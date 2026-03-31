@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import node from '@astrojs/node';
 
-// https://astro.build/config
+// https://astro.build/config — imagetourl.cloud
 export default defineConfig({
   site: 'https://imagetourl.cloud',
   adapter: node({ mode: 'standalone' }),
