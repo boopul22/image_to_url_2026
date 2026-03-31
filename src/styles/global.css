@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Newsreader", serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-background: #fef7ff;
+  --color-surface: #fef7ff;
+  --color-surface-container: #f4eafa;
+  --color-surface-container-low: #faf0ff;
+  --color-surface-container-high: #efe5f5;
+  --color-surface-container-highest: #e9dfef;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #e9dfef;
+  --color-surface-dim: #e0d7e6;
+
+  --color-primary: #630ed4;
+  --color-primary-container: #7c3aed;
+  --color-primary-fixed: #eaddff;
+  --color-primary-fixed-dim: #d2bbff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #ede0ff;
+  --color-on-primary-fixed: #25005a;
+  --color-on-primary-fixed-variant: #5a00c6;
+
+  --color-secondary: #216a51;
+  --color-secondary-container: #a7efcf;
+  --color-secondary-fixed: #a9f1d1;
+  --color-secondary-fixed-dim: #8ed5b6;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #266e55;
+  --color-on-secondary-fixed: #002116;
+  --color-on-secondary-fixed-variant: #00513b;
+
+  --color-tertiary: #675f2b;
+  --color-tertiary-container: #b6ac70;
+  --color-tertiary-fixed: #efe4a2;
+  --color-tertiary-fixed-dim: #d2c888;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #47400e;
+  --color-on-tertiary-fixed: #201c00;
+  --color-on-tertiary-fixed-variant: #4e4715;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  --color-on-background: #1e1a25;
+  --color-on-surface: #1e1a25;
+  --color-on-surface-variant: #4a4455;
+  --color-outline: #7b7487;
+  --color-outline-variant: #ccc3d8;
+
+  --color-inverse-surface: #342e3a;
+  --color-inverse-on-surface: #f7edfd;
+  --color-inverse-primary: #d2bbff;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  margin: 0;
+}
+
+::selection {
+  background-color: var(--color-primary-fixed);
+  color: var(--color-on-primary-fixed);
+}
+
+/* Hard shadow utility */
+.hard-shadow {
+  box-shadow: 4px 4px 0 0 rgba(30, 26, 37, 1);
+}
+
+.hard-shadow-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 rgba(30, 26, 37, 1);
+}
+
+/* Grain texture overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+}
+
+/* Stipple divider */
+.stipple-divider {
+  background-image: radial-gradient(var(--color-outline) 1px, transparent 1px);
+  background-size: 12px 12px;
+  height: 24px;
+  width: 100%;
+  opacity: 0.3;
+}
+
+/* Speech bubble tail */
+.speech-bubble-tail {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%);
+  position: absolute;
+  bottom: -20px;
+  left: 30px;
+  width: 25px;
+  height: 25px;
+}
+
+/* Material icons */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  display: inline-block;
+  vertical-align: middle;
+}

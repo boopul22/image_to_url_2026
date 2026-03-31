@@ -1,0 +1,162 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Pricing - ImageToURL">
+  <Nav activePage="pricing" />
+
+  <main class="max-w-7xl mx-auto px-6 py-20 relative">
+    <!-- Floating Doodles -->
+    <div class="absolute top-10 right-10 opacity-20 hidden lg:block">
+      <span class="material-symbols-outlined text-6xl text-tertiary">flare</span>
+    </div>
+    <div class="absolute top-40 left-10 opacity-20 hidden lg:block">
+      <span class="material-symbols-outlined text-5xl text-secondary">auto_awesome</span>
+    </div>
+
+    <!-- Header -->
+    <header class="text-center mb-20">
+      <h1 class="font-headline italic font-black text-6xl md:text-7xl lg:text-8xl tracking-tight mb-6">
+        Simple <span class="bg-tertiary-fixed px-2">Pricing</span>,<br />infinite pixels.
+      </h1>
+      <p class="font-body text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+        Choose the plan that fits your creative workflow. Whether you're a solo tinkerer or a global agency.
+      </p>
+    </header>
+
+    <!-- Pricing Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <!-- Tier: Free -->
+      <div class="bg-surface-container-lowest border-2 border-on-background rounded-xl p-8 transition-transform duration-200">
+        <div class="mb-8">
+          <span class="font-label uppercase tracking-widest text-xs font-black text-outline">Starter</span>
+          <h3 class="font-headline font-bold text-4xl mt-2 italic">Free</h3>
+          <p class="text-on-surface-variant mt-2">Perfect for exploring the possibilities.</p>
+        </div>
+        <div class="text-5xl font-headline font-black mb-8 italic">$0<span class="text-lg font-body font-normal not-italic text-outline">/mo</span></div>
+        <ul class="space-y-4 mb-10">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">10 uploads per month</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">Standard processing speed</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">Public link library</span>
+          </li>
+        </ul>
+        <button class="w-full py-4 rounded-lg border-2 border-on-background bg-surface-container hover:bg-surface-variant font-bold text-on-background transition-colors">
+          Get Started
+        </button>
+      </div>
+
+      <!-- Tier: Pro (Recommended) -->
+      <div class="relative bg-surface-container-lowest border-2 border-on-background rounded-xl p-8 transition-transform duration-200 hard-shadow md:-mt-8">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase border-2 border-on-background">
+          Recommended
+        </div>
+        <span class="material-symbols-outlined absolute -top-8 -right-8 text-4xl text-tertiary hidden lg:block" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined absolute -bottom-8 -left-8 text-3xl text-secondary hidden lg:block" style="font-variation-settings: 'FILL' 1;">celebration</span>
+        <div class="mb-8">
+          <span class="font-label uppercase tracking-widest text-xs font-black text-primary">Creator</span>
+          <h3 class="font-headline font-bold text-4xl mt-2 italic">Pro</h3>
+          <p class="text-on-surface-variant mt-2">Level up your image management.</p>
+        </div>
+        <div class="text-5xl font-headline font-black mb-8 italic">$12<span class="text-lg font-body font-normal not-italic text-outline">/mo</span></div>
+        <ul class="space-y-4 mb-10">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">draw</span>
+            <span class="text-sm font-bold">Unlimited uploads</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">draw</span>
+            <span class="text-sm font-bold">High-priority processing</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">draw</span>
+            <span class="text-sm font-bold">Custom link expiration</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">draw</span>
+            <span class="text-sm font-bold">Direct API access (Basic)</span>
+          </li>
+        </ul>
+        <button class="w-full py-4 rounded-lg bg-primary text-on-primary border-2 border-on-background font-black text-lg hard-shadow-hover transition-all">
+          Go Pro Now →
+        </button>
+      </div>
+
+      <!-- Tier: Business -->
+      <div class="bg-surface-container-lowest border-2 border-on-background rounded-xl p-8 transition-transform duration-200">
+        <div class="mb-8">
+          <span class="font-label uppercase tracking-widest text-xs font-black text-outline">Scale</span>
+          <h3 class="font-headline font-bold text-4xl mt-2 italic">Business</h3>
+          <p class="text-on-surface-variant mt-2">Enterprise-grade infrastructure.</p>
+        </div>
+        <div class="text-5xl font-headline font-black mb-8 italic">$49<span class="text-lg font-body font-normal not-italic text-outline">/mo</span></div>
+        <ul class="space-y-4 mb-10">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">Everything in Pro</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">Team workspaces</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">Ultra-high resolution</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">draw</span>
+            <span class="text-sm font-medium">Dedicated support line</span>
+          </li>
+        </ul>
+        <button class="w-full py-4 rounded-lg border-2 border-on-background bg-surface-container-high hover:bg-surface-variant font-bold text-on-background transition-colors">
+          Contact Sales
+        </button>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="mt-40 max-w-4xl mx-auto">
+      <h2 class="font-headline font-black text-5xl italic text-center mb-16 underline decoration-tertiary-fixed decoration-8 underline-offset-4">Common Curiosity</h2>
+      <div class="space-y-6">
+        <div class="bg-secondary-container border-2 border-on-background rounded-xl p-6 hard-shadow">
+          <h4 class="font-headline font-bold text-2xl mb-2 italic">Can I cancel anytime?</h4>
+          <p class="font-body text-on-secondary-container leading-relaxed">Absolutely! We believe in freedom. Cancel your subscription with one click, and you'll retain your pro benefits until the end of the billing cycle.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background rounded-xl p-6 hard-shadow">
+          <h4 class="font-headline font-bold text-2xl mb-2 italic">Are my images kept private?</h4>
+          <p class="font-body text-on-tertiary-fixed-variant leading-relaxed">Unless you choose to share a link publicly, your images are stored in your private encrypted silo. We use military-grade security to keep your pixels safe.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background rounded-xl p-6 hard-shadow">
+          <h4 class="font-headline font-bold text-2xl mb-2 italic">What image formats are supported?</h4>
+          <p class="font-body text-on-secondary-container leading-relaxed">We support everything from standard JPG and PNG to HEIC, WebP, and even large RAW files for our Business tier customers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Visual Section -->
+    <section class="mt-40 bg-surface-container border-2 border-on-background rounded-2xl overflow-hidden flex flex-col md:flex-row items-center p-8 md:p-12 relative">
+      <div class="md:w-1/2 mb-10 md:mb-0">
+        <h2 class="font-headline font-black text-4xl md:text-5xl italic mb-6">Ready to transform your assets?</h2>
+        <a href="/" class="inline-block bg-primary text-on-primary px-8 py-4 rounded-xl border-2 border-on-background hard-shadow hard-shadow-hover transition-all font-black text-xl">
+          Get Started Free →
+        </a>
+      </div>
+      <div class="md:w-1/2 flex justify-center">
+        <img class="rounded-xl border-2 border-on-background rotate-3 hard-shadow max-w-full h-auto" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

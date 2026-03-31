@@ -1,0 +1,164 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="API Documentation - ImageToURL">
+  <Nav activePage="api" />
+
+  <main class="pt-8 min-h-screen max-w-7xl mx-auto flex flex-col md:flex-row gap-8 px-6 pb-20">
+    <!-- Left Sidebar Navigation -->
+    <aside class="w-full md:w-64 flex-shrink-0">
+      <div class="sticky top-28 space-y-8">
+        <div>
+          <h3 class="font-label uppercase tracking-widest text-xs font-bold text-outline mb-4">Introduction</h3>
+          <ul class="space-y-3">
+            <li><a class="flex items-center gap-2 text-primary font-bold" href="#getting-started"><span class="material-symbols-outlined text-sm">rocket_launch</span> Getting Started</a></li>
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#authentication"><span class="material-symbols-outlined text-sm">key</span> Authentication</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-label uppercase tracking-widest text-xs font-bold text-outline mb-4">Endpoints</h3>
+          <ul class="space-y-3">
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#upload"><span class="material-symbols-outlined text-sm">upload</span> POST /upload</a></li>
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#retrieve"><span class="material-symbols-outlined text-sm">link</span> GET /image/:id</a></li>
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#delete"><span class="material-symbols-outlined text-sm">delete</span> DELETE /remove</a></li>
+          </ul>
+        </div>
+        <div class="p-6 bg-surface-container rounded-xl border-2 border-on-background hard-shadow">
+          <p class="font-headline italic text-lg mb-4">Ready to go live?</p>
+          <button class="w-full bg-primary text-on-primary py-3 rounded-full font-bold text-sm uppercase tracking-tighter border-2 border-on-background transition-transform hover:-translate-y-1">
+            Request API Key
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Documentation Content -->
+    <section class="flex-grow space-y-16">
+      <!-- Hero Header -->
+      <div class="relative">
+        <h1 class="text-6xl font-headline font-black leading-tight mb-4">
+          Developer <span class="bg-tertiary-fixed px-2">API Reference</span>
+        </h1>
+        <p class="text-xl font-headline italic text-on-surface-variant max-w-2xl">
+          Powerful, simple, and lightning-fast image hosting for your applications. Convert binary data to permanent URLs in milliseconds.
+        </p>
+        <div class="absolute -top-10 -right-10 hidden lg:block opacity-20">
+          <span class="material-symbols-outlined text-9xl text-primary">draw</span>
+        </div>
+      </div>
+
+      <!-- Getting Started Section -->
+      <div class="space-y-6" id="getting-started">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary text-3xl">auto_awesome</span>
+          <h2 class="text-3xl font-headline font-bold">Getting Started</h2>
+        </div>
+        <p class="text-lg leading-relaxed">The ImageToURL API is organized around REST. Our API has predictable resource-oriented URLs, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.</p>
+        <div class="bg-surface-container-highest p-6 rounded-lg border-2 border-on-background">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-label text-xs font-bold uppercase text-on-surface-variant">Base URL</span>
+            <span class="text-[10px] px-2 py-1 bg-secondary-container text-on-secondary-container rounded font-bold uppercase">Production</span>
+          </div>
+          <code class="text-primary font-bold text-lg font-mono select-all">https://api.imagetourl.cloud/v1</code>
+        </div>
+      </div>
+
+      <!-- Authentication Section -->
+      <div class="space-y-6" id="authentication">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-tertiary text-3xl">lock_open</span>
+          <h2 class="text-3xl font-headline font-bold">Authentication</h2>
+        </div>
+        <p class="text-on-surface-variant leading-relaxed">
+          The ImageToURL API uses API keys to authenticate requests. You can view and manage your API keys in the Dashboard. Your API keys carry many privileges, so be sure to keep them secure!
+        </p>
+        <div class="bg-on-surface text-surface p-6 rounded-xl border-2 border-on-background hard-shadow overflow-x-auto">
+          <div class="flex gap-2 mb-4 border-b border-outline pb-2">
+            <div class="w-3 h-3 rounded-full bg-error"></div>
+            <div class="w-3 h-3 rounded-full bg-tertiary-fixed"></div>
+            <div class="w-3 h-3 rounded-full bg-secondary"></div>
+          </div>
+          <code class="block whitespace-pre text-sm font-mono">curl https://api.imagetourl.cloud/v1/upload \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "file=@/path/to/my_image.png"</code>
+        </div>
+      </div>
+
+      <!-- Endpoint: POST /upload -->
+      <div class="space-y-8 bg-surface-container-low p-8 rounded-2xl border-2 border-on-background relative overflow-hidden" id="upload">
+        <div class="absolute top-0 right-0 p-4 opacity-5">
+          <span class="material-symbols-outlined text-9xl">cloud_upload</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl">stylus</span>
+          <h2 class="text-3xl font-headline font-bold">Upload an Image</h2>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <span class="bg-secondary text-on-secondary px-3 py-1 rounded font-bold text-sm tracking-wider">POST</span>
+              <code class="text-on-background font-bold font-mono">/upload</code>
+            </div>
+            <p class="text-on-surface-variant">Upload an image file directly to our secure servers and receive a permanent, CDN-cached URL.</p>
+            <div class="space-y-4">
+              <h4 class="font-label text-xs font-bold uppercase text-outline">Parameters</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden border border-on-background">
+                  <thead>
+                    <tr class="bg-surface-container border-b-2 border-on-background">
+                      <th class="p-3 font-label text-xs uppercase font-black">Name</th>
+                      <th class="p-3 font-label text-xs uppercase font-black">Type</th>
+                      <th class="p-3 font-label text-xs uppercase font-black">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-outline-variant">
+                    <tr>
+                      <td class="p-3 font-bold text-sm">file</td>
+                      <td class="p-3 text-sm italic">binary</td>
+                      <td class="p-3 text-sm">The image file (PNG, JPG, WebP) up to 10MB.</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-bold text-sm">ttl</td>
+                      <td class="p-3 text-sm italic">integer</td>
+                      <td class="p-3 text-sm">Optional time to live in seconds.</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-bold text-sm">folder</td>
+                      <td class="p-3 text-sm italic">string</td>
+                      <td class="p-3 text-sm">Destination folder name.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-on-surface-variant text-surface p-4 rounded-t-lg font-label text-[10px] uppercase font-bold tracking-widest flex justify-between">
+              <span>Response Example</span>
+              <span class="text-secondary-fixed">200 OK</span>
+            </div>
+            <div class="bg-on-surface text-surface p-6 rounded-b-lg border-x-2 border-b-2 border-on-background hard-shadow">
+              <code class="text-xs leading-relaxed block whitespace-pre font-mono">{`{
+  "status": "success",
+  "data": {
+    "id": "img_98234",
+    "url": "https://cdn.imagetourl.cloud/a98x.png",
+    "size": 102488,
+    "mimetype": "image/png",
+    "created_at": "2023-10-27T10:00:00Z"
+  }
+}`}</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
