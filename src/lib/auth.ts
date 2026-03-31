@@ -9,8 +9,10 @@ export interface SessionUser {
 }
 
 const getRedirectURI = () => {
-  const site = import.meta.env.SITE || 'http://localhost:4321';
-  return `${site}/api/auth/callback`;
+  if (import.meta.env.DEV) {
+    return 'http://localhost:4321/api/auth/callback';
+  }
+  return `${import.meta.env.SITE || 'https://imagetourl.cloud'}/api/auth/callback`;
 };
 
 export function getGoogleClient() {
