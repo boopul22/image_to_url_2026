@@ -1,0 +1,54 @@
+---
+const { activePage = 'dashboard' } = Astro.props;
+const user = Astro.locals.user!;
+
+const navItems = [
+  { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', href: '/admin' },
+  { id: 'images', label: 'Image Library', icon: 'photo_library', href: '/admin/images' },
+  { id: 'users', label: 'User Management', icon: 'group', href: '/admin/users' },
+  { id: 'analytics', label: 'Analytics', icon: 'analytics', href: '/admin' },
+  { id: 'api-keys', label: 'API Keys', icon: 'key', href: '/admin' },
+];
+---
+
+<aside class="w-64 flex-shrink-0 bg-surface border-r-2 border-on-surface min-h-[calc(100vh-65px)] flex flex-col">
+  <div class="p-6 border-b border-outline-variant">
+    <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Admin Console</p>
+  </div>
+
+  <nav class="flex-1 p-4 space-y-1">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={[
+          "flex items-center gap-3 px-4 py-3 rounded-lg font-label text-sm font-bold transition-all",
+          activePage === item.id
+            ? "bg-primary text-on-primary"
+            : "text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface",
+        ]}
+      >
+        <span class="material-symbols-outlined text-xl">{item.icon}</span>
+        {item.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="p-4 space-y-4 border-t border-outline-variant">
+    <a
+      href="/admin"
+      class="block w-full bg-primary text-on-primary text-center py-3 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 transition-all"
+    >
+      Upgrade Plan
+    </a>
+    <div class="space-y-1">
+      <a href="/dashboard" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors">
+        <span class="material-symbols-outlined text-xl">settings</span>
+        Settings
+      </a>
+      <a href="/api/auth/logout" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors">
+        <span class="material-symbols-outlined text-xl">logout</span>
+        Logout
+      </a>
+    </div>
+  </div>
+</aside>

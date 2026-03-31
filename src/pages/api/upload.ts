@@ -89,21 +89,21 @@ export const POST: APIRoute = async ({ request, locals }) => {
       ? `${publicUrl}/${key}`
       : `https://${bucketName}.${accountId}.r2.cloudflarestorage.com/${key}`;
 
-    // Save to D1 (don't block response)
+    // Save to D1
     try {
-      const db = getDB(locals) as any;
+      const db = getDB(locals);
       const user = locals.user;
       const uploadedVia = request.headers.get('authorization') ? 'api' : 'web';
 
-      db.prepare(
-        `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      )
+      await db
+        .prepare(
+          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        )
         .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
-        .run()
-        .catch(() => {});
-    } catch {
-      // DB not available
+        .run();
+    } catch (dbErr: any) {
+      console.error('D1 insert error:', dbErr?.message || dbErr);
     }
 
     return new Response(
