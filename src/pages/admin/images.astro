@@ -1,0 +1,117 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Manage Images - Admin - ImageToURL">
+  <Nav activePage="admin" />
+
+  <main class="pt-8 pb-24 px-6 max-w-7xl mx-auto space-y-8">
+    <div class="flex items-center justify-between">
+      <h1 class="text-4xl font-headline italic font-black text-on-surface">Manage Images</h1>
+      <div class="flex gap-3">
+        <a href="/admin" class="bg-surface text-on-surface px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">Overview</a>
+        <a href="/admin/users" class="bg-surface text-on-surface px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">Users</a>
+        <a href="/admin/images" class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow">Images</a>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="flex gap-4">
+      <div class="flex-1 flex items-center gap-3 px-4 py-2 bg-surface border-2 border-on-surface">
+        <span class="material-symbols-outlined text-outline">search</span>
+        <input id="search-input" type="text" placeholder="Search by filename or user email..." class="bg-transparent border-none focus:outline-none w-full font-body text-sm" />
+      </div>
+      <button id="search-btn" class="bg-primary text-on-primary px-6 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase hard-shadow">Search</button>
+    </div>
+
+    <!-- Images Grid -->
+    <div id="images-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="col-span-full p-8 text-center text-outline">
+        <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
+        <p class="font-label text-xs uppercase mt-2">Loading...</p>
+      </div>
+    </div>
+
+    <div id="pagination" class="flex justify-center gap-3"></div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  let currentPage = 1;
+
+  async function loadImages(page: number, search = '') {
+    const params = new URLSearchParams({ page: String(page) });
+    if (search) params.set('search', search);
+
+    const res = await fetch(`/api/admin/images?${params}`);
+    const data = await res.json();
+    currentPage = page;
+
+    const grid = document.getElementById('images-grid')!;
+    if (!data.images?.length) {
+      grid.innerHTML = '<div class="col-span-full p-8 text-center text-outline"><p class="font-label text-xs uppercase">No images found</p></div>';
+      return;
+    }
+
+    grid.innerHTML = data.images.map((img: any) => `
+      <div class="bg-surface border-2 border-on-surface overflow-hidden hard-shadow group">
+        <div class="h-40 bg-surface-container-highest overflow-hidden">
+          <img src="${img.url}" alt="${img.filename}" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-3 space-y-2">
+          <p class="text-xs font-bold truncate" title="${img.filename}">${img.filename}</p>
+          <p class="text-[10px] text-outline">${img.user_name || 'Anonymous'} · ${(img.size_bytes / 1024).toFixed(1)} KB</p>
+          <p class="text-[10px] text-outline">${new Date(img.created_at).toLocaleDateString()} · ${img.uploaded_via}</p>
+          <div class="flex gap-2">
+            <button onclick="copyUrl('${img.url}')" class="flex-1 text-center py-1 border border-on-surface text-[10px] font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">Copy URL</button>
+            <button onclick="deleteImage('${img.id}')" class="py-1 px-2 border border-error text-error text-[10px] font-bold uppercase hover:bg-error hover:text-on-error transition-colors">
+              <span class="material-symbols-outlined text-sm">delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Pagination
+    const pag = document.getElementById('pagination')!;
+    if (data.totalPages > 1) {
+      pag.innerHTML = Array.from({ length: data.totalPages }, (_, i) => i + 1)
+        .map(p => `<button onclick="loadPage(${p})" class="px-4 py-2 border-2 border-on-surface font-label text-xs font-bold ${p === page ? 'bg-primary text-on-primary' : 'bg-surface hover:-translate-y-1 transition-all'}">${p}</button>`)
+        .join('');
+    } else {
+      pag.innerHTML = '';
+    }
+  }
+
+  (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url);
+
+  (window as any).deleteImage = async (id: string) => {
+    if (!confirm('Delete this image permanently from all storage?')) return;
+    await fetch('/api/admin/images', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    loadImages(currentPage, (document.getElementById('search-input') as HTMLInputElement).value);
+  };
+
+  (window as any).loadPage = (page: number) => {
+    loadImages(page, (document.getElementById('search-input') as HTMLInputElement).value);
+  };
+
+  document.getElementById('search-btn')!.addEventListener('click', () => {
+    loadImages(1, (document.getElementById('search-input') as HTMLInputElement).value);
+  });
+
+  document.getElementById('search-input')!.addEventListener('keydown', (e) => {
+    if ((e as KeyboardEvent).key === 'Enter') loadImages(1, (e.target as HTMLInputElement).value);
+  });
+
+  loadImages(1);
+</script>

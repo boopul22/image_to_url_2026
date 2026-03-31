@@ -1,0 +1,111 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Admin Panel - ImageToURL">
+  <Nav activePage="admin" />
+
+  <main class="pt-8 pb-24 px-6 max-w-7xl mx-auto space-y-12">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+      <h1 class="text-4xl font-headline italic font-black text-on-surface flex items-center gap-4">
+        <span class="material-symbols-outlined text-error text-4xl">admin_panel_settings</span>
+        Admin Panel
+      </h1>
+      <div class="flex gap-3">
+        <a href="/admin" class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow">Overview</a>
+        <a href="/admin/users" class="bg-surface text-on-surface px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">Users</a>
+        <a href="/admin/images" class="bg-surface text-on-surface px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">Images</a>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div id="stats-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {['Total Users', 'Total Images', 'Storage Used', 'Active API Keys'].map((label) => (
+        <div class="bg-surface border-2 border-on-surface p-6 hard-shadow">
+          <p class="font-label text-xs font-bold uppercase tracking-wider text-outline mb-2">{label}</p>
+          <p class="text-3xl font-headline font-black text-on-surface">—</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Recent Uploads -->
+    <section>
+      <h2 class="text-2xl font-headline italic font-black text-on-surface mb-6">Recent Uploads</h2>
+      <div id="recent-uploads" class="bg-surface border-2 border-on-surface hard-shadow overflow-hidden">
+        <div class="p-8 text-center text-outline">
+          <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
+          <p class="font-label text-xs uppercase mt-2">Loading...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  async function loadStats() {
+    const res = await fetch('/api/admin/stats');
+    const data = await res.json();
+
+    const cards = document.getElementById('stats-cards')!;
+    const formatSize = (bytes: number) => {
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+      return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+    };
+
+    const values = [data.totalUsers, data.totalImages, formatSize(data.totalStorage), data.activeApiKeys];
+    const icons = ['group', 'photo_library', 'cloud', 'key'];
+    const colors = ['text-primary', 'text-secondary', 'text-tertiary', 'text-error'];
+
+    cards.innerHTML = ['Total Users', 'Total Images', 'Storage Used', 'Active API Keys'].map((label, i) => `
+      <div class="bg-surface border-2 border-on-surface p-6 hard-shadow">
+        <div class="flex items-center justify-between mb-4">
+          <p class="font-label text-xs font-bold uppercase tracking-wider text-outline">${label}</p>
+          <span class="material-symbols-outlined ${colors[i]} text-2xl">${icons[i]}</span>
+        </div>
+        <p class="text-3xl font-headline font-black text-on-surface">${values[i]}</p>
+      </div>
+    `).join('');
+
+    // Recent uploads
+    const uploadsEl = document.getElementById('recent-uploads')!;
+    if (!data.recentUploads?.length) {
+      uploadsEl.innerHTML = '<div class="p-8 text-center text-outline"><p class="font-label text-xs uppercase">No uploads yet</p></div>';
+      return;
+    }
+
+    uploadsEl.innerHTML = `
+      <table class="w-full text-left">
+        <thead>
+          <tr class="bg-surface-container border-b-2 border-on-surface">
+            <th class="p-3 font-label text-xs uppercase font-black">File</th>
+            <th class="p-3 font-label text-xs uppercase font-black">User</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Size</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Via</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Date</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant">
+          ${data.recentUploads.map((img: any) => `
+            <tr class="hover:bg-surface-container-low transition-colors">
+              <td class="p-3 text-sm font-bold truncate max-w-48">${img.filename}</td>
+              <td class="p-3 text-sm text-on-surface-variant">${img.user_name || 'Anonymous'}</td>
+              <td class="p-3 text-sm">${(img.size_bytes / 1024).toFixed(1)} KB</td>
+              <td class="p-3"><span class="font-label text-[10px] font-bold uppercase px-2 py-1 rounded ${img.uploaded_via === 'api' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-secondary-container text-on-secondary-container'}">${img.uploaded_via}</span></td>
+              <td class="p-3 text-sm text-outline">${new Date(img.created_at).toLocaleDateString()}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  loadStats();
+</script>

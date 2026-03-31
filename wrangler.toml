@@ -1,0 +1,8 @@
+name = "imagetourl2026"
+compatibility_date = "2026-03-15"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "imagetourl-db"
+database_id = "4cc70585-dd14-4083-9b03-6dda95846d64"

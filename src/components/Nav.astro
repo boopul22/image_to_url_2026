@@ -35,13 +35,23 @@ const navLinks = [
 
     {user ? (
       <div class="flex items-center gap-3">
-        <img
-          src={user.avatarUrl}
-          alt={user.name}
-          class="w-8 h-8 rounded-full border-2 border-on-background object-cover"
-          referrerpolicy="no-referrer"
-        />
-        <span class="font-label text-xs font-bold text-on-background hidden sm:inline">{user.name}</span>
+        <a href="/dashboard" class="flex items-center gap-2 hover:-translate-y-0.5 transition-all duration-200">
+          <img
+            src={user.avatarUrl}
+            alt={user.name}
+            class="w-8 h-8 rounded-full border-2 border-on-background object-cover"
+            referrerpolicy="no-referrer"
+          />
+          <span class="font-label text-xs font-bold text-on-background hidden sm:inline">{user.name}</span>
+        </a>
+        {user.role === 'admin' && (
+          <a
+            href="/admin"
+            class="text-error font-label text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Admin
+          </a>
+        )}
         <a
           href="/api/auth/logout"
           class="text-outline hover:text-on-background font-label text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all duration-200"

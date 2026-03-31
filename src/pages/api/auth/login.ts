@@ -1,15 +1,23 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { generateCodeVerifier, generateState } from 'arctic';
-import { getGoogleClient } from '../../../lib/auth';
+import {
+  generateState,
+  generateCodeVerifier,
+  generateCodeChallenge,
+  buildGoogleAuthURL,
+  getRedirectUri,
+} from '../../../lib/auth';
+import { getEnv } from '../../../lib/env';
 
-export const GET: APIRoute = async () => {
-  const google = getGoogleClient();
+export const GET: APIRoute = async ({ locals }) => {
+  const env = getEnv(locals);
   const state = generateState();
   const codeVerifier = generateCodeVerifier();
+  const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-  const url = google.createAuthorizationURL(state, codeVerifier, ['openid', 'profile', 'email']);
+  const redirectUri = getRedirectUri(import.meta.env.DEV);
+  const url = buildGoogleAuthURL(state, codeChallenge, env.GOOGLE_CLIENT_ID, redirectUri);
 
   const isSecure = import.meta.env.PROD;
   const cookieFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=600${isSecure ? '; Secure' : ''}`;
@@ -17,7 +25,7 @@ export const GET: APIRoute = async () => {
   return new Response(null, {
     status: 302,
     headers: [
-      ['Location', url.toString()],
+      ['Location', url],
       ['Set-Cookie', `google_oauth_state=${state}; ${cookieFlags}`],
       ['Set-Cookie', `google_oauth_code_verifier=${codeVerifier}; ${cookieFlags}`],
     ],

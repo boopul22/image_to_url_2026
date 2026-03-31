@@ -13,12 +13,12 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.6",
-    "@astrojs/node": "^10.0.4",
     "@aws-sdk/client-s3": "^3.1020.0",
     "@tailwindcss/vite": "^4.2.2",
-    "arctic": "^3.7.0",
     "astro": "^6.1.2",
-    "jose": "^6.2.2",
     "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260331.1"
   }
 }

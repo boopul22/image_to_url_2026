@@ -1,0 +1,145 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Manage Users - Admin - ImageToURL">
+  <Nav activePage="admin" />
+
+  <main class="pt-8 pb-24 px-6 max-w-7xl mx-auto space-y-8">
+    <div class="flex items-center justify-between">
+      <h1 class="text-4xl font-headline italic font-black text-on-surface">Manage Users</h1>
+      <div class="flex gap-3">
+        <a href="/admin" class="bg-surface text-on-surface px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">Overview</a>
+        <a href="/admin/users" class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow">Users</a>
+        <a href="/admin/images" class="bg-surface text-on-surface px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">Images</a>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="flex gap-4">
+      <div class="flex-1 flex items-center gap-3 px-4 py-2 bg-surface border-2 border-on-surface">
+        <span class="material-symbols-outlined text-outline">search</span>
+        <input id="search-input" type="text" placeholder="Search by name or email..." class="bg-transparent border-none focus:outline-none w-full font-body text-sm" />
+      </div>
+      <button id="search-btn" class="bg-primary text-on-primary px-6 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase hard-shadow">Search</button>
+    </div>
+
+    <!-- Users Table -->
+    <div id="users-table" class="bg-surface border-2 border-on-surface hard-shadow overflow-hidden">
+      <div class="p-8 text-center text-outline">
+        <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
+        <p class="font-label text-xs uppercase mt-2">Loading...</p>
+      </div>
+    </div>
+
+    <div id="pagination" class="flex justify-center gap-3"></div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  let currentPage = 1;
+
+  async function loadUsers(page: number, search = '') {
+    const params = new URLSearchParams({ page: String(page) });
+    if (search) params.set('search', search);
+
+    const res = await fetch(`/api/admin/users?${params}`);
+    const data = await res.json();
+    currentPage = page;
+
+    const table = document.getElementById('users-table')!;
+    if (!data.users?.length) {
+      table.innerHTML = '<div class="p-8 text-center text-outline"><p class="font-label text-xs uppercase">No users found</p></div>';
+      return;
+    }
+
+    table.innerHTML = `
+      <table class="w-full text-left">
+        <thead>
+          <tr class="bg-surface-container border-b-2 border-on-surface">
+            <th class="p-3 font-label text-xs uppercase font-black">User</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Email</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Role</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Status</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Images</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Joined</th>
+            <th class="p-3 font-label text-xs uppercase font-black">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant">
+          ${data.users.map((u: any) => `
+            <tr class="hover:bg-surface-container-low transition-colors">
+              <td class="p-3">
+                <div class="flex items-center gap-3">
+                  <img src="${u.avatar_url}" alt="${u.name}" class="w-8 h-8 rounded-full border border-on-surface object-cover" referrerpolicy="no-referrer" />
+                  <span class="font-bold text-sm">${u.name}</span>
+                </div>
+              </td>
+              <td class="p-3 text-sm text-on-surface-variant">${u.email}</td>
+              <td class="p-3">
+                <span class="font-label text-[10px] font-bold uppercase px-2 py-1 rounded ${u.role === 'admin' ? 'bg-error text-on-error' : 'bg-secondary-container text-on-secondary-container'}">${u.role}</span>
+              </td>
+              <td class="p-3">
+                <span class="font-label text-[10px] font-bold uppercase px-2 py-1 rounded ${u.is_banned ? 'bg-error-container text-on-error-container' : 'bg-secondary-fixed text-on-secondary-fixed'}">${u.is_banned ? 'Banned' : 'Active'}</span>
+              </td>
+              <td class="p-3 text-sm font-bold">${u.image_count}</td>
+              <td class="p-3 text-sm text-outline">${new Date(u.created_at).toLocaleDateString()}</td>
+              <td class="p-3">
+                <div class="flex gap-2">
+                  ${u.is_banned
+                    ? `<button onclick="adminAction('${u.id}', 'unban')" class="text-[10px] font-bold uppercase text-secondary hover:underline">Unban</button>`
+                    : `<button onclick="adminAction('${u.id}', 'ban')" class="text-[10px] font-bold uppercase text-error hover:underline">Ban</button>`
+                  }
+                  ${u.role === 'admin'
+                    ? `<button onclick="adminAction('${u.id}', 'remove_admin')" class="text-[10px] font-bold uppercase text-outline hover:underline">Remove Admin</button>`
+                    : `<button onclick="adminAction('${u.id}', 'make_admin')" class="text-[10px] font-bold uppercase text-primary hover:underline">Make Admin</button>`
+                  }
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+
+    // Pagination
+    const pag = document.getElementById('pagination')!;
+    if (data.totalPages > 1) {
+      pag.innerHTML = Array.from({ length: data.totalPages }, (_, i) => i + 1)
+        .map(p => `<button onclick="loadPage(${p})" class="px-4 py-2 border-2 border-on-surface font-label text-xs font-bold ${p === page ? 'bg-primary text-on-primary' : 'bg-surface hover:-translate-y-1 transition-all'}">${p}</button>`)
+        .join('');
+    } else {
+      pag.innerHTML = '';
+    }
+  }
+
+  (window as any).adminAction = async (userId: string, action: string) => {
+    if (!confirm(`Are you sure you want to ${action.replace('_', ' ')} this user?`)) return;
+    await fetch('/api/admin/users', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, action }),
+    });
+    loadUsers(currentPage, (document.getElementById('search-input') as HTMLInputElement).value);
+  };
+
+  (window as any).loadPage = (page: number) => {
+    loadUsers(page, (document.getElementById('search-input') as HTMLInputElement).value);
+  };
+
+  document.getElementById('search-btn')!.addEventListener('click', () => {
+    loadUsers(1, (document.getElementById('search-input') as HTMLInputElement).value);
+  });
+
+  document.getElementById('search-input')!.addEventListener('keydown', (e) => {
+    if ((e as KeyboardEvent).key === 'Enter') loadUsers(1, (e.target as HTMLInputElement).value);
+  });
+
+  loadUsers(1);
+</script>

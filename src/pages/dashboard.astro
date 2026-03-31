@@ -1,0 +1,321 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const user = Astro.locals.user!;
+---
+
+<Layout title="Dashboard - ImageToURL">
+  <Nav activePage="dashboard" />
+
+  <main class="pt-8 pb-24 px-6 max-w-7xl mx-auto space-y-12">
+    <!-- Account Card -->
+    <section class="bg-surface border-2 border-on-surface p-8 hard-shadow flex flex-col md:flex-row items-center gap-8">
+      <img
+        src={user.avatarUrl}
+        alt={user.name}
+        class="w-20 h-20 rounded-full border-4 border-on-surface object-cover"
+        referrerpolicy="no-referrer"
+      />
+      <div class="flex-1 text-center md:text-left">
+        <h1 class="text-3xl font-headline italic font-black text-on-surface">{user.name}</h1>
+        <p class="text-on-surface-variant font-body">{user.email}</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class:list={[
+          "px-4 py-1 border-2 border-on-surface rounded-full font-label text-xs font-bold uppercase tracking-wider",
+          user.role === 'admin' ? 'bg-error text-on-error' : 'bg-secondary-fixed text-on-secondary-fixed',
+        ]}>
+          {user.role}
+        </span>
+      </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section>
+      <h2 class="text-2xl font-headline italic font-black text-on-surface mb-6 flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary">cloud_upload</span>
+        Upload Image
+      </h2>
+      <div class="bg-surface border-2 border-on-surface p-8 hard-shadow">
+        <div
+          id="upload-zone"
+          class="border-2 border-dashed border-outline rounded-xl p-12 text-center cursor-pointer hover:border-primary hover:bg-primary/5 transition-all"
+        >
+          <span class="material-symbols-outlined text-5xl text-outline mb-4">add_photo_alternate</span>
+          <p class="font-label text-sm font-bold uppercase tracking-wider text-outline">
+            Drop image here or click to browse
+          </p>
+          <p class="text-xs text-outline mt-2">JPG, PNG, WebP, GIF, SVG — Max 10MB</p>
+          <input type="file" id="file-input" accept="image/*" class="hidden" />
+        </div>
+        <div id="upload-result" class="mt-4 hidden">
+          <div class="flex items-center gap-3 p-4 bg-secondary-container border-2 border-on-surface rounded-lg">
+            <span class="material-symbols-outlined text-secondary">check_circle</span>
+            <input
+              id="upload-url"
+              type="text"
+              readonly
+              class="flex-1 bg-transparent text-sm font-mono focus:outline-none"
+            />
+            <button id="copy-upload-url" class="font-label text-xs font-bold uppercase text-primary hover:-translate-y-0.5 transition-all">
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Keys Section -->
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-headline italic font-black text-on-surface flex items-center gap-3">
+          <span class="material-symbols-outlined text-tertiary">key</span>
+          API Keys
+        </h2>
+        <button
+          id="generate-key-btn"
+          class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all"
+        >
+          Generate New Key
+        </button>
+      </div>
+
+      <!-- New Key Modal -->
+      <div id="new-key-modal" class="hidden mb-6 p-6 bg-tertiary-fixed border-2 border-on-surface hard-shadow">
+        <p class="font-label text-xs font-bold uppercase tracking-wider text-on-tertiary-fixed mb-2">
+          Your new API key (copy it now — it won't be shown again):
+        </p>
+        <div class="flex items-center gap-2">
+          <code id="new-key-value" class="flex-1 bg-on-surface text-surface p-3 rounded text-sm font-mono break-all"></code>
+          <button id="copy-new-key" class="bg-on-surface text-tertiary-fixed px-4 py-3 rounded font-label text-xs font-bold uppercase">
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <!-- Generate Key Dialog -->
+      <div id="key-name-dialog" class="hidden mb-6 p-6 bg-surface-container border-2 border-on-surface hard-shadow">
+        <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Key Name</label>
+        <div class="flex gap-3">
+          <input
+            id="key-name-input"
+            type="text"
+            placeholder="e.g. My App, CI Pipeline"
+            class="flex-1 bg-surface border-2 border-on-surface px-4 py-2 font-body text-sm focus:outline-none focus:border-primary"
+          />
+          <button id="confirm-generate" class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase">
+            Create
+          </button>
+          <button id="cancel-generate" class="bg-surface border-2 border-on-surface px-5 py-2 font-label text-xs font-bold uppercase">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <div id="api-keys-list" class="space-y-3">
+        <div class="text-center text-outline py-8">
+          <span class="material-symbols-outlined text-4xl mb-2">hourglass_empty</span>
+          <p class="font-label text-xs uppercase">Loading keys...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Images Section -->
+    <section>
+      <h2 class="text-2xl font-headline italic font-black text-on-surface mb-6 flex items-center gap-3">
+        <span class="material-symbols-outlined text-secondary">photo_library</span>
+        Your Images
+      </h2>
+      <div id="images-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="col-span-full text-center text-outline py-12">
+          <span class="material-symbols-outlined text-4xl mb-2">hourglass_empty</span>
+          <p class="font-label text-xs uppercase">Loading images...</p>
+        </div>
+      </div>
+      <div id="load-more-wrapper" class="hidden mt-8 text-center">
+        <button id="load-more-btn" class="bg-surface border-2 border-on-surface px-8 py-3 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">
+          Load More
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Upload
+  const uploadZone = document.getElementById('upload-zone')!;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const uploadResult = document.getElementById('upload-result')!;
+  const uploadUrl = document.getElementById('upload-url') as HTMLInputElement;
+
+  uploadZone.addEventListener('click', () => fileInput.click());
+  uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('border-primary', 'bg-primary/5'); });
+  uploadZone.addEventListener('dragleave', () => { uploadZone.classList.remove('border-primary', 'bg-primary/5'); });
+  uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('border-primary', 'bg-primary/5');
+    if (e.dataTransfer?.files[0]) uploadFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files?.[0]) uploadFile(fileInput.files[0]); });
+
+  async function uploadFile(file: File) {
+    const form = new FormData();
+    form.append('file', file);
+    try {
+      const res = await fetch('/api/upload', { method: 'POST', body: form });
+      const data = await res.json();
+      if (data.success) {
+        uploadUrl.value = data.data.url;
+        uploadResult.classList.remove('hidden');
+        loadImages(1);
+      }
+    } catch {}
+  }
+
+  document.getElementById('copy-upload-url')!.addEventListener('click', () => {
+    navigator.clipboard.writeText(uploadUrl.value);
+  });
+
+  // API Keys
+  const keysList = document.getElementById('api-keys-list')!;
+  const generateBtn = document.getElementById('generate-key-btn')!;
+  const keyNameDialog = document.getElementById('key-name-dialog')!;
+  const keyNameInput = document.getElementById('key-name-input') as HTMLInputElement;
+  const newKeyModal = document.getElementById('new-key-modal')!;
+  const newKeyValue = document.getElementById('new-key-value')!;
+
+  generateBtn.addEventListener('click', () => {
+    keyNameDialog.classList.remove('hidden');
+    keyNameInput.focus();
+  });
+
+  document.getElementById('cancel-generate')!.addEventListener('click', () => {
+    keyNameDialog.classList.add('hidden');
+    keyNameInput.value = '';
+  });
+
+  document.getElementById('confirm-generate')!.addEventListener('click', async () => {
+    const name = keyNameInput.value.trim();
+    if (!name) return;
+    const res = await fetch('/api/dashboard/api-keys', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+    });
+    const data = await res.json();
+    if (data.key) {
+      keyNameDialog.classList.add('hidden');
+      keyNameInput.value = '';
+      newKeyValue.textContent = data.key;
+      newKeyModal.classList.remove('hidden');
+      loadKeys();
+    }
+  });
+
+  document.getElementById('copy-new-key')!.addEventListener('click', () => {
+    navigator.clipboard.writeText(newKeyValue.textContent || '');
+  });
+
+  async function loadKeys() {
+    const res = await fetch('/api/dashboard/api-keys');
+    const data = await res.json();
+    if (!data.keys?.length) {
+      keysList.innerHTML = '<div class="text-center text-outline py-8"><p class="font-label text-xs uppercase">No API keys yet</p></div>';
+      return;
+    }
+    keysList.innerHTML = data.keys.map((k: any) => `
+      <div class="flex items-center gap-4 p-4 bg-surface border-2 border-on-surface hard-shadow">
+        <div class="flex-1">
+          <span class="font-bold text-sm">${k.name}</span>
+          <code class="ml-3 text-xs text-outline font-mono">${k.key_prefix}...</code>
+        </div>
+        <span class="text-xs text-outline">${k.last_used_at ? 'Last used: ' + new Date(k.last_used_at).toLocaleDateString() : 'Never used'}</span>
+        ${k.revoked_at
+          ? '<span class="font-label text-xs font-bold text-error uppercase">Revoked</span>'
+          : `<button onclick="revokeKey('${k.id}')" class="font-label text-xs font-bold uppercase text-error hover:-translate-y-0.5 transition-all">Revoke</button>`
+        }
+      </div>
+    `).join('');
+  }
+
+  (window as any).revokeKey = async (id: string) => {
+    if (!confirm('Revoke this API key?')) return;
+    await fetch('/api/dashboard/api-keys', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    loadKeys();
+  };
+
+  // Images
+  const imagesGrid = document.getElementById('images-grid')!;
+  const loadMoreWrapper = document.getElementById('load-more-wrapper')!;
+  const loadMoreBtn = document.getElementById('load-more-btn')!;
+  let currentPage = 1;
+  let allImages: any[] = [];
+
+  async function loadImages(page: number) {
+    const res = await fetch(`/api/dashboard/images?page=${page}`);
+    const data = await res.json();
+
+    if (page === 1) allImages = data.images;
+    else allImages = [...allImages, ...data.images];
+
+    currentPage = page;
+    renderImages();
+
+    if (page < data.totalPages) {
+      loadMoreWrapper.classList.remove('hidden');
+    } else {
+      loadMoreWrapper.classList.add('hidden');
+    }
+  }
+
+  function renderImages() {
+    if (!allImages.length) {
+      imagesGrid.innerHTML = '<div class="col-span-full text-center text-outline py-12"><span class="material-symbols-outlined text-4xl mb-2">image</span><p class="font-label text-xs uppercase">No images uploaded yet</p></div>';
+      return;
+    }
+    imagesGrid.innerHTML = allImages.map((img: any) => `
+      <div class="bg-surface border-2 border-on-surface overflow-hidden hard-shadow group">
+        <div class="h-40 bg-surface-container-highest overflow-hidden">
+          <img src="${img.url}" alt="${img.filename}" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-3 space-y-2">
+          <p class="text-xs font-bold truncate" title="${img.filename}">${img.filename}</p>
+          <p class="text-[10px] text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
+          <div class="flex gap-2">
+            <button onclick="copyUrl('${img.url}')" class="flex-1 text-center py-1 border border-on-surface text-[10px] font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">Copy URL</button>
+            <button onclick="deleteImage('${img.id}')" class="py-1 px-2 border border-error text-error text-[10px] font-bold uppercase hover:bg-error hover:text-on-error transition-colors">
+              <span class="material-symbols-outlined text-sm">delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url);
+  (window as any).deleteImage = async (id: string) => {
+    if (!confirm('Delete this image permanently?')) return;
+    await fetch('/api/dashboard/images', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    loadImages(1);
+  };
+
+  loadMoreBtn.addEventListener('click', () => loadImages(currentPage + 1));
+
+  // Initial load
+  loadKeys();
+  loadImages(1);
+</script>
