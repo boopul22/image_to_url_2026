@@ -1,14 +1,15 @@
 import { defineMiddleware } from 'astro:middleware';
 import { getSession } from './lib/session';
 import { verifyApiKey } from './lib/api-key';
+import { getDB } from './lib/db';
 
 export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
   let db: D1Database | null = null;
 
   try {
-    db = (locals as any).runtime?.env?.DB ?? null;
+    db = getDB(locals);
   } catch {
-    // runtime.env not available in dev mode
+    // D1 not available
   }
 
   if (db) {

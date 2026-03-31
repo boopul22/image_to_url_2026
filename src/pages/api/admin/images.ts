@@ -3,7 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
-import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { deleteFromR2 } from '../../../lib/r2';
 
 export const GET: APIRoute = async ({ url, locals }) => {
   if (!locals.user || locals.user.role !== 'admin') {
@@ -87,15 +87,13 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
   // Delete from R2
   try {
     const env = getEnv(locals);
-    const s3 = new S3Client({
-      region: 'auto',
-      endpoint: `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-      credentials: {
-        accessKeyId: env.R2_ACCESS_KEY_ID,
-        secretAccessKey: env.R2_SECRET_ACCESS_KEY,
-      },
+    await deleteFromR2({
+      accountId: env.CLOUDFLARE_ACCOUNT_ID,
+      accessKeyId: env.R2_ACCESS_KEY_ID,
+      secretAccessKey: env.R2_SECRET_ACCESS_KEY,
+      bucket: env.R2_BUCKET_NAME,
+      key: image.r2_key,
     });
-    await s3.send(new DeleteObjectCommand({ Bucket: env.R2_BUCKET_NAME, Key: image.r2_key }));
   } catch {
     // Continue even if R2 delete fails
   }

@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
 
@@ -70,45 +70,40 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    const s3 = new S3Client({
-      region: 'auto',
-      endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-      credentials: { accessKeyId, secretAccessKey },
-    });
-
     const id = generateId();
     const ext = getExtension(file.type);
     const key = `uploads/${id}.${ext}`;
-    const buffer = await file.arrayBuffer();
+    const body = new Uint8Array(await file.arrayBuffer());
 
-    await s3.send(
-      new PutObjectCommand({
-        Bucket: bucketName,
-        Key: key,
-        Body: new Uint8Array(buffer),
-        ContentType: file.type,
-      }),
-    );
+    await uploadToR2({
+      accountId,
+      accessKeyId,
+      secretAccessKey,
+      bucket: bucketName,
+      key,
+      body,
+      contentType: file.type,
+    });
 
     const imageUrl = publicUrl
       ? `${publicUrl}/${key}`
       : `https://${bucketName}.${accountId}.r2.cloudflarestorage.com/${key}`;
 
-    // Save to D1 if database is available
+    // Save to D1 (don't block response)
     try {
       const db = getDB(locals) as any;
       const user = locals.user;
       const uploadedVia = request.headers.get('authorization') ? 'api' : 'web';
 
-      await db
-        .prepare(
-          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        )
+      db.prepare(
+        `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      )
         .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
-        .run();
+        .run()
+        .catch(() => {});
     } catch {
-      // DB insert failed but upload succeeded — still return success
+      // DB not available
     }
 
     return new Response(
