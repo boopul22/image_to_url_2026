@@ -3,14 +3,29 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { getGoogleClient, createSessionToken } from '../../../lib/auth';
 
-export const GET: APIRoute = async ({ url, cookies, redirect }) => {
+export const GET: APIRoute = async ({ request, url, cookies, redirect }) => {
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
-  const storedState = cookies.get('google_oauth_state')?.value;
-  const codeVerifier = cookies.get('google_oauth_code_verifier')?.value;
+
+  // Parse cookies from raw header as fallback (Astro cookie API can miss them)
+  const rawCookie = request.headers.get('cookie') || '';
+  const parseCookie = (name: string) => {
+    const match = rawCookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
+    return match ? match[1] : undefined;
+  };
+
+  const storedState = cookies.get('google_oauth_state')?.value || parseCookie('google_oauth_state');
+  const codeVerifier = cookies.get('google_oauth_code_verifier')?.value || parseCookie('google_oauth_code_verifier');
 
   if (!code || !state || !storedState || !codeVerifier || state !== storedState) {
-    return new Response('Invalid OAuth state', { status: 400 });
+    const missing = [
+      !code && 'code',
+      !state && 'state',
+      !storedState && 'storedState(cookie)',
+      !codeVerifier && 'codeVerifier(cookie)',
+      (state && storedState && state !== storedState) && 'state-mismatch',
+    ].filter(Boolean).join(', ');
+    return new Response(`Invalid OAuth state — missing: ${missing}`, { status: 400 });
   }
 
   try {

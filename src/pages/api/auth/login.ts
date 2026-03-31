@@ -4,28 +4,22 @@ import type { APIRoute } from 'astro';
 import { generateCodeVerifier, generateState } from 'arctic';
 import { getGoogleClient } from '../../../lib/auth';
 
-export const GET: APIRoute = async ({ cookies, redirect }) => {
+export const GET: APIRoute = async () => {
   const google = getGoogleClient();
   const state = generateState();
   const codeVerifier = generateCodeVerifier();
 
   const url = google.createAuthorizationURL(state, codeVerifier, ['openid', 'profile', 'email']);
 
-  cookies.set('google_oauth_state', state, {
-    httpOnly: true,
-    secure: import.meta.env.PROD,
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 600, // 10 minutes
-  });
+  const isSecure = import.meta.env.PROD;
+  const cookieFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=600${isSecure ? '; Secure' : ''}`;
 
-  cookies.set('google_oauth_code_verifier', codeVerifier, {
-    httpOnly: true,
-    secure: import.meta.env.PROD,
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 600,
+  return new Response(null, {
+    status: 302,
+    headers: [
+      ['Location', url.toString()],
+      ['Set-Cookie', `google_oauth_state=${state}; ${cookieFlags}`],
+      ['Set-Cookie', `google_oauth_code_verifier=${codeVerifier}; ${cookieFlags}`],
+    ],
   });
-
-  return redirect(url.toString(), 302);
 };
