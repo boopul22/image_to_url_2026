@@ -28,8 +28,39 @@ function getExtension(mimeType: string): string {
   return map[mimeType] || 'bin';
 }
 
+const ANON_UPLOAD_LIMIT = 5;
+
+function getClientIP(request: Request): string {
+  return (
+    request.headers.get('cf-connecting-ip') ||
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    '0.0.0.0'
+  );
+}
+
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    const user = locals.user;
+    const db = getDB(locals);
+
+    // Anonymous upload limit check
+    if (!user) {
+      const ip = getClientIP(request);
+      const result = await db
+        .prepare('SELECT COUNT(*) as count FROM anonymous_uploads WHERE ip_address = ?')
+        .bind(ip)
+        .first<{ count: number }>();
+
+      if (result && result.count >= ANON_UPLOAD_LIMIT) {
+        return new Response(
+          JSON.stringify({
+            error: `Upload limit reached. Anonymous users can upload up to ${ANON_UPLOAD_LIMIT} images. Please sign in for unlimited uploads.`,
+          }),
+          { status: 429, headers: { 'Content-Type': 'application/json' } },
+        );
+      }
+    }
+
     const formData = await request.formData();
     const file = formData.get('file');
 
@@ -72,7 +103,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     const id = generateId();
     const ext = getExtension(file.type);
-    const key = `uploads/${id}.${ext}`;
+    // Anonymous uploads go to "anonymous" folder, logged-in to "uploads"
+    const folder = user ? 'uploads' : 'anonymous';
+    const key = `${folder}/${id}.${ext}`;
     const body = new Uint8Array(await file.arrayBuffer());
 
     await uploadToR2({
@@ -91,8 +124,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     // Save to D1
     try {
-      const db = getDB(locals);
-      const user = locals.user;
       const uploadedVia = request.headers.get('authorization') ? 'api' : 'web';
 
       await db
@@ -102,6 +133,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
         )
         .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
         .run();
+
+      // Track anonymous upload count
+      if (!user) {
+        const ip = getClientIP(request);
+        await db
+          .prepare('INSERT INTO anonymous_uploads (id, ip_address, image_id) VALUES (?, ?, ?)')
+          .bind(generateId(), ip, id)
+          .run();
+      }
     } catch (dbErr: any) {
       console.error('D1 insert error:', dbErr?.message || dbErr);
     }
