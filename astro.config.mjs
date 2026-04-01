@@ -7,6 +7,13 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://imagetourl.cloud',
   adapter: cloudflare(),
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'hi', 'es', 'fr', 'de', 'ja'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   security: {
     checkOrigin: false,
   },

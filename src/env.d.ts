@@ -26,5 +26,6 @@ declare namespace App {
       avatarUrl: string;
       role: 'user' | 'admin';
     };
+    locale: import('./i18n/config').Locale;
   }
 }

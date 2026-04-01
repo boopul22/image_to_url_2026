@@ -1,23 +1,15 @@
 export const prerender = false;
 
-// Dynamic sitemap — rendered at request time via SSR (Cloudflare Workers / D1)
-// @astrojs/sitemap is intentionally NOT used here because it only works with
-// static prerendering. This site is fully SSR (prerender = false), so we own
-// the entire generation pipeline through this API route.
-//
-// Spec compliance:
-//   - No <priority> or <changefreq> — both are ignored by Google since ~2023.
-//   - <lastmod> uses W3C datetime (YYYY-MM-DD) sourced from real DB timestamps.
-//   - One <urlset> file; a sitemap index is only needed if URLs exceed 50,000.
-//   - Only status='published' posts and pages are included.
+// Dynamic sitemap with i18n — rendered at request time via SSR (Cloudflare Workers / D1)
+// Includes xhtml:link alternates for all locale variants per Google's multilingual sitemap spec.
 
 import type { APIContext } from 'astro';
 import { getDB } from '../lib/db';
+import { locales, defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
 
 const SITE = 'https://imagetourl.cloud';
 
-// Static pages that are always public and indexable.
-// Dates reflect the last meaningful content change; update when content ships.
 const STATIC_PAGES: { path: string; lastmod: string }[] = [
   { path: '/',         lastmod: '2026-04-01' },
   { path: '/features', lastmod: '2026-04-01' },
@@ -37,20 +29,34 @@ function escapeXml(str: string): string {
     .replace(/>/g, '&gt;');
 }
 
-// Normalise any ISO datetime string (e.g. "2026-03-15T10:22:00") to YYYY-MM-DD.
 function toDateString(raw: string | null | undefined): string {
   if (!raw) return '2026-04-01';
   return raw.slice(0, 10);
 }
 
-function buildUrlEntry(loc: string, lastmod: string): string {
-  return `  <url>\n    <loc>${escapeXml(loc)}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+function localeUrl(loc: Locale, basePath: string): string {
+  if (loc === defaultLocale) return `${SITE}${basePath}`;
+  return `${SITE}/${loc}${basePath}`;
+}
+
+function buildUrlEntry(basePath: string, lastmod: string): string {
+  const defaultUrl = localeUrl(defaultLocale, basePath);
+  const alternates = locales.map(loc =>
+    `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(localeUrl(loc, basePath))}" />`
+  ).join('\n');
+  const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`;
+
+  return `  <url>
+    <loc>${escapeXml(defaultUrl)}</loc>
+    <lastmod>${lastmod}</lastmod>
+${alternates}
+${xDefault}
+  </url>`;
 }
 
 export async function GET({ locals }: APIContext): Promise<Response> {
   const db = getDB(locals);
 
-  // --- Fetch published blog posts ---
   let postRows: { slug: string; updated_at: string }[] = [];
   try {
     const result = await db
@@ -63,10 +69,9 @@ export async function GET({ locals }: APIContext): Promise<Response> {
       .all<{ slug: string; updated_at: string }>();
     postRows = result.results ?? [];
   } catch {
-    // DB unavailable (e.g. local dev without bindings) — serve static pages only.
+    // DB unavailable — serve static pages only.
   }
 
-  // --- Fetch published CMS pages ---
   let pageRows: { slug: string; updated_at: string }[] = [];
   try {
     const result = await db
@@ -78,48 +83,33 @@ export async function GET({ locals }: APIContext): Promise<Response> {
       )
       .all<{ slug: string; updated_at: string }>();
     pageRows = result.results ?? [];
-  } catch {
-    // Same DB guard as above.
-  }
+  } catch {}
 
-  // --- Build URL entries ---
   const urlEntries: string[] = [];
 
+  // Static pages — each gets all locale alternates
   for (const page of STATIC_PAGES) {
-    urlEntries.push(buildUrlEntry(`${SITE}${page.path}`, page.lastmod));
+    urlEntries.push(buildUrlEntry(page.path, page.lastmod));
   }
 
+  // Blog posts — each gets all locale alternates
   for (const post of postRows) {
-    urlEntries.push(
-      buildUrlEntry(
-        `${SITE}/blog/${escapeXml(post.slug)}`,
-        toDateString(post.updated_at),
-      ),
-    );
+    urlEntries.push(buildUrlEntry(`/blog/${escapeXml(post.slug)}`, toDateString(post.updated_at)));
   }
 
+  // CMS pages
   for (const page of pageRows) {
-    urlEntries.push(
-      buildUrlEntry(
-        `${SITE}/p/${escapeXml(page.slug)}`,
-        toDateString(page.updated_at),
-      ),
-    );
+    urlEntries.push(buildUrlEntry(`/p/${escapeXml(page.slug)}`, toDateString(page.updated_at)));
   }
 
-  // Guard: if URL count ever approaches 50k, this should be split into a
-  // sitemap index. Log a warning to Cloudflare's console so it is visible.
   const total = urlEntries.length;
   if (total > 45000) {
-    console.warn(
-      `[sitemap] URL count is ${total} — approaching the 50,000 per-file limit. ` +
-        'Split into a sitemap index before exceeding the limit.',
-    );
+    console.warn(`[sitemap] URL count is ${total} — approaching the 50,000 per-file limit.`);
   }
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...urlEntries,
     '</urlset>',
   ].join('\n');
@@ -128,8 +118,6 @@ export async function GET({ locals }: APIContext): Promise<Response> {
     status: 200,
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',
-      // Cache at the CDN edge for 1 hour; revalidate in the background.
-      // Keeps crawler requests cheap while staying reasonably fresh.
       'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
     },
   });

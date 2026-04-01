@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { t } from '../../i18n/utils';
+import { defaultLocale } from '../../i18n/config';
+import type { Locale } from '../../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+---
+
+<Layout title={t(locale, 'privacy.meta.title')} description={t(locale, 'privacy.meta.description')}>
+  <Nav activePage="" />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="font-headline italic text-5xl font-black text-on-background mb-8">{t(locale, 'privacy.title')}</h1>
+    <p class="text-sm text-outline mb-12">{t(locale, 'privacy.lastUpdated')}</p>
+
+    <div class="prose prose-on-surface max-w-none space-y-8 text-lg leading-relaxed">
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s1.title')}</h2>
+        <p>{t(locale, 'privacy.s1.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li><strong>{t(locale, 'privacy.s1.images')}</strong> {t(locale, 'privacy.s1.imagesDesc')}</li>
+          <li><strong>{t(locale, 'privacy.s1.account')}</strong> {t(locale, 'privacy.s1.accountDesc')}</li>
+          <li><strong>{t(locale, 'privacy.s1.usage')}</strong> {t(locale, 'privacy.s1.usageDesc')}</li>
+          <li><strong>{t(locale, 'privacy.s1.technical')}</strong> {t(locale, 'privacy.s1.technicalDesc')}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s2.title')}</h2>
+        <p>{t(locale, 'privacy.s2.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>{t(locale, 'privacy.s2.item1')}</li>
+          <li>{t(locale, 'privacy.s2.item2')}</li>
+          <li>{t(locale, 'privacy.s2.item3')}</li>
+          <li>{t(locale, 'privacy.s2.item4')}</li>
+          <li>{t(locale, 'privacy.s2.item5')}</li>
+          <li>{t(locale, 'privacy.s2.item6')}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s3.title')}</h2>
+        <p>{t(locale, 'privacy.s3.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s4.title')}</h2>
+        <p>{t(locale, 'privacy.s4.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li><strong>{t(locale, 'privacy.s4.infra')}</strong> {t(locale, 'privacy.s4.infraDesc')}</li>
+          <li><strong>{t(locale, 'privacy.s4.auth')}</strong> {t(locale, 'privacy.s4.authDesc')}</li>
+          <li><strong>{t(locale, 'privacy.s4.law')}</strong> {t(locale, 'privacy.s4.lawDesc')}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s5.title')}</h2>
+        <p>{t(locale, 'privacy.s5.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>{t(locale, 'privacy.s5.item1')}</li>
+          <li>{t(locale, 'privacy.s5.item2')}</li>
+          <li>{t(locale, 'privacy.s5.item3')}</li>
+          <li>{t(locale, 'privacy.s5.item4')}</li>
+        </ul>
+        <p class="mt-4">{t(locale, 'privacy.s5.contact')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s6.title')}</h2>
+        <p>{t(locale, 'privacy.s6.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s7.title')}</h2>
+        <p>{t(locale, 'privacy.s7.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'privacy.s8.title')}</h2>
+        <p>{t(locale, 'privacy.s8.description')}</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

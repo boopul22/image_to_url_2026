@@ -1,0 +1,540 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { t } from '../../i18n/utils';
+import { defaultLocale } from '../../i18n/config';
+import type { Locale } from '../../i18n/config';
+import { getDB } from '../../lib/db';
+import { getPublishedPosts } from '../../lib/cms';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return locale === defaultLocale ? path : `/${locale}${path}`;
+}
+
+const db = getDB(Astro.locals);
+const { posts: previewPosts } = await getPublishedPosts(db, { limit: 3 });
+
+const pageSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://imagetourl.cloud/#software",
+    "name": "ImageToURL",
+    "url": "https://imagetourl.cloud",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "description": "Upload any image and instantly receive a permanent, CDN-delivered shareable URL. Supports JPG, PNG, WebP, GIF, and SVG up to 10 MB. No account required.",
+    "featureList": [
+      "Drag and drop image upload",
+      "Instant permanent URL generation",
+      "Global CDN delivery",
+      "SSL-encrypted links",
+      "No signup required for free tier",
+      "REST API access",
+      "Markdown and HTML export",
+      "Custom link expiration"
+    ],
+    "screenshot": "https://imagetourl.cloud/favicon.svg",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "10 uploads per month, standard processing speed, public link library.",
+        "url": "https://imagetourl.cloud/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro",
+        "price": "12",
+        "priceCurrency": "USD",
+        "billingIncrement": "P1M",
+        "description": "Unlimited uploads, high-priority processing, custom link expiration, API access.",
+        "url": "https://imagetourl.cloud/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Business",
+        "price": "49",
+        "priceCurrency": "USD",
+        "billingIncrement": "P1M",
+        "description": "Everything in Pro plus team workspaces, ultra-high resolution, and dedicated support.",
+        "url": "https://imagetourl.cloud/pricing"
+      }
+    ],
+    "publisher": {
+      "@id": "https://imagetourl.cloud/#organization"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "3",
+      "reviewCount": "3"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Alex Rivera" },
+        "reviewBody": "Finally, a tool that doesn't ask me to create an account for a simple 2-second task. The speed is actually insane."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Sarah Chen" },
+        "reviewBody": "We use the API to handle all our blog image assets. It's more reliable than our own previous hosting solution."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Jordan Smith" },
+        "reviewBody": "The permanent links feature is a lifesaver for my portfolio. I don't have to worry about broken images ever again."
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://imagetourl.cloud/#webpage",
+    "url": "https://imagetourl.cloud",
+    "name": "ImageToURL — Turn Images into Shareable Links",
+    "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
+    "isPartOf": { "@id": "https://imagetourl.cloud/#website" },
+    "about": { "@id": "https://imagetourl.cloud/#software" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://imagetourl.cloud" }
+      ]
+    }
+  }
+];
+---
+
+<Layout schema={pageSchema} title={t(locale, 'home.meta.title')} description={t(locale, 'home.meta.description')}>
+  <link slot="head" rel="preload" as="image" href="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBTqbTtfZwAZ3XJCxOWx7scpO1v_bzxnM0aN-R7Rd7sgzFl9M7kn8_rCNjA9XscAE2w1glWq8iOXPi5jiVHofktY_wm01rfqVC0FDC2xO-flpV5ViCBrBCPYdexHzAA_pgyA9Hr5JL5VWRHhpfORFUzsUJAtFZg0hm0kgcE_kwT-EqciNFu9S3bCZSblUTJmXvUhBv8CNfVkqhH4uWcBt-XEZ4FKAayycEVu2LtxaJxOwW9oPBOiE7qny_OWMfD6oY3RJpOwmq7g" media="(min-width: 768px)" fetchpriority="high" />
+  <Nav activePage="home" />
+
+  <!-- Hero Section — fits in one viewport -->
+  <section class="max-w-7xl mx-auto px-6 py-6 md:py-8 flex items-center" style="min-height: calc(100vh - 65px);">
+    <div class="w-full max-w-[1100px] mx-auto bg-[#D8C8F0] border-2 border-on-background rounded-xl overflow-hidden hard-shadow grid md:grid-cols-12 relative">
+      <!-- Left Content -->
+      <div class="md:col-span-7 p-8 md:p-12 flex flex-col justify-center gap-5">
+        <h1 class="font-headline italic text-5xl md:text-[4.2rem] font-black text-on-background leading-[0.9] tracking-tighter">
+          {t(locale, 'home.hero.title1')} <br /> {t(locale, 'home.hero.title2')} <span class="bg-tertiary-fixed px-2 not-italic">{t(locale, 'home.hero.title3')}</span>
+        </h1>
+        <p class="font-body text-base md:text-lg text-on-surface-variant max-w-md">
+          {t(locale, 'home.hero.description')}
+        </p>
+
+        <!-- Upload Area — single stable box -->
+        <div class="relative mt-1">
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
+          <div
+            id="upload-panel"
+            class="bg-white border-2 border-on-background rounded-xl hard-shadow overflow-hidden transition-colors"
+            data-uploading={t(locale, 'home.upload.uploading')}
+            data-copied={t(locale, 'home.upload.copied')}
+            data-copy={t(locale, 'home.upload.copy')}
+            data-failed={t(locale, 'home.upload.failed')}
+            data-click-or-drag={t(locale, 'home.upload.clickOrDrag')}
+            data-formats={t(locale, 'home.upload.formats')}
+            data-select-file={t(locale, 'home.upload.selectFile')}
+            data-uploading-file={t(locale, 'home.upload.uploadingFile')}
+          >
+
+            <!-- State: idle / uploading -->
+            <div id="state-idle" class="p-4">
+              <div id="drop-zone" class="flex items-center gap-4 cursor-pointer" role="button" tabindex="0">
+                <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0" id="upload-icon">upload_file</span>
+                <div class="flex-1 min-w-0">
+                  <p class="text-on-surface-variant font-medium truncate" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
+                  <p class="text-xs text-outline mt-0.5" id="upload-subtext">{t(locale, 'home.upload.formats')}</p>
+                </div>
+                <div class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-sm flex-shrink-0" id="upload-btn">
+                  {t(locale, 'home.upload.selectFile')}
+                </div>
+              </div>
+              <div id="progress-bar" class="hidden mt-3 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+                <div id="progress-fill" class="h-full bg-primary rounded-full transition-all duration-300" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- State: success -->
+            <div id="state-success" class="p-4 hidden">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="material-symbols-outlined text-secondary">check_circle</span>
+                <span class="font-bold text-secondary text-sm">{t(locale, 'home.upload.uploaded')}</span>
+                <button id="upload-another" class="ml-auto text-primary font-bold text-xs uppercase tracking-wider hover:underline flex-shrink-0">
+                  {t(locale, 'home.upload.uploadAnother')}
+                </button>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-surface-container border-2 border-on-background rounded-lg px-3 py-2 text-sm font-mono text-on-surface focus:outline-none" />
+                <button id="copy-btn" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-sm border-2 border-on-background flex-shrink-0 active:scale-95 transition-transform">
+                  {t(locale, 'home.upload.copy')}
+                </button>
+              </div>
+            </div>
+
+            <!-- State: error -->
+            <div id="state-error" class="p-4 hidden">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-error flex-shrink-0">error</span>
+                <span class="font-bold text-on-error-container text-sm flex-1 min-w-0 truncate" id="error-text">{t(locale, 'home.upload.failed')}</span>
+                <button id="error-retry" class="text-primary font-bold text-xs uppercase tracking-wider hover:underline flex-shrink-0">
+                  {t(locale, 'home.upload.tryAgain')}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-outline mr-2 self-center">{t(locale, 'home.supported')}</span>
+          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full border border-on-background text-xs font-bold">JPG</span>
+          <span class="bg-tertiary-fixed text-on-tertiary-container px-3 py-1 rounded-full border border-on-background text-xs font-bold">PNG</span>
+          <span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full border border-on-background text-xs font-bold">WebP</span>
+          <span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full border border-on-background text-xs font-bold">GIF</span>
+        </div>
+      </div>
+
+      <!-- Right Content / Collage -->
+      <div class="md:col-span-5 relative bg-white/30 backdrop-blur-sm border-l-2 border-on-background hidden md:block overflow-hidden">
+        <img alt="Digital assets and link sharing concept" class="w-full h-full object-cover grayscale contrast-125 opacity-40 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBTqbTtfZwAZ3XJCxOWx7scpO1v_bzxnM0aN-R7Rd7sgzFl9M7kn8_rCNjA9XscAE2w1glWq8iOXPi5jiVHofktY_wm01rfqVC0FDC2xO-flpV5ViCBrBCPYdexHzAA_pgyA9Hr5JL5VWRHhpfORFUzsUJAtFZg0hm0kgcE_kwT-EqciNFu9S3bCZSblUTJmXvUhBv8CNfVkqhH4uWcBt-XEZ4FKAayycEVu2LtxaJxOwW9oPBOiE7qny_OWMfD6oY3RJpOwmq7g" width="500" height="600" decoding="async" fetchpriority="high" />
+        <div class="absolute inset-0 flex items-center justify-center p-8">
+          <div class="relative w-full h-full">
+            <div class="absolute top-10 right-10 bg-white p-4 border-2 border-on-background rounded-lg hard-shadow -rotate-6">
+              <span class="material-symbols-outlined text-secondary text-4xl">share</span>
+            </div>
+            <div class="absolute bottom-10 left-10 bg-tertiary-fixed p-4 border-2 border-on-background rounded-lg hard-shadow rotate-12">
+              <span class="material-symbols-outlined text-on-tertiary-container text-4xl">bolt</span>
+            </div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary-fixed p-6 border-2 border-on-background rounded-full hard-shadow">
+              <span class="material-symbols-outlined text-on-secondary-fixed text-6xl">photo_camera</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stipple-divider mb-12"></div>
+
+  <!-- Features Grid -->
+  <section class="max-w-7xl mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      <div class="max-w-xl">
+        <h2 class="font-headline italic text-4xl md:text-5xl font-black text-on-background mb-4">{t(locale, 'home.features.title')}</h2>
+        <p class="font-body text-on-surface-variant">{t(locale, 'home.features.description')}</p>
+      </div>
+      <div class="flex gap-2">
+        <div class="w-12 h-12 bg-surface-container-highest border-2 border-on-background rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined">arrow_back</span>
+        </div>
+        <div class="w-12 h-12 bg-primary text-on-primary border-2 border-on-background rounded-full flex items-center justify-center hard-shadow">
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-4">
+      <div class="bg-secondary-container text-on-secondary-container border-2 border-on-background px-6 py-3 rounded-full flex items-center gap-3 hard-shadow-hover transition-all cursor-default">
+        <span class="text-xl">🚀</span>
+        <span class="font-label uppercase tracking-widest text-xs font-bold">{t(locale, 'home.features.cdn')}</span>
+      </div>
+      <div class="bg-surface-container border-2 border-on-background px-6 py-3 rounded-full flex items-center gap-3 hard-shadow-hover transition-all cursor-default">
+        <span class="text-xl">🔓</span>
+        <span class="font-label uppercase tracking-widest text-xs font-bold">{t(locale, 'home.features.noSignup')}</span>
+      </div>
+      <div class="bg-tertiary-fixed text-on-tertiary-container border-2 border-on-background px-6 py-3 rounded-full flex items-center gap-3 hard-shadow-hover transition-all cursor-default">
+        <span class="text-xl">🔗</span>
+        <span class="font-label uppercase tracking-widest text-xs font-bold">{t(locale, 'home.features.permanentLinks')}</span>
+      </div>
+      <div class="bg-primary-fixed text-on-primary-fixed-variant border-2 border-on-background px-6 py-3 rounded-full flex items-center gap-3 hard-shadow-hover transition-all cursor-default">
+        <span class="text-xl">🔒</span>
+        <span class="font-label uppercase tracking-widest text-xs font-bold">{t(locale, 'home.features.ssl')}</span>
+      </div>
+      <div class="bg-error-container text-on-error-container border-2 border-on-background px-6 py-3 rounded-full flex items-center gap-3 hard-shadow-hover transition-all cursor-default">
+        <span class="text-xl">⚡</span>
+        <span class="font-label uppercase tracking-widest text-xs font-bold">{t(locale, 'home.features.instantUpload')}</span>
+      </div>
+      <div class="bg-surface-variant border-2 border-on-background px-6 py-3 rounded-full flex items-center gap-3 hard-shadow-hover transition-all cursor-default">
+        <span class="text-xl">📐</span>
+        <span class="font-label uppercase tracking-widest text-xs font-bold">{t(locale, 'home.features.autoResize')}</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="stipple-divider my-12"></div>
+
+  <!-- How It Works -->
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <div class="grid md:grid-cols-3 gap-12">
+      <!-- Step 1 -->
+      <div class="flex flex-col gap-6 group">
+        <div class="bg-tertiary-fixed p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
+          <img alt="Person uploading photo" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow rotate-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNUxaXnRvIW6w6ROhHWz5_d5P63pRNI6ifuYsUGMBO_YBACVeiRI0sQEgn-4-7t63mrBTlF2hBh7AzR213otU3-xGJbAfMNjWDd03nU3UdBD5rk5t_q8Oaj7HcRP-PBaBqWNoFAosAdOxxokrsO1fweMZz0WcqqF79UbPmWhpWHfM16KoSp2gbJths5FkHu_QAZ41Wh2KTlfQRLqIsV36mpxGkt4BiKttz-QD-3xmu4ccgxdlML6PQl-X-FmWgSdhgfVEGfM10m64" width="400" height="192" loading="lazy" decoding="async" />
+          <div class="absolute top-4 left-4 bg-on-background text-white w-10 h-10 flex items-center justify-center rounded-full font-headline text-2xl italic">1</div>
+        </div>
+        <div>
+          <h3 class="font-headline italic text-3xl font-black text-on-background mb-2">{t(locale, 'home.howItWorks.upload.title')}</h3>
+          <p class="font-body text-on-surface-variant leading-relaxed">{t(locale, 'home.howItWorks.upload.description')}</p>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="flex flex-col gap-6 group">
+        <div class="bg-primary-fixed p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
+          <img alt="Data visualization illustration" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow -rotate-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAs3f2RO8HhvUb4kWQhzuIlPmezORcvJMgTuEMsaBBeIVomafs7BX_dK8Vh7mYhQQWKqr_-XKj7jZNrqhvRzEKFGlTlECmGhaH3wboQH3eRnhlq6_Wjdpsn-6MFnuzlFYBXJ5QLBJ76SCjoDQeNekIJQY3VsAMngchwJrCMJZkXd-ooD4ZB2WxfeC2GiCPX8GWyq-HfW5vZTNz4j6UHTiyMuV-4KZodHYhA1o6IrgQWPPiFm0yOeK8LflZ30hFQiN_5_ZFvmmlJuI" width="400" height="192" loading="lazy" decoding="async" />
+          <div class="absolute top-4 left-4 bg-on-background text-white w-10 h-10 flex items-center justify-center rounded-full font-headline text-2xl italic">2</div>
+        </div>
+        <div>
+          <h3 class="font-headline italic text-3xl font-black text-on-background mb-2">{t(locale, 'home.howItWorks.convert.title')}</h3>
+          <p class="font-body text-on-surface-variant leading-relaxed">{t(locale, 'home.howItWorks.convert.description')}</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="flex flex-col gap-6 group">
+        <div class="bg-secondary-container p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
+          <img alt="Sharing across devices" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow rotate-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYQ-ttM8NJC9DCfSlrd9QtPGSF6OiC2FHMJWnBLa0XK655QcI5-gx4Y6oFr52W8tkRa7tGqCl3cGeQA81nekzGPwQ7oFPTW116n9bHDEaDu63DPiEVM0JvSE--uIpX4Pa4fd1uHTWu9m_gSCjnEE-pH6wAnPmMXsSs2dhT82Ly5i1DJ1qpFNZwfaqdhfCeVU9QiIUBKqjbHAwte6gE4LxNZ1ihypjT82XwJ7NFCpmqLQdd9G6pfECIhQW6JuFSuorRQRs2jt1_w8c" width="400" height="192" loading="lazy" decoding="async" />
+          <div class="absolute top-4 left-4 bg-on-background text-white w-10 h-10 flex items-center justify-center rounded-full font-headline text-2xl italic">3</div>
+        </div>
+        <div>
+          <h3 class="font-headline italic text-3xl font-black text-on-background mb-2">{t(locale, 'home.howItWorks.share.title')}</h3>
+          <p class="font-body text-on-surface-variant leading-relaxed">{t(locale, 'home.howItWorks.share.description')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="bg-secondary px-6 py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-20">
+        <h2 class="font-headline italic text-5xl md:text-7xl font-black text-white mb-6">{t(locale, 'home.testimonials.title')} <span class="bg-tertiary-fixed text-on-tertiary px-3 not-italic">{t(locale, 'home.testimonials.highlight')}</span></h2>
+        <div class="flex justify-center gap-1">
+          {[1,2,3,4,5].map(() => (
+            <span class="material-symbols-outlined text-tertiary-fixed text-4xl" style="font-variation-settings: 'FILL' 1;">star</span>
+          ))}
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-12">
+        <!-- Quote 1 -->
+        <div class="relative pt-8">
+          <div class="bg-white p-8 rounded-xl border-2 border-on-background hard-shadow relative">
+            <div class="speech-bubble-tail bg-white border-l-2 border-b-2 border-on-background"></div>
+            <p class="font-headline italic text-xl text-on-surface mb-6">"{t(locale, 'home.testimonials.alex.quote')}"</p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full border-2 border-on-background overflow-hidden bg-primary-fixed">
+                <img alt={t(locale, 'home.testimonials.alex.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmfM4WRnmfMyxG2svBrqpKPj662x21sg_veIICHjC_JLq9LmSfOXcYCJ4ssCs2F2ZCkPnSOHcVb8O01YtjxgezrK_k4BNaV-g7hDu-9hjcacLtuX5ZoBjz1LTEvnua-NIy2Doq9_vRlKytHTee0BMajnJN8XKa9zuMbNtz0q-1JrTQ1FhSXR2ylj8AR0SfzTTHWZmnk4ejWT60VvIvTJAwCoR0GBEYUBy4v5EP8f_ox9l1xfhvI89yg_OBBvReml0OIivwZ7lANjc" width="48" height="48" loading="lazy" decoding="async" />
+              </div>
+              <div>
+                <p class="font-bold text-sm">{t(locale, 'home.testimonials.alex.name')}</p>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold">{t(locale, 'home.testimonials.alex.role')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Quote 2 -->
+        <div class="relative pt-8">
+          <div class="bg-white p-8 rounded-xl border-2 border-on-background hard-shadow relative -rotate-1">
+            <div class="speech-bubble-tail bg-white border-l-2 border-b-2 border-on-background"></div>
+            <p class="font-headline italic text-xl text-on-surface mb-6">"{t(locale, 'home.testimonials.sarah.quote')}"</p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full border-2 border-on-background overflow-hidden bg-tertiary-fixed">
+                <img alt={t(locale, 'home.testimonials.sarah.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmULj_9vdxghm3rYVHcgb_MFynGE4ZKLJlSHqhJfNJ6Lb9OPzYqFnEF5UrK4_WxSwhU44EinVXaHTJ5norK1kiHdu-NngoRyJb11gThlA2YbcQRLvdo4Kv3omAbV2tESDfnjQ1Y4Ko7VxsEtFrK0Qeapfg6wYms5eJxwyfye4bXa2C-aJv1poP7An_GRxMwe63CTy9OKwniS4IGa5QyM-lXJMBROj3nVOY4WOi533zDEUY7KG93khb6cU4StgCpTOKLYpbY8cFDrU" width="48" height="48" loading="lazy" decoding="async" />
+              </div>
+              <div>
+                <p class="font-bold text-sm">{t(locale, 'home.testimonials.sarah.name')}</p>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold">{t(locale, 'home.testimonials.sarah.role')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Quote 3 -->
+        <div class="relative pt-8">
+          <div class="bg-white p-8 rounded-xl border-2 border-on-background hard-shadow relative rotate-1">
+            <div class="speech-bubble-tail bg-white border-l-2 border-b-2 border-on-background"></div>
+            <p class="font-headline italic text-xl text-on-surface mb-6">"{t(locale, 'home.testimonials.jordan.quote')}"</p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full border-2 border-on-background overflow-hidden bg-secondary-fixed">
+                <img alt={t(locale, 'home.testimonials.jordan.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKK7PpHY1AWcvGia_m2KYL4o4aEjQdoqOv_DuyRnN8lShFbVhM-magAFEVXcgUQe18pHEMb80i65kGHD5Vj_4iEGvljOEFaSQNhNbr3SifE-1YY9PO7mlEVTd_2fY5DoSg9pYNMY-oAwYP_OSZwME6WYVjW3x3kJsZc4tooWZugNvBnAwfaHxw08oFrl_21eJzle-ShNxUmb9h9BMeWWr1QjDv8fVN79fQZ6eewZxxn7oHkL3ft1fNKW_iYj_4Choh_EPvqhsC2a0" width="48" height="48" loading="lazy" decoding="async" />
+              </div>
+              <div>
+                <p class="font-bold text-sm">{t(locale, 'home.testimonials.jordan.name')}</p>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold">{t(locale, 'home.testimonials.jordan.role')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+  </section>
+
+  <!-- Blog Preview Section -->
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="font-headline italic text-4xl md:text-5xl font-black text-on-background mb-12">{t(locale, 'home.blog.title')} <span class="bg-tertiary-fixed px-2 not-italic">{t(locale, 'home.blog.highlight')}</span></h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {previewPosts.map((post) => (
+        <article class="group">
+          <a href={lp(`/blog/${post.slug}`)} class="block h-full">
+            <div class="bg-surface border-2 border-on-background h-full flex flex-col hard-shadow hard-shadow-hover transition-all duration-200">
+              <div class={`h-48 relative border-b-2 border-on-background overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
+                {post.coverImage ? (
+                  <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.coverImage} width="400" height="192" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="material-symbols-outlined text-8xl text-on-surface/20">{post.iconFallback || 'article'}</span>
+                )}
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || t(locale, 'home.blog.uncategorized')}</span>
+                <h3 class="font-headline text-xl font-black text-on-surface mb-3 group-hover:text-primary transition-colors">{post.title}</h3>
+                <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1 mt-auto">
+                  {t(locale, 'home.blog.readMore')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  const panel = document.getElementById('upload-panel')!;
+  const dropZone = document.getElementById('drop-zone')!;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const uploadIcon = document.getElementById('upload-icon')!;
+  const uploadText = document.getElementById('upload-text')!;
+  const uploadSubtext = document.getElementById('upload-subtext')!;
+  const uploadBtn = document.getElementById('upload-btn')!;
+  const progressBar = document.getElementById('progress-bar')!;
+  const progressFill = document.getElementById('progress-fill')!;
+  const stateIdle = document.getElementById('state-idle')!;
+  const stateSuccess = document.getElementById('state-success')!;
+  const stateError = document.getElementById('state-error')!;
+  const resultUrl = document.getElementById('result-url') as HTMLInputElement;
+  const copyBtn = document.getElementById('copy-btn')!;
+  const uploadAnother = document.getElementById('upload-another')!;
+  const errorRetry = document.getElementById('error-retry')!;
+  const errorText = document.getElementById('error-text')!;
+
+  // Read i18n strings from data attributes
+  const i18n = {
+    uploading: panel.dataset.uploading || 'UPLOADING...',
+    copied: panel.dataset.copied || 'COPIED!',
+    copy: panel.dataset.copy || 'COPY',
+    failed: panel.dataset.failed || 'Upload failed',
+    clickOrDrag: panel.dataset.clickOrDrag || 'Click to upload or drag & drop',
+    formats: panel.dataset.formats || 'JPG, PNG, WebP, GIF, SVG — up to 10 MB',
+    selectFile: panel.dataset.selectFile || 'SELECT FILE',
+    uploadingFile: panel.dataset.uploadingFile || 'Uploading {name}',
+  };
+
+  function showState(state: 'idle' | 'success' | 'error') {
+    stateIdle.classList.toggle('hidden', state !== 'idle');
+    stateSuccess.classList.toggle('hidden', state !== 'success');
+    stateError.classList.toggle('hidden', state !== 'error');
+  }
+
+  function resetIdle() {
+    showState('idle');
+    progressBar.classList.add('hidden');
+    progressFill.style.width = '0%';
+    uploadIcon.textContent = 'upload_file';
+    uploadText.textContent = i18n.clickOrDrag;
+    uploadSubtext.textContent = i18n.formats;
+    uploadBtn.textContent = i18n.selectFile;
+    fileInput.value = '';
+  }
+
+  // Click to open file picker
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+
+  // Drag and drop — target the whole panel
+  panel.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    panel.classList.add('!border-primary', '!bg-primary-fixed/30');
+  });
+  panel.addEventListener('dragleave', (e) => {
+    if (!panel.contains(e.relatedTarget as Node)) {
+      panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
+    }
+  });
+  panel.addEventListener('drop', (e) => {
+    e.preventDefault();
+    panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) uploadFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files.length > 0) uploadFile(fileInput.files[0]);
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(resultUrl.value);
+    copyBtn.textContent = i18n.copied;
+    setTimeout(() => { copyBtn.textContent = i18n.copy; }, 2000);
+  });
+
+  uploadAnother.addEventListener('click', resetIdle);
+  errorRetry.addEventListener('click', resetIdle);
+
+  async function uploadFile(file: File) {
+    // Show uploading state (stays in idle panel)
+    showState('idle');
+    progressBar.classList.remove('hidden');
+    progressFill.style.width = '0%';
+    uploadIcon.textContent = 'hourglass_top';
+    uploadText.textContent = i18n.uploadingFile.replace('{name}', file.name);
+    uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1].toUpperCase()}`;
+    uploadBtn.textContent = i18n.uploading;
+
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      progress = Math.min(progress + Math.random() * 15, 90);
+      progressFill.style.width = `${progress}%`;
+    }, 200);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/upload', { method: 'POST', body: formData });
+      const data = await response.json();
+
+      clearInterval(progressInterval);
+
+      if (!response.ok || data.error) {
+        throw new Error(data.error || i18n.failed);
+      }
+
+      progressFill.style.width = '100%';
+      setTimeout(() => {
+        showState('success');
+        resultUrl.value = data.data.url;
+      }, 300);
+
+    } catch (err: any) {
+      clearInterval(progressInterval);
+      showState('error');
+      errorText.textContent = err.message || i18n.failed;
+    }
+  }
+</script>

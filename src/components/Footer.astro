@@ -1,11 +1,21 @@
 ---
+import { t } from '../i18n/utils';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function localePath(path: string): string {
+  if (locale === defaultLocale) return path;
+  return `/${locale}${path}`;
+}
 ---
 
 <footer class="bg-surface-container border-t-2 border-on-background">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full px-8 py-12 max-w-7xl mx-auto">
     <div>
       <div class="text-xl font-black font-headline text-on-background mb-4">ImageToURL</div>
-      <p class="font-body font-medium text-on-surface-variant mb-6">Making the web more visual, one link at a time. Designed for humans, built for speed.</p>
+      <p class="font-body font-medium text-on-surface-variant mb-6">{t(locale, 'footer.tagline')}</p>
       <div class="flex gap-4">
         <a href="#" class="w-10 h-10 border-2 border-on-background rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
           <span class="material-symbols-outlined text-lg">share</span>
@@ -16,19 +26,18 @@
       </div>
     </div>
     <div class="flex flex-col gap-3">
-      <span class="font-label uppercase tracking-widest text-xs font-bold text-primary">Resources</span>
-      <a href="/privacy" class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">Privacy Policy</a>
-      <a href="/terms" class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">Terms of Service</a>
-      <a href="/docs" class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">Documentation</a>
-      <a href="/docs" class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">Documentation</a>
+      <span class="font-label uppercase tracking-widest text-xs font-bold text-primary">{t(locale, 'footer.resources')}</span>
+      <a href={localePath('/privacy')} class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">{t(locale, 'footer.privacy')}</a>
+      <a href={localePath('/terms')} class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">{t(locale, 'footer.terms')}</a>
+      <a href={localePath('/docs')} class="text-outline hover:text-primary underline decoration-2 font-medium transition-colors">{t(locale, 'footer.docs')}</a>
     </div>
     <div class="flex flex-col gap-3">
-      <span class="font-label uppercase tracking-widest text-xs font-bold text-primary">Stay Updated</span>
+      <span class="font-label uppercase tracking-widest text-xs font-bold text-primary">{t(locale, 'footer.stayUpdated')}</span>
       <div class="relative mt-2">
-        <input type="email" placeholder="Your email..." class="w-full bg-white border-2 border-on-background rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" />
-        <button class="absolute right-2 top-2 bottom-2 bg-primary text-on-primary px-3 rounded font-bold text-xs uppercase">Join</button>
+        <input type="email" placeholder={t(locale, 'footer.emailPlaceholder')} class="w-full bg-white border-2 border-on-background rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" />
+        <button class="absolute right-2 top-2 bottom-2 bg-primary text-on-primary px-3 rounded font-bold text-xs uppercase">{t(locale, 'footer.join')}</button>
       </div>
-      <p class="text-xs text-on-surface-variant mt-4">&copy; {new Date().getFullYear()} ImageToURL. Designed by ImageToURL Team</p>
+      <p class="text-xs text-on-surface-variant mt-4">{t(locale, 'footer.copyright', { year: String(new Date().getFullYear()) })}</p>
     </div>
   </div>
 </footer>

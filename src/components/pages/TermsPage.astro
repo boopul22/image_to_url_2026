@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { t } from '../../i18n/utils';
+import { defaultLocale } from '../../i18n/config';
+import type { Locale } from '../../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+---
+
+<Layout title={t(locale, 'terms.meta.title')} description={t(locale, 'terms.meta.description')}>
+  <Nav activePage="" />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="font-headline italic text-5xl font-black text-on-background mb-8">{t(locale, 'terms.title')}</h1>
+    <p class="text-sm text-outline mb-12">{t(locale, 'terms.lastUpdated')}</p>
+
+    <div class="prose prose-on-surface max-w-none space-y-8 text-lg leading-relaxed">
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s1.title')}</h2>
+        <p>{t(locale, 'terms.s1.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s2.title')}</h2>
+        <p>{t(locale, 'terms.s2.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s3.title')}</h2>
+        <p>{t(locale, 'terms.s3.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>{t(locale, 'terms.s3.item1')}</li>
+          <li>{t(locale, 'terms.s3.item2')}</li>
+          <li>{t(locale, 'terms.s3.item3')}</li>
+          <li>{t(locale, 'terms.s3.item4')}</li>
+          <li>{t(locale, 'terms.s3.item5')}</li>
+          <li>{t(locale, 'terms.s3.item6')}</li>
+        </ul>
+        <p class="mt-4">{t(locale, 'terms.s3.outro')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s4.title')}</h2>
+        <p>{t(locale, 'terms.s4.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s5.title')}</h2>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li><strong>{t(locale, 'terms.s5.free')}</strong> {t(locale, 'terms.s5.freeDesc')}</li>
+          <li><strong>{t(locale, 'terms.s5.pro')}</strong> {t(locale, 'terms.s5.proDesc')}</li>
+          <li><strong>{t(locale, 'terms.s5.business')}</strong> {t(locale, 'terms.s5.businessDesc')}</li>
+        </ul>
+        <p class="mt-4">{t(locale, 'terms.s5.cancel')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s6.title')}</h2>
+        <p>{t(locale, 'terms.s6.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s7.title')}</h2>
+        <p>{t(locale, 'terms.s7.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s8.title')}</h2>
+        <p>{t(locale, 'terms.s8.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s9.title')}</h2>
+        <p>{t(locale, 'terms.s9.description')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">{t(locale, 'terms.s10.title')}</h2>
+        <p>{t(locale, 'terms.s10.description')}</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

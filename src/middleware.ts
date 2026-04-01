@@ -2,8 +2,19 @@ import { defineMiddleware } from 'astro:middleware';
 import { getSession } from './lib/session';
 import { verifyApiKey } from './lib/api-key';
 import { getDB } from './lib/db';
+import { getLocaleFromPath } from './i18n/utils';
+import { defaultLocale } from './i18n/config';
 
 export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
+  // Locale detection — force English for admin/dashboard/api routes
+  const url0 = new URL(request.url);
+  const path = url0.pathname;
+  if (path.startsWith('/admin') || path.startsWith('/dashboard') || path.startsWith('/api/')) {
+    locals.locale = defaultLocale;
+  } else {
+    locals.locale = getLocaleFromPath(path);
+  }
+
   let db: D1Database | null = null;
 
   try {

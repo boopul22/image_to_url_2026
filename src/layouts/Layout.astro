@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import { locales, localeOgTags, defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+import { stripLocalePrefix } from '../i18n/utils';
 
 interface Props {
   title?: string;
@@ -7,15 +10,11 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   noindex?: boolean;
-  /**
-   * Pass a page-specific JSON-LD object (or array of objects) to inject
-   * alongside the sitewide Organization + WebSite schemas.
-   */
   schema?: object | object[];
 }
 
 const {
-  title = "ImageToURL — Free Image Hosting | Turn Images into Shareable Links",
+  title = "ImageToURL \u2014 Free Image Hosting | Turn Images into Shareable Links",
   description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery. Upload JPG, PNG, WebP, GIF, SVG and get an instant shareable URL.",
   ogImage = "/og-default.png",
   ogType = "website",
@@ -23,10 +22,12 @@ const {
   schema,
 } = Astro.props;
 
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
+const basePath = stripLocalePrefix(Astro.url.pathname);
 
-// Sitewide schemas — injected on every page
+// Sitewide schemas
 const sitewideSchemas = [
   {
     "@context": "https://schema.org",
@@ -50,28 +51,29 @@ const sitewideSchemas = [
     "url": "https://imagetourl.cloud",
     "name": "ImageToURL",
     "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
-    "publisher": {
-      "@id": "https://imagetourl.cloud/#organization"
-    },
+    "publisher": { "@id": "https://imagetourl.cloud/#organization" },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://imagetourl.cloud/blog?search={search_term_string}"
-      },
+      "target": { "@type": "EntryPoint", "urlTemplate": "https://imagetourl.cloud/blog?search={search_term_string}" },
       "query-input": "required name=search_term_string"
     }
   }
 ];
 
-// Merge sitewide + page-specific schemas into one array for a single <script> tag
 const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 const allSchemas = [...sitewideSchemas, ...pageSchemas];
 const schemaJson = JSON.stringify(allSchemas);
+
+// Build hreflang URLs for all locales
+const SITE = Astro.site?.origin ?? 'https://imagetourl.cloud';
+function hreflangUrl(loc: Locale): string {
+  if (loc === defaultLocale) return `${SITE}${basePath}`;
+  return `${SITE}/${loc}${basePath}`;
+}
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -83,6 +85,12 @@ const schemaJson = JSON.stringify(allSchemas);
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#630ed4" />
 
+    <!-- hreflang for all locales -->
+    {locales.map(loc => (
+      <link rel="alternate" hreflang={loc} href={hreflangUrl(loc)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={hreflangUrl(defaultLocale)} />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -90,6 +98,7 @@ const schemaJson = JSON.stringify(allSchemas);
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:site_name" content="ImageToURL" />
+    <meta property="og:locale" content={localeOgTags[locale]} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -120,7 +129,7 @@ const schemaJson = JSON.stringify(allSchemas);
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={schemaJson} />
 
-    <!-- Per-page head injections (preloads, extra meta, etc.) -->
+    <!-- Per-page head injections -->
     <slot name="head" />
   </head>
   <body class="bg-background font-body text-on-surface relative overflow-x-hidden">
