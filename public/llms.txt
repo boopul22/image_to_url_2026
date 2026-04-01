@@ -1,0 +1,34 @@
+# ImageToURL
+
+> ImageToURL (imagetourl.cloud) is a free image hosting service that converts uploaded images into permanent, shareable CDN-backed URLs. No account is required for basic use.
+
+## What It Does
+- Accepts JPG, PNG, WebP, GIF, SVG files up to 10 MB (50 MB on Business plan)
+- Returns a permanent HTTPS URL served via a global edge network
+- Supports anonymous uploads, API access, and team workspaces
+- Images are optimized and delivered through a lightning-fast CDN
+
+## Plans
+- Free ($0/mo): 10 uploads per month, standard processing speed, public link library
+- Pro ($12/mo): Unlimited uploads, high-priority processing, API access, custom link expiration
+- Business ($49/mo): Everything in Pro plus team workspaces, ultra-high resolution, dedicated support
+
+## Key Pages
+- Homepage / Upload tool: https://imagetourl.cloud/
+- Features: https://imagetourl.cloud/features
+- Pricing: https://imagetourl.cloud/pricing
+- Blog: https://imagetourl.cloud/blog
+- API Documentation: https://imagetourl.cloud/docs
+
+## Blog Topics
+Tutorials on SVG workflows, CDN optimization, REST API usage, image hosting for CMS platforms, global asset distribution, typography, and creative workflows.
+
+## How It Works
+1. Upload: Drag an image into the upload zone or use the REST API
+2. Convert: The engine optimizes and generates a permanent, high-speed URL
+3. Share: Paste the link anywhere — social media, blogs, apps, or documentation
+
+## Excluded (not for AI consumption)
+- /api/ — internal REST endpoints
+- /admin/ — internal CMS management
+- /dashboard/ — authenticated user account area

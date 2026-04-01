@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const db = getDB(locals);
 
-  const [users, images, apiKeys, recentUploads] = await Promise.all([
+  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages] = await Promise.all([
     db.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count, COALESCE(SUM(size_bytes), 0) as total_size FROM images')
@@ -28,6 +28,9 @@ export const GET: APIRoute = async ({ locals }) => {
          ORDER BY i.created_at DESC LIMIT 10`,
       )
       .all(),
+    db.prepare('SELECT COUNT(*) as count FROM posts').first<{ count: number }>(),
+    db.prepare('SELECT COUNT(*) as count FROM media').first<{ count: number }>(),
+    db.prepare('SELECT COUNT(*) as count FROM pages').first<{ count: number }>(),
   ]);
 
   return new Response(
@@ -37,6 +40,9 @@ export const GET: APIRoute = async ({ locals }) => {
       totalStorage: images?.total_size ?? 0,
       activeApiKeys: apiKeys?.count ?? 0,
       recentUploads: recentUploads.results,
+      totalPosts: posts?.count ?? 0,
+      totalMedia: cmsMedia?.count ?? 0,
+      totalPages: pages?.count ?? 0,
     }),
     { headers: { 'Content-Type': 'application/json' } },
   );

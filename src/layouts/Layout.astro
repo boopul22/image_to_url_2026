@@ -4,9 +4,70 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  /**
+   * Pass a page-specific JSON-LD object (or array of objects) to inject
+   * alongside the sitewide Organization + WebSite schemas.
+   */
+  schema?: object | object[];
 }
 
-const { title = "ImageToURL — Turn Images into Shareable Links", description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery." } = Astro.props;
+const {
+  title = "ImageToURL — Free Image Hosting | Turn Images into Shareable Links",
+  description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery. Upload JPG, PNG, WebP, GIF, SVG and get an instant shareable URL.",
+  ogImage = "/og-default.png",
+  ogType = "website",
+  noindex = false,
+  schema,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+
+// Sitewide schemas — injected on every page
+const sitewideSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://imagetourl.cloud/#organization",
+    "name": "ImageToURL",
+    "url": "https://imagetourl.cloud",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imagetourl.cloud/favicon.svg",
+      "width": 512,
+      "height": 512
+    },
+    "description": "ImageToURL is a cloud-based image hosting service that converts uploaded images into permanent, CDN-delivered shareable URLs instantly.",
+    "sameAs": []
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://imagetourl.cloud/#website",
+    "url": "https://imagetourl.cloud",
+    "name": "ImageToURL",
+    "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
+    "publisher": {
+      "@id": "https://imagetourl.cloud/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://imagetourl.cloud/blog?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+];
+
+// Merge sitewide + page-specific schemas into one array for a single <script> tag
+const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const allSchemas = [...sitewideSchemas, ...pageSchemas];
+const schemaJson = JSON.stringify(allSchemas);
 ---
 
 <!doctype html>
@@ -15,14 +76,55 @@ const { title = "ImageToURL — Turn Images into Shareable Links", description =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#630ed4" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="ImageToURL" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <title>{title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500;1,6..72,700;1,6..72,800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Fonts: preconnect + non-render-blocking load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500;1,6..72,700;1,6..72,800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500;1,6..72,700;1,6..72,800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500;1,6..72,700;1,6..72,800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+    </noscript>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={schemaJson} />
+
+    <!-- Per-page head injections (preloads, extra meta, etc.) -->
+    <slot name="head" />
   </head>
   <body class="bg-background font-body text-on-surface relative overflow-x-hidden">
-    <div class="grain-overlay"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
     <slot />
   </body>
 </html>

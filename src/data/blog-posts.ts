@@ -1,3 +1,7 @@
+// DEPRECATED: Blog data has been migrated to D1 database.
+// This file is kept for the migration script (api/admin/cms/migrate.ts) and as reference.
+// Public blog pages now read from D1 via src/lib/cms.ts.
+
 export interface BlogPost {
   slug: string;
   title: string;

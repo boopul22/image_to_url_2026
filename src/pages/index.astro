@@ -4,12 +4,114 @@ export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { blogPosts } from '../data/blog-posts';
+import { getDB } from '../lib/db';
+import { getPublishedPosts } from '../lib/cms';
 
-const previewPosts = blogPosts.slice(0, 3);
+const db = getDB(Astro.locals);
+const { posts: previewPosts } = await getPublishedPosts(db, { limit: 3 });
+
+const pageSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://imagetourl.cloud/#software",
+    "name": "ImageToURL",
+    "url": "https://imagetourl.cloud",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "description": "Upload any image and instantly receive a permanent, CDN-delivered shareable URL. Supports JPG, PNG, WebP, GIF, and SVG up to 10 MB. No account required.",
+    "featureList": [
+      "Drag and drop image upload",
+      "Instant permanent URL generation",
+      "Global CDN delivery",
+      "SSL-encrypted links",
+      "No signup required for free tier",
+      "REST API access",
+      "Markdown and HTML export",
+      "Custom link expiration"
+    ],
+    "screenshot": "https://imagetourl.cloud/favicon.svg",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "10 uploads per month, standard processing speed, public link library.",
+        "url": "https://imagetourl.cloud/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro",
+        "price": "12",
+        "priceCurrency": "USD",
+        "billingIncrement": "P1M",
+        "description": "Unlimited uploads, high-priority processing, custom link expiration, API access.",
+        "url": "https://imagetourl.cloud/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Business",
+        "price": "49",
+        "priceCurrency": "USD",
+        "billingIncrement": "P1M",
+        "description": "Everything in Pro plus team workspaces, ultra-high resolution, and dedicated support.",
+        "url": "https://imagetourl.cloud/pricing"
+      }
+    ],
+    "publisher": {
+      "@id": "https://imagetourl.cloud/#organization"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "3",
+      "reviewCount": "3"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Alex Rivera" },
+        "reviewBody": "Finally, a tool that doesn't ask me to create an account for a simple 2-second task. The speed is actually insane."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Sarah Chen" },
+        "reviewBody": "We use the API to handle all our blog image assets. It's more reliable than our own previous hosting solution."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Jordan Smith" },
+        "reviewBody": "The permanent links feature is a lifesaver for my portfolio. I don't have to worry about broken images ever again."
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://imagetourl.cloud/#webpage",
+    "url": "https://imagetourl.cloud",
+    "name": "ImageToURL — Turn Images into Shareable Links",
+    "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
+    "isPartOf": { "@id": "https://imagetourl.cloud/#website" },
+    "about": { "@id": "https://imagetourl.cloud/#software" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://imagetourl.cloud" }
+      ]
+    }
+  }
+];
 ---
 
-<Layout>
+<Layout schema={pageSchema}>
+  <link slot="head" rel="preload" as="image" href="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBTqbTtfZwAZ3XJCxOWx7scpO1v_bzxnM0aN-R7Rd7sgzFl9M7kn8_rCNjA9XscAE2w1glWq8iOXPi5jiVHofktY_wm01rfqVC0FDC2xO-flpV5ViCBrBCPYdexHzAA_pgyA9Hr5JL5VWRHhpfORFUzsUJAtFZg0hm0kgcE_kwT-EqciNFu9S3bCZSblUTJmXvUhBv8CNfVkqhH4uWcBt-XEZ4FKAayycEVu2LtxaJxOwW9oPBOiE7qny_OWMfD6oY3RJpOwmq7g" media="(min-width: 768px)" fetchpriority="high" />
   <Nav activePage="home" />
 
   <!-- Hero Section — fits in one viewport -->
@@ -89,7 +191,7 @@ const previewPosts = blogPosts.slice(0, 3);
 
       <!-- Right Content / Collage -->
       <div class="md:col-span-5 relative bg-white/30 backdrop-blur-sm border-l-2 border-on-background hidden md:block overflow-hidden">
-        <img alt="Digital assets and link sharing concept" class="w-full h-full object-cover grayscale contrast-125 opacity-40 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBTqbTtfZwAZ3XJCxOWx7scpO1v_bzxnM0aN-R7Rd7sgzFl9M7kn8_rCNjA9XscAE2w1glWq8iOXPi5jiVHofktY_wm01rfqVC0FDC2xO-flpV5ViCBrBCPYdexHzAA_pgyA9Hr5JL5VWRHhpfORFUzsUJAtFZg0hm0kgcE_kwT-EqciNFu9S3bCZSblUTJmXvUhBv8CNfVkqhH4uWcBt-XEZ4FKAayycEVu2LtxaJxOwW9oPBOiE7qny_OWMfD6oY3RJpOwmq7g" />
+        <img alt="Digital assets and link sharing concept" class="w-full h-full object-cover grayscale contrast-125 opacity-40 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBTqbTtfZwAZ3XJCxOWx7scpO1v_bzxnM0aN-R7Rd7sgzFl9M7kn8_rCNjA9XscAE2w1glWq8iOXPi5jiVHofktY_wm01rfqVC0FDC2xO-flpV5ViCBrBCPYdexHzAA_pgyA9Hr5JL5VWRHhpfORFUzsUJAtFZg0hm0kgcE_kwT-EqciNFu9S3bCZSblUTJmXvUhBv8CNfVkqhH4uWcBt-XEZ4FKAayycEVu2LtxaJxOwW9oPBOiE7qny_OWMfD6oY3RJpOwmq7g" width="500" height="600" decoding="async" fetchpriority="high" />
         <div class="absolute inset-0 flex items-center justify-center p-8">
           <div class="relative w-full h-full">
             <div class="absolute top-10 right-10 bg-white p-4 border-2 border-on-background rounded-lg hard-shadow -rotate-6">
@@ -161,7 +263,7 @@ const previewPosts = blogPosts.slice(0, 3);
       <!-- Step 1 -->
       <div class="flex flex-col gap-6 group">
         <div class="bg-tertiary-fixed p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
-          <img alt="Person uploading photo" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow rotate-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNUxaXnRvIW6w6ROhHWz5_d5P63pRNI6ifuYsUGMBO_YBACVeiRI0sQEgn-4-7t63mrBTlF2hBh7AzR213otU3-xGJbAfMNjWDd03nU3UdBD5rk5t_q8Oaj7HcRP-PBaBqWNoFAosAdOxxokrsO1fweMZz0WcqqF79UbPmWhpWHfM16KoSp2gbJths5FkHu_QAZ41Wh2KTlfQRLqIsV36mpxGkt4BiKttz-QD-3xmu4ccgxdlML6PQl-X-FmWgSdhgfVEGfM10m64" />
+          <img alt="Person uploading photo" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow rotate-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNUxaXnRvIW6w6ROhHWz5_d5P63pRNI6ifuYsUGMBO_YBACVeiRI0sQEgn-4-7t63mrBTlF2hBh7AzR213otU3-xGJbAfMNjWDd03nU3UdBD5rk5t_q8Oaj7HcRP-PBaBqWNoFAosAdOxxokrsO1fweMZz0WcqqF79UbPmWhpWHfM16KoSp2gbJths5FkHu_QAZ41Wh2KTlfQRLqIsV36mpxGkt4BiKttz-QD-3xmu4ccgxdlML6PQl-X-FmWgSdhgfVEGfM10m64" width="400" height="192" loading="lazy" decoding="async" />
           <div class="absolute top-4 left-4 bg-on-background text-white w-10 h-10 flex items-center justify-center rounded-full font-headline text-2xl italic">1</div>
         </div>
         <div>
@@ -172,7 +274,7 @@ const previewPosts = blogPosts.slice(0, 3);
       <!-- Step 2 -->
       <div class="flex flex-col gap-6 group">
         <div class="bg-primary-fixed p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
-          <img alt="Data visualization illustration" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow -rotate-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAs3f2RO8HhvUb4kWQhzuIlPmezORcvJMgTuEMsaBBeIVomafs7BX_dK8Vh7mYhQQWKqr_-XKj7jZNrqhvRzEKFGlTlECmGhaH3wboQH3eRnhlq6_Wjdpsn-6MFnuzlFYBXJ5QLBJ76SCjoDQeNekIJQY3VsAMngchwJrCMJZkXd-ooD4ZB2WxfeC2GiCPX8GWyq-HfW5vZTNz4j6UHTiyMuV-4KZodHYhA1o6IrgQWPPiFm0yOeK8LflZ30hFQiN_5_ZFvmmlJuI" />
+          <img alt="Data visualization illustration" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow -rotate-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAs3f2RO8HhvUb4kWQhzuIlPmezORcvJMgTuEMsaBBeIVomafs7BX_dK8Vh7mYhQQWKqr_-XKj7jZNrqhvRzEKFGlTlECmGhaH3wboQH3eRnhlq6_Wjdpsn-6MFnuzlFYBXJ5QLBJ76SCjoDQeNekIJQY3VsAMngchwJrCMJZkXd-ooD4ZB2WxfeC2GiCPX8GWyq-HfW5vZTNz4j6UHTiyMuV-4KZodHYhA1o6IrgQWPPiFm0yOeK8LflZ30hFQiN_5_ZFvmmlJuI" width="400" height="192" loading="lazy" decoding="async" />
           <div class="absolute top-4 left-4 bg-on-background text-white w-10 h-10 flex items-center justify-center rounded-full font-headline text-2xl italic">2</div>
         </div>
         <div>
@@ -183,7 +285,7 @@ const previewPosts = blogPosts.slice(0, 3);
       <!-- Step 3 -->
       <div class="flex flex-col gap-6 group">
         <div class="bg-secondary-container p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
-          <img alt="Sharing across devices" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow rotate-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYQ-ttM8NJC9DCfSlrd9QtPGSF6OiC2FHMJWnBLa0XK655QcI5-gx4Y6oFr52W8tkRa7tGqCl3cGeQA81nekzGPwQ7oFPTW116n9bHDEaDu63DPiEVM0JvSE--uIpX4Pa4fd1uHTWu9m_gSCjnEE-pH6wAnPmMXsSs2dhT82Ly5i1DJ1qpFNZwfaqdhfCeVU9QiIUBKqjbHAwte6gE4LxNZ1ihypjT82XwJ7NFCpmqLQdd9G6pfECIhQW6JuFSuorRQRs2jt1_w8c" />
+          <img alt="Sharing across devices" class="w-full h-48 object-cover border-2 border-on-background rounded-lg hard-shadow rotate-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYQ-ttM8NJC9DCfSlrd9QtPGSF6OiC2FHMJWnBLa0XK655QcI5-gx4Y6oFr52W8tkRa7tGqCl3cGeQA81nekzGPwQ7oFPTW116n9bHDEaDu63DPiEVM0JvSE--uIpX4Pa4fd1uHTWu9m_gSCjnEE-pH6wAnPmMXsSs2dhT82Ly5i1DJ1qpFNZwfaqdhfCeVU9QiIUBKqjbHAwte6gE4LxNZ1ihypjT82XwJ7NFCpmqLQdd9G6pfECIhQW6JuFSuorRQRs2jt1_w8c" width="400" height="192" loading="lazy" decoding="async" />
           <div class="absolute top-4 left-4 bg-on-background text-white w-10 h-10 flex items-center justify-center rounded-full font-headline text-2xl italic">3</div>
         </div>
         <div>
@@ -213,7 +315,7 @@ const previewPosts = blogPosts.slice(0, 3);
             <p class="font-headline italic text-xl text-on-surface mb-6">"Finally, a tool that doesn't ask me to create an account for a simple 2-second task. The speed is actually insane."</p>
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full border-2 border-on-background overflow-hidden bg-primary-fixed">
-                <img alt="Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmfM4WRnmfMyxG2svBrqpKPj662x21sg_veIICHjC_JLq9LmSfOXcYCJ4ssCs2F2ZCkPnSOHcVb8O01YtjxgezrK_k4BNaV-g7hDu-9hjcacLtuX5ZoBjz1LTEvnua-NIy2Doq9_vRlKytHTee0BMajnJN8XKa9zuMbNtz0q-1JrTQ1FhSXR2ylj8AR0SfzTTHWZmnk4ejWT60VvIvTJAwCoR0GBEYUBy4v5EP8f_ox9l1xfhvI89yg_OBBvReml0OIivwZ7lANjc" />
+                <img alt="Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmfM4WRnmfMyxG2svBrqpKPj662x21sg_veIICHjC_JLq9LmSfOXcYCJ4ssCs2F2ZCkPnSOHcVb8O01YtjxgezrK_k4BNaV-g7hDu-9hjcacLtuX5ZoBjz1LTEvnua-NIy2Doq9_vRlKytHTee0BMajnJN8XKa9zuMbNtz0q-1JrTQ1FhSXR2ylj8AR0SfzTTHWZmnk4ejWT60VvIvTJAwCoR0GBEYUBy4v5EP8f_ox9l1xfhvI89yg_OBBvReml0OIivwZ7lANjc" width="48" height="48" loading="lazy" decoding="async" />
               </div>
               <div>
                 <p class="font-bold text-sm">Alex Rivera</p>
@@ -229,7 +331,7 @@ const previewPosts = blogPosts.slice(0, 3);
             <p class="font-headline italic text-xl text-on-surface mb-6">"We use the API to handle all our blog image assets. It's more reliable than our own previous hosting solution."</p>
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full border-2 border-on-background overflow-hidden bg-tertiary-fixed">
-                <img alt="Sarah Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmULj_9vdxghm3rYVHcgb_MFynGE4ZKLJlSHqhJfNJ6Lb9OPzYqFnEF5UrK4_WxSwhU44EinVXaHTJ5norK1kiHdu-NngoRyJb11gThlA2YbcQRLvdo4Kv3omAbV2tESDfnjQ1Y4Ko7VxsEtFrK0Qeapfg6wYms5eJxwyfye4bXa2C-aJv1poP7An_GRxMwe63CTy9OKwniS4IGa5QyM-lXJMBROj3nVOY4WOi533zDEUY7KG93khb6cU4StgCpTOKLYpbY8cFDrU" />
+                <img alt="Sarah Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmULj_9vdxghm3rYVHcgb_MFynGE4ZKLJlSHqhJfNJ6Lb9OPzYqFnEF5UrK4_WxSwhU44EinVXaHTJ5norK1kiHdu-NngoRyJb11gThlA2YbcQRLvdo4Kv3omAbV2tESDfnjQ1Y4Ko7VxsEtFrK0Qeapfg6wYms5eJxwyfye4bXa2C-aJv1poP7An_GRxMwe63CTy9OKwniS4IGa5QyM-lXJMBROj3nVOY4WOi533zDEUY7KG93khb6cU4StgCpTOKLYpbY8cFDrU" width="48" height="48" loading="lazy" decoding="async" />
               </div>
               <div>
                 <p class="font-bold text-sm">Sarah Chen</p>
@@ -245,7 +347,7 @@ const previewPosts = blogPosts.slice(0, 3);
             <p class="font-headline italic text-xl text-on-surface mb-6">"The permanent links feature is a lifesaver for my portfolio. I don't have to worry about broken images ever again."</p>
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full border-2 border-on-background overflow-hidden bg-secondary-fixed">
-                <img alt="Jordan Smith" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKK7PpHY1AWcvGia_m2KYL4o4aEjQdoqOv_DuyRnN8lShFbVhM-magAFEVXcgUQe18pHEMb80i65kGHD5Vj_4iEGvljOEFaSQNhNbr3SifE-1YY9PO7mlEVTd_2fY5DoSg9pYNMY-oAwYP_OSZwME6WYVjW3x3kJsZc4tooWZugNvBnAwfaHxw08oFrl_21eJzle-ShNxUmb9h9BMeWWr1QjDv8fVN79fQZ6eewZxxn7oHkL3ft1fNKW_iYj_4Choh_EPvqhsC2a0" />
+                <img alt="Jordan Smith" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKK7PpHY1AWcvGia_m2KYL4o4aEjQdoqOv_DuyRnN8lShFbVhM-magAFEVXcgUQe18pHEMb80i65kGHD5Vj_4iEGvljOEFaSQNhNbr3SifE-1YY9PO7mlEVTd_2fY5DoSg9pYNMY-oAwYP_OSZwME6WYVjW3x3kJsZc4tooWZugNvBnAwfaHxw08oFrl_21eJzle-ShNxUmb9h9BMeWWr1QjDv8fVN79fQZ6eewZxxn7oHkL3ft1fNKW_iYj_4Choh_EPvqhsC2a0" width="48" height="48" loading="lazy" decoding="async" />
               </div>
               <div>
                 <p class="font-bold text-sm">Jordan Smith</p>
@@ -268,15 +370,15 @@ const previewPosts = blogPosts.slice(0, 3);
         <article class="group">
           <a href={`/blog/${post.slug}`} class="block h-full">
             <div class="bg-surface border-2 border-on-background h-full flex flex-col hard-shadow hard-shadow-hover transition-all duration-200">
-              <div class={`h-48 relative border-b-2 border-on-background overflow-hidden ${!post.image ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
-                {post.image ? (
-                  <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.image} />
+              <div class={`h-48 relative border-b-2 border-on-background overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
+                {post.coverImage ? (
+                  <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.coverImage} width="400" height="192" loading="lazy" decoding="async" />
                 ) : (
                   <span class="material-symbols-outlined text-8xl text-on-surface/20">{post.iconFallback || 'article'}</span>
                 )}
               </div>
               <div class="p-6 flex flex-col flex-1">
-                <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor} tracking-widest mb-3 block`}>{post.category}</span>
+                <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || 'Uncategorized'}</span>
                 <h3 class="font-headline text-xl font-black text-on-surface mb-3 group-hover:text-primary transition-colors">{post.title}</h3>
                 <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1 mt-auto">
                   Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>

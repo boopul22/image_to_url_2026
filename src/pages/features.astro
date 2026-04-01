@@ -1,12 +1,13 @@
 ---
-export const prerender = false;
+// SSG — static landing page, no DB queries. Fastest TTFB + perfect SEO.
+export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Features - ImageToURL">
+<Layout title="Image Hosting Features — CDN, API, Security | ImageToURL" description="Explore ImageToURL features: global CDN delivery, 99.9% uptime, HTTPS encryption, no signup required, REST API access, Markdown export, and custom endpoints.">
   <Nav activePage="features" />
 
   <main class="max-w-7xl mx-auto px-6 py-16">
@@ -61,7 +62,7 @@ import Footer from '../components/Footer.astro';
         <div class="relative group">
           <div class="bg-tertiary-fixed border-2 border-on-background p-2 rounded-xl hard-shadow h-full">
             <div class="overflow-hidden rounded-lg border-2 border-on-background h-64 relative">
-              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="HTTPS Security" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSdRwuOrmCj4ycUILmrlyMqINJmIzdLRXee66AW4UlJ_KzbNGVelXR1A-OxUB53ZxyAwFYHex5aHKj6-IwjRa9Tj1xZf-Z4xIFliAuIqH1QXRhzWTUyPCNAqMbBN7E8zxlAxL4CRk5h4pK9TReXntJQaa-qrowLCwfRZ5AtkWtGikuQuZUBZO8VYAZa87yW7a_YSBJHMamaJ1C0Eoamp9C6Al8nR1oUEUs8g5Cgq9seLdIBOpDlf-NA0_MbSLE05x29s6HBZVxSJE" />
+              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="HTTPS Security" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSdRwuOrmCj4ycUILmrlyMqINJmIzdLRXee66AW4UlJ_KzbNGVelXR1A-OxUB53ZxyAwFYHex5aHKj6-IwjRa9Tj1xZf-Z4xIFliAuIqH1QXRhzWTUyPCNAqMbBN7E8zxlAxL4CRk5h4pK9TReXntJQaa-qrowLCwfRZ5AtkWtGikuQuZUBZO8VYAZa87yW7a_YSBJHMamaJ1C0Eoamp9C6Al8nR1oUEUs8g5Cgq9seLdIBOpDlf-NA0_MbSLE05x29s6HBZVxSJE" width="500" height="256" loading="lazy" decoding="async" />
               <div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
             </div>
             <div class="p-6">
@@ -77,7 +78,7 @@ import Footer from '../components/Footer.astro';
         <div class="relative group">
           <div class="bg-surface-variant border-2 border-on-background p-2 rounded-xl hard-shadow h-full">
             <div class="overflow-hidden rounded-lg border-2 border-on-background h-64 relative">
-              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="No Signup Required" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZjDa9o2JxdS7bGm1oXpigcU9nx0vwEcY-Wkyi5TG6ai-sn9BsyeG2XOGfA6Zz0Xu7vYFSN_Yg-u9M8TAWFt2vRc4Ie19zsVEVn8_qi96bYHyiE2GtIQ5qfVZzO-aUQpl7UQot0I6jvct23gjaVSU9H1KvT7Z7XpsWH0JhAMlpt_-rin-b7I1yX7ANp1Z3_Ahdt4xvsgocXNdWcxv4Vcr9bRbLA3iWxWxctOwWmDbbwJVKVYtFalYHgqWm2LXVzol_teioziOU79A" />
+              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="No Signup Required" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZjDa9o2JxdS7bGm1oXpigcU9nx0vwEcY-Wkyi5TG6ai-sn9BsyeG2XOGfA6Zz0Xu7vYFSN_Yg-u9M8TAWFt2vRc4Ie19zsVEVn8_qi96bYHyiE2GtIQ5qfVZzO-aUQpl7UQot0I6jvct23gjaVSU9H1KvT7Z7XpsWH0JhAMlpt_-rin-b7I1yX7ANp1Z3_Ahdt4xvsgocXNdWcxv4Vcr9bRbLA3iWxWxctOwWmDbbwJVKVYtFalYHgqWm2LXVzol_teioziOU79A" width="500" height="256" loading="lazy" decoding="async" />
               <div class="absolute inset-0 bg-secondary/10 mix-blend-multiply"></div>
             </div>
             <div class="p-6">

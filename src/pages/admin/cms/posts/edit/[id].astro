@@ -1,0 +1,460 @@
+---
+export const prerender = false;
+
+import Layout from '../../../../../layouts/Layout.astro';
+import Nav from '../../../../../components/Nav.astro';
+import AdminSidebar from '../../../../../components/AdminSidebar.astro';
+
+const { id } = Astro.params;
+---
+
+<Layout title="Edit Post - CMS - ImageToURL">
+  <Nav activePage="admin" />
+
+  <div class="flex">
+    <AdminSidebar activePage="cms" />
+
+    <main class="flex-1 bg-surface-container-lowest min-h-[calc(100vh-65px)]">
+      <div class="flex flex-col lg:flex-row">
+        <!-- Main Content Area -->
+        <div class="flex-1 p-8 space-y-6 max-w-4xl">
+          <div class="flex items-center gap-4 mb-2">
+            <a href="/admin/cms/posts" class="text-outline hover:text-on-surface transition-colors">
+              <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <h1 class="text-2xl font-headline italic font-black text-on-surface">Edit Post</h1>
+            <span id="current-status" class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase"></span>
+            <span id="save-status" class="text-xs text-outline ml-auto"></span>
+          </div>
+
+          <!-- Title -->
+          <input
+            id="post-title"
+            type="text"
+            placeholder="Post title..."
+            class="w-full text-4xl font-headline italic font-black bg-transparent border-none focus:outline-none text-on-surface placeholder:text-outline/50"
+          />
+
+          <!-- Excerpt -->
+          <textarea
+            id="post-excerpt"
+            placeholder="Write a short excerpt..."
+            rows="2"
+            class="w-full bg-surface border-2 border-on-surface rounded-lg p-4 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+          ></textarea>
+
+          <!-- Content Builder -->
+          <div class="space-y-6">
+            <div>
+              <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline mb-2 block">Introduction</label>
+              <textarea
+                id="content-intro"
+                placeholder="Opening paragraph..."
+                rows="4"
+                class="w-full bg-surface border-2 border-on-surface rounded-lg p-4 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+              ></textarea>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Sections</label>
+                <button id="add-section-btn" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border-2 border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">add</span> Add Section
+                </button>
+              </div>
+              <div id="sections-container" class="space-y-4"></div>
+            </div>
+
+            <details class="bg-surface border-2 border-on-surface rounded-lg">
+              <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">format_quote</span> Blockquote (optional)
+              </summary>
+              <div class="p-4 pt-0">
+                <textarea
+                  id="content-blockquote"
+                  placeholder="Add a notable quote..."
+                  rows="2"
+                  class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y italic"
+                ></textarea>
+              </div>
+            </details>
+
+            <details class="bg-surface border-2 border-on-surface rounded-lg">
+              <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">lightbulb</span> Callout (optional)
+              </summary>
+              <div class="p-4 pt-0 space-y-3">
+                <input id="callout-title" type="text" placeholder="Callout title..." class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary font-bold" />
+                <textarea id="callout-body" placeholder="Callout content..." rows="2" class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y"></textarea>
+              </div>
+            </details>
+
+            <div>
+              <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline mb-2 block">Conclusion</label>
+              <textarea
+                id="content-outro"
+                placeholder="Closing paragraph..."
+                rows="4"
+                class="w-full bg-surface border-2 border-on-surface rounded-lg p-4 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="w-full lg:w-80 border-t-2 lg:border-t-0 lg:border-l-2 border-on-surface p-6 space-y-5 bg-surface lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto">
+          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3 hard-shadow">
+            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Publish</h3>
+            <div class="flex gap-2">
+              <button id="save-btn" class="flex-1 bg-surface border-2 border-on-surface px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest transition-colors">
+                Save
+              </button>
+              <button id="publish-toggle-btn" class="flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hover:opacity-90 transition-opacity">
+                Publish
+              </button>
+            </div>
+            <a id="view-post-link" href="#" class="text-xs text-primary font-bold uppercase flex items-center gap-1 hidden">
+              <span class="material-symbols-outlined text-sm">open_in_new</span> View Post
+            </a>
+          </div>
+
+          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3">
+            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Category</h3>
+            <select id="post-category" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm">
+              <option value="">Select category...</option>
+            </select>
+          </div>
+
+          <div class="border-2 border-on-surface rounded-xl p-4">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input id="post-featured" type="checkbox" class="w-5 h-5 rounded border-2 border-on-surface accent-primary" />
+              <span class="font-label text-xs font-bold uppercase tracking-wider">Featured Post</span>
+            </label>
+          </div>
+
+          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3">
+            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Cover Image</h3>
+            <div id="cover-preview" class="hidden h-32 bg-surface-container-highest rounded-lg overflow-hidden border-2 border-outline-variant">
+              <img id="cover-img" class="w-full h-full object-cover" />
+            </div>
+            <input id="post-cover-image" type="text" placeholder="Image URL..." class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+            <label class="block text-center px-3 py-2 border-2 border-dashed border-outline rounded-lg text-[10px] font-bold uppercase text-outline hover:border-primary hover:text-primary cursor-pointer transition-colors">
+              Upload Image
+              <input type="file" accept="image/*" class="hidden" id="cover-upload" />
+            </label>
+          </div>
+
+          <details class="border-2 border-on-surface rounded-xl">
+            <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider">Icon Fallback</summary>
+            <div class="p-4 pt-0 space-y-3">
+              <input id="post-icon-fallback" type="text" placeholder="Material icon name" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+              <input id="post-icon-bg" type="text" placeholder="Background class" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+            </div>
+          </details>
+
+          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3">
+            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Author</h3>
+            <input id="post-author-name" type="text" placeholder="Author name" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+            <input id="post-author-role" type="text" placeholder="Author role" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+            <input id="post-author-avatar" type="text" placeholder="Avatar URL" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+          </div>
+
+          <details class="border-2 border-on-surface rounded-xl">
+            <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider">SEO Settings</summary>
+            <div class="p-4 pt-0 space-y-3">
+              <input id="post-slug" type="text" placeholder="post-slug" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+              <input id="post-meta-title" type="text" placeholder="Meta title" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+              <textarea id="post-meta-description" placeholder="Meta description" rows="2" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm resize-none"></textarea>
+            </div>
+          </details>
+
+          <details class="border-2 border-on-surface rounded-xl">
+            <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider">Related Posts</summary>
+            <div class="p-4 pt-0 space-y-3">
+              <input id="related-search" type="text" placeholder="Search posts..." class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
+              <div id="related-results" class="space-y-1 max-h-32 overflow-y-auto"></div>
+              <div id="related-selected" class="space-y-1"></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script define:vars={{ postId: id }}>
+  let sectionCount = 0;
+  let relatedSlugs = [];
+  let allPosts = [];
+  let currentPostStatus = 'draft';
+  let currentSlug = '';
+
+  async function loadCategories() {
+    const res = await fetch('/api/admin/cms/categories');
+    const data = await res.json();
+    const select = document.getElementById('post-category');
+    for (const cat of data.categories || []) {
+      const opt = document.createElement('option');
+      opt.value = cat.id;
+      opt.textContent = cat.name;
+      select.appendChild(opt);
+    }
+  }
+
+  async function loadAllPosts() {
+    const res = await fetch('/api/admin/cms/posts?limit=100&status=published');
+    const data = await res.json();
+    allPosts = (data.posts || []).filter(p => p.id !== postId);
+  }
+
+  function addSection(heading = '', body = '') {
+    sectionCount++;
+    const num = String(sectionCount).padStart(2, '0');
+    const div = document.createElement('div');
+    div.className = 'bg-surface border-2 border-on-surface rounded-lg p-4 space-y-3 relative';
+    div.innerHTML = `
+      <div class="flex items-center gap-3">
+        <span class="font-headline italic font-black text-lg text-primary">${num}</span>
+        <input type="text" placeholder="Section heading..." value="${heading.replace(/"/g, '&quot;')}" class="section-heading flex-1 bg-transparent border-b-2 border-outline-variant focus:border-primary focus:outline-none font-bold text-sm py-1" />
+        <button class="remove-section text-error hover:bg-error hover:text-on-error w-7 h-7 rounded-full flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+      </div>
+      <textarea placeholder="Section content..." rows="4" class="section-body w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y">${body}</textarea>
+    `;
+    document.getElementById('sections-container').appendChild(div);
+    div.querySelector('.remove-section').addEventListener('click', () => {
+      div.remove();
+      renumberSections();
+    });
+  }
+
+  function renumberSections() {
+    const sections = document.querySelectorAll('#sections-container > div');
+    sections.forEach((s, i) => {
+      s.querySelector('.font-headline').textContent = String(i + 1).padStart(2, '0');
+    });
+    sectionCount = sections.length;
+  }
+
+  document.getElementById('add-section-btn').addEventListener('click', () => addSection());
+
+  // Cover image
+  const coverInput = document.getElementById('post-cover-image');
+  const coverPreview = document.getElementById('cover-preview');
+  const coverImg = document.getElementById('cover-img');
+
+  coverInput.addEventListener('input', () => {
+    if (coverInput.value) {
+      coverImg.src = coverInput.value;
+      coverPreview.classList.remove('hidden');
+    } else {
+      coverPreview.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('cover-upload').addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const form = new FormData();
+    form.append('file', file);
+    form.append('folder', 'blog');
+    const res = await fetch('/api/admin/cms/media', { method: 'POST', body: form });
+    const data = await res.json();
+    if (data.url) {
+      coverInput.value = data.url;
+      coverImg.src = data.url;
+      coverPreview.classList.remove('hidden');
+    }
+  });
+
+  // Related posts
+  const relatedSearch = document.getElementById('related-search');
+  const relatedResults = document.getElementById('related-results');
+  const relatedSelected = document.getElementById('related-selected');
+
+  relatedSearch.addEventListener('input', () => {
+    const q = relatedSearch.value.toLowerCase();
+    if (!q) { relatedResults.innerHTML = ''; return; }
+    const matches = allPosts.filter(p => p.title.toLowerCase().includes(q) && !relatedSlugs.includes(p.slug)).slice(0, 5);
+    relatedResults.innerHTML = matches.map(p => `
+      <button class="w-full text-left p-2 text-xs hover:bg-surface-container-highest rounded transition-colors" data-slug="${p.slug}" data-title="${p.title.replace(/"/g, '&quot;')}">
+        ${p.title}
+      </button>
+    `).join('');
+    relatedResults.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (relatedSlugs.length >= 3) return;
+        relatedSlugs.push(btn.dataset.slug);
+        renderRelated();
+        relatedSearch.value = '';
+        relatedResults.innerHTML = '';
+      });
+    });
+  });
+
+  function renderRelated() {
+    relatedSelected.innerHTML = relatedSlugs.map(slug => {
+      const post = allPosts.find(p => p.slug === slug);
+      return `<div class="flex items-center justify-between p-2 bg-surface-container-lowest rounded text-xs">
+        <span>${post?.title || slug}</span>
+        <button class="text-error" data-remove="${slug}"><span class="material-symbols-outlined text-sm">close</span></button>
+      </div>`;
+    }).join('');
+    relatedSelected.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        relatedSlugs = relatedSlugs.filter(s => s !== btn.dataset.remove);
+        renderRelated();
+      });
+    });
+  }
+
+  function updateStatusUI() {
+    const badge = document.getElementById('current-status');
+    const toggleBtn = document.getElementById('publish-toggle-btn');
+    const viewLink = document.getElementById('view-post-link');
+
+    if (currentPostStatus === 'published') {
+      badge.textContent = 'Published';
+      badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container';
+      toggleBtn.textContent = 'Unpublish';
+      toggleBtn.className = 'flex-1 bg-outline text-surface px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hover:opacity-90 transition-opacity';
+      viewLink.href = `/blog/${currentSlug}`;
+      viewLink.classList.remove('hidden');
+    } else {
+      badge.textContent = currentPostStatus;
+      badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
+      toggleBtn.textContent = 'Publish';
+      toggleBtn.className = 'flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hover:opacity-90 transition-opacity';
+      viewLink.classList.add('hidden');
+    }
+  }
+
+  function collectPostData() {
+    const sections = [];
+    document.querySelectorAll('#sections-container > div').forEach((div, i) => {
+      sections.push({
+        heading: div.querySelector('.section-heading').value,
+        number: String(i + 1).padStart(2, '0'),
+        body: div.querySelector('.section-body').value,
+      });
+    });
+
+    const blockquote = document.getElementById('content-blockquote').value || undefined;
+    const calloutTitle = document.getElementById('callout-title').value;
+    const calloutBody = document.getElementById('callout-body').value;
+    const callout = calloutTitle || calloutBody ? { title: calloutTitle, body: calloutBody } : undefined;
+
+    return {
+      title: document.getElementById('post-title').value || 'Untitled',
+      slug: document.getElementById('post-slug').value || undefined,
+      excerpt: document.getElementById('post-excerpt').value,
+      content: JSON.stringify({ intro: document.getElementById('content-intro').value, sections, blockquote, callout, outro: document.getElementById('content-outro').value }),
+      categoryId: document.getElementById('post-category').value || null,
+      featured: document.getElementById('post-featured').checked,
+      coverImage: coverInput.value || null,
+      iconFallback: document.getElementById('post-icon-fallback').value || null,
+      iconBg: document.getElementById('post-icon-bg').value || null,
+      authorName: document.getElementById('post-author-name').value,
+      authorRole: document.getElementById('post-author-role').value,
+      authorAvatar: document.getElementById('post-author-avatar').value,
+      metaTitle: document.getElementById('post-meta-title').value || null,
+      metaDescription: document.getElementById('post-meta-description').value || null,
+      relatedSlugs,
+    };
+  }
+
+  async function savePost() {
+    const data = collectPostData();
+    const saveStatus = document.getElementById('save-status');
+    saveStatus.textContent = 'Saving...';
+
+    const res = await fetch(`/api/admin/cms/posts/${postId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    saveStatus.textContent = result.success ? 'Saved!' : `Error: ${result.error}`;
+    setTimeout(() => { saveStatus.textContent = ''; }, 3000);
+  }
+
+  async function togglePublish() {
+    const action = currentPostStatus === 'published' ? 'unpublish' : 'publish';
+    await fetch(`/api/admin/cms/posts/${postId}/${action}`, { method: 'POST' });
+    currentPostStatus = action === 'publish' ? 'published' : 'draft';
+    updateStatusUI();
+    // Also save current content
+    await savePost();
+  }
+
+  document.getElementById('save-btn').addEventListener('click', savePost);
+  document.getElementById('publish-toggle-btn').addEventListener('click', togglePublish);
+
+  // Auto-save
+  setInterval(() => {
+    const data = collectPostData();
+    localStorage.setItem(`cms-edit-${postId}`, JSON.stringify(data));
+  }, 30000);
+
+  // Load post data
+  async function loadPost() {
+    const res = await fetch(`/api/admin/cms/posts/${postId}`);
+    const data = await res.json();
+    if (!data.success) {
+      alert('Post not found');
+      window.location.href = '/admin/cms/posts';
+      return;
+    }
+
+    const p = data.post;
+    currentPostStatus = p.status;
+    currentSlug = p.slug;
+
+    document.getElementById('post-title').value = p.title;
+    document.getElementById('post-excerpt').value = p.excerpt;
+    document.getElementById('post-slug').value = p.slug;
+    document.getElementById('content-intro').value = p.content.intro || '';
+    document.getElementById('content-outro').value = p.content.outro || '';
+
+    if (p.content.blockquote) {
+      document.getElementById('content-blockquote').value = p.content.blockquote;
+    }
+    if (p.content.callout) {
+      document.getElementById('callout-title').value = p.content.callout.title || '';
+      document.getElementById('callout-body').value = p.content.callout.body || '';
+    }
+
+    // Sections
+    sectionCount = 0;
+    if (p.content.sections?.length) {
+      p.content.sections.forEach(s => addSection(s.heading, s.body));
+    } else {
+      addSection();
+    }
+
+    // Sidebar fields
+    if (p.categoryId) document.getElementById('post-category').value = p.categoryId;
+    document.getElementById('post-featured').checked = p.featured;
+
+    if (p.coverImage) {
+      coverInput.value = p.coverImage;
+      coverImg.src = p.coverImage;
+      coverPreview.classList.remove('hidden');
+    }
+
+    document.getElementById('post-icon-fallback').value = p.iconFallback || '';
+    document.getElementById('post-icon-bg').value = p.iconBg || '';
+    document.getElementById('post-author-name').value = p.authorName;
+    document.getElementById('post-author-role').value = p.authorRole;
+    document.getElementById('post-author-avatar').value = p.authorAvatar;
+    document.getElementById('post-meta-title').value = p.metaTitle || '';
+    document.getElementById('post-meta-description').value = p.metaDescription || '';
+
+    relatedSlugs = p.relatedSlugs || [];
+    updateStatusUI();
+  }
+
+  // Init
+  loadCategories().then(() => loadPost().then(() => loadAllPosts().then(() => renderRelated())));
+</script>

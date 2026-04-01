@@ -1,14 +1,18 @@
 ---
+// CSR-like — SSR with no caching. SEO doesn't matter here.
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+// No CDN caching — always fresh, private user data
+Astro.response.headers.set('Cache-Control', 'private, no-store');
+
 const user = Astro.locals.user!;
 ---
 
-<Layout title="Dashboard - ImageToURL">
+<Layout title="Dashboard - ImageToURL" noindex={true}>
   <Nav activePage="dashboard" />
 
   <main class="pt-8 pb-24 px-6 max-w-7xl mx-auto space-y-12">
@@ -148,6 +152,12 @@ const user = Astro.locals.user!;
 </Layout>
 
 <script>
+  function esc(s: string): string {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
   // Upload
   const uploadZone = document.getElementById('upload-zone')!;
   const fileInput = document.getElementById('file-input') as HTMLInputElement;
@@ -232,13 +242,13 @@ const user = Astro.locals.user!;
     keysList.innerHTML = data.keys.map((k: any) => `
       <div class="flex items-center gap-4 p-4 bg-surface border-2 border-on-surface hard-shadow">
         <div class="flex-1">
-          <span class="font-bold text-sm">${k.name}</span>
-          <code class="ml-3 text-xs text-outline font-mono">${k.key_prefix}...</code>
+          <span class="font-bold text-sm">${esc(k.name)}</span>
+          <code class="ml-3 text-xs text-outline font-mono">${esc(k.key_prefix)}...</code>
         </div>
         <span class="text-xs text-outline">${k.last_used_at ? 'Last used: ' + new Date(k.last_used_at).toLocaleDateString() : 'Never used'}</span>
         ${k.revoked_at
           ? '<span class="font-label text-xs font-bold text-error uppercase">Revoked</span>'
-          : `<button onclick="revokeKey('${k.id}')" class="font-label text-xs font-bold uppercase text-error hover:-translate-y-0.5 transition-all">Revoke</button>`
+          : `<button onclick="revokeKey('${esc(k.id)}')" class="font-label text-xs font-bold uppercase text-error hover:-translate-y-0.5 transition-all">Revoke</button>`
         }
       </div>
     `).join('');
@@ -286,14 +296,14 @@ const user = Astro.locals.user!;
     imagesGrid.innerHTML = allImages.map((img: any) => `
       <div class="bg-surface border-2 border-on-surface overflow-hidden hard-shadow group">
         <div class="h-40 bg-surface-container-highest overflow-hidden">
-          <img src="${img.url}" alt="${img.filename}" class="w-full h-full object-cover" loading="lazy" />
+          <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
         </div>
         <div class="p-3 space-y-2">
-          <p class="text-xs font-bold truncate" title="${img.filename}">${img.filename}</p>
+          <p class="text-xs font-bold truncate" title="${esc(img.filename)}">${esc(img.filename)}</p>
           <p class="text-[10px] text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
           <div class="flex gap-2">
-            <button onclick="copyUrl('${img.url}')" class="flex-1 text-center py-1 border border-on-surface text-[10px] font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">Copy URL</button>
-            <button onclick="deleteImage('${img.id}')" class="py-1 px-2 border border-error text-error text-[10px] font-bold uppercase hover:bg-error hover:text-on-error transition-colors">
+            <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-1 border border-on-surface text-[10px] font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">Copy URL</button>
+            <button onclick="deleteImage('${esc(img.id)}')" class="py-1 px-2 border border-error text-error text-[10px] font-bold uppercase hover:bg-error hover:text-on-error transition-colors">
               <span class="material-symbols-outlined text-sm">delete</span>
             </button>
           </div>

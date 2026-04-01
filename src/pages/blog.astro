@@ -1,16 +1,26 @@
 ---
+// ISR — SSR + edge cache. SSG speed with background refresh on new posts.
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { blogPosts } from '../data/blog-posts';
+import { getDB } from '../lib/db';
+import { getPublishedPosts, getCategories } from '../lib/cms';
 
-const featuredPost = blogPosts.find((p) => p.featured);
-const otherPosts = blogPosts.filter((p) => p !== featuredPost);
+// ISR: Cache at CDN edge for 5 min, serve stale up to 1 hour while revalidating
+Astro.response.headers.set('CDN-Cache-Control', 'public, max-age=300, stale-while-revalidate=3600');
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+
+const db = getDB(Astro.locals);
+const { posts } = await getPublishedPosts(db, { limit: 50 });
+const categories = await getCategories(db);
+
+const featuredPost = posts.find((p) => p.featured);
+const otherPosts = posts.filter((p) => p !== featuredPost);
 ---
 
-<Layout title="Blog - ImageToURL">
+<Layout title="Blog — Image Hosting Tutorials, Tips & Updates | ImageToURL" description="Read tutorials, product updates, and insights on image hosting, CDN optimization, REST APIs, and creative workflows from the ImageToURL team.">
   <Nav activePage="blog" />
 
   <main>
@@ -47,9 +57,11 @@ const otherPosts = blogPosts.filter((p) => p !== featuredPost);
         </div>
         <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
           <button class="px-4 py-2 rounded-full border-2 border-on-surface bg-secondary-fixed text-on-secondary-fixed font-label text-xs font-bold uppercase whitespace-nowrap">All Posts</button>
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface bg-surface-container-highest text-on-surface-variant font-label text-xs font-bold uppercase whitespace-nowrap hover:bg-secondary-fixed transition-colors">Tutorials</button>
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface bg-surface-container-highest text-on-surface-variant font-label text-xs font-bold uppercase whitespace-nowrap hover:bg-secondary-fixed transition-colors">Product Updates</button>
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface bg-surface-container-highest text-on-surface-variant font-label text-xs font-bold uppercase whitespace-nowrap hover:bg-secondary-fixed transition-colors">Case Studies</button>
+          {categories.map((cat) => (
+            <button class="px-4 py-2 rounded-full border-2 border-on-surface bg-surface-container-highest text-on-surface-variant font-label text-xs font-bold uppercase whitespace-nowrap hover:bg-secondary-fixed transition-colors" data-category={cat.id}>
+              {cat.name}
+            </button>
+          ))}
         </div>
       </div>
     </section>
@@ -64,8 +76,8 @@ const otherPosts = blogPosts.filter((p) => p !== featuredPost);
               <div class="bg-surface border-2 border-on-surface h-full overflow-hidden hard-shadow hard-shadow-hover transition-all duration-200">
                 <div class="flex flex-col md:flex-row h-full">
                   <div class="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-on-surface">
-                    {featuredPost.image && (
-                      <img alt={featuredPost.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={featuredPost.image} />
+                    {featuredPost.coverImage && (
+                      <img alt={featuredPost.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" src={featuredPost.coverImage} />
                     )}
                     <div class="absolute top-4 left-4">
                       <span class="px-3 py-1 bg-primary text-on-primary border-2 border-on-surface font-label text-[10px] font-bold uppercase tracking-widest">Featured</span>
@@ -73,16 +85,16 @@ const otherPosts = blogPosts.filter((p) => p !== featuredPost);
                   </div>
                   <div class="p-8 flex flex-col justify-between flex-1">
                     <div>
-                      <span class={`font-label text-xs font-bold uppercase text-${featuredPost.categoryColor} tracking-widest mb-4 block`}>{featuredPost.category}</span>
+                      <span class={`font-label text-xs font-bold uppercase text-${featuredPost.categoryColor || 'primary'} tracking-widest mb-4 block`}>{featuredPost.categoryName || 'Uncategorized'}</span>
                       <h2 class="font-headline text-3xl md:text-4xl font-black text-on-surface mb-4 group-hover:text-primary transition-colors">{featuredPost.title}</h2>
                       <p class="font-body text-on-surface-variant mb-6 leading-relaxed">{featuredPost.excerpt}</p>
                     </div>
                     <div class="flex items-center justify-between">
                       <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full border-2 border-on-surface bg-tertiary-fixed p-0.5 overflow-hidden">
-                          <img alt={featuredPost.author.name} class="w-full h-full object-cover rounded-full" src={featuredPost.author.avatar} />
+                          <img alt={featuredPost.authorName} class="w-full h-full object-cover rounded-full" loading="lazy" decoding="async" src={featuredPost.authorAvatar} />
                         </div>
-                        <span class="font-label text-xs font-bold text-on-surface">{featuredPost.author.name}</span>
+                        <span class="font-label text-xs font-bold text-on-surface">{featuredPost.authorName}</span>
                       </div>
                       <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1">
                         Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
@@ -108,7 +120,7 @@ const otherPosts = blogPosts.filter((p) => p !== featuredPost);
                   {isWide ? (
                     <>
                       <div class="p-8 flex flex-col justify-center flex-1">
-                        <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor} tracking-widest mb-4 block`}>{post.category}</span>
+                        <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-4 block`}>{post.categoryName || 'Uncategorized'}</span>
                         <h3 class="font-headline text-3xl font-black text-on-surface mb-4 group-hover:text-primary transition-colors">{post.title}</h3>
                         <p class="font-body text-on-surface-variant mb-6 leading-relaxed">{post.excerpt}</p>
                         <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1">
@@ -116,14 +128,14 @@ const otherPosts = blogPosts.filter((p) => p !== featuredPost);
                         </span>
                       </div>
                       <div class={`w-full md:w-2/5 h-64 md:h-auto border-t-2 md:border-t-0 md:border-l-2 border-on-surface flex items-center justify-center relative overflow-hidden ${post.iconBg || 'bg-surface-container-highest'}`}>
-                        {post.image ? (
-                          <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.image} />
+                        {post.coverImage ? (
+                          <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" src={post.coverImage} />
                         ) : (
                           <>
                             <span class="material-symbols-outlined text-[12rem] text-primary/10 absolute rotate-12">auto_fix_high</span>
                             <div class="text-center p-6 relative z-10">
                               <span class="material-symbols-outlined text-6xl text-primary mb-4">{post.iconFallback || 'article'}</span>
-                              <div class="font-headline italic text-xl">{post.category}</div>
+                              <div class="font-headline italic text-xl">{post.categoryName || 'Uncategorized'}</div>
                             </div>
                           </>
                         )}
@@ -131,18 +143,18 @@ const otherPosts = blogPosts.filter((p) => p !== featuredPost);
                     </>
                   ) : (
                     <>
-                      <div class={`h-48 relative border-b-2 border-on-surface overflow-hidden ${!post.image ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
-                        {post.image ? (
-                          <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.image} />
+                      <div class={`h-48 relative border-b-2 border-on-surface overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
+                        {post.coverImage ? (
+                          <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" src={post.coverImage} />
                         ) : (
                           <div class="relative z-10 flex flex-col items-center">
                             <span class="material-symbols-outlined text-6xl text-on-surface/20">{post.iconFallback || 'article'}</span>
-                            <span class="font-headline text-lg italic mt-2">{post.category}</span>
+                            <span class="font-headline text-lg italic mt-2">{post.categoryName || 'Uncategorized'}</span>
                           </div>
                         )}
                       </div>
                       <div class="p-6 flex flex-col flex-1">
-                        <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor} tracking-widest mb-3 block`}>{post.category}</span>
+                        <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || 'Uncategorized'}</span>
                         <h3 class="font-headline text-2xl font-black text-on-surface mb-4 group-hover:text-primary transition-colors">{post.title}</h3>
                         <p class="font-body text-sm text-on-surface-variant mb-6 flex-1">{post.excerpt}</p>
                         <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1 mt-auto">

@@ -1,14 +1,18 @@
 ---
+// CSR-like — SSR with no caching. SEO doesn't matter here.
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import AdminSidebar from '../components/AdminSidebar.astro';
 
+// No CDN caching — always fresh, private admin data
+Astro.response.headers.set('Cache-Control', 'private, no-store');
+
 const user = Astro.locals.user!;
 ---
 
-<Layout title="Admin Dashboard - ImageToURL">
+<Layout title="Admin Dashboard - ImageToURL" noindex={true}>
   <Nav activePage="admin" />
 
   <div class="flex">
@@ -107,6 +111,12 @@ const user = Astro.locals.user!;
 </Layout>
 
 <script>
+  function esc(s: string): string {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
   async function loadStats() {
     const res = await fetch('/api/admin/stats');
     const data = await res.json();
@@ -143,9 +153,9 @@ const user = Astro.locals.user!;
                 <td class="px-5 py-3">
                   <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden flex-shrink-0">
-                      <img src="${img.url}" alt="${img.filename}" class="w-full h-full object-cover" loading="lazy" />
+                      <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                     </div>
-                    <span class="text-sm font-bold truncate max-w-32">${img.filename}</span>
+                    <span class="text-sm font-bold truncate max-w-32">${esc(img.filename)}</span>
                   </div>
                 </td>
                 <td class="px-5 py-3">
@@ -153,13 +163,13 @@ const user = Astro.locals.user!;
                     <div class="w-6 h-6 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center">
                       <span class="material-symbols-outlined text-xs text-outline">person</span>
                     </div>
-                    <span class="text-sm text-on-surface-variant">${img.user_name || 'Anonymous'}</span>
+                    <span class="text-sm text-on-surface-variant">${esc(img.user_name || 'Anonymous')}</span>
                   </div>
                 </td>
                 <td class="px-5 py-3 text-sm text-on-surface-variant">${(img.size_bytes / (1024 * 1024)).toFixed(1)} MB</td>
                 <td class="px-5 py-3">
                   <div class="flex gap-2">
-                    <button onclick="copyUrl('${img.url}')" class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+                    <button onclick="copyUrl('${esc(img.url)}')" class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container-highest transition-colors">
                       <span class="material-symbols-outlined text-sm text-outline">link</span>
                     </button>
                     <button class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container-highest transition-colors">
@@ -187,7 +197,7 @@ const user = Astro.locals.user!;
           </div>
           <div class="flex-1 min-w-0">
             <p class="font-bold text-sm">${titles[i % 3]}</p>
-            <p class="text-xs text-on-surface-variant truncate">${img.filename} uploaded${img.user_name ? ' by ' + img.user_name : ''}</p>
+            <p class="text-xs text-on-surface-variant truncate">${esc(img.filename)} uploaded${img.user_name ? ' by ' + esc(img.user_name) : ''}</p>
             <p class="text-[10px] text-outline mt-1">${new Date(img.created_at).toLocaleString()}</p>
           </div>
         </div>

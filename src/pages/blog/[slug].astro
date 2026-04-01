@@ -1,22 +1,57 @@
 ---
+// ISR — SSR + edge cache. SSG speed with background refresh on content updates.
 export const prerender = false;
 
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import { blogPosts, getPostBySlug, getRelatedPosts } from '../../data/blog-posts';
+import { getDB } from '../../lib/db';
+import { getPostBySlug, getRelatedPosts } from '../../lib/cms';
 
 const { slug } = Astro.params;
-const post = getPostBySlug(slug as string);
+const db = getDB(Astro.locals);
+const post = await getPostBySlug(db, slug as string);
 
 if (!post) {
   return Astro.redirect('/blog');
 }
 
-const relatedPosts = getRelatedPosts(post);
+// ISR: Cache at CDN edge for 10 min, serve stale up to 1 day while revalidating.
+// Blog posts change infrequently so longer cache is safe.
+Astro.response.headers.set('CDN-Cache-Control', 'public, max-age=600, stale-while-revalidate=86400');
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+
+const relatedPosts = await getRelatedPosts(db, post.relatedSlugs);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.title,
+  "description": post.excerpt || '',
+  "image": post.coverImage || undefined,
+  "datePublished": post.publishedAt || undefined,
+  "dateModified": post.updatedAt || post.publishedAt || undefined,
+  "author": {
+    "@type": "Person",
+    "name": post.authorName,
+  },
+  "publisher": {
+    "@id": "https://imagetourl.cloud/#organization"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://imagetourl.cloud/blog/${slug}`
+  }
+};
 ---
 
-<Layout title={`${post.title} - ImageToURL Blog`}>
+<Layout
+  title={`${post.title} — ImageToURL Blog`}
+  description={post.excerpt || ''}
+  ogImage={post.coverImage || '/og-default.png'}
+  ogType="article"
+  schema={articleSchema}
+>
   <Nav activePage="blog" />
 
   <main class="pt-12 pb-24 px-6 md:px-0">
@@ -24,7 +59,7 @@ const relatedPosts = getRelatedPosts(post);
       <!-- Article Header -->
       <header class="mb-12">
         <span class="inline-block py-1 px-4 bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-          {post.category}
+          {post.categoryName || 'Uncategorized'}
         </span>
         <h1 class="text-5xl md:text-7xl font-headline italic font-black leading-[1.1] tracking-tight text-on-surface mb-8">
           <Fragment set:html={post.title.replace(/SVG/g, '<span class="relative">SVG<span class="absolute bottom-1 left-0 w-full h-3 bg-tertiary/20 -z-10"></span></span>')} />
@@ -32,19 +67,23 @@ const relatedPosts = getRelatedPosts(post);
         <div class="flex flex-wrap items-center gap-6 border-b-2 border-surface-variant pb-8">
           <div class="flex items-center gap-3">
             <img
-              alt={post.author.name}
+              alt={post.authorName}
               class="w-12 h-12 rounded-full border-2 border-on-surface p-0.5 bg-surface-container object-cover"
-              src={post.author.avatar}
+              src={post.authorAvatar}
+              width="48"
+              height="48"
+              loading="lazy"
+              decoding="async"
             />
             <div>
-              <p class="font-bold text-on-surface">{post.author.name}</p>
-              <p class="text-xs uppercase tracking-tighter text-outline">{post.author.role}</p>
+              <p class="font-bold text-on-surface">{post.authorName}</p>
+              <p class="text-xs uppercase tracking-tighter text-outline">{post.authorRole}</p>
             </div>
           </div>
           <div class="h-8 w-px bg-outline-variant hidden sm:block"></div>
           <div class="flex flex-col">
             <span class="text-xs uppercase tracking-widest text-outline">Published</span>
-            <span class="font-medium">{post.date}</span>
+            <span class="font-medium">{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''}</span>
           </div>
           <div class="ml-auto">
             <span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 border-2 border-on-surface rounded-lg text-sm font-bold flex items-center gap-2 hard-shadow">
@@ -118,39 +157,41 @@ const relatedPosts = getRelatedPosts(post);
       </section>
 
       <!-- Related Posts -->
-      <section class="mt-24">
-        <h3 class="text-3xl font-headline italic font-black mb-10 flex items-center gap-4">
-          Related Posts
-          <span class="h-1 flex-grow bg-surface-variant rounded-full"></span>
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {relatedPosts.map((related) => (
-            <a
-              class="group block border-2 border-on-surface bg-surface hover:translate-x-1 hover:translate-y-1 transition-all"
-              style="box-shadow: 4px 4px 0px 0px rgba(30,26,37,1);"
-              href={`/blog/${related.slug}`}
-            >
-              <div class={`h-40 border-b-2 border-on-surface overflow-hidden ${related.image ? '' : (related.iconBg || 'bg-primary-fixed')} flex items-center justify-center`}>
-                {related.image ? (
-                  <img
-                    alt={related.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    src={related.image}
-                  />
-                ) : (
-                  <span class="material-symbols-outlined text-8xl text-on-surface/20">
-                    {related.iconFallback || 'article'}
-                  </span>
-                )}
-              </div>
-              <div class="p-4">
-                <span class={`text-[10px] font-bold uppercase tracking-widest text-${related.categoryColor}`}>{related.category}</span>
-                <h4 class="font-headline font-bold text-lg leading-tight mt-1 group-hover:underline">{related.title}</h4>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
+      {relatedPosts.length > 0 && (
+        <section class="mt-24">
+          <h3 class="text-3xl font-headline italic font-black mb-10 flex items-center gap-4">
+            Related Posts
+            <span class="h-1 flex-grow bg-surface-variant rounded-full"></span>
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {relatedPosts.map((related) => (
+              <a
+                class="group block border-2 border-on-surface bg-surface hover:translate-x-1 hover:translate-y-1 transition-all"
+                style="box-shadow: 4px 4px 0px 0px rgba(30,26,37,1);"
+                href={`/blog/${related.slug}`}
+              >
+                <div class={`h-40 border-b-2 border-on-surface overflow-hidden ${related.coverImage ? '' : (related.iconBg || 'bg-primary-fixed')} flex items-center justify-center`}>
+                  {related.coverImage ? (
+                    <img
+                      alt={related.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async"
+                      src={related.coverImage}
+                    />
+                  ) : (
+                    <span class="material-symbols-outlined text-8xl text-on-surface/20">
+                      {related.iconFallback || 'article'}
+                    </span>
+                  )}
+                </div>
+                <div class="p-4">
+                  <span class={`text-[10px] font-bold uppercase tracking-widest text-${related.categoryColor || 'primary'}`}>{related.categoryName || 'Uncategorized'}</span>
+                  <h4 class="font-headline font-bold text-lg leading-tight mt-1 group-hover:underline">{related.title}</h4>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
     </article>
   </main>
 

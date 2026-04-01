@@ -1,9 +1,29 @@
 @import "tailwindcss";
 
+/* Font fallbacks with metric overrides to minimize CLS during swap */
+@font-face {
+  font-family: 'Newsreader-fallback';
+  src: local('Georgia'), local('Times New Roman');
+  font-style: italic;
+  size-adjust: 103%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
 @theme {
-  --font-headline: "Newsreader", serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
+  --font-headline: "Newsreader", "Newsreader-fallback", serif;
+  --font-body: "Inter", "Inter-fallback", sans-serif;
+  --font-label: "Inter", "Inter-fallback", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: #fef7ff;
@@ -123,4 +143,30 @@ body {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   display: inline-block;
   vertical-align: middle;
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
 }

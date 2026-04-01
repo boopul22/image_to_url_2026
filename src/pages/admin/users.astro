@@ -6,7 +6,7 @@ import Nav from '../../components/Nav.astro';
 import AdminSidebar from '../../components/AdminSidebar.astro';
 ---
 
-<Layout title="User Management - Admin - ImageToURL">
+<Layout title="User Management - Admin - ImageToURL" noindex={true}>
   <Nav activePage="admin" />
 
   <div class="flex">
@@ -75,6 +75,12 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
 </Layout>
 
 <script>
+  function esc(s: string): string {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
   let currentPage = 1;
   let totalUsers = 0;
 
@@ -119,14 +125,14 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
             <tr class="hover:bg-surface-container-lowest transition-colors">
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <img src="${u.avatar_url}" alt="${u.name}" class="w-10 h-10 rounded-full border-2 border-on-surface object-cover" referrerpolicy="no-referrer" />
+                  <img src="${esc(u.avatar_url)}" alt="${esc(u.name)}" class="w-10 h-10 rounded-full border-2 border-on-surface object-cover" referrerpolicy="no-referrer" loading="lazy" decoding="async" />
                   <div>
-                    <p class="font-bold text-sm">${u.name}</p>
+                    <p class="font-bold text-sm">${esc(u.name)}</p>
                     <p class="text-[10px] text-outline uppercase tracking-wider">${u.role === 'admin' ? 'Administrator' : 'Member'}</p>
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">${u.email}</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">${esc(u.email)}</td>
               <td class="px-6 py-4">${getRoleBadge(u.role, u.is_banned)}</td>
               <td class="px-6 py-4 text-sm text-on-surface-variant">${new Date(u.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
               <td class="px-6 py-4 text-sm font-bold">${u.image_count}</td>

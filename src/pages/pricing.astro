@@ -1,12 +1,113 @@
 ---
-export const prerender = false;
+// SSG — static landing page, no DB queries. Fastest TTFB + perfect SEO.
+export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+
+const pageSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://imagetourl.cloud/pricing#webpage",
+    "url": "https://imagetourl.cloud/pricing",
+    "name": "Pricing - ImageToURL",
+    "description": "Choose from Free ($0/mo), Pro ($12/mo), or Business ($49/mo) plans for ImageToURL image hosting. Cancel anytime.",
+    "isPartOf": { "@id": "https://imagetourl.cloud/#website" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://imagetourl.cloud" },
+        { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://imagetourl.cloud/pricing" }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "ImageToURL Free Plan",
+    "description": "10 uploads per month, standard processing speed, and a public link library. No credit card required.",
+    "url": "https://imagetourl.cloud/pricing",
+    "brand": { "@id": "https://imagetourl.cloud/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "name": "Free",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://imagetourl.cloud/pricing",
+      "priceValidUntil": "2027-12-31"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "ImageToURL Pro Plan",
+    "description": "Unlimited uploads, high-priority processing, custom link expiration, and direct API access (Basic).",
+    "url": "https://imagetourl.cloud/pricing",
+    "brand": { "@id": "https://imagetourl.cloud/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "name": "Pro",
+      "price": "12",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://imagetourl.cloud/pricing",
+      "priceValidUntil": "2027-12-31"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "ImageToURL Business Plan",
+    "description": "Everything in Pro, plus team workspaces, ultra-high resolution support, and a dedicated support line.",
+    "url": "https://imagetourl.cloud/pricing",
+    "brand": { "@id": "https://imagetourl.cloud/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "name": "Business",
+      "price": "49",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://imagetourl.cloud/pricing",
+      "priceValidUntil": "2027-12-31"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I cancel anytime?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! We believe in freedom. Cancel your subscription with one click, and you'll retain your pro benefits until the end of the billing cycle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my images kept private?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unless you choose to share a link publicly, your images are stored in your private encrypted silo. We use military-grade security to keep your pixels safe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We support everything from standard JPG and PNG to HEIC, WebP, and even large RAW files for our Business tier customers."
+        }
+      }
+    ]
+  }
+];
 ---
 
-<Layout title="Pricing - ImageToURL">
+<Layout title="Pricing Plans — Free, Pro & Business | ImageToURL" description="Choose your ImageToURL plan. Free: 10 uploads/month. Pro ($12/mo): unlimited uploads + API. Business ($49/mo): team workspaces + dedicated support." schema={pageSchema}>
   <Nav activePage="pricing" />
 
   <main class="max-w-7xl mx-auto px-6 py-20 relative">
@@ -153,7 +254,7 @@ import Footer from '../components/Footer.astro';
         </a>
       </div>
       <div class="md:w-1/2 flex justify-center">
-        <img class="rounded-xl border-2 border-on-background rotate-3 hard-shadow max-w-full h-auto" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" />
+        <img class="rounded-xl border-2 border-on-background rotate-3 hard-shadow max-w-full h-auto" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" width="500" height="400" loading="lazy" decoding="async" />
       </div>
     </section>
   </main>

@@ -1,0 +1,87 @@
+---
+// SSG — static legal page. Fastest TTFB + perfect SEO.
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Privacy Policy — ImageToURL" description="ImageToURL's privacy policy. Learn how we collect, use, and protect your data when you use our image hosting service.">
+  <Nav activePage="" />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="font-headline italic text-5xl font-black text-on-background mb-8">Privacy Policy</h1>
+    <p class="text-sm text-outline mb-12">Last updated: April 1, 2026</p>
+
+    <div class="prose prose-on-surface max-w-none space-y-8 text-lg leading-relaxed">
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">1. Information We Collect</h2>
+        <p>When you use ImageToURL, we may collect the following types of information:</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li><strong>Images you upload:</strong> We store uploaded images on our servers to generate and maintain your shareable URLs.</li>
+          <li><strong>Account information:</strong> If you sign in via Google OAuth, we collect your name, email address, and profile picture to create your account.</li>
+          <li><strong>Usage data:</strong> We collect anonymized analytics data such as page views, upload counts, and API usage to improve our service.</li>
+          <li><strong>Technical data:</strong> IP addresses, browser type, and device information are collected automatically for security and performance monitoring.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">2. How We Use Your Information</h2>
+        <p>We use collected information to:</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>Provide and maintain the image hosting service</li>
+          <li>Generate permanent, shareable URLs for your uploaded images</li>
+          <li>Authenticate your identity when you sign in</li>
+          <li>Monitor and improve service performance and reliability</li>
+          <li>Prevent abuse and enforce our Terms of Service</li>
+          <li>Communicate important service updates</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">3. Data Storage and Security</h2>
+        <p>Your images and data are stored on Cloudflare's global infrastructure with encryption at rest and in transit. All URLs are served over HTTPS. We implement industry-standard security measures to protect against unauthorized access, alteration, or destruction of your data.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">4. Data Sharing</h2>
+        <p>We do not sell, trade, or rent your personal information to third parties. We may share data with:</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li><strong>Infrastructure providers:</strong> Cloudflare (hosting, CDN, and storage)</li>
+          <li><strong>Authentication providers:</strong> Google (OAuth sign-in)</li>
+          <li><strong>Law enforcement:</strong> When required by law or to protect our rights</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">5. Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>Access the personal data we hold about you</li>
+          <li>Request deletion of your account and associated data</li>
+          <li>Export your data in a portable format</li>
+          <li>Opt out of non-essential data collection</li>
+        </ul>
+        <p class="mt-4">To exercise these rights, contact us at <strong>privacy@imagetourl.cloud</strong>.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">6. Cookies</h2>
+        <p>We use essential cookies for authentication and session management. We do not use third-party advertising or tracking cookies.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">7. Changes to This Policy</h2>
+        <p>We may update this policy from time to time. We will notify registered users of significant changes via email. Continued use of the service after changes constitutes acceptance of the updated policy.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">8. Contact Us</h2>
+        <p>If you have questions about this privacy policy, please contact us at <strong>privacy@imagetourl.cloud</strong>.</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

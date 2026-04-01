@@ -6,7 +6,7 @@ import Nav from '../../components/Nav.astro';
 import AdminSidebar from '../../components/AdminSidebar.astro';
 ---
 
-<Layout title="Image Library - Admin - ImageToURL">
+<Layout title="Image Library - Admin - ImageToURL" noindex={true}>
   <Nav activePage="admin" />
 
   <div class="flex">
@@ -69,6 +69,12 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
 </Layout>
 
 <script>
+  function esc(s: string): string {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
   let currentPage = 1;
 
   async function loadImages(page: number, search = '') {
@@ -91,20 +97,20 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
     grid.innerHTML = data.images.map((img: any) => `
       <div class="bg-surface border-2 border-on-surface rounded-xl overflow-hidden hard-shadow group hover:-translate-y-1 transition-all">
         <div class="h-44 bg-surface-container-highest overflow-hidden relative">
-          <img src="${img.url}" alt="${img.filename}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-          <span class="absolute top-2 right-2 bg-on-surface/80 text-surface text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">${img.mime_type.split('/')[1]}</span>
+          <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" />
+          <span class="absolute top-2 right-2 bg-on-surface/80 text-surface text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">${esc(img.mime_type.split('/')[1])}</span>
         </div>
         <div class="p-4 space-y-2">
-          <h3 class="font-bold text-sm truncate" title="${img.filename}">${img.filename}</h3>
+          <h3 class="font-bold text-sm truncate" title="${esc(img.filename)}">${esc(img.filename)}</h3>
           <div class="flex items-center justify-between text-[10px] text-outline uppercase tracking-wider">
             <span>Date: ${new Date(img.created_at).toLocaleDateString()}</span>
             <span>Size: ${(img.size_bytes / (1024 * 1024)).toFixed(1)} MB</span>
           </div>
           <div class="flex items-center justify-between pt-2">
-            <button onclick="copyUrl('${img.url}')" class="text-primary font-label text-xs font-bold flex items-center gap-1 hover:underline">
+            <button onclick="copyUrl('${esc(img.url)}')" class="text-primary font-label text-xs font-bold flex items-center gap-1 hover:underline">
               View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
-            <button onclick="deleteImage('${img.id}')" class="text-error hover:text-on-error hover:bg-error w-7 h-7 rounded-full flex items-center justify-center transition-colors">
+            <button onclick="deleteImage('${esc(img.id)}')" class="text-error hover:text-on-error hover:bg-error w-7 h-7 rounded-full flex items-center justify-center transition-colors">
               <span class="material-symbols-outlined text-sm">delete</span>
             </button>
           </div>

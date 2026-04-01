@@ -1,0 +1,85 @@
+---
+// SSG — static legal page. Fastest TTFB + perfect SEO.
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Terms of Service — ImageToURL" description="Terms of Service for ImageToURL image hosting. Understand the rules and guidelines for using our free and paid image hosting plans.">
+  <Nav activePage="" />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="font-headline italic text-5xl font-black text-on-background mb-8">Terms of Service</h1>
+    <p class="text-sm text-outline mb-12">Last updated: April 1, 2026</p>
+
+    <div class="prose prose-on-surface max-w-none space-y-8 text-lg leading-relaxed">
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">1. Acceptance of Terms</h2>
+        <p>By accessing or using ImageToURL ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use the Service.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">2. Service Description</h2>
+        <p>ImageToURL provides image hosting services that convert uploaded images into permanent, shareable URLs delivered through a global CDN. The Service is available in Free, Pro, and Business tiers with varying features and limits.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">3. Acceptable Use</h2>
+        <p>You agree not to use the Service to:</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>Upload or distribute illegal, harmful, or offensive content</li>
+          <li>Infringe on intellectual property rights of others</li>
+          <li>Distribute malware, viruses, or other harmful code</li>
+          <li>Attempt to gain unauthorized access to our systems or other users' accounts</li>
+          <li>Use the Service for spam, phishing, or other deceptive practices</li>
+          <li>Exceed rate limits or abuse the API in ways that degrade service for other users</li>
+        </ul>
+        <p class="mt-4">We reserve the right to remove content and suspend accounts that violate these terms.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">4. Account Terms</h2>
+        <p>Anonymous uploads are permitted on the Free tier without an account. For Pro and Business features, you must create an account via Google OAuth. You are responsible for maintaining the security of your account and for all activities that occur under it.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">5. Pricing and Payments</h2>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li><strong>Free tier:</strong> 10 uploads per month at standard processing speed, no payment required.</li>
+          <li><strong>Pro ($12/month):</strong> Unlimited uploads, high-priority processing, API access, and custom link expiration.</li>
+          <li><strong>Business ($49/month):</strong> Everything in Pro, plus team workspaces, ultra-high resolution support, and dedicated support.</li>
+        </ul>
+        <p class="mt-4">You may cancel your subscription at any time. Your Pro or Business benefits will remain active until the end of your current billing cycle. No refunds are provided for partial months.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">6. Content Ownership</h2>
+        <p>You retain all ownership rights to the images you upload. By uploading content to ImageToURL, you grant us a limited license to store, serve, and deliver your images through our CDN infrastructure for the purpose of providing the Service.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">7. Service Availability</h2>
+        <p>We strive for 99.9% uptime but do not guarantee uninterrupted service. We may perform maintenance or updates that temporarily affect availability. We are not liable for any downtime or data loss resulting from circumstances beyond our reasonable control.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">8. Limitation of Liability</h2>
+        <p>ImageToURL is provided "as is" without warranties of any kind. To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">9. Changes to Terms</h2>
+        <p>We may update these terms from time to time. Continued use of the Service after changes are posted constitutes acceptance of the updated terms. Material changes will be communicated to registered users via email.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-primary mb-4">10. Contact</h2>
+        <p>Questions about these terms? Contact us at <strong>legal@imagetourl.cloud</strong>.</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
