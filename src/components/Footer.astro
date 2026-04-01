@@ -6,7 +6,6 @@ import type { Locale } from '../i18n/config';
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
 function localePath(path: string): string {
-  if (locale === defaultLocale) return path;
   return `/${locale}${path}`;
 }
 ---

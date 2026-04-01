@@ -7,7 +7,6 @@ import { locales, defaultLocale } from '../../i18n/config';
 
 export function getStaticPaths() {
   return locales
-    .filter(l => l !== defaultLocale)
     .map(locale => ({ params: { locale } }));
 }
 ---

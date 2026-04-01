@@ -35,7 +35,6 @@ function toDateString(raw: string | null | undefined): string {
 }
 
 function localeUrl(loc: Locale, basePath: string): string {
-  if (loc === defaultLocale) return `${SITE}${basePath}`;
   return `${SITE}/${loc}${basePath}`;
 }
 

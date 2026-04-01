@@ -11,7 +11,7 @@ import { getPublishedPosts, getCategories } from '../../lib/cms';
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
 function lp(path: string): string {
-  return locale === defaultLocale ? path : `/${locale}${path}`;
+  return `/${locale}${path}`;
 }
 
 // ISR: Cache at CDN edge for 5 min, serve stale up to 1 hour while revalidating

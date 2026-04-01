@@ -34,7 +34,7 @@ export function getLocaleFromPath(pathname: string): Locale {
 /** Strip the locale prefix from a pathname to get the base path. */
 export function stripLocalePrefix(pathname: string): string {
   const segment = pathname.split('/')[1];
-  if (locales.includes(segment as Locale) && segment !== defaultLocale) {
+  if (locales.includes(segment as Locale)) {
     return pathname.replace(`/${segment}`, '') || '/';
   }
   return pathname;

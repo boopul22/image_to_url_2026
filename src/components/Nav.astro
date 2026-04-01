@@ -9,7 +9,6 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const basePath = stripLocalePrefix(Astro.url.pathname);
 
 function localePath(path: string, loc: Locale = locale): string {
-  if (loc === defaultLocale) return path;
   return `/${loc}${path}`;
 }
 
@@ -62,7 +61,7 @@ const navLinks = [
         <div id="lang-dropdown" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background rounded-lg hard-shadow overflow-hidden z-50 min-w-[140px]">
           {locales.map((loc) => (
             <a
-              href={loc === defaultLocale ? basePath : `/${loc}${basePath}`}
+              href={`/${loc}${basePath}`}
               class:list={[
                 "block px-4 py-2 text-sm font-medium hover:bg-surface-container-highest transition-colors",
                 loc === locale ? "text-primary font-bold bg-primary-fixed" : "text-on-surface",

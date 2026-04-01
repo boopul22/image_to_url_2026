@@ -67,7 +67,6 @@ const schemaJson = JSON.stringify(allSchemas);
 // Build hreflang URLs for all locales
 const SITE = Astro.site?.origin ?? 'https://imagetourl.cloud';
 function hreflangUrl(loc: Locale): string {
-  if (loc === defaultLocale) return `${SITE}${basePath}`;
   return `${SITE}/${loc}${basePath}`;
 }
 ---
