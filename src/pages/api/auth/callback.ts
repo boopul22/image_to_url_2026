@@ -95,9 +95,10 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
 
     // Set session cookie and clear OAuth cookies
     const isSecure = import.meta.env.PROD;
+    const domain = isSecure ? '; Domain=.imagetourl.cloud' : '';
     const maxAge = 30 * 24 * 60 * 60; // 30 days
-    const sessionFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAge}${isSecure ? '; Secure' : ''}`;
-    const clearFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}`;
+    const sessionFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAge}${isSecure ? '; Secure' : ''}${domain}`;
+    const clearFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}${domain}`;
 
     return new Response(null, {
       status: 302,

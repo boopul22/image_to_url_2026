@@ -20,7 +20,8 @@ export const GET: APIRoute = async ({ locals }) => {
   const url = buildGoogleAuthURL(state, codeChallenge, env.GOOGLE_CLIENT_ID, redirectUri);
 
   const isSecure = import.meta.env.PROD;
-  const cookieFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=600${isSecure ? '; Secure' : ''}`;
+  const domain = isSecure ? '; Domain=.imagetourl.cloud' : '';
+  const cookieFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=600${isSecure ? '; Secure' : ''}${domain}`;
 
   return new Response(null, {
     status: 302,
