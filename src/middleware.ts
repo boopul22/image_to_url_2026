@@ -6,9 +6,15 @@ import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale } from './i18n/config';
 
 export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
-  // Locale detection — force English for admin/dashboard/api routes
   const url0 = new URL(request.url);
   const path = url0.pathname;
+
+  // Redirect bare / to /en/ (manual i18n routing)
+  if (path === '/') {
+    return redirect('/en/', 302);
+  }
+
+  // Locale detection — force English for admin/dashboard/api routes
   if (path.startsWith('/admin') || path.startsWith('/dashboard') || path.startsWith('/api/')) {
     locals.locale = defaultLocale;
   } else {
