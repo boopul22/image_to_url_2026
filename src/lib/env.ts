@@ -1,18 +1,13 @@
-export function getEnv(locals: App.Locals): Record<string, string> {
-  try {
-    const runtimeEnv = (locals as any).runtime?.env;
-    if (runtimeEnv) return runtimeEnv;
-  } catch {
-    // runtime.env not available in dev
-  }
+// @ts-ignore - cloudflare:workers is a Workers-only built-in module
+import { env } from 'cloudflare:workers';
 
-  // Fallback to import.meta.env for dev mode
-  return import.meta.env as any;
+export function getEnv(_locals?: App.Locals): Record<string, string> {
+  return env as unknown as Record<string, string>;
 }
 
-export function getDB(locals: App.Locals): D1Database | null {
+export function getDB(_locals?: App.Locals): D1Database | null {
   try {
-    return (locals as any).runtime?.env?.DB ?? null;
+    return env.DB as unknown as D1Database;
   } catch {
     return null;
   }
