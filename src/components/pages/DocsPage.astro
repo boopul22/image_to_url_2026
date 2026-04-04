@@ -16,28 +16,42 @@ function lp(path: string): string {
 <Layout title={t(locale, 'docs.meta.title')} description={t(locale, 'docs.meta.description')}>
   <Nav activePage="api" />
 
-  <main class="pt-8 min-h-screen max-w-7xl mx-auto flex flex-col md:flex-row gap-8 px-6 pb-20">
+  <main class="pt-4 sm:pt-8 min-h-screen max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 px-4 sm:px-6 pb-20">
+    <!-- Mobile Sidebar Toggle -->
+    <button
+      id="docs-sidebar-toggle"
+      class="lg:hidden flex items-center justify-between w-full bg-surface-container border-2 border-on-background rounded-xl px-4 py-3 font-label text-sm font-bold active:bg-surface-container-highest transition-colors"
+      aria-expanded="false"
+      aria-controls="docs-sidebar"
+    >
+      <span class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-xl">menu_book</span>
+        {t(locale, 'docs.sidebar.introduction')}
+      </span>
+      <span class="material-symbols-outlined text-sm transition-transform duration-200" id="docs-sidebar-chevron">expand_more</span>
+    </button>
+
     <!-- Left Sidebar Navigation -->
-    <aside class="w-full md:w-64 flex-shrink-0">
-      <div class="sticky top-28 space-y-8">
+    <aside id="docs-sidebar" class="w-full lg:w-64 flex-shrink-0 hidden lg:block">
+      <div class="lg:sticky lg:top-28 space-y-6 sm:space-y-8">
         <div>
-          <h3 class="font-label uppercase tracking-widest text-xs font-bold text-outline mb-4">{t(locale, 'docs.sidebar.introduction')}</h3>
-          <ul class="space-y-3">
-            <li><a class="flex items-center gap-2 text-primary font-bold" href="#getting-started"><span class="material-symbols-outlined text-sm">rocket_launch</span> {t(locale, 'docs.sidebar.gettingStarted')}</a></li>
-            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#authentication"><span class="material-symbols-outlined text-sm">key</span> {t(locale, 'docs.sidebar.authentication')}</a></li>
+          <h3 class="font-label uppercase tracking-widest text-xs font-bold text-outline mb-3 sm:mb-4">{t(locale, 'docs.sidebar.introduction')}</h3>
+          <ul class="space-y-1 sm:space-y-3">
+            <li><a class="flex items-center gap-2 text-primary font-bold py-2 sm:py-0" href="#getting-started"><span class="material-symbols-outlined text-sm">rocket_launch</span> {t(locale, 'docs.sidebar.gettingStarted')}</a></li>
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary active:text-primary transition-colors py-2 sm:py-0" href="#authentication"><span class="material-symbols-outlined text-sm">key</span> {t(locale, 'docs.sidebar.authentication')}</a></li>
           </ul>
         </div>
         <div>
-          <h3 class="font-label uppercase tracking-widest text-xs font-bold text-outline mb-4">{t(locale, 'docs.sidebar.endpoints')}</h3>
-          <ul class="space-y-3">
-            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#upload"><span class="material-symbols-outlined text-sm">upload</span> POST /upload</a></li>
-            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#retrieve"><span class="material-symbols-outlined text-sm">link</span> GET /image/:id</a></li>
-            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#delete"><span class="material-symbols-outlined text-sm">delete</span> DELETE /remove</a></li>
+          <h3 class="font-label uppercase tracking-widest text-xs font-bold text-outline mb-3 sm:mb-4">{t(locale, 'docs.sidebar.endpoints')}</h3>
+          <ul class="space-y-1 sm:space-y-3">
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary active:text-primary transition-colors py-2 sm:py-0" href="#upload"><span class="material-symbols-outlined text-sm">upload</span> POST /upload</a></li>
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary active:text-primary transition-colors py-2 sm:py-0" href="#retrieve"><span class="material-symbols-outlined text-sm">link</span> GET /image/:id</a></li>
+            <li><a class="flex items-center gap-2 text-on-surface-variant hover:text-primary active:text-primary transition-colors py-2 sm:py-0" href="#delete"><span class="material-symbols-outlined text-sm">delete</span> DELETE /remove</a></li>
           </ul>
         </div>
-        <div class="p-6 bg-surface-container rounded-xl border-2 border-on-background hard-shadow">
+        <div class="p-5 sm:p-6 bg-surface-container rounded-xl border-2 border-on-background hard-shadow">
           <p class="font-headline italic text-lg mb-4">{t(locale, 'docs.sidebar.readyToGoLive')}</p>
-          <button class="w-full bg-primary text-on-primary py-3 rounded-full font-bold text-sm uppercase tracking-tighter border-2 border-on-background transition-transform hover:-translate-y-1">
+          <button class="w-full bg-primary text-on-primary py-3 rounded-full font-bold text-sm uppercase tracking-tighter border-2 border-on-background transition-transform hover:-translate-y-1 active:translate-y-0">
             {t(locale, 'docs.sidebar.requestApiKey')}
           </button>
         </div>
@@ -48,7 +62,7 @@ function lp(path: string): string {
     <section class="flex-grow space-y-16">
       <!-- Hero Header -->
       <div class="relative">
-        <h1 class="text-6xl font-headline font-black leading-tight mb-4">
+        <h1 class="text-4xl sm:text-6xl font-headline font-black leading-tight mb-4">
           {t(locale, 'docs.hero.title1')} <span class="bg-tertiary-fixed px-2">{t(locale, 'docs.hero.title2')}</span>
         </h1>
         <p class="text-xl font-headline italic text-on-surface-variant max-w-2xl">
@@ -97,7 +111,7 @@ function lp(path: string): string {
       </div>
 
       <!-- Endpoint: POST /upload -->
-      <div class="space-y-8 bg-surface-container-low p-8 rounded-2xl border-2 border-on-background relative overflow-hidden" id="upload">
+      <div class="space-y-6 sm:space-y-8 bg-surface-container-low p-4 sm:p-8 rounded-2xl border-2 border-on-background relative overflow-hidden" id="upload">
         <div class="absolute top-0 right-0 p-4 opacity-5">
           <span class="material-symbols-outlined text-9xl">cloud_upload</span>
         </div>
@@ -169,3 +183,27 @@ function lp(path: string): string {
 
   <Footer />
 </Layout>
+
+<script>
+  const docsToggle = document.getElementById('docs-sidebar-toggle');
+  const docsSidebar = document.getElementById('docs-sidebar');
+  const docsChevron = document.getElementById('docs-sidebar-chevron');
+
+  docsToggle?.addEventListener('click', () => {
+    const isHidden = docsSidebar?.classList.contains('hidden');
+    docsSidebar?.classList.toggle('hidden');
+    docsChevron?.classList.toggle('rotate-180');
+    docsToggle.setAttribute('aria-expanded', String(isHidden));
+  });
+
+  // Close sidebar on mobile when a link is tapped
+  docsSidebar?.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 768) {
+        docsSidebar.classList.add('hidden');
+        docsChevron?.classList.remove('rotate-180');
+        docsToggle?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>

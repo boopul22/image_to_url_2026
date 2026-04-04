@@ -15,9 +15,9 @@ const user = Astro.locals.user!;
 <Layout title="Dashboard - ImageToURL" noindex={true}>
   <Nav activePage="dashboard" />
 
-  <main class="pt-8 pb-24 px-6 max-w-7xl mx-auto space-y-12">
+  <main class="pt-6 sm:pt-8 pb-16 sm:pb-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-8 sm:space-y-12">
     <!-- Account Card -->
-    <section class="bg-surface border-2 border-on-surface p-8 hard-shadow flex flex-col md:flex-row items-center gap-8">
+    <section class="bg-surface border-2 border-on-surface p-5 sm:p-8 hard-shadow flex flex-col md:flex-row items-center gap-6 sm:gap-8">
       <img
         src={user.avatarUrl}
         alt={user.name}
@@ -25,7 +25,7 @@ const user = Astro.locals.user!;
         referrerpolicy="no-referrer"
       />
       <div class="flex-1 text-center md:text-left">
-        <h1 class="text-3xl font-headline italic font-black text-on-surface">{user.name}</h1>
+        <h1 class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">{user.name}</h1>
         <p class="text-on-surface-variant font-body">{user.email}</p>
       </div>
       <div class="flex items-center gap-3">
@@ -44,10 +44,10 @@ const user = Astro.locals.user!;
         <span class="material-symbols-outlined text-primary">cloud_upload</span>
         Upload Image
       </h2>
-      <div class="bg-surface border-2 border-on-surface p-8 hard-shadow">
+      <div class="bg-surface border-2 border-on-surface p-4 sm:p-8 hard-shadow">
         <div
           id="upload-zone"
-          class="border-2 border-dashed border-outline rounded-xl p-12 text-center cursor-pointer hover:border-primary hover:bg-primary/5 transition-all"
+          class="border-2 border-dashed border-outline rounded-xl p-8 sm:p-12 text-center cursor-pointer hover:border-primary hover:bg-primary/5 transition-all"
         >
           <span class="material-symbols-outlined text-5xl text-outline mb-4">add_photo_alternate</span>
           <p class="font-label text-sm font-bold uppercase tracking-wider text-outline">
@@ -104,7 +104,7 @@ const user = Astro.locals.user!;
       <!-- Generate Key Dialog -->
       <div id="key-name-dialog" class="hidden mb-6 p-6 bg-surface-container border-2 border-on-surface hard-shadow">
         <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Key Name</label>
-        <div class="flex gap-3">
+        <div class="flex flex-col sm:flex-row gap-3">
           <input
             id="key-name-input"
             type="text"
@@ -300,10 +300,10 @@ const user = Astro.locals.user!;
         </div>
         <div class="p-3 space-y-2">
           <p class="text-xs font-bold truncate" title="${esc(img.filename)}">${esc(img.filename)}</p>
-          <p class="text-[10px] text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
+          <p class="text-xs text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
           <div class="flex gap-2">
-            <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-1 border border-on-surface text-[10px] font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">Copy URL</button>
-            <button onclick="deleteImage('${esc(img.id)}')" class="py-1 px-2 border border-error text-error text-[10px] font-bold uppercase hover:bg-error hover:text-on-error transition-colors">
+            <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-2.5 border border-on-surface text-xs font-bold uppercase hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Copy URL</button>
+            <button onclick="deleteImage('${esc(img.id)}')" class="py-2.5 px-3 border border-error text-error text-xs font-bold uppercase hover:bg-error hover:text-on-error active:bg-error active:text-on-error transition-colors">
               <span class="material-symbols-outlined text-sm">delete</span>
             </button>
           </div>

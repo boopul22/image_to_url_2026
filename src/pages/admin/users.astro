@@ -12,14 +12,14 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
   <div class="flex">
     <AdminSidebar activePage="users" />
 
-    <main class="flex-1 p-8 space-y-6 bg-surface-container-lowest min-h-[calc(100vh-65px)]">
+    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-65px)]">
       <!-- Header -->
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-4xl font-headline italic font-black text-on-surface">User Management</h1>
+          <h1 class="text-2xl sm:text-4xl font-headline italic font-black text-on-surface">User Management</h1>
           <p class="text-on-surface-variant mt-1" id="user-subtitle">Manage permissions, plans, and administrative access.</p>
         </div>
-        <button class="bg-tertiary-fixed text-on-tertiary-fixed px-5 py-3 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 transition-all flex items-center gap-2">
+        <button class="bg-tertiary-fixed text-on-tertiary-fixed px-5 py-3 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 transition-all flex items-center gap-2 active:scale-95 self-start sm:self-auto">
           <span class="material-symbols-outlined text-lg">person_add</span>
           Invite New Admin
         </button>
@@ -46,7 +46,7 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
       </div>
 
       <!-- Stats Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="user-stats">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5" id="user-stats">
         <div class="bg-surface border-2 border-on-surface rounded-xl p-6 hard-shadow">
           <div class="flex items-center gap-3 mb-3">
             <span class="material-symbols-outlined text-primary text-2xl">trending_up</span>
@@ -103,21 +103,21 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
     }
 
     const getRoleBadge = (role: string, isBanned: number) => {
-      if (isBanned) return '<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-error text-on-error border border-error">Banned</span>';
-      if (role === 'admin') return '<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-error-container text-on-error-container border border-error">Admin</span>';
-      return '<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container border border-secondary">User</span>';
+      if (isBanned) return '<span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase bg-error text-on-error border border-error">Banned</span>';
+      if (role === 'admin') return '<span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase bg-error-container text-on-error-container border border-error">Admin</span>';
+      return '<span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase bg-secondary-container text-on-secondary-container border border-secondary">User</span>';
     };
 
     table.innerHTML = `
-      <table class="w-full text-left">
+      <div class="overflow-x-auto"><table class="w-full text-left min-w-[700px]">
         <thead>
           <tr class="border-b-2 border-on-surface">
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User Profile</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Email Address</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Role</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Joined</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Images</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Actions</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">User Profile</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Email Address</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Role</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Joined</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Images</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-outline-variant/50">
@@ -128,7 +128,7 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
                   <img src="${esc(u.avatar_url)}" alt="${esc(u.name)}" class="w-10 h-10 rounded-full border-2 border-on-surface object-cover" referrerpolicy="no-referrer" loading="lazy" decoding="async" />
                   <div>
                     <p class="font-bold text-sm">${esc(u.name)}</p>
-                    <p class="text-[10px] text-outline uppercase tracking-wider">${u.role === 'admin' ? 'Administrator' : 'Member'}</p>
+                    <p class="text-xs text-outline uppercase tracking-wider">${u.role === 'admin' ? 'Administrator' : 'Member'}</p>
                   </div>
                 </div>
               </td>
@@ -139,19 +139,19 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
               <td class="px-6 py-4">
                 <div class="flex gap-2">
                   ${u.is_banned
-                    ? `<button onclick="adminAction('${u.id}', 'unban')" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary transition-colors">Unban</button>`
-                    : `<button onclick="adminAction('${u.id}', 'ban')" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border border-error text-error hover:bg-error hover:text-on-error transition-colors">Ban</button>`
+                    ? `<button onclick="adminAction('${u.id}', 'unban')" class="px-4 py-2 rounded-full text-xs font-bold uppercase border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary active:bg-secondary active:text-on-secondary transition-colors">Unban</button>`
+                    : `<button onclick="adminAction('${u.id}', 'ban')" class="px-4 py-2 rounded-full text-xs font-bold uppercase border border-error text-error hover:bg-error hover:text-on-error active:bg-error active:text-on-error transition-colors">Ban</button>`
                   }
                   ${u.role === 'admin'
-                    ? `<button onclick="adminAction('${u.id}', 'remove_admin')" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border border-outline text-outline hover:bg-surface-container-highest transition-colors">Remove Admin</button>`
-                    : `<button onclick="adminAction('${u.id}', 'make_admin')" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors">Make Admin</button>`
+                    ? `<button onclick="adminAction('${u.id}', 'remove_admin')" class="px-4 py-2 rounded-full text-xs font-bold uppercase border border-outline text-outline hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors">Remove Admin</button>`
+                    : `<button onclick="adminAction('${u.id}', 'make_admin')" class="px-4 py-2 rounded-full text-xs font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Make Admin</button>`
                   }
                 </div>
               </td>
             </tr>
           `).join('')}
         </tbody>
-      </table>
+      </table></div>
     `;
 
     // Showing text
@@ -166,8 +166,8 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
     const pag = document.getElementById('pagination')!;
     if (data.totalPages > 1) {
       pag.innerHTML = `
-        <button onclick="loadPage(${Math.max(1, page - 1)})" class="px-4 py-2 border-2 border-on-surface rounded-lg font-label text-xs font-bold bg-surface hover:bg-surface-container-highest transition-colors ${page === 1 ? 'opacity-30' : ''}">Previous</button>
-        <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="px-4 py-2 border-2 border-on-surface rounded-lg font-label text-xs font-bold bg-surface hover:bg-surface-container-highest transition-colors ${page === data.totalPages ? 'opacity-30' : ''}">Next</button>
+        <button onclick="loadPage(${Math.max(1, page - 1)})" class="px-4 py-2.5 border-2 border-on-surface rounded-lg font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === 1 ? 'opacity-30' : ''}">Previous</button>
+        <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="px-4 py-2.5 border-2 border-on-surface rounded-lg font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === data.totalPages ? 'opacity-30' : ''}">Next</button>
       `;
     } else {
       pag.innerHTML = '';

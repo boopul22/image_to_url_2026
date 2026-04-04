@@ -60,14 +60,14 @@ const articleSchema = {
 >
   <Nav activePage="blog" />
 
-  <main class="pt-12 pb-24 px-6 md:px-0">
+  <main class="pt-8 sm:pt-12 pb-16 sm:pb-24 px-4 sm:px-6 md:px-0">
     <article class="max-w-3xl mx-auto">
       <!-- Article Header -->
       <header class="mb-12">
         <span class="inline-block py-1 px-4 bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface rounded-full text-xs font-bold uppercase tracking-widest mb-6">
           {post.categoryName || t(locale, 'blogPost.uncategorized')}
         </span>
-        <h1 class="text-5xl md:text-7xl font-headline italic font-black leading-[1.1] tracking-tight text-on-surface mb-8">
+        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-headline italic font-black leading-[1.1] tracking-tight text-on-surface mb-6 sm:mb-8">
           <Fragment set:html={post.title.replace(/SVG/g, '<span class="relative">SVG<span class="absolute bottom-1 left-0 w-full h-3 bg-tertiary/20 -z-10"></span></span>')} />
         </h1>
         <div class="flex flex-wrap items-center gap-6 border-b-2 border-surface-variant pb-8">
@@ -108,14 +108,14 @@ const articleSchema = {
 
         {post.content.sections.map((section, i) => (
           <>
-            <h2 class="text-3xl font-headline italic font-bold mt-12 mb-4 text-primary">
+            <h2 class="text-2xl sm:text-3xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary">
               {section.number}. {section.heading}
             </h2>
             <p set:html={section.body} />
 
             {/* Show blockquote after first section if available */}
             {i === 0 && post.content.blockquote && (
-              <div class="my-12 p-8 bg-surface-container border-2 border-primary border-l-8 rounded-lg relative overflow-hidden">
+              <div class="my-12 p-5 sm:p-8 bg-surface-container border-2 border-primary border-l-8 rounded-lg relative overflow-hidden">
                 <span class="material-symbols-outlined absolute -right-4 -top-4 text-8xl text-primary/5 rotate-12">format_quote</span>
                 <blockquote class="italic font-headline text-2xl text-on-surface relative z-10">
                   {post.content.blockquote}
@@ -125,7 +125,7 @@ const articleSchema = {
 
             {/* Show callout after second section if available */}
             {i === 1 && post.content.callout && (
-              <div class="my-12 p-8 bg-tertiary-fixed border-2 border-on-surface rounded-xl hard-shadow flex gap-6 items-start" style="box-shadow: 6px 6px 0px 0px rgba(30,26,37,1);">
+              <div class="my-12 p-5 sm:p-8 bg-tertiary-fixed border-2 border-on-surface rounded-xl hard-shadow flex gap-4 sm:gap-6 items-start" style="box-shadow: 6px 6px 0px 0px rgba(30,26,37,1);">
                 <div class="bg-on-surface text-tertiary-fixed p-3 rounded-lg rotate-[-3deg] flex-shrink-0">
                   <span class="material-symbols-outlined">lightbulb</span>
                 </div>
@@ -142,20 +142,20 @@ const articleSchema = {
       </div>
 
       <!-- Share Section -->
-      <section class="mt-20 p-8 bg-secondary-container border-2 border-on-surface rounded-2xl relative">
+      <section class="mt-12 sm:mt-20 p-5 sm:p-8 bg-secondary-container border-2 border-on-surface rounded-2xl relative">
         <div class="absolute -top-6 left-8 bg-on-surface text-secondary-container px-6 py-2 font-black italic font-headline border-2 border-on-surface -rotate-1" style="box-shadow: 4px 4px 0px 0px rgba(103,95,43,0.3);">
           {t(locale, 'blogPost.share')}
         </div>
         <div class="flex flex-wrap justify-between items-center gap-6 mt-4">
           <p class="font-headline text-xl italic font-bold">{t(locale, 'blogPost.shareDescription')}</p>
           <div class="flex gap-4">
-            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-6 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
               <span class="material-symbols-outlined">share</span>
             </button>
-            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:-rotate-6 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:-rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
               <span class="material-symbols-outlined">link</span>
             </button>
-            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-3 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-3 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
               <span class="material-symbols-outlined">mail</span>
             </button>
           </div>
@@ -169,7 +169,7 @@ const articleSchema = {
             {t(locale, 'blogPost.related')}
             <span class="h-1 flex-grow bg-surface-variant rounded-full"></span>
           </h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {relatedPosts.map((related) => (
               <a
                 class="group block border-2 border-on-surface bg-surface hover:translate-x-1 hover:translate-y-1 transition-all"
@@ -190,7 +190,7 @@ const articleSchema = {
                   )}
                 </div>
                 <div class="p-4">
-                  <span class={`text-[10px] font-bold uppercase tracking-widest text-${related.categoryColor || 'primary'}`}>{related.categoryName || t(locale, 'blogPost.uncategorized')}</span>
+                  <span class={`text-xs font-bold uppercase tracking-widest text-${related.categoryColor || 'primary'}`}>{related.categoryName || t(locale, 'blogPost.uncategorized')}</span>
                   <h4 class="font-headline font-bold text-lg leading-tight mt-1 group-hover:underline">{related.title}</h4>
                 </div>
               </a>
