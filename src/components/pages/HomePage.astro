@@ -247,28 +247,28 @@ const pageSchema = [
         </div>
       </div>
     </div>
-    <div class="flex gap-3 sm:gap-4 sm:flex-wrap overflow-x-auto sm:overflow-x-visible scroll-snap-x sm:scroll-snap-none pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
-      <div class="bg-secondary-container text-on-secondary-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default flex-shrink-0">
+    <div class="flex flex-wrap gap-2.5 sm:gap-4 pb-2 sm:pb-0">
+      <div class="bg-secondary-container text-on-secondary-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default">
         <span class="text-lg sm:text-xl">🚀</span>
         <span class="font-label uppercase tracking-widest text-[11px] sm:text-xs font-bold whitespace-nowrap">{t(locale, 'home.features.cdn')}</span>
       </div>
-      <div class="bg-surface-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default flex-shrink-0">
+      <div class="bg-surface-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default">
         <span class="text-lg sm:text-xl">🔓</span>
         <span class="font-label uppercase tracking-widest text-[11px] sm:text-xs font-bold whitespace-nowrap">{t(locale, 'home.features.noSignup')}</span>
       </div>
-      <div class="bg-tertiary-fixed text-on-tertiary-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default flex-shrink-0">
+      <div class="bg-tertiary-fixed text-on-tertiary-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default">
         <span class="text-lg sm:text-xl">🔗</span>
         <span class="font-label uppercase tracking-widest text-[11px] sm:text-xs font-bold whitespace-nowrap">{t(locale, 'home.features.permanentLinks')}</span>
       </div>
-      <div class="bg-primary-fixed text-on-primary-fixed-variant border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default flex-shrink-0">
+      <div class="bg-primary-fixed text-on-primary-fixed-variant border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default">
         <span class="text-lg sm:text-xl">🔒</span>
         <span class="font-label uppercase tracking-widest text-[11px] sm:text-xs font-bold whitespace-nowrap">{t(locale, 'home.features.ssl')}</span>
       </div>
-      <div class="bg-error-container text-on-error-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default flex-shrink-0">
+      <div class="bg-error-container text-on-error-container border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default">
         <span class="text-lg sm:text-xl">⚡</span>
         <span class="font-label uppercase tracking-widest text-[11px] sm:text-xs font-bold whitespace-nowrap">{t(locale, 'home.features.instantUpload')}</span>
       </div>
-      <div class="bg-surface-variant border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default flex-shrink-0">
+      <div class="bg-surface-variant border-2 border-on-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 hard-shadow-hover transition-all cursor-default">
         <span class="text-lg sm:text-xl">📐</span>
         <span class="font-label uppercase tracking-widest text-[11px] sm:text-xs font-bold whitespace-nowrap">{t(locale, 'home.features.autoResize')}</span>
       </div>
@@ -279,7 +279,7 @@ const pageSchema = [
 
   <!-- How It Works -->
   <section class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-20">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12 reveal-stagger">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
       <!-- Step 1 -->
       <div class="flex flex-col gap-4 sm:gap-6 group reveal">
         <div class="bg-tertiary-fixed p-6 sm:p-12 border-2 border-on-background rounded-xl hard-shadow group-hover:-translate-y-2 transition-transform duration-300 overflow-hidden relative">
@@ -327,7 +327,7 @@ const pageSchema = [
           ))}
         </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 lg:gap-12 reveal-stagger">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 lg:gap-12">
         <!-- Quote 1 -->
         <div class="relative pt-6 sm:pt-8 reveal">
           <div class="bg-white p-5 sm:p-8 rounded-xl border-2 border-on-background hard-shadow relative">
@@ -383,11 +383,12 @@ const pageSchema = [
   </section>
 
   <!-- Blog Preview Section -->
+  {previewPosts.length > 0 && (
   <section class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-20">
     <h2 class="font-headline italic text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-6 sm:mb-12 reveal">{t(locale, 'home.blog.title')} <span class="bg-tertiary-fixed px-2 not-italic">{t(locale, 'home.blog.highlight')}</span></h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 reveal-stagger">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
       {previewPosts.map((post) => (
-        <article class="group reveal">
+        <article class="group">
           <a href={lp(`/blog/${post.slug}`)} class="block h-full">
             <div class="bg-surface border-2 border-on-background h-full flex flex-col hard-shadow hard-shadow-hover transition-all duration-200">
               <div class={`h-48 relative border-b-2 border-on-background overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
@@ -410,6 +411,7 @@ const pageSchema = [
       ))}
     </div>
   </section>
+  )}
 
   <Footer />
 </Layout>

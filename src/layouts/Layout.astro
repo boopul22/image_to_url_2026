@@ -135,19 +135,37 @@ function hreflangUrl(loc: Locale): string {
     <div class="grain-overlay" aria-hidden="true"></div>
     <slot />
     <script>
-      // Scroll-reveal: observe .reveal elements and add .revealed when visible
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-      );
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      // Scroll-reveal: dual strategy (IO + scroll fallback)
+      const revealed = new WeakSet();
+      function reveal(el: Element) {
+        if (!revealed.has(el)) {
+          revealed.add(el);
+          el.classList.add('revealed');
+        }
+      }
+
+      // Primary: IntersectionObserver (most reliable)
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+        }, { rootMargin: '50px 0px', threshold: 0 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      }
+
+      // Fallback: scroll-based check for elements above fold on load
+      function revealCheck() {
+        document.querySelectorAll('.reveal:not(.revealed)').forEach((el) => {
+          if (el.getBoundingClientRect().top < window.innerHeight + 50) reveal(el);
+        });
+      }
+      revealCheck();
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { revealCheck(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
     </script>
   </body>
 </html>
