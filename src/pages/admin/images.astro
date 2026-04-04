@@ -12,14 +12,14 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
   <div class="flex">
     <AdminSidebar activePage="images" />
 
-    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-65px)]">
+    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
       <!-- Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 class="text-2xl sm:text-4xl font-headline italic font-black text-on-surface">Image Library</h1>
           <p class="text-sm sm:text-base text-on-surface-variant mt-1">Manage, curate, and optimize your global media assets with ease.</p>
         </div>
-        <label class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 active:scale-95 transition-all cursor-pointer flex items-center gap-2 self-start sm:self-auto">
+        <label class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 active:scale-95 transition-all cursor-pointer flex items-center gap-2 self-start sm:self-auto">
           <span class="material-symbols-outlined text-lg">upload</span>
           Upload New Assets
           <input type="file" accept="image/*" multiple class="hidden" id="admin-upload-input" />
@@ -34,11 +34,11 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
             <input type="text" placeholder="mm/dd/yyyy" class="bg-transparent text-sm w-24 focus:outline-none font-body" />
           </div>
           <div class="flex gap-1" id="type-filters">
-            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-on-surface text-surface" data-type="all">All</button>
-            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-type="jpg">JPG</button>
-            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-type="png">PNG</button>
-            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-type="webp">WebP</button>
-            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-type="gif">GIF</button>
+            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all" data-type="all">All</button>
+            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="jpg">JPG</button>
+            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="png">PNG</button>
+            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="webp">WebP</button>
+            <button class="px-4 py-2.5 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="gif">GIF</button>
           </div>
         </div>
         <div class="flex items-center gap-3">

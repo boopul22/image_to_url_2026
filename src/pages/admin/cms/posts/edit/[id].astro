@@ -14,173 +14,216 @@ const { id } = Astro.params;
   <div class="flex">
     <AdminSidebar activePage="cms" />
 
-    <main class="flex-1 bg-surface-container-lowest min-h-[calc(100vh-65px)]">
+    <main class="flex-1 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
+      <!-- Top bar -->
+      <div class="sticky top-[var(--nav-h,57px)] z-20 bg-surface border-b-2 border-on-surface px-4 sm:px-6 py-3 flex items-center gap-3 flex-wrap">
+        <a href="/admin/cms/posts" class="text-outline hover:text-on-surface transition-colors flex items-center gap-1 shrink-0">
+          <span class="material-symbols-outlined text-xl">arrow_back</span>
+          <span class="hidden sm:inline font-label text-xs font-bold uppercase tracking-wider">Posts</span>
+        </a>
+        <div class="h-5 w-px bg-outline-variant hidden sm:block"></div>
+        <h1 class="font-headline text-lg font-black text-on-surface">Edit Post</h1>
+        <span id="current-status" class="px-2.5 py-1 rounded-full text-xs font-bold uppercase"></span>
+        <span id="save-status" class="text-xs text-outline ml-auto transition-opacity"></span>
+        <div class="flex items-center gap-2">
+          <button id="save-btn" class="px-4 py-2 bg-surface border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
+            Save
+          </button>
+          <button id="publish-toggle-btn" class="px-4 py-2 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
+            Publish
+          </button>
+          <a id="view-post-link" href="#" class="hidden w-10 h-10 flex items-center justify-center rounded-xl border-2 border-on-surface hover:bg-surface-container-highest transition-colors" title="View post">
+            <span class="material-symbols-outlined text-lg">open_in_new</span>
+          </a>
+          <button id="toggle-sidebar-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border-2 border-on-surface hover:bg-surface-container-highest transition-colors" aria-label="Toggle settings panel">
+            <span class="material-symbols-outlined text-lg">tune</span>
+          </button>
+        </div>
+      </div>
+
       <div class="flex flex-col lg:flex-row">
         <!-- Main Content Area -->
-        <div class="flex-1 p-8 space-y-6 max-w-4xl">
-          <div class="flex items-center gap-4 mb-2">
-            <a href="/admin/cms/posts" class="text-outline hover:text-on-surface transition-colors">
-              <span class="material-symbols-outlined">arrow_back</span>
-            </a>
-            <h1 class="text-2xl font-headline italic font-black text-on-surface">Edit Post</h1>
-            <span id="current-status" class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase"></span>
-            <span id="save-status" class="text-xs text-outline ml-auto"></span>
-          </div>
-
-          <!-- Title -->
-          <input
-            id="post-title"
-            type="text"
-            placeholder="Post title..."
-            class="w-full text-4xl font-headline italic font-black bg-transparent border-none focus:outline-none text-on-surface placeholder:text-outline/50"
-          />
-
-          <!-- Excerpt -->
-          <textarea
-            id="post-excerpt"
-            placeholder="Write a short excerpt..."
-            rows="2"
-            class="w-full bg-surface border-2 border-on-surface rounded-lg p-4 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-          ></textarea>
-
-          <!-- Content Builder -->
-          <div class="space-y-6">
+        <div class="flex-1 min-w-0">
+          <div class="max-w-3xl mx-auto px-4 sm:px-8 md:px-12 py-8 sm:py-12 space-y-8">
+            <!-- Title -->
             <div>
-              <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline mb-2 block">Introduction</label>
-              <textarea
-                id="content-intro"
-                placeholder="Opening paragraph..."
-                rows="4"
-                class="w-full bg-surface border-2 border-on-surface rounded-lg p-4 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y"
-              ></textarea>
+              <input
+                id="post-title"
+                type="text"
+                placeholder="Post title..."
+                class="w-full text-3xl sm:text-4xl md:text-5xl font-headline italic font-black bg-transparent border-none focus:outline-none text-on-surface placeholder:text-outline/30 leading-tight"
+              />
+              <div class="mt-3 h-1 w-16 bg-primary rounded-full"></div>
             </div>
 
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Sections</label>
-                <button id="add-section-btn" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border-2 border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-1">
-                  <span class="material-symbols-outlined text-sm">add</span> Add Section
-                </button>
+            <!-- Excerpt -->
+            <textarea
+              id="post-excerpt"
+              placeholder="Write a compelling excerpt..."
+              rows="2"
+              class="w-full bg-transparent border-none focus:outline-none text-on-surface-variant text-lg leading-relaxed placeholder:text-outline/30 resize-none font-headline font-normal"
+            ></textarea>
+
+            <!-- Cover Image -->
+            <div id="cover-section">
+              <div id="cover-preview" class="hidden relative group rounded-xl overflow-hidden border-2 border-outline-variant mb-4">
+                <img id="cover-img" class="w-full h-56 sm:h-72 object-cover" />
+                <div class="absolute inset-0 bg-on-surface/0 group-hover:bg-on-surface/30 transition-colors flex items-center justify-center">
+                  <button id="remove-cover" class="opacity-0 group-hover:opacity-100 bg-error text-on-error px-4 py-2 rounded-xl font-label text-xs font-bold uppercase tracking-wider transition-opacity">Remove Cover</button>
+                </div>
               </div>
-              <div id="sections-container" class="space-y-4"></div>
+              <div id="cover-upload-zone" class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center hover:border-primary hover:bg-primary/5 cursor-pointer transition-all group">
+                <span class="material-symbols-outlined text-3xl text-outline group-hover:text-primary transition-colors">add_photo_alternate</span>
+                <p class="text-sm text-outline mt-2 group-hover:text-primary transition-colors">Add cover image</p>
+                <input id="post-cover-image" type="hidden" />
+                <input type="file" accept="image/*" class="hidden" id="cover-upload" />
+              </div>
             </div>
 
-            <details class="bg-surface border-2 border-on-surface rounded-lg">
-              <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">format_quote</span> Blockquote (optional)
-              </summary>
-              <div class="p-4 pt-0">
+            <!-- Content Builder -->
+            <div class="space-y-8">
+              <div class="editor-block">
+                <label class="font-label text-xs font-bold uppercase tracking-widest text-outline/60 mb-3 block">Introduction</label>
                 <textarea
-                  id="content-blockquote"
-                  placeholder="Add a notable quote..."
-                  rows="2"
-                  class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y italic"
+                  id="content-intro"
+                  placeholder="Start with your opening paragraph..."
+                  rows="6"
+                  class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-base leading-[1.8] placeholder:text-outline/25 resize-none font-headline font-normal"
                 ></textarea>
               </div>
-            </details>
 
-            <details class="bg-surface border-2 border-on-surface rounded-lg">
-              <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">lightbulb</span> Callout (optional)
-              </summary>
-              <div class="p-4 pt-0 space-y-3">
-                <input id="callout-title" type="text" placeholder="Callout title..." class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary font-bold" />
-                <textarea id="callout-body" placeholder="Callout content..." rows="2" class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y"></textarea>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <label class="font-label text-xs font-bold uppercase tracking-widest text-outline/60">Sections</label>
+                  <button id="add-section-btn" class="px-4 py-2 rounded-xl text-xs font-bold uppercase border-2 border-primary text-primary hover:bg-primary hover:text-on-primary active:scale-95 transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm">add</span> Add Section
+                  </button>
+                </div>
+                <div id="sections-container" class="space-y-6"></div>
               </div>
-            </details>
 
-            <div>
-              <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline mb-2 block">Conclusion</label>
-              <textarea
-                id="content-outro"
-                placeholder="Closing paragraph..."
-                rows="4"
-                class="w-full bg-surface border-2 border-on-surface rounded-lg p-4 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y"
-              ></textarea>
+              <details class="group border-l-4 border-primary/30 pl-6 open:border-primary transition-colors">
+                <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline/60 flex items-center gap-2 py-2 hover:text-on-surface transition-colors select-none">
+                  <span class="material-symbols-outlined text-sm">format_quote</span> Blockquote (optional)
+                </summary>
+                <div class="pt-3">
+                  <textarea
+                    id="content-blockquote"
+                    placeholder="Add a memorable quote..."
+                    rows="3"
+                    class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-lg leading-relaxed placeholder:text-outline/25 resize-none italic font-headline"
+                  ></textarea>
+                </div>
+              </details>
+
+              <details class="group">
+                <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline/60 flex items-center gap-2 py-2 hover:text-on-surface transition-colors select-none">
+                  <span class="material-symbols-outlined text-sm">lightbulb</span> Callout (optional)
+                </summary>
+                <div class="mt-3 bg-primary-fixed/40 border-2 border-primary/20 rounded-xl p-5 space-y-3">
+                  <input id="callout-title" type="text" placeholder="Callout heading..." class="w-full bg-transparent border-none focus:outline-none font-headline font-bold text-base text-on-surface placeholder:text-outline/30" />
+                  <textarea id="callout-body" placeholder="Callout content..." rows="2" class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-sm leading-relaxed placeholder:text-outline/25 resize-none font-headline font-normal"></textarea>
+                </div>
+              </details>
+
+              <div class="editor-block">
+                <label class="font-label text-xs font-bold uppercase tracking-widest text-outline/60 mb-3 block">Conclusion</label>
+                <textarea
+                  id="content-outro"
+                  placeholder="Wrap it up..."
+                  rows="6"
+                  class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-base leading-[1.8] placeholder:text-outline/25 resize-none font-headline font-normal"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 pt-4 border-t border-outline-variant/50 text-xs text-outline">
+              <span id="word-count">0 words</span>
+              <span>&middot;</span>
+              <span id="read-time">0 min read</span>
             </div>
           </div>
         </div>
 
-        <!-- Sidebar -->
-        <div class="w-full lg:w-80 border-t-2 lg:border-t-0 lg:border-l-2 border-on-surface p-6 space-y-5 bg-surface lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto">
-          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3 hard-shadow">
-            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Publish</h3>
-            <div class="flex gap-2">
-              <button id="save-btn" class="flex-1 bg-surface border-2 border-on-surface px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest transition-colors">
-                Save
-              </button>
-              <button id="publish-toggle-btn" class="flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hover:opacity-90 transition-opacity">
-                Publish
+        <!-- Settings Sidebar -->
+        <div id="editor-sidebar" class="w-full lg:w-80 xl:w-96 border-t-2 lg:border-t-0 lg:border-l-2 border-on-surface bg-surface lg:sticky lg:top-[calc(var(--nav-h,57px)+53px)] lg:max-h-[calc(100dvh-var(--nav-h,57px)-53px)] lg:overflow-y-auto hidden lg:block">
+          <div class="p-4 sm:p-5 space-y-4">
+            <div class="flex items-center justify-between lg:hidden mb-2">
+              <h3 class="font-headline font-bold text-lg">Post Settings</h3>
+              <button id="close-sidebar-btn" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors">
+                <span class="material-symbols-outlined">close</span>
               </button>
             </div>
-            <a id="view-post-link" href="#" class="text-xs text-primary font-bold uppercase flex items-center gap-1 hidden">
-              <span class="material-symbols-outlined text-sm">open_in_new</span> View Post
-            </a>
-          </div>
 
-          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3">
-            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Category</h3>
-            <select id="post-category" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm">
-              <option value="">Select category...</option>
-            </select>
-          </div>
+            <div class="space-y-2">
+              <h3 class="font-label text-xs font-bold uppercase tracking-wider text-outline">Category</h3>
+              <select id="post-category" class="w-full border-2 border-on-surface rounded-xl px-3 py-2.5 bg-surface text-sm">
+                <option value="">Select category...</option>
+              </select>
+            </div>
 
-          <div class="border-2 border-on-surface rounded-xl p-4">
-            <label class="flex items-center gap-3 cursor-pointer">
+            <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl hover:bg-surface-container-lowest transition-colors">
               <input id="post-featured" type="checkbox" class="w-5 h-5 rounded border-2 border-on-surface accent-primary" />
               <span class="font-label text-xs font-bold uppercase tracking-wider">Featured Post</span>
             </label>
+
+            <details class="group">
+              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
+                Icon Fallback
+              </summary>
+              <div class="pt-2 space-y-2">
+                <input id="post-icon-fallback" type="text" placeholder="Material icon name" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+                <input id="post-icon-bg" type="text" placeholder="Background class" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+              </div>
+            </details>
+
+            <details open class="group">
+              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
+                Author
+              </summary>
+              <div class="pt-2 space-y-2">
+                <input id="post-author-name" type="text" placeholder="Author name" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+                <input id="post-author-role" type="text" placeholder="Author role" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+                <input id="post-author-avatar" type="text" placeholder="Avatar URL" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
+                SEO Settings
+              </summary>
+              <div class="pt-2 space-y-2">
+                <input id="post-slug" type="text" placeholder="post-slug" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+                <input id="post-meta-title" type="text" placeholder="Meta title" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+                <textarea id="post-meta-description" placeholder="Meta description" rows="2" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm resize-none focus:border-primary focus:outline-none transition-colors"></textarea>
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
+                Related Posts
+              </summary>
+              <div class="pt-2 space-y-2">
+                <input id="related-search" type="text" placeholder="Search posts..." class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
+                <div id="related-results" class="space-y-1 max-h-32 overflow-y-auto"></div>
+                <div id="related-selected" class="space-y-1"></div>
+              </div>
+            </details>
           </div>
-
-          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3">
-            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Cover Image</h3>
-            <div id="cover-preview" class="hidden h-32 bg-surface-container-highest rounded-lg overflow-hidden border-2 border-outline-variant">
-              <img id="cover-img" class="w-full h-full object-cover" />
-            </div>
-            <input id="post-cover-image" type="text" placeholder="Image URL..." class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-            <label class="block text-center px-3 py-2 border-2 border-dashed border-outline rounded-lg text-[10px] font-bold uppercase text-outline hover:border-primary hover:text-primary cursor-pointer transition-colors">
-              Upload Image
-              <input type="file" accept="image/*" class="hidden" id="cover-upload" />
-            </label>
-          </div>
-
-          <details class="border-2 border-on-surface rounded-xl">
-            <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider">Icon Fallback</summary>
-            <div class="p-4 pt-0 space-y-3">
-              <input id="post-icon-fallback" type="text" placeholder="Material icon name" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-              <input id="post-icon-bg" type="text" placeholder="Background class" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-            </div>
-          </details>
-
-          <div class="border-2 border-on-surface rounded-xl p-4 space-y-3">
-            <h3 class="font-label text-xs font-bold uppercase tracking-wider">Author</h3>
-            <input id="post-author-name" type="text" placeholder="Author name" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-            <input id="post-author-role" type="text" placeholder="Author role" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-            <input id="post-author-avatar" type="text" placeholder="Avatar URL" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-          </div>
-
-          <details class="border-2 border-on-surface rounded-xl">
-            <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider">SEO Settings</summary>
-            <div class="p-4 pt-0 space-y-3">
-              <input id="post-slug" type="text" placeholder="post-slug" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-              <input id="post-meta-title" type="text" placeholder="Meta title" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-              <textarea id="post-meta-description" placeholder="Meta description" rows="2" class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm resize-none"></textarea>
-            </div>
-          </details>
-
-          <details class="border-2 border-on-surface rounded-xl">
-            <summary class="p-4 cursor-pointer font-label text-xs font-bold uppercase tracking-wider">Related Posts</summary>
-            <div class="p-4 pt-0 space-y-3">
-              <input id="related-search" type="text" placeholder="Search posts..." class="w-full border-2 border-on-surface rounded-lg px-3 py-2 bg-surface text-sm" />
-              <div id="related-results" class="space-y-1 max-h-32 overflow-y-auto"></div>
-              <div id="related-selected" class="space-y-1"></div>
-            </div>
-          </details>
         </div>
       </div>
     </main>
   </div>
 </Layout>
+
+<style>
+  .editor-textarea { overflow: hidden; min-height: 3rem; }
+  .section-block:focus-within { border-left-color: var(--color-primary); }
+</style>
 
 <script define:vars={{ postId: id }}>
   let sectionCount = 0;
@@ -188,6 +231,31 @@ const { id } = Astro.params;
   let allPosts = [];
   let currentPostStatus = 'draft';
   let currentSlug = '';
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+
+  function initAutoResize() {
+    document.querySelectorAll('.editor-textarea, #post-excerpt').forEach(ta => {
+      autoResize(ta);
+      ta.addEventListener('input', () => autoResize(ta));
+    });
+  }
+
+  function updateWordCount() {
+    const fields = ['post-title', 'post-excerpt', 'content-intro', 'content-blockquote', 'callout-body', 'content-outro'];
+    let text = fields.map(id => document.getElementById(id)?.value || '').join(' ');
+    document.querySelectorAll('.section-heading, .section-body').forEach(el => { text += ' ' + el.value; });
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    const minutes = Math.max(1, Math.ceil(words / 200));
+    document.getElementById('word-count').textContent = words + ' words';
+    document.getElementById('read-time').textContent = minutes + ' min read';
+  }
+
+  let wcTimer;
+  document.addEventListener('input', () => { clearTimeout(wcTimer); wcTimer = setTimeout(updateWordCount, 300); });
 
   async function loadCategories() {
     const res = await fetch('/api/admin/cms/categories');
@@ -211,29 +279,27 @@ const { id } = Astro.params;
     sectionCount++;
     const num = String(sectionCount).padStart(2, '0');
     const div = document.createElement('div');
-    div.className = 'bg-surface border-2 border-on-surface rounded-lg p-4 space-y-3 relative';
+    div.className = 'section-block bg-surface border-l-4 border-outline-variant rounded-r-xl p-5 sm:p-6 space-y-3 transition-colors';
     div.innerHTML = `
       <div class="flex items-center gap-3">
-        <span class="font-headline italic font-black text-lg text-primary">${num}</span>
-        <input type="text" placeholder="Section heading..." value="${heading.replace(/"/g, '&quot;')}" class="section-heading flex-1 bg-transparent border-b-2 border-outline-variant focus:border-primary focus:outline-none font-bold text-sm py-1" />
-        <button class="remove-section text-error hover:bg-error hover:text-on-error w-7 h-7 rounded-full flex items-center justify-center transition-colors">
-          <span class="material-symbols-outlined text-sm">close</span>
+        <span class="font-headline italic font-black text-2xl text-primary/40 select-none">${num}</span>
+        <input type="text" placeholder="Section heading..." value="${heading.replace(/"/g, '&quot;')}" class="section-heading flex-1 bg-transparent border-none focus:outline-none font-headline font-bold text-xl text-on-surface placeholder:text-outline/25" />
+        <button class="remove-section text-outline/40 hover:text-error hover:bg-error/10 w-8 h-8 rounded-lg flex items-center justify-center transition-colors" title="Remove section">
+          <span class="material-symbols-outlined text-lg">delete</span>
         </button>
       </div>
-      <textarea placeholder="Section content..." rows="4" class="section-body w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-y">${body}</textarea>
+      <textarea placeholder="Write your section content here..." rows="6" class="section-body editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-base leading-[1.8] placeholder:text-outline/25 resize-none font-headline font-normal">${body}</textarea>
     `;
     document.getElementById('sections-container').appendChild(div);
-    div.querySelector('.remove-section').addEventListener('click', () => {
-      div.remove();
-      renumberSections();
-    });
+    div.querySelector('.remove-section').addEventListener('click', () => { div.remove(); renumberSections(); });
+    const ta = div.querySelector('.section-body');
+    autoResize(ta);
+    ta.addEventListener('input', () => autoResize(ta));
   }
 
   function renumberSections() {
     const sections = document.querySelectorAll('#sections-container > div');
-    sections.forEach((s, i) => {
-      s.querySelector('.font-headline').textContent = String(i + 1).padStart(2, '0');
-    });
+    sections.forEach((s, i) => { s.querySelector('.font-headline').textContent = String(i + 1).padStart(2, '0'); });
     sectionCount = sections.length;
   }
 
@@ -243,17 +309,27 @@ const { id } = Astro.params;
   const coverInput = document.getElementById('post-cover-image');
   const coverPreview = document.getElementById('cover-preview');
   const coverImg = document.getElementById('cover-img');
+  const coverUploadZone = document.getElementById('cover-upload-zone');
+  const coverUploadInput = document.getElementById('cover-upload');
 
-  coverInput.addEventListener('input', () => {
-    if (coverInput.value) {
-      coverImg.src = coverInput.value;
-      coverPreview.classList.remove('hidden');
-    } else {
-      coverPreview.classList.add('hidden');
-    }
-  });
+  function showCover(url) {
+    coverInput.value = url;
+    coverImg.src = url;
+    coverPreview.classList.remove('hidden');
+    coverUploadZone.classList.add('hidden');
+  }
 
-  document.getElementById('cover-upload').addEventListener('change', async (e) => {
+  function hideCover() {
+    coverInput.value = '';
+    coverImg.src = '';
+    coverPreview.classList.add('hidden');
+    coverUploadZone.classList.remove('hidden');
+  }
+
+  coverUploadZone.addEventListener('click', () => coverUploadInput.click());
+  document.getElementById('remove-cover')?.addEventListener('click', hideCover);
+
+  coverUploadInput.addEventListener('change', async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const form = new FormData();
@@ -261,11 +337,7 @@ const { id } = Astro.params;
     form.append('folder', 'blog');
     const res = await fetch('/api/admin/cms/media', { method: 'POST', body: form });
     const data = await res.json();
-    if (data.url) {
-      coverInput.value = data.url;
-      coverImg.src = data.url;
-      coverPreview.classList.remove('hidden');
-    }
+    if (data.url) showCover(data.url);
   });
 
   // Related posts
@@ -278,9 +350,7 @@ const { id } = Astro.params;
     if (!q) { relatedResults.innerHTML = ''; return; }
     const matches = allPosts.filter(p => p.title.toLowerCase().includes(q) && !relatedSlugs.includes(p.slug)).slice(0, 5);
     relatedResults.innerHTML = matches.map(p => `
-      <button class="w-full text-left p-2 text-xs hover:bg-surface-container-highest rounded transition-colors" data-slug="${p.slug}" data-title="${p.title.replace(/"/g, '&quot;')}">
-        ${p.title}
-      </button>
+      <button class="w-full text-left p-2 text-xs hover:bg-surface-container-highest rounded-lg transition-colors" data-slug="${p.slug}" data-title="${p.title.replace(/"/g, '&quot;')}">${p.title}</button>
     `).join('');
     relatedResults.querySelectorAll('button').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -296,18 +366,20 @@ const { id } = Astro.params;
   function renderRelated() {
     relatedSelected.innerHTML = relatedSlugs.map(slug => {
       const post = allPosts.find(p => p.slug === slug);
-      return `<div class="flex items-center justify-between p-2 bg-surface-container-lowest rounded text-xs">
-        <span>${post?.title || slug}</span>
-        <button class="text-error" data-remove="${slug}"><span class="material-symbols-outlined text-sm">close</span></button>
+      return `<div class="flex items-center justify-between p-2 bg-surface-container-lowest rounded-lg text-xs">
+        <span class="truncate">${post?.title || slug}</span>
+        <button class="text-error shrink-0 ml-2" data-remove="${slug}"><span class="material-symbols-outlined text-sm">close</span></button>
       </div>`;
     }).join('');
     relatedSelected.querySelectorAll('[data-remove]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        relatedSlugs = relatedSlugs.filter(s => s !== btn.dataset.remove);
-        renderRelated();
-      });
+      btn.addEventListener('click', () => { relatedSlugs = relatedSlugs.filter(s => s !== btn.dataset.remove); renderRelated(); });
     });
   }
+
+  // Mobile sidebar toggle
+  const editorSidebar = document.getElementById('editor-sidebar');
+  document.getElementById('toggle-sidebar-btn')?.addEventListener('click', () => { editorSidebar.classList.toggle('hidden'); });
+  document.getElementById('close-sidebar-btn')?.addEventListener('click', () => { editorSidebar.classList.add('hidden'); });
 
   function updateStatusUI() {
     const badge = document.getElementById('current-status');
@@ -316,16 +388,16 @@ const { id } = Astro.params;
 
     if (currentPostStatus === 'published') {
       badge.textContent = 'Published';
-      badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container';
+      badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold uppercase bg-secondary-container text-on-secondary-container';
       toggleBtn.textContent = 'Unpublish';
-      toggleBtn.className = 'flex-1 bg-outline text-surface px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hover:opacity-90 transition-opacity';
+      toggleBtn.className = 'px-4 py-2 bg-outline text-surface border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all';
       viewLink.href = `/blog/${currentSlug}`;
       viewLink.classList.remove('hidden');
     } else {
       badge.textContent = currentPostStatus;
-      badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
+      badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
       toggleBtn.textContent = 'Publish';
-      toggleBtn.className = 'flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hover:opacity-90 transition-opacity';
+      toggleBtn.className = 'px-4 py-2 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all';
       viewLink.classList.add('hidden');
     }
   }
@@ -368,7 +440,6 @@ const { id } = Astro.params;
     const data = collectPostData();
     const saveStatus = document.getElementById('save-status');
     saveStatus.textContent = 'Saving...';
-
     const res = await fetch(`/api/admin/cms/posts/${postId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -384,7 +455,6 @@ const { id } = Astro.params;
     await fetch(`/api/admin/cms/posts/${postId}/${action}`, { method: 'POST' });
     currentPostStatus = action === 'publish' ? 'published' : 'draft';
     updateStatusUI();
-    // Also save current content
     await savePost();
   }
 
@@ -395,17 +465,21 @@ const { id } = Astro.params;
   setInterval(() => {
     const data = collectPostData();
     localStorage.setItem(`cms-edit-${postId}`, JSON.stringify(data));
-  }, 30000);
+    const el = document.getElementById('save-status');
+    el.textContent = 'Auto-saved';
+    setTimeout(() => { if (el.textContent === 'Auto-saved') el.textContent = ''; }, 2000);
+  }, 15000);
 
-  // Load post data
+  // Ctrl/Cmd+S
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); savePost(); }
+  });
+
+  // Load post
   async function loadPost() {
     const res = await fetch(`/api/admin/cms/posts/${postId}`);
     const data = await res.json();
-    if (!data.success) {
-      alert('Post not found');
-      window.location.href = '/admin/cms/posts';
-      return;
-    }
+    if (!data.success) { alert('Post not found'); window.location.href = '/admin/cms/posts'; return; }
 
     const p = data.post;
     currentPostStatus = p.status;
@@ -417,15 +491,12 @@ const { id } = Astro.params;
     document.getElementById('content-intro').value = p.content.intro || '';
     document.getElementById('content-outro').value = p.content.outro || '';
 
-    if (p.content.blockquote) {
-      document.getElementById('content-blockquote').value = p.content.blockquote;
-    }
+    if (p.content.blockquote) document.getElementById('content-blockquote').value = p.content.blockquote;
     if (p.content.callout) {
       document.getElementById('callout-title').value = p.content.callout.title || '';
       document.getElementById('callout-body').value = p.content.callout.body || '';
     }
 
-    // Sections
     sectionCount = 0;
     if (p.content.sections?.length) {
       p.content.sections.forEach(s => addSection(s.heading, s.body));
@@ -433,15 +504,9 @@ const { id } = Astro.params;
       addSection();
     }
 
-    // Sidebar fields
     if (p.categoryId) document.getElementById('post-category').value = p.categoryId;
     document.getElementById('post-featured').checked = p.featured;
-
-    if (p.coverImage) {
-      coverInput.value = p.coverImage;
-      coverImg.src = p.coverImage;
-      coverPreview.classList.remove('hidden');
-    }
+    if (p.coverImage) showCover(p.coverImage);
 
     document.getElementById('post-icon-fallback').value = p.iconFallback || '';
     document.getElementById('post-icon-bg').value = p.iconBg || '';
@@ -453,6 +518,8 @@ const { id } = Astro.params;
 
     relatedSlugs = p.relatedSlugs || [];
     updateStatusUI();
+    initAutoResize();
+    updateWordCount();
   }
 
   // Init

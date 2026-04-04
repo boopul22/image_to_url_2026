@@ -7,35 +7,37 @@ const navItems = [
   { id: 'cms', label: 'Content', icon: 'edit_note', href: '/admin/cms' },
   { id: 'images', label: 'Image Library', icon: 'photo_library', href: '/admin/images' },
   { id: 'users', label: 'User Management', icon: 'group', href: '/admin/users' },
-  { id: 'analytics', label: 'Analytics', icon: 'analytics', href: '/admin' },
-  { id: 'api-keys', label: 'API Keys', icon: 'key', href: '/admin' },
 ];
 ---
 
 <!-- Mobile sidebar toggle -->
 <button
   id="sidebar-toggle"
-  class="lg:hidden fixed z-50 w-14 h-14 bg-primary text-on-primary border-2 border-on-surface flex items-center justify-center hard-shadow active:scale-90 transition-transform"
-  style="bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem)); left: max(1.5rem, env(safe-area-inset-left, 1.5rem));"
+  class="lg:hidden fixed z-50 w-12 h-12 bg-primary text-on-primary border-2 border-on-surface rounded-xl flex items-center justify-center hard-shadow active:scale-90 transition-transform"
+  style="bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)); left: max(1.25rem, env(safe-area-inset-left, 1.25rem));"
   aria-label="Toggle sidebar"
 >
   <span class="material-symbols-outlined text-xl" id="sidebar-icon">menu</span>
 </button>
 
 <!-- Backdrop -->
-<div id="sidebar-backdrop" class="lg:hidden fixed inset-0 bg-on-surface/40 z-30 transition-opacity duration-200 opacity-0 pointer-events-none" aria-hidden="true"></div>
+<div id="sidebar-backdrop" class="lg:hidden fixed inset-0 bg-on-surface/50 z-30 transition-opacity duration-200 opacity-0 pointer-events-none backdrop-blur-sm" aria-hidden="true"></div>
 
-<aside id="admin-sidebar" class="w-64 flex-shrink-0 bg-surface border-r-2 border-on-surface min-h-[calc(100vh-65px)] flex flex-col fixed lg:sticky lg:top-[65px] top-[65px] left-0 z-40 -translate-x-full lg:translate-x-0 transition-transform duration-200">
-  <div class="p-6 border-b border-outline-variant">
+<aside id="admin-sidebar" class="admin-sidebar w-64 flex-shrink-0 bg-surface border-r-2 border-on-surface flex flex-col fixed lg:sticky top-0 lg:top-[var(--nav-h,57px)] left-0 z-40 h-dvh lg:h-[calc(100dvh-var(--nav-h,57px))] -translate-x-full lg:translate-x-0 transition-transform duration-200">
+  <!-- Mobile: show header with close button -->
+  <div class="flex items-center justify-between p-4 border-b border-outline-variant lg:pt-6 lg:pb-4 lg:px-6">
     <p class="font-label text-xs font-bold uppercase tracking-widest text-outline">Admin Console</p>
+    <button id="sidebar-close" class="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors" aria-label="Close sidebar">
+      <span class="material-symbols-outlined text-lg">close</span>
+    </button>
   </div>
 
-  <nav class="flex-1 p-3 sm:p-4 space-y-1">
+  <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
     {navItems.map((item) => (
       <a
         href={item.href}
         class:list={[
-          "flex items-center gap-3 px-4 py-3.5 sm:py-3 font-label text-sm font-bold transition-all",
+          "flex items-center gap-3 px-4 py-3 font-label text-sm font-bold transition-all rounded-xl",
           activePage === item.id
             ? "bg-primary text-on-primary"
             : "text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface active:bg-surface-container-highest",
@@ -47,13 +49,13 @@ const navItems = [
     ))}
   </nav>
 
-  <div class="p-3 sm:p-4 space-y-4 border-t border-outline-variant" style="padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+  <div class="p-3 border-t border-outline-variant" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
     <div class="space-y-1">
-      <a href="/dashboard" class="flex items-center gap-3 px-4 py-3.5 sm:py-3 text-on-surface-variant hover:text-on-surface active:text-on-surface font-label text-sm transition-colors hover:bg-surface-container-highest active:bg-surface-container-highest">
+      <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors hover:bg-surface-container-highest rounded-xl">
         <span class="material-symbols-outlined text-xl">settings</span>
         Settings
       </a>
-      <a href="/api/auth/logout" class="flex items-center gap-3 px-4 py-3.5 sm:py-3 text-on-surface-variant hover:text-on-surface active:text-on-surface font-label text-sm transition-colors hover:bg-surface-container-highest active:bg-surface-container-highest">
+      <a href="/api/auth/logout" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors hover:bg-surface-container-highest rounded-xl">
         <span class="material-symbols-outlined text-xl">logout</span>
         Logout
       </a>
@@ -62,21 +64,35 @@ const navItems = [
 </aside>
 
 <script>
+  // Measure actual nav height and set CSS variable
+  function setNavHeight() {
+    const nav = document.querySelector('nav.sticky');
+    if (nav) {
+      const h = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--nav-h', h + 'px');
+    }
+  }
+  setNavHeight();
+  window.addEventListener('resize', setNavHeight);
+
   const toggle = document.getElementById('sidebar-toggle');
   const sidebar = document.getElementById('admin-sidebar');
   const backdrop = document.getElementById('sidebar-backdrop');
   const icon = document.getElementById('sidebar-icon');
+  const closeBtn = document.getElementById('sidebar-close');
 
   function openSidebar() {
     sidebar?.classList.remove('-translate-x-full');
     backdrop?.classList.remove('opacity-0', 'pointer-events-none');
     if (icon) icon.textContent = 'close';
+    document.body.style.overflow = 'hidden';
   }
 
   function closeSidebar() {
     sidebar?.classList.add('-translate-x-full');
     backdrop?.classList.add('opacity-0', 'pointer-events-none');
     if (icon) icon.textContent = 'menu';
+    document.body.style.overflow = '';
   }
 
   toggle?.addEventListener('click', () => {
@@ -84,5 +100,13 @@ const navItems = [
     isOpen ? closeSidebar() : openSidebar();
   });
 
+  closeBtn?.addEventListener('click', closeSidebar);
   backdrop?.addEventListener('click', closeSidebar);
+
+  // Close on nav link click (mobile)
+  sidebar?.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 1024) closeSidebar();
+    });
+  });
 </script>

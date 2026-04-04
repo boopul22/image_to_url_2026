@@ -12,10 +12,17 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
   <div class="flex">
     <AdminSidebar activePage="cms" />
 
-    <main class="flex-1 p-8 space-y-6 bg-surface-container-lowest min-h-[calc(100vh-65px)]">
-      <div class="flex items-center justify-between">
+    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs font-label font-bold uppercase tracking-wider text-outline" aria-label="Breadcrumb">
+        <a href="/admin/cms" class="hover:text-on-surface transition-colors">Content</a>
+        <span class="material-symbols-outlined text-sm">chevron_right</span>
+        <span class="text-on-surface">Categories</span>
+      </nav>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-4xl font-headline italic font-black text-on-surface">Categories</h1>
+          <h1 class="text-2xl sm:text-4xl font-headline italic font-black text-on-surface">Categories</h1>
           <p class="text-on-surface-variant mt-1">Organize your blog content by topic.</p>
         </div>
       </div>
@@ -23,7 +30,7 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
       <!-- Add Category -->
       <div class="bg-surface border-2 border-on-surface rounded-xl p-5 hard-shadow">
         <h3 class="font-label text-xs font-bold uppercase tracking-wider mb-4">Add New Category</h3>
-        <div class="flex gap-3">
+        <div class="flex flex-col sm:flex-row gap-3">
           <input id="new-cat-name" type="text" placeholder="Category name..." class="flex-1 border-2 border-on-surface rounded-lg px-4 py-2 bg-surface text-sm" />
           <select id="new-cat-color" class="border-2 border-on-surface rounded-lg px-4 py-2 bg-surface text-sm">
             <option value="primary">Purple (Primary)</option>
@@ -67,14 +74,14 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     const colorLabel = (c: string) => c === 'primary' ? 'Purple' : c === 'secondary' ? 'Teal' : 'Olive';
 
     container.innerHTML = `
-      <table class="w-full text-left">
+      <div class="overflow-x-auto"><table class="w-full text-left min-w-[600px]">
         <thead>
           <tr class="border-b-2 border-on-surface">
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Name</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Slug</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Color</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Posts</th>
-            <th class="px-6 py-4 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Actions</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Name</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Slug</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Color</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Posts</th>
+            <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-outline-variant/50">
@@ -94,14 +101,14 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
               <td class="px-6 py-4 text-sm font-bold">${c.postCount}</td>
               <td class="px-6 py-4">
                 <div class="flex gap-2">
-                  <button onclick="saveCat('${esc(c.id)}')" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors">Save</button>
-                  <button onclick="deleteCat('${esc(c.id)}')" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border border-error text-error hover:bg-error hover:text-on-error transition-colors">Delete</button>
+                  <button onclick="saveCat('${esc(c.id)}')" class="px-3 py-1 rounded-full text-xs font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors">Save</button>
+                  <button onclick="deleteCat('${esc(c.id)}')" class="px-3 py-1 rounded-full text-xs font-bold uppercase border border-error text-error hover:bg-error hover:text-on-error transition-colors">Delete</button>
                 </div>
               </td>
             </tr>
           `).join('')}
         </tbody>
-      </table>
+      </table></div>
     `;
   }
 

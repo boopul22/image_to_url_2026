@@ -12,13 +12,20 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
   <div class="flex">
     <AdminSidebar activePage="cms" />
 
-    <main class="flex-1 p-8 space-y-6 bg-surface-container-lowest min-h-[calc(100vh-65px)]">
-      <div class="flex items-center justify-between">
+    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs font-label font-bold uppercase tracking-wider text-outline" aria-label="Breadcrumb">
+        <a href="/admin/cms" class="hover:text-on-surface transition-colors">Content</a>
+        <span class="material-symbols-outlined text-sm">chevron_right</span>
+        <span class="text-on-surface">Media</span>
+      </nav>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-4xl font-headline italic font-black text-on-surface">Media Library</h1>
+          <h1 class="text-2xl sm:text-4xl font-headline italic font-black text-on-surface">Media Library</h1>
           <p class="text-on-surface-variant mt-1" id="media-count">Manage uploaded images for your content.</p>
         </div>
-        <label class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 transition-all cursor-pointer flex items-center gap-2">
+        <label class="bg-primary text-on-primary px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 active:scale-95 transition-all cursor-pointer flex items-center gap-2 self-start sm:self-auto">
           <span class="material-symbols-outlined text-lg">upload</span>
           Upload Media
           <input type="file" accept="image/*" multiple class="hidden" id="media-upload-input" />
@@ -26,12 +33,12 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
       </div>
 
       <!-- Folder Filters -->
-      <div class="flex items-center gap-3">
-        <div class="flex gap-1" id="folder-filters">
-          <button class="px-3 py-1.5 rounded-full border-2 border-on-surface text-[10px] font-bold uppercase bg-on-surface text-surface" data-folder="all">All</button>
-          <button class="px-3 py-1.5 rounded-full border-2 border-on-surface text-[10px] font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-folder="blog">Blog</button>
-          <button class="px-3 py-1.5 rounded-full border-2 border-on-surface text-[10px] font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-folder="pages">Pages</button>
-          <button class="px-3 py-1.5 rounded-full border-2 border-on-surface text-[10px] font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors" data-folder="general">General</button>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+        <div class="flex flex-wrap gap-1" id="folder-filters">
+          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all" data-folder="all">All</button>
+          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="blog">Blog</button>
+          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="pages">Pages</button>
+          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="general">General</button>
         </div>
         <select id="upload-folder" class="ml-auto border-2 border-on-surface rounded-lg px-3 py-1.5 bg-surface text-xs font-label font-bold">
           <option value="general">Upload to: General</option>
@@ -88,12 +95,12 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
         </div>
         <div class="p-3 space-y-2">
           <p class="text-xs font-bold truncate" title="${esc(m.filename)}">${esc(m.filename)}</p>
-          <div class="flex items-center justify-between text-[10px] text-outline uppercase tracking-wider">
+          <div class="flex items-center justify-between text-xs text-outline uppercase tracking-wider">
             <span>${esc(m.folder)}</span>
             <span>${(m.sizeBytes / 1024).toFixed(0)} KB</span>
           </div>
           <div class="flex items-center gap-1">
-            <button onclick="copyUrl('${esc(m.url)}')" class="flex-1 px-2 py-1 rounded text-[10px] font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors text-center">Copy URL</button>
+            <button onclick="copyUrl('${esc(m.url)}')" class="flex-1 px-2 py-1 rounded text-xs font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors text-center">Copy URL</button>
             <button onclick="deleteMedia('${esc(m.id)}')" class="text-error hover:bg-error hover:text-on-error w-6 h-6 rounded flex items-center justify-center transition-colors">
               <span class="material-symbols-outlined text-sm">delete</span>
             </button>
@@ -106,17 +113,27 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     const pag = document.getElementById('pagination')!;
     if (data.totalPages > 1) {
       pag.innerHTML = `
-        <button onclick="loadPage(${Math.max(1, page - 1)})" class="px-4 py-2 border-2 border-on-surface rounded-lg font-label text-xs font-bold ${page === 1 ? 'opacity-30' : ''}">Previous</button>
+        <button onclick="loadPage(${Math.max(1, page - 1)})" class="px-4 py-2.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === 1 ? 'opacity-30' : ''}">Previous</button>
         <span class="text-sm text-outline">Page ${page} of ${data.totalPages}</span>
-        <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="px-4 py-2 border-2 border-on-surface rounded-lg font-label text-xs font-bold ${page === data.totalPages ? 'opacity-30' : ''}">Next</button>
+        <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="px-4 py-2.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === data.totalPages ? 'opacity-30' : ''}">Next</button>
       `;
     } else {
       pag.innerHTML = '';
     }
   }
 
+  function showToast(message: string) {
+    const existing = document.querySelector('.admin-toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border-2 border-on-surface hard-shadow transition-opacity';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
+  }
+
   (window as any).copyUrl = (url: string) => {
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(url).then(() => showToast('URL copied!'));
   };
 
   (window as any).deleteMedia = async (id: string) => {
@@ -138,8 +155,8 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     currentFolder = btn.dataset.folder || 'all';
     document.querySelectorAll('#folder-filters button').forEach(b => {
       b.className = b === btn
-        ? 'px-3 py-1.5 rounded-full border-2 border-on-surface text-[10px] font-bold uppercase bg-on-surface text-surface'
-        : 'px-3 py-1.5 rounded-full border-2 border-on-surface text-[10px] font-bold uppercase bg-surface hover:bg-surface-container-highest transition-colors';
+        ? 'px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all'
+        : 'px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all';
     });
     loadMedia(1);
   });
