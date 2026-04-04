@@ -27,10 +27,10 @@
 
   --color-background: #FFFFFF;
   --color-surface: #FFFFFF;
-  --color-surface-container: #F5F5F5;
-  --color-surface-container-low: #FAFAFA;
-  --color-surface-container-high: #EEEEEE;
-  --color-surface-container-highest: #E0E0E0;
+  --color-surface-container: #F0F0F0;
+  --color-surface-container-low: #F7F7F7;
+  --color-surface-container-high: #E8E8E8;
+  --color-surface-container-highest: #DDDDDD;
   --color-surface-container-lowest: #FFFFFF;
   --color-surface-variant: #F5F5F5;
   --color-surface-dim: #E0E0E0;

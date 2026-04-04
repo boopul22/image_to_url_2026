@@ -43,39 +43,29 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       }
     }
 
-    // For API routes, try Bearer token if no session
-    const url = new URL(request.url);
-    if (!locals.user && url.pathname.startsWith('/api/') && !url.pathname.startsWith('/api/auth/')) {
-      const authHeader = request.headers.get('authorization');
-      if (authHeader?.startsWith('Bearer itu_')) {
-        try {
-          const result = await verifyApiKey(db, authHeader.slice(7));
-          if (result) {
-            locals.user = {
-              id: result.user.id,
-              googleId: result.user.googleId,
-              name: result.user.name,
-              email: result.user.email,
-              avatarUrl: result.user.avatarUrl,
-              role: result.user.role as 'user' | 'admin',
-            };
-          }
-        } catch {
-          // Invalid API key
-        }
-      }
-    }
+    // API key auth — disabled for now
+    // Bearer token authentication is not available at this time.
   }
 
-  // Protect /dashboard routes
+  // Protect /dashboard routes (pages + API)
   const url = new URL(request.url);
-  if (url.pathname.startsWith('/dashboard') && !locals.user) {
+  if ((url.pathname.startsWith('/dashboard') || url.pathname.startsWith('/api/dashboard/')) && !locals.user) {
+    if (url.pathname.startsWith('/api/')) {
+      return new Response(JSON.stringify({ error: 'Authentication required' }), {
+        status: 401, headers: { 'Content-Type': 'application/json' },
+      });
+    }
     return redirect('/api/auth/login', 302);
   }
 
-  // Protect /admin routes
-  if (url.pathname.startsWith('/admin')) {
+  // Protect /admin routes (pages + API)
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin/')) {
     if (!locals.user || locals.user.role !== 'admin') {
+      if (url.pathname.startsWith('/api/')) {
+        return new Response(JSON.stringify({ error: 'Forbidden' }), {
+          status: 403, headers: { 'Content-Type': 'application/json' },
+        });
+      }
       return new Response('Forbidden', { status: 403 });
     }
   }

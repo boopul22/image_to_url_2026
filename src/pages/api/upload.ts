@@ -40,6 +40,22 @@ function getClientIP(request: Request): string {
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    // Block ALL external API access — only allow requests from our own site
+    const origin = request.headers.get('origin');
+    const referer = request.headers.get('referer');
+    const allowedOrigins = [
+      'https://imagetourl.cloud',
+      'http://localhost:4321',
+      'http://localhost:3000',
+    ];
+    const requestOrigin = origin || (referer ? new URL(referer).origin : null);
+    if (!requestOrigin || !allowedOrigins.some(o => requestOrigin.startsWith(o))) {
+      return new Response(
+        JSON.stringify({ error: 'API access is not available. Please use imagetourl.cloud to upload images.' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+
     const user = locals.user;
     const db = getDB(locals);
 
@@ -159,7 +175,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
           created_at: new Date().toISOString(),
         },
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      },
     );
   } catch (err: any) {
     console.error('Upload error:', err);
