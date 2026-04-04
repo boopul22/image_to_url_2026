@@ -166,24 +166,26 @@ const pageSchema = [
 <Layout schema={pageSchema} title={t(locale, 'home.meta.title')} description={t(locale, 'home.meta.description')}>
   <Nav activePage="home" />
 
-  <!-- Hero Section — Centered Upload -->
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 pt-10 pb-8 sm:pt-16 sm:pb-12 lg:pt-20 lg:pb-16 text-center">
-    <div class="inline-block bg-primary/15 text-primary px-3 py-1 rounded-full font-label text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-5 sm:mb-6">
-      {t(locale, 'home.hero.badge')}
+  <!-- Hero Section — Immediate, action-focused -->
+  <section class="min-h-[calc(100dvh-58px)] flex flex-col max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 lg:pt-14 text-center">
+    <div>
+      <div class="inline-block bg-primary/15 text-primary px-3 py-1 rounded-full font-label text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4">
+        {t(locale, 'home.hero.badge')}
+      </div>
+      <h1 class="font-headline text-3xl sm:text-5xl lg:text-6xl font-black text-on-background leading-[0.95] tracking-tighter mb-3 sm:mb-4">
+        {t(locale, 'home.hero.headline1')} <span class="text-primary">{t(locale, 'home.hero.headline2')}</span>
+      </h1>
+      <p class="font-body text-sm sm:text-base lg:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto mb-5 sm:mb-6">
+        {t(locale, 'home.hero.subheadline')}
+      </p>
     </div>
-    <h1 class="font-headline text-3xl sm:text-5xl lg:text-6xl font-black text-on-background leading-[0.95] tracking-tighter mb-4 sm:mb-5">
-      {t(locale, 'home.hero.headline1')} <span class="text-primary">{t(locale, 'home.hero.headline2')}</span>
-    </h1>
-    <p class="font-body text-sm sm:text-base lg:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto mb-6 sm:mb-8">
-      {t(locale, 'home.hero.subheadline')}
-    </p>
 
     <!-- Upload Area -->
-    <div class="w-full max-w-2xl mx-auto">
+    <div class="w-full max-w-2xl lg:max-w-3xl mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
       <div
         id="upload-panel"
-        class="bg-surface-container rounded-2xl border border-outline-variant overflow-hidden transition-colors"
+        class="bg-surface-container rounded-2xl lg:rounded-3xl border border-outline-variant overflow-hidden transition-colors"
         data-uploading={t(locale, 'home.upload.uploading')}
         data-copied={t(locale, 'home.upload.copied')}
         data-copy={t(locale, 'home.upload.copy')}
@@ -194,14 +196,14 @@ const pageSchema = [
         data-uploading-file={t(locale, 'home.upload.uploadingFile')}
       >
         <!-- State: idle / uploading -->
-        <div id="state-idle" class="p-5 sm:p-8 lg:p-10">
-          <div id="drop-zone" class="flex flex-col items-center gap-4 sm:gap-5 cursor-pointer" role="button" tabindex="0">
-            <span class="material-symbols-outlined text-on-tertiary-container text-4xl sm:text-5xl" id="upload-icon">upload_file</span>
+        <div id="state-idle" class="p-5 sm:p-8 lg:p-12">
+          <div id="drop-zone" class="flex flex-col items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer" role="button" tabindex="0">
+            <span class="material-symbols-outlined text-on-tertiary-container text-4xl sm:text-5xl lg:text-6xl" id="upload-icon">upload_file</span>
             <div class="text-center">
-              <p class="text-on-surface font-bold text-base sm:text-lg font-headline" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
-              <p class="text-xs sm:text-sm text-outline mt-1.5" id="upload-subtext">{t(locale, 'home.upload.formats')}</p>
+              <p class="text-on-surface font-bold text-base sm:text-lg lg:text-xl font-headline" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
+              <p class="text-xs sm:text-sm lg:text-base text-outline mt-1.5" id="upload-subtext">{t(locale, 'home.upload.formats')}</p>
             </div>
-            <div class="bg-primary text-on-primary px-8 py-3 sm:py-3.5 rounded-lg font-bold text-sm sm:text-base uppercase tracking-wider active:scale-95 transition-transform" id="upload-btn">
+            <div class="bg-primary text-on-primary px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 rounded-lg lg:rounded-xl font-bold text-sm sm:text-base lg:text-lg uppercase tracking-wider active:scale-95 transition-transform" id="upload-btn">
               {t(locale, 'home.upload.selectFile')}
             </div>
           </div>
@@ -211,7 +213,7 @@ const pageSchema = [
         </div>
 
         <!-- State: success -->
-        <div id="state-success" class="p-5 sm:p-8 lg:p-10 hidden">
+        <div id="state-success" class="p-5 sm:p-8 lg:p-12 hidden">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl">check_circle</span>
             <span class="font-bold text-secondary text-sm sm:text-base">{t(locale, 'home.upload.uploaded')}</span>
@@ -220,15 +222,15 @@ const pageSchema = [
             </button>
           </div>
           <div class="flex flex-col sm:flex-row gap-3">
-            <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border border-outline-variant rounded-lg px-4 py-3 text-sm sm:text-base font-mono text-on-surface focus:outline-none" />
-            <button id="copy-btn" class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold text-sm sm:text-base flex-shrink-0 active:scale-95 transition-transform">
+            <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border border-outline-variant rounded-lg px-4 py-3 sm:py-3.5 text-sm sm:text-base font-mono text-on-surface focus:outline-none" />
+            <button id="copy-btn" class="bg-primary text-on-primary px-6 py-3 sm:py-3.5 rounded-lg font-bold text-sm sm:text-base flex-shrink-0 active:scale-95 transition-transform">
               {t(locale, 'home.upload.copy')}
             </button>
           </div>
         </div>
 
         <!-- State: error -->
-        <div id="state-error" class="p-5 sm:p-8 lg:p-10 hidden">
+        <div id="state-error" class="p-5 sm:p-8 lg:p-12 hidden">
           <div class="flex items-center gap-3">
             <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
             <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0 truncate" id="error-text">{t(locale, 'home.upload.failed')}</span>
@@ -240,8 +242,8 @@ const pageSchema = [
       </div>
     </div>
 
-    <!-- Trust Signals -->
-    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
+    <!-- Trust Signals — pushed to bottom of viewport -->
+    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-auto pt-5 sm:pt-6 pb-4 sm:pb-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> {t(locale, 'home.trust.cdn')}</span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">lock</span> {t(locale, 'home.trust.ssl')}</span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">link</span> {t(locale, 'home.trust.permanent')}</span>

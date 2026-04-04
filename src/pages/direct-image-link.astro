@@ -60,8 +60,10 @@ const faqSchema = {
 <Layout title="Direct Image Link Hosting — Clean Hotlinkable URLs | ImageToURL" description="Get direct image links that end in .jpg, .png, .gif — not gallery pages with ads. Hotlink-friendly URLs for embedding anywhere on the web." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -74,10 +76,13 @@ const faqSchema = {
         Get clean, hotlinkable image URLs that point straight to your file. No gallery wrappers, no ads, no redirects — just the image, ready to embed anywhere.
       </p>
     </header>
+    </div>
+
 
 
     <!-- Direct vs Gallery Links -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Direct vs Gallery Links</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +117,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Use direct links in HTML img tags, Markdown, BBCode, CSS backgrounds, API responses, or any context that accepts an image URL. They work everywhere.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- How It's Different -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How We Compare</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -166,10 +173,12 @@ const faqSchema = {
           </table>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Perfect For -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -204,10 +213,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant text-sm">Technical docs, help centers, and knowledge bases need images that load cleanly without external gallery interfaces.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -249,10 +260,12 @@ const faqSchema = {
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Imgur defaults to gallery page links with ads and social features. While direct links exist on Imgur, they are not the default and can be harder to find. ImageToURL gives you a direct link by default, every time.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -280,16 +293,21 @@ const faqSchema = {
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Get a direct image link now</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your image and get a clean, hotlinkable URL. No gallery pages, no ads, no nonsense.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

@@ -17,8 +17,10 @@ function lp(path: string): string {
 <Layout title="Image URL Generator - Convert Images to URLs Instantly | ImageToURL" description="Generate instant URLs for your images with ImageToURL. Upload any image and get a permanent, shareable link in seconds. Perfect for developers, bloggers, and content creators.">
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -31,10 +33,13 @@ function lp(path: string): string {
         Upload any image and instantly convert it into a permanent, shareable URL. No software to install, no accounts to create — just fast, reliable link generation.
       </p>
     </header>
+    </div>
+
 
 
     <!-- How It Works -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -65,10 +70,12 @@ function lp(path: string): string {
           <p class="font-body text-on-surface-variant">Use your image URL anywhere on the web. Paste it in emails, embed it in websites, or share it on social media.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Features -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Features</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -103,10 +110,12 @@ function lp(path: string): string {
           <p class="font-body text-on-surface-variant">Copy your URL with one click, grab an embed code, or share directly. Every URL works everywhere — websites, forums, messaging apps, and more.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Perfect For -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -141,10 +150,12 @@ function lp(path: string): string {
           <p class="font-body text-on-surface-variant text-sm">Use image URLs in blogs, newsletters, email campaigns, and online publications.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -172,16 +183,21 @@ function lp(path: string): string {
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Generate your first image URL</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload an image and get a permanent, shareable link in seconds. No signup required.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Get Started Free
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

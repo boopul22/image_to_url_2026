@@ -60,8 +60,10 @@ const faqSchema = {
 <Layout title="Free Image Hosting for eBay Listings | ImageToURL" description="Host product images for eBay listings with permanent, direct URLs. Free, no signup required. Works perfectly with eBay's image requirements." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -74,10 +76,13 @@ const faqSchema = {
         Upload your product photos and get permanent, direct image URLs that work perfectly in eBay listing descriptions. Free to use, no account required.
       </p>
     </header>
+    </div>
+
 
 
     <!-- Why eBay Sellers Need External Hosting -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why eBay Sellers Need External Hosting</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +117,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Get clean, direct URLs that point straight to your image file. No landing pages, no redirects, no ads. Just paste the URL into your eBay listing HTML and it works.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- How to Use -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How to Use for eBay</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -146,10 +153,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Add the URL to your eBay listing description using the HTML editor. Use an <code class="bg-on-background/10 px-1 rounded text-sm">&lt;img&gt;</code> tag and your image appears instantly.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- eBay Image Requirements -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">eBay Image Best Practices</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -177,10 +186,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">eBay recommends pure white backgrounds for the main listing image. Clean backgrounds help your products stand out in search results.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -222,10 +233,12 @@ const faqSchema = {
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Once you upload an image and get the URL, you can reuse that same link in as many eBay listings as you need. This is especially useful for sellers with standard product photos, size charts, or branded banners.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -253,16 +266,21 @@ const faqSchema = {
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Make your eBay listings stand out</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your product photos and get permanent URLs in seconds. No signup, no watermarks, no broken images.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

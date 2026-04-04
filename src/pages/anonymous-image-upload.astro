@@ -60,8 +60,10 @@ const faqSchema = {
 <Layout title="Anonymous Image Upload — No Account Required | ImageToURL" description="Upload images anonymously without creating an account. No signup, no email, no tracking. Just drag, drop, and get your link. Free and private." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -74,10 +76,13 @@ const faqSchema = {
         No signup forms. No email addresses. No tracking cookies. Just drag, drop, and get your shareable image link. The way image hosting should work.
       </p>
     </header>
+    </div>
+
 
 
     <!-- Why Anonymous -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Anonymous Matters</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +117,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Zero friction between you and your image link. Open the page, drop your file, copy the URL. The entire process takes under 10 seconds.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Privacy Features -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Privacy Features</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -143,10 +150,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Image URLs contain no identifying information. They are clean, direct links to your image file — nothing else embedded in the URL structure.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Perfect For -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -181,10 +190,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant text-sm">Medical images, confidential screenshots, or private documents. Upload without attaching your identity to the content.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -226,10 +237,12 @@ const faqSchema = {
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL is completely free for all users. Since there are no accounts, there are no free tiers or premium plans — everyone gets the same full-featured service at no cost.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -257,16 +270,21 @@ const faqSchema = {
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Upload anonymously in seconds</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">No account, no email, no tracking. Just drop your image and get a link.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

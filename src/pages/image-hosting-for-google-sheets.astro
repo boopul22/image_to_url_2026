@@ -26,8 +26,10 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
 <Layout title="Image URLs for Google Sheets — =IMAGE() Function | ImageToURL" description="Get image URLs that work with Google Sheets =IMAGE() function. Upload images, get direct URLs, and display them in your spreadsheets instantly." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -40,10 +42,13 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         Upload images and get direct URLs that work with Google Sheets' =IMAGE() function. Display product photos, icons, and visuals right inside your spreadsheet cells.
       </p>
     </header>
+    </div>
+
 
 
     <!-- How It Works with Google Sheets -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works with Google Sheets</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -89,10 +94,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           </div>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Why You Need External URLs -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why You Need External URLs</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -127,10 +134,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant">No sharing permissions to manage. Public CDN URLs mean every team member and collaborator sees the images instantly without extra access setup.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Use Cases -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Use Cases</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -157,10 +166,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant text-sm">Embed charts, screenshots, and diagrams directly in report spreadsheets for stakeholders.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -202,10 +213,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">There is no limit from ImageToURL's side. Google Sheets may slow down with very large numbers of images, but typical use cases like product catalogs, inventory sheets, and dashboards work perfectly.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -233,16 +246,21 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Add images to your spreadsheets today</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload an image, copy the URL, and use =IMAGE() in Google Sheets. It takes seconds.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

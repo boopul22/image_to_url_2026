@@ -26,8 +26,10 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
 <Layout title="Share Images via URL on WhatsApp | ImageToURL" description="Share images as links on WhatsApp instead of file attachments. No compression, no quality loss. Get a permanent URL and share it in any chat." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -40,10 +42,13 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         Share images as links instead of attachments. No compression, no quality loss, no storage limits. Upload once and share the URL in any WhatsApp chat.
       </p>
     </header>
+    </div>
+
 
 
     <!-- Why Share Links Instead of Attachments -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Share Links Instead of Attachments</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -78,10 +83,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant">WhatsApp media takes up phone storage and can be lost when switching devices. Image URLs take zero storage and remain accessible permanently, even on new phones.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- How It Works -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +119,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant text-sm">Paste the link in any WhatsApp chat. Recipients see a preview and can tap to view the full-quality image.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Also Works With -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Also Works With</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -142,10 +151,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant text-sm">Share image links on Messenger to bypass Facebook's image compression and maintain quality.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -187,10 +198,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Upload multiple images using our bulk upload feature, copy the URLs, and share them in your WhatsApp chat. Each image gets its own permanent link that anyone can view.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -218,16 +231,21 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Share images without compression</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload an image, copy the URL, and paste it in WhatsApp. Full quality, zero compression, totally free.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

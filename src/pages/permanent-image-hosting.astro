@@ -60,8 +60,10 @@ const faqSchema = {
 <Layout title="Permanent Image Hosting — URLs That Never Expire | ImageToURL" description="Image URLs that never expire or break. Upload once, share forever. Free permanent image hosting with no expiration dates and no link rot." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -74,10 +76,13 @@ const faqSchema = {
         Upload once, share forever. Your image URLs will never expire, never break, and never disappear. End link rot for good with truly permanent image hosting.
       </p>
     </header>
+    </div>
+
 
 
     <!-- The Link Rot Problem -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">The Link Rot Problem</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +117,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Photobucket, TinyPic, and countless others have shut down or changed their terms. Years of embedded images lost when a host decides to pivot or close.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Our Permanence Guarantee -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Our Permanence Guarantee</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -150,10 +157,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Our URL format never changes. No migrations, no domain switches, no path restructuring. The link you get today will work identically in 10 years.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Perfect For -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -188,10 +197,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant text-sm">Evidence photos, compliance records, and legal documentation need URLs that never change or disappear.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -233,10 +244,12 @@ const faqSchema = {
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">There are no limits on the number of images you can host. Upload as many as you need — every single one gets a permanent, shareable URL.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -264,16 +277,21 @@ const faqSchema = {
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Upload images that last forever</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">No expiration dates. No link rot. Get permanent image URLs in seconds.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

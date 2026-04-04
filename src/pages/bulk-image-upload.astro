@@ -35,7 +35,9 @@ const schema = [
 <Layout title="Bulk Image Upload - Upload Multiple Images at Once | ImageToURL" description="Upload multiple images at once with ImageToURL's bulk upload feature. Get instant URLs for all your images. Perfect for e-commerce, agencies, and content creators." schema={schema}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <ImageUploader />
 
     <header class="mb-8 sm:mb-20 reveal">
@@ -53,10 +55,13 @@ const schema = [
         </a>
       </div>
     </header>
+    </div>
+
 
 
     <!-- How It Works -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How Bulk Upload Works</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -95,10 +100,12 @@ const schema = [
           <p class="font-body text-on-surface-variant text-sm">Copy all URLs at once or export them as a list for easy integration.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Advanced Features -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Advanced Features</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -133,10 +140,12 @@ const schema = [
           <p class="font-body text-on-surface-variant flex-grow">Copy all URLs to clipboard with one click, or export them as a formatted list ready for spreadsheets and databases.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Use Cases -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -163,10 +172,12 @@ const schema = [
           <p class="font-body text-on-surface-variant text-sm">Manage client deliverables and share entire image sets via permanent URLs.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -194,10 +205,13 @@ const schema = [
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline mb-4">Upload your images in bulk</h2>
         <p class="text-surface/70 mb-8 max-w-lg mx-auto">Free, fast, and no signup required. Select multiple images and get all your URLs instantly.</p>
@@ -205,6 +219,8 @@ const schema = [
           <span class="material-symbols-outlined text-xl">cloud_upload</span>
           Start Bulk Upload
         </a>
+      </div>
+    </div>
       </div>
     </section>
   </main>

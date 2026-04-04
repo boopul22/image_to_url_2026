@@ -76,8 +76,10 @@ const faqSchema = {
 <Layout title="GIF to URL — Host Animated GIFs & Get Direct Links | ImageToURL" description="Host animated GIFs and get instant shareable URLs. Full animation preserved, direct links for embedding anywhere. Free GIF hosting, no signup required." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -90,10 +92,13 @@ const faqSchema = {
         Upload your animated GIFs and get permanent, direct URLs instantly. Every frame preserved, fast CDN delivery, and free embedding anywhere — no signup needed.
       </p>
     </header>
+    </div>
+
 
 
     <!-- How It Works -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -115,10 +120,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Copy your URL and embed it in Discord, Reddit, forums, HTML pages, or share it directly in messages.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Why Host GIFs with Us? -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Host GIFs with Us?</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -153,10 +160,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Our URLs support hotlinking. Embed your GIFs in any website, wiki, or forum without restrictions.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Perfect For -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -191,10 +200,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Share animated prototypes, micro-interactions, and loading animations.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -246,10 +257,12 @@ const faqSchema = {
           </div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -277,16 +290,21 @@ const faqSchema = {
           <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Host your animated GIF in seconds</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your GIF and get a permanent, embeddable link. No signup, no frame loss, no catch.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload GIF Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

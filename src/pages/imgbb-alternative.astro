@@ -60,8 +60,10 @@ const faqSchema = {
 <Layout title="ImgBB Alternative — Faster, Cleaner, Free | ImageToURL" description="Looking for an ImgBB alternative? ImageToURL is faster, cleaner, and completely free. No ads, no compression, permanent direct image links." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -74,10 +76,13 @@ const faqSchema = {
         Tired of ImgBB's ads, slow uploads, and compression? ImageToURL is the faster, cleaner image host — free, with permanent direct links and zero compromises.
       </p>
     </header>
+    </div>
+
 
 
     <!-- Why Switch from ImgBB -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Switch from ImgBB</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +117,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">ImgBB's API has rate limits and restrictions that make it difficult for developers building production applications. Our direct URLs work seamlessly in any integration.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Comparison -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">ImageToURL vs ImgBB</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -170,10 +177,12 @@ const faqSchema = {
           </table>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- What Makes Us Better -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">What Makes Us Better</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -208,10 +217,12 @@ const faqSchema = {
           <p class="font-body text-on-surface-variant">Clean direct URLs that work in any application. No gallery wrappers to parse, no API keys to manage for basic hosting needs, no rate limit headaches.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -253,10 +264,12 @@ const faqSchema = {
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImgBB offers optional auto-deletion timers and may remove inactive content. ImageToURL provides truly permanent URLs with no expiration dates and no inactivity-based deletion.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -284,16 +297,21 @@ const faqSchema = {
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Upgrade from ImgBB today</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Faster uploads, no ads, no compression. Experience image hosting done right.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 

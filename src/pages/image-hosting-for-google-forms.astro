@@ -26,8 +26,10 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
 <Layout title="Image URLs for Google Forms | ImageToURL" description="Add images to Google Forms using hosted URLs. Perfect for surveys, quizzes, and questionnaires that need visual content. Free and instant." schema={[schema, faqSchema]}>
   <Nav />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+  <main>
 
+
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 pt-8 sm:pt-16">
     <!-- Hero -->
     <ImageUploader />
 
@@ -40,10 +42,13 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         Add images to your Google Forms surveys, quizzes, and questionnaires using hosted URLs. Upload once, paste the link, and your visual content is live.
       </p>
     </header>
+    </div>
+
 
 
     <!-- Why Use External Images in Forms -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Use External Images in Forms</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -78,10 +83,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant">Show product mockups, design variations, or packaging options and collect feedback. Visual context leads to more meaningful and actionable responses.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- How to Add Images -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How to Add Images</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -112,10 +119,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant text-sm">Click the image icon in the Forms editor, choose "URL", and paste your link. The image appears in your form instantly.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Perfect For -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -142,10 +151,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <p class="font-body text-on-surface-variant text-sm">Show ad creatives, branding options, or competitor screenshots and gauge audience reactions.</p>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -187,10 +198,12 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Image-based questions are common in quizzes for visual identification, diagram labeling, and picture-based multiple choice. Upload your quiz images to ImageToURL and add them via URL in the Forms editor.</div>
         </details>
       </div>
+    </div>
     </section>
 
     <!-- Related Tools -->
-    <section class="mb-10 sm:mb-24">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
       <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
         <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
@@ -218,16 +231,21 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
       </div>
+    </div>
     </section>
 
     <!-- CTA -->
-    <section class="reveal">
+    <section class="py-10 sm:py-20 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="reveal">
       <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
         <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Make your Google Forms visual</h2>
         <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload images, get permanent URLs, and add them to any Google Form in seconds. Free, no signup required.</p>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
+      </div>
+    </div>
       </div>
     </section>
 
