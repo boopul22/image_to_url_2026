@@ -1,6 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
 import { getSession } from './lib/session';
-import { verifyApiKey } from './lib/api-key';
 import { getDB } from './lib/db';
 import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale } from './i18n/config';
@@ -12,6 +11,14 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   // Redirect bare / to /en/ (manual i18n routing)
   if (path === '/') {
     return redirect('/en/', 302);
+  }
+
+  // Trailing slash consistency: redirect /page/ → /page (except locale roots like /en/)
+  // Prevents duplicate content issues for SEO
+  if (path !== '/' && path.endsWith('/') && !path.match(/^\/[a-z]{2}\/$/)) {
+    const cleanPath = path.replace(/\/+$/, '');
+    const newUrl = new URL(cleanPath + url0.search, url0.origin);
+    return redirect(newUrl.pathname + newUrl.search, 301);
   }
 
   // Locale detection — force English for admin/dashboard/api routes
@@ -71,6 +78,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   }
 
   const response = await next();
+
+  // Security headers — all responses
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
   // Add cache headers for public HTML pages (SEO performance)
   // Skip API, admin, dashboard routes — those must never be cached

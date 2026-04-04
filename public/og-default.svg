@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FFFBEB"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#FFD600"/>
+  <rect x="0" y="622" width="1200" height="8" fill="#FFD600"/>
+  <text x="600" y="260" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="#1C1B1F">ImageToURL</text>
+  <text x="600" y="340" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="500" fill="#49454F">Free Image Hosting &amp; Instant URLs</text>
+  <text x="600" y="400" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#79747E">Upload any image. Get a permanent, shareable link.</text>
+  <rect x="440" y="450" width="320" height="56" rx="28" fill="#FFD600"/>
+  <text x="600" y="486" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#1C1B1F">imagetourl.cloud</text>
+</svg>

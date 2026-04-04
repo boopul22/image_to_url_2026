@@ -11,15 +11,21 @@ interface Props {
   ogType?: string;
   noindex?: boolean;
   schema?: object | object[];
+  /** Disable hreflang tags for root-level English-only pages (e.g. /png-to-url) */
+  noHreflang?: boolean;
+  /** Breadcrumb items for BreadcrumbList schema: [{name, url}] */
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 const {
   title = "ImageToURL \u2014 Free Image Hosting | Turn Images into Shareable Links",
   description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery. Upload JPG, PNG, WebP, GIF, SVG and get an instant shareable URL.",
-  ogImage = "/og-default.png",
+  ogImage = "/og-default.svg",
   ogType = "website",
   noindex = false,
   schema,
+  noHreflang = false,
+  breadcrumbs,
 } = Astro.props;
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -60,8 +66,29 @@ const sitewideSchemas = [
   }
 ];
 
+// Auto-generate breadcrumbs for root-level pages if not explicitly provided
+const SITE_URL = 'https://imagetourl.cloud';
+const autoBreadcrumbs: { name: string; url: string }[] | undefined = breadcrumbs ?? (
+  noHreflang && Astro.url.pathname !== '/' ? [
+    { name: 'Home', url: SITE_URL + '/' },
+    { name: title.replace(/\s*[\u2014\-|].*(ImageToURL|imagetourl).*$/i, '').trim(), url: SITE_URL + Astro.url.pathname },
+  ] : undefined
+);
+
+// BreadcrumbList schema
+const breadcrumbSchema = autoBreadcrumbs?.length ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": autoBreadcrumbs.map((crumb, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": crumb.name,
+    "item": crumb.url,
+  })),
+} : null;
+
 const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
-const allSchemas = [...sitewideSchemas, ...pageSchemas];
+const allSchemas = [...sitewideSchemas, ...pageSchemas, ...(breadcrumbSchema ? [breadcrumbSchema] : [])];
 const schemaJson = JSON.stringify(allSchemas);
 
 // Build hreflang URLs for all locales
@@ -74,15 +101,6 @@ function hreflangUrl(loc: Locale): string {
 <!doctype html>
 <html lang={locale}>
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFY17JKKYK"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-CFY17JKKYK');
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -93,11 +111,11 @@ function hreflangUrl(loc: Locale): string {
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#FFD600" />
 
-    <!-- hreflang for all locales -->
-    {locales.map(loc => (
+    <!-- hreflang for all locales (skip for root-level English-only pages) -->
+    {!noHreflang && locales.map(loc => (
       <link rel="alternate" hreflang={loc} href={hreflangUrl(loc)} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={hreflangUrl(defaultLocale)} />
+    {!noHreflang && <link rel="alternate" hreflang="x-default" href={hreflangUrl(defaultLocale)} />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -174,6 +192,32 @@ function hreflangUrl(loc: Locale): string {
           ticking = true;
         }
       }, { passive: true });
+    </script>
+
+    <!-- Google Analytics — deferred to avoid blocking LCP -->
+    <script is:inline>
+      (function(){
+        // Load GA after first user interaction or after 3s, whichever is first
+        var loaded = false;
+        function loadGA() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CFY17JKKYK';
+          s.async = true;
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CFY17JKKYK');
+        }
+        // Trigger on first interaction
+        ['scroll','click','keydown','touchstart'].forEach(function(evt){
+          document.addEventListener(evt, loadGA, {once:true, passive:true});
+        });
+        // Fallback: load after 3 seconds
+        setTimeout(loadGA, 3000);
+      })();
     </script>
   </body>
 </html>
