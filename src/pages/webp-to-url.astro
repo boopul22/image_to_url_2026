@@ -1,0 +1,305 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WebP to URL Converter",
+  "url": "https://imagetourl.cloud/webp-to-url",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert WebP images to shareable URLs instantly with next-gen format quality.",
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is WebP format?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WebP is a modern image format developed by Google that provides superior compression for both lossy and lossless images. It supports transparency and animation while being 25-34% smaller than equivalent PNG or JPG files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ImageToURL preserve WebP quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we store your WebP files exactly as uploaded. No re-encoding, no compression artifacts, no quality degradation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I embed WebP URLs anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Our direct URLs work anywhere images are supported. However, note that WebP may not display on very old browsers — in those cases, consider also uploading a PNG fallback."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is WebP better than PNG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your use case. WebP offers smaller file sizes than PNG with similar quality, including transparency support. PNG is better when you need universal legacy browser support or lossless archival quality."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the maximum WebP file size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free uploads support WebP files up to 2MB. Create a free account to upload WebP images up to 10MB."
+      }
+    }
+  ]
+};
+---
+
+<Layout title="WebP to URL — Convert WebP Images to Shareable URLs | ImageToURL" description="Convert WebP images to shareable URLs instantly. Next-gen format with smaller file sizes and superior quality. Free WebP hosting, no signup required." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">WebP Converter</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        WebP to URL <span class="italic text-primary">— next-gen format.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Upload any WebP image and get a permanent, shareable URL in seconds. Google's modern format with smaller files and superior quality — completely free.
+      </p>
+    </header>
+
+
+    <!-- How It Works -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-black font-headline text-lg mb-4">1</div>
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">upload_file</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Upload Your WebP</h3>
+          <p class="font-body text-on-surface-variant">Drag & drop or click to select your WebP file. We accept all WebP variants including lossy, lossless, and animated.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-black font-headline text-lg mb-4">2</div>
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">link</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Get Your URL</h3>
+          <p class="font-body text-on-surface-variant">Your WebP is uploaded to our global CDN instantly. A permanent, direct image URL is generated automatically.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-black font-headline text-lg mb-4">3</div>
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">share</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Share Anywhere</h3>
+          <p class="font-body text-on-surface-variant">Copy your URL and use it anywhere — HTML, Markdown, forums, emails, or social media.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why WebP? -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why WebP?</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">compress</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Smaller File Sizes</h3>
+          <p class="font-body text-on-surface-variant">WebP delivers up to 30% smaller files than PNG and JPG with equivalent quality. Faster page loads for your users.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">auto_awesome</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Superior Image Quality</h3>
+          <p class="font-body text-on-surface-variant">Google's modern format combines the best of both worlds: lossy compression like JPG with transparency like PNG.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">public</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Growing Browser Support</h3>
+          <p class="font-body text-on-surface-variant">WebP is now supported by Chrome, Firefox, Safari, and Edge. Over 97% of browsers handle WebP natively.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">gif_box</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Animation Support</h3>
+          <p class="font-body text-on-surface-variant">WebP supports animation like GIF but with vastly smaller file sizes. Modern animated images at a fraction of the bandwidth.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">code</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Web Developers</h3>
+          <p class="font-body text-on-surface-variant">Serve modern, optimized images with direct URLs. Perfect for progressive web apps and performance-focused sites.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">speed</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Performance Enthusiasts</h3>
+          <p class="font-body text-on-surface-variant">Reduce image payload by 30% or more. Improve Core Web Vitals and page load times with WebP.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">smart_toy</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">AI Image Creators</h3>
+          <p class="font-body text-on-surface-variant">Many AI image generators output WebP. Host your AI-generated art with permanent, shareable URLs.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">brush</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Content Creators</h3>
+          <p class="font-body text-on-surface-variant">Upload blog images, thumbnails, and social media assets in WebP for faster delivery without quality loss.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="space-y-4 reveal">
+        <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            What is WebP format?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">WebP is a modern image format developed by Google that provides superior compression for both lossy and lossless images. It supports transparency and animation while being 25-34% smaller than equivalent PNG or JPG files.</p>
+          </div>
+        </details>
+        <details class="bg-tertiary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Does ImageToURL preserve WebP quality?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Yes, we store your WebP files exactly as uploaded. No re-encoding, no compression artifacts, no quality degradation.</p>
+          </div>
+        </details>
+        <details class="bg-primary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Can I embed WebP URLs anywhere?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Yes. Our direct URLs work anywhere images are supported. However, note that WebP may not display on very old browsers — in those cases, consider also uploading a PNG fallback.</p>
+          </div>
+        </details>
+        <details class="bg-surface-variant border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Is WebP better than PNG?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">It depends on your use case. WebP offers smaller file sizes than PNG with similar quality, including transparency support. PNG is better when you need universal legacy browser support or lossless archival quality.</p>
+          </div>
+        </details>
+        <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            What's the maximum WebP file size?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Free uploads support WebP files up to 2MB. Create a free account to upload WebP images up to 10MB.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
+        <a href="/png-to-url" class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+          <div>
+            <h3 class="text-lg sm:text-xl font-black font-headline mb-1">PNG to URL</h3>
+            <p class="font-body text-on-surface-variant text-sm">Convert PNG images to shareable links</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+        </a>
+        <a href="/jpg-to-url" class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+          <div>
+            <h3 class="text-lg sm:text-xl font-black font-headline mb-1">JPG to URL</h3>
+            <p class="font-body text-on-surface-variant text-sm">Convert JPEG photos to shareable links</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+        </a>
+        <a href="/free-image-hosting" class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+          <div>
+            <h3 class="text-lg sm:text-xl font-black font-headline mb-1">Free Image Hosting</h3>
+            <p class="font-body text-on-surface-variant text-sm">Host any image format for free</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Convert your WebP to a shareable URL</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your WebP image and get a permanent link in seconds. No signup, no compression, no catch.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload WebP Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

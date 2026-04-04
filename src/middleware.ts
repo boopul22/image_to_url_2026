@@ -80,5 +80,24 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     }
   }
 
-  return next();
+  const response = await next();
+
+  // Add cache headers for public HTML pages (SEO performance)
+  // Skip API, admin, dashboard routes — those must never be cached
+  if (
+    !path.startsWith('/api/') &&
+    !path.startsWith('/admin') &&
+    !path.startsWith('/dashboard') &&
+    response.headers.get('content-type')?.includes('text/html')
+  ) {
+    if (locals.user) {
+      // Logged-in: don't cache at CDN (personalized nav), but allow browser short cache
+      response.headers.set('Cache-Control', 'private, max-age=0, must-revalidate');
+    } else {
+      // Anonymous: cache at CDN edge for fast crawling & page loads
+      response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+    }
+  }
+
+  return response;
 });

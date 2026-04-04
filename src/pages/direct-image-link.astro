@@ -1,0 +1,299 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Direct Image Link Hosting - ImageToURL",
+  "description": "Get direct image links that end in .jpg, .png, .gif — not gallery pages with ads. Hotlink-friendly URLs for embedding anywhere.",
+  "url": "https://imagetourl.cloud/direct-image-link",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a direct image link?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A direct image link points straight to the image file itself, not to a gallery page or viewer. When you open a direct link, you see only the image — no surrounding website, no ads, no interface. These URLs typically end in file extensions like .jpg, .png, or .webp." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are direct links better than gallery links?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Direct links can be embedded in HTML, Markdown, forums, and emails without displaying unwanted ads or gallery interfaces. They load faster, work with image tags, and display correctly in any context where an image URL is expected." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I hotlink ImageToURL images on my website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. ImageToURL fully supports hotlinking. You can embed our image URLs directly in your website's HTML, and they will load reliably without referrer restrictions or bandwidth throttling." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do direct image links work in emails?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Direct image links are the only type of image URL that works reliably in HTML emails. Gallery links would show a broken preview or redirect to a webpage. Our direct URLs display the image inline in any email client." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Imgur provide direct image links?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Imgur defaults to gallery page links with ads and social features. While direct links exist on Imgur, they are not the default and can be harder to find. ImageToURL gives you a direct link by default, every time." }
+    }
+  ]
+};
+---
+
+<Layout title="Direct Image Link Hosting — Clean Hotlinkable URLs | ImageToURL" description="Get direct image links that end in .jpg, .png, .gif — not gallery pages with ads. Hotlink-friendly URLs for embedding anywhere on the web." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Direct Links</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Direct Image Links <span class="italic text-primary">— no gallery pages.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Get clean, hotlinkable image URLs that point straight to your file. No gallery wrappers, no ads, no redirects — just the image, ready to embed anywhere.
+      </p>
+    </header>
+
+
+    <!-- Direct vs Gallery Links -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Direct vs Gallery Links</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">link</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Clean URLs</h3>
+          <p class="font-body text-on-surface-variant">Our URLs point directly to the image file. When you open the link, you see the image — nothing else. No wrapper pages, no viewer interfaces, no social sharing widgets.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">block</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Ads</h3>
+          <p class="font-body text-on-surface-variant">Gallery pages exist to serve advertisements around your image. Direct links bypass all of that. Your viewers see your image, not someone else's revenue stream.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">sync_alt</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Hotlink-Friendly</h3>
+          <p class="font-body text-on-surface-variant">Embed our image URLs on any website, in any app. We do not block hotlinking, restrict referrers, or throttle bandwidth. Your embedded images always load.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">code</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Embed Anywhere</h3>
+          <p class="font-body text-on-surface-variant">Use direct links in HTML img tags, Markdown, BBCode, CSS backgrounds, API responses, or any context that accepts an image URL. They work everywhere.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It's Different -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How We Compare</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="overflow-x-auto reveal">
+        <div class="border-2 border-on-background rounded-xl hard-shadow overflow-hidden min-w-[600px]">
+          <table class="w-full font-body text-sm sm:text-base">
+            <thead>
+              <tr class="bg-on-surface text-surface">
+                <th class="text-left p-4 sm:p-5 font-headline font-bold">Feature</th>
+                <th class="text-center p-4 sm:p-5 font-headline font-bold">ImageToURL</th>
+                <th class="text-center p-4 sm:p-5 font-headline font-bold">Imgur</th>
+                <th class="text-center p-4 sm:p-5 font-headline font-bold">ImgBB</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Default link type</td>
+                <td class="p-4 sm:p-5 text-center text-primary font-bold">Direct image</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Gallery page</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Gallery page</td>
+              </tr>
+              <tr class="border-t border-on-background/20 bg-surface-variant/30">
+                <td class="p-4 sm:p-5 font-medium">Ads on image page</td>
+                <td class="p-4 sm:p-5 text-center text-primary font-bold">None</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Yes</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Yes</td>
+              </tr>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Hotlinking allowed</td>
+                <td class="p-4 sm:p-5 text-center text-primary font-bold">Always</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Limited</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Limited</td>
+              </tr>
+              <tr class="border-t border-on-background/20 bg-surface-variant/30">
+                <td class="p-4 sm:p-5 font-medium">Works in &lt;img&gt; tags</td>
+                <td class="p-4 sm:p-5 text-center text-primary font-bold">Yes</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Only direct URL</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Only direct URL</td>
+              </tr>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Account required</td>
+                <td class="p-4 sm:p-5 text-center text-primary font-bold">No</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Optional</td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Optional</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">terminal</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Developers</h3>
+          <p class="font-body text-on-surface-variant text-sm">Embed images in apps, README files, and API responses with reliable direct URLs that always return an image.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">forum</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Forum Users</h3>
+          <p class="font-body text-on-surface-variant text-sm">Post images on Reddit, Stack Overflow, or any forum with BBCode or Markdown support. Direct links display inline correctly.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">mail</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Email Marketers</h3>
+          <p class="font-body text-on-surface-variant text-sm">HTML emails need direct image URLs. Gallery links break email layouts. Our URLs display perfectly in every email client.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">description</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Documentation</h3>
+          <p class="font-body text-on-surface-variant text-sm">Technical docs, help centers, and knowledge bases need images that load cleanly without external gallery interfaces.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="max-w-3xl reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>What is a direct image link?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">A direct image link points straight to the image file itself, not to a gallery page or viewer. When you open a direct link, you see only the image — no surrounding website, no ads, no interface. These URLs typically end in file extensions like .jpg, .png, or .webp.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Why are direct links better than gallery links?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Direct links can be embedded in HTML, Markdown, forums, and emails without displaying unwanted ads or gallery interfaces. They load faster, work with image tags, and display correctly in any context where an image URL is expected.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I hotlink ImageToURL images on my website?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL fully supports hotlinking. You can embed our image URLs directly in your website's HTML, and they will load reliably without referrer restrictions or bandwidth throttling.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Do direct image links work in emails?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Direct image links are the only type of image URL that works reliably in HTML emails. Gallery links would show a broken preview or redirect to a webpage. Our direct URLs display the image inline in any email client.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does Imgur provide direct image links?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Imgur defaults to gallery page links with ads and social features. While direct links exist on Imgur, they are not the default and can be harder to find. ImageToURL gives you a direct link by default, every time.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/image-embed-code-generator" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Embed Code Generator</h3>
+            <p class="text-sm text-on-surface-variant">Get HTML, BBCode, and Markdown codes</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/free-image-cdn" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image CDN</h3>
+            <p class="text-sm text-on-surface-variant">Global CDN delivery for your images</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/imgur-alternative" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Imgur Alternative</h3>
+            <p class="text-sm text-on-surface-variant">Switch from Imgur gallery pages</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Get a direct image link now</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your image and get a clean, hotlinkable URL. No gallery pages, no ads, no nonsense.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

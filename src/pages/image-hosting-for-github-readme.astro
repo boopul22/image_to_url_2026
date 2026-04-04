@@ -1,0 +1,275 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ImageToURL — Image Hosting for GitHub README",
+  "url": "https://imagetourl.com/image-hosting-for-github-readme",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Host images for GitHub README files with permanent URLs. Stop committing images to your repo."
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why should I not commit images directly to my GitHub repo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Git tracks every version of every file. Binary image files cannot be diffed efficiently, so every change adds the full file size to your repo history. Over time, this bloats your .git directory, slows down clones, and wastes storage for every contributor." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I add an externally hosted image to a GitHub README?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image to ImageToURL, copy the permanent URL, then add it to your README using standard Markdown syntax: ![Alt text](https://your-image-url). GitHub renders the image inline when anyone views your repository." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the images load on private repositories too?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Since the images are hosted externally on ImageToURL's CDN, they load independently of GitHub's access controls. Anyone with access to the repository will see the images, regardless of whether the repo is public or private." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do ImageToURL links work in GitHub wikis and issues?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. ImageToURL links work anywhere GitHub renders Markdown — README files, wiki pages, issue comments, pull request descriptions, and discussion threads. The same permanent URL works across all of these contexts." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if ImageToURL goes down?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL uses a globally distributed CDN with high availability. Images are replicated across multiple edge servers. In the unlikely event of downtime, images are restored automatically when service resumes. Your URLs remain the same permanently." }
+    }
+  ]
+};
+---
+
+<Layout title="Image Hosting for GitHub README Files | ImageToURL" description="Host images for GitHub README files with permanent URLs. Stop committing images to your repo — use external hosting for faster clones and cleaner repos." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Developers</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Image Hosting for GitHub <span class="italic text-primary">README files.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Stop committing binary images to your repos. Upload to ImageToURL, get a permanent URL, and keep your repositories lean and your clones fast.
+      </p>
+    </header>
+
+
+    <!-- Why Not Commit Images to Repos -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Not Commit Images to Repos</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">database</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Bloats Your Repository</h3>
+          <p class="font-body text-on-surface-variant">Git stores every version of every file in its history. A few screenshots can quickly balloon your .git directory to hundreds of megabytes, since binary files cannot be delta-compressed.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">speed</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Slows Down Clones</h3>
+          <p class="font-body text-on-surface-variant">Every <code class="bg-on-background/10 px-1 rounded text-sm">git clone</code> downloads the entire history including all image versions. New contributors wait minutes instead of seconds to get started on your project.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">difference</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Clutters Your Diffs</h3>
+          <p class="font-body text-on-surface-variant">Binary files show up as changed in pull requests but cannot be meaningfully reviewed. They add noise to code reviews and make it harder to see what actually changed in a commit.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">cloud_off</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Wastes Storage Quotas</h3>
+          <p class="font-body text-on-surface-variant">GitHub has soft limits on repository size (recommended under 1GB). Images eat through that budget quickly, especially for active projects with frequent screenshot updates.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use in Markdown -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How to Use in Markdown</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Markdown Image</h3>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">![Screenshot](https://imagetourl.com/your-image-url.png)</code>
+          <p class="font-body text-on-surface-variant mt-4 text-sm">Standard Markdown syntax. Works in README.md, CONTRIBUTING.md, and any .md file in your repo.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">HTML Image Tag</h3>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">&lt;img src="https://imagetourl.com/your-image-url.png" width="600" alt="Screenshot"&gt;</code>
+          <p class="font-body text-on-surface-variant mt-4 text-sm">Use HTML when you need to control the image size, alignment, or add custom attributes. GitHub renders HTML in Markdown files.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Linked Image</h3>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">[![Demo](https://imagetourl.com/your-image-url.png)](https://your-site.com)</code>
+          <p class="font-body text-on-surface-variant mt-4 text-sm">Wrap an image in a link for clickable screenshots, demo previews, or badges that link to your live project.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Centered Image</h3>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">&lt;p align="center"&gt;&lt;img src="https://imagetourl.com/your-image-url.png" width="500"&gt;&lt;/p&gt;</code>
+          <p class="font-body text-on-surface-variant mt-4 text-sm">Center images in your README using the align attribute on a wrapping paragraph tag. Great for logos and hero screenshots.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">code</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Open Source Projects</h3>
+          <p class="font-body text-on-surface-variant text-sm">Add screenshots, architecture diagrams, and demo GIFs to your README without bloating the repo for every contributor.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">menu_book</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Documentation</h3>
+          <p class="font-body text-on-surface-variant text-sm">Host tutorial screenshots, API response examples, and workflow diagrams externally for cleaner documentation repos.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">person</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Portfolio READMEs</h3>
+          <p class="font-body text-on-surface-variant text-sm">Showcase project screenshots and demo videos in your GitHub profile README with fast-loading, permanent images.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">apartment</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Organization Profiles</h3>
+          <p class="font-body text-on-surface-variant text-sm">Add logos, team photos, and branding to your GitHub organization's profile README with reliable external hosting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Why should I not commit images directly to my GitHub repo?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Git tracks every version of every file. Binary image files cannot be diffed efficiently, so every change adds the full file size to your repo history. Over time, this bloats your .git directory, slows down clones, and wastes storage for every contributor.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>How do I add an externally hosted image to a GitHub README?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Upload your image to ImageToURL, copy the permanent URL, then add it to your README using standard Markdown syntax: <code>![Alt text](https://your-image-url)</code>. GitHub renders the image inline when anyone views your repository.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Will the images load on private repositories too?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Since the images are hosted externally on ImageToURL's CDN, they load independently of GitHub's access controls. Anyone with access to the repository will see the images, regardless of whether the repo is public or private.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Do ImageToURL links work in GitHub wikis and issues?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. ImageToURL links work anywhere GitHub renders Markdown — README files, wiki pages, issue comments, pull request descriptions, and discussion threads. The same permanent URL works across all of these contexts.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>What happens if ImageToURL goes down?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImageToURL uses a globally distributed CDN with high availability. Images are replicated across multiple edge servers. In the unlikely event of downtime, images are restored automatically when service resumes. Your URLs remain the same permanently.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/image-url-generator" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
+            <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image format</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/image-hosting-for-discord" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Discord Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Permanent embed links for Discord</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/image-hosting-for-notion" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Notion Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Permanent URLs for Notion pages</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Keep your repos lean and your READMEs sharp</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload screenshots and diagrams, get permanent Markdown-ready URLs. No signup, no repo bloat.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

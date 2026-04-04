@@ -1,0 +1,272 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ImageToURL — Image Hosting for eBay",
+  "url": "https://imagetourl.com/image-hosting-for-ebay",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Host product images for eBay listings with permanent, direct URLs. Free, no signup required."
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do I need external image hosting for eBay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "eBay allows external images in listing descriptions via direct URL links. External hosting gives you more control over image quality, lets you use images across multiple listings, and avoids eBay's own compression which can reduce product photo clarity." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Imgur work for eBay listings?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Imgur has historically blocked hotlinking from eBay and other marketplace platforms. ImageToURL provides direct image URLs that are specifically designed to work when embedded in eBay listing descriptions without any restrictions." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my eBay images stay online permanently?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Images uploaded to ImageToURL are hosted permanently. Your eBay listing images will remain live for as long as your listing exists, and beyond. There are no expiration dates on any uploaded images." }
+    },
+    {
+      "@type": "Question",
+      "name": "What image sizes work best for eBay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "eBay recommends images that are at least 500 pixels on the longest side, with 1600 pixels being ideal for the zoom feature. Use JPEG format for photos and PNG for graphics with text. ImageToURL preserves your original image quality without any compression." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the same image URL across multiple eBay listings?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Once you upload an image and get the URL, you can reuse that same link in as many eBay listings as you need. This is especially useful for sellers with standard product photos, size charts, or branded banners." }
+    }
+  ]
+};
+---
+
+<Layout title="Free Image Hosting for eBay Listings | ImageToURL" description="Host product images for eBay listings with permanent, direct URLs. Free, no signup required. Works perfectly with eBay's image requirements." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">eBay Sellers</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Image Hosting for eBay <span class="italic text-primary">listings.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Upload your product photos and get permanent, direct image URLs that work perfectly in eBay listing descriptions. Free to use, no account required.
+      </p>
+    </header>
+
+
+    <!-- Why eBay Sellers Need External Hosting -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why eBay Sellers Need External Hosting</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">block</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Imgur Blocks eBay Embeds</h3>
+          <p class="font-body text-on-surface-variant">Popular free image hosts like Imgur actively block hotlinking from eBay. Your product photos show as broken images, making your listings look unprofessional and costing you sales.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">all_inclusive</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Permanent URLs</h3>
+          <p class="font-body text-on-surface-variant">Your image links never expire. Whether your listing runs for 7 days or stays up for years as a store item, your product photos will always display correctly.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">hide_image</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Watermarks</h3>
+          <p class="font-body text-on-surface-variant">Your product images are served exactly as you uploaded them. No watermarks, no logos, no branding overlays that distract buyers or make your listings look cheap.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">link</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Direct Image Links</h3>
+          <p class="font-body text-on-surface-variant">Get clean, direct URLs that point straight to your image file. No landing pages, no redirects, no ads. Just paste the URL into your eBay listing HTML and it works.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How to Use for eBay</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <span class="inline-block font-black font-headline text-4xl sm:text-5xl opacity-15 mb-3">01</span>
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">upload</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Upload Product Photos</h3>
+          <p class="font-body text-on-surface-variant">Drag and drop your product images above. We accept JPG, PNG, WebP, and GIF formats with no quality loss.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <span class="inline-block font-black font-headline text-4xl sm:text-5xl opacity-15 mb-3">02</span>
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">content_copy</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Copy the Image URL</h3>
+          <p class="font-body text-on-surface-variant">Your permanent direct link is ready instantly. Click to copy the URL to your clipboard.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <span class="inline-block font-black font-headline text-4xl sm:text-5xl opacity-15 mb-3">03</span>
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">storefront</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Paste in Your eBay Listing</h3>
+          <p class="font-body text-on-surface-variant">Add the URL to your eBay listing description using the HTML editor. Use an <code class="bg-on-background/10 px-1 rounded text-sm">&lt;img&gt;</code> tag and your image appears instantly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- eBay Image Requirements -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">eBay Image Best Practices</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">aspect_ratio</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Use 1600px Images</h3>
+          <p class="font-body text-on-surface-variant">eBay's zoom feature requires at least 1600 pixels on the longest side. This lets buyers zoom in on details and increases buyer confidence.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">image</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">JPEG for Photos</h3>
+          <p class="font-body text-on-surface-variant">Use JPEG format for product photography. It offers the best balance of quality and file size, ensuring fast loading in eBay search results.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">palette</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">White Backgrounds</h3>
+          <p class="font-body text-on-surface-variant">eBay recommends pure white backgrounds for the main listing image. Clean backgrounds help your products stand out in search results.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Why do I need external image hosting for eBay?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">eBay allows external images in listing descriptions via direct URL links. External hosting gives you more control over image quality, lets you use images across multiple listings, and avoids eBay's own compression which can reduce product photo clarity.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does Imgur work for eBay listings?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Imgur has historically blocked hotlinking from eBay and other marketplace platforms. ImageToURL provides direct image URLs that are specifically designed to work when embedded in eBay listing descriptions without any restrictions.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Will my eBay images stay online permanently?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Images uploaded to ImageToURL are hosted permanently. Your eBay listing images will remain live for as long as your listing exists, and beyond. There are no expiration dates on any uploaded images.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>What image sizes work best for eBay?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">eBay recommends images that are at least 500 pixels on the longest side, with 1600 pixels being ideal for the zoom feature. Use JPEG format for photos and PNG for graphics with text. ImageToURL preserves your original image quality without any compression.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I use the same image URL across multiple eBay listings?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Once you upload an image and get the URL, you can reuse that same link in as many eBay listings as you need. This is especially useful for sellers with standard product photos, size charts, or branded banners.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image for free with global CDN delivery</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/bulk-image-upload" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Bulk Image Upload</h3>
+            <p class="text-sm text-on-surface-variant">Upload all your product photos at once</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/image-hosting-for-forums" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Forum Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host images for any forum or marketplace</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Make your eBay listings stand out</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your product photos and get permanent URLs in seconds. No signup, no watermarks, no broken images.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

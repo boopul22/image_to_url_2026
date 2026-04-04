@@ -1,13 +1,5 @@
 ---
-// SSG — non-default locales (hi, es, fr, de, ja)
-export const prerender = true;
-
+export const prerender = false;
 import PricingPage from '../../components/pages/PricingPage.astro';
-import { locales, defaultLocale } from '../../i18n/config';
-
-export function getStaticPaths() {
-  return locales
-    .map(locale => ({ params: { locale } }));
-}
 ---
 <PricingPage />

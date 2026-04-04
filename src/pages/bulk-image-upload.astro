@@ -1,0 +1,213 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+function lp(path: string): string { return `/${locale}${path}`; }
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Bulk Image Upload - ImageToURL",
+    "description": "Upload multiple images at once and get instant URLs for all of them.",
+    "url": "https://imagetourl.cloud/bulk-image-upload"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Bulk Upload Images",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Select Multiple Images", "text": "Choose dozens of images from your device at once." },
+      { "@type": "HowToStep", "position": 2, "name": "Batch Processing", "text": "All images are processed simultaneously on our servers." },
+      { "@type": "HowToStep", "position": 3, "name": "URL Generation", "text": "Each image gets its own permanent, shareable URL." },
+      { "@type": "HowToStep", "position": 4, "name": "Export & Share", "text": "Copy all URLs at once or export them as a list." }
+    ]
+  }
+];
+---
+
+<Layout title="Bulk Image Upload - Upload Multiple Images at Once | ImageToURL" description="Upload multiple images at once with ImageToURL's bulk upload feature. Get instant URLs for all your images. Perfect for e-commerce, agencies, and content creators." schema={schema}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Bulk Upload</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Bulk Image Upload <span class="italic text-primary">made simple.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Upload dozens of images at once and get instant, shareable URLs for every single one. No signup, no limits.
+      </p>
+      <div class="mt-6 sm:mt-10">
+        <a href={lp('/')} class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-xl">cloud_upload</span>
+          Start Bulk Upload
+        </a>
+      </div>
+    </header>
+
+
+    <!-- How It Works -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How Bulk Upload Works</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 reveal">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">01</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-secondary text-2xl">photo_library</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Select Images</h3>
+          <p class="font-body text-on-surface-variant text-sm">Choose multiple files from your device — select as many as you need.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">02</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-tertiary text-2xl">sync</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Batch Processing</h3>
+          <p class="font-body text-on-surface-variant text-sm">All images are processed simultaneously on our high-speed servers.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">03</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">link</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">URL Generation</h3>
+          <p class="font-body text-on-surface-variant text-sm">Each image gets its own permanent, shareable URL instantly.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">04</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-on-surface text-2xl">download</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Export &amp; Share</h3>
+          <p class="font-body text-on-surface-variant text-sm">Copy all URLs at once or export them as a list for easy integration.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advanced Features -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Advanced Features</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 reveal">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow flex flex-col">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 -rotate-3">
+            <span class="material-symbols-outlined text-secondary text-2xl">collections</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Multiple Image Upload</h3>
+          <p class="font-body text-on-surface-variant flex-grow">Select dozens of files at once from your device. Drag and drop an entire folder or use the file picker to choose specific images.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow flex flex-col">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 rotate-2">
+            <span class="material-symbols-outlined text-tertiary text-2xl">dynamic_feed</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Batch URL Generation</h3>
+          <p class="font-body text-on-surface-variant flex-grow">All URLs are generated in parallel, not one-by-one. Get all your links back in seconds, no matter how many images you upload.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow flex flex-col">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 -rotate-2">
+            <span class="material-symbols-outlined text-primary text-2xl">hourglass_top</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Progress Tracking</h3>
+          <p class="font-body text-on-surface-variant flex-grow">See real-time upload progress for every file. Know exactly which images are uploading, completed, or need attention.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow flex flex-col">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 rotate-3">
+            <span class="material-symbols-outlined text-on-surface text-2xl">table_chart</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Bulk Export Options</h3>
+          <p class="font-body text-on-surface-variant flex-grow">Copy all URLs to clipboard with one click, or export them as a formatted list ready for spreadsheets and databases.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 reveal">
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">storefront</span>
+          <h3 class="font-headline font-bold text-lg mb-2">E-commerce Stores</h3>
+          <p class="font-body text-on-surface-variant text-sm">Upload entire product catalogs and get URLs ready for your shop listings.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">brush</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Content Creators</h3>
+          <p class="font-body text-on-surface-variant text-sm">Batch upload images for blogs, newsletters, and social media campaigns.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">terminal</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Web Developers</h3>
+          <p class="font-body text-on-surface-variant text-sm">Upload all project assets at once and embed the URLs directly in your code.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">apartment</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Digital Agencies</h3>
+          <p class="font-body text-on-surface-variant text-sm">Manage client deliverables and share entire image sets via permanent URLs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/photo-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Photo to URL</h3>
+            <p class="text-sm text-on-surface-variant">Turn any photo into a shareable link</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/gif-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">GIF to URL</h3>
+            <p class="text-sm text-on-surface-variant">Host animated GIFs with direct links</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline mb-4">Upload your images in bulk</h2>
+        <p class="text-surface/70 mb-8 max-w-lg mx-auto">Free, fast, and no signup required. Select multiple images and get all your URLs instantly.</p>
+        <a href={lp('/')} class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow-hover active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-xl">cloud_upload</span>
+          Start Bulk Upload
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

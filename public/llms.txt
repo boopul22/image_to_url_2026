@@ -19,6 +19,29 @@
 - Pricing: https://imagetourl.cloud/pricing
 - Blog: https://imagetourl.cloud/blog
 - API Documentation: https://imagetourl.cloud/docs
+- Free Image Hosting: https://imagetourl.cloud/free-image-hosting
+- Image URL Generator: https://imagetourl.cloud/image-url-generator
+- About: https://imagetourl.cloud/about
+
+## Converter Tools
+- PNG to URL: https://imagetourl.cloud/png-to-url
+- JPG to URL: https://imagetourl.cloud/jpg-to-url
+- GIF to URL: https://imagetourl.cloud/gif-to-url
+- WebP to URL: https://imagetourl.cloud/webp-to-url
+- Photo to URL: https://imagetourl.cloud/photo-to-url
+- Screenshot to URL: https://imagetourl.cloud/screenshot-to-url
+- Bulk Image Upload: https://imagetourl.cloud/bulk-image-upload
+
+## Use Case Pages
+- Image Hosting for eBay: https://imagetourl.cloud/image-hosting-for-ebay
+- Image Hosting for Discord: https://imagetourl.cloud/image-hosting-for-discord
+- Image Hosting for GitHub README: https://imagetourl.cloud/image-hosting-for-github-readme
+- Image Hosting for Email Signatures: https://imagetourl.cloud/image-hosting-for-email-signatures
+- Image Hosting for Notion: https://imagetourl.cloud/image-hosting-for-notion
+- Image Hosting for WordPress: https://imagetourl.cloud/image-hosting-for-wordpress
+- Image URLs for ChatGPT: https://imagetourl.cloud/image-url-for-chatgpt
+- AI Image Hosting: https://imagetourl.cloud/ai-image-hosting
+- Imgur Alternative: https://imagetourl.cloud/imgur-alternative
 
 ## Blog Topics
 Tutorials on SVG workflows, CDN optimization, REST API usage, image hosting for CMS platforms, global asset distribution, typography, and creative workflows.

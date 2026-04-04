@@ -19,6 +19,41 @@ const navLinks = [
   { name: t(locale, 'nav.api'), href: localePath('/docs'), id: "api", icon: "terminal" },
   { name: t(locale, 'nav.blog'), href: localePath('/blog'), id: "blog", icon: "article" },
 ];
+
+const toolsDropdown = {
+  convert: [
+    { name: 'PNG to URL', href: '/png-to-url', icon: 'image' },
+    { name: 'JPG to URL', href: '/jpg-to-url', icon: 'photo' },
+    { name: 'GIF to URL', href: '/gif-to-url', icon: 'gif_box' },
+    { name: 'WebP to URL', href: '/webp-to-url', icon: 'web' },
+    { name: 'Photo to URL', href: '/photo-to-url', icon: 'add_photo_alternate' },
+    { name: 'Screenshot to URL', href: '/screenshot-to-url', icon: 'screenshot_monitor' },
+  ],
+  features: [
+    { name: t(locale, 'nav.freeHosting'), href: '/free-image-hosting', icon: 'cloud_upload' },
+    { name: t(locale, 'nav.urlGenerator'), href: '/image-url-generator', icon: 'link' },
+    { name: t(locale, 'nav.bulkUpload'), href: '/bulk-image-upload', icon: 'backup' },
+    { name: 'Free Image CDN', href: '/free-image-cdn', icon: 'public' },
+    { name: 'Permanent Hosting', href: '/permanent-image-hosting', icon: 'all_inclusive' },
+    { name: 'Direct Image Links', href: '/direct-image-link', icon: 'link' },
+    { name: 'Anonymous Upload', href: '/anonymous-image-upload', icon: 'person_off' },
+    { name: 'Embed Code Generator', href: '/image-embed-code-generator', icon: 'code' },
+  ],
+  useCases: [
+    { name: 'For eBay', href: '/image-hosting-for-ebay', icon: 'storefront' },
+    { name: 'For Discord', href: '/image-hosting-for-discord', icon: 'forum' },
+    { name: 'For GitHub', href: '/image-hosting-for-github-readme', icon: 'terminal' },
+    { name: 'For Notion', href: '/image-hosting-for-notion', icon: 'description' },
+    { name: 'For WordPress', href: '/image-hosting-for-wordpress', icon: 'language' },
+    { name: 'For ChatGPT', href: '/image-url-for-chatgpt', icon: 'smart_toy' },
+    { name: 'AI Image Hosting', href: '/ai-image-hosting', icon: 'auto_awesome' },
+    { name: 'Imgur Alternative', href: '/imgur-alternative', icon: 'swap_horiz' },
+  ],
+  company: [
+    { name: t(locale, 'nav.about'), href: '/about', icon: 'info' },
+    { name: t(locale, 'nav.contact'), href: '/contact', icon: 'mail' },
+  ],
+};
 ---
 
 <nav class="sticky top-0 z-40 bg-background border-b-2 border-on-background transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
@@ -43,6 +78,62 @@ const navLinks = [
           {link.name}
         </a>
       ))}
+
+      <!-- Tools Dropdown -->
+      <div class="relative" id="tools-switcher-desktop">
+        <button
+          id="tools-btn-desktop"
+          class="flex items-center gap-1 font-label uppercase tracking-wider text-xs font-bold transition-all duration-200 text-outline hover:text-on-background"
+          aria-expanded="false"
+        >
+          {t(locale, 'nav.tools')}
+          <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+        <div id="tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[680px]">
+          <div class="grid grid-cols-4 gap-0 divide-x-2 divide-on-background">
+            <!-- Convert Column -->
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
+              {toolsDropdown.convert.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <!-- Features Column -->
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.featuresLabel')}</span>
+              {toolsDropdown.features.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <!-- Use Cases Column -->
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Use Cases</span>
+              {toolsDropdown.useCases.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <!-- Company Column -->
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.company')}</span>
+              {toolsDropdown.company.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Desktop Right Actions -->
@@ -146,6 +237,60 @@ const navLinks = [
           {link.name}
         </a>
       ))}
+
+      <div class="h-px bg-outline-variant my-2"></div>
+
+      <!-- Tools Dropdown (mobile) -->
+      <div class="relative" id="tools-switcher-mobile">
+        <button
+          id="tools-btn-mobile"
+          class="flex items-center gap-3 w-full py-3.5 px-4 hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors font-label uppercase tracking-wider text-xs font-bold text-outline"
+          aria-label="Tools"
+          aria-expanded="false"
+        >
+          <span class="material-symbols-outlined text-base">build</span>
+          {t(locale, 'nav.tools')}
+          <span class="material-symbols-outlined text-sm ml-auto" id="tools-chevron-mobile">expand_more</span>
+        </button>
+        <div id="tools-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden">
+          <div class="px-3 pt-3 pb-1">
+            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">{t(locale, 'nav.convert')}</span>
+          </div>
+          {toolsDropdown.convert.map((item) => (
+            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+              {item.name}
+            </a>
+          ))}
+          <div class="px-3 pt-3 pb-1">
+            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">{t(locale, 'nav.featuresLabel')}</span>
+          </div>
+          {toolsDropdown.features.map((item) => (
+            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+              {item.name}
+            </a>
+          ))}
+          <div class="px-3 pt-3 pb-1">
+            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">Use Cases</span>
+          </div>
+          {toolsDropdown.useCases.map((item) => (
+            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+              {item.name}
+            </a>
+          ))}
+          <div class="px-3 pt-3 pb-1">
+            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">{t(locale, 'nav.company')}</span>
+          </div>
+          {toolsDropdown.company.map((item) => (
+            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+              {item.name}
+            </a>
+          ))}
+        </div>
+      </div>
 
       <div class="h-px bg-outline-variant my-2"></div>
 
@@ -255,13 +400,35 @@ const navLinks = [
     const isOpen = !langDropdownDesktop!.classList.contains('hidden');
     langDropdownDesktop!.classList.toggle('hidden');
     langBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
+    // Close tools dropdown when opening lang
+    toolsDropdownDesktop?.classList.add('hidden');
+    toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
 
+  // Desktop tools dropdown
+  const toolsBtnDesktop = document.getElementById('tools-btn-desktop');
+  const toolsDropdownDesktop = document.getElementById('tools-dropdown-desktop');
+
+  toolsBtnDesktop?.addEventListener('click', () => {
+    const isOpen = !toolsDropdownDesktop!.classList.contains('hidden');
+    toolsDropdownDesktop!.classList.toggle('hidden');
+    toolsBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
+    // Close lang dropdown when opening tools
+    langDropdownDesktop?.classList.add('hidden');
+    langBtnDesktop?.setAttribute('aria-expanded', 'false');
+  });
+
+  // Close all desktop dropdowns on outside click
   document.addEventListener('click', (e) => {
-    const switcher = document.getElementById('lang-switcher-desktop');
-    if (switcher && !switcher.contains(e.target as Node)) {
-      langDropdownDesktop!.classList.add('hidden');
-      langBtnDesktop!.setAttribute('aria-expanded', 'false');
+    const langSwitcher = document.getElementById('lang-switcher-desktop');
+    const toolsSwitcher = document.getElementById('tools-switcher-desktop');
+    if (langSwitcher && !langSwitcher.contains(e.target as Node)) {
+      langDropdownDesktop?.classList.add('hidden');
+      langBtnDesktop?.setAttribute('aria-expanded', 'false');
+    }
+    if (toolsSwitcher && !toolsSwitcher.contains(e.target as Node)) {
+      toolsDropdownDesktop?.classList.add('hidden');
+      toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
     }
   });
 
@@ -273,5 +440,19 @@ const navLinks = [
     const isOpen = !langDropdownMobile!.classList.contains('hidden');
     langDropdownMobile!.classList.toggle('hidden');
     langBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Mobile tools dropdown (inline expand)
+  const toolsBtnMobile = document.getElementById('tools-btn-mobile');
+  const toolsDropdownMobile = document.getElementById('tools-dropdown-mobile');
+  const toolsChevronMobile = document.getElementById('tools-chevron-mobile');
+
+  toolsBtnMobile?.addEventListener('click', () => {
+    const isOpen = !toolsDropdownMobile!.classList.contains('hidden');
+    toolsDropdownMobile!.classList.toggle('hidden');
+    toolsBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
+    if (toolsChevronMobile) {
+      toolsChevronMobile.style.transform = isOpen ? '' : 'rotate(180deg)';
+    }
   });
 </script>

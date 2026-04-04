@@ -38,6 +38,55 @@ function localeUrl(loc: Locale, basePath: string): string {
   return `${SITE}/${loc}${basePath}`;
 }
 
+// Root-level English-only pages (no hreflang alternates)
+const ROOT_PAGES: { path: string; lastmod: string }[] = [
+  { path: '/about',              lastmod: '2026-04-04' },
+  { path: '/contact',            lastmod: '2026-04-04' },
+  { path: '/free-image-hosting', lastmod: '2026-04-04' },
+  { path: '/image-url-generator',lastmod: '2026-04-04' },
+  { path: '/bulk-image-upload',  lastmod: '2026-04-04' },
+  { path: '/content-guidelines', lastmod: '2026-04-04' },
+  { path: '/png-to-url',         lastmod: '2026-04-04' },
+  { path: '/jpg-to-url',         lastmod: '2026-04-04' },
+  { path: '/gif-to-url',         lastmod: '2026-04-04' },
+  { path: '/webp-to-url',        lastmod: '2026-04-04' },
+  { path: '/photo-to-url',                    lastmod: '2026-04-04' },
+  { path: '/screenshot-to-url',               lastmod: '2026-04-04' },
+  // Use-case pages
+  { path: '/image-hosting-for-ebay',           lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-discord',        lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-github-readme',  lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-email-signatures', lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-notion',         lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-newsletters',    lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-forums',         lastmod: '2026-04-04' },
+  // AI pages
+  { path: '/ai-image-hosting',                 lastmod: '2026-04-04' },
+  { path: '/image-url-for-chatgpt',            lastmod: '2026-04-04' },
+  // Feature pages
+  { path: '/free-image-cdn',                   lastmod: '2026-04-04' },
+  { path: '/permanent-image-hosting',          lastmod: '2026-04-04' },
+  { path: '/anonymous-image-upload',           lastmod: '2026-04-04' },
+  { path: '/direct-image-link',                lastmod: '2026-04-04' },
+  { path: '/image-embed-code-generator',       lastmod: '2026-04-04' },
+  // Comparison pages
+  { path: '/imgur-alternative',                lastmod: '2026-04-04' },
+  { path: '/imgbb-alternative',                lastmod: '2026-04-04' },
+  // Platform pages
+  { path: '/image-hosting-for-wordpress',      lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-shopify',        lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-google-sheets',  lastmod: '2026-04-04' },
+  { path: '/image-hosting-for-google-forms',   lastmod: '2026-04-04' },
+  { path: '/image-to-url-for-whatsapp',        lastmod: '2026-04-04' },
+];
+
+function buildRootUrlEntry(path: string, lastmod: string): string {
+  return `  <url>
+    <loc>${escapeXml(SITE + path)}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`;
+}
+
 function buildUrlEntry(basePath: string, lastmod: string): string {
   const defaultUrl = localeUrl(defaultLocale, basePath);
   const alternates = locales.map(loc =>
@@ -89,6 +138,11 @@ export async function GET({ locals }: APIContext): Promise<Response> {
   // Static pages — each gets all locale alternates
   for (const page of STATIC_PAGES) {
     urlEntries.push(buildUrlEntry(page.path, page.lastmod));
+  }
+
+  // Root-level English-only landing pages (no hreflang)
+  for (const page of ROOT_PAGES) {
+    urlEntries.push(buildRootUrlEntry(page.path, page.lastmod));
   }
 
   // Blog posts — each gets all locale alternates

@@ -1,0 +1,276 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Anonymous Image Upload - ImageToURL",
+  "description": "Upload images anonymously without creating an account. No signup, no email, no tracking.",
+  "url": "https://imagetourl.cloud/anonymous-image-upload",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to create an account to upload images?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. ImageToURL requires no account, no registration, and no email address. Simply drag and drop your image and get a link instantly. It is completely anonymous." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ImageToURL track who uploads images?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We do not associate uploads with user identities. There are no user accounts, no cookies tracking your upload history, and no personal data collected. Your uploads are anonymous." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are anonymous uploads permanent?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Anonymous uploads receive the same permanent URLs as any other upload. There is no reduced quality or shorter retention for anonymous users — because every user is anonymous." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can someone trace an uploaded image back to me?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We do not store IP addresses or any identifying information linked to uploads. The image URL itself contains no personal data. We recommend stripping EXIF metadata before uploading if your image contains location or device information." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ImageToURL free for anonymous uploads?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. ImageToURL is completely free for all users. Since there are no accounts, there are no free tiers or premium plans — everyone gets the same full-featured service at no cost." }
+    }
+  ]
+};
+---
+
+<Layout title="Anonymous Image Upload — No Account Required | ImageToURL" description="Upload images anonymously without creating an account. No signup, no email, no tracking. Just drag, drop, and get your link. Free and private." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Anonymous Upload</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Anonymous Image Upload <span class="italic text-primary">— no account needed.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        No signup forms. No email addresses. No tracking cookies. Just drag, drop, and get your shareable image link. The way image hosting should work.
+      </p>
+    </header>
+
+
+    <!-- Why Anonymous -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Anonymous Matters</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">person_off</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Registration</h3>
+          <p class="font-body text-on-surface-variant">Skip the account creation. No usernames, no passwords, no verification emails. Upload images the moment you arrive on the site.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">alternate_email</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Email Required</h3>
+          <p class="font-body text-on-surface-variant">We never ask for your email address. No confirmation emails, no marketing newsletters, no spam. Your inbox stays clean.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">visibility_off</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Tracking</h3>
+          <p class="font-body text-on-surface-variant">We do not use tracking cookies, analytics pixels, or third-party trackers. Your browsing and upload activity remains private.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">bolt</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Instant Access</h3>
+          <p class="font-body text-on-surface-variant">Zero friction between you and your image link. Open the page, drop your file, copy the URL. The entire process takes under 10 seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy Features -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Privacy Features</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">lock</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">HTTPS Encryption</h3>
+          <p class="font-body text-on-surface-variant">Every upload and download happens over encrypted HTTPS connections. Your images are protected in transit from your browser to our servers.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">block</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Ads, No Trackers</h3>
+          <p class="font-body text-on-surface-variant">Our site has zero advertisements, zero third-party scripts, and zero analytics trackers. No one is monetizing your visits or building a profile on you.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">link</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Clean Direct URLs</h3>
+          <p class="font-body text-on-surface-variant">Image URLs contain no identifying information. They are clean, direct links to your image file — nothing else embedded in the URL structure.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">share</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Quick Sharing</h3>
+          <p class="font-body text-on-surface-variant text-sm">Need to share an image right now? Skip the signup wall and get a link in seconds. Perfect for quick conversations and one-off shares.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">shield</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Privacy-Conscious Users</h3>
+          <p class="font-body text-on-surface-variant text-sm">If you value your digital privacy, ImageToURL is the image host that does not ask for or collect personal information.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">schedule</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">One-Time Uploads</h3>
+          <p class="font-body text-on-surface-variant text-sm">Uploading a single image for a forum post or email? No need to create yet another account. Just upload and go.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">security</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Sensitive Content</h3>
+          <p class="font-body text-on-surface-variant text-sm">Medical images, confidential screenshots, or private documents. Upload without attaching your identity to the content.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="max-w-3xl reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Do I need to create an account to upload images?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. ImageToURL requires no account, no registration, and no email address. Simply drag and drop your image and get a link instantly. It is completely anonymous.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does ImageToURL track who uploads images?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">We do not associate uploads with user identities. There are no user accounts, no cookies tracking your upload history, and no personal data collected. Your uploads are anonymous.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Are anonymous uploads permanent?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Anonymous uploads receive the same permanent URLs as any other upload. There is no reduced quality or shorter retention for anonymous users — because every user is anonymous.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can someone trace an uploaded image back to me?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">We do not store IP addresses or any identifying information linked to uploads. The image URL itself contains no personal data. We recommend stripping EXIF metadata before uploading if your image contains location or device information.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Is ImageToURL free for anonymous uploads?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL is completely free for all users. Since there are no accounts, there are no free tiers or premium plans — everyone gets the same full-featured service at no cost.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image format completely free</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/permanent-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Permanent Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">URLs that never expire or break</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/direct-image-link" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Direct Image Links</h3>
+            <p class="text-sm text-on-surface-variant">Clean URLs without gallery wrappers</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Upload anonymously in seconds</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">No account, no email, no tracking. Just drop your image and get a link.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

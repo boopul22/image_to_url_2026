@@ -9,7 +9,7 @@ export default defineConfig({
   adapter: cloudflare(),
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'hi', 'es', 'fr', 'de', 'ja'],
+    locales: ['en', 'hi', 'es', 'fr', 'de', 'ja', 'zh'],
     routing: 'manual',
   },
   security: {

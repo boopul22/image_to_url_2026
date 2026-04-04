@@ -1,0 +1,158 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact ImageToURL",
+  "description": "Get in touch with the ImageToURL team.",
+  "url": "https://imagetourl.cloud/contact"
+};
+---
+
+<Layout title="Contact Us - ImageToURL" description="Get in touch with the ImageToURL team. Report bugs, request features, or ask questions about our free image hosting service." schema={schema}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+    <!-- Hero -->
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Contact</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Get in <span class="italic text-primary">touch.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Have a question, bug report, or feature request? We'd love to hear from you.
+      </p>
+    </header>
+
+    <!-- Ways to Reach Us -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Ways to Reach Us</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 reveal">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-secondary text-2xl">email</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Email Support</h3>
+          <p class="font-body text-on-surface-variant mb-3">For technical help, account issues, or general questions.</p>
+          <a href="mailto:blog.boopul@gmail.com" class="font-label text-sm font-bold text-primary hover:underline">blog.boopul@gmail.com</a>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-tertiary text-2xl">chat</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">General Inquiries</h3>
+          <p class="font-body text-on-surface-variant">Partnership proposals, media inquiries, or anything else — drop us a line.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary text-2xl">bug_report</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Bug Reports</h3>
+          <p class="font-body text-on-surface-variant">Found something broken? Let us know and we'll fix it fast.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow">
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-on-surface text-2xl">lightbulb</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Feature Requests</h3>
+          <p class="font-body text-on-surface-variant">Have an idea that would make ImageToURL better? We're all ears.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Send a Message -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Send a Message</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="bg-surface border-2 border-on-background p-6 sm:p-10 rounded-xl hard-shadow max-w-3xl reveal">
+        <form id="contact-form" class="space-y-5">
+          <div>
+            <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Your Name</label>
+            <input type="text" name="name" required placeholder="Full name" class="w-full bg-white border-2 border-on-background px-4 py-3 focus:border-primary focus:outline-none text-sm rounded-lg" />
+          </div>
+          <div>
+            <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Email Address</label>
+            <input type="email" name="email" required placeholder="you@example.com" class="w-full bg-white border-2 border-on-background px-4 py-3 focus:border-primary focus:outline-none text-sm rounded-lg" />
+          </div>
+          <div>
+            <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Subject</label>
+            <select name="subject" required class="w-full bg-white border-2 border-on-background px-4 py-3 focus:border-primary focus:outline-none text-sm rounded-lg">
+              <option value="">Select a topic...</option>
+              <option value="technical">Technical Support</option>
+              <option value="general">General Inquiry</option>
+              <option value="feature">Feature Request</option>
+              <option value="bug">Bug Report</option>
+              <option value="partnership">Partnership</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Message</label>
+            <textarea name="message" required rows="6" placeholder="Tell us what's on your mind..." class="w-full bg-white border-2 border-on-background px-4 py-3 focus:border-primary focus:outline-none text-sm rounded-lg resize-y"></textarea>
+          </div>
+          <button type="submit" class="bg-primary text-on-primary px-8 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
+            Send Message
+          </button>
+        </form>
+        <p class="text-xs text-on-surface-variant mt-4">We typically respond within 24 hours.</p>
+      </div>
+    </section>
+
+    <!-- Quick Answers -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Quick Answers</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 reveal">
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">How fast is the response?</h3>
+          <p class="font-body text-on-surface-variant text-sm">We aim to respond to all inquiries within 24 hours during business days.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">Do I need an account to upload?</h3>
+          <p class="font-body text-on-surface-variant text-sm">No! ImageToURL is completely free to use with no signup required. Just upload and go.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">Is there an API available?</h3>
+          <p class="font-body text-on-surface-variant text-sm">Yes, we offer a REST API for developers. Check our <a href={lp('/docs')} class="text-primary font-bold hover:underline">API documentation</a> for details.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">What formats are supported?</h3>
+          <p class="font-body text-on-surface-variant text-sm">We support JPG, PNG, WebP, GIF, and SVG formats up to 10MB per file.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline mb-4">Still have questions?</h2>
+        <p class="text-surface/70 mb-8 max-w-lg mx-auto">Try our image hosting tool — it's free, fast, and requires no signup.</p>
+        <a href={lp('/')} class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow-hover active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-xl">cloud_upload</span>
+          Try ImageToURL Free
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

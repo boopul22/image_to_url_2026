@@ -1,0 +1,237 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Image URLs for Google Forms", "url": "https://imagetourl.cloud/image-hosting-for-google-forms", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Add images to Google Forms using hosted URLs. Perfect for surveys, quizzes, and questionnaires that need visual content. Free and instant.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "How do I add an image to a Google Form question?", "acceptedAnswer": { "@type": "Answer", "text": "In the Google Forms editor, click the image icon next to any question or answer option. Select 'URL' as the source, paste your ImageToURL link, and the image will be embedded in your form." } },
+  { "@type": "Question", "name": "Can I add images to individual answer options?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Google Forms allows images on both questions and individual multiple-choice or checkbox options. Upload each image to ImageToURL and paste the URLs into the respective answer option image fields." } },
+  { "@type": "Question", "name": "Will form respondents be able to see the images?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. ImageToURL provides public, CDN-backed URLs. Anyone who opens your form will see the images load instantly, regardless of their device or location." } },
+  { "@type": "Question", "name": "Do the images stay in my form permanently?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. ImageToURL generates permanent URLs that never expire. Your form images will remain visible for as long as your form is active." } },
+  { "@type": "Question", "name": "Can I use these images in Google Forms quizzes?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Image-based questions are common in quizzes for visual identification, diagram labeling, and picture-based multiple choice. Upload your quiz images and add them via URL." } }
+] };
+---
+
+<Layout title="Image URLs for Google Forms | ImageToURL" description="Add images to Google Forms using hosted URLs. Perfect for surveys, quizzes, and questionnaires that need visual content. Free and instant." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Google Forms</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Image URLs for Google <span class="italic text-primary">Forms.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Add images to your Google Forms surveys, quizzes, and questionnaires using hosted URLs. Upload once, paste the link, and your visual content is live.
+      </p>
+    </header>
+
+
+    <!-- Why Use External Images in Forms -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Use External Images in Forms</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">quiz</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Richer Surveys</h3>
+          <p class="font-body text-on-surface-variant">Add context to your questions with screenshots, product images, or diagrams. Visual surveys get higher completion rates and more accurate responses.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">image</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Visual Questions</h3>
+          <p class="font-body text-on-surface-variant">Create picture-based multiple choice, "identify this image" quizzes, or visual preference polls. Images make questions clearer and more engaging.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">palette</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Branded Forms</h3>
+          <p class="font-body text-on-surface-variant">Add your logo, brand graphics, and custom headers to make forms look professional. External hosting gives you full control over image quality and dimensions.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">rate_review</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Product Feedback</h3>
+          <p class="font-body text-on-surface-variant">Show product mockups, design variations, or packaging options and collect feedback. Visual context leads to more meaningful and actionable responses.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Add Images -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How to Add Images</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8 reveal">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">01</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Upload Your Image</h3>
+          <p class="font-body text-on-surface-variant text-sm">Drag and drop or select any image. Supports JPG, PNG, WebP, GIF, and SVG formats.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">02</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">content_copy</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Copy the URL</h3>
+          <p class="font-body text-on-surface-variant text-sm">Get a permanent, CDN-backed image URL instantly. One click to copy to clipboard.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">03</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">add_photo_alternate</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Add to Google Forms</h3>
+          <p class="font-body text-on-surface-variant text-sm">Click the image icon in the Forms editor, choose "URL", and paste your link. The image appears in your form instantly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 reveal">
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">school</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Teachers &amp; Quizzes</h3>
+          <p class="font-body text-on-surface-variant text-sm">Create image-based quiz questions, diagram labeling exercises, and visual assessments for students.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">shopping_bag</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Product Surveys</h3>
+          <p class="font-body text-on-surface-variant text-sm">Show product images, packaging options, or design mockups and collect customer preferences.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">visibility</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Visual Assessments</h3>
+          <p class="font-body text-on-surface-variant text-sm">Build visual identification tests, design reviews, and image-based evaluations for any context.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">analytics</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Market Research</h3>
+          <p class="font-body text-on-surface-variant text-sm">Show ad creatives, branding options, or competitor screenshots and gauge audience reactions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>How do I add an image to a Google Form question?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">In the Google Forms editor, click the image icon next to any question or answer option. Select "URL" as the source, paste your ImageToURL link, and the image will be embedded in your form.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I add images to individual answer options?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Google Forms allows images on both questions and individual multiple-choice or checkbox options. Upload each image to ImageToURL and paste the URLs into the respective answer option image fields.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Will form respondents be able to see the images?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL provides public, CDN-backed URLs. Anyone who opens your form will see the images load instantly, regardless of their device or location. No extra sharing permissions needed.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Do the images stay in my form permanently?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL generates permanent URLs that never expire. Your form images will remain visible for as long as your form is active, with no maintenance needed.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I use these images in Google Forms quizzes?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Image-based questions are common in quizzes for visual identification, diagram labeling, and picture-based multiple choice. Upload your quiz images to ImageToURL and add them via URL in the Forms editor.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/image-hosting-for-google-sheets" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Google Sheets Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Image URLs for Google Sheets =IMAGE() function</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/screenshot-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Screenshot to URL</h3>
+            <p class="text-sm text-on-surface-variant">Turn screenshots into shareable links instantly</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Make your Google Forms visual</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload images, get permanent URLs, and add them to any Google Form in seconds. Free, no signup required.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

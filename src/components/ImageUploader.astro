@@ -1,0 +1,180 @@
+---
+/**
+ * Reusable image uploader widget.
+ * Embeds the drag-and-drop upload panel with progress, success, and error states.
+ * Uses unique IDs via a generated suffix to allow multiple instances (though typically one per page).
+ */
+---
+
+<div class="w-full max-w-3xl mx-auto mb-10 sm:mb-16">
+  <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
+  <div
+    id="upload-panel"
+    class="bg-tertiary-fixed border-2 border-on-background hard-shadow overflow-hidden transition-colors rounded-xl"
+  >
+    <!-- State: idle / uploading -->
+    <div id="state-idle" class="p-6 sm:p-10 lg:p-12">
+      <div id="drop-zone" class="flex flex-col items-center gap-4 sm:gap-5 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-tertiary-container text-5xl sm:text-6xl" id="upload-icon">upload_file</span>
+        <div class="text-center">
+          <p class="text-on-surface font-bold text-base sm:text-xl lg:text-2xl font-headline" id="upload-text">Click to upload or drag & drop</p>
+          <p class="text-sm sm:text-base text-outline mt-2" id="upload-subtext">JPG, PNG, WebP, GIF, SVG — up to 10 MB</p>
+        </div>
+        <div class="bg-on-background text-primary px-8 sm:px-10 py-3 sm:py-4 font-bold text-sm sm:text-base uppercase tracking-wider active:scale-95 transition-transform" id="upload-btn">
+          SELECT FILE
+        </div>
+      </div>
+      <div id="progress-bar" class="hidden mt-6 h-2 bg-surface-variant overflow-hidden rounded-full">
+        <div id="progress-fill" class="h-full bg-primary transition-all duration-300 rounded-full" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- State: success -->
+    <div id="state-success" class="p-6 sm:p-10 lg:p-12 hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg">Uploaded!</span>
+        <button id="upload-another" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
+          Upload another
+        </button>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border-2 border-on-background px-4 py-3 sm:py-3 text-sm sm:text-base font-mono text-on-surface focus:outline-none rounded" />
+        <button id="copy-btn" class="bg-primary text-on-primary px-6 py-3 font-bold text-sm sm:text-base border-2 border-on-background flex-shrink-0 active:scale-95 transition-transform">
+          COPY
+        </button>
+      </div>
+    </div>
+
+    <!-- State: error -->
+    <div id="state-error" class="p-6 sm:p-10 lg:p-12 hidden">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
+        <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0 truncate" id="error-text">Upload failed</span>
+        <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
+          TRY AGAIN
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust signals -->
+  <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-5 sm:mt-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
+    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> CDN</span>
+    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">lock</span> SSL</span>
+    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">link</span> Permanent</span>
+    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">flash_on</span> Instant</span>
+  </div>
+</div>
+
+<script>
+  const panel = document.getElementById('upload-panel')!;
+  const dropZone = document.getElementById('drop-zone')!;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const uploadIcon = document.getElementById('upload-icon')!;
+  const uploadText = document.getElementById('upload-text')!;
+  const uploadSubtext = document.getElementById('upload-subtext')!;
+  const uploadBtn = document.getElementById('upload-btn')!;
+  const progressBar = document.getElementById('progress-bar')!;
+  const progressFill = document.getElementById('progress-fill')!;
+  const stateIdle = document.getElementById('state-idle')!;
+  const stateSuccess = document.getElementById('state-success')!;
+  const stateError = document.getElementById('state-error')!;
+  const resultUrl = document.getElementById('result-url') as HTMLInputElement;
+  const copyBtn = document.getElementById('copy-btn')!;
+  const uploadAnother = document.getElementById('upload-another')!;
+  const errorRetry = document.getElementById('error-retry')!;
+  const errorText = document.getElementById('error-text')!;
+
+  function showState(state: 'idle' | 'success' | 'error') {
+    stateIdle.classList.toggle('hidden', state !== 'idle');
+    stateSuccess.classList.toggle('hidden', state !== 'success');
+    stateError.classList.toggle('hidden', state !== 'error');
+  }
+
+  function resetIdle() {
+    showState('idle');
+    progressBar.classList.add('hidden');
+    progressFill.style.width = '0%';
+    uploadIcon.textContent = 'upload_file';
+    uploadText.textContent = 'Click to upload or drag & drop';
+    uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG — up to 10 MB';
+    uploadBtn.textContent = 'SELECT FILE';
+    fileInput.value = '';
+  }
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+
+  panel.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    panel.classList.add('!border-primary', '!bg-primary-fixed/30');
+  });
+  panel.addEventListener('dragleave', (e) => {
+    if (!panel.contains(e.relatedTarget as Node)) {
+      panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
+    }
+  });
+  panel.addEventListener('drop', (e) => {
+    e.preventDefault();
+    panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) uploadFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files.length > 0) uploadFile(fileInput.files[0]);
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(resultUrl.value);
+    copyBtn.textContent = 'COPIED!';
+    setTimeout(() => { copyBtn.textContent = 'COPY'; }, 2000);
+  });
+
+  uploadAnother.addEventListener('click', resetIdle);
+  errorRetry.addEventListener('click', resetIdle);
+
+  async function uploadFile(file: File) {
+    showState('idle');
+    progressBar.classList.remove('hidden');
+    progressFill.style.width = '0%';
+    uploadIcon.textContent = 'hourglass_top';
+    uploadText.textContent = `Uploading ${file.name}`;
+    uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1]?.toUpperCase() || 'FILE'}`;
+    uploadBtn.textContent = 'UPLOADING...';
+
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      progress = Math.min(progress + Math.random() * 15, 90);
+      progressFill.style.width = `${progress}%`;
+    }, 200);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/upload', { method: 'POST', body: formData });
+      const data = await response.json();
+
+      clearInterval(progressInterval);
+
+      if (!response.ok || data.error) {
+        throw new Error(data.error || 'Upload failed');
+      }
+
+      progressFill.style.width = '100%';
+      setTimeout(() => {
+        showState('success');
+        resultUrl.value = data.data.url;
+      }, 300);
+
+    } catch (err: any) {
+      clearInterval(progressInterval);
+      showState('error');
+      errorText.textContent = err.message || 'Upload failed';
+    }
+  }
+</script>

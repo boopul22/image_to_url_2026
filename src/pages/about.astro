@@ -1,0 +1,197 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+---
+
+<Layout
+  title="About ImageToURL - Free Image Hosting Service"
+  description="Learn about ImageToURL, the free image hosting service built by Bipul Kumar. Our mission is to make image sharing fast, free, and private for everyone."
+>
+  <Nav activePage="about" />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">About Us</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Built by a developer, <span class="italic text-primary">for everyone.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        ImageToURL is crafted by Bipul Kumar, a solo indie developer from India, with a simple goal &mdash; make image hosting free, fast, and accessible to everyone on the internet.
+      </p>
+    </header>
+
+    <!-- Our Mission -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Our Mission</h2>
+        <div class="h-0.5 sm:h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8">
+        <div class="lg:col-span-7 bg-secondary-container border-2 border-on-background p-6 sm:p-10 rounded-xl hard-shadow relative overflow-hidden group reveal">
+          <div class="absolute top-4 right-4 text-secondary opacity-20 group-hover:rotate-12 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[120px]">rocket_launch</span>
+          </div>
+          <div class="relative z-10">
+            <h3 class="text-2xl sm:text-3xl font-black font-headline mb-4">Making image hosting free, fast &amp; private</h3>
+            <p class="text-lg font-headline font-medium mb-4 max-w-md">
+              We believe everyone deserves a simple way to share images online &mdash; without hidden fees, forced sign-ups, or invasive tracking.
+            </p>
+            <p class="font-body text-on-surface-variant max-w-md">
+              ImageToURL was born from the frustration of bloated image hosting services that compromise your privacy. Our mission is to keep image sharing as straightforward as it should be: upload, get a link, share it with the world.
+            </p>
+          </div>
+        </div>
+        <div class="lg:col-span-5 bg-surface-container-highest border-2 border-on-background p-6 sm:p-10 rounded-xl hard-shadow flex flex-col justify-center text-center reveal">
+          <div class="mb-6"><span class="material-symbols-outlined text-primary text-5xl">cloud_done</span></div>
+          <h3 class="text-2xl font-black font-headline mb-2">Millions of images hosted</h3>
+          <p class="font-body text-on-surface-variant">Trusted by developers, bloggers, and creators around the world to reliably host and deliver their images at scale.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Core Values</h2>
+        <div class="h-0.5 sm:h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 -rotate-3">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">lock</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Privacy First</h3>
+          <p class="font-body text-on-surface-variant">No tracking, no ads, no data harvesting. Your images are yours &mdash; we simply host them. No account or personal information required.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 rotate-2">
+            <span class="material-symbols-outlined text-tertiary text-2xl sm:text-3xl">bolt</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Speed &amp; Reliability</h3>
+          <p class="font-body text-on-surface-variant">Powered by a global CDN, your images load instantly no matter where your audience is. We aim for maximum uptime you can count on.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 -rotate-2">
+            <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl">public</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Global Accessibility</h3>
+          <p class="font-body text-on-surface-variant">Free for everyone, everywhere. No paywalls, no premium tiers for basic features. Image hosting should be a utility, not a luxury.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 rotate-2">
+            <span class="material-symbols-outlined text-tertiary text-2xl sm:text-3xl">design_services</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">User-Centric Design</h3>
+          <p class="font-body text-on-surface-variant">A clean, intuitive interface that gets out of your way. Upload in seconds, grab your link, and move on with your day.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 -rotate-3">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">groups</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Community Focus</h3>
+          <p class="font-body text-on-surface-variant">Built with feedback from real users. We listen, iterate, and improve based on what our community actually needs.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 rotate-2">
+            <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl">verified</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Quality Assurance</h3>
+          <p class="font-body text-on-surface-variant">Images are served in their original quality. No sneaky compression, no watermarks, no surprises. What you upload is what gets delivered.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Our Story</h2>
+        <div class="h-0.5 sm:h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow relative overflow-hidden group reveal">
+          <div class="absolute top-4 right-4 text-tertiary opacity-20 group-hover:rotate-12 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[80px]">lightbulb</span>
+          </div>
+          <div class="relative z-10">
+            <h3 class="text-2xl sm:text-3xl font-black font-headline mb-4">How It All Started</h3>
+            <p class="font-body text-on-surface-variant leading-relaxed">
+              ImageToURL started as a side project to solve a simple problem &mdash; sharing images online without the hassle. As a developer, Bipul Kumar needed a quick way to host screenshots, diagrams, and assets without signing up for yet another service. What began as a personal tool quickly grew as friends and fellow developers started asking for access.
+            </p>
+          </div>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow relative overflow-hidden group reveal">
+          <div class="absolute top-4 right-4 text-primary opacity-20 group-hover:rotate-12 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[80px]">trending_up</span>
+          </div>
+          <div class="relative z-10">
+            <h3 class="text-2xl sm:text-3xl font-black font-headline mb-4">Growth &amp; Evolution</h3>
+            <p class="font-body text-on-surface-variant leading-relaxed">
+              What started as a weekend project has grown into a trusted platform used by people across the globe. From bloggers embedding images in their posts to developers sharing screenshots in documentation, ImageToURL has evolved to serve a diverse community &mdash; all while staying true to its core promise: free, fast, and private image hosting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology & Security -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Technology &amp; Security</h2>
+        <div class="h-0.5 sm:h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center reveal">
+          <div class="mb-4"><span class="material-symbols-outlined text-secondary text-4xl">dns</span></div>
+          <h3 class="text-lg font-black font-headline mb-2">CDN Delivery</h3>
+          <p class="font-body text-on-surface-variant text-sm">Images served from edge servers worldwide for blazing-fast load times, wherever your users are.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center reveal">
+          <div class="mb-4"><span class="material-symbols-outlined text-primary text-4xl">https</span></div>
+          <h3 class="text-lg font-black font-headline mb-2">HTTPS Encryption</h3>
+          <p class="font-body text-on-surface-variant text-sm">Every image is served over secure HTTPS connections, protecting data in transit from end to end.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center reveal">
+          <div class="mb-4"><span class="material-symbols-outlined text-tertiary text-4xl">shield</span></div>
+          <h3 class="text-lg font-black font-headline mb-2">Content Moderation</h3>
+          <p class="font-body text-on-surface-variant text-sm">Automated systems and policies to keep the platform safe, clean, and free from abuse.</p>
+        </div>
+        <div class="bg-surface-container-highest border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center reveal">
+          <div class="mb-4"><span class="material-symbols-outlined text-primary text-4xl">no_accounts</span></div>
+          <h3 class="text-lg font-black font-headline mb-2">No Signup Required</h3>
+          <p class="font-body text-on-surface-variant text-sm">Start uploading instantly. No email, no password, no personal data collected. Just drag, drop, and share.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CTA -->
+  <section class="bg-surface-container py-16 sm:py-24 border-t-2 border-on-background mt-12 sm:mt-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-headline mb-4 leading-tight">Ready to <span class="text-primary underline decoration-4 underline-offset-8">get started?</span></h2>
+      <p class="font-body text-on-surface-variant text-lg mb-8 max-w-xl mx-auto">Upload your first image in seconds. No signup, no credit card, no strings attached.</p>
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4 sm:px-0">
+        <a href={lp('/')} class="bg-primary text-on-primary border-2 border-on-background px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl font-bold text-center hard-shadow hover:-translate-y-1 hover:-translate-x-1 active:translate-y-0 active:translate-x-0 transition-all">
+          Start Uploading
+        </a>
+        <a href={`mailto:blog.boopul@gmail.com`} class="bg-white text-on-background border-2 border-on-background px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl font-bold text-center hard-shadow hover:-translate-y-1 hover:-translate-x-1 active:translate-y-0 active:translate-x-0 transition-all">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

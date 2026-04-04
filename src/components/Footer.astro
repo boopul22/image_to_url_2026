@@ -11,7 +11,7 @@ function localePath(path: string): string {
 ---
 
 <footer class="bg-surface-container border-t-2 border-on-background" style="padding-bottom: env(safe-area-inset-bottom);">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-8 w-full px-4 sm:px-8 py-10 sm:py-12 max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-8 w-full px-4 sm:px-8 py-10 sm:py-12 max-w-7xl mx-auto">
     <div>
       <div class="text-xl font-black font-headline text-on-background mb-4">ImageToURL</div>
       <p class="font-body font-medium text-on-surface-variant mb-6">{t(locale, 'footer.tagline')}</p>
@@ -25,10 +25,21 @@ function localePath(path: string): string {
       </div>
     </div>
     <div class="flex flex-col gap-4">
+      <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.tools')}</span>
+      <a href="/free-image-hosting" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.freeHosting')}</a>
+      <a href="/image-url-generator" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.urlGenerator')}</a>
+      <a href="/bulk-image-upload" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.bulkUpload')}</a>
+      <a href="/png-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">PNG to URL</a>
+      <a href="/photo-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">Photo to URL</a>
+    </div>
+    <div class="flex flex-col gap-4">
       <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.resources')}</span>
       <a href={localePath('/privacy')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.privacy')}</a>
       <a href={localePath('/terms')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.terms')}</a>
       <a href={localePath('/docs')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.docs')}</a>
+      <a href="/about" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.about')}</a>
+      <a href="/contact" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.contact')}</a>
+      <a href={localePath('/blog')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.blog')}</a>
     </div>
     <div class="flex flex-col gap-3">
       <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.stayUpdated')}</span>

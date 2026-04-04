@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Page Not Found - ImageToURL" noindex={true}>
+  <Nav />
+
+  <main class="flex items-center justify-center min-h-[calc(100dvh-200px)] px-4 sm:px-6">
+    <div class="max-w-lg w-full text-center py-16 sm:py-24">
+      <!-- 404 badge -->
+      <span class="inline-block px-4 py-1.5 bg-primary border-2 border-on-surface rounded-full font-label text-xs font-bold uppercase tracking-widest text-on-primary mb-6 hard-shadow">
+        404
+      </span>
+
+      <!-- Big heading -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-headline italic font-black text-on-surface leading-tight mb-4">
+        This page has moved.
+      </h1>
+
+      <!-- Explanation -->
+      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-10 max-w-md mx-auto">
+        The tool you're looking for now lives on our homepage. Upload images, get instant URLs &mdash; all in one place.
+      </p>
+
+      <!-- CTA -->
+      <a
+        href="/en/"
+        class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 border-2 border-on-surface font-label text-sm font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 active:scale-95 transition-all"
+      >
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+        Go to Homepage
+      </a>
+
+      <p class="text-outline text-xs mt-6">
+        Or try <a href="/en/docs" class="text-primary font-bold hover:underline">API Docs</a>
+        &middot; <a href="/en/features" class="text-primary font-bold hover:underline">Features</a>
+        &middot; <a href="/en/pricing" class="text-primary font-bold hover:underline">Pricing</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

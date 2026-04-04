@@ -1,0 +1,303 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ImgBB Alternative - ImageToURL",
+  "description": "A faster, cleaner alternative to ImgBB. No ads, no compression, permanent direct image links.",
+  "url": "https://imagetourl.cloud/imgbb-alternative",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why should I switch from ImgBB?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ImgBB has increasingly aggressive advertising, slow upload speeds, image compression that degrades quality, and limited API capabilities. ImageToURL offers a cleaner, faster experience with no ads and no compression." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ImageToURL faster than ImgBB?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. ImageToURL uses a global CDN with 300+ edge locations for both uploads and delivery. Images upload faster and load faster for viewers compared to ImgBB's infrastructure." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ImageToURL compress images like ImgBB?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. ImageToURL stores and serves your images at their original quality. ImgBB compresses larger images, which can noticeably reduce quality for high-resolution photos and detailed graphics." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ImageToURL have an API like ImgBB?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL provides a straightforward upload interface that works for programmatic use cases. Our direct URLs are designed to work seamlessly with any application or workflow." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are ImgBB image links permanent?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ImgBB offers optional auto-deletion timers and may remove inactive content. ImageToURL provides truly permanent URLs with no expiration dates and no inactivity-based deletion." }
+    }
+  ]
+};
+---
+
+<Layout title="ImgBB Alternative — Faster, Cleaner, Free | ImageToURL" description="Looking for an ImgBB alternative? ImageToURL is faster, cleaner, and completely free. No ads, no compression, permanent direct image links." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">ImgBB Alternative</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        A Better ImgBB <span class="italic text-primary">Alternative.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Tired of ImgBB's ads, slow uploads, and compression? ImageToURL is the faster, cleaner image host — free, with permanent direct links and zero compromises.
+      </p>
+    </header>
+
+
+    <!-- Why Switch from ImgBB -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Switch from ImgBB</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">hourglass_top</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Slow Uploads</h3>
+          <p class="font-body text-on-surface-variant">ImgBB's upload process can feel sluggish, especially for larger files. ImageToURL leverages a global CDN infrastructure to make uploads near-instant.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">ad_units</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Ad-Heavy Pages</h3>
+          <p class="font-body text-on-surface-variant">ImgBB displays multiple ad placements on every page — banners, interstitials, and pop-ups. ImageToURL has zero ads, giving you and your viewers a clean experience.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">compress</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Image Compression</h3>
+          <p class="font-body text-on-surface-variant">ImgBB compresses images, reducing quality for larger uploads. Your high-resolution photos and detailed graphics deserve to be served at full quality.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">api</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Limited API</h3>
+          <p class="font-body text-on-surface-variant">ImgBB's API has rate limits and restrictions that make it difficult for developers building production applications. Our direct URLs work seamlessly in any integration.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">ImageToURL vs ImgBB</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="overflow-x-auto reveal">
+        <div class="border-2 border-on-background rounded-xl hard-shadow overflow-hidden min-w-[500px]">
+          <table class="w-full font-body text-sm sm:text-base">
+            <thead>
+              <tr class="bg-on-surface text-surface">
+                <th class="text-left p-4 sm:p-5 font-headline font-bold">Feature</th>
+                <th class="text-center p-4 sm:p-5 font-headline font-bold">ImageToURL</th>
+                <th class="text-center p-4 sm:p-5 font-headline font-bold">ImgBB</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Upload speed</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">Near-instant</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Variable, often slow</td>
+              </tr>
+              <tr class="border-t border-on-background/20 bg-surface-variant/30">
+                <td class="p-4 sm:p-5 font-medium">Advertisements</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">None</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Multiple ad placements</td>
+              </tr>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Image compression</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">None</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Compresses large images</td>
+              </tr>
+              <tr class="border-t border-on-background/20 bg-surface-variant/30">
+                <td class="p-4 sm:p-5 font-medium">CDN delivery</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">300+ global edges</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Limited CDN</td>
+              </tr>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Direct links default</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">Yes</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Gallery page default</td>
+              </tr>
+              <tr class="border-t border-on-background/20 bg-surface-variant/30">
+                <td class="p-4 sm:p-5 font-medium">Account required</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">No</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Optional</td>
+              </tr>
+              <tr class="border-t border-on-background/20">
+                <td class="p-4 sm:p-5 font-medium">Permanent links</td>
+                <td class="p-4 sm:p-5 text-center"><span class="text-primary font-bold">Yes, forever</span></td>
+                <td class="p-4 sm:p-5 text-center text-on-surface-variant">Optional auto-delete</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Makes Us Better -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">What Makes Us Better</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">speed</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Faster CDN</h3>
+          <p class="font-body text-on-surface-variant">Our global CDN with 300+ edge locations delivers images in under 100ms. ImgBB's delivery infrastructure cannot match this speed worldwide.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">block</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Ads at All</h3>
+          <p class="font-body text-on-surface-variant">ImgBB surrounds your images with advertisements. ImageToURL has zero ads — not now, not ever. Your content is presented cleanly without distractions.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">high_quality</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Compression</h3>
+          <p class="font-body text-on-surface-variant">Every image is stored and delivered at its original quality. No lossy re-encoding, no resolution downscaling, no quality surprises.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">integration_instructions</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Better for Developers</h3>
+          <p class="font-body text-on-surface-variant">Clean direct URLs that work in any application. No gallery wrappers to parse, no API keys to manage for basic hosting needs, no rate limit headaches.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="max-w-3xl reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Why should I switch from ImgBB?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImgBB has increasingly aggressive advertising, slow upload speeds, image compression that degrades quality, and limited API capabilities. ImageToURL offers a cleaner, faster experience with no ads and no compression.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Is ImageToURL faster than ImgBB?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL uses a global CDN with 300+ edge locations for both uploads and delivery. Images upload faster and load faster for viewers compared to ImgBB's infrastructure.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does ImageToURL compress images like ImgBB?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. ImageToURL stores and serves your images at their original quality. ImgBB compresses larger images, which can noticeably reduce quality for high-resolution photos and detailed graphics.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does ImageToURL have an API like ImgBB?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImageToURL provides a straightforward upload interface that works for programmatic use cases. Our direct URLs are designed to work seamlessly with any application or workflow.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Are ImgBB image links permanent?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImgBB offers optional auto-deletion timers and may remove inactive content. ImageToURL provides truly permanent URLs with no expiration dates and no inactivity-based deletion.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/imgur-alternative" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Imgur Alternative</h3>
+            <p class="text-sm text-on-surface-variant">The best alternative to Imgur in 2026</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image format for free</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/permanent-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Permanent Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">URLs that never expire or break</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Upgrade from ImgBB today</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Faster uploads, no ads, no compression. Experience image hosting done right.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

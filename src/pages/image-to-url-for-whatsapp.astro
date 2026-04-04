@@ -1,0 +1,237 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Share Images via URL on WhatsApp", "url": "https://imagetourl.cloud/image-to-url-for-whatsapp", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Share images as links on WhatsApp instead of file attachments. No compression, no quality loss. Get a permanent URL and share it in any chat.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Why share image links instead of attachments on WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "WhatsApp compresses images when sent as attachments, reducing quality significantly. Sharing a URL instead preserves the original image quality and allows recipients to view the full-resolution version." } },
+  { "@type": "Question", "name": "Will the image preview show in the WhatsApp chat?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. When you paste an ImageToURL link in a WhatsApp chat, WhatsApp generates a link preview with a thumbnail of the image, so recipients can see what they are clicking before opening it." } },
+  { "@type": "Question", "name": "Does this work in WhatsApp groups?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Image URLs work in one-on-one chats, group chats, WhatsApp Business, and WhatsApp Web. Every participant can click the link to view the full-quality image." } },
+  { "@type": "Question", "name": "Do the image URLs expire?", "acceptedAnswer": { "@type": "Answer", "text": "No. ImageToURL generates permanent URLs. Your shared images remain accessible indefinitely, unlike WhatsApp media which can be deleted or lost when changing phones." } },
+  { "@type": "Question", "name": "Can I share multiple images at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload multiple images using our bulk upload feature, copy the URLs, and share them in your WhatsApp chat. Each image gets its own permanent link." } }
+] };
+---
+
+<Layout title="Share Images via URL on WhatsApp | ImageToURL" description="Share images as links on WhatsApp instead of file attachments. No compression, no quality loss. Get a permanent URL and share it in any chat." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">WhatsApp</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Image URLs for WhatsApp <span class="italic text-primary">sharing.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Share images as links instead of attachments. No compression, no quality loss, no storage limits. Upload once and share the URL in any WhatsApp chat.
+      </p>
+    </header>
+
+
+    <!-- Why Share Links Instead of Attachments -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Share Links Instead of Attachments</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">block</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Compression</h3>
+          <p class="font-body text-on-surface-variant">WhatsApp aggressively compresses images sent as attachments, often reducing quality by 70% or more. Sharing a URL bypasses compression entirely — recipients see the original.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">high_quality</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Full Quality Preserved</h3>
+          <p class="font-body text-on-surface-variant">Share high-resolution photos, detailed screenshots, and professional images without any quality degradation. Every pixel stays exactly as you uploaded it.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">groups</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Works in Groups</h3>
+          <p class="font-body text-on-surface-variant">Share one URL in a group chat and everyone can view the full-quality image. No need to send the same attachment to multiple people or worry about group media limits.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">all_inclusive</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Storage Limit</h3>
+          <p class="font-body text-on-surface-variant">WhatsApp media takes up phone storage and can be lost when switching devices. Image URLs take zero storage and remain accessible permanently, even on new phones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8 reveal">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">01</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Upload Your Image</h3>
+          <p class="font-body text-on-surface-variant text-sm">Drag and drop or select any photo, screenshot, or graphic from your device.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">02</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">content_copy</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Copy the URL</h3>
+          <p class="font-body text-on-surface-variant text-sm">Get a permanent, CDN-backed URL. One tap to copy it to your clipboard.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">03</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">send</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Paste in WhatsApp</h3>
+          <p class="font-body text-on-surface-variant text-sm">Paste the link in any WhatsApp chat. Recipients see a preview and can tap to view the full-quality image.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Also Works With -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Also Works With</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 reveal">
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">send</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Telegram</h3>
+          <p class="font-body text-on-surface-variant text-sm">Share image URLs in Telegram chats and channels with full link previews and no quality loss.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">shield</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Signal</h3>
+          <p class="font-body text-on-surface-variant text-sm">Send image links on Signal for full-resolution sharing without attachment compression.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">chat_bubble</span>
+          <h3 class="font-headline font-bold text-lg mb-2">iMessage</h3>
+          <p class="font-body text-on-surface-variant text-sm">Paste image URLs in iMessage for rich link previews and original quality images on iOS and macOS.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">forum</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Facebook Messenger</h3>
+          <p class="font-body text-on-surface-variant text-sm">Share image links on Messenger to bypass Facebook's image compression and maintain quality.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Why share image links instead of attachments on WhatsApp?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">WhatsApp compresses images when sent as attachments, reducing quality significantly. Sharing a URL instead preserves the original image quality and allows recipients to view the full-resolution version in their browser.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Will the image preview show in the WhatsApp chat?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. When you paste an ImageToURL link in a WhatsApp chat, WhatsApp generates a link preview with a thumbnail of the image, so recipients can see what they are clicking before opening it.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does this work in WhatsApp groups?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Image URLs work in one-on-one chats, group chats, WhatsApp Business, and WhatsApp Web. Every participant can click the link to view the full-quality image.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Do the image URLs expire?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. ImageToURL generates permanent URLs. Your shared images remain accessible indefinitely, unlike WhatsApp media which can be deleted or lost when changing phones.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I share multiple images at once?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Upload multiple images using our bulk upload feature, copy the URLs, and share them in your WhatsApp chat. Each image gets its own permanent link that anyone can view.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/photo-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Photo to URL</h3>
+            <p class="text-sm text-on-surface-variant">Turn any photo into a shareable link</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/screenshot-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Screenshot to URL</h3>
+            <p class="text-sm text-on-surface-variant">Share screenshots as links instantly</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Share images without compression</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload an image, copy the URL, and paste it in WhatsApp. Full quality, zero compression, totally free.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

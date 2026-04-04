@@ -1,0 +1,172 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+---
+
+<Layout title="Free Image Hosting - Upload Images & Get Instant URLs | ImageToURL" description="Host your images for free with ImageToURL. No signup required, permanent links, global CDN delivery, and support for JPG, PNG, WebP, GIF, SVG formats.">
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Free Hosting</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Free Image Hosting <span class="italic text-primary">for everyone.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        No signup required. No limits. Upload your images and get permanent, shareable links instantly — backed by a global CDN for lightning-fast delivery.
+      </p>
+    </header>
+
+
+    <!-- Why Choose Free Hosting -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Choose Free Hosting</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">cloud_upload</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Unlimited Free Uploads</h3>
+          <p class="font-body text-on-surface-variant">Upload as many images as you want, completely free. No hidden fees, no storage caps — just straightforward image hosting that scales with your needs.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">public</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Global CDN Network</h3>
+          <p class="font-body text-on-surface-variant">Your images are delivered from edge servers worldwide, ensuring fast load times no matter where your audience is located.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">lock</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Secure Image Hosting</h3>
+          <p class="font-body text-on-surface-variant">Every image is served over HTTPS with full encryption. Your content stays safe and your links remain trustworthy across all platforms.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">person_off</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No Signup Required</h3>
+          <p class="font-body text-on-surface-variant">Start uploading instantly. No account creation, no email verification — just drag, drop, and share. It really is that simple.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Benefits</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">all_inclusive</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Permanent Image Links</h3>
+          <p class="font-body text-on-surface-variant">Your image URLs never expire. Share them in emails, documents, or embed them in websites — they will always work.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">block</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Ad-Free Experience</h3>
+          <p class="font-body text-on-surface-variant">Clean, distraction-free image hosting. No pop-ups, no banners, no interstitials — just your images, delivered fast.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">high_quality</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">High-Quality Storage</h3>
+          <p class="font-body text-on-surface-variant">No compression, no quality loss. Your images are stored and served in their original quality, exactly as you uploaded them.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">language</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Public Image Hosting</h3>
+          <p class="font-body text-on-surface-variant">Share your images anywhere on the web. Embed in forums, blogs, social media, or send direct links to anyone.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported Formats -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Supported Formats</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="flex flex-wrap gap-3 sm:gap-4 reveal">
+        <span class="bg-surface-variant border-2 border-on-background px-5 sm:px-6 py-2 sm:py-3 rounded-full font-black font-headline text-sm sm:text-lg tracking-wide">JPG</span>
+        <span class="bg-surface-variant border-2 border-on-background px-5 sm:px-6 py-2 sm:py-3 rounded-full font-black font-headline text-sm sm:text-lg tracking-wide">PNG</span>
+        <span class="bg-surface-variant border-2 border-on-background px-5 sm:px-6 py-2 sm:py-3 rounded-full font-black font-headline text-sm sm:text-lg tracking-wide">WebP</span>
+        <span class="bg-surface-variant border-2 border-on-background px-5 sm:px-6 py-2 sm:py-3 rounded-full font-black font-headline text-sm sm:text-lg tracking-wide">GIF</span>
+        <span class="bg-surface-variant border-2 border-on-background px-5 sm:px-6 py-2 sm:py-3 rounded-full font-black font-headline text-sm sm:text-lg tracking-wide">SVG</span>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/png-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">PNG to URL</h3>
+            <p class="text-sm text-on-surface-variant">Convert PNG images with transparency preserved</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/jpg-to-url" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">JPG to URL</h3>
+            <p class="text-sm text-on-surface-variant">Convert JPEG photos to shareable links</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/image-url-generator" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
+            <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image format</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Start hosting your images for free</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your first image in seconds. No signup, no credit card, no catch.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,245 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ImageToURL — Image Hosting for Newsletters",
+  "url": "https://imagetourl.com/image-hosting-for-newsletters",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Reliable image hosting for email newsletters. Permanent URLs that work with Mailchimp, Substack, ConvertKit, and all platforms."
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do newsletter images sometimes not display?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Newsletter images can fail to display for several reasons: the hosting service went down, the image URL expired, the host blocked hotlinking from email clients, or the image was deleted. ImageToURL provides permanent, CDN-backed URLs with no hotlink restrictions, ensuring your newsletter images always render for every subscriber." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use ImageToURL with Mailchimp?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. In Mailchimp's email editor, add an image block and select 'Import from URL'. Paste your ImageToURL link and the image loads directly into your campaign. The permanent URL ensures the image works even for subscribers who open the email weeks or months later." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ImageToURL work with Substack?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Substack supports external image URLs in posts. While Substack has its own image hosting, using ImageToURL gives you a permanent backup URL that works regardless of Substack's infrastructure. You can paste ImageToURL links directly into Substack's editor." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will images load fast in email clients?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. ImageToURL serves all images from a global CDN with edge servers worldwide. Images load quickly regardless of where your subscribers are located. Fast image loading improves the reading experience and reduces the chance of subscribers closing your email before it fully renders." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there bandwidth limits for newsletter images?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL is designed to handle high-traffic use cases like newsletters. Your images are served from a CDN that scales automatically, so whether you have 100 subscribers or 100,000, every recipient sees your images load quickly and reliably." }
+    }
+  ]
+};
+---
+
+<Layout title="Image Hosting for Email Newsletters | ImageToURL" description="Reliable image hosting for email newsletters. Permanent URLs that work with Mailchimp, Substack, ConvertKit, and all newsletter platforms." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Newsletters</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Image Hosting for Email <span class="italic text-primary">Newsletters.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Reliable image hosting that works with every newsletter platform. Upload once, get a permanent URL that renders perfectly in every subscriber's inbox.
+      </p>
+    </header>
+
+
+    <!-- Why Newsletter Creators Need This -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Newsletter Creators Need This</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">verified</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Reliable Delivery</h3>
+          <p class="font-body text-on-surface-variant">Your newsletter images load for every subscriber, every time. No broken images, no missing graphics. Permanent URLs mean your back-catalog emails still display correctly months later.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">speed</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Global CDN Speed</h3>
+          <p class="font-body text-on-surface-variant">Images are served from edge servers around the world. Whether your subscribers are in New York, London, or Tokyo, they get fast-loading images that render the moment they open your email.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">cloud_upload</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No File Size Headaches</h3>
+          <p class="font-body text-on-surface-variant">Upload high-quality hero images, product photos, and infographics without worrying about platform file size limits. ImageToURL handles the hosting, your newsletter platform just references the URL.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">language</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Works Everywhere</h3>
+          <p class="font-body text-on-surface-variant">ImageToURL links render in Gmail, Outlook, Apple Mail, Yahoo Mail, and every email client. No platform-specific compatibility issues. One URL works universally.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Works With -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Works With Your Newsletter Platform</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">campaign</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Mailchimp</h3>
+          <p class="font-body text-on-surface-variant text-sm">Use "Import from URL" in the image block to add ImageToURL links directly into your Mailchimp campaigns and automations.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">edit_note</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Substack</h3>
+          <p class="font-body text-on-surface-variant text-sm">Paste ImageToURL links directly in Substack's editor for images that stay permanent across both web and email versions of your posts.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">conversion_path</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">ConvertKit</h3>
+          <p class="font-body text-on-surface-variant text-sm">Add images to ConvertKit emails and landing pages using the URL import feature. Works across broadcasts, sequences, and automations.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">hive</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Beehiiv</h3>
+          <p class="font-body text-on-surface-variant text-sm">Import images via URL in Beehiiv's drag-and-drop editor. Permanent links ensure every issue in your archive displays images correctly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Why do newsletter images sometimes not display?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Newsletter images can fail to display for several reasons: the hosting service went down, the image URL expired, the host blocked hotlinking from email clients, or the image was deleted. ImageToURL provides permanent, CDN-backed URLs with no hotlink restrictions, ensuring your newsletter images always render for every subscriber.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I use ImageToURL with Mailchimp?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. In Mailchimp's email editor, add an image block and select "Import from URL". Paste your ImageToURL link and the image loads directly into your campaign. The permanent URL ensures the image works even for subscribers who open the email weeks or months later.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Does ImageToURL work with Substack?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Substack supports external image URLs in posts. While Substack has its own image hosting, using ImageToURL gives you a permanent backup URL that works regardless of Substack's infrastructure. You can paste ImageToURL links directly into Substack's editor.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Will images load fast in email clients?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL serves all images from a global CDN with edge servers worldwide. Images load quickly regardless of where your subscribers are located. Fast image loading improves the reading experience and reduces the chance of subscribers closing your email before it fully renders.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Are there bandwidth limits for newsletter images?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImageToURL is designed to handle high-traffic use cases like newsletters. Your images are served from a CDN that scales automatically, so whether you have 100 subscribers or 100,000, every recipient sees your images load quickly and reliably.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/image-hosting-for-email-signatures" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Email Signature Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Permanent URLs for logos and headshots</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/bulk-image-upload" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Bulk Image Upload</h3>
+            <p class="text-sm text-on-surface-variant">Upload all newsletter images at once</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image for free with CDN delivery</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Your newsletter deserves reliable images</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your newsletter images and get permanent URLs that work with every email platform and client.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

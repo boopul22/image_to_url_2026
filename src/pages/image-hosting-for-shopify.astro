@@ -1,0 +1,237 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Image Hosting for Shopify", "url": "https://imagetourl.cloud/image-hosting-for-shopify", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Host product images and custom section images for your Shopify store. Free CDN-backed image hosting with permanent URLs for custom Shopify pages.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Can I use external image URLs in Shopify?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Shopify allows external image URLs in custom HTML sections, blog posts, custom pages, and email templates. You can paste any hosted image URL directly into the Shopify editor." } },
+  { "@type": "Question", "name": "Will externally hosted images affect my Shopify store speed?", "acceptedAnswer": { "@type": "Answer", "text": "No. CDN-hosted images load from edge servers closest to your customer, often faster than images served from Shopify's own CDN for custom sections and blog content." } },
+  { "@type": "Question", "name": "Can I use these images in Shopify email campaigns?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Externally hosted image URLs work perfectly in Shopify Email, Klaviyo, Mailchimp, and any other email marketing tool you connect to your store." } },
+  { "@type": "Question", "name": "Are the image URLs permanent?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every image uploaded to ImageToURL gets a permanent URL that never expires. Your Shopify store content will always display correctly." } },
+  { "@type": "Question", "name": "Do I need to install a Shopify app for this?", "acceptedAnswer": { "@type": "Answer", "text": "No app installation needed. Simply upload your image to ImageToURL, copy the URL, and paste it wherever you need it in your Shopify admin. It works with any Shopify theme." } }
+] };
+---
+
+<Layout title="Free Image Hosting for Shopify Stores | ImageToURL" description="Host product images and custom section images for your Shopify store. Free CDN-backed image hosting with permanent URLs for custom Shopify pages." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Shopify</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Image Hosting for Shopify <span class="italic text-primary">stores.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Host custom section images, blog visuals, and marketing assets for your Shopify store. Free CDN-backed URLs that work everywhere in your Shopify admin.
+      </p>
+    </header>
+
+
+    <!-- Why Shopify Stores Need This -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Shopify Stores Need This</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">dashboard_customize</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Custom Section Images</h3>
+          <p class="font-body text-on-surface-variant">Shopify's custom HTML and Liquid sections accept external image URLs. Add banners, icons, and visuals to any section without uploading to Shopify's file manager.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">article</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Blog Post Images</h3>
+          <p class="font-body text-on-surface-variant">Enrich your Shopify blog with high-quality images. External hosting means no file manager limits and faster content creation for your editorial calendar.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">campaign</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Email Campaign Assets</h3>
+          <p class="font-body text-on-surface-variant">Use hosted image URLs in Shopify Email, Klaviyo, or Mailchimp campaigns. Permanent URLs mean your email images never break, even months later.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">web</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Landing Page Graphics</h3>
+          <p class="font-body text-on-surface-variant">Build high-converting landing pages with hero images, trust badges, and promotional graphics. Host them externally for maximum flexibility and speed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use in Shopify -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How to Use in Shopify</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8 reveal">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">01</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Upload Your Image</h3>
+          <p class="font-body text-on-surface-variant text-sm">Drag and drop product photos, banners, or graphics. All common formats supported.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">02</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">content_copy</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Copy the URL</h3>
+          <p class="font-body text-on-surface-variant text-sm">Get a permanent, CDN-backed image URL instantly. One click to copy.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow text-center">
+          <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">03</span>
+          <div class="w-14 h-14 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 mx-auto">
+            <span class="material-symbols-outlined text-primary text-2xl">storefront</span>
+          </div>
+          <h3 class="text-lg font-black font-headline mb-2">Paste in Shopify</h3>
+          <p class="font-body text-on-surface-variant text-sm">Use in custom HTML sections, blog posts, pages, or email templates. Works with any Shopify theme.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 reveal">
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">photo_camera</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Product Photos</h3>
+          <p class="font-body text-on-surface-variant text-sm">Host high-resolution product images for descriptions, comparisons, and custom sections.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">collections_bookmark</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Lookbooks</h3>
+          <p class="font-body text-on-surface-variant text-sm">Create stunning lookbook pages with externally hosted lifestyle and editorial photography.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">ads_click</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Marketing Pages</h3>
+          <p class="font-body text-on-surface-variant text-sm">Build promotional and seasonal landing pages with custom banners and hero images.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">mail</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Email Templates</h3>
+          <p class="font-body text-on-surface-variant text-sm">Add branded images to transactional emails, newsletters, and abandoned cart sequences.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I use external image URLs in Shopify?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Shopify allows external image URLs in custom HTML sections, blog posts, custom pages, and email templates. You can paste any hosted image URL directly into the Shopify rich text editor or custom Liquid code.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Will externally hosted images affect my store speed?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. CDN-hosted images load from edge servers closest to your customer, often faster than images served through Shopify's file manager for custom content sections.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Can I use these images in Shopify email campaigns?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Externally hosted image URLs work perfectly in Shopify Email, Klaviyo, Mailchimp, and any other email marketing tool you connect to your store.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Are the image URLs permanent?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Every image uploaded to ImageToURL gets a permanent URL that never expires. Your Shopify store content will always display correctly, even years from now.</div>
+        </details>
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>Do I need to install a Shopify app for this?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No app installation needed. Simply upload your image to ImageToURL, copy the URL, and paste it wherever you need it in your Shopify admin. It works with any Shopify theme.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
+        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
+            <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/bulk-image-upload" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Bulk Image Upload</h3>
+            <p class="text-sm text-on-surface-variant">Upload entire product catalogs at once</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+        <a href="/image-url-generator" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+          <div>
+            <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
+            <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image format</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Power up your Shopify store</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload images, get permanent URLs, and use them anywhere in your Shopify admin. Free, fast, no app required.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

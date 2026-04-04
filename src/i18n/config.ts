@@ -1,4 +1,4 @@
-export const locales = ['en', 'hi', 'es', 'fr', 'de', 'ja'] as const;
+export const locales = ['en', 'hi', 'es', 'fr', 'de', 'ja', 'zh'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'en';
 
@@ -9,6 +9,7 @@ export const localeLabels: Record<Locale, string> = {
   fr: 'Français',
   de: 'Deutsch',
   ja: '日本語',
+  zh: '中文',
 };
 
 /** BCP 47 locale tags for og:locale */
@@ -19,4 +20,5 @@ export const localeOgTags: Record<Locale, string> = {
   fr: 'fr_FR',
   de: 'de_DE',
   ja: 'ja_JP',
+  zh: 'zh_CN',
 };

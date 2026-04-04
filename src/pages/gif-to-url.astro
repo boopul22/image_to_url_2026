@@ -1,0 +1,296 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "GIF to URL — Animated GIF Hosting",
+  "url": "https://imagetourl.cloud/gif-to-url",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Host animated GIFs and get instant shareable URLs. Full animation preserved, direct links for embedding anywhere.",
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does ImageToURL preserve GIF animations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, every frame of your animated GIF is preserved exactly as uploaded. We never convert, compress, or drop frames from your animations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a limit on the number of frames in a GIF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No frame limit. As long as your GIF file is within the size limit (2MB for anonymous uploads, 10MB with a free account), all frames are preserved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I embed my GIF in Discord or Reddit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Your GIF URL is a direct link that embeds automatically in Discord, Reddit, Slack, and most other platforms that support inline images."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are GIF URLs permanent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Once uploaded, your GIF URL never expires. It remains accessible and shareable indefinitely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I upload large GIF files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free anonymous uploads support GIFs up to 2MB. Create a free account to upload GIFs up to 10MB. Our CDN handles the bandwidth so your animations load fast everywhere."
+      }
+    }
+  ]
+};
+---
+
+<Layout title="GIF to URL — Host Animated GIFs & Get Direct Links | ImageToURL" description="Host animated GIFs and get instant shareable URLs. Full animation preserved, direct links for embedding anywhere. Free GIF hosting, no signup required." schema={[schema, faqSchema]}>
+  <Nav />
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <ImageUploader />
+
+    <header class="mb-8 sm:mb-20 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">GIF Hosting</span>
+      <h1 class="text-3xl sm:text-6xl lg:text-8xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        GIF to URL <span class="italic text-primary">— animations preserved.</span>
+      </h1>
+      <p class="text-base sm:text-xl lg:text-2xl font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Upload your animated GIFs and get permanent, direct URLs instantly. Every frame preserved, fast CDN delivery, and free embedding anywhere — no signup needed.
+      </p>
+    </header>
+
+
+    <!-- How It Works -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">How It Works</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 text-2xl sm:text-3xl font-black font-headline">1</div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Upload Your GIF</h3>
+          <p class="font-body text-on-surface-variant">Drag & drop or click to select your animated GIF. Supports all frame counts and animations up to 10MB.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 text-2xl sm:text-3xl font-black font-headline">2</div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Get Your URL</h3>
+          <p class="font-body text-on-surface-variant">Your GIF is uploaded to our global CDN instantly. A permanent, direct .gif URL is generated automatically.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6 text-2xl sm:text-3xl font-black font-headline">3</div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Embed Anywhere</h3>
+          <p class="font-body text-on-surface-variant">Copy your URL and embed it in Discord, Reddit, forums, HTML pages, or share it directly in messages.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Host GIFs with Us? -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Why Host GIFs with Us?</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">gif_box</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Full Animation Support</h3>
+          <p class="font-body text-on-surface-variant">Every frame of your animated GIF is preserved. No conversion, no quality loss, no frame dropping.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">code</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Direct Embedding</h3>
+          <p class="font-body text-on-surface-variant">Get direct .gif URLs that embed perfectly in forums, Discord, Reddit, and HTML pages.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">data_usage</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">No File Size Surprises</h3>
+          <p class="font-body text-on-surface-variant">Upload GIFs up to 10MB. We handle the bandwidth so your animations load fast everywhere.</p>
+        </div>
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">link</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Hotlink-Friendly</h3>
+          <p class="font-body text-on-surface-variant">Our URLs support hotlinking. Embed your GIFs in any website, wiki, or forum without restrictions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Perfect For</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
+        <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">sentiment_very_satisfied</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Meme Creators</h3>
+          <p class="font-body text-on-surface-variant">Host and share animated memes with permanent, fast-loading URLs.</p>
+        </div>
+        <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">forum</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Discord & Forum Users</h3>
+          <p class="font-body text-on-surface-variant">Embed reaction GIFs and custom emotes in Discord, Reddit, and online communities.</p>
+        </div>
+        <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">school</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">Tutorial Makers</h3>
+          <p class="font-body text-on-surface-variant">Create animated walkthroughs and step-by-step visual guides with hosted GIFs.</p>
+        </div>
+        <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
+          <div class="w-14 sm:w-16 h-14 sm:h-16 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-5 sm:mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl">design_services</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-black font-headline mb-2">UI/UX Designers</h3>
+          <p class="font-body text-on-surface-variant">Share animated prototypes, micro-interactions, and loading animations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="space-y-4 reveal">
+        <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Does ImageToURL preserve GIF animations?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Yes, every frame of your animated GIF is preserved exactly as uploaded. We never convert, compress, or drop frames from your animations.</p>
+          </div>
+        </details>
+        <details class="bg-tertiary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Is there a limit on the number of frames in a GIF?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">No frame limit. As long as your GIF file is within the size limit (2MB for anonymous uploads, 10MB with a free account), all frames are preserved.</p>
+          </div>
+        </details>
+        <details class="bg-primary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Can I embed my GIF in Discord or Reddit?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Absolutely. Your GIF URL is a direct link that embeds automatically in Discord, Reddit, Slack, and most other platforms that support inline images.</p>
+          </div>
+        </details>
+        <details class="bg-surface-variant border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Are GIF URLs permanent?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Yes. Once uploaded, your GIF URL never expires. It remains accessible and shareable indefinitely.</p>
+          </div>
+        </details>
+        <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-6 sm:p-8 cursor-pointer font-black font-headline text-lg sm:text-xl list-none flex items-center justify-between">
+            Can I upload large GIF files?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-6 sm:px-8 pb-6 sm:pb-8">
+            <p class="font-body text-on-surface-variant">Free anonymous uploads support GIFs up to 2MB. Create a free account to upload GIFs up to 10MB. Our CDN handles the bandwidth so your animations load fast everywhere.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-6 sm:mb-10 reveal">
+        <h2 class="text-xl sm:text-4xl font-black font-headline tracking-tight">Related Tools</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
+        <a href="/png-to-url" class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+          <div>
+            <h3 class="text-lg sm:text-xl font-black font-headline mb-1">PNG to URL</h3>
+            <p class="font-body text-on-surface-variant text-sm">Convert PNG images with transparency preserved</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+        </a>
+        <a href="/image-url-generator" class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+          <div>
+            <h3 class="text-lg sm:text-xl font-black font-headline mb-1">Screenshot to URL</h3>
+            <p class="font-body text-on-surface-variant text-sm">Generate URLs from screenshots instantly</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+        </a>
+        <a href="/free-image-hosting" class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+          <div>
+            <h3 class="text-lg sm:text-xl font-black font-headline mb-1">Free Image Hosting</h3>
+            <p class="font-body text-on-surface-variant text-sm">Host any image format for free</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-8 sm:p-12 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-2xl sm:text-4xl font-black font-headline tracking-tight mb-4">Host your animated GIF in seconds</h2>
+        <p class="font-body text-surface/70 mb-6 sm:mb-8 max-w-lg mx-auto">Upload your GIF and get a permanent, embeddable link. No signup, no frame loss, no catch.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-8 py-4 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+          Upload GIF Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
