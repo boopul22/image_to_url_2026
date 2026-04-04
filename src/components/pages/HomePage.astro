@@ -167,15 +167,15 @@ const pageSchema = [
   <Nav activePage="home" />
 
   <!-- Hero Section — Immediate, action-focused -->
-  <section class="min-h-[calc(100dvh-58px)] flex flex-col max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 lg:pt-14 text-center">
+  <section class="sm:min-h-[calc(100dvh-58px)] flex flex-col max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 lg:pt-14 text-center">
     <div>
-      <div class="inline-block bg-primary/15 text-primary px-3 py-1 rounded-full font-label text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4">
+      <div class="hidden sm:inline-block bg-primary/15 text-primary px-3 py-1 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-4">
         {t(locale, 'home.hero.badge')}
       </div>
-      <h1 class="font-headline text-3xl sm:text-5xl lg:text-6xl font-black text-on-background leading-[0.95] tracking-tighter mb-3 sm:mb-4">
+      <h1 class="font-headline text-[1.75rem] sm:text-5xl lg:text-6xl font-black text-on-background leading-[0.95] tracking-tighter mb-2 sm:mb-4">
         {t(locale, 'home.hero.headline1')} <span class="text-primary">{t(locale, 'home.hero.headline2')}</span>
       </h1>
-      <p class="font-body text-sm sm:text-base lg:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto mb-5 sm:mb-6">
+      <p class="hidden sm:block font-body text-base lg:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto mb-6">
         {t(locale, 'home.hero.subheadline')}
       </p>
     </div>
@@ -196,9 +196,9 @@ const pageSchema = [
         data-uploading-file={t(locale, 'home.upload.uploadingFile')}
       >
         <!-- State: idle / uploading -->
-        <div id="state-idle" class="p-5 sm:p-8 lg:p-12">
-          <div id="drop-zone" class="flex flex-col items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer" role="button" tabindex="0">
-            <span class="material-symbols-outlined text-on-tertiary-container text-4xl sm:text-5xl lg:text-6xl" id="upload-icon">upload_file</span>
+        <div id="state-idle" class="p-4 sm:p-8 lg:p-12">
+          <div id="drop-zone" class="flex flex-col items-center gap-3 sm:gap-5 lg:gap-6 cursor-pointer" role="button" tabindex="0">
+            <span class="material-symbols-outlined text-on-tertiary-container text-3xl sm:text-5xl lg:text-6xl" id="upload-icon">upload_file</span>
             <div class="text-center">
               <p class="text-on-surface font-bold text-base sm:text-lg lg:text-xl font-headline" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
               <p class="text-xs sm:text-sm lg:text-base text-outline mt-1.5" id="upload-subtext">{t(locale, 'home.upload.formats')}</p>
@@ -243,11 +243,11 @@ const pageSchema = [
     </div>
 
     <!-- Trust Signals — pushed to bottom of viewport -->
-    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-auto pt-5 sm:pt-6 pb-4 sm:pb-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
-      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> {t(locale, 'home.trust.cdn')}</span>
-      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">lock</span> {t(locale, 'home.trust.ssl')}</span>
-      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">link</span> {t(locale, 'home.trust.permanent')}</span>
-      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">flash_on</span> {t(locale, 'home.trust.instant')}</span>
+    <div class="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 sm:mt-8 pt-0 sm:pt-0 pb-4 sm:pb-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> <span class="hidden sm:inline">{t(locale, 'home.trust.cdn')}</span></span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">lock</span> <span class="hidden sm:inline">{t(locale, 'home.trust.ssl')}</span></span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">link</span> <span class="hidden sm:inline">{t(locale, 'home.trust.permanent')}</span></span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">flash_on</span> <span class="hidden sm:inline">{t(locale, 'home.trust.instant')}</span></span>
     </div>
   </section>
 
