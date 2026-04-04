@@ -117,17 +117,9 @@ const pageSchema = [
   <Nav activePage="pricing" />
 
   <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-20 relative">
-    <!-- Floating Doodles -->
-    <div class="absolute top-10 right-10 opacity-20 hidden lg:block">
-      <span class="material-symbols-outlined text-6xl text-tertiary">flare</span>
-    </div>
-    <div class="absolute top-40 left-10 opacity-20 hidden lg:block">
-      <span class="material-symbols-outlined text-5xl text-secondary">auto_awesome</span>
-    </div>
-
     <!-- Header -->
     <header class="text-center mb-8 sm:mb-20 reveal">
-      <h1 class="font-headline italic font-black text-3xl sm:text-5xl lg:text-7xl xl:text-8xl tracking-tight mb-4 sm:mb-6">
+      <h1 class="font-headline font-black text-3xl sm:text-5xl lg:text-7xl xl:text-8xl tracking-tight mb-4 sm:mb-6">
         {t(locale, 'pricing.hero.title1')} <span class="bg-tertiary-fixed px-2">{t(locale, 'pricing.hero.title2')}</span>{t(locale, 'pricing.hero.title3')}
       </h1>
       <p class="font-body text-base sm:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
@@ -138,13 +130,13 @@ const pageSchema = [
     <!-- Pricing Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 items-start reveal-stagger">
       <!-- Tier: Free -->
-      <div class="bg-surface-container-lowest border-2 border-on-background rounded-xl p-5 sm:p-8 transition-transform duration-200 reveal">
+      <div class="bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 reveal">
         <div class="mb-5 sm:mb-8">
           <span class="font-label uppercase tracking-widest text-xs font-black text-outline">{t(locale, 'pricing.free.label')}</span>
-          <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2 italic">{t(locale, 'pricing.free.name')}</h3>
+          <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2">{t(locale, 'pricing.free.name')}</h3>
           <p class="text-on-surface-variant mt-2 text-sm sm:text-base">{t(locale, 'pricing.free.description')}</p>
         </div>
-        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8 italic">{t(locale, 'pricing.free.price')}<span class="text-base sm:text-lg font-body font-normal not-italic text-outline">{t(locale, 'pricing.free.period')}</span></div>
+        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.free.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.free.period')}</span></div>
         <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-primary">draw</span>
@@ -159,24 +151,22 @@ const pageSchema = [
             <span class="text-sm font-medium">{t(locale, 'pricing.free.feature3')}</span>
           </li>
         </ul>
-        <button class="w-full py-4 rounded-lg border-2 border-on-background bg-surface-container hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
+        <button class="w-full py-4 border-2 border-on-background bg-surface-container hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
           {t(locale, 'pricing.free.cta')}
         </button>
       </div>
 
       <!-- Tier: Pro (Recommended) -->
-      <div class="relative bg-surface-container-lowest border-2 border-on-background rounded-xl p-5 sm:p-8 transition-transform duration-200 hard-shadow lg:-mt-8 reveal">
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase border-2 border-on-background">
+      <div class="relative bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 hard-shadow reveal">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 text-xs font-bold tracking-widest uppercase border-2 border-on-background">
           {t(locale, 'pricing.pro.badge')}
         </div>
-        <span class="material-symbols-outlined absolute -top-8 -right-8 text-4xl text-tertiary hidden lg:block" style="font-variation-settings: 'FILL' 1;">star</span>
-        <span class="material-symbols-outlined absolute -bottom-8 -left-8 text-3xl text-secondary hidden lg:block" style="font-variation-settings: 'FILL' 1;">celebration</span>
         <div class="mb-5 sm:mb-8">
-          <span class="font-label uppercase tracking-widest text-xs font-black text-primary">{t(locale, 'pricing.pro.label')}</span>
-          <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2 italic">{t(locale, 'pricing.pro.name')}</h3>
+          <span class="font-label uppercase tracking-widest text-xs font-black text-on-background">{t(locale, 'pricing.pro.label')}</span>
+          <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2">{t(locale, 'pricing.pro.name')}</h3>
           <p class="text-on-surface-variant mt-2 text-sm sm:text-base">{t(locale, 'pricing.pro.description')}</p>
         </div>
-        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8 italic">{t(locale, 'pricing.pro.price')}<span class="text-base sm:text-lg font-body font-normal not-italic text-outline">{t(locale, 'pricing.pro.period')}</span></div>
+        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.pro.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.pro.period')}</span></div>
         <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">draw</span>
@@ -195,19 +185,19 @@ const pageSchema = [
             <span class="text-sm font-bold">{t(locale, 'pricing.pro.feature4')}</span>
           </li>
         </ul>
-        <button class="w-full py-4 rounded-lg bg-primary text-on-primary border-2 border-on-background font-black text-lg hard-shadow-hover transition-all active:scale-[0.98]">
+        <button class="w-full py-4 bg-primary text-on-primary border-2 border-on-background font-black text-lg hard-shadow-hover transition-all active:scale-[0.98]">
           {t(locale, 'pricing.pro.cta')}
         </button>
       </div>
 
       <!-- Tier: Business -->
-      <div class="bg-surface-container-lowest border-2 border-on-background rounded-xl p-5 sm:p-8 transition-transform duration-200 reveal">
+      <div class="bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 reveal">
         <div class="mb-5 sm:mb-8">
           <span class="font-label uppercase tracking-widest text-xs font-black text-outline">{t(locale, 'pricing.business.label')}</span>
-          <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2 italic">{t(locale, 'pricing.business.name')}</h3>
+          <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2">{t(locale, 'pricing.business.name')}</h3>
           <p class="text-on-surface-variant mt-2 text-sm sm:text-base">{t(locale, 'pricing.business.description')}</p>
         </div>
-        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8 italic">{t(locale, 'pricing.business.price')}<span class="text-base sm:text-lg font-body font-normal not-italic text-outline">{t(locale, 'pricing.business.period')}</span></div>
+        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.business.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.business.period')}</span></div>
         <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-primary">draw</span>
@@ -226,7 +216,7 @@ const pageSchema = [
             <span class="text-sm font-medium">{t(locale, 'pricing.business.feature4')}</span>
           </li>
         </ul>
-        <button class="w-full py-4 rounded-lg border-2 border-on-background bg-surface-container-high hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
+        <button class="w-full py-4 border-2 border-on-background bg-surface-container-high hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
           {t(locale, 'pricing.business.cta')}
         </button>
       </div>
@@ -234,33 +224,33 @@ const pageSchema = [
 
     <!-- FAQ Section -->
     <section class="mt-20 sm:mt-40 max-w-4xl mx-auto">
-      <h2 class="font-headline font-black text-3xl sm:text-5xl italic text-center mb-10 sm:mb-16 underline decoration-tertiary-fixed decoration-8 underline-offset-4">{t(locale, 'pricing.faq.title')}</h2>
+      <h2 class="font-headline font-black text-3xl sm:text-5xl text-center mb-10 sm:mb-16 underline decoration-tertiary-fixed decoration-8 underline-offset-4">{t(locale, 'pricing.faq.title')}</h2>
       <div class="space-y-6">
-        <div class="bg-secondary-container border-2 border-on-background rounded-xl p-6 hard-shadow">
-          <h4 class="font-headline font-bold text-2xl mb-2 italic">{t(locale, 'pricing.faq.q1')}</h4>
-          <p class="font-body text-on-secondary-container leading-relaxed">{t(locale, 'pricing.faq.a1')}</p>
+        <div class="bg-background border-2 border-on-background p-6 hard-shadow">
+          <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q1')}</h4>
+          <p class="font-body text-on-background leading-relaxed">{t(locale, 'pricing.faq.a1')}</p>
         </div>
-        <div class="bg-tertiary-fixed border-2 border-on-background rounded-xl p-6 hard-shadow">
-          <h4 class="font-headline font-bold text-2xl mb-2 italic">{t(locale, 'pricing.faq.q2')}</h4>
-          <p class="font-body text-on-tertiary-fixed-variant leading-relaxed">{t(locale, 'pricing.faq.a2')}</p>
+        <div class="bg-background border-2 border-on-background p-6 hard-shadow">
+          <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q2')}</h4>
+          <p class="font-body text-on-background leading-relaxed">{t(locale, 'pricing.faq.a2')}</p>
         </div>
-        <div class="bg-secondary-container border-2 border-on-background rounded-xl p-6 hard-shadow">
-          <h4 class="font-headline font-bold text-2xl mb-2 italic">{t(locale, 'pricing.faq.q3')}</h4>
-          <p class="font-body text-on-secondary-container leading-relaxed">{t(locale, 'pricing.faq.a3')}</p>
+        <div class="bg-background border-2 border-on-background p-6 hard-shadow">
+          <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q3')}</h4>
+          <p class="font-body text-on-background leading-relaxed">{t(locale, 'pricing.faq.a3')}</p>
         </div>
       </div>
     </section>
 
     <!-- CTA Visual Section -->
-    <section class="mt-16 sm:mt-40 bg-surface-container border-2 border-on-background rounded-2xl overflow-hidden flex flex-col lg:flex-row items-center p-6 sm:p-8 lg:p-12 relative">
+    <section class="mt-16 sm:mt-40 bg-surface-container border-2 border-on-background overflow-hidden flex flex-col lg:flex-row items-center p-6 sm:p-8 lg:p-12 relative">
       <div class="lg:w-1/2 mb-8 lg:mb-0">
-        <h2 class="font-headline font-black text-3xl sm:text-4xl lg:text-5xl italic mb-4 sm:mb-6">{t(locale, 'pricing.cta.title')}</h2>
-        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-on-background hard-shadow hard-shadow-hover transition-all font-black text-lg sm:text-xl active:scale-95">
+        <h2 class="font-headline font-black text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-6">{t(locale, 'pricing.cta.title')}</h2>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-3 sm:py-4 border-2 border-on-background hard-shadow hard-shadow-hover transition-all font-black text-lg sm:text-xl active:scale-95">
           {t(locale, 'pricing.cta.btn')}
         </a>
       </div>
       <div class="lg:w-1/2 flex justify-center">
-        <img class="rounded-xl border-2 border-on-background rotate-3 hard-shadow max-w-full h-auto max-h-64 sm:max-h-none" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" width="500" height="400" loading="lazy" decoding="async" />
+        <img class="border-2 border-on-background rotate-3 hard-shadow max-w-full h-auto max-h-64 sm:max-h-none" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" width="500" height="400" loading="lazy" decoding="async" />
       </div>
     </section>
   </main>

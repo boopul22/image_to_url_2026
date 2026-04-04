@@ -2,81 +2,80 @@
 
 /* Font fallbacks with metric overrides to minimize CLS during swap */
 @font-face {
-  font-family: 'Newsreader-fallback';
-  src: local('Georgia'), local('Times New Roman');
-  font-style: italic;
-  size-adjust: 103%;
-  ascent-override: 92%;
-  descent-override: 24%;
-  line-gap-override: 0%;
-}
-
-@font-face {
-  font-family: 'Inter-fallback';
-  src: local('Arial'), local('Helvetica Neue');
-  size-adjust: 107%;
+  font-family: 'Space-Grotesk-fallback';
+  src: local('Arial Black'), local('Impact');
+  size-adjust: 105%;
   ascent-override: 90%;
   descent-override: 22%;
   line-gap-override: 0%;
 }
 
+@font-face {
+  font-family: 'Space-Mono-fallback';
+  src: local('Courier New'), local('Courier');
+  size-adjust: 110%;
+  ascent-override: 88%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
 @theme {
-  --font-headline: "Newsreader", "Newsreader-fallback", serif;
-  --font-body: "Inter", "Inter-fallback", sans-serif;
-  --font-label: "Inter", "Inter-fallback", sans-serif;
+  --font-headline: "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
+  --font-body: "Space Mono", "Space-Mono-fallback", monospace;
+  --font-label: "Space Mono", "Space-Mono-fallback", monospace;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-  --color-background: #fef7ff;
-  --color-surface: #fef7ff;
-  --color-surface-container: #f4eafa;
-  --color-surface-container-low: #faf0ff;
-  --color-surface-container-high: #efe5f5;
-  --color-surface-container-highest: #e9dfef;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-variant: #e9dfef;
-  --color-surface-dim: #e0d7e6;
+  --color-background: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-container: #F5F5F5;
+  --color-surface-container-low: #FAFAFA;
+  --color-surface-container-high: #EEEEEE;
+  --color-surface-container-highest: #E0E0E0;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-variant: #F5F5F5;
+  --color-surface-dim: #E0E0E0;
 
-  --color-primary: #630ed4;
-  --color-primary-container: #7c3aed;
-  --color-primary-fixed: #eaddff;
-  --color-primary-fixed-dim: #d2bbff;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #ede0ff;
-  --color-on-primary-fixed: #25005a;
-  --color-on-primary-fixed-variant: #5a00c6;
+  --color-primary: #FFD600;
+  --color-primary-container: #FFD600;
+  --color-primary-fixed: #FFF9C4;
+  --color-primary-fixed-dim: #FFD600;
+  --color-on-primary: #0A0A0A;
+  --color-on-primary-container: #0A0A0A;
+  --color-on-primary-fixed: #0A0A0A;
+  --color-on-primary-fixed-variant: #0A0A0A;
 
-  --color-secondary: #216a51;
-  --color-secondary-container: #a7efcf;
-  --color-secondary-fixed: #a9f1d1;
-  --color-secondary-fixed-dim: #8ed5b6;
-  --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #266e55;
-  --color-on-secondary-fixed: #002116;
-  --color-on-secondary-fixed-variant: #00513b;
+  --color-secondary: #0A0A0A;
+  --color-secondary-container: #F5F5F5;
+  --color-secondary-fixed: #F5F5F5;
+  --color-secondary-fixed-dim: #E0E0E0;
+  --color-on-secondary: #FFFFFF;
+  --color-on-secondary-container: #0A0A0A;
+  --color-on-secondary-fixed: #0A0A0A;
+  --color-on-secondary-fixed-variant: #0A0A0A;
 
-  --color-tertiary: #675f2b;
-  --color-tertiary-container: #b6ac70;
-  --color-tertiary-fixed: #efe4a2;
-  --color-tertiary-fixed-dim: #d2c888;
-  --color-on-tertiary: #ffffff;
-  --color-on-tertiary-container: #47400e;
-  --color-on-tertiary-fixed: #201c00;
-  --color-on-tertiary-fixed-variant: #4e4715;
+  --color-tertiary: #FFD600;
+  --color-tertiary-container: #FFF9C4;
+  --color-tertiary-fixed: #FFF9C4;
+  --color-tertiary-fixed-dim: #FFD600;
+  --color-on-tertiary: #0A0A0A;
+  --color-on-tertiary-container: #0A0A0A;
+  --color-on-tertiary-fixed: #0A0A0A;
+  --color-on-tertiary-fixed-variant: #0A0A0A;
 
-  --color-error: #ba1a1a;
-  --color-error-container: #ffdad6;
-  --color-on-error: #ffffff;
-  --color-on-error-container: #93000a;
+  --color-error: #FF0000;
+  --color-error-container: #FFE0E0;
+  --color-on-error: #FFFFFF;
+  --color-on-error-container: #FF0000;
 
-  --color-on-background: #1e1a25;
-  --color-on-surface: #1e1a25;
-  --color-on-surface-variant: #4a4455;
-  --color-outline: #7b7487;
-  --color-outline-variant: #ccc3d8;
+  --color-on-background: #0A0A0A;
+  --color-on-surface: #0A0A0A;
+  --color-on-surface-variant: #333333;
+  --color-outline: #0A0A0A;
+  --color-outline-variant: #CCCCCC;
 
-  --color-inverse-surface: #342e3a;
-  --color-inverse-on-surface: #f7edfd;
-  --color-inverse-primary: #d2bbff;
+  --color-inverse-surface: #0A0A0A;
+  --color-inverse-on-surface: #FFFFFF;
+  --color-inverse-primary: #FFD600;
 }
 
 /* Base styles */
@@ -97,73 +96,36 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-primary-fixed);
-  color: var(--color-on-primary-fixed);
+  background-color: #FFD600;
+  color: #0A0A0A;
 }
 
-/* Hard shadow utility — smaller on mobile for tighter layouts */
+/* Hard shadow utility — solid offset border, brutalist style */
 .hard-shadow {
-  box-shadow: 3px 3px 0 0 rgba(30, 26, 37, 1);
+  box-shadow: 3px 3px 0 #0A0A0A;
 }
 
 @media (min-width: 640px) {
   .hard-shadow {
-    box-shadow: 4px 4px 0 0 rgba(30, 26, 37, 1);
+    box-shadow: 4px 4px 0 #0A0A0A;
   }
 }
 
 .hard-shadow-hover:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 rgba(30, 26, 37, 1);
+  box-shadow: 5px 5px 0 #0A0A0A;
 }
 
 @media (min-width: 640px) {
   .hard-shadow-hover:hover {
-    box-shadow: 6px 6px 0 0 rgba(30, 26, 37, 1);
+    box-shadow: 6px 6px 0 #0A0A0A;
   }
 }
 
 /* Touch-friendly active state for interactive elements on mobile */
 .hard-shadow-hover:active {
   transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0 0 rgba(30, 26, 37, 1);
-}
-
-/* Grain texture overlay — hidden on mobile for GPU savings */
-.grain-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 50;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.02;
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .grain-overlay {
-    display: block;
-  }
-}
-
-/* Stipple divider — more delicate on mobile */
-.stipple-divider {
-  background-image: radial-gradient(var(--color-outline) 1px, transparent 1px);
-  background-size: 10px 10px;
-  height: 16px;
-  width: 100%;
-  opacity: 0.2;
-}
-
-@media (min-width: 640px) {
-  .stipple-divider {
-    background-size: 12px 12px;
-    height: 24px;
-    opacity: 0.3;
-  }
+  box-shadow: 2px 2px 0 #0A0A0A;
 }
 
 /* Scroll-reveal: fade-up entrance animation */
@@ -186,16 +148,6 @@ body {
 .reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
 .reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
 .reveal-stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
-
-/* Speech bubble tail */
-.speech-bubble-tail {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%);
-  position: absolute;
-  bottom: -20px;
-  left: 30px;
-  width: 25px;
-  height: 25px;
-}
 
 /* Smooth mobile menu transition */
 .mobile-menu-transition {
@@ -272,9 +224,5 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .grain-overlay {
-    display: none;
   }
 }

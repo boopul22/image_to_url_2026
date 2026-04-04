@@ -82,7 +82,7 @@ function hreflangUrl(loc: Locale): string {
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#630ed4" />
+    <meta name="theme-color" content="#FFD600" />
 
     <!-- hreflang for all locales -->
     {locales.map(loc => (
@@ -113,16 +113,16 @@ function hreflangUrl(loc: Locale): string {
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap"
     />
     <link
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap"
     />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap" />
     </noscript>
 
     <!-- Structured Data -->
@@ -132,7 +132,6 @@ function hreflangUrl(loc: Locale): string {
     <slot name="head" />
   </head>
   <body class="bg-background font-body text-on-surface relative overflow-x-hidden">
-    <div class="grain-overlay" aria-hidden="true"></div>
     <slot />
     <script>
       // Scroll-reveal: dual strategy (IO + scroll fallback)
