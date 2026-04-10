@@ -100,13 +100,15 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     const sessionFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAge}${isSecure ? '; Secure' : ''}${domain}`;
     const clearFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}${domain}`;
 
+    // Cache-bust: append timestamp so the browser doesn't serve a stale cached page
     return new Response(null, {
       status: 302,
       headers: [
-        ['Location', '/'],
+        ['Location', `/?_=${Date.now()}`],
         ['Set-Cookie', `session=${sessionToken}; ${sessionFlags}`],
         ['Set-Cookie', `google_oauth_state=; ${clearFlags}`],
         ['Set-Cookie', `google_oauth_code_verifier=; ${clearFlags}`],
+        ['Cache-Control', 'no-store'],
       ],
     });
   } catch (err: any) {

@@ -94,11 +94,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     response.headers.get('content-type')?.includes('text/html')
   ) {
     if (locals.user) {
-      // Logged-in: don't cache at CDN (personalized nav), but allow browser short cache
-      response.headers.set('Cache-Control', 'private, max-age=0, must-revalidate');
+      // Logged-in: don't cache at CDN (personalized nav), browser must revalidate
+      response.headers.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     } else {
       // Anonymous: cache at CDN edge for fast crawling & page loads
       response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+      response.headers.set('Vary', 'Cookie');
     }
   }
 
