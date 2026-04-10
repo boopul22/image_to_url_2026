@@ -227,17 +227,33 @@ const pageSchema = [
               {t(locale, 'home.upload.copy')}
             </button>
           </div>
+          <!-- ExtractPics cross-promo tip -->
+          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="block mt-4 pt-3 border-t border-outline-variant/50 hover:opacity-80 transition-opacity group">
+            <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
+            <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+          </a>
         </div>
 
         <!-- State: error -->
         <div id="state-error" class="p-5 sm:p-8 lg:p-12 hidden">
           <div class="flex items-center gap-3">
             <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
-            <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0 truncate" id="error-text">{t(locale, 'home.upload.failed')}</span>
+            <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0" id="error-text">{t(locale, 'home.upload.failed')}</span>
             <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
               {t(locale, 'home.upload.tryAgain')}
             </button>
           </div>
+          <!-- Sign in CTA for limit errors -->
+          <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t border-outline-variant/50 text-on-background hover:opacity-80 transition-opacity group">
+            <span class="material-symbols-outlined text-base text-primary">login</span>
+            <span class="text-xs sm:text-sm font-bold">Sign in to get more uploads</span>
+            <span class="material-symbols-outlined text-sm text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+          </a>
+          <!-- ExtractPics cross-promo tip -->
+          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" id="error-promo" class="hidden mt-3 pt-3 border-t border-outline-variant/50 hover:opacity-80 transition-opacity group">
+            <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
+            <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+          </a>
         </div>
       </div>
     </div>
@@ -375,6 +391,65 @@ const pageSchema = [
         <span class="material-symbols-outlined text-primary text-3xl mb-3 block">palette</span>
         <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.useCases.creators.title')}</h3>
         <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.useCases.creators.description')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Workflow — ExtractPics cross-promo -->
+  <section class="py-10 sm:py-16 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-6 sm:mb-10 reveal">
+        <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-2 sm:mb-3">Your Complete <span class="text-primary">Image Workflow</span></h2>
+        <p class="font-body text-on-surface-variant text-sm sm:text-base">From any website to a shareable link — in seconds</p>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-0 reveal">
+        <!-- Step 1: Extract -->
+        <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="flex-1 w-full sm:w-auto bg-surface-container rounded-2xl p-5 sm:p-6 text-center group hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-primary text-2xl">travel_explore</span>
+          </div>
+          <h3 class="font-headline text-lg font-black text-on-background mb-1 group-hover:text-primary transition-colors">Extract</h3>
+          <p class="font-body text-on-surface-variant text-xs sm:text-sm leading-relaxed">Grab images from any website with ExtractPics</p>
+          <span class="inline-flex items-center gap-1 mt-2 text-primary font-bold text-xs uppercase tracking-wider">
+            extractpics.com <span class="material-symbols-outlined text-sm">open_in_new</span>
+          </span>
+        </a>
+        <!-- Arrow -->
+        <div class="flex-shrink-0 text-outline/40 hidden sm:block px-2">
+          <span class="material-symbols-outlined text-3xl">arrow_forward</span>
+        </div>
+        <div class="flex-shrink-0 text-outline/40 sm:hidden">
+          <span class="material-symbols-outlined text-2xl">arrow_downward</span>
+        </div>
+        <!-- Step 2: Upload -->
+        <div class="flex-1 w-full sm:w-auto bg-primary/5 border-2 border-primary/20 rounded-2xl p-5 sm:p-6 text-center">
+          <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-on-primary text-2xl">cloud_upload</span>
+          </div>
+          <h3 class="font-headline text-lg font-black text-on-background mb-1">Upload</h3>
+          <p class="font-body text-on-surface-variant text-xs sm:text-sm leading-relaxed">Drop them here to get permanent CDN links</p>
+          <span class="inline-flex items-center gap-1 mt-2 text-primary font-bold text-xs uppercase tracking-wider">
+            You're here
+          </span>
+        </div>
+        <!-- Arrow -->
+        <div class="flex-shrink-0 text-outline/40 hidden sm:block px-2">
+          <span class="material-symbols-outlined text-3xl">arrow_forward</span>
+        </div>
+        <div class="flex-shrink-0 text-outline/40 sm:hidden">
+          <span class="material-symbols-outlined text-2xl">arrow_downward</span>
+        </div>
+        <!-- Step 3: Share -->
+        <div class="flex-1 w-full sm:w-auto bg-surface-container rounded-2xl p-5 sm:p-6 text-center">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-primary text-2xl">share</span>
+          </div>
+          <h3 class="font-headline text-lg font-black text-on-background mb-1">Share</h3>
+          <p class="font-body text-on-surface-variant text-xs sm:text-sm leading-relaxed">Use your links anywhere — they never expire</p>
+          <span class="inline-flex items-center gap-1 mt-2 text-primary font-bold text-xs uppercase tracking-wider">
+            Permanent URLs
+          </span>
+        </div>
       </div>
     </div>
   </section>
@@ -549,6 +624,8 @@ const pageSchema = [
   const uploadAnother = document.getElementById('upload-another')!;
   const errorRetry = document.getElementById('error-retry')!;
   const errorText = document.getElementById('error-text')!;
+  const errorSignin = document.getElementById('error-signin')!;
+  const errorPromo = document.getElementById('error-promo')!;
 
   // Read i18n strings from data attributes
   const i18n = {
@@ -577,6 +654,10 @@ const pageSchema = [
     uploadSubtext.textContent = i18n.formats;
     uploadBtn.textContent = i18n.selectFile;
     fileInput.value = '';
+    errorSignin.classList.add('hidden');
+    errorSignin.classList.remove('flex');
+    errorPromo.classList.add('hidden');
+    errorPromo.classList.remove('block');
   }
 
   // Click to open file picker
@@ -663,6 +744,11 @@ const pageSchema = [
       clearInterval(progressInterval);
       showState('error');
       errorText.textContent = err.message || i18n.failed;
+      const isLimit = (err.message || '').toLowerCase().includes('limit');
+      errorSignin.classList.toggle('hidden', !isLimit);
+      errorSignin.classList.toggle('flex', isLimit);
+      errorPromo.classList.toggle('hidden', !isLimit);
+      errorPromo.classList.toggle('block', isLimit);
     }
   }
 </script>

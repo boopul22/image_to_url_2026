@@ -44,17 +44,33 @@
           COPY
         </button>
       </div>
+      <!-- ExtractPics cross-promo tip -->
+      <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="block mt-4 pt-3 border-t-2 border-on-background/10 hover:opacity-80 transition-opacity group">
+        <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
+        <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+      </a>
     </div>
 
     <!-- State: error -->
     <div id="state-error" class="p-6 sm:p-10 lg:p-12 hidden">
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
-        <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0 truncate" id="error-text">Upload failed</span>
+        <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0" id="error-text">Upload failed</span>
         <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
           TRY AGAIN
         </button>
       </div>
+      <!-- Sign in CTA for limit errors -->
+      <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t-2 border-on-background/10 text-on-background hover:opacity-80 transition-opacity group">
+        <span class="material-symbols-outlined text-base text-primary">login</span>
+        <span class="text-xs sm:text-sm font-bold">Sign in to get more uploads</span>
+        <span class="material-symbols-outlined text-sm text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+      </a>
+      <!-- ExtractPics cross-promo tip -->
+      <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" id="error-promo" class="hidden mt-3 pt-3 border-t-2 border-on-background/10 hover:opacity-80 transition-opacity group">
+        <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
+        <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+      </a>
     </div>
   </div>
 
@@ -85,6 +101,8 @@
   const uploadAnother = document.getElementById('upload-another')!;
   const errorRetry = document.getElementById('error-retry')!;
   const errorText = document.getElementById('error-text')!;
+  const errorSignin = document.getElementById('error-signin')!;
+  const errorPromo = document.getElementById('error-promo')!;
 
   function showState(state: 'idle' | 'success' | 'error') {
     stateIdle.classList.toggle('hidden', state !== 'idle');
@@ -101,6 +119,10 @@
     uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG — up to 10 MB';
     uploadBtn.textContent = 'SELECT FILE';
     fileInput.value = '';
+    errorSignin.classList.add('hidden');
+    errorSignin.classList.remove('flex');
+    errorPromo.classList.add('hidden');
+    errorPromo.classList.remove('block');
   }
 
   dropZone.addEventListener('click', () => fileInput.click());
@@ -175,6 +197,11 @@
       clearInterval(progressInterval);
       showState('error');
       errorText.textContent = err.message || 'Upload failed';
+      const isLimit = (err.message || '').toLowerCase().includes('limit');
+      errorSignin.classList.toggle('hidden', !isLimit);
+      errorSignin.classList.toggle('flex', isLimit);
+      errorPromo.classList.toggle('hidden', !isLimit);
+      errorPromo.classList.toggle('block', isLimit);
     }
   }
 </script>

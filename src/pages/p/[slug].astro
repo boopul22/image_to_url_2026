@@ -16,7 +16,7 @@ const row = await db
   .first();
 
 if (!row) {
-  return Astro.redirect('/');
+  return new Response(null, { status: 404 });
 }
 
 // ISR: Cache at CDN edge for 10 min, serve stale up to 1 day while revalidating

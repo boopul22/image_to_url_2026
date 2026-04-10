@@ -49,6 +49,9 @@ const toolsDropdown = {
     { name: 'AI Image Hosting', href: '/ai-image-hosting', icon: 'auto_awesome' },
     { name: 'Imgur Alternative', href: '/imgur-alternative', icon: 'swap_horiz' },
   ],
+  companion: [
+    { name: 'ExtractPics — Image Extractor', href: 'https://extractpics.com/?ref=imagetourl', icon: 'travel_explore', external: true },
+  ],
   company: [
     { name: t(locale, 'nav.about'), href: '/about', icon: 'info' },
     { name: t(locale, 'nav.contact'), href: '/contact', icon: 'mail' },
@@ -121,15 +124,25 @@ const toolsDropdown = {
                 </a>
               ))}
             </div>
-            <!-- Company Column -->
+            <!-- Companion Tools Column -->
             <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.company')}</span>
-              {toolsDropdown.company.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Companion Tools</span>
+              {toolsDropdown.companion.map((item) => (
+                <a href={item.href} target="_blank" rel="noopener" class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
                   <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
                   {item.name}
+                  <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>
                 </a>
               ))}
+              <div class="border-t border-outline-variant/40 mt-3 pt-3">
+                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.company')}</span>
+                {toolsDropdown.company.map((item) => (
+                  <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                    <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                    {item.name}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -278,6 +291,16 @@ const toolsDropdown = {
             <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
               <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
               {item.name}
+            </a>
+          ))}
+          <div class="px-3 pt-3 pb-1">
+            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">Companion Tools</span>
+          </div>
+          {toolsDropdown.companion.map((item) => (
+            <a href={item.href} target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+              {item.name}
+              <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>
             </a>
           ))}
           <div class="px-3 pt-3 pb-1">
