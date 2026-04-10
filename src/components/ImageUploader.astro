@@ -10,21 +10,21 @@
   <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
   <div
     id="upload-panel"
-    class="bg-tertiary-fixed border-2 border-on-background hard-shadow overflow-hidden transition-colors rounded-xl"
+    class="bg-tertiary-fixed border-3 sm:border-2 border-on-background hard-shadow overflow-hidden transition-colors rounded-2xl sm:rounded-xl"
   >
     <!-- State: idle / uploading -->
-    <div id="state-idle" class="p-6 sm:p-10 lg:p-12">
-      <div id="drop-zone" class="flex flex-col items-center gap-4 sm:gap-5 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-tertiary-container text-5xl sm:text-6xl" id="upload-icon">upload_file</span>
+    <div id="state-idle" class="p-8 sm:p-10 lg:p-12">
+      <div id="drop-zone" class="flex flex-col items-center gap-5 sm:gap-5 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-tertiary-container text-6xl sm:text-6xl" id="upload-icon">upload_file</span>
         <div class="text-center">
-          <p class="text-on-surface font-bold text-base sm:text-xl lg:text-2xl font-headline" id="upload-text">Click to upload or drag & drop</p>
+          <p class="text-on-surface font-bold text-xl sm:text-xl lg:text-2xl font-headline" id="upload-text">Click to upload or drag & drop</p>
           <p class="text-sm sm:text-base text-outline mt-2" id="upload-subtext">JPG, PNG, WebP, GIF, SVG — up to 10 MB</p>
         </div>
-        <div class="bg-on-background text-primary px-8 sm:px-10 py-3 sm:py-4 font-bold text-sm sm:text-base uppercase tracking-wider active:scale-95 transition-transform" id="upload-btn">
+        <div class="bg-on-background text-primary px-10 sm:px-10 py-4 sm:py-4 font-bold text-base sm:text-base uppercase tracking-wider active:scale-95 transition-transform rounded-lg sm:rounded-none" id="upload-btn">
           SELECT FILE
         </div>
       </div>
-      <div id="progress-bar" class="hidden mt-6 h-2 bg-surface-variant overflow-hidden rounded-full">
+      <div id="progress-bar" class="hidden mt-6 h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
         <div id="progress-fill" class="h-full bg-primary transition-all duration-300 rounded-full" style="width: 0%"></div>
       </div>
     </div>
