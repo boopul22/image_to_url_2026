@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -12,9 +12,21 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
 function lp(path: string): string {
   return `/${locale}${path}`;
 }
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ImageToURL — Free Image Hosting",
+  "url": "https://imagetourl.cloud/free-image-hosting",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Host your images for free with permanent links and global CDN delivery. No signup required.",
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
 ---
 
-<Layout title="Free Image Hosting - Upload Images & Get Instant URLs | ImageToURL" description="Host your images for free with ImageToURL. No signup required, permanent links, global CDN delivery, and support for JPG, PNG, WebP, GIF, SVG formats." noHreflang>
+<Layout title="Free Image Hosting - Upload Images & Get Instant URLs | ImageToURL" description="Host your images for free with ImageToURL. No signup required, permanent links, global CDN delivery, and support for JPG, PNG, WebP, GIF, SVG formats." schema={schema} noHreflang>
   <Nav />
 
   <main>

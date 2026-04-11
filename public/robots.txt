@@ -47,6 +47,9 @@ Disallow: /dashboard
 Disallow: /admin
 Disallow: /admin/
 
+# Uploaded image files — binary content, not indexable pages.
+Disallow: /uploads/
+
 # All API routes — no indexable content, block crawl budget waste.
 Disallow: /api/
 

@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -12,9 +12,21 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
 function lp(path: string): string {
   return `/${locale}${path}`;
 }
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ImageToURL — Image URL Generator",
+  "url": "https://imagetourl.cloud/image-url-generator",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Generate instant URLs for your images. Upload any image and get a permanent, shareable link in seconds.",
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
 ---
 
-<Layout title="Image URL Generator - Convert Images to URLs Instantly | ImageToURL" description="Generate instant URLs for your images with ImageToURL. Upload any image and get a permanent, shareable link in seconds. Perfect for developers, bloggers, and content creators." noHreflang>
+<Layout title="Image URL Generator - Convert Images to URLs Instantly | ImageToURL" description="Generate instant URLs for your images with ImageToURL. Upload any image and get a permanent, shareable link in seconds. Perfect for developers, bloggers, and content creators." schema={schema} noHreflang>
   <Nav />
 
   <main>

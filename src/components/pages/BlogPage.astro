@@ -80,7 +80,7 @@ const otherPosts = posts.filter((p) => p !== featuredPost);
                 <div class="flex flex-col md:flex-row h-full">
                   <div class="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-on-surface">
                     {featuredPost.coverImage && (
-                      <img alt={featuredPost.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" src={featuredPost.coverImage} />
+                      <img alt={featuredPost.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" decoding="async" fetchpriority="high" src={featuredPost.coverImage} width="600" height="400" />
                     )}
                     <div class="absolute top-4 left-4">
                       <span class="px-3 py-1 bg-primary text-on-primary border-2 border-on-surface font-label text-[10px] font-bold uppercase tracking-widest">{t(locale, 'blog.featured')}</span>

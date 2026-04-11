@@ -10,12 +10,18 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
 
   // Redirect bare / to /en/ (manual i18n routing)
   if (path === '/') {
-    return redirect('/en/', 302);
+    return redirect('/en/', 301);
   }
 
-  // Trailing slash consistency: redirect /page/ → /page (except locale roots like /en/)
+  // Redirect root-level i18n pages to /en/ equivalents to prevent duplicate content
+  const rootToLocaleRedirects = ['/blog', '/features', '/pricing', '/docs', '/privacy', '/terms'];
+  if (rootToLocaleRedirects.includes(path)) {
+    return redirect(`/en${path}`, 301);
+  }
+
+  // Trailing slash consistency: redirect /page/ → /page (except locale roots like /en/ and /404)
   // Prevents duplicate content issues for SEO
-  if (path !== '/' && path.endsWith('/') && !path.match(/^\/[a-z]{2}\/$/)) {
+  if (path !== '/' && path.endsWith('/') && !path.match(/^\/[a-z]{2}\/$/) && path !== '/404/') {
     const cleanPath = path.replace(/\/+$/, '');
     const newUrl = new URL(cleanPath + url0.search, url0.origin);
     return redirect(newUrl.pathname + newUrl.search, 301);
@@ -84,6 +90,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 
   // Add cache headers for public HTML pages (SEO performance)
   // Skip API, admin, dashboard routes — those must never be cached

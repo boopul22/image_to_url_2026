@@ -15,14 +15,6 @@ function localePath(path: string): string {
     <div>
       <div class="text-xl font-black font-headline text-on-background mb-4">ImageToURL</div>
       <p class="font-body font-medium text-on-surface-variant mb-6">{t(locale, 'footer.tagline')}</p>
-      <div class="flex gap-3">
-        <a href="#" class="w-11 h-11 border-2 border-on-background flex items-center justify-center hover:bg-primary hover:text-white active:bg-primary active:text-white transition-colors">
-          <span class="material-symbols-outlined text-lg">share</span>
-        </a>
-        <a href="#" class="w-11 h-11 border-2 border-on-background flex items-center justify-center hover:bg-primary hover:text-white active:bg-primary active:text-white transition-colors">
-          <span class="material-symbols-outlined text-lg">public</span>
-        </a>
-      </div>
     </div>
     <div class="flex flex-col gap-4">
       <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.tools')}</span>
@@ -30,7 +22,10 @@ function localePath(path: string): string {
       <a href="/image-url-generator" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.urlGenerator')}</a>
       <a href="/bulk-image-upload" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.bulkUpload')}</a>
       <a href="/png-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">PNG to URL</a>
-      <a href="/photo-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">Photo to URL</a>
+      <a href="/jpg-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">JPG to URL</a>
+      <a href="/imgur-alternative" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">Imgur Alternative</a>
+      <a href="/image-hosting-for-shopify" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">For Shopify</a>
+      <a href="/image-hosting-for-google-sheets" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">For Google Sheets</a>
     </div>
     <div class="flex flex-col gap-4">
       <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.resources')}</span>
@@ -40,6 +35,7 @@ function localePath(path: string): string {
       <a href="/about" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.about')}</a>
       <a href="/contact" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.contact')}</a>
       <a href={localePath('/blog')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.blog')}</a>
+      <a href="/content-guidelines" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">Content Guidelines</a>
     </div>
     <div class="flex flex-col gap-4">
       <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">Our Tools</span>

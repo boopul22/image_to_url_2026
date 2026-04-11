@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -17,7 +17,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "ImageToURL — Image Hosting for Forums",
-  "url": "https://imagetourl.com/image-hosting-for-forums",
+  "url": "https://imagetourl.cloud/image-hosting-for-forums",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -130,17 +130,17 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
         <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">BBCode</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm break-all">[img]https://imagetourl.com/your-image.png[/img]</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm break-all">[img]https://imagetourl.cloud/your-image.png[/img]</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">For phpBB, vBulletin, SMF, MyBB, and other traditional forum platforms that support BBCode markup.</p>
         </div>
         <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">HTML</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm break-all">&lt;img src="https://imagetourl.com/your-image.png" alt="Description"&gt;</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm break-all">&lt;img src="https://imagetourl.cloud/your-image.png" alt="Description"&gt;</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">For forums that allow HTML in posts, custom signatures, and any web-based platform that renders standard HTML.</p>
         </div>
         <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Markdown</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm break-all">![Description](https://imagetourl.com/your-image.png)</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm break-all">![Description](https://imagetourl.cloud/your-image.png)</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">For Reddit, Discourse, GitHub Discussions, and any modern forum or platform that uses Markdown formatting.</p>
         </div>
       </div>

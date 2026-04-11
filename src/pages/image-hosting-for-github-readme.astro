@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -17,7 +17,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "ImageToURL — Image Hosting for GitHub README",
-  "url": "https://imagetourl.com/image-hosting-for-github-readme",
+  "url": "https://imagetourl.cloud/image-hosting-for-github-readme",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -130,22 +130,22 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
         <div class="bg-secondary-container border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Markdown Image</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">![Screenshot](https://imagetourl.com/your-image-url.png)</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">![Screenshot](https://imagetourl.cloud/your-image-url.png)</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">Standard Markdown syntax. Works in README.md, CONTRIBUTING.md, and any .md file in your repo.</p>
         </div>
         <div class="bg-tertiary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">HTML Image Tag</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">&lt;img src="https://imagetourl.com/your-image-url.png" width="600" alt="Screenshot"&gt;</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">&lt;img src="https://imagetourl.cloud/your-image-url.png" width="600" alt="Screenshot"&gt;</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">Use HTML when you need to control the image size, alignment, or add custom attributes. GitHub renders HTML in Markdown files.</p>
         </div>
         <div class="bg-primary-fixed border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Linked Image</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">[![Demo](https://imagetourl.com/your-image-url.png)](https://your-site.com)</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">[![Demo](https://imagetourl.cloud/your-image-url.png)](https://your-site.com)</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">Wrap an image in a link for clickable screenshots, demo previews, or badges that link to your live project.</p>
         </div>
         <div class="bg-surface-variant border-2 border-on-background p-6 sm:p-8 rounded-xl hard-shadow reveal">
           <h3 class="text-lg sm:text-2xl font-black font-headline mb-4">Centered Image</h3>
-          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">&lt;p align="center"&gt;&lt;img src="https://imagetourl.com/your-image-url.png" width="500"&gt;&lt;/p&gt;</code>
+          <code class="block bg-on-background/10 p-4 rounded-lg font-mono text-sm sm:text-base break-all">&lt;p align="center"&gt;&lt;img src="https://imagetourl.cloud/your-image-url.png" width="500"&gt;&lt;/p&gt;</code>
           <p class="font-body text-on-surface-variant mt-4 text-sm">Center images in your README using the align attribute on a wrapping paragraph tag. Great for logos and hero screenshots.</p>
         </div>
       </div>

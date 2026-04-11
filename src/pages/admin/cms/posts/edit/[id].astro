@@ -6,7 +6,7 @@ import Layout from '../../../../../layouts/Layout.astro';
 const { id } = Astro.params;
 ---
 
-<Layout title="Edit Post - CMS - ImageToURL">
+<Layout title="Edit Post - CMS - ImageToURL" noindex={true}>
   <div class="fixed inset-0 flex flex-col bg-surface-container-lowest z-50" data-post-id={id}>
     <!-- Top Bar -->
     <div class="flex-none flex items-center justify-between px-3 sm:px-5 py-2.5 border-b-2 border-on-surface bg-surface">

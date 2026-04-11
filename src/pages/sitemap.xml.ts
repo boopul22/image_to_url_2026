@@ -88,18 +88,18 @@ function buildRootUrlEntry(path: string, lastmod: string): string {
 }
 
 function buildUrlEntry(basePath: string, lastmod: string): string {
-  const defaultUrl = localeUrl(defaultLocale, basePath);
   const alternates = locales.map(loc =>
     `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(localeUrl(loc, basePath))}" />`
   ).join('\n');
-  const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`;
+  const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(localeUrl(defaultLocale, basePath))}" />`;
 
-  return `  <url>
-    <loc>${escapeXml(defaultUrl)}</loc>
+  // Emit a <url> entry for EACH locale (Google requires each locale URL to have its own entry)
+  return locales.map(loc => `  <url>
+    <loc>${escapeXml(localeUrl(loc, basePath))}</loc>
     <lastmod>${lastmod}</lastmod>
 ${alternates}
 ${xDefault}
-  </url>`;
+  </url>`).join('\n');
 }
 
 export async function GET({ locals }: APIContext): Promise<Response> {

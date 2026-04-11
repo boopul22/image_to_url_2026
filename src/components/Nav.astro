@@ -8,6 +8,10 @@ const user = Astro.locals.user;
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const basePath = stripLocalePrefix(Astro.url.pathname);
 
+// Root-level English-only pages have no locale variants — hide language switcher
+const hasLocalePrefix = Astro.url.pathname !== basePath;
+const isLocalizable = hasLocalePrefix || Astro.url.pathname === '/';
+
 function localePath(path: string, loc: Locale = locale): string {
   return `/${loc}${path}`;
 }
@@ -45,9 +49,15 @@ const toolsDropdown = {
     { name: 'For GitHub', href: '/image-hosting-for-github-readme', icon: 'terminal' },
     { name: 'For Notion', href: '/image-hosting-for-notion', icon: 'description' },
     { name: 'For WordPress', href: '/image-hosting-for-wordpress', icon: 'language' },
+    { name: 'For Shopify', href: '/image-hosting-for-shopify', icon: 'shopping_cart' },
+    { name: 'For Newsletters', href: '/image-hosting-for-newsletters', icon: 'newspaper' },
+    { name: 'For Email Signatures', href: '/image-hosting-for-email-signatures', icon: 'signature' },
+    { name: 'For Forums', href: '/image-hosting-for-forums', icon: 'chat' },
+    { name: 'For WhatsApp', href: '/image-to-url-for-whatsapp', icon: 'sms' },
     { name: 'For ChatGPT', href: '/image-url-for-chatgpt', icon: 'smart_toy' },
     { name: 'AI Image Hosting', href: '/ai-image-hosting', icon: 'auto_awesome' },
     { name: 'Imgur Alternative', href: '/imgur-alternative', icon: 'swap_horiz' },
+    { name: 'ImgBB Alternative', href: '/imgbb-alternative', icon: 'swap_horiz' },
   ],
   companion: [
     { name: 'ExtractPics — Image Extractor', href: 'https://extractpics.com/?ref=imagetourl', icon: 'travel_explore', external: true },
@@ -151,7 +161,8 @@ const toolsDropdown = {
 
     <!-- Desktop Right Actions -->
     <div class="hidden lg:flex items-center gap-3">
-      <!-- Language Switcher (desktop) -->
+      <!-- Language Switcher (desktop) — hidden on English-only pages -->
+      {isLocalizable && (
       <div class="relative" id="lang-switcher-desktop">
         <button
           id="lang-btn-desktop"
@@ -177,6 +188,7 @@ const toolsDropdown = {
           ))}
         </div>
       </div>
+      )}
 
       {user ? (
         <>
@@ -317,7 +329,8 @@ const toolsDropdown = {
 
       <div class="h-px bg-outline-variant my-2"></div>
 
-      <!-- Language Switcher (inside mobile menu) -->
+      <!-- Language Switcher (inside mobile menu) — hidden on English-only pages -->
+      {isLocalizable && (
       <div class="relative" id="lang-switcher-mobile">
         <button
           id="lang-btn-mobile"
@@ -343,6 +356,7 @@ const toolsDropdown = {
           ))}
         </div>
       </div>
+      )}
 
       {user ? (
         <>
