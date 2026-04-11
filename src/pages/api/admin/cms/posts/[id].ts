@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../../../lib/db';
-import { mapPostRow, calculateReadTime, parseContentJson, logActivity } from '../../../../../lib/cms';
+import { mapPostRow, calculateReadTimeAuto, logActivity } from '../../../../../lib/cms';
 
 export const GET: APIRoute = async ({ params, locals }) => {
   if (!locals.user || locals.user.role !== 'admin') {
@@ -46,8 +46,7 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
     ? (typeof body.content === 'string' ? body.content : JSON.stringify(body.content))
     : (existing as any).content;
 
-  const parsedContent = parseContentJson(content);
-  const readTime = calculateReadTime(parsedContent);
+  const readTime = calculateReadTimeAuto(content);
 
   // If publishing for the first time
   let publishedAt = (existing as any).published_at;

@@ -2,265 +2,470 @@
 export const prerender = false;
 
 import Layout from '../../../../../layouts/Layout.astro';
-import Nav from '../../../../../components/Nav.astro';
-import AdminSidebar from '../../../../../components/AdminSidebar.astro';
 
 const { id } = Astro.params;
 ---
 
 <Layout title="Edit Post - CMS - ImageToURL">
-  <Nav activePage="admin" />
-
-  <div class="flex">
-    <AdminSidebar activePage="cms" />
-
-    <main class="flex-1 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
-      <!-- Top bar -->
-      <div class="sticky top-[var(--nav-h,57px)] z-20 bg-surface border-b-2 border-on-surface px-4 sm:px-6 py-3 flex items-center gap-3 flex-wrap">
-        <a href="/admin/cms/posts" class="text-outline hover:text-on-surface transition-colors flex items-center gap-1 shrink-0">
-          <span class="material-symbols-outlined text-xl">arrow_back</span>
-          <span class="hidden sm:inline font-label text-xs font-bold uppercase tracking-wider">Posts</span>
+  <div class="fixed inset-0 flex flex-col bg-surface-container-lowest z-50" data-post-id={id}>
+    <!-- Top Bar -->
+    <div class="flex-none flex items-center justify-between px-3 sm:px-5 py-2.5 border-b-2 border-on-surface bg-surface">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <button type="button" id="back-btn" class="flex-none w-9 h-9 rounded-xl border-2 border-on-surface flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+          <span class="material-symbols-outlined text-lg">arrow_back</span>
+        </button>
+        <h1 id="page-title" class="font-headline text-sm sm:text-base font-black text-on-surface truncate">Edit Post</h1>
+        <span id="status-badge" class="hidden sm:inline px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase"></span>
+        <span id="save-status" class="hidden sm:inline text-[10px] text-outline"></span>
+      </div>
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <span id="error-msg" class="text-error text-xs max-w-32 truncate hidden lg:inline"></span>
+        <button id="save-btn" type="button" class="px-3 py-1.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
+          Save
+        </button>
+        <button id="publish-toggle-btn" type="button" class="px-3 py-1.5 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
+          Publish
+        </button>
+        <a id="view-post-link" href="#" class="hidden w-9 h-9 flex items-center justify-center rounded-xl border-2 border-on-surface hover:bg-surface-container-highest transition-colors" title="View post">
+          <span class="material-symbols-outlined text-lg">open_in_new</span>
         </a>
-        <div class="h-5 w-px bg-outline-variant hidden sm:block"></div>
-        <h1 class="font-headline text-lg font-black text-on-surface">Edit Post</h1>
-        <span id="current-status" class="px-2.5 py-1 rounded-full text-xs font-bold uppercase"></span>
-        <span id="save-status" class="text-xs text-outline ml-auto transition-opacity"></span>
-        <div class="flex items-center gap-2">
-          <button id="save-btn" class="px-4 py-2 bg-surface border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
-            Save
+      </div>
+    </div>
+
+    <!-- Mobile status bar -->
+    <div class="flex-none sm:hidden flex items-center justify-between px-3 py-1.5 border-b border-outline-variant/30 bg-surface">
+      <div class="flex items-center gap-2">
+        <span id="status-badge-mobile" class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase"></span>
+        <span id="save-status-mobile" class="text-[10px] text-outline"></span>
+      </div>
+    </div>
+
+    <!-- Mobile Tabs -->
+    <div class="flex-none sm:hidden flex border-b-2 border-on-surface">
+      <button type="button" data-mobile-tab="details" class="mobile-tab flex-1 px-2 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center justify-center gap-1.5 border-on-surface text-on-surface">
+        <span class="material-symbols-outlined text-sm">tune</span> Details
+      </button>
+      <button type="button" data-mobile-tab="editor" class="mobile-tab flex-1 px-2 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center justify-center gap-1.5 border-transparent text-outline">
+        <span class="material-symbols-outlined text-sm">edit</span> Write
+      </button>
+      <button type="button" data-mobile-tab="preview" class="mobile-tab flex-1 px-2 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center justify-center gap-1.5 border-transparent text-outline">
+        <span class="material-symbols-outlined text-sm">visibility</span> Preview
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="flex-1 flex min-h-0 relative">
+      <!-- Desktop: Left Sidebar (metadata) -->
+      <div class="hidden sm:block flex-none w-72 xl:w-80 border-r-2 border-on-surface overflow-y-auto p-3 space-y-2.5 bg-surface no-scrollbar" id="left-sidebar">
+        <div id="metadata-fields"></div>
+      </div>
+
+      <!-- Desktop: Right panel -->
+      <div class="hidden sm:flex flex-1 flex-col min-w-0">
+        <div class="flex-none flex items-center border-b-2 border-on-surface px-1 bg-surface">
+          <button type="button" data-tab="editor" class="desktop-tab px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center gap-1.5 border-on-surface text-on-surface">
+            <span class="material-symbols-outlined text-sm">edit</span> Write
           </button>
-          <button id="publish-toggle-btn" class="px-4 py-2 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
-            Publish
+          <button type="button" data-tab="preview" class="desktop-tab px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center gap-1.5 border-transparent text-outline hover:text-on-surface">
+            <span class="material-symbols-outlined text-sm">visibility</span> Preview
           </button>
-          <a id="view-post-link" href="#" class="hidden w-10 h-10 flex items-center justify-center rounded-xl border-2 border-on-surface hover:bg-surface-container-highest transition-colors" title="View post">
-            <span class="material-symbols-outlined text-lg">open_in_new</span>
-          </a>
-          <button id="toggle-sidebar-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border-2 border-on-surface hover:bg-surface-container-highest transition-colors" aria-label="Toggle settings panel">
-            <span class="material-symbols-outlined text-lg">tune</span>
-          </button>
+        </div>
+        <div id="desktop-editor" class="flex-1 min-h-0 overflow-hidden flex flex-col">
+          <div id="editor-toolbar" class="flex-none flex flex-wrap items-center gap-0.5 px-2 sm:px-3 py-1.5 bg-surface-container border-b border-outline-variant/50 overflow-x-auto">
+            <button type="button" data-action="h2" title="Heading 2" class="tb-btn font-bold text-xs">H2</button>
+            <button type="button" data-action="h3" title="Heading 3" class="tb-btn font-bold text-xs">H3</button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="bold" title="Bold" class="tb-btn"><span class="material-symbols-outlined text-base">format_bold</span></button>
+            <button type="button" data-action="italic" title="Italic" class="tb-btn"><span class="material-symbols-outlined text-base">format_italic</span></button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="bulletList" title="Bullet List" class="tb-btn"><span class="material-symbols-outlined text-base">format_list_bulleted</span></button>
+            <button type="button" data-action="orderedList" title="Ordered List" class="tb-btn"><span class="material-symbols-outlined text-base">format_list_numbered</span></button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="blockquote" title="Blockquote" class="tb-btn"><span class="material-symbols-outlined text-base">format_quote</span></button>
+            <button type="button" data-action="link" title="Link" class="tb-btn"><span class="material-symbols-outlined text-base">link</span></button>
+            <button type="button" data-action="image" title="Insert Image" class="tb-btn"><span class="material-symbols-outlined text-base">image</span></button>
+            <button type="button" data-action="horizontalRule" title="Horizontal Rule" class="tb-btn"><span class="material-symbols-outlined text-base">horizontal_rule</span></button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="undo" title="Undo" class="tb-btn"><span class="material-symbols-outlined text-base">undo</span></button>
+            <button type="button" data-action="redo" title="Redo" class="tb-btn"><span class="material-symbols-outlined text-base">redo</span></button>
+          </div>
+          <div id="editor-content" class="flex-1 min-h-0 overflow-y-auto"></div>
+          <input type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml" class="hidden" id="editor-image-upload" />
+        </div>
+        <div id="desktop-preview" class="flex-1 min-h-0 overflow-y-auto p-8 hidden">
+          <div id="preview-content" class="prose prose-on-surface max-w-3xl mx-auto"></div>
         </div>
       </div>
 
-      <div class="flex flex-col lg:flex-row">
-        <!-- Main Content Area -->
-        <div class="flex-1 min-w-0">
-          <div class="max-w-3xl mx-auto px-4 sm:px-8 md:px-12 py-8 sm:py-12 space-y-8">
-            <!-- Title -->
-            <div>
-              <input
-                id="post-title"
-                type="text"
-                placeholder="Post title..."
-                class="w-full text-3xl sm:text-4xl md:text-5xl font-headline italic font-black bg-transparent border-none focus:outline-none text-on-surface placeholder:text-outline/30 leading-tight"
-              />
-              <div class="mt-3 h-1 w-16 bg-primary rounded-full"></div>
-            </div>
-
-            <!-- Excerpt -->
-            <textarea
-              id="post-excerpt"
-              placeholder="Write a compelling excerpt..."
-              rows="2"
-              class="w-full bg-transparent border-none focus:outline-none text-on-surface-variant text-lg leading-relaxed placeholder:text-outline/30 resize-none font-headline font-normal"
-            ></textarea>
-
-            <!-- Cover Image -->
-            <div id="cover-section">
-              <div id="cover-preview" class="hidden relative group rounded-xl overflow-hidden border-2 border-outline-variant mb-4">
-                <img id="cover-img" class="w-full h-56 sm:h-72 object-cover" />
-                <div class="absolute inset-0 bg-on-surface/0 group-hover:bg-on-surface/30 transition-colors flex items-center justify-center">
-                  <button id="remove-cover" class="opacity-0 group-hover:opacity-100 bg-error text-on-error px-4 py-2 rounded-xl font-label text-xs font-bold uppercase tracking-wider transition-opacity">Remove Cover</button>
-                </div>
-              </div>
-              <div id="cover-upload-zone" class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center hover:border-primary hover:bg-primary/5 cursor-pointer transition-all group">
-                <span class="material-symbols-outlined text-3xl text-outline group-hover:text-primary transition-colors">add_photo_alternate</span>
-                <p class="text-sm text-outline mt-2 group-hover:text-primary transition-colors">Add cover image</p>
-                <input id="post-cover-image" type="hidden" />
-                <input type="file" accept="image/*" class="hidden" id="cover-upload" />
-              </div>
-            </div>
-
-            <!-- Content Builder -->
-            <div class="space-y-8">
-              <div class="editor-block">
-                <label class="font-label text-xs font-bold uppercase tracking-widest text-outline/60 mb-3 block">Introduction</label>
-                <textarea
-                  id="content-intro"
-                  placeholder="Start with your opening paragraph..."
-                  rows="6"
-                  class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-base leading-[1.8] placeholder:text-outline/25 resize-none font-headline font-normal"
-                ></textarea>
-              </div>
-
-              <div>
-                <div class="flex items-center justify-between mb-4">
-                  <label class="font-label text-xs font-bold uppercase tracking-widest text-outline/60">Sections</label>
-                  <button id="add-section-btn" class="px-4 py-2 rounded-xl text-xs font-bold uppercase border-2 border-primary text-primary hover:bg-primary hover:text-on-primary active:scale-95 transition-all flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-sm">add</span> Add Section
-                  </button>
-                </div>
-                <div id="sections-container" class="space-y-6"></div>
-              </div>
-
-              <details class="group border-l-4 border-primary/30 pl-6 open:border-primary transition-colors">
-                <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline/60 flex items-center gap-2 py-2 hover:text-on-surface transition-colors select-none">
-                  <span class="material-symbols-outlined text-sm">format_quote</span> Blockquote (optional)
-                </summary>
-                <div class="pt-3">
-                  <textarea
-                    id="content-blockquote"
-                    placeholder="Add a memorable quote..."
-                    rows="3"
-                    class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-lg leading-relaxed placeholder:text-outline/25 resize-none italic font-headline"
-                  ></textarea>
-                </div>
-              </details>
-
-              <details class="group">
-                <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline/60 flex items-center gap-2 py-2 hover:text-on-surface transition-colors select-none">
-                  <span class="material-symbols-outlined text-sm">lightbulb</span> Callout (optional)
-                </summary>
-                <div class="mt-3 bg-primary-fixed/40 border-2 border-primary/20 rounded-xl p-5 space-y-3">
-                  <input id="callout-title" type="text" placeholder="Callout heading..." class="w-full bg-transparent border-none focus:outline-none font-headline font-bold text-base text-on-surface placeholder:text-outline/30" />
-                  <textarea id="callout-body" placeholder="Callout content..." rows="2" class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-sm leading-relaxed placeholder:text-outline/25 resize-none font-headline font-normal"></textarea>
-                </div>
-              </details>
-
-              <div class="editor-block">
-                <label class="font-label text-xs font-bold uppercase tracking-widest text-outline/60 mb-3 block">Conclusion</label>
-                <textarea
-                  id="content-outro"
-                  placeholder="Wrap it up..."
-                  rows="6"
-                  class="editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-base leading-[1.8] placeholder:text-outline/25 resize-none font-headline font-normal"
-                ></textarea>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-4 pt-4 border-t border-outline-variant/50 text-xs text-outline">
-              <span id="word-count">0 words</span>
-              <span>&middot;</span>
-              <span id="read-time">0 min read</span>
-            </div>
-          </div>
+      <!-- Mobile: Editor panel -->
+      <div id="mobile-editor" class="sm:hidden flex-1 flex flex-col min-w-0 hidden">
+        <div id="editor-toolbar-mobile" class="flex-none flex flex-wrap items-center gap-0.5 px-2 py-1.5 bg-surface-container border-b border-outline-variant/50 overflow-x-auto">
+          <button type="button" data-action="h2" title="Heading 2" class="tb-btn font-bold text-xs">H2</button>
+          <button type="button" data-action="h3" title="Heading 3" class="tb-btn font-bold text-xs">H3</button>
+          <div class="tb-divider"></div>
+          <button type="button" data-action="bold" title="Bold" class="tb-btn"><span class="material-symbols-outlined text-base">format_bold</span></button>
+          <button type="button" data-action="italic" title="Italic" class="tb-btn"><span class="material-symbols-outlined text-base">format_italic</span></button>
+          <div class="tb-divider"></div>
+          <button type="button" data-action="blockquote" title="Blockquote" class="tb-btn"><span class="material-symbols-outlined text-base">format_quote</span></button>
+          <button type="button" data-action="link" title="Link" class="tb-btn"><span class="material-symbols-outlined text-base">link</span></button>
+          <button type="button" data-action="image" title="Insert Image" class="tb-btn"><span class="material-symbols-outlined text-base">image</span></button>
+          <div class="tb-divider"></div>
+          <button type="button" data-action="undo" title="Undo" class="tb-btn"><span class="material-symbols-outlined text-base">undo</span></button>
+          <button type="button" data-action="redo" title="Redo" class="tb-btn"><span class="material-symbols-outlined text-base">redo</span></button>
         </div>
-
-        <!-- Settings Sidebar -->
-        <div id="editor-sidebar" class="w-full lg:w-80 xl:w-96 border-t-2 lg:border-t-0 lg:border-l-2 border-on-surface bg-surface lg:sticky lg:top-[calc(var(--nav-h,57px)+53px)] lg:max-h-[calc(100dvh-var(--nav-h,57px)-53px)] lg:overflow-y-auto hidden lg:block">
-          <div class="p-4 sm:p-5 space-y-4">
-            <div class="flex items-center justify-between lg:hidden mb-2">
-              <h3 class="font-headline font-bold text-lg">Post Settings</h3>
-              <button id="close-sidebar-btn" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors">
-                <span class="material-symbols-outlined">close</span>
-              </button>
-            </div>
-
-            <div class="space-y-2">
-              <h3 class="font-label text-xs font-bold uppercase tracking-wider text-outline">Category</h3>
-              <select id="post-category" class="w-full border-2 border-on-surface rounded-xl px-3 py-2.5 bg-surface text-sm">
-                <option value="">Select category...</option>
-              </select>
-            </div>
-
-            <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl hover:bg-surface-container-lowest transition-colors">
-              <input id="post-featured" type="checkbox" class="w-5 h-5 rounded border-2 border-on-surface accent-primary" />
-              <span class="font-label text-xs font-bold uppercase tracking-wider">Featured Post</span>
-            </label>
-
-            <details class="group">
-              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
-                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
-                Icon Fallback
-              </summary>
-              <div class="pt-2 space-y-2">
-                <input id="post-icon-fallback" type="text" placeholder="Material icon name" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-                <input id="post-icon-bg" type="text" placeholder="Background class" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-              </div>
-            </details>
-
-            <details open class="group">
-              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
-                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
-                Author
-              </summary>
-              <div class="pt-2 space-y-2">
-                <input id="post-author-name" type="text" placeholder="Author name" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-                <input id="post-author-role" type="text" placeholder="Author role" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-                <input id="post-author-avatar" type="text" placeholder="Avatar URL" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-              </div>
-            </details>
-
-            <details class="group">
-              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
-                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
-                SEO Settings
-              </summary>
-              <div class="pt-2 space-y-2">
-                <input id="post-slug" type="text" placeholder="post-slug" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-                <input id="post-meta-title" type="text" placeholder="Meta title" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-                <textarea id="post-meta-description" placeholder="Meta description" rows="2" class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm resize-none focus:border-primary focus:outline-none transition-colors"></textarea>
-              </div>
-            </details>
-
-            <details class="group">
-              <summary class="cursor-pointer font-label text-xs font-bold uppercase tracking-wider text-outline flex items-center gap-2 py-2 hover:text-on-surface transition-colors">
-                <span class="material-symbols-outlined text-sm transition-transform group-open:rotate-90">chevron_right</span>
-                Related Posts
-              </summary>
-              <div class="pt-2 space-y-2">
-                <input id="related-search" type="text" placeholder="Search posts..." class="w-full border-2 border-outline-variant rounded-xl px-3 py-2 bg-surface text-sm focus:border-primary focus:outline-none transition-colors" />
-                <div id="related-results" class="space-y-1 max-h-32 overflow-y-auto"></div>
-                <div id="related-selected" class="space-y-1"></div>
-              </div>
-            </details>
-          </div>
-        </div>
+        <div id="editor-content-mobile" class="flex-1 min-h-0 overflow-y-auto"></div>
       </div>
-    </main>
+
+      <!-- Mobile: Preview panel -->
+      <div id="mobile-preview" class="sm:hidden flex-1 overflow-y-auto p-4 hidden">
+        <div id="preview-content-mobile" class="prose prose-on-surface max-w-none text-sm"></div>
+      </div>
+    </div>
   </div>
 </Layout>
 
+<template id="metadata-template">
+  <div class="space-y-2.5">
+    <input id="post-title" type="text" placeholder="Post title" class="sf-input !font-bold !text-on-surface" />
+
+    <div>
+      <span class="sf-label">Slug</span>
+      <input id="post-slug" type="text" placeholder="auto-generated" class="sf-input !text-xs text-outline" />
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <span class="sf-label">Author</span>
+        <input id="post-author-name" type="text" class="sf-input" />
+      </div>
+      <div>
+        <span class="sf-label">Role</span>
+        <input id="post-author-role" type="text" class="sf-input" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <span class="sf-label">Category</span>
+        <select id="post-category" class="sf-input">
+          <option value="">Select...</option>
+        </select>
+      </div>
+      <div>
+        <span class="sf-label">Icon Fallback</span>
+        <input id="post-icon-fallback" type="text" placeholder="article" class="sf-input" />
+      </div>
+    </div>
+
+    <div>
+      <span class="sf-label">Description</span>
+      <textarea id="post-excerpt" placeholder="Short excerpt..." rows="2" class="sf-input resize-none"></textarea>
+    </div>
+
+    <div>
+      <span class="sf-label">Featured Image</span>
+      <div class="flex gap-1.5">
+        <input id="post-cover-image" type="text" placeholder="URL or upload" class="sf-input flex-1 !text-xs" />
+        <input type="file" accept="image/*" class="hidden" id="cover-upload" />
+        <button type="button" id="cover-upload-btn" class="flex-none w-8 h-[30px] rounded-lg border-2 border-outline-variant flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+          <span class="material-symbols-outlined text-sm">upload</span>
+        </button>
+      </div>
+      <div id="cover-preview" class="hidden mt-1.5">
+        <img id="cover-img" class="rounded-lg h-20 w-full object-cover border-2 border-outline-variant" />
+      </div>
+    </div>
+
+    <div>
+      <span class="sf-label">Avatar URL</span>
+      <input id="post-author-avatar" type="text" placeholder="https://..." class="sf-input !text-xs" />
+    </div>
+
+    <div>
+      <span class="sf-label">Icon Background</span>
+      <input id="post-icon-bg" type="text" placeholder="bg-primary-fixed" class="sf-input !text-xs" />
+    </div>
+
+    <label class="flex items-center gap-2.5 cursor-pointer py-1">
+      <input id="post-featured" type="checkbox" class="w-4 h-4 rounded border-2 border-on-surface accent-primary" />
+      <span class="sf-label !mb-0">Featured Post</span>
+    </label>
+
+    <div>
+      <span class="sf-label">Related</span>
+      <div id="related-list" class="mt-1 flex flex-wrap gap-1"></div>
+    </div>
+
+    <div class="pt-2 border-t border-outline-variant/50">
+      <span class="sf-label">Meta Title</span>
+      <input id="post-meta-title" type="text" class="sf-input !text-xs" />
+    </div>
+    <div>
+      <span class="sf-label">Meta Description</span>
+      <textarea id="post-meta-description" rows="2" class="sf-input resize-none !text-xs"></textarea>
+    </div>
+
+    <div id="published-info" class="hidden pt-1 border-t border-outline-variant/50">
+      <span class="sf-label">Published</span>
+      <p id="published-date" class="text-xs text-outline"></p>
+    </div>
+  </div>
+</template>
+
 <style>
-  .editor-textarea { overflow: hidden; min-height: 3rem; }
-  .section-block:focus-within { border-left-color: var(--color-primary); }
+  .sf-label {
+    display: block; font-size: 0.625rem; color: var(--color-outline);
+    text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 0.125rem;
+  }
+  .sf-input {
+    width: 100%; padding: 0.3rem 0.5rem;
+    background: var(--color-surface-container-lowest);
+    border: 1.5px solid var(--color-outline-variant);
+    border-radius: 0.5rem; color: var(--color-on-surface);
+    font-size: 0.75rem; transition: border-color 0.15s;
+  }
+  .sf-input:focus { outline: none; border-color: var(--color-primary); }
+  .sf-input::placeholder { color: var(--color-outline); opacity: 0.5; }
+  @media (max-width: 639px) {
+    .sf-input { padding: 0.5rem 0.625rem; font-size: 1rem; border-radius: 0.625rem; }
+    .sf-label { font-size: 0.6875rem; margin-bottom: 0.25rem; }
+  }
+
+  .tb-btn {
+    width: 2rem; height: 2rem; border-radius: 0.5rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-outline); transition: all 0.15s;
+    cursor: pointer; border: none; background: none;
+  }
+  .tb-btn:hover { background: var(--color-surface-container-highest); color: var(--color-on-surface); }
+  .tb-btn.is-active { background: var(--color-primary); color: var(--color-on-primary); }
+  .tb-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  @media (max-width: 639px) { .tb-btn { width: 2.25rem; height: 2.25rem; } }
+  .tb-divider { width: 1px; height: 1.5rem; background: var(--color-outline-variant); margin: 0 0.25rem; align-self: center; }
+
+  :global(.tiptap) {
+    min-height: 100%; padding: 1.5rem 2rem;
+    color: var(--color-on-surface); font-size: 0.9375rem;
+    line-height: 1.75; outline: none; max-width: 48rem; margin: 0 auto;
+  }
+  @media (max-width: 639px) { :global(.tiptap) { padding: 1rem; font-size: 1rem; } }
+  :global(.tiptap h2) { font-weight: 900; font-style: italic; font-size: 1.5rem; margin: 1.5rem 0 0.75rem; color: var(--color-primary); font-family: var(--font-headline), serif; }
+  :global(.tiptap h3) { font-weight: 700; font-size: 1.25rem; margin: 1.25rem 0 0.5rem; color: var(--color-on-surface); font-family: var(--font-headline), serif; }
+  :global(.tiptap p) { margin-bottom: 0.75rem; }
+  :global(.tiptap ul) { list-style: disc; padding-left: 1.25rem; margin: 0.75rem 0; }
+  :global(.tiptap ol) { list-style: decimal; padding-left: 1.25rem; margin: 0.75rem 0; }
+  :global(.tiptap li) { margin-bottom: 0.375rem; }
+  :global(.tiptap blockquote) { border-left: 4px solid var(--color-primary); background: var(--color-surface-container); padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; }
+  :global(.tiptap a) { color: var(--color-primary); text-decoration: underline; cursor: pointer; }
+  :global(.tiptap hr) { border-color: var(--color-outline-variant); margin: 1.5rem 0; }
+  :global(.tiptap img) { max-width: 100%; height: auto; border-radius: 0.75rem; border: 2px solid var(--color-outline-variant); margin: 1rem 0; }
+  :global(.tiptap p.is-editor-empty:first-child::before) { content: attr(data-placeholder); color: var(--color-outline); opacity: 0.4; pointer-events: none; float: left; height: 0; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
 
-<script define:vars={{ postId: id }}>
-  let sectionCount = 0;
-  let relatedSlugs = [];
-  let allPosts = [];
+<script>
+  import { Editor } from '@tiptap/core';
+  import StarterKit from '@tiptap/starter-kit';
+  import Link from '@tiptap/extension-link';
+  import Image from '@tiptap/extension-image';
+  import Placeholder from '@tiptap/extension-placeholder';
+
+  const postId = document.querySelector('[data-post-id]')!.getAttribute('data-post-id')!;
+  let relatedSlugs: string[] = [];
+  let allPosts: any[] = [];
   let currentPostStatus = 'draft';
   let currentSlug = '';
 
-  function autoResize(el) {
-    el.style.height = 'auto';
-    el.style.height = el.scrollHeight + 'px';
+  // --- Clone metadata template ---
+  const template = document.getElementById('metadata-template') as HTMLTemplateElement;
+  document.getElementById('metadata-fields')!.appendChild(template.content.cloneNode(true));
+
+  // --- TipTap Editor ---
+  const editor = new Editor({
+    element: document.querySelector('#editor-content')!,
+    extensions: [
+      StarterKit.configure({ heading: { levels: [2, 3] } }),
+      Link.configure({ openOnClick: false, autolink: true, HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' } }),
+      Image.configure({ inline: false, allowBase64: false }),
+      Placeholder.configure({ placeholder: 'Start writing your post content...' }),
+    ],
+    content: '',
+    onUpdate: () => updatePreview(),
+  });
+
+  // --- Tabs ---
+  document.querySelectorAll('.desktop-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = (btn as HTMLElement).dataset.tab;
+      document.querySelectorAll('.desktop-tab').forEach(b => {
+        b.classList.toggle('border-on-surface', (b as HTMLElement).dataset.tab === tab);
+        b.classList.toggle('text-on-surface', (b as HTMLElement).dataset.tab === tab);
+        b.classList.toggle('border-transparent', (b as HTMLElement).dataset.tab !== tab);
+        b.classList.toggle('text-outline', (b as HTMLElement).dataset.tab !== tab);
+      });
+      document.getElementById('desktop-editor')!.classList.toggle('hidden', tab !== 'editor');
+      document.getElementById('desktop-preview')!.classList.toggle('hidden', tab !== 'preview');
+      if (tab === 'preview') updatePreview();
+    });
+  });
+
+  const leftSidebar = document.getElementById('left-sidebar')!;
+  const mobileEditorPanel = document.getElementById('mobile-editor')!;
+  const mobilePreviewPanel = document.getElementById('mobile-preview')!;
+  const mobileEditorContent = document.getElementById('editor-content-mobile')!;
+
+  function setMobileTab(tab: string) {
+    document.querySelectorAll('.mobile-tab').forEach(b => {
+      const isActive = (b as HTMLElement).dataset.mobileTab === tab;
+      b.classList.toggle('border-on-surface', isActive);
+      b.classList.toggle('text-on-surface', isActive);
+      b.classList.toggle('border-transparent', !isActive);
+      b.classList.toggle('text-outline', !isActive);
+    });
+
+    const showDetails = tab === 'details';
+    leftSidebar.style.display = showDetails ? 'block' : '';
+    leftSidebar.style.width = showDetails ? '100%' : '';
+    leftSidebar.style.flex = showDetails ? '1' : '';
+
+    mobileEditorPanel.classList.toggle('hidden', tab !== 'editor');
+    mobilePreviewPanel.classList.toggle('hidden', tab !== 'preview');
+
+    if (tab === 'editor') {
+      const tiptap = document.querySelector('#editor-content .tiptap');
+      if (tiptap) mobileEditorContent.appendChild(tiptap);
+    } else {
+      const tiptap = mobileEditorContent.querySelector('.tiptap');
+      if (tiptap) document.getElementById('editor-content')!.appendChild(tiptap);
+    }
+    if (tab === 'preview') updatePreview();
   }
 
-  function initAutoResize() {
-    document.querySelectorAll('.editor-textarea, #post-excerpt').forEach(ta => {
-      autoResize(ta);
-      ta.addEventListener('input', () => autoResize(ta));
+  document.querySelectorAll('.mobile-tab').forEach(btn => {
+    btn.addEventListener('click', () => setMobileTab((btn as HTMLElement).dataset.mobileTab!));
+  });
+
+  // Set initial mobile state
+  if (window.innerWidth < 640) {
+    setMobileTab('details');
+  }
+
+  function updatePreview() {
+    const html = editor.getHTML();
+    const placeholder = '<p class="text-outline italic">Preview will appear here...</p>';
+    const el = document.getElementById('preview-content');
+    if (el) el.innerHTML = html || placeholder;
+    const elM = document.getElementById('preview-content-mobile');
+    if (elM) elM.innerHTML = html || placeholder;
+  }
+
+  // --- Toolbar ---
+  const imageInput = document.getElementById('editor-image-upload') as HTMLInputElement;
+
+  function wireToolbar(toolbarEl: HTMLElement) {
+    toolbarEl.addEventListener('mousedown', (e) => {
+      if ((e.target as HTMLElement).closest('.tb-btn')) e.preventDefault();
+    });
+    toolbarEl.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.tb-btn') as HTMLButtonElement | null;
+      if (!btn) return;
+      handleAction(btn.dataset.action!);
+      updateToolbars();
     });
   }
 
-  function updateWordCount() {
-    const fields = ['post-title', 'post-excerpt', 'content-intro', 'content-blockquote', 'callout-body', 'content-outro'];
-    let text = fields.map(id => document.getElementById(id)?.value || '').join(' ');
-    document.querySelectorAll('.section-heading, .section-body').forEach(el => { text += ' ' + el.value; });
-    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
-    const minutes = Math.max(1, Math.ceil(words / 200));
-    document.getElementById('word-count').textContent = words + ' words';
-    document.getElementById('read-time').textContent = minutes + ' min read';
+  function handleAction(action: string) {
+    switch (action) {
+      case 'h2': editor.chain().focus().toggleHeading({ level: 2 }).run(); break;
+      case 'h3': editor.chain().focus().toggleHeading({ level: 3 }).run(); break;
+      case 'bold': editor.chain().focus().toggleBold().run(); break;
+      case 'italic': editor.chain().focus().toggleItalic().run(); break;
+      case 'bulletList': editor.chain().focus().toggleBulletList().run(); break;
+      case 'orderedList': editor.chain().focus().toggleOrderedList().run(); break;
+      case 'blockquote': editor.chain().focus().toggleBlockquote().run(); break;
+      case 'link': {
+        const prev = editor.getAttributes('link').href;
+        const url = window.prompt('Enter URL:', prev || 'https://');
+        if (url === null) break;
+        if (url === '') { editor.chain().focus().extendMarkRange('link').unsetLink().run(); break; }
+        editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+        break;
+      }
+      case 'image': imageInput.click(); break;
+      case 'horizontalRule': editor.chain().focus().setHorizontalRule().run(); break;
+      case 'undo': editor.chain().focus().undo().run(); break;
+      case 'redo': editor.chain().focus().redo().run(); break;
+    }
   }
 
-  let wcTimer;
-  document.addEventListener('input', () => { clearTimeout(wcTimer); wcTimer = setTimeout(updateWordCount, 300); });
+  function updateToolbars() {
+    document.querySelectorAll('#editor-toolbar .tb-btn, #editor-toolbar-mobile .tb-btn').forEach((btn) => {
+      const a = (btn as HTMLElement).dataset.action;
+      let active = false;
+      switch (a) {
+        case 'h2': active = editor.isActive('heading', { level: 2 }); break;
+        case 'h3': active = editor.isActive('heading', { level: 3 }); break;
+        case 'bold': active = editor.isActive('bold'); break;
+        case 'italic': active = editor.isActive('italic'); break;
+        case 'bulletList': active = editor.isActive('bulletList'); break;
+        case 'orderedList': active = editor.isActive('orderedList'); break;
+        case 'blockquote': active = editor.isActive('blockquote'); break;
+        case 'link': active = editor.isActive('link'); break;
+      }
+      btn.classList.toggle('is-active', active);
+      if (a === 'undo') (btn as HTMLButtonElement).disabled = !editor.can().undo();
+      if (a === 'redo') (btn as HTMLButtonElement).disabled = !editor.can().redo();
+    });
+  }
 
+  wireToolbar(document.getElementById('editor-toolbar')!);
+  wireToolbar(document.getElementById('editor-toolbar-mobile')!);
+  editor.on('selectionUpdate', updateToolbars);
+  editor.on('update', updateToolbars);
+
+  imageInput.addEventListener('change', async (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    const form = new FormData();
+    form.append('file', file);
+    form.append('folder', 'blog');
+    try {
+      const res = await fetch('/api/admin/cms/media', { method: 'POST', body: form });
+      const data = await res.json();
+      if (data.url) editor.chain().focus().setImage({ src: data.url, alt: file.name }).run();
+    } catch (err: any) { alert(`Upload failed: ${err.message}`); }
+    imageInput.value = '';
+  });
+
+  // --- Back ---
+  document.getElementById('back-btn')!.addEventListener('click', () => {
+    window.location.href = '/admin/cms/posts';
+  });
+
+  // --- Convert old JSON content to HTML ---
+  function jsonContentToHtml(content: any): string {
+    const parts: string[] = [];
+    if (content.intro) parts.push(`<p>${content.intro}</p>`);
+    for (const section of content.sections || []) {
+      if (section.heading) parts.push(`<h2>${section.heading}</h2>`);
+      if (section.body) parts.push(`<p>${section.body}</p>`);
+    }
+    if (content.blockquote) parts.push(`<blockquote><p>${content.blockquote}</p></blockquote>`);
+    if (content.callout) {
+      parts.push(`<h3>${content.callout.title || 'Note'}</h3>`);
+      parts.push(`<p>${content.callout.body || ''}</p>`);
+    }
+    if (content.outro) parts.push(`<p>${content.outro}</p>`);
+    return parts.join('');
+  }
+
+  // --- Categories ---
   async function loadCategories() {
     const res = await fetch('/api/admin/cms/categories');
     const data = await res.json();
-    const select = document.getElementById('post-category');
+    const select = document.getElementById('post-category') as HTMLSelectElement;
     for (const cat of data.categories || []) {
       const opt = document.createElement('option');
       opt.value = cat.id;
@@ -272,182 +477,123 @@ const { id } = Astro.params;
   async function loadAllPosts() {
     const res = await fetch('/api/admin/cms/posts?limit=100&status=published');
     const data = await res.json();
-    allPosts = (data.posts || []).filter(p => p.id !== postId);
+    allPosts = (data.posts || []).filter((p: any) => p.id !== postId);
   }
 
-  function addSection(heading = '', body = '') {
-    sectionCount++;
-    const num = String(sectionCount).padStart(2, '0');
-    const div = document.createElement('div');
-    div.className = 'section-block bg-surface border-l-4 border-outline-variant rounded-r-xl p-5 sm:p-6 space-y-3 transition-colors';
-    div.innerHTML = `
-      <div class="flex items-center gap-3">
-        <span class="font-headline italic font-black text-2xl text-primary/40 select-none">${num}</span>
-        <input type="text" placeholder="Section heading..." value="${heading.replace(/"/g, '&quot;')}" class="section-heading flex-1 bg-transparent border-none focus:outline-none font-headline font-bold text-xl text-on-surface placeholder:text-outline/25" />
-        <button class="remove-section text-outline/40 hover:text-error hover:bg-error/10 w-8 h-8 rounded-lg flex items-center justify-center transition-colors" title="Remove section">
-          <span class="material-symbols-outlined text-lg">delete</span>
-        </button>
-      </div>
-      <textarea placeholder="Write your section content here..." rows="6" class="section-body editor-textarea w-full bg-transparent border-none focus:outline-none text-on-surface text-base leading-[1.8] placeholder:text-outline/25 resize-none font-headline font-normal">${body}</textarea>
-    `;
-    document.getElementById('sections-container').appendChild(div);
-    div.querySelector('.remove-section').addEventListener('click', () => { div.remove(); renumberSections(); });
-    const ta = div.querySelector('.section-body');
-    autoResize(ta);
-    ta.addEventListener('input', () => autoResize(ta));
-  }
+  // --- Cover image ---
+  const coverInput = document.getElementById('post-cover-image') as HTMLInputElement;
+  const coverPreview = document.getElementById('cover-preview')!;
+  const coverImg = document.getElementById('cover-img') as HTMLImageElement;
+  const coverUploadInput = document.getElementById('cover-upload') as HTMLInputElement;
 
-  function renumberSections() {
-    const sections = document.querySelectorAll('#sections-container > div');
-    sections.forEach((s, i) => { s.querySelector('.font-headline').textContent = String(i + 1).padStart(2, '0'); });
-    sectionCount = sections.length;
-  }
-
-  document.getElementById('add-section-btn').addEventListener('click', () => addSection());
-
-  // Cover image
-  const coverInput = document.getElementById('post-cover-image');
-  const coverPreview = document.getElementById('cover-preview');
-  const coverImg = document.getElementById('cover-img');
-  const coverUploadZone = document.getElementById('cover-upload-zone');
-  const coverUploadInput = document.getElementById('cover-upload');
-
-  function showCover(url) {
-    coverInput.value = url;
-    coverImg.src = url;
-    coverPreview.classList.remove('hidden');
-    coverUploadZone.classList.add('hidden');
-  }
-
-  function hideCover() {
-    coverInput.value = '';
-    coverImg.src = '';
-    coverPreview.classList.add('hidden');
-    coverUploadZone.classList.remove('hidden');
-  }
-
-  coverUploadZone.addEventListener('click', () => coverUploadInput.click());
-  document.getElementById('remove-cover')?.addEventListener('click', hideCover);
-
+  document.getElementById('cover-upload-btn')!.addEventListener('click', () => coverUploadInput.click());
   coverUploadInput.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
+    const file = (e.target as HTMLInputElement).files?.[0];
     if (!file) return;
     const form = new FormData();
     form.append('file', file);
     form.append('folder', 'blog');
     const res = await fetch('/api/admin/cms/media', { method: 'POST', body: form });
     const data = await res.json();
-    if (data.url) showCover(data.url);
+    if (data.url) {
+      coverInput.value = data.url;
+      coverImg.src = data.url;
+      coverPreview.classList.remove('hidden');
+    }
   });
 
-  // Related posts
-  const relatedSearch = document.getElementById('related-search');
-  const relatedResults = document.getElementById('related-results');
-  const relatedSelected = document.getElementById('related-selected');
-
-  relatedSearch.addEventListener('input', () => {
-    const q = relatedSearch.value.toLowerCase();
-    if (!q) { relatedResults.innerHTML = ''; return; }
-    const matches = allPosts.filter(p => p.title.toLowerCase().includes(q) && !relatedSlugs.includes(p.slug)).slice(0, 5);
-    relatedResults.innerHTML = matches.map(p => `
-      <button class="w-full text-left p-2 text-xs hover:bg-surface-container-highest rounded-lg transition-colors" data-slug="${p.slug}" data-title="${p.title.replace(/"/g, '&quot;')}">${p.title}</button>
-    `).join('');
-    relatedResults.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (relatedSlugs.length >= 3) return;
-        relatedSlugs.push(btn.dataset.slug);
-        renderRelated();
-        relatedSearch.value = '';
-        relatedResults.innerHTML = '';
-      });
-    });
-  });
-
+  // --- Related posts ---
   function renderRelated() {
-    relatedSelected.innerHTML = relatedSlugs.map(slug => {
-      const post = allPosts.find(p => p.slug === slug);
-      return `<div class="flex items-center justify-between p-2 bg-surface-container-lowest rounded-lg text-xs">
-        <span class="truncate">${post?.title || slug}</span>
-        <button class="text-error shrink-0 ml-2" data-remove="${slug}"><span class="material-symbols-outlined text-sm">close</span></button>
-      </div>`;
+    const container = document.getElementById('related-list')!;
+    container.innerHTML = allPosts.map(p => {
+      const sel = relatedSlugs.includes(p.slug);
+      return `<button type="button" data-slug="${p.slug}" class="related-chip px-2 py-0.5 rounded-lg text-[10px] font-bold transition-colors border ${sel
+        ? 'bg-primary/20 border-primary/40 text-primary'
+        : 'bg-surface-container-lowest border-outline-variant text-outline hover:text-on-surface hover:bg-surface-container-highest'
+      }">${p.title}</button>`;
     }).join('');
-    relatedSelected.querySelectorAll('[data-remove]').forEach(btn => {
-      btn.addEventListener('click', () => { relatedSlugs = relatedSlugs.filter(s => s !== btn.dataset.remove); renderRelated(); });
+    container.querySelectorAll('.related-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const slug = (btn as HTMLElement).dataset.slug!;
+        if (relatedSlugs.includes(slug)) relatedSlugs = relatedSlugs.filter(s => s !== slug);
+        else relatedSlugs.push(slug);
+        renderRelated();
+      });
     });
   }
 
-  // Mobile sidebar toggle
-  const editorSidebar = document.getElementById('editor-sidebar');
-  document.getElementById('toggle-sidebar-btn')?.addEventListener('click', () => { editorSidebar.classList.toggle('hidden'); });
-  document.getElementById('close-sidebar-btn')?.addEventListener('click', () => { editorSidebar.classList.add('hidden'); });
-
+  // --- Status UI ---
   function updateStatusUI() {
-    const badge = document.getElementById('current-status');
-    const toggleBtn = document.getElementById('publish-toggle-btn');
-    const viewLink = document.getElementById('view-post-link');
+    const badge = document.getElementById('status-badge')!;
+    const badgeMobile = document.getElementById('status-badge-mobile')!;
+    const toggleBtn = document.getElementById('publish-toggle-btn')!;
+    const viewLink = document.getElementById('view-post-link') as HTMLAnchorElement;
+    const pageTitle = document.getElementById('page-title')!;
 
     if (currentPostStatus === 'published') {
       badge.textContent = 'Published';
-      badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold uppercase bg-secondary-container text-on-secondary-container';
+      badge.className = 'hidden sm:inline px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container';
+      badgeMobile.textContent = 'Published';
+      badgeMobile.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container';
       toggleBtn.textContent = 'Unpublish';
-      toggleBtn.className = 'px-4 py-2 bg-outline text-surface border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all';
+      toggleBtn.className = 'px-3 py-1.5 bg-outline text-surface border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all';
       viewLink.href = `/blog/${currentSlug}`;
       viewLink.classList.remove('hidden');
     } else {
-      badge.textContent = currentPostStatus;
-      badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
+      badge.textContent = 'Draft';
+      badge.className = 'hidden sm:inline px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
+      badgeMobile.textContent = 'Draft';
+      badgeMobile.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
       toggleBtn.textContent = 'Publish';
-      toggleBtn.className = 'px-4 py-2 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all';
+      toggleBtn.className = 'px-3 py-1.5 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all';
       viewLink.classList.add('hidden');
     }
+
+    const title = (document.getElementById('post-title') as HTMLInputElement).value;
+    pageTitle.textContent = title ? `Edit: ${title}` : 'Edit Post';
   }
 
+  // --- Save status helper ---
+  function setSaveStatus(text: string) {
+    const el = document.getElementById('save-status');
+    const elM = document.getElementById('save-status-mobile');
+    if (el) el.textContent = text;
+    if (elM) elM.textContent = text;
+  }
+
+  // --- Collect ---
   function collectPostData() {
-    const sections = [];
-    document.querySelectorAll('#sections-container > div').forEach((div, i) => {
-      sections.push({
-        heading: div.querySelector('.section-heading').value,
-        number: String(i + 1).padStart(2, '0'),
-        body: div.querySelector('.section-body').value,
-      });
-    });
-
-    const blockquote = document.getElementById('content-blockquote').value || undefined;
-    const calloutTitle = document.getElementById('callout-title').value;
-    const calloutBody = document.getElementById('callout-body').value;
-    const callout = calloutTitle || calloutBody ? { title: calloutTitle, body: calloutBody } : undefined;
-
     return {
-      title: document.getElementById('post-title').value || 'Untitled',
-      slug: document.getElementById('post-slug').value || undefined,
-      excerpt: document.getElementById('post-excerpt').value,
-      content: JSON.stringify({ intro: document.getElementById('content-intro').value, sections, blockquote, callout, outro: document.getElementById('content-outro').value }),
-      categoryId: document.getElementById('post-category').value || null,
-      featured: document.getElementById('post-featured').checked,
+      title: (document.getElementById('post-title') as HTMLInputElement).value || 'Untitled',
+      slug: (document.getElementById('post-slug') as HTMLInputElement).value || undefined,
+      excerpt: (document.getElementById('post-excerpt') as HTMLTextAreaElement).value,
+      content: editor.getHTML(),
+      categoryId: (document.getElementById('post-category') as HTMLSelectElement).value || null,
+      featured: (document.getElementById('post-featured') as HTMLInputElement).checked,
       coverImage: coverInput.value || null,
-      iconFallback: document.getElementById('post-icon-fallback').value || null,
-      iconBg: document.getElementById('post-icon-bg').value || null,
-      authorName: document.getElementById('post-author-name').value,
-      authorRole: document.getElementById('post-author-role').value,
-      authorAvatar: document.getElementById('post-author-avatar').value,
-      metaTitle: document.getElementById('post-meta-title').value || null,
-      metaDescription: document.getElementById('post-meta-description').value || null,
+      iconFallback: (document.getElementById('post-icon-fallback') as HTMLInputElement).value || null,
+      iconBg: (document.getElementById('post-icon-bg') as HTMLInputElement).value || null,
+      authorName: (document.getElementById('post-author-name') as HTMLInputElement).value,
+      authorRole: (document.getElementById('post-author-role') as HTMLInputElement).value,
+      authorAvatar: (document.getElementById('post-author-avatar') as HTMLInputElement).value,
+      metaTitle: (document.getElementById('post-meta-title') as HTMLInputElement).value || null,
+      metaDescription: (document.getElementById('post-meta-description') as HTMLTextAreaElement).value || null,
       relatedSlugs,
     };
   }
 
+  // --- Save ---
   async function savePost() {
     const data = collectPostData();
-    const saveStatus = document.getElementById('save-status');
-    saveStatus.textContent = 'Saving...';
+    setSaveStatus('Saving...');
     const res = await fetch(`/api/admin/cms/posts/${postId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     const result = await res.json();
-    saveStatus.textContent = result.success ? 'Saved!' : `Error: ${result.error}`;
-    setTimeout(() => { saveStatus.textContent = ''; }, 3000);
+    setSaveStatus(result.success ? 'Saved!' : `Error: ${result.error}`);
+    setTimeout(() => { setSaveStatus(''); }, 3000);
   }
 
   async function togglePublish() {
@@ -458,24 +604,24 @@ const { id } = Astro.params;
     await savePost();
   }
 
-  document.getElementById('save-btn').addEventListener('click', savePost);
-  document.getElementById('publish-toggle-btn').addEventListener('click', togglePublish);
-
-  // Auto-save
-  setInterval(() => {
-    const data = collectPostData();
-    localStorage.setItem(`cms-edit-${postId}`, JSON.stringify(data));
-    const el = document.getElementById('save-status');
-    el.textContent = 'Auto-saved';
-    setTimeout(() => { if (el.textContent === 'Auto-saved') el.textContent = ''; }, 2000);
-  }, 15000);
+  document.getElementById('save-btn')!.addEventListener('click', savePost);
+  document.getElementById('publish-toggle-btn')!.addEventListener('click', togglePublish);
 
   // Ctrl/Cmd+S
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); savePost(); }
   });
 
-  // Load post
+  // Auto-save
+  setInterval(() => {
+    setSaveStatus('Auto-saved');
+    setTimeout(() => {
+      const el = document.getElementById('save-status');
+      if (el?.textContent === 'Auto-saved') setSaveStatus('');
+    }, 2000);
+  }, 15000);
+
+  // --- Load post ---
   async function loadPost() {
     const res = await fetch(`/api/admin/cms/posts/${postId}`);
     const data = await res.json();
@@ -485,43 +631,42 @@ const { id } = Astro.params;
     currentPostStatus = p.status;
     currentSlug = p.slug;
 
-    document.getElementById('post-title').value = p.title;
-    document.getElementById('post-excerpt').value = p.excerpt;
-    document.getElementById('post-slug').value = p.slug;
-    document.getElementById('content-intro').value = p.content.intro || '';
-    document.getElementById('content-outro').value = p.content.outro || '';
+    (document.getElementById('post-title') as HTMLInputElement).value = p.title;
+    (document.getElementById('post-excerpt') as HTMLTextAreaElement).value = p.excerpt;
+    (document.getElementById('post-slug') as HTMLInputElement).value = p.slug;
 
-    if (p.content.blockquote) document.getElementById('content-blockquote').value = p.content.blockquote;
-    if (p.content.callout) {
-      document.getElementById('callout-title').value = p.content.callout.title || '';
-      document.getElementById('callout-body').value = p.content.callout.body || '';
+    if (p.htmlContent) {
+      editor.commands.setContent(p.htmlContent);
+    } else if (p.content && (p.content.intro || p.content.sections?.length || p.content.outro)) {
+      editor.commands.setContent(jsonContentToHtml(p.content));
     }
 
-    sectionCount = 0;
-    if (p.content.sections?.length) {
-      p.content.sections.forEach(s => addSection(s.heading, s.body));
-    } else {
-      addSection();
+    if (p.categoryId) (document.getElementById('post-category') as HTMLSelectElement).value = p.categoryId;
+    (document.getElementById('post-featured') as HTMLInputElement).checked = p.featured;
+    if (p.coverImage) {
+      coverInput.value = p.coverImage;
+      coverImg.src = p.coverImage;
+      coverPreview.classList.remove('hidden');
     }
 
-    if (p.categoryId) document.getElementById('post-category').value = p.categoryId;
-    document.getElementById('post-featured').checked = p.featured;
-    if (p.coverImage) showCover(p.coverImage);
-
-    document.getElementById('post-icon-fallback').value = p.iconFallback || '';
-    document.getElementById('post-icon-bg').value = p.iconBg || '';
-    document.getElementById('post-author-name').value = p.authorName;
-    document.getElementById('post-author-role').value = p.authorRole;
-    document.getElementById('post-author-avatar').value = p.authorAvatar;
-    document.getElementById('post-meta-title').value = p.metaTitle || '';
-    document.getElementById('post-meta-description').value = p.metaDescription || '';
+    (document.getElementById('post-icon-fallback') as HTMLInputElement).value = p.iconFallback || '';
+    (document.getElementById('post-icon-bg') as HTMLInputElement).value = p.iconBg || '';
+    (document.getElementById('post-author-name') as HTMLInputElement).value = p.authorName;
+    (document.getElementById('post-author-role') as HTMLInputElement).value = p.authorRole;
+    (document.getElementById('post-author-avatar') as HTMLInputElement).value = p.authorAvatar;
+    (document.getElementById('post-meta-title') as HTMLInputElement).value = p.metaTitle || '';
+    (document.getElementById('post-meta-description') as HTMLTextAreaElement).value = p.metaDescription || '';
 
     relatedSlugs = p.relatedSlugs || [];
+
+    if (p.publishedAt) {
+      document.getElementById('published-info')!.classList.remove('hidden');
+      document.getElementById('published-date')!.textContent = new Date(p.publishedAt).toLocaleString();
+    }
+
     updateStatusUI();
-    initAutoResize();
-    updateWordCount();
   }
 
-  // Init
+  // --- Init ---
   loadCategories().then(() => loadPost().then(() => loadAllPosts().then(() => renderRelated())));
 </script>

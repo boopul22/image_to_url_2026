@@ -3,7 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../../lib/db';
 import { generateId } from '../../../../lib/crypto';
-import { generateSlug, calculateReadTime, parseContentJson, mapPostRow, logActivity } from '../../../../lib/cms';
+import { generateSlug, calculateReadTimeAuto, mapPostRow, logActivity } from '../../../../lib/cms';
 
 export const GET: APIRoute = async ({ locals, url }) => {
   if (!locals.user || locals.user.role !== 'admin') {
@@ -78,8 +78,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   const content = typeof body.content === 'string' ? body.content : JSON.stringify(body.content || { intro: '', sections: [], outro: '' });
-  const parsedContent = parseContentJson(content);
-  const readTime = calculateReadTime(parsedContent);
+  const readTime = calculateReadTimeAuto(content);
   const status = body.status || 'draft';
   const publishedAt = status === 'published' ? new Date().toISOString() : null;
 

@@ -16,6 +16,7 @@ export interface Post {
   title: string;
   excerpt: string;
   content: PostContent;
+  htmlContent: string;
   categoryId: string | null;
   categoryName: string | null;
   categoryColor: string | null;
@@ -103,6 +104,32 @@ export function calculateReadTime(content: PostContent): string {
   return `${minutes} min read`;
 }
 
+export function calculateReadTimeFromHtml(html: string): string {
+  const text = html.replace(/<[^>]*>/g, ' ');
+  const words = text.split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  return `${minutes} min read`;
+}
+
+export function isHtmlContent(raw: string): boolean {
+  if (!raw) return false;
+  const trimmed = raw.trim();
+  if (trimmed.startsWith('{')) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (parsed && typeof parsed === 'object' && 'intro' in parsed) return false;
+    } catch {}
+  }
+  return true;
+}
+
+export function calculateReadTimeAuto(raw: string): string {
+  if (isHtmlContent(raw)) {
+    return calculateReadTimeFromHtml(raw);
+  }
+  return calculateReadTime(parseContentJson(raw));
+}
+
 export function parseContentJson(raw: string): PostContent {
   try {
     const parsed = JSON.parse(raw);
@@ -119,12 +146,16 @@ export function parseContentJson(raw: string): PostContent {
 }
 
 export function mapPostRow(row: any): Post {
+  const rawContent = row.content || '';
+  const html = isHtmlContent(rawContent);
+
   return {
     id: row.id,
     slug: row.slug,
     title: row.title,
     excerpt: row.excerpt || '',
-    content: parseContentJson(row.content),
+    content: html ? { intro: '', sections: [], outro: '' } : parseContentJson(rawContent),
+    htmlContent: html ? rawContent : '',
     categoryId: row.category_id || null,
     categoryName: row.category_name || null,
     categoryColor: row.category_color || null,

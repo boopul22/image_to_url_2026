@@ -101,45 +101,49 @@ const articleSchema = {
       </header>
 
       <!-- Article Body -->
-      <div class="prose prose-on-surface max-w-none text-lg leading-relaxed space-y-8">
-        <p class="text-xl font-medium leading-relaxed">
-          {post.content.intro}
-        </p>
+      {post.htmlContent ? (
+        <div class="prose prose-on-surface max-w-none text-lg leading-relaxed blog-html-content" set:html={post.htmlContent} />
+      ) : (
+        <div class="prose prose-on-surface max-w-none text-lg leading-relaxed space-y-8">
+          <p class="text-xl font-medium leading-relaxed">
+            {post.content.intro}
+          </p>
 
-        {post.content.sections.map((section, i) => (
-          <>
-            <h2 class="text-2xl sm:text-3xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary">
-              {section.number}. {section.heading}
-            </h2>
-            <p set:html={section.body} />
+          {post.content.sections.map((section, i) => (
+            <>
+              <h2 class="text-2xl sm:text-3xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary">
+                {section.number}. {section.heading}
+              </h2>
+              <p set:html={section.body} />
 
-            {/* Show blockquote after first section if available */}
-            {i === 0 && post.content.blockquote && (
-              <div class="my-12 p-5 sm:p-8 bg-surface-container border-2 border-primary border-l-8 rounded-lg relative overflow-hidden">
-                <span class="material-symbols-outlined absolute -right-4 -top-4 text-8xl text-primary/5 rotate-12">format_quote</span>
-                <blockquote class="italic font-headline text-2xl text-on-surface relative z-10">
-                  {post.content.blockquote}
-                </blockquote>
-              </div>
-            )}
-
-            {/* Show callout after second section if available */}
-            {i === 1 && post.content.callout && (
-              <div class="my-12 p-5 sm:p-8 bg-tertiary-fixed border-2 border-on-surface rounded-xl hard-shadow flex gap-4 sm:gap-6 items-start" style="box-shadow: 6px 6px 0px 0px rgba(30,26,37,1);">
-                <div class="bg-on-surface text-tertiary-fixed p-3 rounded-lg rotate-[-3deg] flex-shrink-0">
-                  <span class="material-symbols-outlined">lightbulb</span>
+              {/* Show blockquote after first section if available */}
+              {i === 0 && post.content.blockquote && (
+                <div class="my-12 p-5 sm:p-8 bg-surface-container border-2 border-primary border-l-8 rounded-lg relative overflow-hidden">
+                  <span class="material-symbols-outlined absolute -right-4 -top-4 text-8xl text-primary/5 rotate-12">format_quote</span>
+                  <blockquote class="italic font-headline text-2xl text-on-surface relative z-10">
+                    {post.content.blockquote}
+                  </blockquote>
                 </div>
-                <div>
-                  <h4 class="font-headline font-black text-xl mb-2">{post.content.callout.title}</h4>
-                  <p class="text-on-surface/80 leading-snug">{post.content.callout.body}</p>
-                </div>
-              </div>
-            )}
-          </>
-        ))}
+              )}
 
-        <p>{post.content.outro}</p>
-      </div>
+              {/* Show callout after second section if available */}
+              {i === 1 && post.content.callout && (
+                <div class="my-12 p-5 sm:p-8 bg-tertiary-fixed border-2 border-on-surface rounded-xl hard-shadow flex gap-4 sm:gap-6 items-start" style="box-shadow: 6px 6px 0px 0px rgba(30,26,37,1);">
+                  <div class="bg-on-surface text-tertiary-fixed p-3 rounded-lg rotate-[-3deg] flex-shrink-0">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                  </div>
+                  <div>
+                    <h4 class="font-headline font-black text-xl mb-2">{post.content.callout.title}</h4>
+                    <p class="text-on-surface/80 leading-snug">{post.content.callout.body}</p>
+                  </div>
+                </div>
+              )}
+            </>
+          ))}
+
+          <p>{post.content.outro}</p>
+        </div>
+      )}
 
       <!-- Share Section -->
       <section class="mt-12 sm:mt-20 p-5 sm:p-8 bg-secondary-container border-2 border-on-surface rounded-2xl relative">
@@ -203,3 +207,82 @@ const articleSchema = {
 
   <Footer />
 </Layout>
+
+<style>
+  /* Styles for HTML content from TipTap editor */
+  .blog-html-content h2 {
+    font-size: 1.75rem;
+    font-weight: 900;
+    font-style: italic;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    font-family: var(--font-headline), serif;
+    line-height: 1.2;
+  }
+  @media (min-width: 640px) {
+    .blog-html-content h2 { font-size: 2rem; }
+  }
+  .blog-html-content h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-on-surface);
+    font-family: var(--font-headline), serif;
+  }
+  .blog-html-content p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+  .blog-html-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+  .blog-html-content ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+  .blog-html-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  .blog-html-content blockquote {
+    border-left: 6px solid var(--color-primary);
+    background: var(--color-surface-container);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-style: italic;
+    font-family: var(--font-headline), serif;
+    font-size: 1.25rem;
+  }
+  .blog-html-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .blog-html-content a:hover {
+    opacity: 0.8;
+  }
+  .blog-html-content hr {
+    border-color: var(--color-outline-variant);
+    margin: 2rem 0;
+  }
+  .blog-html-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    border: 2px solid var(--color-outline-variant);
+    margin: 1.5rem 0;
+  }
+  .blog-html-content strong {
+    font-weight: 700;
+    color: var(--color-on-surface);
+  }
+  .blog-html-content em {
+    font-style: italic;
+  }
+</style>
