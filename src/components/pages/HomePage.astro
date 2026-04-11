@@ -169,11 +169,11 @@ const pageSchema = [
   <!-- Hero Section — Immediate, action-focused -->
   <section class="sm:min-h-[calc(100dvh-58px)] flex flex-col max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 lg:pt-14 text-center">
     <div>
-      <div class="hidden sm:inline-block bg-primary/15 text-primary px-3 py-1 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-4">
+      <div class="hidden sm:inline-block bg-primary text-on-primary px-3 py-1 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-4">
         {t(locale, 'home.hero.badge')}
       </div>
       <h1 class="font-headline text-[1.75rem] sm:text-5xl lg:text-6xl font-black text-on-background leading-[0.95] tracking-tighter mb-2 sm:mb-4">
-        {t(locale, 'home.hero.headline1')} <span class="text-primary">{t(locale, 'home.hero.headline2')}</span>
+        {t(locale, 'home.hero.headline1')} <span class="text-[#9B7D00]">{t(locale, 'home.hero.headline2')}</span>
       </h1>
       <p class="hidden sm:block font-body text-base lg:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto mb-6">
         {t(locale, 'home.hero.subheadline')}
@@ -466,7 +466,7 @@ const pageSchema = [
             <p class="font-body text-on-surface text-sm sm:text-base mb-4 leading-relaxed">"{t(locale, 'home.testimonials.alex.quote')}"</p>
             <div class="flex items-center gap-3 pt-3 border-t border-outline-variant">
               <div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed flex-shrink-0">
-                <img alt={t(locale, 'home.testimonials.alex.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmfM4WRnmfMyxG2svBrqpKPj662x21sg_veIICHjC_JLq9LmSfOXcYCJ4ssCs2F2ZCkPnSOHcVb8O01YtjxgezrK_k4BNaV-g7hDu-9hjcacLtuX5ZoBjz1LTEvnua-NIy2Doq9_vRlKytHTee0BMajnJN8XKa9zuMbNtz0q-1JrTQ1FhSXR2ylj8AR0SfzTTHWZmnk4ejWT60VvIvTJAwCoR0GBEYUBy4v5EP8f_ox9l1xfhvI89yg_OBBvReml0OIivwZ7lANjc" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+                <img alt={t(locale, 'home.testimonials.alex.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmfM4WRnmfMyxG2svBrqpKPj662x21sg_veIICHjC_JLq9LmSfOXcYCJ4ssCs2F2ZCkPnSOHcVb8O01YtjxgezrK_k4BNaV-g7hDu-9hjcacLtuX5ZoBjz1LTEvnua-NIy2Doq9_vRlKytHTee0BMajnJN8XKa9zuMbNtz0q-1JrTQ1FhSXR2ylj8AR0SfzTTHWZmnk4ejWT60VvIvTJAwCoR0GBEYUBy4v5EP8f_ox9l1xfhvI89yg_OBBvReml0OIivwZ7lANjc=s80" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
               </div>
               <div>
                 <p class="font-bold text-sm">{t(locale, 'home.testimonials.alex.name')}</p>
@@ -480,7 +480,7 @@ const pageSchema = [
             <p class="font-body text-on-surface text-sm sm:text-base mb-4 leading-relaxed">"{t(locale, 'home.testimonials.sarah.quote')}"</p>
             <div class="flex items-center gap-3 pt-3 border-t border-outline-variant">
               <div class="w-10 h-10 rounded-full overflow-hidden bg-tertiary-fixed flex-shrink-0">
-                <img alt={t(locale, 'home.testimonials.sarah.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmULj_9vdxghm3rYVHcgb_MFynGE4ZKLJlSHqhJfNJ6Lb9OPzYqFnEF5UrK4_WxSwhU44EinVXaHTJ5norK1kiHdu-NngoRyJb11gThlA2YbcQRLvdo4Kv3omAbV2tESDfnjQ1Y4Ko7VxsEtFrK0Qeapfg6wYms5eJxwyfye4bXa2C-aJv1poP7An_GRxMwe63CTy9OKwniS4IGa5QyM-lXJMBROj3nVOY4WOi533zDEUY7KG93khb6cU4StgCpTOKLYpbY8cFDrU" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+                <img alt={t(locale, 'home.testimonials.sarah.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmULj_9vdxghm3rYVHcgb_MFynGE4ZKLJlSHqhJfNJ6Lb9OPzYqFnEF5UrK4_WxSwhU44EinVXaHTJ5norK1kiHdu-NngoRyJb11gThlA2YbcQRLvdo4Kv3omAbV2tESDfnjQ1Y4Ko7VxsEtFrK0Qeapfg6wYms5eJxwyfye4bXa2C-aJv1poP7An_GRxMwe63CTy9OKwniS4IGa5QyM-lXJMBROj3nVOY4WOi533zDEUY7KG93khb6cU4StgCpTOKLYpbY8cFDrU=s80" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
               </div>
               <div>
                 <p class="font-bold text-sm">{t(locale, 'home.testimonials.sarah.name')}</p>
@@ -494,7 +494,7 @@ const pageSchema = [
             <p class="font-body text-on-surface text-sm sm:text-base mb-4 leading-relaxed">"{t(locale, 'home.testimonials.jordan.quote')}"</p>
             <div class="flex items-center gap-3 pt-3 border-t border-outline-variant">
               <div class="w-10 h-10 rounded-full overflow-hidden bg-secondary-fixed flex-shrink-0">
-                <img alt={t(locale, 'home.testimonials.jordan.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKK7PpHY1AWcvGia_m2KYL4o4aEjQdoqOv_DuyRnN8lShFbVhM-magAFEVXcgUQe18pHEMb80i65kGHD5Vj_4iEGvljOEFaSQNhNbr3SifE-1YY9PO7mlEVTd_2fY5DoSg9pYNMY-oAwYP_OSZwME6WYVjW3x3kJsZc4tooWZugNvBnAwfaHxw08oFrl_21eJzle-ShNxUmb9h9BMeWWr1QjDv8fVN79fQZ6eewZxxn7oHkL3ft1fNKW_iYj_4Choh_EPvqhsC2a0" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+                <img alt={t(locale, 'home.testimonials.jordan.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKK7PpHY1AWcvGia_m2KYL4o4aEjQdoqOv_DuyRnN8lShFbVhM-magAFEVXcgUQe18pHEMb80i65kGHD5Vj_4iEGvljOEFaSQNhNbr3SifE-1YY9PO7mlEVTd_2fY5DoSg9pYNMY-oAwYP_OSZwME6WYVjW3x3kJsZc4tooWZugNvBnAwfaHxw08oFrl_21eJzle-ShNxUmb9h9BMeWWr1QjDv8fVN79fQZ6eewZxxn7oHkL3ft1fNKW_iYj_4Choh_EPvqhsC2a0=s80" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
               </div>
               <div>
                 <p class="font-bold text-sm">{t(locale, 'home.testimonials.jordan.name')}</p>

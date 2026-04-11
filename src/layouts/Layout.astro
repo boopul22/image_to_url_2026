@@ -47,8 +47,7 @@ const sitewideSchemas = [
       "width": 512,
       "height": 512
     },
-    "description": "ImageToURL is a cloud-based image hosting service that converts uploaded images into permanent, CDN-delivered shareable URLs instantly.",
-    "sameAs": []
+    "description": "ImageToURL is a cloud-based image hosting service that converts uploaded images into permanent, CDN-delivered shareable URLs instantly."
   },
   {
     "@context": "https://schema.org",
@@ -159,7 +158,9 @@ function hreflangUrl(loc: Locale): string {
     <slot name="head" />
   </head>
   <body class="bg-background font-body text-on-surface relative overflow-x-hidden">
-    <slot />
+    <main>
+      <slot />
+    </main>
     <script>
       // Scroll-reveal: dual strategy (IO + scroll fallback)
       const revealed = new WeakSet();
