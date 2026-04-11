@@ -10,6 +10,11 @@ export interface PostContent {
   outro: string;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface Post {
   id: string;
   slug: string;
@@ -32,6 +37,7 @@ export interface Post {
   metaTitle: string | null;
   metaDescription: string | null;
   relatedSlugs: string[];
+  faqItems: FAQItem[];
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string;
@@ -171,6 +177,7 @@ export function mapPostRow(row: any): Post {
     metaTitle: row.meta_title || null,
     metaDescription: row.meta_description || null,
     relatedSlugs: parseJsonArray(row.related_slugs),
+    faqItems: parseJsonFaq(row.faq_items),
     publishedAt: row.published_at || null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -178,6 +185,16 @@ export function mapPostRow(row: any): Post {
 }
 
 function parseJsonArray(raw: string | null): string[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function parseJsonFaq(raw: string | null): FAQItem[] {
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);

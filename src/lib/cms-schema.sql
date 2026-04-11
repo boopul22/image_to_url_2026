@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS posts (
   meta_title TEXT,
   meta_description TEXT,
   related_slugs TEXT NOT NULL DEFAULT '[]',
+  faq_items TEXT NOT NULL DEFAULT '[]',
   published_at TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))

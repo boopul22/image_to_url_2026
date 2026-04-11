@@ -61,7 +61,7 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
          author_name = ?, author_role = ?, author_avatar = ?,
          featured = ?, status = ?, cover_image = ?, icon_fallback = ?, icon_bg = ?,
          read_time = ?, meta_title = ?, meta_description = ?,
-         related_slugs = ?, published_at = ?, updated_at = datetime('now')
+         related_slugs = ?, faq_items = ?, published_at = ?, updated_at = datetime('now')
        WHERE id = ?`,
     )
     .bind(
@@ -82,6 +82,7 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
       body.metaTitle !== undefined ? body.metaTitle : (existing as any).meta_title,
       body.metaDescription !== undefined ? body.metaDescription : (existing as any).meta_description,
       body.relatedSlugs !== undefined ? JSON.stringify(body.relatedSlugs) : (existing as any).related_slugs,
+      body.faqItems !== undefined ? JSON.stringify(body.faqItems) : ((existing as any).faq_items || '[]'),
       publishedAt,
       id,
     )

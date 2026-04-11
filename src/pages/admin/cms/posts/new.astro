@@ -162,8 +162,8 @@ const user = Astro.locals.user!;
     </div>
 
     <div>
-      <span class="sf-label">Description</span>
-      <textarea id="post-excerpt" placeholder="Short excerpt..." rows="2" class="sf-input resize-none"></textarea>
+      <span class="sf-label">Excerpt</span>
+      <textarea id="post-excerpt" placeholder="Short excerpt for listing cards..." rows="2" class="sf-input resize-none"></textarea>
     </div>
 
     <div>
@@ -201,6 +201,19 @@ const user = Astro.locals.user!;
       <div id="related-list" class="mt-1 flex flex-wrap gap-1"></div>
     </div>
 
+    <!-- FAQ -->
+    <div class="pt-2 border-t border-outline-variant/50">
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="sf-label !mb-0">FAQ</span>
+        <button type="button" id="add-faq-btn" class="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold text-primary hover:bg-primary/10 transition-colors">
+          <span class="material-symbols-outlined text-xs">add_circle</span> Add
+        </button>
+      </div>
+      <div id="faq-list" class="space-y-2">
+        <p id="faq-empty" class="text-[10px] text-outline italic">No FAQ items yet</p>
+      </div>
+    </div>
+
     <!-- SEO -->
     <div class="pt-2 border-t border-outline-variant/50">
       <span class="sf-label">Meta Title</span>
@@ -208,7 +221,7 @@ const user = Astro.locals.user!;
     </div>
     <div>
       <span class="sf-label">Meta Description</span>
-      <textarea id="post-meta-description" placeholder="Meta description" rows="2" class="sf-input resize-none !text-xs"></textarea>
+      <textarea id="post-meta-description" placeholder="Meta description for search engines..." rows="2" class="sf-input resize-none !text-xs"></textarea>
     </div>
   </div>
 </template>
@@ -595,6 +608,55 @@ const user = Astro.locals.user!;
     });
   }
 
+  // --- FAQ management ---
+  let faqItems: Array<{ question: string; answer: string }> = [];
+
+  function renderFaq() {
+    const list = document.getElementById('faq-list')!;
+    const empty = document.getElementById('faq-empty');
+    if (empty) empty.style.display = faqItems.length ? 'none' : '';
+
+    // Remove existing FAQ entries (keep the empty message)
+    list.querySelectorAll('.faq-entry').forEach(el => el.remove());
+
+    faqItems.forEach((faq, i) => {
+      const div = document.createElement('div');
+      div.className = 'faq-entry rounded-lg border border-outline-variant bg-surface-container-lowest p-2 space-y-1.5';
+      div.innerHTML = `
+        <div class="flex items-start gap-1">
+          <div class="flex-1">
+            <span class="sf-label">Q${i + 1}</span>
+            <input type="text" value="${faq.question.replace(/"/g, '&quot;')}" placeholder="Question..." class="sf-input !text-xs faq-q" data-index="${i}" />
+          </div>
+          <button type="button" class="faq-remove flex-none mt-3 w-6 h-6 rounded flex items-center justify-center text-outline hover:text-error hover:bg-error/10 transition-colors" data-index="${i}">
+            <span class="material-symbols-outlined text-sm">delete</span>
+          </button>
+        </div>
+        <div>
+          <span class="sf-label">Answer</span>
+          <textarea placeholder="Answer..." rows="2" class="sf-input resize-none !text-xs faq-a" data-index="${i}">${faq.answer}</textarea>
+        </div>
+      `;
+      list.appendChild(div);
+
+      div.querySelector('.faq-q')!.addEventListener('input', (e) => {
+        faqItems[i].question = (e.target as HTMLInputElement).value;
+      });
+      div.querySelector('.faq-a')!.addEventListener('input', (e) => {
+        faqItems[i].answer = (e.target as HTMLTextAreaElement).value;
+      });
+      div.querySelector('.faq-remove')!.addEventListener('click', () => {
+        faqItems.splice(i, 1);
+        renderFaq();
+      });
+    });
+  }
+
+  document.getElementById('add-faq-btn')!.addEventListener('click', () => {
+    faqItems.push({ question: '', answer: '' });
+    renderFaq();
+  });
+
   // --- Save status helper (updates both desktop and mobile) ---
   function setSaveStatus(text: string) {
     const el = document.getElementById('save-status');
@@ -622,6 +684,7 @@ const user = Astro.locals.user!;
       metaTitle: (document.getElementById('post-meta-title') as HTMLInputElement).value || null,
       metaDescription: (document.getElementById('post-meta-description') as HTMLTextAreaElement).value || null,
       relatedSlugs,
+      faqItems,
     };
   }
 
@@ -687,6 +750,7 @@ const user = Astro.locals.user!;
       (document.getElementById('post-author-role') as HTMLInputElement).value = data.authorRole || '';
       (document.getElementById('post-author-avatar') as HTMLInputElement).value = data.authorAvatar || defaultAuthorAvatar;
       if (data.relatedSlugs) relatedSlugs = data.relatedSlugs;
+      if (data.faqItems) { faqItems = data.faqItems; renderFaq(); }
     } catch {}
   }
 

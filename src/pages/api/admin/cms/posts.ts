@@ -84,8 +84,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   await db
     .prepare(
-      `INSERT INTO posts (id, slug, title, excerpt, content, category_id, author_name, author_role, author_avatar, featured, status, cover_image, icon_fallback, icon_bg, read_time, meta_title, meta_description, related_slugs, published_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO posts (id, slug, title, excerpt, content, category_id, author_name, author_role, author_avatar, featured, status, cover_image, icon_fallback, icon_bg, read_time, meta_title, meta_description, related_slugs, faq_items, published_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     )
     .bind(
       id, slug,
@@ -105,6 +105,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       body.metaTitle || null,
       body.metaDescription || null,
       JSON.stringify(body.relatedSlugs || []),
+      JSON.stringify(body.faqItems || []),
       publishedAt,
     )
     .run();
