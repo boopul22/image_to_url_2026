@@ -158,11 +158,6 @@ const { id } = Astro.params;
     </div>
 
     <div>
-      <span class="sf-label">Description</span>
-      <textarea id="post-excerpt" placeholder="Short description of the post..." rows="2" class="sf-input resize-none"></textarea>
-    </div>
-
-    <div>
       <span class="sf-label">Featured Image</span>
       <div class="flex gap-1.5">
         <input id="post-cover-image" type="text" placeholder="URL or upload" class="sf-input flex-1 !text-xs" />
@@ -627,7 +622,7 @@ const { id } = Astro.params;
     return {
       title: (document.getElementById('post-title') as HTMLInputElement).value || 'Untitled',
       slug: (document.getElementById('post-slug') as HTMLInputElement).value || undefined,
-      excerpt: (document.getElementById('post-excerpt') as HTMLTextAreaElement).value,
+      excerpt: (document.getElementById('post-meta-description') as HTMLTextAreaElement).value || '',
       content: editor.getHTML(),
       categoryId: (document.getElementById('post-category') as HTMLSelectElement).value || null,
       featured: (document.getElementById('post-featured') as HTMLInputElement).checked,
@@ -694,7 +689,10 @@ const { id } = Astro.params;
     currentSlug = p.slug;
 
     (document.getElementById('post-title') as HTMLInputElement).value = p.title;
-    (document.getElementById('post-excerpt') as HTMLTextAreaElement).value = p.excerpt;
+    // If no meta description set, use excerpt as the description
+    if (!p.metaDescription && p.excerpt) {
+      (document.getElementById('post-meta-description') as HTMLTextAreaElement).value = p.excerpt;
+    }
     (document.getElementById('post-slug') as HTMLInputElement).value = p.slug;
 
     if (p.htmlContent) {
