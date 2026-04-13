@@ -85,6 +85,7 @@ const { id } = Astro.params;
             <button type="button" data-action="link" title="Link" class="tb-btn"><span class="material-symbols-outlined text-base">link</span></button>
             <button type="button" data-action="image" title="Insert Image" class="tb-btn"><span class="material-symbols-outlined text-base">image</span></button>
             <button type="button" data-action="horizontalRule" title="Horizontal Rule" class="tb-btn"><span class="material-symbols-outlined text-base">horizontal_rule</span></button>
+            <button type="button" data-action="table" title="Insert Table" class="tb-btn"><span class="material-symbols-outlined text-base">table</span></button>
             <div class="tb-divider"></div>
             <button type="button" data-action="undo" title="Undo" class="tb-btn"><span class="material-symbols-outlined text-base">undo</span></button>
             <button type="button" data-action="redo" title="Redo" class="tb-btn"><span class="material-symbols-outlined text-base">redo</span></button>
@@ -109,6 +110,7 @@ const { id } = Astro.params;
           <button type="button" data-action="blockquote" title="Blockquote" class="tb-btn"><span class="material-symbols-outlined text-base">format_quote</span></button>
           <button type="button" data-action="link" title="Link" class="tb-btn"><span class="material-symbols-outlined text-base">link</span></button>
           <button type="button" data-action="image" title="Insert Image" class="tb-btn"><span class="material-symbols-outlined text-base">image</span></button>
+          <button type="button" data-action="table" title="Insert Table" class="tb-btn"><span class="material-symbols-outlined text-base">table</span></button>
           <div class="tb-divider"></div>
           <button type="button" data-action="undo" title="Undo" class="tb-btn"><span class="material-symbols-outlined text-base">undo</span></button>
           <button type="button" data-action="redo" title="Redo" class="tb-btn"><span class="material-symbols-outlined text-base">redo</span></button>
@@ -268,6 +270,11 @@ const { id } = Astro.params;
   :global(.tiptap hr) { border-color: var(--color-outline-variant); margin: 1.5rem 0; }
   :global(.tiptap img) { max-width: 100%; height: auto; border-radius: 0.75rem; border: 2px solid var(--color-outline-variant); margin: 1rem 0; }
   :global(.tiptap p.is-editor-empty:first-child::before) { content: attr(data-placeholder); color: var(--color-outline); opacity: 0.4; pointer-events: none; float: left; height: 0; }
+  :global(.tiptap table) { border-collapse: collapse; width: 100%; margin: 1rem 0; border: 2px solid var(--color-outline-variant); border-radius: 0.5rem; overflow: hidden; }
+  :global(.tiptap th) { background: var(--color-surface-container); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.5rem 0.75rem; border: 1px solid var(--color-outline-variant); text-align: left; }
+  :global(.tiptap td) { padding: 0.5rem 0.75rem; border: 1px solid var(--color-outline-variant); vertical-align: top; }
+  :global(.tiptap .selectedCell:after) { background: var(--color-primary); opacity: 0.1; content: ''; left: 0; right: 0; top: 0; bottom: 0; pointer-events: none; position: absolute; z-index: 2; }
+  :global(.tiptap .tableWrapper) { overflow-x: auto; }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -279,6 +286,7 @@ const { id } = Astro.params;
   import Link from '@tiptap/extension-link';
   import Image from '@tiptap/extension-image';
   import Placeholder from '@tiptap/extension-placeholder';
+  import { Table, TableRow, TableHeader, TableCell } from '@tiptap/extension-table';
 
   const postId = document.querySelector('[data-post-id]')!.getAttribute('data-post-id')!;
   let relatedSlugs: string[] = [];
@@ -298,6 +306,10 @@ const { id } = Astro.params;
       Link.configure({ openOnClick: false, autolink: true, HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' } }),
       Image.configure({ inline: false, allowBase64: false }),
       Placeholder.configure({ placeholder: 'Start writing your post content...' }),
+      Table.configure({ resizable: false }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     content: '',
     onUpdate: () => updatePreview(),
@@ -403,6 +415,7 @@ const { id } = Astro.params;
       }
       case 'image': imageInput.click(); break;
       case 'horizontalRule': editor.chain().focus().setHorizontalRule().run(); break;
+      case 'table': editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(); break;
       case 'undo': editor.chain().focus().undo().run(); break;
       case 'redo': editor.chain().focus().redo().run(); break;
     }
