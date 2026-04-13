@@ -6,6 +6,7 @@ import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config — imagetourl.cloud
 export default defineConfig({
   site: 'https://imagetourl.cloud',
+  trailingSlash: 'ignore',
   adapter: cloudflare(),
   i18n: {
     defaultLocale: 'en',
