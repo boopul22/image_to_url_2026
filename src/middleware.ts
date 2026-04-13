@@ -14,17 +14,11 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   }
 
   // Redirect root-level i18n pages to /en/ equivalents to prevent duplicate content
+  // Strip trailing slash before matching so /blog/ and /blog both redirect correctly
+  const cleanedPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
   const rootToLocaleRedirects = ['/blog', '/features', '/pricing', '/docs', '/privacy', '/terms'];
-  if (rootToLocaleRedirects.includes(path)) {
-    return redirect(`/en${path}`, 301);
-  }
-
-  // Trailing slash consistency: redirect /page/ → /page (except locale roots like /en/ and /404)
-  // Prevents duplicate content issues for SEO
-  if (path !== '/' && path.endsWith('/') && !path.match(/^\/[a-z]{2}\/$/) && path !== '/404/') {
-    const cleanPath = path.replace(/\/+$/, '');
-    const newUrl = new URL(cleanPath + url0.search, url0.origin);
-    return redirect(newUrl.pathname + newUrl.search, 301);
+  if (rootToLocaleRedirects.includes(cleanedPath)) {
+    return redirect(`/en${cleanedPath}`, 301);
   }
 
   // Locale detection — force English for admin/dashboard/api routes
