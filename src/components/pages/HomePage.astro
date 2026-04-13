@@ -167,25 +167,25 @@ const pageSchema = [
   <Nav activePage="home" />
 
   <!-- Hero Section — Immediate, action-focused -->
-  <section class="sm:min-h-[calc(100dvh-58px)] flex flex-col max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 lg:pt-14 text-center">
+  <section class="flex flex-col max-w-3xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 text-center">
     <div>
-      <div class="hidden sm:inline-block bg-primary text-on-primary px-3 py-1 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-4">
+      <div class="hidden sm:inline-block bg-primary text-on-primary px-3 py-1 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-3">
         {t(locale, 'home.hero.badge')}
       </div>
-      <h1 class="font-headline text-[1.75rem] sm:text-5xl lg:text-6xl font-black text-on-background leading-[0.95] tracking-tighter mb-2 sm:mb-4">
+      <h1 class="font-headline text-[1.75rem] sm:text-3xl lg:text-4xl font-black text-on-background leading-[0.95] tracking-tighter mb-2 sm:mb-3">
         {t(locale, 'home.hero.headline1')} <span class="text-[#9B7D00]">{t(locale, 'home.hero.headline2')}</span>
       </h1>
-      <p class="hidden sm:block font-body text-base lg:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto mb-6">
+      <p class="hidden sm:block font-body text-sm lg:text-base text-on-surface-variant leading-relaxed max-w-md mx-auto mb-4">
         {t(locale, 'home.hero.subheadline')}
       </p>
     </div>
 
     <!-- Upload Area -->
-    <div class="w-full max-w-2xl lg:max-w-3xl mx-auto">
+    <div class="w-full max-w-xl lg:max-w-2xl mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
       <div
         id="upload-panel"
-        class="bg-surface-container rounded-2xl lg:rounded-3xl border border-outline-variant overflow-hidden transition-colors"
+        class="bg-surface-container rounded-2xl border border-outline-variant overflow-hidden transition-colors"
         data-uploading={t(locale, 'home.upload.uploading')}
         data-copied={t(locale, 'home.upload.copied')}
         data-copy={t(locale, 'home.upload.copy')}
@@ -196,14 +196,14 @@ const pageSchema = [
         data-uploading-file={t(locale, 'home.upload.uploadingFile')}
       >
         <!-- State: idle / uploading -->
-        <div id="state-idle" class="p-4 sm:p-8 lg:p-12">
-          <div id="drop-zone" class="flex flex-col items-center gap-3 sm:gap-5 lg:gap-6 cursor-pointer" role="button" tabindex="0">
-            <span class="material-symbols-outlined text-on-tertiary-container text-3xl sm:text-5xl lg:text-6xl" id="upload-icon">upload_file</span>
+        <div id="state-idle" class="p-4 sm:p-6">
+          <div id="drop-zone" class="flex flex-col items-center gap-3 sm:gap-4 cursor-pointer" role="button" tabindex="0">
+            <span class="material-symbols-outlined text-on-tertiary-container text-3xl sm:text-4xl" id="upload-icon">upload_file</span>
             <div class="text-center">
-              <p class="text-on-surface font-bold text-base sm:text-lg lg:text-xl font-headline" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
-              <p class="text-xs sm:text-sm lg:text-base text-outline mt-1.5" id="upload-subtext">{t(locale, 'home.upload.formats')}</p>
+              <p class="text-on-surface font-bold text-base sm:text-lg font-headline" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
+              <p class="text-xs sm:text-sm text-outline mt-1" id="upload-subtext">{t(locale, 'home.upload.formats')}</p>
             </div>
-            <div class="bg-primary text-on-primary px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 rounded-lg lg:rounded-xl font-bold text-sm sm:text-base lg:text-lg uppercase tracking-wider active:scale-95 transition-transform" id="upload-btn">
+            <div class="bg-primary text-on-primary px-8 sm:px-10 py-3 rounded-lg font-bold text-sm uppercase tracking-wider active:scale-95 transition-transform" id="upload-btn">
               {t(locale, 'home.upload.selectFile')}
             </div>
           </div>
@@ -213,7 +213,7 @@ const pageSchema = [
         </div>
 
         <!-- State: success -->
-        <div id="state-success" class="p-5 sm:p-8 lg:p-12 hidden">
+        <div id="state-success" class="p-4 sm:p-6 hidden">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl">check_circle</span>
             <span class="font-bold text-secondary text-sm sm:text-base">{t(locale, 'home.upload.uploaded')}</span>
@@ -228,14 +228,19 @@ const pageSchema = [
             </button>
           </div>
           <!-- ExtractPics cross-promo tip -->
-          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="block mt-4 pt-3 border-t border-outline-variant/50 hover:opacity-80 transition-opacity group">
-            <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
-            <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="flex items-center gap-3 mt-4 pt-3 border-t border-outline-variant/50 hover:opacity-90 transition-opacity group">
+            <div class="flex-1 min-w-0">
+              <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
+              <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+            </div>
+            <span class="flex-shrink-0 inline-flex items-center gap-1 bg-primary text-on-primary px-3 py-2 rounded-lg font-bold text-xs uppercase tracking-wider group-hover:translate-x-0.5 transition-transform">
+              Try now <span class="material-symbols-outlined text-sm">open_in_new</span>
+            </span>
           </a>
         </div>
 
         <!-- State: error -->
-        <div id="state-error" class="p-5 sm:p-8 lg:p-12 hidden">
+        <div id="state-error" class="p-4 sm:p-6 hidden">
           <div class="flex items-center gap-3">
             <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
             <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0" id="error-text">{t(locale, 'home.upload.failed')}</span>
@@ -250,16 +255,21 @@ const pageSchema = [
             <span class="material-symbols-outlined text-sm text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
           </a>
           <!-- ExtractPics cross-promo tip -->
-          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" id="error-promo" class="hidden mt-3 pt-3 border-t border-outline-variant/50 hover:opacity-80 transition-opacity group">
-            <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
-            <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" id="error-promo" class="hidden items-center gap-3 mt-3 pt-3 border-t border-outline-variant/50 hover:opacity-90 transition-opacity group">
+            <div class="flex-1 min-w-0">
+              <span class="text-xs sm:text-sm font-bold text-on-background">Try our new tool — ExtractPics</span>
+              <p class="text-xs sm:text-sm font-medium text-error mt-1">Scrape images from any webpage — up to 3 pages deep</p>
+            </div>
+            <span class="flex-shrink-0 inline-flex items-center gap-1 bg-primary text-on-primary px-3 py-2 rounded-lg font-bold text-xs uppercase tracking-wider group-hover:translate-x-0.5 transition-transform">
+              Try now <span class="material-symbols-outlined text-sm">open_in_new</span>
+            </span>
           </a>
         </div>
       </div>
     </div>
 
     <!-- Trust Signals — pushed to bottom of viewport -->
-    <div class="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 sm:mt-8 pt-0 sm:pt-0 pb-4 sm:pb-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
+    <div class="flex flex-wrap justify-center gap-3 sm:gap-5 mt-4 sm:mt-6 pb-4 sm:pb-5 text-xs text-on-surface-variant font-label font-bold uppercase tracking-wider">
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> <span class="hidden sm:inline">{t(locale, 'home.trust.cdn')}</span></span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">lock</span> <span class="hidden sm:inline">{t(locale, 'home.trust.ssl')}</span></span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">link</span> <span class="hidden sm:inline">{t(locale, 'home.trust.permanent')}</span></span>
@@ -268,55 +278,55 @@ const pageSchema = [
   </section>
 
   <!-- Stats Bar -->
-  <section class="py-6 sm:py-10 bg-surface-container-low border-y border-outline-variant/40">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+  <section class="py-6 sm:py-8 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 text-center">
       <div class="reveal">
-        <div class="font-headline text-2xl sm:text-4xl font-black text-primary">{t(locale, 'home.stats.images')}</div>
+        <div class="font-headline text-2xl sm:text-3xl font-black text-primary">{t(locale, 'home.stats.images')}</div>
         <div class="font-label text-[10px] sm:text-xs uppercase tracking-widest text-on-surface-variant font-bold mt-1">{t(locale, 'home.stats.imagesLabel')}</div>
       </div>
       <div class="reveal">
-        <div class="font-headline text-2xl sm:text-4xl font-black text-primary">{t(locale, 'home.stats.uptime')}</div>
+        <div class="font-headline text-2xl sm:text-3xl font-black text-primary">{t(locale, 'home.stats.uptime')}</div>
         <div class="font-label text-[10px] sm:text-xs uppercase tracking-widest text-on-surface-variant font-bold mt-1">{t(locale, 'home.stats.uptimeLabel')}</div>
       </div>
       <div class="reveal">
-        <div class="font-headline text-2xl sm:text-4xl font-black text-primary">{t(locale, 'home.stats.countries')}</div>
+        <div class="font-headline text-2xl sm:text-3xl font-black text-primary">{t(locale, 'home.stats.countries')}</div>
         <div class="font-label text-[10px] sm:text-xs uppercase tracking-widest text-on-surface-variant font-bold mt-1">{t(locale, 'home.stats.countriesLabel')}</div>
       </div>
       <div class="reveal">
-        <div class="font-headline text-2xl sm:text-4xl font-black text-primary">{t(locale, 'home.stats.signup')}</div>
+        <div class="font-headline text-2xl sm:text-3xl font-black text-primary">{t(locale, 'home.stats.signup')}</div>
         <div class="font-label text-[10px] sm:text-xs uppercase tracking-widest text-on-surface-variant font-bold mt-1">{t(locale, 'home.stats.signupLabel')}</div>
       </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
-    <div class="text-center mb-8 sm:mb-14 reveal">
-      <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.howItWorks.title')}</h2>
-      <p class="font-body text-on-surface-variant text-sm sm:text-base">{t(locale, 'home.howItWorks.subtitle')}</p>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="text-center mb-5 sm:mb-8 reveal">
+      <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.howItWorks.title')}</h2>
+      <p class="font-body text-on-surface-variant text-sm">{t(locale, 'home.howItWorks.subtitle')}</p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 reveal-stagger">
-      <div class="reveal bg-surface-container rounded-2xl p-6 sm:p-8 relative">
-        <div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-base font-black mb-4">1</div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 reveal-stagger">
+      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 relative">
+        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-sm font-black mb-3">1</div>
         <div>
-          <span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-3 block">cloud_upload</span>
-          <h3 class="font-headline text-xl sm:text-2xl font-black text-on-background mb-2">{t(locale, 'home.howItWorks.upload.title')}</h3>
+          <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl mb-2 block">cloud_upload</span>
+          <h3 class="font-headline text-lg sm:text-xl font-black text-on-background mb-1.5">{t(locale, 'home.howItWorks.upload.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.howItWorks.upload.description')}</p>
         </div>
       </div>
-      <div class="reveal bg-surface-container rounded-2xl p-6 sm:p-8 relative">
-        <div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-base font-black mb-4">2</div>
+      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 relative">
+        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-sm font-black mb-3">2</div>
         <div>
-          <span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-3 block">bolt</span>
-          <h3 class="font-headline text-xl sm:text-2xl font-black text-on-background mb-2">{t(locale, 'home.howItWorks.convert.title')}</h3>
+          <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl mb-2 block">bolt</span>
+          <h3 class="font-headline text-lg sm:text-xl font-black text-on-background mb-1.5">{t(locale, 'home.howItWorks.convert.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.howItWorks.convert.description')}</p>
         </div>
       </div>
-      <div class="reveal bg-surface-container rounded-2xl p-6 sm:p-8 relative">
-        <div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-base font-black mb-4">3</div>
+      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 relative">
+        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-sm font-black mb-3">3</div>
         <div>
-          <span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-3 block">share</span>
-          <h3 class="font-headline text-xl sm:text-2xl font-black text-on-background mb-2">{t(locale, 'home.howItWorks.share.title')}</h3>
+          <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl mb-2 block">share</span>
+          <h3 class="font-headline text-lg sm:text-xl font-black text-on-background mb-1.5">{t(locale, 'home.howItWorks.share.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.howItWorks.share.description')}</p>
         </div>
       </div>
@@ -324,40 +334,40 @@ const pageSchema = [
   </section>
 
   <!-- Features Grid -->
-  <section class="py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-8 sm:mb-14 reveal">
-        <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.features.title')}</h2>
-        <p class="font-body text-on-surface-variant text-sm sm:text-base">{t(locale, 'home.features.description')}</p>
+  <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-5 sm:mb-8 reveal">
+        <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.features.title')}</h2>
+        <p class="font-body text-on-surface-variant text-sm">{t(locale, 'home.features.description')}</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 reveal-stagger">
-        <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 hover:-translate-y-0.5 transition-transform cursor-default">
-          <span class="material-symbols-outlined text-primary text-3xl mb-3 block">rocket_launch</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 reveal-stagger">
+        <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5 hover:-translate-y-0.5 transition-transform cursor-default">
+          <span class="material-symbols-outlined text-primary text-2xl mb-2 block">rocket_launch</span>
           <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.features.grid.cdn.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.features.grid.cdn.description')}</p>
         </div>
-        <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 hover:-translate-y-0.5 transition-transform cursor-default">
-          <span class="material-symbols-outlined text-primary text-3xl mb-3 block">lock_open</span>
+        <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5 hover:-translate-y-0.5 transition-transform cursor-default">
+          <span class="material-symbols-outlined text-primary text-2xl mb-2 block">lock_open</span>
           <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.features.grid.noSignup.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.features.grid.noSignup.description')}</p>
         </div>
-        <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 hover:-translate-y-0.5 transition-transform cursor-default">
-          <span class="material-symbols-outlined text-primary text-3xl mb-3 block">link</span>
+        <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5 hover:-translate-y-0.5 transition-transform cursor-default">
+          <span class="material-symbols-outlined text-primary text-2xl mb-2 block">link</span>
           <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.features.grid.permanent.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.features.grid.permanent.description')}</p>
         </div>
-        <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 hover:-translate-y-0.5 transition-transform cursor-default">
-          <span class="material-symbols-outlined text-primary text-3xl mb-3 block">https</span>
+        <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5 hover:-translate-y-0.5 transition-transform cursor-default">
+          <span class="material-symbols-outlined text-primary text-2xl mb-2 block">https</span>
           <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.features.grid.ssl.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.features.grid.ssl.description')}</p>
         </div>
-        <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 hover:-translate-y-0.5 transition-transform cursor-default">
-          <span class="material-symbols-outlined text-primary text-3xl mb-3 block">flash_on</span>
+        <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5 hover:-translate-y-0.5 transition-transform cursor-default">
+          <span class="material-symbols-outlined text-primary text-2xl mb-2 block">flash_on</span>
           <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.features.grid.instant.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.features.grid.instant.description')}</p>
         </div>
-        <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6 hover:-translate-y-0.5 transition-transform cursor-default">
-          <span class="material-symbols-outlined text-primary text-3xl mb-3 block">aspect_ratio</span>
+        <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5 hover:-translate-y-0.5 transition-transform cursor-default">
+          <span class="material-symbols-outlined text-primary text-2xl mb-2 block">aspect_ratio</span>
           <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.features.grid.resize.title')}</h3>
           <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.features.grid.resize.description')}</p>
         </div>
@@ -366,29 +376,29 @@ const pageSchema = [
   </section>
 
   <!-- Use Cases -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
-    <div class="text-center mb-8 sm:mb-14 reveal">
-      <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.useCases.title')}</h2>
-      <p class="font-body text-on-surface-variant text-sm sm:text-base">{t(locale, 'home.useCases.subtitle')}</p>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="text-center mb-5 sm:mb-8 reveal">
+      <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.useCases.title')}</h2>
+      <p class="font-body text-on-surface-variant text-sm">{t(locale, 'home.useCases.subtitle')}</p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 reveal-stagger">
-      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6">
-        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">edit_note</span>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 reveal-stagger">
+      <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5">
+        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">edit_note</span>
         <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.useCases.bloggers.title')}</h3>
         <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.useCases.bloggers.description')}</p>
       </div>
-      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6">
-        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">terminal</span>
+      <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5">
+        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">terminal</span>
         <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.useCases.developers.title')}</h3>
         <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.useCases.developers.description')}</p>
       </div>
-      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6">
-        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">school</span>
+      <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5">
+        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">school</span>
         <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.useCases.students.title')}</h3>
         <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.useCases.students.description')}</p>
       </div>
-      <div class="reveal bg-surface-container rounded-2xl p-5 sm:p-6">
-        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">palette</span>
+      <div class="reveal bg-surface-container rounded-2xl p-4 sm:p-5">
+        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">palette</span>
         <h3 class="font-headline text-lg font-black text-on-background mb-1">{t(locale, 'home.useCases.creators.title')}</h3>
         <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.useCases.creators.description')}</p>
       </div>
@@ -396,11 +406,11 @@ const pageSchema = [
   </section>
 
   <!-- Image Workflow — ExtractPics cross-promo -->
-  <section class="py-10 sm:py-16 bg-surface-container-low border-y border-outline-variant/40">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-6 sm:mb-10 reveal">
-        <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-2 sm:mb-3">Your Complete <span class="text-primary">Image Workflow</span></h2>
-        <p class="font-body text-on-surface-variant text-sm sm:text-base">From any website to a shareable link — in seconds</p>
+  <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-6 sm:mb-8 reveal">
+        <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-2">Your Complete <span class="text-primary">Image Workflow</span></h2>
+        <p class="font-body text-on-surface-variant text-sm">From any website to a shareable link — in seconds</p>
       </div>
       <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-0 reveal">
         <!-- Step 1: Extract -->
@@ -455,15 +465,15 @@ const pageSchema = [
   </section>
 
   <!-- Testimonials -->
-  <section class="px-4 sm:px-6 py-10 sm:py-20 bg-surface-container-low border-y border-outline-variant/40">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-8 sm:mb-14 reveal">
-        <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-2">{t(locale, 'home.testimonials.title')} <span class="text-primary">{t(locale, 'home.testimonials.highlight')}</span></h2>
+  <section class="px-4 sm:px-6 py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-6 sm:mb-8 reveal">
+        <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-2">{t(locale, 'home.testimonials.title')} <span class="text-primary">{t(locale, 'home.testimonials.highlight')}</span></h2>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 reveal-stagger">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 reveal-stagger">
         <div class="reveal">
-          <div class="bg-surface-container rounded-2xl p-5 sm:p-6">
-            <p class="font-body text-on-surface text-sm sm:text-base mb-4 leading-relaxed">"{t(locale, 'home.testimonials.alex.quote')}"</p>
+          <div class="bg-surface-container rounded-2xl p-4 sm:p-5">
+            <p class="font-body text-on-surface text-sm mb-3 leading-relaxed">"{t(locale, 'home.testimonials.alex.quote')}"</p>
             <div class="flex items-center gap-3 pt-3 border-t border-outline-variant">
               <div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed flex-shrink-0">
                 <img alt={t(locale, 'home.testimonials.alex.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmfM4WRnmfMyxG2svBrqpKPj662x21sg_veIICHjC_JLq9LmSfOXcYCJ4ssCs2F2ZCkPnSOHcVb8O01YtjxgezrK_k4BNaV-g7hDu-9hjcacLtuX5ZoBjz1LTEvnua-NIy2Doq9_vRlKytHTee0BMajnJN8XKa9zuMbNtz0q-1JrTQ1FhSXR2ylj8AR0SfzTTHWZmnk4ejWT60VvIvTJAwCoR0GBEYUBy4v5EP8f_ox9l1xfhvI89yg_OBBvReml0OIivwZ7lANjc=s80" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
@@ -476,8 +486,8 @@ const pageSchema = [
           </div>
         </div>
         <div class="reveal">
-          <div class="bg-surface-container rounded-2xl p-5 sm:p-6">
-            <p class="font-body text-on-surface text-sm sm:text-base mb-4 leading-relaxed">"{t(locale, 'home.testimonials.sarah.quote')}"</p>
+          <div class="bg-surface-container rounded-2xl p-4 sm:p-5">
+            <p class="font-body text-on-surface text-sm mb-3 leading-relaxed">"{t(locale, 'home.testimonials.sarah.quote')}"</p>
             <div class="flex items-center gap-3 pt-3 border-t border-outline-variant">
               <div class="w-10 h-10 rounded-full overflow-hidden bg-tertiary-fixed flex-shrink-0">
                 <img alt={t(locale, 'home.testimonials.sarah.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmULj_9vdxghm3rYVHcgb_MFynGE4ZKLJlSHqhJfNJ6Lb9OPzYqFnEF5UrK4_WxSwhU44EinVXaHTJ5norK1kiHdu-NngoRyJb11gThlA2YbcQRLvdo4Kv3omAbV2tESDfnjQ1Y4Ko7VxsEtFrK0Qeapfg6wYms5eJxwyfye4bXa2C-aJv1poP7An_GRxMwe63CTy9OKwniS4IGa5QyM-lXJMBROj3nVOY4WOi533zDEUY7KG93khb6cU4StgCpTOKLYpbY8cFDrU=s80" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
@@ -490,8 +500,8 @@ const pageSchema = [
           </div>
         </div>
         <div class="reveal">
-          <div class="bg-surface-container rounded-2xl p-5 sm:p-6">
-            <p class="font-body text-on-surface text-sm sm:text-base mb-4 leading-relaxed">"{t(locale, 'home.testimonials.jordan.quote')}"</p>
+          <div class="bg-surface-container rounded-2xl p-4 sm:p-5">
+            <p class="font-body text-on-surface text-sm mb-3 leading-relaxed">"{t(locale, 'home.testimonials.jordan.quote')}"</p>
             <div class="flex items-center gap-3 pt-3 border-t border-outline-variant">
               <div class="w-10 h-10 rounded-full overflow-hidden bg-secondary-fixed flex-shrink-0">
                 <img alt={t(locale, 'home.testimonials.jordan.name')} src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKK7PpHY1AWcvGia_m2KYL4o4aEjQdoqOv_DuyRnN8lShFbVhM-magAFEVXcgUQe18pHEMb80i65kGHD5Vj_4iEGvljOEFaSQNhNbr3SifE-1YY9PO7mlEVTd_2fY5DoSg9pYNMY-oAwYP_OSZwME6WYVjW3x3kJsZc4tooWZugNvBnAwfaHxw08oFrl_21eJzle-ShNxUmb9h9BMeWWr1QjDv8fVN79fQZ6eewZxxn7oHkL3ft1fNKW_iYj_4Choh_EPvqhsC2a0=s80" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
@@ -508,9 +518,9 @@ const pageSchema = [
   </section>
 
   <!-- FAQ Accordion -->
-  <section class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
-    <div class="text-center mb-8 sm:mb-14 reveal">
-      <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background">{t(locale, 'home.faq.title')}</h2>
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="text-center mb-5 sm:mb-8 reveal">
+      <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background">{t(locale, 'home.faq.title')}</h2>
     </div>
     <div class="flex flex-col gap-3 sm:gap-4 reveal" id="faq-container">
       <div class="faq-item bg-surface-container rounded-xl">
@@ -562,11 +572,11 @@ const pageSchema = [
   </section>
 
   <!-- Final CTA -->
-  <section class="py-10 sm:py-16 bg-surface-container-low border-y border-outline-variant/40">
+  <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-3 sm:mb-4 reveal">{t(locale, 'home.cta.title')}</h2>
-      <p class="font-body text-on-surface-variant text-sm sm:text-base mb-6 sm:mb-8 reveal">{t(locale, 'home.cta.subtitle')}</p>
-      <button class="reveal inline-block bg-primary text-on-primary px-8 py-3 sm:py-4 rounded-xl font-headline font-black text-sm sm:text-base uppercase tracking-wider hover:-translate-y-1 transition-transform cursor-pointer" id="cta-upload-btn">
+      <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-3 sm:mb-4 reveal">{t(locale, 'home.cta.title')}</h2>
+      <p class="font-body text-on-surface-variant text-sm mb-3 sm:mb-4 reveal">{t(locale, 'home.cta.subtitle')}</p>
+      <button class="reveal inline-block bg-primary text-on-primary px-8 py-3 rounded-xl font-headline font-black text-sm uppercase tracking-wider hover:-translate-y-1 transition-transform cursor-pointer" id="cta-upload-btn">
         {t(locale, 'home.cta.button')}
       </button>
     </div>
@@ -574,21 +584,21 @@ const pageSchema = [
 
   <!-- Blog Preview -->
   {previewPosts.length > 0 && (
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
-    <h2 class="font-headline text-2xl sm:text-4xl lg:text-5xl font-black text-on-background mb-6 sm:mb-12 reveal">{t(locale, 'home.blog.title')} <span class="text-primary">{t(locale, 'home.blog.highlight')}</span></h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 reveal-stagger">
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <h2 class="font-headline text-2xl sm:text-3xl font-black text-on-background mb-5 sm:mb-8 reveal">{t(locale, 'home.blog.title')} <span class="text-primary">{t(locale, 'home.blog.highlight')}</span></h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 reveal-stagger">
       {previewPosts.map((post) => (
         <article class="group reveal">
           <a href={lp(`/blog/${post.slug}`)} class="block h-full">
             <div class="bg-surface-container rounded-2xl h-full flex flex-col overflow-hidden hover:-translate-y-0.5 transition-all duration-200">
-              <div class={`h-48 relative overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
+              <div class={`h-40 relative overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
                 {post.coverImage ? (
                   <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.coverImage} width="400" height="192" loading="lazy" decoding="async" />
                 ) : (
                   <span class="material-symbols-outlined text-8xl text-on-surface/20">{post.iconFallback || 'article'}</span>
                 )}
               </div>
-              <div class="p-5 sm:p-6 flex flex-col flex-1">
+              <div class="p-4 sm:p-5 flex flex-col flex-1">
                 <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || t(locale, 'home.blog.uncategorized')}</span>
                 <h3 class="font-headline text-lg font-black text-on-surface mb-3 group-hover:text-primary transition-colors">{post.title}</h3>
                 <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1 mt-auto">
@@ -657,7 +667,7 @@ const pageSchema = [
     errorSignin.classList.add('hidden');
     errorSignin.classList.remove('flex');
     errorPromo.classList.add('hidden');
-    errorPromo.classList.remove('block');
+    errorPromo.classList.remove('flex');
   }
 
   // Click to open file picker
@@ -748,7 +758,7 @@ const pageSchema = [
       errorSignin.classList.toggle('hidden', !isLimit);
       errorSignin.classList.toggle('flex', isLimit);
       errorPromo.classList.toggle('hidden', !isLimit);
-      errorPromo.classList.toggle('block', isLimit);
+      errorPromo.classList.toggle('flex', isLimit);
     }
   }
 </script>

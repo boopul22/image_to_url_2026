@@ -116,10 +116,10 @@ const pageSchema = [
 <Layout title={t(locale, 'pricing.meta.title')} description={t(locale, 'pricing.meta.description')} schema={pageSchema}>
   <Nav activePage="pricing" />
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-20 relative">
+  <main class="max-w-5xl mx-auto px-3 sm:px-6 py-8 sm:py-20 relative">
     <!-- Header -->
-    <header class="text-center mb-8 sm:mb-20 reveal">
-      <h1 class="font-headline font-black text-3xl sm:text-5xl lg:text-7xl xl:text-8xl tracking-tight mb-4 sm:mb-6">
+    <header class="text-center mb-5 sm:mb-8 reveal">
+      <h1 class="font-headline font-black text-3xl sm:text-3xl lg:text-7xl xl:text-8xl tracking-tight mb-4 sm:mb-6">
         {t(locale, 'pricing.hero.title1')} <span class="bg-tertiary-fixed px-2">{t(locale, 'pricing.hero.title2')}</span>{t(locale, 'pricing.hero.title3')}
       </h1>
       <p class="font-body text-base sm:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
@@ -128,7 +128,7 @@ const pageSchema = [
     </header>
 
     <!-- Pricing Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 items-start reveal-stagger">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 items-start reveal-stagger">
       <!-- Tier: Free -->
       <div class="bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 reveal">
         <div class="mb-5 sm:mb-8">
@@ -136,8 +136,8 @@ const pageSchema = [
           <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2">{t(locale, 'pricing.free.name')}</h3>
           <p class="text-on-surface-variant mt-2 text-sm sm:text-base">{t(locale, 'pricing.free.description')}</p>
         </div>
-        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.free.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.free.period')}</span></div>
-        <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
+        <div class="text-4xl sm:text-3xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.free.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.free.period')}</span></div>
+        <ul class="space-y-3 sm:space-y-4 mb-5 sm:mb-8">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-primary">draw</span>
             <span class="text-sm font-medium">{t(locale, 'pricing.free.feature1')}</span>
@@ -166,8 +166,8 @@ const pageSchema = [
           <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2">{t(locale, 'pricing.pro.name')}</h3>
           <p class="text-on-surface-variant mt-2 text-sm sm:text-base">{t(locale, 'pricing.pro.description')}</p>
         </div>
-        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.pro.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.pro.period')}</span></div>
-        <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
+        <div class="text-4xl sm:text-3xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.pro.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.pro.period')}</span></div>
+        <ul class="space-y-3 sm:space-y-4 mb-5 sm:mb-8">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">draw</span>
             <span class="text-sm font-bold">{t(locale, 'pricing.pro.feature1')}</span>
@@ -197,8 +197,8 @@ const pageSchema = [
           <h3 class="font-headline font-bold text-3xl sm:text-4xl mt-2">{t(locale, 'pricing.business.name')}</h3>
           <p class="text-on-surface-variant mt-2 text-sm sm:text-base">{t(locale, 'pricing.business.description')}</p>
         </div>
-        <div class="text-4xl sm:text-5xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.business.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.business.period')}</span></div>
-        <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
+        <div class="text-4xl sm:text-3xl font-headline font-black mb-5 sm:mb-8">{t(locale, 'pricing.business.price')}<span class="text-base sm:text-lg font-body font-normal text-outline">{t(locale, 'pricing.business.period')}</span></div>
+        <ul class="space-y-3 sm:space-y-4 mb-5 sm:mb-8">
           <li class="flex items-start gap-3">
             <span class="material-symbols-outlined text-primary">draw</span>
             <span class="text-sm font-medium">{t(locale, 'pricing.business.feature1')}</span>
@@ -224,7 +224,7 @@ const pageSchema = [
 
     <!-- FAQ Section -->
     <section class="mt-20 sm:mt-40 max-w-4xl mx-auto">
-      <h2 class="font-headline font-black text-3xl sm:text-5xl text-center mb-10 sm:mb-16 underline decoration-tertiary-fixed decoration-8 underline-offset-4">{t(locale, 'pricing.faq.title')}</h2>
+      <h2 class="font-headline font-black text-3xl sm:text-3xl text-center mb-10 sm:mb-16 underline decoration-tertiary-fixed decoration-8 underline-offset-4">{t(locale, 'pricing.faq.title')}</h2>
       <div class="space-y-6">
         <div class="bg-background border-2 border-on-background p-6 hard-shadow">
           <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q1')}</h4>
@@ -242,7 +242,7 @@ const pageSchema = [
     </section>
 
     <!-- CTA Visual Section -->
-    <section class="mt-16 sm:mt-40 bg-surface-container border-2 border-on-background overflow-hidden flex flex-col lg:flex-row items-center p-6 sm:p-8 lg:p-12 relative">
+    <section class="mt-16 sm:mt-40 bg-surface-container border-2 border-on-background overflow-hidden flex flex-col lg:flex-row items-center p-4 sm:p-5 lg:p-12 relative">
       <div class="lg:w-1/2 mb-8 lg:mb-0">
         <h2 class="font-headline font-black text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-6">{t(locale, 'pricing.cta.title')}</h2>
         <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-3 sm:py-4 border-2 border-on-background hard-shadow hard-shadow-hover transition-all font-black text-lg sm:text-xl active:scale-95">

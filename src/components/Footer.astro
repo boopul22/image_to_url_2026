@@ -11,46 +11,46 @@ function localePath(path: string): string {
 ---
 
 <footer class="bg-surface-container border-t-2 border-on-background" style="padding-bottom: env(safe-area-inset-bottom);">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-8 w-full px-4 sm:px-8 py-10 sm:py-12 max-w-7xl mx-auto">
-    <div>
-      <div class="text-xl font-black font-headline text-on-background mb-4">ImageToURL</div>
-      <p class="font-body font-medium text-on-surface-variant mb-6">{t(locale, 'footer.tagline')}</p>
+  <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-6 w-full px-4 sm:px-6 py-8 sm:py-10 max-w-5xl mx-auto">
+    <div class="col-span-2 lg:col-span-1">
+      <div class="text-lg font-black font-headline text-on-background mb-3">ImageToURL</div>
+      <p class="font-body text-sm font-medium text-on-surface-variant mb-4">{t(locale, 'footer.tagline')}</p>
     </div>
-    <div class="flex flex-col gap-4">
-      <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.tools')}</span>
-      <a href="/free-image-hosting" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.freeHosting')}</a>
-      <a href="/image-url-generator" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.urlGenerator')}</a>
-      <a href="/bulk-image-upload" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.bulkUpload')}</a>
-      <a href="/png-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">PNG to URL</a>
-      <a href="/jpg-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">JPG to URL</a>
-      <a href="/imgur-alternative" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">Imgur Alternative</a>
-      <a href="/image-hosting-for-shopify" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">For Shopify</a>
-      <a href="/image-hosting-for-google-sheets" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">For Google Sheets</a>
+    <div class="flex flex-col gap-2.5">
+      <span class="font-label uppercase tracking-widest text-[10px] font-bold text-on-background">{t(locale, 'footer.tools')}</span>
+      <a href="/free-image-hosting" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.freeHosting')}</a>
+      <a href="/image-url-generator" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.urlGenerator')}</a>
+      <a href="/bulk-image-upload" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.bulkUpload')}</a>
+      <a href="/png-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">PNG to URL</a>
+      <a href="/jpg-to-url" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">JPG to URL</a>
+      <a href="/imgur-alternative" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">Imgur Alternative</a>
+      <a href="/image-hosting-for-shopify" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">For Shopify</a>
+      <a href="/image-hosting-for-google-sheets" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">For Google Sheets</a>
     </div>
-    <div class="flex flex-col gap-4">
-      <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.resources')}</span>
-      <a href={localePath('/privacy')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.privacy')}</a>
-      <a href={localePath('/terms')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.terms')}</a>
-      <a href={localePath('/docs')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.docs')}</a>
-      <a href="/about" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.about')}</a>
-      <a href="/contact" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.contact')}</a>
-      <a href={localePath('/blog')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">{t(locale, 'footer.blog')}</a>
-      <a href="/content-guidelines" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1">Content Guidelines</a>
+    <div class="flex flex-col gap-2.5">
+      <span class="font-label uppercase tracking-widest text-[10px] font-bold text-on-background">{t(locale, 'footer.resources')}</span>
+      <a href={localePath('/privacy')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.privacy')}</a>
+      <a href={localePath('/terms')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.terms')}</a>
+      <a href={localePath('/docs')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.docs')}</a>
+      <a href="/about" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.about')}</a>
+      <a href="/contact" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.contact')}</a>
+      <a href={localePath('/blog')} class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">{t(locale, 'footer.blog')}</a>
+      <a href="/content-guidelines" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5">Content Guidelines</a>
     </div>
-    <div class="flex flex-col gap-4">
-      <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">Our Tools</span>
-      <a href="/" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1 flex items-center gap-2">
+    <div class="flex flex-col gap-2.5">
+      <span class="font-label uppercase tracking-widest text-[10px] font-bold text-on-background">Our Tools</span>
+      <a href="/" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5 flex items-center gap-2">
         <span class="material-symbols-outlined text-primary text-base">cloud_upload</span>
         ImageToURL
       </a>
-      <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 font-medium transition-colors py-1 flex items-center gap-2">
+      <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class="text-outline hover:text-on-background active:text-on-background underline decoration-2 text-sm font-medium transition-colors py-0.5 flex items-center gap-2">
         <span class="material-symbols-outlined text-primary text-base">travel_explore</span>
         ExtractPics
         <span class="material-symbols-outlined text-xs text-outline">open_in_new</span>
       </a>
     </div>
-    <div class="flex flex-col gap-3">
-      <span class="font-label uppercase tracking-widest text-xs font-bold text-on-background">{t(locale, 'footer.stayUpdated')}</span>
+    <div class="col-span-2 lg:col-span-1 flex flex-col gap-2.5">
+      <span class="font-label uppercase tracking-widest text-[10px] font-bold text-on-background">{t(locale, 'footer.stayUpdated')}</span>
       <div class="flex flex-col sm:flex-row gap-2 mt-2 sm:relative">
         <input type="email" placeholder={t(locale, 'footer.emailPlaceholder')} class="w-full bg-white border-2 border-on-background px-4 py-3 sm:py-2 sm:pr-20 focus:ring-0 focus:border-primary focus:outline-none text-base sm:text-sm" />
         <button class="sm:absolute sm:right-2 sm:top-2 sm:bottom-2 bg-primary text-on-primary px-4 py-3 sm:py-0 sm:px-3 font-bold text-sm sm:text-xs uppercase active:scale-95 transition-transform">{t(locale, 'footer.join')}</button>

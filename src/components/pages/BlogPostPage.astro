@@ -83,7 +83,7 @@ const faqSchema = post.faqItems?.length ? {
         <span class="inline-block py-1 px-4 bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface rounded-full text-xs font-bold uppercase tracking-widest mb-6">
           {post.categoryName || t(locale, 'blogPost.uncategorized')}
         </span>
-        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-headline italic font-black leading-[1.1] tracking-tight text-on-surface mb-6 sm:mb-8">
+        <h1 class="text-3xl sm:text-3xl lg:text-7xl font-headline italic font-black leading-[1.1] tracking-tight text-on-surface mb-6 sm:mb-8">
           <Fragment set:html={post.title.replace(/SVG/g, '<span class="relative">SVG<span class="absolute bottom-1 left-0 w-full h-3 bg-tertiary/20 -z-10"></span></span>')} />
         </h1>
         <div class="flex flex-wrap items-center gap-6 border-b-2 border-surface-variant pb-8">
