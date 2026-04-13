@@ -13,49 +13,75 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
   <Nav activePage="" />
 
   <main class="max-w-3xl mx-auto px-6 py-16">
-    <h1 class="font-headline text-5xl font-black text-on-background mb-8">{t(locale, 'privacy.title')}</h1>
-    <p class="text-sm text-outline mb-12">{t(locale, 'privacy.lastUpdated')}</p>
+    <h1 class="font-headline text-5xl font-black text-on-background mb-4">{t(locale, 'privacy.title')}</h1>
+    <p class="text-lg text-outline mb-8">{t(locale, 'privacy.subtitle')}</p>
 
     <div class="prose prose-on-surface max-w-none space-y-8 text-lg leading-relaxed">
+
+      <!-- Section 1: Information We Collect -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s1.title')}</h2>
-        <p>{t(locale, 'privacy.s1.intro')}</p>
-        <ul class="list-disc pl-6 space-y-2 mt-4">
-          <li><strong>{t(locale, 'privacy.s1.images')}</strong> {t(locale, 'privacy.s1.imagesDesc')}</li>
-          <li><strong>{t(locale, 'privacy.s1.account')}</strong> {t(locale, 'privacy.s1.accountDesc')}</li>
-          <li><strong>{t(locale, 'privacy.s1.usage')}</strong> {t(locale, 'privacy.s1.usageDesc')}</li>
-          <li><strong>{t(locale, 'privacy.s1.technical')}</strong> {t(locale, 'privacy.s1.technicalDesc')}</li>
-        </ul>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-lg font-semibold text-on-background mb-2">{t(locale, 'privacy.s1.techTitle')}</h3>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>{t(locale, 'privacy.s1.tech1')}</li>
+              <li>{t(locale, 'privacy.s1.tech2')}</li>
+              <li>{t(locale, 'privacy.s1.tech3')}</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-on-background mb-2">{t(locale, 'privacy.s1.analyticsTitle')}</h3>
+            <p>{t(locale, 'privacy.s1.analyticsDesc')}</p>
+          </div>
+        </div>
       </section>
 
+      <!-- Section 2: How We Protect Your Data -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s2.title')}</h2>
-        <p>{t(locale, 'privacy.s2.intro')}</p>
-        <ul class="list-disc pl-6 space-y-2 mt-4">
-          <li>{t(locale, 'privacy.s2.item1')}</li>
-          <li>{t(locale, 'privacy.s2.item2')}</li>
-          <li>{t(locale, 'privacy.s2.item3')}</li>
-          <li>{t(locale, 'privacy.s2.item4')}</li>
-          <li>{t(locale, 'privacy.s2.item5')}</li>
-          <li>{t(locale, 'privacy.s2.item6')}</li>
-        </ul>
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'privacy.s2.httpsTitle')}</h4>
+            <p>{t(locale, 'privacy.s2.httpsDesc')}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'privacy.s2.storageTitle')}</h4>
+            <p>{t(locale, 'privacy.s2.storageDesc')}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'privacy.s2.noRegTitle')}</h4>
+            <p>{t(locale, 'privacy.s2.noRegDesc')}</p>
+          </div>
+        </div>
       </section>
 
+      <!-- Section 3: Data Retention -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s3.title')}</h2>
-        <p>{t(locale, 'privacy.s3.description')}</p>
+        <div class="space-y-2">
+          <p><strong>{t(locale, 'privacy.s3.imagesLabel')}</strong> {t(locale, 'privacy.s3.imagesDesc')}</p>
+          <p><strong>{t(locale, 'privacy.s3.techLogsLabel')}</strong> {t(locale, 'privacy.s3.techLogsDesc')}</p>
+          <p><strong>{t(locale, 'privacy.s3.errorLogsLabel')}</strong> {t(locale, 'privacy.s3.errorLogsDesc')}</p>
+        </div>
       </section>
 
+      <!-- Section 4: Third-Party Services -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s4.title')}</h2>
-        <p>{t(locale, 'privacy.s4.intro')}</p>
-        <ul class="list-disc pl-6 space-y-2 mt-4">
-          <li><strong>{t(locale, 'privacy.s4.infra')}</strong> {t(locale, 'privacy.s4.infraDesc')}</li>
-          <li><strong>{t(locale, 'privacy.s4.auth')}</strong> {t(locale, 'privacy.s4.authDesc')}</li>
-          <li><strong>{t(locale, 'privacy.s4.law')}</strong> {t(locale, 'privacy.s4.lawDesc')}</li>
-        </ul>
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'privacy.s4.r2Title')}</h4>
+            <p>{t(locale, 'privacy.s4.r2Desc')}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'privacy.s4.gaTitle')}</h4>
+            <p>{t(locale, 'privacy.s4.gaDesc')}</p>
+          </div>
+        </div>
       </section>
 
+      <!-- Section 5: Your Rights -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s5.title')}</h2>
         <p>{t(locale, 'privacy.s5.intro')}</p>
@@ -63,26 +89,31 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
           <li>{t(locale, 'privacy.s5.item1')}</li>
           <li>{t(locale, 'privacy.s5.item2')}</li>
           <li>{t(locale, 'privacy.s5.item3')}</li>
-          <li>{t(locale, 'privacy.s5.item4')}</li>
         </ul>
         <p class="mt-4">{t(locale, 'privacy.s5.contact')}</p>
       </section>
 
+      <!-- Section 6: Policy Updates -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s6.title')}</h2>
-        <p>{t(locale, 'privacy.s6.description')}</p>
+        <p>{t(locale, 'privacy.s6.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>{t(locale, 'privacy.s6.item1')}</li>
+          <li>{t(locale, 'privacy.s6.item2')}</li>
+          <li>{t(locale, 'privacy.s6.item3')}</li>
+        </ul>
+        <p class="mt-4">{t(locale, 'privacy.s6.outro')}</p>
       </section>
 
+      <!-- Section 7: Contact -->
       <section>
-        <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s7.title')}</h2>
-        <p>{t(locale, 'privacy.s7.description')}</p>
+        <p><strong>{t(locale, 'privacy.s7.label')}</strong></p>
+        <p>{t(locale, 'privacy.s7.contactIntro')} <a href={`mailto:${t(locale, 'privacy.s7.email')}`} class="underline">{t(locale, 'privacy.s7.email')}</a></p>
       </section>
 
-      <section>
-        <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s8.title')}</h2>
-        <p>{t(locale, 'privacy.s8.description')}</p>
-      </section>
     </div>
+
+    <p class="text-sm text-outline mt-12">{t(locale, 'privacy.lastUpdated')}</p>
   </main>
 
   <Footer />

@@ -13,39 +13,73 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
   <Nav activePage="" />
 
   <main class="max-w-3xl mx-auto px-6 py-16">
-    <h1 class="font-headline text-5xl font-black text-on-background mb-8">{t(locale, 'terms.title')}</h1>
-    <p class="text-sm text-outline mb-12">{t(locale, 'terms.lastUpdated')}</p>
+    <h1 class="font-headline text-5xl font-black text-on-background mb-4">{t(locale, 'terms.title')}</h1>
+    <p class="text-lg text-outline mb-8">{t(locale, 'terms.subtitle')}</p>
+
+    <!-- Quick Summary -->
+    <div class="border-2 border-on-background p-6 mb-10">
+      <h2 class="text-xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.summary.title')}</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>{t(locale, 'terms.summary.item1')}</li>
+        <li>{t(locale, 'terms.summary.item2')}</li>
+        <li>{t(locale, 'terms.summary.item3')}</li>
+        <li>{t(locale, 'terms.summary.item4')}</li>
+      </ul>
+    </div>
 
     <div class="prose prose-on-surface max-w-none space-y-8 text-lg leading-relaxed">
+
+      <!-- Section 1: Acceptance of Terms -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s1.title')}</h2>
         <p>{t(locale, 'terms.s1.description')}</p>
       </section>
 
+      <!-- Section 2: Use License -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s2.title')}</h2>
-        <p>{t(locale, 'terms.s2.description')}</p>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-lg font-semibold text-on-background mb-2">{t(locale, 'terms.s2.permittedTitle')}</h3>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>{t(locale, 'terms.s2.permitted1')}</li>
+              <li>{t(locale, 'terms.s2.permitted2')}</li>
+              <li>{t(locale, 'terms.s2.permitted3')}</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-on-background mb-2">{t(locale, 'terms.s2.notTitle')}</h3>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>{t(locale, 'terms.s2.not1')}</li>
+              <li>{t(locale, 'terms.s2.not2')}</li>
+              <li>{t(locale, 'terms.s2.not3')}</li>
+              <li>{t(locale, 'terms.s2.not4')}</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
+      <!-- Section 3: Prohibited Content -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s3.title')}</h2>
         <p>{t(locale, 'terms.s3.intro')}</p>
         <ul class="list-disc pl-6 space-y-2 mt-4">
-          <li>{t(locale, 'terms.s3.item1')}</li>
-          <li>{t(locale, 'terms.s3.item2')}</li>
-          <li>{t(locale, 'terms.s3.item3')}</li>
-          <li>{t(locale, 'terms.s3.item4')}</li>
-          <li>{t(locale, 'terms.s3.item5')}</li>
-          <li>{t(locale, 'terms.s3.item6')}</li>
+          <li><strong>{t(locale, 'terms.s3.item1label')}</strong> {t(locale, 'terms.s3.item1')}</li>
+          <li><strong>{t(locale, 'terms.s3.item2label')}</strong> {t(locale, 'terms.s3.item2')}</li>
+          <li><strong>{t(locale, 'terms.s3.item3label')}</strong> {t(locale, 'terms.s3.item3')}</li>
+          <li><strong>{t(locale, 'terms.s3.item4label')}</strong> {t(locale, 'terms.s3.item4')}</li>
+          <li><strong>{t(locale, 'terms.s3.item5label')}</strong> {t(locale, 'terms.s3.item5')}</li>
+          <li><strong>{t(locale, 'terms.s3.item6label')}</strong> {t(locale, 'terms.s3.item6')}</li>
         </ul>
-        <p class="mt-4">{t(locale, 'terms.s3.outro')}</p>
       </section>
 
+      <!-- Section 4: Account Terms -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s4.title')}</h2>
         <p>{t(locale, 'terms.s4.description')}</p>
       </section>
 
+      <!-- Section 5: Pricing and Payments -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s5.title')}</h2>
         <ul class="list-disc pl-6 space-y-2 mt-4">
@@ -56,31 +90,94 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
         <p class="mt-4">{t(locale, 'terms.s5.cancel')}</p>
       </section>
 
+      <!-- Section 6: Service Limitations -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s6.title')}</h2>
-        <p>{t(locale, 'terms.s6.description')}</p>
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'terms.s6.fileSizeTitle')}</h4>
+            <p>{t(locale, 'terms.s6.fileSizeDesc')}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'terms.s6.rateTitle')}</h4>
+            <p>{t(locale, 'terms.s6.rateDesc')}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'terms.s6.storageTitle')}</h4>
+            <p>{t(locale, 'terms.s6.storageDesc')}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-on-background">{t(locale, 'terms.s6.availTitle')}</h4>
+            <p>{t(locale, 'terms.s6.availDesc')}</p>
+          </div>
+        </div>
       </section>
 
+      <!-- Section 7: Content Removal -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s7.title')}</h2>
-        <p>{t(locale, 'terms.s7.description')}</p>
+        <p>{t(locale, 'terms.s7.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>{t(locale, 'terms.s7.item1')}</li>
+          <li>{t(locale, 'terms.s7.item2')}</li>
+          <li>{t(locale, 'terms.s7.item3')}</li>
+          <li>{t(locale, 'terms.s7.item4')}</li>
+        </ul>
+        <p class="mt-4">{t(locale, 'terms.s7.contactIntro')} <a href={`mailto:${t(locale, 'terms.s7.email')}`} class="underline">{t(locale, 'terms.s7.email')}</a></p>
       </section>
 
+      <!-- Section 8: Disclaimer -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s8.title')}</h2>
-        <p>{t(locale, 'terms.s8.description')}</p>
+        <p>{t(locale, 'terms.s8.intro')}</p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+          <li>{t(locale, 'terms.s8.item1')}</li>
+          <li>{t(locale, 'terms.s8.item2')}</li>
+          <li>{t(locale, 'terms.s8.item3')}</li>
+        </ul>
+        <p class="mt-4">{t(locale, 'terms.s8.outro')}</p>
       </section>
 
+      <!-- Section 9: Limitation of Liability -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s9.title')}</h2>
-        <p>{t(locale, 'terms.s9.description')}</p>
+        <p>{t(locale, 'terms.s9.p1')}</p>
+        <p class="mt-4">{t(locale, 'terms.s9.p2')}</p>
       </section>
 
+      <!-- Section 10: Indemnification -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s10.title')}</h2>
         <p>{t(locale, 'terms.s10.description')}</p>
       </section>
+
+      <!-- Section 11: Severability -->
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s11.title')}</h2>
+        <p>{t(locale, 'terms.s11.description')}</p>
+      </section>
+
+      <!-- Section 12: Variation of Terms -->
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s12.title')}</h2>
+        <p>{t(locale, 'terms.s12.description')}</p>
+      </section>
+
+      <!-- Section 13: Assignment -->
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'terms.s13.title')}</h2>
+        <p>{t(locale, 'terms.s13.description')}</p>
+      </section>
+
+      <!-- Section 14: Contact -->
+      <section>
+        <p><strong>{t(locale, 'terms.s14.label')}</strong></p>
+        <p>{t(locale, 'terms.s14.contactIntro')} <a href={`mailto:${t(locale, 'terms.s14.email')}`} class="underline">{t(locale, 'terms.s14.email')}</a></p>
+      </section>
+
     </div>
+
+    <p class="text-sm text-outline mt-12">{t(locale, 'terms.lastUpdated')}</p>
   </main>
 
   <Footer />
