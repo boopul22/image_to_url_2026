@@ -191,8 +191,13 @@ const toolsDropdown = {
       )}
 
       {user ? (
-        <>
-          <a href="/dashboard" class="flex items-center gap-2 transition-colors">
+        <div class="relative" id="profile-switcher-desktop">
+          <button
+            id="profile-btn-desktop"
+            class="flex items-center gap-2 text-[13px] font-medium text-on-background hover:text-rose-600 transition-colors"
+            aria-label="Profile menu"
+            aria-expanded="false"
+          >
             <img
               src={user.avatarUrl}
               alt={user.name}
@@ -201,23 +206,27 @@ const toolsDropdown = {
               height="24"
               referrerpolicy="no-referrer"
             />
-            <span class="text-[13px] font-medium text-on-background">{user.name}</span>
-          </a>
-          {user.role === 'admin' && (
-            <a
-              href="/admin"
-              class="text-rose-600 hover:text-rose-700 text-[13px] font-medium transition-colors"
-            >
-              {t(locale, 'nav.admin')}
+            <span>{user.name}</span>
+            <span class="material-symbols-outlined text-sm">expand_more</span>
+          </button>
+          <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[180px]">
+            <a href="/dashboard" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors">
+              <span class="material-symbols-outlined text-base text-neutral-500">dashboard</span>
+              Dashboard
             </a>
-          )}
-          <a
-            href="/api/auth/logout"
-            class="text-neutral-500 hover:text-on-background text-[13px] font-medium transition-colors"
-          >
-            {t(locale, 'nav.signOut')}
-          </a>
-        </>
+            {user.role === 'admin' && (
+              <a href="/admin" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-rose-600 hover:bg-neutral-50 transition-colors">
+                <span class="material-symbols-outlined text-base">admin_panel_settings</span>
+                {t(locale, 'nav.admin')}
+              </a>
+            )}
+            <div class="border-t border-neutral-200"></div>
+            <a href="/api/auth/logout" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-neutral-500 hover:text-on-background hover:bg-neutral-50 transition-colors">
+              <span class="material-symbols-outlined text-base">logout</span>
+              {t(locale, 'nav.signOut')}
+            </a>
+          </div>
+        </div>
       ) : (
         <a
           href="/api/auth/login"
@@ -455,10 +464,25 @@ const toolsDropdown = {
     langBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
 
+  // Desktop profile dropdown
+  const profileBtnDesktop = document.getElementById('profile-btn-desktop');
+  const profileDropdownDesktop = document.getElementById('profile-dropdown-desktop');
+
+  profileBtnDesktop?.addEventListener('click', () => {
+    const isOpen = !profileDropdownDesktop!.classList.contains('hidden');
+    profileDropdownDesktop!.classList.toggle('hidden');
+    profileBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
+    langDropdownDesktop?.classList.add('hidden');
+    langBtnDesktop?.setAttribute('aria-expanded', 'false');
+    toolsDropdownDesktop?.classList.add('hidden');
+    toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
+  });
+
   // Close all desktop dropdowns on outside click
   document.addEventListener('click', (e) => {
     const langSwitcher = document.getElementById('lang-switcher-desktop');
     const toolsSwitcher = document.getElementById('tools-switcher-desktop');
+    const profileSwitcher = document.getElementById('profile-switcher-desktop');
     if (langSwitcher && !langSwitcher.contains(e.target as Node)) {
       langDropdownDesktop?.classList.add('hidden');
       langBtnDesktop?.setAttribute('aria-expanded', 'false');
@@ -466,6 +490,10 @@ const toolsDropdown = {
     if (toolsSwitcher && !toolsSwitcher.contains(e.target as Node)) {
       toolsDropdownDesktop?.classList.add('hidden');
       toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
+    }
+    if (profileSwitcher && !profileSwitcher.contains(e.target as Node)) {
+      profileDropdownDesktop?.classList.add('hidden');
+      profileBtnDesktop?.setAttribute('aria-expanded', 'false');
     }
   });
 
