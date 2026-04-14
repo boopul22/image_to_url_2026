@@ -30,6 +30,11 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
+      "name": "What does \"image to URL permanent\" actually mean here?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It means the URL we generate for your image keeps working forever. There is no expiration timer, no inactivity sweep, and no plan to migrate URLs. The same link you copy today will still load the image years from now." }
+    },
+    {
+      "@type": "Question",
       "name": "Do image URLs on ImageToURL really never expire?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes. Once you upload an image, the URL is permanent. There are no expiration dates, no auto-deletion after inactivity, and no time-based limits. Your link works forever." }
     },
@@ -57,7 +62,7 @@ const faqSchema = {
 };
 ---
 
-<Layout title="Permanent Image Hosting — URLs That Never Expire | ImageToURL" description="Image URLs that never expire or break. Upload once, share forever. Free permanent image hosting with no expiration dates and no link rot." schema={[schema, faqSchema]} noHreflang>
+<Layout title="Image to URL Permanent — Hosting That Never Expires | ImageToURL" description="Permanent image to URL hosting. Upload once, share forever. Image links that never expire, never break, and never disappear. Free, no signup." schema={[schema, faqSchema]} noHreflang>
   <Nav />
 
   <main>
@@ -70,10 +75,10 @@ const faqSchema = {
     <header class="mb-5 sm:mb-8 reveal">
       <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Permanent Links</span>
       <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
-        Permanent Image Hosting <span class="italic text-primary">— forever.</span>
+        Image to URL, <span class="italic text-primary">permanent and forever.</span>
       </h1>
       <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
-        Upload once, share forever. Your image URLs will never expire, never break, and never disappear. End link rot for good with truly permanent image hosting.
+        Upload once, share forever. Your image to URL link is permanent. It will not expire, will not break, and will not disappear when you forget about it. End link rot for good.
       </p>
     </header>
     </div>
@@ -208,6 +213,13 @@ const faqSchema = {
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="max-w-3xl reveal">
+        <details class="group border-2 border-on-background hard-shadow mb-3">
+          <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
+            <span>What does "image to URL permanent" actually mean here?</span>
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">It means the URL we generate for your image keeps working forever. There is no expiration timer, no inactivity sweep, and no plan to migrate URLs. The same link you copy today will still load the image years from now.</div>
+        </details>
         <details class="group border-2 border-on-background hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Do image URLs on ImageToURL really never expire?</span>

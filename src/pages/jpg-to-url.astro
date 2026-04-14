@@ -16,12 +16,12 @@ function lp(path: string): string {
 const schema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "JPG to URL Converter",
+  "name": "Convert JPG Image to URL Link",
   "url": "https://imagetourl.cloud/jpg-to-url",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Convert JPG and JPEG images to shareable URLs instantly. Fast, free, and permanent.",
+  "description": "Convert any JPG image to a URL link online and free. Direct .jpg URLs, no signup, permanent hosting.",
   "provider": { "@id": "https://imagetourl.cloud/#organization" }
 };
 
@@ -29,6 +29,14 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert a JPG image to a URL link online for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Drop your JPG into the uploader at the top of this page. We host it on a global CDN and hand you a permanent .jpg URL in a couple of seconds. There is no signup, no watermark, and no fee for the upload-and-share flow."
+      }
+    },
     {
       "@type": "Question",
       "name": "What's the maximum JPG file size I can upload?",
@@ -73,7 +81,7 @@ const faqSchema = {
 };
 ---
 
-<Layout title="JPG to URL — Convert JPEG Images to Shareable Links | ImageToURL" description="Convert JPG and JPEG images to shareable URLs instantly. Universal compatibility, fast loading, and permanent direct links. Free, no signup required." schema={[schema, faqSchema]} noHreflang>
+<Layout title="Convert JPG Image to URL Link — Online & Free | ImageToURL" description="Convert JPG image to URL link online and free. Upload any JPG or JPEG and get a permanent direct link in seconds. Image to URL JPG, no signup needed." schema={[schema, faqSchema]} noHreflang>
   <Nav />
 
   <main>
@@ -86,10 +94,10 @@ const faqSchema = {
     <header class="mb-5 sm:mb-8 reveal">
       <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">JPG Converter</span>
       <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
-        Convert JPG to URL <span class="italic text-primary">fast and free.</span>
+        Convert JPG image to URL link <span class="italic text-primary">online and free.</span>
       </h1>
       <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
-        Upload any JPG or JPEG image and get a permanent, shareable URL instantly. Universal compatibility, fast CDN delivery, and zero quality loss — all for free.
+        Upload any JPG or JPEG and get a permanent, shareable URL in seconds. The fastest image to URL JPG converter on the web. No signup, no compression, no catch.
       </p>
     </header>
     </div>
@@ -211,6 +219,15 @@ const faqSchema = {
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="space-y-4 reveal">
+        <details class="bg-primary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+          <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+            How do I convert a JPG image to a URL link online for free?
+            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+            <p class="font-body text-on-surface-variant">Drop your JPG into the uploader at the top of this page. We host it on a global CDN and hand you a permanent .jpg URL in a couple of seconds. There is no signup, no watermark, and no fee for the upload-and-share flow.</p>
+          </div>
+        </details>
         <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             What's the maximum JPG file size I can upload?

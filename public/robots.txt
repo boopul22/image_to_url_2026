@@ -41,6 +41,8 @@ Allow: /image-hosting-for-shopify
 Allow: /image-hosting-for-google-sheets
 Allow: /image-hosting-for-google-forms
 Allow: /image-to-url-for-whatsapp
+Allow: /image-to-url-for-html
+Allow: /image-to-url-vercel
 
 # Authenticated / admin surfaces — never index these.
 Disallow: /dashboard

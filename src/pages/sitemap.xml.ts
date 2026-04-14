@@ -18,6 +18,8 @@ const STATIC_PAGES: { path: string; lastmod: string }[] = [
   { path: '/blog',     lastmod: '2026-04-01' },
   { path: '/privacy',  lastmod: '2026-04-01' },
   { path: '/terms',    lastmod: '2026-04-01' },
+  { path: '/image-to-url-for-html', lastmod: '2026-04-14' },
+  { path: '/image-to-url-vercel',   lastmod: '2026-04-14' },
 ];
 
 function escapeXml(str: string): string {
