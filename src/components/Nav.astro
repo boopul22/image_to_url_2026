@@ -71,13 +71,13 @@ const toolsDropdown = {
 
 <nav class="sticky top-0 z-40 bg-[#fcfcfc]/95 backdrop-blur-sm border-b border-neutral-200 transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
   <div class="flex justify-between items-center w-full px-4 sm:px-6 h-14 max-w-6xl mx-auto">
-    <a href={localePath('/')} class="text-base font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-2 flex-shrink-0">
-      <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+    <a href={localePath('/')} class="text-[15px] font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-1.5 flex-shrink-0 leading-none">
+      <span class="material-symbols-outlined text-rose-600 text-lg leading-none" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
       ImageToURL
     </a>
 
     <!-- Desktop Nav -->
-    <div class="hidden lg:flex items-center gap-6 xl:gap-7">
+    <div class="hidden lg:flex items-center gap-5 xl:gap-6">
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -160,13 +160,13 @@ const toolsDropdown = {
     </div>
 
     <!-- Desktop Right Actions -->
-    <div class="hidden lg:flex items-center gap-3">
+    <div class="hidden lg:flex items-center gap-4">
       <!-- Language Switcher (desktop) — hidden on English-only pages -->
       {isLocalizable && (
       <div class="relative" id="lang-switcher-desktop">
         <button
           id="lang-btn-desktop"
-          class="flex items-center gap-1 px-2 py-1 border-2 border-on-background hover:bg-surface-container-highest transition-colors text-xs font-bold font-label uppercase tracking-wider"
+          class="flex items-center gap-1 text-[13px] font-medium text-neutral-500 hover:text-on-background transition-colors"
           aria-label="Change language"
           aria-expanded="false"
         >
@@ -192,28 +192,28 @@ const toolsDropdown = {
 
       {user ? (
         <>
-          <a href="/dashboard" class="flex items-center gap-2 hover:-translate-y-0.5 transition-all duration-200">
+          <a href="/dashboard" class="flex items-center gap-2 transition-colors">
             <img
               src={user.avatarUrl}
               alt={user.name}
-              class="w-8 h-8 border-2 border-on-background object-cover"
-              width="32"
-              height="32"
+              class="w-6 h-6 border border-neutral-300 object-cover"
+              width="24"
+              height="24"
               referrerpolicy="no-referrer"
             />
-            <span class="font-label text-xs font-bold text-on-background">{user.name}</span>
+            <span class="text-[13px] font-medium text-on-background">{user.name}</span>
           </a>
           {user.role === 'admin' && (
             <a
               href="/admin"
-              class="text-error font-label text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all duration-200"
+              class="text-rose-600 hover:text-rose-700 text-[13px] font-medium transition-colors"
             >
               {t(locale, 'nav.admin')}
             </a>
           )}
           <a
             href="/api/auth/logout"
-            class="text-outline hover:text-on-background font-label text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all duration-200"
+            class="text-neutral-500 hover:text-on-background text-[13px] font-medium transition-colors"
           >
             {t(locale, 'nav.signOut')}
           </a>
@@ -221,7 +221,7 @@ const toolsDropdown = {
       ) : (
         <a
           href="/api/auth/login"
-          class="bg-primary text-on-primary px-6 py-2 border-2 border-on-background hard-shadow hard-shadow-hover active:scale-95 duration-100 font-label uppercase tracking-wider text-xs font-bold flex items-center gap-2"
+          class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-1.5 font-headline text-[12px] font-semibold uppercase tracking-wide flex items-center gap-1.5 transition-colors"
         >
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -237,7 +237,7 @@ const toolsDropdown = {
     <!-- Mobile Menu Button (only element on right side on mobile) -->
     <button
       id="mobile-menu-btn"
-      class="lg:hidden w-10 h-10 flex items-center justify-center border-2 border-on-background hover:bg-surface-container-highest transition-colors"
+      class="lg:hidden w-9 h-9 flex items-center justify-center text-on-background hover:bg-neutral-100 transition-colors"
       aria-label={t(locale, 'nav.toggleMenu')}
       aria-expanded="false"
     >
