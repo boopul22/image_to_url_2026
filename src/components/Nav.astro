@@ -70,14 +70,14 @@ const toolsDropdown = {
 ---
 
 <nav class="sticky top-0 z-40 bg-[#fcfcfc]/95 backdrop-blur-sm border-b border-neutral-200 transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
-  <div class="flex justify-between items-center w-full px-4 sm:px-6 h-14 max-w-6xl mx-auto">
-    <a href={localePath('/')} class="text-[15px] font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-1.5 flex-shrink-0">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 h-14 max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_auto_1fr]">
+    <a href={localePath('/')} class="text-[15px] font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-1.5 flex-shrink-0 lg:justify-self-start">
       <span class="material-symbols-outlined text-rose-600 text-lg" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
       ImageToURL
     </a>
 
     <!-- Desktop Nav -->
-    <div class="hidden lg:flex items-center gap-5 xl:gap-6">
+    <div class="hidden lg:flex items-center gap-5 xl:gap-6 lg:justify-self-center">
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -160,7 +160,7 @@ const toolsDropdown = {
     </div>
 
     <!-- Desktop Right Actions -->
-    <div class="hidden lg:flex items-center gap-4">
+    <div class="hidden lg:flex items-center gap-4 lg:justify-self-end">
       <!-- Language Switcher (desktop) — hidden on English-only pages -->
       {isLocalizable && (
       <div class="relative" id="lang-switcher-desktop">
