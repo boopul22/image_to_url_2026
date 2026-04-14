@@ -77,6 +77,13 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /api/
+
 # Block training-only crawlers
 User-agent: CCBot
 Disallow: /

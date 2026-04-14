@@ -81,9 +81,14 @@ const ROOT_PAGES: { path: string; lastmod: string }[] = [
 ];
 
 function buildRootUrlEntry(path: string, lastmod: string): string {
+  // English-only landing pages: self-referential hreflang so Google can cluster them
+  // as English content with x-default fallback.
+  const url = escapeXml(SITE + path);
   return `  <url>
-    <loc>${escapeXml(SITE + path)}</loc>
+    <loc>${url}</loc>
     <lastmod>${lastmod}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${url}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${url}" />
   </url>`;
 }
 

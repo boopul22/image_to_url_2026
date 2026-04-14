@@ -13,6 +13,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     return redirect('/en/', 301);
   }
 
+  // Legacy: /zh/* -> /zh-Hans/* (locale was renamed to BCP-47 Simplified Chinese)
+  if (path === '/zh' || path.startsWith('/zh/')) {
+    const tail = path === '/zh' ? '/' : path.slice(3);
+    return redirect(`/zh-Hans${tail}`, 301);
+  }
+
   // Redirect root-level i18n pages to /en/ equivalents to prevent duplicate content
   // Strip trailing slash before matching so /blog/ and /blog both redirect correctly
   const cleanedPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
@@ -86,6 +92,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 
+  // CSP — report-only for now; promote to enforcing after watching reports for a week.
+  response.headers.set(
+    'Content-Security-Policy-Report-Only',
+    "default-src 'self'; img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'",
+  );
+
   // Add cache headers for public HTML pages (SEO performance)
   // Skip API, admin, dashboard routes — those must never be cached
   if (
@@ -98,9 +110,10 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       // Logged-in: don't cache at CDN (personalized nav), browser must revalidate
       response.headers.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     } else {
-      // Anonymous: cache at CDN edge for fast crawling & page loads
+      // Anonymous: cache at CDN edge for fast crawling & page loads.
+      // No `Vary: Cookie` — anonymous responses don't depend on cookies, and Vary
+      // would fragment the edge cache by every cookie value (killing HIT rate).
       response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
-      response.headers.set('Vary', 'Cookie');
     }
   }
 

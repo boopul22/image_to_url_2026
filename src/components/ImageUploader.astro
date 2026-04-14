@@ -22,7 +22,7 @@
             class="inline-flex items-center justify-center w-4 h-4 ml-1 border border-on-background text-[10px] font-bold align-middle hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
           >?</button>
         </label>
-        <p id="expires-in-hint" class="text-[11px] text-on-surface-variant truncate">Kept forever — never auto-deleted</p>
+        <p id="expires-in-hint" class="text-[11px] leading-tight text-on-surface-variant">Never auto-deleted</p>
       </div>
     </div>
     <select
@@ -117,7 +117,7 @@
   const expiresInSel = document.getElementById('expires-in') as HTMLSelectElement | null;
   const expiresInHint = document.getElementById('expires-in-hint');
   const EXPIRY_HINTS: Record<string, string> = {
-    never: 'Kept forever — never auto-deleted',
+    never: 'Never auto-deleted',
     '1h': 'Auto-deletes in 1 hour',
     '24h': 'Auto-deletes in 24 hours',
     '7d': 'Auto-deletes in 7 days',

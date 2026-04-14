@@ -7,9 +7,9 @@ import es from './translations/es.json';
 import fr from './translations/fr.json';
 import de from './translations/de.json';
 import ja from './translations/ja.json';
-import zh from './translations/zh.json';
+import zhHans from './translations/zh.json';
 
-const translations: Record<Locale, Record<string, string>> = { en, hi, es, fr, de, ja, zh };
+const translations: Record<Locale, Record<string, string>> = { en, hi, es, fr, de, ja, 'zh-Hans': zhHans };
 
 /**
  * Translate a key for the given locale. Falls back to English if key is missing.

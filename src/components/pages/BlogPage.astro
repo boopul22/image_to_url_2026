@@ -26,7 +26,7 @@ const featuredPost = posts.find((p) => p.featured);
 const otherPosts = posts.filter((p) => p !== featuredPost);
 ---
 
-<Layout title={t(locale, 'blog.meta.title')} description={t(locale, 'blog.meta.description')}>
+<Layout title={t(locale, 'blog.meta.title')} description={t(locale, 'blog.meta.description')} noindex={posts.length === 0}>
   <Nav activePage="blog" />
 
   <main>

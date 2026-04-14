@@ -17,15 +17,18 @@ function lp(path: string): string {
 const db = getDB(Astro.locals);
 const { posts: previewPosts } = await getPublishedPosts(db, { limit: 3 });
 
+const canonicalHomeUrl = `https://imagetourl.cloud/${locale}/`;
+
 const pageSchema = [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "@id": "https://imagetourl.cloud/#software",
     "name": "ImageToURL",
     "url": "https://imagetourl.cloud",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript and HTML5",
     "description": "Upload any image and instantly receive a permanent, CDN-delivered shareable URL. Supports JPG, PNG, WebP, GIF, and SVG up to 10 MB. No account required.",
     "featureList": [
       "Drag and drop image upload",
@@ -37,128 +40,73 @@ const pageSchema = [
       "Markdown and HTML export",
       "Custom link expiration"
     ],
-    "screenshot": "https://imagetourl.cloud/favicon.svg",
+    "screenshot": "https://imagetourl.cloud/og-default.svg",
     "offers": [
       {
         "@type": "Offer",
         "name": "Free",
         "price": "0",
         "priceCurrency": "USD",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
         "description": "10 uploads per month, standard processing speed, public link library.",
         "url": "https://imagetourl.cloud/pricing"
       },
       {
         "@type": "Offer",
         "name": "Pro",
-        "price": "12",
         "priceCurrency": "USD",
-        "billingIncrement": "P1M",
+        "price": "12",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "12",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M",
+          "unitCode": "MON"
+        },
         "description": "Unlimited uploads, high-priority processing, custom link expiration, API access.",
         "url": "https://imagetourl.cloud/pricing"
       },
       {
         "@type": "Offer",
         "name": "Business",
-        "price": "49",
         "priceCurrency": "USD",
-        "billingIncrement": "P1M",
+        "price": "49",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "49",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M",
+          "unitCode": "MON"
+        },
         "description": "Everything in Pro plus team workspaces, ultra-high resolution, and dedicated support.",
         "url": "https://imagetourl.cloud/pricing"
       }
     ],
     "publisher": {
       "@id": "https://imagetourl.cloud/#organization"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": "3",
-      "reviewCount": "3"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "Alex Rivera" },
-        "reviewBody": "Finally, a tool that doesn't ask me to create an account for a simple 2-second task. The speed is actually insane."
-      },
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "Sarah Chen" },
-        "reviewBody": "We use the API to handle all our blog image assets. It's more reliable than our own previous hosting solution."
-      },
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "Jordan Smith" },
-        "reviewBody": "The permanent links feature is a lifesaver for my portfolio. I don't have to worry about broken images ever again."
-      }
-    ]
+    }
   },
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://imagetourl.cloud/#webpage",
-    "url": "https://imagetourl.cloud",
+    "@id": `${canonicalHomeUrl}#webpage`,
+    "url": canonicalHomeUrl,
     "name": "ImageToURL — Turn Images into Shareable Links",
     "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
+    "inLanguage": locale,
     "isPartOf": { "@id": "https://imagetourl.cloud/#website" },
     "about": { "@id": "https://imagetourl.cloud/#software" },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://imagetourl.cloud" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": canonicalHomeUrl }
       ]
     }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is it really free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. The free tier gives you 10 uploads per month with permanent links and CDN delivery. No credit card needed."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do my links expire?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Free-tier links are permanent. Pro users can optionally set custom expiration times."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What image formats are supported?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "JPG, PNG, WebP, GIF, and SVG — up to 10 MB per file."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is there an API?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Pro and Business plans include full REST API access for automated uploads and image management."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How secure are my images?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "All images are served over HTTPS with SSL encryption. Data is stored on Cloudflare's encrypted infrastructure."
-        }
-      }
-    ]
   }
 ];
 ---
@@ -198,7 +146,7 @@ const pageSchema = [
                 class="inline-flex items-center justify-center w-4 h-4 ml-1 border border-on-background text-[10px] font-bold align-middle hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
               >?</button>
             </label>
-            <p id="expires-in-hint" class="text-[11px] text-on-surface-variant truncate">Kept forever — never auto-deleted</p>
+            <p id="expires-in-hint" class="text-[11px] leading-tight text-on-surface-variant">Never auto-deleted</p>
           </div>
         </div>
         <select
@@ -620,7 +568,7 @@ const pageSchema = [
   const expiresInSel = document.getElementById('expires-in') as HTMLSelectElement | null;
   const expiresInHint = document.getElementById('expires-in-hint');
   const EXPIRY_HINTS: Record<string, string> = {
-    never: 'Kept forever — never auto-deleted',
+    never: 'Never auto-deleted',
     '1h': 'Auto-deletes in 1 hour',
     '24h': 'Auto-deletes in 24 hours',
     '7d': 'Auto-deletes in 7 days',
