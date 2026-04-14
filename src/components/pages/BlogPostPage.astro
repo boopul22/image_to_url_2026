@@ -29,6 +29,56 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate'
 
 const relatedPosts = await getRelatedPosts(db, post.relatedSlugs);
 
+// --- Table of contents ---------------------------------------------------
+// Build a TOC from H2/H3 headings. For htmlContent posts we also inject
+// stable `id` attributes on the headings so the anchor links work.
+type TocItem = { id: string; text: string; level: 2 | 3 };
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/<[^>]*>/g, '')
+    .replace(/&[a-z]+;/g, ' ')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 60) || 'section';
+}
+
+let tocItems: TocItem[] = [];
+let renderedHtml: string | null = null;
+
+if (post.htmlContent) {
+  const used = new Set<string>();
+  renderedHtml = post.htmlContent.replace(
+    /<(h2|h3)([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (_m, tag: string, attrs: string, inner: string) => {
+      const level = tag.toLowerCase() === 'h2' ? 2 : 3;
+      const text = inner.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+      if (!text) return `<${tag}${attrs}>${inner}</${tag}>`;
+      const existingId = attrs.match(/\sid=["']([^"']+)["']/i)?.[1];
+      let id = existingId || slugify(text);
+      let n = 2;
+      while (used.has(id)) id = `${slugify(text)}-${n++}`;
+      used.add(id);
+      const newAttrs = existingId
+        ? attrs
+        : `${attrs} id="${id}"`;
+      tocItems.push({ id, text, level: level as 2 | 3 });
+      return `<${tag}${newAttrs}>${inner}</${tag}>`;
+    }
+  );
+} else if (post.content?.sections) {
+  tocItems = post.content.sections.map((s: any) => ({
+    id: slugify(`${s.number}-${s.heading}`),
+    text: `${s.number}. ${s.heading}`,
+    level: 2,
+  }));
+}
+
+const showToc = tocItems.length >= 3;
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -116,9 +166,43 @@ const faqSchema = post.faqItems?.length ? {
         </div>
       </header>
 
+      <!-- Table of Contents -->
+      {showToc && (
+        <details
+          open
+          class="blog-toc group mb-10 sm:mb-12 bg-surface-container border-2 border-on-surface rounded-xl"
+          style="box-shadow: 4px 4px 0px 0px rgba(30,26,37,1);"
+        >
+          <summary class="cursor-pointer list-none px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3 border-b-2 border-on-surface group-open:border-b-2">
+            <span class="text-xs uppercase tracking-widest font-black text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-base">list</span>
+              {t(locale, 'blogPost.toc') || 'Table of contents'}
+            </span>
+            <span class="material-symbols-outlined text-lg text-outline transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <nav aria-label={t(locale, 'blogPost.toc') || 'Table of contents'} class="px-4 sm:px-6 py-4 sm:py-5">
+            <ol class="space-y-2.5 sm:space-y-2 list-none p-0 m-0">
+              {tocItems.map((item, idx) => (
+                <li class={item.level === 3 ? 'pl-4 sm:pl-5' : ''}>
+                  <a
+                    href={`#${item.id}`}
+                    class="flex items-baseline gap-3 py-1 text-sm sm:text-base text-on-surface hover:text-primary font-medium leading-snug no-underline hover:underline underline-offset-4 break-words"
+                  >
+                    <span class="text-[10px] sm:text-xs font-black text-outline tabular-nums w-6 flex-none pt-0.5">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span class="min-w-0 break-words">{item.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </details>
+      )}
+
       <!-- Article Body -->
       {post.htmlContent ? (
-        <div class="landing-prose blog-html-content" set:html={post.htmlContent} />
+        <div class="landing-prose blog-html-content" set:html={renderedHtml ?? post.htmlContent} />
       ) : (
         <div class="landing-prose">
           <p class="text-xl font-medium leading-relaxed">
@@ -127,7 +211,10 @@ const faqSchema = post.faqItems?.length ? {
 
           {post.content.sections.map((section, i) => (
             <>
-              <h2 class="text-lg sm:text-xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary">
+              <h2
+                id={slugify(`${section.number}-${section.heading}`)}
+                class="text-lg sm:text-xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary scroll-mt-24"
+              >
                 {section.number}. {section.heading}
               </h2>
               <p set:html={section.body} />
@@ -245,4 +332,16 @@ const faqSchema = post.faqItems?.length ? {
 
   <Footer />
 </Layout>
+
+<style>
+  .blog-html-content :is(h2, h3)[id],
+  article :is(h2, h3)[id] {
+    scroll-margin-top: 6rem;
+  }
+  .blog-toc summary::-webkit-details-marker { display: none; }
+  .blog-toc summary { -webkit-tap-highlight-color: transparent; }
+  @media (max-width: 640px) {
+    .blog-toc a { min-height: 44px; align-items: center; }
+  }
+</style>
 
