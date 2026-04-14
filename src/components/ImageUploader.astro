@@ -8,6 +8,16 @@
 
 <div class="w-full max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10">
   <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
+  <div class="flex items-center justify-end gap-3 mb-3">
+    <label for="expires-in" class="text-xs font-bold uppercase tracking-wider text-on-background">Auto-delete</label>
+    <select id="expires-in" class="bg-white border-2 border-on-background px-3 py-2 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-rose-600">
+      <option value="never">Never</option>
+      <option value="1h">1 hour</option>
+      <option value="24h">24 hours</option>
+      <option value="7d">7 days</option>
+      <option value="30d">30 days</option>
+    </select>
+  </div>
   <div
     id="upload-panel"
     class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors"
@@ -178,6 +188,8 @@
     try {
       const formData = new FormData();
       formData.append('file', file);
+      const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
+      if (expiresInEl) formData.append('expires_in', expiresInEl.value);
 
       const response = await fetch('/api/upload', { method: 'POST', body: formData });
       const data = await response.json();

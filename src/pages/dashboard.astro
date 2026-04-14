@@ -301,6 +301,7 @@ const user = Astro.locals.user!;
         <div class="p-3 space-y-2">
           <p class="text-xs font-bold truncate" title="${esc(img.filename)}">${esc(img.filename)}</p>
           <p class="text-xs text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
+          ${img.expires_at ? `<p class="text-[10px] font-bold uppercase tracking-wider text-rose-600">Expires ${formatExpiry(img.expires_at)}</p>` : ''}
           <div class="flex gap-2">
             <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-2.5 border border-on-surface text-xs font-bold uppercase hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Copy URL</button>
             <button onclick="deleteImage('${esc(img.id)}')" class="py-2.5 px-3 border border-error text-error text-xs font-bold uppercase hover:bg-error hover:text-on-error active:bg-error active:text-on-error transition-colors">
@@ -310,6 +311,16 @@ const user = Astro.locals.user!;
         </div>
       </div>
     `).join('');
+  }
+
+  function formatExpiry(iso: string): string {
+    const ms = new Date(iso.replace(' ', 'T') + 'Z').getTime() - Date.now();
+    if (ms <= 0) return 'soon';
+    const m = Math.round(ms / 60000);
+    if (m < 60) return `in ${m}m`;
+    const h = Math.round(m / 60);
+    if (h < 48) return `in ${h}h`;
+    return `in ${Math.round(h / 24)}d`;
   }
 
   (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url);

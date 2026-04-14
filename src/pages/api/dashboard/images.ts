@@ -3,7 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
-import { deleteFromR2 } from '../../../lib/r2';
+import { hardDeleteImage } from '../../../lib/images/delete';
 
 export const GET: APIRoute = async ({ url, locals }) => {
   if (!locals.user) {
@@ -21,12 +21,12 @@ export const GET: APIRoute = async ({ url, locals }) => {
   const [images, countResult] = await Promise.all([
     db
       .prepare(
-        'SELECT id, r2_key, url, filename, size_bytes, mime_type, created_at FROM images WHERE user_id = ? ORDER BY created_at DESC LIMIT ? OFFSET ?',
+        'SELECT id, r2_key, url, filename, size_bytes, mime_type, created_at, expires_at FROM images WHERE user_id = ? AND deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?',
       )
       .bind(locals.user.id, limit, offset)
       .all(),
     db
-      .prepare('SELECT COUNT(*) as count FROM images WHERE user_id = ?')
+      .prepare('SELECT COUNT(*) as count FROM images WHERE user_id = ? AND deleted_at IS NULL')
       .bind(locals.user.id)
       .first<{ count: number }>(),
   ]);
@@ -73,22 +73,7 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  // Delete from R2
-  try {
-    const env = getEnv(locals);
-    await deleteFromR2({
-      accountId: env.CLOUDFLARE_ACCOUNT_ID,
-      accessKeyId: env.R2_ACCESS_KEY_ID,
-      secretAccessKey: env.R2_SECRET_ACCESS_KEY,
-      bucket: env.R2_BUCKET_NAME,
-      key: image.r2_key,
-    });
-  } catch {
-    // Continue even if R2 delete fails
-  }
-
-  // Delete from D1
-  await db.prepare('DELETE FROM images WHERE id = ? AND user_id = ?').bind(id, locals.user.id).run();
+  await hardDeleteImage(db, getEnv(locals) as any, id, image.r2_key, { userId: locals.user.id });
 
   return new Response(JSON.stringify({ success: true }), {
     headers: { 'Content-Type': 'application/json' },

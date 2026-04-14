@@ -4,6 +4,7 @@ import type { APIRoute } from 'astro';
 import { uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
+import { resolveExpiresIn } from '../../lib/images/delete';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -79,6 +80,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     const formData = await request.formData();
     const file = formData.get('file');
+    const expiresInSeconds = resolveExpiresIn(formData.get('expires_in'), !user);
 
     if (!file || !(file instanceof File)) {
       return new Response(JSON.stringify({ error: 'No file provided' }), {
@@ -142,13 +144,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
     try {
       const uploadedVia = request.headers.get('authorization') ? 'api' : 'web';
 
-      await db
-        .prepare(
-          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        )
-        .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
-        .run();
+      const expiresAtSql =
+        expiresInSeconds === null ? null : `datetime('now', '+${expiresInSeconds} seconds')`;
+
+      if (expiresAtSql) {
+        await db
+          .prepare(
+            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, expires_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ${expiresAtSql})`,
+          )
+          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
+          .run();
+      } else {
+        await db
+          .prepare(
+            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          )
+          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
+          .run();
+      }
 
       // Track anonymous upload count
       if (!user) {

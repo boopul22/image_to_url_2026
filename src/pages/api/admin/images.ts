@@ -3,7 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
-import { deleteFromR2 } from '../../../lib/r2';
+import { hardDeleteImage } from '../../../lib/images/delete';
 
 export const GET: APIRoute = async ({ url, locals }) => {
   if (!locals.user || locals.user.role !== 'admin') {
@@ -84,21 +84,7 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  // Delete from R2
-  try {
-    const env = getEnv(locals);
-    await deleteFromR2({
-      accountId: env.CLOUDFLARE_ACCOUNT_ID,
-      accessKeyId: env.R2_ACCESS_KEY_ID,
-      secretAccessKey: env.R2_SECRET_ACCESS_KEY,
-      bucket: env.R2_BUCKET_NAME,
-      key: image.r2_key,
-    });
-  } catch {
-    // Continue even if R2 delete fails
-  }
-
-  await db.prepare('DELETE FROM images WHERE id = ?').bind(id).run();
+  await hardDeleteImage(db, getEnv(locals) as any, id, image.r2_key);
 
   return new Response(JSON.stringify({ success: true }), {
     headers: { 'Content-Type': 'application/json' },

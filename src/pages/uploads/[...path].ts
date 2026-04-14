@@ -2,11 +2,29 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getEnv } from '../../lib/env';
+import { getDB } from '../../lib/db';
 
 export const GET: APIRoute = async ({ params, locals }) => {
   const path = params.path;
   if (!path) {
     return new Response('Not found', { status: 404 });
+  }
+
+  const db = getDB(locals);
+  if (db) {
+    const row = await db
+      .prepare(
+        `SELECT expires_at, deleted_at FROM images
+         WHERE r2_key = ?`,
+      )
+      .bind(`uploads/${path}`)
+      .first<{ expires_at: string | null; deleted_at: string | null }>();
+    if (row && (row.deleted_at || (row.expires_at && row.expires_at <= new Date().toISOString().replace('T', ' ').slice(0, 19)))) {
+      return new Response('This image has expired.', {
+        status: 410,
+        headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
+      });
+    }
   }
 
   const env = getEnv(locals);

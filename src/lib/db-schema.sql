@@ -30,9 +30,14 @@ CREATE TABLE IF NOT EXISTS images (
   mime_type TEXT NOT NULL,
   uploaded_via TEXT DEFAULT 'web',
   api_key_id TEXT,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  expires_at TEXT,
+  deleted_at TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_images_user_id ON images(user_id);
+CREATE INDEX IF NOT EXISTS idx_images_expires_at
+  ON images(expires_at)
+  WHERE expires_at IS NOT NULL AND deleted_at IS NULL;
 
 CREATE TABLE IF NOT EXISTS api_keys (
   id TEXT PRIMARY KEY,
