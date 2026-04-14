@@ -239,6 +239,31 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid #171717;
     box-shadow: 2px 2px 0 0 #e11d48;
   }
+
+  /* Blog post body overrides: drop the per-heading underline, give real rhythm,
+     and separate inline images from the background with brutalist border+shadow. */
+  .landing-prose.blog-html-content h2 {
+    margin-top: 3rem;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .landing-prose.blog-html-content h2:first-child { margin-top: 0; }
+  .landing-prose.blog-html-content h3 { margin-top: 2.25rem; }
+  .landing-prose.blog-html-content p { margin-bottom: 0; line-height: 1.75; }
+  .landing-prose.blog-html-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #171717;
+    box-shadow: 6px 6px 0 0 #171717;
+    border-radius: 0.5rem;
+    margin: 2.25rem 0;
+  }
+  .landing-prose.blog-html-content hr {
+    border: 0;
+    height: 0;
+    margin: 2.5rem 0;
+  }
 }
 
 /* Reveal classes kept as no-ops for compatibility — brutalism snaps, no fades. */
