@@ -190,6 +190,7 @@ const toolsDropdown = {
       </div>
       )}
 
+      <div id="auth-slot-desktop" data-signed-in={user ? 'true' : 'false'}>
       {user ? (
         <div class="relative" id="profile-switcher-desktop">
           <button
@@ -241,6 +242,7 @@ const toolsDropdown = {
           {t(locale, 'nav.signIn')}
         </a>
       )}
+      </div>
     </div>
 
     <!-- Mobile Menu Button (only element on right side on mobile) -->
@@ -367,6 +369,7 @@ const toolsDropdown = {
       </div>
       )}
 
+      <div id="auth-slot-mobile" data-signed-in={user ? 'true' : 'false'}>
       {user ? (
         <>
           <div class="h-px bg-outline-variant my-1"></div>
@@ -406,6 +409,7 @@ const toolsDropdown = {
           {t(locale, 'nav.signIn')}
         </a>
       )}
+      </div>
     </div>
   </div>
 </nav>
@@ -520,4 +524,81 @@ const toolsDropdown = {
       toolsChevronMobile.style.transform = isOpen ? '' : 'rotate(180deg)';
     }
   });
+
+  // Auth nav hydration — fixes signed-out flash on prerendered/CDN-cached pages.
+  // Server may render the signed-out state (no cookies at build time, or anonymous
+  // CDN cache hit). If a real session exists, swap the auth slots to the profile UI.
+  (async () => {
+    const desktop = document.getElementById('auth-slot-desktop');
+    const mobile = document.getElementById('auth-slot-mobile');
+    if (!desktop || desktop.dataset.signedIn === 'true') return;
+
+    const escapeHtml = (s: string) =>
+      s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+
+    let user: { name: string; avatarUrl: string; role: 'user' | 'admin' } | null = null;
+    try {
+      const res = await fetch('/api/me', { credentials: 'same-origin' });
+      if (!res.ok) return;
+      user = (await res.json()).user;
+    } catch {
+      return;
+    }
+    if (!user) return;
+
+    const name = escapeHtml(user.name);
+    const avatar = escapeHtml(user.avatarUrl);
+    const isAdmin = user.role === 'admin';
+
+    desktop.innerHTML = `
+      <div class="relative" id="profile-switcher-desktop">
+        <button id="profile-btn-desktop" class="flex items-center gap-2 text-[13px] font-headline font-medium uppercase tracking-wide text-on-background hover:text-rose-600 transition-colors" aria-label="Profile menu" aria-expanded="false">
+          <img src="${avatar}" alt="${name}" class="w-6 h-6 border border-neutral-300 object-cover" width="24" height="24" referrerpolicy="no-referrer" />
+          <span>${name}</span>
+          <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+        <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[180px]">
+          <a href="/dashboard" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors">
+            <span class="material-symbols-outlined text-base text-neutral-500">dashboard</span>Dashboard
+          </a>
+          ${isAdmin ? `<a href="/admin" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-rose-600 hover:bg-neutral-50 transition-colors"><span class="material-symbols-outlined text-base">admin_panel_settings</span>Admin</a>` : ''}
+          <div class="border-t border-neutral-200"></div>
+          <a href="/api/auth/logout" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-neutral-500 hover:text-on-background hover:bg-neutral-50 transition-colors">
+            <span class="material-symbols-outlined text-base">logout</span>Sign out
+          </a>
+        </div>
+      </div>
+    `;
+
+    if (mobile) {
+      mobile.innerHTML = `
+        <div class="h-px bg-outline-variant my-1"></div>
+        <a href="/dashboard" class="flex items-center gap-3 py-3.5 px-4 hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors">
+          <img src="${avatar}" alt="${name}" class="w-7 h-7 border-2 border-on-background object-cover" width="28" height="28" referrerpolicy="no-referrer" />
+          <span class="font-label text-xs font-bold text-on-background">${name}</span>
+        </a>
+        ${isAdmin ? `<a href="/admin" class="font-label uppercase tracking-wider text-xs font-bold py-3.5 px-4 text-error hover:bg-error-container active:bg-error-container transition-colors flex items-center gap-3"><span class="material-symbols-outlined text-base">admin_panel_settings</span>Admin</a>` : ''}
+        <a href="/api/auth/logout" class="font-label uppercase tracking-wider text-xs font-bold py-3.5 px-4 text-outline hover:text-on-background hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors flex items-center gap-3">
+          <span class="material-symbols-outlined text-base">logout</span>Sign out
+        </a>
+      `;
+    }
+
+    // Re-wire the desktop profile dropdown toggle for the freshly injected DOM
+    const newProfileBtn = document.getElementById('profile-btn-desktop');
+    const newProfileDropdown = document.getElementById('profile-dropdown-desktop');
+    newProfileBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      newProfileDropdown?.classList.toggle('hidden');
+      const open = !newProfileDropdown?.classList.contains('hidden');
+      newProfileBtn?.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', (e) => {
+      const sw = document.getElementById('profile-switcher-desktop');
+      if (sw && !sw.contains(e.target as Node)) {
+        newProfileDropdown?.classList.add('hidden');
+        newProfileBtn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 </script>
