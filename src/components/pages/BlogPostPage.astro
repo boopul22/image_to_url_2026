@@ -118,16 +118,16 @@ const faqSchema = post.faqItems?.length ? {
 
       <!-- Article Body -->
       {post.htmlContent ? (
-        <div class="prose prose-on-surface max-w-none text-lg leading-relaxed blog-html-content" set:html={post.htmlContent} />
+        <div class="landing-prose blog-html-content" set:html={post.htmlContent} />
       ) : (
-        <div class="prose prose-on-surface max-w-none text-lg leading-relaxed space-y-8">
+        <div class="landing-prose">
           <p class="text-xl font-medium leading-relaxed">
             {post.content.intro}
           </p>
 
           {post.content.sections.map((section, i) => (
             <>
-              <h2 class="text-2xl sm:text-3xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary">
+              <h2 class="text-lg sm:text-xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary">
                 {section.number}. {section.heading}
               </h2>
               <p set:html={section.body} />
@@ -164,7 +164,7 @@ const faqSchema = post.faqItems?.length ? {
       <!-- FAQ Section -->
       {post.faqItems && post.faqItems.length > 0 && (
         <section class="mt-12 sm:mt-16">
-          <h3 class="text-2xl sm:text-3xl font-headline italic font-black mb-6 flex items-center gap-3">
+          <h3 class="text-lg sm:text-xl font-headline italic font-black mb-6 flex items-center gap-3">
             <span class="material-symbols-outlined text-primary">help</span>
             Frequently Asked Questions
           </h3>

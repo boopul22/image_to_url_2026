@@ -69,23 +69,23 @@ const toolsDropdown = {
 };
 ---
 
-<nav class="sticky top-0 z-40 bg-background border-b-2 border-on-background transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
-  <div class="flex justify-between items-center w-full px-4 sm:px-6 py-3 sm:py-4 max-w-7xl mx-auto">
-    <a href={localePath('/')} class="text-lg sm:text-2xl font-black font-headline text-on-background flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-      <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+<nav class="sticky top-0 z-40 bg-[#fcfcfc]/95 backdrop-blur-sm border-b border-neutral-200 transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 h-14 max-w-6xl mx-auto">
+    <a href={localePath('/')} class="text-base font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-2 flex-shrink-0">
+      <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
       ImageToURL
     </a>
 
     <!-- Desktop Nav -->
-    <div class="hidden lg:flex items-center gap-6 xl:gap-8">
+    <div class="hidden lg:flex items-center gap-6 xl:gap-7">
       {navLinks.map((link) => (
         <a
           href={link.href}
           class:list={[
-            "font-label uppercase tracking-wider text-xs font-bold transition-all duration-200",
+            "text-[13px] font-medium transition-colors duration-200",
             activePage === link.id
-              ? "text-on-background border-b-2 border-on-background font-bold pb-1"
-              : "text-outline hover:underline hover:text-on-background",
+              ? "text-on-background"
+              : "text-neutral-500 hover:text-on-background",
           ]}
         >
           {link.name}
@@ -96,7 +96,7 @@ const toolsDropdown = {
       <div class="relative" id="tools-switcher-desktop">
         <button
           id="tools-btn-desktop"
-          class="flex items-center gap-1 font-label uppercase tracking-wider text-xs font-bold transition-all duration-200 text-outline hover:text-on-background"
+          class="flex items-center gap-1 text-[13px] font-medium transition-colors duration-200 text-neutral-500 hover:text-on-background"
           aria-expanded="false"
         >
           {t(locale, 'nav.tools')}
@@ -246,7 +246,7 @@ const toolsDropdown = {
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu-transition lg:hidden border-t-2 border-on-background bg-background">
+  <div id="mobile-menu" class="mobile-menu-transition lg:hidden border-t border-neutral-200 bg-background">
     <div class="flex flex-col px-4 py-3 gap-1" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
       {navLinks.map((link) => (
         <a

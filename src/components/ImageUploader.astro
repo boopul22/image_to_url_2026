@@ -10,19 +10,17 @@
   <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
   <div
     id="upload-panel"
-    class="bg-tertiary-fixed border-3 sm:border-2 border-on-background hard-shadow overflow-hidden transition-colors rounded-2xl sm:rounded-xl"
+    class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors"
   >
     <!-- State: idle / uploading -->
-    <div id="state-idle" class="p-4 sm:p-6">
-      <div id="drop-zone" class="flex flex-col items-center gap-3 sm:gap-4 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-tertiary-container text-3xl sm:text-4xl" id="upload-icon">upload_file</span>
+    <div id="state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
+      <div id="drop-zone" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl" id="upload-icon">add_photo_alternate</span>
         <div class="text-center">
-          <p class="text-on-surface font-bold text-base sm:text-lg font-headline" id="upload-text">Click to upload or drag & drop</p>
-          <p class="text-xs sm:text-sm text-outline mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG — up to 10 MB</p>
+          <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider" id="upload-text">Drop image here or click to browse</p>
+          <p class="text-xs sm:text-sm text-on-surface-variant mt-2" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
         </div>
-        <div class="bg-on-background text-primary px-8 sm:px-10 py-3 font-bold text-sm uppercase tracking-wider active:scale-95 transition-transform rounded-lg sm:rounded-none" id="upload-btn">
-          SELECT FILE
-        </div>
+        <div class="sr-only" id="upload-btn">Select File</div>
       </div>
       <div id="progress-bar" class="hidden mt-6 h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
         <div id="progress-fill" class="h-full bg-primary transition-all duration-300 rounded-full" style="width: 0%"></div>
@@ -32,16 +30,16 @@
     <!-- State: success -->
     <div id="state-success" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-4">
-        <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl">check_circle</span>
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
         <span class="font-bold text-secondary text-sm sm:text-lg">Uploaded!</span>
         <button id="upload-another" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
           Upload another
         </button>
       </div>
       <div class="flex flex-col sm:flex-row gap-3">
-        <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border-2 border-on-background px-4 py-3 sm:py-3 text-sm sm:text-base font-mono text-on-surface focus:outline-none rounded" />
-        <button id="copy-btn" class="bg-primary text-on-primary px-6 py-3 font-bold text-sm sm:text-base border-2 border-on-background flex-shrink-0 active:scale-95 transition-transform">
-          COPY
+        <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border-2 border-on-background px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
+        <button id="copy-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">
+          Copy
         </button>
       </div>
       <!-- YouTube channel support CTA -->
@@ -120,7 +118,7 @@
     uploadIcon.textContent = 'upload_file';
     uploadText.textContent = 'Click to upload or drag & drop';
     uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG — up to 10 MB';
-    uploadBtn.textContent = 'SELECT FILE';
+    uploadBtn.textContent = 'Select File';
     fileInput.value = '';
     errorSignin.classList.add('hidden');
     errorSignin.classList.remove('flex');
@@ -155,8 +153,8 @@
 
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(resultUrl.value);
-    copyBtn.textContent = 'COPIED!';
-    setTimeout(() => { copyBtn.textContent = 'COPY'; }, 2000);
+    copyBtn.textContent = 'Copied!';
+    setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
   });
 
   uploadAnother.addEventListener('click', resetIdle);
@@ -169,7 +167,7 @@
     uploadIcon.textContent = 'hourglass_top';
     uploadText.textContent = `Uploading ${file.name}`;
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1]?.toUpperCase() || 'FILE'}`;
-    uploadBtn.textContent = 'UPLOADING...';
+    uploadBtn.textContent = 'Uploading...';
 
     let progress = 0;
     const progressInterval = setInterval(() => {
