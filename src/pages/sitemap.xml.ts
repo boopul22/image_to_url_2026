@@ -48,6 +48,7 @@ const ROOT_PAGES: { path: string; lastmod: string }[] = [
   { path: '/image-url-generator',lastmod: '2026-04-04' },
   { path: '/bulk-image-upload',  lastmod: '2026-04-04' },
   { path: '/content-guidelines', lastmod: '2026-04-04' },
+  { path: '/heic-to-jpg',        lastmod: '2026-04-15' },
   { path: '/png-to-url',         lastmod: '2026-04-04' },
   { path: '/jpg-to-url',         lastmod: '2026-04-04' },
   { path: '/gif-to-url',         lastmod: '2026-04-04' },

@@ -2,6 +2,7 @@
 import { t, stripLocalePrefix } from '../i18n/utils';
 import { locales, localeLabels, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
+import { getNavGroups } from '../lib/nav-links';
 
 const { activePage = "home" } = Astro.props;
 const user = Astro.locals.user;
@@ -19,54 +20,10 @@ function localePath(path: string, loc: Locale = locale): string {
 const navLinks = [
   { name: t(locale, 'nav.home'), href: localePath('/'), id: "home", icon: "home" },
   { name: t(locale, 'nav.features'), href: localePath('/features'), id: "features", icon: "auto_awesome" },
-  { name: t(locale, 'nav.pricing'), href: localePath('/pricing'), id: "pricing", icon: "sell" },
-  { name: t(locale, 'nav.api'), href: localePath('/docs'), id: "api", icon: "terminal" },
   { name: t(locale, 'nav.blog'), href: localePath('/blog'), id: "blog", icon: "article" },
 ];
 
-const toolsDropdown = {
-  convert: [
-    { name: 'PNG to URL', href: '/png-to-url', icon: 'image' },
-    { name: 'JPG to URL', href: '/jpg-to-url', icon: 'photo' },
-    { name: 'GIF to URL', href: '/gif-to-url', icon: 'gif_box' },
-    { name: 'WebP to URL', href: '/webp-to-url', icon: 'web' },
-    { name: 'Photo to URL', href: '/photo-to-url', icon: 'add_photo_alternate' },
-    { name: 'Screenshot to URL', href: '/screenshot-to-url', icon: 'screenshot_monitor' },
-  ],
-  features: [
-    { name: t(locale, 'nav.freeHosting'), href: '/free-image-hosting', icon: 'cloud_upload' },
-    { name: t(locale, 'nav.urlGenerator'), href: '/image-url-generator', icon: 'link' },
-    { name: t(locale, 'nav.bulkUpload'), href: '/bulk-image-upload', icon: 'backup' },
-    { name: 'Free Image CDN', href: '/free-image-cdn', icon: 'public' },
-    { name: 'Permanent Hosting', href: '/permanent-image-hosting', icon: 'all_inclusive' },
-    { name: 'Direct Image Links', href: '/direct-image-link', icon: 'link' },
-    { name: 'Anonymous Upload', href: '/anonymous-image-upload', icon: 'person_off' },
-    { name: 'Embed Code Generator', href: '/image-embed-code-generator', icon: 'code' },
-  ],
-  useCases: [
-    { name: 'For eBay', href: '/image-hosting-for-ebay', icon: 'storefront' },
-    { name: 'For Discord', href: '/image-hosting-for-discord', icon: 'forum' },
-    { name: 'For GitHub', href: '/image-hosting-for-github-readme', icon: 'terminal' },
-    { name: 'For Notion', href: '/image-hosting-for-notion', icon: 'description' },
-    { name: 'For WordPress', href: '/image-hosting-for-wordpress', icon: 'language' },
-    { name: 'For Shopify', href: '/image-hosting-for-shopify', icon: 'shopping_cart' },
-    { name: 'For Newsletters', href: '/image-hosting-for-newsletters', icon: 'newspaper' },
-    { name: 'For Email Signatures', href: '/image-hosting-for-email-signatures', icon: 'signature' },
-    { name: 'For Forums', href: '/image-hosting-for-forums', icon: 'chat' },
-    { name: 'For WhatsApp', href: '/image-to-url-for-whatsapp', icon: 'sms' },
-    { name: 'For ChatGPT', href: '/image-url-for-chatgpt', icon: 'smart_toy' },
-    { name: 'AI Image Hosting', href: '/ai-image-hosting', icon: 'auto_awesome' },
-    { name: 'Imgur Alternative', href: '/imgur-alternative', icon: 'swap_horiz' },
-    { name: 'ImgBB Alternative', href: '/imgbb-alternative', icon: 'swap_horiz' },
-  ],
-  companion: [
-    { name: 'ExtractPics — Image Extractor', href: 'https://extractpics.com/?ref=imagetourl', icon: 'travel_explore', external: true },
-  ],
-  company: [
-    { name: t(locale, 'nav.about'), href: '/about', icon: 'info' },
-    { name: t(locale, 'nav.contact'), href: '/contact', icon: 'mail' },
-  ],
-};
+const toolsDropdown = getNavGroups(locale);
 ---
 
 <nav class="sticky top-0 z-40 bg-[#fcfcfc]/95 backdrop-blur-sm border-b border-neutral-200 transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
@@ -102,8 +59,8 @@ const toolsDropdown = {
           {t(locale, 'nav.tools')}
           <span class="material-symbols-outlined text-sm">expand_more</span>
         </button>
-        <div id="tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[680px]">
-          <div class="grid grid-cols-4 gap-0 divide-x-2 divide-on-background">
+        <div id="tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[560px]">
+          <div class="grid grid-cols-3 gap-0 divide-x-2 divide-on-background">
             <!-- Convert Column -->
             <div class="p-4">
               <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
@@ -134,26 +91,33 @@ const toolsDropdown = {
                 </a>
               ))}
             </div>
-            <!-- Companion Tools Column -->
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Companion Tools</span>
-              {toolsDropdown.companion.map((item) => (
-                <a href={item.href} target="_blank" rel="noopener" class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-                  {item.name}
-                  <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>
-                </a>
-              ))}
-              <div class="border-t border-outline-variant/40 mt-3 pt-3">
-                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.company')}</span>
-                {toolsDropdown.company.map((item) => (
-                  <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                    <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Dropdown (our products) -->
+      <div class="relative" id="our-tools-switcher-desktop">
+        <button
+          id="our-tools-btn-desktop"
+          class="flex items-center gap-1 text-[13px] font-headline font-medium uppercase tracking-wide transition-colors duration-200 text-neutral-500 hover:text-on-background"
+          aria-expanded="false"
+        >
+          Tools
+          <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+        <div id="our-tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[260px]">
+          <div class="p-3">
+            {toolsDropdown.tools.map((item) => (
+              <a
+                href={item.href}
+                {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                class="flex items-center gap-2 px-2 py-2 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
+              >
+                <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                {item.name}
+                {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -316,23 +280,31 @@ const toolsDropdown = {
               {item.name}
             </a>
           ))}
-          <div class="px-3 pt-3 pb-1">
-            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">Companion Tools</span>
-          </div>
-          {toolsDropdown.companion.map((item) => (
-            <a href={item.href} target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+        </div>
+      </div>
+
+      <!-- Tools Dropdown (mobile, real products) -->
+      <div class="relative" id="our-tools-switcher-mobile">
+        <button
+          id="our-tools-btn-mobile"
+          class="flex items-center gap-3 w-full py-3.5 px-4 hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors font-label uppercase tracking-wider text-xs font-bold text-outline"
+          aria-label="Tools"
+          aria-expanded="false"
+        >
+          <span class="material-symbols-outlined text-base">build</span>
+          Tools
+          <span class="material-symbols-outlined text-sm ml-auto" id="our-tools-chevron-mobile">expand_more</span>
+        </button>
+        <div id="our-tools-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden">
+          {toolsDropdown.tools.map((item) => (
+            <a
+              href={item.href}
+              {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+              class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors"
+            >
               <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
               {item.name}
-              <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>
-            </a>
-          ))}
-          <div class="px-3 pt-3 pb-1">
-            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">{t(locale, 'nav.company')}</span>
-          </div>
-          {toolsDropdown.company.map((item) => (
-            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
-              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-              {item.name}
+              {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
             </a>
           ))}
         </div>
@@ -463,7 +435,23 @@ const toolsDropdown = {
     const isOpen = !toolsDropdownDesktop!.classList.contains('hidden');
     toolsDropdownDesktop!.classList.toggle('hidden');
     toolsBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
-    // Close lang dropdown when opening tools
+    // Close other dropdowns when opening solutions
+    langDropdownDesktop?.classList.add('hidden');
+    langBtnDesktop?.setAttribute('aria-expanded', 'false');
+    ourToolsDropdownDesktop?.classList.add('hidden');
+    ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
+  });
+
+  // Desktop our-tools dropdown (real products)
+  const ourToolsBtnDesktop = document.getElementById('our-tools-btn-desktop');
+  const ourToolsDropdownDesktop = document.getElementById('our-tools-dropdown-desktop');
+
+  ourToolsBtnDesktop?.addEventListener('click', () => {
+    const isOpen = !ourToolsDropdownDesktop!.classList.contains('hidden');
+    ourToolsDropdownDesktop!.classList.toggle('hidden');
+    ourToolsBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
+    toolsDropdownDesktop?.classList.add('hidden');
+    toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
     langDropdownDesktop?.classList.add('hidden');
     langBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
@@ -495,6 +483,11 @@ const toolsDropdown = {
       toolsDropdownDesktop?.classList.add('hidden');
       toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
     }
+    const ourToolsSwitcher = document.getElementById('our-tools-switcher-desktop');
+    if (ourToolsSwitcher && !ourToolsSwitcher.contains(e.target as Node)) {
+      ourToolsDropdownDesktop?.classList.add('hidden');
+      ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
+    }
     if (profileSwitcher && !profileSwitcher.contains(e.target as Node)) {
       profileDropdownDesktop?.classList.add('hidden');
       profileBtnDesktop?.setAttribute('aria-expanded', 'false');
@@ -522,6 +515,20 @@ const toolsDropdown = {
     toolsBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
     if (toolsChevronMobile) {
       toolsChevronMobile.style.transform = isOpen ? '' : 'rotate(180deg)';
+    }
+  });
+
+  // Mobile our-tools dropdown
+  const ourToolsBtnMobile = document.getElementById('our-tools-btn-mobile');
+  const ourToolsDropdownMobile = document.getElementById('our-tools-dropdown-mobile');
+  const ourToolsChevronMobile = document.getElementById('our-tools-chevron-mobile');
+
+  ourToolsBtnMobile?.addEventListener('click', () => {
+    const isOpen = !ourToolsDropdownMobile!.classList.contains('hidden');
+    ourToolsDropdownMobile!.classList.toggle('hidden');
+    ourToolsBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
+    if (ourToolsChevronMobile) {
+      ourToolsChevronMobile.style.transform = isOpen ? '' : 'rotate(180deg)';
     }
   });
 

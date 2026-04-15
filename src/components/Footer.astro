@@ -2,8 +2,10 @@
 import { t } from '../i18n/utils';
 import { defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
+import { getNavGroups } from '../lib/nav-links';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const navGroups = getNavGroups(locale);
 
 function localePath(path: string): string {
   return `/${locale}${path}`;
@@ -15,8 +17,8 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
 
 <footer class="bg-neutral-900 text-neutral-400 pt-14 pb-10 border-t-4 border-rose-600" style="padding-bottom: max(2.5rem, env(safe-area-inset-bottom));">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-8">
-      <div class="col-span-2 lg:col-span-2">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-x-6 gap-y-8">
+      <div class="col-span-2 sm:col-span-3 lg:col-span-2">
         <div class="font-headline font-semibold text-base uppercase tracking-tighter text-white mb-3 flex items-center gap-2">
           <span class="material-symbols-outlined text-rose-600 text-xl" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
           ImageToURL
@@ -25,17 +27,24 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
       </div>
 
       <div class="flex flex-col">
-        <span class={headingClass}>{t(locale, 'footer.tools')}</span>
-        <a href="/free-image-hosting" class={linkClass}>{t(locale, 'footer.freeHosting')}</a>
-        <a href="/image-url-generator" class={linkClass}>{t(locale, 'footer.urlGenerator')}</a>
-        <a href="/bulk-image-upload" class={linkClass}>{t(locale, 'footer.bulkUpload')}</a>
-        <a href="/png-to-url" class={linkClass}>PNG to URL</a>
-        <a href="/jpg-to-url" class={linkClass}>JPG to URL</a>
-        <a href="/imgur-alternative" class={linkClass}>Imgur Alternative</a>
-        <a href="/image-hosting-for-shopify" class={linkClass}>For Shopify</a>
-        <a href="/image-hosting-for-google-sheets" class={linkClass}>For Google Sheets</a>
-        <a href={localePath('/image-to-url-for-html')} class={linkClass}>Image to URL for HTML</a>
-        <a href={localePath('/image-to-url-vercel')} class={linkClass}>Image to URL for Vercel</a>
+        <span class={headingClass}>Convert</span>
+        {navGroups.convert.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>Features</span>
+        {navGroups.features.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>Use Cases</span>
+        {navGroups.useCases.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
       </div>
 
       <div class="flex flex-col">
@@ -55,6 +64,10 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
           <span class="material-symbols-outlined text-rose-600 text-sm">cloud_upload</span>
           ImageToURL
         </a>
+        <a href="/heic-to-jpg" class={linkClass + " flex items-center gap-1.5"}>
+          <span class="material-symbols-outlined text-rose-600 text-sm">photo_camera_back</span>
+          HEIC to JPG
+        </a>
         <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class={linkClass + " flex items-center gap-1.5"}>
           <span class="material-symbols-outlined text-rose-600 text-sm">travel_explore</span>
           ExtractPics
@@ -65,7 +78,7 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
         </a>
       </div>
 
-      <div class="col-span-2 lg:col-span-2 flex flex-col">
+      <div class="col-span-2 sm:col-span-3 lg:col-span-2 flex flex-col">
         <span class={headingClass}>{t(locale, 'footer.stayUpdated')}</span>
         <div class="flex flex-col sm:flex-row gap-2 mt-1">
           <input
