@@ -138,9 +138,9 @@ h1, h2, h3, h4, h5, h6 {
 
   .landing-prose h2 {
     font-family: 'Space Grotesk', 'Space-Grotesk-fallback', system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 1.25rem;
-    line-height: 1.15;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.2;
     letter-spacing: -0.025em;
     text-transform: uppercase;
     color: #171717;
@@ -148,6 +148,9 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 3px solid #171717;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
   @media (min-width: 640px) {
     .landing-prose h2 { font-size: 1.5rem; }
@@ -155,9 +158,9 @@ h1, h2, h3, h4, h5, h6 {
 
   .landing-prose h3 {
     font-family: 'Space Grotesk', 'Space-Grotesk-fallback', system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 1.05rem;
-    line-height: 1.2;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.25;
     letter-spacing: -0.015em;
     text-transform: uppercase;
     color: #171717;
@@ -165,15 +168,24 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.75rem;
     padding-left: 0.875rem;
     border-left: 5px solid #e11d48;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
   @media (min-width: 640px) {
-    .landing-prose h3 { font-size: 1.15rem; }
+    .landing-prose h3 { font-size: 1.2rem; }
   }
 
   .landing-prose p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #404040;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: #3a3a3a;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  @media (min-width: 640px) {
+    .landing-prose p { font-size: 1rem; line-height: 1.7; }
   }
 
   .landing-prose a {
@@ -243,21 +255,42 @@ h1, h2, h3, h4, h5, h6 {
   /* Blog post body overrides: drop the per-heading underline, give real rhythm,
      and separate inline images from the background with brutalist border+shadow. */
   .landing-prose.blog-html-content h2 {
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     padding-bottom: 0;
     border-bottom: 0;
   }
+  @media (min-width: 640px) {
+    .landing-prose.blog-html-content h2 { margin-top: 3rem; }
+  }
   .landing-prose.blog-html-content h2:first-child { margin-top: 0; }
-  .landing-prose.blog-html-content h3 { margin-top: 2.25rem; }
-  .landing-prose.blog-html-content p { margin-bottom: 0; line-height: 1.75; }
+  .landing-prose.blog-html-content h3 { margin-top: 2rem; }
+  .landing-prose.blog-html-content p {
+    margin-bottom: 0;
+    line-height: 1.65;
+    font-size: 1.0625rem;
+  }
+  @media (min-width: 640px) {
+    .landing-prose.blog-html-content p { font-size: 1.0625rem; line-height: 1.7; }
+  }
+  .landing-prose.blog-html-content > * + * { margin-top: 1.1rem; }
+  .landing-prose.blog-html-content a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
   .landing-prose.blog-html-content img {
     display: block;
     max-width: 100%;
     height: auto;
     border: 2px solid #171717;
-    box-shadow: 6px 6px 0 0 #171717;
+    box-shadow: 4px 4px 0 0 #171717;
     border-radius: 0.5rem;
-    margin: 2.25rem 0;
+    margin: 1.75rem 0;
+  }
+  @media (min-width: 640px) {
+    .landing-prose.blog-html-content img {
+      box-shadow: 6px 6px 0 0 #171717;
+      margin: 2.25rem 0;
+    }
   }
   .landing-prose.blog-html-content hr {
     border: 0;
