@@ -2,6 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../lib/db';
+import { getAdsWithStats } from '../../../lib/sponsor-ads';
 
 export const GET: APIRoute = async ({ locals }) => {
   if (!locals.user || locals.user.role !== 'admin') {
@@ -13,7 +14,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const db = getDB(locals);
 
-  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks] = await Promise.all([
+  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks, sponsorAds] = await Promise.all([
     db.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count, COALESCE(SUM(size_bytes), 0) as total_size FROM images')
@@ -32,6 +33,7 @@ export const GET: APIRoute = async ({ locals }) => {
     db.prepare('SELECT COUNT(*) as count FROM media').first<{ count: number }>(),
     db.prepare('SELECT COUNT(*) as count FROM pages').first<{ count: number }>(),
     db.prepare("SELECT COUNT(*) as count FROM link_clicks WHERE link_id = 'youtube-cta'").first<{ count: number }>(),
+    getAdsWithStats(db).catch(() => []),
   ]);
 
   return new Response(
@@ -45,6 +47,7 @@ export const GET: APIRoute = async ({ locals }) => {
       totalMedia: cmsMedia?.count ?? 0,
       totalPages: pages?.count ?? 0,
       ytClicks: ytClicks?.count ?? 0,
+      sponsorAds,
     }),
     { headers: { 'Content-Type': 'application/json' } },
   );

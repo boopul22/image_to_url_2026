@@ -7,6 +7,7 @@ import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPublishedPosts } from '../../lib/cms';
+import { getActiveAds, type SponsorAd } from '../../lib/sponsor-ads';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -16,6 +17,15 @@ function lp(path: string): string {
 
 const db = getDB(Astro.locals);
 const { posts: previewPosts } = await getPublishedPosts(db, { limit: 3 });
+
+let sponsorAds: SponsorAd[] = [];
+try {
+  sponsorAds = await getActiveAds(db);
+} catch {
+  sponsorAds = [];
+}
+const leftAd = sponsorAds.find((a) => a.slot === 'home-left');
+const rightAd = sponsorAds.find((a) => a.slot === 'home-right');
 
 const canonicalHomeUrl = `https://imagetourl.cloud/${locale}/`;
 
@@ -131,14 +141,37 @@ const pageSchema = [
     <!-- Upload Area (+ desktop-only side sponsored slots) -->
     <div class="w-full lg:max-w-6xl lg:mx-auto lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,36rem)_minmax(0,1fr)] lg:gap-5 lg:items-start">
       <!-- Left sponsored slot (desktop only) -->
-      <aside class="hidden lg:block self-start" aria-label="Sponsored">
-        <a href="https://extractpics.com/?ref=imagetourl&slot=home-left" target="_blank" rel="noopener sponsored" data-track-click="sponsor-home-left" class="sponsor-card group block p-5 text-left bg-white border border-neutral-300 hover:border-rose-600 hover:shadow-md transition-all">
-          <span class="inline-block bg-rose-600 text-white px-2 py-0.5 font-headline text-[10px] font-bold uppercase tracking-widest mb-3 border-2 border-neutral-900">Sponsored</span>
-          <p class="font-body text-[15px] font-bold text-neutral-900 leading-snug mb-1.5">Extract every image from any webpage</p>
-          <p class="font-body text-[12px] text-neutral-700 leading-snug mb-3">Paste a URL, download them all. Free. No signup.</p>
-          <span class="inline-flex items-center gap-1 text-[12px] font-bold text-rose-600">extractpics.com <span class="material-symbols-outlined text-[14px] sponsor-arrow">arrow_forward</span></span>
-        </a>
-      </aside>
+      {leftAd && (
+        <aside class="hidden lg:block self-start" aria-label="Sponsored">
+          <a
+            href={leftAd.href}
+            target="_blank"
+            rel={leftAd.rel}
+            data-track-sponsor-click={leftAd.id}
+            data-track-sponsor-view={leftAd.id}
+            class:list={[
+              'sponsor-card group block p-5 text-left bg-white border border-neutral-300 hover:shadow-md transition-all',
+              leftAd.theme === 'youtube' ? 'hover:border-[#FF0000]' : 'hover:border-rose-600',
+            ]}
+          >
+            <span class="inline-block bg-rose-600 text-white px-2 py-0.5 font-headline text-[10px] font-bold uppercase tracking-widest mb-3 border-2 border-neutral-900">Sponsored</span>
+            {leftAd.icon_kind === 'youtube' ? (
+              <div class="flex items-start gap-2 mb-1.5">
+                <svg class="flex-shrink-0 w-[18px] h-[18px] mt-0.5 text-[#FF0000]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <p class="font-body text-[15px] font-bold text-neutral-900 leading-snug">{leftAd.title}</p>
+              </div>
+            ) : (
+              <p class="font-body text-[15px] font-bold text-neutral-900 leading-snug mb-1.5">{leftAd.title}</p>
+            )}
+            <p class="font-body text-[12px] text-neutral-700 leading-snug mb-3">{leftAd.body}</p>
+            <span class:list={['inline-flex items-center gap-1 text-[12px] font-bold', leftAd.theme === 'youtube' ? 'text-[#FF0000]' : 'text-rose-600']}>
+              {leftAd.cta_text} <span class="material-symbols-outlined text-[14px] sponsor-arrow">{leftAd.theme === 'youtube' ? 'play_arrow' : 'arrow_forward'}</span>
+            </span>
+          </a>
+        </aside>
+      )}
 
       <div class="w-full max-w-xl lg:max-w-none mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
@@ -247,19 +280,37 @@ const pageSchema = [
       </div>
 
       <!-- Right sponsored slot (desktop only) -->
-      <aside class="hidden lg:block self-start" aria-label="Sponsored">
-        <a href="https://www.youtube.com/@Gen_Groove/videos" target="_blank" rel="noopener" data-track-click="sponsor-home-right-youtube" class="sponsor-card group block p-5 text-left bg-white border border-neutral-300 hover:border-[#FF0000] hover:shadow-md transition-all">
-          <span class="inline-block bg-rose-600 text-white px-2 py-0.5 font-headline text-[10px] font-bold uppercase tracking-widest mb-3 border-2 border-neutral-900">Sponsored</span>
-          <div class="flex items-start gap-2 mb-1.5">
-            <svg class="flex-shrink-0 w-[18px] h-[18px] mt-0.5 text-[#FF0000]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-            <p class="font-body text-[15px] font-bold text-neutral-900 leading-snug">Chill music while you work 🎧</p>
-          </div>
-          <p class="font-body text-[12px] text-neutral-700 leading-snug mb-3">Lo-fi &amp; groove playlists to focus &amp; stay in flow. New drops weekly.</p>
-          <span class="inline-flex items-center gap-1 text-[12px] font-bold text-[#FF0000]">Listen on YouTube <span class="material-symbols-outlined text-[14px] sponsor-arrow">play_arrow</span></span>
-        </a>
-      </aside>
+      {rightAd && (
+        <aside class="hidden lg:block self-start" aria-label="Sponsored">
+          <a
+            href={rightAd.href}
+            target="_blank"
+            rel={rightAd.rel}
+            data-track-sponsor-click={rightAd.id}
+            data-track-sponsor-view={rightAd.id}
+            class:list={[
+              'sponsor-card group block p-5 text-left bg-white border border-neutral-300 hover:shadow-md transition-all',
+              rightAd.theme === 'youtube' ? 'hover:border-[#FF0000]' : 'hover:border-rose-600',
+            ]}
+          >
+            <span class="inline-block bg-rose-600 text-white px-2 py-0.5 font-headline text-[10px] font-bold uppercase tracking-widest mb-3 border-2 border-neutral-900">Sponsored</span>
+            {rightAd.icon_kind === 'youtube' ? (
+              <div class="flex items-start gap-2 mb-1.5">
+                <svg class="flex-shrink-0 w-[18px] h-[18px] mt-0.5 text-[#FF0000]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <p class="font-body text-[15px] font-bold text-neutral-900 leading-snug">{rightAd.title}</p>
+              </div>
+            ) : (
+              <p class="font-body text-[15px] font-bold text-neutral-900 leading-snug mb-1.5">{rightAd.title}</p>
+            )}
+            <p class="font-body text-[12px] text-neutral-700 leading-snug mb-3">{rightAd.body}</p>
+            <span class:list={['inline-flex items-center gap-1 text-[12px] font-bold', rightAd.theme === 'youtube' ? 'text-[#FF0000]' : 'text-rose-600']}>
+              {rightAd.cta_text} <span class="material-symbols-outlined text-[14px] sponsor-arrow">{rightAd.theme === 'youtube' ? 'play_arrow' : 'arrow_forward'}</span>
+            </span>
+          </a>
+        </aside>
+      )}
     </div>
 
     <!-- Trust Signals — pushed to bottom of viewport -->
@@ -752,7 +803,7 @@ const pageSchema = [
     }
   }
 
-  // Click tracking for YouTube CTA
+  // Legacy click tracking (non-sponsor links)
   document.querySelectorAll<HTMLAnchorElement>('[data-track-click]').forEach((el) => {
     el.addEventListener('click', () => {
       navigator.sendBeacon('/api/track/click', JSON.stringify({
@@ -761,6 +812,46 @@ const pageSchema = [
       }));
     });
   });
+
+  // Sponsored ads: click tracking
+  document.querySelectorAll<HTMLAnchorElement>('[data-track-sponsor-click]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const adId = el.dataset.trackSponsorClick;
+      if (!adId) return;
+      navigator.sendBeacon('/api/track/sponsor', JSON.stringify({
+        adId,
+        type: 'click',
+        page: window.location.pathname,
+      }));
+    });
+  });
+
+  // Sponsored ads: view tracking (dedupe per sessionStorage)
+  const viewEls = document.querySelectorAll<HTMLElement>('[data-track-sponsor-view]');
+  if (viewEls.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        const adId = el.dataset.trackSponsorView;
+        if (!adId) { io.unobserve(el); continue; }
+        const key = 'sponsor_view_' + adId;
+        try {
+          if (sessionStorage.getItem(key)) { io.unobserve(el); continue; }
+          sessionStorage.setItem(key, '1');
+        } catch {
+          // sessionStorage unavailable (private mode) — still fire once per page load
+        }
+        navigator.sendBeacon('/api/track/sponsor', JSON.stringify({
+          adId,
+          type: 'view',
+          page: window.location.pathname,
+        }));
+        io.unobserve(el);
+      }
+    }, { threshold: 0.5 });
+    viewEls.forEach((el) => io.observe(el));
+  }
 </script>
 
 <script>
