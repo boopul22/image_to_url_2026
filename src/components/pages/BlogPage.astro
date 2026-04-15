@@ -174,20 +174,20 @@ const otherPosts = posts.filter((p) => p !== featuredPost);
       </div>
     </section>
 
-    <!-- Newsletter Section -->
+    <!-- ExtractPics Promo Section -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 mb-16 sm:mb-24">
-      <div class="bg-surface-container border-2 border-on-surface p-6 sm:p-12 text-center relative overflow-hidden rounded-lg hard-shadow">
+      <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" data-track-click="extractpics-blog-promo" class="block bg-surface-container border-2 border-on-surface p-6 sm:p-12 text-center relative overflow-hidden rounded-lg hard-shadow hover:-translate-y-1 transition-transform">
         <div class="relative z-10">
-          <h2 class="font-headline italic text-xl sm:text-2xl font-black text-on-surface mb-4">{t(locale, 'blog.newsletter.title')}</h2>
-          <p class="font-headline text-xl text-on-surface-variant mb-8 max-w-xl mx-auto">{t(locale, 'blog.newsletter.description')}</p>
-          <form class="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-lg mx-auto">
-            <input type="email" placeholder={t(locale, 'blog.newsletter.placeholder')} class="flex-1 bg-surface border-2 border-on-surface px-5 sm:px-6 py-3.5 sm:py-3 font-body text-base sm:text-sm focus:ring-2 focus:ring-primary focus:outline-none rounded-md" />
-            <button type="submit" class="bg-primary text-on-primary px-8 py-3.5 sm:py-3 border-2 border-on-surface font-label uppercase tracking-wider text-xs font-bold hover:-translate-y-1 active:translate-y-0 transition-transform hard-shadow rounded-md">{t(locale, 'blog.newsletter.subscribe')}</button>
-          </form>
+          <span class="inline-block bg-rose-600 text-white px-3 py-1 font-label uppercase tracking-wider text-[10px] font-bold mb-4 border-2 border-on-surface">Our Other Tool</span>
+          <h2 class="font-headline italic text-xl sm:text-2xl font-black text-on-surface mb-4">Extract Every Image From Any Webpage</h2>
+          <p class="font-headline text-xl text-on-surface-variant mb-8 max-w-xl mx-auto">Paste a URL. Get every image on the page in one click. Free, no signup.</p>
+          <span class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-3.5 sm:py-3 border-2 border-on-surface font-label uppercase tracking-wider text-xs font-bold hard-shadow rounded-md">
+            Try ExtractPics <span class="material-symbols-outlined text-sm">open_in_new</span>
+          </span>
         </div>
-        <span class="material-symbols-outlined text-8xl text-primary/10 absolute -bottom-8 -left-8 -rotate-12">mail</span>
-        <span class="material-symbols-outlined text-8xl text-secondary/10 absolute -top-8 -right-8 rotate-12">rocket</span>
-      </div>
+        <span class="material-symbols-outlined text-8xl text-primary/10 absolute -bottom-8 -left-8 -rotate-12">download</span>
+        <span class="material-symbols-outlined text-8xl text-secondary/10 absolute -top-8 -right-8 rotate-12">image</span>
+      </a>
     </section>
   </main>
 
