@@ -280,6 +280,37 @@ const pageSchema = [
     </div>
   </section>
 
+  <!-- Blog Preview -->
+  {previewPosts.length > 0 && (
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-5 sm:mb-8 reveal">{t(locale, 'home.blog.title')} <span class="text-primary">{t(locale, 'home.blog.highlight')}</span></h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 reveal-stagger">
+      {previewPosts.map((post) => (
+        <article class="group reveal">
+          <a href={lp(`/blog/${post.slug}`)} class="block h-full">
+            <div class="bg-surface-container rounded-2xl h-full flex flex-col overflow-hidden border-2 border-neutral-900 brutal-shadow brutal-shadow-hover">
+              <div class={`h-40 relative overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
+                {post.coverImage ? (
+                  <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.coverImage} width="400" height="192" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="material-symbols-outlined text-8xl text-on-surface/20">{post.iconFallback || 'article'}</span>
+                )}
+              </div>
+              <div class="p-4 sm:p-5 flex flex-col flex-1">
+                <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || t(locale, 'home.blog.uncategorized')}</span>
+                <h3 class="font-headline text-lg font-black text-on-surface mb-3 group-hover:text-primary transition-colors">{post.title}</h3>
+                <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1 mt-auto">
+                  {t(locale, 'home.blog.readMore')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+  )}
+
   <!-- Features Grid -->
   <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
@@ -528,37 +559,6 @@ const pageSchema = [
       </button>
     </div>
   </section>
-
-  <!-- Blog Preview -->
-  {previewPosts.length > 0 && (
-  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-    <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-5 sm:mb-8 reveal">{t(locale, 'home.blog.title')} <span class="text-primary">{t(locale, 'home.blog.highlight')}</span></h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 reveal-stagger">
-      {previewPosts.map((post) => (
-        <article class="group reveal">
-          <a href={lp(`/blog/${post.slug}`)} class="block h-full">
-            <div class="bg-surface-container rounded-2xl h-full flex flex-col overflow-hidden hover:-translate-y-0.5 transition-all duration-200">
-              <div class={`h-40 relative overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
-                {post.coverImage ? (
-                  <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.coverImage} width="400" height="192" loading="lazy" decoding="async" />
-                ) : (
-                  <span class="material-symbols-outlined text-8xl text-on-surface/20">{post.iconFallback || 'article'}</span>
-                )}
-              </div>
-              <div class="p-4 sm:p-5 flex flex-col flex-1">
-                <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || t(locale, 'home.blog.uncategorized')}</span>
-                <h3 class="font-headline text-lg font-black text-on-surface mb-3 group-hover:text-primary transition-colors">{post.title}</h3>
-                <span class="font-label text-xs font-black uppercase text-primary flex items-center gap-1 mt-auto">
-                  {t(locale, 'home.blog.readMore')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                </span>
-              </div>
-            </div>
-          </a>
-        </article>
-      ))}
-    </div>
-  </section>
-  )}
 
   <Footer />
 </Layout>
