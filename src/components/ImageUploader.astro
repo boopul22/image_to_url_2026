@@ -7,7 +7,7 @@
 ---
 
 <div class="w-full max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10">
-  <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
+  <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
   <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
       <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">timer</span>
@@ -86,6 +86,21 @@
       </a>
     </div>
 
+    <!-- State: batch success -->
+    <div id="state-batch" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg" id="batch-heading">Uploaded 0 files</span>
+        <button id="batch-another" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
+          Upload more
+        </button>
+      </div>
+      <div id="batch-list" class="flex flex-col gap-2 max-h-80 overflow-auto"></div>
+      <button id="batch-copy-all" class="mt-3 w-full bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">
+        Copy all URLs
+      </button>
+    </div>
+
     <!-- State: error -->
     <div id="state-error" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3">
@@ -140,7 +155,12 @@
   const progressFill = document.getElementById('progress-fill')!;
   const stateIdle = document.getElementById('state-idle')!;
   const stateSuccess = document.getElementById('state-success')!;
+  const stateBatch = document.getElementById('state-batch')!;
   const stateError = document.getElementById('state-error')!;
+  const batchHeading = document.getElementById('batch-heading')!;
+  const batchList = document.getElementById('batch-list')!;
+  const batchCopyAll = document.getElementById('batch-copy-all')!;
+  const batchAnother = document.getElementById('batch-another')!;
   const resultUrl = document.getElementById('result-url') as HTMLInputElement;
   const copyBtn = document.getElementById('copy-btn')!;
   const uploadAnother = document.getElementById('upload-another')!;
@@ -149,9 +169,10 @@
   const errorSignin = document.getElementById('error-signin')!;
   const errorPromo = document.getElementById('error-promo')!;
 
-  function showState(state: 'idle' | 'success' | 'error') {
+  function showState(state: 'idle' | 'success' | 'batch' | 'error') {
     stateIdle.classList.toggle('hidden', state !== 'idle');
     stateSuccess.classList.toggle('hidden', state !== 'success');
+    stateBatch.classList.toggle('hidden', state !== 'batch');
     stateError.classList.toggle('hidden', state !== 'error');
   }
 
@@ -188,12 +209,112 @@
     e.preventDefault();
     panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
     const files = e.dataTransfer?.files;
-    if (files && files.length > 0) uploadFile(files[0]);
+    if (files && files.length > 0) handleFiles(files);
   });
 
   fileInput.addEventListener('change', () => {
-    if (fileInput.files && fileInput.files.length > 0) uploadFile(fileInput.files[0]);
+    if (fileInput.files && fileInput.files.length > 0) handleFiles(fileInput.files);
   });
+
+  async function handleFiles(files: FileList) {
+    if (files.length === 1) {
+      uploadFile(files[0]);
+      return;
+    }
+    // Batch path — require login
+    let loggedIn = false;
+    try {
+      const res = await fetch('/api/me', { credentials: 'same-origin' });
+      const data = await res.json();
+      loggedIn = !!(data && data.user);
+    } catch {}
+    if (!loggedIn) {
+      showState('error');
+      errorText.textContent = 'Sign in to upload multiple images at once.';
+      errorSignin.classList.remove('hidden');
+      errorSignin.classList.add('flex');
+      fileInput.value = '';
+      return;
+    }
+    uploadBatch(Array.from(files));
+  }
+
+  async function uploadBatch(files: File[]) {
+    showState('idle');
+    progressBar.classList.remove('hidden');
+    progressFill.style.width = '0%';
+    uploadIcon.textContent = 'hourglass_top';
+    uploadText.textContent = `Uploading 0 / ${files.length}`;
+    uploadSubtext.textContent = 'Batch upload in progress…';
+    uploadBtn.textContent = 'Uploading...';
+
+    batchList.innerHTML = '';
+    const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
+    const results: { name: string; url: string }[] = [];
+    const failures: { name: string; error: string }[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      uploadText.textContent = `Uploading ${i + 1} / ${files.length}`;
+      uploadSubtext.textContent = file.name;
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        if (expiresInEl) formData.append('expires_in', expiresInEl.value);
+        const response = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (!response.ok || data.error) throw new Error(data.error || 'Upload failed');
+        results.push({ name: file.name, url: data.data.url });
+      } catch (err: any) {
+        failures.push({ name: file.name, error: err.message || 'Upload failed' });
+      }
+      progressFill.style.width = `${Math.round(((i + 1) / files.length) * 100)}%`;
+    }
+
+    if (results.length === 0) {
+      showState('error');
+      errorText.textContent = failures[0]?.error || 'All uploads failed';
+      return;
+    }
+
+    batchHeading.textContent =
+      failures.length > 0
+        ? `Uploaded ${results.length} / ${files.length} (${failures.length} failed)`
+        : `Uploaded ${results.length} files`;
+
+    for (const r of results) {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-2';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.readOnly = true;
+      input.value = r.url;
+      input.className = 'flex-1 min-w-0 bg-white border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'Copy';
+      btn.className = 'bg-white hover:bg-rose-600 hover:text-white text-on-background font-bold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wider transition-colors flex-shrink-0';
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(r.url);
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+      row.appendChild(input);
+      row.appendChild(btn);
+      batchList.appendChild(row);
+    }
+
+    showState('batch');
+  }
+
+  batchCopyAll.addEventListener('click', () => {
+    const urls = Array.from(batchList.querySelectorAll('input')).map((i) => (i as HTMLInputElement).value).join('\n');
+    navigator.clipboard.writeText(urls);
+    (batchCopyAll as HTMLButtonElement).textContent = 'Copied!';
+    setTimeout(() => { (batchCopyAll as HTMLButtonElement).textContent = 'Copy all URLs'; }, 2000);
+  });
+
+  batchAnother.addEventListener('click', resetIdle);
 
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(resultUrl.value);

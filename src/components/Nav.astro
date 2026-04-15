@@ -174,12 +174,12 @@ const toolsDropdown = {
           {localeLabels[locale]}
           <span class="material-symbols-outlined text-sm">expand_more</span>
         </button>
-        <div id="lang-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[160px]">
+        <div id="lang-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow z-50 w-[360px] max-h-[min(70vh,480px)] overflow-y-auto grid grid-cols-2">
           {locales.map((loc) => (
             <a
               href={`/${loc}${basePath}`}
               class:list={[
-                "block px-4 py-3 text-sm font-medium hover:bg-surface-container-highest transition-colors",
+                "block px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors truncate",
                 loc === locale ? "text-on-background font-bold bg-primary" : "text-on-surface",
               ]}
             >
@@ -353,12 +353,12 @@ const toolsDropdown = {
           {localeLabels[locale]}
           <span class="material-symbols-outlined text-sm ml-auto">expand_more</span>
         </button>
-        <div id="lang-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden">
+        <div id="lang-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background max-h-[50vh] overflow-y-auto grid grid-cols-2">
           {locales.map((loc) => (
             <a
               href={`/${loc}${basePath}`}
               class:list={[
-                "block px-4 py-3 text-sm font-medium hover:bg-surface-container-highest transition-colors",
+                "block px-3 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors truncate",
                 loc === locale ? "text-on-background font-bold bg-primary" : "text-on-surface",
               ]}
             >
