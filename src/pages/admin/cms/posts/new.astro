@@ -90,6 +90,20 @@ const user = Astro.locals.user!;
             <button type="button" data-action="undo" title="Undo" class="tb-btn"><span class="material-symbols-outlined text-base">undo</span></button>
             <button type="button" data-action="redo" title="Redo" class="tb-btn"><span class="material-symbols-outlined text-base">redo</span></button>
           </div>
+          <div id="table-toolbar" class="hidden flex-none flex-wrap items-center gap-1 px-2 sm:px-3 py-1.5 bg-primary/5 border-b border-primary/30 overflow-x-auto">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-primary mr-1 flex-none">Table</span>
+            <button type="button" data-action="addRowBefore" title="Insert a new row above the current row" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_up</span>+ Row Above</button>
+            <button type="button" data-action="addRowAfter" title="Insert a new row below the current row" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_down</span>+ Row Below</button>
+            <button type="button" data-action="deleteRow" title="Delete the current row" class="tt-btn tt-btn--danger"><span class="material-symbols-outlined text-sm">remove</span>Row</button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="addColumnBefore" title="Insert a new column to the left" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_left</span>+ Col Left</button>
+            <button type="button" data-action="addColumnAfter" title="Insert a new column to the right" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_right</span>+ Col Right</button>
+            <button type="button" data-action="deleteColumn" title="Delete the current column" class="tt-btn tt-btn--danger"><span class="material-symbols-outlined text-sm">remove</span>Col</button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="toggleHeaderRow" title="Turn the top row into a header (or remove header)" class="tt-btn"><span class="material-symbols-outlined text-sm">view_headline</span>Header Row</button>
+            <div class="tb-divider"></div>
+            <button type="button" data-action="deleteTable" title="Delete the whole table" class="tt-btn tt-btn--nuke"><span class="material-symbols-outlined text-sm">delete</span>Delete Table</button>
+          </div>
           <div id="editor-content" class="flex-1 min-h-0 overflow-y-auto"></div>
           <input type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml" class="hidden" id="editor-image-upload" />
         </div>
@@ -118,6 +132,20 @@ const user = Astro.locals.user!;
           <div class="tb-divider"></div>
           <button type="button" data-action="undo" title="Undo" class="tb-btn"><span class="material-symbols-outlined text-base">undo</span></button>
           <button type="button" data-action="redo" title="Redo" class="tb-btn"><span class="material-symbols-outlined text-base">redo</span></button>
+        </div>
+        <div id="table-toolbar-mobile" class="hidden flex-none flex-wrap items-center gap-1 px-2 py-1.5 bg-primary/5 border-b border-primary/30 overflow-x-auto">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-primary mr-1 flex-none">Table</span>
+          <button type="button" data-action="addRowBefore" title="Insert a new row above the current row" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_up</span>+ Row Above</button>
+          <button type="button" data-action="addRowAfter" title="Insert a new row below the current row" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_down</span>+ Row Below</button>
+          <button type="button" data-action="deleteRow" title="Delete the current row" class="tt-btn tt-btn--danger"><span class="material-symbols-outlined text-sm">remove</span>Row</button>
+          <div class="tb-divider"></div>
+          <button type="button" data-action="addColumnBefore" title="Insert a new column to the left" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_left</span>+ Col Left</button>
+          <button type="button" data-action="addColumnAfter" title="Insert a new column to the right" class="tt-btn"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_right</span>+ Col Right</button>
+          <button type="button" data-action="deleteColumn" title="Delete the current column" class="tt-btn tt-btn--danger"><span class="material-symbols-outlined text-sm">remove</span>Col</button>
+          <div class="tb-divider"></div>
+          <button type="button" data-action="toggleHeaderRow" title="Turn the top row into a header (or remove header)" class="tt-btn"><span class="material-symbols-outlined text-sm">view_headline</span>Header</button>
+          <div class="tb-divider"></div>
+          <button type="button" data-action="deleteTable" title="Delete the whole table" class="tt-btn tt-btn--nuke"><span class="material-symbols-outlined text-sm">delete</span>Delete Table</button>
         </div>
         <div id="editor-content-mobile" class="flex-1 min-h-0 overflow-y-auto"></div>
       </div>
@@ -276,6 +304,28 @@ const user = Astro.locals.user!;
   .tb-btn:disabled { opacity: 0.3; cursor: not-allowed; }
   @media (max-width: 639px) { .tb-btn { width: 2.25rem; height: 2.25rem; } }
   .tb-divider { width: 1px; height: 1.5rem; background: var(--color-outline-variant); margin: 0 0.25rem; align-self: center; }
+
+  /* Contextual table toolbar buttons (shown only when cursor is inside a table) */
+  #table-toolbar:not(.hidden), #table-toolbar-mobile:not(.hidden) { display: flex; }
+  .tt-btn {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    height: 1.75rem; padding: 0 0.5rem; border-radius: 0.375rem;
+    font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.03em; color: var(--color-on-surface); white-space: nowrap;
+    background: var(--color-surface-container-lowest);
+    border: 1.5px solid var(--color-outline-variant);
+    cursor: pointer; transition: all 0.12s; flex: none;
+  }
+  .tt-btn:hover { background: var(--color-surface-container-highest); border-color: var(--color-on-surface); }
+  .tt-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .tt-btn .material-symbols-outlined { font-size: 1rem; line-height: 1; }
+  .tt-btn--danger { color: #b91c1c; border-color: #fca5a5; background: #fef2f2; }
+  .tt-btn--danger:hover { background: #fee2e2; border-color: #b91c1c; }
+  .tt-btn--nuke { color: #fff; border-color: #b91c1c; background: #b91c1c; }
+  .tt-btn--nuke:hover { background: #991b1b; border-color: #991b1b; }
+  @media (max-width: 639px) {
+    .tt-btn { height: 2rem; font-size: 0.75rem; padding: 0 0.625rem; }
+  }
 
   /* TipTap editor */
   :global(.tiptap) {
@@ -471,12 +521,12 @@ const user = Astro.locals.user!;
   // --- Toolbar wiring (handles both desktop and mobile toolbars) ---
   function wireToolbar(toolbarEl: HTMLElement) {
     toolbarEl.addEventListener('mousedown', (e) => {
-      const btn = (e.target as HTMLElement).closest('.tb-btn');
+      const btn = (e.target as HTMLElement).closest('button[data-action]');
       if (btn) e.preventDefault();
     });
 
     toolbarEl.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest('.tb-btn') as HTMLButtonElement | null;
+      const btn = (e.target as HTMLElement).closest('button[data-action]') as HTMLButtonElement | null;
       if (!btn) return;
       const action = btn.dataset.action;
       handleToolbarAction(action!);
@@ -506,6 +556,18 @@ const user = Astro.locals.user!;
       case 'image': imageInput.click(); break;
       case 'horizontalRule': editor.chain().focus().setHorizontalRule().run(); break;
       case 'table': editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(); break;
+      case 'addRowBefore': editor.chain().focus().addRowBefore().run(); break;
+      case 'addRowAfter': editor.chain().focus().addRowAfter().run(); break;
+      case 'deleteRow': editor.chain().focus().deleteRow().run(); break;
+      case 'addColumnBefore': editor.chain().focus().addColumnBefore().run(); break;
+      case 'addColumnAfter': editor.chain().focus().addColumnAfter().run(); break;
+      case 'deleteColumn': editor.chain().focus().deleteColumn().run(); break;
+      case 'toggleHeaderRow': editor.chain().focus().toggleHeaderRow().run(); break;
+      case 'deleteTable':
+        if (window.confirm('Delete the entire table? You can press Ctrl+Z (Cmd+Z on Mac) to undo.')) {
+          editor.chain().focus().deleteTable().run();
+        }
+        break;
       case 'undo': editor.chain().focus().undo().run(); break;
       case 'redo': editor.chain().focus().redo().run(); break;
     }
@@ -524,15 +586,21 @@ const user = Astro.locals.user!;
         case 'orderedList': active = editor.isActive('orderedList'); break;
         case 'blockquote': active = editor.isActive('blockquote'); break;
         case 'link': active = editor.isActive('link'); break;
+        case 'table': active = editor.isActive('table'); break;
       }
       btn.classList.toggle('is-active', active);
       if (action === 'undo') (btn as HTMLButtonElement).disabled = !editor.can().undo();
       if (action === 'redo') (btn as HTMLButtonElement).disabled = !editor.can().redo();
     });
+    const inTable = editor.isActive('table');
+    document.getElementById('table-toolbar')?.classList.toggle('hidden', !inTable);
+    document.getElementById('table-toolbar-mobile')?.classList.toggle('hidden', !inTable);
   }
 
   wireToolbar(document.getElementById('editor-toolbar')!);
   wireToolbar(document.getElementById('editor-toolbar-mobile')!);
+  wireToolbar(document.getElementById('table-toolbar')!);
+  wireToolbar(document.getElementById('table-toolbar-mobile')!);
   editor.on('selectionUpdate', updateAllToolbarStates);
   editor.on('update', updateAllToolbarStates);
 
