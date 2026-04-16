@@ -297,6 +297,63 @@ h1, h2, h3, h4, h5, h6 {
     height: 0;
     margin: 2.5rem 0;
   }
+
+  /* Tables in prose bodies (blog posts, CMS pages).
+     TipTap emits raw <table> with no wrapper, so the table itself carries the
+     horizontal overflow. display:block + width:fit-content + max-width:100%
+     gives us a scrollable table on narrow viewports without breaking cell
+     layout for typical markdown-style tables. */
+  .landing-prose table {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    border: 2px solid #171717;
+    box-shadow: 4px 4px 0 0 #171717;
+    margin: 2rem 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    background: #ffffff;
+  }
+  .landing-prose thead {
+    background: #171717;
+  }
+  .landing-prose thead th {
+    color: #fcfcfc;
+    font-family: 'Space Grotesk', 'Space-Grotesk-fallback', system-ui, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border: 2px solid #171717;
+    white-space: nowrap;
+  }
+  .landing-prose tbody td,
+  .landing-prose tbody th {
+    padding: 0.75rem 1rem;
+    border: 2px solid #171717;
+    vertical-align: top;
+    color: #171717;
+  }
+  .landing-prose tbody tr:nth-child(even) {
+    background: #f5f5f5;
+  }
+  .landing-prose tbody th {
+    background: #fecdd3;
+    font-family: 'Space Grotesk', 'Space-Grotesk-fallback', system-ui, sans-serif;
+    font-weight: 700;
+    text-align: left;
+  }
+  /* Strip inner margins from paragraphs dropped inside cells by the editor. */
+  .landing-prose :is(th, td) > p {
+    margin: 0;
+  }
+  .landing-prose :is(th, td) > p + p {
+    margin-top: 0.5rem;
+  }
 }
 
 /* Reveal classes kept as no-ops for compatibility — brutalism snaps, no fades. */
