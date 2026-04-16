@@ -299,10 +299,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* Tables in prose bodies (blog posts, CMS pages).
-     TipTap emits raw <table> with no wrapper, so the table itself carries the
-     horizontal overflow. display:block + width:fit-content + max-width:100%
-     gives us a scrollable table on narrow viewports without breaking cell
-     layout for typical markdown-style tables. */
+     TipTap emits <table><tbody> directly — no <thead> wrapper — so header
+     styles target <th> regardless of position. display:block on the table
+     gives horizontal overflow on narrow viewports without a wrapper div. */
   .landing-prose table {
     display: block;
     width: fit-content;
@@ -316,10 +315,8 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.5;
     background: #ffffff;
   }
-  .landing-prose thead {
+  .landing-prose th {
     background: #171717;
-  }
-  .landing-prose thead th {
     color: #fcfcfc;
     font-family: 'Space Grotesk', 'Space-Grotesk-fallback', system-ui, sans-serif;
     font-weight: 700;
@@ -329,24 +326,25 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
     padding: 0.75rem 1rem;
     border: 2px solid #171717;
-    white-space: nowrap;
+    vertical-align: top;
   }
-  .landing-prose tbody td,
-  .landing-prose tbody th {
+  .landing-prose td {
     padding: 0.75rem 1rem;
     border: 2px solid #171717;
     vertical-align: top;
     color: #171717;
   }
-  .landing-prose tbody tr:nth-child(even) {
+  /* Zebra stripe only rows whose cells are <td> (i.e. non-header rows). */
+  .landing-prose tr:nth-child(even) td {
     background: #f5f5f5;
   }
-  .landing-prose tbody th {
-    background: #fecdd3;
-    font-family: 'Space Grotesk', 'Space-Grotesk-fallback', system-ui, sans-serif;
-    font-weight: 700;
-    text-align: left;
+  /* Links inside cells — keep the brand rose with no underline explosion. */
+  .landing-prose :is(th, td) a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
+  .landing-prose td a { color: #be123c; }
   /* Strip inner margins from paragraphs dropped inside cells by the editor. */
   .landing-prose :is(th, td) > p {
     margin: 0;
