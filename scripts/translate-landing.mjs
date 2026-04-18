@@ -69,7 +69,13 @@ function robustJsonParse(raw) {
   throw lastErr;
 }
 
-async function openrouter(system, user) {
+// Strict structured-output for landing translations. Avoids the trailing-
+// JSON-garbage class of errors that Gemini Flash sometimes emits and keeps
+// per-call cost predictable (no retries needed).
+async function openrouter(system, user, { schema = null } = {}) {
+  const responseFormat = schema
+    ? { type: 'json_schema', json_schema: { name: 'landing_output', strict: true, schema } }
+    : { type: 'json_object' };
   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -82,15 +88,87 @@ async function openrouter(system, user) {
       model: MODEL,
       messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
       temperature: 0.2,
-      response_format: { type: 'json_object' },
+      max_tokens: 16384,
+      response_format: responseFormat,
     }),
   });
-  if (!res.ok) throw new Error(`OpenRouter ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  if (!res.ok) {
+    const body = await res.text();
+    if (schema && /schema|structured|response_format/i.test(body)) {
+      // Fallback once if the provider rejects the strict schema.
+      return openrouter(system, user, { schema: null });
+    }
+    throw new Error(`OpenRouter ${res.status}: ${body.slice(0, 300)}`);
+  }
   const json = await res.json();
   const content = json.choices?.[0]?.message?.content;
   if (!content) throw new Error('no content');
   return robustJsonParse(content);
 }
+
+const SLUG_SCHEMA = {
+  type: 'object',
+  properties: { slug: { type: 'string' } },
+  required: ['slug'],
+  additionalProperties: false,
+};
+
+const LANDING_SCHEMA = {
+  type: 'object',
+  properties: {
+    slug: { type: 'string' },
+    content: {
+      type: 'object',
+      properties: {
+        metaTitle: { type: 'string' },
+        metaDescription: { type: 'string' },
+        schemaName: { type: 'string' },
+        schemaDescription: { type: 'string' },
+        badge: { type: 'string' },
+        h1Pre: { type: 'string' },
+        h1Highlight: { type: 'string' },
+        intro: { type: 'string' },
+        howTitle: { type: 'string' },
+        steps: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { title: { type: 'string' }, body: { type: 'string' } },
+            required: ['title', 'body'],
+            additionalProperties: false,
+          },
+        },
+        whyTitle: { type: 'string' },
+        whyItems: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { title: { type: 'string' }, body: { type: 'string' } },
+            required: ['title', 'body'],
+            additionalProperties: false,
+          },
+        },
+        faqTitle: { type: 'string' },
+        faqs: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { q: { type: 'string' }, a: { type: 'string' } },
+            required: ['q', 'a'],
+            additionalProperties: false,
+          },
+        },
+        ctaTitle: { type: 'string' },
+        ctaBody: { type: 'string' },
+        ctaButton: { type: 'string' },
+      },
+      required: ['metaTitle', 'metaDescription', 'schemaName', 'schemaDescription', 'badge', 'h1Pre', 'h1Highlight', 'intro', 'howTitle', 'steps', 'whyTitle', 'whyItems', 'faqTitle', 'faqs', 'ctaTitle', 'ctaBody', 'ctaButton'],
+      additionalProperties: false,
+    },
+  },
+  required: ['slug', 'content'],
+  additionalProperties: false,
+};
 
 // Preserve native scripts (Devanagari, Arabic, Han, Thai, etc.) so Hindi,
 // Arabic, Chinese, Japanese, Korean, Bengali, Tamil, Marathi, Telugu, Urdu,
@@ -181,17 +259,16 @@ Output JSON ONLY: {"slug": "<slug>"}`;
   let lastErr;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const parsed = await openrouter(system, user);
+      const parsed = await openrouter(system, user, { schema: SLUG_SCHEMA });
       const raw = parsed.slug || '';
       const slug = slugify(raw);
       if (!slug) throw new Error('empty slug');
       if (expectedScript && !expectedScript.test(slug)) {
         lastErr = new Error(`slug missing expected script: ${slug}`);
-        continue; // retry once
+        continue; // retry once — validation only, not an API error
       }
       return { locale, slug };
     } catch (err) {
-      // Don't retry on API/parse errors — just bail.
       throw err;
     }
   }
@@ -226,9 +303,9 @@ Rules:
 - Output valid JSON only.`;
 
   const user = JSON.stringify({ english_content: enEntry });
-  // Single attempt — failures skip that (locale, page) combo. User can
-  // re-run the script later without --force to backfill only the missed ones.
-  const parsed = await openrouter(system, user);
+  // Single attempt — strict schema makes JSON failures extremely rare.
+  // If it does fail, we skip and let a subsequent --all run backfill it.
+  const parsed = await openrouter(system, user, { schema: LANDING_SCHEMA });
   const slug = slugify(parsed.slug || pageKey);
   return { locale, slug, content: parsed.content };
 }
