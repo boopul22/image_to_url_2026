@@ -114,7 +114,10 @@ async function run() {
     let existing = {};
     try { existing = await readJson(filePath); } catch { /* new file */ }
 
-    const missing = enKeys.filter(k => !(k in existing) || existing[k] === '' || existing[k] === en[k]);
+    // "Missing" means the key isn't present or is empty. Do NOT treat
+    // equal-to-English as missing — many keys (brand names, PNG, URL, etc.)
+    // legitimately stay identical in translation. Re-flagging them burns tokens.
+    const missing = enKeys.filter(k => !(k in existing) || existing[k] === '');
     if (missing.length === 0) {
       console.log(`  ${locale}: up to date`);
       continue;
