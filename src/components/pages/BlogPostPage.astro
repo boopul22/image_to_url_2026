@@ -16,6 +16,7 @@ function lp(path: string): string {
 
 const { slug } = Astro.params;
 const db = getDB(Astro.locals);
+
 const post = await getPostBySlugLocalized(db, slug as string, locale);
 
 if (!post) {

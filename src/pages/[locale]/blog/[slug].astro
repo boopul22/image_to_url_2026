@@ -1,5 +1,35 @@
 ---
 export const prerender = false;
 import BlogPostPage from '../../../components/pages/BlogPostPage.astro';
+import { getDB } from '../../../lib/db';
+import { defaultLocale } from '../../../i18n/config';
+import type { Locale } from '../../../i18n/config';
+
+// Non-English visitor arriving at the English slug? 301 to the canonical
+// translated slug for their locale so URLs always match content language
+// (and Google doesn't end up indexing English slugs under non-English
+// locale prefixes).
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const { slug } = Astro.params;
+if (locale !== 'en' && slug) {
+  try {
+    const db = getDB(Astro.locals);
+    const hit = await db
+      .prepare(
+        `SELECT pt.slug as translated_slug
+         FROM posts p
+         JOIN post_translations pt ON pt.post_id = p.id
+         WHERE p.slug = ? AND pt.locale = ? AND p.status = 'published'
+         LIMIT 1`,
+      )
+      .bind(slug, locale)
+      .first<{ translated_slug: string }>();
+    if (hit?.translated_slug && hit.translated_slug !== slug) {
+      return Astro.redirect(`/${locale}/blog/${hit.translated_slug}`, 301);
+    }
+  } catch {
+    // post_translations missing or other DB issue — fall through to component
+  }
+}
 ---
 <BlogPostPage />
