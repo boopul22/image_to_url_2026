@@ -1,6 +1,7 @@
 // Admin-only: auto-translate a blog post into all non-English locales via
 // OpenRouter. Idempotent when onlyMissing=true. Runs in the request worker
 // (serial-batch of 4 concurrent locales) — for 27 locales expect ~30–90s.
+// Requires OPENROUTER_API_KEY Worker secret.
 
 export const prerender = false;
 
