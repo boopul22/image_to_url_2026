@@ -112,7 +112,7 @@ export function getNavGroups(locale: Locale): NavGroups {
     compare: [
       lp(locale, 'imgur-alternative', 'Imgur Alternative', 'swap_horiz'),
       lp(locale, 'imgbb-alternative', 'ImgBB Alternative', 'swap_horiz'),
-      en('/cloudinary-alternative', 'Cloudinary Alternative', 'swap_horiz'),
+      lp(locale, 'cloudinary-alternative', 'Cloudinary Alternative', 'swap_horiz'),
       en('/postimages-alternative', 'Postimages Alternative', 'swap_horiz'),
       en('/google-photos-direct-link', 'Google Photos Direct Link', 'photo_library'),
       en('/dropbox-direct-image-link', 'Dropbox Direct Link', 'cloud'),
