@@ -9,7 +9,8 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const nav = getNavGroups(locale);
 
 function localePath(path: string): string {
-  return `/${locale}${path}`;
+  const out = `/${locale}${path}`;
+  return out.endsWith('/') ? out : out + '/';
 }
 
 const colHead = "font-headline font-semibold text-xs uppercase tracking-wider text-white mb-4";

@@ -28,7 +28,10 @@ const NON_LOCALIZED_EXACT = new Set([
 ]);
 
 function isNonLocalized(path: string): boolean {
-  if (NON_LOCALIZED_EXACT.has(path)) return true;
+  // Match with and without trailing slash — Cloudflare normalizes to trailing
+  // slash, so /postimages-alternative/ arrives here but the set stores bare paths.
+  const bare = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+  if (NON_LOCALIZED_EXACT.has(bare)) return true;
   if (path.startsWith('/_')) return true; // _astro, _image etc
   if (/\.[a-zA-Z0-9]{2,5}$/.test(path) && !path.endsWith('.html')) return true; // static assets
   return NON_LOCALIZED_PREFIXES.some(p => path === p.replace(/\/$/, '') || path.startsWith(p));

@@ -30,8 +30,10 @@ function lp(locale: Locale, pageKey: PageKey, name: string, icon: string): NavLi
 }
 
 // Helper: build a plain English-only link (for pages not yet in SLUGS).
+// Always emits a trailing slash to match Cloudflare's canonical URLs and
+// avoid a 307 on every footer click in production.
 function en(href: string, name: string, icon: string): NavLink {
-  return { name, href, icon };
+  return { name, href: href.endsWith('/') ? href : href + '/', icon };
 }
 
 export function getNavGroups(locale: Locale): NavGroups {
