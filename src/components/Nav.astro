@@ -5,7 +5,7 @@ import type { Locale } from '../i18n/config';
 import { getNavGroups } from '../lib/nav-links';
 import { resolveSlug, getSlug } from '../i18n/landing/registry';
 
-const { activePage = "home" } = Astro.props;
+const { activePage = "home", blogLocaleSlugs = null } = Astro.props as { activePage?: string; blogLocaleSlugs?: Record<string, string> | null };
 const user = Astro.locals.user;
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const basePath = stripLocalePrefix(Astro.url.pathname);
@@ -21,7 +21,11 @@ const currentSlug = basePath.replace(/^\/+|\/+$/g, '');
 const currentPageKey = currentSlug ? resolveSlug(locale, currentSlug) : null;
 
 function langSwitchHref(loc: Locale): string {
+  // Blog post? Use the per-locale translated slug directly (one hop, not two).
+  if (blogLocaleSlugs && blogLocaleSlugs[loc]) return `/${loc}/blog/${blogLocaleSlugs[loc]}`;
+  // Landing page in the slug registry? Use its translated slug.
   if (currentPageKey) return `/${loc}/${getSlug(currentPageKey, loc)}`;
+  // Fallback: same path under the new locale prefix.
   return `/${loc}${basePath}`;
 }
 

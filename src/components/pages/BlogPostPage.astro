@@ -23,6 +23,36 @@ if (!post) {
   return Astro.redirect(lp('/blog'));
 }
 
+// Fetch all locale slugs for this post so the language switcher can emit
+// canonical translated URLs directly (no 301 hop).
+let blogLocaleSlugs: Record<string, string> = {};
+try {
+  // Find the base post_id: if `post` came from post_translations overlay, its
+  // slug is the translated one; if not, it's the English post. Look up id by
+  // original English slug via the base posts table.
+  const baseSlug = locale === 'en'
+    ? post.slug
+    : (await db.prepare('SELECT id FROM posts WHERE slug = ? OR id = (SELECT post_id FROM post_translations WHERE locale = ? AND slug = ? LIMIT 1) LIMIT 1')
+        .bind(slug, locale, slug)
+        .first<{ id: string }>())?.id;
+  // Need post.id — Post.id isn't in the Post type we got, but we can re-query.
+  const row = await db
+    .prepare(`SELECT p.id, p.slug as en_slug FROM posts p WHERE p.slug = ?`)
+    .bind(locale === 'en' ? post.slug : slug)
+    .first<{ id: string; en_slug: string }>();
+  const postId = row?.id
+    ?? (await db.prepare('SELECT post_id FROM post_translations WHERE locale = ? AND slug = ? LIMIT 1').bind(locale, slug).first<{ post_id: string }>())?.post_id;
+  if (postId) {
+    const enRow = await db.prepare('SELECT slug FROM posts WHERE id = ?').bind(postId).first<{ slug: string }>();
+    if (enRow?.slug) blogLocaleSlugs.en = enRow.slug;
+    const rows = await db
+      .prepare('SELECT locale, slug FROM post_translations WHERE post_id = ?')
+      .bind(postId)
+      .all<{ locale: string; slug: string }>();
+    for (const r of rows.results ?? []) blogLocaleSlugs[r.locale] = r.slug;
+  }
+} catch { /* non-fatal */ }
+
 // ISR: Cache at CDN edge for 10 min, serve stale up to 1 day while revalidating.
 // Blog posts change infrequently so longer cache is safe.
 Astro.response.headers.set('CDN-Cache-Control', 'public, max-age=600, stale-while-revalidate=86400');
@@ -130,7 +160,7 @@ const faqSchema = post.faqItems?.length ? {
   {faqSchema && (
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   )}
-  <Nav activePage="blog" />
+  <Nav activePage="blog" blogLocaleSlugs={blogLocaleSlugs} />
 
   <main class="pt-6 sm:pt-12 pb-16 sm:pb-24 px-5 sm:px-6 md:px-0">
     <article class="max-w-3xl mx-auto">
