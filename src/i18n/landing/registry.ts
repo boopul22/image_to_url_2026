@@ -17,7 +17,8 @@ export function getSlug(pageKey: PageKey, locale: Locale): string {
 }
 
 export function localizedUrl(pageKey: PageKey, locale: Locale): string {
-  return `/${locale}/${getSlug(pageKey, locale)}`;
+  // Trailing slash matches the canonical URL Astro emits for landing pages.
+  return `/${locale}/${getSlug(pageKey, locale)}/`;
 }
 
 export function isPageKey(v: string): v is PageKey {

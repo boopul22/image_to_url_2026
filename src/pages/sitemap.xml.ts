@@ -19,8 +19,8 @@ const STATIC_PAGES: { path: string; lastmod: string }[] = [
   { path: '/blog',     lastmod: '2026-04-01' },
   { path: '/privacy',  lastmod: '2026-04-01' },
   { path: '/terms',    lastmod: '2026-04-01' },
-  { path: '/image-to-url-for-html', lastmod: '2026-04-14' },
-  { path: '/image-to-url-vercel',   lastmod: '2026-04-14' },
+  // Note: image-to-url-for-html and image-to-url-vercel are emitted via the
+  // landing slug registry below — listing them here too caused duplicate <loc>s.
 ];
 
 function escapeXml(str: string): string {
@@ -153,12 +153,14 @@ export async function GET({ locals }: APIContext): Promise<Response> {
   // xhtml:link alternates pointing at each locale's translated slug.
   const landingLastmod = '2026-04-18';
   for (const pageKey of PAGE_KEYS) {
+    // Landing pages canonicalize to a trailing-slash URL; emit the canonical
+    // form so Google doesn't follow a 307 on every entry.
     const alternates = locales
-      .map(loc => `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/${getSlug(pageKey, loc)}`)}" />`)
+      .map(loc => `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/${getSlug(pageKey, loc)}/`)}" />`)
       .join('\n');
-    const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${SITE}/${defaultLocale}/${getSlug(pageKey, defaultLocale)}`)}" />`;
+    const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${SITE}/${defaultLocale}/${getSlug(pageKey, defaultLocale)}/`)}" />`;
     for (const loc of locales) {
-      const locUrl = `${SITE}/${loc}/${getSlug(pageKey, loc)}`;
+      const locUrl = `${SITE}/${loc}/${getSlug(pageKey, loc)}/`;
       urlEntries.push(`  <url>
     <loc>${escapeXml(locUrl)}</loc>
     <lastmod>${landingLastmod}</lastmod>
