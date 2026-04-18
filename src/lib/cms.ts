@@ -245,6 +245,50 @@ export async function getPublishedPosts(
   };
 }
 
+/**
+ * Locale-aware listing. Overlays translated title/excerpt/slug from
+ * post_translations for non-English locales. Missing translations fall back
+ * to English.
+ */
+export async function getPublishedPostsLocalized(
+  db: D1Database,
+  locale: string,
+  opts: { limit?: number; offset?: number; categoryId?: string; search?: string } = {},
+): Promise<{ posts: Post[]; total: number }> {
+  const base = await getPublishedPosts(db, opts);
+  if (locale === 'en' || base.posts.length === 0) return base;
+
+  const ids = base.posts.map(p => p.id);
+  const placeholders = ids.map(() => '?').join(',');
+  const rows = await db
+    .prepare(
+      `SELECT post_id, slug, title, excerpt, meta_title, meta_description
+       FROM post_translations
+       WHERE locale = ? AND post_id IN (${placeholders})`,
+    )
+    .bind(locale, ...ids)
+    .all<{
+      post_id: string; slug: string; title: string; excerpt: string;
+      meta_title: string | null; meta_description: string | null;
+    }>();
+  const byId = new Map<string, typeof rows.results[number]>();
+  for (const r of rows.results ?? []) byId.set(r.post_id, r);
+
+  const overlaid = base.posts.map(p => {
+    const t = byId.get(p.id);
+    if (!t) return p;
+    return {
+      ...p,
+      slug: t.slug,
+      title: t.title,
+      excerpt: t.excerpt,
+      metaTitle: t.meta_title ?? p.metaTitle,
+      metaDescription: t.meta_description ?? p.metaDescription,
+    };
+  });
+  return { posts: overlaid, total: base.total };
+}
+
 export async function getPostBySlug(db: D1Database, slug: string): Promise<Post | null> {
   const row = await db
     .prepare(
@@ -256,6 +300,50 @@ export async function getPostBySlug(db: D1Database, slug: string): Promise<Post 
     .first();
 
   return row ? mapPostRow(row) : null;
+}
+
+/**
+ * Locale-aware post lookup. For 'en', falls back to English `posts` table.
+ * For other locales, resolves (locale, slug) via `post_translations`, loads the
+ * base post, and overlays translated fields. If no translation exists for the
+ * locale, falls back to the English post so content still renders.
+ */
+export async function getPostBySlugLocalized(
+  db: D1Database,
+  slug: string,
+  locale: string,
+): Promise<Post | null> {
+  if (locale === 'en') return getPostBySlug(db, slug);
+
+  const trans = await db
+    .prepare(
+      `SELECT
+         pt.title as t_title, pt.excerpt as t_excerpt, pt.content as t_content,
+         pt.meta_title as t_meta_title, pt.meta_description as t_meta_description,
+         pt.faq_items as t_faq_items,
+         p.*, c.name as category_name, c.color as category_color
+       FROM post_translations pt
+       JOIN posts p ON p.id = pt.post_id
+       LEFT JOIN categories c ON p.category_id = c.id
+       WHERE pt.locale = ? AND pt.slug = ? AND p.status = 'published'`,
+    )
+    .bind(locale, slug)
+    .first<any>();
+
+  if (trans) {
+    return mapPostRow({
+      ...trans,
+      title: trans.t_title,
+      excerpt: trans.t_excerpt,
+      content: trans.t_content,
+      meta_title: trans.t_meta_title,
+      meta_description: trans.t_meta_description,
+      faq_items: trans.t_faq_items,
+    });
+  }
+
+  // Fallback: slug might still be the English slug (translation missing).
+  return getPostBySlug(db, slug);
 }
 
 export async function getRelatedPosts(db: D1Database, slugs: string[]): Promise<Post[]> {

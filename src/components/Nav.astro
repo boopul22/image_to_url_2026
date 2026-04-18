@@ -3,6 +3,7 @@ import { t, stripLocalePrefix } from '../i18n/utils';
 import { locales, localeLabels, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { getNavGroups } from '../lib/nav-links';
+import { resolveSlug, getSlug } from '../i18n/landing/registry';
 
 const { activePage = "home" } = Astro.props;
 const user = Astro.locals.user;
@@ -12,6 +13,17 @@ const basePath = stripLocalePrefix(Astro.url.pathname);
 // Root-level English-only pages have no locale variants — hide language switcher
 const hasLocalePrefix = Astro.url.pathname !== basePath;
 const isLocalizable = hasLocalePrefix || Astro.url.pathname === '/';
+
+// If the current URL is a translated landing page, resolve its pageKey so we
+// can generate per-locale translated slugs for the language switcher.
+// e.g. on /hi/convert-png-to-url the user clicks "French" → /fr/convertir-png-en-url
+const currentSlug = basePath.replace(/^\/+|\/+$/g, '');
+const currentPageKey = currentSlug ? resolveSlug(locale, currentSlug) : null;
+
+function langSwitchHref(loc: Locale): string {
+  if (currentPageKey) return `/${loc}/${getSlug(currentPageKey, loc)}`;
+  return `/${loc}${basePath}`;
+}
 
 function localePath(path: string, loc: Locale = locale): string {
   return `/${loc}${path}`;
@@ -125,6 +137,17 @@ const toolsDropdown = getNavGroups(locale);
 
     <!-- Desktop Right Actions -->
     <div class="hidden lg:flex items-center gap-4 lg:justify-self-end">
+      <!-- Donate (Ko-fi) -->
+      <a
+        href="https://ko-fi.com/bipul"
+        target="_blank"
+        rel="noopener"
+        class="flex items-center gap-1.5 bg-white text-on-background border-2 border-on-background hard-shadow px-3 py-1.5 font-headline text-[12px] font-bold uppercase tracking-wide hover:bg-rose-600 hover:text-white transition-colors"
+      >
+        <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">favorite</span>
+        Donate
+      </a>
+
       <!-- Language Switcher (desktop) — hidden on English-only pages -->
       {isLocalizable && (
       <div class="relative" id="lang-switcher-desktop">
@@ -141,7 +164,7 @@ const toolsDropdown = getNavGroups(locale);
         <div id="lang-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow z-50 w-[360px] max-h-[min(70vh,480px)] overflow-y-auto grid grid-cols-2">
           {locales.map((loc) => (
             <a
-              href={`/${loc}${basePath}`}
+              href={langSwitchHref(loc)}
               class:list={[
                 "block px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors truncate",
                 loc === locale ? "text-on-background font-bold bg-primary" : "text-on-surface",
@@ -312,6 +335,17 @@ const toolsDropdown = getNavGroups(locale);
 
       <div class="h-px bg-outline-variant my-2"></div>
 
+      <!-- Donate (Ko-fi) -->
+      <a
+        href="https://ko-fi.com/bipul"
+        target="_blank"
+        rel="noopener"
+        class="flex items-center justify-center gap-2 mx-2 mb-1 bg-white text-on-background py-3.5 border-2 border-on-background hard-shadow font-label uppercase tracking-wider text-xs font-bold active:scale-[0.98] transition-transform"
+      >
+        <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">favorite</span>
+        Donate
+      </a>
+
       <!-- Language Switcher (inside mobile menu) — hidden on English-only pages -->
       {isLocalizable && (
       <div class="relative" id="lang-switcher-mobile">
@@ -328,7 +362,7 @@ const toolsDropdown = getNavGroups(locale);
         <div id="lang-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background max-h-[50vh] overflow-y-auto grid grid-cols-2">
           {locales.map((loc) => (
             <a
-              href={`/${loc}${basePath}`}
+              href={langSwitchHref(loc)}
               class:list={[
                 "block px-3 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors truncate",
                 loc === locale ? "text-on-background font-bold bg-primary" : "text-on-surface",

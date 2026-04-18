@@ -2,7 +2,18 @@ import { defineMiddleware } from 'astro:middleware';
 import { getSession } from './lib/session';
 import { getDB } from './lib/db';
 import { getLocaleFromPath } from './i18n/utils';
-import { defaultLocale } from './i18n/config';
+import { defaultLocale, locales } from './i18n/config';
+
+// Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
+const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/'];
+const NON_LOCALIZED_EXACT = new Set(['/sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest']);
+
+function isNonLocalized(path: string): boolean {
+  if (NON_LOCALIZED_EXACT.has(path)) return true;
+  if (path.startsWith('/_')) return true; // _astro, _image etc
+  if (/\.[a-zA-Z0-9]{2,5}$/.test(path) && !path.endsWith('.html')) return true; // static assets
+  return NON_LOCALIZED_PREFIXES.some(p => path === p.replace(/\/$/, '') || path.startsWith(p));
+}
 
 export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
   const url0 = new URL(request.url);
@@ -19,12 +30,13 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     return redirect(`/zh-Hans${tail}`, 301);
   }
 
-  // Redirect root-level i18n pages to /en/ equivalents to prevent duplicate content
-  // Strip trailing slash before matching so /blog/ and /blog both redirect correctly
-  const cleanedPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
-  const rootToLocaleRedirects = ['/blog', '/features', '/pricing', '/docs', '/privacy', '/terms'];
-  if (rootToLocaleRedirects.includes(cleanedPath)) {
-    return redirect(`/en${cleanedPath}`, 301);
+  // Catch-all: any non-locale-prefixed public path → /en/<path>
+  // Applies to tool pages, blog, legal pages, etc. Excludes admin/api/assets.
+  const firstSeg = path.split('/')[1];
+  const hasLocalePrefix = locales.includes(firstSeg as (typeof locales)[number]);
+  if (!hasLocalePrefix && !isNonLocalized(path)) {
+    const cleaned = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+    return redirect(`/en${cleaned}${url0.search}`, 301);
   }
 
   // Locale detection — force English for admin/dashboard/api routes
@@ -83,7 +95,22 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     }
   }
 
-  const response = await next();
+  let response = await next();
+
+  // Dev-only: rewrite cross-origin CDN image URLs through the Vite dev proxy
+  // so Chrome's ORB doesn't block them on localhost. Production HTML is untouched.
+  if (
+    import.meta.env.DEV &&
+    response.headers.get('content-type')?.includes('text/html')
+  ) {
+    const html = await response.text();
+    const rewritten = html.replaceAll('https://cdn.imagetourl.cloud/', '/__cdn/');
+    response = new Response(rewritten, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  }
 
   // Security headers — all responses
   response.headers.set('X-Content-Type-Options', 'nosniff');

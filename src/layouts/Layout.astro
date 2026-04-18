@@ -13,6 +13,9 @@ interface Props {
   schema?: object | object[];
   /** Disable hreflang tags for root-level English-only pages (e.g. /png-to-url) */
   noHreflang?: boolean;
+  /** Override hreflang generation with explicit per-locale URLs. Used by pages
+   *  with translated slugs where the URL differs per locale (dynamic landing route). */
+  hreflangAlternates?: { locale: Locale; url: string }[];
   /** Breadcrumb items for BreadcrumbList schema: [{name, url}] */
   breadcrumbs?: { name: string; url: string }[];
   /** ISO-8601 date string surfaced as visible text and `WebPage.dateModified` */
@@ -27,6 +30,7 @@ const {
   noindex = false,
   schema,
   noHreflang = false,
+  hreflangAlternates,
   breadcrumbs,
   lastModified,
 } = Astro.props;
@@ -140,10 +144,16 @@ function hreflangUrl(loc: Locale): string {
     <meta name="theme-color" content="#e11d48" />
 
     <!-- hreflang for all locales (skip for root-level English-only pages) -->
-    {!noHreflang && locales.map(loc => (
+    {!noHreflang && hreflangAlternates && hreflangAlternates.map(a => (
+      <link rel="alternate" hreflang={a.locale} href={`${SITE}${a.url}`} />
+    ))}
+    {!noHreflang && hreflangAlternates && (
+      <link rel="alternate" hreflang="x-default" href={`${SITE}${hreflangAlternates.find(a => a.locale === defaultLocale)?.url ?? '/'}`} />
+    )}
+    {!noHreflang && !hreflangAlternates && locales.map(loc => (
       <link rel="alternate" hreflang={loc} href={hreflangUrl(loc)} />
     ))}
-    {!noHreflang && <link rel="alternate" hreflang="x-default" href={hreflangUrl(defaultLocale)} />}
+    {!noHreflang && !hreflangAlternates && <link rel="alternate" hreflang="x-default" href={hreflangUrl(defaultLocale)} />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />

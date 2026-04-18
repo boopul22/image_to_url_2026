@@ -7,6 +7,7 @@ import type { APIContext } from 'astro';
 import { getDB } from '../lib/db';
 import { locales, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
+import { PAGE_KEYS, getSlug } from '../i18n/landing/registry';
 
 const SITE = 'https://imagetourl.cloud';
 
@@ -113,16 +114,16 @@ ${xDefault}
 export async function GET({ locals }: APIContext): Promise<Response> {
   const db = getDB(locals);
 
-  let postRows: { slug: string; updated_at: string }[] = [];
+  let postRows: { id: string; slug: string; updated_at: string }[] = [];
   try {
     const result = await db
       .prepare(
-        `SELECT slug, updated_at FROM posts
+        `SELECT id, slug, updated_at FROM posts
          WHERE status = 'published'
          ORDER BY published_at DESC, created_at DESC
          LIMIT 50000`,
       )
-      .all<{ slug: string; updated_at: string }>();
+      .all<{ id: string; slug: string; updated_at: string }>();
     postRows = result.results ?? [];
   } catch {
     // DB unavailable — serve static pages only.
@@ -148,14 +149,71 @@ export async function GET({ locals }: APIContext): Promise<Response> {
     urlEntries.push(buildUrlEntry(page.path, page.lastmod));
   }
 
-  // Root-level English-only landing pages (no hreflang)
+  // Localized tool/landing pages — one <url> per (locale, pageKey) with
+  // xhtml:link alternates pointing at each locale's translated slug.
+  const landingLastmod = '2026-04-18';
+  for (const pageKey of PAGE_KEYS) {
+    const alternates = locales
+      .map(loc => `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/${getSlug(pageKey, loc)}`)}" />`)
+      .join('\n');
+    const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${SITE}/${defaultLocale}/${getSlug(pageKey, defaultLocale)}`)}" />`;
+    for (const loc of locales) {
+      const locUrl = `${SITE}/${loc}/${getSlug(pageKey, loc)}`;
+      urlEntries.push(`  <url>
+    <loc>${escapeXml(locUrl)}</loc>
+    <lastmod>${landingLastmod}</lastmod>
+${alternates}
+${xDefault}
+  </url>`);
+    }
+  }
+
+  // Legacy: any ROOT_PAGES entries not covered by the registry stay as
+  // English-only. (Most are covered; this is a safety net for edges.)
+  const registrySlugs = new Set(PAGE_KEYS.map(k => `/${getSlug(k, defaultLocale)}`));
   for (const page of ROOT_PAGES) {
+    if (registrySlugs.has(page.path)) continue;
     urlEntries.push(buildRootUrlEntry(page.path, page.lastmod));
   }
 
-  // Blog posts — each gets all locale alternates
+  // Blog posts — emit one <url> per (locale, slug). If translated slugs exist
+  // in post_translations, use them; otherwise fall back to the English slug
+  // under the locale prefix.
+  let transRows: { post_id: string; locale: string; slug: string }[] = [];
+  try {
+    const result = await db
+      .prepare('SELECT post_id, locale, slug FROM post_translations')
+      .all<{ post_id: string; locale: string; slug: string }>();
+    transRows = result.results ?? [];
+  } catch {}
+  const postIdBySlug = new Map<string, string>();
+  for (const p of postRows as any[]) if (p.id) postIdBySlug.set(p.slug, p.id);
+  const transBySlug = new Map<string, Map<string, string>>(); // postSlug -> (locale -> tSlug)
   for (const post of postRows) {
-    urlEntries.push(buildUrlEntry(`/blog/${escapeXml(post.slug)}`, toDateString(post.updated_at)));
+    const postId = (post as any).id;
+    if (!postId) continue;
+    const perLocale = new Map<string, string>();
+    for (const t of transRows) if (t.post_id === postId) perLocale.set(t.locale, t.slug);
+    transBySlug.set(post.slug, perLocale);
+  }
+
+  for (const post of postRows) {
+    const perLocale = transBySlug.get(post.slug) ?? new Map<string, string>();
+    const lastmod = toDateString(post.updated_at);
+    const alternates = locales.map(loc => {
+      const slug = loc === defaultLocale ? post.slug : (perLocale.get(loc) ?? post.slug);
+      return `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/blog/${slug}`)}" />`;
+    }).join('\n');
+    const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${SITE}/${defaultLocale}/blog/${post.slug}`)}" />`;
+    for (const loc of locales) {
+      const slug = loc === defaultLocale ? post.slug : (perLocale.get(loc) ?? post.slug);
+      urlEntries.push(`  <url>
+    <loc>${escapeXml(`${SITE}/${loc}/blog/${slug}`)}</loc>
+    <lastmod>${lastmod}</lastmod>
+${alternates}
+${xDefault}
+  </url>`);
+    }
   }
 
   // CMS pages

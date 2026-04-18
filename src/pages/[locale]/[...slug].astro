@@ -4,22 +4,50 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ImageUploader from '../../components/ImageUploader.astro';
-import { locales, defaultLocale } from '../../i18n/config';
-import type { Locale } from '../../i18n/config';
-import { content } from '../../i18n/landing/image-to-url-vercel';
+import { locales, defaultLocale, type Locale } from '../../i18n/config';
+import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, type PageKey } from '../../i18n/landing/registry';
+import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
+
+// Eager-load all landing content modules at build time. Each module exports
+// `content: Record<Locale, LandingContent>`.
+const modules = import.meta.glob<{ content: LandingContentMap }>(
+  '../../i18n/landing/*.ts',
+  { eager: true },
+);
+
+function contentFor(pageKey: PageKey): LandingContentMap | null {
+  const path = `../../i18n/landing/${pageKey}.ts`;
+  return modules[path]?.content ?? null;
+}
 
 export function getStaticPaths() {
-  return locales.map((locale) => ({ params: { locale } }));
+  const paths: { params: { locale: Locale; slug: string } }[] = [];
+  for (const pageKey of PAGE_KEYS) {
+    for (const locale of locales) {
+      const slug = SLUGS[pageKey][locale] ?? SLUGS[pageKey][defaultLocale];
+      if (!slug) continue;
+      paths.push({ params: { locale, slug } });
+    }
+  }
+  return paths;
 }
 
 const locale = (Astro.params.locale ?? defaultLocale) as Locale;
-const c = content[locale] ?? content[defaultLocale];
+const slug = String(Astro.params.slug ?? '');
 
-function lp(path: string): string {
-  return `/${locale}${path}`;
+// Reverse-resolve slug to pageKey for this locale
+let pageKey: PageKey | null = null;
+for (const key of PAGE_KEYS) {
+  if (getSlug(key, locale) === slug) { pageKey = key; break; }
 }
+if (!pageKey) return Astro.redirect('/' + locale + '/');
 
-const pageUrl = `https://imagetourl.cloud/${locale}/image-to-url-vercel`;
+const map = contentFor(pageKey);
+if (!map) return Astro.redirect('/' + locale + '/');
+const c: LandingContent = map[locale] ?? map[defaultLocale];
+
+const pageUrl = `https://imagetourl.cloud/${locale}/${slug}`;
+const alternates = hreflangPairs(pageKey);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -38,15 +66,22 @@ const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   inLanguage: locale,
-  mainEntity: c.faqs.map((f) => ({
+  mainEntity: c.faqs.map(f => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+
+const homeHref = `/${locale}/`;
 ---
 
-<Layout title={c.metaTitle} description={c.metaDescription} schema={[schema, faqSchema]}>
+<Layout
+  title={c.metaTitle}
+  description={c.metaDescription}
+  schema={[schema, faqSchema]}
+  hreflangAlternates={alternates}
+>
   <Nav />
 
   <main>
@@ -72,7 +107,7 @@ const faqSchema = {
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {c.steps.map((step, i) => (
-            <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed'][i]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+            <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed'][i % 3]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
               <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">{i + 1}</div>
               <h3 class="text-base sm:text-lg font-black font-headline mb-2">{step.title}</h3>
               <p class="font-body text-on-surface-variant">{step.body}</p>
@@ -92,7 +127,7 @@ const faqSchema = {
           {c.whyItems.map((item, i) => (
             <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
               <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-                <span class="material-symbols-outlined text-primary text-lg sm:text-xl">cloud</span>
+                <span class="material-symbols-outlined text-primary text-lg sm:text-xl">bolt</span>
               </div>
               <h3 class="text-base sm:text-lg font-black font-headline mb-2">{item.title}</h3>
               <p class="font-body text-on-surface-variant">{item.body}</p>
@@ -110,7 +145,7 @@ const faqSchema = {
         </div>
         <div class="space-y-4 reveal">
           {c.faqs.map((f, i) => (
-            <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant', 'bg-secondary-container'][i]} border-2 border-on-background rounded-xl hard-shadow group`}>
+            <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border-2 border-on-background rounded-xl hard-shadow group`}>
               <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">
                 <span>{f.q}</span>
                 <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
@@ -130,7 +165,7 @@ const faqSchema = {
           <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
             <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">{c.ctaTitle}</h2>
             <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">{c.ctaBody}</p>
-            <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+            <a href={homeHref} class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
               {c.ctaButton}
             </a>
           </div>

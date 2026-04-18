@@ -6,7 +6,7 @@ import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
-import { getPostBySlug, getRelatedPosts } from '../../lib/cms';
+import { getPostBySlug, getPostBySlugLocalized, getRelatedPosts } from '../../lib/cms';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -16,7 +16,7 @@ function lp(path: string): string {
 
 const { slug } = Astro.params;
 const db = getDB(Astro.locals);
-const post = await getPostBySlug(db, slug as string);
+const post = await getPostBySlugLocalized(db, slug as string, locale);
 
 if (!post) {
   return Astro.redirect(lp('/blog'));

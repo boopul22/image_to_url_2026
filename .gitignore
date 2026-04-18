@@ -28,3 +28,4 @@ pnpm-debug.log*
 
 # stitch design assets
 stitch_assets/
+.dev.vars

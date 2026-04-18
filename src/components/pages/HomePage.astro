@@ -6,7 +6,7 @@ import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
-import { getPublishedPosts } from '../../lib/cms';
+import { getPublishedPostsLocalized } from '../../lib/cms';
 import { getActiveAds, type SponsorAd } from '../../lib/sponsor-ads';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -16,7 +16,7 @@ function lp(path: string): string {
 }
 
 const db = getDB(Astro.locals);
-const { posts: previewPosts } = await getPublishedPosts(db, { limit: 3 });
+const { posts: previewPosts } = await getPublishedPostsLocalized(db, locale, { limit: 3 });
 
 let sponsorAds: SponsorAd[] = [];
 try {

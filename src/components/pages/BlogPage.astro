@@ -6,7 +6,7 @@ import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
-import { getPublishedPosts, getCategories } from '../../lib/cms';
+import { getPublishedPostsLocalized, getCategories } from '../../lib/cms';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -19,7 +19,7 @@ Astro.response.headers.set('CDN-Cache-Control', 'public, max-age=300, stale-whil
 Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
 
 const db = getDB(Astro.locals);
-const { posts } = await getPublishedPosts(db, { limit: 50 });
+const { posts } = await getPublishedPostsLocalized(db, locale, { limit: 50 });
 const categories = await getCategories(db);
 
 const featuredPost = posts.find((p) => p.featured);
