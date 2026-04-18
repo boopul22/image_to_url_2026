@@ -1,0 +1,48 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `# Zapier "Webhooks by Zapier" custom action
+# Action: POST
+# URL: https://imagetourl.cloud/api/upload
+# Payload Type: form
+# Data:
+#   file:  {{Attachment URL from previous step}}
+# Headers:
+#   Authorization: Bearer YOUR_IMAGETOURL_KEY
+
+# Zapier will POST multipart form with the downloaded file
+# Response → extract {{data.url}} for use in later steps`;
+---
+<DevApiPage
+  title="Image Upload via Zapier — No-code CDN URLs"
+  slug="image-upload-zapier"
+  metaDescription="Upload images to ImageToURL from Zapier with Webhooks by Zapier. No-code, works with any trigger."
+  h1Pre="Zapier image upload"
+  h1Highlight="Webhooks, one step."
+  intro="Zapier doesn't have a native ImageToURL integration yet, but 'Webhooks by Zapier' handles it in one action. Any Zap trigger (form submission, new email attachment, Airtable record) can feed an image into ImageToURL."
+  lang="bash"
+  langLabel="Zapier Webhook"
+  codeSnippet={code}
+  whys={[
+    { title: "Works with any trigger", body: "Typeform, Google Forms, Gmail, Dropbox, Airtable, Notion — whatever Zapier can read, you can forward to ImageToURL." },
+    { title: "No coding required", body: "Configure once in Zapier's UI; every matching trigger auto-uploads. Great for form submissions, user avatar uploads, customer photo intake." },
+    { title: "Extract URL for downstream steps", body: "The response contains {{data.url}} — use that in a later Zap step to write back to Airtable, Google Sheets, or Slack." },
+    { title: "Rate-limit friendly", body: "Pro plan's 60 uploads/min matches Zapier's typical trigger cadence — no throttling for normal workloads." }
+  ]}
+  faqs={[
+    { q: "What trigger should I use?", a: "Anything that provides a file URL or attachment: Typeform file upload, Gmail attachment, Airtable attachment field, Dropbox new file. Zapier downloads the file and re-uploads via the webhook." },
+    { q: "Do I need a paid Zapier plan?", a: "Webhooks by Zapier is a 'Multi-Step' feature — requires the Starter plan ($19.99/mo) or higher. Free-plan users can't use custom webhooks." },
+    { q: "How do I pass the file?", a: "Use Zapier's 'Attachment URL' or 'File URL' field from the trigger as the value of the 'file' form field in the webhook action." },
+    { q: "Is the API key safe in Zapier?", a: "Zapier stores headers encrypted at rest. Still, use a Pro or Business API key with scoped permissions — rotate via your dashboard if Zapier account is compromised." },
+    { q: "Can I handle upload failures?", a: "Use Zapier's 'Filter' step on {{status_code}} to branch — send a Slack alert on non-200 responses, or retry with Zapier Code." },
+    { q: "What about multi-file uploads?", a: "Zapier's webhook sends one POST per step. For multi-file zaps, use the 'Looping' path: one trigger → loop → one upload each." },
+    { q: "Cost at scale?", a: "Zapier Starter: 750 tasks/mo for ~$20. If each upload is one task, that's 750 uploads/mo. ImageToURL Pro at $12 gives unlimited. Make / n8n are cheaper at higher scale." },
+    { q: "Alternatives to Zapier?", a: "Make (Integromat) has a more flexible HTTP module. n8n is self-hostable and cheaper for high volume." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-upload-make", title: "Make", body: "Same pattern on Make.com." },
+    { href: "/image-upload-n8n", title: "n8n", body: "Self-hosted alternative." },
+    { href: "/image-hosting-api-curl", title: "cURL", body: "See the underlying API call." }
+  ]}
+/>

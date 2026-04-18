@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Webflow"
+  slug="image-hosting-for-webflow"
+  metaTitle="Image Hosting for Webflow — Beyond the Asset Manager"
+  metaDescription="External CDN image hosting for Webflow sites. Useful for CMS items, site staging, and bypassing asset-count limits."
+  h1Pre="Image hosting for Webflow"
+  h1Highlight="scale past the asset limit."
+  intro="Webflow's built-in asset CDN is fast and free — but it caps at 10 GB on lower plans and doesn't let you reference the same image from multiple projects. External hosting fills both gaps."
+  why={[
+    { title: "Bypass 10 GB asset limit", body: "On Basic and CMS plans Webflow caps storage. Host heavy/archival images externally and keep the paid plan focused on active site assets." },
+    { title: "Cross-project reuse", body: "One logo, one author photo, one product shot — referenced from five Webflow projects. External URL beats uploading the same file five times." },
+    { title: "CMS items from external data", body: "If your CMS is populated via Zapier or Make from a Google Sheet or Airtable, images come in as URLs. Host on ImageToURL and reference — Webflow doesn't need to re-upload." },
+    { title: "Staging workflows", body: "Swap images on staging without touching production Webflow asset library. Same URL behind the scenes, different bindings per environment." }
+  ]}
+  steps={[
+    { title: "Upload to ImageToURL", body: "Drop the source file, save the URL." },
+    { title: "Use the URL field in Webflow", body: "Webflow's Image component accepts 'External URL' — paste there. Works in Designer, CMS, and custom code embed." },
+    { title: "Set alt text in Webflow", body: "Alt text is a Webflow-side attribute. Fill it even with external URLs for a11y and SEO." }
+  ]}
+  faqs={[
+    { q: "Does Webflow let me use external image URLs?", a: "Yes. In the Image component, click the image and choose 'External URL' — paste your ImageToURL link. The browser fetches directly from our CDN at render time." },
+    { q: "Does this affect site speed scores?", a: "Cloudflare's PoPs are globally distributed; Webflow's own CDN is AWS CloudFront. Both are fast. The real win is avoiding Webflow's asset cap, not speed." },
+    { q: "Do external images work in CMS Collections?", a: "Yes — the Image field on a Collection item accepts 'External URL'. Useful when your CMS data is populated via Zapier/Make from external sources that already have image URLs." },
+    { q: "og:image for Webflow pages?", a: "Webflow's Open Graph settings accept any URL. Use ImageToURL for a version you can swap without re-exporting the site." },
+    { q: "Will Webflow resize my externally-hosted image?", a: "No — Webflow's srcset/responsive magic only applies to assets you upload to its CDN. For external URLs, you're responsible for pre-sizing via the image resizer tool." },
+    { q: "Do external images break if Webflow hosting changes?", a: "No — they're decoupled. Webflow serves your HTML; the &lt;img&gt; src points at our CDN. Unrelated systems." },
+    { q: "SEO considerations?", a: "Fine. Google's crawler follows image URLs regardless of host. Just make sure alt text, lazy loading, and responsive sizes are set in Webflow." },
+    { q: "Max size?", a: "Webflow asset cap on external URLs: there isn't one — it's just a remote fetch. ImageToURL caps at 10 MB free / 50 MB Business." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-wix", title: "Wix", body: "Same pattern on Wix." },
+    { href: "/image-hosting-for-squarespace", title: "Squarespace", body: "And on Squarespace." },
+    { href: "/image-hosting-for-framer", title: "Framer", body: "And on Framer." }
+  ]}
+/>

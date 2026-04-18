@@ -1,0 +1,88 @@
+import type { LandingContent, LandingContentMap } from './types';
+import { fillLocales } from './types';
+
+const en: LandingContent = {
+  metaTitle: 'JPG to PNG Converter — 100% in Browser | Free & Private',
+  metaDescription: 'Convert JPG to PNG locally in your browser. Lossless re-encode, no upload, no watermark, unlimited files.',
+  schemaName: 'JPG to PNG Converter',
+  schemaDescription: 'Convert JPG images to PNG entirely in your browser using lossless re-encoding.',
+  badge: 'Browser-only Tool',
+  h1Pre: 'JPG to PNG Converter',
+  h1Highlight: 'lossless, local, free.',
+  intro: 'Drop JPG files and get PNGs you can edit, overlay, or add transparency to. Conversion happens in your browser — your images never leave your device.',
+  howTitle: 'When you actually want PNG',
+  steps: [
+    { title: 'Drop JPG files', body: 'Drag your .jpg or .jpeg files into the drop zone, or click to browse.' },
+    { title: 'Browser re-encodes to PNG', body: 'The image is decoded and re-encoded as lossless PNG using the canvas API, locally.' },
+    { title: 'Download the PNG', body: 'Click Download on each file. Use Get URL if you want a hosted link instead.' },
+  ],
+  whyTitle: 'When you actually want PNG',
+  whyItems: [
+    { title: 'Before editing', body: 'Every JPG save loses quality. Convert once to PNG, edit as many times as you want.' },
+    { title: 'Transparent backgrounds', body: 'You can\'t add transparency to a JPG — but you can to its PNG. Convert first, then erase the background.' },
+    { title: 'Logos, UI, screenshots', body: 'JPG blurs sharp edges with its DCT blocks. Re-save as PNG if the JPG is an accidentally-compressed logo or UI screenshot.' },
+    { title: 'Platforms that require PNG', body: 'Some print pipelines, icon sets, and academic journals accept only PNG/TIFF. Convert once, submit.' },
+  ],
+  faqTitle: 'FAQ',
+  faqs: [
+    { q: 'Does converting JPG to PNG improve quality?', a: 'No. JPG\'s compression artifacts are already baked in — PNG just preserves them losslessly. If you need higher visual quality, you need the original source.' },
+    { q: 'Why is the PNG bigger than the JPG?', a: 'PNG is lossless — it encodes every pixel exactly. JPG throws away high-frequency detail. Expect PNGs to be 3–10× larger than the source JPG.' },
+    { q: 'Are my JPGs uploaded anywhere?', a: 'No. The conversion runs in your browser via the canvas API. Nothing leaves your device unless you click Get URL.' },
+    { q: 'Can I add transparency after converting?', a: 'Yes — after download. JPG has no alpha channel, so the output is fully opaque PNG. Open in Photoshop/GIMP/Photopea to erase a background.' },
+    { q: 'Does it preserve EXIF metadata?', a: 'No. Canvas re-encoding strips EXIF, GPS, and embedded ICC profiles.' },
+    { q: 'Any file-size limit?', a: 'No server limit. Your browser\'s memory is the only cap — large phone photos convert fine.' },
+    { q: 'Why would I want PNG instead of JPG?', a: 'Editing (re-saves without further loss), transparency (you plan to erase a background), and sharp-edge graphics (screenshots, UI, logos).' },
+    { q: 'What browsers are supported?', a: 'Chrome, Edge, Firefox, Safari, Brave, and Arc — desktop and mobile.' },
+  ],
+  ctaTitle: 'Need a permanent URL for the PNG?',
+  ctaBody: 'After converting, click Get URL on any file to host it on our CDN — free, no signup.',
+  ctaButton: 'Try the main uploader',
+};
+
+const hi: LandingContent = { ...en,
+  metaTitle: 'JPG से PNG कनवर्टर — 100% ब्राउज़र में | मुफ्त',
+  schemaName: 'JPG से PNG कनवर्टर',
+  badge: 'ब्राउज़र-ओनली टूल',
+  h1Pre: 'JPG से PNG कनवर्टर', h1Highlight: 'लॉसलेस, लोकल, मुफ्त।',
+  intro: 'JPG फाइलें ड्रॉप करें और PNG पाएं जिन्हें आप संपादित, ओवरले या पारदर्शिता जोड़ सकते हैं। रूपांतरण ब्राउज़र में होता है।',
+  howTitle: 'JPG को PNG में क्यों बदलें', whyTitle: 'JPG को PNG में क्यों बदलें', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+  ctaTitle: 'PNG के लिए स्थायी URL चाहिए?', ctaBody: 'कनवर्ट करने के बाद, Get URL क्लिक करें।', ctaButton: 'मुख्य अपलोडर आज़माएं',
+};
+const es: LandingContent = { ...en,
+  metaTitle: 'Convertidor JPG a PNG — 100% Navegador | Gratis',
+  schemaName: 'Convertidor JPG a PNG',
+  badge: 'Herramienta solo en el navegador',
+  h1Pre: 'Convertidor JPG a PNG', h1Highlight: 'sin pérdidas, local, gratis.',
+  intro: 'Suelta archivos JPG y obtén PNG que puedes editar, superponer o añadir transparencia. La conversión ocurre en tu navegador.',
+  howTitle: 'Cuando realmente quieres PNG', whyTitle: 'Cuando realmente quieres PNG', faqTitle: 'Preguntas frecuentes',
+  ctaTitle: '¿Necesitas un URL permanente para el PNG?', ctaBody: 'Después de convertir, haz clic en Get URL.', ctaButton: 'Probar el cargador principal',
+};
+const fr: LandingContent = { ...en,
+  metaTitle: 'Convertisseur JPG vers PNG — 100% Navigateur | Gratuit',
+  schemaName: 'Convertisseur JPG vers PNG',
+  badge: 'Outil navigateur uniquement',
+  h1Pre: 'Convertisseur JPG vers PNG', h1Highlight: 'sans perte, local, gratuit.',
+  intro: 'Déposez vos fichiers JPG et obtenez des PNG éditables avec transparence. La conversion se fait dans votre navigateur.',
+  howTitle: 'Pourquoi convertir JPG en PNG', whyTitle: 'Pourquoi convertir JPG en PNG', faqTitle: 'Questions fréquentes',
+  ctaTitle: 'Besoin d\'un lien permanent vers le PNG ?', ctaBody: 'Après conversion, cliquez sur Get URL.', ctaButton: 'Essayer le téléchargeur principal',
+};
+const de: LandingContent = { ...en,
+  metaTitle: 'JPG zu PNG Konverter — 100% im Browser | Kostenlos',
+  schemaName: 'JPG zu PNG Konverter',
+  badge: 'Nur-Browser-Tool',
+  h1Pre: 'JPG zu PNG Konverter', h1Highlight: 'verlustfrei, lokal, kostenlos.',
+  intro: 'Legen Sie JPG-Dateien ab und erhalten Sie PNGs, die Sie bearbeiten oder mit Transparenz überlagern können. Konvertierung im Browser.',
+  howTitle: 'Wann Sie wirklich PNG wollen', whyTitle: 'Wann Sie wirklich PNG wollen', faqTitle: 'Häufige Fragen',
+  ctaTitle: 'Brauchen Sie einen dauerhaften PNG-Link?', ctaBody: 'Nach der Konvertierung klicken Sie Get URL.', ctaButton: 'Hauptuploader ausprobieren',
+};
+const ja: LandingContent = { ...en,
+  metaTitle: 'JPG から PNG 変換ツール — 100% ブラウザ | 無料',
+  schemaName: 'JPG から PNG 変換ツール',
+  badge: 'ブラウザ専用ツール',
+  h1Pre: 'JPG から PNG 変換ツール', h1Highlight: 'ロスレス、ローカル、無料。',
+  intro: 'JPG ファイルをドロップして、編集可能な PNG を取得。ブラウザで変換が行われます。',
+  howTitle: 'なぜ PNG を選ぶか', whyTitle: 'なぜ PNG を選ぶか', faqTitle: 'よくある質問',
+  ctaTitle: 'PNG の永続 URL が必要？', ctaBody: '変換後、Get URL をクリック。', ctaButton: 'メインアップローダーを試す',
+};
+
+export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });

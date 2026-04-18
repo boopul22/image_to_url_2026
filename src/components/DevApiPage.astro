@@ -1,0 +1,118 @@
+---
+/**
+ * Shared dev/API landing page. Hero + intro + single hero code block + why
+ * + FAQ. Each page supplies unique code snippet, lang, intro, FAQ.
+ */
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+export interface FaqItem { q: string; a: string; }
+export interface Props {
+  title: string;
+  slug: string;
+  metaDescription: string;
+  h1Pre: string;
+  h1Highlight: string;
+  intro: string;
+  lang: string;           // "python" | "javascript" | "php" | "bash"
+  langLabel: string;      // "Python", "Node.js", "PHP", "cURL"
+  codeSnippet: string;
+  whys: { title: string; body: string }[];
+  faqs: FaqItem[];
+  relatedSlugs?: { href: string; title: string; body: string }[];
+}
+const { title, slug, metaDescription, h1Pre, h1Highlight, intro, lang, langLabel, codeSnippet, whys, faqs, relatedSlugs } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org", "@type": "WebApplication",
+  "name": title,
+  "url": `https://imagetourl.cloud/${slug}`,
+  "applicationCategory": "DeveloperApplication", "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": metaDescription,
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
+const codeSchema = {
+  "@context": "https://schema.org", "@type": "SoftwareSourceCode",
+  "name": `Upload image via ${langLabel}`,
+  "programmingLanguage": langLabel,
+  "codeSampleType": "code snippet",
+  "text": codeSnippet
+};
+const faqSchema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+---
+<Layout title={title} description={metaDescription} schema={[schema, codeSchema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">{langLabel} · API</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">{h1Pre} <span class="italic text-primary">{h1Highlight}</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">{intro}</p>
+      </header>
+
+      <div class="border-2 border-on-background rounded-xl hard-shadow overflow-hidden bg-on-surface reveal">
+        <div class="bg-surface-variant border-b-2 border-on-background px-4 py-2 flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-on-background">{langLabel}</span>
+          <button id="copy-code" class="text-xs font-bold uppercase tracking-wider text-primary hover:underline">Copy</button>
+        </div>
+        <pre class="p-4 text-xs sm:text-sm text-surface overflow-x-auto"><code id="code-block">{codeSnippet}</code></pre>
+      </div>
+      <script is:inline>
+        (() => { const b = document.getElementById('copy-code'); const c = document.getElementById('code-block'); if (!b || !c) return; b.addEventListener('click', async () => { await navigator.clipboard.writeText(c.textContent || ''); b.textContent = 'Copied!'; setTimeout(() => b.textContent = 'Copy', 1200); }); })();
+      </script>
+    </div>
+
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Why use ImageToURL's API</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          {whys.map((w, i) => (
+            <div class={`${i % 2 === 0 ? 'bg-secondary-container' : 'bg-tertiary-fixed'} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+              <h3 class="text-base sm:text-lg font-black font-headline mb-2">{w.title}</h3>
+              <p class="font-body text-on-surface-variant">{w.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqs.map((f, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{f.q}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {relatedSlugs && relatedSlugs.length > 0 && (
+      <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6">
+          <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Related</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {relatedSlugs.map(r => (
+              <a href={r.href} class="bg-white border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+                <div>
+                  <h3 class="text-sm sm:text-base font-black font-headline mb-1">{r.title}</h3>
+                  <p class="font-body text-on-surface-variant text-sm">{r.body}</p>
+                </div>
+                <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</Layout>

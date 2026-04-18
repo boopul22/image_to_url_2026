@@ -1,0 +1,101 @@
+---
+/**
+ * Answer-first Q&A page designed for AI search citation (Google AI Overviews,
+ * Perplexity, ChatGPT Web Search). Emits QAPage + Speakable + FAQPage schema.
+ *
+ * Structure:
+ *   - Question as H1
+ *   - Short answer in the first <p> (≤45 words, marked Speakable)
+ *   - Detailed answer in subsequent paragraphs
+ *   - Supporting FAQ
+ */
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+export interface FaqItem { q: string; a: string; }
+export interface Props {
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  question: string;          // the H1 — full question
+  shortAnswer: string;       // ≤45 words, first paragraph, marked speakable
+  longAnswerParagraphs: string[];  // 3–5 paragraphs of detail
+  faqs: FaqItem[];
+  relatedSlugs?: { href: string; title: string; body: string }[];
+}
+const { slug, metaTitle, metaDescription, question, shortAnswer, longAnswerParagraphs, faqs, relatedSlugs } = Astro.props;
+
+const pageUrl = `https://imagetourl.cloud/${slug}`;
+
+const qaSchema = {
+  "@context": "https://schema.org", "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": question,
+    "text": question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": shortAnswer + ' ' + longAnswerParagraphs.join(' '),
+      "url": pageUrl
+    }
+  },
+  "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".speakable"] }
+};
+const faqSchema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+---
+<Layout title={metaTitle} description={metaDescription} schema={[qaSchema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-3xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <article>
+        <header class="mb-5 sm:mb-8 reveal">
+          <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Quick answer</span>
+          <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-tight tracking-tighter mb-4 sm:mb-6">{question}</h1>
+          <p class="speakable text-base sm:text-lg font-headline font-semibold text-on-background leading-relaxed bg-white border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow">{shortAnswer}</p>
+        </header>
+
+        <section class="mb-8 sm:mb-12">
+          {longAnswerParagraphs.map(p => (
+            <p class="font-body text-on-surface-variant mb-4 leading-relaxed">{p}</p>
+          ))}
+        </section>
+
+        <section class="mb-8 sm:mb-12">
+          <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-lg sm:text-xl font-black font-headline tracking-tight">Related questions</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+          <div class="flex flex-col gap-3 sm:gap-4">
+            {faqs.map((f, i) => (
+              <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+                <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{f.q}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+                <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{f.a}</p></div>
+              </details>
+            ))}
+          </div>
+        </section>
+      </article>
+    </div>
+
+    {relatedSlugs && relatedSlugs.length > 0 && (
+      <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6">
+          <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">More answers</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {relatedSlugs.map(r => (
+              <a href={r.href} class="bg-white border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+                <div>
+                  <h3 class="text-sm sm:text-base font-black font-headline mb-1">{r.title}</h3>
+                  <p class="font-body text-on-surface-variant text-sm">{r.body}</p>
+                </div>
+                <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</Layout>

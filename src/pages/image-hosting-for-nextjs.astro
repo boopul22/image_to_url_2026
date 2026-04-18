@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Next.js"
+  slug="image-hosting-for-nextjs"
+  metaTitle="Image Hosting for Next.js — next/image Remote Patterns"
+  metaDescription="External CDN image hosting for Next.js apps. Works with next/image remote patterns, Vercel, Cloudflare Pages, and static export."
+  h1Pre="Image hosting for Next.js"
+  h1Highlight="next/image with external sources."
+  intro="Next.js's next/image optimizer is world-class — but only for images you serve. For user uploads, marketing pages, or content pulled from a headless CMS, you need an external CDN that plays nicely with remote patterns."
+  why={[
+    { title: "next/image remote patterns", body: "Add imagetourl.cloud to next.config.js images.remotePatterns and next/image will auto-optimize, resize, and serve WebP/AVIF variants from our URLs." },
+    { title: "Separation of concerns", body: "Keep uploads and assets out of your git repo. Edge deployments (Vercel, Netlify, Cloudflare Pages) shouldn't slow-sync gigabytes of images on every deploy." },
+    { title: "Static export support", body: "If you next build + next export, next/image can't optimize at runtime. External URLs served by a real CDN are the pragmatic replacement." },
+    { title: "User-generated content", body: "UGC uploads from authenticated users can POST to our API and return a CDN URL — store the URL in your DB, ref it from next/image." }
+  ]}
+  steps={[
+    { title: "Upload image", body: "Via the UI or POST to /api/upload — receive a JSON response with the URL." },
+    { title: "Configure next.config.js", body: "Add { protocol: 'https', hostname: 'imagetourl.cloud' } to images.remotePatterns. Restart dev server." },
+    { title: "Use <Image src={url} />", body: "Pass the URL into next/image. Widths, srcset, lazy-loading, and format auto-swap all work." }
+  ]}
+  faqs={[
+    { q: "Do I really need remote patterns configured?", a: "Yes — Next.js refuses to optimize images from unknown hostnames for security. Add imagetourl.cloud to remotePatterns in next.config.js and you're done." },
+    { q: "Does next/image still optimize external URLs?", a: "Yes. Next.js fetches the source from our CDN once, resizes/converts to WebP/AVIF, and caches the variants. Subsequent users hit the Next.js cache, not our CDN." },
+    { q: "Vercel vs Cloudflare Pages?", a: "Vercel's image optimizer is the default behind next/image. Cloudflare Pages uses its own image-resizing service — both work with external URLs." },
+    { q: "Does static export break this?", a: "next export can't optimize images at runtime. Options: pre-generate sizes with the image resizer, or switch to the Cloudflare Pages image service via @cloudflare/next-on-pages." },
+    { q: "CORS concerns?", a: "ImageToURL serves images with Access-Control-Allow-Origin: *, so any frontend can fetch and display. No CORS errors in canvas or drawImage contexts." },
+    { q: "Upload via API from Next.js server?", a: "Yes. POST multipart form to /api/upload with your Pro/Business API key. Store the returned URL in your database." },
+    { q: "Pricing concerns with heavy next/image cache hits?", a: "Your bandwidth bill lives with your Next.js host (Vercel, Cloudflare). ImageToURL serves the original once, not on every render." },
+    { q: "What if I use Tanstack Start / Remix / SvelteKit?", a: "Same idea — any framework that accepts remote image URLs works. Remix uses whatever img optimizer you configure; SvelteKit does similar." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-to-url-vercel", title: "Vercel Image to URL", body: "Vercel-specific." },
+    { href: "/image-to-url-for-html", title: "HTML Image Hosting", body: "For raw HTML." },
+    { href: "/image-hosting-for-markdown", title: "Markdown", body: "For MDX content." }
+  ]}
+/>

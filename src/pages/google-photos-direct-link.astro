@@ -1,0 +1,60 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Google Photos Direct Link — ImageToURL", "url": "https://imagetourl.cloud/google-photos-direct-link", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Get a real direct image URL from Google Photos without sharing your entire album. Re-host in your browser.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Can I get a direct image URL from Google Photos?", "acceptedAnswer": { "@type": "Answer", "text": "Not officially. Google Photos share links resolve to an HTML album page, not a raw image. The 'lh3.googleusercontent.com' URLs that show up in DevTools are session-bound, can rotate, and aren't meant for embedding. To get a stable direct URL, re-host the image somewhere that provides one." } },
+  { "@type": "Question", "name": "Why doesn't Google give me a direct link?", "acceptedAnswer": { "@type": "Answer", "text": "Google Photos is a personal library, not a CDN. The share page is designed for humans, not img-src embedding. It also avoids hotlinking abuse — without wrapping in an album, anyone with the URL could burn your bandwidth." } },
+  { "@type": "Question", "name": "What's the workaround?", "acceptedAnswer": { "@type": "Answer", "text": "Download the photo from Google Photos (three-dot menu → Download), then upload it here. You get a real, permanent direct URL on a global CDN — suitable for blogs, forum posts, Markdown files, and emails." } },
+  { "@type": "Question", "name": "Is there a way to extract all photos from a shared album at once?", "acceptedAnswer": { "@type": "Answer", "text": "Use Google Takeout (takeout.google.com) to export the whole library or an album as a ZIP. Then bulk-upload the extracted photos here. Takeout preserves originals without recompression." } },
+  { "@type": "Question", "name": "Why do googleusercontent.com URLs break?", "acceptedAnswer": { "@type": "Answer", "text": "Those URLs carry short-lived signed tokens. They work while the share session is active but can rotate or expire silently. Embedding them is a common cause of broken images on old forum posts." } },
+  { "@type": "Question", "name": "Does the re-hosted image preserve EXIF?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, uploads keep original EXIF by default. If you'd rather strip it for privacy, run it through the image compressor first — canvas re-encoding drops metadata." } },
+  { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "10 MB per upload on the free plan, 50 MB on Business. Google Photos originals usually fit." } },
+  { "@type": "Question", "name": "What about Google Drive image links?", "acceptedAnswer": { "@type": "Answer", "text": "Same problem — Drive links resolve to preview HTML. The drive.google.com/uc?id= trick sometimes works as a direct link but is unreliable and often rate-limited. Re-hosting is the stable answer." } }
+] };
+---
+<Layout title="Google Photos Direct Link — How to Get a Real Image URL" description="Google Photos doesn't provide direct image URLs. Here's the workaround: download + re-host for a permanent CDN link." schema={[schema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Use Case</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">Google Photos direct link <span class="italic text-primary">the honest way.</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Google Photos share links resolve to an album page — not a raw image URL. Download the photo and re-host it here for a real permanent direct link.</p>
+      </header>
+    </div>
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">3-step workflow</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">1</div><h3 class="text-base sm:text-lg font-black font-headline mb-2">Download from Photos</h3><p class="font-body text-on-surface-variant">Open the photo, tap the three-dot menu, choose Download. Or use Takeout for bulk.</p></div>
+          <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">2</div><h3 class="text-base sm:text-lg font-black font-headline mb-2">Drop it here</h3><p class="font-body text-on-surface-variant">Drag the downloaded file onto the uploader. Upload happens to a global CDN edge.</p></div>
+          <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">3</div><h3 class="text-base sm:text-lg font-black font-headline mb-2">Copy the URL</h3><p class="font-body text-on-surface-variant">You get a permanent, direct image URL — paste it in Markdown, HTML, forums, emails.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqSchema.mainEntity.map((q, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{q.name}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{q.acceptedAnswer.text}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6"><div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Get a real direct URL</h2>
+        <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload your photo</a>
+      </div></div></div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

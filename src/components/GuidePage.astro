@@ -1,0 +1,117 @@
+---
+/**
+ * Long-form guide / pillar-post layout. Used for in-depth SEO/content pages
+ * at /guides/*. Each guide supplies title, intro, a list of sections (with
+ * H2 + paragraphs), optional key-points callout, FAQ, and related links.
+ *
+ * Emits Article + FAQPage schema.
+ */
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+export interface Section { heading: string; paragraphs: string[] }
+export interface FaqItem { q: string; a: string }
+export interface Props {
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  title: string;
+  datePublished: string;      // ISO date
+  readTime: string;           // e.g. "8 min read"
+  intro: string;              // opening paragraph
+  keyPoints?: string[];       // optional TL;DR bullets
+  sections: Section[];
+  faqs: FaqItem[];
+  relatedSlugs?: { href: string; title: string; body: string }[];
+}
+const { slug, metaTitle, metaDescription, title, datePublished, readTime, intro, keyPoints, sections, faqs, relatedSlugs } = Astro.props;
+
+const pageUrl = `https://imagetourl.cloud/guides/${slug}`;
+
+const articleSchema = {
+  "@context": "https://schema.org", "@type": "Article",
+  "headline": title,
+  "description": metaDescription,
+  "datePublished": datePublished,
+  "dateModified": datePublished,
+  "author": { "@type": "Organization", "name": "ImageToURL", "@id": "https://imagetourl.cloud/#organization" },
+  "publisher": { "@id": "https://imagetourl.cloud/#organization" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
+  "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".speakable"] }
+};
+const faqSchema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+---
+<Layout title={metaTitle} description={metaDescription} schema={[articleSchema, faqSchema]} ogType="article" noHreflang>
+  <Nav />
+  <main>
+    <article class="max-w-3xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-6 sm:mb-8 reveal">
+        <div class="flex items-center gap-3 mb-3 text-xs font-mono text-on-surface-variant">
+          <span class="uppercase tracking-wider font-bold">Guide</span>
+          <span>·</span>
+          <time datetime={datePublished}>{new Date(datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          <span>·</span>
+          <span>{readTime}</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-headline leading-tight tracking-tighter mb-4 sm:mb-6">{title}</h1>
+        <p class="speakable text-base sm:text-lg font-headline font-medium text-on-surface-variant leading-relaxed">{intro}</p>
+      </header>
+
+      {keyPoints && keyPoints.length > 0 && (
+        <div class="reveal mb-8 sm:mb-10 bg-white border-2 border-on-background rounded-xl hard-shadow p-4 sm:p-5">
+          <h2 class="text-sm font-black font-headline uppercase tracking-wider mb-3">Key points</h2>
+          <ul class="flex flex-col gap-2 font-body text-on-surface-variant">
+            {keyPoints.map(k => (
+              <li class="flex gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0">check_circle</span><span>{k}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div class="prose-guide">
+        {sections.map(s => (
+          <section class="mb-8 sm:mb-10 reveal">
+            <h2 id={s.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')} class="text-lg sm:text-xl font-black font-headline tracking-tight mb-3">{s.heading}</h2>
+            {s.paragraphs.map(p => (<p class="font-body text-on-surface-variant mb-3 leading-relaxed">{p}</p>))}
+          </section>
+        ))}
+      </div>
+
+      <section class="mt-10 sm:mt-12">
+        <div class="flex items-baseline gap-4 mb-5 reveal"><h2 class="text-lg sm:text-xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqs.map((f, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{f.q}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </article>
+
+    {relatedSlugs && relatedSlugs.length > 0 && (
+      <section class="py-8 sm:py-12 mt-10 bg-surface-container-low border-t border-outline-variant/40">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6">
+          <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Related</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {relatedSlugs.map(r => (
+              <a href={r.href} class="bg-white border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+                <div>
+                  <h3 class="text-sm sm:text-base font-black font-headline mb-1">{r.title}</h3>
+                  <p class="font-body text-on-surface-variant text-sm">{r.body}</p>
+                </div>
+                <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</Layout>

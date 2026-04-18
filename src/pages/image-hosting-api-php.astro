@@ -1,0 +1,64 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `<?php
+function uploadImage(string $path, ?string $apiKey = null): string {
+    $ch = curl_init('https://imagetourl.cloud/api/upload');
+    $postData = ['file' => new CURLFile($path)];
+
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+    if ($apiKey) {
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $apiKey]);
+    }
+
+    $response = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($code >= 400) throw new RuntimeException("HTTP $code");
+    $body = json_decode($response, true);
+    if (!empty($body['error'])) throw new RuntimeException($body['error']);
+    return $body['data']['url'];
+}
+
+// Example
+$url = uploadImage('/var/www/uploads/screenshot.png', getenv('IMAGETOURL_KEY'));
+echo $url;`;
+---
+<DevApiPage
+  title="Image Hosting API — PHP Example"
+  slug="image-hosting-api-php"
+  metaDescription="Upload images from PHP using curl. Drop-in function for Laravel, WordPress, symfony, plain PHP."
+  h1Pre="Image hosting API"
+  h1Highlight="PHP with built-in curl."
+  intro="A copy-paste function for uploading images from PHP. Uses the built-in curl extension — works in WordPress, Laravel, Symfony, CakePHP, or raw PHP."
+  lang="php"
+  langLabel="PHP"
+  codeSnippet={code}
+  whys={[
+    { title: "No Composer package required", body: "The built-in curl extension is enabled on every PHP host since PHP 4. You don't need Guzzle, though you can swap in Guzzle for PSR-18 compliance." },
+    { title: "WordPress plugin-ready", body: "Drop the function into a plugin file; hook to media_upload or save_post to auto-push WP Media Library uploads to ImageToURL." },
+    { title: "Laravel compatible", body: "Use Laravel's HTTP client (Http::attach) or this raw curl version inside a service class. Save the returned URL to a model's URL column." },
+    { title: "Backwards-compatible", body: "Works on PHP 5.6+ with CURLFile. Modern (8.x) users can switch to the built-in http\\Client for PSR-18." }
+  ]}
+  faqs={[
+    { q: "Should I use Guzzle instead?", a: "If your project already uses Guzzle, yes — $client->post($url, ['multipart' => [['name' => 'file', 'contents' => fopen($path, 'r')]]]). The curl version avoids adding a dependency if you don't already have one." },
+    { q: "WordPress integration?", a: "Add an action on 'add_attachment' that calls uploadImage() with the local WP file path, then stores the ImageToURL URL as post_meta. Serve the CDN URL instead of the local one." },
+    { q: "Laravel Filesystem custom driver?", a: "Yes — implement a custom FilesystemAdapter where put() calls uploadImage() and returns the URL. Makes Storage::disk('cdn')->put() transparent." },
+    { q: "Max upload size in PHP?", a: "Watch php.ini upload_max_filesize and post_max_size. ImageToURL accepts up to 10 MB free / 50 MB Business — make sure PHP's limits are higher than that." },
+    { q: "Error handling?", a: "Wrap in try/catch; the function throws on HTTP errors or API-level errors. Log body['error'] to your monitoring before rethrowing." },
+    { q: "HTTPS / SSL verification?", a: "curl verifies SSL by default. If your server has an outdated CA bundle, CURLOPT_CAINFO to a fresh cacert.pem. Don't disable verification in production." },
+    { q: "Rate-limit handling?", a: "Check HTTP 429 response. The Retry-After header tells you how many seconds to wait. Implement exponential backoff for bulk operations." },
+    { q: "Is the API key safe in PHP code?", a: "Never hard-code it. Use getenv() or Laravel's config() to read from .env — exclude .env from git." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-api-python", title: "Python", body: "Python snippet." },
+    { href: "/image-hosting-api-nodejs", title: "Node.js", body: "Node snippet." },
+    { href: "/image-hosting-for-wordpress", title: "WordPress", body: "WP integration details." }
+  ]}
+/>

@@ -1,0 +1,68 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="what-exif-leaks"
+  metaTitle="What EXIF Data Leaks About You — And How to Strip It"
+  metaDescription="EXIF metadata in photos can reveal your location, device, and sometimes your home address. Here's what it contains and how to remove it before sharing."
+  title="What EXIF Data Leaks About You (and How to Strip It Before Sharing)"
+  datePublished="2026-04-12"
+  readTime="8 min read"
+  intro="Every photo your phone takes carries a hidden metadata packet called EXIF. It includes the GPS coordinates where the shot was taken, the exact time, your device model, and sometimes enough detail to identify your home or workplace. Most people have no idea. Here's what EXIF contains, where it leaks, and the ways to strip it before sharing."
+  keyPoints={[
+    "EXIF can include exact GPS coordinates, device model, and serial numbers",
+    "Instagram, Facebook, Twitter strip EXIF on upload — but forums, cloud storage, and email do not",
+    "The simplest strip: re-encode through a browser-based tool (canvas API drops metadata)",
+    "For advanced cases: ExifTool, exiv2, or the privacy settings on your phone's camera app",
+  ]}
+  sections={[
+    { heading: "What is EXIF?", paragraphs: [
+      "EXIF (Exchangeable Image File Format) is a metadata standard baked into JPG and TIFF files since 1995. Every photo your phone, DSLR, or mirrorless camera produces has an EXIF block — a small chunk of data describing the shot. Most of it is useful: camera model, shutter speed, ISO, focal length. Some of it is sensitive.",
+      "The sensitive fields, in order of concern: GPS coordinates (latitude/longitude precise to ~5 meters), capture timestamp (to the second), device serial number (unique to your camera), and 'lens make/model' (can identify a specific professional rig). Taken together they can pin a photo to a device, a location, and a moment.",
+    ] },
+    { heading: "Where EXIF leaks", paragraphs: [
+      "Social media mostly strips EXIF on upload. Instagram, Facebook, TikTok, LinkedIn, and Twitter/X all remove it (they also use it internally for their own purposes, but the version served to viewers is clean). That's the one good habit the platforms adopted.",
+      "Everywhere else tends to preserve it. Email attachments keep full EXIF. Cloud storage share links (Dropbox, Google Drive, iCloud) serve the original file with EXIF intact. Forum attachments, Discord images, Telegram, WhatsApp's 'send as document' option, and many image hosts (including the free-tier defaults at Imgur and ImgBB) all preserve EXIF.",
+      "Notable real-world leaks: journalists doxxing themselves by posting a meeting photo from their home office; real-estate listings exposing seller addresses via EXIF on MLS photos; a 2012 case where John McAfee's Panama hideout was compromised by Vice Magazine publishing a phone-taken photo with GPS intact.",
+    ] },
+    { heading: "How to check what's in your photo", paragraphs: [
+      "Right-click an image → Properties → Details (Windows) or File → Get Info (macOS). Both show the most common EXIF fields. For full detail, ExifTool (exiftool.org) is the gold standard — it parses everything and runs on every OS.",
+      "In the browser, paste any photo into exifdata.com or metapicz.com for a visual breakdown. Both are client-side; your photo isn't uploaded.",
+      "iPhone and Android both let you view EXIF in the Photos app via the info panel. On iPhone: tap the photo, swipe up, see GPS + camera info. Android varies by OEM.",
+    ] },
+    { heading: "How to strip it", paragraphs: [
+      "Simplest: re-encode the image with a canvas-based tool. ImageToURL's image compressor and resizer both run in the browser and both drop EXIF as a side effect of canvas encoding. No config needed — just run the image through and save the output.",
+      "On mobile: iOS 15+ has 'Adjust Location' per photo (Photos → info → Adjust) that strips GPS. Android's Photos app has similar. Both are per-photo, not a global setting.",
+      "For batch / command line: exiftool -all= photo.jpg strips everything. exiftool -gps:all= photo.jpg strips only GPS. Wildcard operations work: exiftool -all= *.jpg.",
+      "Camera-side: disable 'Add location' in iOS Camera settings before shooting; Android varies but most brands have an equivalent toggle. Once GPS is off, the shot won't have EXIF location to strip later.",
+    ] },
+    { heading: "What EXIF you might want to keep", paragraphs: [
+      "EXIF isn't pure evil. Photographers benefit from keeping lens/camera metadata for editing and archival. Stock-photo portals often require EXIF-intact submissions. Scientific datasets use EXIF timestamps for correlation.",
+      "Strip selectively: keep the technical fields (camera, exposure), drop the personal ones (GPS, serial numbers, owner name). ExifTool's --gps:all -serialnumber -ownername combo does exactly that.",
+    ] },
+    { heading: "What about hosts that claim to strip automatically?", paragraphs: [
+      "Most major photo-sharing sites strip EXIF on view, but the original file often retains it in the backend. Some have 'download original' endpoints that leak the full EXIF. Verify by downloading a test image from the host and running ExifTool on it.",
+      "ImageToURL's default is to preserve uploaded EXIF — the host doesn't touch your file. Strip with the image compressor first if you want EXIF removed. The /image-compressor tool re-encodes in your browser, dropping metadata in the process.",
+    ] },
+    { heading: "Screenshots — a subtle case", paragraphs: [
+      "Screenshots usually don't have EXIF (they weren't captured through a camera pipeline). But they do contain other identifying bits: the window title bar shows your username, the visible portion of open apps reveals your software stack, and on some OSes the file's creation timestamp reveals the exact time.",
+      "When sharing a screenshot publicly, crop aggressively and check the file-creation metadata. ImageToURL's image resizer + compressor combo strips file-level creation timestamps too."
+    ] },
+  ]}
+  faqs={[
+    { q: "Does social media really strip all EXIF?", a: "Most major platforms strip GPS and other sensitive fields from public-facing versions. Some keep limited technical fields (camera model). Always assume 'partial strip' and verify if privacy is critical." },
+    { q: "Does sharing a 'share link' leak EXIF?", a: "If the link opens the original file: yes. Dropbox, Google Drive, iCloud share links all preserve EXIF. Download, strip, re-upload to an image host if you care." },
+    { q: "What about AirDrop / iMessage?", a: "AirDrop preserves EXIF. iMessage also preserves EXIF between Apple users by default (iMessage full-fidelity mode). Switching to 'Mail' or 'Share link' might compress and strip — depends on OS version." },
+    { q: "Does converting HEIC to JPG strip EXIF?", a: "It depends on the tool. Apple Photos preserves EXIF in the converted JPG. ImageToURL's /heic-to-jpg (canvas re-encode) strips it. Pick the behavior you want." },
+    { q: "Can EXIF identify my specific phone?", a: "Sometimes — newer iPhones include serial numbers in EXIF on some models. Android varies. Always strip serials for sensitive shares." },
+    { q: "Does stripping EXIF hurt SEO?", a: "No. Google's image crawler ignores EXIF for ranking. Alt text and surrounding HTML matter; EXIF does not." },
+    { q: "Is there a way to strip EXIF in bulk from my photo library?", a: "exiftool -all= *.jpg on the command line is the fastest. GUI: ImageOptim (macOS), ExifPurge (Windows). iPhone: use the Shortcuts app to batch-strip — 'Remove EXIF Data' action added in iOS 16." },
+    { q: "Does Signal or iMessage end-to-end encryption help?", a: "E2E protects the image in transit but doesn't strip EXIF. The recipient still sees full metadata. Strip before sending if you want the photo itself to be privacy-preserving." },
+  ]}
+  relatedSlugs={[
+    { href: "/image-compressor", title: "Image compressor", body: "Strips EXIF on re-encode." },
+    { href: "/anonymous-image-upload", title: "Anonymous upload", body: "No account trail either." },
+    { href: "/guides/image-lcp-optimization", title: "LCP optimization", body: "Smaller files, fewer secrets." },
+  ]}
+/>

@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Medium"
+  slug="image-hosting-for-medium"
+  metaTitle="Image Hosting for Medium — Custom URLs for Articles"
+  metaDescription="Host images for Medium articles on an external CDN. Useful for cross-posting, drafts, and asset reuse."
+  h1Pre="Image hosting for Medium"
+  h1Highlight="cross-post without re-uploading."
+  intro="Medium absorbs your image uploads into its own CDN. That's fine for a one-off post, but hurts when you want to cross-post the same article elsewhere or re-use a logo across many pieces."
+  why={[
+    { title: "Cross-post to your own blog", body: "Medium auto-hosts images to cdn.medium.com. If you mirror the post on your personal site, those URLs are external — ImageToURL gives you one source of truth." },
+    { title: "Medium strips alt text unpredictably", body: "Alt text entered in the Medium editor sometimes doesn't persist through their export. Host externally for consistent a11y across platforms." },
+    { title: "Custom story headers", body: "Medium's featured image is small. Host a 1600-wide variant on ImageToURL for use as the og:image on the cross-post version." },
+    { title: "Drafts with embedded external images", body: "Draft in Google Docs or Notion with ImageToURL URLs, paste into Medium, and the images survive the import." }
+  ]}
+  steps={[
+    { title: "Upload source files", body: "Drop all article images here; save the URLs." },
+    { title: "Paste URLs into Medium", body: "In the Medium editor, click the + icon, then 'Image from URL' — or drag the image directly and Medium re-hosts the CDN version." },
+    { title: "Cross-post elsewhere", body: "Use the same ImageToURL URLs on your personal blog, LinkedIn article, Dev.to repost — perfect consistency." }
+  ]}
+  faqs={[
+    { q: "Does Medium let me embed external images by URL?", a: "Yes. Medium's + menu in the editor has 'Image from URL'. Paste your ImageToURL link and Medium either fetches it inline or re-hosts to cdn.medium.com." },
+    { q: "If Medium re-hosts, what's the benefit?", a: "You keep the source. If Medium goes down, pivots away from open articles, or you migrate off, you still have pristine URLs for every article image." },
+    { q: "Do images stay loaded for non-Medium members?", a: "Yes — Medium's images are public regardless of membership. External URLs referenced via 'Image from URL' work the same way." },
+    { q: "Does this help with SEO?", a: "Slightly. Medium's canonical URL points to the Medium article, so SEO credit lives there. But if you cross-post to your own blog with the same images, search engines can correctly attribute both versions." },
+    { q: "Max file size?", a: "Medium's upload cap is 25 MB. ImageToURL free is 10 MB, Business 50 MB. Use Business if you're hosting 4K feature photography." },
+    { q: "Animated GIFs?", a: "Both ImageToURL and Medium accept GIF. Medium converts large GIFs to video behind the scenes for playback." },
+    { q: "Does it affect my Medium Partner Program earnings?", a: "No. Earnings depend on member read time, not image hosting." },
+    { q: "Author avatar?", a: "Medium profile photo is uploaded directly to Medium — external URLs don't plug in. Use ImageToURL for the high-res source to keep for reuploads." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-substack", title: "Substack", body: "Same logic for Substack." },
+    { href: "/image-hosting-for-ghost", title: "Ghost", body: "Self-hosted blogging." },
+    { href: "/image-hosting-for-linkedin", title: "LinkedIn Articles", body: "Cross-post LinkedIn." }
+  ]}
+/>

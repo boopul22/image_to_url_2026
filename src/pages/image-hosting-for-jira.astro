@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Jira"
+  slug="image-hosting-for-jira"
+  metaTitle="Image Hosting for Jira — Bug Repros & Ticket Screenshots"
+  metaDescription="Host bug-repro screenshots and tickets' external references on a fast CDN. Direct URLs that render in Jira markdown and Confluence."
+  h1Pre="Image hosting for Jira"
+  h1Highlight="repros that survive attachment sprawl."
+  intro="Jira's native attachments are fine, but they duplicate across every ticket, eat tenant storage, and break when tickets get archived. External CDN URLs keep your repros accessible forever."
+  why={[
+    { title: "Survive ticket archival", body: "When your org archives old Jira projects, attached images are often deleted. External URLs on ImageToURL remain." },
+    { title: "One image, many tickets", body: "A UI mockup or architecture diagram referenced from 10+ related tickets and the umbrella epic. Upload once, reference everywhere." },
+    { title: "Confluence + Jira consistency", body: "Same image in a Confluence page AND the tracking Jira ticket. External URL = one source of truth, no re-upload." },
+    { title: "Share with non-Jira users", body: "Stakeholders, customers, auditors who don't have Jira access can't fetch attachments. Public CDN URLs work for anyone with a browser." }
+  ]}
+  steps={[
+    { title: "Take screenshot + upload", body: "Snip the repro, drop the file here, copy the URL." },
+    { title: "Paste into the ticket body", body: "Use Jira's markdown: ![description](url). Alternatively Atlassian Document Format's image node accepts the URL in the source attribute." },
+    { title: "Link from Confluence too", body: "Same URL in the related Confluence page's /image macro. Changes in one don't require re-upload." }
+  ]}
+  faqs={[
+    { q: "Does Jira's markdown support inline external images?", a: "Yes — ![alt](url) renders inline in ticket descriptions, comments, and wiki pages. Same syntax works in Confluence." },
+    { q: "What about attachments vs inline?", a: "Attachments live in Jira's storage and get rehosted to an internal URL. Inline external URLs render from our CDN. Attachments are better for legal-discoverable artifacts; external is better for repros and references." },
+    { q: "Can I drag an ImageToURL URL into the Jira editor?", a: "Some Jira versions attempt to download and re-attach. To keep external-only, paste the markdown ![alt](url) directly in source mode." },
+    { q: "Is this compliant with our SOC 2 / ISO evidence?", a: "If your security team requires all attachments in tenant-controlled storage, native Jira attachments are the safer path. For non-sensitive screenshots, external hosting is usually acceptable." },
+    { q: "Does this work with Jira Cloud and Server?", a: "Both. Cloud and Data Center both accept external image URLs in markdown. Behavior is identical." },
+    { q: "What about Jira Product Discovery?", a: "Product Discovery's idea descriptions use the same editor — external URLs render inline." },
+    { q: "API upload from a bug-report tool?", a: "Yes — POST to /api/upload with a Pro/Business API key. Integrate into Sentry, Bugsnag, or custom QA tooling to auto-host repro screenshots." },
+    { q: "Permissions?", a: "ImageToURL URLs are publicly reachable (URL-based access). Don't use for confidential repros — use Jira native attachments for those." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-stack-overflow", title: "Stack Overflow", body: "Same repro workflow." },
+    { href: "/screenshot-to-url", title: "Screenshot to URL", body: "Quick screenshot shortcut." },
+    { href: "/bulk-image-upload", title: "Bulk Upload", body: "For multi-image repros." }
+  ]}
+/>

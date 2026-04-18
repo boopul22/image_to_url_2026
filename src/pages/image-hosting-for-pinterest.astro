@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Pinterest"
+  slug="image-hosting-for-pinterest"
+  metaTitle="Image Hosting for Pinterest — Rich Pin & External-Site URLs"
+  metaDescription="Host vertical Pin images on a fast CDN for Rich Pins, scheduled pins, and external-site posts."
+  h1Pre="Image hosting for Pinterest"
+  h1Highlight="rich pins that scale."
+  intro="Pinterest rewards tall, fast-loading Pin images. For Rich Pins, scheduled posts, external-site embeds, or automated pin pipelines, you need a real CDN-backed direct URL."
+  why={[
+    { title: "Rich Pins pull og:image", body: "Product, Recipe, and Article Rich Pins all source images from og:image on your site. Slow or missing images = the Pin defaults to a generic card." },
+    { title: "Vertical 2:3 ratio", body: "Pinterest's preferred 1000×1500 aspect doesn't match what most CMSs emit. Host purpose-built Pin variants on ImageToURL and reference them from og:image." },
+    { title: "Scheduled pins via Tailwind / Planable", body: "Social schedulers accept image URLs. Your pinnable asset library lives on ImageToURL — pull from there into any scheduler." },
+    { title: "External site Pin button", body: "The Pinterest Save button scrapes your page for the best image. Pre-set the 'pin-friendly' image via data-pin-media attribute and it'll grab from your CDN URL." }
+  ]}
+  steps={[
+    { title: "Resize to 1000×1500", body: "Run your source through the image resizer — 2:3 vertical is the Pinterest sweet spot." },
+    { title: "Upload the Pin asset", body: "Drop the resized image here — you get a direct URL." },
+    { title: "Wire into your site or scheduler", body: "Use the URL in your og:image tag, data-pin-media attribute, or scheduler image field." }
+  ]}
+  faqs={[
+    { q: "Can I Pin an ImageToURL URL directly?", a: "Yes. Paste the URL into Pinterest's 'Create Pin' dialog under 'Add from website' or the browser extension. Pinterest fetches it from our CDN." },
+    { q: "What's the best image aspect ratio for Pinterest?", a: "2:3 vertical (1000×1500 recommended). Taller pins (up to 1:2.1) can get cropped in feeds but still perform well when clicked." },
+    { q: "Why are my Rich Pins showing the wrong image?", a: "Usually the og:image tag on your page either points to the wrong asset or Pinterest has cached a stale version. Use the Rich Pin validator, fix og:image, then request a recache." },
+    { q: "Max file size for Pinterest upload?", a: "32 MB native upload. ImageToURL free caps at 10 MB — plenty for a well-compressed 1000×1500 JPG (~300 KB)." },
+    { q: "Does image speed affect Pinterest ranking?", a: "Not directly in the Pinterest feed (Pinterest re-hosts images), but Pin clicks → your site → slow og:image = lost conversions." },
+    { q: "Can I hotlink my ImageToURL image as the actual Pin?", a: "Pinterest mirrors uploaded images to its own CDN. After upload, your image lives at pinimg.com. The URL you saved is only the source." },
+    { q: "Animated GIF pins?", a: "Pinterest flattens GIFs to static images. For motion, upload as video (Idea Pin)." },
+    { q: "Alt text?", a: "Set it inside Pinterest after creating the Pin. ImageToURL doesn't push alt text through og:image — that's a Pinterest-side field." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-resizer", title: "Image Resizer", body: "Hit 1000×1500 exactly." },
+    { href: "/image-hosting-for-instagram", title: "Instagram", body: "Bio-link images." },
+    { href: "/image-compressor", title: "Image Compressor", body: "Shrink large Pins for fast load." }
+  ]}
+/>

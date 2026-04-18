@@ -1,0 +1,347 @@
+---
+/**
+ * Client-side image format converter for formats the browser can decode/encode
+ * natively via <canvas>: PNG, JPG, WEBP (and read-only: GIF/BMP/TIFF via Image).
+ *
+ * No libraries, no WASM, no network egress during conversion. The optional
+ * "Get URL" button on each result is the single point of upload.
+ */
+export interface Props {
+  /** source format id — matches Accept list. e.g. 'png' */
+  from: 'png' | 'jpg' | 'webp' | 'gif' | 'bmp';
+  /** output format id. */
+  to: 'png' | 'jpg' | 'webp';
+  /** id prefix — lets multiple converters coexist on one page. */
+  idPrefix?: string;
+}
+
+const { from, to, idPrefix = 'conv' } = Astro.props;
+
+const acceptMap: Record<Props['from'], string> = {
+  png: '.png,image/png',
+  jpg: '.jpg,.jpeg,image/jpeg',
+  webp: '.webp,image/webp',
+  gif: '.gif,image/gif',
+  bmp: '.bmp,image/bmp',
+};
+const toMime: Record<Props['to'], string> = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  webp: 'image/webp',
+};
+const toExt: Record<Props['to'], string> = { png: 'png', jpg: 'jpg', webp: 'webp' };
+const fromLabel: Record<Props['from'], string> = {
+  png: 'PNG', jpg: 'JPG', webp: 'WEBP', gif: 'GIF', bmp: 'BMP',
+};
+const toLabel: Record<Props['to'], string> = { png: 'PNG', jpg: 'JPG', webp: 'WEBP' };
+
+const accept = acceptMap[from];
+const outMime = toMime[to];
+const outExt = toExt[to];
+const supportsQuality = to === 'jpg' || to === 'webp';
+const fromL = fromLabel[from];
+const toL = toLabel[to];
+---
+
+<div class="w-full max-w-2xl mx-auto" data-conv-root={idPrefix} data-conv-from={from} data-conv-to={to} data-conv-mime={outMime} data-conv-ext={outExt}>
+  <input type="file" id={`${idPrefix}-input`} accept={accept} multiple class="hidden" />
+
+  <!-- Quality + privacy strip -->
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
+        <p class="text-[11px] leading-tight text-on-surface-variant">Files never leave your device</p>
+      </div>
+    </div>
+    {supportsQuality && (
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <label for={`${idPrefix}-quality`} class="text-xs font-bold uppercase tracking-wider text-on-background">Quality</label>
+        <input type="range" id={`${idPrefix}-quality`} min="60" max="100" value="92" class="w-20 sm:w-28 accent-rose-600" />
+        <span id={`${idPrefix}-quality-val`} class="text-xs font-mono font-bold w-8 text-right">92</span>
+      </div>
+    )}
+  </div>
+
+  <!-- Drop zone -->
+  <div id={`${idPrefix}-panel`} class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+    <div id={`${idPrefix}-state-idle`} class="px-6 py-12 sm:px-10 sm:py-16">
+      <div id={`${idPrefix}-drop`} class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">cloud_upload</span>
+        <div class="text-center">
+          <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop {fromL} files here or click to browse</p>
+          <p class="text-xs sm:text-sm text-on-surface-variant mt-2">Multi-select OK — runs on your device</p>
+        </div>
+      </div>
+      <div id={`${idPrefix}-progress`} class="hidden mt-6">
+        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id={`${idPrefix}-progress-fill`} class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        </div>
+        <p id={`${idPrefix}-progress-text`} class="text-xs text-center mt-2 font-mono text-on-surface-variant">Converting…</p>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id={`${idPrefix}-state-results`} class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg" id={`${idPrefix}-results-heading`}>Converted 0 files</span>
+        <button id={`${idPrefix}-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Convert more</button>
+      </div>
+      <div id={`${idPrefix}-results-list`} class="flex flex-col gap-2 max-h-96 overflow-auto"></div>
+    </div>
+
+    <!-- Error -->
+    <div id={`${idPrefix}-state-error`} class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <span class="font-bold text-error text-sm sm:text-lg">Conversion failed</span>
+        <button id={`${idPrefix}-error-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+      </div>
+      <p id={`${idPrefix}-error-text`} class="text-xs sm:text-sm text-on-surface-variant"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Ctx = {
+    idPrefix: string;
+    to: string;
+    mime: string;
+    ext: string;
+  };
+
+  function initConverter(root: HTMLElement) {
+    const idPrefix = root.getAttribute('data-conv-root') || 'conv';
+    const toFormat = root.getAttribute('data-conv-to') || 'jpg';
+    const mime = root.getAttribute('data-conv-mime') || 'image/jpeg';
+    const ext = root.getAttribute('data-conv-ext') || 'jpg';
+    const supportsQuality = toFormat === 'jpg' || toFormat === 'webp';
+
+    const byId = <T extends HTMLElement>(id: string) => document.getElementById(`${idPrefix}-${id}`) as T;
+    const input = byId<HTMLInputElement>('input');
+    const drop = byId<HTMLDivElement>('drop');
+    const panel = byId<HTMLDivElement>('panel');
+    const stateIdle = byId<HTMLDivElement>('state-idle');
+    const stateResults = byId<HTMLDivElement>('state-results');
+    const stateError = byId<HTMLDivElement>('state-error');
+    const progress = byId<HTMLDivElement>('progress');
+    const progressFill = byId<HTMLDivElement>('progress-fill');
+    const progressText = byId<HTMLParagraphElement>('progress-text');
+    const resultsList = byId<HTMLDivElement>('results-list');
+    const resultsHeading = byId<HTMLSpanElement>('results-heading');
+    const resetBtn = byId<HTMLButtonElement>('reset');
+    const errorReset = byId<HTMLButtonElement>('error-reset');
+    const errorText = byId<HTMLParagraphElement>('error-text');
+    const qualityInput = supportsQuality ? byId<HTMLInputElement>('quality') : null;
+    const qualityVal = supportsQuality ? byId<HTMLSpanElement>('quality-val') : null;
+
+    if (!input || !drop || !panel) return;
+
+    qualityInput?.addEventListener('input', () => {
+      if (qualityVal) qualityVal.textContent = qualityInput.value;
+    });
+
+    function showState(name: 'idle' | 'results' | 'error') {
+      stateIdle.classList.toggle('hidden', name !== 'idle');
+      stateResults.classList.toggle('hidden', name !== 'results');
+      stateError.classList.toggle('hidden', name !== 'error');
+    }
+
+    drop.addEventListener('click', () => input.click());
+    drop.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        input.click();
+      }
+    });
+
+    ['dragenter', 'dragover'].forEach((ev) => {
+      panel.addEventListener(ev, (e) => {
+        e.preventDefault();
+        panel.classList.add('border-rose-600', 'bg-rose-50');
+      });
+    });
+    ['dragleave', 'drop'].forEach((ev) => {
+      panel.addEventListener(ev, (e) => {
+        e.preventDefault();
+        panel.classList.remove('border-rose-600', 'bg-rose-50');
+      });
+    });
+    panel.addEventListener('drop', (e) => {
+      const files = (e as DragEvent).dataTransfer?.files;
+      if (files && files.length) handleFiles(files);
+    });
+    input.addEventListener('change', () => {
+      if (input.files && input.files.length) handleFiles(input.files);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      resultsList.innerHTML = '';
+      input.value = '';
+      showState('idle');
+      progress.classList.add('hidden');
+      progressFill.style.width = '0%';
+    });
+    errorReset.addEventListener('click', () => {
+      showState('idle');
+      progress.classList.add('hidden');
+      progressFill.style.width = '0%';
+    });
+
+    function fmtBytes(n: number): string {
+      if (n < 1024) return `${n} B`;
+      if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+      return `${(n / 1024 / 1024).toFixed(2)} MB`;
+    }
+
+    function convertFile(file: File, quality: number): Promise<Blob> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Could not read file'));
+        reader.onload = () => {
+          const img = new Image();
+          img.onerror = () => reject(new Error('Browser could not decode this file'));
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return reject(new Error('Canvas unavailable'));
+            // JPG has no alpha — paint white background first to avoid black fill.
+            if (mime === 'image/jpeg') {
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob(
+              (blob) => (blob ? resolve(blob) : reject(new Error('Encoding failed'))),
+              mime,
+              mime === 'image/png' ? undefined : quality
+            );
+          };
+          img.src = reader.result as string;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function makeRow(name: string, blob: Blob): HTMLDivElement {
+      const row = document.createElement('div');
+      row.className = 'border-2 border-on-background bg-white p-3 flex items-center gap-3';
+
+      const url = URL.createObjectURL(blob);
+      const baseName = name.replace(/\.[^.]+$/, '') + '.' + ext;
+
+      const thumb = document.createElement('img');
+      thumb.src = url;
+      thumb.alt = '';
+      thumb.className = 'w-12 h-12 object-cover border-2 border-on-background flex-shrink-0';
+
+      const meta = document.createElement('div');
+      meta.className = 'flex-1 min-w-0';
+      const nameEl = document.createElement('p');
+      nameEl.className = 'text-xs font-bold truncate';
+      nameEl.textContent = baseName;
+      const sizeEl = document.createElement('p');
+      sizeEl.className = 'text-[11px] text-on-surface-variant';
+      sizeEl.textContent = fmtBytes(blob.size);
+      meta.appendChild(nameEl);
+      meta.appendChild(sizeEl);
+
+      const dl = document.createElement('a');
+      dl.href = url;
+      dl.download = baseName;
+      dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
+      dl.textContent = 'Download';
+
+      const host = document.createElement('button');
+      host.className = 'border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide flex-shrink-0';
+      host.textContent = 'Get URL';
+      host.addEventListener('click', async () => {
+        host.disabled = true;
+        host.textContent = 'Hosting…';
+        try {
+          const fd = new FormData();
+          fd.append('file', new File([blob], baseName, { type: mime }));
+          const res = await fetch('/api/upload', { method: 'POST', body: fd });
+          const data = await res.json();
+          if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');
+          const hosted = data.data.url as string;
+          host.remove();
+          const urlInput = document.createElement('input');
+          urlInput.type = 'text';
+          urlInput.readOnly = true;
+          urlInput.value = hosted;
+          urlInput.className = 'flex-1 min-w-0 bg-white border-2 border-on-background px-2 py-2 text-xs font-mono';
+          urlInput.addEventListener('focus', () => urlInput.select());
+          const copy = document.createElement('button');
+          copy.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
+          copy.textContent = 'Copy';
+          copy.addEventListener('click', async () => {
+            await navigator.clipboard.writeText(hosted);
+            copy.textContent = 'Copied!';
+            setTimeout(() => (copy.textContent = 'Copy'), 1200);
+          });
+          row.appendChild(urlInput);
+          row.appendChild(copy);
+        } catch (err: any) {
+          host.disabled = false;
+          host.textContent = 'Retry';
+          const note = document.createElement('span');
+          note.className = 'text-[11px] text-error';
+          note.textContent = err.message || 'Failed';
+          row.appendChild(note);
+        }
+      });
+
+      row.appendChild(thumb);
+      row.appendChild(meta);
+      row.appendChild(dl);
+      row.appendChild(host);
+      return row;
+    }
+
+    async function handleFiles(fileList: FileList) {
+      const files = Array.from(fileList);
+      if (!files.length) return;
+
+      progress.classList.remove('hidden');
+      progressFill.style.width = '0%';
+      progressText.textContent = `Converting 1 / ${files.length}…`;
+
+      resultsList.innerHTML = '';
+      const quality = qualityInput ? Number(qualityInput.value) / 100 : 0.92;
+      let done = 0;
+      let success = 0;
+
+      for (const file of files) {
+        progressText.textContent = `Converting ${done + 1} / ${files.length} — ${file.name}`;
+        try {
+          const blob = await convertFile(file, quality);
+          resultsList.appendChild(makeRow(file.name, blob));
+          success++;
+        } catch (err: any) {
+          const row = document.createElement('div');
+          row.className = 'border-2 border-error bg-white p-3 text-xs';
+          row.textContent = `${file.name} — ${err?.message || 'failed'}`;
+          resultsList.appendChild(row);
+        }
+        done++;
+        progressFill.style.width = `${Math.round((done / files.length) * 100)}%`;
+      }
+
+      if (success === 0) {
+        showState('error');
+        errorText.textContent = 'None of the files could be converted. Make sure they are valid images.';
+        return;
+      }
+
+      resultsHeading.textContent = `Converted ${success} file${success === 1 ? '' : 's'}`;
+      showState('results');
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-conv-root]').forEach(initConverter);
+</script>

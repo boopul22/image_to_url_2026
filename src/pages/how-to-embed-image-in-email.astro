@@ -1,0 +1,33 @@
+---
+export const prerender = true;
+import GeoQaPage from '../components/GeoQaPage.astro';
+---
+<GeoQaPage
+  slug="how-to-embed-image-in-email"
+  metaTitle="How to Embed an Image in an Email — Inline vs Linked"
+  metaDescription="Two ways to embed an image in an email: as an attachment that renders inline, or via an <img> tag referencing a hosted URL. Here's when to use each."
+  question="How do I embed an image in an email?"
+  shortAnswer="Either attach the image and paste it into the email body (most clients inline it), or use an <img src='URL'> tag pointing to a hosted image. For marketing emails and HTML newsletters, the URL approach keeps the email small and consistent across clients."
+  longAnswerParagraphs={[
+    "Email supports two embedding mechanisms. The first is a multipart MIME attachment referenced via cid: — the image lives inside the email itself. The second is an external &lt;img&gt; tag that fetches the image from a remote URL when the recipient opens the email. Which one to use depends on your audience and delivery pipeline.",
+    "For casual one-off emails from Gmail or Outlook, just drag the image into the message body. The client handles the MIME attachment automatically. Pros: no external dependency, works even if the recipient has images-blocked. Cons: the email is larger, and some spam filters flag large inline images.",
+    "For marketing emails, newsletters, and transactional emails sent from Mailchimp, SendGrid, Postmark, or Resend — use hosted URLs. The email stays lightweight (maybe 20 KB), and you can update the image at the host without re-sending the email. Use a fast, global CDN so subscribers everywhere get fast load times.",
+    "For corporate signatures (the logo at the bottom of your replies), use a hosted URL. A linked signature image is 0 bytes in each email; an inline one adds 5–20 KB to every send. Over a year of emails, that's a meaningful amount of bandwidth you're attaching to everything.",
+    "Gmail proxies external images through a Google-controlled domain for privacy, which means your host has to return an Access-Control-Allow-Origin header and accept Google's crawler. Hosts like ImageToURL set these correctly; some amateur hosts don't, which shows the 'image could not be loaded' placeholder in Gmail."
+  ]}
+  faqs={[
+    { q: "Why doesn't my email image show up for some recipients?", a: "Most email clients block external images by default for privacy. Recipients need to click 'Show images' once per sender. To force inline rendering, use MIME attachment with cid: reference — works even with images blocked." },
+    { q: "What size should my email images be?", a: "Max 600px wide for most clients (Gmail caps rendered width around there). File size: under 200 KB per image for fast open times. Use a WebP/JPG at quality 80 via the image compressor before hosting." },
+    { q: "Does Apple Mail / Outlook handle external URLs differently?", a: "Apple Mail fetches external images directly from your host unless Mail Privacy Protection is on (then it pre-loads via Apple proxy). Outlook 365 caches images in its image proxy. Use a fast CDN to avoid the pre-load delay showing blanks." },
+    { q: "Can I track who opens the email via the image URL?", a: "Yes — some platforms use a tiny tracking pixel (1×1 image) with a unique URL per recipient. Most marketing tools (Mailchimp, SendGrid) do this automatically. Image hosts can log per-URL access; ImageToURL offers this on Pro." },
+    { q: "Does embedding an image affect email deliverability?", a: "Yes. Poorly-optimized images (too large, slow host, high image-to-text ratio) can trigger spam filters. Keep the image-to-text ratio balanced and make sure alt text is set on every &lt;img&gt; tag." },
+    { q: "Why does my logo look pixelated in email?", a: "Most clients have retina-display support — serve 2× resolution in the source and display with width/height attributes. E.g., 400×120 logo served as 800×240 PNG with width='400' height='120'." },
+    { q: "Can I use SVG in email?", a: "Spotty support. Gmail renders SVG, Outlook 365 doesn't consistently, Apple Mail does. Safer to rasterize to PNG via the image resizer before email." },
+    { q: "How do I embed an animated GIF?", a: "Gmail and Apple Mail play them. Outlook shows only the first frame. Make sure frame 1 carries the key message for Outlook users." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-newsletters", title: "Newsletter hosting", body: "Optimized for emails." },
+    { href: "/image-hosting-for-email-signatures", title: "Email signatures", body: "Signature images." },
+    { href: "/image-compressor", title: "Image compressor", body: "Shrink for deliverability." }
+  ]}
+/>

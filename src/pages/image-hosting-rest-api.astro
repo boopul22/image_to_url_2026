@@ -1,0 +1,59 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `# Base URL
+https://imagetourl.cloud/api
+
+# Endpoints
+POST   /api/upload                  # multipart/form-data upload
+GET    /api/uploads/:id             # metadata for a single upload
+DELETE /api/uploads/:id             # delete an upload (owner only)
+GET    /api/uploads?limit=50        # list your uploads (paginated)
+
+# Authentication
+Authorization: Bearer YOUR_KEY
+
+# Response envelope
+{ "data": { ... } }   on success
+{ "error": "..." }    on failure
+
+# Rate limits (per key, sliding window)
+Anonymous:   10 requests/min
+Pro:         60 requests/min
+Business:    600 requests/min
+
+# On rate limit: HTTP 429 with Retry-After header in seconds`;
+---
+<DevApiPage
+  title="Image Hosting REST API — Endpoint Reference"
+  slug="image-hosting-rest-api"
+  metaDescription="REST API reference for ImageToURL. Upload, fetch metadata, delete, list. Bearer auth, JSON responses, documented rate limits."
+  h1Pre="Image Hosting REST API"
+  h1Highlight="four endpoints, no surprises."
+  intro="The ImageToURL REST API is intentionally small: upload, metadata, delete, list. Everything else — resizing, format-swap, optimization — happens on-device before upload or via Cloudflare query-string transforms on the CDN URL."
+  lang="bash"
+  langLabel="REST"
+  codeSnippet={code}
+  whys={[
+    { title: "Minimal surface", body: "Four endpoints. You can learn it in 10 minutes and never need to re-consult docs." },
+    { title: "Stable versioning", body: "No breaking changes since v1. If we ever need v2, both versions will run side-by-side for 12 months." },
+    { title: "Consistent envelope", body: "{ data } or { error } — no exceptions. Parse once, use everywhere. No nested pagination objects, no cursor hell." },
+    { title: "Transparent rate limits", body: "429 + Retry-After. No opaque 'API exhausted' errors. Respect the header and you'll never hit a problem." }
+  ]}
+  faqs={[
+    { q: "Is there an OpenAPI spec?", a: "Yes — available at /api/openapi.json. Import into Postman, Insomnia, or auto-generate clients with openapi-generator." },
+    { q: "Do you support webhooks?", a: "Business plan only. Configure a URL in your dashboard; we POST upload metadata on every successful upload from your key." },
+    { q: "Presigned URLs for direct browser upload?", a: "Not yet — roadmap for 2026 Q3. For now, use the POST /api/upload endpoint from your backend with the user's file." },
+    { q: "Batch upload in one request?", a: "No — one file per POST. For bulk, fire parallel POSTs (mindful of rate limits) or use the bulk-upload UI." },
+    { q: "Do you return responsive image variants?", a: "Not in the POST response. After upload, use Cloudflare Images query params on the URL — e.g. ?w=400&q=80&f=webp — for on-the-fly resize. Pro plan enables this." },
+    { q: "Delete via public URL?", a: "No — delete requires the owning API key. Without auth, uploads are immutable." },
+    { q: "Idempotency keys?", a: "Not required for uploads (each POST is a new upload by design). For deletes, multiple DELETE calls to the same id return 404 after the first — safe to retry." },
+    { q: "SDK roadmap?", a: "Official SDKs for JS, Python, Go, and PHP are planned for 2026 Q2. Until then, the snippets on /image-upload-api work." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-upload-api", title: "Quick Start", body: "30-second upload example." },
+    { href: "/image-hosting-api-python", title: "Python", body: "Python client snippet." },
+    { href: "/image-hosting-api-nodejs", title: "Node.js", body: "Node snippet." }
+  ]}
+/>

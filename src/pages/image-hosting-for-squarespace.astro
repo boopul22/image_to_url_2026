@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Squarespace"
+  slug="image-hosting-for-squarespace"
+  metaTitle="Image Hosting for Squarespace — External CDN for 7.1 Sites"
+  metaDescription="External image hosting for Squarespace 7.0 and 7.1. Useful for code-block embeds, email campaigns, and asset reuse."
+  h1Pre="Image hosting for Squarespace"
+  h1Highlight="what Fluid Engine can't do."
+  intro="Squarespace's native asset library is excellent for layout images, but Code Blocks, Email Campaigns, and reused branding across multiple Squarespace sites all benefit from a stable external URL."
+  why={[
+    { title: "Code Block embeds", body: "The HTML Code Block accepts arbitrary &lt;img src&gt;. External URLs let you write custom markup without wrestling Squarespace's image-loader quirks." },
+    { title: "Email Campaigns", body: "Squarespace email campaigns inline your layout images. External ImageToURL URLs keep the campaign file small and let you edit the hosted image without re-sending." },
+    { title: "Reuse across Squarespace sites", body: "If you run multiple Squarespace sites for the same brand, each has its own asset library. External hosting = one logo, referenced everywhere." },
+    { title: "Faster LCP in certain themes", body: "Some older Squarespace themes wrap images in lazy-loaders that hurt LCP. External URLs in a &lt;picture&gt; tag inside a Code Block bypass that chain." }
+  ]}
+  steps={[
+    { title: "Upload your image", body: "Drop it here — get a CDN URL." },
+    { title: "Paste into a Code Block", body: "Add a Code Block; insert &lt;img src='your-url' alt='...' loading='lazy'&gt;. Save and publish." },
+    { title: "Or use in Email Campaign HTML", body: "Squarespace Email has an HTML block — paste the same &lt;img&gt; markup there." }
+  ]}
+  faqs={[
+    { q: "Can I use external URLs in regular Image Blocks?", a: "Squarespace's Image Block wants an upload from your asset library. External URLs only work in Code Blocks or inside rich-text HTML. For seamless native editing, upload natively." },
+    { q: "Does Squarespace re-host my external image?", a: "No — Code Block images fetch from the src URL at runtime. Users load directly from our CDN." },
+    { q: "7.0 vs 7.1 differences?", a: "Both versions have Code Blocks that accept external &lt;img&gt;. 7.1's Fluid Engine doesn't touch the Code Block contents — your HTML passes through unchanged." },
+    { q: "Does this break Squarespace's responsive image system?", a: "Yes — external images don't get automatic srcset variants. Pre-generate sizes with the image resizer and use a &lt;picture&gt; element with media queries if responsive is critical." },
+    { q: "og:image?", a: "Squarespace auto-generates og:image from your featured image. For custom control, use a Code Injection in Page Settings with a meta tag pointing to your ImageToURL URL." },
+    { q: "SEO impact?", a: "Neutral. Search engines follow external image URLs the same as internal ones. Alt text is what matters for image SEO." },
+    { q: "Max file size?", a: "Squarespace Code Blocks have no size limit on external images. ImageToURL: 10 MB free / 50 MB Business." },
+    { q: "Commerce product photos?", a: "Those are uploaded natively to Squarespace Commerce — external URLs don't integrate. Use ImageToURL as your master archive." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-wix", title: "Wix", body: "Similar pattern." },
+    { href: "/image-hosting-for-webflow", title: "Webflow", body: "For Webflow sites." },
+    { href: "/image-hosting-for-newsletters", title: "Newsletters", body: "Email-campaign hosting." }
+  ]}
+/>

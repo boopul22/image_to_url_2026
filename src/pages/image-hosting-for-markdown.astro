@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Markdown"
+  slug="image-hosting-for-markdown"
+  metaTitle="Image Hosting for Markdown — Direct URLs for Every Renderer"
+  metaDescription="Free image hosting for Markdown files: README, docs, notes, blog posts. Universal direct URLs that render everywhere."
+  h1Pre="Image hosting for Markdown"
+  h1Highlight="one URL, every renderer."
+  intro="Markdown's image syntax is ![alt](url). For the image to render in GitHub, VS Code preview, MkDocs, Obsidian export, Docusaurus, and Notion — all at once — that URL has to be public, fast, and permanent."
+  why={[
+    { title: "Works in every renderer", body: "GitHub, GitLab, Bitbucket, MkDocs, Docusaurus, Obsidian Publish, Dendron, Zola, Hugo, Jekyll, VS Code preview — all accept ![](url). No renderer needs configuration." },
+    { title: "No relative-path breakage", body: "Relative paths like ./images/foo.png break when a doc is published, embedded, or copy-pasted between tools. Absolute URLs just work." },
+    { title: "One URL, many notes", body: "Obsidian, Logseq, Dendron users: reference the same image from 50 different notes without duplication." },
+    { title: "GitHub README friendly", body: "Replaces GitHub's deprecated user-content.githubusercontent upload URLs that expire. Permanent URLs keep old READMEs alive." }
+  ]}
+  steps={[
+    { title: "Upload image", body: "Drop the image — save the URL." },
+    { title: "Paste into your Markdown", body: "Type ![alt text here](paste-url-here). Alt text matters for a11y and SEO." },
+    { title: "Render to verify", body: "Preview in your Markdown tool or push to GitHub — image should render on first view, no refresh needed." }
+  ]}
+  faqs={[
+    { q: "What's the Markdown image syntax?", a: "![alt text](url) — alt text in brackets, URL in parens. Optional title: ![alt](url \"Tooltip\"). All Markdown flavors support this." },
+    { q: "Does it work in GitHub Markdown specifically?", a: "Yes. GitHub renders any https URL. Pro tip: GitHub also supports &lt;img width='300' /&gt; for sizing — plain Markdown doesn't." },
+    { q: "CommonMark, GFM, MDX — same syntax?", a: "Yes. Image syntax is identical across flavors. MDX additionally allows JSX-style <img> tags." },
+    { q: "Obsidian wiki-style [[image.png]] links?", a: "Those are Obsidian-only and break outside Obsidian. ImageToURL URLs work in Obsidian AND every export format." },
+    { q: "What about lazy loading in Markdown?", a: "Native Markdown doesn't support loading='lazy'. If your renderer extends to HTML (MDX, GFM with raw HTML enabled), use &lt;img loading='lazy' src='url'&gt;." },
+    { q: "Width and height attributes?", a: "Pure Markdown: no. GFM (GitHub), MDX, and many docs generators: inline &lt;img width=... height=...&gt; is supported." },
+    { q: "Can I use SVG?", a: "Yes — SVGs render inline via ![](url.svg) in most renderers. GitHub renders SVGs safely; some strip interactive JS inside SVGs for security." },
+    { q: "Max file size?", a: "ImageToURL: 10 MB free / 50 MB Business. Markdown renderers have no cap — they just &lt;img src&gt; and let the browser fetch." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-github-readme", title: "GitHub README", body: "README-specific advice." },
+    { href: "/image-hosting-for-notion", title: "Notion", body: "Notion exports to Markdown." },
+    { href: "/image-embed-code-generator", title: "Embed Code Generator", body: "Snippets for other formats too." }
+  ]}
+/>

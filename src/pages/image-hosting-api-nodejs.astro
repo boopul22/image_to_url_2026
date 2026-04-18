@@ -1,0 +1,60 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `import fs from 'node:fs';
+
+export async function uploadImage(filePath, apiKey) {
+  const fd = new FormData();
+  fd.append('file', new Blob([fs.readFileSync(filePath)]), filePath.split('/').pop());
+
+  const headers = {};
+  if (apiKey) headers.Authorization = \`Bearer \${apiKey}\`;
+
+  const r = await fetch('https://imagetourl.cloud/api/upload', {
+    method: 'POST',
+    headers,
+    body: fd,
+  });
+
+  const body = await r.json();
+  if (!r.ok || body.error) throw new Error(body.error || \`HTTP \${r.status}\`);
+  return body.data.url;
+}
+
+// Example
+const url = await uploadImage('./screenshot.png', process.env.IMAGETOURL_KEY);
+console.log(url); // https://imagetourl.cloud/uploads/abc123.png`;
+---
+<DevApiPage
+  title="Image Hosting API — Node.js (fetch) Example"
+  slug="image-hosting-api-nodejs"
+  metaDescription="Upload images from Node.js with the built-in fetch + FormData. No axios, no form-data package. Node 18+."
+  h1Pre="Image hosting API"
+  h1Highlight="Node.js with built-in fetch."
+  intro="Node 18+ has fetch and FormData built in. This snippet reads a file, posts multipart, and returns the hosted URL — no third-party dependencies."
+  lang="javascript"
+  langLabel="Node.js"
+  codeSnippet={code}
+  whys={[
+    { title: "Zero dependencies", body: "Works with Node 18+'s global fetch and FormData. No axios, no form-data, no node-fetch. Fewer deps means fewer security patches to babysit." },
+    { title: "Serverless-friendly", body: "The same snippet runs in AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and Deno Deploy without modification." },
+    { title: "TypeScript-ready", body: "Drop into a .ts file unchanged. The URL return type is string; error paths throw." },
+    { title: "Streaming uploads", body: "For large files, swap readFileSync for fs.createReadStream in a ReadableStream wrapper — memory-efficient for 50 MB+ uploads." }
+  ]}
+  faqs={[
+    { q: "Do I need node-fetch?", a: "No — Node 18+ has global fetch. For older Node, npm install node-fetch@2 and require it. The API surface is identical." },
+    { q: "What about Next.js server components?", a: "Same code works in a Route Handler or server action. Cloudflare Pages, Vercel, and self-hosted Next.js all provide fetch globally." },
+    { q: "Deno / Bun?", a: "Identical. Deno has fetch and FormData built in; Bun matches Node.js's fetch API." },
+    { q: "Can I upload a Buffer directly?", a: "Yes: new Blob([buffer], { type: 'image/png' }) — then append to FormData. Useful when you already have image bytes in memory." },
+    { q: "How do I upload a canvas in browser-side Node (Electron)?", a: "canvas.toBlob(blob => uploadImage(blob)) — rename the function to accept a Blob instead of a path; the rest is identical." },
+    { q: "Retry on 429?", a: "Wrap the fetch in a small backoff loop. ImageToURL responds with Retry-After headers on rate limit — respect that value." },
+    { q: "TypeScript types?", a: "The response shape is { data: { url: string, id: string, size: number, mime: string, created_at: string } } | { error: string }. Declare as a union and narrow." },
+    { q: "Express middleware for server-side uploads?", a: "Accept multipart with multer, then re-POST the buffer to ImageToURL using the above function. Store the returned URL in your DB instead of local disk." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-api-python", title: "Python", body: "Python snippet." },
+    { href: "/image-hosting-for-nextjs", title: "Next.js", body: "Next.js integration." },
+    { href: "/image-upload-api", title: "API overview", body: "Endpoint docs." }
+  ]}
+/>

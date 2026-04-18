@@ -1,0 +1,33 @@
+---
+export const prerender = true;
+import GeoQaPage from '../components/GeoQaPage.astro';
+---
+<GeoQaPage
+  slug="how-long-does-imagetourl-store-images"
+  metaTitle="How Long Does ImageToURL Store My Images?"
+  metaDescription="ImageToURL stores uploaded images indefinitely as long as they comply with content guidelines. Here's the full retention policy."
+  question="How long does ImageToURL store my images?"
+  shortAnswer="ImageToURL stores uploaded images indefinitely as long as they comply with our content guidelines. There's no inactivity purge, no 6-month rule, and no auto-deletion based on view counts."
+  longAnswerParagraphs={[
+    "Our retention policy is intentionally simple: upload once, the URL keeps working forever — as long as the image doesn't violate content guidelines (no illegal content, no NSFW, no malware, no copyrighted material without rights). The URL is content-addressed, so even account deletion doesn't purge anonymous-anchored uploads.",
+    "We don't use inactivity as a signal for deletion. Competitors (notably Imgur since 2023) delete anonymous uploads after 6 months with no views. That means an image embedded in a low-traffic forum post from 2019 will have been purged by now. ImageToURL doesn't do this — a 2019 embed keeps working in 2026.",
+    "Active removal happens in three cases: (1) a valid DMCA takedown from a rights holder, (2) content guideline violations flagged via our abuse-report form, (3) the uploader themselves deletes via their account dashboard. We don't preemptively scan or delete based on 'cold' access patterns.",
+    "For Pro and Business accounts, we formalize the permanence guarantee in an SLA: 99.9% availability over a 12-month rolling window for any stored URL. Image content won't be removed except for the three reasons above. If you need archival-grade permanence for legal or evidence purposes, Business plan adds write-once/read-many storage with audit logs.",
+    "We also don't sell or repurpose stored images. Your uploads aren't training data. They aren't sold to stock-photo aggregators. They aren't analyzed for advertising. Storage exists only to serve the URL you received at upload. You retain copyright on everything you upload."
+  ]}
+  faqs={[
+    { q: "What happens if ImageToURL shuts down?", a: "We'd give 90 days notice and provide bulk-download tooling before deprovisioning. Our storage layer is on Cloudflare R2 — if ImageToURL as a company wound down, we'd publish a read-only mirror that keeps URLs alive for at least 12 months after shutdown." },
+    { q: "What if my URL gets DMCA'd?", a: "We review the takedown, inform the uploader, and act according to the DMCA process. If your upload is removed, the URL returns 404. Uploader can file a counter-notice if the claim is disputed." },
+    { q: "Can I export all my uploads?", a: "Yes. Authenticated accounts (Pro/Business) have a 'Download all' export in the dashboard. Anonymous uploads don't have this by default — keep your original files." },
+    { q: "Does 'indefinite' mean forever?", a: "'Indefinite' means 'no pre-defined expiry'. No service can promise eternity, but ImageToURL has a stated commitment to not auto-purge inactive URLs, and we back this for paid plans with an SLA." },
+    { q: "What about GDPR 'right to be forgotten'?", a: "If you're the subject of an image and didn't upload it, request removal via our abuse form. We review and remove if the claim is valid. Account holders can delete their own uploads from their dashboard." },
+    { q: "Do you back up my images?", a: "Cloudflare R2 replicates across multiple regions with 99.999999999% durability. We take periodic snapshots for disaster recovery. You should also keep your original files — network services can fail for any reason." },
+    { q: "Will old URLs format-change?", a: "URLs are immutable once issued. We don't rename paths, restructure domains, or change URL shape without preserving old URLs indefinitely via redirects. Your 2024 URL will still work in 2034." },
+    { q: "Can I get a longer SLA?", a: "Contact sales for enterprise agreements. Custom retention, legal hold, and multi-region replication are available for regulated industries." }
+  ]}
+  relatedSlugs={[
+    { href: "/permanent-image-hosting", title: "Permanent hosting", body: "Why permanence matters." },
+    { href: "/imgur-alternative", title: "Imgur alternative", body: "After the purge." },
+    { href: "/content-guidelines", title: "Content guidelines", body: "What's allowed." }
+  ]}
+/>

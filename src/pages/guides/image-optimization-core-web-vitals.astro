@@ -1,0 +1,78 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="image-optimization-core-web-vitals"
+  metaTitle="Image Optimization for Core Web Vitals (2026) — Complete Guide"
+  metaDescription="How images affect LCP, CLS, and INP — and the concrete optimizations that move Core Web Vitals scores in 2026."
+  title="Image Optimization for Core Web Vitals: The Complete 2026 Guide"
+  datePublished="2026-04-02"
+  readTime="11 min read"
+  intro="Core Web Vitals became a confirmed ranking factor in 2021 and have since evolved — INP replaced FID in March 2024, and Google's 2025 updates sharpened E-E-A-T enforcement. Images affect every CWV metric. Here's the complete playbook: how images hurt LCP, CLS, and INP, and the specific fixes that move the p75 score."
+  keyPoints={[
+    "LCP: pick right format, size correctly, preload the LCP image, avoid lazy-load on it",
+    "CLS: set width and height attributes (or aspect-ratio CSS) on every image",
+    "INP: avoid heavy client-side image decoding during user interactions",
+    "TTFB: CDN-deliver images — Cloudflare / Fastly / Bunny edge beats single-origin",
+  ]}
+  sections={[
+    { heading: "The three Web Vitals and how images touch each", paragraphs: [
+      "LCP (Largest Contentful Paint) measures when the largest above-fold element renders. On 70% of websites, that's an image. LCP is where image work has the biggest SEO impact.",
+      "CLS (Cumulative Layout Shift) measures how much content jumps around during loading. Images without reserved slots are the #1 cause of layout shift — they push content down when they finally arrive.",
+      "INP (Interaction to Next Paint) measures how quickly the page responds to user input. Heavy client-side image work (HEIC decoding, canvas manipulation) can make the main thread unresponsive, hurting INP.",
+    ] },
+    { heading: "LCP: picking the right image", paragraphs: [
+      "The LCP image is almost always the hero or featured photo at the top of the page. Its load time determines the LCP score. Target: under 2.5 s at p75 on 4G.",
+      "Fix 1: format. Serve AVIF or WebP via <picture>. WebP alone saves 25–35% over JPG; adding AVIF saves another 20%. For sharp-edge content (UI screenshots, logos), PNG is still right — WebP lossless is 20% smaller than PNG.",
+      "Fix 2: dimensions. A hero image served at 1200×800 but sourced as 3000×2000 is 6× too many bytes. Match source to rendered dimensions (2× for retina). Use srcset for viewport-specific variants.",
+      "Fix 3: preload. The browser doesn't discover the LCP image until it parses the <img> tag — too late. Add <link rel='preload' as='image' fetchpriority='high'> to the <head> so the fetch parallelizes with CSS.",
+      "Fix 4: fetchpriority. On the <img> tag itself, add fetchpriority='high'. Combined with preload, this signals 'this is the most important image on the page' to the browser's scheduler.",
+      "Fix 5: don't lazy-load the LCP image. loading='lazy' is catastrophic for the LCP image; the browser waits for IntersectionObserver to fire before fetching. Use loading='eager' (or omit — eager is default) for the LCP image only.",
+    ] },
+    { heading: "CLS: reserving the slot", paragraphs: [
+      "Every <img> should have width and height attributes matching the intrinsic dimensions. Modern browsers use these to compute aspect-ratio and reserve the rendering slot before the image loads. No attribute = unknown height = layout shift when the image finally arrives.",
+      "For CSS-sized responsive images: the attributes keep aspect-ratio consistent while CSS (width: 100%; height: auto) handles the visual sizing. Don't worry about the attribute values conflicting with CSS — browsers only use them for aspect calculation, not rendering.",
+      "For images inside flex or grid layouts: aspect-ratio CSS property is an alternative — aspect-ratio: 16/9. Works the same.",
+      "CLS target: under 0.1 at p75. Image-only fixes usually move CLS from 0.3 → 0.05 if the rest of the page doesn't have font-swap or late-injected content.",
+    ] },
+    { heading: "INP: the less obvious image cost", paragraphs: [
+      "INP replaced FID as a Web Vital on March 12, 2024. Where FID only measured the delay before the browser responded to the first input, INP measures every input's full latency from tap to next paint.",
+      "Images affect INP when the browser spends main-thread time decoding or re-rendering. Canvas-based image processing (HEIC decoding, compression, resizing) that runs during a user tap is the biggest risk. Move heavy work off the main thread — Web Workers for decoding, OffscreenCanvas where supported.",
+      "A typical INP problem: user clicks 'Convert' on an HEIC file → WASM decoder runs on main thread → 500 ms of frozen UI → INP score explodes for that interaction. Fix: ensure heavy processing runs in a worker and shows progress indication so the click response is instant even if the work takes 500 ms.",
+      "INP target: under 200 ms at p75.",
+    ] },
+    { heading: "TTFB and CDN selection", paragraphs: [
+      "Before the browser can render LCP, it needs the first byte of the image. TTFB (Time to First Byte) is how long that takes. Single-origin hosting from a US server gives UK users 120 ms TTFB; CDN-delivered from Cloudflare gives them 15 ms.",
+      "Cloudflare has 300+ PoPs, Fastly has 100+, AWS CloudFront has 450+ but higher per-PoP latency. Bunny and BunnyCDN have aggressive PoP density in Asia. For images specifically: any of these beats single-origin hosting.",
+      "If you're self-hosting on your own domain, at minimum use Cloudflare's free CDN in front of your origin. The image-caching config is one checkbox.",
+    ] },
+    { heading: "Image CDNs vs DIY responsive generation", paragraphs: [
+      "Option A — DIY: pre-generate 3–5 variants per image at build time with sharp/Pillow/ImageMagick. Serve via srcset. Cheaper, more control, stable URLs. Good for sites where the image inventory is stable.",
+      "Option B — Image CDN: serve one source, let the CDN (Cloudinary, Cloudflare Images, Bunny Optimizer, ImageKit) generate variants on demand via URL params. More expensive at high volume, but zero build-time cost. Good for user-generated content.",
+      "Option C — Hybrid: static hero images pre-generated (DIY), user uploads through an Image CDN. Best of both when traffic and inventory differ.",
+      "Whatever you pick, verify the output is actually WebP/AVIF via DevTools Network tab. Many CMSs claim modern format support but serve JPG to modern browsers due to misconfiguration.",
+    ] },
+    { heading: "Measurement and monitoring", paragraphs: [
+      "Lab data: PageSpeed Insights (pagespeed.web.dev), Lighthouse CI, WebPageTest. Run a 4G-throttled emulation. Lab data changes instantly after deploys.",
+      "Field data: Chrome User Experience Report (CrUX), surfaced in Search Console's Core Web Vitals report and in the PSI 'Field Data' section. Updates on a 28-day rolling window.",
+      "RUM (Real User Monitoring): web-vitals.js from Google, beamed to your analytics of choice (GA4, self-hosted, Vercel Analytics). This is the most honest view — your real users across real devices and networks.",
+      "Benchmark before changes, deploy, wait 28 days, compare. Field data lags; don't over-correct based on a 2-day change.",
+    ] },
+  ]}
+  faqs={[
+    { q: "Does Google index WebP and AVIF images in Image Search?", a: "Yes, Google indexes both. Image Search rankings are based on alt text, surrounding HTML, and relevance — format doesn't matter." },
+    { q: "Is it worth shipping AVIF if only 80% of traffic supports it?", a: "At 97%+ AVIF support in 2026, the question's effectively resolved. The 3% holdouts fall through to WebP in your <picture>. Ship AVIF." },
+    { q: "Does lazy-loading hurt SEO?", a: "No — Google's crawler triggers IntersectionObserver-style behaviors during indexing. Just don't lazy-load the LCP image." },
+    { q: "My Lighthouse says 'Defer offscreen images'. What should I do?", a: "Add loading='lazy' to every <img> below the fold. Use loading='eager' only on the LCP image." },
+    { q: "Should I use a placeholder (blur-up, LQIP) for the LCP image?", a: "Optional. Blur-up improves perceived loading but adds a tiny bit of JavaScript. For sites with a fast LCP already, skip it. For hero images over 200 KB, it's worth the implementation." },
+    { q: "Does sticking a background image in a div hurt LCP?", a: "CSS background-image counts for LCP only if it's a real URL (not data:). Preload it the same way you would an <img> src." },
+    { q: "What about HTML <video> as LCP?", a: "The poster attribute counts for LCP. Serve a small poster image as a JPG/WebP; autoplay only after LCP has rendered." },
+    { q: "Do icon sprites and SVG affect LCP?", a: "SVGs that are small (<5 KB) are effectively free. Large illustrations (complex SVG with 100+ paths) can be heavier than a raster version — test both and measure." },
+  ]}
+  relatedSlugs={[
+    { href: "/guides/image-lcp-optimization", title: "LCP deep-dive", body: "Focus on LCP alone." },
+    { href: "/guides/responsive-images-cheatsheet", title: "Responsive cheatsheet", body: "srcset + sizes + picture." },
+    { href: "/guides/jpg-vs-png-vs-webp-vs-avif", title: "Format guide", body: "Which format to pick." },
+  ]}
+/>

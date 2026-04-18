@@ -1,0 +1,73 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="image-lcp-optimization"
+  metaTitle="Image LCP Optimization in 2026 — A Practical Guide"
+  metaDescription="How to optimize images for Core Web Vitals' LCP metric in 2026. Format, sizing, srcset, preload, and the specific tools that move the p75 score."
+  title="Image LCP Optimization: The 2026 Playbook"
+  datePublished="2026-04-15"
+  readTime="10 min read"
+  intro="Largest Contentful Paint (LCP) is usually an image — the hero photo, a product shot, or a featured banner. Optimizing that one image is often the cheapest 500 ms you'll ever save on a page. Here's how to do it systematically, with the specific trade-offs that matter for ranking and revenue."
+  keyPoints={[
+    "LCP target: under 2.5 s at p75 (Google's 'Good' threshold)",
+    "Biggest wins: modern format (WebP/AVIF), correct size (srcset), preload hint, and avoiding lazy-load on the LCP image",
+    "Font and layout shift are LCP-adjacent — don't skip CLS-safe image dimensions",
+    "After optimizations: most sites move from 3–4 s to 1.5–2 s LCP on 4G",
+  ]}
+  sections={[
+    { heading: "What LCP actually measures", paragraphs: [
+      "LCP is the render time of the largest content element visible in the initial viewport. 'Largest' means pixel area. 'Content' means images, video poster frames, background images with a real URL, and block-level text. On most landing pages and article pages, the winner is an image — the hero, a featured photo, or the first above-the-fold graphic.",
+      "Google measures LCP at p75 (75th-percentile user experience) over 28-day rolling windows. The threshold for 'Good' is 2.5 s; anything above 4 s is 'Poor'. Core Web Vitals is a confirmed ranking factor as of 2021, and INP replaced FID in March 2024 — LCP is the remaining image-specific lever.",
+    ] },
+    { heading: "Step 1: Pick the right format", paragraphs: [
+      "For a photograph LCP image: AVIF is ideal (30–50% smaller than JPG at equivalent quality), WebP is the safe default (25–35% smaller than JPG, universal support), and JPG is the fallback. Serve via the <picture> element so modern browsers grab AVIF, older browsers fall back to WebP or JPG.",
+      "For a UI screenshot or diagram LCP: PNG is still correct — text stays crisp. WebP lossless is 20% smaller than PNG with identical pixels, worth the switch.",
+      "Skip GIF as an LCP image entirely. If your hero is animated, use WebP animation or an MP4 with poster frame (browsers count the poster as LCP).",
+    ] },
+    { heading: "Step 2: Size it correctly", paragraphs: [
+      "The #1 mistake: serving a 3000×2000 hero image that renders at 1200×800 on desktop. That's 6× too many bytes. Resize to the rendered dimensions (or 2× for retina: 2400×1600 for a 1200×800 display slot).",
+      "Use srcset to serve different sizes per viewport: <img src='hero-1200.webp' srcset='hero-800.webp 800w, hero-1200.webp 1200w, hero-1800.webp 1800w' sizes='(max-width: 768px) 100vw, 1200px'>. The browser picks the smallest file that satisfies the display slot at the user's device pixel ratio.",
+      "Generate the variants once with sharp, Pillow, ImageMagick, or a CMS pipeline. On ImageToURL, use the image resizer to batch-create 800/1200/1800 variants from a single source.",
+    ] },
+    { heading: "Step 3: Preload the LCP image", paragraphs: [
+      "By default, browsers discover images only when the HTML parser reaches the <img> tag — usually after CSS and fonts. That's too late for the LCP image. Add a <link rel='preload'> hint to the <head> so the browser starts fetching immediately.",
+      "Example: <link rel='preload' as='image' href='/hero-1200.webp' imagesrcset='/hero-800.webp 800w, /hero-1200.webp 1200w' imagesizes='(max-width: 768px) 100vw, 1200px' fetchpriority='high'>. This tells the browser: parallelize this fetch with the critical CSS.",
+      "Do this only for the single LCP image. Preloading everything above the fold defeats the purpose — the browser needs bandwidth budget for the LCP specifically.",
+    ] },
+    { heading: "Step 4: Avoid lazy-load on the LCP image", paragraphs: [
+      "loading='lazy' is excellent for below-the-fold images but catastrophic for the LCP one. Lazy-loaded images wait until the main bundle has executed and IntersectionObserver fires — typically 500–1500 ms late.",
+      "Set loading='eager' explicitly on the LCP image, or omit the attribute (eager is the default). Combine with fetchpriority='high' to signal priority to the browser's fetch scheduler.",
+      "In Next.js: next/image's priority prop does both — eager + preload. Apply to the hero only.",
+    ] },
+    { heading: "Step 5: Use a fast CDN", paragraphs: [
+      "Self-hosted images from a single origin add 100–400 ms of TTFB for users outside your origin region. Route images through a CDN — Cloudflare (used by ImageToURL), Fastly, Bunny, or Cloudinary — and TTFB drops to under 50 ms worldwide.",
+      "CDN cache is the LCP lever most teams underrate. A slow cold-cache fetch to your origin becomes a fast warm-cache hit on every subsequent page view.",
+    ] },
+    { heading: "Step 6: Eliminate CLS on the image slot", paragraphs: [
+      "CLS isn't LCP, but a layout shift forces the browser to re-render and can cause the LCP paint to be re-measured late. Always set width and height attributes on the <img> tag (or CSS aspect-ratio) so the browser reserves the slot before the image arrives.",
+      "For responsive images: use aspect-ratio: 16/9 or set explicit width/height with object-fit: cover. The slot stays reserved even when the image loads.",
+    ] },
+    { heading: "Step 7: Measure before and after", paragraphs: [
+      "Use PageSpeed Insights (pagespeed.web.dev) for lab + field (CrUX) data. Lab data tells you today's rendering; field data tells you what Google sees over 28 days. Both matter.",
+      "For continuous monitoring, install WebPageTest, SpeedCurve, or Calibre. Set up RUM (Real User Monitoring) via web-vitals.js so you see p75 LCP by country, browser, and device class.",
+      "After shipping optimizations, wait 28 days for the CrUX field data to catch up before drawing conclusions. Lab data changes instantly; field data reflects cumulative user experience.",
+    ] },
+  ]}
+  faqs={[
+    { q: "What if my LCP image is loaded by JavaScript (React hero component)?", a: "JS-loaded images are late by design. Either inline the first-paint image in SSR/SSG, or serve the src from HTML with React hydrating afterward. A fully client-rendered hero is the worst pattern for LCP." },
+    { q: "Does compressing too aggressively hurt LCP?", a: "Not directly — smaller images load faster. But JPG below quality 60 or AVIF below 40 show visible compression artifacts, which hurts user perception independent of LCP score." },
+    { q: "Can I use a background-image for the hero?", a: "It works but complicates preloading. If you do, add <link rel='preload' as='image' href='/hero.webp'> — same technique, just without the <img>." },
+    { q: "Does a CDN-resized URL (like Cloudflare Images ?w=1200) count as LCP optimization?", a: "Yes — the browser sees the final URL, not the transformation pipeline. Make sure the transformation is cached; the first user pays the generation cost but subsequent viewers get cached bytes." },
+    { q: "What about video LCP?", a: "If a video element has a poster attribute, the poster counts for LCP. Use a lightweight poster image (JPG/WebP) and keep autoplay off until after LCP." },
+    { q: "Does image preload work cross-origin?", a: "Yes, with the crossorigin attribute matching the <img>'s CORS mode. CDN-hosted images typically serve with Access-Control-Allow-Origin: * so preload + crossorigin='anonymous' works." },
+    { q: "I heard AVIF decoding is slow — is it a CPU problem?", a: "AVIF decode is ~2× slower than WebP on underpowered devices. On average hardware the difference is imperceptible. For photography-heavy sites on old Android budget phones, benchmark before committing." },
+    { q: "Does text LCP matter?", a: "If your largest above-fold element is a block of text (common on text-first sites), LCP depends on font loading. Use font-display: swap, preload the critical font file, and avoid FOIT." },
+  ]}
+  relatedSlugs={[
+    { href: "/guides/jpg-vs-png-vs-webp-vs-avif", title: "Format comparison", body: "Pick the right format first." },
+    { href: "/image-compressor", title: "Image compressor", body: "Shrink without re-encoding elsewhere." },
+    { href: "/image-resizer", title: "Image resizer", body: "Make srcset variants." },
+  ]}
+/>

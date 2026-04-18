@@ -25,6 +25,18 @@ const schema = {
   "provider": { "@id": "https://imagetourl.cloud/#organization" }
 };
 
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to convert PNG to URL",
+  "totalTime": "PT10S",
+  "step": [
+    { "@type": "HowToStep", "name": "Drop your PNG file", "text": "Drag a .png file into the uploader, or click to browse." },
+    { "@type": "HowToStep", "name": "We host it on the CDN", "text": "The file is uploaded to Cloudflare's global edge network and assigned a permanent URL." },
+    { "@type": "HowToStep", "name": "Copy the direct URL", "text": "Paste the URL anywhere — Markdown, HTML, chat, email." }
+  ]
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -73,7 +85,7 @@ const faqSchema = {
 };
 ---
 
-<Layout title="Convert PNG Image to URL Link — Free Online | ImageToURL" description="Convert PNG image to URL link online and free. Upload any PNG and get a permanent direct .png URL with transparency preserved. No signup required." schema={[schema, faqSchema]} noHreflang>
+<Layout title="Convert PNG Image to URL Link — Free Online | ImageToURL" description="Convert PNG image to URL link online and free. Upload any PNG and get a permanent direct .png URL with transparency preserved. No signup required." schema={[schema, howToSchema, faqSchema]} noHreflang>
   <Nav />
 
   <main>

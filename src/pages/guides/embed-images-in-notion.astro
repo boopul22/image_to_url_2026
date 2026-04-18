@@ -1,0 +1,68 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="embed-images-in-notion"
+  metaTitle="Embed Images in Notion Without Breaking — The Permanent-Link Method"
+  metaDescription="How to embed images in Notion so they stay visible after exports, in shared pages, and across workspace moves. Covers native upload vs external URLs."
+  title="Embed Images in Notion Without Breaking (2026 Edition)"
+  datePublished="2026-04-10"
+  readTime="7 min read"
+  intro="Notion's image handling is deceptively simple: drag-and-drop and you're done. The catch only appears months later — when an export comes out with broken images, a public page shows empty boxes, or a duplicated template brings nothing over. Here's how Notion actually handles images and the workflow that keeps them alive forever."
+  keyPoints={[
+    "Notion uploads go to an AWS S3 bucket with session-signed URLs — they rotate and can't be hotlinked",
+    "Exports to Markdown or HTML include image files only if you choose 'Everything' — Markdown-only exports break",
+    "External image URLs referenced via Notion's Embed block persist across duplications and exports",
+    "For anything you need to guarantee long-term (docs, portfolios, public pages), use a permanent external host",
+  ]}
+  sections={[
+    { heading: "How Notion stores uploaded images", paragraphs: [
+      "When you drag an image into Notion, it's uploaded to an S3 bucket at prod-files-secure.s3.us-west-2.amazonaws.com. The URL includes a signed query string with X-Amz-Signature and X-Amz-Expires. These URLs rotate roughly every hour and are tied to your Notion session.",
+      "Inside Notion, the URL is re-signed silently as you view pages. So you never notice. But if you scrape the URL out of the DOM and try to use it elsewhere — pasted in a blog post, Slack message, or RSS feed — it breaks within hours.",
+      "This is by design: Notion wants your images to stay inside Notion, not silently leak to third parties. Great for privacy. Terrible for every workflow that needs a stable URL.",
+    ] },
+    { heading: "Export behavior is surprising", paragraphs: [
+      "Notion's 'Export as Markdown & CSV' produces .md files with image references as bare S3 URLs — which break within hours of export. For long-term documentation, this is near-useless.",
+      "'Export as HTML' does better: it downloads images into a /images folder and rewrites paths to be relative. Works fine on your local machine. Still breaks if you upload the HTML to a web server without the images folder.",
+      "'Export as Everything' includes images as local files. This is the only option that preserves images across moves. Few people know to pick it.",
+    ] },
+    { heading: "The external-URL workflow", paragraphs: [
+      "For any image you plan to keep in Notion for more than a few months, or share outside Notion, host it externally and reference via URL. Notion supports this via the Embed block or the Image block's 'Embed link' option.",
+      "Workflow: upload the image to a permanent host (ImageToURL, Cloudinary, or your own CDN), copy the direct URL, in Notion use /embed image and paste the URL. Notion renders it inline exactly like an uploaded image, but the file lives on your host.",
+      "Bonus: the same URL works in every downstream context. Notion page exports to Markdown? Still works. Duplicated page? Still works. Share the page publicly? Still works for every viewer.",
+    ] },
+    { heading: "What about Notion's 'Public' pages?", paragraphs: [
+      "Public Notion pages (via Share → Publish to web) actually do serve images consistently to external viewers — Notion proxies them through its own CDN for public viewers. The S3 signed URLs only affect people trying to scrape or re-embed.",
+      "So if you're running a Notion-as-website setup (using Notion + Super, Potion, Feather, or custom), native uploads work fine for page rendering. But if you plan to duplicate/archive/backup: external URLs are still safer.",
+    ] },
+    { heading: "Notion CMS / database contexts", paragraphs: [
+      "Notion databases support Files & Media property types. Uploading here has the same S3 behavior — signed URLs that rotate. For databases that feed external tools (Zapier, Make, your own app), external URLs stored in a URL-type property are vastly more reliable.",
+      "Pattern: host the image externally, store the URL in a database 'Image URL' text property, use Notion's formula or button automation to preview. Downstream integrations read a stable URL.",
+    ] },
+    { heading: "Team template best practice", paragraphs: [
+      "When you build a template to share with teammates, embedded images from your personal Notion S3 bucket break for everyone else the moment they duplicate the template. The images disappear with a red X.",
+      "Fix: upload the template's images to an external CDN first. Use those URLs in the Embed blocks. When teammates duplicate, the image references work because they're external URLs with no session binding.",
+      "If you share templates on Gumroad or ProductHunt, this matters 10× more — buyers get a broken template otherwise.",
+    ] },
+    { heading: "Logos in synced Notion headers", paragraphs: [
+      "The company logo at the top of every team page is a prime candidate for external hosting. Upload once to ImageToURL, reference from a synced block. Changing the logo later = update one external file; every Notion page refreshes on next view.",
+      "Without this pattern, changing the logo means opening 40 pages and re-uploading. Not fun.",
+    ] },
+  ]}
+  faqs={[
+    { q: "Does Notion load external images slowly?", a: "No — external images load at the speed of the CDN serving them. Cloudflare-backed hosts (like ImageToURL) are often faster than Notion's own image proxy." },
+    { q: "Can I still caption external images in Notion?", a: "Yes. The caption is a Notion-side attribute, independent of the image source. Captions survive duplicates and exports." },
+    { q: "What about alt text for accessibility?", a: "Notion unfortunately doesn't expose alt-text editing for uploaded or embedded images in the standard editor (API-only). Set it via the Notion API if a11y matters." },
+    { q: "Does the embed URL need to end in a file extension?", a: "Recommended but not strictly required. URLs ending in .jpg/.png/.webp are more likely to be recognized as images; data URIs and query-stringed URLs sometimes fail in Notion's preview." },
+    { q: "Can I bulk-migrate existing uploads to external?", a: "Painful. Notion doesn't expose a bulk-export of image URLs via the API. The manual path: export as 'Everything', upload the extracted files to ImageToURL, replace each image in Notion with the external version. Consider doing this only for documents that matter long-term." },
+    { q: "Does this work with Notion AI?", a: "Notion AI reads uploaded images (OCR + vision) but does it only on files inside the workspace. External URLs won't be processed by Notion AI directly — paste the URL into a chat manually if you want AI analysis." },
+    { q: "Are external URLs indexable by Google for Public Notion pages?", a: "Google's crawler follows any URL. External images served via a crawlable host get indexed in Google Images; native Notion uploads often don't because their URLs rotate before Google revisits." },
+    { q: "Is there a way to enforce this team-wide?", a: "Not via Notion settings. Make it a team convention: 'images bigger than 500 KB or used in public pages must be external'. Enforce in code reviews or template reviews." },
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-notion", title: "Notion hosting", body: "Full guide." },
+    { href: "/image-url-generator", title: "Image URL Generator", body: "Quick hosting." },
+    { href: "/guides/what-exif-leaks", title: "EXIF leaks", body: "Privacy before uploading." },
+  ]}
+/>

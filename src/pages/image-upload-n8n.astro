@@ -1,0 +1,50 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `// n8n "HTTP Request" node configuration
+// Method: POST
+// URL: https://imagetourl.cloud/api/upload
+// Authentication: Generic Credential → Header Auth
+//   Name: Authorization
+//   Value: Bearer YOUR_IMAGETOURL_KEY
+// Body Content Type: Form-Data Multipart
+// Body Parameters:
+//   Name:          Type:       Value:
+//   file           n8n Binary  data  (from previous node's binary property)
+// Options → Response → Response Format: JSON
+
+// After this node runs, the URL is at:  {{$json.data.url}}`;
+---
+<DevApiPage
+  title="Image Upload via n8n — Self-hosted Automation"
+  slug="image-upload-n8n"
+  metaDescription="Upload images to ImageToURL from n8n's HTTP Request node. Self-hosted, open-source, no per-operation fees."
+  h1Pre="n8n image upload"
+  h1Highlight="self-hosted, no op fees."
+  intro="n8n is the self-hostable alternative to Zapier/Make. Its HTTP Request node handles multipart uploads with binary data from any previous node — webhooks, email triggers, database rows, file watches."
+  lang="javascript"
+  langLabel="n8n HTTP"
+  codeSnippet={code}
+  whys={[
+    { title: "No per-op costs", body: "Self-host n8n for $5–20/month on a VPS and run millions of workflow executions. Zapier/Make charge per task — n8n is free once hosted." },
+    { title: "Binary data handling", body: "n8n tracks file bytes as first-class 'binary' properties across nodes. The HTTP Request node binds them directly to multipart form fields." },
+    { title: "Code nodes for complex logic", body: "When the built-in nodes don't cover your case, drop in a Function node with the raw fetch snippet — same code as the Node.js example." },
+    { title: "Community-built integrations", body: "n8n's marketplace has hundreds of community nodes. If ImageToURL gets an official n8n node later, it'll land there." }
+  ]}
+  faqs={[
+    { q: "How do I pass a binary file to the HTTP Request node?", a: "The previous node must have a binary property (e.g. 'data' from a Read Binary File node or webhook with binary upload). In the HTTP node's multipart form, set the field type to 'n8n Binary' and reference that property name." },
+    { q: "Do I need n8n Pro?", a: "No — self-hosted Community Edition is free and covers this use case fully. Pro adds SSO, audit logs, and hosted service." },
+    { q: "Where do I store the API key?", a: "Create a Credential in n8n (Generic → Header Auth). Attach it to the HTTP Request node. Credentials are encrypted at rest." },
+    { q: "How do I handle errors?", a: "Enable 'Continue On Fail' on the HTTP node and add an IF node checking for a non-success response. Route errors to Slack, email, or a retry queue." },
+    { q: "Rate-limit retries?", a: "Add a Wait node + IF loop with exponential backoff. Or use the community 'Retry' node package." },
+    { q: "Webhook trigger → upload flow?", a: "Webhook Trigger (receives file) → HTTP Request (uploads to ImageToURL) → Respond to Webhook (returns the hosted URL). Classic n8n pattern." },
+    { q: "Docker / Railway / Render deploy?", a: "All three have one-click n8n templates. Railway and Render free tiers run small n8n instances comfortably." },
+    { q: "Can I trigger n8n from GitHub Actions?", a: "Yes — expose an n8n webhook from Actions via curl. Useful for upload-as-part-of-CI-pipeline workflows." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-upload-make", title: "Make.com", body: "Hosted alternative." },
+    { href: "/image-upload-zapier", title: "Zapier", body: "Simplest no-code option." },
+    { href: "/image-hosting-api-nodejs", title: "Node.js", body: "For n8n Function nodes." }
+  ]}
+/>

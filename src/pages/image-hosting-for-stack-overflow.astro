@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Stack Overflow"
+  slug="image-hosting-for-stack-overflow"
+  metaTitle="Image Hosting for Stack Overflow — Repro Screenshots & Diagrams"
+  metaDescription="Host screenshots, error dialogs, and diagrams for Stack Overflow questions and answers. Free, permanent CDN URLs."
+  h1Pre="Image hosting for Stack Overflow"
+  h1Highlight="screenshots that stay linked."
+  intro="Stack Overflow hosts pasted screenshots via imgur.com by default — and Imgur's 2023 inactivity purge has started breaking old Q&A screenshots. Host your repro images on a permanent CDN instead."
+  why={[
+    { title: "The Imgur purge hit Stack Overflow hard", body: "Since 2023, thousands of SO questions have broken screenshots. Host on ImageToURL — no purge — and your answer stays usable for years." },
+    { title: "Direct Markdown embed", body: "SO's Markdown syntax is ![](url). Paste an ImageToURL URL directly; it renders inline, full-quality, no re-hosting." },
+    { title: "Error dialogs", body: "Stack trace screenshots, compiler errors, console output — often the heart of the question. A broken image makes the question un-answerable later." },
+    { title: "Diagrams & architecture", body: "Mermaid, Excalidraw, or draw.io exports referenced from multiple answers you've given benefit from central hosting." }
+  ]}
+  steps={[
+    { title: "Screenshot + upload", body: "Shift+Cmd+4 (macOS) or Snipping Tool (Win), drop the PNG here — get a URL." },
+    { title: "Paste into SO's answer box", body: "Use Markdown: ![description](paste-url-here). Or click the image icon in the toolbar and pick 'Image from URL'." },
+    { title: "Preview to verify", body: "Stack Overflow's preview renders the image inline. If it doesn't load, double-check the URL protocol is https." }
+  ]}
+  faqs={[
+    { q: "Why not just use Stack Overflow's built-in image upload?", a: "SO's built-in upload goes to i.stack.imgur.com — which is still Imgur. Your image is subject to Imgur's content policies and inactivity rules. ImageToURL gives you an independent, permanent URL." },
+    { q: "Are my screenshots really private until I paste the URL?", a: "The URL is unlisted — not indexed by our site and not browsable through any gallery. But anyone with the URL can fetch it. Treat the URL as 'share with care' rather than 'secret'." },
+    { q: "Does SO strip EXIF?", a: "SO's own image upload does. ImageToURL keeps EXIF by default on uploads. For privacy, run through the image compressor first — canvas re-encoding strips metadata." },
+    { q: "Can I embed GIFs to show repro behavior?", a: "Yes — ![](url.gif) renders an animated GIF in SO answers. Great for showing a UI bug." },
+    { q: "Max file size?", a: "SO Markdown has no hard cap. ImageToURL: 10 MB free / 50 MB Business. Most screenshots are 50–300 KB so the free tier covers it." },
+    { q: "What about meta.stackoverflow, stackexchange network sites?", a: "All Stack Exchange sites use the same Markdown. Same external URL works in Server Fault, Super User, Mathematics SE, etc." },
+    { q: "Can I delete my image later?", a: "Yes — log in, open the upload in your dashboard, click Delete. The URL will return 404, breaking the embed. Use this cautiously on old, well-read answers." },
+    { q: "Does this affect answer reputation or vote scoring?", a: "No. Image host has no bearing on voting or reputation. Answer quality does — an image that loads is worth more votes than a broken one." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-github-readme", title: "GitHub README", body: "Same pattern for repo docs." },
+    { href: "/imgur-alternative", title: "Imgur Alternative", body: "Why the purge matters." },
+    { href: "/screenshot-to-url", title: "Screenshot to URL", body: "Shortcut for screenshot embeds." }
+  ]}
+/>

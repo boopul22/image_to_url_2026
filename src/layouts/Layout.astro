@@ -94,12 +94,34 @@ const sitewideSchemas = [
   }
 ];
 
-// Auto-generate breadcrumbs for root-level pages if not explicitly provided
+// Auto-generate breadcrumbs for root-level English pages AND locale-prefixed
+// landing pages. Uses a localized "Home" label for each supported locale.
 const SITE_URL = 'https://imagetourl.cloud';
+const HOME_LABELS: Record<string, string> = {
+  en: 'Home', hi: 'होम', es: 'Inicio', fr: 'Accueil', de: 'Startseite',
+  ja: 'ホーム', 'zh-Hans': '首页', id: 'Beranda', vi: 'Trang chủ',
+  'pt-BR': 'Início', tr: 'Ana Sayfa', tl: 'Home', pl: 'Strona główna',
+  nl: 'Home', it: 'Home', ar: 'الرئيسية', bn: 'হোম', fa: 'خانه',
+  ur: 'ہوم', ru: 'Главная', th: 'หน้าแรก', ko: '홈', sw: 'Nyumbani',
+  ms: 'Laman Utama', ta: 'முகப்பு', mr: 'मुख्यपृष्ठ', te: 'హోమ్', 'zh-Hant': '首頁',
+};
+function detectLocale(path: string): string | null {
+  const m = path.match(/^\/([^\/]+)(?:\/|$)/);
+  if (!m) return null;
+  return HOME_LABELS[m[1]] !== undefined ? m[1] : null;
+}
+const pathname = Astro.url.pathname;
+const pageLocale = detectLocale(pathname);
+const cleanTitle = title.replace(/\s*[\u2014\-|].*(ImageToURL|imagetourl).*$/i, '').trim();
 const autoBreadcrumbs: { name: string; url: string }[] | undefined = breadcrumbs ?? (
-  noHreflang && Astro.url.pathname !== '/' ? [
-    { name: 'Home', url: SITE_URL + '/' },
-    { name: title.replace(/\s*[\u2014\-|].*(ImageToURL|imagetourl).*$/i, '').trim(), url: SITE_URL + Astro.url.pathname },
+  pathname === '/' ? undefined :
+  pageLocale ? [
+    { name: HOME_LABELS[pageLocale], url: SITE_URL + `/${pageLocale}/` },
+    { name: cleanTitle, url: SITE_URL + pathname },
+  ] :
+  noHreflang ? [
+    { name: HOME_LABELS.en, url: SITE_URL + '/' },
+    { name: cleanTitle, url: SITE_URL + pathname },
   ] : undefined
 );
 

@@ -1,0 +1,33 @@
+---
+export const prerender = true;
+import GeoQaPage from '../components/GeoQaPage.astro';
+---
+<GeoQaPage
+  slug="what-is-image-hotlinking"
+  metaTitle="What is Image Hotlinking? Definition, Uses, and Policies"
+  metaDescription="Image hotlinking means embedding an image hosted on another server via its direct URL. Here's when it's fine, when it's not, and how to do it safely."
+  question="What is image hotlinking?"
+  shortAnswer="Image hotlinking is embedding an image on your page by pointing an <img src> tag at a URL hosted on someone else's server, instead of downloading and re-hosting the image yourself. It uses the other server's bandwidth every time your page loads."
+  longAnswerParagraphs={[
+    "The term comes from 'hot link' — a live reference that fetches the current version from the source, as opposed to a static copy. When your visitor loads your page, their browser fetches the HTML from you, sees the external &lt;img&gt; src, and fetches the image bytes directly from the original server. Your server never touches the image.",
+    "Hotlinking is technically the default behavior of the web — HTML was designed to reference resources from anywhere. It becomes a problem only when the source server's operator doesn't want their bandwidth consumed by your traffic. A small personal blog embedding an image from a tiny indie site can accidentally rack up real costs on the source.",
+    "Image hosts have different policies. ImageToURL, Imgur, ImgBB, Cloudinary, and other dedicated hosts explicitly permit hotlinking — it's the product. News sites, personal portfolios, and corporate sites usually don't; many serve a 'hotlink forbidden' placeholder or a 403 error when an embed attempt is detected via Referer header.",
+    "The safe way to hotlink: only from hosts designed for it. Upload images you want to share to a hosting service, use the resulting URL. Your bandwidth consumption is the host's business. Your visitors get fast CDN delivery. You never worry about the source going down because you chose a host that promises uptime.",
+    "Etiquette matters even when it's technically allowed. Don't hotlink copyrighted photos from news sites, even if their CDN serves them. Respect robots.txt's directives. If you're a heavy user of a free host, consider upgrading to a paid tier to support the service."
+  ]}
+  faqs={[
+    { q: "Is hotlinking illegal?", a: "Not inherently. The legal concern is copyright — embedding a copyrighted image via hotlink is usually treated the same as copying it. If you don't have rights, hotlinking doesn't protect you. If you have rights (your own upload), hotlinking is fine." },
+    { q: "How do websites block hotlinking?", a: "By checking the Referer HTTP header — if the request comes from a different domain than their own, they return a placeholder or 403. Implemented in Nginx/Apache config or via CDN rules." },
+    { q: "Can I prevent others from hotlinking my images?", a: "Yes — set up Referer-based blocking on your server or CDN. Cloudflare has a one-click 'Hotlink Protection' toggle. Watermarking is a secondary deterrent." },
+    { q: "Does hotlinking affect SEO?", a: "Your page gets SEO credit for the HTML content. The image SEO credit typically goes to the domain serving the image — so hotlinking from someone else's domain gives them the image-search ranking. Host your own images if image SEO matters." },
+    { q: "Is hotlinking from an image-hosting service bad?", a: "No — it's what they're for. ImageToURL, Imgur, ImgBB, Cloudinary exist specifically to absorb traffic for hotlinked images." },
+    { q: "What's 'bandwidth theft'?", a: "Old-school forum slang for hotlinking without permission — consuming the source's bandwidth without linking or crediting. Mostly a pre-2010 concern; modern CDNs absorb this cheaply." },
+    { q: "Should I rehost images I find online?", a: "If you have permission or it's licensed freely: sure, and host them to avoid breakage from the source going down. If not: you're now responsible for copyright liability, too." },
+    { q: "Do CDN URLs change if the source gets deleted?", a: "Yes. If the original upload is deleted, the direct URL returns 404 and your embed breaks. Permanence policy of your host determines how likely this is." }
+  ]}
+  relatedSlugs={[
+    { href: "/direct-image-link", title: "Direct image links", body: "The URLs used for hotlinking." },
+    { href: "/permanent-image-hosting", title: "Permanent hosting", body: "Keep embedded images alive." },
+    { href: "/free-image-cdn", title: "Free image CDN", body: "Host designed for hotlinking." }
+  ]}
+/>

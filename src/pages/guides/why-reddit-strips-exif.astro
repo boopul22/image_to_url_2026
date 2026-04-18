@@ -1,0 +1,63 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="why-reddit-strips-exif"
+  metaTitle="Why Reddit Strips EXIF and Recompresses Your Images"
+  metaDescription="Reddit strips EXIF metadata and recompresses uploads. Here's why, what it means for OC (original content) verification, and how to work around it."
+  title="Why Reddit Strips EXIF (and Recompresses Your Uploads)"
+  datePublished="2026-04-08"
+  readTime="6 min read"
+  intro="Post an original photograph to Reddit and the downloaded version will have no EXIF, degraded quality, and — if it's wider than 4096 pixels — different dimensions. This is deliberate. Here's why Reddit processes uploads aggressively, what it means for 'original content' verification, and how to work around it."
+  keyPoints={[
+    "Reddit strips all EXIF metadata on upload — for user privacy and storage efficiency",
+    "Images wider than 4096 pixels are resized; JPG quality drops from source to ~85",
+    "To prove 'OC', post a low-resolution version on Reddit and link the high-res original hosted elsewhere",
+    "Discord, Telegram, WhatsApp, and Signal have different processing — compare before assuming behavior is universal",
+  ]}
+  sections={[
+    { heading: "The privacy angle", paragraphs: [
+      "Reddit's EXIF strip is mostly a privacy decision. Users frequently post photos they took at home, at work, or at events — and EXIF GPS coordinates would reveal home addresses, workplace locations, and routine travel patterns to any casual scraper. A single leaked GPS fix can be compared against stalker-style research to confirm identity.",
+      "Reddit's user base runs heavily on pseudonymity. Stripping EXIF protects that accidentally and systematically, with no user action required. Most users have no idea their photos contain GPS data until it's too late.",
+    ] },
+    { heading: "The storage and cost angle", paragraphs: [
+      "Reddit processes hundreds of millions of images. Storage, bandwidth, and CDN costs scale with file size. Recompressing every upload to JPG at ~85 quality and capping dimensions at 4096×4096 cuts Reddit's bandwidth bill substantially without visibly hurting image quality for the 99% of users who view on phones and laptops.",
+      "That recompression is the other reason OC (original content) verification is tricky. Even if you're the original photographer, the version on Reddit isn't your file anymore — it's Reddit's re-encode, with different bytes, different hashes, and no identifying metadata.",
+    ] },
+    { heading: "What OC verification actually looks like", paragraphs: [
+      "For serious OC subreddits (r/photography, r/itookapicture, r/earthporn), moderators expect a proof of ownership beyond 'I posted it'. Common approaches: post a lower-resolution version on Reddit, link the original on an external host in a comment. The external version has EXIF and full resolution, which mods can verify.",
+      "Another pattern: post a photo and a timestamped hand in frame (or a tag with the subreddit name). The 'hand shot' can't be Google-image-reversed because it's unique to that moment. Mods accept it as proof even after Reddit strips metadata.",
+      "For professional photographers, the trust layer is IPTC/XMP metadata in the original file plus your portfolio on a domain you own. The Reddit post is promotion; the proof lives elsewhere.",
+    ] },
+    { heading: "How to post original images well", paragraphs: [
+      "Step 1: resize your source to 2048 pixels on the long edge (not 4096). Reddit does less processing on smaller images. Quality degradation is invisible to phone viewers and saves you a compression generation.",
+      "Step 2: pre-compress with quality 90 JPG or WebP. Reddit will recompress to ~85 regardless, but starting higher gives you margin against artifact stacking.",
+      "Step 3: host the full-resolution original on a CDN (like ImageToURL) for your 'OC proof' link in a comment. Free, permanent, direct URL that opens the real file.",
+    ] },
+    { heading: "Platform-by-platform comparison", paragraphs: [
+      "Reddit: strips EXIF, recompresses JPG to ~85, caps at 4096px. Discord: strips EXIF, keeps format, no recompression below 8 MB. Telegram: strips EXIF, preserves resolution up to ~10 MB, converts PNG to JPG if larger. WhatsApp: strips EXIF, aggressive compression, down-sampling to 1600px on the long edge by default.",
+      "Signal: strips EXIF, preserves format and roughly full resolution (subject to 100 MB cap). Instagram: strips EXIF, re-encodes, caps at 1080 wide. Twitter/X: strips EXIF, re-encodes photos (but not PNGs or animated GIFs below 5 MB).",
+      "For serving the exact bytes of your original file to a viewer: use an external host with a direct URL. None of the major social platforms do this by design.",
+    ] },
+    { heading: "If you want EXIF-preserved sharing", paragraphs: [
+      "Use email (slow but faithful), file-transfer services (WeTransfer, Dropbox Transfer), a cloud-storage share link, or an image host that explicitly preserves EXIF. ImageToURL preserves EXIF on uploaded files by default — strip only if you choose to run the image through the compressor tool first.",
+      "For photo pros selling prints: your proofing platform (SmugMug, PhotoShelter, Pixieset) is built around preserving originals. Don't try to replicate that with social-sharing tools.",
+    ] },
+  ]}
+  faqs={[
+    { q: "Does Reddit ever keep EXIF?", a: "No — the strip is consistent across i.redd.it, media.redd.it, and embedded image hosts Reddit mirrors. Even the 'Show original' link serves the processed version." },
+    { q: "Are GIFs stripped of metadata too?", a: "GIFs don't carry EXIF natively, but Reddit converts most GIFs to MP4 for playback, dropping any embedded metadata in the process." },
+    { q: "If I post via Imgur first, then link to Reddit, does Reddit still strip?", a: "Reddit doesn't modify external-hosted images — only its native uploads. An external Imgur link on a Reddit post serves the Imgur version unchanged (though Imgur itself strips EXIF on its own upload)." },
+    { q: "Why do some Reddit images look noticeably worse than others?", a: "Multiple compression generations. If a photo went through WhatsApp → screenshot → Reddit, each step recompresses. Quality drops visibly after 2–3 generations." },
+    { q: "Does Reddit's API give me the original-quality file?", a: "No — the API returns the same processed versions as the website. For the raw original, you'd need access to the uploader's source file, which Reddit doesn't provide." },
+    { q: "What about old Reddit posts from 2015 with images? Were those also stripped?", a: "Yes, Reddit has stripped EXIF since at least 2016 when they launched their own image host. Older Imgur-hosted images weren't stripped by Reddit — Imgur's own policy applies to those." },
+    { q: "Does this affect copyright claims?", a: "EXIF is circumstantial evidence, not definitive proof. Copyright registration or timestamped original files in your own backup are the stronger evidence. DMCA takedowns don't require EXIF." },
+    { q: "Is there a way to tell Reddit not to strip?", a: "No user-facing option. The strip is a server-side pipeline applied to every upload." },
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-reddit", title: "Reddit hosting", body: "External URL workflow." },
+    { href: "/guides/what-exif-leaks", title: "EXIF leaks", body: "What's actually at stake." },
+    { href: "/imgur-alternative", title: "Imgur alternative", body: "Permanent URLs on Reddit." },
+  ]}
+/>

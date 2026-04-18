@@ -1,0 +1,63 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "ImageToURL vs Cloudinary", "url": "https://imagetourl.cloud/imagetourl-vs-cloudinary", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Honest side-by-side: ImageToURL vs Cloudinary. When each tool is the right pick.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Is this a real comparison or a marketing pitch?", "acceptedAnswer": { "@type": "Answer", "text": "Honest: Cloudinary is the better choice for anyone who leans on URL transformations, AI ops, or DAM features. ImageToURL is the better choice for teams that pre-process images and just need a CDN-delivered URL without the $99/mo starting price." } },
+  { "@type": "Question", "name": "Price difference at scale?", "acceptedAnswer": { "@type": "Answer", "text": "For a blog serving 50 GB/month of static images: ImageToURL Pro at $12 vs Cloudinary Plus at $99. For an e-commerce site with 2 TB/month and on-the-fly transforms: Cloudinary's model can actually be cheaper than building equivalent infrastructure." } },
+  { "@type": "Question", "name": "Can I replace Cloudinary's transformations?", "acceptedAnswer": { "@type": "Answer", "text": "For static responsive sets: yes, pre-generate with sharp/Pillow at build time. For runtime user-generated content at variable sizes: harder without Cloudinary. Pick Cloudinary if that's the bulk of your workload." } },
+  { "@type": "Question", "name": "Video?", "acceptedAnswer": { "@type": "Answer", "text": "Cloudinary handles video. ImageToURL is image-only — no video, no HLS, no adaptive streaming." } },
+  { "@type": "Question", "name": "AI features?", "acceptedAnswer": { "@type": "Answer", "text": "Cloudinary has auto-tagging, face detect, background remove, generative fill. ImageToURL doesn't — use a dedicated tool like remove.bg upstream if needed." } },
+  { "@type": "Question", "name": "DAM / asset management?", "acceptedAnswer": { "@type": "Answer", "text": "Cloudinary has full enterprise DAM. ImageToURL has folders, tags, team workspaces on Business — lighter, but workable for small teams." } },
+  { "@type": "Question", "name": "Migration path between the two?", "acceptedAnswer": { "@type": "Answer", "text": "Straightforward in either direction. Both return image URLs; updating your &lt;img src&gt; references is a find-replace. The harder part is moving transformation logic if you rely on Cloudinary URL params." } },
+  { "@type": "Question", "name": "Which does Lighthouse / Core Web Vitals reward?", "acceptedAnswer": { "@type": "Answer", "text": "Either can score well. What matters is pre-chosen sizes, WebP/AVIF output, and edge caching — Cloudinary does these automatically; with ImageToURL you handle the format decision upstream." } }
+] };
+---
+<Layout title="ImageToURL vs Cloudinary — Honest Comparison" description="When to pick ImageToURL vs Cloudinary. Honest tradeoffs on price, transforms, AI, and DAM." schema={[schema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Comparison</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">ImageToURL vs Cloudinary <span class="italic text-primary">pick the right tool.</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Honest tradeoffs. Cloudinary is a full image transformation platform; ImageToURL is a focused CDN host. If you need URL transforms and AI ops, Cloudinary wins. If you pre-process once and just need a URL, ImageToURL wins at a fraction of the price.</p>
+      </header>
+    </div>
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="overflow-x-auto border-2 border-on-background rounded-xl hard-shadow bg-white">
+          <table class="w-full text-sm">
+            <thead class="bg-surface-variant border-b-2 border-on-background"><tr><th class="text-left p-3 font-black font-headline uppercase text-xs">Feature</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImageToURL</th><th class="text-left p-3 font-black font-headline uppercase text-xs">Cloudinary</th></tr></thead>
+            <tbody class="font-body">
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Entry price</td><td class="p-3">Free / $12 Pro</td><td class="p-3">Free tier / $99 Plus</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">CDN</td><td class="p-3">Cloudflare</td><td class="p-3">Akamai multi-CDN</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">URL transforms</td><td class="p-3">No</td><td class="p-3">Full — resize, crop, effects, format-swap</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">AI ops</td><td class="p-3">No</td><td class="p-3">Auto-tag, face detect, gen-fill, bg-remove</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Video</td><td class="p-3">No</td><td class="p-3">Yes, adaptive streaming</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">DAM</td><td class="p-3">Light — tags, folders, teams</td><td class="p-3">Full enterprise DAM</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Signup required</td><td class="p-3">No (anonymous)</td><td class="p-3">Yes</td></tr>
+              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Blogs, portfolios, dev handoffs, indie SaaS</td><td class="p-3">E-commerce, dynamic UGC, large media teams</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqSchema.mainEntity.map((q, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{q.name}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{q.acceptedAnswer.text}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

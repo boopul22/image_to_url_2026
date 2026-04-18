@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="LinkedIn"
+  slug="image-hosting-for-linkedin"
+  metaTitle="Image Hosting for LinkedIn — Article, Newsletter & Post Assets"
+  metaDescription="Host images for LinkedIn articles, newsletters, and external-link cards on a fast CDN. Free tier available."
+  h1Pre="Image hosting for LinkedIn"
+  h1Highlight="consistent cards, fast delivery."
+  intro="LinkedIn uploads images to its own CDN when you post. For articles you cross-post, external-site link cards, newsletter issues, and sales-enablement assets, external hosting gives you control and consistency."
+  why={[
+    { title: "Link-card og:image", body: "When you share your own site's URL on LinkedIn, the preview card pulls og:image. That asset needs to be on a fast, always-up CDN — LinkedIn caches the first fetch." },
+    { title: "LinkedIn Article cross-posting", body: "Same article on your site + LinkedIn Articles. Use identical ImageToURL URLs in both, and you keep one source of truth." },
+    { title: "Company page branding", body: "Banner, logo, and cover variants reused across posts, articles, and ads. Host once, reference many." },
+    { title: "Sales enablement", body: "Pitch decks, one-pagers, case-study PDFs referenced via URL in Sales Navigator messages — all need external hosting." }
+  ]}
+  steps={[
+    { title: "Upload your assets", body: "Drop logos, banners, article images — get CDN URLs." },
+    { title: "Wire into og:image on your pages", body: "LinkedIn's card scraper reads og:image and og:title. Point it at your ImageToURL URL." },
+    { title: "Post Inspector verify", body: "Use LinkedIn's Post Inspector (linkedin.com/post-inspector) to refresh the card cache after any og:image change." }
+  ]}
+  faqs={[
+    { q: "Does LinkedIn render external images in posts?", a: "LinkedIn always re-hosts uploads. What it renders externally is the link preview card, which fetches og:image from the target URL. That's where ImageToURL plugs in." },
+    { q: "What's the best link-card image size?", a: "1200×627 for the big card. LinkedIn crops anything else. Use the image resizer to hit that exactly." },
+    { q: "How long does LinkedIn cache og:image?", a: "Days to weeks. Use Post Inspector to force a recache after changing the image. Otherwise people sharing your link see the old one." },
+    { q: "Can I animate the card image?", a: "No — LinkedIn's link-preview scraper captures a static image. For animation, post native video." },
+    { q: "LinkedIn Newsletter cover art?", a: "Uploaded natively, not from URL. Keep the high-res source on ImageToURL for reuploads." },
+    { q: "Does it support LinkedIn Learning course thumbnails?", a: "Course images are uploaded in Learning Hub. Use ImageToURL to keep the pre-upload source and any video still-frames." },
+    { q: "How to avoid LinkedIn compressing my images?", a: "For post uploads, compression is forced. For link-card og:image, LinkedIn doesn't re-compress — your uploaded JPG/PNG is what users see. Pre-optimize with the image compressor tool." },
+    { q: "Max size?", a: "og:image: 5 MB is a safe ceiling for LinkedIn's scraper. ImageToURL's free 10 MB cap is plenty; heavily compress before upload." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-twitter", title: "X / Twitter", body: "Card images for X." },
+    { href: "/image-compressor", title: "Image Compressor", body: "Pre-optimize for link cards." },
+    { href: "/image-hosting-for-email-signatures", title: "Email Signatures", body: "Matching brand assets." }
+  ]}
+/>

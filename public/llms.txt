@@ -1,57 +1,131 @@
 # ImageToURL
 
-> ImageToURL (imagetourl.cloud) is a free image hosting service that converts uploaded images into permanent, shareable CDN-backed URLs. No account is required for basic use.
+> ImageToURL (imagetourl.cloud) is a free image hosting service that converts uploaded images into permanent, shareable CDN-backed URLs. It also provides privacy-first browser-side image converters and utilities. No account is required for basic use.
 
 ## What It Does
+- Hosts uploaded images at permanent HTTPS URLs served via Cloudflare's global edge (300+ PoPs)
+- Converts between image formats 100% in the browser: PNG, JPG, WebP, HEIC, PDF
+- Utilities: compress, resize, base64 encode/decode, favicon generator
 - Accepts JPG, PNG, WebP, GIF, SVG files up to 10 MB (50 MB on Business plan)
-- Returns a permanent HTTPS URL served via a global edge network
-- Supports anonymous uploads, API access, and team workspaces
-- Images are optimized and delivered through a lightning-fast CDN
+- Supports anonymous uploads, REST API access, team workspaces
+- No inactivity purge — uploads stay indefinitely per content guidelines
 
 ## Plans
-- Free ($0/mo): 10 uploads per month, standard processing speed, public link library
-- Pro ($12/mo): Unlimited uploads, high-priority processing, API access, custom link expiration
-- Business ($49/mo): Everything in Pro plus team workspaces, ultra-high resolution, dedicated support
+- Free ($0/mo): 10 uploads per month, standard processing speed
+- Pro ($12/mo): Unlimited uploads, API access, custom link expiration
+- Business ($49/mo): Team workspaces, ultra-high resolution, 50 MB uploads, dedicated support
 
-## Key Pages
+## Core Pages
 - Homepage / Upload tool: https://imagetourl.cloud/
 - Features: https://imagetourl.cloud/features
 - Pricing: https://imagetourl.cloud/pricing
 - Blog: https://imagetourl.cloud/blog
 - API Documentation: https://imagetourl.cloud/docs
-- Free Image Hosting: https://imagetourl.cloud/free-image-hosting
-- Image URL Generator: https://imagetourl.cloud/image-url-generator
 - About: https://imagetourl.cloud/about
 
-## Converter Tools
+## URL Conversion Tools (upload → CDN URL)
 - PNG to URL: https://imagetourl.cloud/png-to-url
 - JPG to URL: https://imagetourl.cloud/jpg-to-url
 - GIF to URL: https://imagetourl.cloud/gif-to-url
 - WebP to URL: https://imagetourl.cloud/webp-to-url
 - Photo to URL: https://imagetourl.cloud/photo-to-url
 - Screenshot to URL: https://imagetourl.cloud/screenshot-to-url
+- Image URL Generator: https://imagetourl.cloud/image-url-generator
 - Bulk Image Upload: https://imagetourl.cloud/bulk-image-upload
+- Image Embed Code Generator: https://imagetourl.cloud/image-embed-code-generator
+- Direct Image Link: https://imagetourl.cloud/direct-image-link
 
-## Use Case Pages
-- Image Hosting for eBay: https://imagetourl.cloud/image-hosting-for-ebay
-- Image Hosting for Discord: https://imagetourl.cloud/image-hosting-for-discord
-- Image Hosting for GitHub README: https://imagetourl.cloud/image-hosting-for-github-readme
-- Image Hosting for Email Signatures: https://imagetourl.cloud/image-hosting-for-email-signatures
-- Image Hosting for Notion: https://imagetourl.cloud/image-hosting-for-notion
-- Image Hosting for WordPress: https://imagetourl.cloud/image-hosting-for-wordpress
-- Image URLs for ChatGPT: https://imagetourl.cloud/image-url-for-chatgpt
-- AI Image Hosting: https://imagetourl.cloud/ai-image-hosting
-- Imgur Alternative: https://imagetourl.cloud/imgur-alternative
+## Format Converters (browser-only, no upload)
+- HEIC to JPG: https://imagetourl.cloud/heic-to-jpg
+- HEIC to PNG: https://imagetourl.cloud/heic-to-png
+- HEIC to PDF: https://imagetourl.cloud/heic-to-pdf
+- PNG to JPG: https://imagetourl.cloud/png-to-jpg
+- JPG to PNG: https://imagetourl.cloud/jpg-to-png
+- PNG to WebP: https://imagetourl.cloud/png-to-webp
+- JPG to WebP: https://imagetourl.cloud/jpg-to-webp
+- WebP to JPG: https://imagetourl.cloud/webp-to-jpg
+- WebP to PNG: https://imagetourl.cloud/webp-to-png
+- PNG to PDF: https://imagetourl.cloud/png-to-pdf
+- JPG to PDF: https://imagetourl.cloud/jpg-to-pdf
 
-## Blog Topics
-Tutorials on SVG workflows, CDN optimization, REST API usage, image hosting for CMS platforms, global asset distribution, typography, and creative workflows.
+## Image Utilities
+- Image Compressor: https://imagetourl.cloud/image-compressor
+- Image Resizer: https://imagetourl.cloud/image-resizer
+- Image to Base64: https://imagetourl.cloud/image-to-base64
+- Base64 to Image: https://imagetourl.cloud/base64-to-image
+- Favicon Generator: https://imagetourl.cloud/favicon-generator
+
+## Platform Use Cases
+- WordPress: https://imagetourl.cloud/image-hosting-for-wordpress
+- Shopify: https://imagetourl.cloud/image-hosting-for-shopify
+- Discord: https://imagetourl.cloud/image-hosting-for-discord
+- eBay: https://imagetourl.cloud/image-hosting-for-ebay
+- GitHub README: https://imagetourl.cloud/image-hosting-for-github-readme
+- Notion: https://imagetourl.cloud/image-hosting-for-notion
+- Reddit: https://imagetourl.cloud/image-hosting-for-reddit
+- X / Twitter: https://imagetourl.cloud/image-hosting-for-twitter
+- Instagram: https://imagetourl.cloud/image-hosting-for-instagram
+- Pinterest: https://imagetourl.cloud/image-hosting-for-pinterest
+- Substack: https://imagetourl.cloud/image-hosting-for-substack
+- Medium: https://imagetourl.cloud/image-hosting-for-medium
+- LinkedIn: https://imagetourl.cloud/image-hosting-for-linkedin
+- Webflow: https://imagetourl.cloud/image-hosting-for-webflow
+- Squarespace: https://imagetourl.cloud/image-hosting-for-squarespace
+- Wix: https://imagetourl.cloud/image-hosting-for-wix
+- Framer: https://imagetourl.cloud/image-hosting-for-framer
+- Stack Overflow: https://imagetourl.cloud/image-hosting-for-stack-overflow
+- Markdown: https://imagetourl.cloud/image-hosting-for-markdown
+- Next.js: https://imagetourl.cloud/image-hosting-for-nextjs
+- Jira: https://imagetourl.cloud/image-hosting-for-jira
+- WhatsApp: https://imagetourl.cloud/image-to-url-for-whatsapp
+- Email Signatures: https://imagetourl.cloud/image-hosting-for-email-signatures
+- Newsletters: https://imagetourl.cloud/image-hosting-for-newsletters
+- Forums: https://imagetourl.cloud/image-hosting-for-forums
+- Google Sheets: https://imagetourl.cloud/image-hosting-for-google-sheets
+- Google Forms: https://imagetourl.cloud/image-hosting-for-google-forms
+- ChatGPT: https://imagetourl.cloud/image-url-for-chatgpt
+
+## Developer / API
+- Upload API: https://imagetourl.cloud/image-upload-api
+- REST API reference: https://imagetourl.cloud/image-hosting-rest-api
+- Python: https://imagetourl.cloud/image-hosting-api-python
+- Node.js: https://imagetourl.cloud/image-hosting-api-nodejs
+- PHP: https://imagetourl.cloud/image-hosting-api-php
+- cURL: https://imagetourl.cloud/image-hosting-api-curl
+- Zapier: https://imagetourl.cloud/image-upload-zapier
+- Make (Integromat): https://imagetourl.cloud/image-upload-make
+- n8n: https://imagetourl.cloud/image-upload-n8n
+
+## Comparisons
+- vs Imgur: https://imagetourl.cloud/imagetourl-vs-imgur
+- vs ImgBB: https://imagetourl.cloud/imagetourl-vs-imgbb
+- vs Cloudinary: https://imagetourl.cloud/imagetourl-vs-cloudinary
+- Imgur vs ImgBB: https://imagetourl.cloud/imgur-vs-imgbb
+- Imgur alternative: https://imagetourl.cloud/imgur-alternative
+- ImgBB alternative: https://imagetourl.cloud/imgbb-alternative
+- Cloudinary alternative: https://imagetourl.cloud/cloudinary-alternative
+- Postimages alternative: https://imagetourl.cloud/postimages-alternative
+- Google Photos direct link: https://imagetourl.cloud/google-photos-direct-link
+- Dropbox direct image link: https://imagetourl.cloud/dropbox-direct-image-link
+
+## Answer-First Q&A Pages
+- How to get a direct URL for an image: https://imagetourl.cloud/how-to-get-direct-url-for-image
+- How to share an image as a link: https://imagetourl.cloud/how-to-share-image-as-link
+- How to embed an image in an email: https://imagetourl.cloud/how-to-embed-image-in-email
+- What is image hotlinking: https://imagetourl.cloud/what-is-image-hotlinking
+- How to host an image for free: https://imagetourl.cloud/how-to-host-image-for-free
+- How long does ImageToURL store images: https://imagetourl.cloud/how-long-does-imagetourl-store-images
 
 ## How It Works
-1. Upload: Drag an image into the upload zone or use the REST API
-2. Convert: The engine optimizes and generates a permanent, high-speed URL
-3. Share: Paste the link anywhere — social media, blogs, apps, or documentation
+1. Upload: Drag an image into the upload zone or POST to the API
+2. Convert (optional): Client-side conversion for HEIC / PDF / format swaps — zero network egress
+3. Share: The returned URL works in Markdown, HTML, Slack, email, forums, and social platforms
+
+## Retention Policy
+Uploaded images are stored indefinitely while compliant with content guidelines. There is no inactivity-based purge. Removal occurs only for: valid DMCA takedowns, content guideline violations, or uploader-initiated deletion.
 
 ## Excluded (not for AI consumption)
 - /api/ — internal REST endpoints
 - /admin/ — internal CMS management
 - /dashboard/ — authenticated user account area
+- /uploads/ — raw user-uploaded images (not indexed)

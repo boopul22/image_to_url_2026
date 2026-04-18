@@ -1,0 +1,161 @@
+---
+/** Client-side image resizer. Supports pixel dimensions or percentage scale. */
+---
+<div class="w-full max-w-2xl mx-auto">
+  <input type="file" id="irsz-input" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" multiple class="hidden" />
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center gap-3 flex-wrap">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-rose-600 text-lg" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <p class="text-xs font-bold uppercase tracking-wider text-on-background">Browser-only</p>
+    </div>
+    <div class="flex items-center gap-2 ml-auto flex-wrap">
+      <select id="irsz-mode" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
+        <option value="width">Width (px)</option>
+        <option value="height">Height (px)</option>
+        <option value="percent">Percent (%)</option>
+      </select>
+      <input type="number" id="irsz-value" value="800" min="1" class="border-2 border-on-background bg-white text-xs font-mono px-2 py-1 w-24" />
+      <label class="text-xs font-bold uppercase tracking-wider text-on-background flex items-center gap-1">
+        <input type="checkbox" id="irsz-lock" checked class="accent-rose-600" /> Lock ratio
+      </label>
+    </div>
+  </div>
+  <div id="irsz-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+    <div id="irsz-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
+      <div id="irsz-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">aspect_ratio</span>
+        <div class="text-center">
+          <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop images here or click to browse</p>
+          <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · WebP — multi-select OK</p>
+        </div>
+      </div>
+      <div id="irsz-progress" class="hidden mt-6">
+        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id="irsz-progress-fill" class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        </div>
+        <p id="irsz-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Resizing…</p>
+      </div>
+    </div>
+    <div id="irsz-state-results" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg" id="irsz-results-heading">Resized</span>
+        <button id="irsz-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Resize more</button>
+      </div>
+      <div id="irsz-results-list" class="flex flex-col gap-2 max-h-96 overflow-auto"></div>
+    </div>
+    <div id="irsz-state-error" class="p-4 sm:p-6 hidden">
+      <p id="irsz-error-text" class="text-xs sm:text-sm text-error"></p>
+      <button id="irsz-error-reset" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline mt-2">Try again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById('irsz-input') as HTMLInputElement;
+  const drop = document.getElementById('irsz-drop') as HTMLDivElement;
+  const panel = document.getElementById('irsz-panel') as HTMLDivElement;
+  const stateIdle = document.getElementById('irsz-state-idle') as HTMLDivElement;
+  const stateResults = document.getElementById('irsz-state-results') as HTMLDivElement;
+  const stateError = document.getElementById('irsz-state-error') as HTMLDivElement;
+  const progress = document.getElementById('irsz-progress') as HTMLDivElement;
+  const progressFill = document.getElementById('irsz-progress-fill') as HTMLDivElement;
+  const progressText = document.getElementById('irsz-progress-text') as HTMLParagraphElement;
+  const resultsList = document.getElementById('irsz-results-list') as HTMLDivElement;
+  const resultsHeading = document.getElementById('irsz-results-heading') as HTMLSpanElement;
+  const resetBtn = document.getElementById('irsz-reset') as HTMLButtonElement;
+  const errorReset = document.getElementById('irsz-error-reset') as HTMLButtonElement;
+  const errorText = document.getElementById('irsz-error-text') as HTMLParagraphElement;
+  const modeSel = document.getElementById('irsz-mode') as HTMLSelectElement;
+  const valueInput = document.getElementById('irsz-value') as HTMLInputElement;
+  const lockBox = document.getElementById('irsz-lock') as HTMLInputElement;
+
+  function showState(n: 'idle' | 'results' | 'error') {
+    stateIdle.classList.toggle('hidden', n !== 'idle');
+    stateResults.classList.toggle('hidden', n !== 'results');
+    stateError.classList.toggle('hidden', n !== 'error');
+  }
+  drop.addEventListener('click', () => input.click());
+  ['dragenter','dragover'].forEach(ev => panel.addEventListener(ev, e => { e.preventDefault(); panel.classList.add('border-rose-600','bg-rose-50'); }));
+  ['dragleave','drop'].forEach(ev => panel.addEventListener(ev, e => { e.preventDefault(); panel.classList.remove('border-rose-600','bg-rose-50'); }));
+  panel.addEventListener('drop', e => { const f = (e as DragEvent).dataTransfer?.files; if (f && f.length) handleFiles(f); });
+  input.addEventListener('change', () => { if (input.files && input.files.length) handleFiles(input.files); });
+  resetBtn.addEventListener('click', () => { resultsList.innerHTML = ''; input.value = ''; showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%'; });
+  errorReset.addEventListener('click', () => { showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%'; });
+
+  function fmtBytes(n: number): string {
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / 1024 / 1024).toFixed(2)} MB`;
+  }
+
+  function resizeFile(file: File): Promise<{ blob: Blob; w: number; h: number }> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Could not read file'));
+      reader.onload = () => {
+        const img = new Image();
+        img.onerror = () => reject(new Error('Could not decode'));
+        img.onload = () => {
+          const mode = modeSel.value;
+          const v = Number(valueInput.value);
+          const lock = lockBox.checked;
+          let w = img.naturalWidth, h = img.naturalHeight;
+          if (mode === 'width') { if (lock) h = Math.round(h * (v / w)); w = v; if (!lock) h = img.naturalHeight; }
+          else if (mode === 'height') { if (lock) w = Math.round(w * (v / h)); h = v; if (!lock) w = img.naturalWidth; }
+          else { w = Math.round(w * v / 100); h = Math.round(h * v / 100); }
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return reject(new Error('Canvas unavailable'));
+          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+          if ((file.type || 'image/jpeg') === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h); }
+          ctx.drawImage(img, 0, 0, w, h);
+          const mime = file.type || 'image/jpeg';
+          canvas.toBlob(b => b ? resolve({ blob: b, w, h }) : reject(new Error('Encoding failed')), mime, mime === 'image/png' ? undefined : 0.92);
+        };
+        img.src = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function makeRow(name: string, orig: File, res: { blob: Blob; w: number; h: number }): HTMLDivElement {
+    const row = document.createElement('div');
+    row.className = 'border-2 border-on-background bg-white p-3 flex items-center gap-3';
+    const url = URL.createObjectURL(res.blob);
+    const ext = (orig.type || 'image/jpeg').split('/')[1].replace('jpeg','jpg');
+    const baseName = name.replace(/\.[^.]+$/, '') + `-${res.w}x${res.h}.${ext}`;
+    const thumb = document.createElement('img'); thumb.src = url; thumb.alt = ''; thumb.className = 'w-12 h-12 object-cover border-2 border-on-background flex-shrink-0';
+    const meta = document.createElement('div'); meta.className = 'flex-1 min-w-0';
+    const nameEl = document.createElement('p'); nameEl.className = 'text-xs font-bold truncate'; nameEl.textContent = baseName;
+    const sizeEl = document.createElement('p'); sizeEl.className = 'text-[11px] text-on-surface-variant';
+    sizeEl.textContent = `${res.w} × ${res.h} · ${fmtBytes(res.blob.size)}`;
+    meta.appendChild(nameEl); meta.appendChild(sizeEl);
+    const dl = document.createElement('a'); dl.href = url; dl.download = baseName;
+    dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0'; dl.textContent = 'Download';
+    row.appendChild(thumb); row.appendChild(meta); row.appendChild(dl);
+    return row;
+  }
+
+  async function handleFiles(fileList: FileList) {
+    const files = Array.from(fileList);
+    if (!files.length) return;
+    progress.classList.remove('hidden'); progressFill.style.width = '0%';
+    resultsList.innerHTML = '';
+    let done = 0, success = 0;
+    for (const file of files) {
+      progressText.textContent = `Resizing ${done + 1} / ${files.length}`;
+      try { const res = await resizeFile(file); resultsList.appendChild(makeRow(file.name, file, res)); success++; }
+      catch (err: any) {
+        const row = document.createElement('div'); row.className = 'border-2 border-error bg-white p-3 text-xs';
+        row.textContent = `${file.name} — ${err?.message || 'failed'}`;
+        resultsList.appendChild(row);
+      }
+      done++; progressFill.style.width = `${Math.round((done / files.length) * 100)}%`;
+    }
+    if (success === 0) { showState('error'); errorText.textContent = 'Could not resize any file.'; return; }
+    resultsHeading.textContent = `Resized ${success} file${success === 1 ? '' : 's'}`;
+    showState('results');
+  }
+</script>

@@ -1,0 +1,55 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `# Anonymous upload (rate-limited, no auth required)
+curl -X POST https://imagetourl.cloud/api/upload \\
+  -F "file=@screenshot.png"
+
+# Authenticated upload (Pro / Business)
+curl -X POST https://imagetourl.cloud/api/upload \\
+  -H "Authorization: Bearer $IMAGETOURL_KEY" \\
+  -F "file=@screenshot.png"
+
+# Extract the URL from the JSON response with jq
+curl -sS -X POST https://imagetourl.cloud/api/upload \\
+  -H "Authorization: Bearer $IMAGETOURL_KEY" \\
+  -F "file=@screenshot.png" \\
+  | jq -r '.data.url'
+
+# Delete an upload
+curl -X DELETE https://imagetourl.cloud/api/uploads/abc123 \\
+  -H "Authorization: Bearer $IMAGETOURL_KEY"`;
+---
+<DevApiPage
+  title="Image Hosting API — cURL Examples"
+  slug="image-hosting-api-curl"
+  metaDescription="Upload images from the terminal with cURL. Anonymous, authenticated, and delete examples. Perfect for scripts and CI."
+  h1Pre="Image hosting API"
+  h1Highlight="cURL, one-liner style."
+  intro="Upload from your shell, bash scripts, GitHub Actions, or anywhere cURL runs. Pipe with jq to extract the URL in one line."
+  lang="bash"
+  langLabel="cURL"
+  codeSnippet={code}
+  whys={[
+    { title: "Terminal-native", body: "No language runtime needed. Runs on macOS, Linux, WSL, and CI environments out of the box." },
+    { title: "GitHub Actions friendly", body: "Upload screenshots from your test runs, CI-generated reports, or build artifacts as one step in any workflow." },
+    { title: "Bash pipelines", body: "Chain with find, xargs, jq, and other Unix tools — bulk upload every PNG in a directory in one line." },
+    { title: "Debugging aid", body: "When your language client behaves oddly, curl -v reproduces the raw HTTP exchange. Fastest way to verify API behavior." }
+  ]}
+  faqs={[
+    { q: "Why -F instead of --data-binary?", a: "-F tells curl to use multipart/form-data, which is what the API expects. --data-binary sends the raw bytes without form encoding — wrong format." },
+    { q: "Can I pipe an image from stdin?", a: "Yes: cat img.png | curl -X POST -F 'file=@-;filename=img.png;type=image/png' .... Useful for one-shot pipelines." },
+    { q: "GitHub Actions example?", a: "steps: - run: | URL=$(curl -sS -X POST https://imagetourl.cloud/api/upload -H \"Authorization: Bearer $KEY\" -F \"file=@./screenshot.png\" | jq -r '.data.url') && echo \"$URL\"" },
+    { q: "Bulk upload a directory?", a: "find . -name '*.png' -exec curl -X POST https://imagetourl.cloud/api/upload -H \"Authorization: Bearer $KEY\" -F 'file=@{}' \\;. Add jq to collect URLs." },
+    { q: "Progress bar for large uploads?", a: "Remove -sS to see the default progress meter. -v for full request/response logging." },
+    { q: "Setting a timeout?", a: "--max-time 30 caps total duration; --connect-timeout 10 caps the TCP handshake." },
+    { q: "Why does auth header get logged?", a: "-v logs everything including the Authorization header. Use -v 2> err.log and scrub before sharing logs." },
+    { q: "Can I pass the key in a file?", a: "-H \"Authorization: Bearer $(cat ~/.imagetourl)\" — keeps the key out of shell history and process lists." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-api-python", title: "Python", body: "Python snippet." },
+    { href: "/image-upload-zapier", title: "Zapier", body: "No-code integration." },
+    { href: "/image-upload-api", title: "API overview", body: "Full endpoint docs." }
+  ]}
+/>

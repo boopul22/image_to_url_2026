@@ -4,9 +4,47 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ImageUploader from '../../components/ImageUploader.astro';
+import HeicConverter from '../../components/HeicConverter.astro';
+import HeicPngConverter from '../../components/HeicPngConverter.astro';
+import CanvasConverter from '../../components/CanvasConverter.astro';
+import PdfConverter from '../../components/PdfConverter.astro';
+import ImageCompressor from '../../components/ImageCompressor.astro';
+import ImageResizer from '../../components/ImageResizer.astro';
 import { locales, defaultLocale, type Locale } from '../../i18n/config';
 import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, type PageKey } from '../../i18n/landing/registry';
 import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
+
+// Widget map: which custom converter/utility component to render per pageKey.
+// Pages not in this map fall back to the generic <ImageUploader>.
+type WidgetSpec =
+  | { kind: 'none' }
+  | { kind: 'uploader' }
+  | { kind: 'heic-to-jpg' }
+  | { kind: 'heic-to-png' }
+  | { kind: 'pdf'; from: 'png' | 'jpg' | 'heic' }
+  | { kind: 'canvas'; from: 'png' | 'jpg' | 'webp'; to: 'png' | 'jpg' | 'webp'; idPrefix: string }
+  | { kind: 'compressor' }
+  | { kind: 'resizer' };
+
+const WIDGETS: Partial<Record<PageKey, WidgetSpec>> = {
+  // Cluster A — format-pair converters
+  'heic-to-jpg':  { kind: 'heic-to-jpg' },
+  'heic-to-png':  { kind: 'heic-to-png' },
+  'heic-to-pdf':  { kind: 'pdf', from: 'heic' },
+  'png-to-jpg':   { kind: 'canvas', from: 'png',  to: 'jpg',  idPrefix: 'png2jpg' },
+  'jpg-to-png':   { kind: 'canvas', from: 'jpg',  to: 'png',  idPrefix: 'jpg2png' },
+  'webp-to-jpg':  { kind: 'canvas', from: 'webp', to: 'jpg',  idPrefix: 'webp2jpg' },
+  'webp-to-png':  { kind: 'canvas', from: 'webp', to: 'png',  idPrefix: 'webp2png' },
+  'png-to-webp':  { kind: 'canvas', from: 'png',  to: 'webp', idPrefix: 'png2webp' },
+  'jpg-to-webp':  { kind: 'canvas', from: 'jpg',  to: 'webp', idPrefix: 'jpg2webp' },
+  'png-to-pdf':   { kind: 'pdf', from: 'png' },
+  'jpg-to-pdf':   { kind: 'pdf', from: 'jpg' },
+  // Cluster B — utilities
+  'image-compressor': { kind: 'compressor' },
+  'image-resizer':    { kind: 'resizer' },
+  // image-to-base64, base64-to-image, favicon-generator have no shared widget —
+  // they use inline scripts and render fine without a widget component.
+};
 
 // Eager-load all landing content modules at build time. Each module exports
 // `content: Record<Locale, LandingContent>`.
@@ -74,6 +112,7 @@ const faqSchema = {
 };
 
 const homeHref = `/${locale}/`;
+const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
 ---
 
 <Layout
@@ -86,7 +125,13 @@ const homeHref = `/${locale}/`;
 
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
-      <ImageUploader />
+      {widget.kind === 'uploader' && <ImageUploader />}
+      {widget.kind === 'heic-to-jpg' && <HeicConverter />}
+      {widget.kind === 'heic-to-png' && <HeicPngConverter />}
+      {widget.kind === 'pdf' && <PdfConverter from={widget.from} idPrefix={`pdf-${widget.from}-${locale}`} />}
+      {widget.kind === 'canvas' && <CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} />}
+      {widget.kind === 'compressor' && <ImageCompressor />}
+      {widget.kind === 'resizer' && <ImageResizer />}
 
       <header class="mb-5 sm:mb-8 reveal">
         <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">{c.badge}</span>

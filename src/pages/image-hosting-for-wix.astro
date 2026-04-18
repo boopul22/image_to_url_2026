@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Wix"
+  slug="image-hosting-for-wix"
+  metaTitle="Image Hosting for Wix — Velo, HTML Embeds & Asset Reuse"
+  metaDescription="External image hosting for Wix sites. Useful for Velo code, HTML embeds, and reusing assets across multiple Wix sites."
+  h1Pre="Image hosting for Wix"
+  h1Highlight="Velo and HTML embed-friendly."
+  intro="Wix's native Media Manager is fine for static page images. When you're building with Velo, embedding HTML, or sharing assets across sites, external CDN hosting is cleaner."
+  why={[
+    { title: "Velo dynamic content", body: "When Velo code sets an image from a data source (Wix Data, external API), it uses URLs — ImageToURL URLs are public and CDN-delivered." },
+    { title: "HTML iframe component", body: "The Wix HTML Embed component accepts any URL. External images render via &lt;img&gt; tags inside — full control." },
+    { title: "Multi-site branding", body: "Wix agencies running dozens of client sites can host brand assets centrally and reference them from every site's HTML." },
+    { title: "Avoid Wix's thumbnail cache", body: "Wix auto-generates thumbnails from Media Manager uploads. External URLs bypass that — helpful when you've already hand-optimized for size." }
+  ]}
+  steps={[
+    { title: "Upload image", body: "Drop your file — get a direct URL." },
+    { title: "Use in Velo", body: "In Velo code, set the image via URL: $w('#myImage').src = 'https://imagetourl.cloud/...'. Works for wix-data fed items too." },
+    { title: "Or HTML Embed", body: "Drop an HTML Embed component on the page; paste &lt;img src='your-url' /&gt; — publish and the image renders." }
+  ]}
+  faqs={[
+    { q: "Can I set the regular Wix Image component from a URL?", a: "Only via Velo code. In the visual editor, the Image component expects a Media Manager asset. Velo's $w('#image').src = url works at runtime." },
+    { q: "Does Wix re-host my external image?", a: "No — the browser fetches directly from our CDN. That's also why lazy-loading and responsive srcset won't auto-apply." },
+    { q: "Studio vs Classic Wix?", a: "Same behavior. Wix Studio and Classic both support Velo's image.src URL property and HTML Embed components." },
+    { q: "Image SEO — does it still work?", a: "Yes. Set alt text on the Wix Image component or directly in the HTML Embed's &lt;img alt&gt;." },
+    { q: "Can I bulk-migrate off Wix Media Manager?", a: "Download your assets from Media Manager, upload to ImageToURL via the bulk-upload tool, replace references via Velo or find-replace in HTML blocks." },
+    { q: "og:image?", a: "Wix's SEO panel accepts custom og:image. Point it at your ImageToURL URL for control over link-preview cards." },
+    { q: "Max size?", a: "Wix Media Manager: 15 MB per image on free, higher on paid. ImageToURL: 10 MB free / 50 MB Business." },
+    { q: "Commerce product images?", a: "Wix Stores uses Media Manager — external URLs don't integrate. Keep your master copies on ImageToURL for reuploads and ad creatives." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-squarespace", title: "Squarespace", body: "Same pattern." },
+    { href: "/image-hosting-for-webflow", title: "Webflow", body: "For Webflow." },
+    { href: "/image-url-generator", title: "Image URL Generator", body: "Generic upload → URL." }
+  ]}
+/>

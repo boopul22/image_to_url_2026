@@ -1,0 +1,63 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "ImageToURL vs Imgur", "url": "https://imagetourl.cloud/imagetourl-vs-imgur", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Side-by-side comparison: ImageToURL and Imgur for image hosting.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Which is better for blog and dev embeds?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL. Imgur started aggressively removing 'inactive' links in 2023 — a lot of old forum and blog embeds broke. ImageToURL keeps uploads indefinitely as long as they comply with content guidelines, so embedded images on a 5-year-old blog post still load." } },
+  { "@type": "Question", "name": "Which has more features?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur has community features (upvotes, galleries, comments) because it's a social site. ImageToURL is a focused hosting service — API, bulk upload, team workspaces, custom expiration. Pick by workload, not feature count." } },
+  { "@type": "Question", "name": "Which is faster?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL in most locations. Cloudflare's 300+ edge PoPs beat Imgur's single-CDN delivery for LATAM, Africa, and Southeast Asia. US/EU traffic is roughly tied." } },
+  { "@type": "Question", "name": "Does Imgur really delete inactive images?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — since May 2023, anonymous uploads older than six months with no recent views can be purged. That's a big deal for anyone relying on old embeds. ImageToURL doesn't do this." } },
+  { "@type": "Question", "name": "NSFW?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur allows hidden NSFW; ImageToURL doesn't permit it. If that's a hard requirement, Imgur wins by default." } },
+  { "@type": "Question", "name": "Which one has a public API?", "acceptedAnswer": { "@type": "Answer", "text": "Both do. Imgur's is mature and free-tier generous. ImageToURL's is Pro-plan only but has no per-day request caps on Business." } },
+  { "@type": "Question", "name": "Direct vs hotlink policy?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL treats direct links as first-class — they're the product. Imgur allows direct embedding but sometimes returns a meme-redirect page instead of the raw image when referrers look like scrapers." } },
+  { "@type": "Question", "name": "Which is easier for a non-technical user?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL — one drop, one URL, no account. Imgur is close but pushes you toward signup and social features." } }
+] };
+---
+<Layout title="ImageToURL vs Imgur — Which Image Host Should You Use?" description="Side-by-side: ImageToURL and Imgur. Permanence, CDN speed, API, NSFW policy, and the 2023 inactive-link purge." schema={[schema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Comparison</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">ImageToURL vs Imgur <span class="italic text-primary">permanence matters.</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Imgur now purges inactive anonymous uploads. ImageToURL doesn't. For blogs, forums, and documentation, that's the deciding factor.</p>
+      </header>
+    </div>
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="overflow-x-auto border-2 border-on-background rounded-xl hard-shadow bg-white">
+          <table class="w-full text-sm">
+            <thead class="bg-surface-variant border-b-2 border-on-background"><tr><th class="text-left p-3 font-black font-headline uppercase text-xs">Feature</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImageToURL</th><th class="text-left p-3 font-black font-headline uppercase text-xs">Imgur</th></tr></thead>
+            <tbody class="font-body">
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Permanence</td><td class="p-3">Indefinite</td><td class="p-3">Inactive anonymous uploads purged after 6 months</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">CDN</td><td class="p-3">Cloudflare (300+ PoPs)</td><td class="p-3">Fastly</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">10 MB free / 50 MB Business</td><td class="p-3">20 MB (free)</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API</td><td class="p-3">Pro + Business</td><td class="p-3">Free (rate-limited)</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Community features</td><td class="p-3">None (focused tool)</td><td class="p-3">Upvotes, galleries, comments</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">NSFW</td><td class="p-3">Not allowed</td><td class="p-3">Allowed with flag</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Anonymous upload</td><td class="p-3">Yes</td><td class="p-3">Yes</td></tr>
+              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Dev, blog, portfolio, docs</td><td class="p-3">Memes, forum culture, temporary shares</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqSchema.mainEntity.map((q, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{q.name}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{q.acceptedAnswer.text}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

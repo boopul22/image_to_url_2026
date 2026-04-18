@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Substack"
+  slug="image-hosting-for-substack"
+  metaTitle="Image Hosting for Substack — External CDN for Emails & Web"
+  metaDescription="Host images for Substack newsletters on a fast external CDN. Faster load, controllable deliverability, no Substack CDN quirks."
+  h1Pre="Image hosting for Substack"
+  h1Highlight="faster emails, cleaner embeds."
+  intro="Substack auto-hosts images you paste into the editor, but for embedded HTML, newsletter images referenced from multiple posts, or logos in your header, an external CDN URL is cleaner and faster."
+  why={[
+    { title: "Substack's CDN is slow outside US/EU", body: "substack.com's image subdomain uses a single-region CDN. Readers in Asia, LATAM, and Africa see measurable delays. Cloudflare's 300+ PoPs are closer." },
+    { title: "HTML embeds need external URLs", body: "Substack's HTML embed block accepts arbitrary &lt;img&gt; tags. External URLs give you control over format, caching, and size." },
+    { title: "Reuse across posts", body: "If you use a consistent logo, author photo, or series banner, host once on ImageToURL and reference it from every post — no re-upload." },
+    { title: "Email deliverability", body: "Gmail's Postmaster Tools penalizes emails with slow image hosts. ImageToURL's edge caching beats Substack's default for international readers." }
+  ]}
+  steps={[
+    { title: "Upload your asset", body: "Drop your logo, banner, or illustration here — get a CDN URL." },
+    { title: "Use the HTML embed block in Substack", body: "In the post editor, add an HTML block and paste &lt;img src='your-url' alt='...' /&gt;." },
+    { title: "Or paste into the image URL field", body: "Substack's image block accepts URLs directly — use that for standard post images." }
+  ]}
+  faqs={[
+    { q: "Doesn't Substack host images automatically?", a: "Yes — when you paste or drag into the editor, Substack uploads to its own CDN. That's fine for one-off images; for reused assets, logos, or speed-critical international delivery, an external host wins." },
+    { q: "Will external images load in subscribers' inbox?", a: "Yes. Gmail, Apple Mail, Outlook all render external &lt;img&gt; tags from any https URL. Some clients cache images; deliverability isn't affected." },
+    { q: "Do images show in the emailed version of the post?", a: "Yes — Substack's email renderer inlines the src URL into the HTML mailer. Subscribers fetch from our CDN at open time (or from Gmail's proxy, which also talks to our CDN)." },
+    { q: "Can I track image opens via ImageToURL?", a: "Not on free. Pro plan logs per-URL view counts (aggregate). Substack's own analytics covers open-rate already." },
+    { q: "What about og:image for shared post links?", a: "Substack auto-generates og:image from post content. If you want to override, use the post's custom header image upload — ImageToURL can host the source." },
+    { q: "Max size?", a: "10 MB free, 50 MB Business. Substack's own cap is 10 MB, so the free tier matches." },
+    { q: "Does it work for paid-only posts?", a: "Yes. Paywall gates the Substack post HTML, not external assets. If someone guesses the image URL they can see it — same as with any hosted image." },
+    { q: "Can I host my podcast cover art here?", a: "Yes. The URL works as the cover-art reference in RSS feeds for Spotify, Apple Podcasts, and Overcast." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-newsletters", title: "Newsletter Hosting", body: "Generic email newsletter hosting." },
+    { href: "/image-hosting-for-medium", title: "Medium", body: "Same pattern on Medium." },
+    { href: "/image-hosting-for-ghost", title: "Ghost", body: "Self-hosted Ghost images." }
+  ]}
+/>

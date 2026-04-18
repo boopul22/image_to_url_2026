@@ -1,0 +1,52 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `# One-line upload: POST multipart/form-data to /api/upload
+curl -X POST https://imagetourl.cloud/api/upload \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -F "file=@/path/to/image.png"
+
+# Response (JSON)
+# {
+#   "data": {
+#     "url": "https://imagetourl.cloud/uploads/abc123.png",
+#     "id": "abc123",
+#     "size": 245678,
+#     "mime": "image/png",
+#     "created_at": "2026-04-18T12:34:56Z"
+#   }
+# }`;
+---
+<DevApiPage
+  title="Image Upload API — Simple REST Endpoint"
+  slug="image-upload-api"
+  metaDescription="Simple REST image upload API. POST multipart form-data, receive a CDN URL. Works from any language."
+  h1Pre="Image Upload API"
+  h1Highlight="one endpoint, one POST, one URL back."
+  intro="A boring, focused image upload API. POST multipart form-data to /api/upload, receive a JSON response with a permanent CDN URL. No SDK required — curl, Python requests, Node fetch, or whatever your stack uses."
+  lang="bash"
+  langLabel="cURL"
+  codeSnippet={code}
+  whys={[
+    { title: "Predictable response shape", body: "Always { data: { url, id, size, mime, created_at } } on success; { error } on failure. No deep nested structures to parse." },
+    { title: "No SDK lock-in", body: "Plain multipart upload works from every language. No npm install, no pip install required — though language-specific examples are on this page." },
+    { title: "Permanent URLs", body: "Upload once, URL lasts forever (Pro/Business guarantees written into the SLA). No 30-day expiry, no inactivity purge." },
+    { title: "Cloudflare-backed CDN", body: "Uploads are served from 300+ edge PoPs. Your users hit the edge closest to them — no single-region latency." }
+  ]}
+  faqs={[
+    { q: "Do I need an API key?", a: "Anonymous uploads work without a key (rate-limited). Programmatic use in production should use a Pro or Business API key — higher rate limits, programmatic delete, and usage dashboards." },
+    { q: "What's the max file size?", a: "10 MB on free/anonymous, 10 MB on Pro, 50 MB on Business. Contact us for larger." },
+    { q: "Is there a rate limit?", a: "Anonymous: 10 uploads/min per IP. Pro: 60/min. Business: 600/min. Contact for higher." },
+    { q: "How do I delete an upload?", a: "DELETE /api/uploads/:id with your API key. Only works for uploads made with the same key." },
+    { q: "Supported formats?", a: "PNG, JPG, WebP, GIF, SVG. AVIF supported on upload; served as-is. HEIC not accepted — convert client-side first via /heic-to-jpg." },
+    { q: "Does the API return responsive variants?", a: "Not in the free response. Pro plan includes optional ?w=300 query-string resizing via Cloudflare Images on the CDN URL." },
+    { q: "CORS?", a: "Access-Control-Allow-Origin: * for GET on upload URLs. POST to /api/upload requires Origin header; we allow all origins for the upload endpoint too." },
+    { q: "Webhooks on upload?", a: "Business plan supports webhooks — configure a URL in your dashboard and we POST the upload metadata on each successful upload." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-api-python", title: "Python", body: "Python requests snippet." },
+    { href: "/image-hosting-api-nodejs", title: "Node.js", body: "Node fetch snippet." },
+    { href: "/image-hosting-rest-api", title: "REST API", body: "Full endpoint docs." }
+  ]}
+/>

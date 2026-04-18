@@ -1,0 +1,136 @@
+---
+/**
+ * Shared layout for /image-hosting-for-X pages. Each page supplies unique
+ * title, intro, "why hosting matters for X" bullets, "how to embed on X" steps,
+ * and FAQ. Structure is shared so we don't reinvent layout per platform.
+ */
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+export interface FaqItem { q: string; a: string; }
+export interface StepItem { title: string; body: string; }
+export interface WhyItem { title: string; body: string; }
+export interface Props {
+  platform: string;           // "Reddit", "Substack", etc.
+  slug: string;               // "image-hosting-for-reddit"
+  metaTitle: string;
+  metaDescription: string;
+  h1Pre: string;              // e.g. "Image hosting for Reddit"
+  h1Highlight: string;        // e.g. "embeds that survive the Reddit crawler."
+  intro: string;              // 1-2 sentence lead paragraph
+  why: WhyItem[];             // 3-4 cards
+  steps: StepItem[];          // 3 steps
+  faqs: FaqItem[];            // 8 Q&As
+  relatedSlugs?: { href: string; title: string; body: string }[];
+}
+const { platform, slug, metaTitle, metaDescription, h1Pre, h1Highlight, intro, why, steps, faqs, relatedSlugs } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org", "@type": "WebApplication",
+  "name": `${platform} image hosting — ImageToURL`,
+  "url": `https://imagetourl.cloud/${slug}`,
+  "applicationCategory": "MultimediaApplication", "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": metaDescription,
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
+const faqSchema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+const howToSchema = {
+  "@context": "https://schema.org", "@type": "HowTo",
+  "name": `How to embed images on ${platform}`,
+  "step": steps.map(s => ({ "@type": "HowToStep", "name": s.title, "text": s.body }))
+};
+
+const bgRotation = ['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'];
+---
+
+<Layout title={metaTitle} description={metaDescription} schema={[schema, howToSchema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">{platform}</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">{h1Pre} <span class="italic text-primary">{h1Highlight}</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">{intro}</p>
+        <a href="/" class="inline-block mt-5 sm:mt-6 bg-primary text-on-primary px-5 py-2.5 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload an image →</a>
+      </header>
+    </div>
+
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Why hosting matters on {platform}</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          {why.map((w, i) => (
+            <div class={`${bgRotation[i % bgRotation.length]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+              <h3 class="text-base sm:text-lg font-black font-headline mb-2">{w.title}</h3>
+              <p class="font-body text-on-surface-variant">{w.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 sm:py-12">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">How to embed</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          {steps.map((s, i) => (
+            <div class={`${bgRotation[i % bgRotation.length]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+              <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">{i + 1}</div>
+              <h3 class="text-base sm:text-lg font-black font-headline mb-2">{s.title}</h3>
+              <p class="font-body text-on-surface-variant">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqs.map((f, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{f.q}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {relatedSlugs && relatedSlugs.length > 0 && (
+      <section class="py-8 sm:py-12">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6">
+          <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Related</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {relatedSlugs.map(r => (
+              <a href={r.href} class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+                <div>
+                  <h3 class="text-sm sm:text-base font-black font-headline mb-1">{r.title}</h3>
+                  <p class="font-body text-on-surface-variant text-sm">{r.body}</p>
+                </div>
+                <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Get a stable URL for {platform}</h2>
+          <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">Free, no signup, global CDN delivery.</p>
+          <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload an image</a>
+        </div></div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

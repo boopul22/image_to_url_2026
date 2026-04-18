@@ -1,0 +1,70 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Imgur vs ImgBB", "url": "https://imagetourl.cloud/imgur-vs-imgbb", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Imgur vs ImgBB side-by-side. Permanence, CDN, API, community features.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Which is more reliable long-term?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB. Since Imgur's 2023 policy change, anonymous uploads older than 6 months with no views can be purged. ImgBB has no such rule as of 2026. Neither is ideal for 10-year-old embeds — for that, a focused host with an explicit permanence SLA is safer." } },
+  { "@type": "Question", "name": "Which is faster?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur. Fastly's edge network delivers faster TTFB than ImgBB's origin, especially in Europe and Asia." } },
+  { "@type": "Question", "name": "Which has the better API?", "acceptedAnswer": { "@type": "Answer", "text": "Both are solid. Imgur's is more mature with richer endpoints (albums, galleries, comments). ImgBB is simpler — just upload and list. Pick by what you need." } },
+  { "@type": "Question", "name": "NSFW policy?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur allows NSFW with a flag. ImgBB officially disallows adult content, though enforcement is uneven." } },
+  { "@type": "Question", "name": "Max file size?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB: 32 MB. Imgur: 20 MB (free), up to 200 MB for animated GIF/videos." } },
+  { "@type": "Question", "name": "Thumbnail variants?", "acceptedAnswer": { "@type": "Answer", "text": "Both auto-generate thumbnails. ImgBB returns them in the upload JSON. Imgur's thumbnails are accessed via URL suffixes (s = small, m = medium, l = large)." } },
+  { "@type": "Question", "name": "Community features?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur only. ImgBB is a pure hosting tool; Imgur has upvotes, galleries, trending, and comments." } },
+  { "@type": "Question", "name": "Which should I pick?", "acceptedAnswer": { "@type": "Answer", "text": "Meme and community culture: Imgur. Forum-post embeds, quiet hosting: ImgBB. If neither feels right — broken embeds, ads, permanence concerns — consider a focused hosting service like ImageToURL." } }
+] };
+---
+<Layout title="Imgur vs ImgBB — Which to Pick in 2026" description="Imgur vs ImgBB side-by-side. Permanence after the 2023 purge, CDN, API, NSFW policy, and community." schema={[schema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Comparison</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">Imgur vs ImgBB <span class="italic text-primary">honest tradeoffs.</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Both free hosts, both popular, different cultures. Imgur wins on speed and community; ImgBB wins on permanence policy and max file size.</p>
+      </header>
+    </div>
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="overflow-x-auto border-2 border-on-background rounded-xl hard-shadow bg-white">
+          <table class="w-full text-sm">
+            <thead class="bg-surface-variant border-b-2 border-on-background"><tr><th class="text-left p-3 font-black font-headline uppercase text-xs">Feature</th><th class="text-left p-3 font-black font-headline uppercase text-xs">Imgur</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImgBB</th></tr></thead>
+            <tbody class="font-body">
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Permanence</td><td class="p-3">Inactive anon purged at 6 mo</td><td class="p-3">No stated inactivity rule</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Speed</td><td class="p-3">Fastly edge</td><td class="p-3">Single origin</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file</td><td class="p-3">20 MB / 200 MB GIF</td><td class="p-3">32 MB</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API</td><td class="p-3">Mature</td><td class="p-3">Simple</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">NSFW</td><td class="p-3">Allowed w/ flag</td><td class="p-3">Not allowed</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Community</td><td class="p-3">Yes — upvotes, trending</td><td class="p-3">None</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Thumbnails</td><td class="p-3">URL suffixes</td><td class="p-3">JSON response</td></tr>
+              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Memes, Reddit, community</td><td class="p-3">Forum embeds, quiet hosting</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqSchema.mainEntity.map((q, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{q.name}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{q.acceptedAnswer.text}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6"><div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Tired of picking between compromises?</h2>
+        <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">ImageToURL is a focused, ad-free, permanence-first host.</p>
+        <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Try ImageToURL</a>
+      </div></div></div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

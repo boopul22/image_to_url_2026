@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Framer"
+  slug="image-hosting-for-framer"
+  metaTitle="Image Hosting for Framer — External CDN for CMS Items"
+  metaDescription="External image hosting for Framer sites. Useful for CMS items populated from Airtable / Sheets, code-component embeds, and design-system reuse."
+  h1Pre="Image hosting for Framer"
+  h1Highlight="CMS items with external images."
+  intro="Framer's CMS integrates with Airtable, Google Sheets, and Notion — but the image columns contain URLs, not uploads. Host on ImageToURL and Framer fetches straight from our CDN."
+  why={[
+    { title: "Airtable / Sheets CMS items", body: "When your Framer CMS source is Airtable or a Google Sheet, image columns are URLs. Those URLs need to be publicly reachable CDN images — exactly what ImageToURL provides." },
+    { title: "Code components", body: "Framer code components (React) use img tags. External URLs are the natural fit — no upload dialog to wrestle." },
+    { title: "Design system reuse", body: "Core brand assets referenced from 10+ pages. Host once, update once, all pages refresh on deploy." },
+    { title: "Staging via CMS swap", body: "Keep staging and production image URLs in a single CMS column. Swap one URL to change the asset everywhere." }
+  ]}
+  steps={[
+    { title: "Upload image", body: "Drop your file — save the URL." },
+    { title: "Paste into Airtable / Sheets", body: "In your CMS source's image column, paste the ImageToURL URL." },
+    { title: "Framer pulls on sync", body: "Trigger a CMS sync in Framer — items appear with images fetched from our CDN." }
+  ]}
+  faqs={[
+    { q: "Does Framer accept external image URLs?", a: "Yes, everywhere. CMS image fields, code components, and HTML embeds all accept direct URLs. Framer's native asset uploader is optional, not required." },
+    { q: "Does Framer re-host externally referenced images?", a: "No — your users load directly from our CDN. This is why speed of the external host matters." },
+    { q: "Will Framer's responsive image optimization still work?", a: "Only for images uploaded natively to Framer. External URLs are served as-is. Pre-generate sizes with the image resizer." },
+    { q: "Can I use it with Framer's Form component?", a: "Forms don't display images by default. For a thumbnail inside a form (e.g. 'confirm avatar'), use a code component that reads the URL." },
+    { q: "SEO — does Framer's image SEO help external URLs?", a: "Alt text set in Framer applies to the &lt;img&gt; tag regardless of source. Google and Bing crawl images by URL, so external hosting has neutral SEO impact." },
+    { q: "og:image?", a: "Framer's page SEO settings accept a custom og:image URL. Point at ImageToURL for full control over link-preview cards." },
+    { q: "Max size?", a: "Framer has no explicit cap on external images. ImageToURL: 10 MB free / 50 MB Business." },
+    { q: "Can I swap the image without touching Framer?", a: "Not with the same URL — ImageToURL URLs are content-addressed and immutable. For swap-without-re-deploy, point Framer at an Airtable/Sheets URL column that you can change freely." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-webflow", title: "Webflow", body: "Webflow's external URL workflow." },
+    { href: "/image-hosting-for-notion", title: "Notion", body: "Notion CMS images." },
+    { href: "/image-hosting-for-google-sheets", title: "Google Sheets", body: "Sheets as a CMS source." }
+  ]}
+/>

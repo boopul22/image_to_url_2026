@@ -1,0 +1,61 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `import requests
+
+def upload_image(path: str, api_key: str = None) -> str:
+    """Upload a local image, return the hosted CDN URL."""
+    headers = {}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+
+    with open(path, "rb") as f:
+        r = requests.post(
+            "https://imagetourl.cloud/api/upload",
+            headers=headers,
+            files={"file": f},
+            timeout=30,
+        )
+    r.raise_for_status()
+    body = r.json()
+    if body.get("error"):
+        raise RuntimeError(body["error"])
+    return body["data"]["url"]
+
+# Example
+url = upload_image("./screenshot.png", api_key="YOUR_KEY")
+print(url)  # https://imagetourl.cloud/uploads/abc123.png`;
+---
+<DevApiPage
+  title="Image Hosting API — Python Requests Example"
+  slug="image-hosting-api-python"
+  metaDescription="Upload images from Python using requests. Multipart form-data, CDN URL in response. Copy-paste ready."
+  h1Pre="Image hosting API"
+  h1Highlight="Python, one function."
+  intro="A copy-paste function that uploads a local image from Python and returns the CDN URL. Uses the requests library (pip install requests)."
+  lang="python"
+  langLabel="Python"
+  codeSnippet={code}
+  whys={[
+    { title: "Works with any Python", body: "3.8+. No async required, no third-party SDK. The requests library is already on most systems." },
+    { title: "Async variant with httpx", body: "Swap requests for httpx.AsyncClient for async FastAPI / Django services — same multipart pattern." },
+    { title: "Drop into scripts or services", body: "Data pipelines, Jupyter notebooks, Airflow DAGs, Celery tasks — anywhere you handle image bytes." },
+    { title: "Integrates with Pillow", body: "Pillow.Image → BytesIO → upload works in one chain. Pre-process (resize, compress) in-memory, then POST the final bytes." }
+  ]}
+  faqs={[
+    { q: "Should I use async?", a: "For a single upload in a script: no. For a web service uploading on every request: yes — swap requests for httpx.AsyncClient to avoid blocking. The POST call is otherwise identical." },
+    { q: "Can I upload from a BytesIO buffer instead of a file path?", a: "Yes. Pass files={'file': ('name.png', buffer, 'image/png')} — requests handles the multipart boundary either way." },
+    { q: "Error handling?", a: "r.raise_for_status() raises on HTTP errors. Check body['error'] for API-level errors (e.g. quota exceeded, invalid file type). Wrap in try/except for network issues." },
+    { q: "How do I upload from a Pillow image?", a: "img = Image.open('...'); buf = BytesIO(); img.save(buf, format='PNG'); buf.seek(0); then pass buf to the files parameter." },
+    { q: "Rate limits from Python?", a: "Same as any client: 10/min anonymous, 60/min Pro, 600/min Business. Add backoff with tenacity or retry for 429 responses." },
+    { q: "Does it work in Jupyter / Colab?", a: "Yes. requests works identically in notebook contexts. Output the URL with display(Image(url=...)) to preview inline." },
+    { q: "Parallelism — is it safe?", a: "Yes. Use concurrent.futures.ThreadPoolExecutor for bulk uploads. Tune workers to match your rate-limit tier." },
+    { q: "Django ImageField integration?", a: "Override storage to upload to ImageToURL on save, store the returned URL in a URLField instead of a local ImageField. Pattern documented in our docs." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-api-nodejs", title: "Node.js", body: "Node fetch / axios." },
+    { href: "/image-hosting-api-curl", title: "cURL", body: "Shell scripts." },
+    { href: "/image-upload-api", title: "Upload API overview", body: "Endpoint docs." }
+  ]}
+/>

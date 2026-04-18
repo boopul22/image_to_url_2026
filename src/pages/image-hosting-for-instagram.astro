@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Instagram"
+  slug="image-hosting-for-instagram"
+  metaTitle="Image Hosting for Instagram Bio & Link-in-Bio Pages"
+  metaDescription="Free image hosting for Instagram link-in-bio pages, Stories swipe-ups, and og:image for shared URLs."
+  h1Pre="Image hosting for Instagram"
+  h1Highlight="bio links and link cards."
+  intro="Instagram doesn't host external URLs in posts, but everything around it — link-in-bio pages, Stories stickers, og:image on shared links — needs a real CDN URL. This is the host."
+  why={[
+    { title: "Link-in-bio pages", body: "Carrd, Linktree, Beacons pull images from external hosts. ImageToURL URLs stay live without counting against your Instagram storage." },
+    { title: "Story stickers", body: "The GIPHY sticker flow uses external URLs. If you host a custom GIF here, you can embed it via supported third-party sticker apps." },
+    { title: "og:image for shared links", body: "When your followers share your blog link in DMs, Instagram pulls og:image for the preview. That image needs to live on a fast CDN." },
+    { title: "Archive originals", body: "Instagram aggressively compresses uploads. Keep your pristine masters on ImageToURL so you can re-post a sharper version if compression murders detail." }
+  ]}
+  steps={[
+    { title: "Upload source image", body: "Drop your photo or graphic — get a CDN URL back." },
+    { title: "Wire it into your bio page", body: "Paste the URL into Carrd's image block, Linktree's custom-thumbnail, or your own hosted landing page." },
+    { title: "Verify link preview", body: "Paste your landing-page URL into an Instagram DM (to yourself) — the preview card should render with your image." }
+  ]}
+  faqs={[
+    { q: "Can I embed an external image IN an Instagram post?", a: "No. Instagram uploads are native — you pick from your phone's camera roll or computer. External URLs only work around Instagram (bio pages, link previews, Stories stickers via third-party apps)." },
+    { q: "What size for link-preview images?", a: "1200×630 is safe for most link aggregators. Use the image resizer to hit exact dimensions before uploading." },
+    { q: "Does Instagram preview my og:image?", a: "Yes — when someone shares your URL in a DM or Story, Instagram's crawler pulls og:image from the page. Make sure it's ≥200×200 and under 8 MB." },
+    { q: "Animated GIFs for stickers?", a: "GIFs work in Story stickers via third-party sticker packs (Giphy, stickers from Canva etc). Direct hotlinking into Instagram isn't supported." },
+    { q: "Can I automate Instagram posts with image URLs?", a: "Meta's Graph API accepts image URLs for feed posts. The URL has to be publicly reachable, which is exactly what ImageToURL provides." },
+    { q: "Does Instagram compress my image if I post it natively?", a: "Yes — heavily. ImageToURL URLs are pristine copies; Instagram's version is re-encoded and often noticeably softer." },
+    { q: "Profile photo from URL?", a: "Only via the Graph API, not the Instagram app UI. For app users: download to device first, upload from there." },
+    { q: "Max size limits?", a: "10 MB per image on free, 50 MB on Business. Instagram's native upload caps around 30 MB anyway." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-pinterest", title: "Pinterest", body: "Pin-friendly direct URLs." },
+    { href: "/image-hosting-for-twitter", title: "X / Twitter", body: "Link cards and og:image." },
+    { href: "/image-url-generator", title: "Image URL Generator", body: "Generic converter." }
+  ]}
+/>

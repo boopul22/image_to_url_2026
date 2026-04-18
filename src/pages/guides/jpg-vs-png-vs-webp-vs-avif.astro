@@ -1,0 +1,73 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="jpg-vs-png-vs-webp-vs-avif"
+  metaTitle="JPG vs PNG vs WebP vs AVIF — 2026 Format Guide"
+  metaDescription="Which image format should you use in 2026? An honest comparison of JPG, PNG, WebP, and AVIF across size, quality, compatibility, and real-world workloads."
+  title="JPG vs PNG vs WebP vs AVIF: Which Format Should You Use in 2026?"
+  datePublished="2026-04-18"
+  readTime="9 min read"
+  intro="Picking the right image format still matters in 2026 — not because browser support is bad (it isn't), but because the wrong choice wastes bandwidth, scores badly on Core Web Vitals, and sometimes breaks compatibility with the one app that still can't open WebP. Here's how the four main formats actually compare, with concrete workload recommendations."
+  keyPoints={[
+    "AVIF is the smallest at equivalent quality (30–50% smaller than JPG) — use for hero images when your audience is on modern browsers",
+    "WebP is the safest default in 2026 — 98%+ browser support, 25–35% smaller than JPG for photos, supports transparency",
+    "JPG is still the most compatible — use for email, print workflows, and legacy apps",
+    "PNG is for sharp graphics (logos, UI screenshots) and anything that needs lossless edits",
+    "Animated formats: GIF is obsolete — prefer WebP animation or MP4 video",
+  ]}
+  sections={[
+    { heading: "The quick decision tree", paragraphs: [
+      "Photo on a modern website → WebP (or AVIF with WebP fallback). Logo, icon, screenshot → PNG. Email attachment or print output → JPG. Editing-pipeline intermediate → PNG or TIFF. Hero image where every KB matters → AVIF. That covers 90% of decisions.",
+      "The remaining 10% — animated visuals, wide-gamut color, HDR — usually have a native format of their own (video, ProPhoto RGB, HEIC) and shouldn't be shoehorned into the raster-image debate.",
+    ] },
+    { heading: "JPG: the universal baseline", paragraphs: [
+      "JPG (JPEG) has been the default photo format since 1992. Its lossy DCT compression is excellent for continuous-tone photos and nearly universal in software support. Every browser, every email client, every printer, every stock-photo portal accepts JPG without fuss.",
+      "Downsides: lossy re-encoding degrades on every save (not just the first), no alpha channel, and DCT artifacts are visible on sharp edges — logos, text, and UI screenshots look blurry at low quality. JPG is also weak at very low bitrates compared to WebP/AVIF.",
+      "Use JPG when: emailing photos, uploading to print labs or older stock portals, saving a final deliverable for a client who'll convert to whatever they want next. Avoid JPG for: any lossless workflow, anything with transparency, anything you'll edit repeatedly.",
+    ] },
+    { heading: "PNG: lossless workhorse", paragraphs: [
+      "PNG uses deflate — a general-purpose lossless algorithm. That's perfect for graphics with flat colors (logos, icons, UI screenshots) and anything you'll edit. It supports an 8-bit alpha channel, so transparency stays crisp. No generation loss on re-saves.",
+      "Downside: file sizes are 3–10× larger than JPG for photos, because deflate isn't tuned for photographic content. A 4 MB PNG photo typically shrinks to 400 KB as JPG at 90% quality with no visible difference.",
+      "Use PNG when: lossless fidelity matters (logos, brand assets, editorial pipelines), you need transparency, or you're working with sharp-edge content like screenshots. Avoid PNG for: web-delivered photographs (use JPG or WebP instead).",
+    ] },
+    { heading: "WebP: the 2026 default", paragraphs: [
+      "WebP is Google's 2010 format that finally hit 98%+ browser support in 2021 when Safari 14 shipped. It does both lossy (like JPG) and lossless (like PNG), plus transparency and animation. At lossy compression, it's 25–35% smaller than JPG at visually identical quality. Lossless WebP beats PNG by about 20%.",
+      "It's the right default for most web images in 2026. Lighthouse penalizes sites that serve JPG where WebP would work. Most modern CMSs (WordPress, Shopify, Webflow, Ghost) now emit WebP by default — you may not even notice the transition.",
+      "Caveat: some email clients (older Outlook), print shops, and niche apps still don't render WebP. For those specific contexts, serve JPG. For the website itself, WebP.",
+    ] },
+    { heading: "AVIF: the size champion", paragraphs: [
+      "AVIF is the new format from the Alliance for Open Media, derived from the AV1 video codec. At equivalent perceptual quality, AVIF files are 30–50% smaller than WebP — dramatic for hero images, photography portfolios, and image-heavy landing pages.",
+      "Browser support hit 97% in 2024 when Edge caught up. Safari 16+, Chrome 85+, Firefox 93+ all render AVIF. The holdouts are mostly ancient iOS installs and corporate browsers locked to old versions.",
+      "Downsides: encoding is CPU-expensive (AV1 is slow), and editor support is still uneven — Photoshop added AVIF in 2022 but many design tools don't. Use AVIF for delivery; edit in PNG or TIFF, export AVIF as the last step.",
+    ] },
+    { heading: "Real-world workload recommendations", paragraphs: [
+      "Blog with photography: WebP everywhere; AVIF for the hero if you want to squeeze 20% more. Fall back to JPG for ancient browsers via <picture>.",
+      "E-commerce product pages: AVIF for the main product shot (Lighthouse weights LCP heavily). WebP for the gallery thumbnails. JPG fallback.",
+      "Design portfolio: PNG for UI work (text must stay crisp). WebP or AVIF for photographed work.",
+      "Documentation and technical blogs: PNG for all screenshots. Do not JPG-compress a screenshot of UI — the text blurs.",
+      "Email newsletter: JPG for photos (safest across all clients), PNG for logos. Skip WebP and AVIF — Outlook pain isn't worth the size savings on a 600-pixel-wide email.",
+    ] },
+    { heading: "How to actually convert", paragraphs: [
+      "For one-off conversions: use one of the format-pair converters on ImageToURL — /png-to-webp, /jpg-to-webp, /heic-to-jpg, and so on. Everything runs in your browser, no upload, no watermark.",
+      "For bulk, automated workflows: Imagemin (Node), sharp (Node), or Pillow (Python) can batch-convert entire directories. Modern static site generators (Astro, Next.js, Nuxt) do this at build time via integrated image pipelines.",
+      "At the edge: Cloudflare Images, Bunny Optimizer, and Cloudinary can convert on request from a single source. Good when you're uploading one source and serving many variants — pre-generating is cheaper when the source inventory is stable.",
+    ] },
+  ]}
+  faqs={[
+    { q: "Should I delete all my JPGs and re-save as WebP?", a: "No — recompressing a lossy JPG to a lossy WebP adds one generation of loss. Keep your JPG archive; serve WebP derivatives generated once from the originals." },
+    { q: "What about HEIC?", a: "HEIC is Apple's photo format (iPhone default since iOS 11). Compression is similar to AVIF. Browser support is poor, so HEIC is a capture/transport format — convert to JPG or WebP before putting on a website." },
+    { q: "Is GIF really dead?", a: "For animation, yes — both WebP animation and MP4 video are 5–50× smaller at the same visual quality. Twitter/X, iMessage, and Slack all auto-convert GIF to MP4. Keep GIF only for the 'right-click save GIF' social-meme workflow." },
+    { q: "Does AVIF work in email?", a: "No — email-client image support lags the web by 5–10 years. JPG and PNG only for email." },
+    { q: "What's JPEG XL? I keep hearing about it.", a: "JPEG XL is the successor to JPEG, with better compression and lossless JPG transcoding. Sadly, Chrome dropped JXL support in 2022 — only Safari 17+ ships it. Not practical for the web in 2026." },
+    { q: "Should I worry about color profiles?", a: "For photography portfolios and e-commerce, yes — serve sRGB for web and embed the profile. Canvas-based browser converters strip profiles (potential issue for wide-gamut displays). Use ImageMagick or Photoshop if ICC profiles matter." },
+    { q: "What's the compression level / quality I should use?", a: "Photos: JPG 80–85, WebP 75–85, AVIF 50–70 are the sweet spots. Screenshots and text: PNG lossless, or WebP/AVIF lossless mode." },
+    { q: "Does image format affect SEO?", a: "Indirectly — faster image delivery improves Core Web Vitals (LCP specifically), which is a ranking signal. Beyond that, Google's image search indexes all common formats equally." },
+  ]}
+  relatedSlugs={[
+    { href: "/png-to-webp", title: "PNG to WebP", body: "The conversion in one step." },
+    { href: "/image-compressor", title: "Image Compressor", body: "Quality slider for each format." },
+    { href: "/guides/image-lcp-optimization", title: "Image LCP optimization", body: "Why format choice affects Core Web Vitals." },
+  ]}
+/>

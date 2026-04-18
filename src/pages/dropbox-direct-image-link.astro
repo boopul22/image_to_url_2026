@@ -1,0 +1,60 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Dropbox Direct Image Link — ImageToURL", "url": "https://imagetourl.cloud/dropbox-direct-image-link", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Dropbox share links don't embed as images. Here's how to get a real direct image URL by re-hosting.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  { "@type": "Question", "name": "Why don't Dropbox share links work as image URLs?", "acceptedAnswer": { "@type": "Answer", "text": "Dropbox share URLs (www.dropbox.com/s/...) open an HTML preview page, not the raw image bytes. Embedding them in an <img> tag shows a broken icon or an HTML iframe — neither works for blog posts, forum images, or Markdown." } },
+  { "@type": "Question", "name": "What about the ?dl=1 trick?", "acceptedAnswer": { "@type": "Answer", "text": "Replacing '?dl=0' with '?dl=1' forces a download, which sometimes works as an img src. But Dropbox rate-limits public links aggressively (20 GB/day for free accounts), so embedded images break once the quota hits." } },
+  { "@type": "Question", "name": "What about the dl.dropboxusercontent.com URL?", "acceptedAnswer": { "@type": "Answer", "text": "That's the raw-file subdomain — it does work as a direct URL. But Dropbox officially deprecated it in 2017; it works today but isn't guaranteed, and the bandwidth quota still applies. Not safe for production embedding." } },
+  { "@type": "Question", "name": "What should I do instead?", "acceptedAnswer": { "@type": "Answer", "text": "Download the image from Dropbox and re-upload here. You get a permanent CDN URL with no bandwidth quota and guaranteed embedding support. Free for 10 uploads/month, $12/mo for unlimited." } },
+  { "@type": "Question", "name": "Is it slower than Dropbox?", "acceptedAnswer": { "@type": "Answer", "text": "No — typically faster. Cloudflare's edge network is closer to end-users than Dropbox's single-region origin." } },
+  { "@type": "Question", "name": "Can I link back to the Dropbox page if I want?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the hosted URL doesn't stop you from also linking the Dropbox page from your post. Many bloggers do both: embedded hosted image + link to the Dropbox source." } },
+  { "@type": "Question", "name": "What about OneDrive and iCloud?", "acceptedAnswer": { "@type": "Answer", "text": "Same story. OneDrive's embed URL works only for Office docs, and iCloud share links are HTML preview pages. Re-hosting is the universal answer." } },
+  { "@type": "Question", "name": "Does the image stay accessible forever?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, uploads are permanent as long as they comply with content guidelines. No bandwidth caps, no inactivity removal." } }
+] };
+---
+<Layout title="Dropbox Direct Image Link — How to Embed Dropbox Images" description="Dropbox share links don't embed as images. Here's the stable workaround: download and re-host for a real direct URL." schema={[schema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Use Case</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">Dropbox direct image link <span class="italic text-primary">the link that actually works.</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Dropbox share URLs open a preview page, not a raw image. The ?dl=1 trick is rate-limited and brittle. Re-host once for a stable direct URL.</p>
+      </header>
+    </div>
+    <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">The problem with each Dropbox URL</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">dropbox.com/s/...</h3><p class="font-body text-on-surface-variant">Opens a preview HTML page. Won't render inside an &lt;img&gt; tag.</p></div>
+          <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">...?dl=1</h3><p class="font-body text-on-surface-variant">Forces download. Sometimes embeds, but hits rate limits at 20 GB/day on free accounts.</p></div>
+          <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">dl.dropboxusercontent.com</h3><p class="font-body text-on-surface-variant">Deprecated in 2017. Still works today — not guaranteed tomorrow. Not safe for production.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
+        <div class="flex flex-col gap-3 sm:gap-4">
+          {faqSchema.mainEntity.map((q, i) => (
+            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{q.name}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{q.acceptedAnswer.text}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6"><div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+        <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Re-host and move on</h2>
+        <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload image</a>
+      </div></div></div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

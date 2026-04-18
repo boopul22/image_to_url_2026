@@ -10,9 +10,10 @@ const user = Astro.locals.user;
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const basePath = stripLocalePrefix(Astro.url.pathname);
 
-// Root-level English-only pages have no locale variants — hide language switcher
+// Always show the language switcher — even on English-only root pages, users
+// should be able to jump to a localized experience (their locale's homepage).
 const hasLocalePrefix = Astro.url.pathname !== basePath;
-const isLocalizable = hasLocalePrefix || Astro.url.pathname === '/';
+const isLocalizable = true;
 
 // If the current URL is a translated landing page, resolve its pageKey so we
 // can generate per-locale translated slugs for the language switcher.
@@ -20,14 +21,26 @@ const isLocalizable = hasLocalePrefix || Astro.url.pathname === '/';
 const currentSlug = basePath.replace(/^\/+|\/+$/g, '');
 const currentPageKey = currentSlug ? resolveSlug(locale, currentSlug) : null;
 
+// Detect English-only root pages (/png-to-jpg, /image-compressor, /guides/*, etc.)
+// — anything without a locale prefix that isn't in the landing registry.
+const isEnglishOnlyRoot = !hasLocalePrefix && Astro.url.pathname !== '/' && !currentPageKey;
+
 function langSwitchHref(loc: Locale): string {
   // Blog post? Use the per-locale translated slug directly (one hop, not two).
   if (blogLocaleSlugs && blogLocaleSlugs[loc]) return `/${loc}/blog/${blogLocaleSlugs[loc]}`;
   // Landing page in the slug registry? Use its translated slug.
   if (currentPageKey) return `/${loc}/${getSlug(currentPageKey, loc)}`;
+  // English-only page with no translated variant → keep the user on the same
+  // URL. Clicking is effectively a no-op instead of dumping them on a locale
+  // homepage. When translations land, this falls through to currentPageKey.
+  if (isEnglishOnlyRoot) return Astro.url.pathname;
   // Fallback: same path under the new locale prefix.
   return `/${loc}${basePath}`;
 }
+
+// For English-only pages, flag the switcher visually so users understand the
+// page isn't translated yet (the href does nothing on click).
+const currentLocaleOnlyHint = isEnglishOnlyRoot;
 
 function localePath(path: string, loc: Locale = locale): string {
   return `/${loc}${path}`;
@@ -75,21 +88,18 @@ const toolsDropdown = getNavGroups(locale);
           {t(locale, 'nav.tools')}
           <span class="material-symbols-outlined text-sm">expand_more</span>
         </button>
-        <div id="tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[560px]">
-          <div class="grid grid-cols-3 gap-0 divide-x-2 divide-on-background">
-            <!-- Convert Column -->
+        <div id="tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 w-[780px] max-h-[80vh] overflow-y-auto">
+          <!-- Row 1: Utilities + Features + Use Cases -->
+          <div class="grid grid-cols-3 gap-0 divide-x-2 divide-on-background border-b-2 border-on-background">
             <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
-              {toolsDropdown.convert.map((item) => (
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Utilities</span>
+              {toolsDropdown.utilities.map((item) => (
                 <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
                   <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
                   {item.name}
                 </a>
               ))}
-            </div>
-            <!-- Features Column -->
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.featuresLabel')}</span>
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mt-4 mb-3">{t(locale, 'nav.featuresLabel')}</span>
               {toolsDropdown.features.map((item) => (
                 <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
                   <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
@@ -97,10 +107,48 @@ const toolsDropdown = getNavGroups(locale);
                 </a>
               ))}
             </div>
-            <!-- Use Cases Column -->
             <div class="p-4">
               <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Use Cases</span>
               {toolsDropdown.useCases.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Compare</span>
+              {toolsDropdown.compare.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+          <!-- Row 2: API + Answers + Guides -->
+          <div class="grid grid-cols-3 gap-0 divide-x-2 divide-on-background">
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">API &amp; Integrations</span>
+              {toolsDropdown.api.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Answers</span>
+              {toolsDropdown.answers.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Guides</span>
+              {toolsDropdown.guides.map((item) => (
                 <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
                   <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
                   {item.name}
@@ -121,19 +169,40 @@ const toolsDropdown = getNavGroups(locale);
           Tools
           <span class="material-symbols-outlined text-sm">expand_more</span>
         </button>
-        <div id="our-tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 min-w-[260px]">
-          <div class="p-3">
-            {toolsDropdown.tools.map((item) => (
-              <a
-                href={item.href}
-                {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
-                class="flex items-center gap-2 px-2 py-2 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
-              >
-                <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-                {item.name}
-                {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
-              </a>
-            ))}
+        <div id="our-tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 bg-surface border-2 border-on-background hard-shadow overflow-hidden z-50 w-[780px] max-h-[80vh] overflow-y-auto">
+          <div class="grid grid-cols-3 gap-0 divide-x-2 divide-on-background">
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
+              {toolsDropdown.convert.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Format Converters</span>
+              {toolsDropdown.formatConvert.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Partner Tools</span>
+              {toolsDropdown.tools.map((item) => (
+                <a
+                  href={item.href}
+                  {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                  class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
+                >
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                  {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -279,33 +348,29 @@ const toolsDropdown = getNavGroups(locale);
           {t(locale, 'nav.tools')}
           <span class="material-symbols-outlined text-sm ml-auto" id="tools-chevron-mobile">expand_more</span>
         </button>
-        <div id="tools-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden">
-          <div class="px-3 pt-3 pb-1">
-            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">{t(locale, 'nav.convert')}</span>
-          </div>
-          {toolsDropdown.convert.map((item) => (
-            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
-              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-              {item.name}
-            </a>
-          ))}
-          <div class="px-3 pt-3 pb-1">
-            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">{t(locale, 'nav.featuresLabel')}</span>
-          </div>
-          {toolsDropdown.features.map((item) => (
-            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
-              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-              {item.name}
-            </a>
-          ))}
-          <div class="px-3 pt-3 pb-1">
-            <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">Use Cases</span>
-          </div>
-          {toolsDropdown.useCases.map((item) => (
-            <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
-              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-              {item.name}
-            </a>
+        <div id="tools-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden max-h-[70vh] overflow-y-auto">
+          {([
+            ['Utilities', toolsDropdown.utilities],
+            ['nav.featuresLabel', toolsDropdown.features],
+            ['Use Cases', toolsDropdown.useCases],
+            ['Compare', toolsDropdown.compare],
+            ['API & Integrations', toolsDropdown.api],
+            ['Answers', toolsDropdown.answers],
+            ['Guides', toolsDropdown.guides],
+          ] as const).map(([label, items]) => (
+            <>
+              <div class="px-3 pt-3 pb-1">
+                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">
+                  {label.startsWith('nav.') ? t(locale, label) : label}
+                </span>
+              </div>
+              {items.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                </a>
+              ))}
+            </>
           ))}
         </div>
       </div>
@@ -322,17 +387,30 @@ const toolsDropdown = getNavGroups(locale);
           Tools
           <span class="material-symbols-outlined text-sm ml-auto" id="our-tools-chevron-mobile">expand_more</span>
         </button>
-        <div id="our-tools-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden">
-          {toolsDropdown.tools.map((item) => (
-            <a
-              href={item.href}
-              {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
-              class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors"
-            >
-              <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-              {item.name}
-              {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
-            </a>
+        <div id="our-tools-dropdown-mobile" class="hidden mx-4 mb-1 bg-surface-container border-2 border-on-background overflow-hidden max-h-[70vh] overflow-y-auto">
+          {([
+            ['nav.convert', toolsDropdown.convert],
+            ['Format Converters', toolsDropdown.formatConvert],
+            ['Partner Tools', toolsDropdown.tools],
+          ] as const).map(([label, items]) => (
+            <>
+              <div class="px-3 pt-3 pb-1">
+                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">
+                  {label.startsWith('nav.') ? t(locale, label) : label}
+                </span>
+              </div>
+              {items.map((item) => (
+                <a
+                  href={item.href}
+                  {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                  class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors"
+                >
+                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                  {item.name}
+                  {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
+                </a>
+              ))}
+            </>
           ))}
         </div>
       </div>

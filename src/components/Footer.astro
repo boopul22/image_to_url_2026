@@ -41,8 +41,50 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
       </div>
 
       <div class="flex flex-col">
+        <span class={headingClass}>Format Converters</span>
+        {navGroups.formatConvert.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>Utilities</span>
+        {navGroups.utilities.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
         <span class={headingClass}>Use Cases</span>
         {navGroups.useCases.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>Compare &amp; Alternatives</span>
+        {navGroups.compare.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>API &amp; Integrations</span>
+        {navGroups.api.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>Answers</span>
+        {navGroups.answers.map((item) => (
+          <a href={item.href} class={linkClass}>{item.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col">
+        <span class={headingClass}>Guides</span>
+        {navGroups.guides.map((item) => (
           <a href={item.href} class={linkClass}>{item.name}</a>
         ))}
       </div>

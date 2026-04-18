@@ -5,8 +5,27 @@ import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale, locales } from './i18n/config';
 
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
-const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/'];
-const NON_LOCALIZED_EXACT = new Set(['/sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest']);
+const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
+const NON_LOCALIZED_EXACT = new Set([
+  '/sitemap.xml', '/image-sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest',
+  '/llms.txt', '/llms-full.txt',
+  // Cluster C competitor alts + vs pages (not yet in landing registry)
+  '/postimages-alternative', '/google-photos-direct-link', '/dropbox-direct-image-link',
+  '/imagetourl-vs-imgur', '/imagetourl-vs-imgbb', '/imagetourl-vs-cloudinary', '/imgur-vs-imgbb',
+  // Cluster D platform use-cases
+  '/image-hosting-for-reddit', '/image-hosting-for-twitter', '/image-hosting-for-instagram',
+  '/image-hosting-for-pinterest', '/image-hosting-for-substack', '/image-hosting-for-medium',
+  '/image-hosting-for-linkedin', '/image-hosting-for-webflow', '/image-hosting-for-squarespace',
+  '/image-hosting-for-wix', '/image-hosting-for-framer', '/image-hosting-for-stack-overflow',
+  '/image-hosting-for-markdown', '/image-hosting-for-nextjs', '/image-hosting-for-jira',
+  // Cluster E dev / API pages
+  '/image-upload-api', '/image-hosting-api-python', '/image-hosting-api-nodejs', '/image-hosting-api-php',
+  '/image-hosting-api-curl', '/image-upload-zapier', '/image-upload-make', '/image-upload-n8n',
+  '/image-hosting-rest-api',
+  // Cluster F GEO Q&A pages
+  '/how-to-get-direct-url-for-image', '/how-to-share-image-as-link', '/how-to-embed-image-in-email',
+  '/what-is-image-hotlinking', '/how-to-host-image-for-free', '/how-long-does-imagetourl-store-images',
+]);
 
 function isNonLocalized(path: string): boolean {
   if (NON_LOCALIZED_EXACT.has(path)) return true;

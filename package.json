@@ -24,6 +24,7 @@
     "@tiptap/starter-kit": "^3.22.3",
     "astro": "^6.1.2",
     "heic2any": "^0.0.4",
+    "jspdf": "^4.2.1",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {

@@ -1,0 +1,76 @@
+---
+export const prerender = true;
+import GuidePage from '../../components/GuidePage.astro';
+---
+<GuidePage
+  slug="responsive-images-cheatsheet"
+  metaTitle="Responsive Images Cheatsheet — srcset, sizes, picture in 2026"
+  metaDescription="A practical reference for responsive images: srcset, sizes, <picture>, format fallbacks, and real-world patterns for modern sites."
+  title="The Responsive Images Cheatsheet (2026)"
+  datePublished="2026-04-05"
+  readTime="9 min read"
+  intro="Responsive images — serving the right file for each viewport — saves bandwidth, improves Core Web Vitals, and keeps mobile users happy. The HTML features for it (srcset, sizes, <picture>) are widely supported but routinely misused. Here's a clean reference with patterns you can copy-paste."
+  keyPoints={[
+    "srcset + sizes = browser picks the smallest variant that satisfies the slot",
+    "<picture> = provide format fallbacks (AVIF → WebP → JPG) without JavaScript",
+    "width/height attributes prevent CLS even with responsive images",
+    "fetchpriority='high' on the LCP image makes the biggest difference",
+  ]}
+  sections={[
+    { heading: "The minimal responsive image", paragraphs: [
+      "Start here: <img src='hero-1200.webp' srcset='hero-800.webp 800w, hero-1200.webp 1200w, hero-1800.webp 1800w' sizes='(max-width: 768px) 100vw, 1200px' width='1200' height='800' alt='...'>.",
+      "The browser looks at the viewport, picks the descriptor from sizes that matches, then chooses the smallest srcset variant that satisfies that width × device pixel ratio. Works everywhere without JavaScript.",
+    ] },
+    { heading: "When to use <picture>", paragraphs: [
+      "<picture> is needed when you want format fallbacks (AVIF → WebP → JPG) or art-direction variants (different crop per viewport). For just 'different sizes of the same image', srcset + sizes on a bare <img> is enough.",
+      "Template: <picture><source type='image/avif' srcset='hero.avif'><source type='image/webp' srcset='hero.webp'><img src='hero.jpg' width='1200' height='800' alt='...'></picture>. Modern browsers grab AVIF; Safari 15 and below fall through to WebP; truly ancient clients get JPG.",
+    ] },
+    { heading: "Understanding 'sizes'", paragraphs: [
+      "The sizes attribute tells the browser how wide the image will be rendered — not which variant to pick. It's a set of media conditions evaluated left-to-right; the first matching condition wins.",
+      "Example: sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw' means: on phones take the full viewport width, on tablets half the viewport, on desktop one-third. The browser then picks the srcset variant closest to that computed width at the user's DPR.",
+      "For images that fill the viewport edge-to-edge: sizes='100vw'. For a fixed-width layout: sizes='1200px'. For a grid: sizes='(max-width: 768px) 100vw, 33vw' for a 3-column grid on desktop.",
+    ] },
+    { heading: "The width and height trap", paragraphs: [
+      "Even for responsive images, set width and height attributes. Browsers use them to reserve layout space before the image loads — preventing Cumulative Layout Shift. The values should reflect the intrinsic dimensions of the image (not the rendered size), and CSS should set width: 100%; height: auto to keep the aspect ratio.",
+      "Modern browsers compute aspect-ratio from the width/height attributes automatically. The slot stays reserved; the image fills it when loaded.",
+    ] },
+    { heading: "LCP image — special treatment", paragraphs: [
+      "The largest above-the-fold image is your LCP. Default behavior is 'wait until the HTML parser reaches the <img> tag to start fetching'. That's too late.",
+      "Add fetchpriority='high' to the LCP <img>. Also add <link rel='preload' as='image' imagesrcset='hero-1200.webp 1200w, hero-1800.webp 1800w' imagesizes='1200px' fetchpriority='high'> to the <head>.",
+      "Don't preload more than the single LCP image — preload is a bandwidth priority signal, not a 'load faster' magic word.",
+    ] },
+    { heading: "Art direction: different crops per viewport", paragraphs: [
+      "Sometimes one image doesn't work across all viewports — a wide 21:9 hero on desktop needs to become a 4:5 portrait on mobile, cropping to the subject. That's art direction and requires <picture> with media queries:",
+      "<picture><source media='(max-width: 640px)' srcset='hero-mobile-800.webp'><source media='(max-width: 1024px)' srcset='hero-tablet-1200.webp'><img src='hero-desktop-1800.webp' width='1800' height='800' alt='...'></picture>.",
+      "Note: art direction means you're serving genuinely different images, not the same image resized. Use this only when a naive resize looks bad (e.g., a wide hero where the subject becomes tiny at phone width).",
+    ] },
+    { heading: "Framework-specific helpers", paragraphs: [
+      "Next.js: <Image src='...' width={1200} height={800} sizes='...' priority /> — handles srcset, AVIF/WebP variants, and preload automatically. priority = eager + fetchpriority high.",
+      "Astro: <Image src={...} widths={[800,1200,1800]} sizes='...' /> — generates srcset at build time. <Picture> for format fallbacks.",
+      "Nuxt: <NuxtImg> component, similar API. Gatsby: <GatsbyImage>. All compile to the same srcset/sizes/picture patterns.",
+      "For plain HTML or vanilla static sites, generate variants once with sharp/Pillow/ImageMagick; the <picture> markup is straightforward to hand-write.",
+    ] },
+    { heading: "Common mistakes", paragraphs: [
+      "Mistake 1: srcset with only density descriptors (1x, 2x) when your image can render at very different sizes. Prefer width descriptors (800w, 1200w, 1800w) with a sizes attribute.",
+      "Mistake 2: generating 10 variants when 3 is enough. Users' devices cluster around common widths (~400, ~800, ~1200, ~1800 effective pixels). Skinny variants don't noticeably improve quality.",
+      "Mistake 3: serving a 2000px image at a 200px slot. srcset is useless if every variant is huge. Generate variants that match your smallest slots too.",
+      "Mistake 4: lazy-loading the LCP image. loading='lazy' is below-the-fold only. LCP = loading='eager' (or omitted) + fetchpriority='high'.",
+      "Mistake 5: forgetting the alt attribute. Empty alt='' for decorative, descriptive alt='...' for meaningful. Never omit it.",
+    ] },
+  ]}
+  faqs={[
+    { q: "Is <picture> with AVIF worth the markup overhead?", a: "For image-heavy pages yes — 20–30% LCP improvement is typical versus WebP-only. For text-first sites with one small image, the bytes saved don't justify the markup verbosity." },
+    { q: "Can I use CSS background-images responsively?", a: "Yes, via image-set() in CSS: background-image: image-set('hero-800.webp' 1x, 'hero-1200.webp' 1.5x, 'hero-1800.webp' 2x). No sizes equivalent though — picks by DPR only." },
+    { q: "Does srcset work with SVG?", a: "SVG is resolution-independent by design. srcset is overkill — just serve the SVG once at any size. For raster fallbacks in a <picture>, provide a PNG or WebP." },
+    { q: "How many srcset variants is too many?", a: "3–5 is a sensible range. Below 3 and you waste bandwidth on the smallest viewports; above 5 and file-generation time balloons for diminishing returns." },
+    { q: "Do I need to serve WebP and AVIF separately?", a: "If your AVIF size is smaller than WebP (usually), yes — via <picture>. If they're the same size (rare), skip AVIF to reduce cache fragmentation." },
+    { q: "What about retina/high-DPR screens?", a: "srcset with width descriptors (800w, 1200w) already handles DPR — the browser multiplies sizes by the device's DPR when picking. Density descriptors (1x, 2x) are only needed if you're serving fixed-pixel images." },
+    { q: "Is lazy-loading on by default in 2026?", a: "No — loading='lazy' must be explicit. Chrome and Firefox auto-lazy-load iframes but not images. Browsers do prioritize in-viewport images regardless, so the effective behavior is close to lazy." },
+    { q: "Can I skip sizes if I only have one srcset variant?", a: "Technically yes, but then srcset is pointless. srcset without sizes falls back to density-based selection — rarely what you want." },
+  ]}
+  relatedSlugs={[
+    { href: "/guides/image-lcp-optimization", title: "LCP optimization", body: "How this affects ranking." },
+    { href: "/guides/jpg-vs-png-vs-webp-vs-avif", title: "Format guide", body: "Pick the format first." },
+    { href: "/image-resizer", title: "Image resizer", body: "Generate the variants." },
+  ]}
+/>

@@ -1,0 +1,49 @@
+---
+export const prerender = true;
+import DevApiPage from '../components/DevApiPage.astro';
+
+const code = `# Make.com HTTP module configuration
+# Module: HTTP > Make a request
+# URL: https://imagetourl.cloud/api/upload
+# Method: POST
+# Headers:
+#   Authorization: Bearer YOUR_IMAGETOURL_KEY
+# Body type: Multipart/form-data
+# Fields:
+#   - Key: file
+#     Value (File type): {{bundle.file.data}} or binary from previous step
+#     File name: {{bundle.file.name}}
+# Parse response: Yes → use {{1.data.url}} in downstream modules`;
+---
+<DevApiPage
+  title="Image Upload via Make (Integromat) — HTTP Module"
+  slug="image-upload-make"
+  metaDescription="Upload images from Make.com to ImageToURL using the HTTP module. More flexible than Zapier for complex routing."
+  h1Pre="Make image upload"
+  h1Highlight="HTTP module, full control."
+  intro="Make.com's HTTP module handles multipart uploads gracefully — bind a file from a previous step to the file field and POST. Better than Zapier for scenarios with branching, aggregation, and filters."
+  lang="bash"
+  langLabel="Make HTTP"
+  codeSnippet={code}
+  whys={[
+    { title: "Better for complex flows", body: "Make scenarios support arrays, aggregators, and iterators natively. Zapier struggles with 'upload 10 images from an array'; Make handles it in one iterator." },
+    { title: "Cheaper at volume", body: "Make's pricing per operation (10k ops for $9/mo Core plan) is roughly half Zapier's per-task cost at the same scale." },
+    { title: "File-type bundles", body: "Make's 'binary' bundle type lets you pass file data between modules without re-downloading. Zapier re-fetches at each step." },
+    { title: "Self-healing retries", body: "Built-in retry-on-error with configurable backoff. Helpful when ImageToURL rate-limits during bulk runs." }
+  ]}
+  faqs={[
+    { q: "How do I attach a file to the HTTP module?", a: "Choose body type 'Multipart/form-data', add a field with key 'file', and set the value to a File-type bundle from a previous module (e.g. Google Drive > Download, Dropbox > Download, or webhook)." },
+    { q: "Do I need to download first?", a: "If the source module returns a URL (e.g. Airtable attachment), yes — use an HTTP > Get File module first. If the source returns binary (Dropbox download), pass it directly." },
+    { q: "Extract the response URL for next step?", a: "Enable 'Parse response'. Then reference {{1.data.url}} (where 1 is the module number) in downstream steps." },
+    { q: "What's 'Core' vs 'Pro' Make plan?", a: "Core: 10k ops/mo for $9. Pro: 10k with 2× faster execution and priority support. For image-upload workflows, Core is usually fine." },
+    { q: "Error handling?", a: "Add a 'Break' route with a filter on the response status ≠ 200. Route failures to Slack, email, or a retry queue." },
+    { q: "Iterator for bulk uploads?", a: "Yes — aggregate file array → iterator → HTTP module per file → array aggregator for the URLs. Standard Make pattern." },
+    { q: "Is the API key visible in scenarios?", a: "Make stores connection values encrypted. Use a Pro/Business key and rotate if you share the scenario with collaborators." },
+    { q: "Works with Make's Custom Apps?", a: "Yes — build a Custom App that wraps the ImageToURL endpoint if you reuse it across many scenarios. Removes boilerplate." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-upload-zapier", title: "Zapier", body: "Zapier alternative." },
+    { href: "/image-upload-n8n", title: "n8n", body: "Self-hosted." },
+    { href: "/image-upload-api", title: "API overview", body: "Underlying endpoint." }
+  ]}
+/>

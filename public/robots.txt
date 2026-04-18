@@ -43,6 +43,66 @@ Allow: /image-hosting-for-google-forms
 Allow: /image-to-url-for-whatsapp
 Allow: /image-to-url-for-html
 Allow: /image-to-url-vercel
+# Cluster A format-pair converters
+Allow: /png-to-jpg
+Allow: /jpg-to-png
+Allow: /webp-to-jpg
+Allow: /webp-to-png
+Allow: /png-to-webp
+Allow: /jpg-to-webp
+Allow: /png-to-pdf
+Allow: /jpg-to-pdf
+Allow: /heic-to-jpg
+Allow: /heic-to-png
+Allow: /heic-to-pdf
+# Cluster B utilities
+Allow: /image-compressor
+Allow: /image-resizer
+Allow: /image-to-base64
+Allow: /base64-to-image
+Allow: /favicon-generator
+# Cluster C alternatives + vs
+Allow: /cloudinary-alternative
+Allow: /postimages-alternative
+Allow: /google-photos-direct-link
+Allow: /dropbox-direct-image-link
+Allow: /imagetourl-vs-imgur
+Allow: /imagetourl-vs-imgbb
+Allow: /imagetourl-vs-cloudinary
+Allow: /imgur-vs-imgbb
+# Cluster D platforms
+Allow: /image-hosting-for-reddit
+Allow: /image-hosting-for-twitter
+Allow: /image-hosting-for-instagram
+Allow: /image-hosting-for-pinterest
+Allow: /image-hosting-for-substack
+Allow: /image-hosting-for-medium
+Allow: /image-hosting-for-linkedin
+Allow: /image-hosting-for-webflow
+Allow: /image-hosting-for-squarespace
+Allow: /image-hosting-for-wix
+Allow: /image-hosting-for-framer
+Allow: /image-hosting-for-stack-overflow
+Allow: /image-hosting-for-markdown
+Allow: /image-hosting-for-nextjs
+Allow: /image-hosting-for-jira
+# Cluster E developer / API pages
+Allow: /image-upload-api
+Allow: /image-hosting-api-python
+Allow: /image-hosting-api-nodejs
+Allow: /image-hosting-api-php
+Allow: /image-hosting-api-curl
+Allow: /image-upload-zapier
+Allow: /image-upload-make
+Allow: /image-upload-n8n
+Allow: /image-hosting-rest-api
+# Cluster F GEO Q&A pages
+Allow: /how-to-get-direct-url-for-image
+Allow: /how-to-share-image-as-link
+Allow: /how-to-embed-image-in-email
+Allow: /what-is-image-hotlinking
+Allow: /how-to-host-image-for-free
+Allow: /how-long-does-imagetourl-store-images
 
 # Authenticated / admin surfaces — never index these.
 Disallow: /dashboard
@@ -91,3 +151,4 @@ User-agent: CCBot
 Disallow: /
 
 Sitemap: https://imagetourl.cloud/sitemap.xml
+Sitemap: https://imagetourl.cloud/image-sitemap.xml
