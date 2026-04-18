@@ -11,24 +11,40 @@ import type { Locale } from '../../../i18n/config';
 // locale prefixes).
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const { slug } = Astro.params;
-if (locale !== 'en' && slug) {
+if (slug) {
   try {
     const db = getDB(Astro.locals);
-    const hit = await db
+
+    // Check if the URL's slug actually resolves to a published post.
+    // Three ways: (a) base English slug, (b) translated slug for this locale,
+    // (c) another locale's slug (landed on wrong locale URL).
+    const found = await db
       .prepare(
-        `SELECT pt.slug as translated_slug
+        `SELECT p.id as post_id, p.slug as en_slug,
+                (SELECT pt.slug FROM post_translations pt
+                 WHERE pt.post_id = p.id AND pt.locale = ?
+                 LIMIT 1) as locale_slug
          FROM posts p
-         JOIN post_translations pt ON pt.post_id = p.id
-         WHERE p.slug = ? AND pt.locale = ? AND p.status = 'published'
+         LEFT JOIN post_translations pt2 ON pt2.post_id = p.id AND pt2.slug = ?
+         WHERE p.status = 'published'
+           AND (p.slug = ? OR pt2.slug = ?)
          LIMIT 1`,
       )
-      .bind(slug, locale)
-      .first<{ translated_slug: string }>();
-    if (hit?.translated_slug && hit.translated_slug !== slug) {
-      return Astro.redirect(`/${locale}/blog/${hit.translated_slug}`, 301);
+      .bind(locale, slug, slug, slug)
+      .first<{ post_id: string; en_slug: string; locale_slug: string | null }>();
+
+    if (!found) {
+      // Slug doesn't match any post — bounce to blog index in this locale.
+      return Astro.redirect(`/${locale}/blog`, 302);
+    }
+
+    // Non-English visitor arriving at the English slug and a translation
+    // exists: 301 to the translated slug (canonical URL per language).
+    if (locale !== 'en' && found.locale_slug && slug !== found.locale_slug) {
+      return Astro.redirect(`/${locale}/blog/${found.locale_slug}`, 301);
     }
   } catch {
-    // post_translations missing or other DB issue — fall through to component
+    // DB hiccup — fall through and let the component render its best effort.
   }
 }
 ---

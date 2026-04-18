@@ -205,7 +205,7 @@ async function openrouter(system, user, { responseFormat = TRANSLATION_SCHEMA } 
       model: MODEL,
       messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
       temperature: 0.2,
-      max_tokens: 16384,
+      max_tokens: 32000,
       response_format: responseFormat,
     }),
   });
@@ -272,6 +272,12 @@ Output JSON ONLY: {"slug": "<slug>"}`;
 
 async function translateOne(post, locale) {
   const label = LOCALES[locale];
+  const contentSample = String(post.content ?? '').trim();
+  const contentIsHtml = contentSample.startsWith('<') || /<\/(p|h[1-6]|div|ul|ol|li|a|strong|em|blockquote)>/i.test(contentSample);
+  const contentGuidance = contentIsHtml
+    ? `content_body is HTML. Translate every piece of visible text between tags into ${label}. Do NOT change any HTML tag names, attribute names, attribute values, or URLs. Preserve entity references (&amp; &nbsp; &lt;). Preserve <code>, <pre>, and <a href="..."> attribute values exactly.`
+    : `content_body is TipTap-style JSON. Translate every "text" string inside nodes. Do NOT change "type", "attrs", "marks", or the overall node structure. Output must still parse as valid JSON of the same shape.`;
+
   const system = `You are a professional translator. Translate the following blog post from English to ${label} (locale: ${locale}).
 
 Output strict JSON with this exact shape:
@@ -281,14 +287,17 @@ Output strict JSON with this exact shape:
   "excerpt": "string",
   "meta_title": "string",
   "meta_description": "string",
-  "content_json": "string — SAME JSON shape as input content_json with every 'text' field translated; type/attrs/marks/structure untouched",
+  "content_json": "string — translated copy of content_body (same format — HTML or JSON — as the input)",
   "faq_items_json": "string — SAME JSON array shape as input faq_items_json with every question/answer translated"
 }
 
+Content format: ${contentIsHtml ? 'HTML' : 'JSON'}.
+${contentGuidance}
+
 Rules:
-- Preserve all JSON structure. Translate only text values.
 - Keep brand names (ImageToURL, Cloudflare, Imgur, Imgbb, WordPress, Discord, Notion, Shopify, GitHub, etc.) in original Latin form.
 - Keep code snippets, URLs, file extensions (.png, .jpg, .gif, .webp, .heic), and technical tokens unchanged.
+- Preserve link targets: inside <a href="..."> the href value must stay unchanged even if it points to English text.
 - Output valid JSON only. No commentary.`;
 
   const user = JSON.stringify({
@@ -305,7 +314,16 @@ Rules:
 
   const parsed = await openrouter(system, user);
   let content = parsed.content_json ?? post.content;
-  try { JSON.parse(content); } catch { content = post.content; }
+  // Validate format matches the original: JSON if original was JSON, HTML otherwise.
+  // Empty/missing output falls back to source.
+  if (!content || typeof content !== 'string' || content.trim().length < 3) {
+    content = post.content;
+  } else if (contentIsHtml) {
+    // Require at least one HTML tag; otherwise model likely returned raw text.
+    if (!/<[a-z][^>]*>/i.test(content)) content = post.content;
+  } else {
+    try { JSON.parse(content); } catch { content = post.content; }
+  }
   let faq = parsed.faq_items_json ?? post.faq_items;
   try { JSON.parse(faq); } catch { faq = post.faq_items; }
   const slug = slugify(parsed.slug || post.slug) || post.slug;
@@ -367,13 +385,18 @@ async function run() {
       });
     }
     if (updates.length > 0) {
-      const stmts = updates.map(u => `UPDATE post_translations SET slug=${sqlQuote(u.newSlug)}, translated_at=datetime('now') WHERE post_id=${sqlQuote(u.post_id)} AND locale=${sqlQuote(u.locale)};`).join('\n');
-      try {
-        await wranglerFile(stmts);
-        console.log(`  wrote ${updates.length} slug update${updates.length === 1 ? '' : 's'}`);
-      } catch (err) {
-        console.error(`  DB write failed: ${err.message}`);
+      // Many small UPDATEs are more reliable than one big import — the import
+      // API has sporadic auth hiccups.
+      let okCount = 0;
+      for (const u of updates) {
+        try {
+          await wrangler(`UPDATE post_translations SET slug=${sqlQuote(u.newSlug)}, translated_at=datetime('now') WHERE post_id=${sqlQuote(u.post_id)} AND locale=${sqlQuote(u.locale)}`);
+          okCount++;
+        } catch (err) {
+          console.error(`    write ${u.post_id.slice(0,6)}.${u.locale}: ${err.message.slice(0, 120)}`);
+        }
       }
+      console.log(`  wrote ${okCount}/${updates.length} slug update${updates.length === 1 ? '' : 's'}`);
     } else {
       console.log('  no slug changes needed');
     }
