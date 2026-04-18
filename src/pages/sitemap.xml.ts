@@ -185,7 +185,9 @@ ${xDefault}
       .prepare('SELECT post_id, locale, slug FROM post_translations')
       .all<{ post_id: string; locale: string; slug: string }>();
     transRows = result.results ?? [];
-  } catch {}
+  } catch {
+    // post_translations table not migrated yet — fine, just skip translated blog URLs
+  }
   const postIdBySlug = new Map<string, string>();
   for (const p of postRows as any[]) if (p.id) postIdBySlug.set(p.slug, p.id);
   const transBySlug = new Map<string, Map<string, string>>(); // postSlug -> (locale -> tSlug)

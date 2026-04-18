@@ -260,18 +260,25 @@ export async function getPublishedPostsLocalized(
 
   const ids = base.posts.map(p => p.id);
   const placeholders = ids.map(() => '?').join(',');
-  const rows = await db
-    .prepare(
-      `SELECT post_id, slug, title, excerpt, meta_title, meta_description
-       FROM post_translations
-       WHERE locale = ? AND post_id IN (${placeholders})`,
-    )
-    .bind(locale, ...ids)
-    .all<{
-      post_id: string; slug: string; title: string; excerpt: string;
-      meta_title: string | null; meta_description: string | null;
-    }>();
-  const byId = new Map<string, typeof rows.results[number]>();
+  // Tolerate missing post_translations table (e.g. pre-migration environments).
+  // In that case, fall back to English content under the requested locale.
+  let rows: { results?: Array<{ post_id: string; slug: string; title: string; excerpt: string; meta_title: string | null; meta_description: string | null }> } = { results: [] };
+  try {
+    rows = await db
+      .prepare(
+        `SELECT post_id, slug, title, excerpt, meta_title, meta_description
+         FROM post_translations
+         WHERE locale = ? AND post_id IN (${placeholders})`,
+      )
+      .bind(locale, ...ids)
+      .all<{
+        post_id: string; slug: string; title: string; excerpt: string;
+        meta_title: string | null; meta_description: string | null;
+      }>();
+  } catch {
+    return base;
+  }
+  const byId = new Map<string, { post_id: string; slug: string; title: string; excerpt: string; meta_title: string | null; meta_description: string | null }>();
   for (const r of rows.results ?? []) byId.set(r.post_id, r);
 
   const overlaid = base.posts.map(p => {
@@ -315,20 +322,26 @@ export async function getPostBySlugLocalized(
 ): Promise<Post | null> {
   if (locale === 'en') return getPostBySlug(db, slug);
 
-  const trans = await db
-    .prepare(
-      `SELECT
-         pt.title as t_title, pt.excerpt as t_excerpt, pt.content as t_content,
-         pt.meta_title as t_meta_title, pt.meta_description as t_meta_description,
-         pt.faq_items as t_faq_items,
-         p.*, c.name as category_name, c.color as category_color
-       FROM post_translations pt
-       JOIN posts p ON p.id = pt.post_id
-       LEFT JOIN categories c ON p.category_id = c.id
-       WHERE pt.locale = ? AND pt.slug = ? AND p.status = 'published'`,
-    )
-    .bind(locale, slug)
-    .first<any>();
+  // Tolerate missing post_translations table — fall back to English post lookup.
+  let trans: any = null;
+  try {
+    trans = await db
+      .prepare(
+        `SELECT
+           pt.title as t_title, pt.excerpt as t_excerpt, pt.content as t_content,
+           pt.meta_title as t_meta_title, pt.meta_description as t_meta_description,
+           pt.faq_items as t_faq_items,
+           p.*, c.name as category_name, c.color as category_color
+         FROM post_translations pt
+         JOIN posts p ON p.id = pt.post_id
+         LEFT JOIN categories c ON p.category_id = c.id
+         WHERE pt.locale = ? AND pt.slug = ? AND p.status = 'published'`,
+      )
+      .bind(locale, slug)
+      .first<any>();
+  } catch {
+    return getPostBySlug(db, slug);
+  }
 
   if (trans) {
     return mapPostRow({
