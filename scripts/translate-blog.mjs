@@ -32,9 +32,37 @@ const args = process.argv.slice(2);
 const ALL = args.includes('--all');
 const FORCE = args.includes('--force');
 const LOCAL = args.includes('--local');
+// --slugs-only: don't re-translate content, only regenerate URL slugs
+// for existing translations in native script where applicable.
+const SLUGS_ONLY = args.includes('--slugs-only');
 const localesArg = args.find(a => a.startsWith('--locales='));
 const ONLY_LOCALES = localesArg ? localesArg.split('=')[1].split(',') : Object.keys(LOCALES);
 const postIdArgs = args.filter(a => !a.startsWith('--'));
+
+// Scripts expected per locale — for validation.
+const REQUIRED_SCRIPT = {
+  hi: /[\u0900-\u097F]/, mr: /[\u0900-\u097F]/,
+  bn: /[\u0980-\u09FF]/, ta: /[\u0B80-\u0BFF]/, te: /[\u0C00-\u0C7F]/,
+  ar: /[\u0600-\u06FF]/, fa: /[\u0600-\u06FF]/, ur: /[\u0600-\u06FF]/,
+  th: /[\u0E00-\u0E7F]/, ja: /[\u3040-\u30FF\u4E00-\u9FFF]/, ko: /[\uAC00-\uD7AF]/,
+  'zh-Hans': /[\u4E00-\u9FFF]/, 'zh-Hant': /[\u4E00-\u9FFF]/,
+};
+
+const SLUG_EXAMPLES = {
+  hi: 'पीएनजी-को-यूआरएल-में-बदलें',
+  bn: 'পিএনজি-কে-ইউআরএল-এ-রূপান্তর',
+  mr: 'पीएनजी-ला-यूआरएल-मध्ये',
+  ta: 'படங்களை-யுஆர்எல்-ஆக',
+  te: 'చిత్రాలను-యుఆర్ఎల్-గా',
+  ar: 'روابط-الصور-المباشرة',
+  fa: 'لینک-مستقیم-تصویر',
+  ur: 'تصویر-کا-لنک',
+  th: 'แปลงรูปเป็นลิงก์',
+  ja: '画像リンクの違い',
+  ko: '이미지-링크-차이',
+  'zh-Hans': '图片链接对比',
+  'zh-Hant': '圖片連結對比',
+};
 
 const DB_FLAG = LOCAL ? '--local' : '--remote';
 
@@ -196,6 +224,52 @@ async function openrouter(system, user, { responseFormat = TRANSLATION_SCHEMA } 
   return robustJsonParse(content);
 }
 
+// Slug-only regeneration: given an already-translated row, produce a native-
+// script slug. Cheap — short prompt, small output. Used by --slugs-only.
+async function regenerateSlug(post, trans) {
+  const locale = trans.locale;
+  const expectedScript = REQUIRED_SCRIPT[locale];
+  const example = SLUG_EXAMPLES[locale];
+
+  const system = expectedScript
+    ? `Produce a SEO URL slug for a blog post in ${LOCALES[locale]} (${locale}) using that language's NATIVE SCRIPT only (not Latin, not transliteration).
+
+- Hindi/Marathi → Devanagari (देवनागरी)
+- Bengali → Bengali script
+- Tamil/Telugu/Thai → their native scripts
+- Arabic/Farsi/Urdu → Arabic script
+- Japanese → Kana/Kanji
+- Korean → Hangul
+- Chinese → Han characters
+${example ? `Example good slug: ${example}` : ''}
+
+- 3-6 native words, lowercase where applicable, hyphen-separated, raw Unicode.
+- Keep brand names (ImageToURL, WordPress, Discord, GitHub) and file formats (png, jpg, url) in Latin.
+
+Output JSON ONLY: {"slug": "<slug>"}`
+    : `Produce a SEO URL slug in ${LOCALES[locale]} (${locale}). Natural target-language words, lowercase, 3-6 words, hyphen-separated, no URL encoding. Keep brand names in Latin.
+
+Output JSON ONLY: {"slug": "<slug>"}`;
+
+  const user = JSON.stringify({
+    translated_title: trans.title,
+    translated_meta_title: trans.meta_title,
+  });
+
+  let lastErr;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const parsed = await openrouter(system, user, { responseFormat: { type: 'json_schema', json_schema: { name: 'slug_only', strict: true, schema: { type: 'object', properties: { slug: { type: 'string' } }, required: ['slug'], additionalProperties: false } } } });
+    const slug = slugify(parsed.slug || '');
+    if (!slug) { lastErr = new Error('empty slug'); continue; }
+    if (expectedScript && !expectedScript.test(slug)) {
+      lastErr = new Error(`slug missing ${locale} script: ${slug}`);
+      continue;
+    }
+    return slug;
+  }
+  throw lastErr || new Error('slug regen failed');
+}
+
 async function translateOne(post, locale) {
   const label = LOCALES[locale];
   const system = `You are a professional translator. Translate the following blog post from English to ${label} (locale: ${locale}).
@@ -265,6 +339,46 @@ async function run() {
   }
   console.log(`  ${posts.length} post${posts.length === 1 ? '' : 's'}`);
   if (posts.length === 0) return;
+
+  // SLUG-ONLY MODE: for each post, pull existing translations, regenerate
+  // native-script slugs where applicable, UPDATE rows. No content retranslation.
+  if (SLUGS_ONLY) {
+    const postIds = posts.map(p => sqlQuote(p.id)).join(',');
+    const rows = await wrangler(`SELECT post_id, locale, slug, title, meta_title FROM post_translations WHERE post_id IN (${postIds})`);
+    console.log(`  ${rows.length} existing translations`);
+    const PARALLEL = 8;
+    const updates = [];
+    const filtered = rows.filter(r => ONLY_LOCALES.includes(r.locale));
+    for (let i = 0; i < filtered.length; i += PARALLEL) {
+      const batch = filtered.slice(i, i + PARALLEL);
+      const settled = await Promise.allSettled(batch.map(async r => {
+        const post = posts.find(p => p.id === r.post_id);
+        const newSlug = await regenerateSlug(post, r);
+        return { post_id: r.post_id, locale: r.locale, oldSlug: r.slug, newSlug };
+      }));
+      settled.forEach((s, idx) => {
+        const r = batch[idx];
+        if (s.status === 'fulfilled') {
+          if (s.value.newSlug !== s.value.oldSlug) updates.push(s.value);
+          console.log(`    ${r.post_id.slice(0, 6)}.${r.locale}: ${s.status === 'fulfilled' ? (s.value.newSlug === s.value.oldSlug ? 'unchanged' : s.value.newSlug) : 'skip'}`);
+        } else {
+          console.error(`    ${r.post_id.slice(0, 6)}.${r.locale}: ${String(s.reason).slice(0, 150)}`);
+        }
+      });
+    }
+    if (updates.length > 0) {
+      const stmts = updates.map(u => `UPDATE post_translations SET slug=${sqlQuote(u.newSlug)}, translated_at=datetime('now') WHERE post_id=${sqlQuote(u.post_id)} AND locale=${sqlQuote(u.locale)};`).join('\n');
+      try {
+        await wranglerFile(stmts);
+        console.log(`  wrote ${updates.length} slug update${updates.length === 1 ? '' : 's'}`);
+      } catch (err) {
+        console.error(`  DB write failed: ${err.message}`);
+      }
+    } else {
+      console.log('  no slug changes needed');
+    }
+    return;
+  }
 
   // Fetch existing translations so we can skip completed (locale, post) combos.
   let existingRows = [];
