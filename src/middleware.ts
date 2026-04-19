@@ -5,7 +5,7 @@ import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale, locales } from './i18n/config';
 
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
-const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
+const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/', '/i/'];
 const NON_LOCALIZED_EXACT = new Set([
   '/sitemap.xml', '/image-sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest',
   '/llms.txt', '/llms-full.txt',

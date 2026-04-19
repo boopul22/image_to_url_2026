@@ -177,6 +177,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
       console.error('D1 insert error:', dbErr?.message || dbErr);
     }
 
+    const shareUrl = `${new URL(request.url).origin}/i/${id}`;
+
     return new Response(
       JSON.stringify({
         success: true,
@@ -184,6 +186,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
           id: `img_${id}`,
           key,
           url: imageUrl,
+          shareUrl,
           filename: file.name,
           size: file.size,
           mimetype: file.type,
