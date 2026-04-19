@@ -44,6 +44,10 @@ const WIDGETS: Partial<Record<PageKey, WidgetSpec>> = {
   'image-resizer':    { kind: 'resizer' },
   // image-to-base64, base64-to-image, favicon-generator have no shared widget —
   // they use inline scripts and render fine without a widget component.
+  // Informational / policy pages — no upload widget on these.
+  'about':               { kind: 'none' },
+  'contact':             { kind: 'none' },
+  'content-guidelines':  { kind: 'none' },
 };
 
 // Eager-load all landing content modules at build time. Each module exports
