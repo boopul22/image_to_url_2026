@@ -6,3 +6,8 @@ compatibility_flags = ["nodejs_compat"]
 binding = "DB"
 database_name = "imagetourl-db"
 database_id = "4cc70585-dd14-4083-9b03-6dda95846d64"
+remote = true
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "imagetourl-storage"
