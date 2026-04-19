@@ -52,8 +52,6 @@
   "home.upload.failed": "Upload failed",
   "home.upload.tryAgain": "Try again",
   "home.upload.uploadingFile": "Uploading {name}",
-  "home.upload.shareHint": "Paste this anywhere — Reddit, blogs, forums, Discord.",
-  "home.upload.needDirect": "Need a direct image URL for <img src>?",
   "home.supported": "Supported:",
   "home.features.title": "Discover All Features",
   "home.features.description": "Everything you need to manage your visual assets with zero friction and maximum efficiency.",

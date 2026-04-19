@@ -216,8 +216,6 @@ const pageSchema = [
         data-formats={t(locale, 'home.upload.formats')}
         data-select-file={t(locale, 'home.upload.selectFile')}
         data-uploading-file={t(locale, 'home.upload.uploadingFile')}
-        data-share-hint={t(locale, 'home.upload.shareHint')}
-        data-need-direct={t(locale, 'home.upload.needDirect')}
       >
         <!-- State: idle / uploading -->
         <div id="state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
@@ -243,28 +241,9 @@ const pageSchema = [
               {t(locale, 'home.upload.uploadAnother')}
             </button>
           </div>
-          <!-- Primary: share link (HTML page, counts as backlink when pasted) -->
           <div class="flex flex-col sm:flex-row gap-3">
-            <input type="text" id="share-url" readonly class="flex-1 min-w-0 bg-white border-2 border-on-background px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-            <button id="copy-share-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">
-              {t(locale, 'home.upload.copy')}
-            </button>
-          </div>
-          <p class="mt-2 text-xs text-on-surface-variant">{t(locale, 'home.upload.shareHint')}</p>
-
-          <!-- Secondary: direct image URL (for <img src> embedding) -->
-          <button
-            id="toggle-direct"
-            type="button"
-            class="mt-3 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-rose-600"
-            aria-expanded="false"
-            aria-controls="direct-row"
-          >
-            + {t(locale, 'home.upload.needDirect')}
-          </button>
-          <div id="direct-row" class="hidden mt-3 flex-col sm:flex-row gap-3">
             <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border-2 border-on-background px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-            <button id="copy-btn" class="bg-white hover:bg-surface-variant text-on-background font-headline font-semibold text-sm py-3 px-6 border-2 border-on-background brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">
+            <button id="copy-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">
               {t(locale, 'home.upload.copy')}
             </button>
           </div>
@@ -690,11 +669,7 @@ const pageSchema = [
   const stateSuccess = document.getElementById('state-success')!;
   const stateError = document.getElementById('state-error')!;
   const resultUrl = document.getElementById('result-url') as HTMLInputElement;
-  const shareUrlInput = document.getElementById('share-url') as HTMLInputElement;
   const copyBtn = document.getElementById('copy-btn')!;
-  const copyShareBtn = document.getElementById('copy-share-btn')!;
-  const toggleDirect = document.getElementById('toggle-direct')!;
-  const directRow = document.getElementById('direct-row')!;
   const uploadAnother = document.getElementById('upload-another')!;
   const errorRetry = document.getElementById('error-retry')!;
   const errorText = document.getElementById('error-text')!;
@@ -761,26 +736,10 @@ const pageSchema = [
     if (fileInput.files && fileInput.files.length > 0) uploadFile(fileInput.files[0]);
   });
 
-  function wireCopy(btn: HTMLElement, input: HTMLInputElement) {
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(input.value);
-      } catch {
-        input.select();
-        document.execCommand('copy');
-      }
-      btn.textContent = i18n.copied;
-      setTimeout(() => { btn.textContent = i18n.copy; }, 2000);
-    });
-  }
-  wireCopy(copyShareBtn, shareUrlInput);
-  wireCopy(copyBtn, resultUrl);
-
-  toggleDirect.addEventListener('click', () => {
-    const isHidden = directRow.classList.contains('hidden');
-    directRow.classList.toggle('hidden');
-    directRow.classList.toggle('flex');
-    toggleDirect.setAttribute('aria-expanded', String(isHidden));
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(resultUrl.value);
+    copyBtn.textContent = i18n.copied;
+    setTimeout(() => { copyBtn.textContent = i18n.copy; }, 2000);
   });
 
   uploadAnother.addEventListener('click', resetIdle);
@@ -830,11 +789,6 @@ const pageSchema = [
       setTimeout(() => {
         showState('success');
         resultUrl.value = data.data.url;
-        shareUrlInput.value = data.data.shareUrl || data.data.url;
-        // Collapse direct-URL row on each new upload
-        directRow.classList.add('hidden');
-        directRow.classList.remove('flex');
-        toggleDirect.setAttribute('aria-expanded', 'false');
       }, 300);
 
     } catch (err: any) {
