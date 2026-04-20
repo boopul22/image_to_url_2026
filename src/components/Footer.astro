@@ -14,16 +14,33 @@ function localePath(path: string): string {
 }
 
 const colHead = "font-headline font-semibold text-xs uppercase tracking-wider text-white mb-4";
-const subHead = "font-headline text-[11px] uppercase tracking-wider text-neutral-500 mt-4 mb-2";
 const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors py-0.5 block";
+
+type Group = { label: string; items: { name: string; href: string }[] };
+
+const toolsGroups: Group[] = [
+  { label: 'URL Uploaders', items: nav.convert },
+  { label: 'Format Convert', items: nav.formatConvert },
+  { label: 'Utilities', items: nav.utilities },
+];
+const popularGroups: Group[] = [
+  { label: 'Features', items: nav.features },
+  { label: 'Use Cases', items: nav.useCases },
+];
+const learnGroups: Group[] = [
+  { label: 'Guides', items: nav.guides },
+  { label: 'Answers', items: nav.answers },
+  { label: 'Compare', items: nav.compare },
+  { label: 'API', items: nav.api },
+];
 ---
 
 <footer class="bg-neutral-900 text-neutral-400 pt-12 pb-8 border-t-4 border-rose-600" style="padding-bottom: max(2rem, env(safe-area-inset-bottom));">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-x-6 gap-y-10">
+    <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-x-8 gap-y-8">
 
       <!-- Brand + Newsletter + Socials -->
-      <div class="col-span-2 md:col-span-4 lg:col-span-3">
+      <div class="md:col-span-4 lg:col-span-3">
         <div class="font-headline font-semibold text-base uppercase tracking-tighter text-white mb-3 flex items-center gap-2">
           <span class="material-symbols-outlined text-rose-600 text-xl" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
           ImageToURL
@@ -37,7 +54,7 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
             placeholder={t(locale, 'footer.emailPlaceholder')}
             class="flex-1 bg-neutral-800 border-2 border-neutral-700 text-white placeholder:text-neutral-500 px-3 py-2 text-xs focus:border-rose-600 focus:outline-none"
           />
-          <button class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 font-headline font-semibold text-xs uppercase tracking-wide transition-colors">
+          <button class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 font-headline font-semibold text-xs uppercase tracking-wide transition-colors border-2 border-rose-600">
             {t(locale, 'footer.join')}
           </button>
         </div>
@@ -53,100 +70,160 @@ const linkClass = "text-xs text-neutral-400 hover:text-white transition-colors p
         </div>
       </div>
 
-      <!-- Tools column: Convert + Format + Utilities -->
-      <div class="col-span-1 md:col-span-2 lg:col-span-3">
+      <!-- Tools -->
+      <div class="md:col-span-4 lg:col-span-3">
         <span class={colHead}>{t(locale, 'footer.tools')}</span>
-
-        <span class="block font-headline text-[11px] uppercase tracking-wider text-neutral-500 mb-2">URL Uploaders</span>
-        <div class="columns-2 gap-x-4">
-          {nav.convert.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
-
-        <span class={subHead}>Format Convert</span>
-        <div class="columns-2 gap-x-4">
-          {nav.formatConvert.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
-
-        <span class={subHead}>Utilities</span>
-        <div class="columns-2 gap-x-4">
-          {nav.utilities.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
+        {toolsGroups.map((g) => (
+          <details class="footer-dd">
+            <summary>
+              <span class="dd-label">{g.label}</span>
+              <span class="dd-sq" aria-hidden="true"></span>
+            </summary>
+            <div class="dd-body">
+              {g.items.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
+            </div>
+          </details>
+        ))}
       </div>
 
-      <!-- Popular: Features + Use Cases -->
-      <div class="col-span-1 md:col-span-2 lg:col-span-3">
+      <!-- Popular -->
+      <div class="md:col-span-4 lg:col-span-3">
         <span class={colHead}>Popular</span>
-
-        <span class="block font-headline text-[11px] uppercase tracking-wider text-neutral-500 mb-2">Features</span>
-        <div class="columns-2 gap-x-4">
-          {nav.features.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
-
-        <span class={subHead}>Use Cases</span>
-        <div class="columns-2 gap-x-4">
-          {nav.useCases.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
+        {popularGroups.map((g) => (
+          <details class="footer-dd">
+            <summary>
+              <span class="dd-label">{g.label}</span>
+              <span class="dd-sq" aria-hidden="true"></span>
+            </summary>
+            <div class="dd-body">
+              {g.items.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
+            </div>
+          </details>
+        ))}
       </div>
 
-      <!-- Learn: Compare + API + Answers + Guides -->
-      <div class="col-span-1 md:col-span-2 lg:col-span-2">
+      <!-- Learn -->
+      <div class="md:col-span-4 lg:col-span-3">
         <span class={colHead}>Learn</span>
-
-        <span class="block font-headline text-[11px] uppercase tracking-wider text-neutral-500 mb-2">Guides</span>
-        <div class="columns-2 gap-x-4">
-          {nav.guides.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
-
-        <span class={subHead}>Answers</span>
-        <div class="columns-2 gap-x-4">
-          {nav.answers.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
-
-        <span class={subHead}>Compare</span>
-        <div class="columns-2 gap-x-4">
-          {nav.compare.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
-
-        <span class={subHead}>API</span>
-        <div class="columns-2 gap-x-4">
-          {nav.api.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
-        </div>
+        {learnGroups.map((g) => (
+          <details class="footer-dd">
+            <summary>
+              <span class="dd-label">{g.label}</span>
+              <span class="dd-sq" aria-hidden="true"></span>
+            </summary>
+            <div class="dd-body">
+              {g.items.map((i) => (<a href={i.href} class={linkClass}>{i.name}</a>))}
+            </div>
+          </details>
+        ))}
       </div>
 
-      <!-- Company: pages + our tools -->
-      <div class="col-span-1 md:col-span-2 lg:col-span-1">
-        <span class={colHead}>{t(locale, 'footer.resources')}</span>
-        <a href={localePath('/privacy')} class={linkClass}>{t(locale, 'footer.privacy')}</a>
-        <a href={localePath('/terms')} class={linkClass}>{t(locale, 'footer.terms')}</a>
-        <a href={localePath('/docs')} class={linkClass}>{t(locale, 'footer.docs')}</a>
-        <a href={localizedUrl('about', locale)} class={linkClass}>{t(locale, 'footer.about')}</a>
-        <a href={localizedUrl('contact', locale)} class={linkClass}>{t(locale, 'footer.contact')}</a>
-        <a href={localePath('/blog')} class={linkClass}>{t(locale, 'footer.blog')}</a>
-        <a href={localizedUrl('content-guidelines', locale)} class={linkClass}>Content Guidelines</a>
+    </div>
 
-        <span class={subHead}>Our Tools</span>
-        <a href={localePath('/')} class={linkClass + " flex items-center gap-1.5"}>
-          <span class="material-symbols-outlined text-rose-600 text-sm">cloud_upload</span>
-          ImageToURL
-        </a>
-        <a href={localizedUrl('heic-to-jpg', locale)} class={linkClass + " flex items-center gap-1.5"}>
-          <span class="material-symbols-outlined text-rose-600 text-sm">photo_camera_back</span>
-          HEIC to JPG
-        </a>
-        <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class={linkClass + " flex items-center gap-1.5"}>
-          <span class="material-symbols-outlined text-rose-600 text-sm">travel_explore</span>
-          ExtractPics
-        </a>
-        <a href="https://dailymeditationguide.com/?ref=imagetourl" target="_blank" rel="noopener" class={linkClass + " flex items-center gap-1.5"}>
-          <span class="material-symbols-outlined text-rose-600 text-sm">self_improvement</span>
-          Daily Meditation
-        </a>
+    <!-- Company / Our Tools — short enough to stay flat -->
+    <div class="mt-10 pt-6 border-t-2 border-neutral-800 grid gap-6 md:grid-cols-2">
+      <div>
+        <span class={colHead}>{t(locale, 'footer.resources')}</span>
+        <nav class="flex flex-wrap gap-x-5 gap-y-1">
+          <a href={localePath('/privacy')} class={linkClass}>{t(locale, 'footer.privacy')}</a>
+          <a href={localePath('/terms')} class={linkClass}>{t(locale, 'footer.terms')}</a>
+          <a href={localePath('/docs')} class={linkClass}>{t(locale, 'footer.docs')}</a>
+          <a href={localizedUrl('about', locale)} class={linkClass}>{t(locale, 'footer.about')}</a>
+          <a href={localizedUrl('contact', locale)} class={linkClass}>{t(locale, 'footer.contact')}</a>
+          <a href={localePath('/blog')} class={linkClass}>{t(locale, 'footer.blog')}</a>
+          <a href={localizedUrl('content-guidelines', locale)} class={linkClass}>Content Guidelines</a>
+        </nav>
+      </div>
+
+      <div>
+        <span class={colHead}>Our Tools</span>
+        <div class="flex flex-wrap gap-x-5 gap-y-1">
+          <a href={localePath('/')} class={linkClass + ' inline-flex items-center gap-1.5'}>
+            <span class="material-symbols-outlined text-rose-600 text-sm">cloud_upload</span>
+            ImageToURL
+          </a>
+          <a href={localizedUrl('heic-to-jpg', locale)} class={linkClass + ' inline-flex items-center gap-1.5'}>
+            <span class="material-symbols-outlined text-rose-600 text-sm">photo_camera_back</span>
+            HEIC to JPG
+          </a>
+          <a href="https://extractpics.com/?ref=imagetourl" target="_blank" rel="noopener" class={linkClass + ' inline-flex items-center gap-1.5'}>
+            <span class="material-symbols-outlined text-rose-600 text-sm">travel_explore</span>
+            ExtractPics
+          </a>
+          <a href="https://dailymeditationguide.com/?ref=imagetourl" target="_blank" rel="noopener" class={linkClass + ' inline-flex items-center gap-1.5'}>
+            <span class="material-symbols-outlined text-rose-600 text-sm">self_improvement</span>
+            Daily Meditation
+          </a>
+        </div>
       </div>
     </div>
 
-    <div class="mt-10 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row justify-between gap-2 text-xs text-neutral-500">
+    <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row justify-between gap-2 text-xs text-neutral-500">
       <p>{t(locale, 'footer.copyright', { year: String(new Date().getFullYear()) })}</p>
       <p>Built with care · Hosted on Cloudflare</p>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-dd {
+    border-bottom: 1px solid #262626; /* neutral-800 */
+  }
+  .footer-dd > summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.625rem 0;
+    font-family: var(--font-headline, 'Space Grotesk', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d4d4d4; /* neutral-300 */
+    transition: color 160ms linear;
+  }
+  .footer-dd > summary::-webkit-details-marker { display: none; }
+  .footer-dd > summary::marker { content: ''; }
+  .footer-dd > summary:hover { color: #fff; }
+  .footer-dd > summary:hover .dd-sq { border-color: #e11d48; color: #e11d48; }
+  .footer-dd[open] > summary { color: #fff; }
+
+  /* Brutal toggle square */
+  .dd-sq {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #525252; /* neutral-600 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #a3a3a3; /* neutral-400 */
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+    transition: color 160ms linear, background-color 160ms linear, border-color 160ms linear;
+  }
+  .dd-sq::before { content: '+'; display: block; transform: translateY(-1px); }
+  .footer-dd[open] .dd-sq {
+    background: #e11d48;
+    border-color: #e11d48;
+    color: #fff;
+  }
+  .footer-dd[open] .dd-sq::before { content: '–'; transform: translateY(-2px); }
+
+  /* Body rail — rose-600 accent on open */
+  .dd-body {
+    padding: 0.25rem 0 0.75rem 0.75rem;
+    margin-left: 0.125rem;
+    border-left: 2px solid #e11d48;
+  }
+
+  /* No motion: instant open — matches brutalist anti-smooth rule */
+  .footer-dd > summary,
+  .footer-dd .dd-sq { will-change: auto; }
+</style>
