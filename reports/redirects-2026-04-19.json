@@ -1,0 +1,1453 @@
+{
+  "base": "https://imagetourl.cloud",
+  "checkedAt": "2026-04-19T20:28:19.184Z",
+  "totals": {
+    "checked": 1796,
+    "ok": 1735,
+    "redirect": 61,
+    "broken": 0,
+    "error": 0
+  },
+  "redirects": [
+    {
+      "url": "https://imagetourl.cloud/postimages-alternative",
+      "finalUrl": "https://imagetourl.cloud/postimages-alternative/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/postimages-alternative",
+          "status": 307,
+          "location": "/postimages-alternative/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/postimages-alternative/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/google-photos-direct-link",
+      "finalUrl": "https://imagetourl.cloud/google-photos-direct-link/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/google-photos-direct-link",
+          "status": 307,
+          "location": "/google-photos-direct-link/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/google-photos-direct-link/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/dropbox-direct-image-link",
+      "finalUrl": "https://imagetourl.cloud/dropbox-direct-image-link/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/dropbox-direct-image-link",
+          "status": 307,
+          "location": "/dropbox-direct-image-link/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/dropbox-direct-image-link/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/imagetourl-vs-imgur",
+      "finalUrl": "https://imagetourl.cloud/imagetourl-vs-imgur/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/imagetourl-vs-imgur",
+          "status": 307,
+          "location": "/imagetourl-vs-imgur/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/imagetourl-vs-imgur/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/imagetourl-vs-imgbb",
+      "finalUrl": "https://imagetourl.cloud/imagetourl-vs-imgbb/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/imagetourl-vs-imgbb",
+          "status": 307,
+          "location": "/imagetourl-vs-imgbb/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/imagetourl-vs-imgbb/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/imagetourl-vs-cloudinary",
+      "finalUrl": "https://imagetourl.cloud/imagetourl-vs-cloudinary/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/imagetourl-vs-cloudinary",
+          "status": 307,
+          "location": "/imagetourl-vs-cloudinary/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/imagetourl-vs-cloudinary/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/imgur-vs-imgbb",
+      "finalUrl": "https://imagetourl.cloud/imgur-vs-imgbb/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/imgur-vs-imgbb",
+          "status": 307,
+          "location": "/imgur-vs-imgbb/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/imgur-vs-imgbb/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-reddit",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-reddit/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-reddit",
+          "status": 307,
+          "location": "/image-hosting-for-reddit/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-reddit/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-twitter",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-twitter/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-twitter",
+          "status": 307,
+          "location": "/image-hosting-for-twitter/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-twitter/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-instagram",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-instagram/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-instagram",
+          "status": 307,
+          "location": "/image-hosting-for-instagram/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-instagram/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-pinterest",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-pinterest/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-pinterest",
+          "status": 307,
+          "location": "/image-hosting-for-pinterest/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-pinterest/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-substack",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-substack/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-substack",
+          "status": 307,
+          "location": "/image-hosting-for-substack/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-substack/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-medium",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-medium/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-medium",
+          "status": 307,
+          "location": "/image-hosting-for-medium/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-medium/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-linkedin",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-linkedin/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-linkedin",
+          "status": 307,
+          "location": "/image-hosting-for-linkedin/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-linkedin/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-webflow",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-webflow/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-webflow",
+          "status": 307,
+          "location": "/image-hosting-for-webflow/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-webflow/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-squarespace",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-squarespace/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-squarespace",
+          "status": 307,
+          "location": "/image-hosting-for-squarespace/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-squarespace/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-wix",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-wix/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-wix",
+          "status": 307,
+          "location": "/image-hosting-for-wix/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-wix/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-framer",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-framer/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-framer",
+          "status": 307,
+          "location": "/image-hosting-for-framer/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-framer/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-stack-overflow",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-stack-overflow/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-stack-overflow",
+          "status": 307,
+          "location": "/image-hosting-for-stack-overflow/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-stack-overflow/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-markdown",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-markdown/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-markdown",
+          "status": 307,
+          "location": "/image-hosting-for-markdown/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-markdown/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-nextjs",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-nextjs/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-nextjs",
+          "status": 307,
+          "location": "/image-hosting-for-nextjs/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-nextjs/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-for-jira",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-for-jira/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-jira",
+          "status": 307,
+          "location": "/image-hosting-for-jira/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-for-jira/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-upload-api",
+      "finalUrl": "https://imagetourl.cloud/image-upload-api/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-upload-api",
+          "status": 307,
+          "location": "/image-upload-api/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-upload-api/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-api-python",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-api-python/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-python",
+          "status": 307,
+          "location": "/image-hosting-api-python/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-python/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-api-nodejs",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-api-nodejs/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-nodejs",
+          "status": 307,
+          "location": "/image-hosting-api-nodejs/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-nodejs/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-api-php",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-api-php/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-php",
+          "status": 307,
+          "location": "/image-hosting-api-php/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-php/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-api-curl",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-api-curl/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-curl",
+          "status": 307,
+          "location": "/image-hosting-api-curl/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-api-curl/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-upload-zapier",
+      "finalUrl": "https://imagetourl.cloud/image-upload-zapier/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-upload-zapier",
+          "status": 307,
+          "location": "/image-upload-zapier/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-upload-zapier/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-upload-make",
+      "finalUrl": "https://imagetourl.cloud/image-upload-make/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-upload-make",
+          "status": 307,
+          "location": "/image-upload-make/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-upload-make/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-upload-n8n",
+      "finalUrl": "https://imagetourl.cloud/image-upload-n8n/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-upload-n8n",
+          "status": 307,
+          "location": "/image-upload-n8n/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-upload-n8n/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-hosting-rest-api",
+      "finalUrl": "https://imagetourl.cloud/image-hosting-rest-api/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-hosting-rest-api",
+          "status": 307,
+          "location": "/image-hosting-rest-api/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/image-hosting-rest-api/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/how-to-get-direct-url-for-image",
+      "finalUrl": "https://imagetourl.cloud/how-to-get-direct-url-for-image/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/how-to-get-direct-url-for-image",
+          "status": 307,
+          "location": "/how-to-get-direct-url-for-image/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/how-to-get-direct-url-for-image/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/how-to-share-image-as-link",
+      "finalUrl": "https://imagetourl.cloud/how-to-share-image-as-link/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/how-to-share-image-as-link",
+          "status": 307,
+          "location": "/how-to-share-image-as-link/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/how-to-share-image-as-link/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/how-to-embed-image-in-email",
+      "finalUrl": "https://imagetourl.cloud/how-to-embed-image-in-email/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/how-to-embed-image-in-email",
+          "status": 307,
+          "location": "/how-to-embed-image-in-email/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/how-to-embed-image-in-email/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/what-is-image-hotlinking",
+      "finalUrl": "https://imagetourl.cloud/what-is-image-hotlinking/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/what-is-image-hotlinking",
+          "status": 307,
+          "location": "/what-is-image-hotlinking/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/what-is-image-hotlinking/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/how-to-host-image-for-free",
+      "finalUrl": "https://imagetourl.cloud/how-to-host-image-for-free/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/how-to-host-image-for-free",
+          "status": 307,
+          "location": "/how-to-host-image-for-free/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/how-to-host-image-for-free/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/how-long-does-imagetourl-store-images",
+      "finalUrl": "https://imagetourl.cloud/how-long-does-imagetourl-store-images/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/how-long-does-imagetourl-store-images",
+          "status": 307,
+          "location": "/how-long-does-imagetourl-store-images/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/how-long-does-imagetourl-store-images/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/jpg-vs-png-vs-webp-vs-avif",
+      "finalUrl": "https://imagetourl.cloud/guides/jpg-vs-png-vs-webp-vs-avif/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/jpg-vs-png-vs-webp-vs-avif",
+          "status": 307,
+          "location": "/guides/jpg-vs-png-vs-webp-vs-avif/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/jpg-vs-png-vs-webp-vs-avif/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/image-lcp-optimization",
+      "finalUrl": "https://imagetourl.cloud/guides/image-lcp-optimization/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/image-lcp-optimization",
+          "status": 307,
+          "location": "/guides/image-lcp-optimization/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/image-lcp-optimization/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/what-exif-leaks",
+      "finalUrl": "https://imagetourl.cloud/guides/what-exif-leaks/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/what-exif-leaks",
+          "status": 307,
+          "location": "/guides/what-exif-leaks/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/what-exif-leaks/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/embed-images-in-notion",
+      "finalUrl": "https://imagetourl.cloud/guides/embed-images-in-notion/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/embed-images-in-notion",
+          "status": 307,
+          "location": "/guides/embed-images-in-notion/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/embed-images-in-notion/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/why-reddit-strips-exif",
+      "finalUrl": "https://imagetourl.cloud/guides/why-reddit-strips-exif/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/why-reddit-strips-exif",
+          "status": 307,
+          "location": "/guides/why-reddit-strips-exif/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/why-reddit-strips-exif/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/responsive-images-cheatsheet",
+      "finalUrl": "https://imagetourl.cloud/guides/responsive-images-cheatsheet/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/responsive-images-cheatsheet",
+          "status": 307,
+          "location": "/guides/responsive-images-cheatsheet/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/responsive-images-cheatsheet/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/guides/image-optimization-core-web-vitals",
+      "finalUrl": "https://imagetourl.cloud/guides/image-optimization-core-web-vitals/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/guides/image-optimization-core-web-vitals",
+          "status": 307,
+          "location": "/guides/image-optimization-core-web-vitals/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/guides/image-optimization-core-web-vitals/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/",
+      "finalUrl": "https://imagetourl.cloud/en/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 1,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/",
+          "status": 301,
+          "location": "/en/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/heic-to-jpg",
+      "finalUrl": "https://imagetourl.cloud/en/heic-to-jpg/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/heic-to-jpg",
+          "status": 301,
+          "location": "/en/heic-to-jpg",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/heic-to-jpg",
+          "status": 307,
+          "location": "/en/heic-to-jpg/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/heic-to-jpg/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/heic-to-png",
+      "finalUrl": "https://imagetourl.cloud/en/heic-to-png/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/heic-to-png",
+          "status": 301,
+          "location": "/en/heic-to-png",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/heic-to-png",
+          "status": 307,
+          "location": "/en/heic-to-png/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/heic-to-png/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/heic-to-pdf",
+      "finalUrl": "https://imagetourl.cloud/en/heic-to-pdf/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/heic-to-pdf",
+          "status": 301,
+          "location": "/en/heic-to-pdf",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/heic-to-pdf",
+          "status": 307,
+          "location": "/en/heic-to-pdf/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/heic-to-pdf/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/png-to-jpg",
+      "finalUrl": "https://imagetourl.cloud/en/png-to-jpg/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/png-to-jpg",
+          "status": 301,
+          "location": "/en/png-to-jpg",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/png-to-jpg",
+          "status": 307,
+          "location": "/en/png-to-jpg/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/png-to-jpg/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/jpg-to-png",
+      "finalUrl": "https://imagetourl.cloud/en/jpg-to-png/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/jpg-to-png",
+          "status": 301,
+          "location": "/en/jpg-to-png",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/jpg-to-png",
+          "status": 307,
+          "location": "/en/jpg-to-png/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/jpg-to-png/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/webp-to-jpg",
+      "finalUrl": "https://imagetourl.cloud/en/webp-to-jpg/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/webp-to-jpg",
+          "status": 301,
+          "location": "/en/webp-to-jpg",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/webp-to-jpg",
+          "status": 307,
+          "location": "/en/webp-to-jpg/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/webp-to-jpg/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/webp-to-png",
+      "finalUrl": "https://imagetourl.cloud/en/webp-to-png/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/webp-to-png",
+          "status": 301,
+          "location": "/en/webp-to-png",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/webp-to-png",
+          "status": 307,
+          "location": "/en/webp-to-png/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/webp-to-png/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/png-to-webp",
+      "finalUrl": "https://imagetourl.cloud/en/png-to-webp/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/png-to-webp",
+          "status": 301,
+          "location": "/en/png-to-webp",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/png-to-webp",
+          "status": 307,
+          "location": "/en/png-to-webp/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/png-to-webp/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/jpg-to-webp",
+      "finalUrl": "https://imagetourl.cloud/en/jpg-to-webp/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/jpg-to-webp",
+          "status": 301,
+          "location": "/en/jpg-to-webp",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/jpg-to-webp",
+          "status": 307,
+          "location": "/en/jpg-to-webp/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/jpg-to-webp/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/png-to-pdf",
+      "finalUrl": "https://imagetourl.cloud/en/png-to-pdf/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/png-to-pdf",
+          "status": 301,
+          "location": "/en/png-to-pdf",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/png-to-pdf",
+          "status": 307,
+          "location": "/en/png-to-pdf/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/png-to-pdf/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/jpg-to-pdf",
+      "finalUrl": "https://imagetourl.cloud/en/jpg-to-pdf/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/jpg-to-pdf",
+          "status": 301,
+          "location": "/en/jpg-to-pdf",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/jpg-to-pdf",
+          "status": 307,
+          "location": "/en/jpg-to-pdf/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/jpg-to-pdf/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-compressor",
+      "finalUrl": "https://imagetourl.cloud/en/image-compressor/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-compressor",
+          "status": 301,
+          "location": "/en/image-compressor",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/image-compressor",
+          "status": 307,
+          "location": "/en/image-compressor/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/image-compressor/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-resizer",
+      "finalUrl": "https://imagetourl.cloud/en/image-resizer/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-resizer",
+          "status": 301,
+          "location": "/en/image-resizer",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/image-resizer",
+          "status": 307,
+          "location": "/en/image-resizer/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/image-resizer/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/favicon-generator",
+      "finalUrl": "https://imagetourl.cloud/en/favicon-generator/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/favicon-generator",
+          "status": 301,
+          "location": "/en/favicon-generator",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/favicon-generator",
+          "status": 307,
+          "location": "/en/favicon-generator/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/favicon-generator/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/image-to-base64",
+      "finalUrl": "https://imagetourl.cloud/en/image-to-base64/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/image-to-base64",
+          "status": 301,
+          "location": "/en/image-to-base64",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/image-to-base64",
+          "status": 307,
+          "location": "/en/image-to-base64/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/image-to-base64/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    },
+    {
+      "url": "https://imagetourl.cloud/base64-to-image",
+      "finalUrl": "https://imagetourl.cloud/en/base64-to-image/",
+      "finalStatus": 200,
+      "finalContentType": "text/html",
+      "redirected": true,
+      "hops": 2,
+      "chain": [
+        {
+          "url": "https://imagetourl.cloud/base64-to-image",
+          "status": 301,
+          "location": "/en/base64-to-image",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/base64-to-image",
+          "status": 307,
+          "location": "/en/base64-to-image/",
+          "contentType": null
+        },
+        {
+          "url": "https://imagetourl.cloud/en/base64-to-image/",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html"
+        }
+      ]
+    }
+  ],
+  "broken": [],
+  "errors": []
+}
