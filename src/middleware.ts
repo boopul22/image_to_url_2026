@@ -52,6 +52,20 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     return redirect(`/zh-Hans${tail}`, 301);
   }
 
+  // Unsupported locale Google guessed: /uk/* -> /en/*
+  if (path === '/uk' || path.startsWith('/uk/')) {
+    const tail = path === '/uk' ? '/' : path.slice(3);
+    return redirect(`/en${tail}${url0.search}`, 301);
+  }
+
+  // Legacy locale-prefixed auth links (/en/auth/login etc.) — auth lives under /api/auth/*
+  {
+    const m = path.match(/^\/([a-z]{2,3}(?:-[A-Za-z]+)?)\/(auth\/.+)$/);
+    if (m && (locales as readonly string[]).includes(m[1])) {
+      return redirect(`/api/${m[2]}${url0.search}`, 301);
+    }
+  }
+
   // Catch-all: any non-locale-prefixed public path → /en/<path>
   // Applies to tool pages, blog, legal pages, etc. Excludes admin/api/assets.
   const firstSeg = path.split('/')[1];
@@ -118,6 +132,46 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   }
 
   let response = await next();
+
+  // 404 → 410 Gone for URL patterns that are permanently removed. Tells Google
+  // to drop them from the index instead of retrying. Covers:
+  //   • /anonymous/* — deleted upload URLs
+  //   • /<locale>/tools/* — old URL pattern (pages moved to /<locale>/<slug>/)
+  //   • /<locale>/… with percent-encoded non-ASCII slug — cross-locale pollution
+  //     from an earlier translation run where slugs got retranslated
+  //   • /en/use-cases/* — removed section
+  //   • WordPress probe paths — never existed, pure bot traffic
+  if (response.status === 404 && !path.startsWith('/api/')) {
+    let gone = false;
+    if (path.startsWith('/anonymous/')) gone = true;
+    else if (path.startsWith('/wp-') || path.startsWith('/wordpress/') || /\.(?:php|asp|aspx|jsp|cgi)$/i.test(path)) gone = true;
+    else if (path.startsWith('/en/use-cases/')) gone = true;
+    else {
+      const seg = path.split('/');
+      const loc = seg[1];
+      if ((locales as readonly string[]).includes(loc)) {
+        // /<locale>/tools/* — legacy URL pattern, permanently removed
+        if (seg[2] === 'tools') gone = true;
+        // Cross-locale slug pollution: path contains percent-encoded non-ASCII
+        // (e.g. /de/%E0%A4%AC%E0%A4%B2%E0%A5%8D%E0%A4%95-...). These are stale
+        // slugs from earlier translation runs that no longer resolve in any locale.
+        else if (/%[89A-F][0-9A-F]/i.test(path)) gone = true;
+      }
+    }
+    if (gone) {
+      return new Response(
+        '<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Gone</title></head><body><h1>410 Gone</h1><p>This URL has been permanently removed. <a href="/en/">Go to homepage</a>.</p></body></html>',
+        {
+          status: 410,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'X-Robots-Tag': 'noindex',
+            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+          },
+        },
+      );
+    }
+  }
 
   // Dev-only: rewrite cross-origin CDN image URLs through the Vite dev proxy
   // so Chrome's ORB doesn't block them on localhost. Production HTML is untouched.
