@@ -1,0 +1,253 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - button "Toggle navigation menu" [expanded] [active] [ref=e7]:
+          - generic [ref=e8]: close
+      - generic [ref=e10]:
+        - link "home Home" [ref=e11] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e12]: home
+          - text: Home
+        - link "auto_awesome Features" [ref=e13] [cursor=pointer]:
+          - /url: /en/features
+          - generic [ref=e14]: auto_awesome
+          - text: Features
+        - link "sell Pricing" [ref=e15] [cursor=pointer]:
+          - /url: /en/pricing
+          - generic [ref=e16]: sell
+          - text: Pricing
+        - link "terminal API" [ref=e17] [cursor=pointer]:
+          - /url: /en/docs
+          - generic [ref=e18]: terminal
+          - text: API
+        - link "article Blog" [ref=e19] [cursor=pointer]:
+          - /url: /en/blog
+          - generic [ref=e20]: article
+          - text: Blog
+        - button "Tools" [ref=e23]:
+          - generic [ref=e24]: build
+          - text: Tools
+          - generic [ref=e25]: expand_more
+        - link "Sign In" [ref=e27] [cursor=pointer]:
+          - /url: /api/auth/login
+          - img [ref=e28]
+          - text: Sign In
+    - main [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - button "add_photo_alternate Drop image here or click to browse JPG, PNG, WebP, GIF, SVG — Max 10MB Select File" [ref=e38] [cursor=pointer]:
+            - generic [ref=e39]: add_photo_alternate
+            - generic [ref=e40]:
+              - paragraph [ref=e41]: Drop image here or click to browse
+              - paragraph [ref=e42]: JPG, PNG, WebP, GIF, SVG — Max 10MB
+            - generic [ref=e43]: Select File
+          - generic [ref=e44]:
+            - generic [ref=e45]:
+              - generic [ref=e46]: rocket_launch
+              - text: CDN
+            - generic [ref=e47]:
+              - generic [ref=e48]: lock
+              - text: SSL
+            - generic [ref=e49]:
+              - generic [ref=e50]: link
+              - text: Permanent
+            - generic [ref=e51]:
+              - generic [ref=e52]: flash_on
+              - text: Instant
+        - generic [ref=e53]:
+          - generic [ref=e54]: PNG Converter
+          - heading "Convert PNG to URL with transparency preserved." [level=1] [ref=e55]
+          - paragraph [ref=e56]: Upload any PNG image and get a permanent, shareable URL in seconds. Transparency, lossless quality, and every pixel preserved — completely free.
+      - generic [ref=e58]:
+        - heading "How It Works" [level=2] [ref=e60]
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - generic [ref=e64]: "1"
+            - heading "Upload Your PNG" [level=3] [ref=e65]
+            - paragraph [ref=e66]: Drag & drop or click to select your PNG file. Supports transparent and high-resolution PNGs up to 10MB.
+          - generic [ref=e67]:
+            - generic [ref=e68]: "2"
+            - heading "Get Your URL" [level=3] [ref=e69]
+            - paragraph [ref=e70]: Your PNG is uploaded to our global CDN instantly. A permanent, direct image URL is generated automatically.
+          - generic [ref=e71]:
+            - generic [ref=e72]: "3"
+            - heading "Share Anywhere" [level=3] [ref=e73]
+            - paragraph [ref=e74]: Copy your URL and use it anywhere — HTML, Markdown, forums, emails, or social media.
+      - generic [ref=e76]:
+        - heading "Why PNG?" [level=2] [ref=e78]
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e83]: layers
+            - heading "Transparency Support" [level=3] [ref=e84]
+            - paragraph [ref=e85]: PNG is the gold standard for images with transparent backgrounds. Logos, icons, overlays — all preserved perfectly.
+          - generic [ref=e86]:
+            - generic [ref=e88]: high_quality
+            - heading "Lossless Quality" [level=3] [ref=e89]
+            - paragraph [ref=e90]: Unlike JPG, PNG uses lossless compression. Your image quality is preserved pixel-for-pixel, exactly as uploaded.
+          - generic [ref=e91]:
+            - generic [ref=e93]: web
+            - heading "Web Graphics Standard" [level=3] [ref=e94]
+            - paragraph [ref=e95]: PNG is universally supported across all browsers, devices, and platforms. The most reliable format for web graphics.
+          - generic [ref=e96]:
+            - generic [ref=e98]: print
+            - heading "Print-Ready Resolution" [level=3] [ref=e99]
+            - paragraph [ref=e100]: High-resolution PNGs maintain sharp detail for both screen display and print-quality output.
+      - generic [ref=e102]:
+        - heading "Perfect For" [level=2] [ref=e104]
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - generic [ref=e109]: palette
+            - heading "Web Designers" [level=3] [ref=e110]
+            - paragraph [ref=e111]: Host logos, icons, and UI assets with transparency intact for seamless website integration.
+          - generic [ref=e112]:
+            - generic [ref=e114]: description
+            - heading "Documentation Writers" [level=3] [ref=e115]
+            - paragraph [ref=e116]: Embed crisp screenshots and diagrams in Markdown, Notion, and GitHub READMEs.
+          - generic [ref=e117]:
+            - generic [ref=e119]: storefront
+            - heading "E-Commerce Sellers" [level=3] [ref=e120]
+            - paragraph [ref=e121]: Product images with transparent backgrounds for eBay, Amazon, and Shopify listings.
+          - generic [ref=e122]:
+            - generic [ref=e124]: code
+            - heading "Developers" [level=3] [ref=e125]
+            - paragraph [ref=e126]: Host interface mockups, architecture diagrams, and API documentation images.
+      - generic [ref=e128]:
+        - heading "Frequently Asked Questions" [level=2] [ref=e130]
+        - generic [ref=e132]:
+          - group [ref=e133]:
+            - generic "Does ImageToURL preserve PNG transparency? expand_more" [ref=e134] [cursor=pointer]:
+              - text: Does ImageToURL preserve PNG transparency?
+              - generic [ref=e135]: expand_more
+          - group [ref=e136]:
+            - generic "What's the maximum PNG file size? expand_more" [ref=e137] [cursor=pointer]:
+              - text: What's the maximum PNG file size?
+              - generic [ref=e138]: expand_more
+          - group [ref=e139]:
+            - generic "Can I get a direct link to my PNG? expand_more" [ref=e140] [cursor=pointer]:
+              - text: Can I get a direct link to my PNG?
+              - generic [ref=e141]: expand_more
+          - group [ref=e142]:
+            - generic "How long do PNG URLs last? expand_more" [ref=e143] [cursor=pointer]:
+              - text: How long do PNG URLs last?
+              - generic [ref=e144]: expand_more
+          - group [ref=e145]:
+            - generic "Is PNG to URL conversion free? expand_more" [ref=e146] [cursor=pointer]:
+              - text: Is PNG to URL conversion free?
+              - generic [ref=e147]: expand_more
+      - generic [ref=e149]:
+        - heading "Related Tools" [level=2] [ref=e151]
+        - generic [ref=e153]:
+          - link "JPG to URL Convert JPEG photos to shareable links arrow_forward" [ref=e154] [cursor=pointer]:
+            - /url: /jpg-to-url
+            - generic [ref=e155]:
+              - heading "JPG to URL" [level=3] [ref=e156]
+              - paragraph [ref=e157]: Convert JPEG photos to shareable links
+            - generic [ref=e158]: arrow_forward
+          - link "GIF to URL Host animated GIFs with direct URLs arrow_forward" [ref=e159] [cursor=pointer]:
+            - /url: /gif-to-url
+            - generic [ref=e160]:
+              - heading "GIF to URL" [level=3] [ref=e161]
+              - paragraph [ref=e162]: Host animated GIFs with direct URLs
+            - generic [ref=e163]: arrow_forward
+          - link "Free Image Hosting Host any image format for free arrow_forward" [ref=e164] [cursor=pointer]:
+            - /url: /free-image-hosting
+            - generic [ref=e165]:
+              - heading "Free Image Hosting" [level=3] [ref=e166]
+              - paragraph [ref=e167]: Host any image format for free
+            - generic [ref=e168]: arrow_forward
+      - generic [ref=e172]:
+        - heading "Convert your PNG to a shareable URL" [level=2] [ref=e173]
+        - paragraph [ref=e174]: Upload your PNG and get a permanent link in seconds. No signup, no watermarks, no catch.
+        - link "Upload PNG Now" [ref=e175] [cursor=pointer]:
+          - /url: /en/
+    - generic [ref=e177]:
+      - generic [ref=e178]:
+        - generic [ref=e179]:
+          - generic [ref=e180]:
+            - generic [ref=e181]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e182]: Making the web more visual, one link at a time. Designed for humans, built for speed.
+        - generic [ref=e183]:
+          - generic [ref=e184]: Tools
+          - link "Free Image Hosting" [ref=e185] [cursor=pointer]:
+            - /url: /free-image-hosting
+          - link "Image URL Generator" [ref=e186] [cursor=pointer]:
+            - /url: /image-url-generator
+          - link "Bulk Image Upload" [ref=e187] [cursor=pointer]:
+            - /url: /bulk-image-upload
+          - link "PNG to URL" [ref=e188] [cursor=pointer]:
+            - /url: /png-to-url
+          - link "JPG to URL" [ref=e189] [cursor=pointer]:
+            - /url: /jpg-to-url
+          - link "Imgur Alternative" [ref=e190] [cursor=pointer]:
+            - /url: /imgur-alternative
+          - link "For Shopify" [ref=e191] [cursor=pointer]:
+            - /url: /image-hosting-for-shopify
+          - link "For Google Sheets" [ref=e192] [cursor=pointer]:
+            - /url: /image-hosting-for-google-sheets
+        - generic [ref=e193]:
+          - generic [ref=e194]: Resources
+          - link "Privacy Policy" [ref=e195] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms of Service" [ref=e196] [cursor=pointer]:
+            - /url: /en/terms
+          - link "Documentation" [ref=e197] [cursor=pointer]:
+            - /url: /en/docs
+          - link "About" [ref=e198] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e199] [cursor=pointer]:
+            - /url: /contact
+          - link "Blog" [ref=e200] [cursor=pointer]:
+            - /url: /en/blog
+          - link "Content Guidelines" [ref=e201] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e202]:
+          - generic [ref=e203]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e204] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e205]: cloud_upload
+            - text: ImageToURL
+          - link "travel_explore ExtractPics" [ref=e206] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e207]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e208] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e209]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e210]:
+          - generic [ref=e211]: Stay Updated
+          - generic [ref=e212]:
+            - textbox "Your email..." [ref=e213]
+            - button "Join" [ref=e214]
+          - generic [ref=e215]:
+            - link "GitHub" [ref=e216] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e217]
+            - link "Instagram" [ref=e219] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e220]
+            - link "Personal Website" [ref=e222] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e223]:
+        - paragraph [ref=e224]: © 2026 ImageToURL. Designed by ImageToURL Team
+        - paragraph [ref=e225]: Built with care · Hosted on Cloudflare
+  - generic [ref=e228]:
+    - button "Menu" [ref=e229]:
+      - img [ref=e231]
+      - generic: Menu
+    - button "Inspect" [ref=e235]:
+      - img [ref=e237]
+      - generic: Inspect
+    - button "Audit" [ref=e239]:
+      - img [ref=e241]
+      - generic: Audit
+    - button "Settings" [ref=e244]:
+      - img [ref=e246]
+      - generic: Settings

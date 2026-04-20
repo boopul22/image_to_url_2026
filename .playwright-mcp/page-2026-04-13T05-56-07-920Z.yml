@@ -1,0 +1,927 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Go to home" [ref=e5] [cursor=pointer]:
+        - /url: /en-IN
+        - img [ref=e7]
+        - generic [ref=e10]: ImageToURL
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - link "Tools" [ref=e13] [cursor=pointer]:
+            - /url: /en-IN/tools
+          - link "PDF to URL" [ref=e14] [cursor=pointer]:
+            - /url: /en-IN/pdf-to-url
+          - link "Video to URL" [ref=e15] [cursor=pointer]:
+            - /url: /en-IN/video-to-url
+          - link "GIF to URL" [ref=e16] [cursor=pointer]:
+            - /url: /en-IN/gif-to-url
+          - link "File to URL" [ref=e17] [cursor=pointer]:
+            - /url: /en-IN/file-to-url
+          - link "Bulk Upload" [ref=e18] [cursor=pointer]:
+            - /url: /en-IN/bulk-image-upload
+          - link "Pricing" [ref=e19] [cursor=pointer]:
+            - /url: /en-IN/pricing
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /en-IN/blog
+        - button "Sign in with Google" [ref=e21] [cursor=pointer]:
+          - img [ref=e22]
+          - generic [ref=e27]: Sign in with Google
+  - generic [ref=e29]:
+    - generic [ref=e31]:
+      - heading "Image to URL Converter" [level=1] [ref=e32]
+      - paragraph [ref=e33]: Transform your images into permanent, shareable URLs instantly. Free, fast, and reliable image hosting for everyone.
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - generic [ref=e38]: Lightning Fast
+        - generic [ref=e39]:
+          - img [ref=e40]
+          - generic [ref=e42]:
+            - text: Secure & Private
+            - link "Image optimization tool" [ref=e43] [cursor=pointer]:
+              - img [ref=e45]
+              - text: Image optimization tool
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - generic [ref=e51]: Permanent Links
+      - generic [ref=e52]:
+        - img [ref=e53]
+        - generic [ref=e56]: "Last updated: January 6, 2026"
+    - generic [ref=e60]:
+      - img [ref=e61]
+      - paragraph [ref=e64]:
+        - strong [ref=e65]: "Quick Answer:"
+        - text: ImageToURL converts your images into permanent, shareable web links in under 3 seconds. Unlike temporary hosting services, our image URLs never expire and are delivered via global CDN for fast loading anywhere. Simply drag-drop your image (up to 2MB), click convert, and get a permanent link—no registration required for free use. Sign in to unlock higher limits and upload history.
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - button "📷" [pressed] [ref=e70] [cursor=pointer]:
+              - generic [ref=e71]: 📷
+            - generic [ref=e73]: Choose Image
+            - img [ref=e75]
+          - generic [ref=e77]:
+            - button "⬆️" [ref=e78] [cursor=pointer]:
+              - generic [ref=e79]: ⬆️
+            - generic [ref=e81]: Upload
+            - img [ref=e83]
+          - generic [ref=e85]:
+            - button "📋" [ref=e86] [cursor=pointer]:
+              - generic [ref=e87]: 📋
+            - generic [ref=e89]: Copy Link
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - generic [ref=e92]:
+              - img [ref=e93]
+              - generic [ref=e95]: Quick Start
+            - generic [ref=e96]: 0/2
+          - generic [ref=e98]:
+            - generic [ref=e101]: Choose Image
+            - generic [ref=e104]: Upload
+            - generic [ref=e107]: Copy Link
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - img [ref=e112]
+              - heading "Get More with a Free Account" [level=3] [ref=e115]
+            - paragraph [ref=e116]:
+              - text: Sign in to unlock 10 daily uploads (2x more) and track your history
+              - link "Custom URL Branding" [ref=e117] [cursor=pointer]:
+                - img [ref=e119]
+                - text: Custom URL Branding
+          - generic [ref=e121]:
+            - button "Sign In" [ref=e122] [cursor=pointer]
+            - button "View Demo" [ref=e123] [cursor=pointer]
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - generic [ref=e127]: 📷
+              - generic [ref=e128]:
+                - heading "Choose Image" [level=3] [ref=e129]
+                - paragraph [ref=e130]: Select or drag your image here
+                - paragraph [ref=e131]: 💡 Select or drag your image here
+            - button "Collapse details" [ref=e132] [cursor=pointer]:
+              - img [ref=e133]
+          - generic [ref=e135]:
+            - generic [ref=e136]:
+              - generic [ref=e137]:
+                - generic [ref=e138]: Quick Start
+                - generic [ref=e139]: 0/2
+              - generic [ref=e140]:
+                - generic [ref=e141] [cursor=pointer]:
+                  - checkbox "Choose Image" [ref=e142]
+                  - generic [ref=e143]: Choose Image
+                - generic [ref=e144] [cursor=pointer]:
+                  - checkbox "Preview" [ref=e145]
+                  - generic [ref=e146]: Preview
+            - generic [ref=e147]:
+              - generic [ref=e148]: Preview
+              - generic [ref=e149]:
+                - img [ref=e150]
+                - generic [ref=e153]: Drop your image here, or click to browse (Clipboard support)
+            - generic [ref=e154]:
+              - generic [ref=e155]: Frequently Asked Questions
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - paragraph [ref=e158]: Is my image safe?
+                  - paragraph [ref=e159]:
+                    - text: Yes, all images are encrypted during transfer and stored securely.
+                    - link "Link Tracking Analytics" [ref=e160] [cursor=pointer]:
+                      - img [ref=e162]
+                      - text: Link Tracking Analytics
+                - generic [ref=e164]:
+                  - paragraph [ref=e165]: How long are links valid?
+                  - paragraph [ref=e166]: All image links are permanent and never expire.
+          - generic [ref=e167]:
+            - generic [ref=e168]: 1/3
+            - button "Next" [disabled]
+        - heading "Upload Your Image" [level=2] [ref=e169]
+        - generic [ref=e171] [cursor=pointer]:
+          - img [ref=e172]
+          - paragraph [ref=e175]: Drop your image here, or click to browse (Clipboard support)
+          - paragraph [ref=e176]: Supports JPG, PNG, GIF up to 2MB Free forever
+          - paragraph [ref=e177]: "Maximum file size: 2MB"
+          - paragraph [ref=e178]: "💡 Tip: You can also paste (Ctrl+V / Cmd+V) screenshots directly!"
+      - generic [ref=e180]:
+        - generic [ref=e181]:
+          - generic [ref=e182]:
+            - text: Uploads today
+            - link "Image optimization tool" [ref=e183] [cursor=pointer]:
+              - img [ref=e185]
+              - text: Image optimization tool
+          - generic [ref=e187]: 0 / 5
+        - generic [ref=e190]: 5 uploads left today
+    - generic [ref=e192]:
+      - generic [ref=e193]:
+        - heading "Trusted by 245633 Users Worldwide" [level=2] [ref=e194]
+        - paragraph [ref=e195]: See what Indian professionals are saying about ImageToURL
+      - generic [ref=e196]:
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - generic [ref=e199]: RS
+            - generic [ref=e200]:
+              - heading "Rahul Sharma" [level=3] [ref=e201]
+              - paragraph [ref=e202]: Full Stack Developer
+              - paragraph [ref=e203]: InfoTech Solutions, Bangalore
+          - generic [ref=e204]:
+            - img [ref=e205]
+            - img [ref=e207]
+            - img [ref=e209]
+            - img [ref=e211]
+            - img [ref=e213]
+          - generic [ref=e215]:
+            - img [ref=e216]
+            - paragraph [ref=e219]: "\"Perfect for hosting product images for our e-commerce clients. Works flawlessly even with slower internet connections. The permanent URLs are exactly what we needed for our documentation sites.\""
+        - generic [ref=e220]:
+          - generic [ref=e221]:
+            - generic [ref=e222]: PP
+            - generic [ref=e223]:
+              - heading "Priya Patel" [level=3] [ref=e224]
+              - paragraph [ref=e225]: Digital Marketing Specialist
+              - paragraph [ref=e226]: Mumbai Marketing Hub
+          - generic [ref=e227]:
+            - img [ref=e228]
+            - img [ref=e230]
+            - img [ref=e232]
+            - img [ref=e234]
+            - img [ref=e236]
+          - generic [ref=e238]:
+            - img [ref=e239]
+            - paragraph [ref=e242]: "\"As a marketer managing multiple WhatsApp Business campaigns, ImageToURL has been a game-changer. I can quickly share product images with permanent links across all platforms. No more broken links!\""
+        - generic [ref=e243]:
+          - generic [ref=e244]:
+            - generic [ref=e245]: AR
+            - generic [ref=e246]:
+              - heading "Arjun Reddy" [level=3] [ref=e247]
+              - paragraph [ref=e248]: EdTech Content Creator
+              - paragraph [ref=e249]: Learn India Online
+          - generic [ref=e250]:
+            - img [ref=e251]
+            - img [ref=e253]
+            - img [ref=e255]
+            - img [ref=e257]
+            - img [ref=e259]
+          - generic [ref=e261]:
+            - img [ref=e262]
+            - paragraph [ref=e265]: "\"We use ImageToURL for all our course materials and student resources. The free hosting is brilliant for educational institutions with tight budgets. Students can access images anytime without restrictions.\""
+        - generic [ref=e266]:
+          - generic [ref=e267]:
+            - generic [ref=e268]: SK
+            - generic [ref=e269]:
+              - heading "Sneha Krishnan" [level=3] [ref=e270]
+              - paragraph [ref=e271]: Freelance Blogger
+              - paragraph [ref=e272]: Tech & Lifestyle Blog
+          - generic [ref=e273]:
+            - img [ref=e274]
+            - img [ref=e276]
+            - img [ref=e278]
+            - img [ref=e280]
+            - img [ref=e282]
+          - generic [ref=e284]:
+            - img [ref=e285]
+            - paragraph [ref=e288]: "\"Finally, a reliable image hosting service that understands Indian users! Fast uploads, permanent links, and completely free. I've recommended it to all my blogger friends in the community.\""
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - generic [ref=e291]: VS
+            - generic [ref=e292]:
+              - heading "Vikram Singh" [level=3] [ref=e293]
+              - paragraph [ref=e294]: Mobile App Developer
+              - paragraph [ref=e295]: Delhi Tech Innovations
+          - generic [ref=e296]:
+            - img [ref=e297]
+            - img [ref=e299]
+            - img [ref=e301]
+            - img [ref=e303]
+            - img [ref=e305]
+          - generic [ref=e307]:
+            - img [ref=e308]
+            - paragraph [ref=e311]: "\"We prototype mobile apps for Indian startups and need quick image hosting for demos. ImageToURL's API is simple, fast, and the CDN ensures our clients see images load quickly across India.\""
+        - generic [ref=e312]:
+          - generic [ref=e313]:
+            - generic [ref=e314]: AD
+            - generic [ref=e315]:
+              - heading "Anjali Desai" [level=3] [ref=e316]
+              - paragraph [ref=e317]: Social Media Manager
+              - paragraph [ref=e318]: Brand Connect India
+          - generic [ref=e319]:
+            - img [ref=e320]
+            - img [ref=e322]
+            - img [ref=e324]
+            - img [ref=e326]
+            - img [ref=e328]
+          - generic [ref=e330]:
+            - img [ref=e331]
+            - paragraph [ref=e334]: "\"Managing social media for multiple Indian brands means juggling lots of images. ImageToURL makes it easy to organise and share visual content. The permanent URLs work perfectly with Instagram, Facebook, and WhatsApp Business.\""
+    - generic [ref=e336]:
+      - heading "Why Choose ImageToURL?" [level=2] [ref=e337]
+      - generic [ref=e338]:
+        - generic [ref=e339]:
+          - img [ref=e341]
+          - heading "Lightning Fast" [level=3] [ref=e343]
+          - paragraph [ref=e344]:
+            - text: Upload and convert your images to URLs in seconds. No waiting, no delays.
+            - link "Custom URL Branding" [ref=e345] [cursor=pointer]:
+              - img [ref=e347]
+              - text: Custom URL Branding
+        - generic [ref=e349]:
+          - img [ref=e351]
+          - heading "Secure & Private" [level=3] [ref=e353]
+          - paragraph [ref=e354]: Your images are stored securely with enterprise-grade encryption and privacy protection.
+        - generic [ref=e355]:
+          - img [ref=e357]
+          - heading "Permanent Links" [level=3] [ref=e360]
+          - paragraph [ref=e361]: Get permanent URLs that never expire. Perfect for websites, blogs, and social media.
+    - generic [ref=e363]:
+      - generic [ref=e364]:
+        - heading "How We Compare to Other Image Hosts" [level=2] [ref=e365]
+        - paragraph [ref=e366]: See why developers and creators choose ImageToURL over alternatives
+      - table [ref=e370]:
+        - rowgroup [ref=e371]:
+          - row "Feature ImageToURL Imgur Google Photos" [ref=e372]:
+            - columnheader "Feature" [ref=e373]
+            - columnheader "ImageToURL" [ref=e374]
+            - columnheader "Imgur" [ref=e375]
+            - columnheader "Google Photos" [ref=e376]
+        - rowgroup [ref=e377]:
+          - row "Permanent URLs ✓ Never expire ✓ With account ✗ Can change" [ref=e378]:
+            - cell "Permanent URLs" [ref=e379]
+            - cell "✓ Never expire" [ref=e380]
+            - cell "✓ With account" [ref=e381]
+            - cell "✗ Can change" [ref=e382]
+          - row "No Registration ✓ Instant upload ✗ Account required for API ✗ Google account required" [ref=e383]:
+            - cell "No Registration" [ref=e384]
+            - cell "✓ Instant upload" [ref=e385]
+            - cell "✗ Account required for API" [ref=e386]
+            - cell "✗ Google account required" [ref=e387]
+          - row "CDN Delivery ✓ Global CDN ✓ Yes ✓ Yes" [ref=e388]:
+            - cell "CDN Delivery" [ref=e389]
+            - cell "✓ Global CDN" [ref=e390]
+            - cell "✓ Yes" [ref=e391]
+            - cell "✓ Yes" [ref=e392]
+          - row "File Size Limit 2MB (free) 20MB 200MB" [ref=e393]:
+            - cell "File Size Limit" [ref=e394]
+            - cell "2MB (free)" [ref=e395]
+            - cell "20MB" [ref=e396]
+            - cell "200MB" [ref=e397]
+          - row "Privacy ✓ No tracking ⚠ Ads & tracking ⚠ Google ecosystem" [ref=e398]:
+            - cell "Privacy" [ref=e399]
+            - cell "✓ No tracking" [ref=e400]
+            - cell "⚠ Ads & tracking" [ref=e401]
+            - cell "⚠ Google ecosystem" [ref=e402]
+          - row "Direct Image URL ✓ Always ✓ Yes ✗ Embed only" [ref=e403]:
+            - cell "Direct Image URL" [ref=e404]
+            - cell "✓ Always" [ref=e405]
+            - cell "✓ Yes" [ref=e406]
+            - cell "✗ Embed only" [ref=e407]
+          - row "Developer Friendly ✓ Simple API ✓ Full API ⚠ Complex API" [ref=e408]:
+            - cell "Developer Friendly" [ref=e409]
+            - cell "✓ Simple API" [ref=e410]
+            - cell "✓ Full API" [ref=e411]
+            - cell "⚠ Complex API" [ref=e412]
+          - row "Best For Quick sharing, dev projects Community sharing Personal photo storage" [ref=e413]:
+            - cell "Best For" [ref=e414]
+            - cell "Quick sharing, dev projects" [ref=e415]
+            - cell "Community sharing" [ref=e416]
+            - cell "Personal photo storage" [ref=e417]
+      - paragraph [ref=e419]:
+        - text: "* Comparison based on free tier features as of January 2026"
+        - link "Image optimization tool" [ref=e420] [cursor=pointer]:
+          - img [ref=e422]
+          - text: Image optimization tool
+    - generic [ref=e425]:
+      - generic [ref=e426]:
+        - heading "Popular Tools" [level=2] [ref=e427]
+        - paragraph [ref=e428]: Explore our most used image and file conversion tools
+      - generic [ref=e429]:
+        - link "Privacy Privacy Cleaner Remove EXIF data and GPS info from photos" [ref=e430] [cursor=pointer]:
+          - /url: /tools/privacy-cleaner
+          - img [ref=e432]
+          - generic [ref=e435]: Privacy
+          - heading "Privacy Cleaner" [level=3] [ref=e436]
+          - paragraph [ref=e437]: Remove EXIF data and GPS info from photos
+        - link "Office PPT to URL Convert PowerPoint presentations to shareable links" [ref=e438] [cursor=pointer]:
+          - /url: /ppt-to-url-converter
+          - img [ref=e440]
+          - generic [ref=e443]: Office
+          - heading "PPT to URL" [level=3] [ref=e444]
+          - paragraph [ref=e445]: Convert PowerPoint presentations to shareable links
+        - link "Optimisation Image Compressor Reduce image file size without quality loss" [ref=e446] [cursor=pointer]:
+          - /url: /image-compressor
+          - img [ref=e448]
+          - generic [ref=e453]: Optimisation
+          - heading "Image Compressor" [level=3] [ref=e454]
+          - paragraph [ref=e455]: Reduce image file size without quality loss
+        - link "Converter HEIC to PNG Convert iPhone HEIC photos to PNG format" [ref=e456] [cursor=pointer]:
+          - /url: /tools/heic-viewer-and-to-png
+          - img [ref=e458]
+          - generic [ref=e462]: Converter
+          - heading "HEIC to PNG" [level=3] [ref=e463]
+          - paragraph [ref=e464]: Convert iPhone HEIC photos to PNG format
+        - link "Editor Square Image Crop any image to perfect square dimensions" [ref=e465] [cursor=pointer]:
+          - /url: /tools/square-image
+          - img [ref=e467]
+          - generic [ref=e470]: Editor
+          - heading "Square Image" [level=3] [ref=e471]
+          - paragraph [ref=e472]: Crop any image to perfect square dimensions
+        - link "Filter Black & White Convert photos to stunning black and white" [ref=e473] [cursor=pointer]:
+          - /url: /tools/make-photo-black-and-white
+          - img [ref=e475]
+          - generic [ref=e477]: Filter
+          - heading "Black & White" [level=3] [ref=e478]
+          - paragraph [ref=e479]: Convert photos to stunning black and white
+        - link "Artistic Pencil Sketch Transform photos into pencil sketch drawings" [ref=e480] [cursor=pointer]:
+          - /url: /tools/image-to-pencil-sketch
+          - img [ref=e482]
+          - generic [ref=e485]: Artistic
+          - heading "Pencil Sketch" [level=3] [ref=e486]
+          - paragraph [ref=e487]: Transform photos into pencil sketch drawings
+        - link "Editor Circle Crop Crop images into perfect circle shapes" [ref=e488] [cursor=pointer]:
+          - /url: /tools/crop-a-circle
+          - img [ref=e490]
+          - generic [ref=e492]: Editor
+          - heading "Circle Crop" [level=3] [ref=e493]
+          - paragraph [ref=e494]: Crop images into perfect circle shapes
+      - link "View All Tools →" [ref=e496] [cursor=pointer]:
+        - /url: /tools
+        - text: View All Tools →
+        - img [ref=e497]
+    - generic [ref=e500]:
+      - generic [ref=e501]:
+        - heading "Who Uses ImageToURL?" [level=2] [ref=e502]
+        - paragraph [ref=e503]:
+          - text: Trusted by professionals and creators across India
+          - link "Custom URL Branding" [ref=e504] [cursor=pointer]:
+            - img [ref=e506]
+            - text: Custom URL Branding
+      - generic [ref=e508]:
+        - generic [ref=e509]:
+          - generic [ref=e510]:
+            - generic [ref=e511]:
+              - img [ref=e513]
+              - generic [ref=e516]:
+                - heading "Web Developers" [level=3] [ref=e517]
+                - paragraph [ref=e518]: Host images for e-commerce sites, mobile apps, and client projects without complex server setup. Perfect for Indian startups and freelance developers.
+            - generic [ref=e519]:
+              - paragraph [ref=e520]: "Use Cases:"
+              - generic [ref=e521]:
+                - generic [ref=e522]:
+                  - generic [ref=e523]: •
+                  - generic [ref=e524]: E-commerce product images
+                - generic [ref=e525]:
+                  - generic [ref=e526]: •
+                  - generic [ref=e527]: API documentation
+                - generic [ref=e528]:
+                  - generic [ref=e529]: •
+                  - generic [ref=e530]: Client project demos
+                - generic [ref=e531]:
+                  - generic [ref=e532]: •
+                  - generic [ref=e533]: Mobile app prototypes
+          - generic [ref=e534]:
+            - paragraph [ref=e535]: Example Use Case
+            - img "Web developer embedding images in HTML code with permanent URLs" [ref=e537]
+            - code [ref=e539]: <img src="https://img.image2url.com/abc123.jpg" alt="Product mockup" />
+            - paragraph [ref=e540]:
+              - text: Embed product images for Indian e-commerce sites with fast-loading permanent URLs
+              - link "Image optimization tool" [ref=e541] [cursor=pointer]:
+                - img [ref=e543]
+                - text: Image optimization tool
+        - generic [ref=e545]:
+          - generic [ref=e546]:
+            - generic [ref=e547]:
+              - img [ref=e549]
+              - generic [ref=e554]:
+                - heading "Bloggers & Content Creators" [level=3] [ref=e555]
+                - paragraph [ref=e556]: Share visual content across blogs, YouTube thumbnails, and WhatsApp Business with permanent URLs that work everywhere.
+            - generic [ref=e557]:
+              - paragraph [ref=e558]: "Use Cases:"
+              - generic [ref=e559]:
+                - generic [ref=e560]:
+                  - generic [ref=e561]: •
+                  - generic [ref=e562]: Blog featured images
+                - generic [ref=e563]:
+                  - generic [ref=e564]: •
+                  - generic [ref=e565]: YouTube thumbnails
+                - generic [ref=e566]:
+                  - generic [ref=e567]: •
+                  - generic [ref=e568]: WhatsApp Business catalogues
+                - generic [ref=e569]:
+                  - generic [ref=e570]: •
+                  - generic [ref=e571]: Instagram bio links
+          - generic [ref=e572]:
+            - paragraph [ref=e573]: Example Use Case
+            - img "Blogger adding images to Markdown documents with permanent links" [ref=e575]
+            - code [ref=e577]: "![Product](https://img.image2url.com/abc123.jpg)"
+            - paragraph [ref=e578]: Host tutorial images for educational blogs and online coaching platforms
+        - generic [ref=e579]:
+          - generic [ref=e580]:
+            - generic [ref=e581]:
+              - img [ref=e583]
+              - generic [ref=e586]:
+                - heading "Digital Marketers" [level=3] [ref=e587]
+                - paragraph [ref=e588]: Manage campaign visuals for email marketing, social media, and WhatsApp campaigns with reliable CDN-powered image links.
+            - generic [ref=e589]:
+              - paragraph [ref=e590]: "Use Cases:"
+              - generic [ref=e591]:
+                - generic [ref=e592]:
+                  - generic [ref=e593]: •
+                  - generic [ref=e594]: WhatsApp marketing campaigns
+                - generic [ref=e595]:
+                  - generic [ref=e596]: •
+                  - generic [ref=e597]: Social media advertisements
+                - generic [ref=e598]:
+                  - generic [ref=e599]: •
+                  - generic [ref=e600]: Email newsletters
+                - generic [ref=e601]:
+                  - generic [ref=e602]: •
+                  - generic [ref=e603]: Festival campaign banners
+          - generic [ref=e604]:
+            - paragraph [ref=e605]: Example Use Case
+            - img "Digital marketer tracking image engagement in email campaigns with permanent URLs" [ref=e607]
+            - code [ref=e609]: <a href="https://example.com?utm_source=email"> <img src="https://img.image2url.com/promo.jpg" /> </a>
+            - paragraph [ref=e610]:
+              - text: Share Diwali and festive campaign images across multiple marketing channels with permanent URLs
+              - link "Custom URL Branding" [ref=e611] [cursor=pointer]:
+                - img [ref=e613]
+                - text: Custom URL Branding
+        - generic [ref=e615]:
+          - generic [ref=e616]:
+            - generic [ref=e617]:
+              - img [ref=e619]
+              - generic [ref=e622]:
+                - heading "Students & Researchers" [level=3] [ref=e623]
+                - paragraph [ref=e624]: Include diagrams, charts, and reference images in assignments, research papers, and online learning materials without storage limitations.
+            - generic [ref=e625]:
+              - paragraph [ref=e626]: "Use Cases:"
+              - generic [ref=e627]:
+                - generic [ref=e628]:
+                  - generic [ref=e629]: •
+                  - generic [ref=e630]: College assignments
+                - generic [ref=e631]:
+                  - generic [ref=e632]: •
+                  - generic [ref=e633]: Research project reports
+                - generic [ref=e634]:
+                  - generic [ref=e635]: •
+                  - generic [ref=e636]: Online course materials
+                - generic [ref=e637]:
+                  - generic [ref=e638]: •
+                  - generic [ref=e639]: Study group resources
+          - generic [ref=e640]:
+            - paragraph [ref=e641]: Example Use Case
+            - img "Student referencing images in research papers with stable URLs" [ref=e643]
+            - code [ref=e645]: "Figure 1: Research Data [https://img.image2url.com/data.jpg]"
+            - paragraph [ref=e646]: Share educational diagrams and charts for IIT/NIT projects and GATE preparation materials
+    - generic [ref=e648]:
+      - heading "The Easiest Way to Share Images" [level=2] [ref=e649]
+      - paragraph [ref=e650]: ImageToURL is a free, fast, and reliable image hosting service designed for developers, bloggers, and content creators. Convert your images to permanent URLs in seconds and share them anywhere on the web.
+      - generic [ref=e651]:
+        - generic [ref=e652]:
+          - heading "Perfect For:" [level=3] [ref=e653]
+          - list [ref=e654]:
+            - listitem [ref=e655]: • Website development
+            - listitem [ref=e656]: • Blog posts and articles
+            - listitem [ref=e657]: • Social media sharing
+            - listitem [ref=e658]: • Email newsletters
+            - listitem [ref=e659]: • Documentation
+        - generic [ref=e660]:
+          - heading "Features:" [level=3] [ref=e661]
+          - list [ref=e662]:
+            - listitem [ref=e663]: • Free forever
+            - listitem [ref=e664]: • No registration required for free use
+            - listitem [ref=e665]: • Fast CDN delivery
+            - listitem [ref=e666]: • Multiple format support
+            - listitem [ref=e667]: • Permanent URLs
+            - link "Image sharing platform" [ref=e668] [cursor=pointer]:
+              - img [ref=e670]
+              - text: Image sharing platform
+    - generic [ref=e673]:
+      - heading "Frequently Asked Questions" [level=2] [ref=e674]
+      - generic [ref=e675]:
+        - generic [ref=e676]:
+          - heading "What is an image to URL converter?" [level=3] [ref=e677]
+          - paragraph [ref=e678]: An image to URL converter is a tool that transforms your local image files into permanent web URLs. Our image URL generator uploads your images to secure cloud storage and provides you with a direct link that you can use anywhere on the internet. Unlike temporary image hosting services, our image to link converter creates permanent URLs that never expire, making it perfect for websites, blogs, and social media posts.
+        - generic [ref=e679]:
+          - heading "How does the image to link conversion work?" [level=3] [ref=e680]
+          - paragraph [ref=e681]: "Our image to URL service works in three simple steps: First, you upload your image file (JPG, PNG, or GIF) to our image URL generator. Second, the image is securely stored on our CDN servers. Finally, you receive a permanent image URL that you can copy and share anywhere. The entire image to link process takes just seconds, and the generated image URL remains active permanently."
+        - generic [ref=e682]:
+          - heading "What file formats does the image URL generator support?" [level=3] [ref=e683]
+          - paragraph [ref=e684]:
+            - text: Our image to URL converter supports all common image formats including JPG, JPEG, PNG, GIF, and WebP. The maximum file size is 2MB per image. Whether you need to convert a photo to URL, create an image link from a screenshot, or generate image URLs for your graphic designs, our image to link tool handles all popular formats efficiently.
+            - link "Image optimization tool" [ref=e685] [cursor=pointer]:
+              - img [ref=e687]
+              - text: Image optimization tool
+        - generic [ref=e689]:
+          - heading "Are the image URLs permanent?" [level=3] [ref=e690]
+          - paragraph [ref=e691]: Yes! All image URLs generated by our image to link converter are permanent and never expire. Once you upload an image and get your image URL, that link will remain active indefinitely. This makes our image URL generator ideal for long-term projects, documentation, blogs, and any situation where you need reliable, permanent image links. Your image to URL conversion creates a lasting web address for your images.
+        - generic [ref=e692]:
+          - heading "Where can I use the generated image URLs?" [level=3] [ref=e693]
+          - paragraph [ref=e694]: You can use your image URLs anywhere on the web! The image links created by our image to URL converter work perfectly in HTML img tags, CSS backgrounds, Markdown documents, social media posts, email newsletters, forum signatures, and more. Simply copy the image URL and paste it wherever you need to display your image. Our image to link service ensures your images load fast from our global CDN.
+        - generic [ref=e695]:
+          - heading "Is the image to URL converter free?" [level=3] [ref=e696]
+          - paragraph [ref=e697]:
+            - text: Absolutely! Our image URL generator is free to use with no registration required for basic uploads. If you want higher limits and upload history, you can sign in and upgrade at any time. There are no hidden fees, no watermarks on your images, and no expiration dates on your image links.
+            - link "Link Tracking Analytics" [ref=e698] [cursor=pointer]:
+              - img [ref=e700]
+              - text: Link Tracking Analytics
+        - generic [ref=e702]:
+          - heading "How secure is the image to link conversion?" [level=3] [ref=e703]
+          - paragraph [ref=e704]: Security is our top priority. All images uploaded through our image to URL converter are transmitted using HTTPS encryption. Your image URLs are stored on secure, enterprise-grade cloud storage with automatic backups. While the generated image links are publicly accessible (so you can share them), your upload process and file handling are completely secure. Our image URL generator ensures your content is protected throughout the image to link conversion process.
+  - generic [ref=e706]:
+    - generic [ref=e707]:
+      - generic [ref=e708]:
+        - heading "Select Region" [level=2] [ref=e709]
+        - paragraph [ref=e710]: Choose your preferred language and region
+      - generic [ref=e712]:
+        - button "English English" [ref=e713] [cursor=pointer]:
+          - img "English" [ref=e715]
+          - generic [ref=e717]: English
+        - button "English (Australia) English (Australia)" [ref=e718] [cursor=pointer]:
+          - img "English (Australia)" [ref=e720]
+          - generic [ref=e722]: English (Australia)
+        - button "English (India) English (India)" [ref=e723] [cursor=pointer]:
+          - img "English (India)" [ref=e725]
+          - generic [ref=e727]: English (India)
+          - img [ref=e730]
+        - button "العربية العربية" [ref=e732] [cursor=pointer]:
+          - img "العربية" [ref=e734]
+          - generic [ref=e736]: العربية
+        - button "Български Български" [ref=e737] [cursor=pointer]:
+          - img "Български" [ref=e739]
+          - generic [ref=e741]: Български
+        - button "Català Català" [ref=e742] [cursor=pointer]:
+          - img "Català" [ref=e744]
+          - generic [ref=e746]: Català
+        - button "Čeština Čeština" [ref=e747] [cursor=pointer]:
+          - img "Čeština" [ref=e749]
+          - generic [ref=e751]: Čeština
+        - button "Dansk Dansk" [ref=e752] [cursor=pointer]:
+          - img "Dansk" [ref=e754]
+          - generic [ref=e756]: Dansk
+        - button "Deutsch Deutsch" [ref=e757] [cursor=pointer]:
+          - img "Deutsch" [ref=e759]
+          - generic [ref=e761]: Deutsch
+        - button "Ελληνικά Ελληνικά" [ref=e762] [cursor=pointer]:
+          - img "Ελληνικά" [ref=e764]
+          - generic [ref=e766]: Ελληνικά
+        - button "Español Español" [ref=e767] [cursor=pointer]:
+          - img "Español" [ref=e769]
+          - generic [ref=e771]: Español
+        - button "Suomi Suomi" [ref=e772] [cursor=pointer]:
+          - img "Suomi" [ref=e774]
+          - generic [ref=e776]: Suomi
+        - button "Français Français" [ref=e777] [cursor=pointer]:
+          - img "Français" [ref=e779]
+          - generic [ref=e781]: Français
+        - button "עברית עברית" [ref=e782] [cursor=pointer]:
+          - img "עברית" [ref=e784]
+          - generic [ref=e786]: עברית
+        - button "Hrvatski Hrvatski" [ref=e787] [cursor=pointer]:
+          - img "Hrvatski" [ref=e789]
+          - generic [ref=e791]: Hrvatski
+        - button "Magyar Magyar" [ref=e792] [cursor=pointer]:
+          - img "Magyar" [ref=e794]
+          - generic [ref=e796]: Magyar
+        - button "Bahasa Indonesia Bahasa Indonesia" [ref=e797] [cursor=pointer]:
+          - img "Bahasa Indonesia" [ref=e799]
+          - generic [ref=e801]: Bahasa Indonesia
+        - button "Italiano Italiano" [ref=e802] [cursor=pointer]:
+          - img "Italiano" [ref=e804]
+          - generic [ref=e806]: Italiano
+        - button "日本語 日本語" [ref=e807] [cursor=pointer]:
+          - img "日本語" [ref=e809]
+          - generic [ref=e811]: 日本語
+        - button "한국어 한국어" [ref=e812] [cursor=pointer]:
+          - img "한국어" [ref=e814]
+          - generic [ref=e816]: 한국어
+        - button "Nederlands Nederlands" [ref=e817] [cursor=pointer]:
+          - img "Nederlands" [ref=e819]
+          - generic [ref=e821]: Nederlands
+        - button "Norsk Norsk" [ref=e822] [cursor=pointer]:
+          - img "Norsk" [ref=e824]
+          - generic [ref=e826]: Norsk
+        - button "Polski Polski" [ref=e827] [cursor=pointer]:
+          - img "Polski" [ref=e829]
+          - generic [ref=e831]: Polski
+        - button "Português Português" [ref=e832] [cursor=pointer]:
+          - img "Português" [ref=e834]
+          - generic [ref=e836]: Português
+        - button "Português (Brasil) Português (Brasil)" [ref=e837] [cursor=pointer]:
+          - img "Português (Brasil)" [ref=e839]
+          - generic [ref=e841]: Português (Brasil)
+        - button "Română Română" [ref=e842] [cursor=pointer]:
+          - img "Română" [ref=e844]
+          - generic [ref=e846]: Română
+        - button "Русский Русский" [ref=e847] [cursor=pointer]:
+          - img "Русский" [ref=e849]
+          - generic [ref=e851]: Русский
+        - button "Slovenčina Slovenčina" [ref=e852] [cursor=pointer]:
+          - img "Slovenčina" [ref=e854]
+          - generic [ref=e856]: Slovenčina
+        - button "Svenska Svenska" [ref=e857] [cursor=pointer]:
+          - img "Svenska" [ref=e859]
+          - generic [ref=e861]: Svenska
+        - button "ไทย ไทย" [ref=e862] [cursor=pointer]:
+          - img "ไทย" [ref=e864]
+          - generic [ref=e866]: ไทย
+        - button "Filipino Filipino" [ref=e867] [cursor=pointer]:
+          - img "Filipino" [ref=e869]
+          - generic [ref=e871]: Filipino
+        - button "Türkçe Türkçe" [ref=e872] [cursor=pointer]:
+          - img "Türkçe" [ref=e874]
+          - generic [ref=e876]: Türkçe
+        - button "Українська Українська" [ref=e877] [cursor=pointer]:
+          - img "Українська" [ref=e879]
+          - generic [ref=e881]: Українська
+        - button "Tiếng Việt Tiếng Việt" [ref=e882] [cursor=pointer]:
+          - img "Tiếng Việt" [ref=e884]
+          - generic [ref=e886]: Tiếng Việt
+        - button "简体中文 简体中文" [ref=e887] [cursor=pointer]:
+          - img "简体中文" [ref=e889]
+          - generic [ref=e891]: 简体中文
+        - button "繁體中文 繁體中文" [ref=e892] [cursor=pointer]:
+          - img "繁體中文" [ref=e894]
+          - generic [ref=e896]: 繁體中文
+    - generic [ref=e897]:
+      - generic [ref=e898]:
+        - heading "Rate our service" [level=3] [ref=e899]
+        - paragraph [ref=e900]:
+          - text: Your feedback helps us improve for everyone.
+          - link "Image compression tool" [ref=e901] [cursor=pointer]:
+            - img [ref=e903]
+            - text: Image compression tool
+      - generic [ref=e905]:
+        - generic [ref=e906]:
+          - button [ref=e907] [cursor=pointer]:
+            - img [ref=e908]
+          - button [ref=e910] [cursor=pointer]:
+            - img [ref=e911]
+          - button [ref=e913] [cursor=pointer]:
+            - img [ref=e914]
+          - button [ref=e916] [cursor=pointer]:
+            - img [ref=e917]
+          - button [ref=e919] [cursor=pointer]:
+            - img [ref=e920]
+        - generic [ref=e922]:
+          - generic [ref=e923]: "4.6"
+          - generic [ref=e924]: 5,026 votes
+  - contentinfo [ref=e925]:
+    - generic [ref=e926]:
+      - generic [ref=e927]:
+        - generic [ref=e928]:
+          - generic [ref=e929]:
+            - img [ref=e931]
+            - generic [ref=e934]:
+              - paragraph [ref=e935]: ImageToURL
+              - heading "Free image hosting that never expires" [level=3] [ref=e936]
+          - paragraph [ref=e937]: Upload, share, and host your images with permanent URLs. No registration required for free use.
+          - generic [ref=e938]:
+            - generic [ref=e939]:
+              - img [ref=e940]
+              - text: Instant links
+            - generic [ref=e942]:
+              - img [ref=e943]
+              - text: HTTPS by default
+            - generic [ref=e945]:
+              - img [ref=e946]
+              - text: Global edge
+            - generic [ref=e952]:
+              - combobox "Select language" [ref=e953] [cursor=pointer]:
+                - option "🇺🇸 English"
+                - option "🇦🇺 English (Australia)"
+                - option "🇮🇳 English (India)" [selected]
+                - option "🇸🇦 العربية"
+                - option "🇧🇬 Български"
+                - option "🇪🇸 Català"
+                - option "🇨🇿 Čeština"
+                - option "🇩🇰 Dansk"
+                - option "🇩🇪 Deutsch"
+                - option "🇬🇷 Ελληνικά"
+                - option "🇪🇸 Español"
+                - option "🇫🇮 Suomi"
+                - option "🇫🇷 Français"
+                - option "🇮🇱 עברית"
+                - option "🇭🇷 Hrvatski"
+                - option "🇭🇺 Magyar"
+                - option "🇮🇩 Bahasa Indonesia"
+                - option "🇮🇹 Italiano"
+                - option "🇯🇵 日本語"
+                - option "🇰🇷 한국어"
+                - option "🇳🇱 Nederlands"
+                - option "🇳🇴 Norsk"
+                - option "🇵🇱 Polski"
+                - option "🇵🇹 Português"
+                - option "🇧🇷 Português (Brasil)"
+                - option "🇷🇴 Română"
+                - option "🇷🇺 Русский"
+                - option "🇸🇰 Slovenčina"
+                - option "🇸🇪 Svenska"
+                - option "🇹🇭 ไทย"
+                - option "🇵🇭 Filipino"
+                - option "🇹🇷 Türkçe"
+                - option "🇺🇦 Українська"
+                - option "🇻🇳 Tiếng Việt"
+                - option "🇨🇳 简体中文"
+                - option "🇹🇼 繁體中文"
+              - generic:
+                - img
+        - generic [ref=e954]:
+          - heading "Tools" [level=3] [ref=e955]
+          - generic [ref=e956]:
+            - link "Image to ICO" [ref=e957] [cursor=pointer]:
+              - /url: /en-IN/image-to-icon
+            - link "Image to Link" [ref=e958] [cursor=pointer]:
+              - /url: /en-IN/image-to-link
+            - link "Image to WebP Converter" [ref=e959] [cursor=pointer]:
+              - /url: /en-IN/image-to-webp-converter
+            - link "Image URL Generator" [ref=e960] [cursor=pointer]:
+              - /url: /en-IN/image-url-generator
+            - link "Picture to URL" [ref=e961] [cursor=pointer]:
+              - /url: /en-IN/picture-to-url
+            - link "Photo to URL" [ref=e962] [cursor=pointer]:
+              - /url: /en-IN/photo-to-url-converter
+            - link "GIF to URL" [ref=e963] [cursor=pointer]:
+              - /url: /en-IN/gif-to-url
+            - link "Image Compressor" [ref=e964] [cursor=pointer]:
+              - /url: /en-IN/image-compressor
+            - link "Video to URL" [ref=e965] [cursor=pointer]:
+              - /url: /en-IN/video-to-url
+            - link "Bulk Image Upload" [ref=e966] [cursor=pointer]:
+              - /url: /en-IN/bulk-image-upload
+            - 'link "MCP Server: image2url" [ref=e967] [cursor=pointer]':
+              - /url: /en-IN/tools/mcp-server-image2url
+            - link "Privacy Cleaner" [ref=e968] [cursor=pointer]:
+              - /url: /en-IN/tools/privacy-cleaner
+            - link "Background Remover" [ref=e969] [cursor=pointer]:
+              - /url: /en-IN/tools/background-remover
+            - link "Image Extender" [ref=e970] [cursor=pointer]:
+              - /url: /en-IN/tools/image-extender
+            - link "Photo Restoration" [ref=e971] [cursor=pointer]:
+              - /url: /en-IN/tools/photo-restoration
+            - link "IPYNB to PDF" [ref=e972] [cursor=pointer]:
+              - /url: /en-IN/tools/ipynb-to-pdf
+            - link "WebP to PNG" [ref=e973] [cursor=pointer]:
+              - /url: /en-IN/tools/webp-to-png
+            - link "Photo Enhancer" [ref=e974] [cursor=pointer]:
+              - /url: /en-IN/tools/photo-enhancer
+            - link "MHT to PDF" [ref=e975] [cursor=pointer]:
+              - /url: /en-IN/tools/mht-to-pdf
+        - generic [ref=e976]:
+          - heading "Convert Tools" [level=3] [ref=e977]
+          - generic [ref=e978]:
+            - link "PPT to URL" [ref=e979] [cursor=pointer]:
+              - /url: /en-IN/ppt-to-url-converter
+            - link "PDF to URL" [ref=e980] [cursor=pointer]:
+              - /url: /en-IN/pdf-to-url
+            - link "HTML to URL" [ref=e981] [cursor=pointer]:
+              - /url: /en-IN/html-to-url
+            - link "QR to URL" [ref=e982] [cursor=pointer]:
+              - /url: /en-IN/qr-to-url
+            - link "YouTube Redirect Cleaner" [ref=e983] [cursor=pointer]:
+              - /url: /en-IN/convert-youtube-redirect-links-to-url
+        - generic [ref=e984]:
+          - heading "URL Tools" [level=3] [ref=e985]
+          - generic [ref=e986]:
+            - link "Audio to Link" [ref=e987] [cursor=pointer]:
+              - /url: /en-IN/audio-to-link
+            - link "MP3 to Link" [ref=e988] [cursor=pointer]:
+              - /url: /en-IN/mp3-to-link
+            - link "MP3 Compressor" [ref=e989] [cursor=pointer]:
+              - /url: /en-IN/tools/mp3-compressor
+            - link "File to URL" [ref=e990] [cursor=pointer]:
+              - /url: /en-IN/file-to-url
+            - link "Base64 to URL" [ref=e991] [cursor=pointer]:
+              - /url: /en-IN/base64-to-url
+            - link "URL Expander" [ref=e992] [cursor=pointer]:
+              - /url: /en-IN/url-expander
+            - link "URL Opener" [ref=e993] [cursor=pointer]:
+              - /url: /en-IN/url-opener
+            - link "URL Parser" [ref=e994] [cursor=pointer]:
+              - /url: /en-IN/url-parser
+            - link "Batch URL Checker" [ref=e995] [cursor=pointer]:
+              - /url: /en-IN/batch-url-checker
+            - link "Tools" [ref=e996] [cursor=pointer]:
+              - /url: /en-IN/tools
+      - generic [ref=e997]:
+        - generic [ref=e998]:
+          - paragraph [ref=e999]: © 2024 ImageToURL. All rights reserved. Made with ❤️ for developers and creators
+          - generic [ref=e1000]:
+            - generic [ref=e1001]:
+              - heading "Legal" [level=4] [ref=e1002]
+              - paragraph [ref=e1003]: Need help or legal info? Find it below.
+            - generic [ref=e1004]:
+              - link "Privacy Policy" [ref=e1005] [cursor=pointer]:
+                - /url: /en-IN/privacy
+              - generic [ref=e1006]: •
+              - link "Terms of Service" [ref=e1007] [cursor=pointer]:
+                - /url: /en-IN/terms
+              - generic [ref=e1008]: •
+              - link "About" [ref=e1009] [cursor=pointer]:
+                - /url: /en-IN/about
+            - generic [ref=e1010]:
+              - heading "Connect With Us" [level=4] [ref=e1011]
+              - generic [ref=e1012]:
+                - link "Image2URL on GitHub" [ref=e1013] [cursor=pointer]:
+                  - /url: https://github.com/image2url
+                  - img [ref=e1014]
+                - link "Image2URL on X" [ref=e1017] [cursor=pointer]:
+                  - /url: https://x.com/image2url
+                  - img [ref=e1018]
+                - link "Buy Me A Coffee":
+                  - /url: https://buymeacoffee.com/image2url
+                  - img "Buy Me A Coffee"
+        - generic [ref=e1020]:
+          - generic [ref=e1021]:
+            - img [ref=e1022]
+            - text: SSL
+          - generic [ref=e1024]:
+            - img [ref=e1025]
+            - text: Global edge
+          - generic [ref=e1030]:
+            - img [ref=e1031]
+            - text: Fast uploads
+        - generic [ref=e1033]:
+          - link "Fazier badge":
+            - /url: https://fazier.com/launches/www.image2url.com
+            - img "Fazier badge"
+          - link "Featured on findly.tools":
+            - /url: https://findly.tools/image-to-url?utm_source=image-to-url
+            - img "Featured on findly.tools"
+          - link "Featured on Indie.Deals":
+            - /url: https://indie.deals?ref=https%3A%2F%2Fwww.image2url.com%2F
+            - img "Featured on Indie.Deals"
+          - link "ImageToURL - Featured on Startup Fame":
+            - /url: https://startupfa.me/s/imagetourl-1?utm_source=www.image2url.com
+            - img "ImageToURL - Featured on Startup Fame"
+          - link "Featured on Twelve Tools":
+            - /url: https://twelve.tools
+            - img "Featured on Twelve Tools"
+          - link "Good AI Tools":
+            - /url: https://goodaitools.com
+            - img "Good AI Tools"
+          - link "Featured on ShowMeBestAI":
+            - /url: https://showmebest.ai
+            - img "Featured on ShowMeBestAI"
+          - link "Software Development Blogs - OnToplist.com":
+            - /url: https://www.ontoplist.com/software-blogs/
+            - img "Software Development Blogs - OnToplist.com"
+          - link "Listed on AIDirs":
+            - /url: https://aidirs.org/item/imagetourl
+            - img "Listed on AIDirs"
+          - link "Listed on Submito":
+            - /url: https://submito.net
+            - img "Listed on Submito"
+          - link "Listed on Turbo0":
+            - /url: https://turbo0.com/item/image-to-url
+            - img "Listed on Turbo0"
+          - link "Featured on LaunchIgniter":
+            - /url: https://launchigniter.com/product/image-to-url?ref=badge-image-to-url
+            - img "Featured on LaunchIgniter"
+          - link "Featured on Dofollow.Tools":
+            - /url: https://dofollow.tools
+            - img "Featured on Dofollow.Tools"
+          - link "Verified DR - Verified Domain Rating for www.image2url.com":
+            - /url: https://verifieddr.com/website/image2url-com
+            - img "Verified DR - Verified Domain Rating for www.image2url.com"
+          - link "Submit AI Tools – The ultimate platform to discover, submit, and explore the best AI tools across various categories.":
+            - /url: https://submitaitools.org
+            - img "Submit AI Tools – The ultimate platform to discover, submit, and explore the best AI tools across various categories."
+  - alert [ref=e1034]

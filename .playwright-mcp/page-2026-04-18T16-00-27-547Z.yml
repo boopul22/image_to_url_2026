@@ -1,0 +1,398 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /fr/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - generic [ref=e7]:
+          - link "Accueil" [ref=e8] [cursor=pointer]:
+            - /url: /fr/
+          - link "Fonctionnalités" [ref=e9] [cursor=pointer]:
+            - /url: /fr/features
+          - link "Blog" [ref=e10] [cursor=pointer]:
+            - /url: /fr/blog
+          - button "Solutions expand_more" [ref=e12]:
+            - text: Solutions
+            - generic [ref=e13]: expand_more
+          - button "Tools expand_more" [ref=e15]:
+            - text: Tools
+            - generic [ref=e16]: expand_more
+        - generic [ref=e17]:
+          - link "favorite Donate" [ref=e18] [cursor=pointer]:
+            - /url: https://ko-fi.com/bipul
+            - generic [ref=e19]: favorite
+            - text: Donate
+          - button "Change language" [ref=e21]:
+            - generic [ref=e22]: translate
+            - text: Français
+            - generic [ref=e23]: expand_more
+          - link "Se connecter" [ref=e25] [cursor=pointer]:
+            - /url: /api/auth/login
+            - img [ref=e26]
+            - text: Se connecter
+    - main [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - generic [ref=e36]: lock
+              - generic [ref=e37]:
+                - paragraph [ref=e38]: 100% in your browser
+                - paragraph [ref=e39]: Files never leave your device
+            - generic [ref=e40]:
+              - generic [ref=e41]: Quality
+              - slider "Quality" [ref=e42]: "92"
+              - generic [ref=e43]: "92"
+          - button "cloud_upload Drop PNG files here or click to browse Multi-select OK — runs on your device" [ref=e46] [cursor=pointer]:
+            - generic [ref=e47]: cloud_upload
+            - generic [ref=e48]:
+              - paragraph [ref=e49]: Drop PNG files here or click to browse
+              - paragraph [ref=e50]: Multi-select OK — runs on your device
+        - generic [ref=e51]:
+          - generic [ref=e52]: Outil navigateur uniquement
+          - heading "Convertisseur PNG vers JPG s'exécute sur votre appareil." [level=1] [ref=e53]
+          - paragraph [ref=e54]: Déposez vos fichiers PNG et obtenez des JPG instantanément — plus petits, universellement compatibles. La conversion a lieu localement. Aucun envoi, aucune inscription, aucun filigrane.
+      - generic [ref=e56]:
+        - heading "Comment ça marche" [level=2] [ref=e58]
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]: "1"
+            - heading "Drop PNG files" [level=3] [ref=e63]
+            - paragraph [ref=e64]: Drag from Finder, desktop, downloads, or a folder. Multi-select is fine — they are processed one by one.
+          - generic [ref=e65]:
+            - generic [ref=e66]: "2"
+            - heading "Convert locally" [level=3] [ref=e67]
+            - paragraph [ref=e68]: Your browser decodes the PNG, flattens transparency to white, and re-encodes as JPG using the canvas API. Zero network calls.
+          - generic [ref=e69]:
+            - generic [ref=e70]: "3"
+            - heading "Download or host" [level=3] [ref=e71]
+            - paragraph [ref=e72]: Save the JPG to your device, or click Get URL to host it on our CDN and copy a permanent link.
+      - generic [ref=e74]:
+        - heading "Pourquoi convertir PNG en JPG ?" [level=2] [ref=e76]
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - generic [ref=e81]: bolt
+            - heading "5–10× smaller files" [level=3] [ref=e82]
+            - paragraph [ref=e83]: Photos as PNG are wastefully large. JPG at 92% quality produces files a fraction of the size with no visible difference.
+          - generic [ref=e84]:
+            - generic [ref=e86]: bolt
+            - heading "Email attachments" [level=3] [ref=e87]
+            - paragraph [ref=e88]: Gmail's 25 MB cap kills big PNG batches. Convert first and send ten times as many photos in one email.
+          - generic [ref=e89]:
+            - generic [ref=e91]: bolt
+            - heading "Marketplaces & listings" [level=3] [ref=e92]
+            - paragraph [ref=e93]: eBay, Depop, Etsy, Facebook Marketplace, and OLX recompress anything you upload. Sending PNG just wastes bandwidth.
+          - generic [ref=e94]:
+            - generic [ref=e96]: bolt
+            - heading "Strips EXIF by default" [level=3] [ref=e97]
+            - paragraph [ref=e98]: Canvas re-encoding drops every embedded metadata field. A privacy win when sharing screenshots that might contain file paths.
+      - generic [ref=e100]:
+        - heading "Questions fréquentes" [level=2] [ref=e102]
+        - generic [ref=e104]:
+          - group [ref=e105]:
+            - generic "Does this upload my PNG files? expand_more" [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]: Does this upload my PNG files?
+              - generic [ref=e108]: expand_more
+          - group [ref=e109]:
+            - generic "Why does my transparent PNG come out with a white background? expand_more" [ref=e110] [cursor=pointer]:
+              - generic [ref=e111]: Why does my transparent PNG come out with a white background?
+              - generic [ref=e112]: expand_more
+          - group [ref=e113]:
+            - generic "Will the JPG be smaller than the PNG? expand_more" [ref=e114] [cursor=pointer]:
+              - generic [ref=e115]: Will the JPG be smaller than the PNG?
+              - generic [ref=e116]: expand_more
+          - group [ref=e117]:
+            - generic "Is there a file-size or file-count limit? expand_more" [ref=e118] [cursor=pointer]:
+              - generic [ref=e119]: Is there a file-size or file-count limit?
+              - generic [ref=e120]: expand_more
+          - group [ref=e121]:
+            - generic "What quality setting should I use? expand_more" [ref=e122] [cursor=pointer]:
+              - generic [ref=e123]: What quality setting should I use?
+              - generic [ref=e124]: expand_more
+          - group [ref=e125]:
+            - generic "Does this preserve my PNG's EXIF or metadata? expand_more" [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: Does this preserve my PNG's EXIF or metadata?
+              - generic [ref=e128]: expand_more
+          - group [ref=e129]:
+            - generic "Can I convert PNG screenshots this way? expand_more" [ref=e130] [cursor=pointer]:
+              - generic [ref=e131]: Can I convert PNG screenshots this way?
+              - generic [ref=e132]: expand_more
+          - group [ref=e133]:
+            - generic "What browsers work? expand_more" [ref=e134] [cursor=pointer]:
+              - generic [ref=e135]: What browsers work?
+              - generic [ref=e136]: expand_more
+      - generic [ref=e140]:
+        - heading "Besoin d'un lien permanent vers le JPG ?" [level=2] [ref=e141]
+        - paragraph [ref=e142]: Après conversion, cliquez sur Get URL pour l'héberger sur notre CDN — gratuit, sans inscription.
+        - link "Essayer le téléchargeur principal" [ref=e143] [cursor=pointer]:
+          - /url: /fr/
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - generic [ref=e149]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e150]: Rendre le web plus visuel, un lien à la fois. Conçu pour les humains, optimisé pour la vitesse.
+        - generic [ref=e151]:
+          - generic [ref=e152]: Convert
+          - link "PNG to URL" [ref=e153] [cursor=pointer]:
+            - /url: /fr/convertir-png-en-url/
+          - link "JPG to URL" [ref=e154] [cursor=pointer]:
+            - /url: /fr/convertir-jpg-en-url/
+          - link "GIF to URL" [ref=e155] [cursor=pointer]:
+            - /url: /fr/gif-vers-url/
+          - link "WebP to URL" [ref=e156] [cursor=pointer]:
+            - /url: /fr/convertir-webp-en-url/
+          - link "Photo to URL" [ref=e157] [cursor=pointer]:
+            - /url: /fr/convertir-photo-en-url/
+          - link "Screenshot to URL" [ref=e158] [cursor=pointer]:
+            - /url: /fr/convertir-capture-ecran-en-url/
+        - generic [ref=e159]:
+          - generic [ref=e160]: Features
+          - link "Hébergement Gratuit" [ref=e161] [cursor=pointer]:
+            - /url: /fr/hebergement-images-gratuit/
+          - link "Générateur d'URL" [ref=e162] [cursor=pointer]:
+            - /url: /fr/generateur-url-image-gratuit/
+          - link "Téléchargement en Masse" [ref=e163] [cursor=pointer]:
+            - /url: /fr/telechargement-images-masse/
+          - link "Free Image CDN" [ref=e164] [cursor=pointer]:
+            - /url: /fr/cdn-images-gratuit/
+          - link "Permanent Hosting" [ref=e165] [cursor=pointer]:
+            - /url: /fr/image-vers-url-permanent/
+          - link "Direct Image Links" [ref=e166] [cursor=pointer]:
+            - /url: /fr/hebergement-image-lien-direct/
+          - link "Anonymous Upload" [ref=e167] [cursor=pointer]:
+            - /url: /fr/hebergement-image-anonyme/
+          - link "Embed Code Generator" [ref=e168] [cursor=pointer]:
+            - /url: /fr/generateur-code-embed-image/
+        - generic [ref=e169]:
+          - generic [ref=e170]: Format Converters
+          - link "HEIC → JPG" [ref=e171] [cursor=pointer]:
+            - /url: /fr/convertir-heic-en-jpg/
+          - link "HEIC → PNG" [ref=e172] [cursor=pointer]:
+            - /url: /fr/convertir-heic-en-png/
+          - link "HEIC → PDF" [ref=e173] [cursor=pointer]:
+            - /url: /fr/convertir-heic-en-pdf/
+          - link "PNG → JPG" [ref=e174] [cursor=pointer]:
+            - /url: /fr/convertir-png-en-jpg/
+          - link "JPG → PNG" [ref=e175] [cursor=pointer]:
+            - /url: /fr/convertir-jpg-en-png/
+          - link "PNG → WebP" [ref=e176] [cursor=pointer]:
+            - /url: /fr/convertir-png-en-webp/
+          - link "JPG → WebP" [ref=e177] [cursor=pointer]:
+            - /url: /fr/convertir-jpg-en-webp/
+          - link "WebP → JPG" [ref=e178] [cursor=pointer]:
+            - /url: /fr/convertir-webp-en-jpg/
+          - link "WebP → PNG" [ref=e179] [cursor=pointer]:
+            - /url: /fr/convertir-webp-en-png/
+          - link "PNG → PDF" [ref=e180] [cursor=pointer]:
+            - /url: /fr/convertir-png-en-pdf/
+          - link "JPG → PDF" [ref=e181] [cursor=pointer]:
+            - /url: /fr/convertir-jpg-en-pdf/
+        - generic [ref=e182]:
+          - generic [ref=e183]: Utilities
+          - link "Compressor" [ref=e184] [cursor=pointer]:
+            - /url: /fr/compresseur-d-images/
+          - link "Resizer" [ref=e185] [cursor=pointer]:
+            - /url: /fr/redimensionneur-d-images/
+          - link "Favicon Generator" [ref=e186] [cursor=pointer]:
+            - /url: /fr/generateur-de-favicon/
+          - link "Image → Base64" [ref=e187] [cursor=pointer]:
+            - /url: /fr/image-vers-base64/
+          - link "Base64 → Image" [ref=e188] [cursor=pointer]:
+            - /url: /fr/base64-vers-image/
+        - generic [ref=e189]:
+          - generic [ref=e190]: Use Cases
+          - link "For eBay" [ref=e191] [cursor=pointer]:
+            - /url: /fr/hebergement-images-ebay/
+          - link "For Discord" [ref=e192] [cursor=pointer]:
+            - /url: /fr/hebergement-image-discord/
+          - link "For GitHub" [ref=e193] [cursor=pointer]:
+            - /url: /fr/hebergement-images-github-readme/
+          - link "For Notion" [ref=e194] [cursor=pointer]:
+            - /url: /fr/hebergement-images-notion/
+          - link "For WordPress" [ref=e195] [cursor=pointer]:
+            - /url: /fr/hebergement-images-wordpress/
+          - link "For Shopify" [ref=e196] [cursor=pointer]:
+            - /url: /fr/hebergement-images-shopify/
+          - link "For Newsletters" [ref=e197] [cursor=pointer]:
+            - /url: /fr/hebergement-images-newsletter/
+          - link "For Email Signatures" [ref=e198] [cursor=pointer]:
+            - /url: /fr/hebergement-images-signature-email/
+          - link "For Forums" [ref=e199] [cursor=pointer]:
+            - /url: /fr/hebergement-images-forums/
+          - link "For WhatsApp" [ref=e200] [cursor=pointer]:
+            - /url: /fr/partager-images-whatsapp-url/
+          - link "For ChatGPT" [ref=e201] [cursor=pointer]:
+            - /url: /fr/url-image-pour-chatgpt/
+          - link "AI Image Hosting" [ref=e202] [cursor=pointer]:
+            - /url: /fr/hebergement-images-ia/
+          - link "For Reddit" [ref=e203] [cursor=pointer]:
+            - /url: /image-hosting-for-reddit
+          - link "For X / Twitter" [ref=e204] [cursor=pointer]:
+            - /url: /image-hosting-for-twitter
+          - link "For Instagram" [ref=e205] [cursor=pointer]:
+            - /url: /image-hosting-for-instagram
+          - link "For Pinterest" [ref=e206] [cursor=pointer]:
+            - /url: /image-hosting-for-pinterest
+          - link "For LinkedIn" [ref=e207] [cursor=pointer]:
+            - /url: /image-hosting-for-linkedin
+          - link "For Substack" [ref=e208] [cursor=pointer]:
+            - /url: /image-hosting-for-substack
+          - link "For Medium" [ref=e209] [cursor=pointer]:
+            - /url: /image-hosting-for-medium
+          - link "For Webflow" [ref=e210] [cursor=pointer]:
+            - /url: /image-hosting-for-webflow
+          - link "For Squarespace" [ref=e211] [cursor=pointer]:
+            - /url: /image-hosting-for-squarespace
+          - link "For Wix" [ref=e212] [cursor=pointer]:
+            - /url: /image-hosting-for-wix
+          - link "For Framer" [ref=e213] [cursor=pointer]:
+            - /url: /image-hosting-for-framer
+          - link "For Stack Overflow" [ref=e214] [cursor=pointer]:
+            - /url: /image-hosting-for-stack-overflow
+          - link "For Markdown" [ref=e215] [cursor=pointer]:
+            - /url: /image-hosting-for-markdown
+          - link "For Next.js" [ref=e216] [cursor=pointer]:
+            - /url: /image-hosting-for-nextjs
+          - link "For Jira" [ref=e217] [cursor=pointer]:
+            - /url: /image-hosting-for-jira
+        - generic [ref=e218]:
+          - generic [ref=e219]: Compare & Alternatives
+          - link "Imgur Alternative" [ref=e220] [cursor=pointer]:
+            - /url: /fr/meilleure-alternative-imgur/
+          - link "ImgBB Alternative" [ref=e221] [cursor=pointer]:
+            - /url: /fr/alternative-imgbb-gratuite/
+          - link "Cloudinary Alternative" [ref=e222] [cursor=pointer]:
+            - /url: /cloudinary-alternative
+          - link "Postimages Alternative" [ref=e223] [cursor=pointer]:
+            - /url: /postimages-alternative
+          - link "Google Photos Direct Link" [ref=e224] [cursor=pointer]:
+            - /url: /google-photos-direct-link
+          - link "Dropbox Direct Link" [ref=e225] [cursor=pointer]:
+            - /url: /dropbox-direct-image-link
+          - link "vs Imgur" [ref=e226] [cursor=pointer]:
+            - /url: /imagetourl-vs-imgur
+          - link "vs ImgBB" [ref=e227] [cursor=pointer]:
+            - /url: /imagetourl-vs-imgbb
+          - link "vs Cloudinary" [ref=e228] [cursor=pointer]:
+            - /url: /imagetourl-vs-cloudinary
+          - link "Imgur vs ImgBB" [ref=e229] [cursor=pointer]:
+            - /url: /imgur-vs-imgbb
+        - generic [ref=e230]:
+          - generic [ref=e231]: API & Integrations
+          - link "Upload API" [ref=e232] [cursor=pointer]:
+            - /url: /image-upload-api
+          - link "REST Reference" [ref=e233] [cursor=pointer]:
+            - /url: /image-hosting-rest-api
+          - link "Python" [ref=e234] [cursor=pointer]:
+            - /url: /image-hosting-api-python
+          - link "Node.js" [ref=e235] [cursor=pointer]:
+            - /url: /image-hosting-api-nodejs
+          - link "PHP" [ref=e236] [cursor=pointer]:
+            - /url: /image-hosting-api-php
+          - link "cURL" [ref=e237] [cursor=pointer]:
+            - /url: /image-hosting-api-curl
+          - link "Zapier" [ref=e238] [cursor=pointer]:
+            - /url: /image-upload-zapier
+          - link "Make.com" [ref=e239] [cursor=pointer]:
+            - /url: /image-upload-make
+          - link "n8n" [ref=e240] [cursor=pointer]:
+            - /url: /image-upload-n8n
+        - generic [ref=e241]:
+          - generic [ref=e242]: Answers
+          - link "Get a direct URL" [ref=e243] [cursor=pointer]:
+            - /url: /how-to-get-direct-url-for-image
+          - link "Share as a link" [ref=e244] [cursor=pointer]:
+            - /url: /how-to-share-image-as-link
+          - link "Embed in email" [ref=e245] [cursor=pointer]:
+            - /url: /how-to-embed-image-in-email
+          - link "What is hotlinking" [ref=e246] [cursor=pointer]:
+            - /url: /what-is-image-hotlinking
+          - link "Host for free" [ref=e247] [cursor=pointer]:
+            - /url: /how-to-host-image-for-free
+          - link "Retention policy" [ref=e248] [cursor=pointer]:
+            - /url: /how-long-does-imagetourl-store-images
+        - generic [ref=e249]:
+          - generic [ref=e250]: Guides
+          - link "JPG vs PNG vs WebP vs AVIF" [ref=e251] [cursor=pointer]:
+            - /url: /guides/jpg-vs-png-vs-webp-vs-avif
+          - link "Image LCP Optimization" [ref=e252] [cursor=pointer]:
+            - /url: /guides/image-lcp-optimization
+          - link "Core Web Vitals Guide" [ref=e253] [cursor=pointer]:
+            - /url: /guides/image-optimization-core-web-vitals
+          - link "Responsive Images Cheatsheet" [ref=e254] [cursor=pointer]:
+            - /url: /guides/responsive-images-cheatsheet
+          - link "What EXIF Leaks" [ref=e255] [cursor=pointer]:
+            - /url: /guides/what-exif-leaks
+          - link "Embed in Notion" [ref=e256] [cursor=pointer]:
+            - /url: /guides/embed-images-in-notion
+          - link "Why Reddit Strips EXIF" [ref=e257] [cursor=pointer]:
+            - /url: /guides/why-reddit-strips-exif
+        - generic [ref=e258]:
+          - generic [ref=e259]: Ressources
+          - link "Politique de confidentialité" [ref=e260] [cursor=pointer]:
+            - /url: /fr/privacy
+          - link "Conditions d'utilisation" [ref=e261] [cursor=pointer]:
+            - /url: /fr/terms
+          - link "Documentation" [ref=e262] [cursor=pointer]:
+            - /url: /fr/docs
+          - link "À propos" [ref=e263] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e264] [cursor=pointer]:
+            - /url: /contact
+          - link "Blog" [ref=e265] [cursor=pointer]:
+            - /url: /fr/blog
+          - link "Content Guidelines" [ref=e266] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e267]:
+          - generic [ref=e268]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e269] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e270]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e271] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e272]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e273] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e274]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e275] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e276]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e277]:
+          - generic [ref=e278]: Restez informé
+          - generic [ref=e279]:
+            - textbox "Votre email..." [ref=e280]
+            - button "Rejoindre" [ref=e281]
+          - generic [ref=e282]:
+            - link "GitHub" [ref=e283] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e284]
+            - link "Instagram" [ref=e286] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e287]
+            - link "Personal Website" [ref=e289] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e290]:
+        - paragraph [ref=e291]: © 2026 ImageToURL. Conçu par l'équipe ImageToURL
+        - paragraph [ref=e292]: Built with care · Hosted on Cloudflare
+  - generic [ref=e295]:
+    - button "Menu" [ref=e296]:
+      - img [ref=e298]
+      - generic: Menu
+    - button "Inspect" [ref=e302]:
+      - img [ref=e304]
+      - generic: Inspect
+    - button "Audit" [ref=e306]:
+      - img [ref=e308]
+      - generic: Audit
+    - button "Settings" [ref=e311]:
+      - img [ref=e313]
+      - generic: Settings

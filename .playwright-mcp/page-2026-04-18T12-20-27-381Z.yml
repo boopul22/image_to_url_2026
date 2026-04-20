@@ -1,0 +1,496 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - generic [ref=e7]:
+          - link "Home" [ref=e8] [cursor=pointer]:
+            - /url: /en/
+          - link "Features" [ref=e9] [cursor=pointer]:
+            - /url: /en/features
+          - link "Blog" [ref=e10] [cursor=pointer]:
+            - /url: /en/blog
+          - button "Solutions expand_more" [ref=e12]:
+            - text: Solutions
+            - generic [ref=e13]: expand_more
+          - button "Tools expand_more" [ref=e15]:
+            - text: Tools
+            - generic [ref=e16]: expand_more
+        - generic [ref=e17]:
+          - link "favorite Donate" [ref=e18] [cursor=pointer]:
+            - /url: https://ko-fi.com/bipul
+            - generic [ref=e19]: favorite
+            - text: Donate
+          - button "Change language" [ref=e21]:
+            - generic [ref=e22]: translate
+            - text: English
+            - generic [ref=e23]: expand_more
+          - link "Sign In" [ref=e25] [cursor=pointer]:
+            - /url: /api/auth/login
+            - img [ref=e26]
+            - text: Sign In
+    - main [ref=e31]:
+      - article [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: Tutorials
+          - heading "How to Convert Any Image to a Shareable URL in Seconds (Step-by-Step)" [level=1] [ref=e35]
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - img "Sheenam Middha" [ref=e38]
+              - generic [ref=e39]:
+                - paragraph [ref=e40]: Sheenam Middha
+                - paragraph [ref=e41]: Blogger
+            - generic [ref=e43]:
+              - generic [ref=e44]: Published
+              - generic [ref=e45]: Apr 15, 2026
+            - generic [ref=e47]:
+              - generic [ref=e48]: schedule
+              - text: 5 min read
+        - group [ref=e49]:
+          - generic "list Table of contents expand_more" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: list
+              - text: Table of contents
+            - generic [ref=e53]: expand_more
+          - navigation "Table of contents" [ref=e54]:
+            - list [ref=e55]:
+              - listitem [ref=e56]:
+                - link "01 What Is an Image URL and Why Do You Need One?" [ref=e57] [cursor=pointer]:
+                  - /url: "#what-is-an-image-url-and-why-do-you-need-one"
+                  - generic [ref=e58]: "01"
+                  - generic [ref=e59]: What Is an Image URL and Why Do You Need One?
+              - listitem [ref=e60]:
+                - link "02 Why People Use Image URLs" [ref=e61] [cursor=pointer]:
+                  - /url: "#why-people-use-image-urls"
+                  - generic [ref=e62]: "02"
+                  - generic [ref=e63]: Why People Use Image URLs
+              - listitem [ref=e64]:
+                - link "03 How Does an Image-to-URL Converter Work?" [ref=e65] [cursor=pointer]:
+                  - /url: "#how-does-an-image-to-url-converter-work"
+                  - generic [ref=e66]: "03"
+                  - generic [ref=e67]: How Does an Image-to-URL Converter Work?
+              - listitem [ref=e68]:
+                - link "04 What Happens Behind the Scenes" [ref=e69] [cursor=pointer]:
+                  - /url: "#what-happens-behind-the-scenes"
+                  - generic [ref=e70]: "04"
+                  - generic [ref=e71]: What Happens Behind the Scenes
+              - listitem [ref=e72]:
+                - 'link "05 Step-by-Step: How to Convert an Image to a URL on Imagetourl.cloud" [ref=e73] [cursor=pointer]':
+                  - /url: "#step-by-step-how-to-convert-an-image-to-a-url-on-imagetourlc"
+                  - generic [ref=e74]: "05"
+                  - generic [ref=e75]: "Step-by-Step: How to Convert an Image to a URL on Imagetourl.cloud"
+              - listitem [ref=e76]:
+                - link "06 Step 1 — Open Imagetourl.cloud" [ref=e77] [cursor=pointer]:
+                  - /url: "#step-1-open-imagetourlcloud"
+                  - generic [ref=e78]: "06"
+                  - generic [ref=e79]: Step 1 — Open Imagetourl.cloud
+              - listitem [ref=e80]:
+                - link "07 Step 2 — Upload Your Image" [ref=e81] [cursor=pointer]:
+                  - /url: "#step-2-upload-your-image"
+                  - generic [ref=e82]: "07"
+                  - generic [ref=e83]: Step 2 — Upload Your Image
+              - listitem [ref=e84]:
+                - link "08 Step 3 — Wait for the Upload to Finish" [ref=e85] [cursor=pointer]:
+                  - /url: "#step-3-wait-for-the-upload-to-finish"
+                  - generic [ref=e86]: "08"
+                  - generic [ref=e87]: Step 3 — Wait for the Upload to Finish
+              - listitem [ref=e88]:
+                - link "09 Step 4 — Copy Your Image URL" [ref=e89] [cursor=pointer]:
+                  - /url: "#step-4-copy-your-image-url"
+                  - generic [ref=e90]: "09"
+                  - generic [ref=e91]: Step 4 — Copy Your Image URL
+              - listitem [ref=e92]:
+                - link "10 Step 5 — Use It Anywhere" [ref=e93] [cursor=pointer]:
+                  - /url: "#step-5-use-it-anywhere"
+                  - generic [ref=e94]: "10"
+                  - generic [ref=e95]: Step 5 — Use It Anywhere
+              - listitem [ref=e96]:
+                - link "11 What Image Formats Are Supported?" [ref=e97] [cursor=pointer]:
+                  - /url: "#what-image-formats-are-supported"
+                  - generic [ref=e98]: "11"
+                  - generic [ref=e99]: What Image Formats Are Supported?
+              - listitem [ref=e100]:
+                - link "12 Common Uses for Image URLs" [ref=e101] [cursor=pointer]:
+                  - /url: "#common-uses-for-image-urls"
+                  - generic [ref=e102]: "12"
+                  - generic [ref=e103]: Common Uses for Image URLs
+              - listitem [ref=e104]:
+                - link "13 For Website Owners and Bloggers" [ref=e105] [cursor=pointer]:
+                  - /url: "#for-website-owners-and-bloggers"
+                  - generic [ref=e106]: "13"
+                  - generic [ref=e107]: For Website Owners and Bloggers
+              - listitem [ref=e108]:
+                - link "14 For Developers and API Users" [ref=e109] [cursor=pointer]:
+                  - /url: "#for-developers-and-api-users"
+                  - generic [ref=e110]: "14"
+                  - generic [ref=e111]: For Developers and API Users
+              - listitem [ref=e112]:
+                - link "15 For Marketers and Social Media Managers" [ref=e113] [cursor=pointer]:
+                  - /url: "#for-marketers-and-social-media-managers"
+                  - generic [ref=e114]: "15"
+                  - generic [ref=e115]: For Marketers and Social Media Managers
+              - listitem [ref=e116]:
+                - link "16 For Students and Educators" [ref=e117] [cursor=pointer]:
+                  - /url: "#for-students-and-educators"
+                  - generic [ref=e118]: "16"
+                  - generic [ref=e119]: For Students and Educators
+              - listitem [ref=e120]:
+                - link "17 Tips to Get the Best Results" [ref=e121] [cursor=pointer]:
+                  - /url: "#tips-to-get-the-best-results"
+                  - generic [ref=e122]: "17"
+                  - generic [ref=e123]: Tips to Get the Best Results
+              - listitem [ref=e124]:
+                - link "18 Is It Safe to Convert Images to URLs?" [ref=e125] [cursor=pointer]:
+                  - /url: "#is-it-safe-to-convert-images-to-urls"
+                  - generic [ref=e126]: "18"
+                  - generic [ref=e127]: Is It Safe to Convert Images to URLs?
+              - listitem [ref=e128]:
+                - link "19 Conclusion!" [ref=e129] [cursor=pointer]:
+                  - /url: "#conclusion"
+                  - generic [ref=e130]: "19"
+                  - generic [ref=e131]: Conclusion!
+        - generic [ref=e132]:
+          - paragraph [ref=e133]:
+            - text: Have a photo on your gadget and want to share it with the world quickly? Whether you are a developer, a blogger, or a simple individual who wishes to send a quick image link, it is the easiest method to convert an image to a URL. No attachments of files, no compression headaches. Pure linkage that anyone can access anywhere. You will see in this guide just how to turn any picture into a shareable URL in a few seconds with
+            - link "Imagetourl.cloud" [ref=e134] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+            - text: ", step by step, and no technical expertise is required."
+          - heading "What Is an Image URL and Why Do You Need One?" [level=2] [ref=e135]:
+            - strong [ref=e136]: What Is an Image URL and Why Do You Need One?
+          - paragraph [ref=e137]: Image URL is a direct web address that links to your image on the Web. You do not send a photo file, but a link, and when you have clicked on it, the image appears in the browser of whoever clicked on it.
+          - heading "Why People Use Image URLs" [level=3] [ref=e138]:
+            - strong [ref=e139]: Why People Use Image URLs
+          - list [ref=e140]:
+            - listitem [ref=e141]:
+              - paragraph [ref=e142]: To insert pictures on websites, blogs, or emails without having to upload files every time.
+            - listitem [ref=e143]:
+              - paragraph [ref=e144]: To post pictures in apps or platforms that do not allow the uploading of files.
+            - listitem [ref=e145]:
+              - paragraph [ref=e146]: To support pictures in APIs, chatbots, or automation processes.
+            - listitem [ref=e147]:
+              - paragraph [ref=e148]: So as not to send large file attachments in messages or emails.
+          - paragraph [ref=e149]: Image URLs have been used by you already, though you may not be aware of it, if you have ever put an image into a forum or used a product image in an online store.
+          - heading "How Does an Image-to-URL Converter Work?" [level=2] [ref=e150]:
+            - strong [ref=e151]: How Does an Image-to-URL Converter Work?
+          - paragraph [ref=e152]:
+            - text: In case you upload a picture to a converter such as
+            - link "Imagetourl.cloud" [ref=e153] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+            - text: ", the converter places your picture on a secure server and provides you with a permanent link to the picture. Your image URL is that. Any device can view the image at any given time as long as one has the link."
+          - heading "What Happens Behind the Scenes" [level=3] [ref=e154]:
+            - strong [ref=e155]: What Happens Behind the Scenes
+          - list [ref=e156]:
+            - listitem [ref=e157]:
+              - paragraph [ref=e158]: You post your photo (JPG, PNG, GIF, WebP, and so on).
+            - listitem [ref=e159]:
+              - paragraph [ref=e160]: It is stored in a cloud server in the tool.
+            - listitem [ref=e161]:
+              - paragraph [ref=e162]: An image is assigned a unique URL.
+            - listitem [ref=e163]:
+              - paragraph [ref=e164]: Paste the URL anywhere.
+          - paragraph [ref=e165]:
+            - text: It lasts several seconds.
+            - link "Imagetourl.cloud" [ref=e166] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+            - text: does not require an account.
+          - 'heading "Step-by-Step: How to Convert an Image to a URL on Imagetourl.cloud" [level=2] [ref=e167]':
+            - strong [ref=e168]: "Step-by-Step: How to Convert an Image to a URL on"
+            - link "Imagetourl.cloud" [ref=e169] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+              - strong [ref=e170]: Imagetourl.cloud
+          - paragraph [ref=e171]: This is how to do it step-by-step.
+          - heading "Step 1 — Open Imagetourl.cloud" [level=3] [ref=e172]:
+            - strong [ref=e173]: Step 1 — Open
+            - link "Imagetourl.cloud" [ref=e174] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+              - strong [ref=e175]: Imagetourl.cloud
+          - paragraph [ref=e176]:
+            - text: Open in your browser
+            - link "Imagetourl.cloud" [ref=e177] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+            - text: . There is no registration required.
+          - img "WhatsApp Image 2026-04-15 at 10.53.43 PM.jpeg" [ref=e178]
+          - heading "Step 2 — Upload Your Image" [level=3] [ref=e179]:
+            - strong [ref=e180]: Step 2 — Upload Your Image
+          - paragraph [ref=e181]: To post an image, simply click the Upload button or drag and drop a picture file on the page. It can work with such common formats as JPG, PNG, GIF, BMP, and WebP.
+          - img "Screenshot.png" [ref=e182]
+          - heading "Step 3 — Wait for the Upload to Finish" [level=3] [ref=e183]:
+            - strong [ref=e184]: Step 3 — Wait for the Upload to Finish
+          - paragraph [ref=e185]: It normally takes 2-5 seconds to upload based on the size of your picture and the speed of your internet. When it is complete, you will see a progress bar or confirmation message.
+          - img "Screenshot (1).png" [ref=e186]
+          - heading "Step 4 — Copy Your Image URL" [level=3] [ref=e187]:
+            - strong [ref=e188]: Step 4 — Copy Your Image URL
+          - paragraph [ref=e189]: After uploading, the URL of your image is displayed on the screen. Click "Copy" to get the link. There is your shareable image URL - all set.
+          - img "Screenshot (2).png" [ref=e190]
+          - heading "Step 5 — Use It Anywhere" [level=3] [ref=e191]:
+            - strong [ref=e192]: Step 5 — Use It Anywhere
+          - paragraph [ref=e193]: "Paste the URL in:"
+          - list [ref=e194]:
+            - listitem [ref=e195]:
+              - paragraph [ref=e196]: An image source (as a web address <img src=...>) is a website or blog post.
+            - listitem [ref=e197]:
+              - paragraph [ref=e198]: A chat message or email.
+            - listitem [ref=e199]:
+              - paragraph [ref=e200]: A Google Doc, Notion page, or presentation.
+            - listitem [ref=e201]:
+              - paragraph [ref=e202]: An autonomization tool or API query.
+          - heading "What Image Formats Are Supported?" [level=2] [ref=e203]:
+            - strong [ref=e204]: What Image Formats Are Supported?
+          - paragraph [ref=e205]:
+            - link "Imagetourl.cloud" [ref=e206] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+              - strong [ref=e207]: Imagetourl.cloud
+            - text: "supports all major image formats, including:"
+          - list [ref=e208]:
+            - listitem [ref=e209]:
+              - paragraph [ref=e210]:
+                - strong [ref=e211]: JPG / JPEG
+                - text: — best for photos
+            - listitem [ref=e212]:
+              - paragraph [ref=e213]:
+                - strong [ref=e214]: PNG
+                - text: — best for images with transparency
+            - listitem [ref=e215]:
+              - paragraph [ref=e216]:
+                - strong [ref=e217]: GIF
+                - text: — for animated images
+            - listitem [ref=e218]:
+              - paragraph [ref=e219]:
+                - strong [ref=e220]: WebP
+                - text: — modern format for faster loading
+            - listitem [ref=e221]:
+              - paragraph [ref=e222]:
+                - strong [ref=e223]: BMP
+                - text: — basic bitmap images
+          - paragraph [ref=e224]: If your image is in a rare format, convert it to JPG or PNG first using any free image converter, then upload it.
+          - heading "Common Uses for Image URLs" [level=2] [ref=e225]:
+            - strong [ref=e226]: Common Uses for Image URLs
+          - heading "For Website Owners and Bloggers" [level=3] [ref=e227]:
+            - strong [ref=e228]: For Website Owners and Bloggers
+          - paragraph [ref=e229]:
+            - text: You can host images on
+            - link "Imagetourl.cloud" [ref=e230] [cursor=pointer]:
+              - /url: http://Imagetourl.cloud
+            - text: and use the URL in your HTML or WordPress editor, instead of uploading images to your CMS each time. It maintains a media library for your website and accelerates your workflow.
+          - heading "For Developers and API Users" [level=3] [ref=e231]:
+            - strong [ref=e232]: For Developers and API Users
+          - paragraph [ref=e233]: Image URLs are also required when dealing with APIs that receive image links rather than file uploads - such as AI image recognition services, social media APIs, or form-builders.
+          - heading "For Marketers and Social Media Managers" [level=3] [ref=e234]:
+            - strong [ref=e235]: For Marketers and Social Media Managers
+          - paragraph [ref=e236]: Have to send a product picture or banner to someone on your team? Send a URL rather than a big file. They crack it, get it, that is all.
+          - heading "For Students and Educators" [level=3] [ref=e237]:
+            - strong [ref=e238]: For Students and Educators
+          - paragraph [ref=e239]: It is a lot easier to share diagrams, charts, or pictures in a presentation through a link than it would be to add files in online classrooms and discussion forums.
+          - heading "Tips to Get the Best Results" [level=2] [ref=e240]:
+            - strong [ref=e241]: Tips to Get the Best Results
+          - list [ref=e242]:
+            - listitem [ref=e243]:
+              - paragraph [ref=e244]:
+                - strong [ref=e245]: Keep file size under 5 MB
+                - text: for faster uploads and loading
+            - listitem [ref=e246]:
+              - paragraph [ref=e247]:
+                - strong [ref=e248]: Use PNG for logos or graphics
+                - text: that need a transparent background
+            - listitem [ref=e249]:
+              - paragraph [ref=e250]:
+                - strong [ref=e251]: Use JPG for photos
+                - text: to keep the file size smaller
+            - listitem [ref=e252]:
+              - paragraph [ref=e253]:
+                - strong [ref=e254]: Don't share sensitive images
+                - text: — URLs are public links anyone can access
+            - listitem [ref=e255]:
+              - paragraph [ref=e256]:
+                - strong [ref=e257]: Bookmark the URL
+                - text: if you plan to use it repeatedly
+          - heading "Is It Safe to Convert Images to URLs?" [level=2] [ref=e258]:
+            - strong [ref=e259]: Is It Safe to Convert Images to URLs?
+          - paragraph [ref=e260]: Yes - however, remember what you post. When you generate an image URL, the image will be made publicly available to anybody with the link. This is quite ok in the case of general-purpose images such as product images, infographics, or blog images.
+          - paragraph [ref=e261]: Do not post personal photos, IDs, or any personal pictures. Post pictures only of what you are comfortable with.
+          - heading "Conclusion!" [level=2] [ref=e262]:
+            - strong [ref=e263]: Conclusion!
+          - paragraph [ref=e264]:
+            - text: One of the most useful online tasks is converting an image to a shareable URL, which takes less than a minute. The process is easy with
+            - link "Imagetourl.Cloud" [ref=e265] [cursor=pointer]:
+              - /url: http://Imagetourl.Cloud
+            - text: ": upload, copy, share. This tool can be used to create a website, deal with APIs, or even provide a fast connection to an image, and it can do so without any hassle. Give it a go and avoid the inconvenience of transmitting image files in the traditional manner."
+          - paragraph [ref=e266]
+          - paragraph [ref=e267]
+        - generic [ref=e268]:
+          - heading "help Frequently Asked Questions" [level=3] [ref=e269]:
+            - generic [ref=e270]: help
+            - text: Frequently Asked Questions
+          - generic [ref=e271]:
+            - group [ref=e272]:
+              - generic "Is Imagetourl.cloud free to use? expand_more" [ref=e273] [cursor=pointer]:
+                - generic [ref=e274]: Is Imagetourl.cloud free to use?
+                - generic [ref=e275]: expand_more
+            - group [ref=e276]:
+              - generic "How long does the image URL stay active? expand_more" [ref=e277] [cursor=pointer]:
+                - generic [ref=e278]: How long does the image URL stay active?
+                - generic [ref=e279]: expand_more
+            - group [ref=e280]:
+              - generic "Can I convert multiple images at once? expand_more" [ref=e281] [cursor=pointer]:
+                - generic [ref=e282]: Can I convert multiple images at once?
+                - generic [ref=e283]: expand_more
+            - group [ref=e284]:
+              - generic "Do I need to create an account to use the tool? expand_more" [ref=e285] [cursor=pointer]:
+                - generic [ref=e286]: Do I need to create an account to use the tool?
+                - generic [ref=e287]: expand_more
+            - group [ref=e288]:
+              - generic "Can I use the image URL in my website's HTML? expand_more" [ref=e289] [cursor=pointer]:
+                - generic [ref=e290]: Can I use the image URL in my website's HTML?
+                - generic [ref=e291]: expand_more
+            - group [ref=e292]:
+              - generic "What if my image URL stops working? expand_more" [ref=e293] [cursor=pointer]:
+                - generic [ref=e294]: What if my image URL stops working?
+                - generic [ref=e295]: expand_more
+        - generic [ref=e296]:
+          - generic [ref=e297]: Share this Article
+          - generic [ref=e298]:
+            - paragraph [ref=e299]: Help others discover great content!
+            - generic [ref=e300]:
+              - button "share" [ref=e301]:
+                - generic [ref=e302]: share
+              - button "link" [ref=e303]:
+                - generic [ref=e304]: link
+              - button "mail" [ref=e305]:
+                - generic [ref=e306]: mail
+    - generic [ref=e308]:
+      - generic [ref=e309]:
+        - generic [ref=e310]:
+          - generic [ref=e311]:
+            - generic [ref=e312]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e313]: Making the web more visual, one link at a time. Designed for humans, built for speed.
+        - generic [ref=e314]:
+          - generic [ref=e315]: Convert
+          - link "PNG to URL" [ref=e316] [cursor=pointer]:
+            - /url: /en/png-to-url
+          - link "JPG to URL" [ref=e317] [cursor=pointer]:
+            - /url: /en/jpg-to-url
+          - link "GIF to URL" [ref=e318] [cursor=pointer]:
+            - /url: /en/gif-to-url
+          - link "WebP to URL" [ref=e319] [cursor=pointer]:
+            - /url: /en/webp-to-url
+          - link "Photo to URL" [ref=e320] [cursor=pointer]:
+            - /url: /en/photo-to-url
+          - link "Screenshot to URL" [ref=e321] [cursor=pointer]:
+            - /url: /en/screenshot-to-url
+        - generic [ref=e322]:
+          - generic [ref=e323]: Features
+          - link "Free Image Hosting" [ref=e324] [cursor=pointer]:
+            - /url: /en/free-image-hosting
+          - link "Image URL Generator" [ref=e325] [cursor=pointer]:
+            - /url: /en/image-url-generator
+          - link "Bulk Image Upload" [ref=e326] [cursor=pointer]:
+            - /url: /en/bulk-image-upload
+          - link "Free Image CDN" [ref=e327] [cursor=pointer]:
+            - /url: /en/free-image-cdn
+          - link "Permanent Hosting" [ref=e328] [cursor=pointer]:
+            - /url: /en/permanent-image-hosting
+          - link "Direct Image Links" [ref=e329] [cursor=pointer]:
+            - /url: /en/direct-image-link
+          - link "Anonymous Upload" [ref=e330] [cursor=pointer]:
+            - /url: /en/anonymous-image-upload
+          - link "Embed Code Generator" [ref=e331] [cursor=pointer]:
+            - /url: /en/image-embed-code-generator
+        - generic [ref=e332]:
+          - generic [ref=e333]: Use Cases
+          - link "For eBay" [ref=e334] [cursor=pointer]:
+            - /url: /en/image-hosting-for-ebay
+          - link "For Discord" [ref=e335] [cursor=pointer]:
+            - /url: /en/image-hosting-for-discord
+          - link "For GitHub" [ref=e336] [cursor=pointer]:
+            - /url: /en/image-hosting-for-github-readme
+          - link "For Notion" [ref=e337] [cursor=pointer]:
+            - /url: /en/image-hosting-for-notion
+          - link "For WordPress" [ref=e338] [cursor=pointer]:
+            - /url: /en/image-hosting-for-wordpress
+          - link "For Shopify" [ref=e339] [cursor=pointer]:
+            - /url: /en/image-hosting-for-shopify
+          - link "For Newsletters" [ref=e340] [cursor=pointer]:
+            - /url: /en/image-hosting-for-newsletters
+          - link "For Email Signatures" [ref=e341] [cursor=pointer]:
+            - /url: /en/image-hosting-for-email-signatures
+          - link "For Forums" [ref=e342] [cursor=pointer]:
+            - /url: /en/image-hosting-for-forums
+          - link "For WhatsApp" [ref=e343] [cursor=pointer]:
+            - /url: /en/image-to-url-for-whatsapp
+          - link "For ChatGPT" [ref=e344] [cursor=pointer]:
+            - /url: /en/image-url-for-chatgpt
+          - link "AI Image Hosting" [ref=e345] [cursor=pointer]:
+            - /url: /en/ai-image-hosting
+          - link "Imgur Alternative" [ref=e346] [cursor=pointer]:
+            - /url: /en/imgur-alternative
+          - link "ImgBB Alternative" [ref=e347] [cursor=pointer]:
+            - /url: /en/imgbb-alternative
+        - generic [ref=e348]:
+          - generic [ref=e349]: Resources
+          - link "Privacy Policy" [ref=e350] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms of Service" [ref=e351] [cursor=pointer]:
+            - /url: /en/terms
+          - link "Documentation" [ref=e352] [cursor=pointer]:
+            - /url: /en/docs
+          - link "About" [ref=e353] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e354] [cursor=pointer]:
+            - /url: /contact
+          - link "Blog" [ref=e355] [cursor=pointer]:
+            - /url: /en/blog
+          - link "Content Guidelines" [ref=e356] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e357]:
+          - generic [ref=e358]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e359] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e360]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e361] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e362]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e363] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e364]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e365] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e366]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e367]:
+          - generic [ref=e368]: Stay Updated
+          - generic [ref=e369]:
+            - textbox "Your email..." [ref=e370]
+            - button "Join" [ref=e371]
+          - generic [ref=e372]:
+            - link "GitHub" [ref=e373] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e374]
+            - link "Instagram" [ref=e376] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e377]
+            - link "Personal Website" [ref=e379] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e380]:
+        - paragraph [ref=e381]: © 2026 ImageToURL. Designed by ImageToURL Team
+        - paragraph [ref=e382]: Built with care · Hosted on Cloudflare
+  - generic [ref=e385]:
+    - button "Menu" [ref=e386]:
+      - img [ref=e388]
+      - generic: Menu
+    - button "Inspect" [ref=e392]:
+      - img [ref=e394]
+      - generic: Inspect
+    - button "Audit" [ref=e396]:
+      - img [ref=e398]
+      - generic: Audit
+    - button "Settings" [ref=e401]:
+      - img [ref=e403]
+      - generic: Settings

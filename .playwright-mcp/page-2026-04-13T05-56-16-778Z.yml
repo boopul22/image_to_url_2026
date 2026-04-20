@@ -1,0 +1,502 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Go to home" [ref=e5] [cursor=pointer]:
+        - /url: /en-IN
+        - img [ref=e7]
+        - generic [ref=e10]: ImageToURL
+      - generic [ref=e12]:
+        - link "Tools" [ref=e13] [cursor=pointer]:
+          - /url: /en-IN/tools
+        - link "PDF to URL" [ref=e14] [cursor=pointer]:
+          - /url: /en-IN/pdf-to-url
+        - link "Video to URL" [ref=e15] [cursor=pointer]:
+          - /url: /en-IN/video-to-url
+        - link "GIF to URL" [ref=e16] [cursor=pointer]:
+          - /url: /en-IN/gif-to-url
+        - link "File to URL" [ref=e17] [cursor=pointer]:
+          - /url: /en-IN/file-to-url
+        - link "Bulk Upload" [ref=e18] [cursor=pointer]:
+          - /url: /en-IN/bulk-image-upload
+        - link "Pricing" [ref=e19] [cursor=pointer]:
+          - /url: /en-IN/pricing
+        - link "Blog" [ref=e20] [cursor=pointer]:
+          - /url: /en-IN/blog
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - img [ref=e29]
+      - heading "Privacy Policy" [level=1] [ref=e31]
+      - paragraph [ref=e32]: Your privacy is our top priority. We believe in transparency and protecting your data with the highest standards.
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - heading "Data Security" [level=3] [ref=e39]
+        - paragraph [ref=e40]: Enterprise-grade encryption protects all data in transit and at rest.
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - img [ref=e43]
+          - heading "Transparency" [level=3] [ref=e46]
+        - paragraph [ref=e47]: Clear, honest communication about what data we collect and why.
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - img [ref=e50]
+          - heading "User Control" [level=3] [ref=e53]
+        - paragraph [ref=e54]: You have control over your data and can request deletion at any time.
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - heading "Information We Collect" [level=2] [ref=e57]:
+          - img [ref=e58]
+          - text: Information We Collect
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - heading "Technical Information" [level=3] [ref=e64]
+            - list [ref=e65]:
+              - listitem [ref=e66]:
+                - generic [ref=e67]: тА?
+                - text: IP address for rate limiting and abuse prevention
+              - listitem [ref=e68]:
+                - generic [ref=e69]: тА?
+                - text: Browser type and version for compatibility
+              - listitem [ref=e70]:
+                - generic [ref=e71]: тА?
+                - text: File metadata (size, type, upload time)
+          - generic [ref=e72]:
+            - heading "Usage Analytics" [level=3] [ref=e73]
+            - paragraph [ref=e74]: We use Google Analytics to understand how our service is used. This data is anonymized and aggregated.
+      - generic [ref=e75]:
+        - heading "How We Protect Your Data" [level=2] [ref=e76]:
+          - img [ref=e77]
+          - text: How We Protect Your Data
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - img [ref=e82]
+            - generic [ref=e85]:
+              - heading "HTTPS Encryption" [level=4] [ref=e86]
+              - paragraph [ref=e87]: All data transfers use SSL/TLS encryption
+          - generic [ref=e88]:
+            - img [ref=e89]
+            - generic [ref=e92]:
+              - heading "Cloudflare R2 Storage" [level=4] [ref=e93]
+              - paragraph [ref=e94]: Images are stored on secure, encrypted cloud infrastructure
+          - generic [ref=e95]:
+            - img [ref=e96]
+            - generic [ref=e99]:
+              - heading "No Personal Information Required" [level=4] [ref=e100]
+              - paragraph [ref=e101]: No registration or personal data needed to use our service
+      - generic [ref=e102]:
+        - heading "Data Retention" [level=2] [ref=e103]:
+          - img [ref=e104]
+          - text: Data Retention
+        - generic [ref=e107]:
+          - paragraph [ref=e108]:
+            - strong [ref=e109]: "Images:"
+            - text: Uploaded images are stored indefinitely unless they violate our terms of service or are manually deleted.
+          - paragraph [ref=e110]:
+            - strong [ref=e111]: "Technical Logs:"
+            - text: Access logs and analytics data are retained for 30 days for security and performance monitoring.
+          - paragraph [ref=e112]:
+            - strong [ref=e113]: "Error Logs:"
+            - text: Technical error logs are retained for 7 days for debugging purposes.
+      - generic [ref=e114]:
+        - heading "Third-Party Services" [level=2] [ref=e115]
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - heading "Cloudflare R2" [level=4] [ref=e118]
+            - paragraph [ref=e119]: Images are stored on Cloudflare R2, which provides secure object storage with built-in redundancy and DDoS protection.
+          - generic [ref=e120]:
+            - heading "Google Analytics" [level=4] [ref=e121]
+            - paragraph [ref=e122]: We use Google Analytics to understand usage patterns and improve our service. No personal information is shared.
+      - generic [ref=e123]:
+        - heading "Your Rights" [level=2] [ref=e124]
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: "You have the right to:"
+          - list [ref=e127]:
+            - listitem [ref=e128]:
+              - generic [ref=e129]: тА?
+              - text: Access information about the data we process about you
+            - listitem [ref=e130]:
+              - generic [ref=e131]: тА?
+              - text: Request deletion of your uploaded images
+            - listitem [ref=e132]:
+              - generic [ref=e133]: тА?
+              - text: File a complaint with data protection authorities
+          - paragraph [ref=e134]: To exercise these rights, contact us at privacy@image2url.com
+      - generic [ref=e135]:
+        - heading "Policy Updates" [level=2] [ref=e136]
+        - paragraph [ref=e137]: "We may update this privacy policy from time to time. We will:"
+        - list [ref=e138]:
+          - listitem [ref=e139]:
+            - generic [ref=e140]: тА?
+            - text: Post the updated policy on this page
+          - listitem [ref=e141]:
+            - generic [ref=e142]: тА?
+            - text: Update the "Last updated" date
+          - listitem [ref=e143]:
+            - generic [ref=e144]: тА?
+            - text: Notify users of significant changes
+        - paragraph [ref=e145]: Continued use of our service after changes constitutes acceptance of the updated policy.
+      - generic [ref=e146]:
+        - paragraph [ref=e147]:
+          - strong [ref=e148]: Questions about your privacy?
+        - paragraph [ref=e149]:
+          - text: "Contact us at:"
+          - link "privacy@image2url.com" [ref=e150] [cursor=pointer]:
+            - /url: mailto:privacy@image2url.com
+      - paragraph [ref=e152]: "Last updated: January 1, 2025"
+  - generic [ref=e154]:
+    - generic [ref=e155]:
+      - generic [ref=e156]:
+        - heading "Select Region" [level=2] [ref=e157]
+        - paragraph [ref=e158]: Choose your preferred language and region
+      - generic [ref=e160]:
+        - button "English English" [ref=e161] [cursor=pointer]:
+          - img "English" [ref=e163]
+          - generic [ref=e165]: English
+        - button "English (Australia) English (Australia)" [ref=e166] [cursor=pointer]:
+          - img "English (Australia)" [ref=e168]
+          - generic [ref=e170]: English (Australia)
+        - button "English (India) English (India)" [ref=e171] [cursor=pointer]:
+          - img "English (India)" [ref=e173]
+          - generic [ref=e175]: English (India)
+          - img [ref=e178]
+        - button "العربية العربية" [ref=e180] [cursor=pointer]:
+          - img "العربية" [ref=e182]
+          - generic [ref=e184]: العربية
+        - button "Български Български" [ref=e185] [cursor=pointer]:
+          - img "Български" [ref=e187]
+          - generic [ref=e189]: Български
+        - button "Català Català" [ref=e190] [cursor=pointer]:
+          - img "Català" [ref=e192]
+          - generic [ref=e194]: Català
+        - button "Čeština Čeština" [ref=e195] [cursor=pointer]:
+          - img "Čeština" [ref=e197]
+          - generic [ref=e199]: Čeština
+        - button "Dansk Dansk" [ref=e200] [cursor=pointer]:
+          - img "Dansk" [ref=e202]
+          - generic [ref=e204]: Dansk
+        - button "Deutsch Deutsch" [ref=e205] [cursor=pointer]:
+          - img "Deutsch" [ref=e207]
+          - generic [ref=e209]: Deutsch
+        - button "Ελληνικά Ελληνικά" [ref=e210] [cursor=pointer]:
+          - img "Ελληνικά" [ref=e212]
+          - generic [ref=e214]: Ελληνικά
+        - button "Español Español" [ref=e215] [cursor=pointer]:
+          - img "Español" [ref=e217]
+          - generic [ref=e219]: Español
+        - button "Suomi Suomi" [ref=e220] [cursor=pointer]:
+          - img "Suomi" [ref=e222]
+          - generic [ref=e224]: Suomi
+        - button "Français Français" [ref=e225] [cursor=pointer]:
+          - img "Français" [ref=e227]
+          - generic [ref=e229]: Français
+        - button "עברית עברית" [ref=e230] [cursor=pointer]:
+          - img "עברית" [ref=e232]
+          - generic [ref=e234]: עברית
+        - button "Hrvatski Hrvatski" [ref=e235] [cursor=pointer]:
+          - img "Hrvatski" [ref=e237]
+          - generic [ref=e239]: Hrvatski
+        - button "Magyar Magyar" [ref=e240] [cursor=pointer]:
+          - img "Magyar" [ref=e242]
+          - generic [ref=e244]: Magyar
+        - button "Bahasa Indonesia Bahasa Indonesia" [ref=e245] [cursor=pointer]:
+          - img "Bahasa Indonesia" [ref=e247]
+          - generic [ref=e249]: Bahasa Indonesia
+        - button "Italiano Italiano" [ref=e250] [cursor=pointer]:
+          - img "Italiano" [ref=e252]
+          - generic [ref=e254]: Italiano
+        - button "日本語 日本語" [ref=e255] [cursor=pointer]:
+          - img "日本語" [ref=e257]
+          - generic [ref=e259]: 日本語
+        - button "한국어 한국어" [ref=e260] [cursor=pointer]:
+          - img "한국어" [ref=e262]
+          - generic [ref=e264]: 한국어
+        - button "Nederlands Nederlands" [ref=e265] [cursor=pointer]:
+          - img "Nederlands" [ref=e267]
+          - generic [ref=e269]: Nederlands
+        - button "Norsk Norsk" [ref=e270] [cursor=pointer]:
+          - img "Norsk" [ref=e272]
+          - generic [ref=e274]: Norsk
+        - button "Polski Polski" [ref=e275] [cursor=pointer]:
+          - img "Polski" [ref=e277]
+          - generic [ref=e279]: Polski
+        - button "Português Português" [ref=e280] [cursor=pointer]:
+          - img "Português" [ref=e282]
+          - generic [ref=e284]: Português
+        - button "Português (Brasil) Português (Brasil)" [ref=e285] [cursor=pointer]:
+          - img "Português (Brasil)" [ref=e287]
+          - generic [ref=e289]: Português (Brasil)
+        - button "Română Română" [ref=e290] [cursor=pointer]:
+          - img "Română" [ref=e292]
+          - generic [ref=e294]: Română
+        - button "Русский Русский" [ref=e295] [cursor=pointer]:
+          - img "Русский" [ref=e297]
+          - generic [ref=e299]: Русский
+        - button "Slovenčina Slovenčina" [ref=e300] [cursor=pointer]:
+          - img "Slovenčina" [ref=e302]
+          - generic [ref=e304]: Slovenčina
+        - button "Svenska Svenska" [ref=e305] [cursor=pointer]:
+          - img "Svenska" [ref=e307]
+          - generic [ref=e309]: Svenska
+        - button "ไทย ไทย" [ref=e310] [cursor=pointer]:
+          - img "ไทย" [ref=e312]
+          - generic [ref=e314]: ไทย
+        - button "Filipino Filipino" [ref=e315] [cursor=pointer]:
+          - img "Filipino" [ref=e317]
+          - generic [ref=e319]: Filipino
+        - button "Türkçe Türkçe" [ref=e320] [cursor=pointer]:
+          - img "Türkçe" [ref=e322]
+          - generic [ref=e324]: Türkçe
+        - button "Українська Українська" [ref=e325] [cursor=pointer]:
+          - img "Українська" [ref=e327]
+          - generic [ref=e329]: Українська
+        - button "Tiếng Việt Tiếng Việt" [ref=e330] [cursor=pointer]:
+          - img "Tiếng Việt" [ref=e332]
+          - generic [ref=e334]: Tiếng Việt
+        - button "简体中文 简体中文" [ref=e335] [cursor=pointer]:
+          - img "简体中文" [ref=e337]
+          - generic [ref=e339]: 简体中文
+        - button "繁體中文 繁體中文" [ref=e340] [cursor=pointer]:
+          - img "繁體中文" [ref=e342]
+          - generic [ref=e344]: 繁體中文
+    - generic [ref=e345]:
+      - generic [ref=e346]:
+        - heading "Rate our service" [level=3] [ref=e347]
+        - paragraph [ref=e348]: Your feedback helps us improve for everyone.
+      - generic [ref=e349]:
+        - generic [ref=e350]:
+          - button [ref=e351] [cursor=pointer]:
+            - img [ref=e352]
+          - button [ref=e354] [cursor=pointer]:
+            - img [ref=e355]
+          - button [ref=e357] [cursor=pointer]:
+            - img [ref=e358]
+          - button [ref=e360] [cursor=pointer]:
+            - img [ref=e361]
+          - button [ref=e363] [cursor=pointer]:
+            - img [ref=e364]
+        - generic [ref=e366]:
+          - generic [ref=e367]: "4.6"
+          - generic [ref=e368]: 5,026 votes
+  - contentinfo [ref=e369]:
+    - generic [ref=e370]:
+      - generic [ref=e371]:
+        - generic [ref=e372]:
+          - generic [ref=e373]:
+            - img [ref=e375]
+            - generic [ref=e378]:
+              - paragraph [ref=e379]: ImageToURL
+              - heading "Free image hosting that never expires" [level=3] [ref=e380]
+          - paragraph [ref=e381]: Upload, share, and host your images with permanent URLs. No registration required for free use.
+          - generic [ref=e382]:
+            - generic [ref=e383]:
+              - img [ref=e384]
+              - text: Instant links
+            - generic [ref=e386]:
+              - img [ref=e387]
+              - text: HTTPS by default
+            - generic [ref=e389]:
+              - img [ref=e390]
+              - text: Global edge
+            - generic [ref=e396]:
+              - combobox "Select language" [ref=e397] [cursor=pointer]:
+                - option "🇺🇸 English"
+                - option "🇦🇺 English (Australia)"
+                - option "🇮🇳 English (India)" [selected]
+                - option "🇸🇦 العربية"
+                - option "🇧🇬 Български"
+                - option "🇪🇸 Català"
+                - option "🇨🇿 Čeština"
+                - option "🇩🇰 Dansk"
+                - option "🇩🇪 Deutsch"
+                - option "🇬🇷 Ελληνικά"
+                - option "🇪🇸 Español"
+                - option "🇫🇮 Suomi"
+                - option "🇫🇷 Français"
+                - option "🇮🇱 עברית"
+                - option "🇭🇷 Hrvatski"
+                - option "🇭🇺 Magyar"
+                - option "🇮🇩 Bahasa Indonesia"
+                - option "🇮🇹 Italiano"
+                - option "🇯🇵 日本語"
+                - option "🇰🇷 한국어"
+                - option "🇳🇱 Nederlands"
+                - option "🇳🇴 Norsk"
+                - option "🇵🇱 Polski"
+                - option "🇵🇹 Português"
+                - option "🇧🇷 Português (Brasil)"
+                - option "🇷🇴 Română"
+                - option "🇷🇺 Русский"
+                - option "🇸🇰 Slovenčina"
+                - option "🇸🇪 Svenska"
+                - option "🇹🇭 ไทย"
+                - option "🇵🇭 Filipino"
+                - option "🇹🇷 Türkçe"
+                - option "🇺🇦 Українська"
+                - option "🇻🇳 Tiếng Việt"
+                - option "🇨🇳 简体中文"
+                - option "🇹🇼 繁體中文"
+              - generic:
+                - img
+        - generic [ref=e398]:
+          - heading "Tools" [level=3] [ref=e399]
+          - generic [ref=e400]:
+            - link "Image to ICO" [ref=e401] [cursor=pointer]:
+              - /url: /en-IN/image-to-icon
+            - link "Image to Link" [ref=e402] [cursor=pointer]:
+              - /url: /en-IN/image-to-link
+            - link "Image to WebP Converter" [ref=e403] [cursor=pointer]:
+              - /url: /en-IN/image-to-webp-converter
+            - link "Image URL Generator" [ref=e404] [cursor=pointer]:
+              - /url: /en-IN/image-url-generator
+            - link "Picture to URL" [ref=e405] [cursor=pointer]:
+              - /url: /en-IN/picture-to-url
+            - link "Photo to URL" [ref=e406] [cursor=pointer]:
+              - /url: /en-IN/photo-to-url-converter
+            - link "GIF to URL" [ref=e407] [cursor=pointer]:
+              - /url: /en-IN/gif-to-url
+            - link "Image Compressor" [ref=e408] [cursor=pointer]:
+              - /url: /en-IN/image-compressor
+            - link "Video to URL" [ref=e409] [cursor=pointer]:
+              - /url: /en-IN/video-to-url
+            - link "Bulk Image Upload" [ref=e410] [cursor=pointer]:
+              - /url: /en-IN/bulk-image-upload
+            - 'link "MCP Server: image2url" [ref=e411] [cursor=pointer]':
+              - /url: /en-IN/tools/mcp-server-image2url
+            - link "Privacy Cleaner" [ref=e412] [cursor=pointer]:
+              - /url: /en-IN/tools/privacy-cleaner
+            - link "Background Remover" [ref=e413] [cursor=pointer]:
+              - /url: /en-IN/tools/background-remover
+            - link "Image Extender" [ref=e414] [cursor=pointer]:
+              - /url: /en-IN/tools/image-extender
+            - link "Photo Restoration" [ref=e415] [cursor=pointer]:
+              - /url: /en-IN/tools/photo-restoration
+            - link "IPYNB to PDF" [ref=e416] [cursor=pointer]:
+              - /url: /en-IN/tools/ipynb-to-pdf
+            - link "WebP to PNG" [ref=e417] [cursor=pointer]:
+              - /url: /en-IN/tools/webp-to-png
+            - link "Photo Enhancer" [ref=e418] [cursor=pointer]:
+              - /url: /en-IN/tools/photo-enhancer
+            - link "MHT to PDF" [ref=e419] [cursor=pointer]:
+              - /url: /en-IN/tools/mht-to-pdf
+        - generic [ref=e420]:
+          - heading "Convert Tools" [level=3] [ref=e421]
+          - generic [ref=e422]:
+            - link "PPT to URL" [ref=e423] [cursor=pointer]:
+              - /url: /en-IN/ppt-to-url-converter
+            - link "PDF to URL" [ref=e424] [cursor=pointer]:
+              - /url: /en-IN/pdf-to-url
+            - link "HTML to URL" [ref=e425] [cursor=pointer]:
+              - /url: /en-IN/html-to-url
+            - link "QR to URL" [ref=e426] [cursor=pointer]:
+              - /url: /en-IN/qr-to-url
+            - link "YouTube Redirect Cleaner" [ref=e427] [cursor=pointer]:
+              - /url: /en-IN/convert-youtube-redirect-links-to-url
+        - generic [ref=e428]:
+          - heading "URL Tools" [level=3] [ref=e429]
+          - generic [ref=e430]:
+            - link "Audio to Link" [ref=e431] [cursor=pointer]:
+              - /url: /en-IN/audio-to-link
+            - link "MP3 to Link" [ref=e432] [cursor=pointer]:
+              - /url: /en-IN/mp3-to-link
+            - link "MP3 Compressor" [ref=e433] [cursor=pointer]:
+              - /url: /en-IN/tools/mp3-compressor
+            - link "File to URL" [ref=e434] [cursor=pointer]:
+              - /url: /en-IN/file-to-url
+            - link "Base64 to URL" [ref=e435] [cursor=pointer]:
+              - /url: /en-IN/base64-to-url
+            - link "URL Expander" [ref=e436] [cursor=pointer]:
+              - /url: /en-IN/url-expander
+            - link "URL Opener" [ref=e437] [cursor=pointer]:
+              - /url: /en-IN/url-opener
+            - link "URL Parser" [ref=e438] [cursor=pointer]:
+              - /url: /en-IN/url-parser
+            - link "Batch URL Checker" [ref=e439] [cursor=pointer]:
+              - /url: /en-IN/batch-url-checker
+            - link "Tools" [ref=e440] [cursor=pointer]:
+              - /url: /en-IN/tools
+      - generic [ref=e441]:
+        - generic [ref=e442]:
+          - paragraph [ref=e443]: © 2024 ImageToURL. All rights reserved. Made with ❤️ for developers and creators
+          - generic [ref=e444]:
+            - generic [ref=e445]:
+              - heading "Legal" [level=4] [ref=e446]
+              - paragraph [ref=e447]: Need help or legal info? Find it below.
+            - generic [ref=e448]:
+              - link "Privacy Policy" [ref=e449] [cursor=pointer]:
+                - /url: /en-IN/privacy
+              - generic [ref=e450]: •
+              - link "Terms of Service" [ref=e451] [cursor=pointer]:
+                - /url: /en-IN/terms
+              - generic [ref=e452]: •
+              - link "About" [ref=e453] [cursor=pointer]:
+                - /url: /en-IN/about
+            - generic [ref=e454]:
+              - heading "Connect With Us" [level=4] [ref=e455]
+              - generic [ref=e456]:
+                - link "Image2URL on GitHub" [ref=e457] [cursor=pointer]:
+                  - /url: https://github.com/image2url
+                  - img [ref=e458]
+                - link "Image2URL on X" [ref=e461] [cursor=pointer]:
+                  - /url: https://x.com/image2url
+                  - img [ref=e462]
+                - link "Buy Me A Coffee":
+                  - /url: https://buymeacoffee.com/image2url
+                  - img "Buy Me A Coffee"
+        - generic [ref=e464]:
+          - generic [ref=e465]:
+            - img [ref=e466]
+            - text: SSL
+          - generic [ref=e468]:
+            - img [ref=e469]
+            - text: Global edge
+          - generic [ref=e474]:
+            - img [ref=e475]
+            - text: Fast uploads
+        - generic [ref=e477]:
+          - link "Fazier badge":
+            - /url: https://fazier.com/launches/www.image2url.com
+            - img "Fazier badge"
+          - link "Featured on findly.tools":
+            - /url: https://findly.tools/image-to-url?utm_source=image-to-url
+            - img "Featured on findly.tools"
+          - link "Featured on Indie.Deals":
+            - /url: https://indie.deals?ref=https%3A%2F%2Fwww.image2url.com%2F
+            - img "Featured on Indie.Deals"
+          - link "ImageToURL - Featured on Startup Fame":
+            - /url: https://startupfa.me/s/imagetourl-1?utm_source=www.image2url.com
+            - img "ImageToURL - Featured on Startup Fame"
+          - link "Featured on Twelve Tools":
+            - /url: https://twelve.tools
+            - img "Featured on Twelve Tools"
+          - link "Good AI Tools":
+            - /url: https://goodaitools.com
+            - img "Good AI Tools"
+          - link "Featured on ShowMeBestAI":
+            - /url: https://showmebest.ai
+            - img "Featured on ShowMeBestAI"
+          - link "Software Development Blogs - OnToplist.com":
+            - /url: https://www.ontoplist.com/software-blogs/
+            - img "Software Development Blogs - OnToplist.com"
+          - link "Listed on AIDirs":
+            - /url: https://aidirs.org/item/imagetourl
+            - img "Listed on AIDirs"
+          - link "Listed on Submito":
+            - /url: https://submito.net
+            - img "Listed on Submito"
+          - link "Listed on Turbo0":
+            - /url: https://turbo0.com/item/image-to-url
+            - img "Listed on Turbo0"
+          - link "Featured on LaunchIgniter":
+            - /url: https://launchigniter.com/product/image-to-url?ref=badge-image-to-url
+            - img "Featured on LaunchIgniter"
+          - link "Featured on Dofollow.Tools":
+            - /url: https://dofollow.tools
+            - img "Featured on Dofollow.Tools"
+          - link "Verified DR - Verified Domain Rating for www.image2url.com":
+            - /url: https://verifieddr.com/website/image2url-com
+            - img "Verified DR - Verified Domain Rating for www.image2url.com"
+          - link "Submit AI Tools – The ultimate platform to discover, submit, and explore the best AI tools across various categories.":
+            - /url: https://submitaitools.org
+            - img "Submit AI Tools – The ultimate platform to discover, submit, and explore the best AI tools across various categories."
+  - alert [ref=e478]

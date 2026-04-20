@@ -1,0 +1,20 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - checkbox "Use dark theme" [ref=e5]
+    - generic [ref=e6] [cursor=pointer]:
+      - img [ref=e7]
+      - img [ref=e11]
+      - generic [ref=e15]: Use dark theme
+  - banner [ref=e16]:
+    - generic [ref=e17]:
+      - heading [level=2]
+      - heading "An error occurred." [level=1] [ref=e18]
+    - img [ref=e21]
+  - generic [ref=e25]:
+    - img [ref=e27]
+    - generic [ref=e29]: "Expected `miniflare` to be defined"
+  - generic [ref=e30]:
+    - generic [ref=e31]:
+      - heading "Stack Trace" [level=2] [ref=e32]
+      - img [ref=e34] [cursor=pointer]
+    - generic [ref=e38]: at get miniflare (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/@cloudflare/vite-plugin/dist/index.mjs:1740:3) at file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/@cloudflare/vite-plugin/dist/index.mjs:30170:18 at file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/@cloudflare/vite-plugin/dist/index.mjs:1601:25 at call (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:10605:5) at next (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:10558:4) at file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:22365:28 at viteServeStaticMiddleware (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:22451:4) at call (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:10605:5) at next (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:10558:4) at viteServeRawFsMiddleware (file:///Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/vite/dist/node/chunks/config.js:22484:10)

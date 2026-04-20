@@ -1,0 +1,16 @@
+# Copy to wrangler.toml at project root. Fill in the {{PLACEHOLDERS}}.
+name = "{{PROJECT_NAME}}"
+compatibility_date = "2026-03-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Remote D1 lets local `astro dev` talk to the real D1. Set `remote = false`
+# if you prefer a local SQLite replica (requires `wrangler d1 execute --local`).
+[[d1_databases]]
+binding = "DB"
+database_name = "{{D1_DATABASE_NAME}}"
+database_id = "{{D1_DATABASE_ID}}"
+remote = true
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "{{R2_BUCKET_NAME}}"

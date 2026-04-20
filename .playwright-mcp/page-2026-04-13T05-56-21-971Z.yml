@@ -1,0 +1,553 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Go to home" [ref=e5] [cursor=pointer]:
+        - /url: /en-IN
+        - img [ref=e7]
+        - generic [ref=e10]: ImageToURL
+      - generic [ref=e12]:
+        - link "Tools" [ref=e13] [cursor=pointer]:
+          - /url: /en-IN/tools
+        - link "PDF to URL" [ref=e14] [cursor=pointer]:
+          - /url: /en-IN/pdf-to-url
+        - link "Video to URL" [ref=e15] [cursor=pointer]:
+          - /url: /en-IN/video-to-url
+        - link "GIF to URL" [ref=e16] [cursor=pointer]:
+          - /url: /en-IN/gif-to-url
+        - link "File to URL" [ref=e17] [cursor=pointer]:
+          - /url: /en-IN/file-to-url
+        - link "Bulk Upload" [ref=e18] [cursor=pointer]:
+          - /url: /en-IN/bulk-image-upload
+        - link "Pricing" [ref=e19] [cursor=pointer]:
+          - /url: /en-IN/pricing
+        - link "Blog" [ref=e20] [cursor=pointer]:
+          - /url: /en-IN/blog
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - img [ref=e29]
+      - heading "Terms of Service" [level=1] [ref=e32]
+      - paragraph [ref=e33]: Please read these terms carefully before using ImageToURL. By using our service, you agree to these conditions.
+    - generic [ref=e34]:
+      - heading "Quick Summary" [level=2] [ref=e35]
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - img [ref=e38]
+          - generic [ref=e41]: Free image hosting service
+        - generic [ref=e42]:
+          - img [ref=e43]
+          - generic [ref=e46]: "Maximum file size: 2MB"
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - generic [ref=e51]: Permanent URLs for valid content
+        - generic [ref=e52]:
+          - img [ref=e53]
+          - generic [ref=e57]: No illegal or harmful content
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - heading "Acceptance of Terms" [level=2] [ref=e60]
+        - generic [ref=e61]:
+          - paragraph [ref=e62]: By accessing and using ImageToURL (the "Service"), you accept and agree to be bound by the terms and provision of this agreement.
+          - paragraph [ref=e63]: If you do not agree to abide by the above, please do not use this service.
+      - generic [ref=e64]:
+        - heading "Use License" [level=2] [ref=e65]:
+          - img [ref=e66]
+          - text: Use License
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - heading "Permission is granted to:" [level=3] [ref=e73]
+            - list [ref=e74]:
+              - listitem [ref=e75]:
+                - generic [ref=e76]: тА?
+                - text: Upload images that you own or have the right to share
+              - listitem [ref=e77]:
+                - generic [ref=e78]: тА?
+                - text: Use the generated URLs for personal and commercial purposes
+              - listitem [ref=e79]:
+                - generic [ref=e80]: тА?
+                - text: Embed images in websites, blogs, and applications
+          - generic [ref=e81]:
+            - heading "You may NOT:" [level=3] [ref=e82]
+            - list [ref=e83]:
+              - listitem [ref=e84]:
+                - generic [ref=e85]: тА?
+                - text: Upload copyrighted material without permission
+              - listitem [ref=e86]:
+                - generic [ref=e87]: тА?
+                - text: Submit illegal, harmful, or offensive content
+              - listitem [ref=e88]:
+                - generic [ref=e89]: тА?
+                - text: Attempt to circumvent security measures
+              - listitem [ref=e90]:
+                - generic [ref=e91]: тА?
+                - text: Use the service for spam or malicious activities
+      - generic [ref=e92]:
+        - heading "Prohibited Content" [level=2] [ref=e93]:
+          - img [ref=e94]
+          - text: Prohibited Content
+        - paragraph [ref=e96]: "The following types of content are strictly prohibited on ImageToURL:"
+        - list [ref=e97]:
+          - listitem [ref=e98]:
+            - generic [ref=e99]: тА?
+            - generic [ref=e100]:
+              - strong [ref=e101]: "Illegal Content:"
+              - text: Any content that violates local, national, or international laws
+          - listitem [ref=e102]:
+            - generic [ref=e103]: тА?
+            - generic [ref=e104]:
+              - strong [ref=e105]: "Adult Content:"
+              - text: Pornographic or sexually explicit material
+          - listitem [ref=e106]:
+            - generic [ref=e107]: тА?
+            - generic [ref=e108]:
+              - strong [ref=e109]: "Violent Content:"
+              - text: Graphic violence, gore, or hate speech
+          - listitem [ref=e110]:
+            - generic [ref=e111]: тА?
+            - generic [ref=e112]:
+              - strong [ref=e113]: "Copyright Infringement:"
+              - text: Material you don't own or have permission to share
+          - listitem [ref=e114]:
+            - generic [ref=e115]: тА?
+            - generic [ref=e116]:
+              - strong [ref=e117]: "Malicious Content:"
+              - text: Malware, viruses, or harmful code
+          - listitem [ref=e118]:
+            - generic [ref=e119]: тА?
+            - generic [ref=e120]:
+              - strong [ref=e121]: "Personal Information:"
+              - text: Private information about others without consent
+      - generic [ref=e122]:
+        - heading "Service Limitations" [level=2] [ref=e123]:
+          - img [ref=e124]
+          - text: Service Limitations
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - heading "File Size Limit" [level=4] [ref=e128]
+            - paragraph [ref=e129]: Maximum file size is 2MB per image. Files exceeding this limit will be rejected.
+          - generic [ref=e130]:
+            - heading "Rate Limiting" [level=4] [ref=e131]
+            - paragraph [ref=e132]: We implement rate limiting to prevent abuse. Excessive uploads may be temporarily restricted.
+          - generic [ref=e133]:
+            - heading "Storage Duration" [level=4] [ref=e134]
+            - paragraph [ref=e135]: Valid images are stored indefinitely, but we reserve the right to remove content that violates these terms.
+          - generic [ref=e136]:
+            - heading "Service Availability" [level=4] [ref=e137]
+            - paragraph [ref=e138]: While we strive for 100% uptime, we cannot guarantee uninterrupted service availability.
+      - generic [ref=e139]:
+        - heading "Content Removal" [level=2] [ref=e140]:
+          - img [ref=e141]
+          - text: Content Removal
+        - paragraph [ref=e144]: "We reserve the right to remove any content that:"
+        - list [ref=e145]:
+          - listitem [ref=e146]:
+            - generic [ref=e147]: тА?
+            - generic [ref=e148]: Violates these terms of service
+          - listitem [ref=e149]:
+            - generic [ref=e150]: тА?
+            - generic [ref=e151]: Is reported by copyright holders
+          - listitem [ref=e152]:
+            - generic [ref=e153]: тА?
+            - generic [ref=e154]: Is deemed harmful or inappropriate
+          - listitem [ref=e155]:
+            - generic [ref=e156]: тА?
+            - generic [ref=e157]: Contributes to service abuse
+        - paragraph [ref=e158]:
+          - text: "To report inappropriate content, contact us at:"
+          - link "abuse@image2url.com" [ref=e159] [cursor=pointer]:
+            - /url: mailto:abuse@image2url.com
+      - generic [ref=e160]:
+        - heading "Disclaimer" [level=2] [ref=e161]
+        - generic [ref=e162]:
+          - paragraph [ref=e163]: "The information on this website is provided on an \"as is\" basis. To the fullest extent permitted by law, this Company:"
+          - list [ref=e164]:
+            - listitem [ref=e165]:
+              - generic [ref=e166]: тА?
+              - generic [ref=e167]: Excludes all representations and warranties relating to this website and its contents
+            - listitem [ref=e168]:
+              - generic [ref=e169]: тА?
+              - generic [ref=e170]: Makes no warranty that the website will meet your requirements
+            - listitem [ref=e171]:
+              - generic [ref=e172]: тА?
+              - generic [ref=e173]: Makes no warranty that the service will be uninterrupted, timely, or error-free
+          - paragraph [ref=e174]: Your use of this service is entirely at your own risk.
+      - generic [ref=e175]:
+        - heading "Limitation of Liability" [level=2] [ref=e176]
+        - generic [ref=e177]:
+          - paragraph [ref=e178]: In no event shall ImageToURL, nor any of its officers, directors, and employees, be liable to you for anything arising out of or in any way connected with your use of this website.
+          - paragraph [ref=e179]: ImageToURL shall not be liable for any direct, indirect, special, or consequential damages arising out of or related to your use of the service.
+      - generic [ref=e180]:
+        - heading "Indemnification" [level=2] [ref=e181]
+        - paragraph [ref=e183]: You hereby indemnify to the fullest extent ImageToURL from and against any and all liabilities, costs, demands, causes of action, damages, and expenses (including reasonable attorney's fees) arising out of or related to your breach of any of the provisions of these Terms.
+      - generic [ref=e184]:
+        - heading "Severability" [level=2] [ref=e185]
+        - paragraph [ref=e187]: If any provision of these Terms is found to be invalid under any applicable law, such provisions shall be deleted without affecting the remaining provisions herein.
+      - generic [ref=e188]:
+        - heading "Variation of Terms" [level=2] [ref=e189]
+        - paragraph [ref=e191]: ImageToURL is permitted to revise these Terms at any time as it sees fit, and by using this website you are expected to review these Terms on a regular basis.
+      - generic [ref=e192]:
+        - heading "Assignment" [level=2] [ref=e193]
+        - paragraph [ref=e195]: ImageToURL is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.
+      - generic [ref=e196]:
+        - paragraph [ref=e197]:
+          - strong [ref=e198]: Questions about our terms?
+        - paragraph [ref=e199]:
+          - text: "Contact us at:"
+          - link "legal@image2url.com" [ref=e200] [cursor=pointer]:
+            - /url: mailto:legal@image2url.com
+      - paragraph [ref=e202]: "Last updated: January 1, 2025"
+  - generic [ref=e204]:
+    - generic [ref=e205]:
+      - generic [ref=e206]:
+        - heading "Select Region" [level=2] [ref=e207]
+        - paragraph [ref=e208]: Choose your preferred language and region
+      - generic [ref=e210]:
+        - button "English English" [ref=e211] [cursor=pointer]:
+          - img "English" [ref=e213]
+          - generic [ref=e215]: English
+        - button "English (Australia) English (Australia)" [ref=e216] [cursor=pointer]:
+          - img "English (Australia)" [ref=e218]
+          - generic [ref=e220]: English (Australia)
+        - button "English (India) English (India)" [ref=e221] [cursor=pointer]:
+          - img "English (India)" [ref=e223]
+          - generic [ref=e225]: English (India)
+          - img [ref=e228]
+        - button "العربية العربية" [ref=e230] [cursor=pointer]:
+          - img "العربية" [ref=e232]
+          - generic [ref=e234]: العربية
+        - button "Български Български" [ref=e235] [cursor=pointer]:
+          - img "Български" [ref=e237]
+          - generic [ref=e239]: Български
+        - button "Català Català" [ref=e240] [cursor=pointer]:
+          - img "Català" [ref=e242]
+          - generic [ref=e244]: Català
+        - button "Čeština Čeština" [ref=e245] [cursor=pointer]:
+          - img "Čeština" [ref=e247]
+          - generic [ref=e249]: Čeština
+        - button "Dansk Dansk" [ref=e250] [cursor=pointer]:
+          - img "Dansk" [ref=e252]
+          - generic [ref=e254]: Dansk
+        - button "Deutsch Deutsch" [ref=e255] [cursor=pointer]:
+          - img "Deutsch" [ref=e257]
+          - generic [ref=e259]: Deutsch
+        - button "Ελληνικά Ελληνικά" [ref=e260] [cursor=pointer]:
+          - img "Ελληνικά" [ref=e262]
+          - generic [ref=e264]: Ελληνικά
+        - button "Español Español" [ref=e265] [cursor=pointer]:
+          - img "Español" [ref=e267]
+          - generic [ref=e269]: Español
+        - button "Suomi Suomi" [ref=e270] [cursor=pointer]:
+          - img "Suomi" [ref=e272]
+          - generic [ref=e274]: Suomi
+        - button "Français Français" [ref=e275] [cursor=pointer]:
+          - img "Français" [ref=e277]
+          - generic [ref=e279]: Français
+        - button "עברית עברית" [ref=e280] [cursor=pointer]:
+          - img "עברית" [ref=e282]
+          - generic [ref=e284]: עברית
+        - button "Hrvatski Hrvatski" [ref=e285] [cursor=pointer]:
+          - img "Hrvatski" [ref=e287]
+          - generic [ref=e289]: Hrvatski
+        - button "Magyar Magyar" [ref=e290] [cursor=pointer]:
+          - img "Magyar" [ref=e292]
+          - generic [ref=e294]: Magyar
+        - button "Bahasa Indonesia Bahasa Indonesia" [ref=e295] [cursor=pointer]:
+          - img "Bahasa Indonesia" [ref=e297]
+          - generic [ref=e299]: Bahasa Indonesia
+        - button "Italiano Italiano" [ref=e300] [cursor=pointer]:
+          - img "Italiano" [ref=e302]
+          - generic [ref=e304]: Italiano
+        - button "日本語 日本語" [ref=e305] [cursor=pointer]:
+          - img "日本語" [ref=e307]
+          - generic [ref=e309]: 日本語
+        - button "한국어 한국어" [ref=e310] [cursor=pointer]:
+          - img "한국어" [ref=e312]
+          - generic [ref=e314]: 한국어
+        - button "Nederlands Nederlands" [ref=e315] [cursor=pointer]:
+          - img "Nederlands" [ref=e317]
+          - generic [ref=e319]: Nederlands
+        - button "Norsk Norsk" [ref=e320] [cursor=pointer]:
+          - img "Norsk" [ref=e322]
+          - generic [ref=e324]: Norsk
+        - button "Polski Polski" [ref=e325] [cursor=pointer]:
+          - img "Polski" [ref=e327]
+          - generic [ref=e329]: Polski
+        - button "Português Português" [ref=e330] [cursor=pointer]:
+          - img "Português" [ref=e332]
+          - generic [ref=e334]: Português
+        - button "Português (Brasil) Português (Brasil)" [ref=e335] [cursor=pointer]:
+          - img "Português (Brasil)" [ref=e337]
+          - generic [ref=e339]: Português (Brasil)
+        - button "Română Română" [ref=e340] [cursor=pointer]:
+          - img "Română" [ref=e342]
+          - generic [ref=e344]: Română
+        - button "Русский Русский" [ref=e345] [cursor=pointer]:
+          - img "Русский" [ref=e347]
+          - generic [ref=e349]: Русский
+        - button "Slovenčina Slovenčina" [ref=e350] [cursor=pointer]:
+          - img "Slovenčina" [ref=e352]
+          - generic [ref=e354]: Slovenčina
+        - button "Svenska Svenska" [ref=e355] [cursor=pointer]:
+          - img "Svenska" [ref=e357]
+          - generic [ref=e359]: Svenska
+        - button "ไทย ไทย" [ref=e360] [cursor=pointer]:
+          - img "ไทย" [ref=e362]
+          - generic [ref=e364]: ไทย
+        - button "Filipino Filipino" [ref=e365] [cursor=pointer]:
+          - img "Filipino" [ref=e367]
+          - generic [ref=e369]: Filipino
+        - button "Türkçe Türkçe" [ref=e370] [cursor=pointer]:
+          - img "Türkçe" [ref=e372]
+          - generic [ref=e374]: Türkçe
+        - button "Українська Українська" [ref=e375] [cursor=pointer]:
+          - img "Українська" [ref=e377]
+          - generic [ref=e379]: Українська
+        - button "Tiếng Việt Tiếng Việt" [ref=e380] [cursor=pointer]:
+          - img "Tiếng Việt" [ref=e382]
+          - generic [ref=e384]: Tiếng Việt
+        - button "简体中文 简体中文" [ref=e385] [cursor=pointer]:
+          - img "简体中文" [ref=e387]
+          - generic [ref=e389]: 简体中文
+        - button "繁體中文 繁體中文" [ref=e390] [cursor=pointer]:
+          - img "繁體中文" [ref=e392]
+          - generic [ref=e394]: 繁體中文
+    - generic [ref=e395]:
+      - generic [ref=e396]:
+        - heading "Rate our service" [level=3] [ref=e397]
+        - paragraph [ref=e398]: Your feedback helps us improve for everyone.
+      - generic [ref=e399]:
+        - generic [ref=e400]:
+          - button [ref=e401] [cursor=pointer]:
+            - img [ref=e402]
+          - button [ref=e404] [cursor=pointer]:
+            - img [ref=e405]
+          - button [ref=e407] [cursor=pointer]:
+            - img [ref=e408]
+          - button [ref=e410] [cursor=pointer]:
+            - img [ref=e411]
+          - button [ref=e413] [cursor=pointer]:
+            - img [ref=e414]
+        - generic [ref=e416]:
+          - generic [ref=e417]: "4.6"
+          - generic [ref=e418]: 5,026 votes
+  - contentinfo [ref=e419]:
+    - generic [ref=e420]:
+      - generic [ref=e421]:
+        - generic [ref=e422]:
+          - generic [ref=e423]:
+            - img [ref=e425]
+            - generic [ref=e428]:
+              - paragraph [ref=e429]: ImageToURL
+              - heading "Free image hosting that never expires" [level=3] [ref=e430]
+          - paragraph [ref=e431]: Upload, share, and host your images with permanent URLs. No registration required for free use.
+          - generic [ref=e432]:
+            - generic [ref=e433]:
+              - img [ref=e434]
+              - text: Instant links
+            - generic [ref=e436]:
+              - img [ref=e437]
+              - text: HTTPS by default
+            - generic [ref=e439]:
+              - img [ref=e440]
+              - text: Global edge
+            - generic [ref=e446]:
+              - combobox "Select language" [ref=e447] [cursor=pointer]:
+                - option "🇺🇸 English"
+                - option "🇦🇺 English (Australia)"
+                - option "🇮🇳 English (India)" [selected]
+                - option "🇸🇦 العربية"
+                - option "🇧🇬 Български"
+                - option "🇪🇸 Català"
+                - option "🇨🇿 Čeština"
+                - option "🇩🇰 Dansk"
+                - option "🇩🇪 Deutsch"
+                - option "🇬🇷 Ελληνικά"
+                - option "🇪🇸 Español"
+                - option "🇫🇮 Suomi"
+                - option "🇫🇷 Français"
+                - option "🇮🇱 עברית"
+                - option "🇭🇷 Hrvatski"
+                - option "🇭🇺 Magyar"
+                - option "🇮🇩 Bahasa Indonesia"
+                - option "🇮🇹 Italiano"
+                - option "🇯🇵 日本語"
+                - option "🇰🇷 한국어"
+                - option "🇳🇱 Nederlands"
+                - option "🇳🇴 Norsk"
+                - option "🇵🇱 Polski"
+                - option "🇵🇹 Português"
+                - option "🇧🇷 Português (Brasil)"
+                - option "🇷🇴 Română"
+                - option "🇷🇺 Русский"
+                - option "🇸🇰 Slovenčina"
+                - option "🇸🇪 Svenska"
+                - option "🇹🇭 ไทย"
+                - option "🇵🇭 Filipino"
+                - option "🇹🇷 Türkçe"
+                - option "🇺🇦 Українська"
+                - option "🇻🇳 Tiếng Việt"
+                - option "🇨🇳 简体中文"
+                - option "🇹🇼 繁體中文"
+              - generic:
+                - img
+        - generic [ref=e448]:
+          - heading "Tools" [level=3] [ref=e449]
+          - generic [ref=e450]:
+            - link "Image to ICO" [ref=e451] [cursor=pointer]:
+              - /url: /en-IN/image-to-icon
+            - link "Image to Link" [ref=e452] [cursor=pointer]:
+              - /url: /en-IN/image-to-link
+            - link "Image to WebP Converter" [ref=e453] [cursor=pointer]:
+              - /url: /en-IN/image-to-webp-converter
+            - link "Image URL Generator" [ref=e454] [cursor=pointer]:
+              - /url: /en-IN/image-url-generator
+            - link "Picture to URL" [ref=e455] [cursor=pointer]:
+              - /url: /en-IN/picture-to-url
+            - link "Photo to URL" [ref=e456] [cursor=pointer]:
+              - /url: /en-IN/photo-to-url-converter
+            - link "GIF to URL" [ref=e457] [cursor=pointer]:
+              - /url: /en-IN/gif-to-url
+            - link "Image Compressor" [ref=e458] [cursor=pointer]:
+              - /url: /en-IN/image-compressor
+            - link "Video to URL" [ref=e459] [cursor=pointer]:
+              - /url: /en-IN/video-to-url
+            - link "Bulk Image Upload" [ref=e460] [cursor=pointer]:
+              - /url: /en-IN/bulk-image-upload
+            - 'link "MCP Server: image2url" [ref=e461] [cursor=pointer]':
+              - /url: /en-IN/tools/mcp-server-image2url
+            - link "Privacy Cleaner" [ref=e462] [cursor=pointer]:
+              - /url: /en-IN/tools/privacy-cleaner
+            - link "Background Remover" [ref=e463] [cursor=pointer]:
+              - /url: /en-IN/tools/background-remover
+            - link "Image Extender" [ref=e464] [cursor=pointer]:
+              - /url: /en-IN/tools/image-extender
+            - link "Photo Restoration" [ref=e465] [cursor=pointer]:
+              - /url: /en-IN/tools/photo-restoration
+            - link "IPYNB to PDF" [ref=e466] [cursor=pointer]:
+              - /url: /en-IN/tools/ipynb-to-pdf
+            - link "WebP to PNG" [ref=e467] [cursor=pointer]:
+              - /url: /en-IN/tools/webp-to-png
+            - link "Photo Enhancer" [ref=e468] [cursor=pointer]:
+              - /url: /en-IN/tools/photo-enhancer
+            - link "MHT to PDF" [ref=e469] [cursor=pointer]:
+              - /url: /en-IN/tools/mht-to-pdf
+        - generic [ref=e470]:
+          - heading "Convert Tools" [level=3] [ref=e471]
+          - generic [ref=e472]:
+            - link "PPT to URL" [ref=e473] [cursor=pointer]:
+              - /url: /en-IN/ppt-to-url-converter
+            - link "PDF to URL" [ref=e474] [cursor=pointer]:
+              - /url: /en-IN/pdf-to-url
+            - link "HTML to URL" [ref=e475] [cursor=pointer]:
+              - /url: /en-IN/html-to-url
+            - link "QR to URL" [ref=e476] [cursor=pointer]:
+              - /url: /en-IN/qr-to-url
+            - link "YouTube Redirect Cleaner" [ref=e477] [cursor=pointer]:
+              - /url: /en-IN/convert-youtube-redirect-links-to-url
+        - generic [ref=e478]:
+          - heading "URL Tools" [level=3] [ref=e479]
+          - generic [ref=e480]:
+            - link "Audio to Link" [ref=e481] [cursor=pointer]:
+              - /url: /en-IN/audio-to-link
+            - link "MP3 to Link" [ref=e482] [cursor=pointer]:
+              - /url: /en-IN/mp3-to-link
+            - link "MP3 Compressor" [ref=e483] [cursor=pointer]:
+              - /url: /en-IN/tools/mp3-compressor
+            - link "File to URL" [ref=e484] [cursor=pointer]:
+              - /url: /en-IN/file-to-url
+            - link "Base64 to URL" [ref=e485] [cursor=pointer]:
+              - /url: /en-IN/base64-to-url
+            - link "URL Expander" [ref=e486] [cursor=pointer]:
+              - /url: /en-IN/url-expander
+            - link "URL Opener" [ref=e487] [cursor=pointer]:
+              - /url: /en-IN/url-opener
+            - link "URL Parser" [ref=e488] [cursor=pointer]:
+              - /url: /en-IN/url-parser
+            - link "Batch URL Checker" [ref=e489] [cursor=pointer]:
+              - /url: /en-IN/batch-url-checker
+            - link "Tools" [ref=e490] [cursor=pointer]:
+              - /url: /en-IN/tools
+      - generic [ref=e491]:
+        - generic [ref=e492]:
+          - paragraph [ref=e493]: © 2024 ImageToURL. All rights reserved. Made with ❤️ for developers and creators
+          - generic [ref=e494]:
+            - generic [ref=e495]:
+              - heading "Legal" [level=4] [ref=e496]
+              - paragraph [ref=e497]: Need help or legal info? Find it below.
+            - generic [ref=e498]:
+              - link "Privacy Policy" [ref=e499] [cursor=pointer]:
+                - /url: /en-IN/privacy
+              - generic [ref=e500]: •
+              - link "Terms of Service" [ref=e501] [cursor=pointer]:
+                - /url: /en-IN/terms
+              - generic [ref=e502]: •
+              - link "About" [ref=e503] [cursor=pointer]:
+                - /url: /en-IN/about
+            - generic [ref=e504]:
+              - heading "Connect With Us" [level=4] [ref=e505]
+              - generic [ref=e506]:
+                - link "Image2URL on GitHub" [ref=e507] [cursor=pointer]:
+                  - /url: https://github.com/image2url
+                  - img [ref=e508]
+                - link "Image2URL on X" [ref=e511] [cursor=pointer]:
+                  - /url: https://x.com/image2url
+                  - img [ref=e512]
+                - link "Buy Me A Coffee":
+                  - /url: https://buymeacoffee.com/image2url
+                  - img "Buy Me A Coffee"
+        - generic [ref=e514]:
+          - generic [ref=e515]:
+            - img [ref=e516]
+            - text: SSL
+          - generic [ref=e518]:
+            - img [ref=e519]
+            - text: Global edge
+          - generic [ref=e524]:
+            - img [ref=e525]
+            - text: Fast uploads
+        - generic [ref=e527]:
+          - link "Fazier badge":
+            - /url: https://fazier.com/launches/www.image2url.com
+            - img "Fazier badge"
+          - link "Featured on findly.tools":
+            - /url: https://findly.tools/image-to-url?utm_source=image-to-url
+            - img "Featured on findly.tools"
+          - link "Featured on Indie.Deals":
+            - /url: https://indie.deals?ref=https%3A%2F%2Fwww.image2url.com%2F
+            - img "Featured on Indie.Deals"
+          - link "ImageToURL - Featured on Startup Fame":
+            - /url: https://startupfa.me/s/imagetourl-1?utm_source=www.image2url.com
+            - img "ImageToURL - Featured on Startup Fame"
+          - link "Featured on Twelve Tools":
+            - /url: https://twelve.tools
+            - img "Featured on Twelve Tools"
+          - link "Good AI Tools":
+            - /url: https://goodaitools.com
+            - img "Good AI Tools"
+          - link "Featured on ShowMeBestAI":
+            - /url: https://showmebest.ai
+            - img "Featured on ShowMeBestAI"
+          - link "Software Development Blogs - OnToplist.com":
+            - /url: https://www.ontoplist.com/software-blogs/
+            - img "Software Development Blogs - OnToplist.com"
+          - link "Listed on AIDirs":
+            - /url: https://aidirs.org/item/imagetourl
+            - img "Listed on AIDirs"
+          - link "Listed on Submito":
+            - /url: https://submito.net
+            - img "Listed on Submito"
+          - link "Listed on Turbo0":
+            - /url: https://turbo0.com/item/image-to-url
+            - img "Listed on Turbo0"
+          - link "Featured on LaunchIgniter":
+            - /url: https://launchigniter.com/product/image-to-url?ref=badge-image-to-url
+            - img "Featured on LaunchIgniter"
+          - link "Featured on Dofollow.Tools":
+            - /url: https://dofollow.tools
+            - img "Featured on Dofollow.Tools"
+          - link "Verified DR - Verified Domain Rating for www.image2url.com":
+            - /url: https://verifieddr.com/website/image2url-com
+            - img "Verified DR - Verified Domain Rating for www.image2url.com"
+          - link "Submit AI Tools – The ultimate platform to discover, submit, and explore the best AI tools across various categories.":
+            - /url: https://submitaitools.org
+            - img "Submit AI Tools – The ultimate platform to discover, submit, and explore the best AI tools across various categories."
+  - alert [ref=e528]

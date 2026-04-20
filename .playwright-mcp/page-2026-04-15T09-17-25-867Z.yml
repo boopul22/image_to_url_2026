@@ -1,0 +1,294 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - generic [ref=e7]:
+          - link "Home" [ref=e8] [cursor=pointer]:
+            - /url: /en/
+          - link "Features" [ref=e9] [cursor=pointer]:
+            - /url: /en/features
+          - link "Pricing" [ref=e10] [cursor=pointer]:
+            - /url: /en/pricing
+          - link "API" [ref=e11] [cursor=pointer]:
+            - /url: /en/docs
+          - link "Blog" [ref=e12] [cursor=pointer]:
+            - /url: /en/blog
+          - button "Tools expand_more" [ref=e14]:
+            - text: Tools
+            - generic [ref=e15]: expand_more
+        - generic [ref=e16]:
+          - button "Change language" [ref=e18]:
+            - generic [ref=e19]: translate
+            - text: English
+            - generic [ref=e20]: expand_more
+          - link "Sign In" [ref=e22] [cursor=pointer]:
+            - /url: /api/auth/login
+            - img [ref=e23]
+            - text: Sign In
+    - main [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: Latest Perspectives
+          - heading "The ImageToURL Blog" [level=1] [ref=e32]:
+            - text: The ImageToURL
+            - text: Blog
+          - paragraph [ref=e33]: Insights, tutorials, and stories from the intersection of cloud storage, creative workflows, and digital engineering.
+        - generic:
+          - generic: draw
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: search
+          - textbox "Search articles..."
+        - generic [ref=e38]:
+          - button "All Posts" [ref=e39]
+          - button "Tutorials" [ref=e40]
+          - button "Beginner Guides" [ref=e41]
+          - button "Product Updates" [ref=e42]
+          - button "Case Studies" [ref=e43]
+          - button "Image Hosting" [ref=e44]
+          - button "Productivity" [ref=e45]
+          - button "Engineering" [ref=e46]
+          - button "Web Development" [ref=e47]
+          - button "SEO & Performance" [ref=e48]
+          - button "Typography" [ref=e49]
+          - button "Strategy" [ref=e50]
+          - button "Use Cases" [ref=e51]
+          - button "Technical Deep Dives" [ref=e52]
+          - button "Security & Privacy" [ref=e53]
+      - generic [ref=e55]:
+        - article [ref=e56]:
+          - link "What Is an Image URL? A Complete Beginner’s Guide Featured Beginner Guides What Is an Image URL? A Complete Beginner’s Guide The image URL is nothing more than a web address that will lead to a picture that can be found online. You do not attach files, but share a link. Sheenam Middha Sheenam Middha Read More arrow_forward" [ref=e57] [cursor=pointer]:
+            - /url: /en/blog/what-is-an-image-url-a-complete-beginners-guide
+            - generic [ref=e59]:
+              - generic [ref=e60]:
+                - img "What Is an Image URL? A Complete Beginner’s Guide" [ref=e61]
+                - generic [ref=e62]: Featured
+              - generic [ref=e63]:
+                - generic [ref=e64]:
+                  - generic [ref=e65]: Beginner Guides
+                  - heading "What Is an Image URL? A Complete Beginner’s Guide" [level=2] [ref=e66]
+                  - paragraph [ref=e67]: The image URL is nothing more than a web address that will lead to a picture that can be found online. You do not attach files, but share a link.
+                - generic [ref=e68]:
+                  - generic [ref=e69]:
+                    - img "Sheenam Middha" [ref=e71]
+                    - generic [ref=e72]: Sheenam Middha
+                  - generic [ref=e73]:
+                    - text: Read More
+                    - generic [ref=e74]: arrow_forward
+        - article [ref=e75]:
+          - link "Untitled Uncategorized Untitled Read More arrow_forward" [ref=e76] [cursor=pointer]:
+            - /url: /en/blog/untitled
+            - generic [ref=e77]:
+              - img "Untitled" [ref=e79]
+              - generic [ref=e80]:
+                - generic [ref=e81]: Uncategorized
+                - heading "Untitled" [level=3] [ref=e82]
+                - paragraph [ref=e83]
+                - generic [ref=e84]:
+                  - text: Read More
+                  - generic [ref=e85]: arrow_forward
+        - article [ref=e86]:
+          - link "5 Secrets to Efficient SVG Workflows Tutorials 5 Secrets to Efficient SVG Workflows Learn how to seamlessly convert and manage SVG assets using our new automated URL pipeline for high-performance frontend applications. Read More arrow_forward" [ref=e87] [cursor=pointer]:
+            - /url: /en/blog/optimizing-svg-workflows-react
+            - generic [ref=e88]:
+              - img "5 Secrets to Efficient SVG Workflows" [ref=e90]
+              - generic [ref=e91]:
+                - generic [ref=e92]: Tutorials
+                - heading "5 Secrets to Efficient SVG Workflows" [level=3] [ref=e93]
+                - paragraph [ref=e94]: Learn how to seamlessly convert and manage SVG assets using our new automated URL pipeline for high-performance frontend applications.
+                - generic [ref=e95]:
+                  - text: Read More
+                  - generic [ref=e96]: arrow_forward
+        - article [ref=e97]:
+          - 'link "Introducing v2.4: Instant CDN Purging Product Updates Introducing v2.4: Instant CDN Purging Our latest update brings global edge caching improvements. Read More arrow_forward" [ref=e98] [cursor=pointer]':
+            - /url: /en/blog/instant-cdn-purging-v2-4
+            - generic [ref=e99]:
+              - 'img "Introducing v2.4: Instant CDN Purging" [ref=e101]'
+              - generic [ref=e102]:
+                - generic [ref=e103]: Product Updates
+                - 'heading "Introducing v2.4: Instant CDN Purging" [level=3] [ref=e104]'
+                - paragraph [ref=e105]: Our latest update brings global edge caching improvements.
+                - generic [ref=e106]:
+                  - text: Read More
+                  - generic [ref=e107]: arrow_forward
+        - article [ref=e108]:
+          - link "auto_awesome Case Studies Case Studies How DesignHub Scaled to 1M Assets A deep dive into how a leading design agency automated their pipeline. Read More arrow_forward" [ref=e109] [cursor=pointer]:
+            - /url: /en/blog/designhub-scaled-1m-assets
+            - generic [ref=e110]:
+              - generic [ref=e112]:
+                - generic [ref=e113]: auto_awesome
+                - generic [ref=e114]: Case Studies
+              - generic [ref=e115]:
+                - generic [ref=e116]: Case Studies
+                - heading "How DesignHub Scaled to 1M Assets" [level=3] [ref=e117]
+                - paragraph [ref=e118]: A deep dive into how a leading design agency automated their pipeline.
+                - generic [ref=e119]:
+                  - text: Read More
+                  - generic [ref=e120]: arrow_forward
+        - article [ref=e121]:
+          - link "Mastering the REST API Tutorials Mastering the REST API Everything you need to know about our robust API. Read More arrow_forward" [ref=e122] [cursor=pointer]:
+            - /url: /en/blog/mastering-rest-api
+            - generic [ref=e123]:
+              - img "Mastering the REST API" [ref=e125]
+              - generic [ref=e126]:
+                - generic [ref=e127]: Tutorials
+                - heading "Mastering the REST API" [level=3] [ref=e128]
+                - paragraph [ref=e129]: Everything you need to know about our robust API.
+                - generic [ref=e130]:
+                  - text: Read More
+                  - generic [ref=e131]: arrow_forward
+        - article [ref=e132]:
+          - link "architecture Productivity Productivity The Future of Image Handling in CMS Why static assets are a thing of the past. Read More arrow_forward" [ref=e133] [cursor=pointer]:
+            - /url: /en/blog/future-image-handling-cms
+            - generic [ref=e134]:
+              - generic [ref=e136]:
+                - generic [ref=e137]: architecture
+                - generic [ref=e138]: Productivity
+              - generic [ref=e139]:
+                - generic [ref=e140]: Productivity
+                - heading "The Future of Image Handling in CMS" [level=3] [ref=e141]
+                - paragraph [ref=e142]: Why static assets are a thing of the past.
+                - generic [ref=e143]:
+                  - text: Read More
+                  - generic [ref=e144]: arrow_forward
+        - article [ref=e145]:
+          - 'link "The Return of the Pixel: Low-Res Design Trends Engineering The Return of the Pixel: Low-Res Design Trends How retro pixel aesthetics are making a surprising comeback. Read More arrow_forward" [ref=e146] [cursor=pointer]':
+            - /url: /en/blog/pixel-low-res-design-trends
+            - generic [ref=e147]:
+              - 'img "The Return of the Pixel: Low-Res Design Trends" [ref=e149]'
+              - generic [ref=e150]:
+                - generic [ref=e151]: Engineering
+                - 'heading "The Return of the Pixel: Low-Res Design Trends" [level=3] [ref=e152]'
+                - paragraph [ref=e153]: How retro pixel aesthetics are making a surprising comeback.
+                - generic [ref=e154]:
+                  - text: Read More
+                  - generic [ref=e155]: arrow_forward
+        - article [ref=e156]:
+          - link "Why Serif Fonts are Making a Major Comeback Typography Why Serif Fonts are Making a Major Comeback The shift from geometric sans-serifs to elegant serifs. Read More arrow_forward" [ref=e157] [cursor=pointer]:
+            - /url: /en/blog/serif-fonts-comeback
+            - generic [ref=e158]:
+              - img "Why Serif Fonts are Making a Major Comeback" [ref=e160]
+              - generic [ref=e161]:
+                - generic [ref=e162]: Typography
+                - heading "Why Serif Fonts are Making a Major Comeback" [level=3] [ref=e163]
+                - paragraph [ref=e164]: The shift from geometric sans-serifs to elegant serifs.
+                - generic [ref=e165]:
+                  - text: Read More
+                  - generic [ref=e166]: arrow_forward
+        - article [ref=e167]:
+          - link "Strategy Scaling Assets for Global Distribution Best practices for managing visual assets across regions. Read More arrow_forward Scaling Assets for Global Distribution" [ref=e168] [cursor=pointer]:
+            - /url: /en/blog/scaling-assets-global
+            - generic [ref=e169]:
+              - generic [ref=e170]:
+                - generic [ref=e171]: Strategy
+                - heading "Scaling Assets for Global Distribution" [level=3] [ref=e172]
+                - paragraph [ref=e173]: Best practices for managing visual assets across regions.
+                - generic [ref=e174]:
+                  - text: Read More
+                  - generic [ref=e175]: arrow_forward
+              - img "Scaling Assets for Global Distribution" [ref=e177]
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - heading "Stay Curated" [level=2] [ref=e181]
+          - paragraph [ref=e182]: Get our monthly digest of creative insights and technical deep-dives delivered to your inbox.
+          - generic [ref=e183]:
+            - textbox "your@email.com" [ref=e184]
+            - button "Subscribe" [ref=e185]
+        - generic [ref=e186]: mail
+        - generic [ref=e187]: rocket
+    - generic [ref=e189]:
+      - generic [ref=e190]:
+        - generic [ref=e191]:
+          - generic [ref=e192]:
+            - generic [ref=e193]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e194]: Making the web more visual, one link at a time. Designed for humans, built for speed.
+        - generic [ref=e195]:
+          - generic [ref=e196]: Tools
+          - link "Free Image Hosting" [ref=e197] [cursor=pointer]:
+            - /url: /free-image-hosting
+          - link "Image URL Generator" [ref=e198] [cursor=pointer]:
+            - /url: /image-url-generator
+          - link "Bulk Image Upload" [ref=e199] [cursor=pointer]:
+            - /url: /bulk-image-upload
+          - link "PNG to URL" [ref=e200] [cursor=pointer]:
+            - /url: /png-to-url
+          - link "JPG to URL" [ref=e201] [cursor=pointer]:
+            - /url: /jpg-to-url
+          - link "Imgur Alternative" [ref=e202] [cursor=pointer]:
+            - /url: /imgur-alternative
+          - link "For Shopify" [ref=e203] [cursor=pointer]:
+            - /url: /image-hosting-for-shopify
+          - link "For Google Sheets" [ref=e204] [cursor=pointer]:
+            - /url: /image-hosting-for-google-sheets
+          - link "Image to URL for HTML" [ref=e205] [cursor=pointer]:
+            - /url: /en/image-to-url-for-html
+          - link "Image to URL for Vercel" [ref=e206] [cursor=pointer]:
+            - /url: /en/image-to-url-vercel
+        - generic [ref=e207]:
+          - generic [ref=e208]: Resources
+          - link "Privacy Policy" [ref=e209] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms of Service" [ref=e210] [cursor=pointer]:
+            - /url: /en/terms
+          - link "Documentation" [ref=e211] [cursor=pointer]:
+            - /url: /en/docs
+          - link "About" [ref=e212] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e213] [cursor=pointer]:
+            - /url: /contact
+          - link "Blog" [ref=e214] [cursor=pointer]:
+            - /url: /en/blog
+          - link "Content Guidelines" [ref=e215] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e216]:
+          - generic [ref=e217]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e218] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e219]: cloud_upload
+            - text: ImageToURL
+          - link "travel_explore ExtractPics" [ref=e220] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e221]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e222] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e223]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e224]:
+          - generic [ref=e225]: Stay Updated
+          - generic [ref=e226]:
+            - textbox "Your email..." [ref=e227]
+            - button "Join" [ref=e228]
+          - generic [ref=e229]:
+            - link "GitHub" [ref=e230] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e231]
+            - link "Instagram" [ref=e233] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e234]
+            - link "Personal Website" [ref=e236] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e237]:
+        - paragraph [ref=e238]: © 2026 ImageToURL. Designed by ImageToURL Team
+        - paragraph [ref=e239]: Built with care · Hosted on Cloudflare
+  - generic [ref=e242]:
+    - button "Menu" [ref=e243]:
+      - img [ref=e245]
+      - generic: Menu
+    - button "Inspect" [ref=e249]:
+      - img [ref=e251]
+      - generic: Inspect
+    - button "Audit" [ref=e253]:
+      - generic [ref=e254]:
+        - img [ref=e255]
+        - img [ref=e258]
+      - generic: Audit
+    - button "Settings" [ref=e261]:
+      - img [ref=e263]
+      - generic: Settings

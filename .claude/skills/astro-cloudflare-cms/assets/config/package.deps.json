@@ -1,0 +1,28 @@
+{
+  "_comment": "Reference dependency versions from the source site. Install these into the target project's package.json. These are the minimum the CMS needs — the source site has many more for unrelated features.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "astro": "^6.1.2",
+    "@astrojs/cloudflare": "^13.1.6",
+    "@tailwindcss/vite": "^4.2.2",
+    "tailwindcss": "^4.2.2",
+    "@cloudflare/workers-types": "^4.20251010.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.42.0"
+  },
+  "cms_admin_ui_dependencies": {
+    "_comment": "Add these only if you use the bundled TipTap admin editor. They're loaded via CDN in the .astro pages (not bundled), so you don't strictly need them in package.json — but they're listed here for reference.",
+    "@tiptap/core": "^3.22.3",
+    "@tiptap/starter-kit": "^3.22.3",
+    "@tiptap/extension-image": "^3.22.3",
+    "@tiptap/extension-link": "^3.22.3",
+    "@tiptap/extension-placeholder": "^3.22.3",
+    "@tiptap/extension-table": "^3.22.3",
+    "@tiptap/extension-table-row": "^3.22.3",
+    "@tiptap/extension-table-header": "^3.22.3",
+    "@tiptap/extension-table-cell": "^3.22.3"
+  }
+}

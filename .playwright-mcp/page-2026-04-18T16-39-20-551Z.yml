@@ -1,0 +1,526 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - button "Toggle navigation menu" [ref=e7]:
+          - generic [ref=e8]: menu
+      - generic [ref=e10]:
+        - link "home Home" [ref=e11] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e12]: home
+          - text: Home
+        - link "auto_awesome Features" [ref=e13] [cursor=pointer]:
+          - /url: /en/features
+          - generic [ref=e14]: auto_awesome
+          - text: Features
+        - link "article Blog" [ref=e15] [cursor=pointer]:
+          - /url: /en/blog
+          - generic [ref=e16]: article
+          - text: Blog
+        - button "Tools" [ref=e19]:
+          - generic [ref=e20]: build
+          - text: Solutions
+          - generic [ref=e21]: expand_more
+        - button "Tools" [ref=e23]:
+          - generic [ref=e24]: build
+          - text: Tools
+          - generic [ref=e25]: expand_more
+        - link "favorite Donate" [ref=e27] [cursor=pointer]:
+          - /url: https://ko-fi.com/bipul
+          - generic [ref=e28]: favorite
+          - text: Donate
+        - button "Change language" [ref=e30]:
+          - generic [ref=e31]: translate
+          - text: English
+          - generic [ref=e32]: expand_more
+        - link "Sign In" [ref=e34] [cursor=pointer]:
+          - /url: /api/auth/login
+          - img [ref=e35]
+          - text: Sign In
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]: Free Image Hosting
+        - heading "Image to URL in One Click" [level=1] [ref=e43]
+        - paragraph [ref=e44]: Upload any image. Get a permanent, fast link. Share anywhere.
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: timer
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - text: Auto-delete
+                - button "What does auto-delete do?" [ref=e52]: "?"
+              - paragraph [ref=e53]: Never auto-deleted
+          - combobox "Auto-delete What does auto-delete do?" [ref=e54]:
+            - option "Never" [selected]
+            - option "1 hour"
+            - option "24 hours"
+            - option "7 days"
+            - option "30 days"
+        - button "add_photo_alternate Drop image here or click to browse JPG, PNG, WebP, GIF, SVG — Max 10MB SELECT FILE" [ref=e57] [cursor=pointer]:
+          - generic [ref=e58]: add_photo_alternate
+          - generic [ref=e59]:
+            - paragraph [ref=e60]: Drop image here or click to browse
+            - paragraph [ref=e61]: JPG, PNG, WebP, GIF, SVG — Max 10MB
+          - generic [ref=e62]: SELECT FILE
+      - generic [ref=e63]:
+        - generic [ref=e65]: rocket_launch
+        - generic [ref=e67]: lock
+        - generic [ref=e69]: link
+        - generic [ref=e71]: flash_on
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - heading "How It Works" [level=2] [ref=e74]
+        - paragraph [ref=e75]: Three steps. Zero friction.
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e78]: "1"
+          - generic [ref=e79]:
+            - generic [ref=e80]: cloud_upload
+            - heading "Upload" [level=3] [ref=e81]
+            - paragraph [ref=e82]: Simply drag your image into our landing zone. We support all modern formats up to 50MB per file.
+        - generic [ref=e83]:
+          - generic [ref=e84]: "2"
+          - generic [ref=e85]:
+            - generic [ref=e86]: bolt
+            - heading "Convert" [level=3] [ref=e87]
+            - paragraph [ref=e88]: Our engine optimizes your image and generates a permanent, high-speed URL instantly.
+        - generic [ref=e89]:
+          - generic [ref=e90]: "3"
+          - generic [ref=e91]:
+            - generic [ref=e92]: share
+            - heading "Share" [level=3] [ref=e93]
+            - paragraph [ref=e94]: Paste your link anywhere — social media, blogs, or apps. It’s live and stays live forever.
+    - generic [ref=e95]:
+      - heading "From Our Blog" [level=2] [ref=e96]
+      - generic [ref=e97]:
+        - article [ref=e98]:
+          - 'link "Direct Image Links vs Regular Links: What’s the Difference and When to Use Each Uncategorized Direct Image Links vs Regular Links: What’s the Difference and When to Use Each Read More arrow_forward" [ref=e99] [cursor=pointer]':
+            - /url: /en/blog/direct-image-links-vs-regular-links-whats-the-difference-and-when-to-use-each
+            - generic [ref=e100]:
+              - 'img "Direct Image Links vs Regular Links: What’s the Difference and When to Use Each" [ref=e102]'
+              - generic [ref=e103]:
+                - generic [ref=e104]: Uncategorized
+                - 'heading "Direct Image Links vs Regular Links: What’s the Difference and When to Use Each" [level=3] [ref=e105]'
+                - generic [ref=e106]:
+                  - text: Read More
+                  - generic [ref=e107]: arrow_forward
+        - article [ref=e108]:
+          - link "How to Convert Any Image to a Shareable URL in Seconds (Step-by-Step) Tutorials How to Convert Any Image to a Shareable URL in Seconds (Step-by-Step) Read More arrow_forward" [ref=e109] [cursor=pointer]:
+            - /url: /en/blog/how-to-convert-any-image-to-a-shareable-url-in-seconds-step-by-step-o6rf1r
+            - generic [ref=e110]:
+              - img "How to Convert Any Image to a Shareable URL in Seconds (Step-by-Step)" [ref=e112]
+              - generic [ref=e113]:
+                - generic [ref=e114]: Tutorials
+                - heading "How to Convert Any Image to a Shareable URL in Seconds (Step-by-Step)" [level=3] [ref=e115]
+                - generic [ref=e116]:
+                  - text: Read More
+                  - generic [ref=e117]: arrow_forward
+        - article [ref=e118]:
+          - link "What Is an Image URL? A Complete Beginner’s Guide Beginner Guides What Is an Image URL? A Complete Beginner’s Guide Read More arrow_forward" [ref=e119] [cursor=pointer]:
+            - /url: /en/blog/what-is-an-image-url-a-complete-beginners-guide
+            - generic [ref=e120]:
+              - img "What Is an Image URL? A Complete Beginner’s Guide" [ref=e122]
+              - generic [ref=e123]:
+                - generic [ref=e124]: Beginner Guides
+                - heading "What Is an Image URL? A Complete Beginner’s Guide" [level=3] [ref=e125]
+                - generic [ref=e126]:
+                  - text: Read More
+                  - generic [ref=e127]: arrow_forward
+    - generic [ref=e129]:
+      - generic [ref=e130]:
+        - heading "Discover All Features" [level=2] [ref=e131]
+        - paragraph [ref=e132]: Everything you need to manage your visual assets with zero friction and maximum efficiency.
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e135]: rocket_launch
+          - heading "CDN Delivery" [level=3] [ref=e136]
+          - paragraph [ref=e137]: Images served from edge nodes worldwide. Your content loads fast everywhere.
+        - generic [ref=e138]:
+          - generic [ref=e139]: lock_open
+          - heading "No Signup Required" [level=3] [ref=e140]
+          - paragraph [ref=e141]: Upload instantly without creating an account. No email, no password, no friction.
+        - generic [ref=e142]:
+          - generic [ref=e143]: link
+          - heading "Permanent Links" [level=3] [ref=e144]
+          - paragraph [ref=e145]: Your URLs never expire. Share with confidence — they stay live forever.
+        - generic [ref=e146]:
+          - generic [ref=e147]: https
+          - heading "SSL Secure" [level=3] [ref=e148]
+          - paragraph [ref=e149]: Every link is HTTPS encrypted. Safe for any context — blogs, apps, or emails.
+        - generic [ref=e150]:
+          - generic [ref=e151]: flash_on
+          - heading "Instant Upload" [level=3] [ref=e152]
+          - paragraph [ref=e153]: Drag, drop, done. Get your shareable URL in under 2 seconds.
+        - generic [ref=e154]:
+          - generic [ref=e155]: aspect_ratio
+          - heading "Auto Resize" [level=3] [ref=e156]
+          - paragraph [ref=e157]: Images are optimized automatically for fast delivery without quality loss.
+    - generic [ref=e158]:
+      - generic [ref=e159]:
+        - heading "Built for Everyone" [level=2] [ref=e160]
+        - paragraph [ref=e161]: Whether you're sharing a meme or shipping a product — we've got you.
+      - generic [ref=e162]:
+        - generic [ref=e163]:
+          - generic [ref=e164]: edit_note
+          - heading "Bloggers" [level=3] [ref=e165]
+          - paragraph [ref=e166]: Paste image URLs directly into your posts. No media library headaches.
+        - generic [ref=e167]:
+          - generic [ref=e168]: terminal
+          - heading "Developers" [level=3] [ref=e169]
+          - paragraph [ref=e170]: Use our REST API to automate image hosting in your apps and pipelines.
+        - generic [ref=e171]:
+          - generic [ref=e172]: school
+          - heading "Students" [level=3] [ref=e173]
+          - paragraph [ref=e174]: Quick image links for presentations, docs, and group projects.
+        - generic [ref=e175]:
+          - generic [ref=e176]: palette
+          - heading "Creators" [level=3] [ref=e177]
+          - paragraph [ref=e178]: Portfolio images, social posts, and thumbnails — always online, always fast.
+    - generic [ref=e180]:
+      - generic [ref=e181]:
+        - heading "Your Complete Image Workflow" [level=2] [ref=e182]
+        - paragraph [ref=e183]: From any website to a shareable link — in seconds
+      - generic [ref=e184]:
+        - link "travel_explore Extract Grab images from any website with ExtractPics extractpics.com open_in_new" [ref=e185] [cursor=pointer]:
+          - /url: https://extractpics.com/?ref=imagetourl
+          - generic [ref=e187]: travel_explore
+          - heading "Extract" [level=3] [ref=e188]
+          - paragraph [ref=e189]: Grab images from any website with ExtractPics
+          - generic [ref=e190]:
+            - text: extractpics.com
+            - generic [ref=e191]: open_in_new
+        - generic [ref=e193]: arrow_downward
+        - generic [ref=e194]:
+          - generic [ref=e196]: cloud_upload
+          - heading "Upload" [level=3] [ref=e197]
+          - paragraph [ref=e198]: Drop them here to get permanent CDN links
+          - generic [ref=e199]: You're here
+        - generic [ref=e201]: arrow_downward
+        - generic [ref=e202]:
+          - generic [ref=e204]: share
+          - heading "Share" [level=3] [ref=e205]
+          - paragraph [ref=e206]: Use your links anywhere — they never expire
+          - generic [ref=e207]: Permanent URLs
+    - generic [ref=e209]:
+      - heading "Hear From Our Happy Users" [level=2] [ref=e211]
+      - generic [ref=e212]:
+        - generic [ref=e214]:
+          - paragraph [ref=e215]: "\"Finally, a tool that doesn’t ask me to create an account for a simple 2-second task. The speed is actually insane.\""
+          - generic [ref=e216]:
+            - img "Alex Rivera" [ref=e218]
+            - generic [ref=e219]:
+              - paragraph [ref=e220]: Alex Rivera
+              - paragraph [ref=e221]: Graphic Designer
+        - generic [ref=e223]:
+          - paragraph [ref=e224]: "\"We use the API to handle all our blog image assets. It’s more reliable than our own previous hosting solution.\""
+          - generic [ref=e225]:
+            - img "Sarah Chen" [ref=e227]
+            - generic [ref=e228]:
+              - paragraph [ref=e229]: Sarah Chen
+              - paragraph [ref=e230]: Product Lead @ TechFlow
+        - generic [ref=e232]:
+          - paragraph [ref=e233]: "\"The permanent links feature is a lifesaver for my portfolio. I don’t have to worry about broken images ever again.\""
+          - generic [ref=e234]:
+            - img "Jordan Smith" [ref=e236]
+            - generic [ref=e237]:
+              - paragraph [ref=e238]: Jordan Smith
+              - paragraph [ref=e239]: Freelance Developer
+    - generic [ref=e240]:
+      - heading "Frequently Asked Questions" [level=2] [ref=e242]
+      - generic [ref=e243]:
+        - button "Is it really free? expand_more" [ref=e245] [cursor=pointer]:
+          - generic [ref=e246]: Is it really free?
+          - generic [ref=e247]: expand_more
+        - button "Do my links expire? expand_more" [ref=e249] [cursor=pointer]:
+          - generic [ref=e250]: Do my links expire?
+          - generic [ref=e251]: expand_more
+        - button "What image formats are supported? expand_more" [ref=e253] [cursor=pointer]:
+          - generic [ref=e254]: What image formats are supported?
+          - generic [ref=e255]: expand_more
+        - button "Is there an API? expand_more" [ref=e257] [cursor=pointer]:
+          - generic [ref=e258]: Is there an API?
+          - generic [ref=e259]: expand_more
+        - button "How secure are my images? expand_more" [ref=e261] [cursor=pointer]:
+          - generic [ref=e262]: How secure are my images?
+          - generic [ref=e263]: expand_more
+    - generic [ref=e265]:
+      - heading "Ready to Host Your Images?" [level=2] [ref=e266]
+      - paragraph [ref=e267]: No signup. No credit card. Just upload and share.
+      - button "Start Uploading — It's Free" [ref=e268] [cursor=pointer]
+    - generic [ref=e270]:
+      - generic [ref=e271]:
+        - generic [ref=e272]:
+          - generic [ref=e273]:
+            - generic [ref=e274]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e275]: Making the web more visual, one link at a time. Designed for humans, built for speed.
+          - text: Stay Updated
+          - generic [ref=e276]:
+            - textbox "Your email..." [ref=e277]
+            - button "Join" [ref=e278]
+          - generic [ref=e279]:
+            - link "GitHub" [ref=e280] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e281]
+            - link "Instagram" [ref=e283] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e284]
+            - link "Personal Website" [ref=e286] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+        - generic [ref=e287]:
+          - text: Tools
+          - generic [ref=e288]: URL Uploaders
+          - generic [ref=e289]:
+            - link "PNG to URL" [ref=e290] [cursor=pointer]:
+              - /url: /en/png-to-url/
+            - link "JPG to URL" [ref=e291] [cursor=pointer]:
+              - /url: /en/jpg-to-url/
+            - link "GIF to URL" [ref=e292] [cursor=pointer]:
+              - /url: /en/gif-to-url/
+            - link "WebP to URL" [ref=e293] [cursor=pointer]:
+              - /url: /en/webp-to-url/
+            - link "Photo to URL" [ref=e294] [cursor=pointer]:
+              - /url: /en/photo-to-url/
+            - link "Screenshot to URL" [ref=e295] [cursor=pointer]:
+              - /url: /en/screenshot-to-url/
+          - text: Format Convert
+          - generic [ref=e296]:
+            - link "HEIC → JPG" [ref=e297] [cursor=pointer]:
+              - /url: /en/heic-to-jpg/
+            - link "HEIC → PNG" [ref=e298] [cursor=pointer]:
+              - /url: /en/heic-to-png/
+            - link "HEIC → PDF" [ref=e299] [cursor=pointer]:
+              - /url: /en/heic-to-pdf/
+            - link "PNG → JPG" [ref=e300] [cursor=pointer]:
+              - /url: /en/png-to-jpg/
+            - link "JPG → PNG" [ref=e301] [cursor=pointer]:
+              - /url: /en/jpg-to-png/
+            - link "PNG → WebP" [ref=e302] [cursor=pointer]:
+              - /url: /en/png-to-webp/
+            - link "JPG → WebP" [ref=e303] [cursor=pointer]:
+              - /url: /en/jpg-to-webp/
+            - link "WebP → JPG" [ref=e304] [cursor=pointer]:
+              - /url: /en/webp-to-jpg/
+            - link "WebP → PNG" [ref=e305] [cursor=pointer]:
+              - /url: /en/webp-to-png/
+            - link "PNG → PDF" [ref=e306] [cursor=pointer]:
+              - /url: /en/png-to-pdf/
+            - link "JPG → PDF" [ref=e307] [cursor=pointer]:
+              - /url: /en/jpg-to-pdf/
+          - text: Utilities
+          - generic [ref=e308]:
+            - link "Compressor" [ref=e309] [cursor=pointer]:
+              - /url: /en/image-compressor/
+            - link "Resizer" [ref=e310] [cursor=pointer]:
+              - /url: /en/image-resizer/
+            - link "Favicon Generator" [ref=e311] [cursor=pointer]:
+              - /url: /en/favicon-generator/
+            - link "Image → Base64" [ref=e312] [cursor=pointer]:
+              - /url: /en/image-to-base64/
+            - link "Base64 → Image" [ref=e313] [cursor=pointer]:
+              - /url: /en/base64-to-image/
+        - generic [ref=e314]:
+          - text: Popular
+          - generic [ref=e315]: Features
+          - generic [ref=e316]:
+            - link "Free Image Hosting" [ref=e317] [cursor=pointer]:
+              - /url: /en/free-image-hosting/
+            - link "Image URL Generator" [ref=e318] [cursor=pointer]:
+              - /url: /en/image-url-generator/
+            - link "Bulk Image Upload" [ref=e319] [cursor=pointer]:
+              - /url: /en/bulk-image-upload/
+            - link "Free Image CDN" [ref=e320] [cursor=pointer]:
+              - /url: /en/free-image-cdn/
+            - link "Permanent Hosting" [ref=e321] [cursor=pointer]:
+              - /url: /en/permanent-image-hosting/
+            - link "Direct Image Links" [ref=e322] [cursor=pointer]:
+              - /url: /en/direct-image-link/
+            - link "Anonymous Upload" [ref=e323] [cursor=pointer]:
+              - /url: /en/anonymous-image-upload/
+            - link "Embed Code Generator" [ref=e324] [cursor=pointer]:
+              - /url: /en/image-embed-code-generator/
+          - text: Use Cases
+          - generic [ref=e325]:
+            - link "For eBay" [ref=e326] [cursor=pointer]:
+              - /url: /en/image-hosting-for-ebay/
+            - link "For Discord" [ref=e327] [cursor=pointer]:
+              - /url: /en/image-hosting-for-discord/
+            - link "For GitHub" [ref=e328] [cursor=pointer]:
+              - /url: /en/image-hosting-for-github-readme/
+            - link "For Notion" [ref=e329] [cursor=pointer]:
+              - /url: /en/image-hosting-for-notion/
+            - link "For WordPress" [ref=e330] [cursor=pointer]:
+              - /url: /en/image-hosting-for-wordpress/
+            - link "For Shopify" [ref=e331] [cursor=pointer]:
+              - /url: /en/image-hosting-for-shopify/
+            - link "For Newsletters" [ref=e332] [cursor=pointer]:
+              - /url: /en/image-hosting-for-newsletters/
+            - link "For Email Signatures" [ref=e333] [cursor=pointer]:
+              - /url: /en/image-hosting-for-email-signatures/
+            - link "For Forums" [ref=e334] [cursor=pointer]:
+              - /url: /en/image-hosting-for-forums/
+            - link "For WhatsApp" [ref=e335] [cursor=pointer]:
+              - /url: /en/image-to-url-for-whatsapp/
+            - link "For ChatGPT" [ref=e336] [cursor=pointer]:
+              - /url: /en/image-url-for-chatgpt/
+            - link "AI Image Hosting" [ref=e337] [cursor=pointer]:
+              - /url: /en/ai-image-hosting/
+            - link "For Reddit" [ref=e338] [cursor=pointer]:
+              - /url: /image-hosting-for-reddit
+            - link "For X / Twitter" [ref=e339] [cursor=pointer]:
+              - /url: /image-hosting-for-twitter
+            - link "For Instagram" [ref=e340] [cursor=pointer]:
+              - /url: /image-hosting-for-instagram
+            - link "For Pinterest" [ref=e341] [cursor=pointer]:
+              - /url: /image-hosting-for-pinterest
+            - link "For LinkedIn" [ref=e342] [cursor=pointer]:
+              - /url: /image-hosting-for-linkedin
+            - link "For Substack" [ref=e343] [cursor=pointer]:
+              - /url: /image-hosting-for-substack
+            - link "For Medium" [ref=e344] [cursor=pointer]:
+              - /url: /image-hosting-for-medium
+            - link "For Webflow" [ref=e345] [cursor=pointer]:
+              - /url: /image-hosting-for-webflow
+            - link "For Squarespace" [ref=e346] [cursor=pointer]:
+              - /url: /image-hosting-for-squarespace
+            - link "For Wix" [ref=e347] [cursor=pointer]:
+              - /url: /image-hosting-for-wix
+            - link "For Framer" [ref=e348] [cursor=pointer]:
+              - /url: /image-hosting-for-framer
+            - link "For Stack Overflow" [ref=e349] [cursor=pointer]:
+              - /url: /image-hosting-for-stack-overflow
+            - link "For Markdown" [ref=e350] [cursor=pointer]:
+              - /url: /image-hosting-for-markdown
+            - link "For Next.js" [ref=e351] [cursor=pointer]:
+              - /url: /image-hosting-for-nextjs
+            - link "For Jira" [ref=e352] [cursor=pointer]:
+              - /url: /image-hosting-for-jira
+        - generic [ref=e353]:
+          - text: Learn
+          - generic [ref=e354]: Guides
+          - generic [ref=e355]:
+            - link "JPG vs PNG vs WebP vs AVIF" [ref=e356] [cursor=pointer]:
+              - /url: /guides/jpg-vs-png-vs-webp-vs-avif
+            - link "Image LCP Optimization" [ref=e357] [cursor=pointer]:
+              - /url: /guides/image-lcp-optimization
+            - link "Core Web Vitals Guide" [ref=e358] [cursor=pointer]:
+              - /url: /guides/image-optimization-core-web-vitals
+            - link "Responsive Images Cheatsheet" [ref=e359] [cursor=pointer]:
+              - /url: /guides/responsive-images-cheatsheet
+            - link "What EXIF Leaks" [ref=e360] [cursor=pointer]:
+              - /url: /guides/what-exif-leaks
+            - link "Embed in Notion" [ref=e361] [cursor=pointer]:
+              - /url: /guides/embed-images-in-notion
+            - link "Why Reddit Strips EXIF" [ref=e362] [cursor=pointer]:
+              - /url: /guides/why-reddit-strips-exif
+          - text: Answers
+          - generic [ref=e363]:
+            - link "Get a direct URL" [ref=e364] [cursor=pointer]:
+              - /url: /how-to-get-direct-url-for-image
+            - link "Share as a link" [ref=e365] [cursor=pointer]:
+              - /url: /how-to-share-image-as-link
+            - link "Embed in email" [ref=e366] [cursor=pointer]:
+              - /url: /how-to-embed-image-in-email
+            - link "What is hotlinking" [ref=e367] [cursor=pointer]:
+              - /url: /what-is-image-hotlinking
+            - link "Host for free" [ref=e368] [cursor=pointer]:
+              - /url: /how-to-host-image-for-free
+            - link "Retention policy" [ref=e369] [cursor=pointer]:
+              - /url: /how-long-does-imagetourl-store-images
+          - text: Compare
+          - generic [ref=e370]:
+            - link "Imgur Alternative" [ref=e371] [cursor=pointer]:
+              - /url: /en/imgur-alternative/
+            - link "ImgBB Alternative" [ref=e372] [cursor=pointer]:
+              - /url: /en/imgbb-alternative/
+            - link "Cloudinary Alternative" [ref=e373] [cursor=pointer]:
+              - /url: /en/cloudinary-alternative/
+            - link "Postimages Alternative" [ref=e374] [cursor=pointer]:
+              - /url: /postimages-alternative
+            - link "Google Photos Direct Link" [ref=e375] [cursor=pointer]:
+              - /url: /google-photos-direct-link
+            - link "Dropbox Direct Link" [ref=e376] [cursor=pointer]:
+              - /url: /dropbox-direct-image-link
+            - link "vs Imgur" [ref=e377] [cursor=pointer]:
+              - /url: /imagetourl-vs-imgur
+            - link "vs ImgBB" [ref=e378] [cursor=pointer]:
+              - /url: /imagetourl-vs-imgbb
+            - link "vs Cloudinary" [ref=e379] [cursor=pointer]:
+              - /url: /imagetourl-vs-cloudinary
+            - link "Imgur vs ImgBB" [ref=e380] [cursor=pointer]:
+              - /url: /imgur-vs-imgbb
+          - text: API
+          - generic [ref=e381]:
+            - link "Upload API" [ref=e382] [cursor=pointer]:
+              - /url: /image-upload-api
+            - link "REST Reference" [ref=e383] [cursor=pointer]:
+              - /url: /image-hosting-rest-api
+            - link "Python" [ref=e384] [cursor=pointer]:
+              - /url: /image-hosting-api-python
+            - link "Node.js" [ref=e385] [cursor=pointer]:
+              - /url: /image-hosting-api-nodejs
+            - link "PHP" [ref=e386] [cursor=pointer]:
+              - /url: /image-hosting-api-php
+            - link "cURL" [ref=e387] [cursor=pointer]:
+              - /url: /image-hosting-api-curl
+            - link "Zapier" [ref=e388] [cursor=pointer]:
+              - /url: /image-upload-zapier
+            - link "Make.com" [ref=e389] [cursor=pointer]:
+              - /url: /image-upload-make
+            - link "n8n" [ref=e390] [cursor=pointer]:
+              - /url: /image-upload-n8n
+        - generic [ref=e391]:
+          - text: Resources
+          - link "Privacy Policy" [ref=e392] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms of Service" [ref=e393] [cursor=pointer]:
+            - /url: /en/terms
+          - link "Documentation" [ref=e394] [cursor=pointer]:
+            - /url: /en/docs
+          - link "About" [ref=e395] [cursor=pointer]:
+            - /url: /en/about/
+          - link "Contact" [ref=e396] [cursor=pointer]:
+            - /url: /en/contact/
+          - link "Blog" [ref=e397] [cursor=pointer]:
+            - /url: /en/blog
+          - link "Content Guidelines" [ref=e398] [cursor=pointer]:
+            - /url: /en/content-guidelines/
+          - text: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e399] [cursor=pointer]:
+            - /url: /en/
+            - generic [ref=e400]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e401] [cursor=pointer]:
+            - /url: /en/heic-to-jpg/
+            - generic [ref=e402]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e403] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e404]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation" [ref=e405] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e406]: self_improvement
+            - text: Daily Meditation
+      - generic [ref=e407]:
+        - paragraph [ref=e408]: © 2026 ImageToURL. Designed by ImageToURL Team
+        - paragraph [ref=e409]: Built with care · Hosted on Cloudflare
+  - generic [ref=e412]:
+    - button "Menu" [ref=e413]:
+      - img [ref=e415]
+      - generic: Menu
+    - button "Inspect" [ref=e419]:
+      - img [ref=e421]
+      - generic: Inspect
+    - button "Audit" [ref=e423]:
+      - img [ref=e425]
+      - generic: Audit
+    - button "Settings" [ref=e428]:
+      - img [ref=e430]
+      - generic: Settings

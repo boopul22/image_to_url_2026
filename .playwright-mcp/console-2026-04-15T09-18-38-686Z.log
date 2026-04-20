@@ -1,0 +1,7 @@
+[      22ms] [INFO] Loading the image 'https://cdn.imagetourl.cloud/cms/blog/Rfa29MHnrKqR2wbqzZH8y.jpg' violates the following Content Security Policy directive: "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud". The policy is report-only, so the violation has been logged but no further action has been taken. @ http://localhost:4321/en/blog:4137
+[   21285ms] [INFO] Loading the image 'https://cdn.imagetourl.cloud/cms/blog/Rfa29MHnrKqR2wbqzZH8y.jpg' violates the following Content Security Policy directive: "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud". The policy is report-only, so the violation has been logged but no further action has been taken. @ http://localhost:4321/en/blog:4137
+[  126876ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4321/en/blog:0
+[  134552ms] [ERROR] WebSocket connection to 'ws://localhost:4321/?token=Umyc3kNQ92QN' failed:  @ http://localhost:4321/@vite/client:1476
+[  134557ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:4321/@vite/client:1596
+[  151776ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:4321/__cdn/cms/blog/Rfa29MHnrKqR2wbqzZH8y.jpg:0
+[  151921ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:4321/__cdn/cms/blog/Rfa29MHnrKqR2wbqzZH8y.jpg:0

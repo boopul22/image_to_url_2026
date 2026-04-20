@@ -1,0 +1,401 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /hi/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - generic [ref=e7]:
+          - link "होम" [ref=e8] [cursor=pointer]:
+            - /url: /hi/
+          - link "सुविधाएँ" [ref=e9] [cursor=pointer]:
+            - /url: /hi/features
+          - link "ब्लॉग" [ref=e10] [cursor=pointer]:
+            - /url: /hi/blog
+          - button "समाधान expand_more" [ref=e12]:
+            - text: समाधान
+            - generic [ref=e13]: expand_more
+          - button "Tools expand_more" [ref=e15]:
+            - text: Tools
+            - generic [ref=e16]: expand_more
+        - generic [ref=e17]:
+          - link "favorite Donate" [ref=e18] [cursor=pointer]:
+            - /url: https://ko-fi.com/bipul
+            - generic [ref=e19]: favorite
+            - text: Donate
+          - button "Change language" [ref=e21]:
+            - generic [ref=e22]: translate
+            - text: हिन्दी
+            - generic [ref=e23]: expand_more
+          - link "साइन इन" [ref=e25] [cursor=pointer]:
+            - /url: /api/auth/login
+            - img [ref=e26]
+            - text: साइन इन
+    - main [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - generic [ref=e36]: lock
+              - paragraph [ref=e38]: 100% in your browser
+            - generic [ref=e39]:
+              - generic [ref=e40]: Format
+              - combobox "Format" [ref=e41]:
+                - option "Match source" [selected]
+                - option "JPG"
+                - option "WebP"
+              - generic [ref=e42]: Quality
+              - slider "Quality" [ref=e43]: "80"
+              - generic [ref=e44]: "80"
+          - button "compress Drop images here or click to browse PNG · JPG · WebP — multi-select OK" [ref=e47] [cursor=pointer]:
+            - generic [ref=e48]: compress
+            - generic [ref=e49]:
+              - paragraph [ref=e50]: Drop images here or click to browse
+              - paragraph [ref=e51]: PNG · JPG · WebP — multi-select OK
+        - generic [ref=e52]:
+          - generic [ref=e53]: Browser-only Tool
+          - heading "इमेज कंप्रेसर आधा आकार, वही दिखावट।" [level=1] [ref=e54]
+          - paragraph [ref=e55]: JPG, PNG, या WebP फाइलें अपलोड किए बिना सिकोड़ें। लाइव आकार तुलना।
+      - generic [ref=e57]:
+        - heading "How It Works" [level=2] [ref=e59]
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: "1"
+            - heading "Drop images" [level=3] [ref=e64]
+            - paragraph [ref=e65]: Drag PNG, JPG, or WebP files into the drop zone.
+          - generic [ref=e66]:
+            - generic [ref=e67]: "2"
+            - heading "Pick format & quality" [level=3] [ref=e68]
+            - paragraph [ref=e69]: Match source or force to JPG/WebP; slide quality between 30–100%.
+          - generic [ref=e70]:
+            - generic [ref=e71]: "3"
+            - heading "Download smaller files" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Each result shows before/after size.
+      - generic [ref=e75]:
+        - heading "Why compress locally" [level=2] [ref=e77]
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e82]: bolt
+            - heading "Faster uploads" [level=3] [ref=e83]
+            - paragraph [ref=e84]: Pre-compressed files upload faster everywhere.
+          - generic [ref=e85]:
+            - generic [ref=e87]: bolt
+            - heading "Better Core Web Vitals" [level=3] [ref=e88]
+            - paragraph [ref=e89]: Smaller images improve LCP scores.
+          - generic [ref=e90]:
+            - generic [ref=e92]: bolt
+            - heading "Email-friendly sizes" [level=3] [ref=e93]
+            - paragraph [ref=e94]: Fit under Gmail/Outlook attachment caps.
+          - generic [ref=e95]:
+            - generic [ref=e97]: bolt
+            - heading "Privacy-first" [level=3] [ref=e98]
+            - paragraph [ref=e99]: Your files never leave your browser.
+      - generic [ref=e101]:
+        - heading "अक्सर पूछे जाने वाले प्रश्न" [level=2] [ref=e103]
+        - generic [ref=e105]:
+          - group [ref=e106]:
+            - generic "How much can I compress without visible quality loss? expand_more" [ref=e107] [cursor=pointer]:
+              - generic [ref=e108]: How much can I compress without visible quality loss?
+              - generic [ref=e109]: expand_more
+          - group [ref=e110]:
+            - generic "Is this really compressing, or just converting? expand_more" [ref=e111] [cursor=pointer]:
+              - generic [ref=e112]: Is this really compressing, or just converting?
+              - generic [ref=e113]: expand_more
+          - group [ref=e114]:
+            - generic "Does it upload my images? expand_more" [ref=e115] [cursor=pointer]:
+              - generic [ref=e116]: Does it upload my images?
+              - generic [ref=e117]: expand_more
+          - group [ref=e118]:
+            - generic "Will PNG transparency be preserved? expand_more" [ref=e119] [cursor=pointer]:
+              - generic [ref=e120]: Will PNG transparency be preserved?
+              - generic [ref=e121]: expand_more
+          - group [ref=e122]:
+            - generic "Large images (10 MB+)? expand_more" [ref=e123] [cursor=pointer]:
+              - generic [ref=e124]: Large images (10 MB+)?
+              - generic [ref=e125]: expand_more
+          - group [ref=e126]:
+            - generic "Does it strip metadata? expand_more" [ref=e127] [cursor=pointer]:
+              - generic [ref=e128]: Does it strip metadata?
+              - generic [ref=e129]: expand_more
+          - group [ref=e130]:
+            - generic "Batch hundreds of images? expand_more" [ref=e131] [cursor=pointer]:
+              - generic [ref=e132]: Batch hundreds of images?
+              - generic [ref=e133]: expand_more
+          - group [ref=e134]:
+            - generic "Best use case? expand_more" [ref=e135] [cursor=pointer]:
+              - generic [ref=e136]: Best use case?
+              - generic [ref=e137]: expand_more
+      - generic [ref=e141]:
+        - heading "Need a hosted URL?" [level=2] [ref=e142]
+        - paragraph [ref=e143]: Upload the compressed file for a permanent link.
+        - link "Try the main uploader" [ref=e144] [cursor=pointer]:
+          - /url: /hi/
+    - generic [ref=e146]:
+      - generic [ref=e147]:
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - generic [ref=e150]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e151]: वेब को और अधिक दृश्यमान बनाना, एक लिंक एक समय में। मनुष्यों के लिए डिज़ाइन किया गया, गति के लिए बनाया गया।
+        - generic [ref=e152]:
+          - generic [ref=e153]: Convert
+          - link "PNG to URL" [ref=e154] [cursor=pointer]:
+            - /url: /hi/png-को-url-में-बदलें/
+          - link "JPG to URL" [ref=e155] [cursor=pointer]:
+            - /url: /hi/jpg-को-url-में-बदलें/
+          - link "GIF to URL" [ref=e156] [cursor=pointer]:
+            - /url: /hi/gif-को-url-में-बदलें/
+          - link "WebP to URL" [ref=e157] [cursor=pointer]:
+            - /url: /hi/webp-को-url-में-बदलें/
+          - link "Photo to URL" [ref=e158] [cursor=pointer]:
+            - /url: /hi/फोटो-को-url-में-बदलें/
+          - link "Screenshot to URL" [ref=e159] [cursor=pointer]:
+            - /url: /hi/स्क्रीनशॉट-को-url-में-बदलें/
+        - generic [ref=e160]:
+          - generic [ref=e161]: Features
+          - link "मुफ्त इमेज होस्टिंग" [ref=e162] [cursor=pointer]:
+            - /url: /hi/मुफ्त-image-होस्टिंग/
+          - link "इमेज URL जनरेटर" [ref=e163] [cursor=pointer]:
+            - /url: /hi/इमेज-को-url-में-बदलें/
+          - link "बल्क इमेज अपलोड" [ref=e164] [cursor=pointer]:
+            - /url: /hi/बल्क-इमेज-अपलोड/
+          - link "Free Image CDN" [ref=e165] [cursor=pointer]:
+            - /url: /hi/मुफ़्त-image-cdn/
+          - link "Permanent Hosting" [ref=e166] [cursor=pointer]:
+            - /url: /hi/स्थायी-इमेज-टू-यूआरएल/
+          - link "Direct Image Links" [ref=e167] [cursor=pointer]:
+            - /url: /hi/डायरेक्ट-इमेज-लिंक-होस्टिंग/
+          - link "Anonymous Upload" [ref=e168] [cursor=pointer]:
+            - /url: /hi/अनाम-image-अपलोड/
+          - link "Embed Code Generator" [ref=e169] [cursor=pointer]:
+            - /url: /hi/इमेज-एम्बेड-कोड-जनरेटर/
+        - generic [ref=e170]:
+          - generic [ref=e171]: Format Converters
+          - link "HEIC → JPG" [ref=e172] [cursor=pointer]:
+            - /url: /hi/heic-क-jpg-म-बदल/
+          - link "HEIC → PNG" [ref=e173] [cursor=pointer]:
+            - /url: /hi/heic-को-png-में-बदलें/
+          - link "HEIC → PDF" [ref=e174] [cursor=pointer]:
+            - /url: /hi/heic-को-pdf-में-बदलें/
+          - link "PNG → JPG" [ref=e175] [cursor=pointer]:
+            - /url: /hi/png-को-jpg-में-बदलें/
+          - link "JPG → PNG" [ref=e176] [cursor=pointer]:
+            - /url: /hi/jpg-को-png-में-बदलें/
+          - link "PNG → WebP" [ref=e177] [cursor=pointer]:
+            - /url: /hi/png-को-webp-में-बदलें/
+          - link "JPG → WebP" [ref=e178] [cursor=pointer]:
+            - /url: /hi/jpg-को-webp-में-बदलें/
+          - link "WebP → JPG" [ref=e179] [cursor=pointer]:
+            - /url: /hi/webp-को-jpg-में-बदलें/
+          - link "WebP → PNG" [ref=e180] [cursor=pointer]:
+            - /url: /hi/webp-को-png-में-बदलें/
+          - link "PNG → PDF" [ref=e181] [cursor=pointer]:
+            - /url: /hi/png-को-pdf-में-बदलें/
+          - link "JPG → PDF" [ref=e182] [cursor=pointer]:
+            - /url: /hi/jpg-को-pdf-में-बदलें/
+        - generic [ref=e183]:
+          - generic [ref=e184]: Utilities
+          - link "Compressor" [ref=e185] [cursor=pointer]:
+            - /url: /hi/इमेज-कंप्रेसर/
+          - link "Resizer" [ref=e186] [cursor=pointer]:
+            - /url: /hi/इमेज-रीसाइज़र/
+          - link "Favicon Generator" [ref=e187] [cursor=pointer]:
+            - /url: /hi/फेविकॉन-जनरेटर/
+          - link "Image → Base64" [ref=e188] [cursor=pointer]:
+            - /url: /hi/इमेज-को-base64-में-बदलें/
+          - link "Base64 → Image" [ref=e189] [cursor=pointer]:
+            - /url: /hi/base64-को-इमेज-में-बदलें/
+        - generic [ref=e190]:
+          - generic [ref=e191]: Use Cases
+          - link "For eBay" [ref=e192] [cursor=pointer]:
+            - /url: /hi/ebay-के-लिए-इमेज-होस्टिंग/
+          - link "For Discord" [ref=e193] [cursor=pointer]:
+            - /url: /hi/discord-के-लिए-इमेज-होस्टिंग/
+          - link "For GitHub" [ref=e194] [cursor=pointer]:
+            - /url: /hi/github-readme-के-लिए-इमेज-होस्टिंग/
+          - link "For Notion" [ref=e195] [cursor=pointer]:
+            - /url: /hi/notion-के-लिए-स्थायी-इमेज-लिंक/
+          - link "For WordPress" [ref=e196] [cursor=pointer]:
+            - /url: /hi/वर्डप्रेस-के-लिए-इमेज-होस्टिंग/
+          - link "For Shopify" [ref=e197] [cursor=pointer]:
+            - /url: /hi/shopify-के-लिए-फ्री-इमेज-होस्टिंग/
+          - link "For Newsletters" [ref=e198] [cursor=pointer]:
+            - /url: /hi/ईमेल-न्यूज़लेटर-के-लिए-इमेज-होस्टिंग/
+          - link "For Email Signatures" [ref=e199] [cursor=pointer]:
+            - /url: /hi/ईमेल-हस्ताक्षर-के-लिए-इमेज-होस्टिंग/
+          - link "For Forums" [ref=e200] [cursor=pointer]:
+            - /url: /hi/फोरम-के-लिए-इमेज-होस्टिंग/
+          - link "For WhatsApp" [ref=e201] [cursor=pointer]:
+            - /url: /hi/whatsapp-पर-इमेज-लिंक-शेयर-करें/
+          - link "For ChatGPT" [ref=e202] [cursor=pointer]:
+            - /url: /hi/chatgpt-के-लिए-image-url-प्राप्त-करें/
+          - link "AI Image Hosting" [ref=e203] [cursor=pointer]:
+            - /url: /hi/ai-इमेज-होस्टिंग/
+          - link "For Reddit" [ref=e204] [cursor=pointer]:
+            - /url: /image-hosting-for-reddit
+          - link "For X / Twitter" [ref=e205] [cursor=pointer]:
+            - /url: /image-hosting-for-twitter
+          - link "For Instagram" [ref=e206] [cursor=pointer]:
+            - /url: /image-hosting-for-instagram
+          - link "For Pinterest" [ref=e207] [cursor=pointer]:
+            - /url: /image-hosting-for-pinterest
+          - link "For LinkedIn" [ref=e208] [cursor=pointer]:
+            - /url: /image-hosting-for-linkedin
+          - link "For Substack" [ref=e209] [cursor=pointer]:
+            - /url: /image-hosting-for-substack
+          - link "For Medium" [ref=e210] [cursor=pointer]:
+            - /url: /image-hosting-for-medium
+          - link "For Webflow" [ref=e211] [cursor=pointer]:
+            - /url: /image-hosting-for-webflow
+          - link "For Squarespace" [ref=e212] [cursor=pointer]:
+            - /url: /image-hosting-for-squarespace
+          - link "For Wix" [ref=e213] [cursor=pointer]:
+            - /url: /image-hosting-for-wix
+          - link "For Framer" [ref=e214] [cursor=pointer]:
+            - /url: /image-hosting-for-framer
+          - link "For Stack Overflow" [ref=e215] [cursor=pointer]:
+            - /url: /image-hosting-for-stack-overflow
+          - link "For Markdown" [ref=e216] [cursor=pointer]:
+            - /url: /image-hosting-for-markdown
+          - link "For Next.js" [ref=e217] [cursor=pointer]:
+            - /url: /image-hosting-for-nextjs
+          - link "For Jira" [ref=e218] [cursor=pointer]:
+            - /url: /image-hosting-for-jira
+        - generic [ref=e219]:
+          - generic [ref=e220]: Compare & Alternatives
+          - link "Imgur Alternative" [ref=e221] [cursor=pointer]:
+            - /url: /hi/सर्वश्रेष्ठ-imgur-विकल्प/
+          - link "ImgBB Alternative" [ref=e222] [cursor=pointer]:
+            - /url: /hi/imgbb-का-बेहतर-विकल्प/
+          - link "Cloudinary Alternative" [ref=e223] [cursor=pointer]:
+            - /url: /cloudinary-alternative
+          - link "Postimages Alternative" [ref=e224] [cursor=pointer]:
+            - /url: /postimages-alternative
+          - link "Google Photos Direct Link" [ref=e225] [cursor=pointer]:
+            - /url: /google-photos-direct-link
+          - link "Dropbox Direct Link" [ref=e226] [cursor=pointer]:
+            - /url: /dropbox-direct-image-link
+          - link "vs Imgur" [ref=e227] [cursor=pointer]:
+            - /url: /imagetourl-vs-imgur
+          - link "vs ImgBB" [ref=e228] [cursor=pointer]:
+            - /url: /imagetourl-vs-imgbb
+          - link "vs Cloudinary" [ref=e229] [cursor=pointer]:
+            - /url: /imagetourl-vs-cloudinary
+          - link "Imgur vs ImgBB" [ref=e230] [cursor=pointer]:
+            - /url: /imgur-vs-imgbb
+        - generic [ref=e231]:
+          - generic [ref=e232]: API & Integrations
+          - link "Upload API" [ref=e233] [cursor=pointer]:
+            - /url: /image-upload-api
+          - link "REST Reference" [ref=e234] [cursor=pointer]:
+            - /url: /image-hosting-rest-api
+          - link "Python" [ref=e235] [cursor=pointer]:
+            - /url: /image-hosting-api-python
+          - link "Node.js" [ref=e236] [cursor=pointer]:
+            - /url: /image-hosting-api-nodejs
+          - link "PHP" [ref=e237] [cursor=pointer]:
+            - /url: /image-hosting-api-php
+          - link "cURL" [ref=e238] [cursor=pointer]:
+            - /url: /image-hosting-api-curl
+          - link "Zapier" [ref=e239] [cursor=pointer]:
+            - /url: /image-upload-zapier
+          - link "Make.com" [ref=e240] [cursor=pointer]:
+            - /url: /image-upload-make
+          - link "n8n" [ref=e241] [cursor=pointer]:
+            - /url: /image-upload-n8n
+        - generic [ref=e242]:
+          - generic [ref=e243]: Answers
+          - link "Get a direct URL" [ref=e244] [cursor=pointer]:
+            - /url: /how-to-get-direct-url-for-image
+          - link "Share as a link" [ref=e245] [cursor=pointer]:
+            - /url: /how-to-share-image-as-link
+          - link "Embed in email" [ref=e246] [cursor=pointer]:
+            - /url: /how-to-embed-image-in-email
+          - link "What is hotlinking" [ref=e247] [cursor=pointer]:
+            - /url: /what-is-image-hotlinking
+          - link "Host for free" [ref=e248] [cursor=pointer]:
+            - /url: /how-to-host-image-for-free
+          - link "Retention policy" [ref=e249] [cursor=pointer]:
+            - /url: /how-long-does-imagetourl-store-images
+        - generic [ref=e250]:
+          - generic [ref=e251]: Guides
+          - link "JPG vs PNG vs WebP vs AVIF" [ref=e252] [cursor=pointer]:
+            - /url: /guides/jpg-vs-png-vs-webp-vs-avif
+          - link "Image LCP Optimization" [ref=e253] [cursor=pointer]:
+            - /url: /guides/image-lcp-optimization
+          - link "Core Web Vitals Guide" [ref=e254] [cursor=pointer]:
+            - /url: /guides/image-optimization-core-web-vitals
+          - link "Responsive Images Cheatsheet" [ref=e255] [cursor=pointer]:
+            - /url: /guides/responsive-images-cheatsheet
+          - link "What EXIF Leaks" [ref=e256] [cursor=pointer]:
+            - /url: /guides/what-exif-leaks
+          - link "Embed in Notion" [ref=e257] [cursor=pointer]:
+            - /url: /guides/embed-images-in-notion
+          - link "Why Reddit Strips EXIF" [ref=e258] [cursor=pointer]:
+            - /url: /guides/why-reddit-strips-exif
+        - generic [ref=e259]:
+          - generic [ref=e260]: संसाधन
+          - link "गोपनीयता नीति" [ref=e261] [cursor=pointer]:
+            - /url: /hi/privacy
+          - link "सेवा की शर्तें" [ref=e262] [cursor=pointer]:
+            - /url: /hi/terms
+          - link "दस्तावेज़ीकरण" [ref=e263] [cursor=pointer]:
+            - /url: /hi/docs
+          - link "हमारे बारे में" [ref=e264] [cursor=pointer]:
+            - /url: /about
+          - link "संपर्क" [ref=e265] [cursor=pointer]:
+            - /url: /contact
+          - link "ब्लॉग" [ref=e266] [cursor=pointer]:
+            - /url: /hi/blog
+          - link "Content Guidelines" [ref=e267] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e268]:
+          - generic [ref=e269]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e270] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e271]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e272] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e273]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e274] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e275]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e276] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e277]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e278]:
+          - generic [ref=e279]: अपडेट रहें
+          - generic [ref=e280]:
+            - textbox "आपका ईमेल..." [ref=e281]
+            - button "जुड़ें" [ref=e282]
+          - generic [ref=e283]:
+            - link "GitHub" [ref=e284] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e285]
+            - link "Instagram" [ref=e287] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e288]
+            - link "Personal Website" [ref=e290] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e291]:
+        - paragraph [ref=e292]: © 2026 ImageToURL. ImageToURL टीम द्वारा डिज़ाइन किया गया
+        - paragraph [ref=e293]: Built with care · Hosted on Cloudflare
+  - generic [ref=e296]:
+    - button "Menu" [ref=e297]:
+      - img [ref=e299]
+      - generic: Menu
+    - button "Inspect" [ref=e303]:
+      - img [ref=e305]
+      - generic: Inspect
+    - button "Audit" [ref=e307]:
+      - img [ref=e309]
+      - generic: Audit
+    - button "Settings" [ref=e312]:
+      - img [ref=e314]
+      - generic: Settings

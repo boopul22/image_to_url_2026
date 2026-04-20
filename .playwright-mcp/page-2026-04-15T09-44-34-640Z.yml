@@ -1,0 +1,282 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - button "Toggle navigation menu" [ref=e7]:
+          - generic [ref=e8]: menu
+      - generic [ref=e10]:
+        - link "home Home" [ref=e11] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e12]: home
+          - text: Home
+        - link "auto_awesome Features" [ref=e13] [cursor=pointer]:
+          - /url: /en/features
+          - generic [ref=e14]: auto_awesome
+          - text: Features
+        - link "article Blog" [ref=e15] [cursor=pointer]:
+          - /url: /en/blog
+          - generic [ref=e16]: article
+          - text: Blog
+        - button "Tools" [ref=e19]:
+          - generic [ref=e20]: build
+          - text: Solutions
+          - generic [ref=e21]: expand_more
+        - link "Sign In" [ref=e24] [cursor=pointer]:
+          - /url: /api/auth/login
+          - img [ref=e25]
+          - text: Sign In
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]: Browser-only Tool
+          - heading "HEIC to JPG Converter 100% in your browser." [level=1] [ref=e34]
+          - paragraph [ref=e35]: Drop your iPhone HEIC photos here and get JPG files instantly. Conversion runs entirely on your device — your photos never leave your computer. Free, unlimited, no signup.
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - generic [ref=e39]: lock
+              - generic [ref=e40]:
+                - paragraph [ref=e41]: 100% in your browser
+                - paragraph [ref=e42]: Files never leave your device
+            - generic [ref=e43]:
+              - generic [ref=e44]: Quality
+              - slider "Quality" [ref=e45]: "92"
+              - generic [ref=e46]: "92"
+          - button "photo_camera_back Drop HEIC files here or click to browse From your iPhone / iPad — multi-select OK" [ref=e49] [cursor=pointer]:
+            - generic [ref=e50]: photo_camera_back
+            - generic [ref=e51]:
+              - paragraph [ref=e52]: Drop HEIC files here or click to browse
+              - paragraph [ref=e53]: From your iPhone / iPad — multi-select OK
+      - generic [ref=e55]:
+        - heading "How It Works" [level=2] [ref=e57]
+        - generic [ref=e59]:
+          - generic [ref=e60]:
+            - generic [ref=e61]: "1"
+            - heading "Drop your HEIC files" [level=3] [ref=e62]
+            - paragraph [ref=e63]: Drag photos straight from your iPhone, Mac Finder, or downloads folder. Multi-select is supported.
+          - generic [ref=e64]:
+            - generic [ref=e65]: "2"
+            - heading "Convert in your browser" [level=3] [ref=e66]
+            - paragraph [ref=e67]: A WebAssembly decoder runs locally on your device. Zero network calls — verify it in DevTools.
+          - generic [ref=e68]:
+            - generic [ref=e69]: "3"
+            - heading "Download or host" [level=3] [ref=e70]
+            - paragraph [ref=e71]: Save the JPG to your device, or one-click "Get URL" to host it on our CDN and grab a shareable link.
+      - generic [ref=e73]:
+        - heading "Why convert HEIC to JPG?" [level=2] [ref=e75]
+        - generic [ref=e77]:
+          - generic [ref=e78]:
+            - generic [ref=e80]: desktop_windows
+            - heading "Windows compatibility" [level=3] [ref=e81]
+            - paragraph [ref=e82]: Windows can't open HEIC out of the box without paid codecs. JPG opens everywhere, every time.
+          - generic [ref=e83]:
+            - generic [ref=e85]: android
+            - heading "Android & messaging" [level=3] [ref=e86]
+            - paragraph [ref=e87]: Many Android phones and chat apps still struggle with HEIC. JPG just works in WhatsApp, Messenger, Slack, and email.
+          - generic [ref=e88]:
+            - generic [ref=e90]: public
+            - heading "Web & social" [level=3] [ref=e91]
+            - paragraph [ref=e92]: Most blogs, CMSs, and older social platforms reject HEIC uploads. Convert first to avoid the upload error.
+          - generic [ref=e93]:
+            - generic [ref=e95]: lock
+            - heading "Privacy by default" [level=3] [ref=e96]
+            - paragraph [ref=e97]: Other converters upload your photos to their servers. Ours never does — the file stays on your device unless you explicitly choose to host it.
+      - generic [ref=e99]:
+        - heading "FAQ" [level=2] [ref=e101]
+        - generic [ref=e103]:
+          - group [ref=e104]:
+            - generic "Are my photos really private? expand_more" [ref=e105] [cursor=pointer]:
+              - text: Are my photos really private?
+              - generic [ref=e106]: expand_more
+          - group [ref=e107]:
+            - generic "What is HEIC and why do I need to convert it? expand_more" [ref=e108] [cursor=pointer]:
+              - text: What is HEIC and why do I need to convert it?
+              - generic [ref=e109]: expand_more
+          - group [ref=e110]:
+            - generic "Is there a file size or count limit? expand_more" [ref=e111] [cursor=pointer]:
+              - text: Is there a file size or count limit?
+              - generic [ref=e112]: expand_more
+          - group [ref=e113]:
+            - generic "Will I lose quality converting HEIC to JPG? expand_more" [ref=e114] [cursor=pointer]:
+              - text: Will I lose quality converting HEIC to JPG?
+              - generic [ref=e115]: expand_more
+          - group [ref=e116]:
+            - generic "Can I convert multiple files at once? expand_more" [ref=e117] [cursor=pointer]:
+              - text: Can I convert multiple files at once?
+              - generic [ref=e118]: expand_more
+          - group [ref=e119]:
+            - generic "How do I get HEIC files from my iPhone to my computer? expand_more" [ref=e120] [cursor=pointer]:
+              - text: How do I get HEIC files from my iPhone to my computer?
+              - generic [ref=e121]: expand_more
+          - group [ref=e122]:
+            - generic "What browsers are supported? expand_more" [ref=e123] [cursor=pointer]:
+              - text: What browsers are supported?
+              - generic [ref=e124]: expand_more
+          - group [ref=e125]:
+            - generic "Is this really free? expand_more" [ref=e126] [cursor=pointer]:
+              - text: Is this really free?
+              - generic [ref=e127]: expand_more
+      - generic [ref=e129]:
+        - heading "Related" [level=2] [ref=e131]
+        - generic [ref=e133]:
+          - link "JPG to URL Host your converted JPG and get a permanent link arrow_forward" [ref=e134] [cursor=pointer]:
+            - /url: /jpg-to-url
+            - generic [ref=e135]:
+              - heading "JPG to URL" [level=3] [ref=e136]
+              - paragraph [ref=e137]: Host your converted JPG and get a permanent link
+            - generic [ref=e138]: arrow_forward
+          - link "PNG to URL Convert PNG screenshots to shareable links arrow_forward" [ref=e139] [cursor=pointer]:
+            - /url: /png-to-url
+            - generic [ref=e140]:
+              - heading "PNG to URL" [level=3] [ref=e141]
+              - paragraph [ref=e142]: Convert PNG screenshots to shareable links
+            - generic [ref=e143]: arrow_forward
+          - link "Free Image Hosting Host any image format for free arrow_forward" [ref=e144] [cursor=pointer]:
+            - /url: /free-image-hosting
+            - generic [ref=e145]:
+              - heading "Free Image Hosting" [level=3] [ref=e146]
+              - paragraph [ref=e147]: Host any image format for free
+            - generic [ref=e148]: arrow_forward
+      - generic [ref=e152]:
+        - heading "Need a permanent URL too?" [level=2] [ref=e153]
+        - paragraph [ref=e154]: After converting, click "Get URL" on any file to host it on our global CDN — free, no signup.
+        - link "Try the main uploader" [ref=e155] [cursor=pointer]:
+          - /url: /
+    - generic [ref=e157]:
+      - generic [ref=e158]:
+        - generic [ref=e159]:
+          - generic [ref=e160]:
+            - generic [ref=e161]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e162]: Making the web more visual, one link at a time. Designed for humans, built for speed.
+        - generic [ref=e163]:
+          - generic [ref=e164]: Convert
+          - link "PNG to URL" [ref=e165] [cursor=pointer]:
+            - /url: /png-to-url
+          - link "JPG to URL" [ref=e166] [cursor=pointer]:
+            - /url: /jpg-to-url
+          - link "GIF to URL" [ref=e167] [cursor=pointer]:
+            - /url: /gif-to-url
+          - link "WebP to URL" [ref=e168] [cursor=pointer]:
+            - /url: /webp-to-url
+          - link "Photo to URL" [ref=e169] [cursor=pointer]:
+            - /url: /photo-to-url
+          - link "Screenshot to URL" [ref=e170] [cursor=pointer]:
+            - /url: /screenshot-to-url
+        - generic [ref=e171]:
+          - generic [ref=e172]: Features
+          - link "Free Image Hosting" [ref=e173] [cursor=pointer]:
+            - /url: /free-image-hosting
+          - link "Image URL Generator" [ref=e174] [cursor=pointer]:
+            - /url: /image-url-generator
+          - link "Bulk Image Upload" [ref=e175] [cursor=pointer]:
+            - /url: /bulk-image-upload
+          - link "Free Image CDN" [ref=e176] [cursor=pointer]:
+            - /url: /free-image-cdn
+          - link "Permanent Hosting" [ref=e177] [cursor=pointer]:
+            - /url: /permanent-image-hosting
+          - link "Direct Image Links" [ref=e178] [cursor=pointer]:
+            - /url: /direct-image-link
+          - link "Anonymous Upload" [ref=e179] [cursor=pointer]:
+            - /url: /anonymous-image-upload
+          - link "Embed Code Generator" [ref=e180] [cursor=pointer]:
+            - /url: /image-embed-code-generator
+        - generic [ref=e181]:
+          - generic [ref=e182]: Use Cases
+          - link "For eBay" [ref=e183] [cursor=pointer]:
+            - /url: /image-hosting-for-ebay
+          - link "For Discord" [ref=e184] [cursor=pointer]:
+            - /url: /image-hosting-for-discord
+          - link "For GitHub" [ref=e185] [cursor=pointer]:
+            - /url: /image-hosting-for-github-readme
+          - link "For Notion" [ref=e186] [cursor=pointer]:
+            - /url: /image-hosting-for-notion
+          - link "For WordPress" [ref=e187] [cursor=pointer]:
+            - /url: /image-hosting-for-wordpress
+          - link "For Shopify" [ref=e188] [cursor=pointer]:
+            - /url: /image-hosting-for-shopify
+          - link "For Newsletters" [ref=e189] [cursor=pointer]:
+            - /url: /image-hosting-for-newsletters
+          - link "For Email Signatures" [ref=e190] [cursor=pointer]:
+            - /url: /image-hosting-for-email-signatures
+          - link "For Forums" [ref=e191] [cursor=pointer]:
+            - /url: /image-hosting-for-forums
+          - link "For WhatsApp" [ref=e192] [cursor=pointer]:
+            - /url: /image-to-url-for-whatsapp
+          - link "For ChatGPT" [ref=e193] [cursor=pointer]:
+            - /url: /image-url-for-chatgpt
+          - link "AI Image Hosting" [ref=e194] [cursor=pointer]:
+            - /url: /ai-image-hosting
+          - link "Imgur Alternative" [ref=e195] [cursor=pointer]:
+            - /url: /imgur-alternative
+          - link "ImgBB Alternative" [ref=e196] [cursor=pointer]:
+            - /url: /imgbb-alternative
+        - generic [ref=e197]:
+          - generic [ref=e198]: Resources
+          - link "Privacy Policy" [ref=e199] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms of Service" [ref=e200] [cursor=pointer]:
+            - /url: /en/terms
+          - link "Documentation" [ref=e201] [cursor=pointer]:
+            - /url: /en/docs
+          - link "About" [ref=e202] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e203] [cursor=pointer]:
+            - /url: /contact
+          - link "Blog" [ref=e204] [cursor=pointer]:
+            - /url: /en/blog
+          - link "Content Guidelines" [ref=e205] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e206]:
+          - generic [ref=e207]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e208] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e209]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e210] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e211]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e212] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e213]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e214] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e215]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e216]:
+          - generic [ref=e217]: Stay Updated
+          - generic [ref=e218]:
+            - textbox "Your email..." [ref=e219]
+            - button "Join" [ref=e220]
+          - generic [ref=e221]:
+            - link "GitHub" [ref=e222] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e223]
+            - link "Instagram" [ref=e225] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e226]
+            - link "Personal Website" [ref=e228] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e229]:
+        - paragraph [ref=e230]: © 2026 ImageToURL. Designed by ImageToURL Team
+        - paragraph [ref=e231]: Built with care · Hosted on Cloudflare
+  - generic [ref=e234]:
+    - button "Menu" [ref=e235]:
+      - img [ref=e237]
+      - generic: Menu
+    - button "Inspect" [ref=e241]:
+      - img [ref=e243]
+      - generic: Inspect
+    - button "Audit" [ref=e245]:
+      - img [ref=e247]
+      - generic: Audit
+    - button "Settings" [ref=e250]:
+      - img [ref=e252]
+      - generic: Settings

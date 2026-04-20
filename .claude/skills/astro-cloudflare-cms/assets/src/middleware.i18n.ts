@@ -1,0 +1,170 @@
+import { defineMiddleware } from 'astro:middleware';
+import { getSession } from './lib/session';
+import { getDB } from './lib/db';
+import { getLocaleFromPath } from './i18n/utils';
+import { defaultLocale, locales } from './i18n/config';
+
+// Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
+const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
+const NON_LOCALIZED_EXACT = new Set([
+  '/sitemap.xml', '/image-sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest',
+  '/llms.txt', '/llms-full.txt',
+  // Cluster C competitor alts + vs pages (not yet in landing registry)
+  '/postimages-alternative', '/google-photos-direct-link', '/dropbox-direct-image-link',
+  '/imagetourl-vs-imgur', '/imagetourl-vs-imgbb', '/imagetourl-vs-cloudinary', '/imgur-vs-imgbb',
+  // Cluster D platform use-cases
+  '/image-hosting-for-reddit', '/image-hosting-for-twitter', '/image-hosting-for-instagram',
+  '/image-hosting-for-pinterest', '/image-hosting-for-substack', '/image-hosting-for-medium',
+  '/image-hosting-for-linkedin', '/image-hosting-for-webflow', '/image-hosting-for-squarespace',
+  '/image-hosting-for-wix', '/image-hosting-for-framer', '/image-hosting-for-stack-overflow',
+  '/image-hosting-for-markdown', '/image-hosting-for-nextjs', '/image-hosting-for-jira',
+  // Cluster E dev / API pages
+  '/image-upload-api', '/image-hosting-api-python', '/image-hosting-api-nodejs', '/image-hosting-api-php',
+  '/image-hosting-api-curl', '/image-upload-zapier', '/image-upload-make', '/image-upload-n8n',
+  '/image-hosting-rest-api',
+  // Cluster F GEO Q&A pages
+  '/how-to-get-direct-url-for-image', '/how-to-share-image-as-link', '/how-to-embed-image-in-email',
+  '/what-is-image-hotlinking', '/how-to-host-image-for-free', '/how-long-does-imagetourl-store-images',
+]);
+
+function isNonLocalized(path: string): boolean {
+  // Match with and without trailing slash — Cloudflare normalizes to trailing
+  // slash, so /postimages-alternative/ arrives here but the set stores bare paths.
+  const bare = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+  if (NON_LOCALIZED_EXACT.has(bare)) return true;
+  if (path.startsWith('/_')) return true; // _astro, _image etc
+  if (/\.[a-zA-Z0-9]{2,5}$/.test(path) && !path.endsWith('.html')) return true; // static assets
+  return NON_LOCALIZED_PREFIXES.some(p => path === p.replace(/\/$/, '') || path.startsWith(p));
+}
+
+export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
+  const url0 = new URL(request.url);
+  const path = url0.pathname;
+
+  // Redirect bare / to /en/ (manual i18n routing)
+  if (path === '/') {
+    return redirect('/en/', 301);
+  }
+
+  // Legacy: /zh/* -> /zh-Hans/* (locale was renamed to BCP-47 Simplified Chinese)
+  if (path === '/zh' || path.startsWith('/zh/')) {
+    const tail = path === '/zh' ? '/' : path.slice(3);
+    return redirect(`/zh-Hans${tail}`, 301);
+  }
+
+  // Catch-all: any non-locale-prefixed public path → /en/<path>
+  // Applies to tool pages, blog, legal pages, etc. Excludes admin/api/assets.
+  const firstSeg = path.split('/')[1];
+  const hasLocalePrefix = locales.includes(firstSeg as (typeof locales)[number]);
+  if (!hasLocalePrefix && !isNonLocalized(path)) {
+    const cleaned = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+    return redirect(`/en${cleaned}${url0.search}`, 301);
+  }
+
+  // Locale detection — force English for admin/dashboard/api routes
+  if (path.startsWith('/admin') || path.startsWith('/dashboard') || path.startsWith('/api/')) {
+    locals.locale = defaultLocale;
+  } else {
+    locals.locale = getLocaleFromPath(path);
+  }
+
+  let db: D1Database | null = null;
+
+  try {
+    db = getDB(locals);
+  } catch {
+    // D1 not available
+  }
+
+  if (db) {
+    // Try session cookie first
+    const token = cookies.get('session')?.value;
+    if (token) {
+      try {
+        const user = await getSession(db, token);
+        if (user) {
+          locals.user = user;
+        }
+      } catch {
+        // Invalid session
+      }
+    }
+
+    // API key auth — disabled for now
+    // Bearer token authentication is not available at this time.
+  }
+
+  // Protect /dashboard routes (pages + API)
+  const url = new URL(request.url);
+  if ((url.pathname.startsWith('/dashboard') || url.pathname.startsWith('/api/dashboard/')) && !locals.user) {
+    if (url.pathname.startsWith('/api/')) {
+      return new Response(JSON.stringify({ error: 'Authentication required' }), {
+        status: 401, headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    return redirect('/api/auth/login', 302);
+  }
+
+  // Protect /admin routes (pages + API)
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin/')) {
+    if (!locals.user || locals.user.role !== 'admin') {
+      if (url.pathname.startsWith('/api/')) {
+        return new Response(JSON.stringify({ error: 'Forbidden' }), {
+          status: 403, headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      return new Response('Forbidden', { status: 403 });
+    }
+  }
+
+  let response = await next();
+
+  // Dev-only: rewrite cross-origin CDN image URLs through the Vite dev proxy
+  // so Chrome's ORB doesn't block them on localhost. Production HTML is untouched.
+  if (
+    import.meta.env.DEV &&
+    response.headers.get('content-type')?.includes('text/html')
+  ) {
+    const html = await response.text();
+    const rewritten = html.replaceAll('https://cdn.imagetourl.cloud/', '/__cdn/');
+    response = new Response(rewritten, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  }
+
+  // Security headers — all responses
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+
+  // CSP — report-only for now; promote to enforcing after watching reports for a week.
+  response.headers.set(
+    'Content-Security-Policy-Report-Only',
+    "default-src 'self'; img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'",
+  );
+
+  // Add cache headers for public HTML pages (SEO performance)
+  // Skip API, admin, dashboard routes — those must never be cached
+  if (
+    !path.startsWith('/api/') &&
+    !path.startsWith('/admin') &&
+    !path.startsWith('/dashboard') &&
+    response.headers.get('content-type')?.includes('text/html')
+  ) {
+    if (locals.user) {
+      // Logged-in: don't cache at CDN (personalized nav), browser must revalidate
+      response.headers.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    } else {
+      // Anonymous: cache at CDN edge for fast crawling & page loads.
+      // No `Vary: Cookie` — anonymous responses don't depend on cookies, and Vary
+      // would fragment the edge cache by every cookie value (killing HIT rate).
+      response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+    }
+  }
+
+  return response;
+});

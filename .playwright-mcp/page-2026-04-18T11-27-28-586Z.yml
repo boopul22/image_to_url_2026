@@ -1,0 +1,266 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /hi/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - generic [ref=e7]:
+          - link "होम" [ref=e8] [cursor=pointer]:
+            - /url: /hi/
+          - link "सुविधाएँ" [ref=e9] [cursor=pointer]:
+            - /url: /hi/features
+          - link "ब्लॉग" [ref=e10] [cursor=pointer]:
+            - /url: /hi/blog
+          - button "समाधान expand_more" [ref=e12]:
+            - text: समाधान
+            - generic [ref=e13]: expand_more
+          - button "Tools expand_more" [ref=e15]:
+            - text: Tools
+            - generic [ref=e16]: expand_more
+        - generic [ref=e17]:
+          - link "favorite Donate" [ref=e18] [cursor=pointer]:
+            - /url: https://ko-fi.com/bipul
+            - generic [ref=e19]: favorite
+            - text: Donate
+          - button "Change language" [ref=e21]:
+            - generic [ref=e22]: translate
+            - text: हिन्दी
+            - generic [ref=e23]: expand_more
+          - link "साइन इन" [ref=e25] [cursor=pointer]:
+            - /url: /api/auth/login
+            - img [ref=e26]
+            - text: साइन इन
+    - main [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - generic [ref=e36]: timer
+              - generic [ref=e37]:
+                - generic [ref=e38]:
+                  - text: Auto-delete
+                  - button "What does auto-delete do?" [ref=e39]: "?"
+                - paragraph [ref=e40]: Never auto-deleted
+            - combobox "Auto-delete What does auto-delete do?" [ref=e41]:
+              - option "Never" [selected]
+              - option "1 hour"
+              - option "24 hours"
+              - option "7 days"
+              - option "30 days"
+          - button "add_photo_alternate Drop image here or click to browse JPG, PNG, WebP, GIF, SVG — Max 10MB Select File" [ref=e44] [cursor=pointer]:
+            - generic [ref=e45]: add_photo_alternate
+            - generic [ref=e46]:
+              - paragraph [ref=e47]: Drop image here or click to browse
+              - paragraph [ref=e48]: JPG, PNG, WebP, GIF, SVG — Max 10MB
+            - generic [ref=e49]: Select File
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: rocket_launch
+              - text: CDN
+            - generic [ref=e53]:
+              - generic [ref=e54]: lock
+              - text: SSL
+            - generic [ref=e55]:
+              - generic [ref=e56]: link
+              - text: Permanent
+            - generic [ref=e57]:
+              - generic [ref=e58]: flash_on
+              - text: Instant
+        - generic [ref=e59]:
+          - generic [ref=e60]: PNG कन्वर्टर
+          - heading "PNG इमेज को URL लिंक में बदलें मुफ्त और ऑनलाइन।" [level=1] [ref=e61]
+          - paragraph [ref=e62]: कोई भी PNG अपलोड करें और सेकंडों में एक स्थायी, शेयर करने योग्य URL प्राप्त करें। पारदर्शिता बरकरार रहती है, क्वालिटी में कोई कमी नहीं आती, और हर पिक्सेल सुरक्षित रहता है।
+      - generic [ref=e64]:
+        - heading "यह कैसे काम करता है" [level=2] [ref=e66]
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - generic [ref=e70]: "1"
+            - heading "अपनी PNG अपलोड करें" [level=3] [ref=e71]
+            - paragraph [ref=e72]: अपनी PNG फ़ाइल को ड्रैग और ड्रॉप करें या चुनने के लिए क्लिक करें। 10MB तक की पारदर्शी और हाई-रिज़ॉल्यूशन PNG फ़ाइलों का समर्थन करता है।
+          - generic [ref=e73]:
+            - generic [ref=e74]: "2"
+            - heading "अपना URL प्राप्त करें" [level=3] [ref=e75]
+            - paragraph [ref=e76]: आपकी PNG तुरंत हमारे ग्लोबल CDN पर अपलोड हो जाती है। एक स्थायी, डायरेक्ट इमेज URL अपने आप जनरेट हो जाता है।
+          - generic [ref=e77]:
+            - generic [ref=e78]: "3"
+            - heading "कहीं भी शेयर करें" [level=3] [ref=e79]
+            - paragraph [ref=e80]: अपना URL कॉपी करें और इसे कहीं भी इस्तेमाल करें — HTML, Markdown, फ़ोरम, ईमेल, या सोशल मीडिया पर।
+      - generic [ref=e82]:
+        - heading "PNG ही क्यों?" [level=2] [ref=e84]
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e89]: bolt
+            - heading "पारदर्शिता (Transparency) का समर्थन" [level=3] [ref=e90]
+            - paragraph [ref=e91]: पारदर्शी बैकग्राउंड वाली इमेज के लिए PNG गोल्ड स्टैंडर्ड है। लोगो, आइकन, ओवरले — सब कुछ पूरी तरह से सुरक्षित रहता है।
+          - generic [ref=e92]:
+            - generic [ref=e94]: bolt
+            - heading "लॉसलेस क्वालिटी" [level=3] [ref=e95]
+            - paragraph [ref=e96]: JPG के विपरीत, PNG लॉसलेस कम्प्रेशन का उपयोग करता है। आपकी इमेज की क्वालिटी पिक्सेल-दर-पिक्सेल वैसी ही रहती है, जैसी अपलोड की गई थी।
+          - generic [ref=e97]:
+            - generic [ref=e99]: bolt
+            - heading "वेब ग्राफिक्स स्टैंडर्ड" [level=3] [ref=e100]
+            - paragraph [ref=e101]: PNG सभी ब्राउज़र, डिवाइस और प्लेटफ़ॉर्म पर सार्वभौमिक रूप से समर्थित है। वेब ग्राफिक्स के लिए सबसे विश्वसनीय फ़ॉर्मेट।
+      - generic [ref=e103]:
+        - heading "अक्सर पूछे जाने वाले प्रश्न" [level=2] [ref=e105]
+        - generic [ref=e107]:
+          - group [ref=e108]:
+            - generic "क्या ImageToURL PNG की पारदर्शिता को बनाए रखता है? expand_more" [ref=e109] [cursor=pointer]:
+              - generic [ref=e110]: क्या ImageToURL PNG की पारदर्शिता को बनाए रखता है?
+              - generic [ref=e111]: expand_more
+          - group [ref=e112]:
+            - generic "PNG फ़ाइल का अधिकतम साइज़ क्या है? expand_more" [ref=e113] [cursor=pointer]:
+              - generic [ref=e114]: PNG फ़ाइल का अधिकतम साइज़ क्या है?
+              - generic [ref=e115]: expand_more
+          - group [ref=e116]:
+            - generic "क्या मुझे अपनी PNG का डायरेक्ट लिंक मिल सकता है? expand_more" [ref=e117] [cursor=pointer]:
+              - generic [ref=e118]: क्या मुझे अपनी PNG का डायरेक्ट लिंक मिल सकता है?
+              - generic [ref=e119]: expand_more
+          - group [ref=e120]:
+            - generic "PNG URL कब तक चलते हैं? expand_more" [ref=e121] [cursor=pointer]:
+              - generic [ref=e122]: PNG URL कब तक चलते हैं?
+              - generic [ref=e123]: expand_more
+          - group [ref=e124]:
+            - generic "क्या PNG से URL कन्वर्जन मुफ्त है? expand_more" [ref=e125] [cursor=pointer]:
+              - generic [ref=e126]: क्या PNG से URL कन्वर्जन मुफ्त है?
+              - generic [ref=e127]: expand_more
+      - generic [ref=e131]:
+        - heading "अपनी PNG को शेयर करने योग्य URL में बदलें" [level=2] [ref=e132]
+        - paragraph [ref=e133]: अपनी PNG अपलोड करें और बिना किसी साइनअप या वॉटरमार्क के सेकंडों में एक स्थायी लिंक प्राप्त करें।
+        - link "अभी PNG अपलोड करें" [ref=e134] [cursor=pointer]:
+          - /url: /hi/
+    - generic [ref=e136]:
+      - generic [ref=e137]:
+        - generic [ref=e138]:
+          - generic [ref=e139]:
+            - generic [ref=e140]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e141]: वेब को और अधिक दृश्यमान बनाना, एक लिंक एक समय में। मनुष्यों के लिए डिज़ाइन किया गया, गति के लिए बनाया गया।
+        - generic [ref=e142]:
+          - generic [ref=e143]: Convert
+          - link "PNG to URL" [ref=e144] [cursor=pointer]:
+            - /url: /hi/png-को-url-में-बदलें
+          - link "JPG to URL" [ref=e145] [cursor=pointer]:
+            - /url: /hi/jpg-to-url
+          - link "GIF to URL" [ref=e146] [cursor=pointer]:
+            - /url: /hi/gif-को-url-में-बदलें
+          - link "WebP to URL" [ref=e147] [cursor=pointer]:
+            - /url: /hi/webp-to-url
+          - link "Photo to URL" [ref=e148] [cursor=pointer]:
+            - /url: /hi/photo-to-url
+          - link "Screenshot to URL" [ref=e149] [cursor=pointer]:
+            - /url: /hi/screenshot-to-url
+        - generic [ref=e150]:
+          - generic [ref=e151]: Features
+          - link "मुफ्त इमेज होस्टिंग" [ref=e152] [cursor=pointer]:
+            - /url: /hi/free-image-hosting
+          - link "इमेज URL जनरेटर" [ref=e153] [cursor=pointer]:
+            - /url: /hi/image-url-generator
+          - link "बल्क इमेज अपलोड" [ref=e154] [cursor=pointer]:
+            - /url: /hi/bulk-image-upload
+          - link "Free Image CDN" [ref=e155] [cursor=pointer]:
+            - /url: /hi/free-image-cdn
+          - link "Permanent Hosting" [ref=e156] [cursor=pointer]:
+            - /url: /hi/permanent-image-hosting
+          - link "Direct Image Links" [ref=e157] [cursor=pointer]:
+            - /url: /hi/direct-image-link-hosting
+          - link "Anonymous Upload" [ref=e158] [cursor=pointer]:
+            - /url: /hi/anonymous-image-upload
+          - link "Embed Code Generator" [ref=e159] [cursor=pointer]:
+            - /url: /hi/image-embed-code-generator
+        - generic [ref=e160]:
+          - generic [ref=e161]: Use Cases
+          - link "For eBay" [ref=e162] [cursor=pointer]:
+            - /url: /hi/free-ebay-image-hosting
+          - link "For Discord" [ref=e163] [cursor=pointer]:
+            - /url: /hi/discord-image-hosting
+          - link "For GitHub" [ref=e164] [cursor=pointer]:
+            - /url: /hi/image-hosting-for-github-readme
+          - link "For Notion" [ref=e165] [cursor=pointer]:
+            - /url: /hi/image-hosting-for-notion
+          - link "For WordPress" [ref=e166] [cursor=pointer]:
+            - /url: /hi/image-hosting-for-wordpress
+          - link "For Shopify" [ref=e167] [cursor=pointer]:
+            - /url: /hi/image-hosting-for-shopify
+          - link "For Newsletters" [ref=e168] [cursor=pointer]:
+            - /url: /hi/image-hosting-for-newsletters
+          - link "For Email Signatures" [ref=e169] [cursor=pointer]:
+            - /url: /hi/image-hosting-for-email-signatures
+          - link "For Forums" [ref=e170] [cursor=pointer]:
+            - /url: /hi/free-forum-image-hosting
+          - link "For WhatsApp" [ref=e171] [cursor=pointer]:
+            - /url: /hi/image-to-url-for-whatsapp
+          - link "For ChatGPT" [ref=e172] [cursor=pointer]:
+            - /url: /hi/image-url-for-chatgpt
+          - link "AI Image Hosting" [ref=e173] [cursor=pointer]:
+            - /url: /hi/ai-image-hosting
+          - link "Imgur Alternative" [ref=e174] [cursor=pointer]:
+            - /url: /hi/imgur-alternative
+          - link "ImgBB Alternative" [ref=e175] [cursor=pointer]:
+            - /url: /hi/imgbb-alternative
+        - generic [ref=e176]:
+          - generic [ref=e177]: संसाधन
+          - link "गोपनीयता नीति" [ref=e178] [cursor=pointer]:
+            - /url: /hi/privacy
+          - link "सेवा की शर्तें" [ref=e179] [cursor=pointer]:
+            - /url: /hi/terms
+          - link "दस्तावेज़ीकरण" [ref=e180] [cursor=pointer]:
+            - /url: /hi/docs
+          - link "हमारे बारे में" [ref=e181] [cursor=pointer]:
+            - /url: /about
+          - link "संपर्क" [ref=e182] [cursor=pointer]:
+            - /url: /contact
+          - link "ब्लॉग" [ref=e183] [cursor=pointer]:
+            - /url: /hi/blog
+          - link "Content Guidelines" [ref=e184] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e185]:
+          - generic [ref=e186]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e187] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e188]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e189] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e190]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e191] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e192]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e193] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e194]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e195]:
+          - generic [ref=e196]: अपडेट रहें
+          - generic [ref=e197]:
+            - textbox "आपका ईमेल..." [ref=e198]
+            - button "जुड़ें" [ref=e199]
+          - generic [ref=e200]:
+            - link "GitHub" [ref=e201] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e202]
+            - link "Instagram" [ref=e204] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e205]
+            - link "Personal Website" [ref=e207] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e208]:
+        - paragraph [ref=e209]: © 2026 ImageToURL. ImageToURL टीम द्वारा डिज़ाइन किया गया
+        - paragraph [ref=e210]: Built with care · Hosted on Cloudflare
+  - generic [ref=e213]:
+    - button "Menu" [ref=e214]:
+      - img [ref=e216]
+      - generic: Menu
+    - button "Inspect" [ref=e220]:
+      - img [ref=e222]
+      - generic: Inspect
+    - button "Audit" [ref=e224]:
+      - img [ref=e226]
+      - generic: Audit
+    - button "Settings" [ref=e229]:
+      - img [ref=e231]
+      - generic: Settings

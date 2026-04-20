@@ -1,0 +1,20 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - checkbox "Use dark theme" [ref=e5]
+    - generic [ref=e6] [cursor=pointer]:
+      - img [ref=e7]
+      - img [ref=e11]
+      - generic [ref=e15]: Use dark theme
+  - banner [ref=e16]:
+    - generic [ref=e17]:
+      - heading [level=2]
+      - heading "An error occurred." [level=1] [ref=e18]
+    - img [ref=e21]
+  - generic [ref=e25]:
+    - img [ref=e27]
+    - generic [ref=e29]: The response has already been sent to the browser and cannot be altered.
+  - generic [ref=e30]:
+    - generic [ref=e31]:
+      - heading "Stack Trace" [level=2] [ref=e32]
+      - img [ref=e34] [cursor=pointer]
+    - generic [ref=e38]: at Object.write (/Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/.vite/deps_ssr/chunk-WGFV2PRG.js?v=aa661a80:702:15) at renderChild (/Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/.vite/deps_ssr/chunk-WGFV2PRG.js?v=aa661a80:780:15) at AstroComponentInstance.renderImpl (/Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/.vite/deps_ssr/chunk-WGFV2PRG.js?v=aa661a80:96:14) at null.<anonymous> (/Volumes/Mac_ssd1/Websites/iamge_to_url/node_modules/.vite/deps_ssr/chunk-WGFV2PRG.js?v=aa661a80:88:43)

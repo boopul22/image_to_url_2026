@@ -1,0 +1,17 @@
+# Copy to `.dev.vars` at project root (NOT .env — Wrangler reads .dev.vars).
+# `.dev.vars` must be in .gitignore.
+
+GOOGLE_CLIENT_ID={{GOOGLE_CLIENT_ID}}
+GOOGLE_CLIENT_SECRET={{GOOGLE_CLIENT_SECRET}}
+
+# Any random 32+ char string. Reserved for future session signing.
+AUTH_SECRET={{RANDOM_HEX_STRING}}
+
+CLOUDFLARE_ACCOUNT_ID={{CF_ACCOUNT_ID}}
+R2_ACCESS_KEY_ID={{R2_ACCESS_KEY}}
+R2_SECRET_ACCESS_KEY={{R2_SECRET}}
+R2_BUCKET_NAME={{R2_BUCKET_NAME}}
+R2_PUBLIC_URL=https://{{R2_PUBLIC_DOMAIN}}
+
+# Optional — only if you use the /translate endpoint
+# OPENROUTER_API_KEY={{OPENROUTER_KEY}}

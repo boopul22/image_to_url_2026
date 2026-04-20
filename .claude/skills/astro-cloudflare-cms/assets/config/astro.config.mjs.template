@@ -1,0 +1,26 @@
+// Minimal Astro config for the CMS. Merge with an existing astro.config.mjs
+// if the project already has one — the critical bits are:
+//   - output: 'server' (the CMS needs SSR)
+//   - @astrojs/cloudflare adapter with `remoteBindings: true`
+
+import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  site: 'https://{{DOMAIN}}',
+  output: 'server',
+  adapter: cloudflare({
+    // Lets `astro dev` read the real D1 binding defined in wrangler.toml.
+    // Turn off if you want a local SQLite replica instead.
+    remoteBindings: true,
+  }),
+  // Cloudflare strips/adds trailing slashes in production — don't fight it here.
+  trailingSlash: 'ignore',
+  security: {
+    checkOrigin: false,
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});

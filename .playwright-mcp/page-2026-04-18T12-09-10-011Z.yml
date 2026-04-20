@@ -1,0 +1,599 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /hi/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - generic [ref=e7]:
+          - link "होम" [ref=e8] [cursor=pointer]:
+            - /url: /hi/
+          - link "सुविधाएँ" [ref=e9] [cursor=pointer]:
+            - /url: /hi/features
+          - link "ब्लॉग" [ref=e10] [cursor=pointer]:
+            - /url: /hi/blog
+          - button "समाधान expand_more" [ref=e12]:
+            - text: समाधान
+            - generic [ref=e13]: expand_more
+          - button "Tools expand_more" [ref=e15]:
+            - text: Tools
+            - generic [ref=e16]: expand_more
+        - generic [ref=e17]:
+          - link "favorite Donate" [ref=e18] [cursor=pointer]:
+            - /url: https://ko-fi.com/bipul
+            - generic [ref=e19]: favorite
+            - text: Donate
+          - button "Change language" [ref=e21]:
+            - generic [ref=e22]: translate
+            - text: हिन्दी
+            - generic [ref=e23]: expand_more
+          - link "साइन इन" [ref=e25] [cursor=pointer]:
+            - /url: /api/auth/login
+            - img [ref=e26]
+            - text: साइन इन
+    - main [ref=e31]:
+      - article [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: अवर्गीकृत
+          - 'heading "डायरेक्ट इमेज लिंक बनाम रेगुलर लिंक: क्या अंतर है और किसका उपयोग कब करें" [level=1] [ref=e35]'
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - img "Sheenam Middha" [ref=e38]
+              - generic [ref=e39]:
+                - paragraph [ref=e40]: Sheenam Middha
+                - paragraph [ref=e41]: Blogger
+            - generic [ref=e43]:
+              - generic [ref=e44]: प्रकाशित
+              - generic [ref=e45]: Apr 16, 2026
+            - generic [ref=e47]:
+              - generic [ref=e48]: schedule
+              - text: 6 min read
+        - group [ref=e49]:
+          - generic "list Table of contents expand_more" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: list
+              - text: Table of contents
+            - generic [ref=e53]: expand_more
+          - navigation "Table of contents" [ref=e54]:
+            - list [ref=e55]:
+              - listitem [ref=e56]:
+                - link "01 What Is a Regular Image Link?" [ref=e57] [cursor=pointer]:
+                  - /url: "#what-is-a-regular-image-link"
+                  - generic [ref=e58]: "01"
+                  - generic [ref=e59]: What Is a Regular Image Link?
+              - listitem [ref=e60]:
+                - link "02 Example of a Regular Link" [ref=e61] [cursor=pointer]:
+                  - /url: "#example-of-a-regular-link"
+                  - generic [ref=e62]: "02"
+                  - generic [ref=e63]: Example of a Regular Link
+              - listitem [ref=e64]:
+                - link "03 What Is a Direct Image Link?" [ref=e65] [cursor=pointer]:
+                  - /url: "#what-is-a-direct-image-link"
+                  - generic [ref=e66]: "03"
+                  - generic [ref=e67]: What Is a Direct Image Link?
+              - listitem [ref=e68]:
+                - link "04 Example of a Direct Link" [ref=e69] [cursor=pointer]:
+                  - /url: "#example-of-a-direct-link"
+                  - generic [ref=e70]: "04"
+                  - generic [ref=e71]: Example of a Direct Link
+              - listitem [ref=e72]:
+                - link "05 Key Differences Between Direct and Regular Links" [ref=e73] [cursor=pointer]:
+                  - /url: "#key-differences-between-direct-and-regular-links"
+                  - generic [ref=e74]: "05"
+                  - generic [ref=e75]: Key Differences Between Direct and Regular Links
+              - listitem [ref=e76]:
+                - link "06 1. Destination" [ref=e77] [cursor=pointer]:
+                  - /url: "#1-destination"
+                  - generic [ref=e78]: "06"
+                  - generic [ref=e79]: 1. Destination
+              - listitem [ref=e80]:
+                - link "07 2. Ads and Clutter" [ref=e81] [cursor=pointer]:
+                  - /url: "#2-ads-and-clutter"
+                  - generic [ref=e82]: "07"
+                  - generic [ref=e83]: 2. Ads and Clutter
+              - listitem [ref=e84]:
+                - link "08 3. Embedding" [ref=e85] [cursor=pointer]:
+                  - /url: "#3-embedding"
+                  - generic [ref=e86]: "08"
+                  - generic [ref=e87]: 3. Embedding
+              - listitem [ref=e88]:
+                - link "09 4. Speed" [ref=e89] [cursor=pointer]:
+                  - /url: "#4-speed"
+                  - generic [ref=e90]: "09"
+                  - generic [ref=e91]: 4. Speed
+              - listitem [ref=e92]:
+                - link "10 5. Email Compatibility" [ref=e93] [cursor=pointer]:
+                  - /url: "#5-email-compatibility"
+                  - generic [ref=e94]: "10"
+                  - generic [ref=e95]: 5. Email Compatibility
+              - listitem [ref=e96]:
+                - link "11 When to Use a Regular Image Link" [ref=e97] [cursor=pointer]:
+                  - /url: "#when-to-use-a-regular-image-link"
+                  - generic [ref=e98]: "11"
+                  - generic [ref=e99]: When to Use a Regular Image Link
+              - listitem [ref=e100]:
+                - link "12 When to Use a Direct Image Link" [ref=e101] [cursor=pointer]:
+                  - /url: "#when-to-use-a-direct-image-link"
+                  - generic [ref=e102]: "12"
+                  - generic [ref=e103]: When to Use a Direct Image Link
+              - listitem [ref=e104]:
+                - link "13 How to Get a Direct Image Link Using ImageToURL" [ref=e105] [cursor=pointer]:
+                  - /url: "#how-to-get-a-direct-image-link-using-imagetourl"
+                  - generic [ref=e106]: "13"
+                  - generic [ref=e107]: How to Get a Direct Image Link Using ImageToURL
+              - listitem [ref=e108]:
+                - 'link "14 Step 1: Visit the Website" [ref=e109] [cursor=pointer]':
+                  - /url: "#step-1-visit-the-website"
+                  - generic [ref=e110]: "14"
+                  - generic [ref=e111]: "Step 1: Visit the Website"
+              - listitem [ref=e112]:
+                - 'link "15 Step 2: Upload Your Image" [ref=e113] [cursor=pointer]':
+                  - /url: "#step-2-upload-your-image"
+                  - generic [ref=e114]: "15"
+                  - generic [ref=e115]: "Step 2: Upload Your Image"
+              - listitem [ref=e116]:
+                - 'link "16 Step 3: Copy Your Direct Link" [ref=e117] [cursor=pointer]':
+                  - /url: "#step-3-copy-your-direct-link"
+                  - generic [ref=e118]: "16"
+                  - generic [ref=e119]: "Step 3: Copy Your Direct Link"
+              - listitem [ref=e120]:
+                - 'link "17 Step 4: Paste It Anywhere" [ref=e121] [cursor=pointer]':
+                  - /url: "#step-4-paste-it-anywhere"
+                  - generic [ref=e122]: "17"
+                  - generic [ref=e123]: "Step 4: Paste It Anywhere"
+              - listitem [ref=e124]:
+                - link "18 Why ImageToURL Is Better Than Gallery-Based Hosts" [ref=e125] [cursor=pointer]:
+                  - /url: "#why-imagetourl-is-better-than-gallery-based-hosts"
+                  - generic [ref=e126]: "18"
+                  - generic [ref=e127]: Why ImageToURL Is Better Than Gallery-Based Hosts
+              - listitem [ref=e128]:
+                - link "19 No Gallery Pages" [ref=e129] [cursor=pointer]:
+                  - /url: "#no-gallery-pages"
+                  - generic [ref=e130]: "19"
+                  - generic [ref=e131]: No Gallery Pages
+              - listitem [ref=e132]:
+                - link "20 No Ads Around Your Image" [ref=e133] [cursor=pointer]:
+                  - /url: "#no-ads-around-your-image"
+                  - generic [ref=e134]: "20"
+                  - generic [ref=e135]: No Ads Around Your Image
+              - listitem [ref=e136]:
+                - link "21 Hotlinking Is Always Allowed" [ref=e137] [cursor=pointer]:
+                  - /url: "#hotlinking-is-always-allowed"
+                  - generic [ref=e138]: "21"
+                  - generic [ref=e139]: Hotlinking Is Always Allowed
+              - listitem [ref=e140]:
+                - link "22 Permanent Links" [ref=e141] [cursor=pointer]:
+                  - /url: "#permanent-links"
+                  - generic [ref=e142]: "22"
+                  - generic [ref=e143]: Permanent Links
+              - listitem [ref=e144]:
+                - link "23 Global CDN Delivery" [ref=e145] [cursor=pointer]:
+                  - /url: "#global-cdn-delivery"
+                  - generic [ref=e146]: "23"
+                  - generic [ref=e147]: Global CDN Delivery
+              - listitem [ref=e148]:
+                - link "24 SSL-Secured URLs" [ref=e149] [cursor=pointer]:
+                  - /url: "#ssl-secured-urls"
+                  - generic [ref=e150]: "24"
+                  - generic [ref=e151]: SSL-Secured URLs
+              - listitem [ref=e152]:
+                - link "25 Quick Comparison Table" [ref=e153] [cursor=pointer]:
+                  - /url: "#quick-comparison-table"
+                  - generic [ref=e154]: "25"
+                  - generic [ref=e155]: Quick Comparison Table
+              - listitem [ref=e156]:
+                - link "26 Common Use Cases in Real Life" [ref=e157] [cursor=pointer]:
+                  - /url: "#common-use-cases-in-real-life"
+                  - generic [ref=e158]: "26"
+                  - generic [ref=e159]: Common Use Cases in Real Life
+              - listitem [ref=e160]:
+                - link "27 Bloggers" [ref=e161] [cursor=pointer]:
+                  - /url: "#bloggers"
+                  - generic [ref=e162]: "27"
+                  - generic [ref=e163]: Bloggers
+              - listitem [ref=e164]:
+                - link "28 Developers" [ref=e165] [cursor=pointer]:
+                  - /url: "#developers"
+                  - generic [ref=e166]: "28"
+                  - generic [ref=e167]: Developers
+              - listitem [ref=e168]:
+                - link "29 E-commerce Sellers" [ref=e169] [cursor=pointer]:
+                  - /url: "#e-commerce-sellers"
+                  - generic [ref=e170]: "29"
+                  - generic [ref=e171]: E-commerce Sellers
+              - listitem [ref=e172]:
+                - link "30 Students and Teachers" [ref=e173] [cursor=pointer]:
+                  - /url: "#students-and-teachers"
+                  - generic [ref=e174]: "30"
+                  - generic [ref=e175]: Students and Teachers
+              - listitem [ref=e176]:
+                - link "31 Final Thoughts!" [ref=e177] [cursor=pointer]:
+                  - /url: "#final-thoughts"
+                  - generic [ref=e178]: "31"
+                  - generic [ref=e179]: Final Thoughts!
+        - generic [ref=e180]:
+          - paragraph [ref=e181]:
+            - text: All the image links do not operate in the same manner. There are those that open your picture immediately, and the rest bring you to a gallery page with advertisements and additional clicks. This minor variation may or may not make or break the image loading on blogs, emails, forums, and apps. Here you will find out the precise distinction between direct image links and regular links, when to use each, and how
+            - link "ImageToURL.cloud" [ref=e182] [cursor=pointer]:
+              - /url: http://ImageToURL.cloud
+            - text: is able to provide you with a clean, hotlinkable URL in only a few seconds, without even having to sign up.
+          - heading "What Is a Regular Image Link?" [level=2] [ref=e183]:
+            - strong [ref=e184]: What Is a Regular Image Link?
+          - paragraph [ref=e185]: A standard image link is a URL that points to a webpage containing your image, not to the image file. When a person clicks on it, they are redirected to a page that can contain advertisements, social sharing buttons, comments, or an interface that allows a viewer to view the picture.
+          - paragraph [ref=e186]: Image hosting websites such as Imgur or ImgBB have default settings for regular links. The links are alright to share casually, but when you attempt to embed the image in another place, they create issues.
+          - heading "Example of a Regular Link" [level=3] [ref=e187]:
+            - strong [ref=e188]: Example of a Regular Link
+          - paragraph [ref=e189]:
+            - text: "A regular link usually looks like this: “"
+            - link "https://ibb.co/YFk3H2KS" [ref=e190] [cursor=pointer]:
+              - /url: https://ibb.co/YFk3H2KS
+            - text: .” Opening it shows a full webpage — not just the image.
+          - heading "What Is a Direct Image Link?" [level=2] [ref=e191]:
+            - strong [ref=e192]: What Is a Direct Image Link?
+          - paragraph [ref=e193]: One of the links is a direct image link that points directly to the image file. Upon opening it, you cannot see a webpage, advertisements, or an additional interface, just an image. These URLs typically have a file format such as a .jpg, .png, .webp, or .gif.
+          - paragraph [ref=e194]: Direct links are the norm with developers, bloggers, and marketers since they can be used within HTML tags, Markdown, CSS backgrounds, and email templates without breaking.
+          - heading "Example of a Direct Link" [level=3] [ref=e195]:
+            - strong [ref=e196]: Example of a Direct Link
+          - paragraph [ref=e197]:
+            - text: "A direct link looks like this: “"
+            - link "/__cdn/uploads/b1kxtlek.jpg" [ref=e198] [cursor=pointer]:
+              - /url: /__cdn/uploads/b1kxtlek.jpg
+            - text: .” It loads the image instantly, with no surrounding page.
+          - heading "Key Differences Between Direct and Regular Links" [level=2] [ref=e199]:
+            - strong [ref=e200]: Key Differences Between Direct and Regular Links
+          - paragraph [ref=e201]: Being familiar with the difference between the two types of links will assist you in choosing the appropriate one to use in a task at hand.
+          - heading "1. Destination" [level=3] [ref=e202]:
+            - strong [ref=e203]: 1. Destination
+          - paragraph [ref=e204]: A normal link opens a webpage. The image file is opened by a direct connection.
+          - heading "2. Ads and Clutter" [level=3] [ref=e205]:
+            - strong [ref=e206]: 2. Ads and Clutter
+          - paragraph [ref=e207]: Frequent links usually contain advertisements, similar pictures, and social bars. The direct links display just your picture, no distractions.
+          - heading "3. Embedding" [level=3] [ref=e208]:
+            - strong [ref=e209]: 3. Embedding
+          - paragraph [ref=e210]: Direct links are compatible with inside tags of <img> and Markdown and BBcode. Normal links fail to embed correctly and normally appear as broken images.
+          - heading "4. Speed" [level=3] [ref=e211]:
+            - strong [ref=e212]: 4. Speed
+          - paragraph [ref=e213]: Direct links are quicker as they do not involve additional HTML, scripts, and ads. Periodic links have the burden of a complete webpage.
+          - heading "5. Email Compatibility" [level=3] [ref=e214]:
+            - strong [ref=e215]: 5. Email Compatibility
+          - paragraph [ref=e216]: Direct links are viewed well in HTML emails. The links to be used on a regular basis tend to be broken or redirect to a browser.
+          - heading "When to Use a Regular Image Link" [level=2] [ref=e217]:
+            - strong [ref=e218]: When to Use a Regular Image Link
+          - paragraph [ref=e219]: There is a place and use of regular links despite their limitations.
+          - list [ref=e220]:
+            - listitem [ref=e221]:
+              - paragraph [ref=e222]:
+                - strong [ref=e223]: "Casual sharing on social media:"
+                - text: Sites such as Facebook or Twitter usually screen scrape the webpage.
+            - listitem [ref=e224]:
+              - paragraph [ref=e225]:
+                - strong [ref=e226]: "Showing image context:"
+                - text: Would you like your viewers to see comments, captions, or a gallery layout?
+            - listitem [ref=e227]:
+              - paragraph [ref=e228]:
+                - strong [ref=e229]: "Public galleries:"
+                - text: This is when you are sharing a collection and not a single file.
+          - paragraph [ref=e230]: In brief, regular links are good when the webpage itself is worthwhile to the image.
+          - heading "When to Use a Direct Image Link" [level=2] [ref=e231]:
+            - strong [ref=e232]: When to Use a Direct Image Link
+          - paragraph [ref=e233]: Almost all professional applications are better suited to direct links.
+          - list [ref=e234]:
+            - listitem [ref=e235]:
+              - paragraph [ref=e236]: Placing in WordPress, Ghost, or Medium posts.
+            - listitem [ref=e237]:
+              - paragraph [ref=e238]: Newsletters and HTML emails that contain gallery links that break the layout.
+            - listitem [ref=e239]:
+              - paragraph [ref=e240]: READMEs and technical documentation at GitHub.
+            - listitem [ref=e241]:
+              - paragraph [ref=e242]: Markdown or BBcode forums such as Reddit, Discord, or Stack Overflow.
+            - listitem [ref=e243]:
+              - paragraph [ref=e244]: E-commerce on eBay, Shopify, or Etsy.
+            - listitem [ref=e245]:
+              - paragraph [ref=e246]: AI applications, such as ChatGPT, allow you to share an image with a model.
+            - listitem [ref=e247]:
+              - paragraph [ref=e248]: Email signatures in which the image should always be loaded.
+          - paragraph [ref=e249]: When you require the image to be loaded anywhere, anytime, and not to be caught unawares, then use a direct link.
+          - heading "How to Get a Direct Image Link Using ImageToURL" [level=2] [ref=e250]:
+            - strong [ref=e251]: How to Get a Direct Image Link Using ImageToURL
+          - paragraph [ref=e252]: ImageToURL is created on a single mission that is to provide you with a clean, straightforward, permanent image URL within a few seconds. The following is its usage.
+          - 'heading "Step 1: Visit the Website" [level=3] [ref=e253]':
+            - strong [ref=e254]: "Step 1: Visit the Website"
+          - paragraph [ref=e255]:
+            - text: Go to
+            - link "imagetourl.cloud" [ref=e256] [cursor=pointer]:
+              - /url: http://imagetourl.cloud
+            - text: . No registration, no email, and no credit card needed.
+          - img "IMG_0501.jpeg" [ref=e257]
+          - 'heading "Step 2: Upload Your Image" [level=3] [ref=e258]':
+            - strong [ref=e259]: "Step 2: Upload Your Image"
+          - paragraph [ref=e260]: "To upload an image, either drag and drop an image into the upload box or browse your files. Supported formats: JPG, PNG, WebP, GIF, and SVG - a maximum of 10MB per file."
+          - img "IMG_0504.jpeg" [ref=e261]
+          - 'heading "Step 3: Copy Your Direct Link" [level=3] [ref=e262]':
+            - strong [ref=e263]: "Step 3: Copy Your Direct Link"
+          - paragraph [ref=e264]: Your picture is processed in less than two seconds, and a direct URL is provided. All you need to do is press the “Copy” button.
+          - img "IMG_0637.png" [ref=e265]
+          - 'heading "Step 4: Paste It Anywhere" [level=3] [ref=e266]':
+            - strong [ref=e267]: "Step 4: Paste It Anywhere"
+          - paragraph [ref=e268]: Insert the direct image link into a blog, email, forum, Markdown file, or into an <img> tag. It loads immediately and is permanent.
+          - heading "Why ImageToURL Is Better Than Gallery-Based Hosts" [level=2] [ref=e269]:
+            - strong [ref=e270]: Why ImageToURL Is Better Than Gallery-Based Hosts
+          - paragraph [ref=e271]: The default free image pages are gallery pages. They are served with ads by that model, not by you. ImageToURL does just the reverse.
+          - heading "No Gallery Pages" [level=3] [ref=e272]:
+            - strong [ref=e273]: No Gallery Pages
+          - paragraph [ref=e274]: All the URLs are directly linked to your image file. None of the wrapper pages, no redirects, no interface.
+          - heading "No Ads Around Your Image" [level=3] [ref=e275]:
+            - strong [ref=e276]: No Ads Around Your Image
+          - paragraph [ref=e277]: Your audience will only view your image, not third-party advertisements or promotions.
+          - heading "Hotlinking Is Always Allowed" [level=3] [ref=e278]:
+            - strong [ref=e279]: Hotlinking Is Always Allowed
+          - paragraph [ref=e280]: Insert your ImageToURL photos anywhere. No referrer blocks, no bandwidth throttling, and no broken embeds.
+          - heading "Permanent Links" [level=3] [ref=e281]:
+            - strong [ref=e282]: Permanent Links
+          - paragraph [ref=e283]: Your URLs are never out of date. They remain active to archive blogs, portfolios, and long-term documentation.
+          - heading "Global CDN Delivery" [level=3] [ref=e284]:
+            - strong [ref=e285]: Global CDN Delivery
+          - paragraph [ref=e286]: Through Cloudflare, images are served at edges all around the globe, thus displaying swiftly to all visitors, regardless of their location.
+          - heading "SSL-Secured URLs" [level=3] [ref=e287]:
+            - strong [ref=e288]: SSL-Secured URLs
+          - paragraph [ref=e289]: All connections are HTTPS, and thus your photographs are safe to place in secure web pages, applications, and emails.
+          - heading "Quick Comparison Table" [level=2] [ref=e290]:
+            - strong [ref=e291]: Quick Comparison Table
+          - table [ref=e292]:
+            - rowgroup [ref=e297]:
+              - row "Feature Regular Link Direct Link (ImagetoURL.cloud)" [ref=e298]:
+                - columnheader "Feature" [ref=e299]:
+                  - paragraph [ref=e300]:
+                    - strong [ref=e301]: Feature
+                - columnheader "Regular Link" [ref=e302]:
+                  - paragraph [ref=e303]:
+                    - strong [ref=e304]: Regular Link
+                - columnheader "Direct Link (ImagetoURL.cloud)" [ref=e305]:
+                  - paragraph [ref=e306]:
+                    - strong [ref=e307]: Direct Link (
+                    - link "ImagetoURL.cloud" [ref=e308] [cursor=pointer]:
+                      - /url: http://ImagetoURL.cloud
+                      - strong [ref=e309]: ImagetoURL.cloud
+                    - strong [ref=e310]: )
+              - row "Opens Webpage Image file" [ref=e311]:
+                - cell "Opens" [ref=e312]:
+                  - paragraph [ref=e313]: Opens
+                - cell "Webpage" [ref=e314]:
+                  - paragraph [ref=e315]: Webpage
+                - cell "Image file" [ref=e316]:
+                  - paragraph [ref=e317]: Image file
+              - row "Ads shown Yes No" [ref=e318]:
+                - cell "Ads shown" [ref=e319]:
+                  - paragraph [ref=e320]: Ads shown
+                - cell "Yes" [ref=e321]:
+                  - paragraph [ref=e322]: "Yes"
+                - cell "No" [ref=e323]:
+                  - paragraph [ref=e324]: "No"
+              - row "Works in <img> tag No Yes" [ref=e325]:
+                - cell "Works in <img> tag" [ref=e326]:
+                  - paragraph [ref=e327]: Works in <img> tag
+                - cell "No" [ref=e328]:
+                  - paragraph [ref=e329]: "No"
+                - cell "Yes" [ref=e330]:
+                  - paragraph [ref=e331]: "Yes"
+              - row "Works in email Usually breaks Always works" [ref=e332]:
+                - cell "Works in email" [ref=e333]:
+                  - paragraph [ref=e334]: Works in email
+                - cell "Usually breaks" [ref=e335]:
+                  - paragraph [ref=e336]: Usually breaks
+                - cell "Always works" [ref=e337]:
+                  - paragraph [ref=e338]: Always works
+              - row "Hotlinking Often blocked Always allowed" [ref=e339]:
+                - cell "Hotlinking" [ref=e340]:
+                  - paragraph [ref=e341]: Hotlinking
+                - cell "Often blocked" [ref=e342]:
+                  - paragraph [ref=e343]: Often blocked
+                - cell "Always allowed" [ref=e344]:
+                  - paragraph [ref=e345]: Always allowed
+              - row "Signup needed Often yes No" [ref=e346]:
+                - cell "Signup needed" [ref=e347]:
+                  - paragraph [ref=e348]: Signup needed
+                - cell "Often yes" [ref=e349]:
+                  - paragraph [ref=e350]: Often yes
+                - cell "No" [ref=e351]:
+                  - paragraph [ref=e352]: "No"
+          - paragraph
+          - heading "Common Use Cases in Real Life" [level=2] [ref=e353]:
+            - strong [ref=e354]: Common Use Cases in Real Life
+          - paragraph [ref=e355]: The following are some of the real-world situations where the choice of the appropriate link type is essential.
+          - heading "Bloggers" [level=3] [ref=e356]:
+            - strong [ref=e357]: Bloggers
+          - paragraph [ref=e358]: Bypass media library. ImageToURL - upload, get a direct link, and paste it into your post. Your pictures are quick to load around the globe.
+          - heading "Developers" [level=3] [ref=e359]:
+            - strong [ref=e360]: Developers
+          - paragraph [ref=e361]: Provide direct URLs in README documents, API responses, and app assets. They never give a webpage, always an image.
+          - heading "E-commerce Sellers" [level=3] [ref=e362]:
+            - strong [ref=e363]: E-commerce Sellers
+          - paragraph [ref=e364]: eBay or Shopify Product images should be loaded in-line. Direct links show the product without a redirection to the buyers.
+          - heading "Students and Teachers" [level=3] [ref=e365]:
+            - strong [ref=e366]: Students and Teachers
+          - paragraph [ref=e367]: Add images to Google Docs, Notion pages, and presentations with a simple direct URL.
+          - heading "Final Thoughts!" [level=2] [ref=e368]:
+            - strong [ref=e369]: Final Thoughts!
+          - paragraph [ref=e370]:
+            - text: The distinction between direct and regular image links is very slight in terms of words, but enormous when it comes to practice. Direct links load faster, embed everywhere, and keep your content clean. Frequent links are appropriate only when you want viewers to view a complete page in context. Direct links are the wiser option for most people.
+            - link "ImageToURL.cloud" [ref=e371] [cursor=pointer]:
+              - /url: http://ImageToURL.cloud
+            - text: can help you transform any image into a clean, permanent, shareable link in a single click. Visit our website today!
+          - paragraph
+          - paragraph
+          - paragraph
+        - generic [ref=e372]:
+          - heading "help Frequently Asked Questions" [level=3] [ref=e373]:
+            - generic [ref=e374]: help
+            - text: Frequently Asked Questions
+          - generic [ref=e375]:
+            - group [ref=e376]:
+              - generic "डायरेक्ट इमेज लिंक क्या है? expand_more" [ref=e377] [cursor=pointer]:
+                - generic [ref=e378]: डायरेक्ट इमेज लिंक क्या है?
+                - generic [ref=e379]: expand_more
+            - group [ref=e380]:
+              - generic "क्या मैं ईमेल में डायरेक्ट इमेज लिंक का उपयोग कर सकता हूँ? expand_more" [ref=e381] [cursor=pointer]:
+                - generic [ref=e382]: क्या मैं ईमेल में डायरेक्ट इमेज लिंक का उपयोग कर सकता हूँ?
+                - generic [ref=e383]: expand_more
+            - group [ref=e384]:
+              - generic "जब मैं रेगुलर इमेज लिंक को एम्बेड करता हूँ तो वे क्यों टूट जाते हैं? expand_more" [ref=e385] [cursor=pointer]:
+                - generic [ref=e386]: जब मैं रेगुलर इमेज लिंक को एम्बेड करता हूँ तो वे क्यों टूट जाते हैं?
+                - generic [ref=e387]: expand_more
+            - group [ref=e388]:
+              - generic "क्या ImageToURL डिफ़ॉल्ट रूप से डायरेक्ट लिंक प्रदान करता है? expand_more" [ref=e389] [cursor=pointer]:
+                - generic [ref=e390]: क्या ImageToURL डिफ़ॉल्ट रूप से डायरेक्ट लिंक प्रदान करता है?
+                - generic [ref=e391]: expand_more
+            - group [ref=e392]:
+              - generic "क्या ImageToURL से डायरेक्ट इमेज लिंक स्थायी हैं? expand_more" [ref=e393] [cursor=pointer]:
+                - generic [ref=e394]: क्या ImageToURL से डायरेक्ट इमेज लिंक स्थायी हैं?
+                - generic [ref=e395]: expand_more
+            - group [ref=e396]:
+              - generic "क्या डायरेक्ट इमेज लिंक वेबसाइट की गति के लिए बेहतर है? expand_more" [ref=e397] [cursor=pointer]:
+                - generic [ref=e398]: क्या डायरेक्ट इमेज लिंक वेबसाइट की गति के लिए बेहतर है?
+                - generic [ref=e399]: expand_more
+        - generic [ref=e400]:
+          - generic [ref=e401]: यह लेख शेयर करें
+          - generic [ref=e402]:
+            - paragraph [ref=e403]: दूसरों को बेहतरीन सामग्री खोजने में मदद करें!
+            - generic [ref=e404]:
+              - button "share" [ref=e405]:
+                - generic [ref=e406]: share
+              - button "link" [ref=e407]:
+                - generic [ref=e408]: link
+              - button "mail" [ref=e409]:
+                - generic [ref=e410]: mail
+    - generic [ref=e412]:
+      - generic [ref=e413]:
+        - generic [ref=e414]:
+          - generic [ref=e415]:
+            - generic [ref=e416]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e417]: वेब को और अधिक दृश्यमान बनाना, एक लिंक एक समय में। मनुष्यों के लिए डिज़ाइन किया गया, गति के लिए बनाया गया।
+        - generic [ref=e418]:
+          - generic [ref=e419]: Convert
+          - link "PNG to URL" [ref=e420] [cursor=pointer]:
+            - /url: /hi/png-को-url-में-बदलें
+          - link "JPG to URL" [ref=e421] [cursor=pointer]:
+            - /url: /hi/jpg-को-url-में-बदलें
+          - link "GIF to URL" [ref=e422] [cursor=pointer]:
+            - /url: /hi/gif-को-url-में-बदलें
+          - link "WebP to URL" [ref=e423] [cursor=pointer]:
+            - /url: /hi/webp-को-url-में-बदलें
+          - link "Photo to URL" [ref=e424] [cursor=pointer]:
+            - /url: /hi/फोटो-को-url-में-बदलें
+          - link "Screenshot to URL" [ref=e425] [cursor=pointer]:
+            - /url: /hi/स्क्रीनशॉट-को-url-में-बदलें
+        - generic [ref=e426]:
+          - generic [ref=e427]: Features
+          - link "मुफ्त इमेज होस्टिंग" [ref=e428] [cursor=pointer]:
+            - /url: /hi/मुफ्त-image-होस्टिंग
+          - link "इमेज URL जनरेटर" [ref=e429] [cursor=pointer]:
+            - /url: /hi/इमेज-को-url-में-बदलें
+          - link "बल्क इमेज अपलोड" [ref=e430] [cursor=pointer]:
+            - /url: /hi/बल्क-इमेज-अपलोड
+          - link "Free Image CDN" [ref=e431] [cursor=pointer]:
+            - /url: /hi/मुफ़्त-image-cdn
+          - link "Permanent Hosting" [ref=e432] [cursor=pointer]:
+            - /url: /hi/स्थायी-इमेज-टू-यूआरएल
+          - link "Direct Image Links" [ref=e433] [cursor=pointer]:
+            - /url: /hi/डायरेक्ट-इमेज-लिंक-होस्टिंग
+          - link "Anonymous Upload" [ref=e434] [cursor=pointer]:
+            - /url: /hi/अनाम-image-अपलोड
+          - link "Embed Code Generator" [ref=e435] [cursor=pointer]:
+            - /url: /hi/इमेज-एम्बेड-कोड-जनरेटर
+        - generic [ref=e436]:
+          - generic [ref=e437]: Use Cases
+          - link "For eBay" [ref=e438] [cursor=pointer]:
+            - /url: /hi/ebay-के-लिए-इमेज-होस्टिंग
+          - link "For Discord" [ref=e439] [cursor=pointer]:
+            - /url: /hi/discord-के-लिए-इमेज-होस्टिंग
+          - link "For GitHub" [ref=e440] [cursor=pointer]:
+            - /url: /hi/github-readme-के-लिए-इमेज-होस्टिंग
+          - link "For Notion" [ref=e441] [cursor=pointer]:
+            - /url: /hi/notion-के-लिए-स्थायी-इमेज-लिंक
+          - link "For WordPress" [ref=e442] [cursor=pointer]:
+            - /url: /hi/वर्डप्रेस-के-लिए-इमेज-होस्टिंग
+          - link "For Shopify" [ref=e443] [cursor=pointer]:
+            - /url: /hi/shopify-के-लिए-फ्री-इमेज-होस्टिंग
+          - link "For Newsletters" [ref=e444] [cursor=pointer]:
+            - /url: /hi/ईमेल-न्यूज़लेटर-के-लिए-इमेज-होस्टिंग
+          - link "For Email Signatures" [ref=e445] [cursor=pointer]:
+            - /url: /hi/ईमेल-हस्ताक्षर-के-लिए-इमेज-होस्टिंग
+          - link "For Forums" [ref=e446] [cursor=pointer]:
+            - /url: /hi/फोरम-के-लिए-इमेज-होस्टिंग
+          - link "For WhatsApp" [ref=e447] [cursor=pointer]:
+            - /url: /hi/whatsapp-पर-इमेज-लिंक-शेयर-करें
+          - link "For ChatGPT" [ref=e448] [cursor=pointer]:
+            - /url: /hi/chatgpt-के-लिए-image-url-प्राप्त-करें
+          - link "AI Image Hosting" [ref=e449] [cursor=pointer]:
+            - /url: /hi/ai-इमेज-होस्टिंग
+          - link "Imgur Alternative" [ref=e450] [cursor=pointer]:
+            - /url: /hi/सर्वश्रेष्ठ-imgur-विकल्प
+          - link "ImgBB Alternative" [ref=e451] [cursor=pointer]:
+            - /url: /hi/imgbb-का-बेहतर-विकल्प
+        - generic [ref=e452]:
+          - generic [ref=e453]: संसाधन
+          - link "गोपनीयता नीति" [ref=e454] [cursor=pointer]:
+            - /url: /hi/privacy
+          - link "सेवा की शर्तें" [ref=e455] [cursor=pointer]:
+            - /url: /hi/terms
+          - link "दस्तावेज़ीकरण" [ref=e456] [cursor=pointer]:
+            - /url: /hi/docs
+          - link "हमारे बारे में" [ref=e457] [cursor=pointer]:
+            - /url: /about
+          - link "संपर्क" [ref=e458] [cursor=pointer]:
+            - /url: /contact
+          - link "ब्लॉग" [ref=e459] [cursor=pointer]:
+            - /url: /hi/blog
+          - link "Content Guidelines" [ref=e460] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e461]:
+          - generic [ref=e462]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e463] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e464]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e465] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e466]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e467] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e468]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e469] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e470]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e471]:
+          - generic [ref=e472]: अपडेट रहें
+          - generic [ref=e473]:
+            - textbox "आपका ईमेल..." [ref=e474]
+            - button "जुड़ें" [ref=e475]
+          - generic [ref=e476]:
+            - link "GitHub" [ref=e477] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e478]
+            - link "Instagram" [ref=e480] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e481]
+            - link "Personal Website" [ref=e483] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e484]:
+        - paragraph [ref=e485]: © 2026 ImageToURL. ImageToURL टीम द्वारा डिज़ाइन किया गया
+        - paragraph [ref=e486]: Built with care · Hosted on Cloudflare
+  - generic [ref=e489]:
+    - button "Menu" [ref=e490]:
+      - img [ref=e492]
+      - generic: Menu
+    - button "Inspect" [ref=e496]:
+      - img [ref=e498]
+      - generic: Inspect
+    - button "Audit" [ref=e500]:
+      - img [ref=e502]
+      - generic: Audit
+    - button "Settings" [ref=e505]:
+      - img [ref=e507]
+      - generic: Settings

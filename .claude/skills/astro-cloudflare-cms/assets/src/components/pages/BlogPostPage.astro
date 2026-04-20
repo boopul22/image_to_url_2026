@@ -1,0 +1,369 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { t } from '../../i18n/utils';
+import { defaultLocale } from '../../i18n/config';
+import type { Locale } from '../../i18n/config';
+import { getDB } from '../../lib/db';
+import { getPostBySlug, getPostBySlugLocalized, getRelatedPosts } from '../../lib/cms';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const { slug } = Astro.params;
+const db = getDB(Astro.locals);
+
+const post = await getPostBySlugLocalized(db, slug as string, locale);
+
+if (!post) {
+  return Astro.redirect(lp('/blog'));
+}
+
+// Fetch all locale slugs for this post so the language switcher can emit
+// canonical translated URLs directly (no 301 hop).
+let blogLocaleSlugs: Record<string, string> = {};
+try {
+  // Always seed with English slug. For translated views `post.id` still
+  // refers to the base post, and `post.slug` is the translated slug — so we
+  // look up the English slug from the base posts table.
+  const enRow = await db.prepare('SELECT slug FROM posts WHERE id = ?').bind(post.id).first<{ slug: string }>();
+  if (enRow?.slug) blogLocaleSlugs.en = enRow.slug;
+  const rows = await db
+    .prepare('SELECT locale, slug FROM post_translations WHERE post_id = ?')
+    .bind(post.id)
+    .all<{ locale: string; slug: string }>();
+  for (const r of rows.results ?? []) blogLocaleSlugs[r.locale] = r.slug;
+} catch { /* non-fatal — language switcher just falls back to same-path behavior */ }
+
+// ISR: Cache at CDN edge for 10 min, serve stale up to 1 day while revalidating.
+// Blog posts change infrequently so longer cache is safe.
+Astro.response.headers.set('CDN-Cache-Control', 'public, max-age=600, stale-while-revalidate=86400');
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+
+const relatedPosts = await getRelatedPosts(db, post.relatedSlugs);
+
+// --- Table of contents ---------------------------------------------------
+// Build a TOC from H2/H3 headings. For htmlContent posts we also inject
+// stable `id` attributes on the headings so the anchor links work.
+type TocItem = { id: string; text: string; level: 2 | 3 };
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/<[^>]*>/g, '')
+    .replace(/&[a-z]+;/g, ' ')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 60) || 'section';
+}
+
+let tocItems: TocItem[] = [];
+let renderedHtml: string | null = null;
+
+if (post.htmlContent) {
+  const used = new Set<string>();
+  renderedHtml = post.htmlContent.replace(
+    /<(h2|h3)([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (_m, tag: string, attrs: string, inner: string) => {
+      const level = tag.toLowerCase() === 'h2' ? 2 : 3;
+      const text = inner.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+      if (!text) return `<${tag}${attrs}>${inner}</${tag}>`;
+      const existingId = attrs.match(/\sid=["']([^"']+)["']/i)?.[1];
+      let id = existingId || slugify(text);
+      let n = 2;
+      while (used.has(id)) id = `${slugify(text)}-${n++}`;
+      used.add(id);
+      const newAttrs = existingId
+        ? attrs
+        : `${attrs} id="${id}"`;
+      tocItems.push({ id, text, level: level as 2 | 3 });
+      return `<${tag}${newAttrs}>${inner}</${tag}>`;
+    }
+  );
+} else if (post.content?.sections) {
+  tocItems = post.content.sections.map((s: any) => ({
+    id: slugify(`${s.number}-${s.heading}`),
+    text: `${s.number}. ${s.heading}`,
+    level: 2,
+  }));
+}
+
+const showToc = tocItems.length >= 3;
+
+// `t()` returns the key string when a translation is missing, so a plain
+// `t() || fallback` short-circuit doesn't work. Detect that case explicitly.
+const tocLabelRaw = t(locale, 'blogPost.toc');
+const tocLabel = tocLabelRaw && tocLabelRaw !== 'blogPost.toc' ? tocLabelRaw : 'Table of contents';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.title,
+  "description": post.excerpt || '',
+  "image": post.coverImage || undefined,
+  "datePublished": post.publishedAt || undefined,
+  "dateModified": post.updatedAt || post.publishedAt || undefined,
+  "author": {
+    "@type": "Person",
+    "name": post.authorName,
+  },
+  "publisher": {
+    "@id": "https://imagetourl.cloud/#organization"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://imagetourl.cloud/blog/${slug}`
+  }
+};
+
+const faqSchema = post.faqItems?.length ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": post.faqItems.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+    }
+  }))
+} : null;
+---
+
+<Layout
+  title={`${post.title} — ImageToURL Blog`}
+  description={post.excerpt || ''}
+  ogImage={post.coverImage || '/og-default.png'}
+  ogType="article"
+  schema={articleSchema}
+>
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
+  <Nav activePage="blog" blogLocaleSlugs={blogLocaleSlugs} />
+
+  <main class="pt-6 sm:pt-12 pb-16 sm:pb-24 px-5 sm:px-6 md:px-0">
+    <article class="max-w-3xl mx-auto">
+      <!-- Article Header -->
+      <header class="mb-10 sm:mb-12">
+        <span class="inline-block py-1 px-4 bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface rounded-full text-xs font-bold uppercase tracking-widest mb-5 sm:mb-6">
+          {post.categoryName || t(locale, 'blogPost.uncategorized')}
+        </span>
+        <h1 class="text-[1.75rem] leading-[1.15] sm:text-3xl sm:leading-[1.1] lg:text-7xl font-headline italic font-black tracking-tight text-on-surface mb-5 sm:mb-8 [overflow-wrap:break-word] [hyphens:auto]">
+          <Fragment set:html={post.title.replace(/SVG/g, '<span class="relative">SVG<span class="absolute bottom-1 left-0 w-full h-3 bg-tertiary/20 -z-10"></span></span>')} />
+        </h1>
+        <div class="flex flex-wrap items-center gap-6 pb-2">
+          <div class="flex items-center gap-3">
+            <img
+              alt={post.authorName}
+              class="w-12 h-12 rounded-full border-2 border-on-surface p-0.5 bg-surface-container object-cover"
+              src={post.authorAvatar}
+              width="48"
+              height="48"
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <p class="font-bold text-on-surface">{post.authorName}</p>
+              <p class="text-xs uppercase tracking-tighter text-outline">{post.authorRole}</p>
+            </div>
+          </div>
+          <div class="h-8 w-px bg-outline-variant hidden sm:block"></div>
+          <div class="flex flex-col">
+            <span class="text-xs uppercase tracking-widest text-outline">{t(locale, 'blogPost.published')}</span>
+            <span class="font-medium">{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''}</span>
+          </div>
+          <div class="ml-auto">
+            <span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 border-2 border-on-surface rounded-lg text-sm font-bold flex items-center gap-2 hard-shadow">
+              <span class="material-symbols-outlined text-sm">schedule</span>
+              {post.readTime}
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Table of Contents -->
+      {showToc && (
+        <details
+          open
+          class="blog-toc group mb-10 sm:mb-12 bg-surface-container border-2 border-on-surface rounded-xl"
+          style="box-shadow: 4px 4px 0px 0px rgba(30,26,37,1);"
+        >
+          <summary class="cursor-pointer list-none px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3 border-b-2 border-on-surface group-open:border-b-2">
+            <span class="text-xs uppercase tracking-widest font-black text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-base">list</span>
+              {tocLabel}
+            </span>
+            <span class="material-symbols-outlined text-lg text-outline transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <nav aria-label={tocLabel} class="px-4 sm:px-6 py-4 sm:py-5">
+            <ol class="space-y-2.5 sm:space-y-2 list-none p-0 m-0">
+              {tocItems.map((item, idx) => (
+                <li class={item.level === 3 ? 'pl-4 sm:pl-5' : ''}>
+                  <a
+                    href={`#${item.id}`}
+                    class="flex items-baseline gap-3 py-1 text-sm sm:text-base text-on-surface hover:text-primary font-medium leading-snug no-underline hover:underline underline-offset-4 break-words"
+                  >
+                    <span class="text-[10px] sm:text-xs font-black text-outline tabular-nums w-6 flex-none pt-0.5">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span class="min-w-0 break-words">{item.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </details>
+      )}
+
+      <!-- Article Body -->
+      {post.htmlContent ? (
+        <div class="landing-prose blog-html-content" set:html={renderedHtml ?? post.htmlContent} />
+      ) : (
+        <div class="landing-prose">
+          <p class="text-xl font-medium leading-relaxed">
+            {post.content.intro}
+          </p>
+
+          {post.content.sections.map((section, i) => (
+            <>
+              <h2
+                id={slugify(`${section.number}-${section.heading}`)}
+                class="text-lg sm:text-xl font-headline italic font-bold mt-8 sm:mt-12 mb-4 text-primary scroll-mt-24"
+              >
+                {section.number}. {section.heading}
+              </h2>
+              <p set:html={section.body} />
+
+              {/* Show blockquote after first section if available */}
+              {i === 0 && post.content.blockquote && (
+                <div class="my-12 p-5 sm:p-8 bg-surface-container border-2 border-primary border-l-8 rounded-lg relative overflow-hidden">
+                  <span class="material-symbols-outlined absolute -right-4 -top-4 text-8xl text-primary/5 rotate-12">format_quote</span>
+                  <blockquote class="italic font-headline text-2xl text-on-surface relative z-10">
+                    {post.content.blockquote}
+                  </blockquote>
+                </div>
+              )}
+
+              {/* Show callout after second section if available */}
+              {i === 1 && post.content.callout && (
+                <div class="my-12 p-5 sm:p-8 bg-tertiary-fixed border-2 border-on-surface rounded-xl hard-shadow flex gap-4 sm:gap-6 items-start" style="box-shadow: 6px 6px 0px 0px rgba(30,26,37,1);">
+                  <div class="bg-on-surface text-tertiary-fixed p-3 rounded-lg rotate-[-3deg] flex-shrink-0">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                  </div>
+                  <div>
+                    <h4 class="font-headline font-black text-xl mb-2">{post.content.callout.title}</h4>
+                    <p class="text-on-surface/80 leading-snug">{post.content.callout.body}</p>
+                  </div>
+                </div>
+              )}
+            </>
+          ))}
+
+          <p>{post.content.outro}</p>
+        </div>
+      )}
+
+      <!-- FAQ Section -->
+      {post.faqItems && post.faqItems.length > 0 && (
+        <section class="mt-12 sm:mt-16">
+          <h3 class="text-lg sm:text-xl font-headline italic font-black mb-6 flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">help</span>
+            Frequently Asked Questions
+          </h3>
+          <div class="space-y-4">
+            {post.faqItems.map((faq) => (
+              <details class="group border-2 border-on-surface rounded-xl overflow-hidden">
+                <summary class="cursor-pointer px-5 py-4 bg-surface-container hover:bg-surface-container-highest transition-colors flex items-center justify-between gap-4 font-headline font-bold text-on-surface">
+                  <span>{faq.question}</span>
+                  <span class="material-symbols-outlined text-lg text-outline group-open:rotate-180 transition-transform flex-none">expand_more</span>
+                </summary>
+                <div class="px-5 py-4 text-on-surface-variant leading-relaxed border-t-2 border-on-surface">
+                  <p>{faq.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Share Section -->
+      <section class="mt-12 sm:mt-20 p-5 sm:p-8 bg-secondary-container border-2 border-on-surface rounded-2xl relative">
+        <div class="absolute -top-6 left-8 bg-on-surface text-secondary-container px-6 py-2 font-black italic font-headline border-2 border-on-surface -rotate-1" style="box-shadow: 4px 4px 0px 0px rgba(103,95,43,0.3);">
+          {t(locale, 'blogPost.share')}
+        </div>
+        <div class="flex flex-wrap justify-between items-center gap-6 mt-4">
+          <p class="font-headline text-xl italic font-bold">{t(locale, 'blogPost.shareDescription')}</p>
+          <div class="flex gap-4">
+            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+              <span class="material-symbols-outlined">share</span>
+            </button>
+            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:-rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+              <span class="material-symbols-outlined">link</span>
+            </button>
+            <button class="w-12 h-12 bg-surface border-2 border-on-surface rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-3 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+              <span class="material-symbols-outlined">mail</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <section class="mt-24">
+          <h3 class="text-3xl font-headline italic font-black mb-10">
+            {t(locale, 'blogPost.related')}
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {relatedPosts.map((related) => (
+              <a
+                class="group block border-2 border-on-surface bg-surface hover:translate-x-1 hover:translate-y-1 transition-all"
+                style="box-shadow: 4px 4px 0px 0px rgba(30,26,37,1);"
+                href={lp(`/blog/${related.slug}`)}
+              >
+                <div class={`h-40 border-b-2 border-on-surface overflow-hidden ${related.coverImage ? '' : (related.iconBg || 'bg-primary-fixed')} flex items-center justify-center`}>
+                  {related.coverImage ? (
+                    <img
+                      alt={related.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async"
+                      src={related.coverImage}
+                    />
+                  ) : (
+                    <span class="material-symbols-outlined text-8xl text-on-surface/20">
+                      {related.iconFallback || 'article'}
+                    </span>
+                  )}
+                </div>
+                <div class="p-4">
+                  <span class={`text-xs font-bold uppercase tracking-widest text-${related.categoryColor || 'primary'}`}>{related.categoryName || t(locale, 'blogPost.uncategorized')}</span>
+                  <h4 class="font-headline font-bold text-lg leading-tight mt-1 group-hover:underline">{related.title}</h4>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .blog-html-content :is(h2, h3)[id],
+  article :is(h2, h3)[id] {
+    scroll-margin-top: 6rem;
+  }
+  .blog-toc summary::-webkit-details-marker { display: none; }
+  .blog-toc summary { -webkit-tap-highlight-color: transparent; }
+  @media (max-width: 640px) {
+    .blog-toc a { min-height: 44px; align-items: center; }
+  }
+</style>
+

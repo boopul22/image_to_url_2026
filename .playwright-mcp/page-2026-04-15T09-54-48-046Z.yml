@@ -1,0 +1,228 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e6]: cloud_done
+          - text: ImageToURL
+        - button "Toggle navigation menu" [ref=e7]:
+          - generic [ref=e8]: menu
+      - generic [ref=e10]:
+        - link "home Home" [ref=e11] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e12]: home
+          - text: Home
+        - link "auto_awesome Features" [ref=e13] [cursor=pointer]:
+          - /url: /en/features
+          - generic [ref=e14]: auto_awesome
+          - text: Features
+        - link "article Blog" [ref=e15] [cursor=pointer]:
+          - /url: /en/blog
+          - generic [ref=e16]: article
+          - text: Blog
+        - button "Tools" [ref=e19]:
+          - generic [ref=e20]: build
+          - text: Solutions
+          - generic [ref=e21]: expand_more
+        - button "Tools" [ref=e23]:
+          - generic [ref=e24]: build
+          - text: Tools
+          - generic [ref=e25]: expand_more
+        - button "Change language" [ref=e28]:
+          - generic [ref=e29]: translate
+          - text: English
+          - generic [ref=e30]: expand_more
+        - link "Sign In" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/login
+          - img [ref=e33]
+          - text: Sign In
+    - main [ref=e38]:
+      - generic [ref=e40]:
+        - generic [ref=e41]: Latest Perspectives
+        - heading "The ImageToURL Blog" [level=1] [ref=e42]:
+          - text: The ImageToURL
+          - text: Blog
+        - paragraph [ref=e43]: Insights, tutorials, and stories from the intersection of cloud storage, creative workflows, and digital engineering.
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: search
+          - textbox "Search articles..." [ref=e48]
+        - generic [ref=e49]:
+          - button "All Posts" [ref=e50]
+          - button "Tutorials" [ref=e51]
+          - button "Beginner Guides" [ref=e52]
+          - button "Product Updates" [ref=e53]
+          - button "Case Studies" [ref=e54]
+          - button "Image Hosting" [ref=e55]
+          - button "Productivity" [ref=e56]
+          - button "Engineering" [ref=e57]
+          - button "Web Development" [ref=e58]
+          - button "SEO & Performance" [ref=e59]
+          - button "Typography" [ref=e60]
+          - button "Strategy" [ref=e61]
+          - button "Use Cases" [ref=e62]
+          - button "Technical Deep Dives" [ref=e63]
+          - button "Security & Privacy" [ref=e64]
+      - article [ref=e67]:
+        - link "What Is an Image URL? A Complete Beginner’s Guide Featured Beginner Guides What Is an Image URL? A Complete Beginner’s Guide The image URL is nothing more than a web address that will lead to a picture that can be found online. You do not attach files, but share a link. Sheenam Middha Sheenam Middha Read More arrow_forward" [ref=e68] [cursor=pointer]:
+          - /url: /en/blog/what-is-an-image-url-a-complete-beginners-guide
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - img "What Is an Image URL? A Complete Beginner’s Guide" [ref=e72]
+              - generic [ref=e73]: Featured
+            - generic [ref=e74]:
+              - generic [ref=e75]:
+                - generic [ref=e76]: Beginner Guides
+                - heading "What Is an Image URL? A Complete Beginner’s Guide" [level=2] [ref=e77]
+                - paragraph [ref=e78]: The image URL is nothing more than a web address that will lead to a picture that can be found online. You do not attach files, but share a link.
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - img "Sheenam Middha" [ref=e82]
+                  - generic [ref=e83]: Sheenam Middha
+                - generic [ref=e84]:
+                  - text: Read More
+                  - generic [ref=e85]: arrow_forward
+      - generic [ref=e87]:
+        - generic [ref=e88]:
+          - heading "Stay Curated" [level=2] [ref=e89]
+          - paragraph [ref=e90]: Get our monthly digest of creative insights and technical deep-dives delivered to your inbox.
+          - generic [ref=e91]:
+            - textbox "your@email.com" [ref=e92]
+            - button "Subscribe" [ref=e93]
+        - generic [ref=e94]: mail
+        - generic [ref=e95]: rocket
+    - generic [ref=e97]:
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - generic [ref=e101]: cloud_done
+            - text: ImageToURL
+          - paragraph [ref=e102]: Making the web more visual, one link at a time. Designed for humans, built for speed.
+        - generic [ref=e103]:
+          - generic [ref=e104]: Convert
+          - link "PNG to URL" [ref=e105] [cursor=pointer]:
+            - /url: /png-to-url
+          - link "JPG to URL" [ref=e106] [cursor=pointer]:
+            - /url: /jpg-to-url
+          - link "GIF to URL" [ref=e107] [cursor=pointer]:
+            - /url: /gif-to-url
+          - link "WebP to URL" [ref=e108] [cursor=pointer]:
+            - /url: /webp-to-url
+          - link "Photo to URL" [ref=e109] [cursor=pointer]:
+            - /url: /photo-to-url
+          - link "Screenshot to URL" [ref=e110] [cursor=pointer]:
+            - /url: /screenshot-to-url
+        - generic [ref=e111]:
+          - generic [ref=e112]: Features
+          - link "Free Image Hosting" [ref=e113] [cursor=pointer]:
+            - /url: /free-image-hosting
+          - link "Image URL Generator" [ref=e114] [cursor=pointer]:
+            - /url: /image-url-generator
+          - link "Bulk Image Upload" [ref=e115] [cursor=pointer]:
+            - /url: /bulk-image-upload
+          - link "Free Image CDN" [ref=e116] [cursor=pointer]:
+            - /url: /free-image-cdn
+          - link "Permanent Hosting" [ref=e117] [cursor=pointer]:
+            - /url: /permanent-image-hosting
+          - link "Direct Image Links" [ref=e118] [cursor=pointer]:
+            - /url: /direct-image-link
+          - link "Anonymous Upload" [ref=e119] [cursor=pointer]:
+            - /url: /anonymous-image-upload
+          - link "Embed Code Generator" [ref=e120] [cursor=pointer]:
+            - /url: /image-embed-code-generator
+        - generic [ref=e121]:
+          - generic [ref=e122]: Use Cases
+          - link "For eBay" [ref=e123] [cursor=pointer]:
+            - /url: /image-hosting-for-ebay
+          - link "For Discord" [ref=e124] [cursor=pointer]:
+            - /url: /image-hosting-for-discord
+          - link "For GitHub" [ref=e125] [cursor=pointer]:
+            - /url: /image-hosting-for-github-readme
+          - link "For Notion" [ref=e126] [cursor=pointer]:
+            - /url: /image-hosting-for-notion
+          - link "For WordPress" [ref=e127] [cursor=pointer]:
+            - /url: /image-hosting-for-wordpress
+          - link "For Shopify" [ref=e128] [cursor=pointer]:
+            - /url: /image-hosting-for-shopify
+          - link "For Newsletters" [ref=e129] [cursor=pointer]:
+            - /url: /image-hosting-for-newsletters
+          - link "For Email Signatures" [ref=e130] [cursor=pointer]:
+            - /url: /image-hosting-for-email-signatures
+          - link "For Forums" [ref=e131] [cursor=pointer]:
+            - /url: /image-hosting-for-forums
+          - link "For WhatsApp" [ref=e132] [cursor=pointer]:
+            - /url: /image-to-url-for-whatsapp
+          - link "For ChatGPT" [ref=e133] [cursor=pointer]:
+            - /url: /image-url-for-chatgpt
+          - link "AI Image Hosting" [ref=e134] [cursor=pointer]:
+            - /url: /ai-image-hosting
+          - link "Imgur Alternative" [ref=e135] [cursor=pointer]:
+            - /url: /imgur-alternative
+          - link "ImgBB Alternative" [ref=e136] [cursor=pointer]:
+            - /url: /imgbb-alternative
+        - generic [ref=e137]:
+          - generic [ref=e138]: Resources
+          - link "Privacy Policy" [ref=e139] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms of Service" [ref=e140] [cursor=pointer]:
+            - /url: /en/terms
+          - link "Documentation" [ref=e141] [cursor=pointer]:
+            - /url: /en/docs
+          - link "About" [ref=e142] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e143] [cursor=pointer]:
+            - /url: /contact
+          - link "Blog" [ref=e144] [cursor=pointer]:
+            - /url: /en/blog
+          - link "Content Guidelines" [ref=e145] [cursor=pointer]:
+            - /url: /content-guidelines
+        - generic [ref=e146]:
+          - generic [ref=e147]: Our Tools
+          - link "cloud_upload ImageToURL" [ref=e148] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e149]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e150] [cursor=pointer]:
+            - /url: /heic-to-jpg
+            - generic [ref=e151]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e152] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e153]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation Guide" [ref=e154] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e155]: self_improvement
+            - text: Daily Meditation Guide
+        - generic [ref=e156]:
+          - generic [ref=e157]: Stay Updated
+          - generic [ref=e158]:
+            - textbox "Your email..." [ref=e159]
+            - button "Join" [ref=e160]
+          - generic [ref=e161]:
+            - link "GitHub" [ref=e162] [cursor=pointer]:
+              - /url: https://github.com/boopul22
+              - img [ref=e163]
+            - link "Instagram" [ref=e165] [cursor=pointer]:
+              - /url: https://www.instagram.com/bipul.skill
+              - img [ref=e166]
+            - link "Personal Website" [ref=e168] [cursor=pointer]:
+              - /url: https://bipul.online/
+              - text: bipul.online
+      - generic [ref=e169]:
+        - paragraph [ref=e170]: © 2026 ImageToURL. Designed by ImageToURL Team
+        - paragraph [ref=e171]: Built with care · Hosted on Cloudflare
+  - generic [ref=e174]:
+    - button "Menu" [ref=e175]:
+      - img [ref=e177]
+      - generic: Menu
+    - button "Inspect" [ref=e181]:
+      - img [ref=e183]
+      - generic: Inspect
+    - button "Audit" [ref=e185]:
+      - img [ref=e187]
+      - generic: Audit
+    - button "Settings" [ref=e190]:
+      - img [ref=e192]
+      - generic: Settings
