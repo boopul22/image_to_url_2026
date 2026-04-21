@@ -277,6 +277,71 @@ const pageSchema = [
           </a>
         </div>
       </div>
+
+      <!-- Hire-me pitch modal (shown after copy, max 1x / 24h) -->
+      <div
+        id="pitch-modal"
+        class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-neutral-900/60"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pitch-heading"
+      >
+        <div class="relative w-full max-w-lg bg-white border-2 border-neutral-900 brutal-shadow">
+          <button
+            id="pitch-close"
+            type="button"
+            aria-label="Close"
+            class="absolute top-0 right-0 w-10 h-10 flex items-center justify-center border-l-2 border-b-2 border-neutral-900 bg-white hover:bg-rose-600 hover:text-white transition-colors"
+          >
+            <span class="material-symbols-outlined text-xl">close</span>
+          </button>
+          <div class="border-b-2 border-neutral-900 px-5 py-4 pr-14">
+            <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-rose-600 border-2 border-neutral-900 bg-white px-2 py-1 mb-3">01 &middot; From the dev</span>
+            <h2 id="pitch-heading" class="font-headline font-semibold uppercase tracking-tight text-2xl sm:text-3xl leading-[0.95] text-on-background">
+              Like this tool?<br/>I build sites too.
+            </h2>
+          </div>
+          <div class="px-5 py-4 border-b-2 border-neutral-900 text-sm text-on-surface-variant leading-relaxed">
+            <p class="mb-3">I built this image host solo &mdash; fast, SEO-ready, Cloudflare-native. Your website can look and perform the same.</p>
+            <ul class="space-y-2">
+              <li class="flex gap-2"><span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">bolt</span><span><b class="text-on-background">Hand-coded, not WordPress.</b> Loads in under a second.</span></li>
+              <li class="flex gap-2"><span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">search</span><span><b class="text-on-background">Built for Google + AI search.</b> Schema, sitemaps, the works.</span></li>
+              <li class="flex gap-2"><span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">payments</span><span><b class="text-on-background">Fair pricing.</b> One dev, no agency markup.</span></li>
+            </ul>
+          </div>
+          <form
+            id="pitch-form"
+            action="https://formsubmit.co/blog.boopul@gmail.com"
+            method="POST"
+            class="px-5 py-4"
+          >
+            <input type="hidden" name="_subject" value="New website lead from imagetourl.cloud" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://imagetourl.cloud/?contacted=1" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <label for="pitch-email" class="block text-xs font-bold uppercase tracking-wider text-on-background mb-2">Your email &mdash; I reply within a day</label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                id="pitch-email"
+                name="email"
+                required
+                placeholder="you@domain.com"
+                class="flex-1 min-w-0 bg-white border-2 border-neutral-900 px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600"
+              />
+              <button
+                type="submit"
+                id="pitch-submit"
+                class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0"
+              >
+                Get a quote
+              </button>
+            </div>
+            <p class="text-[11px] text-on-surface-variant mt-2 uppercase tracking-wider">No spam. No sales call. Just one dev replying.</p>
+          </form>
+        </div>
+      </div>
       </div>
 
       <!-- Right sponsored slot (desktop only) -->
@@ -740,10 +805,50 @@ const pageSchema = [
     navigator.clipboard.writeText(resultUrl.value);
     copyBtn.textContent = i18n.copied;
     setTimeout(() => { copyBtn.textContent = i18n.copy; }, 2000);
+    maybeShowPitch();
   });
 
   uploadAnother.addEventListener('click', resetIdle);
   errorRetry.addEventListener('click', resetIdle);
+
+  // Hire-me pitch modal — max 1x / 24h after a copy
+  const pitchModal = document.getElementById('pitch-modal');
+  const pitchClose = document.getElementById('pitch-close');
+  const pitchForm = document.getElementById('pitch-form') as HTMLFormElement | null;
+  const PITCH_KEY = 'pitch-modal-last-shown';
+  const DAY_MS = 24 * 60 * 60 * 1000;
+
+  function openPitch() {
+    if (!pitchModal) return;
+    pitchModal.classList.remove('hidden');
+    pitchModal.classList.add('flex');
+    try { localStorage.setItem(PITCH_KEY, String(Date.now())); } catch {}
+    const email = document.getElementById('pitch-email') as HTMLInputElement | null;
+    setTimeout(() => email?.focus(), 50);
+  }
+  function closePitch() {
+    if (!pitchModal) return;
+    pitchModal.classList.add('hidden');
+    pitchModal.classList.remove('flex');
+  }
+  function maybeShowPitch() {
+    if (!pitchModal) return;
+    let last = 0;
+    try { last = Number(localStorage.getItem(PITCH_KEY) || '0'); } catch {}
+    if (Date.now() - last < DAY_MS) return;
+    setTimeout(openPitch, 450);
+  }
+  pitchClose?.addEventListener('click', closePitch);
+  pitchModal?.addEventListener('click', (e) => {
+    if (e.target === pitchModal) closePitch();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && pitchModal && !pitchModal.classList.contains('hidden')) closePitch();
+  });
+  pitchForm?.addEventListener('submit', () => {
+    const btn = document.getElementById('pitch-submit') as HTMLButtonElement | null;
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+  });
 
   // CTA button scrolls to top and opens file picker
   const ctaBtn = document.getElementById('cta-upload-btn');
