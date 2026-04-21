@@ -150,16 +150,7 @@
           <li class="flex gap-2"><span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">payments</span><span><b class="text-on-background">Fair pricing.</b> One dev, no agency markup.</span></li>
         </ul>
       </div>
-      <form
-        id="pitch-form"
-        action="https://formsubmit.co/blog.boopul@gmail.com"
-        method="POST"
-        class="px-5 py-4"
-      >
-        <input type="hidden" name="_subject" value="New website lead from imagetourl.cloud" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://imagetourl.cloud/?contacted=1" />
+      <form id="pitch-form" class="px-5 py-4" novalidate>
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
         <label for="pitch-email" class="block text-xs font-bold uppercase tracking-wider text-on-background mb-2">Your email &mdash; I reply within a day</label>
         <div class="flex flex-col sm:flex-row gap-3">
@@ -179,8 +170,13 @@
             Get a quote
           </button>
         </div>
-        <p class="text-[11px] text-on-surface-variant mt-2 uppercase tracking-wider">No spam. No sales call. Just one dev replying.</p>
+        <p id="pitch-status" class="text-[11px] mt-2 uppercase tracking-wider text-on-surface-variant">No spam. No sales call. Just one dev replying.</p>
       </form>
+      <div id="pitch-success" class="hidden px-5 py-6 text-center">
+        <span class="material-symbols-outlined text-rose-600 text-4xl mb-2 inline-block" style="font-variation-settings: 'FILL' 1;">mark_email_read</span>
+        <p class="font-headline font-semibold uppercase tracking-tight text-xl text-on-background mb-1">Got it. Talk soon.</p>
+        <p class="text-sm text-on-surface-variant">I'll email you within 24 hours with next steps.</p>
+      </div>
     </div>
   </div>
 
@@ -421,9 +417,40 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !pitchModal.classList.contains('hidden')) closePitch();
   });
-  pitchForm?.addEventListener('submit', () => {
+  pitchForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
     const btn = document.getElementById('pitch-submit') as HTMLButtonElement | null;
+    const emailEl = document.getElementById('pitch-email') as HTMLInputElement | null;
+    const status = document.getElementById('pitch-status');
+    const successPanel = document.getElementById('pitch-success');
+    const honey = (pitchForm.querySelector('input[name="_honey"]') as HTMLInputElement | null)?.value || '';
+    if (!emailEl || !emailEl.checkValidity()) {
+      emailEl?.focus();
+      if (status) { status.textContent = 'Enter a valid email.'; status.className = 'text-[11px] mt-2 uppercase tracking-wider text-rose-600'; }
+      return;
+    }
+    if (honey) return;
     if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/blog.boopul@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          email: emailEl.value,
+          _subject: 'New website lead from imagetourl.cloud',
+          _template: 'table',
+          _captcha: 'false',
+          source: 'imagetourl pitch modal',
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || (data && data.success === 'false')) throw new Error((data && data.message) || 'Send failed');
+      pitchForm.classList.add('hidden');
+      successPanel?.classList.remove('hidden');
+    } catch (err: any) {
+      if (btn) { btn.textContent = 'Get a quote'; btn.disabled = false; }
+      if (status) { status.textContent = err?.message || 'Send failed. Try again.'; status.className = 'text-[11px] mt-2 uppercase tracking-wider text-rose-600'; }
+    }
   });
 
   uploadAnother.addEventListener('click', resetIdle);
