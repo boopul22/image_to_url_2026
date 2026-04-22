@@ -1,0 +1,737 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { defaultLocale } from '../../i18n/config';
+import type { Locale } from '../../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Project Brief - ImageToURL",
+  "description": "Tell us about your website project. Share your requirements, goals, and timeline and we'll get back to you with a custom proposal.",
+  "url": "https://imagetourl.cloud/project-brief"
+};
+
+// Project type tiles
+const projectTypes = [
+  { value: 'new-website',   label: 'New Website',      sub: 'Built from scratch',    icon: 'auto_awesome' },
+  { value: 'redesign',      label: 'Redesign',         sub: 'Refresh an old site',   icon: 'brush' },
+  { value: 'landing-page',  label: 'Landing Page',     sub: 'One-pager or funnel',   icon: 'web' },
+  { value: 'ecommerce',     label: 'Ecommerce',        sub: 'Online store',          icon: 'storefront' },
+  { value: 'web-app',       label: 'Web App / SaaS',   sub: 'Logged-in product',     icon: 'dashboard' },
+  { value: 'seo-content',   label: 'SEO / Content',    sub: 'Ranking & blog',        icon: 'trending_up' },
+  { value: 'fix-migration', label: 'Fix or Migrate',   sub: 'Speed up, move host',   icon: 'build' },
+  { value: 'other',         label: 'Something Else',   sub: 'Tell us below',         icon: 'more_horiz' },
+];
+
+// Features — short chips
+const features = [
+  { value: 'cms-blog',       label: 'CMS / Blog' },
+  { value: 'payments',       label: 'Payments' },
+  { value: 'auth-accounts',  label: 'User accounts' },
+  { value: 'booking',        label: 'Booking' },
+  { value: 'seo',            label: 'SEO' },
+  { value: 'i18n',           label: 'Multi-language' },
+  { value: 'integrations',   label: 'Integrations' },
+  { value: 'analytics',      label: 'Analytics' },
+  { value: 'custom-design',  label: 'Custom design' },
+  { value: 'hosting-devops', label: 'Hosting / DevOps' },
+  { value: 'email-automation', label: 'Email automation' },
+  { value: 'ai-features',    label: 'AI features' },
+];
+
+// Timeline tiles
+const timelines = [
+  { value: 'asap',         label: 'ASAP',       sub: 'Rush' },
+  { value: '2-4-weeks',    label: '2–4 weeks',  sub: 'Standard' },
+  { value: '1-2-months',   label: '1–2 months', sub: 'Comfortable' },
+  { value: '3-6-months',   label: '3–6 months', sub: 'Relaxed' },
+  { value: 'flexible',     label: 'Flexible',   sub: 'Not sure' },
+];
+
+// Budget tiles — two quick picks + "Not sure". Anything else → custom input.
+const budgets = [
+  { value: 'under-200', label: 'Under $200' },
+  { value: '200-500',   label: '$200 – $500' },
+  { value: 'not-sure',  label: 'Not sure yet' },
+];
+
+// Country list — ISO 3166-1 (short names). Popular-first optional.
+const countries = [
+  'United States','United Kingdom','Canada','Australia','India','Germany','France','Netherlands','Spain','Italy','Portugal','Ireland','Sweden','Norway','Denmark','Finland','Belgium','Switzerland','Austria','Poland','Czechia','Greece','Turkey','Saudi Arabia','United Arab Emirates','Israel','Egypt','South Africa','Kenya','Nigeria','Ghana','Morocco','Brazil','Mexico','Argentina','Chile','Colombia','Peru','Japan','South Korea','China','Hong Kong','Taiwan','Singapore','Malaysia','Indonesia','Philippines','Thailand','Vietnam','Bangladesh','Pakistan','Sri Lanka','Nepal','New Zealand',
+  'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Armenia','Azerbaijan','Bahamas','Bahrain','Barbados','Belarus','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brunei','Bulgaria','Burkina Faso','Burundi','Cambodia','Cameroon','Cape Verde','Central African Republic','Chad','Comoros','Congo','Costa Rica','Croatia','Cuba','Cyprus','Djibouti','Dominica','Dominican Republic','Ecuador','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Gabon','Gambia','Georgia','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','Iran','Iraq','Ivory Coast','Jamaica','Jordan','Kazakhstan','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Mozambique','Myanmar','Namibia','Nauru','Nicaragua','Niger','North Macedonia','Oman','Palau','Palestine','Panama','Papua New Guinea','Paraguay','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','Sao Tome and Principe','Senegal','Serbia','Seychelles','Sierra Leone','Slovakia','Slovenia','Solomon Islands','Somalia','South Sudan','Sudan','Suriname','Syria','Tajikistan','Tanzania','Timor-Leste','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkmenistan','Tuvalu','Uganda','Ukraine','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Yemen','Zambia','Zimbabwe','Other'
+];
+---
+
+<Layout title="Project Brief - Tell Us About Your Website" description="Start a website project with us. Fill out this short brief with your goals, features, timeline and budget — we'll reply within 24 hours with a custom proposal." schema={schema} noHreflang>
+  <Nav />
+
+  <main class="max-w-5xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <header class="mb-8 sm:mb-12 reveal">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest border border-on-background">Project Brief</span>
+        <span class="inline-flex items-center gap-1.5 bg-white text-on-background px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest border border-on-background">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+          Accepting projects
+        </span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black font-headline leading-[0.95] tracking-tighter mb-4 sm:mb-6 max-w-3xl">
+        Tell us about your <span class="italic text-primary">website</span> — we'll reply in 24h.
+      </h1>
+      <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Short, skimmable questions. Tick tiles, add a few notes, hit send. You'll get a real human reply with a scope, price, and next steps.
+      </p>
+
+      <!-- Inline trust strip -->
+      <div class="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 text-xs font-label uppercase tracking-wider text-on-surface-variant">
+        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">bolt</span> 24h reply</span>
+        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">request_quote</span> Fixed-price quote</span>
+        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">lock</span> Stays private</span>
+        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">public</span> Worldwide</span>
+      </div>
+    </header>
+
+    <!-- Progress bar (inline, above form) -->
+    <div id="brief-progress-wrap" class="mb-4 sm:mb-6 reveal">
+      <div class="bg-white border-2 border-on-background rounded-lg hard-shadow px-3 sm:px-4 py-2.5 flex items-center gap-3">
+        <span class="font-label text-[10px] sm:text-xs font-bold uppercase tracking-wider text-on-surface-variant shrink-0">Progress</span>
+        <div class="flex-1 h-2 bg-surface-variant border border-on-background rounded-full overflow-hidden">
+          <div id="brief-progress-bar" class="h-full bg-primary transition-[width] duration-300 ease-out" style="width:0%"></div>
+        </div>
+        <span id="brief-progress-label" class="font-label text-[10px] sm:text-xs font-bold uppercase tracking-wider shrink-0 tabular-nums">0 / 6</span>
+      </div>
+    </div>
+
+    <!-- Form container -->
+    <section class="mb-10 sm:mb-24">
+      <div class="bg-surface border-2 border-on-background p-4 sm:p-8 lg:p-10 rounded-xl hard-shadow reveal">
+
+        <!-- Success panel (hidden until submit) -->
+        <div id="brief-success" class="hidden">
+          <div class="w-16 h-16 bg-primary-fixed border-2 border-on-background rounded-lg flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary" style="font-size:40px;">check_circle</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-black font-headline tracking-tight mb-3">Brief received.</h3>
+          <p class="font-body text-on-surface-variant mb-8 max-w-xl">Thanks — we got it. A real human reply is coming from <strong class="text-on-background">blog.boopul@gmail.com</strong> within 24 hours.</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
+            <div class="bg-white border-2 border-on-background p-4 rounded-lg hard-shadow">
+              <div class="font-label text-xs font-black text-primary mb-2">STEP 01</div>
+              <div class="font-headline font-bold mb-1">We review</div>
+              <p class="text-xs text-on-surface-variant">We read your brief end-to-end and flag any gaps.</p>
+            </div>
+            <div class="bg-white border-2 border-on-background p-4 rounded-lg hard-shadow">
+              <div class="font-label text-xs font-black text-primary mb-2">STEP 02</div>
+              <div class="font-headline font-bold mb-1">We reply</div>
+              <p class="text-xs text-on-surface-variant">Email within 24h: questions, rough quote, timeline.</p>
+            </div>
+            <div class="bg-white border-2 border-on-background p-4 rounded-lg hard-shadow">
+              <div class="font-label text-xs font-black text-primary mb-2">STEP 03</div>
+              <div class="font-headline font-bold mb-1">We build</div>
+              <p class="text-xs text-on-surface-variant">Kick-off call, fixed-price contract, then we ship.</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href={lp('/')} class="inline-flex items-center justify-center gap-2 bg-on-surface text-surface px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
+              <span class="material-symbols-outlined text-xl">home</span>
+              Back to home
+            </a>
+            <a href={lp('/blog')} class="inline-flex items-center justify-center gap-2 bg-white text-on-background px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
+              <span class="material-symbols-outlined text-xl">menu_book</span>
+              Read the blog
+            </a>
+          </div>
+        </div>
+
+        <form id="brief-form" class="space-y-10" novalidate>
+          <!-- Honeypot -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <!-- Hidden for tile pickers (validated manually in submit handler) -->
+          <input type="hidden" id="hf-project-type" name="project_type" />
+          <input type="hidden" id="hf-timeline" name="timeline" />
+          <input type="hidden" id="hf-budget" name="budget" />
+
+          <!-- ================== SECTION 01 — YOU ================== -->
+          <fieldset data-section="you" class="bf-section">
+            <div class="flex items-baseline gap-4 mb-5">
+              <span class="font-label text-[11px] font-black text-primary tracking-[0.2em]">01</span>
+              <h2 class="text-lg sm:text-xl font-black font-headline tracking-tight">About you</h2>
+              <div class="h-px flex-grow bg-on-background opacity-10 translate-y-[-4px]"></div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="bf-name" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Full name <span class="text-rose-600">*</span></label>
+                  <input id="bf-name" type="text" name="name" required placeholder="Jane Doe" autocomplete="name" class="bf-input" />
+                </div>
+                <div>
+                  <label for="bf-email" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Email <span class="text-rose-600">*</span></label>
+                  <input id="bf-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email" class="bf-input" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="bf-company" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Company / brand <span class="text-on-surface-variant opacity-60">(optional)</span></label>
+                  <input id="bf-company" type="text" name="company" placeholder="Acme Inc." autocomplete="organization" class="bf-input" />
+                </div>
+                <div>
+                  <label for="bf-country" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Country <span class="text-rose-600">*</span></label>
+                  <div class="relative">
+                    <input id="bf-country" name="country" required list="bf-country-list" placeholder="Start typing…" autocomplete="country-name" class="bf-input pr-10" />
+                    <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">public</span>
+                    <datalist id="bf-country-list">
+                      {countries.map((c) => <option value={c} />)}
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="bf-phone" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Phone / WhatsApp <span class="text-on-surface-variant opacity-60">(optional)</span></label>
+                  <input id="bf-phone" type="tel" name="phone" placeholder="+1 555 000 0000" autocomplete="tel" class="bf-input" />
+                </div>
+                <div>
+                  <label for="bf-current" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Current website <span class="text-on-surface-variant opacity-60">(if any)</span></label>
+                  <input id="bf-current" type="url" name="current_website" placeholder="https://" class="bf-input" />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- ================== SECTION 02 — PROJECT ================== -->
+          <fieldset data-section="project" class="bf-section">
+            <div class="flex items-baseline gap-4 mb-5">
+              <span class="font-label text-[11px] font-black text-primary tracking-[0.2em]">02</span>
+              <h2 class="text-lg sm:text-xl font-black font-headline tracking-tight">The project</h2>
+              <div class="h-px flex-grow bg-on-background opacity-10 translate-y-[-4px]"></div>
+            </div>
+
+            <!-- Project type tiles -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-label text-[11px] font-bold uppercase tracking-wider">What are you building? <span class="text-rose-600">*</span></span>
+                <span id="bf-type-feedback" class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Pick one</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3" role="radiogroup" aria-label="Project type">
+                {projectTypes.map((t) => (
+                  <button type="button" class="bf-tile group" data-tile="project-type" data-value={t.value} role="radio" aria-checked="false">
+                    <span class="material-symbols-outlined text-2xl sm:text-[26px] text-on-surface-variant group-[.is-active]:text-primary transition-colors">{t.icon}</span>
+                    <span class="font-headline font-bold text-sm leading-tight mt-2 block">{t.label}</span>
+                    <span class="font-body text-[11px] text-on-surface-variant leading-tight mt-0.5 block">{t.sub}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <!-- Features chips -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-label text-[11px] font-bold uppercase tracking-wider">Features needed <span class="text-on-surface-variant opacity-60">(pick any)</span></span>
+                <span id="bf-features-count" class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">0 selected</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                {features.map((f) => (
+                  <label class="bf-chip">
+                    <input type="checkbox" name="features" value={f.value} class="sr-only peer" />
+                    <span class="material-symbols-outlined text-base opacity-0 peer-checked:opacity-100 transition-opacity -ml-1 mr-0.5">check</span>
+                    <span>{f.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Goals -->
+            <div class="mb-5">
+              <div class="flex items-center justify-between mb-2">
+                <label for="bf-goals" class="font-label text-[11px] font-bold uppercase tracking-wider">Project goals <span class="text-rose-600">*</span></label>
+                <span id="bf-goals-count" class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant tabular-nums">0 / 600</span>
+              </div>
+              <textarea id="bf-goals" name="goals" required rows="4" maxlength="600"
+                placeholder="What are you trying to achieve? e.g. more leads from local search, sell a digital course, replace a slow WordPress site that keeps crashing…"
+                class="bf-input resize-y min-h-[110px]"></textarea>
+              <p class="text-[11px] text-on-surface-variant mt-1.5">Be specific — the clearer the brief, the faster and more accurate the quote.</p>
+            </div>
+
+            <!-- Reference websites (prominent) -->
+            <div class="mb-5">
+              <div class="flex items-center justify-between mb-2">
+                <label for="bf-reference" class="font-label text-[11px] font-bold uppercase tracking-wider">Reference websites <span class="text-on-surface-variant opacity-60">(1–3 URLs you'd like yours to look / work like)</span></label>
+              </div>
+              <textarea id="bf-reference" name="reference_websites" rows="3" placeholder="https://stripe.com&#10;https://linear.app&#10;https://yourcompetitor.com" class="bf-input resize-y"></textarea>
+              <p class="text-[11px] text-on-surface-variant mt-1.5">Paste full URLs. Note which part you like (design, speed, a specific page, a feature).</p>
+            </div>
+
+            <!-- Audience -->
+            <div>
+              <label for="bf-audience" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Target audience <span class="text-on-surface-variant opacity-60">(optional)</span></label>
+              <textarea id="bf-audience" name="audience" rows="2" placeholder="B2B buyers, students, local walk-in clients…" class="bf-input resize-y"></textarea>
+            </div>
+          </fieldset>
+
+          <!-- ================== SECTION 03 — SCOPE ================== -->
+          <fieldset data-section="scope" class="bf-section">
+            <div class="flex items-baseline gap-4 mb-5">
+              <span class="font-label text-[11px] font-black text-primary tracking-[0.2em]">03</span>
+              <h2 class="text-lg sm:text-xl font-black font-headline tracking-tight">Timeline &amp; budget</h2>
+              <div class="h-px flex-grow bg-on-background opacity-10 translate-y-[-4px]"></div>
+            </div>
+
+            <!-- Timeline tiles -->
+            <div class="mb-6">
+              <span class="font-label text-[11px] font-bold uppercase tracking-wider block mb-3">When do you need this? <span class="text-on-surface-variant opacity-60">(optional)</span></span>
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3" role="radiogroup" aria-label="Timeline">
+                {timelines.map((t) => (
+                  <button type="button" class="bf-tile bf-tile-compact group" data-tile="timeline" data-value={t.value} role="radio" aria-checked="false">
+                    <span class="font-headline font-bold text-sm block">{t.label}</span>
+                    <span class="font-body text-[11px] text-on-surface-variant block mt-0.5">{t.sub}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <!-- Budget -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-label text-[11px] font-bold uppercase tracking-wider">Budget (USD) <span class="text-rose-600">*</span></span>
+                <span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Pick a tile or enter an amount</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mb-3" role="radiogroup" aria-label="Budget">
+                {budgets.map((b) => (
+                  <button type="button" class="bf-tile bf-tile-compact group" data-tile="budget" data-value={b.value} role="radio" aria-checked="false">
+                    <span class="font-headline font-bold text-sm block">{b.label}</span>
+                  </button>
+                ))}
+              </div>
+              <div>
+                <label for="bf-budget-custom" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Or enter your desired amount</label>
+                <div class="relative">
+                  <span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-bold text-on-surface-variant pointer-events-none">$</span>
+                  <input id="bf-budget-custom" type="number" inputmode="numeric" min="0" step="50" placeholder="e.g. 1500" class="bf-input pl-8" />
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 font-label text-[11px] font-bold uppercase tracking-wider text-on-surface-variant pointer-events-none">USD</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="bf-hear" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">How did you hear about us? <span class="text-on-surface-variant opacity-60">(optional)</span></label>
+                <input id="bf-hear" type="text" name="source" placeholder="Google, friend, ImageToURL tool, Twitter…" class="bf-input" />
+              </div>
+              <div>
+                <label for="bf-notes" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Anything else? <span class="text-on-surface-variant opacity-60">(optional)</span></label>
+                <textarea id="bf-notes" name="notes" rows="1" placeholder="Constraints, tech stack, questions…" class="bf-input resize-y"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Submit bar -->
+          <div class="pt-2 border-t-2 border-on-background">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-5">
+              <div class="flex items-center gap-2">
+                <span id="bf-ready-dot" class="w-2 h-2 rounded-full bg-on-surface-variant/40"></span>
+                <p id="bf-ready-text" class="text-xs font-label uppercase tracking-wider text-on-surface-variant">
+                  Fill the required fields to send
+                </p>
+              </div>
+              <div class="flex items-center gap-3">
+                <button id="brief-reset" type="button" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-label uppercase tracking-wider text-on-surface-variant hover:text-on-background transition-colors">
+                  <span class="material-symbols-outlined text-base">refresh</span>
+                  Clear
+                </button>
+                <button id="brief-submit" type="submit" class="inline-flex items-center gap-2 bg-primary text-on-primary px-7 sm:px-10 py-3 sm:py-3.5 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span>Send brief</span>
+                  <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+            <p id="brief-status" class="text-xs font-label uppercase tracking-wider mt-3 hidden" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10 sm:mb-24">
+      <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+        <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Common questions</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
+        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">Will you really take a $200 project?</h3>
+          <p class="font-body text-on-surface-variant text-sm">Yes — small scope is fine (a landing tweak, a bug fix, a copy pass). Just match what you want done to what you can pay. We'll tell you upfront if it can't fit.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">What happens after I submit?</h3>
+          <p class="font-body text-on-surface-variant text-sm">A reply within 24 hours with follow-up questions, a rough quote, and a call slot if you want to go deeper. No sales script.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">Do you work with clients outside the US?</h3>
+          <p class="font-body text-on-surface-variant text-sm">Yes — we work with clients worldwide. We'll match our hours to yours for the kick-off call.</p>
+        </div>
+        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+          <h3 class="font-headline font-bold text-lg mb-2">Is my info shared?</h3>
+          <p class="font-body text-on-surface-variant text-sm">No. Your brief goes to our inbox and nowhere else. Never sold, never used for newsletters.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Input base — shared by inputs, textareas, selects */
+  .bf-input {
+    width: 100%;
+    background: #ffffff;
+    border: 2px solid var(--color-on-background, #111);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: inherit;
+    transition: border-color 120ms, box-shadow 120ms, transform 120ms;
+  }
+  .bf-input:focus {
+    outline: none;
+    border-color: var(--color-primary, #e11d48);
+    box-shadow: 4px 4px 0 0 var(--color-on-background, #111);
+    transform: translate(-1px, -1px);
+  }
+  .bf-input::placeholder { color: rgba(0,0,0,0.35); }
+
+  /* Tile picker (radio-style card) */
+  .bf-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0.875rem 0.875rem;
+    background: #ffffff;
+    border: 2px solid var(--color-on-background, #111);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 120ms, box-shadow 120ms, background 120ms;
+    position: relative;
+  }
+  .bf-tile:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 0 var(--color-on-background, #111);
+  }
+  .bf-tile.is-active {
+    background: var(--color-primary-fixed, #ffe4e6);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--color-on-background, #111);
+  }
+  .bf-tile.is-active::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 14px;
+    height: 14px;
+    background: var(--color-primary, #e11d48);
+    border: 2px solid var(--color-on-background, #111);
+    border-radius: 999px;
+  }
+  .bf-tile-compact {
+    padding: 0.75rem 0.75rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Chip (multi-select checkbox) */
+  .bf-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.875rem;
+    background: #ffffff;
+    border: 2px solid var(--color-on-background, #111);
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    user-select: none;
+    transition: transform 120ms, background 120ms, box-shadow 120ms;
+  }
+  .bf-chip:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0 0 var(--color-on-background, #111);
+  }
+  .bf-chip:has(input:checked) {
+    background: var(--color-primary, #e11d48);
+    color: var(--color-on-primary, #fff);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 0 var(--color-on-background, #111);
+  }
+
+  /* Ready dot states */
+  .bf-ready .bf-ready-dot,
+  #bf-ready-dot.is-ready {
+    background: #10b981 !important; /* green-500 */
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bf-input, .bf-tile, .bf-chip { transition: none; }
+  }
+</style>
+
+<script>
+  // ---------- tile pickers (single-select) ----------
+  const tileGroups: Record<string, HTMLInputElement | null> = {
+    'project-type': document.getElementById('hf-project-type') as HTMLInputElement | null,
+    'timeline':     document.getElementById('hf-timeline')     as HTMLInputElement | null,
+    'budget':       document.getElementById('hf-budget')       as HTMLInputElement | null,
+  };
+
+  const budgetCustom = document.getElementById('bf-budget-custom') as HTMLInputElement | null;
+
+  document.querySelectorAll<HTMLButtonElement>('[data-tile]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.tile!;
+      const value = btn.dataset.value!;
+      // Clear others in same group
+      document.querySelectorAll<HTMLButtonElement>(`[data-tile="${group}"]`).forEach((other) => {
+        other.classList.remove('is-active');
+        other.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-checked', 'true');
+      const hidden = tileGroups[group];
+      if (hidden) {
+        hidden.value = value;
+        hidden.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      // Budget: picking a tile clears the custom amount
+      if (group === 'budget' && budgetCustom && budgetCustom.value) {
+        budgetCustom.value = '';
+      }
+      updateProgress();
+    });
+  });
+
+  // Custom budget input: typing a value clears any selected tile and becomes the budget
+  budgetCustom?.addEventListener('input', () => {
+    const v = budgetCustom.value.trim();
+    const hidden = tileGroups['budget'];
+    if (v) {
+      document.querySelectorAll<HTMLButtonElement>('[data-tile="budget"]').forEach((t) => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-checked', 'false');
+      });
+      if (hidden) hidden.value = `custom-${v}`;
+    } else {
+      if (hidden) hidden.value = '';
+    }
+    updateProgress();
+  });
+
+  // Keyboard nav for tile groups (arrow keys move focus + select)
+  document.querySelectorAll<HTMLElement>('[role="radiogroup"]').forEach((group) => {
+    group.addEventListener('keydown', (e) => {
+      const tiles = Array.from(group.querySelectorAll<HTMLButtonElement>('[data-tile]'));
+      const active = document.activeElement as HTMLElement | null;
+      const idx = tiles.findIndex((t) => t === active);
+      if (idx < 0) return;
+      let next = idx;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (idx + 1) % tiles.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (idx - 1 + tiles.length) % tiles.length;
+      else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); tiles[idx].click(); return; }
+      else return;
+      e.preventDefault();
+      tiles[next].focus();
+      tiles[next].click();
+    });
+  });
+
+  // Show project type chosen label
+  const typeFeedback = document.getElementById('bf-type-feedback');
+  document.querySelectorAll<HTMLButtonElement>('[data-tile="project-type"]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (typeFeedback) typeFeedback.textContent = btn.querySelector('.font-headline')?.textContent || 'Pick one';
+    });
+  });
+
+  // ---------- feature chips counter ----------
+  const featuresCountEl = document.getElementById('bf-features-count');
+  document.querySelectorAll<HTMLInputElement>('input[name="features"]').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const n = document.querySelectorAll<HTMLInputElement>('input[name="features"]:checked').length;
+      if (featuresCountEl) featuresCountEl.textContent = `${n} selected`;
+    });
+  });
+
+  // ---------- char counter on goals ----------
+  const goals = document.getElementById('bf-goals') as HTMLTextAreaElement | null;
+  const goalsCount = document.getElementById('bf-goals-count');
+  goals?.addEventListener('input', () => {
+    const n = goals.value.length;
+    if (goalsCount) {
+      goalsCount.textContent = `${n} / 600`;
+      goalsCount.classList.toggle('text-rose-600', n > 550);
+    }
+    updateProgress();
+  });
+
+  // ---------- progress + ready state ----------
+  const form = document.getElementById('brief-form') as HTMLFormElement | null;
+  const progressBar = document.getElementById('brief-progress-bar') as HTMLDivElement | null;
+  const progressLabel = document.getElementById('brief-progress-label') as HTMLSpanElement | null;
+  const readyDot = document.getElementById('bf-ready-dot');
+  const readyText = document.getElementById('bf-ready-text');
+  const submitBtn = document.getElementById('brief-submit') as HTMLButtonElement | null;
+
+  const REQUIRED = [
+    () => !!(document.getElementById('bf-name') as HTMLInputElement)?.value.trim(),
+    () => {
+      const el = document.getElementById('bf-email') as HTMLInputElement;
+      return !!el?.value.trim() && el.checkValidity();
+    },
+    () => !!(document.getElementById('bf-country') as HTMLInputElement)?.value.trim(),
+    () => !!(document.getElementById('hf-project-type') as HTMLInputElement)?.value,
+    () => !!(document.getElementById('hf-budget') as HTMLInputElement)?.value,
+    () => ((document.getElementById('bf-goals') as HTMLTextAreaElement)?.value.trim().length || 0) >= 10,
+  ];
+
+  function updateProgress() {
+    const total = REQUIRED.length;
+    const done = REQUIRED.filter((fn) => { try { return fn(); } catch { return false; } }).length;
+    const pct = Math.round((done / total) * 100);
+    if (progressBar) progressBar.style.width = `${pct}%`;
+    if (progressLabel) progressLabel.textContent = `${done} / ${total}`;
+    const ready = done === total;
+    if (readyDot) readyDot.classList.toggle('is-ready', ready);
+    if (readyText) {
+      readyText.textContent = ready
+        ? 'Ready to send — tap the button'
+        : `${total - done} field${(total - done) === 1 ? '' : 's'} to go`;
+      readyText.classList.toggle('text-on-background', ready);
+      readyText.classList.toggle('text-on-surface-variant', !ready);
+    }
+  }
+
+  form?.addEventListener('input', updateProgress);
+  form?.addEventListener('change', updateProgress);
+  updateProgress();
+
+  // ---------- reset ----------
+  document.getElementById('brief-reset')?.addEventListener('click', () => {
+    if (!form) return;
+    if (!confirm('Clear all fields?')) return;
+    form.reset();
+    document.querySelectorAll<HTMLButtonElement>('[data-tile]').forEach((t) => {
+      t.classList.remove('is-active');
+      t.setAttribute('aria-checked', 'false');
+    });
+    (document.getElementById('hf-project-type') as HTMLInputElement).value = '';
+    (document.getElementById('hf-timeline')     as HTMLInputElement).value = '';
+    (document.getElementById('hf-budget')       as HTMLInputElement).value = '';
+    if (budgetCustom) budgetCustom.value = '';
+    if (typeFeedback) typeFeedback.textContent = 'Pick one';
+    if (featuresCountEl) featuresCountEl.textContent = '0 selected';
+    if (goalsCount) { goalsCount.textContent = '0 / 600'; goalsCount.classList.remove('text-rose-600'); }
+    updateProgress();
+  });
+
+  // ---------- submit (FormSubmit AJAX) ----------
+  const statusEl = document.getElementById('brief-status') as HTMLParagraphElement | null;
+  const successEl = document.getElementById('brief-success') as HTMLDivElement | null;
+
+  function setStatus(msg: string, tone: 'error' | 'info' = 'info') {
+    if (!statusEl) return;
+    if (!msg) { statusEl.textContent = ''; statusEl.classList.add('hidden'); return; }
+    statusEl.textContent = msg;
+    statusEl.classList.remove('hidden');
+    statusEl.className = tone === 'error'
+      ? 'text-xs font-label uppercase tracking-wider mt-3 text-rose-600'
+      : 'text-xs font-label uppercase tracking-wider mt-3 text-on-surface-variant';
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form) return;
+
+    const honey = (form.querySelector('input[name="_honey"]') as HTMLInputElement | null)?.value || '';
+    if (honey) return;
+
+    // Check our tile-backed required fields + native fields
+    const typeVal = (document.getElementById('hf-project-type') as HTMLInputElement).value;
+    const budgetVal = (document.getElementById('hf-budget') as HTMLInputElement).value;
+    if (!typeVal) {
+      setStatus('Pick a project type above.', 'error');
+      document.querySelector<HTMLButtonElement>('[data-tile="project-type"]')?.focus();
+      return;
+    }
+    if (!budgetVal) {
+      setStatus('Pick a budget range.', 'error');
+      document.querySelector<HTMLButtonElement>('[data-tile="budget"]')?.focus();
+      return;
+    }
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const fd = new FormData(form);
+    const featuresList = fd.getAll('features').join(', ');
+    const payload: Record<string, string> = {
+      _subject: 'New website project brief — imagetourl.cloud',
+      _template: 'table',
+      _captcha: 'false',
+      source: 'imagetourl project-brief page',
+      name: String(fd.get('name') || ''),
+      email: String(fd.get('email') || ''),
+      company: String(fd.get('company') || ''),
+      country: String(fd.get('country') || ''),
+      phone: String(fd.get('phone') || ''),
+      current_website: String(fd.get('current_website') || ''),
+      project_type: String(fd.get('project_type') || ''),
+      features: featuresList,
+      goals: String(fd.get('goals') || ''),
+      audience: String(fd.get('audience') || ''),
+      reference_websites: String(fd.get('reference_websites') || ''),
+      timeline: String(fd.get('timeline') || ''),
+      budget: String(fd.get('budget') || ''),
+      hear_about: String(fd.get('source') || ''),
+      notes: String(fd.get('notes') || ''),
+    };
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.querySelector('span:first-child')!.textContent = 'Sending…'; }
+    setStatus('');
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/blog.boopul@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || (data && data.success === 'false')) {
+        throw new Error((data && data.message) || 'Send failed');
+      }
+      form.classList.add('hidden');
+      document.getElementById('brief-progress-wrap')?.classList.add('hidden');
+      successEl?.classList.remove('hidden');
+      successEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err: any) {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.querySelector('span:first-child')!.textContent = 'Send brief'; }
+      setStatus(err?.message || 'Send failed. Try again.', 'error');
+    }
+  });
+</script>
