@@ -353,30 +353,49 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0.5rem;
   }
 
-  /* Code blocks + inline code — TipTap emits <pre><code> and <code>. */
+  /* Inline code — paper/cream chip with thin charcoal outline. */
   .landing-prose :not(pre) > code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
-    font-size: 0.875em;
-    background: #fde68a;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+    background: #fbf3d8;
     color: #171717;
-    border: 2px solid #171717;
-    padding: 1px 6px;
-    font-weight: 600;
+    border: 1.5px solid #171717;
+    padding: 0 5px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
+
+  /* Block code — warm paper, charcoal type, brutalist border + shadow.
+     Light-mode, no dark fills, no rounding. Optical trim with a thin rose
+     rail on the left and a small charcoal tick in the top-right so the
+     block reads as "code" at a glance without screaming. */
   .landing-prose pre {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
-    background: #171717;
-    color: #fcfcfc;
+    position: relative;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
+    background: #faf6ec;
+    color: #171717;
     border: 2px solid #171717;
+    border-left-width: 6px;
+    border-left-color: #e11d48;
     box-shadow: 4px 4px 0 0 #171717;
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 1.5rem 1.25rem 1.25rem;
     margin: 1.75rem 0;
     overflow-x: auto;
     font-size: 0.875rem;
-    line-height: 1.6;
+    line-height: 1.75;
     -webkit-overflow-scrolling: touch;
+    tab-size: 2;
+  }
+  .landing-prose pre::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: #171717;
   }
   .landing-prose pre code {
     background: transparent;
@@ -385,9 +404,24 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
     font-weight: 400;
     font-size: inherit;
+    letter-spacing: -0.005em;
     white-space: pre;
     overflow-wrap: normal;
     word-break: normal;
+    display: block;
+  }
+  .landing-prose pre::selection,
+  .landing-prose pre *::selection {
+    background: #e11d48;
+    color: #fffaf0;
+  }
+  @media (max-width: 640px) {
+    .landing-prose pre {
+      padding: 1rem 1.125rem 1rem 0.875rem;
+      font-size: 0.8125rem;
+      margin: 1.5rem 0;
+      border-left-width: 5px;
+    }
   }
 }
 
