@@ -44,6 +44,26 @@ export function resolveSlug(locale: Locale, slug: string): PageKey | null {
   return REVERSE.get(`${locale}/${slug}`) ?? null;
 }
 
+// Reverse map of translated slug → owning locale. A slug "owns" a locale when
+// SLUGS[pageKey][locale] === slug (not a fallback). Used by middleware to 301
+// cross-locale URLs like /ar/<farsi-slug>/ → /fa/<farsi-slug>/ instead of 404ing.
+// If a slug appears under multiple locales' own entries (rare), the first wins.
+const SLUG_OWNER: Map<string, Locale> = (() => {
+  const m = new Map<string, Locale>();
+  for (const pageKey of PAGE_KEYS) {
+    const slugs = SLUGS[pageKey];
+    for (const locale of locales) {
+      const own = slugs[locale];
+      if (own && !m.has(own)) m.set(own, locale);
+    }
+  }
+  return m;
+})();
+
+export function ownerLocaleForSlug(slug: string): Locale | null {
+  return SLUG_OWNER.get(slug) ?? null;
+}
+
 // For hreflang link tags: emit one entry per locale that has a slug for this
 // page. Locales without a translated slug fall back to their English slug
 // under their locale prefix (still linguistically navigable).

@@ -2,7 +2,8 @@ import { defineMiddleware } from 'astro:middleware';
 import { getSession } from './lib/session';
 import { getDB } from './lib/db';
 import { getLocaleFromPath } from './i18n/utils';
-import { defaultLocale, locales } from './i18n/config';
+import { defaultLocale, locales, type Locale } from './i18n/config';
+import { resolveSlug, ownerLocaleForSlug } from './i18n/landing/registry';
 
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
 const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
@@ -63,6 +64,31 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     const m = path.match(/^\/([a-z]{2,3}(?:-[A-Za-z]+)?)\/(auth\/.+)$/);
     if (m && (locales as readonly string[]).includes(m[1])) {
       return redirect(`/api/${m[2]}${url0.search}`, 301);
+    }
+  }
+
+  // Cross-locale slug redirects: /{locale}/{translated-slug}/ where the slug
+  // belongs to a different locale's SLUGS (e.g. /ar/<farsi-slug>/). 301 to the
+  // locale that owns the slug so Google can reconcile instead of seeing 404s.
+  // Built from an Ahrefs crawl that surfaced ~35k of these cross-linked URLs.
+  {
+    const seg = path.split('/');
+    if (
+      seg.length >= 3 &&
+      (locales as readonly string[]).includes(seg[1]) &&
+      seg[2] &&
+      !seg[3] // single-slug page, not nested (blog, guides, etc.)
+    ) {
+      const loc = seg[1] as Locale;
+      const rawSlug = seg[2];
+      let decoded = rawSlug;
+      try { decoded = decodeURIComponent(rawSlug); } catch { /* keep raw */ }
+      if (!resolveSlug(loc, decoded)) {
+        const owner = ownerLocaleForSlug(decoded);
+        if (owner && owner !== loc) {
+          return redirect(`/${owner}/${rawSlug}/${url0.search}`, 301);
+        }
+      }
     }
   }
 
