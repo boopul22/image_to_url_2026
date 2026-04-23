@@ -38,10 +38,7 @@ function en(href: string, name: string, icon: string): NavLink {
 
 export function getNavGroups(locale: Locale): NavGroups {
   return {
-    tools: [
-      { name: 'ExtractPics — Image Extractor', href: 'https://extractpics.com/?ref=imagetourl', icon: 'travel_explore', external: true },
-      { name: 'Daily Meditation Guide', href: 'https://dailymeditationguide.com/?ref=imagetourl', icon: 'self_improvement', external: true },
-    ],
+    tools: [],
     convert: [
       lp(locale, 'png-to-url', 'PNG to URL', 'image'),
       lp(locale, 'jpg-to-url', 'JPG to URL', 'photo'),
@@ -151,9 +148,7 @@ export function getNavGroups(locale: Locale): NavGroups {
       en('/guides/embed-images-in-notion', 'Embed in Notion', 'description'),
       en('/guides/why-reddit-strips-exif', 'Why Reddit Strips EXIF', 'reddit'),
     ],
-    companion: [
-      { name: 'ExtractPics — Image Extractor', href: 'https://extractpics.com/?ref=imagetourl', icon: 'travel_explore', external: true },
-    ],
+    companion: [],
     company: [
       lp(locale, 'about', t(locale, 'nav.about'), 'info'),
       lp(locale, 'contact', t(locale, 'nav.contact'), 'mail'),

@@ -189,20 +189,22 @@ const toolsDropdown = getNavGroups(locale);
                 </a>
               ))}
             </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Partner Tools</span>
-              {toolsDropdown.tools.map((item) => (
-                <a
-                  href={item.href}
-                  {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
-                  class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
-                >
-                  <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
-                  {item.name}
-                  {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
-                </a>
-              ))}
-            </div>
+            {toolsDropdown.tools.length > 0 && (
+              <div class="p-4">
+                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Partner Tools</span>
+                {toolsDropdown.tools.map((item) => (
+                  <a
+                    href={item.href}
+                    {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                    class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
+                  >
+                    <span class="material-symbols-outlined text-primary text-base">{item.icon}</span>
+                    {item.name}
+                    {item.external && <span class="material-symbols-outlined text-[10px] text-outline ml-auto">open_in_new</span>}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -381,7 +383,7 @@ const toolsDropdown = getNavGroups(locale);
             ['nav.convert', toolsDropdown.convert],
             ['Format Converters', toolsDropdown.formatConvert],
             ['Partner Tools', toolsDropdown.tools],
-          ] as const).map(([label, items]) => (
+          ] as const).filter(([, items]) => items.length > 0).map(([label, items]) => (
             <>
               <div class="px-3 pt-3 pb-1">
                 <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">
