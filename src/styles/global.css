@@ -352,6 +352,43 @@ h1, h2, h3, h4, h5, h6 {
   .landing-prose :is(th, td) > p + p {
     margin-top: 0.5rem;
   }
+
+  /* Code blocks + inline code — TipTap emits <pre><code> and <code>. */
+  .landing-prose :not(pre) > code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.875em;
+    background: #fde68a;
+    color: #171717;
+    border: 2px solid #171717;
+    padding: 1px 6px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .landing-prose pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
+    background: #171717;
+    color: #fcfcfc;
+    border: 2px solid #171717;
+    box-shadow: 4px 4px 0 0 #171717;
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    -webkit-overflow-scrolling: touch;
+  }
+  .landing-prose pre code {
+    background: transparent;
+    color: inherit;
+    border: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: inherit;
+    white-space: pre;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
 }
 
 /* Reveal classes kept as no-ops for compatibility — brutalism snaps, no fades. */
