@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "web": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/patch-worker-entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -28,6 +28,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260331.1"
+    "@cloudflare/workers-types": "^4.20260331.1",
+    "wrangler": "^4.84.1"
   }
 }
