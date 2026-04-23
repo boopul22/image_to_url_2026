@@ -140,11 +140,10 @@ export const GET: APIRoute = async ({ params, request, locals }) => {
 
   const response = new Response(body, { status: 200, headers });
 
-  const ctx = (locals as unknown as { runtime?: { ctx?: { waitUntil?: (p: Promise<unknown>) => void } } })
-    .runtime?.ctx;
+  const cfCtx = (locals as unknown as { cfContext?: { waitUntil?: (p: Promise<unknown>) => void } }).cfContext;
   const putPromise = cache.put(cacheKey, response.clone());
-  if (ctx?.waitUntil) {
-    ctx.waitUntil(putPromise);
+  if (cfCtx?.waitUntil) {
+    cfCtx.waitUntil(putPromise);
   } else {
     // Best-effort: don't block response if waitUntil unavailable
     putPromise.catch(() => {});

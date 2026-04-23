@@ -24,6 +24,21 @@ const categories = await getCategories(db);
 
 const featuredPost = posts.find((p) => p.featured);
 const otherPosts = posts.filter((p) => p !== featuredPost);
+
+// Rewrite cdn.imagetourl.cloud blog covers through our /img transform route
+// so cards fetch right-sized WebP instead of 1.7–2.5 MB source JPEGs.
+// External URLs (or URLs we don't own) fall through untouched.
+function imgUrl(src: string | null | undefined, width: number): string | undefined {
+  if (!src) return undefined;
+  try {
+    const u = new URL(src);
+    if (u.hostname !== 'cdn.imagetourl.cloud') return src;
+    const key = u.pathname.replace(/^\/+/, '');
+    return `/img/${key}?w=${width}&f=webp`;
+  } catch {
+    return src;
+  }
+}
 ---
 
 <Layout title={t(locale, 'blog.meta.title')} description={t(locale, 'blog.meta.description')} noindex={posts.length === 0}>
@@ -80,7 +95,17 @@ const otherPosts = posts.filter((p) => p !== featuredPost);
                 <div class="flex flex-col md:flex-row h-full">
                   <div class="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-on-surface">
                     {featuredPost.coverImage && (
-                      <img alt={featuredPost.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" decoding="async" fetchpriority="high" src={featuredPost.coverImage} width="600" height="400" />
+                      <img
+                        alt={featuredPost.title}
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="eager"
+                        decoding="async"
+                        fetchpriority="high"
+                        src={imgUrl(featuredPost.coverImage, 600)}
+                        srcset={`${imgUrl(featuredPost.coverImage, 600)} 1x, ${imgUrl(featuredPost.coverImage, 1200)} 2x`}
+                        width="600"
+                        height="400"
+                      />
                     )}
                     <div class="absolute top-4 left-4">
                       <span class="px-3 py-1 bg-primary text-on-primary border-2 border-on-surface font-label text-[10px] font-bold uppercase tracking-widest">{t(locale, 'blog.featured')}</span>
@@ -132,7 +157,16 @@ const otherPosts = posts.filter((p) => p !== featuredPost);
                       </div>
                       <div class={`w-full md:w-2/5 h-64 md:h-auto border-t-2 md:border-t-0 md:border-l-2 border-on-surface flex items-center justify-center relative overflow-hidden ${post.iconBg || 'bg-surface-container-highest'}`}>
                         {post.coverImage ? (
-                          <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" src={post.coverImage} />
+                          <img
+                            alt={post.title}
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                            decoding="async"
+                            src={imgUrl(post.coverImage, 400)}
+                            srcset={`${imgUrl(post.coverImage, 400)} 1x, ${imgUrl(post.coverImage, 800)} 2x`}
+                            width="400"
+                            height="256"
+                          />
                         ) : (
                           <>
                             <span class="material-symbols-outlined text-[12rem] text-primary/10 absolute rotate-12">auto_fix_high</span>
@@ -148,7 +182,16 @@ const otherPosts = posts.filter((p) => p !== featuredPost);
                     <>
                       <div class={`h-48 relative border-b-2 border-on-surface overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
                         {post.coverImage ? (
-                          <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" src={post.coverImage} />
+                          <img
+                            alt={post.title}
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                            decoding="async"
+                            src={imgUrl(post.coverImage, 308)}
+                            srcset={`${imgUrl(post.coverImage, 308)} 1x, ${imgUrl(post.coverImage, 616)} 2x`}
+                            width="308"
+                            height="192"
+                          />
                         ) : (
                           <div class="relative z-10 flex flex-col items-center">
                             <span class="material-symbols-outlined text-6xl text-on-surface/20">{post.iconFallback || 'article'}</span>

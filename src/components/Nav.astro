@@ -631,7 +631,10 @@ const toolsDropdown = getNavGroups(locale);
   // Auth nav hydration — fixes signed-out flash on prerendered/CDN-cached pages.
   // Server may render the signed-out state (no cookies at build time, or anonymous
   // CDN cache hit). If a real session exists, swap the auth slots to the profile UI.
-  (async () => {
+  //
+  // Deferred off the critical path: the /api/me fetch is not render-blocking, so
+  // we wait for idle to avoid competing with LCP resources.
+  const hydrateAuth = async () => {
     const desktop = document.getElementById('auth-slot-desktop');
     const mobile = document.getElementById('auth-slot-mobile');
     if (!desktop || desktop.dataset.signedIn === 'true') return;
@@ -703,5 +706,11 @@ const toolsDropdown = getNavGroups(locale);
         newProfileBtn?.setAttribute('aria-expanded', 'false');
       }
     });
-  })();
+  };
+
+  type IdleCallback = (cb: () => void, opts?: { timeout?: number }) => number;
+  const idle: IdleCallback =
+    (window as unknown as { requestIdleCallback?: IdleCallback }).requestIdleCallback
+    ?? ((cb: () => void) => setTimeout(cb, 1500) as unknown as number);
+  idle(() => { void hydrateAuth(); }, { timeout: 2000 });
 </script>

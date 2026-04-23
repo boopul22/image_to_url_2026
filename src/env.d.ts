@@ -2,6 +2,7 @@
 
 type D1Database = import('@cloudflare/workers-types').D1Database;
 type R2Bucket = import('@cloudflare/workers-types').R2Bucket;
+type ImagesBinding = import('@cloudflare/workers-types/experimental').ImagesBinding;
 
 declare namespace App {
   interface Locals {
@@ -9,6 +10,7 @@ declare namespace App {
       env: {
         DB: D1Database;
         R2: R2Bucket;
+        IMAGES: ImagesBinding;
         GOOGLE_CLIENT_ID: string;
         GOOGLE_CLIENT_SECRET: string;
         AUTH_SECRET: string;
