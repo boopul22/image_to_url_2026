@@ -67,10 +67,34 @@ function __crossLocaleRedirect__(pathname, search) {
   if (!ownerLoc || ownerLoc === loc) return null;
   return \`/\${ownerLoc}/\${rawSlug}/\${search || ''}\`;
 }
+// [PATCH] /{locale}/404 fast-path — bot loops at this URL burned ~640K worker
+// invocations on 2026-04-18. Skip middleware/SSR, return static 404 with a
+// long s-maxage so the edge absorbs repeats.
+const __404_BODY__ = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found</title><style>body{font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#fafaf7;color:#1a1a1a;text-align:center;padding:1rem}main{max-width:28rem}h1{font-size:1.5rem;margin:0 0 1rem}p{color:#555;line-height:1.6;margin:0 0 2rem}a{display:inline-block;padding:.75rem 1.5rem;background:#e11d48;color:#fff;text-decoration:none;border:2px solid #1a1a1a;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.875rem;box-shadow:4px 4px 0 #1a1a1a}</style></head><body><main><h1>This page has moved.</h1><p>The tool you are looking for now lives on our homepage.</p><a href="/en/">Go to Tool</a></main></body></html>';
+function __fastPath404__(pathname) {
+  const seg = pathname.split('/');
+  const trailing = seg.length === 4 && seg[3] === '';
+  if (seg.length !== 3 && !trailing) return null;
+  if (seg[2] !== '404' || !__LOCALES__.has(seg[1])) return null;
+  return new Response(__404_BODY__, {
+    status: 404,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+      'X-Robots-Tag': 'noindex',
+      'X-Fast-Path': '404',
+    },
+  });
+}
 `;
 
 const PATCH_AT_START = `async function handle(request, env, context) {
   const { pathname: requestPathname } = new URL(request.url);
+  // [PATCH] /{locale}/404 fast-path BEFORE any routing.
+  {
+    const fp = __fastPath404__(requestPathname);
+    if (fp) return fp;
+  }
   // [PATCH] Cross-locale slug redirect BEFORE any routing.
   {
     const u = new URL(request.url);
