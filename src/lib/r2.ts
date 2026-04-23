@@ -30,8 +30,13 @@ export async function uploadToR2(opts: {
   key: string;
   body: Uint8Array;
   contentType: string;
+  cacheControl?: string;
 }): Promise<void> {
   const { accountId, accessKeyId, secretAccessKey, bucket, key, body, contentType } = opts;
+  // Default to 1-year immutable so objects served directly via the R2 custom
+  // domain (cdn.imagetourl.cloud) carry proper CDN cache headers without
+  // needing a Cloudflare cache rule.
+  const cacheControl = opts.cacheControl ?? 'public, max-age=31536000, immutable';
   const host = `${bucket}.${accountId}.r2.cloudflarestorage.com`;
   const url = `https://${host}/${key}`;
   const region = 'auto';
@@ -42,8 +47,9 @@ export async function uploadToR2(opts: {
   const dateStamp = amzDate.slice(0, 8);
 
   const payloadHash = 'UNSIGNED-PAYLOAD';
-  const canonicalHeaders = `content-type:${contentType}\nhost:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
-  const signedHeaders = 'content-type;host;x-amz-content-sha256;x-amz-date';
+  // Canonical headers must be sorted lowercase alphabetically.
+  const canonicalHeaders = `cache-control:${cacheControl}\ncontent-type:${contentType}\nhost:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+  const signedHeaders = 'cache-control;content-type;host;x-amz-content-sha256;x-amz-date';
 
   const canonicalRequest = `PUT\n/${key}\n\n${canonicalHeaders}\n${signedHeaders}\n${payloadHash}`;
   const credentialScope = `${dateStamp}/${region}/${service}/aws4_request`;
@@ -56,6 +62,7 @@ export async function uploadToR2(opts: {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
+      'Cache-Control': cacheControl,
       'Content-Type': contentType,
       'Host': host,
       'x-amz-date': amzDate,

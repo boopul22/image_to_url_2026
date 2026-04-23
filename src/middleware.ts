@@ -226,10 +226,18 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 
-  // CSP — report-only for now; promote to enforcing after watching reports for a week.
+  // CSP — single source of truth (previously also duplicated in public/_headers).
+  // Report-only for now; promote to enforcing after a clean week of reports.
   response.headers.set(
     'Content-Security-Policy-Report-Only',
-    "default-src 'self'; img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'",
+    "default-src 'self'; " +
+      "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud https://cdn.imagetourl.cloud https://*.cloudflare.com https://*.googlesyndication.com https://*.doubleclick.net; " +
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+      "font-src 'self' data: https://fonts.gstatic.com; " +
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com; " +
+      "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com https://pagead2.googlesyndication.com; " +
+      "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; " +
+      "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'",
   );
 
   // Add cache headers for public HTML pages (SEO performance)

@@ -215,9 +215,6 @@ function hreflangUrl(loc: Locale): string {
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={schemaJson} />
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138" crossorigin="anonymous"></script>
-
     <!-- Per-page head injections -->
     <slot name="head" />
   </head>
@@ -259,14 +256,13 @@ function hreflangUrl(loc: Locale): string {
       }, { passive: true });
     </script>
 
-    <!-- Google Analytics — deferred to avoid blocking LCP -->
+    <!-- Third-party scripts (GA + AdSense) — deferred to avoid blocking LCP -->
     <script is:inline>
       (function(){
-        // Load GA after first user interaction or after 3s, whichever is first
-        var loaded = false;
+        var gaLoaded = false;
         function loadGA() {
-          if (loaded) return;
-          loaded = true;
+          if (gaLoaded) return;
+          gaLoaded = true;
           var s = document.createElement('script');
           s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CFY17JKKYK';
           s.async = true;
@@ -276,12 +272,23 @@ function hreflangUrl(loc: Locale): string {
           gtag('js', new Date());
           gtag('config', 'G-CFY17JKKYK');
         }
-        // Trigger on first interaction
+        var adsLoaded = false;
+        function loadAds() {
+          if (adsLoaded) return;
+          adsLoaded = true;
+          var a = document.createElement('script');
+          a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138';
+          a.async = true;
+          a.crossOrigin = 'anonymous';
+          document.head.appendChild(a);
+        }
+        function loadAll() { loadGA(); loadAds(); }
         ['scroll','click','keydown','touchstart'].forEach(function(evt){
-          document.addEventListener(evt, loadGA, {once:true, passive:true});
+          document.addEventListener(evt, loadAll, {once:true, passive:true});
         });
-        // Fallback: load after 3 seconds
-        setTimeout(loadGA, 3000);
+        // Fallback: load after idle or 4s, whichever comes first
+        var idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 4000); };
+        idle(loadAll, { timeout: 4000 });
       })();
     </script>
   </body>
