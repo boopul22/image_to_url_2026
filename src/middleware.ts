@@ -238,11 +238,15 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     if (locals.user) {
       // Logged-in: don't cache at CDN (personalized nav), browser must revalidate
       response.headers.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    } else {
-      // Anonymous: cache at CDN edge for fast crawling & page loads.
+    } else if (response.status === 200) {
+      // Anonymous 200: cache at CDN edge for fast crawling & page loads.
       // No `Vary: Cookie` — anonymous responses don't depend on cookies, and Vary
       // would fragment the edge cache by every cookie value (killing HIT rate).
       response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+    } else {
+      // 301/404/410: short CDN cache so fixes propagate quickly. Don't want a
+      // stale 404 sticking at the edge for an hour after we ship a 301 fix.
+      response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=60');
     }
   }
 
