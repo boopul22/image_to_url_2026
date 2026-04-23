@@ -10,6 +10,11 @@ const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/
 const NON_LOCALIZED_EXACT = new Set([
   '/sitemap.xml', '/image-sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest',
   '/llms.txt', '/llms-full.txt',
+  // Astro's 404 page — during static build, prerender visits /404 to build
+  // dist/client/404.html. If the catch-all redirects it to /en/404, the built
+  // file becomes a redirect body that Cloudflare Pages then serves for EVERY
+  // unmatched URL. Must stay non-localized so the real 404 page is built.
+  '/404',
   // Cluster C competitor alts + vs pages (not yet in landing registry)
   '/postimages-alternative', '/google-photos-direct-link', '/dropbox-direct-image-link',
   '/imagetourl-vs-imgur', '/imagetourl-vs-imgbb', '/imagetourl-vs-cloudinary', '/imgur-vs-imgbb',
