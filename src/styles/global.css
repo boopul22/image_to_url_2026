@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Self-hosted variable fonts — served from our origin, no Google Fonts round-trip */
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/space-grotesk";
+
 /* Font fallbacks with metric overrides to minimize CLS during swap */
 @font-face {
   font-family: 'Space-Grotesk-fallback';
@@ -20,9 +24,9 @@
 }
 
 @theme {
-  --font-headline: "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
-  --font-body: "DM Sans", "DM-Sans-fallback", system-ui, sans-serif;
-  --font-label: "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
+  --font-headline: "Space Grotesk Variable", "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
+  --font-body: "DM Sans Variable", "DM Sans", "DM-Sans-fallback", system-ui, sans-serif;
+  --font-label: "Space Grotesk Variable", "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: #fcfcfc;
@@ -471,6 +475,14 @@ h1, h2, h3, h4, h5, h6 {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   display: inline-block;
   vertical-align: middle;
+}
+
+/* Skip layout/paint for offscreen sections. Pair with contain-intrinsic-size
+   to avoid scrollbar jump / anchor-link mis-landing. Apply ONLY to below-fold
+   sections — never above the fold. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 /* Focus visible styles for accessibility */

@@ -3,6 +3,9 @@ import '../styles/global.css';
 import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
+import { MATERIAL_ICON_NAMES_CSV } from '../data/material-icons';
+
+const materialSymbolsHref = `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&icon_names=${MATERIAL_ICON_NAMES_CSV}&display=swap`;
 
 interface Props {
   title?: string;
@@ -194,7 +197,9 @@ function hreflangUrl(loc: Locale): string {
 
     <title>{title}</title>
 
-    <!-- Fonts: preconnect + non-render-blocking load -->
+    <!-- Material Symbols only — DM Sans + Space Grotesk self-hosted via fontsource.
+         &icon_names= subsets the font to just the glyphs we render (see
+         scripts/generate-icon-names.mjs). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -205,16 +210,16 @@ function hreflangUrl(loc: Locale): string {
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap"
+      href={materialSymbolsHref}
     />
     <link
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap"
+      href={materialSymbolsHref}
     />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&display=swap" />
+      <link rel="stylesheet" href={materialSymbolsHref} />
     </noscript>
 
     <!-- Structured Data -->
