@@ -6,7 +6,6 @@ Allow: /features
 Allow: /pricing
 Allow: /docs
 Allow: /blog
-Allow: /blog/
 Allow: /privacy
 Allow: /terms
 Allow: /about
@@ -107,7 +106,6 @@ Allow: /how-long-does-imagetourl-store-images
 # Authenticated / admin surfaces — never index these.
 Disallow: /dashboard
 Disallow: /admin
-Disallow: /admin/
 
 # Uploaded image files — binary content, not indexable pages.
 Disallow: /uploads/
@@ -122,14 +120,12 @@ Disallow: /cdn-cgi/
 User-agent: GPTBot
 Allow: /
 Disallow: /admin
-Disallow: /admin/
 Disallow: /dashboard
 Disallow: /api/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /admin
-Disallow: /admin/
 Disallow: /dashboard
 Disallow: /api/
 
@@ -142,7 +138,6 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 Disallow: /admin
-Disallow: /admin/
 Disallow: /dashboard
 Disallow: /api/
 
