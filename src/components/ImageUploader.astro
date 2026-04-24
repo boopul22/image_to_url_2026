@@ -150,32 +150,15 @@
           <li class="flex gap-2"><span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">payments</span><span><b class="text-on-background">Fair pricing.</b> One dev, no agency markup.</span></li>
         </ul>
       </div>
-      <form id="pitch-form" class="px-5 py-4" novalidate>
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-        <label for="pitch-email" class="block text-xs font-bold uppercase tracking-wider text-on-background mb-2">Your email &mdash; I reply within a day</label>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <input
-            type="email"
-            id="pitch-email"
-            name="email"
-            required
-            placeholder="you@domain.com"
-            class="flex-1 min-w-0 bg-white border-2 border-neutral-900 px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600"
-          />
-          <button
-            type="submit"
-            id="pitch-submit"
-            class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0"
-          >
-            Get a quote
-          </button>
-        </div>
-        <p id="pitch-status" class="text-[11px] mt-2 uppercase tracking-wider text-on-surface-variant">No spam. No sales call. Just one dev replying.</p>
-      </form>
-      <div id="pitch-success" class="hidden px-5 py-6 text-center">
-        <span class="material-symbols-outlined text-rose-600 text-4xl mb-2 inline-block" style="font-variation-settings: 'FILL' 1;">mark_email_read</span>
-        <p class="font-headline font-semibold uppercase tracking-tight text-xl text-on-background mb-1">Got it. Talk soon.</p>
-        <p class="text-sm text-on-surface-variant">I'll email you within 24 hours with next steps.</p>
+      <div class="px-5 py-4">
+        <a
+          id="pitch-cta"
+          href="/project-brief"
+          class="block w-full text-center bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide"
+        >
+          Start your project brief
+        </a>
+        <p class="text-[11px] mt-2 uppercase tracking-wider text-on-surface-variant text-center">Takes 60 seconds &middot; No spam &middot; No sales call</p>
       </div>
     </div>
   </div>
@@ -388,7 +371,7 @@
   // Hire-me pitch modal — show at most once per 24 hours after a copy
   const pitchModal = document.getElementById('pitch-modal')!;
   const pitchClose = document.getElementById('pitch-close')!;
-  const pitchForm = document.getElementById('pitch-form') as HTMLFormElement | null;
+  const pitchCta = document.getElementById('pitch-cta');
   const PITCH_KEY = 'pitch-modal-last-shown';
   const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -396,8 +379,7 @@
     pitchModal.classList.remove('hidden');
     pitchModal.classList.add('flex');
     try { localStorage.setItem(PITCH_KEY, String(Date.now())); } catch {}
-    const email = document.getElementById('pitch-email') as HTMLInputElement | null;
-    setTimeout(() => email?.focus(), 50);
+    setTimeout(() => (pitchCta as HTMLAnchorElement | null)?.focus(), 50);
   }
   function closePitch() {
     pitchModal.classList.add('hidden');
@@ -407,7 +389,6 @@
     let last = 0;
     try { last = Number(localStorage.getItem(PITCH_KEY) || '0'); } catch {}
     if (Date.now() - last < DAY_MS) return;
-    // Small delay so the "Copied!" feedback is visible first
     setTimeout(openPitch, 450);
   }
   pitchClose.addEventListener('click', closePitch);
@@ -416,41 +397,6 @@
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !pitchModal.classList.contains('hidden')) closePitch();
-  });
-  pitchForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('pitch-submit') as HTMLButtonElement | null;
-    const emailEl = document.getElementById('pitch-email') as HTMLInputElement | null;
-    const status = document.getElementById('pitch-status');
-    const successPanel = document.getElementById('pitch-success');
-    const honey = (pitchForm.querySelector('input[name="_honey"]') as HTMLInputElement | null)?.value || '';
-    if (!emailEl || !emailEl.checkValidity()) {
-      emailEl?.focus();
-      if (status) { status.textContent = 'Enter a valid email.'; status.className = 'text-[11px] mt-2 uppercase tracking-wider text-rose-600'; }
-      return;
-    }
-    if (honey) return;
-    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
-    try {
-      const res = await fetch('https://formsubmit.co/ajax/blog.boopul@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          email: emailEl.value,
-          _subject: 'New website lead from imagetourl.cloud',
-          _template: 'table',
-          _captcha: 'false',
-          source: 'imagetourl pitch modal',
-        }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || (data && data.success === 'false')) throw new Error((data && data.message) || 'Send failed');
-      pitchForm.classList.add('hidden');
-      successPanel?.classList.remove('hidden');
-    } catch (err: any) {
-      if (btn) { btn.textContent = 'Get a quote'; btn.disabled = false; }
-      if (status) { status.textContent = err?.message || 'Send failed. Try again.'; status.className = 'text-[11px] mt-2 uppercase tracking-wider text-rose-600'; }
-    }
   });
 
   uploadAnother.addEventListener('click', resetIdle);
