@@ -47,6 +47,50 @@ const validJson = JSON.stringify([...validCombos]);
 const localesJson = JSON.stringify(LOCALES);
 
 const INJECTION = `
+// [PATCH] Short-URL handler — serves /{id}.{ext} by looking up r2_key in D1
+// and streaming from R2 binding. Intercepts BEFORE app.match so the root
+// [...catchall] route doesn't 404 these paths.
+const __SHORT_URL_RE__ = /^\\/([a-z0-9]{8})\\.(jpg|jpeg|png|webp|gif|svg)$/;
+function __nowSqlUtc__() {
+  return new Date().toISOString().replace('T', ' ').slice(0, 19);
+}
+async function __shortUrlHandler__(pathname, request, env, context) {
+  const m = pathname.match(__SHORT_URL_RE__);
+  if (!m) return null;
+  if (!env.DB || !env.R2) return null;
+  const id = m[1];
+  const cache = caches.default;
+  const cacheKey = new Request(new URL(request.url).toString(), { method: 'GET' });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+  let row = null;
+  try {
+    row = await env.DB
+      .prepare('SELECT r2_key, expires_at, deleted_at FROM images WHERE id = ?')
+      .bind(id)
+      .first();
+  } catch {}
+  if (!row) return new Response('Not found', { status: 404 });
+  if (row.deleted_at || (row.expires_at && row.expires_at <= __nowSqlUtc__())) {
+    return new Response('This image has expired.', {
+      status: 410,
+      headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' },
+    });
+  }
+  const obj = await env.R2.get(row.r2_key);
+  if (!obj) return new Response('Not found', { status: 404 });
+  const headers = {
+    'Content-Type': obj.httpMetadata?.contentType || 'application/octet-stream',
+    'Cache-Control': 'public, max-age=31536000, immutable',
+  };
+  if (obj.size != null) headers['Content-Length'] = String(obj.size);
+  if (obj.httpEtag) headers['ETag'] = obj.httpEtag;
+  const response = new Response(obj.body, { status: 200, headers });
+  if (context && context.waitUntil) {
+    context.waitUntil(cache.put(cacheKey, response.clone()));
+  }
+  return response;
+}
 // [PATCH] Cross-locale slug redirect — runs before app.match because Astro's
 // prerendered [locale]/[...slug] route matcher returns null for combos not in
 // getStaticPaths, never falling back to a catch-all.
@@ -90,6 +134,11 @@ function __fastPath404__(pathname) {
 
 const PATCH_AT_START = `async function handle(request, env, context) {
   const { pathname: requestPathname } = new URL(request.url);
+  // [PATCH] Short-URL /{id}.{ext} BEFORE any routing.
+  {
+    const resp = await __shortUrlHandler__(requestPathname, request, env, context);
+    if (resp) return resp;
+  }
   // [PATCH] /{locale}/404 fast-path BEFORE any routing.
   {
     const fp = __fastPath404__(requestPathname);

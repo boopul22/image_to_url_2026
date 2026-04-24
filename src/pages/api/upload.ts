@@ -110,7 +110,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const accessKeyId = env.R2_ACCESS_KEY_ID;
     const secretAccessKey = env.R2_SECRET_ACCESS_KEY;
     const bucketName = env.R2_BUCKET_NAME;
-    const publicUrl = env.R2_PUBLIC_URL;
 
     if (!accessKeyId || !secretAccessKey) {
       return new Response(JSON.stringify({ error: 'R2 credentials not configured' }), {
@@ -136,9 +135,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
       contentType: file.type,
     });
 
-    const imageUrl = publicUrl
-      ? `${publicUrl}/${key}`
-      : `https://${bucketName}.${accountId}.r2.cloudflarestorage.com/${key}`;
+    const reqUrlOrigin = new URL(request.url).origin;
+    const siteOrigin = reqUrlOrigin.startsWith('http://localhost')
+      ? 'https://imagetourl.cloud'
+      : reqUrlOrigin;
+    const imageUrl = `${siteOrigin}/${id}.${ext}`;
 
     // Save to D1
     try {
