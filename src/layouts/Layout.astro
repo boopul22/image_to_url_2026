@@ -197,6 +197,11 @@ function hreflangUrl(loc: Locale): string {
     <!-- Fonts: preconnect + non-render-blocking load -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP -->
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+    <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" />
     <link
       rel="preload"
       as="style"
@@ -223,7 +228,6 @@ function hreflangUrl(loc: Locale): string {
       <slot />
     </main>
     <script>
-      // Scroll-reveal: dual strategy (IO + scroll fallback)
       const revealed = new WeakSet();
       function reveal(el: Element) {
         if (!revealed.has(el)) {
@@ -232,46 +236,31 @@ function hreflangUrl(loc: Locale): string {
         }
       }
 
-      // Primary: IntersectionObserver (most reliable)
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
           entries.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
         }, { rootMargin: '50px 0px', threshold: 0 });
         document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      } else {
+        const revealCheck = () => {
+          document.querySelectorAll('.reveal:not(.revealed)').forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight + 50) reveal(el);
+          });
+        };
+        revealCheck();
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => { revealCheck(); ticking = false; });
+            ticking = true;
+          }
+        }, { passive: true });
       }
-
-      // Fallback: scroll-based check for elements above fold on load
-      function revealCheck() {
-        document.querySelectorAll('.reveal:not(.revealed)').forEach((el) => {
-          if (el.getBoundingClientRect().top < window.innerHeight + 50) reveal(el);
-        });
-      }
-      revealCheck();
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => { revealCheck(); ticking = false; });
-          ticking = true;
-        }
-      }, { passive: true });
     </script>
 
     <!-- Third-party scripts (GA + AdSense) — deferred to avoid blocking LCP -->
     <script is:inline>
       (function(){
-        var gaLoaded = false;
-        function loadGA() {
-          if (gaLoaded) return;
-          gaLoaded = true;
-          var s = document.createElement('script');
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CFY17JKKYK';
-          s.async = true;
-          document.head.appendChild(s);
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-CFY17JKKYK');
-        }
         var adsLoaded = false;
         function loadAds() {
           if (adsLoaded) return;
@@ -280,15 +269,14 @@ function hreflangUrl(loc: Locale): string {
           a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138';
           a.async = true;
           a.crossOrigin = 'anonymous';
+          a.fetchPriority = 'low';
           document.head.appendChild(a);
         }
-        function loadAll() { loadGA(); loadAds(); }
+        // Load only on real user interaction — bouncing visitors never trigger
+        // a paint below the fold anyway, so we skip the idle fallback.
         ['scroll','click','keydown','touchstart'].forEach(function(evt){
-          document.addEventListener(evt, loadAll, {once:true, passive:true});
+          document.addEventListener(evt, loadAds, {once:true, passive:true});
         });
-        // Fallback: load after idle or 4s, whichever comes first
-        var idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 4000); };
-        idle(loadAll, { timeout: 4000 });
       })();
     </script>
   </body>

@@ -99,6 +99,9 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     const maxAge = 30 * 24 * 60 * 60; // 30 days
     const sessionFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAge}${isSecure ? '; Secure' : ''}${domain}`;
     const clearFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}${domain}`;
+    // Non-HttpOnly hint so the client can skip /api/me when no session exists.
+    // Carries no auth — presence only signals "try hydrating the nav".
+    const hintFlags = `SameSite=Lax; Path=/; Max-Age=${maxAge}${isSecure ? '; Secure' : ''}${domain}`;
 
     // Cache-bust: append timestamp so the browser doesn't serve a stale cached page
     return new Response(null, {
@@ -106,6 +109,7 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
       headers: [
         ['Location', `/?_=${Date.now()}`],
         ['Set-Cookie', `session=${sessionToken}; ${sessionFlags}`],
+        ['Set-Cookie', `has_session=1; ${hintFlags}`],
         ['Set-Cookie', `google_oauth_state=; ${clearFlags}`],
         ['Set-Cookie', `google_oauth_code_verifier=; ${clearFlags}`],
         ['Cache-Control', 'no-store'],

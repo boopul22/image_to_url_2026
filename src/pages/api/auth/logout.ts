@@ -19,13 +19,16 @@ export const GET: APIRoute = async ({ request, locals }) => {
   }
 
   const isSecure = import.meta.env.PROD;
-  const clearFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}`;
+  const domain = isSecure ? '; Domain=.imagetourl.cloud' : '';
+  const clearFlags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}${domain}`;
+  const hintClearFlags = `SameSite=Lax; Path=/; Max-Age=0${isSecure ? '; Secure' : ''}${domain}`;
 
   return new Response(null, {
     status: 302,
     headers: [
       ['Location', '/'],
       ['Set-Cookie', `session=; ${clearFlags}`],
+      ['Set-Cookie', `has_session=; ${hintClearFlags}`],
     ],
   });
 };

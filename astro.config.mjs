@@ -18,6 +18,12 @@ export default defineConfig({
   security: {
     checkOrigin: false,
   },
+  build: {
+    // Inline stylesheets into the HTML to eliminate the render-blocking
+    // Layout.css request. Brotli-compressed HTML makes the duplicate-per-page
+    // cost small; the saved round-trip beats the repeat-visit cache.
+    inlineStylesheets: 'always',
+  },
   vite: {
     plugins: [tailwindcss()],
     server: {

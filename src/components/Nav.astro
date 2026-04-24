@@ -639,12 +639,20 @@ const toolsDropdown = getNavGroups(locale);
     const mobile = document.getElementById('auth-slot-mobile');
     if (!desktop || desktop.dataset.signedIn === 'true') return;
 
+    // Skip /api/me entirely when the has_session hint cookie is missing.
+    // The real session cookie is HttpOnly; this non-sensitive hint lets us
+    // avoid the fetch for anonymous visitors (most landing-page traffic).
+    if (!/(?:^|;\s*)has_session=1(?:;|$)/.test(document.cookie)) return;
+
     const escapeHtml = (s: string) =>
       s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 
     let user: { name: string; avatarUrl: string; role: 'user' | 'admin' } | null = null;
     try {
-      const res = await fetch('/api/me', { credentials: 'same-origin' });
+      const res = await fetch('/api/me', {
+        credentials: 'same-origin',
+        priority: 'low',
+      } as RequestInit);
       if (!res.ok) return;
       user = (await res.json()).user;
     } catch {
