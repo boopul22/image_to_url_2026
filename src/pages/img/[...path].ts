@@ -73,8 +73,11 @@ const handle: APIRoute = async ({ params, url, locals }) => {
       .transform({ width })
       .output({ format, quality });
   } catch (e) {
+    // Source object exists but is unreadable (corrupt, zero-byte, unsupported
+    // format). Return 404 not 500 — 5xx pollutes the browser console errors
+    // audit; the client handling is identical (broken-image fallback).
     const msg = e instanceof Error ? e.message : String(e);
-    return new Response('transform failed: ' + msg, { status: 500, headers: errHeaders });
+    return new Response('transform failed: ' + msg, { status: 404, headers: errHeaders });
   }
 
   const response = transformed.response();
