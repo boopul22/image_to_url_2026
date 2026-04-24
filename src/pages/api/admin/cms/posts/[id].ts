@@ -59,7 +59,7 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
       `UPDATE posts SET
          title = ?, slug = ?, excerpt = ?, content = ?, category_id = ?,
          author_name = ?, author_role = ?, author_avatar = ?,
-         featured = ?, status = ?, cover_image = ?, icon_fallback = ?, icon_bg = ?,
+         status = ?, cover_image = ?, icon_fallback = ?, icon_bg = ?,
          read_time = ?, meta_title = ?, meta_description = ?,
          related_slugs = ?, faq_items = ?, published_at = ?, updated_at = datetime('now')
        WHERE id = ?`,
@@ -73,7 +73,6 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
       body.authorName ?? (existing as any).author_name,
       body.authorRole ?? (existing as any).author_role,
       body.authorAvatar ?? (existing as any).author_avatar,
-      body.featured !== undefined ? (body.featured ? 1 : 0) : (existing as any).featured,
       body.status ?? (existing as any).status,
       body.coverImage !== undefined ? body.coverImage : (existing as any).cover_image,
       body.iconFallback !== undefined ? body.iconFallback : (existing as any).icon_fallback,

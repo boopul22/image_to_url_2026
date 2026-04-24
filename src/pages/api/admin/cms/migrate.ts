@@ -61,8 +61,8 @@ export const POST: APIRoute = async ({ locals }) => {
 
     await db
       .prepare(
-        `INSERT INTO posts (id, slug, title, excerpt, content, category_id, author_name, author_role, author_avatar, featured, status, cover_image, icon_fallback, icon_bg, read_time, related_slugs, published_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'published', ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO posts (id, slug, title, excerpt, content, category_id, author_name, author_role, author_avatar, status, cover_image, icon_fallback, icon_bg, read_time, related_slugs, published_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'published', ?, ?, ?, ?, ?, ?)`,
       )
       .bind(
         id,
@@ -74,7 +74,6 @@ export const POST: APIRoute = async ({ locals }) => {
         post.author.name,
         post.author.role,
         post.author.avatar,
-        post.featured ? 1 : 0,
         post.image || null,
         post.iconFallback || null,
         post.iconBg || null,

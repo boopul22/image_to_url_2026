@@ -215,11 +215,6 @@ const user = Astro.locals.user!;
       <input id="post-icon-bg" type="text" placeholder="bg-primary-fixed" class="sf-input !text-xs" />
     </div>
 
-    <label class="flex items-center gap-2.5 cursor-pointer py-1">
-      <input id="post-featured" type="checkbox" class="w-4 h-4 rounded border-2 border-on-surface accent-primary" />
-      <span class="sf-label !mb-0">Featured Post</span>
-    </label>
-
     <!-- Related Posts -->
     <div>
       <span class="sf-label">Related</span>
@@ -773,7 +768,6 @@ const user = Astro.locals.user!;
       excerpt: (document.getElementById('post-meta-description') as HTMLTextAreaElement).value || '',
       content: editor.getHTML(),
       categoryId: (document.getElementById('post-category') as HTMLSelectElement).value || null,
-      featured: (document.getElementById('post-featured') as HTMLInputElement).checked,
       status,
       coverImage: coverInput.value || null,
       iconFallback: (document.getElementById('post-icon-fallback') as HTMLInputElement).value || null,

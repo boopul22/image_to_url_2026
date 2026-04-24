@@ -215,11 +215,6 @@ const { id } = Astro.params;
       <input id="post-icon-bg" type="text" placeholder="bg-primary-fixed" class="sf-input !text-xs" />
     </div>
 
-    <label class="flex items-center gap-2.5 cursor-pointer py-1">
-      <input id="post-featured" type="checkbox" class="w-4 h-4 rounded border-2 border-on-surface accent-primary" />
-      <span class="sf-label !mb-0">Featured Post</span>
-    </label>
-
     <div>
       <span class="sf-label">Related</span>
       <div id="related-list" class="mt-1 flex flex-wrap gap-1"></div>
@@ -250,6 +245,11 @@ const { id } = Astro.params;
     <div id="published-info" class="hidden pt-1 border-t border-outline-variant/50">
       <span class="sf-label">Published</span>
       <p id="published-date" class="text-xs text-outline"></p>
+    </div>
+
+    <div id="updated-info" class="hidden pt-1">
+      <span class="sf-label">Last Updated</span>
+      <p id="updated-date" class="text-xs text-outline"></p>
     </div>
   </div>
 </template>
@@ -710,7 +710,6 @@ const { id } = Astro.params;
       excerpt: (document.getElementById('post-meta-description') as HTMLTextAreaElement).value || '',
       content: editor.getHTML(),
       categoryId: (document.getElementById('post-category') as HTMLSelectElement).value || null,
-      featured: (document.getElementById('post-featured') as HTMLInputElement).checked,
       coverImage: coverInput.value || null,
       iconFallback: (document.getElementById('post-icon-fallback') as HTMLInputElement).value || null,
       iconBg: (document.getElementById('post-icon-bg') as HTMLInputElement).value || null,
@@ -735,6 +734,10 @@ const { id } = Astro.params;
     });
     const result = await res.json();
     setSaveStatus(result.success ? 'Saved!' : `Error: ${result.error}`);
+    if (result.success) {
+      document.getElementById('updated-info')!.classList.remove('hidden');
+      document.getElementById('updated-date')!.textContent = new Date().toLocaleString();
+    }
     setTimeout(() => { setSaveStatus(''); }, 3000);
   }
 
@@ -821,7 +824,6 @@ const { id } = Astro.params;
     }
 
     if (p.categoryId) (document.getElementById('post-category') as HTMLSelectElement).value = p.categoryId;
-    (document.getElementById('post-featured') as HTMLInputElement).checked = p.featured;
     if (p.coverImage) {
       coverInput.value = p.coverImage;
       coverImg.src = p.coverImage;
@@ -843,6 +845,17 @@ const { id } = Astro.params;
     if (p.publishedAt) {
       document.getElementById('published-info')!.classList.remove('hidden');
       document.getElementById('published-date')!.textContent = new Date(p.publishedAt).toLocaleString();
+    }
+
+    if (p.updatedAt) {
+      // SQLite's datetime('now') emits "YYYY-MM-DD HH:MM:SS" in UTC without a
+      // timezone marker; JS parses that as local time and shifts it. Normalize
+      // to UTC before formatting so "Last Updated" shows the real wall time.
+      const normalized = /T.*(Z|[+-]\d{2}:?\d{2})$/.test(p.updatedAt)
+        ? p.updatedAt
+        : p.updatedAt.replace(' ', 'T') + 'Z';
+      document.getElementById('updated-info')!.classList.remove('hidden');
+      document.getElementById('updated-date')!.textContent = new Date(normalized).toLocaleString();
     }
 
     updateStatusUI();

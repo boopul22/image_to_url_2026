@@ -15,7 +15,6 @@ export interface BlogPost {
   };
   date: string;
   readTime: string;
-  featured?: boolean;
   image?: string;
   iconFallback?: string;
   iconBg?: string;
@@ -50,7 +49,6 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Oct 24, 2024",
     readTime: "6 min read",
-    featured: true,
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAID85SmTBP4cPv_x0ML1A1tkvmHQlzRp0XlpGfx3fgZGa2l51gCUuNU8UfhwEzRpWL9kbtuhhTIyOnNCfejx_iFZb71r8eG_ccnxg_fhXxdMBZrmZ7AUl6BP3-9eByuYvLW0OylO8lNGepz9clgPaDXdH_kU1o8dNIVS_1mwrExS2IbN4ZTF7LEibgdwPFFh-A__utNRVFJm9Pb71_EhYRvEvi9LTmYwtr1s6OLPQUAIg5cOdQZ9GzITVDtZLh7nGBu44uJ92cC6s",
     content: {
       intro: "Scalable Vector Graphics (SVG) are the unsung heroes of modern web design. But beyond their ability to scale indefinitely, there lies a world of optimization and workflow hacks that can save hours of manual labor.",

@@ -22,9 +22,6 @@ const db = getDB(Astro.locals);
 const { posts } = await getPublishedPostsLocalized(db, locale, { limit: 50 });
 const categories = await getCategories(db);
 
-const featuredPost = posts.find((p) => p.featured);
-const otherPosts = posts.filter((p) => p !== featuredPost);
-
 // Rewrite cdn.imagetourl.cloud blog covers through our /img transform route
 // so cards fetch right-sized WebP instead of 1.7–2.5 MB source JPEGs.
 // External URLs (or URLs we don't own) fall through untouched.
@@ -87,57 +84,8 @@ function imgUrl(src: string | null | undefined, width: number): string | undefin
     <!-- Blog Grid -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Featured Post -->
-        {featuredPost && (
-          <article class="lg:col-span-2 group">
-            <a href={lp(`/blog/${featuredPost.slug}`)} class="block">
-              <div class="bg-surface border-2 border-on-surface h-full overflow-hidden hard-shadow hard-shadow-hover transition-all duration-200">
-                <div class="flex flex-col md:flex-row h-full">
-                  <div class="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-on-surface">
-                    {featuredPost.coverImage && (
-                      <img
-                        alt={featuredPost.title}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="eager"
-                        decoding="async"
-                        fetchpriority="high"
-                        src={imgUrl(featuredPost.coverImage, 616)}
-                        srcset={`${imgUrl(featuredPost.coverImage, 616)} 1x, ${imgUrl(featuredPost.coverImage, 1200)} 2x`}
-                        width="600"
-                        height="400"
-                      />
-                    )}
-                    <div class="absolute top-4 left-4">
-                      <span class="px-3 py-1 bg-primary text-on-primary border-2 border-on-surface font-label text-[10px] font-bold uppercase tracking-widest">{t(locale, 'blog.featured')}</span>
-                    </div>
-                  </div>
-                  <div class="p-8 flex flex-col justify-between flex-1">
-                    <div>
-                      <span class={`font-label text-xs font-bold uppercase text-${featuredPost.categoryColor || 'primary'} tracking-widest mb-4 block`}>{featuredPost.categoryName || t(locale, 'blog.uncategorized')}</span>
-                      <h2 class="font-headline text-xl md:text-2xl font-black text-on-surface mb-4 group-hover:text-on-background transition-colors">{featuredPost.title}</h2>
-                      <p class="font-body text-on-surface-variant mb-6 leading-relaxed">{featuredPost.excerpt}</p>
-                    </div>
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 border-2 border-on-surface bg-tertiary-fixed p-0.5 overflow-hidden">
-                          <img alt={featuredPost.authorName} class="w-full h-full object-cover" loading="lazy" decoding="async" src={featuredPost.authorAvatar} />
-                        </div>
-                        <span class="font-label text-xs font-bold text-on-surface">{featuredPost.authorName}</span>
-                      </div>
-                      <span class="font-label text-xs font-black uppercase text-on-background flex items-center gap-1">
-                        {t(locale, 'blog.readMore')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </article>
-        )}
-
-        <!-- Other Posts -->
-        {otherPosts.map((post, i) => {
-          const isWide = i === otherPosts.length - 1 && otherPosts.length % 3 === 0;
+        {posts.map((post, i) => {
+          const isWide = i === posts.length - 1 && posts.length % 3 === 0;
           return (
             <article class:list={["group", { "lg:col-span-2": isWide }]}>
               <a href={lp(`/blog/${post.slug}`)} class="block h-full">
@@ -185,8 +133,9 @@ function imgUrl(src: string | null | undefined, width: number): string | undefin
                           <img
                             alt={post.title}
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
+                            loading={i === 0 ? 'eager' : 'lazy'}
                             decoding="async"
+                            fetchpriority={i === 0 ? 'high' : undefined}
                             src={imgUrl(post.coverImage, 308)}
                             srcset={`${imgUrl(post.coverImage, 308)} 1x, ${imgUrl(post.coverImage, 616)} 2x`}
                             width="308"

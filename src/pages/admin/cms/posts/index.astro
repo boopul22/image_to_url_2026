@@ -117,6 +117,29 @@ import AdminSidebar from '../../../../components/AdminSidebar.astro';
       return '<span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase bg-error-container text-on-error-container border border-error">Archived</span>';
     };
 
+    // SQLite's `datetime('now')` returns "YYYY-MM-DD HH:MM:SS" in UTC without a
+    // timezone marker; JS parses that as local time and shifts it. Normalize
+    // to UTC first so the displayed time is actually the server time.
+    const toDate = (v: string | null | undefined): Date | null => {
+      if (!v) return null;
+      const s = /T.*(Z|[+-]\d{2}:?\d{2})$/.test(v) ? v : v.replace(' ', 'T') + 'Z';
+      const d = new Date(s);
+      return isNaN(d.getTime()) ? null : d;
+    };
+    const relativeTime = (d: Date): string => {
+      const diff = Math.floor((Date.now() - d.getTime()) / 1000);
+      if (diff < 60) return 'just now';
+      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+      if (diff < 86400 * 30) return `${Math.floor(diff / 86400)}d ago`;
+      return d.toLocaleDateString();
+    };
+    const updatedCell = (v: string | null | undefined) => {
+      const d = toDate(v);
+      if (!d) return '<span class="text-outline">—</span>';
+      return `<span title="${esc(d.toLocaleString())}"><span class="block">${esc(relativeTime(d))}</span><span class="block text-[10px] text-outline">${esc(d.toLocaleDateString())}</span></span>`;
+    };
+
     table.innerHTML = `
       <div class="overflow-x-auto"><table class="w-full text-left min-w-[700px]">
         <thead>
@@ -135,14 +158,13 @@ import AdminSidebar from '../../../../components/AdminSidebar.astro';
               <td class="px-6 py-4">
                 <div>
                   <a href="/admin/cms/posts/edit/${esc(p.id)}" class="font-bold text-sm hover:text-primary transition-colors">${esc(p.title)}</a>
-                  ${p.featured ? '<span class="ml-2 text-xs text-tertiary font-bold uppercase">Featured</span>' : ''}
                   <p class="text-xs text-outline truncate mt-0.5 max-w-sm">${esc(p.excerpt)}</p>
                 </div>
               </td>
               <td class="px-6 py-4 text-sm text-on-surface-variant">${esc(p.categoryName || '—')}</td>
               <td class="px-6 py-4">${statusBadge(p.status)}</td>
               <td class="px-6 py-4 text-sm text-on-surface-variant">${esc(p.authorName)}</td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">${new Date(p.updatedAt).toLocaleDateString()}</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">${updatedCell(p.updatedAt)}</td>
               <td class="px-6 py-4">
                 <div class="flex gap-2">
                   <a href="/admin/cms/posts/edit/${esc(p.id)}" class="px-3 py-1 rounded-full text-xs font-bold uppercase border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors">Edit</a>

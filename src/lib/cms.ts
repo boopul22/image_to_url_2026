@@ -28,7 +28,6 @@ export interface Post {
   authorName: string;
   authorRole: string;
   authorAvatar: string;
-  featured: boolean;
   status: 'draft' | 'published' | 'archived';
   coverImage: string | null;
   iconFallback: string | null;
@@ -168,7 +167,6 @@ export function mapPostRow(row: any): Post {
     authorName: row.author_name || '',
     authorRole: row.author_role || '',
     authorAvatar: row.author_avatar || '',
-    featured: !!row.featured,
     status: row.status || 'draft',
     coverImage: row.cover_image || null,
     iconFallback: row.icon_fallback || null,

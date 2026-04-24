@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS posts (
   author_name TEXT NOT NULL DEFAULT '',
   author_role TEXT NOT NULL DEFAULT '',
   author_avatar TEXT NOT NULL DEFAULT '',
-  featured INTEGER NOT NULL DEFAULT 0,
   status TEXT NOT NULL DEFAULT 'draft',
   cover_image TEXT,
   icon_fallback TEXT,

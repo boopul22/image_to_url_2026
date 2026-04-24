@@ -227,7 +227,6 @@
   "blog.hero.description": "Insights, tutorials, and stories from the intersection of cloud storage, creative workflows, and digital engineering.",
   "blog.search.placeholder": "Search articles...",
   "blog.filter.all": "All Posts",
-  "blog.featured": "Featured",
   "blog.readMore": "Read More",
   "blog.uncategorized": "Uncategorized",
   "blog.newsletter.title": "Stay Curated",
@@ -236,6 +235,7 @@
   "blog.newsletter.subscribe": "Subscribe",
 
   "blogPost.published": "Published",
+  "blogPost.updated": "Last updated",
   "blogPost.uncategorized": "Uncategorized",
   "blogPost.share": "Share this Article",
   "blogPost.shareDescription": "Help others discover great content!",
