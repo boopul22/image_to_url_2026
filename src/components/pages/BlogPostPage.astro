@@ -7,6 +7,7 @@ import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPostBySlug, getPostBySlugLocalized, getRelatedPosts } from '../../lib/cms';
+import { imgUrl, imgUrlAbs } from '../../lib/img';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -134,7 +135,7 @@ const articleSchema = {
   "@type": "BlogPosting",
   "headline": post.title,
   "description": post.excerpt || '',
-  "image": post.coverImage || undefined,
+  "image": imgUrlAbs(post.coverImage, 1200) || undefined,
   "datePublished": publishedIso,
   "dateModified": updatedIso,
   "author": {
@@ -167,7 +168,7 @@ const faqSchema = post.faqItems?.length ? {
 <Layout
   title={`${post.title} — ImageToURL Blog`}
   description={post.excerpt || ''}
-  ogImage={post.coverImage || '/og-default.png'}
+  ogImage={imgUrl(post.coverImage, 1200) || '/og-default.png'}
   ogType="article"
   schema={articleSchema}
 >
@@ -366,7 +367,10 @@ const faqSchema = post.faqItems?.length ? {
                     <img
                       alt={related.title}
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async"
-                      src={related.coverImage}
+                      src={imgUrl(related.coverImage, 400)}
+                      srcset={`${imgUrl(related.coverImage, 400)} 1x, ${imgUrl(related.coverImage, 800)} 2x`}
+                      width="400"
+                      height="160"
                     />
                   ) : (
                     <span class="material-symbols-outlined text-8xl text-on-surface/20">

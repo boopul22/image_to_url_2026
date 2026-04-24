@@ -12,6 +12,12 @@ remote = true
 binding = "R2"
 bucket_name = "imagetourl-storage"
 
+# Image Resizing / Transformations binding. Used by src/pages/img/[...path].ts
+# to resize+re-encode R2 originals to WebP at the edge.
+# Requires "Transform images" enabled on the zone (Dashboard → Images → Transformations).
+[images]
+binding = "IMAGES"
+
 # Run the Astro worker (middleware + SSR) BEFORE static asset matching for any
 # path under a locale. Without this, Cloudflare serves dist/client/404.html
 # directly for paths like /fa/<unknown-slug>/ — bypassing the middleware, so
@@ -20,4 +26,4 @@ bucket_name = "imagetourl-storage"
 [assets]
 directory = "./dist/client"
 binding = "ASSETS"
-run_worker_first = ["/*"]
+run_worker_first = true

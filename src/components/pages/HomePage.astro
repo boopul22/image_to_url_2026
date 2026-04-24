@@ -8,6 +8,7 @@ import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPublishedPostsLocalized } from '../../lib/cms';
 import { getActiveAds, type SponsorAd } from '../../lib/sponsor-ads';
+import { imgUrl } from '../../lib/img';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -408,7 +409,16 @@ const pageSchema = [
             <div class="bg-surface-container rounded-2xl h-full flex flex-col overflow-hidden border-2 border-neutral-900 brutal-shadow brutal-shadow-hover">
               <div class={`h-40 relative overflow-hidden ${!post.coverImage ? (post.iconBg || 'bg-surface-container-highest') + ' flex items-center justify-center' : ''}`}>
                 {post.coverImage ? (
-                  <img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.coverImage} width="400" height="192" loading="lazy" decoding="async" />
+                  <img
+                    alt={post.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src={imgUrl(post.coverImage, 400)}
+                    srcset={`${imgUrl(post.coverImage, 400)} 1x, ${imgUrl(post.coverImage, 800)} 2x`}
+                    width="400"
+                    height="192"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 ) : (
                   <span class="material-symbols-outlined text-8xl text-on-surface/20">{post.iconFallback || 'article'}</span>
                 )}

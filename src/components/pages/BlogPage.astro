@@ -7,6 +7,7 @@ import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPublishedPostsLocalized, getCategories } from '../../lib/cms';
+import { imgUrl } from '../../lib/img';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -22,20 +23,6 @@ const db = getDB(Astro.locals);
 const { posts } = await getPublishedPostsLocalized(db, locale, { limit: 50 });
 const categories = await getCategories(db);
 
-// Rewrite cdn.imagetourl.cloud blog covers through our /img transform route
-// so cards fetch right-sized WebP instead of 1.7–2.5 MB source JPEGs.
-// External URLs (or URLs we don't own) fall through untouched.
-function imgUrl(src: string | null | undefined, width: number): string | undefined {
-  if (!src) return undefined;
-  try {
-    const u = new URL(src);
-    if (u.hostname !== 'cdn.imagetourl.cloud') return src;
-    const key = u.pathname.replace(/^\/+/, '');
-    return `/img/${key}?w=${width}&f=webp`;
-  } catch {
-    return src;
-  }
-}
 ---
 
 <Layout title={t(locale, 'blog.meta.title')} description={t(locale, 'blog.meta.description')} noindex={posts.length === 0}>
