@@ -1,122 +1,14 @@
+# Default group — all crawlers.
+# `Allow: /` makes every path crawlable by default; list only what we *block*.
 User-agent: *
-
-# Public, indexable pages — allow everything not explicitly blocked below.
 Allow: /
-Allow: /features
-Allow: /pricing
-Allow: /docs
-Allow: /blog
-Allow: /privacy
-Allow: /terms
-Allow: /about
-Allow: /contact
-Allow: /free-image-hosting
-Allow: /image-url-generator
-Allow: /bulk-image-upload
-Allow: /png-to-url
-Allow: /jpg-to-url
-Allow: /gif-to-url
-Allow: /webp-to-url
-Allow: /photo-to-url
-Allow: /screenshot-to-url
-Allow: /imgur-alternative
-Allow: /imgbb-alternative
-Allow: /ai-image-hosting
-Allow: /image-url-for-chatgpt
-Allow: /permanent-image-hosting
-Allow: /free-image-cdn
-Allow: /direct-image-link
-Allow: /anonymous-image-upload
-Allow: /image-embed-code-generator
-Allow: /image-hosting-for-ebay
-Allow: /image-hosting-for-discord
-Allow: /image-hosting-for-github-readme
-Allow: /image-hosting-for-email-signatures
-Allow: /image-hosting-for-notion
-Allow: /image-hosting-for-newsletters
-Allow: /image-hosting-for-forums
-Allow: /image-hosting-for-wordpress
-Allow: /image-hosting-for-shopify
-Allow: /image-hosting-for-google-sheets
-Allow: /image-hosting-for-google-forms
-Allow: /image-to-url-for-whatsapp
-Allow: /image-to-url-for-html
-Allow: /image-to-url-vercel
-# Cluster A format-pair converters
-Allow: /png-to-jpg
-Allow: /jpg-to-png
-Allow: /webp-to-jpg
-Allow: /webp-to-png
-Allow: /png-to-webp
-Allow: /jpg-to-webp
-Allow: /png-to-pdf
-Allow: /jpg-to-pdf
-Allow: /heic-to-jpg
-Allow: /heic-to-png
-Allow: /heic-to-pdf
-# Cluster B utilities
-Allow: /image-compressor
-Allow: /image-resizer
-Allow: /image-to-base64
-Allow: /base64-to-image
-Allow: /favicon-generator
-# Cluster C alternatives + vs
-Allow: /cloudinary-alternative
-Allow: /postimages-alternative
-Allow: /google-photos-direct-link
-Allow: /dropbox-direct-image-link
-Allow: /imagetourl-vs-imgur
-Allow: /imagetourl-vs-imgbb
-Allow: /imagetourl-vs-cloudinary
-Allow: /imgur-vs-imgbb
-# Cluster D platforms
-Allow: /image-hosting-for-reddit
-Allow: /image-hosting-for-twitter
-Allow: /image-hosting-for-instagram
-Allow: /image-hosting-for-pinterest
-Allow: /image-hosting-for-substack
-Allow: /image-hosting-for-medium
-Allow: /image-hosting-for-linkedin
-Allow: /image-hosting-for-webflow
-Allow: /image-hosting-for-squarespace
-Allow: /image-hosting-for-wix
-Allow: /image-hosting-for-framer
-Allow: /image-hosting-for-stack-overflow
-Allow: /image-hosting-for-markdown
-Allow: /image-hosting-for-nextjs
-Allow: /image-hosting-for-jira
-# Cluster E developer / API pages
-Allow: /image-upload-api
-Allow: /image-hosting-api-python
-Allow: /image-hosting-api-nodejs
-Allow: /image-hosting-api-php
-Allow: /image-hosting-api-curl
-Allow: /image-upload-zapier
-Allow: /image-upload-make
-Allow: /image-upload-n8n
-Allow: /image-hosting-rest-api
-# Cluster F GEO Q&A pages
-Allow: /how-to-get-direct-url-for-image
-Allow: /how-to-share-image-as-link
-Allow: /how-to-embed-image-in-email
-Allow: /what-is-image-hotlinking
-Allow: /how-to-host-image-for-free
-Allow: /how-long-does-imagetourl-store-images
-
-# Authenticated / admin surfaces — never index these.
-Disallow: /dashboard
 Disallow: /admin
-
-# Uploaded image files — binary content, not indexable pages.
+Disallow: /dashboard
 Disallow: /uploads/
-
-# All API routes — no indexable content, block crawl budget waste.
 Disallow: /api/
-
-# Cloudflare Pages internal routes.
 Disallow: /cdn-cgi/
 
-# AI crawlers — explicitly allow public content
+# AI search / RAG crawlers — allow public content, block private surfaces.
 User-agent: GPTBot
 Allow: /
 Disallow: /admin
@@ -129,10 +21,10 @@ Disallow: /admin
 Disallow: /dashboard
 Disallow: /api/
 
-User-agent: PerplexityBot
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: OAI-SearchBot
+User-agent: PerplexityBot
 Allow: /
 
 User-agent: Google-Extended
@@ -141,7 +33,7 @@ Disallow: /admin
 Disallow: /dashboard
 Disallow: /api/
 
-# Block training-only crawlers
+# Block training-only scraper.
 User-agent: CCBot
 Disallow: /
 
