@@ -71,13 +71,45 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <!-- Recent Posts -->
         <div class="bg-surface border-2 border-on-surface rounded-xl hard-shadow">
-          <div class="p-5 border-b-2 border-on-surface flex items-center justify-between">
+          <div class="p-5 border-b-2 border-on-surface flex items-center justify-between gap-3">
             <h2 class="font-headline italic text-xl font-black">Recent Posts</h2>
             <a href="/admin/cms/posts" class="font-label text-xs font-bold uppercase text-primary flex items-center gap-1">
               View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
-          <div id="recent-posts" class="divide-y divide-outline-variant/50">
+          <div class="flex border-b-2 border-on-surface" role="tablist" aria-label="Recent posts filter">
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-tab="published"
+              class="recent-tab flex-1 px-4 py-3 font-label text-xs font-bold uppercase tracking-wider border-r-2 border-on-surface bg-secondary-container text-on-secondary-container"
+            >
+              <span class="inline-flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">publish</span>
+                Published <span class="opacity-70" data-count="published">—</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="draft"
+              class="recent-tab flex-1 px-4 py-3 font-label text-xs font-bold uppercase tracking-wider bg-surface text-on-surface-variant"
+            >
+              <span class="inline-flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">edit_note</span>
+                Drafts <span class="opacity-70" data-count="draft">—</span>
+              </span>
+            </button>
+          </div>
+          <div id="recent-posts-published" class="divide-y divide-outline-variant/50" role="tabpanel">
+            <div class="p-8 text-center text-outline">
+              <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
+              <p class="font-label text-xs uppercase mt-2">Loading...</p>
+            </div>
+          </div>
+          <div id="recent-posts-draft" class="divide-y divide-outline-variant/50 hidden" role="tabpanel">
             <div class="p-8 text-center text-outline">
               <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
               <p class="font-label text-xs uppercase mt-2">Loading...</p>
@@ -109,53 +141,90 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     return d.innerHTML;
   }
 
+  function renderPosts(container: HTMLElement, posts: any[], emptyLabel: string, isDraft: boolean) {
+    if (!posts?.length) {
+      container.innerHTML = `<div class="p-8 text-center text-outline"><p class="font-label text-xs uppercase">${emptyLabel}</p></div>`;
+      return;
+    }
+    container.innerHTML = posts.map((p: any) => `
+      <a href="/admin/cms/posts/edit/${esc(p.id)}" class="flex items-center justify-between p-4 hover:bg-surface-container-lowest transition-colors${isDraft ? ' bg-tertiary-fixed/20' : ''}">
+        <div class="flex-1 min-w-0">
+          <p class="font-bold text-sm truncate">${esc(p.title)}</p>
+          <p class="text-xs text-outline uppercase tracking-wider mt-1">${esc(p.categoryName || 'Uncategorized')} &middot; ${esc(p.readTime)}</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase ml-3 ${
+          p.status === 'published' ? 'bg-secondary-container text-on-secondary-container' :
+          p.status === 'draft' ? 'bg-tertiary-fixed text-on-tertiary-fixed' :
+          'bg-error-container text-on-error-container'
+        }">${esc(p.status)}</span>
+      </a>
+    `).join('');
+  }
+
+  function setupTabs() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.recent-tab');
+    const panels: Record<string, HTMLElement> = {
+      published: document.getElementById('recent-posts-published')!,
+      draft: document.getElementById('recent-posts-draft')!,
+    };
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab!;
+        tabs.forEach((t) => {
+          const active = t.dataset.tab === target;
+          t.setAttribute('aria-selected', String(active));
+          if (active) {
+            t.classList.remove('bg-surface', 'text-on-surface-variant');
+            t.classList.add(
+              target === 'draft' ? 'bg-tertiary-fixed' : 'bg-secondary-container',
+              target === 'draft' ? 'text-on-tertiary-fixed' : 'text-on-secondary-container',
+            );
+          } else {
+            t.classList.remove('bg-tertiary-fixed', 'text-on-tertiary-fixed', 'bg-secondary-container', 'text-on-secondary-container');
+            t.classList.add('bg-surface', 'text-on-surface-variant');
+          }
+        });
+        Object.entries(panels).forEach(([key, panel]) => {
+          panel.classList.toggle('hidden', key !== target);
+        });
+      });
+    });
+  }
+
   async function loadDashboard() {
-    // Load stats
-    const [postsRes, categoriesRes, mediaRes, activityRes] = await Promise.all([
-      fetch('/api/admin/cms/posts?limit=5'),
+    setupTabs();
+
+    // Load stats and posts (published + drafts in parallel)
+    const [publishedRes, draftsRes, categoriesRes, mediaRes, activityRes] = await Promise.all([
+      fetch('/api/admin/cms/posts?status=published&limit=5'),
+      fetch('/api/admin/cms/posts?status=draft&limit=5'),
       fetch('/api/admin/cms/categories'),
       fetch('/api/admin/cms/media?limit=1'),
       fetch('/api/admin/cms/activity?limit=10'),
     ]);
 
-    const postsData = await postsRes.json();
+    const publishedData = await publishedRes.json();
+    const draftsData = await draftsRes.json();
     const categoriesData = await categoriesRes.json();
     const mediaData = await mediaRes.json();
     const activityData = await activityRes.json();
 
     // Stats
-    document.getElementById('stat-posts')!.textContent = String(postsData.total || 0);
+    const publishedTotal = publishedData.total || 0;
+    const draftsTotal = draftsData.total || 0;
+    document.getElementById('stat-posts')!.textContent = String(publishedTotal + draftsTotal);
+    document.getElementById('stat-published')!.textContent = String(publishedTotal);
+    document.getElementById('stat-drafts')!.textContent = String(draftsTotal);
     document.getElementById('stat-categories')!.textContent = String(categoriesData.categories?.length || 0);
     document.getElementById('stat-media')!.textContent = String(mediaData.total || 0);
 
-    // Count published/drafts from posts
-    const allPostsRes = await fetch('/api/admin/cms/posts?status=published&limit=1');
-    const allPostsData = await allPostsRes.json();
-    document.getElementById('stat-published')!.textContent = String(allPostsData.total || 0);
+    // Tab counts
+    document.querySelector('[data-count="published"]')!.textContent = `(${publishedTotal})`;
+    document.querySelector('[data-count="draft"]')!.textContent = `(${draftsTotal})`;
 
-    const draftsRes = await fetch('/api/admin/cms/posts?status=draft&limit=1');
-    const draftsData = await draftsRes.json();
-    document.getElementById('stat-drafts')!.textContent = String(draftsData.total || 0);
-
-    // Recent posts
-    const recentPosts = document.getElementById('recent-posts')!;
-    if (postsData.posts?.length) {
-      recentPosts.innerHTML = postsData.posts.map((p: any) => `
-        <a href="/admin/cms/posts/edit/${esc(p.id)}" class="flex items-center justify-between p-4 hover:bg-surface-container-lowest transition-colors">
-          <div class="flex-1 min-w-0">
-            <p class="font-bold text-sm truncate">${esc(p.title)}</p>
-            <p class="text-xs text-outline uppercase tracking-wider mt-1">${esc(p.categoryName || 'Uncategorized')} &middot; ${esc(p.readTime)}</p>
-          </div>
-          <span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase ml-3 ${
-            p.status === 'published' ? 'bg-secondary-container text-on-secondary-container' :
-            p.status === 'draft' ? 'bg-tertiary-fixed text-on-tertiary-fixed' :
-            'bg-error-container text-on-error-container'
-          }">${p.status}</span>
-        </a>
-      `).join('');
-    } else {
-      recentPosts.innerHTML = '<div class="p-8 text-center text-outline"><p class="font-label text-xs uppercase">No posts yet</p></div>';
-    }
+    // Recent posts split by status
+    renderPosts(document.getElementById('recent-posts-published')!, publishedData.posts || [], 'No published posts yet', false);
+    renderPosts(document.getElementById('recent-posts-draft')!, draftsData.posts || [], 'No drafts', true);
 
     // Activity
     const actionIcons: Record<string, string> = {
