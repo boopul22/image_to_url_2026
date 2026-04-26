@@ -263,9 +263,23 @@ function hreflangUrl(loc: Locale): string {
       }
     </script>
 
-    <!-- Third-party scripts (GA + AdSense) — deferred to avoid blocking LCP -->
+    <!-- Third-party scripts (GA4 + AdSense) — deferred to avoid blocking LCP -->
     <script is:inline>
       (function(){
+        var gaLoaded = false;
+        function loadGA() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CFY17JKKYK';
+          s.async = true;
+          s.fetchPriority = 'low';
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CFY17JKKYK');
+        }
         var adsLoaded = false;
         function loadAds() {
           if (adsLoaded) return;
@@ -280,7 +294,7 @@ function hreflangUrl(loc: Locale): string {
         // Load only on real user interaction — bouncing visitors never trigger
         // a paint below the fold anyway, so we skip the idle fallback.
         ['scroll','click','keydown','touchstart'].forEach(function(evt){
-          document.addEventListener(evt, loadAds, {once:true, passive:true});
+          document.addEventListener(evt, function() { loadGA(); loadAds(); }, {once:true, passive:true});
         });
       })();
     </script>
