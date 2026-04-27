@@ -1,24 +1,24 @@
-- [x] extract pics
-- [x] extractpics
-- [x] image downloader
-- [x] extract.pics
-- [x] image downloader by link
-- [x] download image from link
-- [x] photo downloader
-- [x] extract pic
-- [x] image extractor
-- [x] extract images
-- [x] image download by link
-- [x] picture downloader
-- [x] image downloader free
-- [x] image downloader online
-- [x] download image from url hd
-- [x] extract image
-- [x] online image downloader
-- [x] image extract
-- [x] download photo from link
-- [x] web image downloader
-- [x] extract.pic
-- [x] website image extractor
-- [x] image extractor from website
-- [x] download image from url
+- [ ] extract pics
+- [ ] extractpics
+- [ ] image downloader
+- [ ] extract.pics
+- [ ] image downloader by link
+- [ ] download image from link
+- [ ] photo downloader
+- [ ] extract pic
+- [ ] image extractor
+- [ ] extract images
+- [ ] image download by link
+- [ ] picture downloader
+- [ ] image downloader free
+- [ ] image downloader online
+- [ ] download image from url hd
+- [ ] extract image
+- [ ] online image downloader
+- [ ] image extract
+- [ ] download photo from link
+- [ ] web image downloader
+- [ ] extract.pic
+- [ ] website image extractor
+- [ ] image extractor from website
+- [ ] download image from url
