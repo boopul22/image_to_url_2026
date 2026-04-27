@@ -1,0 +1,313 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ImageUploader from '../components/ImageUploader.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+function lp(path: string): string { return `/${locale}${path}`; }
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Online Photo Downloader",
+  "url": "https://imagetourl.cloud/photo-downloader",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free online photo and picture downloader. Upload any photo or picture and get a permanent direct download URL instantly. No signup required.",
+  "provider": { "@id": "https://imagetourl.cloud/#organization" }
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to download a photo and get a shareable link",
+  "totalTime": "PT10S",
+  "step": [
+    { "@type": "HowToStep", "name": "Upload your photo", "text": "Drag your photo into the uploader or click to browse. Supports JPG, PNG, WebP, HEIC, GIF — up to 10MB." },
+    { "@type": "HowToStep", "name": "Get your permanent link", "text": "Your photo is instantly hosted on Cloudflare's CDN. A permanent, direct download link is generated automatically." },
+    { "@type": "HowToStep", "name": "Share or save", "text": "Copy the direct photo URL and share it, embed it anywhere, or use it as a permanent download link." }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I download a photo and get a direct link for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your photo using the uploader above. In seconds you'll receive a permanent, direct photo URL hosted on our CDN. No account required — 100% free." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this photo downloader free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free. No subscription, no watermarks, no hidden fees. Just upload and get your direct photo link immediately." }
+    },
+    {
+      "@type": "Question",
+      "name": "What photo formats are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We support JPG, JPEG, PNG, WebP, GIF, and SVG. Photos taken on iPhone (HEIC) should be converted to JPG before uploading." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the photo quality get reduced when downloading?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Your photo is stored and served exactly as uploaded — no compression, no quality loss. You always get the original quality back." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the photo download link last?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Photo links are permanent and never expire. Once uploaded, your photo is hosted indefinitely on our global CDN unless you choose an auto-delete option." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum photo size I can upload?",
+      "acceptedAnswer": { "@type": "Answer", "text": "You can upload photos up to 10MB per file on the free plan. This covers most mobile and camera photos at full resolution." }
+    }
+  ]
+};
+---
+
+<Layout title="Photo Downloader — Save Any Photo by Link, Free Online | ImageToURL" description="Free online photo and picture downloader. Upload any photo and get a permanent direct download link instantly. Supports JPG, PNG, WebP. No signup required." schema={[schema, howToSchema, faqSchema]} noHreflang>
+  <Nav />
+  <main>
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
+      <ImageUploader />
+      <header class="mb-5 sm:mb-8 reveal">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Photo Downloader</span>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+          Download any photo — get a <span class="italic text-primary">permanent direct link, free online.</span>
+        </h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+          Upload any photo or picture and get a permanent, shareable download link in seconds. Works for JPG, PNG, WebP, GIF and more. No signup, no compression, no catch — the easiest free photo downloader online.
+        </p>
+      </header>
+    </div>
+
+    <!-- How It Works -->
+    <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">How It Works</h2>
+          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">1</div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Upload Your Photo</h3>
+            <p class="font-body text-on-surface-variant">Drag & drop or click to select your photo file. Supports JPG, PNG, WebP, GIF, and SVG — up to 10MB per photo.</p>
+          </div>
+          <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">2</div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Get Your Direct Link</h3>
+            <p class="font-body text-on-surface-variant">Your photo is uploaded to our global CDN instantly. A permanent, direct download link is generated automatically in under a second.</p>
+          </div>
+          <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">3</div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Share Anywhere</h3>
+            <p class="font-body text-on-surface-variant">Copy the link and share it via email, chat, social media, or embed it on any website. The photo stays accessible forever.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why This Photo Downloader -->
+    <section class="py-8 sm:py-12">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Why This Photo Downloader?</h2>
+          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">photo_camera</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Preserves Original Quality</h3>
+            <p class="font-body text-on-surface-variant">We serve your photo exactly as uploaded. No resizing, no re-compression — the full-resolution original is always what you get back.</p>
+          </div>
+          <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">public</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Works Everywhere</h3>
+            <p class="font-body text-on-surface-variant">Every photo gets a real direct link that works on any platform — social media, email, forums, websites, and apps — without needing any plugins.</p>
+          </div>
+          <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">schedule</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Links That Never Break</h3>
+            <p class="font-body text-on-surface-variant">Unlike free cloud storage that expires links, our photo URLs are permanent. Share once and they stay working forever.</p>
+          </div>
+          <div class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">bolt</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Instant — Under 1 Second</h3>
+            <p class="font-body text-on-surface-variant">Upload your photo and get your permanent direct link in under a second. No queue, no waiting, no slow processing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For -->
+    <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Perfect For</h2>
+          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">smartphone</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Mobile Phone Photos</h3>
+            <p class="font-body text-on-surface-variant">Transfer photos from your phone to any platform without losing quality. Upload and get a shareable link without emailing to yourself.</p>
+          </div>
+          <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">house</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Real Estate & Classifieds</h3>
+            <p class="font-body text-on-surface-variant">Post property photos on classifieds and listing sites. Get permanent direct links for Craigslist, OLX, and real estate portals.</p>
+          </div>
+          <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">groups</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Social Media Sharing</h3>
+            <p class="font-body text-on-surface-variant">Share photos across multiple social platforms without re-uploading. One link works on Twitter/X, Discord, Telegram, and everywhere else.</p>
+          </div>
+          <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">edit_note</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black font-headline mb-2">Bloggers & Content Creators</h3>
+            <p class="font-body text-on-surface-variant">Embed photos in blog posts and articles with reliable CDN-hosted URLs that load fast for every reader worldwide.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-8 sm:py-12">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Frequently Asked Questions</h2>
+          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+        </div>
+        <div class="space-y-4 reveal">
+          <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
+            <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+              How do I download a photo and get a direct link for free?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+              <p class="font-body text-on-surface-variant">Upload your photo using the uploader above. In seconds you'll receive a permanent, direct photo URL hosted on our CDN. No account required — 100% free.</p>
+            </div>
+          </details>
+          <details class="bg-tertiary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+            <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+              Is this photo downloader really free?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+              <p class="font-body text-on-surface-variant">Yes, completely free. No subscription, no watermarks, no hidden fees. Just upload and get your direct photo link immediately.</p>
+            </div>
+          </details>
+          <details class="bg-primary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+            <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+              What photo formats are supported?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+              <p class="font-body text-on-surface-variant">We support JPG, JPEG, PNG, WebP, GIF, and SVG. Photos taken on iPhone (HEIC) should be converted to JPG first — you can use our <a href="/heic-to-jpg" class="text-primary underline">HEIC to JPG converter</a>.</p>
+            </div>
+          </details>
+          <details class="bg-surface-variant border-2 border-on-background rounded-xl hard-shadow group">
+            <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+              Does the photo quality get reduced?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+              <p class="font-body text-on-surface-variant">No. Your photo is stored and served exactly as uploaded — no compression, no quality loss. You always get the original quality back, at full resolution.</p>
+            </div>
+          </details>
+          <details class="bg-secondary-container border-2 border-on-background rounded-xl hard-shadow group">
+            <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+              How long does the photo download link last?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+              <p class="font-body text-on-surface-variant">Photo links are permanent and never expire. Once uploaded, your photo is hosted indefinitely on our global CDN unless you choose an auto-delete option at upload time.</p>
+            </div>
+          </details>
+          <details class="bg-tertiary-fixed border-2 border-on-background rounded-xl hard-shadow group">
+            <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
+              What is the maximum photo size I can upload?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+              <p class="font-body text-on-surface-variant">You can upload photos up to 10MB per file on the free plan. This covers most mobile and camera photos at full resolution.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Related Tools</h2>
+          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <a href="/image-downloader" class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+            <div>
+              <h3 class="text-sm sm:text-base font-black font-headline mb-1">Image Downloader</h3>
+              <p class="font-body text-on-surface-variant text-sm">Download any image format with a direct URL</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          </a>
+          <a href="/jpg-to-url" class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+            <div>
+              <h3 class="text-sm sm:text-base font-black font-headline mb-1">JPG to URL</h3>
+              <p class="font-body text-on-surface-variant text-sm">Convert JPEG photos to shareable links</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          </a>
+          <a href="/image-extractor" class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
+            <div>
+              <h3 class="text-sm sm:text-base font-black font-headline mb-1">Image Extractor</h3>
+              <p class="font-body text-on-surface-variant text-sm">Extract all images from any website</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="reveal">
+          <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+            <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Download your photo and get a permanent link now</h2>
+            <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">Upload any photo and get a permanent direct download link in seconds. No signup, no watermarks, no catch.</p>
+            <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+              Upload Photo Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

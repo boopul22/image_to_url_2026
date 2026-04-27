@@ -131,6 +131,10 @@ const ROOT_PAGES: { path: string; lastmod: string }[] = [
   { path: '/guides/why-reddit-strips-exif',        lastmod: '2026-04-08' },
   { path: '/guides/responsive-images-cheatsheet',  lastmod: '2026-04-05' },
   { path: '/guides/image-optimization-core-web-vitals', lastmod: '2026-04-02' },
+  // Keyword landing pages (image downloader / extractor cluster)
+  { path: '/image-downloader',  lastmod: '2026-04-27' },
+  { path: '/photo-downloader',  lastmod: '2026-04-27' },
+  { path: '/image-extractor',   lastmod: '2026-04-27' },
 ];
 
 function buildRootUrlEntry(path: string, lastmod: string): string {

@@ -1,0 +1,227 @@
+- main [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - link "cloud_done ImageToURL" [ref=e5] [cursor=pointer]:
+        - /url: /fa/
+        - generic [ref=e6]: cloud_done
+        - text: ImageToURL
+      - generic [ref=e7]:
+        - link "خانه" [ref=e8] [cursor=pointer]:
+          - /url: /fa/
+        - link "ویژگی‌ها" [ref=e9] [cursor=pointer]:
+          - /url: /fa/features
+        - link "وبلاگ" [ref=e10] [cursor=pointer]:
+          - /url: /fa/blog
+        - button "راهکارها expand_more" [ref=e12]:
+          - text: راهکارها
+          - generic [ref=e13]: expand_more
+        - button "Tools expand_more" [ref=e15]:
+          - text: Tools
+          - generic [ref=e16]: expand_more
+      - generic [ref=e17]:
+        - link "favorite Donate" [ref=e18] [cursor=pointer]:
+          - /url: https://ko-fi.com/bipul
+          - generic [ref=e19]: favorite
+          - text: Donate
+        - button "Change language" [ref=e21]:
+          - generic [ref=e22]: translate
+          - text: فارسی
+          - generic [ref=e23]: expand_more
+        - link "ورود" [ref=e25] [cursor=pointer]:
+          - /url: /api/auth/login
+          - img [ref=e26]
+          - text: ورود
+  - main [ref=e31]:
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e35]:
+          - generic [ref=e36]: lock
+          - generic [ref=e37]:
+            - paragraph [ref=e38]: 100% in your browser
+            - paragraph [ref=e39]: Files never leave your device
+        - button "cloud_upload Drop WEBP files here or click to browse Multi-select OK — runs on your device" [ref=e42] [cursor=pointer]:
+          - generic [ref=e43]: cloud_upload
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Drop WEBP files here or click to browse
+            - paragraph [ref=e46]: Multi-select OK — runs on your device
+      - generic [ref=e47]:
+        - generic [ref=e48]: Browser-only Tool
+        - heading "WebP to PNG transparency intact." [level=1] [ref=e49]
+        - paragraph [ref=e50]: Convert WebP to PNG while preserving the alpha channel. Lossless re-encoding, in your browser, zero upload.
+    - generic [ref=e52]:
+      - heading "How to convert WebP to PNG" [level=2] [ref=e54]
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]: "1"
+          - heading "Drop WebP files" [level=3] [ref=e59]
+          - paragraph [ref=e60]: Drag .webp files into the drop zone.
+        - generic [ref=e61]:
+          - generic [ref=e62]: "2"
+          - heading "Browser re-encodes losslessly" [level=3] [ref=e63]
+          - paragraph [ref=e64]: Canvas decodes WebP and writes PNG with alpha channel preserved.
+        - generic [ref=e65]:
+          - generic [ref=e66]: "3"
+          - heading "Download PNG" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Click Download on each file.
+    - generic [ref=e70]:
+      - heading "Why PNG from WebP" [level=2] [ref=e72]
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e77]: bolt
+          - heading "Transparency preserved" [level=3] [ref=e78]
+          - paragraph [ref=e79]: PNG supports the same alpha channel WebP uses.
+        - generic [ref=e80]:
+          - generic [ref=e82]: bolt
+          - heading "Lossless pixels" [level=3] [ref=e83]
+          - paragraph [ref=e84]: No further compression loss on top of whatever the WebP had.
+        - generic [ref=e85]:
+          - generic [ref=e87]: bolt
+          - heading "Editor compatibility" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Every design tool accepts PNG.
+        - generic [ref=e90]:
+          - generic [ref=e92]: bolt
+          - heading "Archival fidelity" [level=3] [ref=e93]
+          - paragraph [ref=e94]: PNG is a better archive format than WebP for future-proof storage.
+    - generic [ref=e96]:
+      - heading "FAQ" [level=2] [ref=e98]
+      - generic [ref=e100]:
+        - group [ref=e101]:
+          - generic "Does this preserve transparency? expand_more" [ref=e102] [cursor=pointer]:
+            - generic [ref=e103]: Does this preserve transparency?
+            - generic [ref=e104]: expand_more
+        - group [ref=e105]:
+          - generic "Is the PNG lossless? expand_more" [ref=e106] [cursor=pointer]:
+            - generic [ref=e107]: Is the PNG lossless?
+            - generic [ref=e108]: expand_more
+        - group [ref=e109]:
+          - generic "Why is the PNG so much larger? expand_more" [ref=e110] [cursor=pointer]:
+            - generic [ref=e111]: Why is the PNG so much larger?
+            - generic [ref=e112]: expand_more
+        - group [ref=e113]:
+          - generic "Are my files uploaded? expand_more" [ref=e114] [cursor=pointer]:
+            - generic [ref=e115]: Are my files uploaded?
+            - generic [ref=e116]: expand_more
+        - group [ref=e117]:
+          - generic "Any batch limit? expand_more" [ref=e118] [cursor=pointer]:
+            - generic [ref=e119]: Any batch limit?
+            - generic [ref=e120]: expand_more
+        - group [ref=e121]:
+          - generic "Animated WebPs? expand_more" [ref=e122] [cursor=pointer]:
+            - generic [ref=e123]: Animated WebPs?
+            - generic [ref=e124]: expand_more
+        - group [ref=e125]:
+          - generic "Is metadata preserved? expand_more" [ref=e126] [cursor=pointer]:
+            - generic [ref=e127]: Is metadata preserved?
+            - generic [ref=e128]: expand_more
+        - group [ref=e129]:
+          - generic "Why convert instead of just renaming? expand_more" [ref=e130] [cursor=pointer]:
+            - generic [ref=e131]: Why convert instead of just renaming?
+            - generic [ref=e132]: expand_more
+    - generic [ref=e136]:
+      - heading "Need a hosted URL?" [level=2] [ref=e137]
+      - paragraph [ref=e138]: After converting, click Get URL.
+      - link "Try the main uploader" [ref=e139] [cursor=pointer]:
+        - /url: /fa/
+  - generic [ref=e141]:
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e145]: cloud_done
+          - text: ImageToURL
+        - paragraph [ref=e146]: بصری‌تر کردن وب، لینک به لینک. طراحی شده برای انسان، ساخته شده برای سرعت.
+        - text: به‌روز بمانید
+        - generic [ref=e147]:
+          - textbox "ایمیل شما..." [ref=e148]
+          - button "عضویت" [ref=e149]
+        - generic [ref=e150]:
+          - link "GitHub" [ref=e151] [cursor=pointer]:
+            - /url: https://github.com/boopul22
+            - img [ref=e152]
+          - link "Instagram" [ref=e154] [cursor=pointer]:
+            - /url: https://www.instagram.com/bipul.skill
+            - img [ref=e155]
+          - link "Personal Website" [ref=e157] [cursor=pointer]:
+            - /url: https://bipul.online/
+            - text: bipul.online
+      - generic [ref=e158]:
+        - text: ابزارها
+        - group [ref=e159]:
+          - generic "URL Uploaders" [ref=e160] [cursor=pointer]:
+            - generic [ref=e161]: URL Uploaders
+            - generic [ref=e162]: +
+        - group [ref=e163]:
+          - generic "Format Convert" [ref=e164] [cursor=pointer]:
+            - generic [ref=e165]: Format Convert
+            - generic [ref=e166]: +
+        - group [ref=e167]:
+          - generic "Utilities" [ref=e168] [cursor=pointer]:
+            - generic [ref=e169]: Utilities
+            - generic [ref=e170]: +
+      - generic [ref=e171]:
+        - text: Popular
+        - group [ref=e172]:
+          - generic "Features" [ref=e173] [cursor=pointer]:
+            - generic [ref=e174]: Features
+            - generic [ref=e175]: +
+        - group [ref=e176]:
+          - generic "Use Cases" [ref=e177] [cursor=pointer]:
+            - generic [ref=e178]: Use Cases
+            - generic [ref=e179]: +
+      - generic [ref=e180]:
+        - text: Learn
+        - group [ref=e181]:
+          - generic "Guides" [ref=e182] [cursor=pointer]:
+            - generic [ref=e183]: Guides
+            - generic [ref=e184]: +
+        - group [ref=e185]:
+          - generic "Answers" [ref=e186] [cursor=pointer]:
+            - generic [ref=e187]: Answers
+            - generic [ref=e188]: +
+        - group [ref=e189]:
+          - generic "Compare" [ref=e190] [cursor=pointer]:
+            - generic [ref=e191]: Compare
+            - generic [ref=e192]: +
+        - group [ref=e193]:
+          - generic "API" [ref=e194] [cursor=pointer]:
+            - generic [ref=e195]: API
+            - generic [ref=e196]: +
+    - generic [ref=e197]:
+      - generic [ref=e198]:
+        - text: منابع
+        - navigation [ref=e199]:
+          - link "سیاست حریم خصوصی" [ref=e200] [cursor=pointer]:
+            - /url: /fa/privacy/
+          - link "شرایط خدمات" [ref=e201] [cursor=pointer]:
+            - /url: /fa/terms/
+          - link "مستندات" [ref=e202] [cursor=pointer]:
+            - /url: /fa/docs/
+          - link "درباره ما" [ref=e203] [cursor=pointer]:
+            - /url: /fa/درباره-imagetourl/
+          - link "تماس با ما" [ref=e204] [cursor=pointer]:
+            - /url: /fa/تماس-با-ما/
+          - link "وبلاگ" [ref=e205] [cursor=pointer]:
+            - /url: /fa/blog/
+          - link "Content Guidelines" [ref=e206] [cursor=pointer]:
+            - /url: /fa/دستورالعمل-های-محتوا/
+      - generic [ref=e207]:
+        - text: Our Tools
+        - generic [ref=e208]:
+          - link "cloud_upload ImageToURL" [ref=e209] [cursor=pointer]:
+            - /url: /fa/
+            - generic [ref=e210]: cloud_upload
+            - text: ImageToURL
+          - link "photo_camera_back HEIC to JPG" [ref=e211] [cursor=pointer]:
+            - /url: /fa/تبدیل-heic-به-jpg/
+            - generic [ref=e212]: photo_camera_back
+            - text: HEIC to JPG
+          - link "travel_explore ExtractPics" [ref=e213] [cursor=pointer]:
+            - /url: https://extractpics.com/?ref=imagetourl
+            - generic [ref=e214]: travel_explore
+            - text: ExtractPics
+          - link "self_improvement Daily Meditation" [ref=e215] [cursor=pointer]:
+            - /url: https://dailymeditationguide.com/?ref=imagetourl
+            - generic [ref=e216]: self_improvement
+            - text: Daily Meditation
+    - generic [ref=e217]:
+      - paragraph [ref=e218]: © 2026 ImageToURL. طراحی شده توسط تیم ImageToURL
+      - paragraph [ref=e219]: Built with care · Hosted on Cloudflare
