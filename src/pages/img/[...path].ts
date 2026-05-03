@@ -58,18 +58,40 @@ const handle: APIRoute = async ({ params, url, locals }) => {
   if (!env.R2) return new Response('no R2 binding', { status: 500, headers: errHeaders });
   if (!env.IMAGES) return new Response('no IMAGES binding', { status: 500, headers: errHeaders });
 
+  // Try R2 binding first, then fall back to fetching from the CDN custom domain.
+  // This handles the case where cdn.imagetourl.cloud serves from a bucket that
+  // the worker's R2 binding can't reach (e.g. custom-domain ↔ binding mismatch).
+  let sourceBody: ReadableStream | ArrayBuffer;
+
   let obj;
   try {
     obj = await env.R2.get(key);
   } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    return new Response('r2 get failed: ' + msg, { status: 500, headers: errHeaders });
+    // R2 binding error — will try CDN fallback below
+    obj = null;
   }
-  if (!obj) return new Response('not found: ' + key, { status: 404, headers: errHeaders });
+
+  if (obj) {
+    sourceBody = obj.body;
+  } else {
+    // Fallback: fetch the original from the CDN public URL
+    const cdnUrl = `https://cdn.imagetourl.cloud/${key}`;
+    let cdnRes;
+    try {
+      cdnRes = await fetch(cdnUrl);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      return new Response('cdn fallback fetch failed: ' + msg, { status: 502, headers: errHeaders });
+    }
+    if (!cdnRes.ok || !cdnRes.body) {
+      return new Response('not found: ' + key, { status: 404, headers: errHeaders });
+    }
+    sourceBody = cdnRes.body;
+  }
 
   let transformed;
   try {
-    transformed = await env.IMAGES.input(obj.body)
+    transformed = await env.IMAGES.input(sourceBody)
       .transform({ width })
       .output({ format, quality });
   } catch (e) {
