@@ -204,14 +204,7 @@ const pageSchema = [
               {t(locale, 'home.upload.copy')}
             </button>
           </div>
-          <!-- ExtractPics brand mention (unlinked) -->
-          <div class="flex items-center gap-3 mt-3 pt-3 border-t border-outline-variant/50">
-            <span class="material-symbols-outlined flex-shrink-0 text-rose-600 text-3xl">download</span>
-            <div class="flex-1 min-w-0">
-              <span class="text-xs sm:text-sm font-bold text-on-background">Need to extract images from a webpage?</span>
-              <p class="text-xs text-on-surface-variant mt-0.5">ExtractPics — grab every image from any URL in one click</p>
-            </div>
-          </div>
+
         </div>
 
         <!-- State: error -->
@@ -433,64 +426,7 @@ const pageSchema = [
     </div>
   </section>
 
-  <!-- Image Workflow — ExtractPics cross-promo -->
-  <section class="cv-auto py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-6 sm:mb-8 reveal">
-        <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-2">Your Complete <span class="text-primary">Image Workflow</span></h2>
-        <p class="font-body text-on-surface-variant text-sm">From any website to a shareable link — in seconds</p>
-      </div>
-      <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-0 reveal">
-        <!-- Step 1: Extract (unlinked brand mention) -->
-        <div class="flex-1 w-full sm:w-auto bg-surface-container rounded-2xl p-5 sm:p-6 text-center">
-          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-            <span class="material-symbols-outlined text-primary text-2xl">travel_explore</span>
-          </div>
-          <h3 class="font-headline text-lg font-black text-on-background mb-1">Extract</h3>
-          <p class="font-body text-on-surface-variant text-xs sm:text-sm leading-relaxed">Grab images from any website with ExtractPics</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-primary font-bold text-xs uppercase tracking-wider">
-            extractpics.com
-          </span>
-        </div>
-        <!-- Arrow -->
-        <div class="flex-shrink-0 text-outline/40 hidden sm:block px-2">
-          <span class="material-symbols-outlined text-3xl">arrow_forward</span>
-        </div>
-        <div class="flex-shrink-0 text-outline/40 sm:hidden">
-          <span class="material-symbols-outlined text-2xl">arrow_downward</span>
-        </div>
-        <!-- Step 2: Upload -->
-        <div class="flex-1 w-full sm:w-auto bg-primary/5 border-2 border-primary/20 rounded-2xl p-5 sm:p-6 text-center">
-          <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mx-auto mb-3">
-            <span class="material-symbols-outlined text-on-primary text-2xl">cloud_upload</span>
-          </div>
-          <h3 class="font-headline text-lg font-black text-on-background mb-1">Upload</h3>
-          <p class="font-body text-on-surface-variant text-xs sm:text-sm leading-relaxed">Drop them here to get permanent CDN links</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-primary font-bold text-xs uppercase tracking-wider">
-            You're here
-          </span>
-        </div>
-        <!-- Arrow -->
-        <div class="flex-shrink-0 text-outline/40 hidden sm:block px-2">
-          <span class="material-symbols-outlined text-3xl">arrow_forward</span>
-        </div>
-        <div class="flex-shrink-0 text-outline/40 sm:hidden">
-          <span class="material-symbols-outlined text-2xl">arrow_downward</span>
-        </div>
-        <!-- Step 3: Share -->
-        <div class="flex-1 w-full sm:w-auto bg-surface-container rounded-2xl p-5 sm:p-6 text-center">
-          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-            <span class="material-symbols-outlined text-primary text-2xl">share</span>
-          </div>
-          <h3 class="font-headline text-lg font-black text-on-background mb-1">Share</h3>
-          <p class="font-body text-on-surface-variant text-xs sm:text-sm leading-relaxed">Use your links anywhere — they never expire</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-primary font-bold text-xs uppercase tracking-wider">
-            Permanent URLs
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Testimonials -->
   <section class="cv-auto px-4 sm:px-6 py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
@@ -648,7 +584,7 @@ const pageSchema = [
   const errorRetry = document.getElementById('error-retry')!;
   const errorText = document.getElementById('error-text')!;
   const errorSignin = document.getElementById('error-signin')!;
-  const errorPromo = document.getElementById('error-promo')!;
+
 
   // Read i18n strings from data attributes
   const i18n = {
@@ -679,8 +615,7 @@ const pageSchema = [
     fileInput.value = '';
     errorSignin.classList.add('hidden');
     errorSignin.classList.remove('flex');
-    errorPromo.classList.add('hidden');
-    errorPromo.classList.remove('flex');
+
   }
 
   // Click to open file picker
@@ -807,8 +742,7 @@ const pageSchema = [
       const isLimit = (err.message || '').toLowerCase().includes('limit');
       errorSignin.classList.toggle('hidden', !isLimit);
       errorSignin.classList.toggle('flex', isLimit);
-      errorPromo.classList.toggle('hidden', !isLimit);
-      errorPromo.classList.toggle('flex', isLimit);
+
     }
   }
 

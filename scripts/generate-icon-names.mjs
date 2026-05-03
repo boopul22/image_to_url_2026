@@ -36,6 +36,8 @@ const patterns = [
   // Ternary / conditional inside material-symbols-outlined content:
   //   {foo === 'bar' ? 'icon_a' : 'icon_b'}  — catch both branches
   /material-symbols-outlined[^{]*\{[^}]*['"]([a-z][a-z0-9_]*)['"][^}]*['"]([a-z][a-z0-9_]*)['"][^}]*\}/g,
+  // nav-links.ts helpers — lp(locale, 'key', 'Label', 'icon_name') / en('/path', 'Label', 'icon_name')
+  /\b(?:lp|en)\([^)]*,\s*['"]([a-z][a-z0-9_]*)['"]\s*\)/g,
 ];
 
 let filesScanned = 0;
