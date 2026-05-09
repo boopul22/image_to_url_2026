@@ -10,12 +10,15 @@
 // where social scrapers and Google's parser expect a fully-qualified URL.
 
 const SITE_ORIGIN = 'https://imagetourl.cloud';
+const OWNED_CDN_HOST = 'cdn.imagetourl.cloud';
+const TRANSFORMABLE_IMAGE_EXT = /\.(jpe?g|png|webp)$/i;
 
 export function imgUrl(src: string | null | undefined, width: number): string | undefined {
   if (!src) return undefined;
   try {
     const u = new URL(src);
-    if (u.hostname !== 'cdn.imagetourl.cloud') return src;
+    if (u.hostname !== OWNED_CDN_HOST) return src;
+    if (!TRANSFORMABLE_IMAGE_EXT.test(u.pathname)) return src;
     const key = u.pathname.replace(/^\/+/, '');
     return `/img/${key}?w=${width}&f=webp`;
   } catch {
@@ -28,4 +31,11 @@ export function imgUrlAbs(src: string | null | undefined, width: number): string
   if (!rel) return undefined;
   if (rel.startsWith('http')) return rel;
   return SITE_ORIGIN + rel;
+}
+
+export function rewriteOwnedCdnImagesInHtml(html: string, width = 800): string {
+  return html.replace(/\bsrc=(["'])(https:\/\/cdn\.imagetourl\.cloud\/[^"']+)\1/gi, (match, quote, src) => {
+    const rewritten = imgUrl(src, width);
+    return rewritten && rewritten !== src ? `src=${quote}${rewritten}${quote}` : match;
+  });
 }

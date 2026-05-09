@@ -7,7 +7,7 @@ import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPostBySlug, getPostBySlugLocalized, getRelatedPosts } from '../../lib/cms';
-import { imgUrl, imgUrlAbs } from '../../lib/img';
+import { imgUrl, imgUrlAbs, rewriteOwnedCdnImagesInHtml } from '../../lib/img';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -94,6 +94,10 @@ if (post.htmlContent) {
     level: 2,
   }));
 }
+
+const displayHtml = post.htmlContent
+  ? rewriteOwnedCdnImagesInHtml(renderedHtml ?? post.htmlContent, 800)
+  : null;
 
 const showToc = tocItems.length >= 3;
 
@@ -259,7 +263,7 @@ const faqSchema = post.faqItems?.length ? {
 
       <!-- Article Body -->
       {post.htmlContent ? (
-        <div class="landing-prose blog-html-content" set:html={renderedHtml ?? post.htmlContent} />
+        <div class="landing-prose blog-html-content" set:html={displayHtml ?? post.htmlContent} />
       ) : (
         <div class="landing-prose">
           <p class="text-xl font-medium leading-relaxed">
@@ -404,4 +408,3 @@ const faqSchema = post.faqItems?.length ? {
     .blog-toc a { min-height: 44px; align-items: center; }
   }
 </style>
-
