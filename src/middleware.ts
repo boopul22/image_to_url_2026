@@ -163,24 +163,31 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   }
 
   // --- Edge Caching (Before next) ---
+  const sessionCookie = cookies.get('session')?.value;
   const isCacheableHtmlPage = request.method === 'GET' && 
     !path.startsWith('/api/') && 
     !path.startsWith('/admin') && 
     !path.startsWith('/dashboard') &&
-    !cookies.has('session'); // only for anonymous
+    !sessionCookie; // only for anonymous
   
   // Try to serve from Cache API immediately
   let cacheKey: Request | null = null;
-  const cacheObj = typeof caches !== 'undefined' ? caches.default : null;
+  const cacheObj = typeof caches !== 'undefined' ? (caches as any).default : null;
   
   if (isCacheableHtmlPage && cacheObj) {
-    cacheKey = new Request(request.url, request);
+    cacheKey = new Request(request.url, { method: 'GET' });
     try {
       const cachedResponse = await cacheObj.match(cacheKey);
       if (cachedResponse) {
-        const cloned = cachedResponse.clone();
-        cloned.headers.set('X-Edge-Cache', 'hit');
-        return cloned;
+        // Cached responses have immutable headers — wrap in a new Response
+        return new Response(cachedResponse.body, {
+          status: cachedResponse.status,
+          statusText: cachedResponse.statusText,
+          headers: new Headers([
+            ...cachedResponse.headers.entries(),
+            ['X-Edge-Cache', 'hit'],
+          ]),
+        });
       }
     } catch (err) {
       // ignore cache read errors
@@ -284,10 +291,11 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       
       // --- Save to Edge Cache ---
       if (cacheObj && cacheKey && isCacheableHtmlPage) {
-        const clone = response.clone();
         try {
-          if (locals.runtime?.waitUntil) {
-            locals.runtime.waitUntil(cacheObj.put(cacheKey, clone));
+          const clone = response.clone();
+          const ctx = (locals as any).runtime?.ctx;
+          if (ctx?.waitUntil) {
+            ctx.waitUntil(cacheObj.put(cacheKey, clone));
           } else {
             cacheObj.put(cacheKey, clone).catch(() => {});
           }
