@@ -162,6 +162,31 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     }
   }
 
+  // --- Edge Caching (Before next) ---
+  const isCacheableHtmlPage = request.method === 'GET' && 
+    !path.startsWith('/api/') && 
+    !path.startsWith('/admin') && 
+    !path.startsWith('/dashboard') &&
+    !cookies.has('session'); // only for anonymous
+  
+  // Try to serve from Cache API immediately
+  let cacheKey: Request | null = null;
+  const cacheObj = typeof caches !== 'undefined' ? caches.default : null;
+  
+  if (isCacheableHtmlPage && cacheObj) {
+    cacheKey = new Request(request.url, request);
+    try {
+      const cachedResponse = await cacheObj.match(cacheKey);
+      if (cachedResponse) {
+        const cloned = cachedResponse.clone();
+        cloned.headers.set('X-Edge-Cache', 'hit');
+        return cloned;
+      }
+    } catch (err) {
+      // ignore cache read errors
+    }
+  }
+
   let response = await next();
 
   // 404 → 410 Gone for URL patterns that are permanently removed. Tells Google
@@ -256,6 +281,21 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       // No `Vary: Cookie` — anonymous responses don't depend on cookies, and Vary
       // would fragment the edge cache by every cookie value (killing HIT rate).
       response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+      
+      // --- Save to Edge Cache ---
+      if (cacheObj && cacheKey && isCacheableHtmlPage) {
+        const clone = response.clone();
+        try {
+          if (locals.runtime?.waitUntil) {
+            locals.runtime.waitUntil(cacheObj.put(cacheKey, clone));
+          } else {
+            cacheObj.put(cacheKey, clone).catch(() => {});
+          }
+          response.headers.set('X-Edge-Cache', 'miss');
+        } catch (e) {
+          // ignore
+        }
+      }
     } else {
       // 301/404/410: short CDN cache so fixes propagate quickly. Don't want a
       // stale 404 sticking at the edge for an hour after we ship a 301 fix.

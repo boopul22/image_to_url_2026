@@ -28,40 +28,46 @@ export function isPageKey(v: string): v is PageKey {
 // Reverse index — built once at module load. Maps "<locale>/<slug>" -> pageKey.
 // Includes English for every page (always present) and each locale's translated
 // slug when defined.
-const REVERSE: Map<string, PageKey> = (() => {
-  const m = new Map<string, PageKey>();
-  for (const pageKey of PAGE_KEYS) {
-    const slugs = SLUGS[pageKey];
-    for (const locale of locales) {
-      const slug = slugs[locale] ?? slugs[defaultLocale];
-      if (slug) m.set(`${locale}/${slug}`, pageKey);
+let REVERSE: Map<string, PageKey> | null = null;
+function getReverse(): Map<string, PageKey> {
+  if (!REVERSE) {
+    REVERSE = new Map<string, PageKey>();
+    for (const pageKey of PAGE_KEYS) {
+      const slugs = SLUGS[pageKey];
+      for (const locale of locales) {
+        const slug = slugs[locale] ?? slugs[defaultLocale];
+        if (slug) REVERSE.set(`${locale}/${slug}`, pageKey);
+      }
     }
   }
-  return m;
-})();
+  return REVERSE;
+}
 
 export function resolveSlug(locale: Locale, slug: string): PageKey | null {
-  return REVERSE.get(`${locale}/${slug}`) ?? null;
+  return getReverse().get(`${locale}/${slug}`) ?? null;
 }
 
 // Reverse map of translated slug → owning locale. A slug "owns" a locale when
 // SLUGS[pageKey][locale] === slug (not a fallback). Used by middleware to 301
 // cross-locale URLs like /ar/<farsi-slug>/ → /fa/<farsi-slug>/ instead of 404ing.
 // If a slug appears under multiple locales' own entries (rare), the first wins.
-const SLUG_OWNER: Map<string, Locale> = (() => {
-  const m = new Map<string, Locale>();
-  for (const pageKey of PAGE_KEYS) {
-    const slugs = SLUGS[pageKey];
-    for (const locale of locales) {
-      const own = slugs[locale];
-      if (own && !m.has(own)) m.set(own, locale);
+let SLUG_OWNER: Map<string, Locale> | null = null;
+function getSlugOwner(): Map<string, Locale> {
+  if (!SLUG_OWNER) {
+    SLUG_OWNER = new Map<string, Locale>();
+    for (const pageKey of PAGE_KEYS) {
+      const slugs = SLUGS[pageKey];
+      for (const locale of locales) {
+        const own = slugs[locale];
+        if (own && !SLUG_OWNER.has(own)) SLUG_OWNER.set(own, locale);
+      }
     }
   }
-  return m;
-})();
+  return SLUG_OWNER;
+}
 
 export function ownerLocaleForSlug(slug: string): Locale | null {
-  return SLUG_OWNER.get(slug) ?? null;
+  return getSlugOwner().get(slug) ?? null;
 }
 
 // For hreflang link tags: emit one entry per locale that has a slug for this
