@@ -172,7 +172,14 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   
   // Try to serve from Cache API immediately
   let cacheKey: Request | null = null;
-  const cacheObj = typeof caches !== 'undefined' ? (caches as any).default : null;
+  let cacheObj: any = null;
+  let cacheDebug = 'no-cache-obj';
+  try {
+    cacheObj = (caches as any).default ?? null;
+    cacheDebug = cacheObj ? 'cache-ready' : 'cache-null';
+  } catch {
+    cacheDebug = 'caches-unavailable';
+  }
   
   if (isCacheableHtmlPage && cacheObj) {
     cacheKey = new Request(request.url, { method: 'GET' });
@@ -186,12 +193,16 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
           headers: new Headers([
             ...cachedResponse.headers.entries(),
             ['X-Edge-Cache', 'hit'],
+            ['X-Cache-Debug', cacheDebug],
           ]),
         });
       }
-    } catch (err) {
-      // ignore cache read errors
+      cacheDebug += ':miss';
+    } catch (err: any) {
+      cacheDebug += ':match-err:' + (err?.message || String(err)).slice(0, 80);
     }
+  } else if (!isCacheableHtmlPage) {
+    cacheDebug += ':not-cacheable';
   }
 
   let response = await next();
@@ -299,11 +310,13 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
           } else {
             cacheObj.put(cacheKey, clone).catch(() => {});
           }
+          cacheDebug += ':put-ok';
           response.headers.set('X-Edge-Cache', 'miss');
-        } catch (e) {
-          // ignore
+        } catch (e: any) {
+          cacheDebug += ':put-err:' + (e?.message || String(e)).slice(0, 80);
         }
       }
+      response.headers.set('X-Cache-Debug', cacheDebug);
     } else {
       // 301/404/410: short CDN cache so fixes propagate quickly. Don't want a
       // stale 404 sticking at the edge for an hour after we ship a 301 fix.
