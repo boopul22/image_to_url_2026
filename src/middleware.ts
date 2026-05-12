@@ -162,7 +162,10 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     }
   }
 
-  // --- Edge Caching (Before next) ---
+  // --- Edge Caching (Workers Cache API) ---
+  // For anonymous GET requests to HTML pages, serve from edge cache to skip SSR
+  // and D1 queries entirely. Cache is populated on miss and expires with the
+  // same max-age as the Cache-Control header set below.
   const sessionCookie = cookies.get('session')?.value;
   const isCacheableHtmlPage = request.method === 'GET' && 
     !path.startsWith('/api/') && 
@@ -170,15 +173,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     !path.startsWith('/dashboard') &&
     !sessionCookie; // only for anonymous
   
-  // Try to serve from Cache API immediately
   let cacheKey: Request | null = null;
   let cacheObj: any = null;
-  let cacheDebug = 'no-cache-obj';
   try {
     cacheObj = (caches as any).default ?? null;
-    cacheDebug = cacheObj ? 'cache-ready' : 'cache-null';
   } catch {
-    cacheDebug = 'caches-unavailable';
+    // caches unavailable
   }
   
   if (isCacheableHtmlPage && cacheObj) {
@@ -186,23 +186,18 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     try {
       const cachedResponse = await cacheObj.match(cacheKey);
       if (cachedResponse) {
-        // Cached responses have immutable headers — wrap in a new Response
         return new Response(cachedResponse.body, {
           status: cachedResponse.status,
           statusText: cachedResponse.statusText,
           headers: new Headers([
             ...cachedResponse.headers.entries(),
             ['X-Edge-Cache', 'hit'],
-            ['X-Cache-Debug', cacheDebug],
           ]),
         });
       }
-      cacheDebug += ':miss';
-    } catch (err: any) {
-      cacheDebug += ':match-err:' + (err?.message || String(err)).slice(0, 80);
+    } catch {
+      // ignore cache read errors
     }
-  } else if (!isCacheableHtmlPage) {
-    cacheDebug += ':not-cacheable';
   }
 
   let response = await next();
@@ -310,13 +305,11 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
           } else {
             await cacheObj.put(cacheKey, clone);
           }
-          cacheDebug += ':put-ok';
           response.headers.set('X-Edge-Cache', 'miss');
-        } catch (e: any) {
-          cacheDebug += ':put-err:' + (e?.message || String(e)).slice(0, 80);
+        } catch {
+          // ignore cache write errors
         }
       }
-      response.headers.set('X-Cache-Debug', cacheDebug);
     } else {
       // 301/404/410: short CDN cache so fixes propagate quickly. Don't want a
       // stale 404 sticking at the edge for an hour after we ship a 301 fix.
