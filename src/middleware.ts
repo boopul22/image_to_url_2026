@@ -304,11 +304,11 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       if (cacheObj && cacheKey && isCacheableHtmlPage) {
         try {
           const clone = response.clone();
-          const ctx = (locals as any).runtime?.ctx;
-          if (ctx?.waitUntil) {
-            ctx.waitUntil(cacheObj.put(cacheKey, clone));
+          const cfCtx = (locals as any).cfContext;
+          if (cfCtx?.waitUntil) {
+            cfCtx.waitUntil(cacheObj.put(cacheKey, clone));
           } else {
-            cacheObj.put(cacheKey, clone).catch(() => {});
+            await cacheObj.put(cacheKey, clone);
           }
           cacheDebug += ':put-ok';
           response.headers.set('X-Edge-Cache', 'miss');
