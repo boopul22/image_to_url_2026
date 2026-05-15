@@ -113,39 +113,13 @@ const pageSchema = [
   <Nav activePage="home" />
 
   <!-- Hero Section — Immediate, action-focused -->
-  <section class="flex flex-col max-w-4xl lg:max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 text-center">
-    <div class="max-w-4xl mx-auto w-full">
-      <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-semibold uppercase tracking-widest mb-3 border-2 border-neutral-900">
-        {t(locale, 'home.hero.badge')}
-      </div>
-      <h1 class="font-headline text-xl sm:text-2xl md:text-3xl font-semibold text-on-background leading-[1.05] tracking-tighter uppercase mb-2 sm:mb-3">
-        {t(locale, 'home.hero.headline1')} <span class="text-rose-600">{t(locale, 'home.hero.headline2')}</span>
-      </h1>
-      <p class="font-body text-xs sm:text-sm text-on-surface-variant leading-relaxed max-w-md mx-auto mb-4 sm:mb-5 px-2">
-        {t(locale, 'home.hero.subheadline')}
-      </p>
-    </div>
-
-    <!-- AdSense — horizontal -->
-    <div class="w-full max-w-xl mx-auto mb-4">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="8598885796"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <!-- Upload Area + flanking vertical ads (lg+) -->
-    <div class="w-full lg:grid lg:grid-cols-[180px_minmax(0,1fr)_180px] lg:gap-6 lg:items-start lg:max-w-5xl lg:mx-auto">
-      <!-- Vertical ad — left -->
-      <aside class="hidden lg:block min-h-[600px]" aria-label="Sponsored">
+  <section class="max-w-4xl lg:max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
+    <div class="w-full lg:relative">
+      <!-- Vertical ad — left (anchored to bottom of upload tool, extends upward) -->
+      <aside class="hidden lg:block lg:absolute lg:left-0 lg:bottom-0 lg:w-[180px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
         <ins
           class="adsbygoogle"
-          style="display:block"
+          style="display:block;width:100%;height:100%"
           data-ad-client="ca-pub-7803867089582138"
           data-ad-slot="1115981593"
           data-ad-format="auto"
@@ -153,6 +127,33 @@ const pageSchema = [
         ></ins>
         <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </aside>
+
+      <!-- Center column: badge, headline, upload tool -->
+      <div class="flex flex-col text-center lg:px-[204px]">
+        <div class="max-w-4xl mx-auto w-full">
+          <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-semibold uppercase tracking-widest mb-3 border-2 border-neutral-900">
+            {t(locale, 'home.hero.badge')}
+          </div>
+          <h1 class="font-headline text-xl sm:text-2xl md:text-3xl font-semibold text-on-background leading-[1.05] tracking-tighter uppercase mb-2 sm:mb-3">
+            {t(locale, 'home.hero.headline1')} <span class="text-rose-600">{t(locale, 'home.hero.headline2')}</span>
+          </h1>
+          <p class="font-body text-xs sm:text-sm text-on-surface-variant leading-relaxed max-w-md mx-auto mb-4 sm:mb-5 px-2">
+            {t(locale, 'home.hero.subheadline')}
+          </p>
+        </div>
+
+        <!-- AdSense — horizontal -->
+        <div class="w-full max-w-xl mx-auto mb-4">
+          <ins
+            class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-7803867089582138"
+            data-ad-slot="8598885796"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
 
     <div class="w-full max-w-xl mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
@@ -249,13 +250,14 @@ const pageSchema = [
         </div>
       </div>
 
-    </div>
+        </div>
+      </div><!-- /center column -->
 
-      <!-- Vertical ad — right -->
-      <aside class="hidden lg:block min-h-[600px]" aria-label="Sponsored">
+      <!-- Vertical ad — right (anchored to bottom of upload tool, extends upward) -->
+      <aside class="hidden lg:block lg:absolute lg:right-0 lg:bottom-0 lg:w-[180px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
         <ins
           class="adsbygoogle"
-          style="display:block"
+          style="display:block;width:100%;height:100%"
           data-ad-client="ca-pub-7803867089582138"
           data-ad-slot="1115981593"
           data-ad-format="auto"
@@ -263,7 +265,7 @@ const pageSchema = [
         ></ins>
         <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </aside>
-    </div>
+    </div><!-- /relative wrapper -->
 
     <!-- Trust Signals — pushed to bottom of viewport -->
     <div class="flex flex-wrap justify-center gap-3 sm:gap-5 mt-4 sm:mt-6 pb-2 sm:pb-3 text-xs text-on-surface-variant font-label font-bold uppercase tracking-wider">
