@@ -1,0 +1,51 @@
+---
+/**
+ * Wraps a tool widget (HEIC converter, canvas converter, PDF converter,
+ * image compressor, image resizer, etc.) with the homepage-style 3-slot
+ * ad layout: left + right 160x600 skyscrapers on lg+, plus a 90px
+ * horizontal banner above the widget.
+ *
+ * Uses the standard left-1/2/-translate-x-1/2 breakout so the wrapper
+ * expands from its parent's max-w-5xl frame up to lg:max-w-6xl, giving
+ * room for 160 + ~672 + 160 columns + gaps (~1040px). Below lg the
+ * skyscrapers are hidden and the horizontal banner stays visible.
+ */
+---
+<div class="w-full mb-8 sm:mb-10 lg:relative lg:left-1/2 lg:-translate-x-1/2 lg:w-screen lg:max-w-6xl lg:px-6">
+  <div class="w-full lg:flex lg:items-end lg:justify-center lg:gap-6">
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
+      <ins
+        class="adsbygoogle"
+        style="display:inline-block;width:160px;height:600px"
+        data-ad-client="ca-pub-7803867089582138"
+        data-ad-slot="1115981593"
+      ></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+
+    <div class="w-full lg:flex-1 lg:max-w-2xl lg:min-w-0">
+      <div class="w-full max-w-2xl mx-auto mb-4 overflow-hidden" style="max-height:90px">
+        <ins
+          class="adsbygoogle"
+          style="display:block;width:100%;height:90px"
+          data-ad-client="ca-pub-7803867089582138"
+          data-ad-slot="8598885796"
+          data-ad-format="horizontal"
+          data-full-width-responsive="false"
+        ></ins>
+        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <slot />
+    </div>
+
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
+      <ins
+        class="adsbygoogle"
+        style="display:inline-block;width:160px;height:600px"
+        data-ad-client="ca-pub-7803867089582138"
+        data-ad-slot="1115981593"
+      ></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+  </div>
+</div>

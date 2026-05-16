@@ -10,6 +10,7 @@ import CanvasConverter from '../../components/CanvasConverter.astro';
 import PdfConverter from '../../components/PdfConverter.astro';
 import ImageCompressor from '../../components/ImageCompressor.astro';
 import ImageResizer from '../../components/ImageResizer.astro';
+import ToolAdSurround from '../../components/ToolAdSurround.astro';
 import { locales, defaultLocale, type Locale } from '../../i18n/config';
 import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, type PageKey } from '../../i18n/landing/registry';
 import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
@@ -130,12 +131,12 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
       {widget.kind === 'uploader' && <ImageUploader />}
-      {widget.kind === 'heic-to-jpg' && <HeicConverter />}
-      {widget.kind === 'heic-to-png' && <HeicPngConverter />}
-      {widget.kind === 'pdf' && <PdfConverter from={widget.from} idPrefix={`pdf-${widget.from}-${locale}`} />}
-      {widget.kind === 'canvas' && <CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} />}
-      {widget.kind === 'compressor' && <ImageCompressor />}
-      {widget.kind === 'resizer' && <ImageResizer />}
+      {widget.kind === 'heic-to-jpg' && <ToolAdSurround><HeicConverter /></ToolAdSurround>}
+      {widget.kind === 'heic-to-png' && <ToolAdSurround><HeicPngConverter /></ToolAdSurround>}
+      {widget.kind === 'pdf' && <ToolAdSurround><PdfConverter from={widget.from} idPrefix={`pdf-${widget.from}-${locale}`} /></ToolAdSurround>}
+      {widget.kind === 'canvas' && <ToolAdSurround><CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} /></ToolAdSurround>}
+      {widget.kind === 'compressor' && <ToolAdSurround><ImageCompressor /></ToolAdSurround>}
+      {widget.kind === 'resizer' && <ToolAdSurround><ImageResizer /></ToolAdSurround>}
 
       <header class="mb-5 sm:mb-8 reveal">
         <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">{c.badge}</span>
