@@ -208,6 +208,16 @@ function hreflangUrl(loc: Locale): string {
     <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
     <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" />
 
+    <!-- AdSense loader (global). Loaded on every page so Auto Ads + manual <ins> slots
+         can render without waiting for user interaction. async + fetchpriority=low keeps
+         it off the LCP critical path. -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138"
+      crossorigin="anonymous"
+      fetchpriority="low"
+    ></script>
+
     <link
       rel="stylesheet"
       media="print"
@@ -259,7 +269,8 @@ function hreflangUrl(loc: Locale): string {
       }
     </script>
 
-    <!-- Third-party scripts (GA4 + AdSense) — deferred to avoid blocking LCP -->
+    <!-- GA4 — interaction-gated to avoid blocking LCP. AdSense moved to <head>
+         as a normal async script so Auto Ads can render on first paint. -->
     <script is:inline>
       (function(){
         var gaLoaded = false;
@@ -276,21 +287,8 @@ function hreflangUrl(loc: Locale): string {
           gtag('js', new Date());
           gtag('config', 'G-CFY17JKKYK');
         }
-        var adsLoaded = false;
-        function loadAds() {
-          if (adsLoaded) return;
-          adsLoaded = true;
-          var a = document.createElement('script');
-          a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138';
-          a.async = true;
-          a.crossOrigin = 'anonymous';
-          a.fetchPriority = 'low';
-          document.head.appendChild(a);
-        }
-        // Load only on real user interaction — bouncing visitors never trigger
-        // a paint below the fold anyway, so we skip the idle fallback.
         ['scroll','click','keydown','touchstart'].forEach(function(evt){
-          document.addEventListener(evt, function() { loadGA(); loadAds(); }, {once:true, passive:true});
+          document.addEventListener(evt, loadGA, {once:true, passive:true});
         });
       })();
     </script>
