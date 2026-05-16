@@ -1,0 +1,520 @@
+---
+/**
+ * Client-side favicon bundle generator.
+ *
+ * Takes one source image and renders the full favicon set in the browser:
+ *  - favicon.ico (16×16, 32×32, 48×48 packed as PNG-in-ICO — supported by all
+ *    modern browsers, no native ICO encoder required)
+ *  - favicon-16/32/48/96/180/192/512 PNGs
+ *  - site.webmanifest
+ *  - a ready-to-paste <head> snippet
+ *
+ * Nothing leaves the browser. The source is decoded with createImageBitmap
+ * so EXIF-rotated phone photos come out the right way up.
+ */
+---
+<div class="w-full max-w-2xl mx-auto">
+  <input
+    type="file"
+    id="fav-input"
+    accept="image/png,image/jpeg,image/webp,image/svg+xml,.png,.jpg,.jpeg,.webp,.svg"
+    class="hidden"
+  />
+
+  <!-- Privacy strip + background -->
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
+        <p class="text-[11px] leading-tight text-on-surface-variant">Source never uploaded</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <label for="fav-bg" class="text-xs font-bold uppercase tracking-wider text-on-background">Background</label>
+      <select id="fav-bg" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
+        <option value="transparent">Transparent</option>
+        <option value="white">White</option>
+        <option value="black">Black</option>
+        <option value="custom">Custom</option>
+      </select>
+      <input type="color" id="fav-bg-color" value="#ffffff" class="hidden w-8 h-7 border-2 border-on-background cursor-pointer p-0" />
+    </div>
+  </div>
+
+  <!-- Drop zone -->
+  <div id="fav-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+    <div id="fav-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
+      <div id="fav-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">favorite</span>
+        <div class="text-center">
+          <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop an image here or click to browse</p>
+          <p class="text-xs sm:text-sm text-on-surface-variant mt-2">Square images work best — PNG · JPG · WebP · SVG</p>
+        </div>
+      </div>
+      <div id="fav-progress" class="hidden mt-6">
+        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id="fav-progress-fill" class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        </div>
+        <p id="fav-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Generating…</p>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="fav-state-results" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg">Favicon bundle ready</span>
+        <button id="fav-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Try another</button>
+      </div>
+
+      <!-- Faux contexts -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
+        <!-- Browser tab mockup -->
+        <div class="border-2 border-on-background bg-surface-variant/30 p-3 flex flex-col gap-2">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Browser tab</span>
+          <div class="bg-white border-2 border-on-background rounded-t-md px-2 pt-1 flex items-center gap-1.5 max-w-full overflow-hidden">
+            <img id="fav-mock-tab" src="" alt="" class="w-4 h-4 flex-shrink-0" style="image-rendering: -webkit-optimize-contrast;" />
+            <span class="text-[11px] font-mono truncate flex-1">Your site</span>
+            <span class="text-on-surface-variant text-[14px]">×</span>
+          </div>
+        </div>
+        <!-- Bookmark mockup -->
+        <div class="border-2 border-on-background bg-surface-variant/30 p-3 flex flex-col gap-2">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bookmark bar</span>
+          <div class="bg-white border-2 border-on-background px-2 py-1 flex items-center gap-1.5">
+            <img id="fav-mock-book" src="" alt="" class="w-4 h-4 flex-shrink-0" style="image-rendering: -webkit-optimize-contrast;" />
+            <span class="text-[11px] font-mono truncate">Site</span>
+          </div>
+        </div>
+        <!-- iOS home screen mockup -->
+        <div class="border-2 border-on-background bg-surface-variant/30 p-3 flex flex-col gap-2">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">iOS home</span>
+          <div class="flex items-end gap-2">
+            <img id="fav-mock-ios" src="" alt="" class="w-12 h-12 rounded-xl border border-on-background/20 flex-shrink-0 object-cover" />
+            <span class="text-[10px] font-mono truncate">App</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asset grid -->
+      <p class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2">Click any asset to download</p>
+      <div id="fav-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-4"></div>
+
+      <!-- Snippet -->
+      <p class="text-xs font-bold uppercase tracking-wider text-on-background mb-2">Drop this in your &lt;head&gt;</p>
+      <textarea
+        id="fav-snippet"
+        readonly
+        rows="7"
+        class="w-full border-2 border-on-background bg-surface-variant/40 font-mono text-[11px] sm:text-xs p-3 resize-y leading-relaxed"
+        spellcheck="false"
+      ></textarea>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <button id="fav-copy" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide">Copy snippet</button>
+        <button id="fav-zip" class="border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Download all (.zip)</button>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="fav-state-error" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <span class="font-bold text-error text-sm sm:text-lg">Generation failed</span>
+        <button id="fav-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+      </div>
+      <p id="fav-error-text" class="text-xs sm:text-sm text-on-surface-variant"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Asset = { name: string; mime: string; bytes: Uint8Array };
+
+  const input = document.getElementById('fav-input') as HTMLInputElement;
+  const drop = document.getElementById('fav-drop') as HTMLDivElement;
+  const panel = document.getElementById('fav-panel') as HTMLDivElement;
+  const stateIdle = document.getElementById('fav-state-idle') as HTMLDivElement;
+  const stateResults = document.getElementById('fav-state-results') as HTMLDivElement;
+  const stateError = document.getElementById('fav-state-error') as HTMLDivElement;
+  const progress = document.getElementById('fav-progress') as HTMLDivElement;
+  const progressFill = document.getElementById('fav-progress-fill') as HTMLDivElement;
+  const progressText = document.getElementById('fav-progress-text') as HTMLParagraphElement;
+  const resetBtn = document.getElementById('fav-reset') as HTMLButtonElement;
+  const errorReset = document.getElementById('fav-error-reset') as HTMLButtonElement;
+  const errorText = document.getElementById('fav-error-text') as HTMLParagraphElement;
+  const bgSel = document.getElementById('fav-bg') as HTMLSelectElement;
+  const bgColor = document.getElementById('fav-bg-color') as HTMLInputElement;
+  const gridEl = document.getElementById('fav-grid') as HTMLDivElement;
+  const snippetEl = document.getElementById('fav-snippet') as HTMLTextAreaElement;
+  const copyBtn = document.getElementById('fav-copy') as HTMLButtonElement;
+  const zipBtn = document.getElementById('fav-zip') as HTMLButtonElement;
+
+  const SIZES = [16, 32, 48, 96, 180, 192, 512];
+  const ICO_SIZES = [16, 32, 48];
+
+  let assets: Asset[] = [];
+
+  bgSel.addEventListener('change', () => {
+    bgColor.classList.toggle('hidden', bgSel.value !== 'custom');
+  });
+
+  function showState(n: 'idle' | 'results' | 'error') {
+    stateIdle.classList.toggle('hidden', n !== 'idle');
+    stateResults.classList.toggle('hidden', n !== 'results');
+    stateError.classList.toggle('hidden', n !== 'error');
+  }
+
+  drop.addEventListener('click', () => input.click());
+  drop.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+  ['dragenter', 'dragover'].forEach((ev) => panel.addEventListener(ev, (e) => {
+    e.preventDefault();
+    panel.classList.add('border-rose-600', 'bg-rose-50');
+  }));
+  ['dragleave', 'drop'].forEach((ev) => panel.addEventListener(ev, (e) => {
+    e.preventDefault();
+    panel.classList.remove('border-rose-600', 'bg-rose-50');
+  }));
+  panel.addEventListener('drop', (e) => {
+    const files = (e as DragEvent).dataTransfer?.files;
+    if (files && files.length) handleFile(files[0]);
+  });
+  input.addEventListener('change', () => {
+    if (input.files && input.files.length) handleFile(input.files[0]);
+  });
+  resetBtn.addEventListener('click', () => {
+    input.value = '';
+    assets = [];
+    gridEl.innerHTML = '';
+    snippetEl.value = '';
+    showState('idle');
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+  });
+  errorReset.addEventListener('click', () => {
+    showState('idle');
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+  });
+
+  function bgFill(): string | null {
+    const v = bgSel.value;
+    if (v === 'transparent') return null;
+    if (v === 'white') return '#ffffff';
+    if (v === 'black') return '#000000';
+    return bgColor.value || '#ffffff';
+  }
+
+  function drawTo(size: number, source: CanvasImageSource, srcW: number, srcH: number, fill: string | null): HTMLCanvasElement {
+    const canvas = document.createElement('canvas');
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas unavailable');
+    if (fill) {
+      ctx.fillStyle = fill;
+      ctx.fillRect(0, 0, size, size);
+    }
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    // Contain the source square — preserve aspect ratio.
+    const ratio = Math.min(size / srcW, size / srcH);
+    const w = srcW * ratio;
+    const h = srcH * ratio;
+    ctx.drawImage(source, (size - w) / 2, (size - h) / 2, w, h);
+    return canvas;
+  }
+
+  function canvasToPng(canvas: HTMLCanvasElement): Promise<Uint8Array> {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(async (blob) => {
+        if (!blob) return reject(new Error('PNG encode failed'));
+        resolve(new Uint8Array(await blob.arrayBuffer()));
+      }, 'image/png');
+    });
+  }
+
+  // Build a multi-resolution .ico using PNG-encoded entries. All current
+  // browsers + Windows support PNG inside ICO; this avoids hand-rolling
+  // BMP/DIB encoders.
+  function makeIco(entries: { size: number; png: Uint8Array }[]): Uint8Array {
+    const count = entries.length;
+    const headerSize = 6 + 16 * count;
+    const totalBody = entries.reduce((n, e) => n + e.png.length, 0);
+    const buf = new Uint8Array(headerSize + totalBody);
+    const dv = new DataView(buf.buffer);
+    // ICONDIR
+    dv.setUint16(0, 0, true); // reserved
+    dv.setUint16(2, 1, true); // type = icon
+    dv.setUint16(4, count, true);
+    let offset = headerSize;
+    for (let i = 0; i < count; i++) {
+      const e = entries[i];
+      const dirOff = 6 + i * 16;
+      const sz = e.size >= 256 ? 0 : e.size; // 0 means 256 per spec
+      buf[dirOff + 0] = sz;          // width
+      buf[dirOff + 1] = sz;          // height
+      buf[dirOff + 2] = 0;           // palette
+      buf[dirOff + 3] = 0;           // reserved
+      dv.setUint16(dirOff + 4, 1, true);   // color planes
+      dv.setUint16(dirOff + 6, 32, true);  // bit depth
+      dv.setUint32(dirOff + 8, e.png.length, true);  // bytes in resource
+      dv.setUint32(dirOff + 12, offset, true);       // image offset
+      buf.set(e.png, offset);
+      offset += e.png.length;
+    }
+    return buf;
+  }
+
+  // Minimal ZIP (stored, no compression). Enough for a few hundred KB of PNGs
+  // and avoids pulling in a deflate library.
+  function crc32(bytes: Uint8Array): number {
+    let table = (crc32 as any)._t as Uint32Array | undefined;
+    if (!table) {
+      table = new Uint32Array(256);
+      for (let i = 0; i < 256; i++) {
+        let c = i;
+        for (let j = 0; j < 8; j++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+        table[i] = c;
+      }
+      (crc32 as any)._t = table;
+    }
+    let c = 0xffffffff;
+    for (let i = 0; i < bytes.length; i++) c = table[(c ^ bytes[i]) & 0xff] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+  }
+
+  function makeZip(files: { name: string; bytes: Uint8Array }[]): Uint8Array {
+    const enc = new TextEncoder();
+    const parts: Uint8Array[] = [];
+    const central: Uint8Array[] = [];
+    let offset = 0;
+    for (const f of files) {
+      const nameBytes = enc.encode(f.name);
+      const crc = crc32(f.bytes);
+      const size = f.bytes.length;
+      // Local file header
+      const local = new Uint8Array(30 + nameBytes.length);
+      const ldv = new DataView(local.buffer);
+      ldv.setUint32(0, 0x04034b50, true);
+      ldv.setUint16(4, 20, true);     // version
+      ldv.setUint16(6, 0, true);      // flags
+      ldv.setUint16(8, 0, true);      // method = stored
+      ldv.setUint16(10, 0, true);     // time
+      ldv.setUint16(12, 0, true);     // date
+      ldv.setUint32(14, crc, true);
+      ldv.setUint32(18, size, true);  // compressed
+      ldv.setUint32(22, size, true);  // uncompressed
+      ldv.setUint16(26, nameBytes.length, true);
+      ldv.setUint16(28, 0, true);     // extra
+      local.set(nameBytes, 30);
+      parts.push(local, f.bytes);
+
+      // Central directory entry
+      const cd = new Uint8Array(46 + nameBytes.length);
+      const cdv = new DataView(cd.buffer);
+      cdv.setUint32(0, 0x02014b50, true);
+      cdv.setUint16(4, 20, true);     // version made by
+      cdv.setUint16(6, 20, true);     // version needed
+      cdv.setUint16(8, 0, true);
+      cdv.setUint16(10, 0, true);
+      cdv.setUint16(12, 0, true);
+      cdv.setUint16(14, 0, true);
+      cdv.setUint32(16, crc, true);
+      cdv.setUint32(20, size, true);
+      cdv.setUint32(24, size, true);
+      cdv.setUint16(28, nameBytes.length, true);
+      cdv.setUint16(30, 0, true);
+      cdv.setUint16(32, 0, true);
+      cdv.setUint16(34, 0, true);
+      cdv.setUint16(36, 0, true);
+      cdv.setUint32(38, 0, true);     // external attrs
+      cdv.setUint32(42, offset, true);
+      cd.set(nameBytes, 46);
+      central.push(cd);
+
+      offset += local.length + size;
+    }
+    const centralSize = central.reduce((n, c) => n + c.length, 0);
+    const centralOffset = offset;
+    parts.push(...central);
+    // End of central directory
+    const end = new Uint8Array(22);
+    const edv = new DataView(end.buffer);
+    edv.setUint32(0, 0x06054b50, true);
+    edv.setUint16(4, 0, true);
+    edv.setUint16(6, 0, true);
+    edv.setUint16(8, files.length, true);
+    edv.setUint16(10, files.length, true);
+    edv.setUint32(12, centralSize, true);
+    edv.setUint32(16, centralOffset, true);
+    edv.setUint16(20, 0, true);
+    parts.push(end);
+    const total = parts.reduce((n, p) => n + p.length, 0);
+    const out = new Uint8Array(total);
+    let o = 0;
+    for (const p of parts) { out.set(p, o); o += p.length; }
+    return out;
+  }
+
+  async function handleFile(file: File) {
+    progress.classList.remove('hidden');
+    progressFill.style.width = '5%';
+    progressText.textContent = `Decoding ${file.name}…`;
+    let bitmap: ImageBitmap;
+    try {
+      bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    } catch (err: any) {
+      showState('error');
+      errorText.textContent = 'Could not decode that file. Try a PNG, JPG, WebP, or SVG.';
+      return;
+    }
+    const fill = bgFill();
+    const pngBySize = new Map<number, Uint8Array>();
+    let done = 0;
+    try {
+      for (const size of SIZES) {
+        progressText.textContent = `Rendering ${size}×${size}…`;
+        const canvas = drawTo(size, bitmap, bitmap.width, bitmap.height, fill);
+        const png = await canvasToPng(canvas);
+        pngBySize.set(size, png);
+        done++;
+        progressFill.style.width = `${Math.round((done / (SIZES.length + 1)) * 100)}%`;
+      }
+    } catch (err: any) {
+      bitmap.close();
+      showState('error');
+      errorText.textContent = err?.message || 'Could not render favicon sizes.';
+      return;
+    }
+    bitmap.close();
+
+    progressText.textContent = 'Packing favicon.ico…';
+    const ico = makeIco(ICO_SIZES.map((s) => ({ size: s, png: pngBySize.get(s)! })));
+    progressFill.style.width = '100%';
+
+    assets = [
+      { name: 'favicon.ico', mime: 'image/x-icon', bytes: ico },
+      { name: 'favicon-16x16.png', mime: 'image/png', bytes: pngBySize.get(16)! },
+      { name: 'favicon-32x32.png', mime: 'image/png', bytes: pngBySize.get(32)! },
+      { name: 'favicon-48x48.png', mime: 'image/png', bytes: pngBySize.get(48)! },
+      { name: 'favicon-96x96.png', mime: 'image/png', bytes: pngBySize.get(96)! },
+      { name: 'apple-touch-icon.png', mime: 'image/png', bytes: pngBySize.get(180)! },
+      { name: 'android-chrome-192x192.png', mime: 'image/png', bytes: pngBySize.get(192)! },
+      { name: 'android-chrome-512x512.png', mime: 'image/png', bytes: pngBySize.get(512)! },
+    ];
+    const manifest = JSON.stringify({
+      name: '',
+      short_name: '',
+      icons: [
+        { src: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+      ],
+      theme_color: '#ffffff',
+      background_color: '#ffffff',
+      display: 'standalone',
+    }, null, 2);
+    assets.push({ name: 'site.webmanifest', mime: 'application/manifest+json', bytes: new TextEncoder().encode(manifest) });
+
+    renderMocks();
+    renderGrid();
+    renderSnippet();
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+    showState('results');
+  }
+
+  function renderMocks() {
+    const mockTab = document.getElementById('fav-mock-tab') as HTMLImageElement;
+    const mockBook = document.getElementById('fav-mock-book') as HTMLImageElement;
+    const mockIos = document.getElementById('fav-mock-ios') as HTMLImageElement;
+    const find = (name: string) => assets.find(a => a.name === name);
+    const url32 = find('favicon-32x32.png');
+    const url180 = find('apple-touch-icon.png');
+    if (url32) {
+      const u = URL.createObjectURL(new Blob([url32.bytes], { type: 'image/png' }));
+      mockTab.src = u;
+      mockBook.src = u;
+    }
+    if (url180) {
+      const u = URL.createObjectURL(new Blob([url180.bytes], { type: 'image/png' }));
+      mockIos.src = u;
+    }
+  }
+
+  function renderGrid() {
+    gridEl.innerHTML = '';
+    const preview: { label: string; size: number; name: string }[] = [
+      { label: '16', size: 16, name: 'favicon-16x16.png' },
+      { label: '32', size: 32, name: 'favicon-32x32.png' },
+      { label: '48', size: 48, name: 'favicon-48x48.png' },
+      { label: '180', size: 64, name: 'apple-touch-icon.png' },
+      { label: '192', size: 64, name: 'android-chrome-192x192.png' },
+      { label: '512', size: 80, name: 'android-chrome-512x512.png' },
+      { label: 'ico', size: 32, name: 'favicon.ico' },
+    ];
+    for (const p of preview) {
+      const asset = assets.find(a => a.name === p.name);
+      if (!asset) continue;
+      const blob = new Blob([asset.bytes], { type: asset.mime });
+      const url = URL.createObjectURL(blob);
+      const card = document.createElement('a');
+      card.href = url;
+      card.download = asset.name;
+      card.className = 'flex flex-col items-center gap-1 border-2 border-on-background bg-white p-2 hover:bg-rose-50 transition-colors';
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = asset.name;
+      img.style.imageRendering = 'pixelated';
+      img.style.width = `${p.size}px`;
+      img.style.height = `${p.size}px`;
+      img.style.objectFit = 'contain';
+      const cap = document.createElement('span');
+      cap.className = 'text-[10px] font-mono font-bold uppercase truncate w-full text-center';
+      cap.textContent = p.label;
+      card.appendChild(img);
+      card.appendChild(cap);
+      gridEl.appendChild(card);
+    }
+  }
+
+  function renderSnippet() {
+    snippetEl.value = [
+      '<link rel="icon" href="/favicon.ico" sizes="any">',
+      '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">',
+      '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">',
+      '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">',
+      '<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">',
+      '<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">',
+      '<link rel="manifest" href="/site.webmanifest">',
+    ].join('\n');
+  }
+
+  copyBtn.addEventListener('click', async () => {
+    if (!snippetEl.value) return;
+    try {
+      await navigator.clipboard.writeText(snippetEl.value);
+      const prev = copyBtn.textContent;
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => (copyBtn.textContent = prev), 1200);
+    } catch {
+      snippetEl.select();
+      document.execCommand('copy');
+    }
+  });
+
+  zipBtn.addEventListener('click', () => {
+    if (!assets.length) return;
+    const zip = makeZip(assets.map(a => ({ name: a.name, bytes: a.bytes })));
+    const blob = new Blob([zip], { type: 'application/zip' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'favicons.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+</script>

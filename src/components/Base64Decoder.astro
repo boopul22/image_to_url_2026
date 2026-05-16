@@ -1,0 +1,242 @@
+---
+/**
+ * Client-side base64 → image decoder.
+ *
+ * Paste either a full data URI or a raw base64 payload. URL-safe variants
+ * (`-`/`_`) are normalized and missing `=` padding is restored. The decode
+ * runs entirely in the browser via `atob` + Blob; nothing leaves the page.
+ */
+---
+<div class="w-full max-w-2xl mx-auto">
+  <!-- Privacy strip -->
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
+        <p class="text-[11px] leading-tight text-on-surface-variant">atob + Blob — nothing uploaded</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <label for="b64d-format" class="text-xs font-bold uppercase tracking-wider text-on-background">If unknown</label>
+      <select id="b64d-format" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp">WebP</option>
+        <option value="image/gif">GIF</option>
+        <option value="image/svg+xml">SVG</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="bg-white border-2 border-on-background border-b-0 p-4">
+    <label for="b64d-input" class="block text-xs font-bold uppercase tracking-wider text-on-background mb-2">Paste base64 or data URI</label>
+    <textarea
+      id="b64d-input"
+      rows="6"
+      placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA…   or just the base64 payload"
+      class="w-full border-2 border-on-background bg-surface-variant/40 font-mono text-[11px] sm:text-xs p-3 resize-y break-all leading-relaxed"
+      spellcheck="false"
+    ></textarea>
+    <div class="flex flex-wrap gap-2 mt-3">
+      <button id="b64d-decode" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border-2 border-on-background uppercase tracking-wide">Decode</button>
+      <button id="b64d-paste" class="border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Paste from clipboard</button>
+      <button id="b64d-clear" class="border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Clear</button>
+    </div>
+    <p id="b64d-error" class="hidden mt-3 text-[11px] text-error font-mono"></p>
+  </div>
+
+  <!-- Result -->
+  <div id="b64d-result" class="bg-white border-2 border-on-background overflow-hidden hidden">
+    <div class="p-4 sm:p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg">Decoded</span>
+        <span id="b64d-meta" class="ml-auto text-[11px] font-mono text-on-surface-variant text-right"></span>
+      </div>
+      <div class="border-2 border-on-background bg-surface-variant/20 p-3 flex items-center justify-center min-h-32">
+        <img id="b64d-preview" alt="" class="max-w-full max-h-72 object-contain" />
+      </div>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <a id="b64d-download" href="#" download="decoded.png" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border-2 border-on-background uppercase tracking-wide">Download</a>
+        <button id="b64d-open" class="border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Open in new tab</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const ta = document.getElementById('b64d-input') as HTMLTextAreaElement;
+  const decodeBtn = document.getElementById('b64d-decode') as HTMLButtonElement;
+  const pasteBtn = document.getElementById('b64d-paste') as HTMLButtonElement;
+  const clearBtn = document.getElementById('b64d-clear') as HTMLButtonElement;
+  const formatSel = document.getElementById('b64d-format') as HTMLSelectElement;
+  const errEl = document.getElementById('b64d-error') as HTMLParagraphElement;
+  const resultEl = document.getElementById('b64d-result') as HTMLDivElement;
+  const previewImg = document.getElementById('b64d-preview') as HTMLImageElement;
+  const metaEl = document.getElementById('b64d-meta') as HTMLSpanElement;
+  const dlLink = document.getElementById('b64d-download') as HTMLAnchorElement;
+  const openBtn = document.getElementById('b64d-open') as HTMLButtonElement;
+
+  let currentObjectUrl: string | null = null;
+
+  function fmtBytes(n: number): string {
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / 1024 / 1024).toFixed(2)} MB`;
+  }
+
+  function extFor(mime: string): string {
+    return ({
+      'image/png': 'png',
+      'image/jpeg': 'jpg',
+      'image/webp': 'webp',
+      'image/gif': 'gif',
+      'image/svg+xml': 'svg',
+      'image/bmp': 'bmp',
+      'image/avif': 'avif',
+    } as Record<string, string>)[mime] || 'bin';
+  }
+
+  function showError(msg: string) {
+    errEl.textContent = msg;
+    errEl.classList.remove('hidden');
+    resultEl.classList.add('hidden');
+  }
+
+  function clearError() {
+    errEl.classList.add('hidden');
+    errEl.textContent = '';
+  }
+
+  function normalizeBase64(input: string): { base64: string; mime: string } {
+    let s = input.trim();
+    let mime: string | null = null;
+
+    // data URI prefix?
+    const dataUriMatch = s.match(/^data:([^;,]+)(;[^,]*)?,(.*)$/s);
+    if (dataUriMatch) {
+      mime = dataUriMatch[1] || null;
+      const params = dataUriMatch[2] || '';
+      const payload = dataUriMatch[3];
+      if (/;base64/i.test(params)) {
+        s = payload;
+      } else {
+        // URL-encoded data URI (e.g. SVG) — convert to base64
+        const decoded = decodeURIComponent(payload);
+        s = btoa(unescape(encodeURIComponent(decoded)));
+      }
+    }
+
+    // Strip whitespace, newlines, quotes
+    s = s.replace(/\s+/g, '').replace(/^["']|["']$/g, '');
+    // URL-safe → standard
+    s = s.replace(/-/g, '+').replace(/_/g, '/');
+    // Restore padding
+    const mod = s.length % 4;
+    if (mod === 2) s += '==';
+    else if (mod === 3) s += '=';
+    else if (mod === 1) throw new Error('Base64 payload has an invalid length');
+
+    if (!/^[A-Za-z0-9+/]*=*$/.test(s)) {
+      throw new Error('Found non-base64 characters in the payload');
+    }
+    return { base64: s, mime: mime ?? formatSel.value };
+  }
+
+  function base64ToBytes(b64: string): Uint8Array {
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  function sniffMime(bytes: Uint8Array): string | null {
+    // PNG: 89 50 4E 47
+    if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47) return 'image/png';
+    // JPEG: FF D8 FF
+    if (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return 'image/jpeg';
+    // GIF: 47 49 46 38
+    if (bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x38) return 'image/gif';
+    // WebP: RIFF....WEBP
+    if (bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46 && bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50) return 'image/webp';
+    // BMP
+    if (bytes[0] === 0x42 && bytes[1] === 0x4d) return 'image/bmp';
+    // SVG (starts with '<' after optional BOM/whitespace)
+    const head = new TextDecoder().decode(bytes.subarray(0, Math.min(bytes.length, 256))).trimStart();
+    if (head.startsWith('<?xml') || head.startsWith('<svg')) return 'image/svg+xml';
+    return null;
+  }
+
+  function doDecode() {
+    clearError();
+    const raw = ta.value;
+    if (!raw.trim()) {
+      showError('Nothing to decode — paste a base64 string or data URI first.');
+      return;
+    }
+    let normalized: { base64: string; mime: string };
+    try {
+      normalized = normalizeBase64(raw);
+    } catch (err: any) {
+      showError(err?.message || 'Could not parse base64.');
+      return;
+    }
+    let bytes: Uint8Array;
+    try {
+      bytes = base64ToBytes(normalized.base64);
+    } catch {
+      showError('Decoding failed — payload is not valid base64.');
+      return;
+    }
+    const sniffed = sniffMime(bytes);
+    const mime = sniffed ?? normalized.mime;
+    const blob = new Blob([bytes], { type: mime });
+
+    if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+    currentObjectUrl = URL.createObjectURL(blob);
+    previewImg.src = currentObjectUrl;
+    previewImg.onerror = () => {
+      showError(`Decoded ${fmtBytes(blob.size)} but the browser could not display it as ${mime}.`);
+    };
+    metaEl.textContent = `${mime} · ${fmtBytes(blob.size)}`;
+    dlLink.href = currentObjectUrl;
+    dlLink.download = `decoded.${extFor(mime)}`;
+    resultEl.classList.remove('hidden');
+  }
+
+  decodeBtn.addEventListener('click', doDecode);
+  ta.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      e.preventDefault();
+      doDecode();
+    }
+  });
+
+  pasteBtn.addEventListener('click', async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) {
+        ta.value = text;
+        doDecode();
+      }
+    } catch {
+      showError('Clipboard access denied — paste manually with Cmd/Ctrl+V.');
+    }
+  });
+
+  clearBtn.addEventListener('click', () => {
+    ta.value = '';
+    clearError();
+    resultEl.classList.add('hidden');
+    if (currentObjectUrl) {
+      URL.revokeObjectURL(currentObjectUrl);
+      currentObjectUrl = null;
+    }
+  });
+
+  openBtn.addEventListener('click', () => {
+    if (currentObjectUrl) window.open(currentObjectUrl, '_blank', 'noopener');
+  });
+</script>

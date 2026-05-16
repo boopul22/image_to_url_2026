@@ -1,0 +1,319 @@
+---
+/**
+ * Client-side image → base64 data URI encoder.
+ *
+ * Reads the dropped file as a data URL via FileReader, surfaces the full
+ * data URI plus ready-to-paste CSS / HTML / Markdown snippets, and never
+ * sends the file anywhere. Single-file UI — drop one image, get one
+ * encoding.
+ */
+---
+<div class="w-full max-w-2xl mx-auto">
+  <input
+    type="file"
+    id="b64e-input"
+    accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml,image/bmp,image/avif,.png,.jpg,.jpeg,.gif,.webp,.svg,.bmp,.avif"
+    class="hidden"
+  />
+
+  <!-- Privacy strip -->
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
+        <p class="text-[11px] leading-tight text-on-surface-variant">FileReader.readAsDataURL — nothing uploaded</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <label for="b64e-prefix" class="text-xs font-bold uppercase tracking-wider text-on-background flex items-center gap-1 cursor-pointer">
+        <input type="checkbox" id="b64e-prefix" checked class="accent-rose-600 w-4 h-4" />
+        Include data: prefix
+      </label>
+    </div>
+  </div>
+
+  <!-- Drop zone / panel -->
+  <div id="b64e-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+    <div id="b64e-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
+      <div id="b64e-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">data_object</span>
+        <div class="text-center">
+          <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop an image here or click to browse</p>
+          <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · GIF · WebP · SVG · BMP · AVIF</p>
+        </div>
+      </div>
+      <div id="b64e-progress" class="hidden mt-6">
+        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id="b64e-progress-fill" class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        </div>
+        <p id="b64e-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Encoding…</p>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="b64e-state-result" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <span class="font-bold text-secondary text-sm sm:text-lg">Encoded</span>
+        <button id="b64e-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Encode another</button>
+      </div>
+
+      <!-- Preview + meta -->
+      <div class="border-2 border-on-background bg-white p-3 flex items-center gap-3 mb-4">
+        <img id="b64e-thumb" alt="" class="w-16 h-16 object-cover border-2 border-on-background flex-shrink-0 bg-surface-variant" />
+        <div class="flex-1 min-w-0">
+          <p id="b64e-name" class="text-xs font-bold truncate"></p>
+          <p id="b64e-meta" class="text-[11px] text-on-surface-variant font-mono"></p>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div role="tablist" class="flex flex-wrap gap-0 border-b-2 border-on-background mb-0">
+        <button data-tab="datauri" role="tab" aria-selected="true" class="b64e-tab bg-on-background text-white font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-b-0">Data URI</button>
+        <button data-tab="css" role="tab" aria-selected="false" class="b64e-tab bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-l-0 border-b-0">CSS</button>
+        <button data-tab="html" role="tab" aria-selected="false" class="b64e-tab bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-l-0 border-b-0">HTML</button>
+        <button data-tab="md" role="tab" aria-selected="false" class="b64e-tab bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-l-0 border-b-0">Markdown</button>
+      </div>
+
+      <textarea
+        id="b64e-output"
+        readonly
+        rows="8"
+        class="w-full border-2 border-on-background border-t-0 bg-surface-variant/40 font-mono text-[11px] sm:text-xs p-3 resize-y break-all leading-relaxed"
+        spellcheck="false"
+      ></textarea>
+
+      <div class="flex flex-wrap gap-2 mt-3">
+        <button id="b64e-copy" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide">Copy</button>
+        <button id="b64e-download" class="border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Download .txt</button>
+      </div>
+
+      <p id="b64e-warn" class="hidden mt-3 text-[11px] text-error font-mono"></p>
+    </div>
+
+    <!-- Error -->
+    <div id="b64e-state-error" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <span class="font-bold text-error text-sm sm:text-lg">Encoding failed</span>
+        <button id="b64e-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+      </div>
+      <p id="b64e-error-text" class="text-xs sm:text-sm text-on-surface-variant"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById('b64e-input') as HTMLInputElement;
+  const drop = document.getElementById('b64e-drop') as HTMLDivElement;
+  const panel = document.getElementById('b64e-panel') as HTMLDivElement;
+  const stateIdle = document.getElementById('b64e-state-idle') as HTMLDivElement;
+  const stateResult = document.getElementById('b64e-state-result') as HTMLDivElement;
+  const stateError = document.getElementById('b64e-state-error') as HTMLDivElement;
+  const progress = document.getElementById('b64e-progress') as HTMLDivElement;
+  const progressFill = document.getElementById('b64e-progress-fill') as HTMLDivElement;
+  const progressText = document.getElementById('b64e-progress-text') as HTMLParagraphElement;
+  const resetBtn = document.getElementById('b64e-reset') as HTMLButtonElement;
+  const errorReset = document.getElementById('b64e-error-reset') as HTMLButtonElement;
+  const errorText = document.getElementById('b64e-error-text') as HTMLParagraphElement;
+  const prefixToggle = document.getElementById('b64e-prefix') as HTMLInputElement;
+  const thumb = document.getElementById('b64e-thumb') as HTMLImageElement;
+  const nameEl = document.getElementById('b64e-name') as HTMLParagraphElement;
+  const metaEl = document.getElementById('b64e-meta') as HTMLParagraphElement;
+  const output = document.getElementById('b64e-output') as HTMLTextAreaElement;
+  const copyBtn = document.getElementById('b64e-copy') as HTMLButtonElement;
+  const dlBtn = document.getElementById('b64e-download') as HTMLButtonElement;
+  const warnEl = document.getElementById('b64e-warn') as HTMLParagraphElement;
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.b64e-tab'));
+
+  type Encoded = { dataUri: string; base64: string; mime: string; name: string; size: number };
+  let current: Encoded | null = null;
+  let activeTab: 'datauri' | 'css' | 'html' | 'md' = 'datauri';
+
+  function showState(n: 'idle' | 'result' | 'error') {
+    stateIdle.classList.toggle('hidden', n !== 'idle');
+    stateResult.classList.toggle('hidden', n !== 'result');
+    stateError.classList.toggle('hidden', n !== 'error');
+  }
+
+  function fmtBytes(n: number): string {
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / 1024 / 1024).toFixed(2)} MB`;
+  }
+
+  drop.addEventListener('click', () => input.click());
+  drop.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      input.click();
+    }
+  });
+
+  ['dragenter', 'dragover'].forEach((ev) =>
+    panel.addEventListener(ev, (e) => {
+      e.preventDefault();
+      panel.classList.add('border-rose-600', 'bg-rose-50');
+    }),
+  );
+  ['dragleave', 'drop'].forEach((ev) =>
+    panel.addEventListener(ev, (e) => {
+      e.preventDefault();
+      panel.classList.remove('border-rose-600', 'bg-rose-50');
+    }),
+  );
+  panel.addEventListener('drop', (e) => {
+    const files = (e as DragEvent).dataTransfer?.files;
+    if (files && files.length) handleFile(files[0]);
+  });
+  input.addEventListener('change', () => {
+    if (input.files && input.files.length) handleFile(input.files[0]);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    current = null;
+    input.value = '';
+    output.value = '';
+    showState('idle');
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+  });
+  errorReset.addEventListener('click', () => {
+    input.value = '';
+    showState('idle');
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+  });
+
+  prefixToggle.addEventListener('change', () => renderOutput());
+  tabs.forEach((tab) =>
+    tab.addEventListener('click', () => {
+      const next = tab.dataset.tab as typeof activeTab;
+      if (!next) return;
+      activeTab = next;
+      tabs.forEach((t) => {
+        const isActive = t.dataset.tab === activeTab;
+        t.setAttribute('aria-selected', String(isActive));
+        t.classList.toggle('bg-on-background', isActive);
+        t.classList.toggle('text-white', isActive);
+        t.classList.toggle('bg-white', !isActive);
+        t.classList.toggle('text-on-background', !isActive);
+      });
+      renderOutput();
+    }),
+  );
+
+  copyBtn.addEventListener('click', async () => {
+    if (!output.value) return;
+    try {
+      await navigator.clipboard.writeText(output.value);
+      const prev = copyBtn.textContent;
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => (copyBtn.textContent = prev), 1200);
+    } catch {
+      output.select();
+      document.execCommand('copy');
+    }
+  });
+
+  dlBtn.addEventListener('click', () => {
+    if (!current) return;
+    const blob = new Blob([output.value], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = current.name.replace(/\.[^.]+$/, '') + '.base64.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  function renderOutput() {
+    if (!current) {
+      output.value = '';
+      return;
+    }
+    const includePrefix = prefixToggle.checked;
+    const payload = includePrefix ? current.dataUri : current.base64;
+    switch (activeTab) {
+      case 'datauri':
+        output.value = payload;
+        break;
+      case 'css':
+        output.value = `background-image: url('${current.dataUri}');`;
+        break;
+      case 'html':
+        output.value = `<img src="${current.dataUri}" alt="" />`;
+        break;
+      case 'md':
+        output.value = `![](${current.dataUri})`;
+        break;
+    }
+  }
+
+  function readAsDataURI(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Could not read file'));
+      reader.onload = () => {
+        const result = reader.result;
+        if (typeof result !== 'string') return reject(new Error('Reader did not return text'));
+        resolve(result);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleFile(file: File) {
+    progress.classList.remove('hidden');
+    progressFill.style.width = '20%';
+    progressText.textContent = `Encoding ${file.name}…`;
+    try {
+      const dataUri = await readAsDataURI(file);
+      progressFill.style.width = '90%';
+      const commaIdx = dataUri.indexOf(',');
+      if (commaIdx < 0) throw new Error('Unexpected reader output');
+      const header = dataUri.slice(5, commaIdx);
+      const isBase64 = header.endsWith(';base64');
+      const mime = (isBase64 ? header.slice(0, -7) : header.replace(/;.*$/, '')) || file.type || 'application/octet-stream';
+      let base64: string;
+      if (isBase64) {
+        base64 = dataUri.slice(commaIdx + 1);
+      } else {
+        const decoded = decodeURIComponent(dataUri.slice(commaIdx + 1));
+        base64 = btoa(unescape(encodeURIComponent(decoded)));
+      }
+      const normalizedDataUri = `data:${mime};base64,${base64}`;
+
+      current = {
+        dataUri: normalizedDataUri,
+        base64,
+        mime,
+        name: file.name,
+        size: file.size,
+      };
+
+      thumb.src = normalizedDataUri;
+      nameEl.textContent = file.name;
+      metaEl.textContent = `${mime} · source ${fmtBytes(file.size)} · base64 ${fmtBytes(base64.length)}`;
+
+      warnEl.classList.toggle('hidden', file.size < 2 * 1024 * 1024);
+      if (file.size >= 2 * 1024 * 1024) {
+        warnEl.textContent = 'Heads up: data URIs over ~2 MB hit browser limits and slow page loads — a hosted URL is faster.';
+      }
+
+      renderOutput();
+      progressFill.style.width = '100%';
+      progress.classList.add('hidden');
+      progressFill.style.width = '0%';
+      showState('result');
+    } catch (err: any) {
+      progress.classList.add('hidden');
+      progressFill.style.width = '0%';
+      errorText.textContent = err?.message || 'Could not encode this file.';
+      showState('error');
+    }
+  }
+</script>

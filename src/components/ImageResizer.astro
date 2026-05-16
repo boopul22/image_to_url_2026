@@ -1,25 +1,88 @@
 ---
-/** Client-side image resizer. Supports pixel dimensions or percentage scale. */
+/**
+ * Client-side image resizer with linked width/height inputs, preset target
+ * sizes, quality control, optional format conversion, and a live "source
+ * → output" dimension readout. Decoding uses createImageBitmap so EXIF
+ * orientation is baked into the pixels.
+ */
 ---
 <div class="w-full max-w-2xl mx-auto">
   <input type="file" id="irsz-input" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" multiple class="hidden" />
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center gap-3 flex-wrap">
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-rose-600 text-lg" style="font-variation-settings: 'FILL' 1;">lock</span>
-      <p class="text-xs font-bold uppercase tracking-wider text-on-background">Browser-only</p>
+
+  <!-- Privacy strip -->
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
+        <p class="text-[11px] leading-tight text-on-surface-variant">Files never leave your device</p>
+      </div>
     </div>
-    <div class="flex items-center gap-2 ml-auto flex-wrap">
-      <select id="irsz-mode" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
-        <option value="width">Width (px)</option>
-        <option value="height">Height (px)</option>
-        <option value="percent">Percent (%)</option>
-      </select>
-      <input type="number" id="irsz-value" value="800" min="1" class="border-2 border-on-background bg-white text-xs font-mono px-2 py-1 w-24" />
-      <label class="text-xs font-bold uppercase tracking-wider text-on-background flex items-center gap-1">
-        <input type="checkbox" id="irsz-lock" checked class="accent-rose-600" /> Lock ratio
-      </label>
-    </div>
+    <span id="irsz-source-dims" class="hidden text-[11px] font-mono font-bold text-on-background bg-tertiary-fixed border-2 border-on-background px-2 py-1"></span>
   </div>
+
+  <!-- Controls -->
+  <div id="irsz-controls" class="bg-white border-2 border-on-background border-b-0 p-4 flex flex-col gap-3">
+    <!-- Width + Height row with lock between -->
+    <div class="flex items-end gap-2 flex-wrap">
+      <div class="flex-1 min-w-[7rem]">
+        <label for="irsz-w" class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Width (px)</label>
+        <input id="irsz-w" type="number" min="1" max="20000" placeholder="auto" class="w-full border-2 border-on-background bg-white text-sm font-mono font-bold px-3 py-2" />
+      </div>
+      <button
+        id="irsz-lock"
+        type="button"
+        aria-pressed="true"
+        title="Lock aspect ratio"
+        class="border-2 border-on-background bg-rose-600 text-white flex items-center justify-center w-10 h-10 mb-0 transition-colors"
+      >
+        <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;" id="irsz-lock-icon">lock</span>
+      </button>
+      <div class="flex-1 min-w-[7rem]">
+        <label for="irsz-h" class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Height (px)</label>
+        <input id="irsz-h" type="number" min="1" max="20000" placeholder="auto" class="w-full border-2 border-on-background bg-white text-sm font-mono font-bold px-3 py-2" />
+      </div>
+    </div>
+
+    <!-- Percent slider as an alternative -->
+    <div class="flex items-center gap-3 flex-wrap">
+      <label for="irsz-pct" class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant flex-shrink-0">Or scale</label>
+      <input id="irsz-pct" type="range" min="5" max="200" value="100" class="flex-1 min-w-[8rem] accent-rose-600" disabled />
+      <span id="irsz-pct-val" class="text-xs font-mono font-bold w-12 text-right">100%</span>
+    </div>
+
+    <!-- Preset chips -->
+    <div class="flex flex-wrap gap-1.5">
+      <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant self-center mr-1">Presets</span>
+      <button data-preset="1920x1080" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">1080p</button>
+      <button data-preset="2560x1440" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">1440p</button>
+      <button data-preset="3840x2160" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">4K</button>
+      <button data-preset="1080x1080" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">IG&nbsp;square</button>
+      <button data-preset="1080x1350" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">IG&nbsp;portrait</button>
+      <button data-preset="1200x630" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">OG&nbsp;card</button>
+      <button data-preset="1500x500" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">Twitter&nbsp;banner</button>
+      <button data-preset="800x800" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">800×800</button>
+    </div>
+
+    <!-- Format + quality row -->
+    <div class="flex items-center gap-2 flex-wrap">
+      <label for="irsz-format" class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Output</label>
+      <select id="irsz-format" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
+        <option value="match">Match source</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/png">PNG</option>
+        <option value="image/webp">WebP</option>
+      </select>
+      <label for="irsz-quality" class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant ml-2">Quality</label>
+      <input type="range" id="irsz-quality" min="50" max="100" value="92" class="w-24 sm:w-32 accent-rose-600" />
+      <span id="irsz-quality-val" class="text-xs font-mono font-bold w-9 text-right">92</span>
+    </div>
+
+    <!-- Output dimension preview -->
+    <p id="irsz-preview-line" class="text-xs font-mono text-on-surface-variant hidden"></p>
+  </div>
+
+  <!-- Drop zone / states -->
   <div id="irsz-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
     <div id="irsz-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
       <div id="irsz-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
@@ -36,6 +99,7 @@
         <p id="irsz-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Resizing…</p>
       </div>
     </div>
+
     <div id="irsz-state-results" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-4">
         <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
@@ -44,9 +108,14 @@
       </div>
       <div id="irsz-results-list" class="flex flex-col gap-2 max-h-96 overflow-auto"></div>
     </div>
+
     <div id="irsz-state-error" class="p-4 sm:p-6 hidden">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <span class="font-bold text-error text-sm sm:text-lg">Resize failed</span>
+        <button id="irsz-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+      </div>
       <p id="irsz-error-text" class="text-xs sm:text-sm text-error"></p>
-      <button id="irsz-error-reset" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline mt-2">Try again</button>
     </div>
   </div>
 </div>
@@ -66,22 +135,29 @@
   const resetBtn = document.getElementById('irsz-reset') as HTMLButtonElement;
   const errorReset = document.getElementById('irsz-error-reset') as HTMLButtonElement;
   const errorText = document.getElementById('irsz-error-text') as HTMLParagraphElement;
-  const modeSel = document.getElementById('irsz-mode') as HTMLSelectElement;
-  const valueInput = document.getElementById('irsz-value') as HTMLInputElement;
-  const lockBox = document.getElementById('irsz-lock') as HTMLInputElement;
+  const wInput = document.getElementById('irsz-w') as HTMLInputElement;
+  const hInput = document.getElementById('irsz-h') as HTMLInputElement;
+  const lockBtn = document.getElementById('irsz-lock') as HTMLButtonElement;
+  const lockIcon = document.getElementById('irsz-lock-icon') as HTMLSpanElement;
+  const pctInput = document.getElementById('irsz-pct') as HTMLInputElement;
+  const pctVal = document.getElementById('irsz-pct-val') as HTMLSpanElement;
+  const qualityInput = document.getElementById('irsz-quality') as HTMLInputElement;
+  const qualityVal = document.getElementById('irsz-quality-val') as HTMLSpanElement;
+  const formatSel = document.getElementById('irsz-format') as HTMLSelectElement;
+  const previewLine = document.getElementById('irsz-preview-line') as HTMLParagraphElement;
+  const sourceDimsEl = document.getElementById('irsz-source-dims') as HTMLSpanElement;
+  const chipBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.irsz-chip'));
+
+  let locked = true;
+  let srcW = 0;
+  let srcH = 0;
+  let suppress = false;
 
   function showState(n: 'idle' | 'results' | 'error') {
     stateIdle.classList.toggle('hidden', n !== 'idle');
     stateResults.classList.toggle('hidden', n !== 'results');
     stateError.classList.toggle('hidden', n !== 'error');
   }
-  drop.addEventListener('click', () => input.click());
-  ['dragenter','dragover'].forEach(ev => panel.addEventListener(ev, e => { e.preventDefault(); panel.classList.add('border-rose-600','bg-rose-50'); }));
-  ['dragleave','drop'].forEach(ev => panel.addEventListener(ev, e => { e.preventDefault(); panel.classList.remove('border-rose-600','bg-rose-50'); }));
-  panel.addEventListener('drop', e => { const f = (e as DragEvent).dataTransfer?.files; if (f && f.length) handleFiles(f); });
-  input.addEventListener('change', () => { if (input.files && input.files.length) handleFiles(input.files); });
-  resetBtn.addEventListener('click', () => { resultsList.innerHTML = ''; input.value = ''; showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%'; });
-  errorReset.addEventListener('click', () => { showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%'; });
 
   function fmtBytes(n: number): string {
     if (n < 1024) return `${n} B`;
@@ -89,51 +165,205 @@
     return `${(n / 1024 / 1024).toFixed(2)} MB`;
   }
 
-  function resizeFile(file: File): Promise<{ blob: Blob; w: number; h: number }> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => reject(new Error('Could not read file'));
-      reader.onload = () => {
-        const img = new Image();
-        img.onerror = () => reject(new Error('Could not decode'));
-        img.onload = () => {
-          const mode = modeSel.value;
-          const v = Number(valueInput.value);
-          const lock = lockBox.checked;
-          let w = img.naturalWidth, h = img.naturalHeight;
-          if (mode === 'width') { if (lock) h = Math.round(h * (v / w)); w = v; if (!lock) h = img.naturalHeight; }
-          else if (mode === 'height') { if (lock) w = Math.round(w * (v / h)); h = v; if (!lock) w = img.naturalWidth; }
-          else { w = Math.round(w * v / 100); h = Math.round(h * v / 100); }
-          const canvas = document.createElement('canvas');
-          canvas.width = w; canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return reject(new Error('Canvas unavailable'));
-          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-          if ((file.type || 'image/jpeg') === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h); }
-          ctx.drawImage(img, 0, 0, w, h);
-          const mime = file.type || 'image/jpeg';
-          canvas.toBlob(b => b ? resolve({ blob: b, w, h }) : reject(new Error('Encoding failed')), mime, mime === 'image/png' ? undefined : 0.92);
+  function updateLockUi() {
+    lockIcon.textContent = locked ? 'lock' : 'lock_open';
+    lockBtn.setAttribute('aria-pressed', String(locked));
+    lockBtn.classList.toggle('bg-rose-600', locked);
+    lockBtn.classList.toggle('text-white', locked);
+    lockBtn.classList.toggle('bg-white', !locked);
+    lockBtn.classList.toggle('text-on-background', !locked);
+  }
+
+  function targetDims(): { w: number; h: number } | null {
+    if (!srcW || !srcH) {
+      const w = Math.max(0, Math.floor(Number(wInput.value) || 0));
+      const h = Math.max(0, Math.floor(Number(hInput.value) || 0));
+      if (w > 0 && h > 0) return { w, h };
+      return null;
+    }
+    const wRaw = wInput.value.trim();
+    const hRaw = hInput.value.trim();
+    let w = wRaw ? Math.max(1, Math.floor(Number(wRaw))) : 0;
+    let h = hRaw ? Math.max(1, Math.floor(Number(hRaw))) : 0;
+    if (w && !h) h = Math.max(1, Math.round(srcH * (w / srcW)));
+    else if (h && !w) w = Math.max(1, Math.round(srcW * (h / srcH)));
+    else if (!w && !h) { w = srcW; h = srcH; }
+    return { w, h };
+  }
+
+  function updatePreviewLine() {
+    if (!srcW) { previewLine.classList.add('hidden'); return; }
+    const t = targetDims();
+    if (!t) { previewLine.classList.add('hidden'); return; }
+    previewLine.classList.remove('hidden');
+    const pctW = ((t.w / srcW) * 100).toFixed(0);
+    previewLine.textContent = `Source ${srcW}×${srcH} → Output ${t.w}×${t.h} (${pctW}%)`;
+  }
+
+  function syncFromWidth() {
+    if (suppress) return;
+    suppress = true;
+    if (locked && srcW && wInput.value) {
+      const w = Math.max(1, Math.floor(Number(wInput.value)));
+      hInput.value = String(Math.max(1, Math.round(srcH * (w / srcW))));
+    }
+    if (srcW && wInput.value) {
+      pctInput.value = String(Math.min(200, Math.max(5, Math.round((Number(wInput.value) / srcW) * 100))));
+      pctVal.textContent = `${pctInput.value}%`;
+    }
+    updatePreviewLine();
+    suppress = false;
+  }
+  function syncFromHeight() {
+    if (suppress) return;
+    suppress = true;
+    if (locked && srcH && hInput.value) {
+      const h = Math.max(1, Math.floor(Number(hInput.value)));
+      wInput.value = String(Math.max(1, Math.round(srcW * (h / srcH))));
+    }
+    if (srcH && hInput.value) {
+      pctInput.value = String(Math.min(200, Math.max(5, Math.round((Number(hInput.value) / srcH) * 100))));
+      pctVal.textContent = `${pctInput.value}%`;
+    }
+    updatePreviewLine();
+    suppress = false;
+  }
+  function syncFromPercent() {
+    if (suppress) return;
+    if (!srcW || !srcH) return;
+    suppress = true;
+    const pct = Number(pctInput.value);
+    pctVal.textContent = `${pct}%`;
+    wInput.value = String(Math.max(1, Math.round((srcW * pct) / 100)));
+    hInput.value = String(Math.max(1, Math.round((srcH * pct) / 100)));
+    updatePreviewLine();
+    suppress = false;
+  }
+
+  wInput.addEventListener('input', syncFromWidth);
+  hInput.addEventListener('input', syncFromHeight);
+  pctInput.addEventListener('input', syncFromPercent);
+  qualityInput.addEventListener('input', () => { qualityVal.textContent = qualityInput.value; });
+
+  lockBtn.addEventListener('click', () => {
+    locked = !locked;
+    updateLockUi();
+    if (locked) syncFromWidth();
+  });
+
+  chipBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const preset = btn.dataset.preset || '';
+      const m = preset.match(/^(\d+)x(\d+)$/);
+      if (!m) return;
+      suppress = true;
+      wInput.value = m[1];
+      hInput.value = m[2];
+      suppress = false;
+      updatePreviewLine();
+      if (srcW) {
+        const pct = Math.min(200, Math.max(5, Math.round((Number(m[1]) / srcW) * 100)));
+        pctInput.value = String(pct);
+        pctVal.textContent = `${pct}%`;
+      }
+    });
+  });
+
+  drop.addEventListener('click', () => input.click());
+  drop.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+  ['dragenter', 'dragover'].forEach((ev) => panel.addEventListener(ev, (e) => {
+    e.preventDefault();
+    panel.classList.add('border-rose-600', 'bg-rose-50');
+  }));
+  ['dragleave', 'drop'].forEach((ev) => panel.addEventListener(ev, (e) => {
+    e.preventDefault();
+    panel.classList.remove('border-rose-600', 'bg-rose-50');
+  }));
+  panel.addEventListener('drop', (e) => {
+    const files = (e as DragEvent).dataTransfer?.files;
+    if (files && files.length) handleFiles(files);
+  });
+  input.addEventListener('change', () => {
+    if (input.files && input.files.length) handleFiles(input.files);
+  });
+  resetBtn.addEventListener('click', () => {
+    resultsList.innerHTML = '';
+    input.value = '';
+    showState('idle');
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+  });
+  errorReset.addEventListener('click', () => {
+    showState('idle');
+    progress.classList.add('hidden');
+    progressFill.style.width = '0%';
+  });
+
+  async function decodeFirst(file: File): Promise<{ source: CanvasImageSource; w: number; h: number; close: () => void }> {
+    try {
+      const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+      return { source: bitmap, w: bitmap.width, h: bitmap.height, close: () => bitmap.close() };
+    } catch {
+      const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Could not read file'));
+        reader.onload = () => {
+          const i = new Image();
+          i.onerror = () => reject(new Error('Could not decode'));
+          i.onload = () => resolve(i);
+          i.src = reader.result as string;
         };
-        img.src = reader.result as string;
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      });
+      return { source: img, w: img.naturalWidth, h: img.naturalHeight, close: () => {} };
+    }
+  }
+
+  async function resizeOne(file: File, w: number, h: number): Promise<{ blob: Blob; w: number; h: number; mime: string }> {
+    const dec = await decodeFirst(file);
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) { dec.close(); throw new Error('Canvas unavailable'); }
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    const fmt = formatSel.value;
+    const outMime = fmt === 'match' ? (file.type || 'image/jpeg') : fmt;
+    if (outMime === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); }
+    ctx.drawImage(dec.source, 0, 0, w, h);
+    dec.close();
+    const quality = Number(qualityInput.value) / 100;
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => blob ? resolve({ blob, w, h, mime: outMime }) : reject(new Error('Encoding failed')),
+        outMime,
+        outMime === 'image/png' ? undefined : quality,
+      );
     });
   }
 
-  function makeRow(name: string, orig: File, res: { blob: Blob; w: number; h: number }): HTMLDivElement {
+  function extFor(mime: string): string {
+    return mime === 'image/jpeg' ? 'jpg' : mime === 'image/webp' ? 'webp' : 'png';
+  }
+
+  function makeRow(name: string, src: File, res: { blob: Blob; w: number; h: number; mime: string }): HTMLDivElement {
     const row = document.createElement('div');
     row.className = 'border-2 border-on-background bg-white p-3 flex items-center gap-3';
     const url = URL.createObjectURL(res.blob);
-    const ext = (orig.type || 'image/jpeg').split('/')[1].replace('jpeg','jpg');
-    const baseName = name.replace(/\.[^.]+$/, '') + `-${res.w}x${res.h}.${ext}`;
-    const thumb = document.createElement('img'); thumb.src = url; thumb.alt = ''; thumb.className = 'w-12 h-12 object-cover border-2 border-on-background flex-shrink-0';
+    const baseName = name.replace(/\.[^.]+$/, '') + `-${res.w}x${res.h}.${extFor(res.mime)}`;
+    const thumb = document.createElement('img');
+    thumb.src = url; thumb.alt = '';
+    thumb.className = 'w-12 h-12 object-contain bg-surface-variant/30 border-2 border-on-background flex-shrink-0';
     const meta = document.createElement('div'); meta.className = 'flex-1 min-w-0';
     const nameEl = document.createElement('p'); nameEl.className = 'text-xs font-bold truncate'; nameEl.textContent = baseName;
-    const sizeEl = document.createElement('p'); sizeEl.className = 'text-[11px] text-on-surface-variant';
-    sizeEl.textContent = `${res.w} × ${res.h} · ${fmtBytes(res.blob.size)}`;
+    const sizeEl = document.createElement('p'); sizeEl.className = 'text-[11px] text-on-surface-variant font-mono';
+    sizeEl.textContent = `${res.w} × ${res.h} · ${fmtBytes(res.blob.size)} · was ${fmtBytes(src.size)}`;
     meta.appendChild(nameEl); meta.appendChild(sizeEl);
     const dl = document.createElement('a'); dl.href = url; dl.download = baseName;
-    dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0'; dl.textContent = 'Download';
+    dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
+    dl.textContent = 'Download';
     row.appendChild(thumb); row.appendChild(meta); row.appendChild(dl);
     return row;
   }
@@ -141,21 +371,79 @@
   async function handleFiles(fileList: FileList) {
     const files = Array.from(fileList);
     if (!files.length) return;
-    progress.classList.remove('hidden'); progressFill.style.width = '0%';
+
+    // Use the first file's dimensions to seed the inputs/preview.
+    try {
+      const first = await decodeFirst(files[0]);
+      srcW = first.w; srcH = first.h;
+      first.close();
+      sourceDimsEl.textContent = `Source ${srcW}×${srcH}`;
+      sourceDimsEl.classList.remove('hidden');
+      pctInput.disabled = false;
+      if (!wInput.value && !hInput.value) {
+        // Default to 50% scale if nothing chosen yet
+        suppress = true;
+        wInput.value = String(Math.max(1, Math.round(srcW * 0.5)));
+        hInput.value = String(Math.max(1, Math.round(srcH * 0.5)));
+        pctInput.value = '50';
+        pctVal.textContent = '50%';
+        suppress = false;
+      } else {
+        syncFromWidth();
+      }
+      updatePreviewLine();
+    } catch (err: any) {
+      showState('error');
+      errorText.textContent = err?.message || 'Could not decode the first image.';
+      return;
+    }
+
+    const t = targetDims();
+    if (!t || t.w < 1 || t.h < 1) {
+      showState('error');
+      errorText.textContent = 'Enter a width or height first.';
+      return;
+    }
+
+    progress.classList.remove('hidden');
+    progressFill.style.width = '0%';
+    progressText.textContent = `Resizing 1 / ${files.length}…`;
     resultsList.innerHTML = '';
     let done = 0, success = 0;
+
     for (const file of files) {
-      progressText.textContent = `Resizing ${done + 1} / ${files.length}`;
-      try { const res = await resizeFile(file); resultsList.appendChild(makeRow(file.name, file, res)); success++; }
-      catch (err: any) {
-        const row = document.createElement('div'); row.className = 'border-2 border-error bg-white p-3 text-xs';
+      progressText.textContent = `Resizing ${done + 1} / ${files.length} — ${file.name}`;
+      try {
+        // For each file, recompute aspect-correct dims when locked.
+        let tw = t.w, th = t.h;
+        if (locked) {
+          const dec = await decodeFirst(file);
+          if (wInput.value && !hInput.value) {
+            tw = Math.max(1, Math.floor(Number(wInput.value)));
+            th = Math.max(1, Math.round(dec.h * (tw / dec.w)));
+          } else if (hInput.value && !wInput.value) {
+            th = Math.max(1, Math.floor(Number(hInput.value)));
+            tw = Math.max(1, Math.round(dec.w * (th / dec.h)));
+          }
+          dec.close();
+        }
+        const res = await resizeOne(file, tw, th);
+        resultsList.appendChild(makeRow(file.name, file, res));
+        success++;
+      } catch (err: any) {
+        const row = document.createElement('div');
+        row.className = 'border-2 border-error bg-white p-3 text-xs';
         row.textContent = `${file.name} — ${err?.message || 'failed'}`;
         resultsList.appendChild(row);
       }
-      done++; progressFill.style.width = `${Math.round((done / files.length) * 100)}%`;
+      done++;
+      progressFill.style.width = `${Math.round((done / files.length) * 100)}%`;
     }
+
     if (success === 0) { showState('error'); errorText.textContent = 'Could not resize any file.'; return; }
     resultsHeading.textContent = `Resized ${success} file${success === 1 ? '' : 's'}`;
     showState('results');
   }
+
+  updateLockUi();
 </script>
