@@ -6,7 +6,39 @@
  */
 ---
 
-<div class="w-full max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10">
+<!-- Tool-area ads: left + right 160x600 skyscrapers flank the uploader on lg+,
+     with a 90px horizontal banner above. The wrapper breaks out of its parent's
+     max-w-5xl constraint at lg+ via left-1/2/-translate-x-1/2 so all three
+     columns + gaps fit (~1040px) inside an lg:max-w-6xl frame. -->
+<div class="w-full mb-8 sm:mb-10 lg:relative lg:left-1/2 lg:-translate-x-1/2 lg:w-screen lg:max-w-6xl lg:px-6">
+  <div class="w-full lg:flex lg:items-end lg:justify-center lg:gap-6">
+    <!-- Left skyscraper -->
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
+      <ins
+        class="adsbygoogle"
+        style="display:inline-block;width:160px;height:600px"
+        data-ad-client="ca-pub-7803867089582138"
+        data-ad-slot="1115981593"
+      ></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+
+    <!-- Center column: top horizontal banner + uploader widget + trust signals -->
+    <div class="w-full lg:flex-1 lg:max-w-2xl lg:min-w-0">
+      <!-- Top horizontal banner -->
+      <div class="w-full max-w-2xl mx-auto mb-4 overflow-hidden" style="max-height:90px">
+        <ins
+          class="adsbygoogle"
+          style="display:block;width:100%;height:90px"
+          data-ad-client="ca-pub-7803867089582138"
+          data-ad-slot="8598885796"
+          data-ad-format="horizontal"
+          data-full-width-responsive="false"
+        ></ins>
+        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <div class="w-full max-w-xl sm:max-w-2xl mx-auto">
   <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
   <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
@@ -126,7 +158,21 @@
     <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">link</span> Permanent</span>
     <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">flash_on</span> Instant</span>
   </div>
-</div>
+      </div><!-- /existing uploader inner -->
+    </div><!-- /center column -->
+
+    <!-- Right skyscraper -->
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
+      <ins
+        class="adsbygoogle"
+        style="display:inline-block;width:160px;height:600px"
+        data-ad-client="ca-pub-7803867089582138"
+        data-ad-slot="1115981593"
+      ></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+  </div><!-- /flex wrapper -->
+</div><!-- /ad-wrapped outer -->
 
 <script>
   const expiresInSel = document.getElementById('expires-in') as HTMLSelectElement | null;
