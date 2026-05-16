@@ -156,19 +156,45 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
       return `${(n / 1024 / 1024).toFixed(2)} MB`;
     }
 
-    function imageDataUrl(file: Blob): Promise<{ dataUrl: string; width: number; height: number; mime: string }> {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onerror = () => reject(new Error('Could not read file'));
-        reader.onload = () => {
-          const dataUrl = reader.result as string;
-          const img = new Image();
-          img.onerror = () => reject(new Error('Browser could not decode'));
-          img.onload = () => resolve({ dataUrl, width: img.naturalWidth, height: img.naturalHeight, mime: dataUrl.substring(5, dataUrl.indexOf(';')) });
-          img.src = dataUrl;
-        };
-        reader.readAsDataURL(file);
-      });
+    async function imageDataUrl(file: Blob): Promise<{ dataUrl: string; width: number; height: number; mime: string }> {
+      // Decode with EXIF orientation applied, then re-export so jsPDF embeds
+      // an upright image. PDF viewers don't honor JPEG EXIF rotation, so we
+      // bake the orientation into the pixels.
+      let bitmap: ImageBitmap | null = null;
+      try {
+        bitmap = await createImageBitmap(file as File, { imageOrientation: 'from-image' });
+      } catch {
+        // Fallback: decode without orientation correction
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = () => reject(new Error('Could not read file'));
+          reader.onload = () => {
+            const dataUrl = reader.result as string;
+            const img = new Image();
+            img.onerror = () => reject(new Error('Browser could not decode'));
+            img.onload = () => resolve({ dataUrl, width: img.naturalWidth, height: img.naturalHeight, mime: dataUrl.substring(5, dataUrl.indexOf(';')) });
+            img.src = dataUrl;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+      const w = bitmap.width;
+      const h = bitmap.height;
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { bitmap.close(); throw new Error('Canvas unavailable'); }
+      // Keep PNG transparency; flatten JPG/WebP onto white for predictable PDF output.
+      const srcMime = (file as File).type || '';
+      const outMime = srcMime === 'image/png' ? 'image/png' : 'image/jpeg';
+      if (outMime === 'image/jpeg') {
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, w, h);
+      }
+      ctx.drawImage(bitmap, 0, 0);
+      bitmap.close();
+      const dataUrl = canvas.toDataURL(outMime, outMime === 'image/png' ? undefined : 0.95);
+      return { dataUrl, width: w, height: h, mime: outMime };
     }
 
     async function prepareBlob(file: File): Promise<Blob> {

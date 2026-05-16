@@ -196,34 +196,58 @@ const toL = toLabel[to];
       return `${(n / 1024 / 1024).toFixed(2)} MB`;
     }
 
-    function convertFile(file: File, quality: number): Promise<Blob> {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onerror = () => reject(new Error('Could not read file'));
-        reader.onload = () => {
-          const img = new Image();
-          img.onerror = () => reject(new Error('Browser could not decode this file'));
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            const ctx = canvas.getContext('2d');
-            if (!ctx) return reject(new Error('Canvas unavailable'));
-            // JPG has no alpha — paint white background first to avoid black fill.
-            if (mime === 'image/jpeg') {
-              ctx.fillStyle = '#ffffff';
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-            ctx.drawImage(img, 0, 0);
-            canvas.toBlob(
-              (blob) => (blob ? resolve(blob) : reject(new Error('Encoding failed'))),
-              mime,
-              mime === 'image/png' ? undefined : quality
-            );
+    async function convertFile(file: File, quality: number): Promise<Blob> {
+      // createImageBitmap with imageOrientation:'from-image' decodes off the
+      // main thread AND honors EXIF orientation — so portrait phone photos
+      // come out the right way up. Falls back to <img> for browsers without it.
+      let width: number;
+      let height: number;
+      let source: CanvasImageSource;
+      let bitmap: ImageBitmap | null = null;
+      try {
+        bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+        width = bitmap.width;
+        height = bitmap.height;
+        source = bitmap;
+      } catch {
+        const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = () => reject(new Error('Could not read file'));
+          reader.onload = () => {
+            const i = new Image();
+            i.onerror = () => reject(new Error('Browser could not decode this file'));
+            i.onload = () => resolve(i);
+            i.src = reader.result as string;
           };
-          img.src = reader.result as string;
-        };
-        reader.readAsDataURL(file);
+          reader.readAsDataURL(file);
+        });
+        width = img.naturalWidth;
+        height = img.naturalHeight;
+        source = img;
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        bitmap?.close();
+        throw new Error('Canvas unavailable');
+      }
+      // JPG has no alpha — paint white background first to avoid black fill.
+      if (mime === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, width, height);
+      }
+      ctx.drawImage(source, 0, 0);
+      bitmap?.close();
+
+      return new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(
+          (blob) => (blob ? resolve(blob) : reject(new Error('Encoding failed'))),
+          mime,
+          mime === 'image/png' ? undefined : quality,
+        );
       });
     }
 
