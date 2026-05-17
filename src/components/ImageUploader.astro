@@ -40,34 +40,50 @@
 
       <div class="w-full max-w-xl sm:max-w-2xl mx-auto">
   <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
+  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
       <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">timer</span>
-      <div class="min-w-0">
-        <label for="expires-in" class="block text-xs font-bold uppercase tracking-wider text-on-background">
-          Auto-delete
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center gap-1.5">
+          <label for="expires-in" class="block text-xs font-bold uppercase tracking-wider text-on-background">Auto-delete</label>
           <button
             type="button"
             id="expires-in-help"
             aria-label="What does auto-delete do?"
-            title="Privacy control: pick how long your image stays online before it is permanently wiped from our servers. Logged-out uploads max out at 24 hours."
-            class="inline-flex items-center justify-center w-4 h-4 ml-1 border border-on-background text-[10px] font-bold align-middle hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
+            aria-expanded="false"
+            aria-controls="expires-in-help-panel"
+            class="inline-flex items-center justify-center w-6 h-6 sm:w-5 sm:h-5 border border-on-background text-xs sm:text-[10px] font-bold hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
           >?</button>
-        </label>
-        <p id="expires-in-hint" class="text-[11px] leading-tight text-on-surface-variant">Never auto-deleted</p>
+        </div>
+        <p id="expires-in-hint" class="text-[11px] leading-tight text-on-surface-variant mt-0.5">Auto-deletes in 7 days</p>
       </div>
     </div>
     <select
       id="expires-in"
       aria-describedby="expires-in-hint"
-      class="bg-white border-2 border-on-background px-3 py-2 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-rose-600 flex-shrink-0"
+      class="w-full sm:w-auto bg-white border-2 border-on-background px-4 py-3 sm:py-2 text-sm sm:text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-rose-600 sm:flex-shrink-0 min-h-[44px] sm:min-h-0"
     >
-      <option value="never">Never</option>
+      <option value="7d">7 days</option>
       <option value="1h">1 hour</option>
       <option value="24h">24 hours</option>
-      <option value="7d">7 days</option>
       <option value="30d">30 days</option>
+      <option value="never">Never</option>
     </select>
+  </div>
+  <div
+    id="expires-in-warning"
+    class="hidden bg-white border-2 border-rose-600 border-t-0 border-b-0 px-4 py-3 text-sm sm:text-xs font-bold text-on-background leading-snug"
+    role="status"
+  >
+    <p id="expires-in-warning-text"></p>
+  </div>
+  <div
+    id="expires-in-help-panel"
+    class="hidden bg-white border-2 border-on-background border-t-0 border-b-0 px-4 py-3 text-xs text-on-surface-variant leading-snug"
+    role="region"
+    aria-labelledby="expires-in-help"
+  >
+    Your image is auto-deleted after 7 days by default. Pick a longer window to keep it around, or a shorter one to wipe it sooner. Logged-out uploads max out at 24 hours regardless.
   </div>
   <div
     id="upload-panel"
@@ -175,8 +191,24 @@
 </div><!-- /ad-wrapped outer -->
 
 <script>
+  // Cached login check shared between the auto-delete gate and the batch-upload gate.
+  let isLoggedIn: boolean | null = null;
+  async function fetchLoggedIn(): Promise<boolean> {
+    if (isLoggedIn !== null) return isLoggedIn;
+    try {
+      const res = await fetch('/api/me', { credentials: 'same-origin' });
+      const data = await res.json();
+      isLoggedIn = !!(data && data.user);
+    } catch {
+      isLoggedIn = false;
+    }
+    return isLoggedIn;
+  }
+
   const expiresInSel = document.getElementById('expires-in') as HTMLSelectElement | null;
   const expiresInHint = document.getElementById('expires-in-hint');
+  const expiresWarnEl = document.getElementById('expires-in-warning');
+  const expiresWarnText = document.getElementById('expires-in-warning-text');
   const EXPIRY_HINTS: Record<string, string> = {
     never: 'Never auto-deleted',
     '1h': 'Auto-deletes in 1 hour',
@@ -184,9 +216,40 @@
     '7d': 'Auto-deletes in 7 days',
     '30d': 'Auto-deletes in 30 days',
   };
-  if (expiresInSel && expiresInHint) {
-    expiresInSel.addEventListener('change', () => {
-      expiresInHint.textContent = EXPIRY_HINTS[expiresInSel.value] || EXPIRY_HINTS.never;
+  const WARN_LABEL: Record<string, string> = {
+    '1h': '1 hour',
+    '24h': '24 hours',
+    '7d': '7 days',
+    '30d': '30 days',
+  };
+
+  function refreshExpiresWarning(value: string) {
+    if (expiresInHint) {
+      expiresInHint.textContent = EXPIRY_HINTS[value] || EXPIRY_HINTS['7d'];
+    }
+    if (!expiresWarnEl || !expiresWarnText) return;
+    const label = WARN_LABEL[value];
+    if (!label) {
+      expiresWarnEl.classList.add('hidden');
+      expiresWarnText.textContent = '';
+    } else {
+      expiresWarnText.textContent = `Your image will be deleted in ${label}.`;
+      expiresWarnEl.classList.remove('hidden');
+    }
+  }
+
+  if (expiresInSel) {
+    expiresInSel.addEventListener('change', () => refreshExpiresWarning(expiresInSel.value));
+    refreshExpiresWarning(expiresInSel.value);
+  }
+
+  const expiresHelpBtn = document.getElementById('expires-in-help');
+  const expiresHelpPanel = document.getElementById('expires-in-help-panel');
+  if (expiresHelpBtn && expiresHelpPanel) {
+    expiresHelpBtn.addEventListener('click', () => {
+      const expanded = expiresHelpBtn.getAttribute('aria-expanded') === 'true';
+      expiresHelpBtn.setAttribute('aria-expanded', String(!expanded));
+      expiresHelpPanel.classList.toggle('hidden');
     });
   }
 
@@ -268,12 +331,7 @@
       return;
     }
     // Batch path — require login
-    let loggedIn = false;
-    try {
-      const res = await fetch('/api/me', { credentials: 'same-origin' });
-      const data = await res.json();
-      loggedIn = !!(data && data.user);
-    } catch {}
+    const loggedIn = await fetchLoggedIn();
     if (!loggedIn) {
       showState('error');
       errorText.textContent = 'Sign in to upload multiple images at once.';
@@ -374,6 +432,19 @@
   errorRetry.addEventListener('click', resetIdle);
 
   async function uploadFile(file: File) {
+    // "Never" requires a signed-in account; server clamps anon to 24h otherwise.
+    if (expiresInSel?.value === 'never') {
+      const loggedIn = await fetchLoggedIn();
+      if (!loggedIn) {
+        showState('error');
+        errorText.textContent = 'Sign in to upload images that never expire.';
+        errorSignin.classList.remove('hidden');
+        errorSignin.classList.add('flex');
+        fileInput.value = '';
+        return;
+      }
+    }
+
     showState('idle');
     progressBar.classList.remove('hidden');
     progressFill.style.width = '0%';
