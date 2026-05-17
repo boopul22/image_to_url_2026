@@ -156,10 +156,10 @@ const pageSchema = [
     <div class="w-full max-w-xl mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
       <!-- Privacy / auto-delete control -->
-      <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div class="flex items-center gap-2 min-w-0">
           <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">timer</span>
-          <div class="min-w-0 flex-1">
+          <div class="min-w-0">
             <div class="flex items-center gap-1.5">
               <label for="expires-in" class="block text-xs font-bold uppercase tracking-wider text-on-background">Auto-delete</label>
               <button
@@ -177,7 +177,7 @@ const pageSchema = [
         <select
           id="expires-in"
           aria-describedby="expires-in-hint"
-          class="w-full sm:w-auto bg-white border-2 border-on-background px-4 py-3 sm:py-2 text-sm sm:text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-rose-600 sm:flex-shrink-0 min-h-[44px] sm:min-h-0"
+          class="w-full sm:w-auto sm:min-w-[140px] bg-white border-2 border-on-background px-4 py-3 text-sm font-bold uppercase tracking-wider focus:outline-none focus:border-rose-600 sm:flex-shrink-0 min-h-[44px]"
         >
           <option value="7d">7 days</option>
           <option value="1h">1 hour</option>
@@ -254,6 +254,9 @@ const pageSchema = [
             <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
               {t(locale, 'home.upload.tryAgain')}
             </button>
+            <a id="error-login" href="/api/auth/login" class="hidden text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
+              LOGIN
+            </a>
           </div>
           <!-- Sign in CTA for limit errors -->
           <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t border-outline-variant/50 text-on-background hover:opacity-80 transition-opacity group">
@@ -563,7 +566,7 @@ const pageSchema = [
       expiresWarnEl.classList.add('hidden');
       expiresWarnText.textContent = '';
     } else {
-      expiresWarnText.textContent = `Your image will be deleted in ${label}.`;
+      expiresWarnText.textContent = `Deletes in ${label} — pick a different duration above ↑`;
       expiresWarnEl.classList.remove('hidden');
     }
   }
@@ -599,6 +602,7 @@ const pageSchema = [
   const copyBtn = document.getElementById('copy-btn')!;
   const uploadAnother = document.getElementById('upload-another')!;
   const errorRetry = document.getElementById('error-retry')!;
+  const errorLogin = document.getElementById('error-login')!;
   const errorText = document.getElementById('error-text')!;
   const errorSignin = document.getElementById('error-signin')!;
 
@@ -632,7 +636,18 @@ const pageSchema = [
     fileInput.value = '';
     errorSignin.classList.add('hidden');
     errorSignin.classList.remove('flex');
+    errorLogin.classList.add('hidden');
+    errorRetry.classList.remove('hidden');
+  }
 
+  function showLoginError() {
+    errorRetry.classList.add('hidden');
+    errorLogin.classList.remove('hidden');
+  }
+
+  function showRetryError() {
+    errorLogin.classList.add('hidden');
+    errorRetry.classList.remove('hidden');
   }
 
   // Click to open file picker
@@ -689,6 +704,7 @@ const pageSchema = [
         errorText.textContent = 'Sign in to upload images that never expire.';
         errorSignin.classList.remove('hidden');
         errorSignin.classList.add('flex');
+        showLoginError();
         fileInput.value = '';
         return;
       }
@@ -745,7 +761,8 @@ const pageSchema = [
       const isLimit = (err.message || '').toLowerCase().includes('limit');
       errorSignin.classList.toggle('hidden', !isLimit);
       errorSignin.classList.toggle('flex', isLimit);
-
+      if (isLimit) showLoginError();
+      else showRetryError();
     }
   }
 
