@@ -627,11 +627,14 @@ const pageSchema = [
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1].toUpperCase()}`;
     uploadBtn.textContent = i18n.uploading;
 
-    let progress = 0;
+    const MIN_UPLOAD_MS = 5000;
+    const startedAt = Date.now();
+
     const progressInterval = setInterval(() => {
-      progress = Math.min(progress + Math.random() * 15, 90);
-      progressFill.style.width = `${progress}%`;
-    }, 200);
+      const elapsed = Date.now() - startedAt;
+      const target = Math.min(95, (elapsed / MIN_UPLOAD_MS) * 95);
+      progressFill.style.width = `${target}%`;
+    }, 100);
 
     try {
       const formData = new FormData();
@@ -642,12 +645,17 @@ const pageSchema = [
       const response = await fetch('/api/upload', { method: 'POST', body: formData });
       const data = await response.json();
 
-      clearInterval(progressInterval);
-
       if (!response.ok || data.error) {
+        clearInterval(progressInterval);
         throw new Error(data.error || i18n.failed);
       }
 
+      const remaining = MIN_UPLOAD_MS - (Date.now() - startedAt);
+      if (remaining > 0) {
+        await new Promise((r) => setTimeout(r, remaining));
+      }
+
+      clearInterval(progressInterval);
       progressFill.style.width = '100%';
       setTimeout(() => {
         showState('success');

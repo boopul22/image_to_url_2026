@@ -112,12 +112,18 @@
     host.textContent = 'Get URL';
     host.addEventListener('click', async () => {
       host.disabled = true; host.textContent = 'Hosting…';
+      const MIN_UPLOAD_MS = 5000;
+      const startedAt = Date.now();
       try {
         const fd = new FormData();
         fd.append('file', new File([blob], baseName, { type: 'image/png' }));
         const res = await fetch('/api/upload', { method: 'POST', body: fd });
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');
+        const remaining = MIN_UPLOAD_MS - (Date.now() - startedAt);
+        if (remaining > 0) {
+          await new Promise((r) => setTimeout(r, remaining));
+        }
         const hosted = data.data.url as string;
         host.remove();
         const inp = document.createElement('input');
