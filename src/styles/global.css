@@ -4,16 +4,41 @@
 @import "@fontsource-variable/dm-sans";
 @import "@fontsource-variable/space-grotesk";
 
-/* Font fallbacks with metric overrides to minimize CLS during swap */
+/* Self-hosted Material Symbols subset — WOFF2 sits in public/fonts/, downloaded
+   at build time by scripts/download-material-symbols.mjs (subsetted to the 221
+   glyphs we actually render). font-display:block + preload in Layout.astro:
+   same-origin preloaded font lands inside the ~100ms block window, so the
+   ligature text never flashes before the glyph paints. */
 @font-face {
-  font-family: 'Space-Grotesk-fallback';
-  src: local('Arial Black'), local('Impact');
-  size-adjust: 105%;
-  ascent-override: 90%;
-  descent-override: 22%;
-  line-gap-override: 0%;
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
 }
 
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* DM Sans metric-matched fallback. Space Grotesk has no dedicated fallback —
+   the old Arial Black/Impact fallback rendered at weight 900 regardless of the
+   declared font-weight, so any Space Grotesk text rendered before the variable
+   font loaded looked like the heaviest headline on the page. With Space Grotesk
+   preloaded in Layout.astro, the FOUT window is short enough that the system
+   sans-serif fallback in the stack is fine. */
 @font-face {
   font-family: 'DM-Sans-fallback';
   src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
@@ -24,9 +49,9 @@
 }
 
 @theme {
-  --font-headline: "Space Grotesk Variable", "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
+  --font-headline: "Space Grotesk Variable", "Space Grotesk", sans-serif;
   --font-body: "DM Sans Variable", "DM Sans", "DM-Sans-fallback", system-ui, sans-serif;
-  --font-label: "Space Grotesk Variable", "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
+  --font-label: "Space Grotesk Variable", "Space Grotesk", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: #fcfcfc;

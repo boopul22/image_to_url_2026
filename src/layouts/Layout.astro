@@ -3,9 +3,11 @@ import '../styles/global.css';
 import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
-import { MATERIAL_ICON_NAMES_CSV } from '../data/material-icons';
-
-const materialSymbolsHref = `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&icon_names=${MATERIAL_ICON_NAMES_CSV}&display=swap`;
+// Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
+// bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
+// to those same fingerprinted URLs, so the preload is always in sync with the CSS.
+import dmSansLatinUrl from '@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url';
+import spaceGroteskLatinUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -197,11 +199,32 @@ function hreflangUrl(loc: Locale): string {
 
     <title>{title}</title>
 
-    <!-- Material Symbols only — DM Sans + Space Grotesk self-hosted via fontsource.
-         &icon_names= subsets the font to just the glyphs we render (see
-         scripts/generate-icon-names.mjs). -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Self-hosted fonts: preload the three woff2s the inlined CSS will reference
+         right after the HTML parses. Without these, busy pages (home: uploader JS +
+         AdSense + dense DOM) discover the fonts later than light pages, so the
+         FOUT window flashed the Space Grotesk fallback (Arial Black 900) on home
+         while /about/ had already swapped. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={dmSansLatinUrl}
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={spaceGroteskLatinUrl}
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/material-symbols-outlined.woff2"
+      crossorigin
+    />
 
     <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP -->
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
@@ -217,16 +240,6 @@ function hreflangUrl(loc: Locale): string {
       crossorigin="anonymous"
       fetchpriority="low"
     ></script>
-
-    <link
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-      href={materialSymbolsHref}
-    />
-    <noscript>
-      <link rel="stylesheet" href={materialSymbolsHref} />
-    </noscript>
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={schemaJson} />

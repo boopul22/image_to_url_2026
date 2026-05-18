@@ -129,7 +129,7 @@ const pageSchema = [
       <!-- Center column: badge, headline, upload tool -->
       <div class="flex flex-col text-center lg:flex-1 lg:max-w-2xl lg:min-w-0">
         <div class="max-w-4xl mx-auto w-full">
-          <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-semibold uppercase tracking-widest mb-3 border-2 border-neutral-900">
+          <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-medium uppercase tracking-widest mb-3 border-2 border-neutral-900">
             {t(locale, 'home.hero.badge')}
           </div>
           <h1 class="font-headline text-xl sm:text-2xl md:text-3xl font-semibold text-on-background leading-[1.05] tracking-tighter uppercase mb-2 sm:mb-3">
@@ -218,7 +218,7 @@ const pageSchema = [
           <div id="drop-zone" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
             <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl" id="upload-icon">add_photo_alternate</span>
             <div class="text-center">
-              <p class="text-on-background font-headline font-semibold text-sm sm:text-base uppercase tracking-wider" id="upload-text">Drop image here or click to browse</p>
+              <p class="text-on-background font-headline font-medium text-sm sm:text-base uppercase tracking-wider" id="upload-text">Drop image here or click to browse</p>
               <p class="text-xs sm:text-sm text-on-surface-variant mt-2" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
             </div>
             <div class="sr-only" id="upload-btn">{t(locale, 'home.upload.selectFile')}</div>

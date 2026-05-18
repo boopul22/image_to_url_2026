@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "web": "astro dev",
-    "prebuild": "node scripts/generate-icon-names.mjs",
+    "prebuild": "node scripts/generate-icon-names.mjs && node scripts/download-material-symbols.mjs",
     "build": "astro build && node scripts/patch-worker-entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
