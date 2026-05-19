@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const db = getDB(locals);
 
-  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks, sponsorAds] = await Promise.all([
+  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks, sponsorAds, uploadsByHour] = await Promise.all([
     db.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count, COALESCE(SUM(size_bytes), 0) as total_size FROM images')
@@ -34,6 +34,17 @@ export const GET: APIRoute = async ({ locals }) => {
     db.prepare('SELECT COUNT(*) as count FROM pages').first<{ count: number }>(),
     db.prepare("SELECT COUNT(*) as count FROM link_clicks WHERE link_id = 'youtube-cta'").first<{ count: number }>(),
     getAdsWithStats(db).catch(() => []),
+    db
+      .prepare(
+        `SELECT
+           strftime('%Y-%m-%d %H:', created_at) || (CASE WHEN cast(strftime('%M', created_at) as int) < 30 THEN '00' ELSE '30' END) as bucket,
+           COUNT(*) as count
+         FROM images
+         WHERE created_at >= datetime('now', '-32 days')
+         GROUP BY bucket
+         ORDER BY bucket ASC`,
+      )
+      .all<{ bucket: string; count: number }>(),
   ]);
 
   return new Response(
@@ -48,6 +59,7 @@ export const GET: APIRoute = async ({ locals }) => {
       totalPages: pages?.count ?? 0,
       ytClicks: ytClicks?.count ?? 0,
       sponsorAds,
+      uploadsByBucket: uploadsByHour.results ?? [],
     }),
     { headers: { 'Content-Type': 'application/json' } },
   );
