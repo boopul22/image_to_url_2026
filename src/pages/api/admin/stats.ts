@@ -2,7 +2,6 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getDB } from '../../../lib/db';
-import { getAdsWithStats } from '../../../lib/sponsor-ads';
 
 export const GET: APIRoute = async ({ locals }) => {
   if (!locals.user || locals.user.role !== 'admin') {
@@ -14,7 +13,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const db = getDB(locals);
 
-  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks, sponsorAds, uploadsByHour] = await Promise.all([
+  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks, adblock, uploadsByHour] = await Promise.all([
     db.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count, COALESCE(SUM(size_bytes), 0) as total_size FROM images')
@@ -33,18 +32,21 @@ export const GET: APIRoute = async ({ locals }) => {
     db.prepare('SELECT COUNT(*) as count FROM media').first<{ count: number }>(),
     db.prepare('SELECT COUNT(*) as count FROM pages').first<{ count: number }>(),
     db.prepare("SELECT COUNT(*) as count FROM link_clicks WHERE link_id = 'youtube-cta'").first<{ count: number }>(),
-    getAdsWithStats(db).catch(() => []),
+    db
+      .prepare('SELECT COUNT(*) as count FROM images WHERE adblock = 1')
+      .first<{ count: number }>(),
     db
       .prepare(
         `SELECT
            strftime('%Y-%m-%d %H:', created_at) || (CASE WHEN cast(strftime('%M', created_at) as int) < 30 THEN '00' ELSE '30' END) as bucket,
-           COUNT(*) as count
+           COUNT(*) as count,
+           COALESCE(SUM(adblock), 0) as adblock
          FROM images
          WHERE created_at >= datetime('now', '-32 days')
          GROUP BY bucket
          ORDER BY bucket ASC`,
       )
-      .all<{ bucket: string; count: number }>(),
+      .all<{ bucket: string; count: number; adblock: number }>(),
   ]);
 
   return new Response(
@@ -58,7 +60,7 @@ export const GET: APIRoute = async ({ locals }) => {
       totalMedia: cmsMedia?.count ?? 0,
       totalPages: pages?.count ?? 0,
       ytClicks: ytClicks?.count ?? 0,
-      sponsorAds,
+      adblockUploads: adblock?.count ?? 0,
       uploadsByBucket: uploadsByHour.results ?? [],
     }),
     { headers: { 'Content-Type': 'application/json' } },

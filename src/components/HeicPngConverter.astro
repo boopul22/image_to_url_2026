@@ -51,6 +51,9 @@
 </div>
 
 <script>
+  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
+  import { detectAdBlock } from '../lib/adblock';
+
   type Heic2Any = (opts: { blob: Blob; toType?: string; quality?: number }) => Promise<Blob | Blob[]>;
   const input = document.getElementById('heicpng-input') as HTMLInputElement;
   const drop = document.getElementById('heicpng-drop') as HTMLDivElement;
@@ -117,6 +120,7 @@
       try {
         const fd = new FormData();
         fd.append('file', new File([blob], baseName, { type: 'image/png' }));
+        fd.append('adblock', (await detectAdBlock()) ? '1' : '0');
         const res = await fetch('/api/upload', { method: 'POST', body: fd });
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');

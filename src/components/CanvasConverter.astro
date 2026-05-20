@@ -105,6 +105,9 @@ const toL = toLabel[to];
 </div>
 
 <script>
+  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
+  import { detectAdBlock } from '../lib/adblock';
+
   type Ctx = {
     idPrefix: string;
     to: string;
@@ -291,6 +294,7 @@ const toL = toLabel[to];
         try {
           const fd = new FormData();
           fd.append('file', new File([blob], baseName, { type: mime }));
+          fd.append('adblock', (await detectAdBlock()) ? '1' : '0');
           const res = await fetch('/api/upload', { method: 'POST', body: fd });
           const data = await res.json();
           if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');

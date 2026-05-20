@@ -47,10 +47,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   const url0 = new URL(request.url);
   const path = url0.pathname;
 
-  // Redirect bare / to /en/ (manual i18n routing)
-  if (path === '/') {
-    return redirect('/en/', 301);
-  }
+  // Homepage: serve /en/ content at / via an internal rewrite instead of a 301.
+  // A network redirect on the most-requested URL cost ~330–760ms in Lighthouse
+  // (delays FCP/LCP). The rewrite keeps the address bar at / but renders the
+  // /en/ route; the page's canonical still resolves to /en/, so SEO
+  // consolidation is unchanged. Passed to next() below.
+  const rewriteTo: string | undefined = path === '/' ? '/en/' : undefined;
 
   // Legacy: /zh/* -> /zh-Hans/* (locale was renamed to BCP-47 Simplified Chinese)
   if (path === '/zh' || path.startsWith('/zh/')) {
@@ -101,7 +103,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   // Applies to tool pages, blog, legal pages, etc. Excludes admin/api/assets.
   const firstSeg = path.split('/')[1];
   const hasLocalePrefix = locales.includes(firstSeg as (typeof locales)[number]);
-  if (!hasLocalePrefix && !isNonLocalized(path)) {
+  if (!rewriteTo && !hasLocalePrefix && !isNonLocalized(path)) {
     const cleaned = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
     return redirect(`/en${cleaned}${url0.search}`, 301);
   }
@@ -200,7 +202,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     }
   }
 
-  let response = await next();
+  let response = await next(rewriteTo);
 
   // 404 → 410 Gone for URL patterns that are permanently removed. Tells Google
   // to drop them from the index instead of retrying. Covers:
@@ -269,12 +271,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   response.headers.set(
     'Content-Security-Policy-Report-Only',
     "default-src 'self'; " +
-      "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud https://cdn.imagetourl.cloud https://*.cloudflare.com https://*.googlesyndication.com https://*.doubleclick.net; " +
+      "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud https://cdn.imagetourl.cloud https://*.cloudflare.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google https://www.google.com https://*.google.com https://www.googletagmanager.com https://*.google-analytics.com; " +
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' data: https://fonts.gstatic.com; " +
-      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com; " +
-      "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://pagead2.googlesyndication.com; " +
-      "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; " +
+      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://*.g.doubleclick.net https://www.googletagmanager.com; " +
+      "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.g.doubleclick.net https://*.adtrafficquality.google https://www.google.com https://*.google-analytics.com https://www.googletagmanager.com; " +
+      "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.g.doubleclick.net https://*.adtrafficquality.google https://www.google.com; " +
       "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'",
   );
 
@@ -293,7 +295,15 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       // Anonymous 200: cache at CDN edge for fast crawling & page loads.
       // No `Vary: Cookie` — anonymous responses don't depend on cookies, and Vary
       // would fragment the edge cache by every cookie value (killing HIT rate).
-      response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+      //
+      // `no-transform` stops Cloudflare from injecting the JavaScript Detections
+      // script (/cdn-cgi/challenge-platform/scripts/jsd/main.js) on these public
+      // pages — that script ran ~2.8s on the main thread and tanked Lighthouse TBT.
+      // Per Cloudflare docs, no-transform suppresses the injection. It is scoped to
+      // anonymous public HTML only; /api/*, /admin, /dashboard and logged-in
+      // responses are excluded above, so JS Detections / Bot Fight Mode still
+      // protect the real abuse surface (uploads, auth, admin).
+      response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400, no-transform');
       
       // --- Save to Edge Cache ---
       if (cacheObj && cacheKey && isCacheableHtmlPage) {

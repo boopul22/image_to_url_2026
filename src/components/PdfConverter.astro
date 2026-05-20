@@ -79,6 +79,9 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
 </div>
 
 <script>
+  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
+  import { detectAdBlock } from '../lib/adblock';
+
   function initPdfConverter(root: HTMLElement) {
     const idPrefix = root.getAttribute('data-pdf-root') || 'pdf';
     const fromFormat = root.getAttribute('data-pdf-from') || 'any';
@@ -232,6 +235,7 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
         try {
           const fd = new FormData();
           fd.append('file', new File([blob], name, { type: 'application/pdf' }));
+          fd.append('adblock', (await detectAdBlock()) ? '1' : '0');
           const res = await fetch('/api/upload', { method: 'POST', body: fd });
           const data = await res.json();
           if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');

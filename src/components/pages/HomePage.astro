@@ -523,6 +523,10 @@ const pageSchema = [
 </Layout>
 
 <script>
+  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
+  // Shared with the tool-page uploader so both report the same signal.
+  import { detectAdBlock } from '../../lib/adblock';
+
   // Cached login check for the auto-delete "Never" gate.
   let isLoggedIn: boolean | null = null;
   async function fetchLoggedIn(): Promise<boolean> {
@@ -719,6 +723,10 @@ const pageSchema = [
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1].toUpperCase()}`;
     uploadBtn.textContent = i18n.uploading;
 
+    // Detect ad blocker once (cached) before the progress timer starts, so the
+    // ~120ms bait wait never stalls the perceived progress bar.
+    const ab = (await detectAdBlock()) ? '1' : '0';
+
     const MIN_UPLOAD_MS = 5000;
     const startedAt = Date.now();
 
@@ -731,6 +739,7 @@ const pageSchema = [
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('adblock', ab);
       const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
       if (expiresInEl) formData.append('expires_in', expiresInEl.value);
 
@@ -776,45 +785,6 @@ const pageSchema = [
     });
   });
 
-  // Sponsored ads: click tracking
-  document.querySelectorAll<HTMLAnchorElement>('[data-track-sponsor-click]').forEach((el) => {
-    el.addEventListener('click', () => {
-      const adId = el.dataset.trackSponsorClick;
-      if (!adId) return;
-      navigator.sendBeacon('/api/track/sponsor', JSON.stringify({
-        adId,
-        type: 'click',
-        page: window.location.pathname,
-      }));
-    });
-  });
-
-  // Sponsored ads: view tracking (dedupe per sessionStorage)
-  const viewEls = document.querySelectorAll<HTMLElement>('[data-track-sponsor-view]');
-  if (viewEls.length && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        const el = entry.target as HTMLElement;
-        const adId = el.dataset.trackSponsorView;
-        if (!adId) { io.unobserve(el); continue; }
-        const key = 'sponsor_view_' + adId;
-        try {
-          if (sessionStorage.getItem(key)) { io.unobserve(el); continue; }
-          sessionStorage.setItem(key, '1');
-        } catch {
-          // sessionStorage unavailable (private mode) — still fire once per page load
-        }
-        navigator.sendBeacon('/api/track/sponsor', JSON.stringify({
-          adId,
-          type: 'view',
-          page: window.location.pathname,
-        }));
-        io.unobserve(el);
-      }
-    }, { threshold: 0.5 });
-    viewEls.forEach((el) => io.observe(el));
-  }
 </script>
 
 <script>
