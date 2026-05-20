@@ -81,6 +81,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const formData = await request.formData();
     const file = formData.get('file');
     const expiresInSeconds = resolveExpiresIn(formData.get('expires_in'), !user);
+    // Ad-blocker signal from the client — analytics only, never affects the upload.
+    const adblock = formData.get('adblock') === '1' ? 1 : 0;
 
     if (!file || !(file instanceof File)) {
       return new Response(JSON.stringify({ error: 'No file provided' }), {
@@ -151,18 +153,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
       if (expiresAtSql) {
         await db
           .prepare(
-            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, expires_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ${expiresAtSql})`,
+            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock, expires_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ${expiresAtSql})`,
           )
-          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
+          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia, adblock)
           .run();
       } else {
         await db
           .prepare(
-            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           )
-          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia)
+          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia, adblock)
           .run();
       }
 
@@ -172,6 +174,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
         await db
           .prepare('INSERT INTO anonymous_uploads (id, ip_address, image_id) VALUES (?, ?, ?)')
           .bind(generateId(), ip, id)
+          .run();
+      }
+
+      // Latest-value-wins ad-blocker rollup for logged-in accounts.
+      // (Anonymous uploads are already captured per-row via images.adblock.)
+      if (user) {
+        await db
+          .prepare('UPDATE users SET uses_adblock = ? WHERE id = ?')
+          .bind(adblock, user.id)
           .run();
       }
     } catch (dbErr: any) {

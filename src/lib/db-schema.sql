@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
   avatar_url TEXT,
   role TEXT NOT NULL DEFAULT 'user',
   is_banned INTEGER NOT NULL DEFAULT 0,
+  uses_adblock INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS images (
   size_bytes INTEGER NOT NULL,
   mime_type TEXT NOT NULL,
   uploaded_via TEXT DEFAULT 'web',
+  adblock INTEGER NOT NULL DEFAULT 0,
   api_key_id TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   expires_at TEXT,

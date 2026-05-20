@@ -194,6 +194,47 @@
 </div><!-- /ad-wrapped outer -->
 
 <script>
+  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
+  // Computed lazily on first upload and cached for the page session, so it only
+  // ever runs while uploading. Heuristic / best-effort; swallows its own errors.
+  let adblockFlag: boolean | null = null;
+  async function detectAdBlock(): Promise<boolean> {
+    if (adblockFlag !== null) return adblockFlag;
+    let blocked = false;
+
+    // 1) Bait element: blockers hide/remove nodes with ad-like class names.
+    try {
+      const bait = document.createElement('div');
+      bait.className = 'adsbox ad-banner ads ad-placement pub_300x250';
+      bait.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;';
+      bait.innerHTML = '&nbsp;';
+      document.body.appendChild(bait);
+      await new Promise((r) => setTimeout(r, 50)); // let the blocker act
+      const cs = getComputedStyle(bait);
+      if (
+        bait.offsetHeight === 0 ||
+        bait.offsetParent === null ||
+        cs.display === 'none' ||
+        cs.visibility === 'hidden'
+      ) blocked = true;
+      bait.remove();
+    } catch { /* ignore */ }
+
+    // 2) Bait request: blockers cancel calls to ad-network URLs.
+    if (!blocked) {
+      try {
+        await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {
+          method: 'HEAD',
+          mode: 'no-cors',
+          cache: 'no-store',
+        });
+      } catch { blocked = true; }
+    }
+
+    adblockFlag = blocked;
+    return blocked;
+  }
+
   // Cached login check shared between the auto-delete gate and the batch-upload gate.
   let isLoggedIn: boolean | null = null;
   async function fetchLoggedIn(): Promise<boolean> {
@@ -371,6 +412,7 @@
 
     batchList.innerHTML = '';
     const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
+    const ab = (await detectAdBlock()) ? '1' : '0';
     const results: { name: string; url: string }[] = [];
     const failures: { name: string; error: string }[] = [];
 
@@ -381,6 +423,7 @@
       try {
         const formData = new FormData();
         formData.append('file', file);
+        formData.append('adblock', ab);
         if (expiresInEl) formData.append('expires_in', expiresInEl.value);
         const response = await fetch('/api/upload', { method: 'POST', body: formData });
         const data = await response.json();
@@ -471,6 +514,10 @@
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1]?.toUpperCase() || 'FILE'}`;
     uploadBtn.textContent = 'Uploading...';
 
+    // Detect ad blocker once (cached) before the progress timer starts, so the
+    // ~50ms bait wait never stalls the perceived progress bar.
+    const ab = (await detectAdBlock()) ? '1' : '0';
+
     // Minimum perceived upload time — instant completion was driving
     // users to bounce before they registered that anything happened.
     const MIN_UPLOAD_MS = 5000;
@@ -487,6 +534,7 @@
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('adblock', ab);
       const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
       if (expiresInEl) formData.append('expires_in', expiresInEl.value);
 
