@@ -4,6 +4,28 @@
 @import "@fontsource-variable/dm-sans";
 @import "@fontsource-variable/space-grotesk";
 
+/* Cross-document View Transitions: makes full-page (MPA) navigations crossfade
+   instead of white-flashing — and since it stays a REAL navigation, Google's
+   vignette/overlay ad still fires (an SPA router would break it). The browser
+   holds the old page on screen during the fetch, so it also masks the SSR
+   render delay on /share. Kept fast (140ms) to fit the brutalist feel; fully
+   disabled for users who prefer reduced motion. Chromium today; other browsers
+   degrade gracefully to a normal navigation. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 140ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Self-hosted Material Symbols subset — WOFF2 sits in public/fonts/, downloaded
    at build time by scripts/download-material-symbols.mjs (subsetted to the 221
    glyphs we actually render). font-display:block + preload in Layout.astro:
