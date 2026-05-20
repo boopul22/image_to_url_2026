@@ -137,7 +137,7 @@
         const copy = document.createElement('button');
         copy.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
         copy.textContent = 'Copy';
-        copy.addEventListener('click', async () => { await navigator.clipboard.writeText(hosted); copy.textContent = 'Copied!'; setTimeout(() => copy.textContent = 'Copy', 1200); });
+        copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ } window.location.href = '/share?u=' + encodeURIComponent(hosted); });
         row.appendChild(inp); row.appendChild(copy);
       } catch (err: any) {
         host.disabled = false; host.textContent = 'Retry';

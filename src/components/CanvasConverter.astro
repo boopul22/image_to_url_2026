@@ -314,9 +314,10 @@ const toL = toLabel[to];
           copy.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
           copy.textContent = 'Copy';
           copy.addEventListener('click', async () => {
-            await navigator.clipboard.writeText(hosted);
-            copy.textContent = 'Copied!';
-            setTimeout(() => (copy.textContent = 'Copy'), 1200);
+            // Copy, then send the user to the share screen (more formats + QR) — same as the
+            // main uploader. The navigation is what lets Google's overlay/vignette ad fire.
+            try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
+            window.location.href = '/share?u=' + encodeURIComponent(hosted);
           });
           row.appendChild(urlInput);
           row.appendChild(copy);
