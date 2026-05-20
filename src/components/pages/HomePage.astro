@@ -681,10 +681,10 @@ const pageSchema = [
     if (fileInput.files && fileInput.files.length > 0) uploadFile(fileInput.files[0]);
   });
 
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(resultUrl.value);
-    copyBtn.textContent = i18n.copied;
-    setTimeout(() => { copyBtn.textContent = i18n.copy; }, 2000);
+  copyBtn.addEventListener('click', async () => {
+    // Copy as before, then send the user to the share screen (more formats + QR).
+    try { await navigator.clipboard.writeText(resultUrl.value); } catch { /* ignore */ }
+    window.location.href = '/share?u=' + encodeURIComponent(resultUrl.value);
   });
 
   uploadAnother.addEventListener('click', resetIdle);

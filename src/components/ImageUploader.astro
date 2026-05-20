@@ -443,10 +443,10 @@
 
   batchAnother.addEventListener('click', resetIdle);
 
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(resultUrl.value);
-    copyBtn.textContent = 'Copied!';
-    setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+  copyBtn.addEventListener('click', async () => {
+    // Copy as before, then send the user to the share screen (more formats + QR).
+    try { await navigator.clipboard.writeText(resultUrl.value); } catch { /* ignore */ }
+    window.location.href = '/share?u=' + encodeURIComponent(resultUrl.value);
   });
 
 
