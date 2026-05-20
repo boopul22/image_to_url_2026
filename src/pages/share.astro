@@ -1,7 +1,9 @@
 ---
 // Standalone "URL copied" share screen. The uploader copy buttons send the user
 // here (with ?u=<image url>) AFTER the normal clipboard copy. Self-contained:
-// everything is derived client-side from the URL — no DB / model / API changes.
+// the URL is validated + the content rendered SERVER-SIDE so there's no client
+// "reveal" pop-in (zero layout shift). Only the QR canvas + copy/download
+// handlers run on the client.
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
@@ -11,6 +13,24 @@ import Footer from '../components/Footer.astro';
 // Never cache at the CDN (the content is per-?u= and trivial); also keep it out
 // of the index.
 Astro.response.headers.set('Cache-Control', 'private, no-store');
+
+// Only render image URLs that belong to us — prevents reflected content / XSS
+// via the ?u= param (it's used as an <img src>, in snippets, and in the QR).
+const ALLOWED_HOSTS = ['imagetourl.cloud', 'cdn.imagetourl.cloud'];
+
+function getValidUrl(raw: string | null): string | null {
+  if (!raw) return null;
+  let parsed: URL;
+  try { parsed = new URL(raw); } catch { return null; }
+  if (parsed.protocol !== 'https:') return null;
+  if (!ALLOWED_HOSTS.includes(parsed.hostname)) return null;
+  return parsed.href;
+}
+
+const url = getValidUrl(Astro.url.searchParams.get('u'));
+const snipMd = url ? `![](${url})` : '';
+const snipHtml = url ? `<img src="${url}" alt="">` : '';
+const snipBb = url ? `[img]${url}[/img]` : '';
 ---
 
 <Layout
@@ -22,80 +42,82 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
   <Nav />
 
   <main class="max-w-xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-    <!-- Valid state -->
-    <div id="share-main" class="hidden">
-      <div class="flex items-center gap-2 mb-5">
-        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
-        <h1 class="text-xl sm:text-2xl font-headline italic font-black text-on-surface">URL copied to clipboard</h1>
-      </div>
-
-      <div class="bg-surface border-2 border-on-surface rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
-        <!-- Thumbnail + URL -->
-        <div class="flex items-start gap-3">
-          <a id="thumb-link" href="#" target="_blank" rel="noopener" class="flex-shrink-0">
-            <img id="thumb" src="" alt="Uploaded image" loading="lazy" decoding="async"
-                 class="w-16 h-16 object-cover border-2 border-on-surface bg-surface-variant" />
-          </a>
-          <div class="flex-1 min-w-0">
-            <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Direct URL</label>
-            <div class="flex gap-2 mt-1">
-              <input id="share-url" type="text" readonly
-                     class="flex-1 min-w-0 bg-white border-2 border-on-background px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-              <button data-copy-target="share-url"
-                      class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border-2 border-on-surface brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
-            </div>
-          </div>
+    {url ? (
+      <!-- Valid state (server-rendered, no client reveal) -->
+      <div id="share-main">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+          <h1 class="text-xl sm:text-2xl font-headline italic font-black text-on-surface">URL copied to clipboard</h1>
         </div>
 
-        <!-- Format snippets -->
-        <div class="space-y-2">
-          <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Embed code</label>
-          <div class="grid gap-2">
-            <div class="flex gap-2">
-              <input id="snip-md" type="text" readonly class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-              <button data-copy-target="snip-md" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Markdown</button>
-            </div>
-            <div class="flex gap-2">
-              <input id="snip-html" type="text" readonly class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-              <button data-copy-target="snip-html" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">HTML</button>
-            </div>
-            <div class="flex gap-2">
-              <input id="snip-bb" type="text" readonly class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-              <button data-copy-target="snip-bb" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">BBCode</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- QR + open -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t-2 border-outline-variant">
-          <div class="flex-shrink-0 border-2 border-on-surface bg-white p-2">
-            <canvas id="qr-canvas" width="160" height="160" class="block w-[160px] h-[160px]"></canvas>
-          </div>
-          <div class="flex-1 w-full space-y-2">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Scan or share</p>
-            <button id="download-qr" class="w-full bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
-              <span class="material-symbols-outlined text-base">download</span> Download QR
-            </button>
-            <a id="open-image" href="#" target="_blank" rel="noopener"
-               class="w-full bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
-              <span class="material-symbols-outlined text-base">open_in_new</span> Open image
+        <div class="bg-surface border-2 border-on-surface rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
+          <!-- Thumbnail + URL -->
+          <div class="flex items-start gap-3">
+            <a id="thumb-link" href={url} target="_blank" rel="noopener" class="flex-shrink-0">
+              <img id="thumb" src={url} alt="Uploaded image" loading="lazy" decoding="async"
+                   class="w-16 h-16 object-cover border-2 border-on-surface bg-surface-variant" />
             </a>
+            <div class="flex-1 min-w-0">
+              <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Direct URL</label>
+              <div class="flex gap-2 mt-1">
+                <input id="share-url" type="text" readonly value={url}
+                       class="flex-1 min-w-0 bg-white border-2 border-on-background px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
+                <button data-copy-target="share-url"
+                        class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border-2 border-on-surface brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Format snippets -->
+          <div class="space-y-2">
+            <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Embed code</label>
+            <div class="grid gap-2">
+              <div class="flex gap-2">
+                <input id="snip-md" type="text" readonly value={snipMd} class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
+                <button data-copy-target="snip-md" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Markdown</button>
+              </div>
+              <div class="flex gap-2">
+                <input id="snip-html" type="text" readonly value={snipHtml} class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
+                <button data-copy-target="snip-html" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">HTML</button>
+              </div>
+              <div class="flex gap-2">
+                <input id="snip-bb" type="text" readonly value={snipBb} class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
+                <button data-copy-target="snip-bb" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">BBCode</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- QR + open -->
+          <div class="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t-2 border-outline-variant">
+            <div class="flex-shrink-0 border-2 border-on-surface bg-white p-2">
+              <canvas id="qr-canvas" width="160" height="160" class="block w-[160px] h-[160px]"></canvas>
+            </div>
+            <div class="flex-1 w-full space-y-2">
+              <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Scan or share</p>
+              <button id="download-qr" class="w-full bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-base">download</span> Download QR
+              </button>
+              <a id="open-image" href={url} target="_blank" rel="noopener"
+                 class="w-full bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-base">open_in_new</span> Open image
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="mt-5 text-center">
-        <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
+        <div class="mt-5 text-center">
+          <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
+        </div>
       </div>
-    </div>
-
-    <!-- Invalid / missing URL state -->
-    <div id="share-empty" class="hidden text-center py-10">
-      <span class="material-symbols-outlined text-5xl text-outline">link_off</span>
-      <h1 class="text-xl font-headline italic font-black text-on-surface mt-3">No image URL</h1>
-      <p class="text-on-surface-variant mt-1">This page opens after you copy an uploaded image link.</p>
-      <a href="/" class="inline-block mt-5 bg-rose-600 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-on-surface brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">Upload an image</a>
-    </div>
+    ) : (
+      <!-- Invalid / missing URL state -->
+      <div id="share-empty" class="text-center py-10">
+        <span class="material-symbols-outlined text-5xl text-outline">link_off</span>
+        <h1 class="text-xl font-headline italic font-black text-on-surface mt-3">No image URL</h1>
+        <p class="text-on-surface-variant mt-1">This page opens after you copy an uploaded image link.</p>
+        <a href="/" class="inline-block mt-5 bg-rose-600 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-on-surface brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">Upload an image</a>
+      </div>
+    )}
   </main>
 
   <Footer />
@@ -104,20 +126,6 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
 <script>
   import QRCode from 'qrcode';
 
-  // Only render image URLs that belong to us — prevents reflected content / XSS
-  // via the ?u= param (it's used as an <img src>, in snippets, and in the QR).
-  const ALLOWED_HOSTS = ['imagetourl.cloud', 'cdn.imagetourl.cloud'];
-
-  function getValidUrl(): string | null {
-    const raw = new URLSearchParams(location.search).get('u');
-    if (!raw) return null;
-    let parsed: URL;
-    try { parsed = new URL(raw); } catch { return null; }
-    if (parsed.protocol !== 'https:') return null;
-    if (!ALLOWED_HOSTS.includes(parsed.hostname)) return null;
-    return parsed.href;
-  }
-
   function flash(btn: HTMLElement, label: string) {
     const original = btn.dataset.label ?? btn.textContent ?? '';
     if (!btn.dataset.label) btn.dataset.label = original;
@@ -125,43 +133,24 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
     window.setTimeout(() => { btn.textContent = btn.dataset.label!; }, 1500);
   }
 
-  const url = getValidUrl();
-  const main = document.getElementById('share-main')!;
-  const empty = document.getElementById('share-empty')!;
-
-  if (!url) {
-    empty.classList.remove('hidden');
-  } else {
-    main.classList.remove('hidden');
-
-    // Snippets
-    const snippets: Record<string, string> = {
-      'share-url': url,
-      'snip-md': `![](${url})`,
-      'snip-html': `<img src="${url}" alt="">`,
-      'snip-bb': `[img]${url}[/img]`,
-    };
-    for (const [id, val] of Object.entries(snippets)) {
-      (document.getElementById(id) as HTMLInputElement).value = val;
-    }
-
-    // Thumbnail + open links
-    (document.getElementById('thumb') as HTMLImageElement).src = url;
-    (document.getElementById('thumb-link') as HTMLAnchorElement).href = url;
-    (document.getElementById('open-image') as HTMLAnchorElement).href = url;
-
-    // Copy buttons (each copies its target input's value)
-    document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
-      btn.addEventListener('click', async () => {
-        const targetId = btn.dataset.copyTarget!;
-        const value = (document.getElementById(targetId) as HTMLInputElement).value;
-        try { await navigator.clipboard.writeText(value); } catch { /* ignore */ }
-        flash(btn, 'Copied!');
-      });
+  // Copy buttons (each copies its target input's value)
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.copyTarget!;
+      const value = (document.getElementById(targetId) as HTMLInputElement).value;
+      try { await navigator.clipboard.writeText(value); } catch { /* ignore */ }
+      flash(btn, 'Copied!');
     });
+  });
+
+  // QR + download — only present in the valid state. The URL is read from the
+  // (already server-validated) #share-url input, so it never has to be re-parsed.
+  const urlInput = document.getElementById('share-url') as HTMLInputElement | null;
+  const canvas = document.getElementById('qr-canvas') as HTMLCanvasElement | null;
+  if (urlInput && canvas) {
+    const url = urlInput.value;
 
     // QR code — rendered fully client-side, the URL never leaves the browser.
-    const canvas = document.getElementById('qr-canvas') as HTMLCanvasElement;
     QRCode.toCanvas(canvas, url, { width: 160, margin: 1 }).catch(() => {
       canvas.closest('div')?.classList.add('hidden');
     });
