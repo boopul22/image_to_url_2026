@@ -241,6 +241,15 @@ function hreflangUrl(loc: Locale): string {
       fetchpriority="low"
     ></script>
 
+    <!-- Collapse ad slots Google returns as "unfilled" so empty placeholders
+         don't reserve blank space (e.g. the 90px banner that otherwise sits
+         empty above the H1). Hiding *unfilled* slots is AdSense-compliant;
+         filled slots are never touched. The slot still reserves space while the
+         request is in flight (data-ad-status unset), so there's no CLS on fill. -->
+    <style is:global>
+      ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+    </style>
+
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={schemaJson} />
 
