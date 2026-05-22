@@ -43,11 +43,12 @@ const fromL = fromLabel[from];
 const toL = toLabel[to];
 ---
 
-<div class="w-full max-w-2xl mx-auto" data-conv-root={idPrefix} data-conv-from={from} data-conv-to={to} data-conv-mime={outMime} data-conv-ext={outExt}>
+<div class="soft-uploader w-full max-w-2xl mx-auto" data-conv-root={idPrefix} data-conv-from={from} data-conv-to={to} data-conv-mime={outMime} data-conv-ext={outExt}>
   <input type="file" id={`${idPrefix}-input`} accept={accept} multiple class="hidden" />
 
+  <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
   <!-- Quality + privacy strip -->
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
+  <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
       <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
       <div class="min-w-0">
@@ -65,18 +66,18 @@ const toL = toLabel[to];
   </div>
 
   <!-- Drop zone -->
-  <div id={`${idPrefix}-panel`} class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+  <div id={`${idPrefix}-panel`} class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id={`${idPrefix}-state-idle`} class="px-6 py-12 sm:px-10 sm:py-16">
-      <div id={`${idPrefix}-drop`} class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">cloud_upload</span>
+      <div id={`${idPrefix}-drop`} class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">cloud_upload</span>
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop {fromL} files here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">Multi-select OK — runs on your device</p>
         </div>
       </div>
       <div id={`${idPrefix}-progress`} class="hidden mt-6">
-        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
-          <div id={`${idPrefix}-progress-fill`} class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        <div class="su-progress h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id={`${idPrefix}-progress-fill`} class="su-progress h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
         </div>
         <p id={`${idPrefix}-progress-text`} class="text-xs text-center mt-2 font-mono text-on-surface-variant">Converting…</p>
       </div>
@@ -87,7 +88,7 @@ const toL = toLabel[to];
       <div class="flex items-center gap-3 mb-4">
         <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
         <span class="font-bold text-secondary text-sm sm:text-lg" id={`${idPrefix}-results-heading`}>Converted 0 files</span>
-        <button id={`${idPrefix}-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Convert more</button>
+        <button id={`${idPrefix}-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Convert more</button>
       </div>
       <div id={`${idPrefix}-results-list`} class="flex flex-col gap-2 max-h-96 overflow-auto"></div>
     </div>
@@ -97,10 +98,11 @@ const toL = toLabel[to];
       <div class="flex items-center gap-3 mb-3">
         <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
         <span class="font-bold text-error text-sm sm:text-lg">Conversion failed</span>
-        <button id={`${idPrefix}-error-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+        <button id={`${idPrefix}-error-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>
       <p id={`${idPrefix}-error-text`} class="text-xs sm:text-sm text-on-surface-variant"></p>
     </div>
+  </div>
   </div>
 </div>
 
@@ -256,7 +258,7 @@ const toL = toLabel[to];
 
     function makeRow(name: string, blob: Blob): HTMLDivElement {
       const row = document.createElement('div');
-      row.className = 'border-2 border-on-background bg-white p-3 flex items-center gap-3';
+      row.className = 'su-control border border-outline-variant bg-white p-3 flex items-center gap-3';
 
       const url = URL.createObjectURL(blob);
       const baseName = name.replace(/\.[^.]+$/, '') + '.' + ext;
@@ -264,7 +266,7 @@ const toL = toLabel[to];
       const thumb = document.createElement('img');
       thumb.src = url;
       thumb.alt = '';
-      thumb.className = 'w-12 h-12 object-cover border-2 border-on-background flex-shrink-0';
+      thumb.className = 'w-12 h-12 object-cover su-control border border-outline-variant flex-shrink-0';
 
       const meta = document.createElement('div');
       meta.className = 'flex-1 min-w-0';
@@ -280,11 +282,11 @@ const toL = toLabel[to];
       const dl = document.createElement('a');
       dl.href = url;
       dl.download = baseName;
-      dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
+      dl.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
       dl.textContent = 'Download';
 
       const host = document.createElement('button');
-      host.className = 'border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide flex-shrink-0';
+      host.className = 'su-btn border border-outline-variant bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 flex-shrink-0';
       host.textContent = 'Get URL';
       host.addEventListener('click', async () => {
         host.disabled = true;
@@ -308,10 +310,10 @@ const toL = toLabel[to];
           urlInput.type = 'text';
           urlInput.readOnly = true;
           urlInput.value = hosted;
-          urlInput.className = 'flex-1 min-w-0 bg-white border-2 border-on-background px-2 py-2 text-xs font-mono';
+          urlInput.className = 'flex-1 min-w-0 bg-white su-control border border-outline-variant px-2 py-2 text-xs font-mono';
           urlInput.addEventListener('focus', () => urlInput.select());
           const copy = document.createElement('button');
-          copy.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
+          copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
           copy.textContent = 'Copy';
           copy.addEventListener('click', async () => {
             // Copy, then send the user to the share screen (more formats + QR) — same as the

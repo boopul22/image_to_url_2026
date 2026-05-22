@@ -3,6 +3,11 @@
  * Reusable image uploader widget.
  * Embeds the drag-and-drop upload panel with progress, success, and error states.
  * Uses unique IDs via a generated suffix to allow multiple instances (though typically one per page).
+ *
+ * Visual: soft "drop card" per the design mockup — a padded gray shell wrapping a
+ * white dashed drop area with a floating action island (auto-delete + Browse).
+ * The soft radii/shadows come from the scoped `.soft-uploader` layer in global.css;
+ * the rest of the site stays brutalist.
  */
 ---
 
@@ -38,146 +43,164 @@
         <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
 
-      <div class="w-full max-w-xl sm:max-w-2xl mx-auto">
-  <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-    <div class="flex items-center gap-2 min-w-0">
-      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">timer</span>
-      <div class="min-w-0">
-        <div class="flex items-center gap-1.5">
-          <label for="expires-in" class="block text-xs font-bold uppercase tracking-wider text-on-background">Auto-delete</label>
+      <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
+        <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
+
+        <!-- Soft drop card: padded gray shell -->
+        <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
+          <!-- Drop area -->
+          <div
+            id="upload-panel"
+            class="su-drop relative bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300"
+          >
+            <!-- State: idle / uploading -->
+            <div id="state-idle" class="relative min-h-[320px]">
+              <div id="drop-zone" class="group absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 pb-24 cursor-pointer" role="button" tabindex="0">
+                <span class="material-symbols-outlined text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon">cloud_upload</span>
+                <div class="text-center">
+                  <p class="text-on-surface-variant font-medium text-sm sm:text-base transition-opacity duration-300 group-hover:opacity-70" id="upload-text">Drop files to upload</p>
+                  <p class="text-xs sm:text-sm text-on-surface-variant/70 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
+                </div>
+                <div id="progress-bar" class="su-progress hidden w-full max-w-xs h-2 bg-surface-variant overflow-hidden">
+                  <div id="progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <div class="sr-only" id="upload-btn">Select File</div>
+              </div>
+
+              <!-- Floating action island: auto-delete + Browse -->
+              <div class="su-island su-soft-shadow absolute bottom-5 left-1/2 -translate-x-1/2 z-10 bg-white border border-outline-variant/30 flex items-center gap-2 p-2 w-[92%] max-w-[380px]">
+                <div class="su-control flex items-center gap-2 bg-surface-container-low px-3 py-2 flex-1 min-w-0 hover:bg-surface-container transition-colors">
+                  <span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">schedule</span>
+                  <div class="relative flex-1 min-w-0">
+                    <select
+                      id="expires-in"
+                      aria-label="Auto-delete after"
+                      aria-describedby="expires-in-hint"
+                      class="su-control appearance-none w-full bg-transparent text-xs font-semibold text-on-surface pr-5 outline-none cursor-pointer"
+                    >
+                      <option value="7d">Delete in 7 days</option>
+                      <option value="1h">Delete in 1 hour</option>
+                      <option value="24h">Delete in 24 hours</option>
+                      <option value="30d">Delete in 30 days</option>
+                      <option value="never">Never delete</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-base pointer-events-none">expand_more</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  id="browse-btn"
+                  class="su-btn bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold px-5 py-2.5 transition-colors whitespace-nowrap active:scale-95 flex-shrink-0"
+                  style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);"
+                >
+                  Browse
+                </button>
+              </div>
+            </div>
+
+            <!-- State: success -->
+            <div id="state-success" class="p-4 sm:p-6 hidden">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-rose-600 text-lg sm:text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="font-bold text-on-surface text-sm sm:text-lg">Uploaded!</span>
+                <button id="upload-another" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
+                  Upload another
+                </button>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <input type="text" id="result-url" readonly class="su-control flex-1 min-w-0 bg-surface-container-low border border-outline-variant px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-500" />
+                <button id="copy-btn" class="su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm py-3 px-6 transition-colors active:scale-95 flex-shrink-0" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">
+                  Copy
+                </button>
+              </div>
+              <!-- ExtractPics cross-promo CTA -->
+              <a href="https://www.extractpics.com/" target="_blank" rel="noopener" data-track-click="extractpics-cta" class="flex items-center gap-3 mt-4 pt-4 border-t border-outline-variant/40 hover:opacity-90 transition-opacity group">
+                <span class="su-control flex-shrink-0 inline-flex items-center justify-center w-9 h-9 bg-rose-50 text-rose-600">
+                  <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">image_search</span>
+                </span>
+                <div class="flex-1 min-w-0">
+                  <span class="text-xs sm:text-sm font-bold text-on-background">Need images from a website?</span>
+                  <p class="text-xs text-on-surface-variant mt-0.5">ExtractPics — grab every image from any URL, free</p>
+                </div>
+                <span class="su-btn flex-shrink-0 inline-flex items-center gap-1 bg-rose-600 text-white px-3 py-2 font-bold text-xs group-hover:translate-x-0.5 transition-transform">
+                  Try it <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </span>
+              </a>
+            </div>
+
+            <!-- State: batch success -->
+            <div id="state-batch" class="p-4 sm:p-6 hidden">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-rose-600 text-lg sm:text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="font-bold text-on-surface text-sm sm:text-lg" id="batch-heading">Uploaded 0 files</span>
+                <button id="batch-another" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
+                  Upload more
+                </button>
+              </div>
+              <div id="batch-list" class="flex flex-col gap-2 max-h-80 overflow-auto"></div>
+              <button id="batch-copy-all" class="su-btn mt-3 w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm py-3 px-6 transition-colors active:scale-95" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">
+                Copy all URLs
+              </button>
+            </div>
+
+            <!-- State: error -->
+            <div id="state-error" class="p-4 sm:p-6 hidden">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
+                <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0" id="error-text">Upload failed</span>
+                <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
+                  Try again
+                </button>
+                <a id="error-login" href="/api/auth/login" class="hidden text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
+                  Login
+                </a>
+              </div>
+              <!-- Sign in CTA for limit errors -->
+              <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t border-outline-variant/40 text-on-background hover:opacity-80 transition-opacity group">
+                <span class="material-symbols-outlined text-base text-primary">login</span>
+                <span class="text-xs sm:text-sm font-bold">Sign in to get more uploads</span>
+                <span class="material-symbols-outlined text-sm text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auto-delete hint + help, below the card -->
+        <div class="mt-3 flex items-center justify-center gap-1.5 text-center">
+          <p id="expires-in-hint" class="text-xs text-on-surface-variant">Auto-deletes in 7 days</p>
           <button
             type="button"
             id="expires-in-help"
             aria-label="What does auto-delete do?"
             aria-expanded="false"
             aria-controls="expires-in-help-panel"
-            class="inline-flex items-center justify-center w-6 h-6 sm:w-5 sm:h-5 border border-on-background text-xs sm:text-[10px] font-bold hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
+            class="su-control inline-flex items-center justify-center w-5 h-5 border border-outline-variant text-[10px] font-bold text-on-surface-variant hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
           >?</button>
         </div>
-        <p id="expires-in-hint" class="text-[11px] leading-tight text-on-surface-variant mt-0.5">Auto-deletes in 7 days</p>
-      </div>
-    </div>
-    <select
-      id="expires-in"
-      aria-describedby="expires-in-hint"
-      class="w-full sm:w-auto sm:min-w-[140px] bg-white border-2 border-on-background px-4 py-3 text-sm font-bold uppercase tracking-wider focus:outline-none focus:border-rose-600 sm:flex-shrink-0 min-h-[44px]"
-    >
-      <option value="7d">7 days</option>
-      <option value="1h">1 hour</option>
-      <option value="24h">24 hours</option>
-      <option value="30d">30 days</option>
-      <option value="never">Never</option>
-    </select>
-  </div>
-  <div
-    id="expires-in-warning"
-    class="hidden bg-white border-2 border-rose-600 border-t-0 border-b-0 px-4 py-3 text-sm sm:text-xs font-bold text-on-background leading-snug"
-    role="status"
-  >
-    <p id="expires-in-warning-text"></p>
-  </div>
-  <div
-    id="expires-in-help-panel"
-    class="hidden bg-white border-2 border-on-background border-t-0 border-b-0 px-4 py-3 text-xs text-on-surface-variant leading-snug"
-    role="region"
-    aria-labelledby="expires-in-help"
-  >
-    Your image is auto-deleted after 7 days by default. Pick a longer window to keep it around, or a shorter one to wipe it sooner. Logged-out uploads max out at 24 hours regardless.
-  </div>
-  <div
-    id="upload-panel"
-    class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors"
-  >
-    <!-- State: idle / uploading -->
-    <div id="state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
-      <div id="drop-zone" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl" id="upload-icon">add_photo_alternate</span>
-        <div class="text-center">
-          <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider" id="upload-text">Drop image here or click to browse</p>
-          <p class="text-xs sm:text-sm text-on-surface-variant mt-2" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
+        <div
+          id="expires-in-warning"
+          class="su-control hidden mt-2 bg-rose-50 border border-rose-200 px-4 py-2.5 text-xs font-semibold text-rose-700 text-center"
+          role="status"
+        >
+          <p id="expires-in-warning-text"></p>
         </div>
-        <div class="sr-only" id="upload-btn">Select File</div>
-      </div>
-      <div id="progress-bar" class="hidden mt-6 h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
-        <div id="progress-fill" class="h-full bg-primary transition-all duration-300 rounded-full" style="width: 0%"></div>
-      </div>
-    </div>
-
-    <!-- State: success -->
-    <div id="state-success" class="p-4 sm:p-6 hidden">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
-        <span class="font-bold text-secondary text-sm sm:text-lg">Uploaded!</span>
-        <button id="upload-another" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
-          Upload another
-        </button>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-3">
-        <input type="text" id="result-url" readonly class="flex-1 min-w-0 bg-white border-2 border-on-background px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-        <button id="copy-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">
-          Copy
-        </button>
-      </div>
-      <!-- YouTube channel support CTA -->
-      <a href="https://www.youtube.com/channel/UCsZteVHTWUZKmOf1xBkeVzA/?sub_confirmation=1" target="_blank" rel="noopener" data-track-click="youtube-cta" class="flex items-center gap-3 mt-3 pt-3 border-t-2 border-on-background/10 hover:opacity-90 transition-opacity group">
-        <svg class="flex-shrink-0 w-6 h-6 text-[#FF0000]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-        </svg>
-        <div class="flex-1 min-w-0">
-          <span class="text-xs sm:text-sm font-bold text-on-background">Enjoy this free tool? Please support us 🙏</span>
-          <p class="text-xs text-on-surface-variant mt-0.5">GROOVE songs that lift your mood</p>
+        <div
+          id="expires-in-help-panel"
+          class="su-control hidden mt-2 bg-surface-container-low border border-outline-variant/40 px-4 py-3 text-xs text-on-surface-variant leading-snug text-center"
+          role="region"
+          aria-labelledby="expires-in-help"
+        >
+          Your image is auto-deleted after 7 days by default. Pick a longer window to keep it around, or a shorter one to wipe it sooner. Logged-out uploads max out at 24 hours regardless.
         </div>
-        <span class="flex-shrink-0 inline-flex items-center gap-1 bg-[#FF0000] text-white border-2 border-on-background px-3 py-2 font-bold text-xs uppercase tracking-wider group-hover:translate-x-0.5 transition-transform">
-          Subscribe <span class="material-symbols-outlined text-sm">open_in_new</span>
-        </span>
-      </a>
-    </div>
 
-    <!-- State: batch success -->
-    <div id="state-batch" class="p-4 sm:p-6 hidden">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
-        <span class="font-bold text-secondary text-sm sm:text-lg" id="batch-heading">Uploaded 0 files</span>
-        <button id="batch-another" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
-          Upload more
-        </button>
-      </div>
-      <div id="batch-list" class="flex flex-col gap-2 max-h-80 overflow-auto"></div>
-      <button id="batch-copy-all" class="mt-3 w-full bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-neutral-900 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">
-        Copy all URLs
-      </button>
-    </div>
-
-    <!-- State: error -->
-    <div id="state-error" class="p-4 sm:p-6 hidden">
-      <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
-        <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0" id="error-text">Upload failed</span>
-        <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
-          TRY AGAIN
-        </button>
-        <a id="error-login" href="/api/auth/login" class="hidden text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">
-          LOGIN
-        </a>
-      </div>
-      <!-- Sign in CTA for limit errors -->
-      <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t-2 border-on-background/10 text-on-background hover:opacity-80 transition-opacity group">
-        <span class="material-symbols-outlined text-base text-primary">login</span>
-        <span class="text-xs sm:text-sm font-bold">Sign in to get more uploads</span>
-        <span class="material-symbols-outlined text-sm text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Trust signals -->
-  <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-5 sm:mt-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
-    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> CDN</span>
-    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">lock</span> SSL</span>
-    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">link</span> Permanent</span>
-    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">flash_on</span> Instant</span>
-  </div>
-      </div><!-- /existing uploader inner -->
+        <!-- Trust signals -->
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-5 sm:mt-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> CDN</span>
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">lock</span> SSL</span>
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">link</span> Permanent</span>
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">flash_on</span> Instant</span>
+        </div>
+      </div><!-- /soft-uploader -->
     </div><!-- /center column -->
 
     <!-- Right skyscraper -->
@@ -262,6 +285,7 @@
 
   const panel = document.getElementById('upload-panel')!;
   const dropZone = document.getElementById('drop-zone')!;
+  const browseBtn = document.getElementById('browse-btn');
   const fileInput = document.getElementById('file-input') as HTMLInputElement;
   const uploadIcon = document.getElementById('upload-icon')!;
   const uploadText = document.getElementById('upload-text')!;
@@ -284,7 +308,7 @@
   const errorLogin = document.getElementById('error-login')!;
   const errorText = document.getElementById('error-text')!;
   const errorSignin = document.getElementById('error-signin')!;
-  const errorPromo = document.getElementById('error-promo')!;
+  const errorPromo = document.getElementById('error-promo');
 
   function showState(state: 'idle' | 'success' | 'batch' | 'error') {
     stateIdle.classList.toggle('hidden', state !== 'idle');
@@ -297,15 +321,15 @@
     showState('idle');
     progressBar.classList.add('hidden');
     progressFill.style.width = '0%';
-    uploadIcon.textContent = 'upload_file';
-    uploadText.textContent = 'Click to upload or drag & drop';
+    uploadIcon.textContent = 'cloud_upload';
+    uploadText.textContent = 'Drop files to upload';
     uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG — up to 10 MB';
     uploadBtn.textContent = 'Select File';
     fileInput.value = '';
     errorSignin.classList.add('hidden');
     errorSignin.classList.remove('flex');
-    errorPromo.classList.add('hidden');
-    errorPromo.classList.remove('flex');
+    errorPromo?.classList.add('hidden');
+    errorPromo?.classList.remove('flex');
     errorLogin.classList.add('hidden');
     errorRetry.classList.remove('hidden');
   }
@@ -324,19 +348,20 @@
   dropZone.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
   });
+  browseBtn?.addEventListener('click', () => fileInput.click());
 
   panel.addEventListener('dragover', (e) => {
     e.preventDefault();
-    panel.classList.add('!border-primary', '!bg-primary-fixed/30');
+    panel.classList.add('!border-rose-400', '!bg-rose-50');
   });
   panel.addEventListener('dragleave', (e) => {
     if (!panel.contains(e.relatedTarget as Node)) {
-      panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
+      panel.classList.remove('!border-rose-400', '!bg-rose-50');
     }
   });
   panel.addEventListener('drop', (e) => {
     e.preventDefault();
-    panel.classList.remove('!border-primary', '!bg-primary-fixed/30');
+    panel.classList.remove('!border-rose-400', '!bg-rose-50');
     const files = e.dataTransfer?.files;
     if (files && files.length > 0) handleFiles(files);
   });
@@ -416,11 +441,11 @@
       input.type = 'text';
       input.readOnly = true;
       input.value = r.url;
-      input.className = 'flex-1 min-w-0 bg-white border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600';
+      input.className = 'su-control flex-1 min-w-0 bg-surface-container-low border border-outline-variant px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-500';
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.textContent = 'Copy';
-      btn.className = 'bg-white hover:bg-rose-600 hover:text-white text-on-background font-bold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wider transition-colors flex-shrink-0';
+      btn.className = 'su-btn bg-white hover:bg-rose-600 hover:text-white text-on-surface font-bold text-xs py-2 px-3 border border-outline-variant transition-colors flex-shrink-0';
       btn.addEventListener('click', () => {
         navigator.clipboard.writeText(r.url);
         btn.textContent = 'Copied!';
@@ -528,14 +553,14 @@
       const isLimit = (err.message || '').toLowerCase().includes('limit');
       errorSignin.classList.toggle('hidden', !isLimit);
       errorSignin.classList.toggle('flex', isLimit);
-      errorPromo.classList.toggle('hidden', !isLimit);
-      errorPromo.classList.toggle('flex', isLimit);
+      errorPromo?.classList.toggle('hidden', !isLimit);
+      errorPromo?.classList.toggle('flex', isLimit);
       if (isLimit) showLoginError();
       else showRetryError();
     }
   }
 
-  // Click tracking for YouTube CTA
+  // Click tracking for cross-promo CTA
   document.querySelectorAll<HTMLAnchorElement>('[data-track-click]').forEach((el) => {
     el.addEventListener('click', () => {
       navigator.sendBeacon('/api/track/click', JSON.stringify({

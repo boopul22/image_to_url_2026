@@ -5,9 +5,10 @@
  * 'match' is chosen, or forced to JPG/WebP for extra savings.
  */
 ---
-<div class="w-full max-w-2xl mx-auto">
+<div class="soft-uploader w-full max-w-2xl mx-auto">
   <input type="file" id="icomp-input" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" multiple class="hidden" />
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+  <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
+  <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
     <div class="flex items-center gap-2 min-w-0">
       <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
       <div class="min-w-0">
@@ -16,7 +17,7 @@
     </div>
     <div class="flex items-center gap-2 flex-shrink-0">
       <label for="icomp-format" class="text-xs font-bold uppercase tracking-wider text-on-background">Format</label>
-      <select id="icomp-format" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
+      <select id="icomp-format" class="su-control border border-outline-variant bg-white text-xs font-bold uppercase px-2 py-1">
         <option value="match">Match source</option>
         <option value="image/jpeg">JPG</option>
         <option value="image/webp">WebP</option>
@@ -26,18 +27,18 @@
       <span id="icomp-quality-val" class="text-xs font-mono font-bold w-8 text-right">80</span>
     </div>
   </div>
-  <div id="icomp-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+  <div id="icomp-panel" class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id="icomp-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
-      <div id="icomp-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">compress</span>
+      <div id="icomp-drop" class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">compress</span>
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop images here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · WebP — multi-select OK</p>
         </div>
       </div>
       <div id="icomp-progress" class="hidden mt-6">
-        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
-          <div id="icomp-progress-fill" class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        <div class="su-progress h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id="icomp-progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
         </div>
         <p id="icomp-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Compressing…</p>
       </div>
@@ -46,7 +47,7 @@
       <div class="flex items-center gap-3 mb-4">
         <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
         <span class="font-bold text-secondary text-sm sm:text-lg" id="icomp-results-heading">Compressed</span>
-        <button id="icomp-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Compress more</button>
+        <button id="icomp-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Compress more</button>
       </div>
       <div id="icomp-results-list" class="flex flex-col gap-2 max-h-96 overflow-auto"></div>
     </div>
@@ -54,10 +55,11 @@
       <div class="flex items-center gap-3 mb-3">
         <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
         <span class="font-bold text-error text-sm sm:text-lg">Failed</span>
-        <button id="icomp-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+        <button id="icomp-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>
       <p id="icomp-error-text" class="text-xs sm:text-sm text-on-surface-variant"></p>
     </div>
+  </div>
   </div>
 </div>
 
@@ -137,10 +139,10 @@
 
   function makeRow(name: string, origSize: number, blob: Blob): HTMLDivElement {
     const row = document.createElement('div');
-    row.className = 'border-2 border-on-background bg-white p-3 flex items-center gap-3';
+    row.className = 'su-control border border-outline-variant bg-white p-3 flex items-center gap-3';
     const url = URL.createObjectURL(blob);
     const baseName = name.replace(/\.[^.]+$/, '') + '-compressed.' + extFor(blob.type);
-    const thumb = document.createElement('img'); thumb.src = url; thumb.alt = ''; thumb.className = 'w-12 h-12 object-cover border-2 border-on-background flex-shrink-0';
+    const thumb = document.createElement('img'); thumb.src = url; thumb.alt = ''; thumb.className = 'w-12 h-12 object-cover su-control border border-outline-variant flex-shrink-0';
     const meta = document.createElement('div'); meta.className = 'flex-1 min-w-0';
     const nameEl = document.createElement('p'); nameEl.className = 'text-xs font-bold truncate'; nameEl.textContent = baseName;
     const savedPct = Math.max(0, Math.round((1 - blob.size / origSize) * 100));
@@ -148,7 +150,7 @@
     sizeEl.textContent = `${fmtBytes(origSize)} → ${fmtBytes(blob.size)} (${savedPct}% smaller)`;
     meta.appendChild(nameEl); meta.appendChild(sizeEl);
     const dl = document.createElement('a'); dl.href = url; dl.download = baseName;
-    dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0'; dl.textContent = 'Download';
+    dl.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0'; dl.textContent = 'Download';
     row.appendChild(thumb); row.appendChild(meta); row.appendChild(dl);
     return row;
   }

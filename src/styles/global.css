@@ -543,6 +543,28 @@ input, textarea, select, button, img, video, iframe, [class*="rounded"] {
   border-radius: 0 !important;
 }
 
+/* ── Soft uploader surface ─────────────────────────────────────────────
+   The uploaders intentionally break the brutalist hard-edge look: a soft,
+   rounded, blurred-shadow card (per the design mockup). This is a SCOPED
+   opt-out — everything is gated behind .soft-uploader so the rest of the
+   site stays square. The descendant selectors (.soft-uploader .su-*, 0,2,0)
+   out-specify the [class*="rounded"] rule above (0,1,0), so even though both
+   carry !important the soft radius wins inside an uploader.
+   Brand: rose accent is applied via Tailwind utilities in the markup; this
+   layer only owns radii + the soft drop shadows. */
+.soft-uploader .su-card    { border-radius: 1.5rem !important; }   /* outer padded card */
+.soft-uploader .su-drop    { border-radius: 1.25rem !important; }  /* white drop area */
+.soft-uploader .su-island  { border-radius: 1rem !important; }     /* floating action island */
+.soft-uploader .su-control { border-radius: 0.75rem !important; }  /* setting pill / inputs */
+.soft-uploader button,
+.soft-uploader select,
+.soft-uploader input,
+.soft-uploader .su-btn     { border-radius: 0.75rem !important; }
+.soft-uploader .su-progress,
+.soft-uploader .su-progress > * { border-radius: 9999px !important; }
+.soft-uploader .su-soft-shadow  { box-shadow: 0 8px 30px rgb(0 0 0 / 0.12) !important; }
+.soft-uploader .su-inner-shadow { box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05) !important; }
+
 /* Minimum touch target sizes for mobile (48px per WCAG 2.5.8) */
 @media (pointer: coarse) {
   a, button, [role="button"], input[type="submit"], input[type="file"]::file-selector-button {

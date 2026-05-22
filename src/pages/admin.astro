@@ -98,14 +98,12 @@ const user = Astro.locals.user!;
 
       <!-- YouTube CTA + Uploads Per Day -->
       <div class="space-y-4">
-        <div class="bg-[#FF0000] border-2 border-on-surface rounded-lg p-3 hard-shadow flex items-center justify-between">
+        <div class="bg-primary border-2 border-on-surface rounded-lg p-3 hard-shadow flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <svg class="w-7 h-7 text-white/90 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/80">YouTube "Support us" Clicks</p>
+            <span class="material-symbols-outlined text-white/90 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">image_search</span>
+            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/80">ExtractPics CTA Clicks</p>
           </div>
-          <p class="text-2xl font-headline font-black text-white" id="stat-yt-clicks">—</p>
+          <p class="text-2xl font-headline font-black text-white" id="stat-cta-clicks">—</p>
         </div>
 
         <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
@@ -186,7 +184,7 @@ const user = Astro.locals.user!;
     document.getElementById('stat-users')!.textContent = data.totalUsers.toLocaleString();
     document.getElementById('stat-storage')!.textContent = formatSize(data.totalStorage);
     document.getElementById('stat-keys')!.textContent = data.activeApiKeys.toLocaleString();
-    document.getElementById('stat-yt-clicks')!.textContent = (data.ytClicks ?? 0).toLocaleString();
+    document.getElementById('stat-cta-clicks')!.textContent = (data.ctaClicks ?? 0).toLocaleString();
 
     // Ad-block uploads — how many uploads came from visitors running an ad blocker.
     const adblockUploads = Number(data.adblockUploads ?? 0);

@@ -8,7 +8,7 @@
  * encoding.
  */
 ---
-<div class="w-full max-w-2xl mx-auto">
+<div class="soft-uploader w-full max-w-2xl mx-auto">
   <input
     type="file"
     id="b64e-input"
@@ -16,8 +16,9 @@
     class="hidden"
   />
 
+  <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
   <!-- Privacy strip -->
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+  <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
     <div class="flex items-center gap-2 min-w-0">
       <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
       <div class="min-w-0">
@@ -34,18 +35,18 @@
   </div>
 
   <!-- Drop zone / panel -->
-  <div id="b64e-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+  <div id="b64e-panel" class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id="b64e-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
-      <div id="b64e-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">data_object</span>
+      <div id="b64e-drop" class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">data_object</span>
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop an image here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · GIF · WebP · SVG · BMP · AVIF</p>
         </div>
       </div>
       <div id="b64e-progress" class="hidden mt-6">
-        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
-          <div id="b64e-progress-fill" class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        <div class="su-progress h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id="b64e-progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
         </div>
         <p id="b64e-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Encoding…</p>
       </div>
@@ -56,12 +57,12 @@
       <div class="flex items-center gap-3 mb-4">
         <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
         <span class="font-bold text-secondary text-sm sm:text-lg">Encoded</span>
-        <button id="b64e-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Encode another</button>
+        <button id="b64e-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Encode another</button>
       </div>
 
       <!-- Preview + meta -->
-      <div class="border-2 border-on-background bg-white p-3 flex items-center gap-3 mb-4">
-        <img id="b64e-thumb" alt="" class="w-16 h-16 object-cover border-2 border-on-background flex-shrink-0 bg-surface-variant" />
+      <div class="su-control border border-outline-variant bg-white p-3 flex items-center gap-3 mb-4">
+        <img id="b64e-thumb" alt="" class="su-control w-16 h-16 object-cover border border-outline-variant flex-shrink-0 bg-surface-variant" />
         <div class="flex-1 min-w-0">
           <p id="b64e-name" class="text-xs font-bold truncate"></p>
           <p id="b64e-meta" class="text-[11px] text-on-surface-variant font-mono"></p>
@@ -69,24 +70,24 @@
       </div>
 
       <!-- Tabs -->
-      <div role="tablist" class="flex flex-wrap gap-0 border-b-2 border-on-background mb-0">
-        <button data-tab="datauri" role="tab" aria-selected="true" class="b64e-tab bg-on-background text-white font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-b-0">Data URI</button>
-        <button data-tab="css" role="tab" aria-selected="false" class="b64e-tab bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-l-0 border-b-0">CSS</button>
-        <button data-tab="html" role="tab" aria-selected="false" class="b64e-tab bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-l-0 border-b-0">HTML</button>
-        <button data-tab="md" role="tab" aria-selected="false" class="b64e-tab bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border-2 border-on-background border-l-0 border-b-0">Markdown</button>
+      <div role="tablist" class="flex flex-wrap gap-0 border-b border-outline-variant mb-0">
+        <button data-tab="datauri" role="tab" aria-selected="true" class="b64e-tab su-btn bg-on-background text-white font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border border-outline-variant border-b-0">Data URI</button>
+        <button data-tab="css" role="tab" aria-selected="false" class="b64e-tab su-btn bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border border-outline-variant border-l-0 border-b-0">CSS</button>
+        <button data-tab="html" role="tab" aria-selected="false" class="b64e-tab su-btn bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border border-outline-variant border-l-0 border-b-0">HTML</button>
+        <button data-tab="md" role="tab" aria-selected="false" class="b64e-tab su-btn bg-white text-on-background font-headline font-bold text-xs uppercase tracking-wider px-3 py-2 border border-outline-variant border-l-0 border-b-0">Markdown</button>
       </div>
 
       <textarea
         id="b64e-output"
         readonly
         rows="8"
-        class="w-full border-2 border-on-background border-t-0 bg-surface-variant/40 font-mono text-[11px] sm:text-xs p-3 resize-y break-all leading-relaxed"
+        class="su-control w-full border border-outline-variant border-t-0 bg-surface-container-low font-mono text-[11px] sm:text-xs p-3 resize-y break-all leading-relaxed focus:outline-none focus:border-rose-500"
         spellcheck="false"
       ></textarea>
 
       <div class="flex flex-wrap gap-2 mt-3">
-        <button id="b64e-copy" class="bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide">Copy</button>
-        <button id="b64e-download" class="border-2 border-on-background bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Download .txt</button>
+        <button id="b64e-copy" class="su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 transition-colors active:scale-95" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">Copy</button>
+        <button id="b64e-download" class="su-btn border border-outline-variant bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 uppercase tracking-wide">Download .txt</button>
       </div>
 
       <p id="b64e-warn" class="hidden mt-3 text-[11px] text-error font-mono"></p>
@@ -97,10 +98,11 @@
       <div class="flex items-center gap-3 mb-3">
         <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
         <span class="font-bold text-error text-sm sm:text-lg">Encoding failed</span>
-        <button id="b64e-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+        <button id="b64e-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>
       <p id="b64e-error-text" class="text-xs sm:text-sm text-on-surface-variant"></p>
     </div>
+  </div>
   </div>
 </div>
 

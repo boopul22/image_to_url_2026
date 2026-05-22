@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const db = getDB(locals);
 
-  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ytClicks, adblock, uploadsByHour] = await Promise.all([
+  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ctaClicks, adblock, uploadsByHour] = await Promise.all([
     db.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count, COALESCE(SUM(size_bytes), 0) as total_size FROM images')
@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ locals }) => {
     db.prepare('SELECT COUNT(*) as count FROM posts').first<{ count: number }>(),
     db.prepare('SELECT COUNT(*) as count FROM media').first<{ count: number }>(),
     db.prepare('SELECT COUNT(*) as count FROM pages').first<{ count: number }>(),
-    db.prepare("SELECT COUNT(*) as count FROM link_clicks WHERE link_id = 'youtube-cta'").first<{ count: number }>(),
+    db.prepare("SELECT COUNT(*) as count FROM link_clicks WHERE link_id = 'extractpics-cta'").first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count FROM images WHERE adblock = 1')
       .first<{ count: number }>(),
@@ -59,7 +59,7 @@ export const GET: APIRoute = async ({ locals }) => {
       totalPosts: posts?.count ?? 0,
       totalMedia: cmsMedia?.count ?? 0,
       totalPages: pages?.count ?? 0,
-      ytClicks: ytClicks?.count ?? 0,
+      ctaClicks: ctaClicks?.count ?? 0,
       adblockUploads: adblock?.count ?? 0,
       uploadsByBucket: uploadsByHour.results ?? [],
     }),

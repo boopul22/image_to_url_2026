@@ -6,11 +6,12 @@
  * orientation is baked into the pixels.
  */
 ---
-<div class="w-full max-w-2xl mx-auto">
+<div class="soft-uploader w-full max-w-2xl mx-auto">
   <input type="file" id="irsz-input" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" multiple class="hidden" />
 
+  <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
   <!-- Privacy strip -->
-  <div class="bg-white border-2 border-on-background border-b-0 px-4 py-3 flex items-center justify-between gap-3">
+  <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
       <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
       <div class="min-w-0">
@@ -18,29 +19,29 @@
         <p class="text-[11px] leading-tight text-on-surface-variant">Files never leave your device</p>
       </div>
     </div>
-    <span id="irsz-source-dims" class="hidden text-[11px] font-mono font-bold text-on-background bg-tertiary-fixed border-2 border-on-background px-2 py-1"></span>
+    <span id="irsz-source-dims" class="su-control hidden text-[11px] font-mono font-bold text-on-background bg-tertiary-fixed border border-outline-variant px-2 py-1"></span>
   </div>
 
   <!-- Controls -->
-  <div id="irsz-controls" class="bg-white border-2 border-on-background border-b-0 p-4 flex flex-col gap-3">
+  <div id="irsz-controls" class="su-control bg-white border border-outline-variant/40 mb-2 p-4 flex flex-col gap-3">
     <!-- Width + Height row with lock between -->
     <div class="flex items-end gap-2 flex-wrap">
       <div class="flex-1 min-w-[7rem]">
         <label for="irsz-w" class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Width (px)</label>
-        <input id="irsz-w" type="number" min="1" max="20000" placeholder="auto" class="w-full border-2 border-on-background bg-white text-sm font-mono font-bold px-3 py-2" />
+        <input id="irsz-w" type="number" min="1" max="20000" placeholder="auto" class="su-control w-full border border-outline-variant bg-white text-sm font-mono font-bold px-3 py-2" />
       </div>
       <button
         id="irsz-lock"
         type="button"
         aria-pressed="true"
         title="Lock aspect ratio"
-        class="border-2 border-on-background bg-rose-600 text-white flex items-center justify-center w-10 h-10 mb-0 transition-colors"
+        class="su-btn border border-outline-variant bg-rose-600 text-white flex items-center justify-center w-10 h-10 mb-0 transition-colors"
       >
         <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;" id="irsz-lock-icon">lock</span>
       </button>
       <div class="flex-1 min-w-[7rem]">
         <label for="irsz-h" class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Height (px)</label>
-        <input id="irsz-h" type="number" min="1" max="20000" placeholder="auto" class="w-full border-2 border-on-background bg-white text-sm font-mono font-bold px-3 py-2" />
+        <input id="irsz-h" type="number" min="1" max="20000" placeholder="auto" class="su-control w-full border border-outline-variant bg-white text-sm font-mono font-bold px-3 py-2" />
       </div>
     </div>
 
@@ -54,20 +55,20 @@
     <!-- Preset chips -->
     <div class="flex flex-wrap gap-1.5">
       <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant self-center mr-1">Presets</span>
-      <button data-preset="1920x1080" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">1080p</button>
-      <button data-preset="2560x1440" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">1440p</button>
-      <button data-preset="3840x2160" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">4K</button>
-      <button data-preset="1080x1080" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">IG&nbsp;square</button>
-      <button data-preset="1080x1350" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">IG&nbsp;portrait</button>
-      <button data-preset="1200x630" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">OG&nbsp;card</button>
-      <button data-preset="1500x500" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">Twitter&nbsp;banner</button>
-      <button data-preset="800x800" class="irsz-chip border-2 border-on-background bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">800×800</button>
+      <button data-preset="1920x1080" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">1080p</button>
+      <button data-preset="2560x1440" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">1440p</button>
+      <button data-preset="3840x2160" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">4K</button>
+      <button data-preset="1080x1080" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">IG&nbsp;square</button>
+      <button data-preset="1080x1350" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">IG&nbsp;portrait</button>
+      <button data-preset="1200x630" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">OG&nbsp;card</button>
+      <button data-preset="1500x500" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">Twitter&nbsp;banner</button>
+      <button data-preset="800x800" class="irsz-chip su-btn border border-outline-variant bg-white hover:bg-tertiary-fixed text-[11px] font-mono font-bold px-2 py-1">800×800</button>
     </div>
 
     <!-- Format + quality row -->
     <div class="flex items-center gap-2 flex-wrap">
       <label for="irsz-format" class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Output</label>
-      <select id="irsz-format" class="border-2 border-on-background bg-white text-xs font-bold uppercase px-2 py-1">
+      <select id="irsz-format" class="su-control border border-outline-variant bg-white text-xs font-bold uppercase px-2 py-1">
         <option value="match">Match source</option>
         <option value="image/jpeg">JPG</option>
         <option value="image/png">PNG</option>
@@ -83,18 +84,18 @@
   </div>
 
   <!-- Drop zone / states -->
-  <div id="irsz-panel" class="bg-white border-2 border-dashed border-on-background overflow-hidden transition-colors">
+  <div id="irsz-panel" class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id="irsz-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
-      <div id="irsz-drop" class="flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-background text-4xl sm:text-5xl">aspect_ratio</span>
+      <div id="irsz-drop" class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
+        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">aspect_ratio</span>
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop images here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · WebP — multi-select OK</p>
         </div>
       </div>
       <div id="irsz-progress" class="hidden mt-6">
-        <div class="h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
-          <div id="irsz-progress-fill" class="h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        <div class="su-progress h-2.5 sm:h-2 bg-surface-variant overflow-hidden rounded-full">
+          <div id="irsz-progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300 rounded-full" style="width: 0%"></div>
         </div>
         <p id="irsz-progress-text" class="text-xs text-center mt-2 font-mono text-on-surface-variant">Resizing…</p>
       </div>
@@ -104,7 +105,7 @@
       <div class="flex items-center gap-3 mb-4">
         <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
         <span class="font-bold text-secondary text-sm sm:text-lg" id="irsz-results-heading">Resized</span>
-        <button id="irsz-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline flex-shrink-0">Resize more</button>
+        <button id="irsz-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Resize more</button>
       </div>
       <div id="irsz-results-list" class="flex flex-col gap-2 max-h-96 overflow-auto"></div>
     </div>
@@ -113,10 +114,11 @@
       <div class="flex items-center gap-3 mb-3">
         <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
         <span class="font-bold text-error text-sm sm:text-lg">Resize failed</span>
-        <button id="irsz-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm uppercase tracking-wider hover:underline">Try again</button>
+        <button id="irsz-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>
       <p id="irsz-error-text" class="text-xs sm:text-sm text-error"></p>
     </div>
+  </div>
   </div>
 </div>
 
@@ -350,19 +352,19 @@
 
   function makeRow(name: string, src: File, res: { blob: Blob; w: number; h: number; mime: string }): HTMLDivElement {
     const row = document.createElement('div');
-    row.className = 'border-2 border-on-background bg-white p-3 flex items-center gap-3';
+    row.className = 'su-control border border-outline-variant bg-white p-3 flex items-center gap-3';
     const url = URL.createObjectURL(res.blob);
     const baseName = name.replace(/\.[^.]+$/, '') + `-${res.w}x${res.h}.${extFor(res.mime)}`;
     const thumb = document.createElement('img');
     thumb.src = url; thumb.alt = '';
-    thumb.className = 'w-12 h-12 object-contain bg-surface-variant/30 border-2 border-on-background flex-shrink-0';
+    thumb.className = 'w-12 h-12 object-contain bg-surface-variant/30 su-control border border-outline-variant flex-shrink-0';
     const meta = document.createElement('div'); meta.className = 'flex-1 min-w-0';
     const nameEl = document.createElement('p'); nameEl.className = 'text-xs font-bold truncate'; nameEl.textContent = baseName;
     const sizeEl = document.createElement('p'); sizeEl.className = 'text-[11px] text-on-surface-variant font-mono';
     sizeEl.textContent = `${res.w} × ${res.h} · ${fmtBytes(res.blob.size)} · was ${fmtBytes(src.size)}`;
     meta.appendChild(nameEl); meta.appendChild(sizeEl);
     const dl = document.createElement('a'); dl.href = url; dl.download = baseName;
-    dl.className = 'bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-3 border-2 border-on-background uppercase tracking-wide flex-shrink-0';
+    dl.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
     dl.textContent = 'Download';
     row.appendChild(thumb); row.appendChild(meta); row.appendChild(dl);
     return row;
