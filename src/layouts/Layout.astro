@@ -12,7 +12,15 @@ import spaceGroteskLatinUrl from '@fontsource-variable/space-grotesk/files/space
 interface Props {
   title?: string;
   description?: string;
+  /** Explicit OG/Twitter image. When omitted, a branded card is generated per
+   *  page+locale via /og/card.png from the title + ogSubtitle. */
   ogImage?: string;
+  /** Subtitle line for the auto-generated OG card (defaults to `description`). */
+  ogSubtitle?: string;
+  /** English title used for the OG card's tofu-proof fallback when a non-Latin
+   *  locale's script font can't load. Pass the English metaTitle on localized
+   *  pages; defaults to the page's own (cleaned) title. */
+  ogTitleEn?: string;
   ogType?: string;
   noindex?: boolean;
   schema?: object | object[];
@@ -30,7 +38,9 @@ interface Props {
 const {
   title = "ImageToURL \u2014 Free Image Hosting | Turn Images into Shareable Links",
   description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery. Upload JPG, PNG, WebP, GIF, SVG and get an instant shareable URL.",
-  ogImage = "/og-default.png",
+  ogImage,
+  ogSubtitle,
+  ogTitleEn,
   ogType = "website",
   noindex = false,
   schema,
@@ -42,7 +52,6 @@ const {
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
-const ogImageUrl = new URL(ogImage, Astro.site).href;
 const basePath = stripLocalePrefix(Astro.url.pathname);
 
 // Sitewide schemas
@@ -117,7 +126,25 @@ function detectLocale(path: string): string | null {
 }
 const pathname = Astro.url.pathname;
 const pageLocale = detectLocale(pathname);
-const cleanTitle = title.replace(/\s*[\u2014\-|].*(ImageToURL|imagetourl).*$/i, '').trim();
+// Strip the trailing brand suffix ("\u2026 \u2014 ImageToURL", "\u2026 | ImageToURL", "\u2026 - ImageToURL").
+// Only treat an ASCII hyphen as a separator when it is space-padded \u2014 otherwise
+// hyphenated localized titles like "PNG-Bild in URL-Link umwandeln | ImageToURL"
+// were truncated to "PNG" (which also corrupted breadcrumbs and OG card titles).
+const cleanTitle = title.replace(/(?:\s*[\u2014\u2013|]|\s+-)\s*.*(?:ImageToURL|imagetourl).*$/i, '').trim();
+
+// OG/Twitter image. Use an explicit `ogImage` when provided (e.g. blog cover
+// images); otherwise generate a branded card per page+locale via /og/card.png.
+let ogImageUrl: string;
+if (ogImage) {
+  ogImageUrl = new URL(ogImage, Astro.site).href;
+} else {
+  const ogTitle = cleanTitle || 'ImageToURL';
+  const ogSub = (ogSubtitle ?? description ?? '').slice(0, 120);
+  const ogParams = new URLSearchParams({ t: ogTitle, l: locale });
+  if (ogSub) ogParams.set('s', ogSub);
+  ogParams.set('en', (ogTitleEn ?? ogTitle).slice(0, 90));
+  ogImageUrl = new URL(`/og/card.png?${ogParams.toString()}`, Astro.site).href;
+}
 const autoBreadcrumbs: { name: string; url: string }[] | undefined = breadcrumbs ?? (
   pathname === '/' ? undefined :
   pageLocale ? [

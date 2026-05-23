@@ -134,30 +134,45 @@ function fmtDate(iso: string | undefined): string {
 // substantively changed; don't bump visibly for same-day edits/typos.
 const showUpdated = !!updatedIso && !!publishedIso && updatedIso.slice(0, 10) !== publishedIso.slice(0, 10);
 
+// Canonical post URL is locale-prefixed (root /blog/* 301s to /{locale}/blog/*),
+// so mainEntityOfPage must match it — a bare /blog/${slug} never matched the
+// canonical for any locale.
+const canonicalPostUrl = `https://imagetourl.cloud/${locale}/blog/${slug}`;
+
+// Link the author to the sitewide founder Person node (defined in Layout's
+// Organization schema with url + sameAs) when the byline matches, so Google and
+// AI engines resolve full author authority instead of a bare name string.
+const FOUNDER_NAME = 'Bipul';
+const isFounderAuthor = post.authorName?.trim().toLowerCase() === FOUNDER_NAME.toLowerCase();
+
+// Google ignores headline past ~110 chars; cap so it stays eligible.
+const headline = post.title.length > 110 ? post.title.slice(0, 109).trimEnd() + '…' : post.title;
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": post.title,
+  "headline": headline,
   "description": post.excerpt || '',
-  "image": imgUrlAbs(post.coverImage, 1200) || undefined,
+  "image": imgUrlAbs(post.coverImage, 1200) || 'https://imagetourl.cloud/og-default.png',
   "datePublished": publishedIso,
   "dateModified": updatedIso,
-  "author": {
-    "@type": "Person",
-    "name": post.authorName,
-  },
+  "inLanguage": locale,
+  "author": isFounderAuthor
+    ? { "@id": "https://imagetourl.cloud/#founder" }
+    : { "@type": "Person", "name": post.authorName },
   "publisher": {
     "@id": "https://imagetourl.cloud/#organization"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": `https://imagetourl.cloud/blog/${slug}`
+    "@id": canonicalPostUrl
   }
 };
 
 const faqSchema = post.faqItems?.length ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": locale,
   "mainEntity": post.faqItems.map(faq => ({
     "@type": "Question",
     "name": faq.question,
