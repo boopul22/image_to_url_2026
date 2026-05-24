@@ -96,7 +96,7 @@ const user = Astro.locals.user!;
         </div>
       </div>
 
-      <!-- YouTube CTA + Uploads Per Day -->
+      <!-- ExtractPics CTA + Uploads by User -->
       <div class="space-y-4">
         <div class="bg-primary border-2 border-on-surface rounded-lg p-3 hard-shadow flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -108,22 +108,23 @@ const user = Astro.locals.user!;
 
         <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
           <div class="flex items-center justify-between p-3 border-b-2 border-on-surface">
-            <h2 class="text-sm font-headline italic font-black text-on-surface uppercase">Uploads Per Day <span class="text-outline font-body not-italic font-normal normal-case">· last 30 days</span></h2>
-            <span class="font-label text-[10px] font-bold uppercase tracking-wider text-outline" id="uploads-per-day-total">—</span>
+            <h2 class="text-sm font-headline italic font-black text-on-surface uppercase">Uploads by User <span class="text-outline font-body not-italic font-normal normal-case">· last 30 days</span></h2>
+            <span class="font-label text-[10px] font-bold uppercase tracking-wider text-outline" id="uploads-by-user-total">—</span>
           </div>
           <div class="overflow-x-auto">
-            <table class="w-full text-left min-w-[460px]">
+            <table class="w-full text-left min-w-[640px]">
               <thead>
                 <tr class="border-b border-outline-variant">
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Date</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Day</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Uploads</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider" title="uploads from visitors with an ad blocker">Ad-block</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider w-2/5">Activity</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider" title="Total uploads in the last 30 days">Uploads</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider" title="Average uploads per active day">Avg/day</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">First</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Last</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider w-1/3">Share</th>
                 </tr>
               </thead>
-              <tbody id="uploads-per-day-body" class="divide-y divide-outline-variant/50">
-                <tr><td colspan="5" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
+              <tbody id="uploads-by-user-body" class="divide-y divide-outline-variant/50">
+                <tr><td colspan="6" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
               </tbody>
             </table>
           </div>
@@ -218,18 +219,69 @@ const user = Astro.locals.user!;
       const d = new Date(today); d.setDate(today.getDate() - i);
       dayRows.push({ date: d, count: byLocalDate.get(dateKey(d)) ?? 0, adblock: adblockByLocalDate.get(dateKey(d)) ?? 0 });
     }
-    const maxCount = Math.max(1, ...dayRows.map(r => r.count));
-    const totalLast30 = dayRows.reduce((s, r) => s + r.count, 0);
-    document.getElementById('uploads-per-day-total')!.textContent = `${totalLast30.toLocaleString()} in 30 days`;
-    document.getElementById('uploads-per-day-body')!.innerHTML = dayRows.map(r => `
-      <tr class="hover:bg-surface-container-lowest transition-colors">
-        <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${r.date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })}</td>
-        <td class="px-3 py-1.5 text-xs text-on-surface-variant">${r.date.toLocaleDateString(undefined, { weekday: 'short' })}</td>
-        <td class="px-3 py-1.5 text-xs font-bold tabular-nums">${r.count.toLocaleString()}</td>
-        <td class="px-3 py-1.5 text-xs tabular-nums ${r.adblock > 0 ? 'text-on-surface font-bold' : 'text-outline'}">${r.adblock.toLocaleString()}</td>
-        <td class="px-3 py-1.5"><div class="h-2 bg-primary border border-on-surface" style="width: ${(r.count / maxCount * 100).toFixed(1)}%; max-width: 100%;"></div></td>
-      </tr>
-    `).join('');
+
+    // Uploads by user — last 30 days, ordered by upload count.
+    type UserRow = {
+      user_id: string | null;
+      user_name: string;
+      user_email: string | null;
+      user_avatar: string | null;
+      count: number;
+      first_upload: string;
+      last_upload: string;
+    };
+    const userRows: UserRow[] = data.uploadsByUser ?? [];
+    const usersTotal = userRows.reduce((s, r) => s + Number(r.count), 0);
+    const maxUserCount = Math.max(1, ...userRows.map(r => Number(r.count)));
+    const fmtDate = (s: string) => {
+      // SQLite returns "YYYY-MM-DD HH:MM:SS" in UTC.
+      const d = new Date(s.replace(' ', 'T') + 'Z');
+      return d.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+    };
+    const activeDays = (first: string, last: string) => {
+      const f = new Date(first.replace(' ', 'T') + 'Z');
+      const l = new Date(last.replace(' ', 'T') + 'Z');
+      const days = Math.floor((l.getTime() - f.getTime()) / 86400000) + 1;
+      return Math.max(1, days);
+    };
+    const totalEl = document.getElementById('uploads-by-user-total');
+    if (totalEl) totalEl.textContent = `${userRows.length.toLocaleString()} ${userRows.length === 1 ? 'user' : 'users'} · ${usersTotal.toLocaleString()} uploads`;
+
+    const userBody = document.getElementById('uploads-by-user-body');
+    if (userBody) {
+      if (!userRows.length) {
+        userBody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">No uploads in the last 30 days</p></td></tr>';
+      } else {
+        userBody.innerHTML = userRows.map(r => {
+          const span = activeDays(r.first_upload, r.last_upload);
+          const avg = (Number(r.count) / span).toFixed(1);
+          const isAnon = !r.user_id;
+          const initial = (r.user_name || '?').trim().charAt(0).toUpperCase();
+          const avatar = r.user_avatar
+            ? `<img src="${esc(r.user_avatar)}" alt="${esc(r.user_name)}" class="w-7 h-7 rounded-full border border-on-surface object-cover flex-shrink-0" referrerpolicy="no-referrer" loading="lazy" decoding="async" />`
+            : `<div class="w-7 h-7 rounded-full border border-on-surface bg-surface-container-highest flex items-center justify-center flex-shrink-0"><span class="text-[10px] font-bold text-outline">${esc(initial)}</span></div>`;
+          const sharePct = (Number(r.count) / maxUserCount * 100).toFixed(1);
+          return `
+            <tr class="hover:bg-surface-container-lowest transition-colors">
+              <td class="px-3 py-1.5">
+                <div class="flex items-center gap-2 min-w-0">
+                  ${avatar}
+                  <div class="min-w-0">
+                    <p class="text-xs font-bold truncate max-w-[180px]">${esc(r.user_name)}${isAnon ? ' <span class="text-outline font-normal">(no account)</span>' : ''}</p>
+                    ${r.user_email ? `<p class="text-[10px] text-outline truncate max-w-[180px]">${esc(r.user_email)}</p>` : ''}
+                  </div>
+                </div>
+              </td>
+              <td class="px-3 py-1.5 text-xs font-bold tabular-nums">${Number(r.count).toLocaleString()}</td>
+              <td class="px-3 py-1.5 text-xs tabular-nums text-on-surface-variant">${avg}</td>
+              <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.first_upload)}</td>
+              <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.last_upload)}</td>
+              <td class="px-3 py-1.5"><div class="h-2 bg-primary border border-on-surface" style="width: ${sharePct}%; max-width: 100%;"></div></td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
 
     // Recent uploads
     const uploadsEl = document.getElementById('recent-uploads')!;
