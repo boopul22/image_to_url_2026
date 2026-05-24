@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const db = getDB(locals);
 
-  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ctaClicks, adblock, uploadsByHour] = await Promise.all([
+  const [users, images, apiKeys, recentUploads, posts, cmsMedia, pages, ctaClicks, adblock, uploadsByHour, uploadsByUser] = await Promise.all([
     db.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>(),
     db
       .prepare('SELECT COUNT(*) as count, COALESCE(SUM(size_bytes), 0) as total_size FROM images')
@@ -47,6 +47,35 @@ export const GET: APIRoute = async ({ locals }) => {
          ORDER BY bucket ASC`,
       )
       .all<{ bucket: string; count: number; adblock: number }>(),
+    // Per-user uploads in the last 30 days. Anonymous uploads (NULL user_id) are
+    // grouped under a single "Anonymous" row. first_upload / last_upload help the
+    // admin see how active each user has been and when they last engaged.
+    db
+      .prepare(
+        `SELECT
+           i.user_id,
+           COALESCE(u.name, 'Anonymous') as user_name,
+           u.email as user_email,
+           u.avatar_url as user_avatar,
+           COUNT(*) as count,
+           MIN(i.created_at) as first_upload,
+           MAX(i.created_at) as last_upload
+         FROM images i
+         LEFT JOIN users u ON i.user_id = u.id
+         WHERE i.created_at >= datetime('now', '-30 days')
+         GROUP BY i.user_id
+         ORDER BY count DESC, last_upload DESC
+         LIMIT 100`,
+      )
+      .all<{
+        user_id: string | null;
+        user_name: string;
+        user_email: string | null;
+        user_avatar: string | null;
+        count: number;
+        first_upload: string;
+        last_upload: string;
+      }>(),
   ]);
 
   return new Response(
@@ -62,6 +91,7 @@ export const GET: APIRoute = async ({ locals }) => {
       ctaClicks: ctaClicks?.count ?? 0,
       adblockUploads: adblock?.count ?? 0,
       uploadsByBucket: uploadsByHour.results ?? [],
+      uploadsByUser: uploadsByUser.results ?? [],
     }),
     { headers: { 'Content-Type': 'application/json' } },
   );
