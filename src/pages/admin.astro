@@ -18,306 +18,305 @@ const user = Astro.locals.user!;
   <div class="flex">
     <AdminSidebar activePage="dashboard" />
 
-    <main class="flex-1 p-3 sm:p-4 md:p-5 space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
+    <main class="flex-1 p-3 sm:p-4 md:p-5 space-y-4 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
 
-      <!-- Welcome Header -->
+      <!-- HEADER -->
       <div class="flex items-center justify-between gap-3 flex-wrap">
         <div>
-          <span class="inline-block px-2 py-0.5 bg-tertiary-fixed border-2 border-on-surface rounded-full font-label text-[10px] font-bold uppercase tracking-widest text-on-tertiary-fixed mb-1.5">Admin Overview</span>
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Dashboard · UTC</p>
           <h1 class="text-lg sm:text-xl md:text-2xl font-headline italic font-black text-on-surface leading-tight">
             Welcome back, {user.name.split(' ')[0]}.
           </h1>
-          <p class="text-[11px] text-outline mt-0.5">All time windows are in UTC.</p>
         </div>
         <button id="refresh-stats" class="flex items-center gap-1.5 bg-surface border-2 border-on-surface rounded-lg px-3 py-1.5 font-label text-[11px] font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-transform hard-shadow">
           <span class="material-symbols-outlined text-base">refresh</span> Refresh
         </button>
       </div>
 
-      <!-- ====================== 1. OVERVIEW ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Overview</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <div class="bg-secondary-fixed border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <div class="flex items-center gap-1.5 text-on-secondary-fixed-variant">
-              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">photo_library</span>
-              <p class="font-label text-[10px] font-bold uppercase tracking-widest">Total Uploads</p>
-            </div>
-            <p class="text-2xl font-headline font-black text-on-secondary-fixed mt-1" id="kpi-images">—</p>
-            <p class="font-label text-[10px] uppercase tracking-wider text-on-secondary-fixed-variant mt-0.5" id="kpi-images-delta">&nbsp;</p>
+      <!-- HERO PULSE — single dark panel; the only "loud" card on the page -->
+      <div class="bg-on-surface text-surface border-2 border-on-surface rounded-2xl p-4 sm:p-5 hard-shadow">
+        <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 md:gap-6 items-end">
+          <!-- Today (hero) -->
+          <div class="min-w-0">
+            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-surface/60">Uploads today</p>
+            <p class="text-5xl sm:text-6xl font-headline font-black leading-none mt-1 tabular-nums" id="hero-today">—</p>
+            <p class="font-label text-[10px] uppercase tracking-wider text-surface/60 mt-1.5" id="hero-today-sub">&nbsp;</p>
           </div>
-          <div class="bg-secondary-container border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <div class="flex items-center gap-1.5 text-on-secondary-container/70">
-              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">group</span>
-              <p class="font-label text-[10px] font-bold uppercase tracking-widest">Registered Users</p>
+          <!-- Trio: yesterday / 7d / 30d -->
+          <div class="grid grid-cols-3 gap-3 md:gap-4 border-t md:border-t-0 md:border-l border-surface/15 pt-3 md:pt-0 md:pl-6">
+            <div>
+              <p class="font-label text-[9px] font-bold uppercase tracking-widest text-surface/50">Yesterday</p>
+              <p class="text-xl sm:text-2xl font-headline font-black mt-1 tabular-nums" id="hero-yesterday">—</p>
+              <p class="font-label text-[9px] uppercase text-surface/40 mt-0.5" id="hero-yesterday-sub">&nbsp;</p>
             </div>
-            <p class="text-2xl font-headline font-black text-on-secondary-container mt-1" id="kpi-users">—</p>
-            <p class="font-label text-[10px] uppercase tracking-wider text-on-secondary-container/70 mt-0.5" id="kpi-users-delta">&nbsp;</p>
-          </div>
-          <div class="bg-tertiary-fixed border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <div class="flex items-center gap-1.5 text-on-tertiary-fixed/70">
-              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">cloud</span>
-              <p class="font-label text-[10px] font-bold uppercase tracking-widest">Storage Used</p>
+            <div>
+              <p class="font-label text-[9px] font-bold uppercase tracking-widest text-surface/50">7 days</p>
+              <p class="text-xl sm:text-2xl font-headline font-black mt-1 tabular-nums" id="hero-7d">—</p>
+              <p class="font-label text-[9px] uppercase mt-0.5" id="hero-7d-sub">&nbsp;</p>
             </div>
-            <p class="text-2xl font-headline font-black text-on-tertiary-fixed mt-1" id="kpi-storage">—</p>
-            <p class="font-label text-[10px] uppercase tracking-wider text-on-tertiary-fixed/70 mt-0.5" id="kpi-storage-delta">&nbsp;</p>
-          </div>
-          <div class="bg-primary-fixed border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <div class="flex items-center gap-1.5 text-on-primary-fixed-variant">
-              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">key</span>
-              <p class="font-label text-[10px] font-bold uppercase tracking-widest">API Keys</p>
+            <div>
+              <p class="font-label text-[9px] font-bold uppercase tracking-widest text-surface/50">30 days</p>
+              <p class="text-xl sm:text-2xl font-headline font-black mt-1 tabular-nums" id="hero-30d">—</p>
+              <p class="font-label text-[9px] uppercase mt-0.5" id="hero-30d-sub">&nbsp;</p>
             </div>
-            <p class="text-2xl font-headline font-black text-on-primary-fixed mt-1" id="kpi-keys">—</p>
-            <p class="font-label text-[10px] uppercase tracking-wider text-on-primary-fixed-variant mt-0.5" id="kpi-keys-delta">&nbsp;</p>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- ====================== 2. UPLOAD ACTIVITY ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Upload Activity</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Today</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="act-today">—</p>
-            <p class="font-label text-[10px] uppercase text-outline mt-0.5" id="act-today-sub">&nbsp;</p>
+      <!-- KPI STRIP — calm, monochrome -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-surface border border-outline-variant rounded-xl p-3">
+          <div class="flex items-center justify-between">
+            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Total uploads</p>
+            <span class="material-symbols-outlined text-base text-outline/60">photo_library</span>
           </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Yesterday</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="act-yesterday">—</p>
-            <p class="font-label text-[10px] uppercase text-outline mt-0.5" id="act-yesterday-sub">&nbsp;</p>
+          <p class="text-2xl font-headline font-black text-on-surface mt-1 tabular-nums" id="kpi-images">—</p>
+          <p class="font-label text-[10px] uppercase tracking-wider text-outline mt-0.5" id="kpi-images-delta">&nbsp;</p>
+        </div>
+        <div class="bg-surface border border-outline-variant rounded-xl p-3">
+          <div class="flex items-center justify-between">
+            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Registered users</p>
+            <span class="material-symbols-outlined text-base text-outline/60">group</span>
           </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Last 7 days</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="act-7d">—</p>
-            <p class="font-label text-[10px] uppercase mt-0.5" id="act-7d-sub">&nbsp;</p>
+          <p class="text-2xl font-headline font-black text-on-surface mt-1 tabular-nums" id="kpi-users">—</p>
+          <p class="font-label text-[10px] uppercase tracking-wider text-outline mt-0.5" id="kpi-users-delta">&nbsp;</p>
+        </div>
+        <div class="bg-surface border border-outline-variant rounded-xl p-3">
+          <div class="flex items-center justify-between">
+            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Storage</p>
+            <span class="material-symbols-outlined text-base text-outline/60">cloud</span>
           </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Last 30 days</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="act-30d">—</p>
-            <p class="font-label text-[10px] uppercase mt-0.5" id="act-30d-sub">&nbsp;</p>
+          <p class="text-2xl font-headline font-black text-on-surface mt-1 tabular-nums" id="kpi-storage">—</p>
+          <p class="font-label text-[10px] uppercase tracking-wider text-outline mt-0.5" id="kpi-storage-delta">&nbsp;</p>
+        </div>
+        <div class="bg-surface border border-outline-variant rounded-xl p-3">
+          <div class="flex items-center justify-between">
+            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Active sessions</p>
+            <span class="material-symbols-outlined text-base text-outline/60">bolt</span>
+          </div>
+          <p class="text-2xl font-headline font-black text-on-surface mt-1 tabular-nums" id="kpi-sessions">—</p>
+          <p class="font-label text-[10px] uppercase tracking-wider text-outline mt-0.5" id="kpi-sessions-delta">Live right now</p>
+        </div>
+      </div>
+
+      <!-- COMPOSITION — single panel, three horizontal stacked bars -->
+      <div class="bg-surface border border-outline-variant rounded-xl p-4">
+        <div class="flex items-baseline justify-between mb-3">
+          <h2 class="text-xs font-headline italic font-black text-on-surface uppercase">Composition</h2>
+          <span class="font-label text-[10px] uppercase tracking-wider text-outline">Last 30 days · <span id="comp-total" class="tabular-nums">—</span> uploads</span>
+        </div>
+        <div class="space-y-3" id="comp-bars">
+          <!-- Authenticated vs anonymous -->
+          <div>
+            <div class="flex items-baseline justify-between text-[11px] mb-1">
+              <span class="font-bold text-on-surface">Authenticated <span class="text-outline font-normal" id="comp-auth-num">—</span></span>
+              <span class="text-outline">Anonymous <span class="text-on-surface font-bold" id="comp-anon-num">—</span></span>
+            </div>
+            <div class="h-2.5 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden flex">
+              <div class="h-full bg-primary" id="comp-auth-bar" style="width: 0%"></div>
+              <div class="h-full bg-secondary" id="comp-anon-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <!-- Web vs API -->
+          <div>
+            <div class="flex items-baseline justify-between text-[11px] mb-1">
+              <span class="font-bold text-on-surface">Web <span class="text-outline font-normal" id="comp-web-num">—</span></span>
+              <span class="text-outline">API <span class="text-on-surface font-bold" id="comp-api-num">—</span></span>
+            </div>
+            <div class="h-2.5 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden flex">
+              <div class="h-full bg-primary" id="comp-web-bar" style="width: 0%"></div>
+              <div class="h-full bg-tertiary" id="comp-api-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <!-- Adblock vs not -->
+          <div>
+            <div class="flex items-baseline justify-between text-[11px] mb-1">
+              <span class="font-bold text-on-surface">Ad-blocker <span class="text-outline font-normal" id="comp-ab-num">—</span></span>
+              <span class="text-outline">No blocker <span class="text-on-surface font-bold" id="comp-noab-num">—</span></span>
+            </div>
+            <div class="h-2.5 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden flex">
+              <div class="h-full bg-on-surface" id="comp-ab-bar" style="width: 0%"></div>
+              <div class="h-full bg-secondary" id="comp-noab-bar" style="width: 0%"></div>
+            </div>
           </div>
         </div>
-        <!-- 30-day breakdown bar: how the last-30d uploads split by source/auth/adblock -->
-        <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Last 30 days · breakdown</p>
-          <dl id="act-breakdown" class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1.5 text-xs">
-            <div class="flex items-baseline justify-between"><dt class="text-outline">Authenticated</dt><dd class="font-bold tabular-nums" data-breakdown="auth">—</dd></div>
-            <div class="flex items-baseline justify-between"><dt class="text-outline">Anonymous</dt><dd class="font-bold tabular-nums" data-breakdown="anon">—</dd></div>
-            <div class="flex items-baseline justify-between"><dt class="text-outline">Via web</dt><dd class="font-bold tabular-nums" data-breakdown="web">—</dd></div>
-            <div class="flex items-baseline justify-between"><dt class="text-outline">Via API</dt><dd class="font-bold tabular-nums" data-breakdown="api">—</dd></div>
-            <div class="flex items-baseline justify-between"><dt class="text-outline">With ad-blocker</dt><dd class="font-bold tabular-nums" data-breakdown="adblock">—</dd></div>
-            <div class="flex items-baseline justify-between"><dt class="text-outline">No ad-blocker</dt><dd class="font-bold tabular-nums" data-breakdown="noadblock">—</dd></div>
-          </dl>
-        </div>
-      </section>
+      </div>
 
-      <!-- ====================== 3. USERS ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Users</h2>
-
-        <!-- Top uploaders (last 30 days) -->
-        <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-          <div class="flex items-center justify-between p-3 border-b-2 border-on-surface">
-            <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Top Uploaders <span class="text-outline font-body not-italic font-normal normal-case">· last 30 days</span></h3>
-            <span class="font-label text-[10px] font-bold uppercase tracking-wider text-outline" id="uploads-by-user-total">—</span>
+      <!-- USERS — single tabbed panel -->
+      <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+        <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-outline-variant flex-wrap">
+          <h2 class="text-xs font-headline italic font-black text-on-surface uppercase">Users</h2>
+          <div class="flex items-center gap-1 flex-wrap" role="tablist" id="user-tabs">
+            <button data-tab="top30" class="user-tab font-label text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full transition-colors" type="button">Top · 30d</button>
+            <button data-tab="topall" class="user-tab font-label text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full transition-colors" type="button">Top · all-time</button>
+            <button data-tab="recent" class="user-tab font-label text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full transition-colors" type="button">Recent signups</button>
+            <button data-tab="dormant" class="user-tab font-label text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full transition-colors" type="button">Dormant</button>
           </div>
+        </div>
+
+        <div data-panel="top30" class="user-panel">
           <div class="overflow-x-auto">
-            <table class="w-full text-left min-w-[640px]">
+            <table class="w-full text-left min-w-[560px]">
               <thead>
                 <tr class="border-b border-outline-variant">
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
+                  <th class="px-4 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
                   <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Uploads</th>
                   <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Avg/day</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">First</th>
                   <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Last</th>
                   <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider w-1/3">Share</th>
                 </tr>
               </thead>
               <tbody id="uploads-by-user-body" class="divide-y divide-outline-variant/50">
+                <tr><td colspan="5" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-panel="topall" class="user-panel hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left min-w-[480px]">
+              <thead>
+                <tr class="border-b border-outline-variant">
+                  <th class="px-4 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Uploads</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Since</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Last</th>
+                </tr>
+              </thead>
+              <tbody id="top-lifetime-body" class="divide-y divide-outline-variant/50">
+                <tr><td colspan="4" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-panel="recent" class="user-panel hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left min-w-[480px]">
+              <thead>
+                <tr class="border-b border-outline-variant">
+                  <th class="px-4 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Joined</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Lifetime</th>
+                </tr>
+              </thead>
+              <tbody id="recent-signups-body" class="divide-y divide-outline-variant/50">
+                <tr><td colspan="3" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-panel="dormant" class="user-panel hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left min-w-[560px]">
+              <thead>
+                <tr class="border-b border-outline-variant">
+                  <th class="px-4 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Joined</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Lifetime</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Last upload</th>
+                </tr>
+              </thead>
+              <tbody id="dormant-body" class="divide-y divide-outline-variant/50">
+                <tr><td colspan="4" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRENDS — daily table + patterns side by side -->
+      <div class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-3">
+        <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+          <div class="px-4 py-3 border-b border-outline-variant flex items-baseline justify-between">
+            <h2 class="text-xs font-headline italic font-black text-on-surface uppercase">Daily breakdown</h2>
+            <span class="font-label text-[10px] uppercase tracking-wider text-outline">Last 30 days</span>
+          </div>
+          <div class="overflow-x-auto max-h-[480px] overflow-y-auto">
+            <table class="w-full text-left min-w-[560px]">
+              <thead class="sticky top-0 bg-surface">
+                <tr class="border-b border-outline-variant">
+                  <th class="px-4 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Date</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Uploads</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Users</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Anon</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Size</th>
+                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider w-1/3">Volume</th>
+                </tr>
+              </thead>
+              <tbody id="daily-body" class="divide-y divide-outline-variant/50">
                 <tr><td colspan="6" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- Lifetime top uploaders + new signups + dormant -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-            <div class="p-3 border-b-2 border-on-surface">
-              <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Top Uploaders <span class="text-outline font-body not-italic font-normal normal-case">· all-time</span></h3>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left min-w-[420px]">
-                <thead>
-                  <tr class="border-b border-outline-variant">
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Uploads</th>
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Since</th>
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Last</th>
-                  </tr>
-                </thead>
-                <tbody id="top-lifetime-body" class="divide-y divide-outline-variant/50">
-                  <tr><td colspan="4" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-            <div class="p-3 border-b-2 border-on-surface">
-              <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Recent Signups</h3>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left min-w-[420px]">
-                <thead>
-                  <tr class="border-b border-outline-variant">
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Joined</th>
-                    <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Lifetime</th>
-                  </tr>
-                </thead>
-                <tbody id="recent-signups-body" class="divide-y divide-outline-variant/50">
-                  <tr><td colspan="3" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-          <div class="p-3 border-b-2 border-on-surface">
-            <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Dormant Registered Users <span class="text-outline font-body not-italic font-normal normal-case">· no upload in last 30 days</span></h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left min-w-[560px]">
-              <thead>
-                <tr class="border-b border-outline-variant">
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">User</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Email</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Joined</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Lifetime uploads</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Last upload</th>
-                </tr>
-              </thead>
-              <tbody id="dormant-body" class="divide-y divide-outline-variant/50">
-                <tr><td colspan="5" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====================== 4. DAILY BREAKDOWN ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Daily Breakdown <span class="text-outline font-body not-italic font-normal normal-case text-xs">· last 30 days · UTC</span></h2>
-        <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-          <div class="overflow-x-auto">
-            <table class="w-full text-left min-w-[640px]">
-              <thead>
-                <tr class="border-b border-outline-variant">
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Date</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Uploads</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Unique users</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Anon</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Ad-block</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Size</th>
-                  <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider w-1/4">Volume</th>
-                </tr>
-              </thead>
-              <tbody id="daily-body" class="divide-y divide-outline-variant/50">
-                <tr><td colspan="7" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Loading...</p></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====================== 5. PATTERNS ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Patterns <span class="text-outline font-body not-italic font-normal normal-case text-xs">· when uploads happen · UTC</span></h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-            <div class="p-3 border-b-2 border-on-surface">
-              <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Hour of day <span class="text-outline font-body not-italic font-normal normal-case">· last 7 days</span></h3>
+        <div class="space-y-3">
+          <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+            <div class="px-4 py-3 border-b border-outline-variant flex items-baseline justify-between">
+              <h2 class="text-xs font-headline italic font-black text-on-surface uppercase">Hour of day</h2>
+              <span class="font-label text-[10px] uppercase tracking-wider text-outline">7d</span>
             </div>
             <div class="p-3 font-mono text-[11px] leading-snug" id="hourly-body">
               <p class="text-outline">Loading...</p>
             </div>
           </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-            <div class="p-3 border-b-2 border-on-surface">
-              <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Day of week <span class="text-outline font-body not-italic font-normal normal-case">· last 30 days</span></h3>
+          <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+            <div class="px-4 py-3 border-b border-outline-variant flex items-baseline justify-between">
+              <h2 class="text-xs font-headline italic font-black text-on-surface uppercase">Day of week</h2>
+              <span class="font-label text-[10px] uppercase tracking-wider text-outline">30d</span>
             </div>
             <div class="p-3 font-mono text-[11px] leading-snug" id="dow-body">
               <p class="text-outline">Loading...</p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- ====================== 6. ANONYMOUS TRAFFIC ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Anonymous Traffic <span class="text-outline font-body not-italic font-normal normal-case text-xs">· unique IPs as a proxy for visitors</span></h2>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Unique IPs · 7d</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="anon-ips-7d">—</p>
-          </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Unique IPs · 30d</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="anon-ips-30d">—</p>
-          </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Anon uploads · 30d</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="anon-uploads-30d">—</p>
-          </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Anon uploads · all-time</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="anon-uploads-total">—</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====================== 7. ENGAGEMENT ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Engagement</h2>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Active sessions</p>
-            <p class="text-2xl font-headline font-black text-on-surface mt-1" id="eng-sessions">—</p>
-            <p class="font-label text-[10px] uppercase text-outline mt-0.5">Logged-in users right now</p>
-          </div>
-          <div class="bg-on-surface text-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-surface/70">Ad-blocker users <span class="text-surface/50 normal-case font-normal">· 30d</span></p>
-            <p class="text-2xl font-headline font-black text-surface mt-1" id="eng-adblock-30d">—</p>
-            <p class="font-label text-[10px] uppercase text-surface/60 mt-0.5" id="eng-adblock-30d-sub">&nbsp;</p>
-          </div>
-          <div class="bg-surface border-2 border-on-surface rounded-lg p-3 hard-shadow">
-            <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">CTA clicks <span class="normal-case font-normal">· 30d</span></p>
-            <div id="eng-cta-list" class="mt-1 space-y-1 text-xs">
-              <p class="text-outline">Loading...</p>
+      <!-- ENGAGEMENT — compact strip -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+        <div class="bg-surface border border-outline-variant rounded-xl p-4">
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Anon visitors <span class="normal-case font-normal">· unique IPs</span></p>
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            <div>
+              <p class="text-xl font-headline font-black text-on-surface tabular-nums" id="anon-ips-7d">—</p>
+              <p class="font-label text-[9px] uppercase text-outline">7 days</p>
+            </div>
+            <div>
+              <p class="text-xl font-headline font-black text-on-surface tabular-nums" id="anon-ips-30d">—</p>
+              <p class="font-label text-[9px] uppercase text-outline">30 days</p>
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- ====================== 8. RECENT UPLOADS ====================== -->
-      <section class="space-y-3">
-        <h2 class="text-sm font-headline italic font-black text-on-surface uppercase border-b-2 border-on-surface pb-1">Recent Uploads</h2>
-        <div class="bg-surface border-2 border-on-surface rounded-lg overflow-hidden hard-shadow">
-          <div class="flex items-center justify-between p-3 border-b-2 border-on-surface">
-            <h3 class="text-xs font-headline italic font-black text-on-surface uppercase">Last 10</h3>
-            <a href="/admin/images" class="font-label text-[10px] font-bold uppercase tracking-wider text-primary hover:underline">View All</a>
-          </div>
-          <div id="recent-uploads">
-            <div class="p-6 text-center text-outline">
-              <span class="material-symbols-outlined text-3xl">hourglass_empty</span>
-              <p class="font-label text-xs uppercase mt-2">Loading...</p>
-            </div>
+        <div class="bg-surface border border-outline-variant rounded-xl p-4">
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Ad-blocker users <span class="normal-case font-normal">· last 30 days</span></p>
+          <div class="flex items-baseline gap-2 mt-2">
+            <p class="text-xl font-headline font-black text-on-surface tabular-nums" id="eng-adblock-30d">—</p>
+            <p class="font-label text-[10px] uppercase text-outline" id="eng-adblock-30d-sub">&nbsp;</p>
           </div>
         </div>
-      </section>
+        <div class="bg-surface border border-outline-variant rounded-xl p-4">
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">CTA clicks <span class="normal-case font-normal">· last 30 days</span></p>
+          <div id="eng-cta-list" class="mt-2 space-y-1 text-[11px]">
+            <p class="text-outline">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT UPLOADS -->
+      <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+        <div class="px-4 py-3 border-b border-outline-variant flex items-center justify-between">
+          <h2 class="text-xs font-headline italic font-black text-on-surface uppercase">Recent uploads</h2>
+          <a href="/admin/images" class="font-label text-[10px] font-bold uppercase tracking-wider text-primary hover:underline">View all →</a>
+        </div>
+        <div id="recent-uploads">
+          <div class="p-6 text-center text-outline">
+            <p class="font-label text-xs uppercase">Loading...</p>
+          </div>
+        </div>
+      </div>
 
     </main>
   </div>
@@ -339,17 +338,16 @@ const user = Astro.locals.user!;
 
   function fmtDate(s: string | null | undefined): string {
     if (!s) return '—';
-    // SQLite returns "YYYY-MM-DD HH:MM:SS" in UTC.
     const d = new Date(s.replace(' ', 'T') + 'Z');
     if (Number.isNaN(d.getTime())) return '—';
     return d.toLocaleDateString(undefined, { month: 'short', day: '2-digit', year: '2-digit' });
   }
 
   function fmtChange(pct: number | null): { text: string; cls: string } {
-    if (pct === null || pct === undefined) return { text: 'n/a vs prev', cls: 'text-outline' };
+    if (pct === null || pct === undefined) return { text: 'no prev data', cls: 'text-surface/40' };
     const sign = pct > 0 ? '+' : '';
     const rounded = Math.abs(pct) >= 10 ? pct.toFixed(0) : pct.toFixed(1);
-    const cls = pct > 0 ? 'text-secondary font-bold' : pct < 0 ? 'text-error font-bold' : 'text-outline';
+    const cls = pct > 0 ? 'text-secondary font-bold' : pct < 0 ? 'text-error font-bold' : 'text-surface/50';
     return { text: `${sign}${rounded}% vs prev`, cls };
   }
 
@@ -363,71 +361,81 @@ const user = Astro.locals.user!;
 
   type Data = any;
 
-  function renderOverview(d: Data) {
-    document.getElementById('kpi-images')!.textContent = d.uploads.allTime.toLocaleString();
-    document.getElementById('kpi-images-delta')!.textContent =
-      `+${(d.uploads.today ?? 0).toLocaleString()} today · +${(d.uploads.last7d ?? 0).toLocaleString()} this week`;
+  function renderHero(d: Data) {
+    document.getElementById('hero-today')!.textContent = (d.uploads.today ?? 0).toLocaleString();
+    document.getElementById('hero-today-sub')!.textContent = `${formatSize(d.storage.today)} stored`;
 
-    document.getElementById('kpi-users')!.textContent = d.users.total.toLocaleString();
-    document.getElementById('kpi-users-delta')!.textContent =
-      `+${(d.users.newToday ?? 0).toLocaleString()} today · +${(d.users.new30d ?? 0).toLocaleString()} this month`;
+    document.getElementById('hero-yesterday')!.textContent = (d.uploads.yesterday ?? 0).toLocaleString();
+    const ydayDelta = (d.uploads.today ?? 0) - (d.uploads.yesterday ?? 0);
+    document.getElementById('hero-yesterday-sub')!.textContent =
+      ydayDelta === 0 ? 'same as today' : `today ${ydayDelta > 0 ? '+' : ''}${ydayDelta}`;
 
-    document.getElementById('kpi-storage')!.textContent = formatSize(d.storage.allTime);
-    document.getElementById('kpi-storage-delta')!.textContent =
-      `+${formatSize(d.storage.last7d)} this week · +${formatSize(d.storage.last30d)} this month`;
+    document.getElementById('hero-7d')!.textContent = (d.uploads.last7d ?? 0).toLocaleString();
+    const c7 = fmtChange(d.uploads.change7dPct);
+    const sub7 = document.getElementById('hero-7d-sub')!;
+    sub7.textContent = c7.text;
+    sub7.className = `font-label text-[9px] uppercase mt-0.5 ${c7.cls}`;
 
-    document.getElementById('kpi-keys')!.textContent = (d.activeApiKeys ?? 0).toLocaleString();
-    document.getElementById('kpi-keys-delta')!.textContent = `${(d.users.admins ?? 0).toLocaleString()} admin${d.users.admins === 1 ? '' : 's'} · ${(d.users.banned ?? 0).toLocaleString()} banned`;
+    document.getElementById('hero-30d')!.textContent = (d.uploads.last30d ?? 0).toLocaleString();
+    const c30 = fmtChange(d.uploads.change30dPct);
+    const sub30 = document.getElementById('hero-30d-sub')!;
+    sub30.textContent = c30.text;
+    sub30.className = `font-label text-[9px] uppercase mt-0.5 ${c30.cls}`;
   }
 
-  function renderActivity(d: Data) {
-    document.getElementById('act-today')!.textContent = (d.uploads.today ?? 0).toLocaleString();
-    document.getElementById('act-today-sub')!.textContent = `${formatSize(d.storage.today)} uploaded`;
+  function renderKPIs(d: Data) {
+    document.getElementById('kpi-images')!.textContent = (d.uploads.allTime ?? 0).toLocaleString();
+    document.getElementById('kpi-images-delta')!.textContent =
+      `+${(d.uploads.last7d ?? 0).toLocaleString()} this week`;
 
-    document.getElementById('act-yesterday')!.textContent = (d.uploads.yesterday ?? 0).toLocaleString();
-    const ydayDelta = (d.uploads.today ?? 0) - (d.uploads.yesterday ?? 0);
-    document.getElementById('act-yesterday-sub')!.textContent =
-      ydayDelta === 0 ? 'same as today' : `today is ${ydayDelta > 0 ? '+' : ''}${ydayDelta} vs yesterday`;
+    document.getElementById('kpi-users')!.textContent = (d.users.total ?? 0).toLocaleString();
+    document.getElementById('kpi-users-delta')!.textContent =
+      `+${(d.users.new30d ?? 0).toLocaleString()} this month`;
 
-    document.getElementById('act-7d')!.textContent = (d.uploads.last7d ?? 0).toLocaleString();
-    const c7 = fmtChange(d.uploads.change7dPct);
-    const sub7 = document.getElementById('act-7d-sub')!;
-    sub7.textContent = c7.text;
-    sub7.className = `font-label text-[10px] uppercase mt-0.5 ${c7.cls}`;
+    document.getElementById('kpi-storage')!.textContent = formatSize(d.storage.allTime);
+    document.getElementById('kpi-storage-delta')!.textContent = `+${formatSize(d.storage.last30d)} this month`;
 
-    document.getElementById('act-30d')!.textContent = (d.uploads.last30d ?? 0).toLocaleString();
-    const c30 = fmtChange(d.uploads.change30dPct);
-    const sub30 = document.getElementById('act-30d-sub')!;
-    sub30.textContent = c30.text;
-    sub30.className = `font-label text-[10px] uppercase mt-0.5 ${c30.cls}`;
+    document.getElementById('kpi-sessions')!.textContent = (d.engagement?.activeSessions ?? 0).toLocaleString();
+  }
 
-    // Breakdown bar
-    const s = d.sources;
-    const total = d.uploads.last30d || 1;
-    const set = (key: string, n: number) => {
-      const el = document.querySelector(`#act-breakdown [data-breakdown="${key}"]`);
-      if (el) el.textContent = `${n.toLocaleString()} (${((n / total) * 100).toFixed(1)}%)`;
-    };
-    set('auth', s.authenticated30d);
-    set('anon', s.anonymous30d);
-    set('web', s.web30d);
-    set('api', s.api30d);
-    set('adblock', s.adblock30d);
-    set('noadblock', s.noAdblock30d);
+  function renderComposition(d: Data) {
+    const total = d.uploads.last30d || 0;
+    document.getElementById('comp-total')!.textContent = total.toLocaleString();
+
+    const pct = (n: number) => (total > 0 ? (n / total) * 100 : 0);
+    const fmt = (n: number) => `${n.toLocaleString()} (${pct(n).toFixed(0)}%)`;
+
+    document.getElementById('comp-auth-num')!.textContent = fmt(d.sources.authenticated30d ?? 0);
+    document.getElementById('comp-anon-num')!.textContent = fmt(d.sources.anonymous30d ?? 0);
+    (document.getElementById('comp-auth-bar') as HTMLElement).style.width = `${pct(d.sources.authenticated30d ?? 0)}%`;
+    (document.getElementById('comp-anon-bar') as HTMLElement).style.width = `${pct(d.sources.anonymous30d ?? 0)}%`;
+
+    document.getElementById('comp-web-num')!.textContent = fmt(d.sources.web30d ?? 0);
+    document.getElementById('comp-api-num')!.textContent = fmt(d.sources.api30d ?? 0);
+    (document.getElementById('comp-web-bar') as HTMLElement).style.width = `${pct(d.sources.web30d ?? 0)}%`;
+    (document.getElementById('comp-api-bar') as HTMLElement).style.width = `${pct(d.sources.api30d ?? 0)}%`;
+
+    document.getElementById('comp-ab-num')!.textContent = fmt(d.sources.adblock30d ?? 0);
+    document.getElementById('comp-noab-num')!.textContent = fmt(d.sources.noAdblock30d ?? 0);
+    (document.getElementById('comp-ab-bar') as HTMLElement).style.width = `${pct(d.sources.adblock30d ?? 0)}%`;
+    (document.getElementById('comp-noab-bar') as HTMLElement).style.width = `${pct(d.sources.noAdblock30d ?? 0)}%`;
+  }
+
+  function avatarHTML(r: any): string {
+    const initial = (r.user_name || r.name || r.email || '?').trim().charAt(0).toUpperCase();
+    return r.avatar_url || r.user_avatar
+      ? `<img src="${esc(r.avatar_url || r.user_avatar)}" alt="" class="w-7 h-7 rounded-full border border-outline-variant object-cover flex-shrink-0" referrerpolicy="no-referrer" loading="lazy" decoding="async" />`
+      : `<div class="w-7 h-7 rounded-full border border-outline-variant bg-surface-container-highest flex items-center justify-center flex-shrink-0"><span class="text-[10px] font-bold text-outline">${esc(initial)}</span></div>`;
   }
 
   function renderTopUploaders30d(d: Data) {
     const rows: any[] = d.uploadsByUser ?? [];
-    const total = rows.reduce((s, r) => s + Number(r.count), 0);
-    const max = Math.max(1, ...rows.map(r => Number(r.count)));
-    const totalEl = document.getElementById('uploads-by-user-total');
-    if (totalEl) totalEl.textContent = `${rows.length.toLocaleString()} ${rows.length === 1 ? 'user' : 'users'} · ${total.toLocaleString()} uploads`;
-
     const body = document.getElementById('uploads-by-user-body')!;
     if (!rows.length) {
-      body.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">No uploads in the last 30 days</p></td></tr>';
+      body.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">No uploads in the last 30 days</p></td></tr>';
       return;
     }
+    const max = Math.max(1, ...rows.map(r => Number(r.count)));
     const activeDays = (first: string, last: string) => {
       const f = new Date(first.replace(' ', 'T') + 'Z');
       const l = new Date(last.replace(' ', 'T') + 'Z');
@@ -438,27 +446,22 @@ const user = Astro.locals.user!;
       const span = activeDays(r.first_upload, r.last_upload);
       const avg = (Number(r.count) / span).toFixed(1);
       const isAnon = !r.user_id;
-      const initial = (r.user_name || '?').trim().charAt(0).toUpperCase();
-      const avatar = r.user_avatar
-        ? `<img src="${esc(r.user_avatar)}" alt="${esc(r.user_name)}" class="w-7 h-7 rounded-full border border-on-surface object-cover flex-shrink-0" referrerpolicy="no-referrer" loading="lazy" decoding="async" />`
-        : `<div class="w-7 h-7 rounded-full border border-on-surface bg-surface-container-highest flex items-center justify-center flex-shrink-0"><span class="text-[10px] font-bold text-outline">${esc(initial)}</span></div>`;
       const sharePct = (Number(r.count) / max * 100).toFixed(1);
       return `
-        <tr class="hover:bg-surface-container-lowest transition-colors">
-          <td class="px-3 py-1.5">
+        <tr class="hover:bg-surface-container-lowest">
+          <td class="px-4 py-2">
             <div class="flex items-center gap-2 min-w-0">
-              ${avatar}
+              ${avatarHTML(r)}
               <div class="min-w-0">
                 <p class="text-xs font-bold truncate max-w-[180px]">${esc(r.user_name)}${isAnon ? ' <span class="text-outline font-normal">(no account)</span>' : ''}</p>
                 ${r.user_email ? `<p class="text-[10px] text-outline truncate max-w-[180px]">${esc(r.user_email)}</p>` : ''}
               </div>
             </div>
           </td>
-          <td class="px-3 py-1.5 text-xs font-bold tabular-nums">${Number(r.count).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs tabular-nums text-on-surface-variant">${avg}</td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.first_upload)}</td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.last_upload)}</td>
-          <td class="px-3 py-1.5"><div class="h-2 bg-primary border border-on-surface" style="width: ${sharePct}%; max-width: 100%;"></div></td>
+          <td class="px-3 py-2 text-xs font-bold tabular-nums">${Number(r.count).toLocaleString()}</td>
+          <td class="px-3 py-2 text-xs tabular-nums text-on-surface-variant">${avg}</td>
+          <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.last_upload)}</td>
+          <td class="px-3 py-2"><div class="h-1.5 rounded-full bg-primary" style="width: ${sharePct}%; max-width: 100%;"></div></td>
         </tr>
       `;
     }).join('');
@@ -473,24 +476,20 @@ const user = Astro.locals.user!;
     }
     body.innerHTML = rows.map(r => {
       const isAnon = !r.user_id;
-      const initial = (r.user_name || '?').trim().charAt(0).toUpperCase();
-      const avatar = r.user_avatar
-        ? `<img src="${esc(r.user_avatar)}" alt="${esc(r.user_name)}" class="w-7 h-7 rounded-full border border-on-surface object-cover flex-shrink-0" referrerpolicy="no-referrer" loading="lazy" decoding="async" />`
-        : `<div class="w-7 h-7 rounded-full border border-on-surface bg-surface-container-highest flex items-center justify-center flex-shrink-0"><span class="text-[10px] font-bold text-outline">${esc(initial)}</span></div>`;
       return `
-        <tr class="hover:bg-surface-container-lowest transition-colors">
-          <td class="px-3 py-1.5">
+        <tr class="hover:bg-surface-container-lowest">
+          <td class="px-4 py-2">
             <div class="flex items-center gap-2 min-w-0">
-              ${avatar}
+              ${avatarHTML(r)}
               <div class="min-w-0">
                 <p class="text-xs font-bold truncate max-w-[180px]">${esc(r.user_name)}${isAnon ? ' <span class="text-outline font-normal">(no account)</span>' : ''}</p>
                 ${r.user_email ? `<p class="text-[10px] text-outline truncate max-w-[180px]">${esc(r.user_email)}</p>` : ''}
               </div>
             </div>
           </td>
-          <td class="px-3 py-1.5 text-xs font-bold tabular-nums">${Number(r.count).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.first_upload)}</td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.last_upload)}</td>
+          <td class="px-3 py-2 text-xs font-bold tabular-nums">${Number(r.count).toLocaleString()}</td>
+          <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.first_upload)}</td>
+          <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.last_upload)}</td>
         </tr>
       `;
     }).join('');
@@ -503,77 +502,66 @@ const user = Astro.locals.user!;
       body.innerHTML = '<tr><td colspan="3" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">No signups yet</p></td></tr>';
       return;
     }
-    body.innerHTML = rows.map(r => {
-      const initial = (r.name || r.email || '?').trim().charAt(0).toUpperCase();
-      const avatar = r.avatar_url
-        ? `<img src="${esc(r.avatar_url)}" alt="${esc(r.name)}" class="w-7 h-7 rounded-full border border-on-surface object-cover flex-shrink-0" referrerpolicy="no-referrer" loading="lazy" decoding="async" />`
-        : `<div class="w-7 h-7 rounded-full border border-on-surface bg-surface-container-highest flex items-center justify-center flex-shrink-0"><span class="text-[10px] font-bold text-outline">${esc(initial)}</span></div>`;
-      return `
-        <tr class="hover:bg-surface-container-lowest transition-colors">
-          <td class="px-3 py-1.5">
-            <div class="flex items-center gap-2 min-w-0">
-              ${avatar}
-              <div class="min-w-0">
-                <p class="text-xs font-bold truncate max-w-[180px]">${esc(r.name || 'Unnamed')}</p>
-                ${r.email ? `<p class="text-[10px] text-outline truncate max-w-[180px]">${esc(r.email)}</p>` : ''}
-              </div>
+    body.innerHTML = rows.map(r => `
+      <tr class="hover:bg-surface-container-lowest">
+        <td class="px-4 py-2">
+          <div class="flex items-center gap-2 min-w-0">
+            ${avatarHTML(r)}
+            <div class="min-w-0">
+              <p class="text-xs font-bold truncate max-w-[180px]">${esc(r.name || 'Unnamed')}</p>
+              ${r.email ? `<p class="text-[10px] text-outline truncate max-w-[180px]">${esc(r.email)}</p>` : ''}
             </div>
-          </td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.created_at)}</td>
-          <td class="px-3 py-1.5 text-xs font-bold tabular-nums ${Number(r.upload_count) === 0 ? 'text-error' : ''}">${Number(r.upload_count).toLocaleString()}</td>
-        </tr>
-      `;
-    }).join('');
+          </div>
+        </td>
+        <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.created_at)}</td>
+        <td class="px-3 py-2 text-xs font-bold tabular-nums ${Number(r.upload_count) === 0 ? 'text-error' : ''}">${Number(r.upload_count).toLocaleString()}</td>
+      </tr>
+    `).join('');
   }
 
   function renderDormant(d: Data) {
     const rows: any[] = d.dormantUsers ?? [];
     const body = document.getElementById('dormant-body')!;
     if (!rows.length) {
-      body.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">Every registered user uploaded in the last 30 days</p></td></tr>';
+      body.innerHTML = '<tr><td colspan="4" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">All registered users uploaded recently</p></td></tr>';
       return;
     }
-    body.innerHTML = rows.map(r => {
-      const initial = (r.name || r.email || '?').trim().charAt(0).toUpperCase();
-      const avatar = r.avatar_url
-        ? `<img src="${esc(r.avatar_url)}" alt="${esc(r.name)}" class="w-7 h-7 rounded-full border border-on-surface object-cover flex-shrink-0" referrerpolicy="no-referrer" loading="lazy" decoding="async" />`
-        : `<div class="w-7 h-7 rounded-full border border-on-surface bg-surface-container-highest flex items-center justify-center flex-shrink-0"><span class="text-[10px] font-bold text-outline">${esc(initial)}</span></div>`;
-      return `
-        <tr class="hover:bg-surface-container-lowest transition-colors">
-          <td class="px-3 py-1.5">
-            <div class="flex items-center gap-2 min-w-0">
-              ${avatar}
-              <p class="text-xs font-bold truncate max-w-[160px]">${esc(r.name || 'Unnamed')}</p>
+    body.innerHTML = rows.map(r => `
+      <tr class="hover:bg-surface-container-lowest">
+        <td class="px-4 py-2">
+          <div class="flex items-center gap-2 min-w-0">
+            ${avatarHTML(r)}
+            <div class="min-w-0">
+              <p class="text-xs font-bold truncate max-w-[180px]">${esc(r.name || 'Unnamed')}</p>
+              ${r.email ? `<p class="text-[10px] text-outline truncate max-w-[180px]">${esc(r.email)}</p>` : ''}
             </div>
-          </td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant truncate max-w-[220px]">${esc(r.email)}</td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.created_at)}</td>
-          <td class="px-3 py-1.5 text-xs font-bold tabular-nums">${Number(r.lifetime_uploads).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs text-on-surface-variant whitespace-nowrap">${r.last_upload ? fmtDate(r.last_upload) : 'Never'}</td>
-        </tr>
-      `;
-    }).join('');
+          </div>
+        </td>
+        <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${fmtDate(r.created_at)}</td>
+        <td class="px-3 py-2 text-xs font-bold tabular-nums">${Number(r.lifetime_uploads).toLocaleString()}</td>
+        <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${r.last_upload ? fmtDate(r.last_upload) : 'Never'}</td>
+      </tr>
+    `).join('');
   }
 
   function renderDaily(d: Data) {
     const rows: any[] = d.dailySeries ?? [];
     const body = document.getElementById('daily-body')!;
     if (!rows.length) {
-      body.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">No uploads in the last 30 days</p></td></tr>';
+      body.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-outline"><p class="font-label text-xs uppercase">No uploads in the last 30 days</p></td></tr>';
       return;
     }
     const max = Math.max(1, ...rows.map(r => Number(r.uploads)));
     body.innerHTML = rows.map(r => {
       const widthPct = (Number(r.uploads) / max * 100).toFixed(1);
       return `
-        <tr class="hover:bg-surface-container-lowest transition-colors">
-          <td class="px-3 py-1.5 text-xs font-bold tabular-nums whitespace-nowrap">${esc(r.day)}</td>
-          <td class="px-3 py-1.5 text-xs font-bold tabular-nums">${Number(r.uploads).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs tabular-nums">${Number(r.unique_users).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs tabular-nums text-outline">${Number(r.anon).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs tabular-nums text-outline">${Number(r.adblock).toLocaleString()}</td>
-          <td class="px-3 py-1.5 text-xs tabular-nums text-on-surface-variant whitespace-nowrap">${formatSize(Number(r.size))}</td>
-          <td class="px-3 py-1.5"><div class="h-2 bg-primary border border-on-surface" style="width: ${widthPct}%; max-width: 100%;"></div></td>
+        <tr class="hover:bg-surface-container-lowest">
+          <td class="px-4 py-1.5 text-[11px] font-bold tabular-nums whitespace-nowrap">${esc(r.day)}</td>
+          <td class="px-3 py-1.5 text-[11px] font-bold tabular-nums">${Number(r.uploads).toLocaleString()}</td>
+          <td class="px-3 py-1.5 text-[11px] tabular-nums">${Number(r.unique_users).toLocaleString()}</td>
+          <td class="px-3 py-1.5 text-[11px] tabular-nums text-outline">${Number(r.anon).toLocaleString()}</td>
+          <td class="px-3 py-1.5 text-[11px] tabular-nums text-on-surface-variant whitespace-nowrap">${formatSize(Number(r.size))}</td>
+          <td class="px-3 py-1.5"><div class="h-1.5 rounded-full bg-primary" style="width: ${widthPct}%; max-width: 100%;"></div></td>
         </tr>
       `;
     }).join('');
@@ -593,7 +581,7 @@ const user = Astro.locals.user!;
     for (let h = 0; h < 24; h++) {
       const v = map.get(h) ?? 0;
       const hh = String(h).padStart(2, '0');
-      lines.push(`<div class="flex items-center gap-2"><span class="text-outline w-7">${hh}</span><span class="text-primary">${textBar(v, max, 18)}</span><span class="tabular-nums text-on-surface-variant w-10 text-right">${v.toLocaleString()}</span></div>`);
+      lines.push(`<div class="flex items-center gap-2"><span class="text-outline w-6">${hh}</span><span class="text-primary">${textBar(v, max, 14)}</span><span class="tabular-nums text-on-surface-variant w-8 text-right">${v.toLocaleString()}</span></div>`);
     }
     el.innerHTML = lines.join('');
   }
@@ -611,7 +599,7 @@ const user = Astro.locals.user!;
     const lines: string[] = [];
     for (let i = 0; i < 7; i++) {
       const v = map.get(i) ?? 0;
-      lines.push(`<div class="flex items-center gap-2"><span class="text-outline w-7">${DOW_NAMES[i]}</span><span class="text-primary">${textBar(v, max, 18)}</span><span class="tabular-nums text-on-surface-variant w-10 text-right">${v.toLocaleString()}</span></div>`);
+      lines.push(`<div class="flex items-center gap-2"><span class="text-outline w-7">${DOW_NAMES[i]}</span><span class="text-primary">${textBar(v, max, 14)}</span><span class="tabular-nums text-on-surface-variant w-8 text-right">${v.toLocaleString()}</span></div>`);
     }
     el.innerHTML = lines.join('');
   }
@@ -619,16 +607,12 @@ const user = Astro.locals.user!;
   function renderAnonymous(d: Data) {
     document.getElementById('anon-ips-7d')!.textContent = (d.anonymous.uniqueIPs7d ?? 0).toLocaleString();
     document.getElementById('anon-ips-30d')!.textContent = (d.anonymous.uniqueIPs30d ?? 0).toLocaleString();
-    document.getElementById('anon-uploads-30d')!.textContent = (d.sources.anonymous30d ?? 0).toLocaleString();
-    document.getElementById('anon-uploads-total')!.textContent = (d.anonymous.totalUploadsAllTime ?? 0).toLocaleString();
   }
 
-  function renderEngagement(d: Data) {
-    document.getElementById('eng-sessions')!.textContent = (d.engagement.activeSessions ?? 0).toLocaleString();
-
+  function renderEngagementBlock(d: Data) {
     document.getElementById('eng-adblock-30d')!.textContent = (d.sources.adblock30d ?? 0).toLocaleString();
     document.getElementById('eng-adblock-30d-sub')!.textContent =
-      `${(d.sources.adblockPct30d ?? 0).toFixed(1)}% of last-30d uploads`;
+      `${(d.sources.adblockPct30d ?? 0).toFixed(1)}% of uploads`;
 
     const ctaList: any[] = d.engagement.ctaBreakdown ?? [];
     const ctaEl = document.getElementById('eng-cta-list')!;
@@ -651,38 +635,29 @@ const user = Astro.locals.user!;
       <div class="overflow-x-auto"><table class="w-full text-left min-w-[500px]">
         <thead>
           <tr class="border-b border-outline-variant">
-            <th class="px-5 py-3 font-label text-xs uppercase font-bold text-outline tracking-wider">Asset</th>
-            <th class="px-5 py-3 font-label text-xs uppercase font-bold text-outline tracking-wider">Owner</th>
-            <th class="px-5 py-3 font-label text-xs uppercase font-bold text-outline tracking-wider">Size</th>
-            <th class="px-5 py-3 font-label text-xs uppercase font-bold text-outline tracking-wider">Actions</th>
+            <th class="px-4 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Asset</th>
+            <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Owner</th>
+            <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider">Size</th>
+            <th class="px-3 py-2 font-label text-[10px] uppercase font-bold text-outline tracking-wider"></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-outline-variant/50">
           ${d.recentUploads.map((img: any) => `
-            <tr class="hover:bg-surface-container-lowest transition-colors">
-              <td class="px-5 py-3">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden flex-shrink-0">
-                    <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <tr class="hover:bg-surface-container-lowest">
+              <td class="px-4 py-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden flex-shrink-0">
+                    <img src="${esc(img.url)}" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
-                  <span class="text-sm font-bold truncate max-w-40">${esc(img.filename)}</span>
+                  <span class="text-xs font-bold truncate max-w-[200px]">${esc(img.filename)}</span>
                 </div>
               </td>
-              <td class="px-5 py-3">
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center">
-                    <span class="material-symbols-outlined text-xs text-outline">person</span>
-                  </div>
-                  <span class="text-sm text-on-surface-variant">${esc(img.user_name || 'Anonymous')}</span>
-                </div>
-              </td>
-              <td class="px-5 py-3 text-sm text-on-surface-variant">${(img.size_bytes / (1024 * 1024)).toFixed(1)} MB</td>
-              <td class="px-5 py-3">
-                <div class="flex gap-2">
-                  <button onclick="copyUrl('${esc(img.url)}')" class="w-9 h-9 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors">
-                    <span class="material-symbols-outlined text-sm text-outline">link</span>
-                  </button>
-                </div>
+              <td class="px-3 py-2 text-xs text-on-surface-variant truncate max-w-[160px]">${esc(img.user_name || 'Anonymous')}</td>
+              <td class="px-3 py-2 text-xs text-on-surface-variant whitespace-nowrap">${(img.size_bytes / (1024 * 1024)).toFixed(1)} MB</td>
+              <td class="px-3 py-2 text-right">
+                <button onclick="copyUrl('${esc(img.url)}')" class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container-highest">
+                  <span class="material-symbols-outlined text-sm text-outline">link</span>
+                </button>
               </td>
             </tr>
           `).join('')}
@@ -691,13 +666,38 @@ const user = Astro.locals.user!;
     `;
   }
 
+  function bindTabs() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.user-tab');
+    const panels = document.querySelectorAll<HTMLElement>('.user-panel');
+    const activeCls = ['bg-on-surface', 'text-surface'];
+    const idleCls = ['text-outline', 'hover:bg-surface-container-highest'];
+    const setActive = (tab: HTMLButtonElement, on: boolean) => {
+      if (on) {
+        tab.classList.add(...activeCls);
+        tab.classList.remove(...idleCls);
+      } else {
+        tab.classList.remove(...activeCls);
+        tab.classList.add(...idleCls);
+      }
+    };
+    tabs.forEach((tab, i) => {
+      setActive(tab, i === 0);
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => setActive(t, t === tab));
+        panels.forEach(p => p.classList.toggle('hidden', p.dataset.panel !== target));
+      });
+    });
+  }
+
   async function loadStats() {
     const res = await fetch('/api/admin/stats');
     if (!res.ok) throw new Error('stats failed');
     const data = await res.json();
 
-    renderOverview(data);
-    renderActivity(data);
+    renderHero(data);
+    renderKPIs(data);
+    renderComposition(data);
     renderTopUploaders30d(data);
     renderTopLifetime(data);
     renderRecentSignups(data);
@@ -706,7 +706,7 @@ const user = Astro.locals.user!;
     renderHourly(data);
     renderDayOfWeek(data);
     renderAnonymous(data);
-    renderEngagement(data);
+    renderEngagementBlock(data);
     renderRecent(data);
   }
 
@@ -714,7 +714,7 @@ const user = Astro.locals.user!;
     const existing = document.querySelector('.admin-toast');
     if (existing) existing.remove();
     const toast = document.createElement('div');
-    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border-2 border-on-surface hard-shadow transition-opacity';
+    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border-2 border-on-surface hard-shadow';
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
@@ -728,5 +728,6 @@ const user = Astro.locals.user!;
     loadStats().then(() => showToast('Refreshed')).catch(() => showToast('Refresh failed'));
   });
 
+  bindTabs();
   loadStats().catch(() => showToast('Failed to load stats'));
 </script>
