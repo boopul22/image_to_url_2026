@@ -24,18 +24,30 @@
     </aside>
 
     <div class="w-full lg:flex-1 lg:max-w-2xl lg:min-w-0">
-      <div class="w-full max-w-2xl mx-auto mb-4 overflow-hidden" style="max-height:90px">
+      <div class="w-full max-w-2xl mx-auto mb-4">
         <ins
           class="adsbygoogle"
-          style="display:block;width:100%;height:90px"
+          style="display:block"
           data-ad-client="ca-pub-7803867089582138"
           data-ad-slot="8598885796"
-          data-ad-format="horizontal"
-          data-full-width-responsive="false"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
         ></ins>
         <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
       <slot />
+      <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers. -->
+      <div class="lg:hidden w-full max-w-2xl mx-auto mt-6">
+        <ins
+          class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-7803867089582138"
+          data-ad-slot="7769825756"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
     </div>
 
     <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden" aria-label="Sponsored">
@@ -43,7 +55,7 @@
         class="adsbygoogle"
         style="display:inline-block;width:160px;height:600px"
         data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1115981593"
+        data-ad-slot="3200025356"
       ></ins>
       <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </aside>
