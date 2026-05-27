@@ -422,5 +422,11 @@
   "terms.s14.title": "14. Contact",
   "terms.s14.label": "Questions about our terms?",
   "terms.s14.contactIntro": "Contact us at:",
-  "terms.s14.email": "blog.boopul@gmail.com"
+  "terms.s14.email": "blog.boopul@gmail.com",
+
+  "adblock.title": "Please disable your ad blocker",
+  "adblock.body": "Ads pay for the free storage and bandwidth this site uses. Please disable your ad blocker for this site and try again.",
+  "adblock.retry": "Try again",
+  "adblock.cancel": "Cancel",
+  "adblock.stillBlocked": "Still detecting an ad blocker. Disable it for this site, then try again."
 }

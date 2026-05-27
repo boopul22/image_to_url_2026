@@ -12,7 +12,12 @@
 // match EasyList's generic rules. The result is cached for the page session.
 let adblockFlag: boolean | null = null;
 
-export async function detectAdBlock(): Promise<boolean> {
+export function resetAdBlockCache(): void {
+  adblockFlag = null;
+}
+
+export async function detectAdBlock(opts?: { force?: boolean }): Promise<boolean> {
+  if (opts?.force) adblockFlag = null;
   if (adblockFlag !== null) return adblockFlag;
   let blocked = false;
 

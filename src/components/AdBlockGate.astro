@@ -1,0 +1,138 @@
+---
+/**
+ * Shared ad-block gate modal. Mounted once in Layout.astro.
+ * Uploaders call `window.__adblockGate.check()` before starting an upload.
+ * Resolves true if the user is not running an ad-blocker (or disabled it on retry),
+ * false if they cancelled.
+ */
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n/utils';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+
+const title = t(locale, 'adblock.title');
+const body = t(locale, 'adblock.body');
+const retry = t(locale, 'adblock.retry');
+const cancel = t(locale, 'adblock.cancel');
+const stillBlocked = t(locale, 'adblock.stillBlocked');
+---
+
+<div
+  id="adblock-gate"
+  class="soft-uploader fixed inset-0 z-[9999] hidden items-center justify-center p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="adblock-gate-title"
+  aria-describedby="adblock-gate-body"
+>
+  <div id="adblock-gate-backdrop" class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+  <div class="su-card su-soft-shadow relative w-full max-w-md bg-surface p-6 sm:p-7 border border-outline-variant/40">
+    <h2 id="adblock-gate-title" class="text-lg sm:text-xl font-semibold text-on-surface mb-2">
+      {title}
+    </h2>
+    <p id="adblock-gate-body" class="text-sm sm:text-base text-on-surface-variant mb-4 leading-relaxed">
+      {body}
+    </p>
+    <p
+      id="adblock-gate-still"
+      class="text-sm text-rose-600 mb-4 hidden"
+      role="alert"
+      aria-live="polite"
+    >
+      {stillBlocked}
+    </p>
+    <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 sm:gap-3">
+      <button
+        id="adblock-gate-cancel"
+        type="button"
+        class="su-btn px-4 py-2 bg-surface-container text-on-surface border border-outline-variant/60 hover:bg-surface-container-high"
+      >
+        {cancel}
+      </button>
+      <button
+        id="adblock-gate-retry"
+        type="button"
+        class="su-btn px-4 py-2 bg-rose-600 text-white font-medium hover:bg-rose-700"
+      >
+        {retry} →
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { detectAdBlock, resetAdBlockCache } from '../lib/adblock';
+
+  type Resolver = (proceed: boolean) => void;
+
+  const dialog = document.getElementById('adblock-gate') as HTMLDivElement | null;
+  const backdrop = document.getElementById('adblock-gate-backdrop');
+  const cancelBtn = document.getElementById('adblock-gate-cancel');
+  const retryBtn = document.getElementById('adblock-gate-retry') as HTMLButtonElement | null;
+  const stillNote = document.getElementById('adblock-gate-still');
+
+  let pending: Promise<boolean> | null = null;
+  let resolver: Resolver | null = null;
+  let prevOverflow = '';
+
+  function open() {
+    if (!dialog) return;
+    stillNote?.classList.add('hidden');
+    dialog.classList.remove('hidden');
+    dialog.classList.add('flex');
+    prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close(proceed: boolean) {
+    if (!dialog) return;
+    dialog.classList.add('hidden');
+    dialog.classList.remove('flex');
+    document.body.style.overflow = prevOverflow;
+    const r = resolver;
+    resolver = null;
+    pending = null;
+    if (r) r(proceed);
+  }
+
+  cancelBtn?.addEventListener('click', () => close(false));
+  backdrop?.addEventListener('click', () => close(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dialog && !dialog.classList.contains('hidden')) {
+      close(false);
+    }
+  });
+
+  retryBtn?.addEventListener('click', async () => {
+    if (!retryBtn) return;
+    retryBtn.disabled = true;
+    stillNote?.classList.add('hidden');
+    resetAdBlockCache();
+    const stillBlocked = await detectAdBlock({ force: true });
+    retryBtn.disabled = false;
+    if (stillBlocked) {
+      stillNote?.classList.remove('hidden');
+    } else {
+      close(true);
+    }
+  });
+
+  async function check(): Promise<boolean> {
+    if (pending) return pending;
+    pending = (async () => {
+      const blocked = await detectAdBlock();
+      if (!blocked) {
+        pending = null;
+        return true;
+      }
+      return new Promise<boolean>((resolve) => {
+        resolver = resolve;
+        open();
+      });
+    })();
+    return pending;
+  }
+
+  (window as any).__adblockGate = { check };
+</script>

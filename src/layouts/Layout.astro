@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
+import AdBlockGate from '../components/AdBlockGate.astro';
 // Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
 // bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
 // to those same fingerprinted URLs, so the preload is always in sync with the CSS.
@@ -287,6 +288,7 @@ function hreflangUrl(loc: Locale): string {
     <main>
       <slot />
     </main>
+    <AdBlockGate />
     <script>
       const revealed = new WeakSet();
       function reveal(el: Element) {

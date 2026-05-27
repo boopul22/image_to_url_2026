@@ -88,7 +88,6 @@
 
 <script>
   // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
-  import { detectAdBlock } from '../lib/adblock';
 
   type Heic2Any = (opts: { blob: Blob; toType?: string; quality?: number }) => Promise<Blob | Blob[]>;
 
@@ -209,6 +208,7 @@
     host.className = 'su-btn border border-outline-variant bg-white hover:bg-on-background hover:text-white font-headline font-semibold text-xs py-2 px-3 flex-shrink-0';
     host.textContent = 'Get URL';
     host.addEventListener('click', async () => {
+      if (!(await (window as any).__adblockGate?.check())) return;
       host.disabled = true;
       host.textContent = 'Hosting…';
       const MIN_UPLOAD_MS = 5000;
@@ -216,7 +216,7 @@
       try {
         const fd = new FormData();
         fd.append('file', new File([blob], baseName, { type: 'image/jpeg' }));
-        fd.append('adblock', (await detectAdBlock()) ? '1' : '0');
+        fd.append('adblock', '0');
         const res = await fetch('/api/upload', { method: 'POST', body: fd });
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');

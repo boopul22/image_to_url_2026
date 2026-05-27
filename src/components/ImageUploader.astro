@@ -219,7 +219,6 @@
 <script>
   // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
   // Shared with HomePage.astro so both uploaders report the same signal.
-  import { detectAdBlock } from '../lib/adblock';
 
   // Cached login check shared between the auto-delete gate and the batch-upload gate.
   let isLoggedIn: boolean | null = null;
@@ -371,6 +370,11 @@
   });
 
   async function handleFiles(files: FileList) {
+    // Ad-block gate covers both single and batch paths in one place.
+    if (!(await (window as any).__adblockGate?.check())) {
+      fileInput.value = '';
+      return;
+    }
     if (files.length === 1) {
       uploadFile(files[0]);
       return;
@@ -400,7 +404,7 @@
 
     batchList.innerHTML = '';
     const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
-    const ab = (await detectAdBlock()) ? '1' : '0';
+    const ab = '0'; // gated in handleFiles
     const results: { name: string; url: string }[] = [];
     const failures: { name: string; error: string }[] = [];
 
@@ -502,9 +506,7 @@
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1]?.toUpperCase() || 'FILE'}`;
     uploadBtn.textContent = 'Uploading...';
 
-    // Detect ad blocker once (cached) before the progress timer starts, so the
-    // ~50ms bait wait never stalls the perceived progress bar.
-    const ab = (await detectAdBlock()) ? '1' : '0';
+    const ab = '0'; // gated in handleFiles
 
     // Minimum perceived upload time — instant completion was driving
     // users to bounce before they registered that anything happened.

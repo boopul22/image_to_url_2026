@@ -542,7 +542,6 @@ const pageSchema = [
 <script>
   // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
   // Shared with the tool-page uploader so both report the same signal.
-  import { detectAdBlock } from '../../lib/adblock';
 
   // Cached login check for the auto-delete "Never" gate.
   let isLoggedIn: boolean | null = null;
@@ -718,6 +717,13 @@ const pageSchema = [
   }
 
   async function uploadFile(file: File) {
+    // Ad-block gate: if the user has an ad-blocker we explain why we need it off
+    // and offer a retry. Cancelling leaves the uploader idle.
+    if (!(await (window as any).__adblockGate?.check())) {
+      fileInput.value = '';
+      return;
+    }
+
     // "Never" requires a signed-in account; server clamps anon to 24h otherwise.
     if (expiresInSel?.value === 'never') {
       const loggedIn = await fetchLoggedIn();
@@ -741,9 +747,8 @@ const pageSchema = [
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1].toUpperCase()}`;
     uploadBtn.textContent = i18n.uploading;
 
-    // Detect ad blocker once (cached) before the progress timer starts, so the
-    // ~120ms bait wait never stalls the perceived progress bar.
-    const ab = (await detectAdBlock()) ? '1' : '0';
+    // Gate already passed above — blocker is either off or never was on.
+    const ab = '0';
 
     const MIN_UPLOAD_MS = 5000;
     const startedAt = Date.now();
