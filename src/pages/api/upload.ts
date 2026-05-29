@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 import { uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
-import { resolveExpiresIn } from '../../lib/images/delete';
+import { resolveExpiresAt } from '../../lib/images/delete';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -80,7 +80,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     const formData = await request.formData();
     const file = formData.get('file');
-    const expiresInSeconds = resolveExpiresIn(formData.get('expires_in'), !user);
+    const expiresAt = resolveExpiresAt(formData.get('expires_in'), !user);
     // Ad-blocker signal from the client — analytics only, never affects the upload.
     const adblock = formData.get('adblock') === '1' ? 1 : 0;
 
@@ -147,26 +147,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
     try {
       const uploadedVia = request.headers.get('authorization') ? 'api' : 'web';
 
-      const expiresAtSql =
-        expiresInSeconds === null ? null : `datetime('now', '+${expiresInSeconds} seconds')`;
-
-      if (expiresAtSql) {
-        await db
-          .prepare(
-            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock, expires_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ${expiresAtSql})`,
-          )
-          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia, adblock)
-          .run();
-      } else {
-        await db
-          .prepare(
-            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          )
-          .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia, adblock)
-          .run();
-      }
+      await db
+        .prepare(
+          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock, expires_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        )
+        .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia, adblock, expiresAt)
+        .run();
 
       // Track anonymous upload count
       if (!user) {

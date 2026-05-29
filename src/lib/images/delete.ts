@@ -1,22 +1,35 @@
 import { deleteFromR2 } from '../r2';
 
-export const EXPIRES_IN_SECONDS: Record<string, number | null> = {
-  '1h': 3600,
-  '24h': 86400,
-  '7d': 604800,
-  '30d': 2592000,
-  never: null,
-};
+// Two-option expiry model:
+//   'never' (logged-in only) -> kept forever (expires_at = null)
+//   'auto'  (default, + anonymous) -> swept at the monthly billing boundary
+//
+// Auto-expire anchors to the 1st of a month at 00:00 UTC (the Cloudflare billing
+// reset). To avoid killing a fresh upload almost immediately, anything uploaded
+// within AUTO_EXPIRE_GRACE_DAYS of the upcoming 1st is pushed to the following
+// month — so every image gets at least ~2 weeks (and at most ~6).
+export const AUTO_EXPIRE_GRACE_DAYS = 14;
 
-export const ANON_MAX_EXPIRES_SECONDS = 86400;
+function toSqliteUtc(ms: number): string {
+  // SQLite datetime format the cron + short-URL handler compare against.
+  return new Date(ms).toISOString().replace('T', ' ').slice(0, 19);
+}
 
-export function resolveExpiresIn(raw: unknown, isAnonymous: boolean): number | null {
-  const key = typeof raw === 'string' && raw in EXPIRES_IN_SECONDS ? raw : '24h';
-  const seconds = EXPIRES_IN_SECONDS[key];
-  if (isAnonymous) {
-    return seconds === null ? ANON_MAX_EXPIRES_SECONDS : Math.min(seconds, ANON_MAX_EXPIRES_SECONDS);
-  }
-  return seconds;
+export function computeAutoExpiresAt(now: Date = new Date()): string {
+  const firstOfNextMonth = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1);
+  const graceMs = AUTO_EXPIRE_GRACE_DAYS * 86_400_000;
+  const target =
+    firstOfNextMonth - now.getTime() < graceMs
+      ? Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 2, 1) // bump a cycle
+      : firstOfNextMonth;
+  return toSqliteUtc(target);
+}
+
+// Returns an absolute SQLite-UTC datetime string, or null to keep forever.
+// Anonymous uploads can never be permanent — they always auto-expire.
+export function resolveExpiresAt(raw: unknown, isAnonymous: boolean): string | null {
+  if (raw === 'never' && !isAnonymous) return null;
+  return computeAutoExpiresAt();
 }
 
 type R2Env = {
