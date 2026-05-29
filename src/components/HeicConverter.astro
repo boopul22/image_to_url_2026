@@ -291,7 +291,7 @@
         success++;
       } catch (err) {
         const row = document.createElement('div');
-        row.className = 'border-2 border-error bg-white p-3 text-xs';
+        row.className = 'border border-error bg-white p-3 text-xs';
         row.textContent = `${file.name} — failed (not a valid HEIC?)`;
         resultsList.appendChild(row);
       }

@@ -79,8 +79,8 @@ const countries = [
     <!-- Hero -->
     <header class="mb-8 sm:mb-12 reveal">
       <div class="flex flex-wrap items-center gap-2 mb-4">
-        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest border border-on-background">Project Brief</span>
-        <span class="inline-flex items-center gap-1.5 bg-white text-on-background px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest border border-on-background">
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest border border-outline-variant/40">Project Brief</span>
+        <span class="inline-flex items-center gap-1.5 bg-white text-on-background px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest border border-outline-variant/40">
           <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
           Accepting projects
         </span>
@@ -103,9 +103,9 @@ const countries = [
 
     <!-- Progress bar (inline, above form) -->
     <div id="brief-progress-wrap" class="mb-4 sm:mb-6 reveal">
-      <div class="bg-white border-2 border-on-background rounded-lg hard-shadow px-3 sm:px-4 py-2.5 flex items-center gap-3">
+      <div class="bg-white border border-outline-variant/40 rounded-lg hard-shadow px-3 sm:px-4 py-2.5 flex items-center gap-3">
         <span class="font-label text-[10px] sm:text-xs font-bold uppercase tracking-wider text-on-surface-variant shrink-0">Progress</span>
-        <div class="flex-1 h-2 bg-surface-variant border border-on-background rounded-full overflow-hidden">
+        <div class="flex-1 h-2 bg-surface-variant border border-outline-variant/40 rounded-full overflow-hidden">
           <div id="brief-progress-bar" class="h-full bg-primary transition-[width] duration-300 ease-out" style="width:0%"></div>
         </div>
         <span id="brief-progress-label" class="font-label text-[10px] sm:text-xs font-bold uppercase tracking-wider shrink-0 tabular-nums">0 / 6</span>
@@ -114,28 +114,28 @@ const countries = [
 
     <!-- Form container -->
     <section class="mb-10 sm:mb-24">
-      <div class="bg-surface border-2 border-on-background p-4 sm:p-8 lg:p-10 rounded-xl hard-shadow reveal">
+      <div class="bg-surface border border-outline-variant/40 p-4 sm:p-8 lg:p-10 rounded-xl hard-shadow reveal">
 
         <!-- Success panel (hidden until submit) -->
         <div id="brief-success" class="hidden">
-          <div class="w-16 h-16 bg-primary-fixed border-2 border-on-background rounded-lg flex items-center justify-center mb-5">
+          <div class="w-16 h-16 bg-primary-fixed border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
             <span class="material-symbols-outlined text-primary" style="font-size:40px;">check_circle</span>
           </div>
           <h3 class="text-2xl sm:text-3xl font-black font-headline tracking-tight mb-3">Brief received.</h3>
           <p class="font-body text-on-surface-variant mb-8 max-w-xl">Thanks — we got it. A real human reply is coming from <strong class="text-on-background">blog.boopul@gmail.com</strong> within 24 hours.</p>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-            <div class="bg-white border-2 border-on-background p-4 rounded-lg hard-shadow">
+            <div class="bg-white border border-outline-variant/40 p-4 rounded-lg hard-shadow">
               <div class="font-label text-xs font-black text-primary mb-2">STEP 01</div>
               <div class="font-headline font-bold mb-1">We review</div>
               <p class="text-xs text-on-surface-variant">We read your brief end-to-end and flag any gaps.</p>
             </div>
-            <div class="bg-white border-2 border-on-background p-4 rounded-lg hard-shadow">
+            <div class="bg-white border border-outline-variant/40 p-4 rounded-lg hard-shadow">
               <div class="font-label text-xs font-black text-primary mb-2">STEP 02</div>
               <div class="font-headline font-bold mb-1">We reply</div>
               <p class="text-xs text-on-surface-variant">Email within 24h: questions, rough quote, timeline.</p>
             </div>
-            <div class="bg-white border-2 border-on-background p-4 rounded-lg hard-shadow">
+            <div class="bg-white border border-outline-variant/40 p-4 rounded-lg hard-shadow">
               <div class="font-label text-xs font-black text-primary mb-2">STEP 03</div>
               <div class="font-headline font-bold mb-1">We build</div>
               <p class="text-xs text-on-surface-variant">Kick-off call, fixed-price contract, then we ship.</p>
@@ -143,11 +143,11 @@ const countries = [
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3">
-            <a href={lp('/')} class="inline-flex items-center justify-center gap-2 bg-on-surface text-surface px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
+            <a href={lp('/')} class="inline-flex items-center justify-center gap-2 bg-on-surface text-surface px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
               <span class="material-symbols-outlined text-xl">home</span>
               Back to home
             </a>
-            <a href={lp('/blog')} class="inline-flex items-center justify-center gap-2 bg-white text-on-background px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
+            <a href={lp('/blog')} class="inline-flex items-center justify-center gap-2 bg-white text-on-background px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
               <span class="material-symbols-outlined text-xl">menu_book</span>
               Read the blog
             </a>
@@ -339,7 +339,7 @@ const countries = [
           </fieldset>
 
           <!-- Submit bar -->
-          <div class="pt-2 border-t-2 border-on-background">
+          <div class="pt-2 border-t border-outline-variant/40">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-5">
               <div class="flex items-center gap-2">
                 <span id="bf-ready-dot" class="w-2 h-2 rounded-full bg-on-surface-variant/40"></span>
@@ -352,7 +352,7 @@ const countries = [
                   <span class="material-symbols-outlined text-base">refresh</span>
                   Clear
                 </button>
-                <button id="brief-submit" type="submit" class="inline-flex items-center gap-2 bg-primary text-on-primary px-7 sm:px-10 py-3 sm:py-3.5 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                <button id="brief-submit" type="submit" class="inline-flex items-center gap-2 bg-primary text-on-primary px-7 sm:px-10 py-3 sm:py-3.5 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
                   <span>Send brief</span>
                   <span class="material-symbols-outlined text-lg">arrow_forward</span>
                 </button>
@@ -371,19 +371,19 @@ const countries = [
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
-        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow">
           <h3 class="font-headline font-bold text-lg mb-2">Will you really take a $200 project?</h3>
           <p class="font-body text-on-surface-variant text-sm">Yes — small scope is fine (a landing tweak, a bug fix, a copy pass). Just match what you want done to what you can pay. We'll tell you upfront if it can't fit.</p>
         </div>
-        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow">
           <h3 class="font-headline font-bold text-lg mb-2">What happens after I submit?</h3>
           <p class="font-body text-on-surface-variant text-sm">A reply within 24 hours with follow-up questions, a rough quote, and a call slot if you want to go deeper. No sales script.</p>
         </div>
-        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow">
           <h3 class="font-headline font-bold text-lg mb-2">Do you work with clients outside the US?</h3>
           <p class="font-body text-on-surface-variant text-sm">Yes — we work with clients worldwide. We'll match our hours to yours for the kick-off call.</p>
         </div>
-        <div class="bg-surface border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow">
           <h3 class="font-headline font-bold text-lg mb-2">Is my info shared?</h3>
           <p class="font-body text-on-surface-variant text-sm">No. Your brief goes to our inbox and nowhere else. Never sold, never used for newsletters.</p>
         </div>

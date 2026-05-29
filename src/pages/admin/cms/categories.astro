@@ -28,23 +28,23 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
       </div>
 
       <!-- Add Category -->
-      <div class="bg-surface border-2 border-on-surface rounded-xl p-5 hard-shadow">
+      <div class="bg-surface border border-outline-variant/40 rounded-xl p-5 hard-shadow">
         <h3 class="font-label text-xs font-bold uppercase tracking-wider mb-4">Add New Category</h3>
         <div class="flex flex-col sm:flex-row gap-3">
-          <input id="new-cat-name" type="text" placeholder="Category name..." class="flex-1 border-2 border-on-surface rounded-lg px-4 py-2 bg-surface text-sm" />
-          <select id="new-cat-color" class="border-2 border-on-surface rounded-lg px-4 py-2 bg-surface text-sm">
+          <input id="new-cat-name" type="text" placeholder="Category name..." class="flex-1 border border-outline-variant/40 rounded-lg px-4 py-2 bg-surface text-sm" />
+          <select id="new-cat-color" class="border border-outline-variant/40 rounded-lg px-4 py-2 bg-surface text-sm">
             <option value="primary">Purple (Primary)</option>
             <option value="secondary">Teal (Secondary)</option>
             <option value="tertiary">Olive (Tertiary)</option>
           </select>
-          <button id="add-cat-btn" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 transition-all">
+          <button id="add-cat-btn" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40 hard-shadow hover:-translate-y-1 transition-all">
             Add
           </button>
         </div>
       </div>
 
       <!-- Categories List -->
-      <div id="categories-list" class="bg-surface border-2 border-on-surface rounded-xl overflow-hidden hard-shadow">
+      <div id="categories-list" class="bg-surface border border-outline-variant/40 rounded-xl overflow-hidden hard-shadow">
         <div class="p-8 text-center text-outline">
           <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
           <p class="font-label text-xs uppercase mt-2">Loading...</p>
@@ -76,7 +76,7 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     container.innerHTML = `
       <div class="overflow-x-auto"><table class="w-full text-left min-w-[600px]">
         <thead>
-          <tr class="border-b-2 border-on-surface">
+          <tr class="border-b border-outline-variant/40">
             <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Name</th>
             <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Slug</th>
             <th class="px-6 py-4 font-label text-xs uppercase font-bold text-outline tracking-wider">Color</th>
@@ -92,7 +92,7 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
               </td>
               <td class="px-6 py-4 text-sm text-outline">${esc(c.slug)}</td>
               <td class="px-6 py-4">
-                <select class="cat-color border border-on-surface rounded px-2 py-1 bg-surface text-xs">
+                <select class="cat-color border border-outline-variant/40 rounded px-2 py-1 bg-surface text-xs">
                   <option value="primary" ${c.color === 'primary' ? 'selected' : ''}>Purple</option>
                   <option value="secondary" ${c.color === 'secondary' ? 'selected' : ''}>Teal</option>
                   <option value="tertiary" ${c.color === 'tertiary' ? 'selected' : ''}>Olive</option>

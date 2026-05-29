@@ -129,6 +129,18 @@
   --color-inverse-surface: #171717;
   --color-inverse-on-surface: #fcfcfc;
   --color-inverse-primary: #e11d48;
+
+  /* Square corners site-wide: every rounded-{sm..3xl} utility resolves to 0, so
+     cards, buttons, inputs and dropdowns are all hard-edged. rounded-full is a
+     hardcoded 9999px (not a token) so circles/pills — avatars, the 1·2·3 step
+     badges, progress bars — stay round. The uploader keeps its own radii via
+     the scoped .su-* !important rules. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
 }
 
 /* Base styles */
@@ -154,10 +166,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-headline);
   font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   color: var(--color-on-background);
-  text-transform: uppercase;
 }
 
 ::selection {
@@ -165,23 +176,18 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
-/* Hard shadow utility — solid offset, no blur. */
+/* Soft shadow utility — blurred drop shadow, matches the uploader card.
+   (Class names kept for back-compat with existing markup.) */
 .hard-shadow,
 .brutal-shadow {
-  box-shadow: 4px 4px 0 0 #171717;
-  transition: transform 200ms, box-shadow 200ms, background-color 200ms, color 200ms;
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05);
+  border-radius: 0;
+  transition: box-shadow 200ms ease, background-color 200ms, color 200ms;
 }
 
 .hard-shadow-hover:hover,
 .brutal-shadow-hover:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 0 #171717;
-}
-
-.hard-shadow-hover:active,
-.brutal-shadow-hover:active {
-  transform: translate(4px, 4px);
-  box-shadow: 0 0 0 0 #171717;
+  box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.08);
 }
 
 @layer components {
@@ -194,13 +200,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     font-size: 1.4rem;
     line-height: 1.2;
-    letter-spacing: -0.025em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
     color: #171717;
     margin-top: 0;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 3px solid #171717;
+    border-bottom: 1px solid #e5e5e5;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
@@ -214,13 +219,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     font-size: 1.15rem;
     line-height: 1.25;
-    letter-spacing: -0.015em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
     color: #171717;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
     padding-left: 0.875rem;
-    border-left: 5px solid #e11d48;
+    border-left: 3px solid #e11d48;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
@@ -274,13 +278,12 @@ h1, h2, h3, h4, h5, h6 {
   .landing-prose ul > li::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.5rem;
-    width: 0.75rem;
-    height: 0.75rem;
+    left: 0.25rem;
+    top: 0.6rem;
+    width: 0.5rem;
+    height: 0.5rem;
     background: #e11d48;
-    border: 2px solid #171717;
-    box-shadow: 2px 2px 0 0 #171717;
+    border-radius: 9999px;
   }
 
   .landing-prose ol { counter-reset: landing-counter; }
@@ -301,8 +304,6 @@ h1, h2, h3, h4, h5, h6 {
     background: #171717;
     padding: 4px 7px;
     line-height: 1;
-    border: 2px solid #171717;
-    box-shadow: 2px 2px 0 0 #e11d48;
   }
 
   /* Blog post body overrides: drop the per-heading underline, give real rhythm,
@@ -334,14 +335,11 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     max-width: 100%;
     height: auto;
-    border: 2px solid #171717;
-    box-shadow: 4px 4px 0 0 #171717;
-    border-radius: 0.5rem;
+    border: 1px solid #e5e5e5;
     margin: 1.75rem 0;
   }
   @media (min-width: 640px) {
     .landing-prose.blog-html-content img {
-      box-shadow: 6px 6px 0 0 #171717;
       margin: 2.25rem 0;
     }
   }
@@ -361,8 +359,8 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 100%;
     overflow-x: auto;
     border-collapse: collapse;
-    border: 2px solid #171717;
-    box-shadow: 4px 4px 0 0 #171717;
+    border: 1px solid #e5e5e5;
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05);
     margin: 2rem 0;
     font-size: 0.9375rem;
     line-height: 1.5;
@@ -378,12 +376,12 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.75rem;
     text-align: left;
     padding: 0.75rem 1rem;
-    border: 2px solid #171717;
+    border: 1px solid #2f2f2f;
     vertical-align: top;
   }
   .landing-prose td {
     padding: 0.75rem 1rem;
-    border: 2px solid #171717;
+    border: 1px solid #e5e5e5;
     vertical-align: top;
     color: #171717;
   }
@@ -412,7 +410,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.9em;
     background: #fbf3d8;
     color: #171717;
-    border: 1.5px solid #171717;
+    border: 1px solid #e7dcb4;
     padding: 0 5px;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -429,10 +427,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace;
     background: #faf6ec;
     color: #171717;
-    border: 2px solid #171717;
-    border-left-width: 6px;
+    border: 1px solid #e5e5e5;
+    border-left-width: 4px;
     border-left-color: #e11d48;
-    box-shadow: 4px 4px 0 0 #171717;
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05);
     padding: 1.25rem 1.5rem 1.25rem 1.25rem;
     margin: 1.75rem 0;
     overflow-x: auto;
@@ -444,11 +442,12 @@ h1, h2, h3, h4, h5, h6 {
   .landing-prose pre::before {
     content: '';
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 8px;
-    height: 8px;
-    background: #171717;
+    top: 12px;
+    right: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #e11d48;
   }
   .landing-prose pre code {
     background: transparent;
@@ -538,18 +537,27 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
-/* Every surface is a hard-edged box — no rounding, anywhere. */
-input, textarea, select, button, img, video, iframe, [class*="rounded"] {
-  border-radius: 0 !important;
+/* Soft default radius for bare form controls (those without a rounded-* class).
+   Tailwind's rounded-* utilities flow through normally; the scoped
+   .soft-uploader .su-* rules below still win inside uploaders via !important. */
+input, textarea, select, button {
+  border-radius: 0;
+}
+
+/* Card surfaces — recessed inner shadow like the uploader's su-card, no outer
+   drop. Cards stay square-cornered (rounding is reserved for buttons, inputs,
+   pills and the uploader). The [class~=] exact-token match excludes full-width
+   -low/-high sections and hover:bg-* utility states. */
+[class~="bg-surface-container"][class*="rounded"] {
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05);
+  border-radius: 0;
 }
 
 /* ── Soft uploader surface ─────────────────────────────────────────────
-   The uploaders intentionally break the brutalist hard-edge look: a soft,
-   rounded, blurred-shadow card (per the design mockup). This is a SCOPED
-   opt-out — everything is gated behind .soft-uploader so the rest of the
-   site stays square. The descendant selectors (.soft-uploader .su-*, 0,2,0)
-   out-specify the [class*="rounded"] rule above (0,1,0), so even though both
-   carry !important the soft radius wins inside an uploader.
+   The uploaders carry the canonical soft look — a rounded, blurred-shadow
+   card (per the design mockup). The rest of the site now follows the same
+   aesthetic, so these scoped rules just pin the uploader's specific radii
+   (larger than the site default) and keep working regardless of markup.
    Brand: rose accent is applied via Tailwind utilities in the markup; this
    layer only owns radii + the soft drop shadows. */
 .soft-uploader .su-card    { border-radius: 1.5rem !important; }   /* outer padded card */

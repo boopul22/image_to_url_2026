@@ -28,13 +28,13 @@ const user = Astro.locals.user!;
             Welcome back, {user.name.split(' ')[0]}.
           </h1>
         </div>
-        <button id="refresh-stats" class="flex items-center gap-1.5 bg-surface border-2 border-on-surface rounded-lg px-3 py-1.5 font-label text-[11px] font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-transform hard-shadow">
+        <button id="refresh-stats" class="flex items-center gap-1.5 bg-surface border border-outline-variant/40 rounded-lg px-3 py-1.5 font-label text-[11px] font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-transform hard-shadow">
           <span class="material-symbols-outlined text-base">refresh</span> Refresh
         </button>
       </div>
 
       <!-- HERO PULSE — single dark panel; the only "loud" card on the page -->
-      <div class="bg-on-surface text-surface border-2 border-on-surface rounded-2xl p-4 sm:p-5 hard-shadow">
+      <div class="bg-on-surface text-surface border border-outline-variant/40 rounded-2xl p-4 sm:p-5 hard-shadow">
         <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 md:gap-6 items-end">
           <!-- Today (hero) -->
           <div class="min-w-0">
@@ -714,7 +714,7 @@ const user = Astro.locals.user!;
     const existing = document.querySelector('.admin-toast');
     if (existing) existing.remove();
     const toast = document.createElement('div');
-    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border-2 border-on-surface hard-shadow';
+    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border border-outline-variant/40 hard-shadow';
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);

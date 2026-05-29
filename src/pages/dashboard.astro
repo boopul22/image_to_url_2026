@@ -17,7 +17,7 @@ const user = Astro.locals.user!;
 
   <main class="pt-6 sm:pt-8 pb-16 sm:pb-24 px-4 sm:px-6 max-w-5xl mx-auto space-y-8 sm:space-y-12">
     <!-- Account Card -->
-    <section class="bg-surface border-2 border-on-surface p-5 sm:p-8 hard-shadow flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+    <section class="bg-surface border border-outline-variant/40 p-5 sm:p-8 hard-shadow flex flex-col md:flex-row items-center gap-6 sm:gap-8">
       <img
         src={user.avatarUrl}
         alt={user.name}
@@ -30,7 +30,7 @@ const user = Astro.locals.user!;
       </div>
       <div class="flex items-center gap-3">
         <span class:list={[
-          "px-4 py-1 border-2 border-on-surface rounded-full font-label text-xs font-bold uppercase tracking-wider",
+          "px-4 py-1 border border-outline-variant/40 rounded-full font-label text-xs font-bold uppercase tracking-wider",
           user.role === 'admin' ? 'bg-error text-on-error' : 'bg-secondary-fixed text-on-secondary-fixed',
         ]}>
           {user.role}
@@ -82,14 +82,14 @@ const user = Astro.locals.user!;
         </h2>
         <button
           id="generate-key-btn"
-          class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all"
+          class="bg-primary text-on-primary px-5 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all"
         >
           Generate New Key
         </button>
       </div>
 
       <!-- New Key Modal -->
-      <div id="new-key-modal" class="hidden mb-6 p-6 bg-tertiary-fixed border-2 border-on-surface hard-shadow">
+      <div id="new-key-modal" class="hidden mb-6 p-6 bg-tertiary-fixed border border-outline-variant/40 hard-shadow">
         <p class="font-label text-xs font-bold uppercase tracking-wider text-on-tertiary-fixed mb-2">
           Your new API key (copy it now — it won't be shown again):
         </p>
@@ -102,19 +102,19 @@ const user = Astro.locals.user!;
       </div>
 
       <!-- Generate Key Dialog -->
-      <div id="key-name-dialog" class="hidden mb-6 p-6 bg-surface-container border-2 border-on-surface hard-shadow">
+      <div id="key-name-dialog" class="hidden mb-6 p-6 bg-surface-container border border-outline-variant/40 hard-shadow">
         <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Key Name</label>
         <div class="flex flex-col sm:flex-row gap-3">
           <input
             id="key-name-input"
             type="text"
             placeholder="e.g. My App, CI Pipeline"
-            class="flex-1 bg-surface border-2 border-on-surface px-4 py-2 font-body text-sm focus:outline-none focus:border-primary"
+            class="flex-1 bg-surface border border-outline-variant/40 px-4 py-2 font-body text-sm focus:outline-none focus:border-primary"
           />
-          <button id="confirm-generate" class="bg-primary text-on-primary px-5 py-2 border-2 border-on-surface font-label text-xs font-bold uppercase">
+          <button id="confirm-generate" class="bg-primary text-on-primary px-5 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase">
             Create
           </button>
-          <button id="cancel-generate" class="bg-surface border-2 border-on-surface px-5 py-2 font-label text-xs font-bold uppercase">
+          <button id="cancel-generate" class="bg-surface border border-outline-variant/40 px-5 py-2 font-label text-xs font-bold uppercase">
             Cancel
           </button>
         </div>
@@ -141,7 +141,7 @@ const user = Astro.locals.user!;
         </div>
       </div>
       <div id="load-more-wrapper" class="hidden mt-8 text-center">
-        <button id="load-more-btn" class="bg-surface border-2 border-on-surface px-8 py-3 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">
+        <button id="load-more-btn" class="bg-surface border border-outline-variant/40 px-8 py-3 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all">
           Load More
         </button>
       </div>
@@ -240,7 +240,7 @@ const user = Astro.locals.user!;
       return;
     }
     keysList.innerHTML = data.keys.map((k: any) => `
-      <div class="flex items-center gap-4 p-4 bg-surface border-2 border-on-surface hard-shadow">
+      <div class="flex items-center gap-4 p-4 bg-surface border border-outline-variant/40 hard-shadow">
         <div class="flex-1">
           <span class="font-bold text-sm">${esc(k.name)}</span>
           <code class="ml-3 text-xs text-outline font-mono">${esc(k.key_prefix)}...</code>
@@ -294,7 +294,7 @@ const user = Astro.locals.user!;
       return;
     }
     imagesGrid.innerHTML = allImages.map((img: any) => `
-      <div class="bg-surface border-2 border-on-surface overflow-hidden hard-shadow group">
+      <div class="bg-surface border border-outline-variant/40 overflow-hidden hard-shadow group">
         <div class="h-40 bg-surface-container-highest overflow-hidden">
           <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
         </div>
@@ -303,7 +303,7 @@ const user = Astro.locals.user!;
           <p class="text-xs text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
           ${img.expires_at ? `<p class="text-[10px] font-bold uppercase tracking-wider text-rose-600">Expires ${formatExpiry(img.expires_at)}</p>` : ''}
           <div class="flex gap-2">
-            <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-2.5 border border-on-surface text-xs font-bold uppercase hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Copy URL</button>
+            <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-2.5 border border-outline-variant/40 text-xs font-bold uppercase hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Copy URL</button>
             <button onclick="deleteImage('${esc(img.id)}')" class="py-2.5 px-3 border border-error text-error text-xs font-bold uppercase hover:bg-error hover:text-on-error active:bg-error active:text-on-error transition-colors">
               <span class="material-symbols-outlined text-sm">delete</span>
             </button>

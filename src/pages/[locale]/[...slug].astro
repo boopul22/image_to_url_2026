@@ -150,7 +150,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       {widget.kind === 'favicon' && <ToolAdSurround><FaviconGenerator /></ToolAdSurround>}
 
       <header class="mb-5 sm:mb-8 reveal">
-        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">{c.badge}</span>
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">{c.badge}</span>
         <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
           {c.h1Pre} <span class="italic text-primary">{c.h1Highlight}</span>
         </h1>
@@ -168,8 +168,8 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {c.steps.map((step, i) => (
-            <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed'][i % 3]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
-              <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">{i + 1}</div>
+            <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed'][i % 3]} border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+              <div class="w-10 sm:w-12 h-10 sm:h-12 bg-primary text-on-primary border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-black font-headline">{i + 1}</div>
               <h3 class="text-base sm:text-lg font-black font-headline mb-2">{step.title}</h3>
               <p class="font-body text-on-surface-variant">{step.body}</p>
             </div>
@@ -186,8 +186,8 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {c.whyItems.map((item, i) => (
-            <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
-              <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+            <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+              <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
                 <span class="material-symbols-outlined text-primary text-lg sm:text-xl">bolt</span>
               </div>
               <h3 class="text-base sm:text-lg font-black font-headline mb-2">{item.title}</h3>
@@ -206,7 +206,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
         </div>
         <div class="space-y-4 reveal">
           {c.faqs.map((f, i) => (
-            <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border-2 border-on-background rounded-xl hard-shadow group`}>
+            <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border border-outline-variant/40 rounded-xl hard-shadow group`}>
               <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">
                 <span>{f.q}</span>
                 <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
@@ -223,10 +223,10 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
     <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="reveal">
-          <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+          <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border border-outline-variant/40 hard-shadow text-center">
             <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">{c.ctaTitle}</h2>
             <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">{c.ctaBody}</p>
-            <a href={homeHref} class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+            <a href={homeHref} class="inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
               {c.ctaButton}
             </a>
           </div>

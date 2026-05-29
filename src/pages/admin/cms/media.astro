@@ -25,7 +25,7 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
           <h1 class="text-xl sm:text-2xl font-headline italic font-black text-on-surface">Media Library</h1>
           <p class="text-on-surface-variant mt-1" id="media-count">Manage uploaded images for your content.</p>
         </div>
-        <label class="bg-primary text-on-primary px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider border-2 border-on-surface hard-shadow hover:-translate-y-1 active:scale-95 transition-all cursor-pointer flex items-center gap-2 self-start sm:self-auto">
+        <label class="bg-primary text-on-primary px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40 hard-shadow hover:-translate-y-1 active:scale-95 transition-all cursor-pointer flex items-center gap-2 self-start sm:self-auto">
           <span class="material-symbols-outlined text-lg">upload</span>
           Upload Media
           <input type="file" accept="image/*" multiple class="hidden" id="media-upload-input" />
@@ -35,12 +35,12 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
       <!-- Folder Filters -->
       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <div class="flex flex-wrap gap-1" id="folder-filters">
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all" data-folder="all">All</button>
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="blog">Blog</button>
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="pages">Pages</button>
-          <button class="px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="general">General</button>
+          <button class="px-4 py-2 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all" data-folder="all">All</button>
+          <button class="px-4 py-2 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="blog">Blog</button>
+          <button class="px-4 py-2 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="pages">Pages</button>
+          <button class="px-4 py-2 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-folder="general">General</button>
         </div>
-        <select id="upload-folder" class="ml-auto border-2 border-on-surface rounded-lg px-3 py-1.5 bg-surface text-xs font-label font-bold">
+        <select id="upload-folder" class="ml-auto border border-outline-variant/40 rounded-lg px-3 py-1.5 bg-surface text-xs font-label font-bold">
           <option value="general">Upload to: General</option>
           <option value="blog">Upload to: Blog</option>
           <option value="pages">Upload to: Pages</option>
@@ -89,7 +89,7 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     }
 
     grid.innerHTML = data.media.map((m: any) => `
-      <div class="bg-surface border-2 border-on-surface rounded-xl overflow-hidden hard-shadow group hover:-translate-y-1 transition-all">
+      <div class="bg-surface border border-outline-variant/40 rounded-xl overflow-hidden hard-shadow group hover:-translate-y-1 transition-all">
         <div class="h-36 bg-surface-container-highest overflow-hidden">
           <img src="${esc(m.url)}" alt="${esc(m.altText || m.filename)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" />
         </div>
@@ -113,9 +113,9 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     const pag = document.getElementById('pagination')!;
     if (data.totalPages > 1) {
       pag.innerHTML = `
-        <button onclick="loadPage(${Math.max(1, page - 1)})" class="px-4 py-2.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === 1 ? 'opacity-30' : ''}">Previous</button>
+        <button onclick="loadPage(${Math.max(1, page - 1)})" class="px-4 py-2.5 border border-outline-variant/40 rounded-xl font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === 1 ? 'opacity-30' : ''}">Previous</button>
         <span class="text-sm text-outline">Page ${page} of ${data.totalPages}</span>
-        <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="px-4 py-2.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === data.totalPages ? 'opacity-30' : ''}">Next</button>
+        <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="px-4 py-2.5 border border-outline-variant/40 rounded-xl font-label text-xs font-bold bg-surface hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors ${page === data.totalPages ? 'opacity-30' : ''}">Next</button>
       `;
     } else {
       pag.innerHTML = '';
@@ -126,7 +126,7 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     const existing = document.querySelector('.admin-toast');
     if (existing) existing.remove();
     const toast = document.createElement('div');
-    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border-2 border-on-surface hard-shadow transition-opacity';
+    toast.className = 'admin-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-5 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider z-50 border border-outline-variant/40 hard-shadow transition-opacity';
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
@@ -155,8 +155,8 @@ import AdminSidebar from '../../../components/AdminSidebar.astro';
     currentFolder = btn.dataset.folder || 'all';
     document.querySelectorAll('#folder-filters button').forEach(b => {
       b.className = b === btn
-        ? 'px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all'
-        : 'px-4 py-2 rounded-full border-2 border-on-surface text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all';
+        ? 'px-4 py-2 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all'
+        : 'px-4 py-2 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all';
     });
     loadMedia(1);
   });

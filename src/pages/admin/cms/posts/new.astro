@@ -9,9 +9,9 @@ const user = Astro.locals.user!;
 <Layout title="New Post - CMS - ImageToURL" noindex={true}>
   <div class="fixed inset-0 flex flex-col bg-surface-container-lowest z-50">
     <!-- Top Bar -->
-    <div class="flex-none flex items-center justify-between px-3 sm:px-5 py-2.5 border-b-2 border-on-surface bg-surface">
+    <div class="flex-none flex items-center justify-between px-3 sm:px-5 py-2.5 border-b border-outline-variant/40 bg-surface">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-        <button type="button" id="back-btn" class="flex-none w-9 h-9 rounded-xl border-2 border-on-surface flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+        <button type="button" id="back-btn" class="flex-none w-9 h-9 rounded-xl border border-outline-variant/40 flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
           <span class="material-symbols-outlined text-lg">arrow_back</span>
         </button>
         <h1 class="font-headline text-sm sm:text-base font-black text-on-surface truncate">
@@ -21,10 +21,10 @@ const user = Astro.locals.user!;
         <span id="save-status" class="hidden sm:inline text-[10px] text-outline"></span>
       </div>
       <div class="flex items-center gap-1.5 sm:gap-2">
-        <button id="save-draft-btn" type="button" class="px-3 py-1.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
+        <button id="save-draft-btn" type="button" class="px-3 py-1.5 border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
           Draft
         </button>
-        <button id="publish-btn" type="button" class="px-3 py-1.5 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
+        <button id="publish-btn" type="button" class="px-3 py-1.5 bg-primary text-on-primary border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
           Publish
         </button>
       </div>
@@ -39,7 +39,7 @@ const user = Astro.locals.user!;
     </div>
 
     <!-- Mobile Tabs -->
-    <div class="flex-none sm:hidden flex border-b-2 border-on-surface">
+    <div class="flex-none sm:hidden flex border-b border-outline-variant/40">
       <button type="button" data-mobile-tab="details" class="mobile-tab flex-1 px-2 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center justify-center gap-1.5 border-on-surface text-on-surface">
         <span class="material-symbols-outlined text-sm">tune</span> Details
       </button>
@@ -54,14 +54,14 @@ const user = Astro.locals.user!;
     <!-- Body -->
     <div class="flex-1 flex min-h-0 relative">
       <!-- Left Sidebar (metadata) — visible on desktop, toggled on mobile -->
-      <div id="left-sidebar" class="hidden sm:block flex-none w-72 xl:w-80 sm:border-r-2 border-on-surface overflow-y-auto p-3 space-y-2.5 bg-surface no-scrollbar">
+      <div id="left-sidebar" class="hidden sm:block flex-none w-72 xl:w-80 sm:border-r border-outline-variant/40 overflow-y-auto p-3 space-y-2.5 bg-surface no-scrollbar">
         <div id="metadata-fields"></div>
       </div>
 
       <!-- Desktop: Right panel (editor + preview) -->
       <div class="hidden sm:flex flex-1 flex-col min-w-0">
         <!-- Write / Preview tabs -->
-        <div class="flex-none flex items-center border-b-2 border-on-surface px-1 bg-surface">
+        <div class="flex-none flex items-center border-b border-outline-variant/40 px-1 bg-surface">
           <button type="button" data-tab="editor" class="desktop-tab px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center gap-1.5 border-on-surface text-on-surface">
             <span class="material-symbols-outlined text-sm">edit</span> Write
           </button>
@@ -196,12 +196,12 @@ const user = Astro.locals.user!;
       <div class="flex gap-1.5">
         <input id="post-cover-image" type="text" placeholder="URL or upload" class="sf-input flex-1 !text-xs" />
         <input type="file" accept="image/*" class="hidden" id="cover-upload" />
-        <button type="button" id="cover-upload-btn" class="flex-none w-8 h-[30px] rounded-lg border-2 border-outline-variant flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+        <button type="button" id="cover-upload-btn" class="flex-none w-8 h-[30px] rounded-lg border border-outline-variant/40 flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
           <span class="material-symbols-outlined text-sm">upload</span>
         </button>
       </div>
       <div id="cover-preview" class="hidden mt-1.5">
-        <img id="cover-img" class="rounded-lg h-20 w-full object-cover border-2 border-outline-variant" />
+        <img id="cover-img" class="rounded-lg h-20 w-full object-cover border border-outline-variant/40" />
       </div>
     </div>
 

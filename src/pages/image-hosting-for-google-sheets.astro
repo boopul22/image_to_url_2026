@@ -34,7 +34,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
     <ImageUploader />
 
     <header class="mb-5 sm:mb-8 reveal">
-      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Google Sheets</span>
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">Google Sheets</span>
       <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
         Image URLs for Google <span class="italic text-primary">Sheets.</span>
       </h1>
@@ -54,13 +54,13 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
-        <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow">
-          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+        <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <span class="material-symbols-outlined text-primary text-lg sm:text-xl">function</span>
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">The =IMAGE() Function</h3>
           <p class="font-body text-on-surface-variant mb-4">Google Sheets has a built-in =IMAGE() function that displays an image from a URL directly inside a cell. It requires a public, direct image URL — exactly what ImageToURL provides.</p>
-          <div class="bg-white border-2 border-on-background rounded-lg p-4 font-mono text-sm">
+          <div class="bg-white border border-outline-variant/40 rounded-lg p-4 font-mono text-sm">
             <p class="text-on-surface-variant mb-1">// Basic usage</p>
             <p class="font-bold">=IMAGE("https://your-url.jpg")</p>
             <p class="text-on-surface-variant mt-3 mb-1">// Fit to cell</p>
@@ -69,8 +69,8 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
             <p class="font-bold">=IMAGE("https://your-url.jpg", 4, 100, 200)</p>
           </div>
         </div>
-        <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow">
-          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+        <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <span class="material-symbols-outlined text-primary text-lg sm:text-xl">view_list</span>
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Step-by-Step</h3>
@@ -105,29 +105,29 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
-          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+        <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <span class="material-symbols-outlined text-primary text-lg sm:text-xl">link</span>
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">=IMAGE() Needs Public URLs</h3>
           <p class="font-body text-on-surface-variant">The =IMAGE() function only works with publicly accessible, direct image URLs. Private links, login-required pages, and HTML wrappers will not render as images.</p>
         </div>
-        <div class="bg-surface-variant border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
-          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+        <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <span class="material-symbols-outlined text-primary text-lg sm:text-xl">cloud_off</span>
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Google Drive Links Don't Work</h3>
           <p class="font-body text-on-surface-variant">Google Drive sharing links point to a preview page, not the raw image. They break in =IMAGE() and show errors. ImageToURL gives you a true direct image URL every time.</p>
         </div>
-        <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
-          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+        <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <span class="material-symbols-outlined text-primary text-lg sm:text-xl">all_inclusive</span>
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Permanent URLs for Reports</h3>
           <p class="font-body text-on-surface-variant">Build dashboards and reports with confidence. Your image URLs never expire, so shared spreadsheets always display correctly — even months later.</p>
         </div>
-        <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal">
-          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border-2 border-on-background rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+        <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <span class="material-symbols-outlined text-primary text-lg sm:text-xl">group</span>
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Team-Accessible Images</h3>
@@ -145,22 +145,22 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 reveal">
-        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
           <span class="material-symbols-outlined text-primary text-3xl mb-4 block">inventory_2</span>
           <h3 class="font-headline font-bold text-lg mb-2">Product Catalogs</h3>
           <p class="font-body text-on-surface-variant text-sm">Display product thumbnails next to names, prices, and SKUs in your spreadsheet catalog.</p>
         </div>
-        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
           <span class="material-symbols-outlined text-primary text-3xl mb-4 block">warehouse</span>
           <h3 class="font-headline font-bold text-lg mb-2">Inventory Tracking</h3>
           <p class="font-body text-on-surface-variant text-sm">Add item photos to inventory sheets for easy visual identification and stock management.</p>
         </div>
-        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
           <span class="material-symbols-outlined text-primary text-3xl mb-4 block">dashboard</span>
           <h3 class="font-headline font-bold text-lg mb-2">Team Dashboards</h3>
           <p class="font-body text-on-surface-variant text-sm">Add logos, avatars, and chart screenshots to dashboards shared across your team.</p>
         </div>
-        <div class="bg-surface border-2 border-on-background p-6 rounded-xl hard-shadow">
+        <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
           <span class="material-symbols-outlined text-primary text-3xl mb-4 block">assessment</span>
           <h3 class="font-headline font-bold text-lg mb-2">Visual Reports</h3>
           <p class="font-body text-on-surface-variant text-sm">Embed charts, screenshots, and diagrams directly in report spreadsheets for stakeholders.</p>
@@ -177,35 +177,35 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="reveal">
-        <details class="group border-2 border-on-background hard-shadow mb-3">
+        <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>How do I display an image in Google Sheets?</span>
             <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Use the =IMAGE() function with a direct image URL. For example: =IMAGE("https://imagetourl.cloud/your-image.jpg"). The image will display directly inside the cell.</div>
         </details>
-        <details class="group border-2 border-on-background hard-shadow mb-3">
+        <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Why don't Google Drive image links work in =IMAGE()?</span>
             <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Google Drive sharing links are not direct image URLs. They point to a preview page, not the raw image file. The =IMAGE() function requires a direct URL that serves the image file directly, which is exactly what ImageToURL provides.</div>
         </details>
-        <details class="group border-2 border-on-background hard-shadow mb-3">
+        <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I resize images inside Google Sheets cells?</span>
             <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. The =IMAGE() function supports a mode parameter: =IMAGE(url, 1) fits to cell, =IMAGE(url, 2) stretches to fill, =IMAGE(url, 3) keeps original size, and =IMAGE(url, 4, height, width) lets you set custom pixel dimensions.</div>
         </details>
-        <details class="group border-2 border-on-background hard-shadow mb-3">
+        <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Will the images load for everyone who views my spreadsheet?</span>
             <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Since ImageToURL provides public, CDN-backed URLs, anyone with access to your spreadsheet will see the images load instantly — no additional permissions or sharing setup needed.</div>
         </details>
-        <details class="group border-2 border-on-background hard-shadow mb-3">
+        <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Is there a limit on how many images I can add to a spreadsheet?</span>
             <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
@@ -224,21 +224,21 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="h-1 flex-grow bg-on-background opacity-10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 reveal">
-        <a href="/image-url-generator" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+        <a href="/image-url-generator" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
             <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image format</p>
           </div>
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
-        <a href="/bulk-image-upload" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+        <a href="/bulk-image-upload" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Bulk Image Upload</h3>
             <p class="text-sm text-on-surface-variant">Upload multiple images and get all URLs at once</p>
           </div>
           <span class="material-symbols-outlined text-primary">arrow_forward</span>
         </a>
-        <a href="/free-image-hosting" class="border-2 border-on-background p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
+        <a href="/free-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Direct Image Link</h3>
             <p class="text-sm text-on-surface-variant">Get direct links to your hosted images</p>
@@ -253,10 +253,10 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
     <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
       <div class="reveal">
-      <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+      <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border border-outline-variant/40 hard-shadow text-center">
         <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Add images to your spreadsheets today</h2>
         <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">Upload an image, copy the URL, and use =IMAGE() in Google Sheets. It takes seconds.</p>
-        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
           Upload Now
         </a>
       </div>

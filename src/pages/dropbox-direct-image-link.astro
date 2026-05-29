@@ -21,7 +21,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
       <header class="mb-5 sm:mb-8 reveal">
-        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-on-background">Use Case</span>
+        <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">Use Case</span>
         <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">Dropbox direct image link <span class="italic text-primary">the link that actually works.</span></h1>
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Dropbox share URLs open a preview page, not a raw image. The ?dl=1 trick is rate-limited and brittle. Re-host once for a stable direct URL.</p>
       </header>
@@ -30,9 +30,9 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">The problem with each Dropbox URL</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-          <div class="bg-secondary-container border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">dropbox.com/s/...</h3><p class="font-body text-on-surface-variant">Opens a preview HTML page. Won't render inside an &lt;img&gt; tag.</p></div>
-          <div class="bg-tertiary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">...?dl=1</h3><p class="font-body text-on-surface-variant">Forces download. Sometimes embeds, but hits rate limits at 20 GB/day on free accounts.</p></div>
-          <div class="bg-primary-fixed border-2 border-on-background p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">dl.dropboxusercontent.com</h3><p class="font-body text-on-surface-variant">Deprecated in 2017. Still works today — not guaranteed tomorrow. Not safe for production.</p></div>
+          <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">dropbox.com/s/...</h3><p class="font-body text-on-surface-variant">Opens a preview HTML page. Won't render inside an &lt;img&gt; tag.</p></div>
+          <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">...?dl=1</h3><p class="font-body text-on-surface-variant">Forces download. Sometimes embeds, but hits rate limits at 20 GB/day on free accounts.</p></div>
+          <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal"><h3 class="text-base sm:text-lg font-black font-headline mb-2">dl.dropboxusercontent.com</h3><p class="font-body text-on-surface-variant">Deprecated in 2017. Still works today — not guaranteed tomorrow. Not safe for production.</p></div>
         </div>
       </div>
     </section>
@@ -41,7 +41,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
         <div class="flex flex-col gap-3 sm:gap-4">
           {faqSchema.mainEntity.map((q, i) => (
-            <details class={`border-2 border-on-background rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
+            <details class={`border border-outline-variant/40 rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
               <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{q.name}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
               <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{q.acceptedAnswer.text}</p></div>
             </details>
@@ -50,9 +50,9 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
       </div>
     </section>
     <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
-      <div class="max-w-5xl mx-auto px-3 sm:px-6"><div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border-2 border-on-surface hard-shadow text-center">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6"><div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border border-outline-variant/40 hard-shadow text-center">
         <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Re-host and move on</h2>
-        <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border-2 border-on-background font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload image</a>
+        <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload image</a>
       </div></div></div>
     </section>
   </main>

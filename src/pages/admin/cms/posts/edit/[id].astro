@@ -9,9 +9,9 @@ const { id } = Astro.params;
 <Layout title="Edit Post - CMS - ImageToURL" noindex={true}>
   <div class="fixed inset-0 flex flex-col bg-surface-container-lowest z-50" data-post-id={id}>
     <!-- Top Bar -->
-    <div class="flex-none flex items-center justify-between px-3 sm:px-5 py-2.5 border-b-2 border-on-surface bg-surface">
+    <div class="flex-none flex items-center justify-between px-3 sm:px-5 py-2.5 border-b border-outline-variant/40 bg-surface">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-        <button type="button" id="back-btn" class="flex-none w-9 h-9 rounded-xl border-2 border-on-surface flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+        <button type="button" id="back-btn" class="flex-none w-9 h-9 rounded-xl border border-outline-variant/40 flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
           <span class="material-symbols-outlined text-lg">arrow_back</span>
         </button>
         <h1 id="page-title" class="font-headline text-sm sm:text-base font-black text-on-surface truncate">Edit Post</h1>
@@ -20,17 +20,17 @@ const { id } = Astro.params;
       </div>
       <div class="flex items-center gap-1.5 sm:gap-2">
         <span id="error-msg" class="text-error text-xs max-w-32 truncate hidden lg:inline"></span>
-        <button id="save-btn" type="button" class="px-3 py-1.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
+        <button id="save-btn" type="button" class="px-3 py-1.5 border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all">
           Save
         </button>
-        <button id="translate-btn" type="button" title="Auto-translate to all languages via OpenRouter" class="px-3 py-1.5 border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all flex items-center gap-1.5">
+        <button id="translate-btn" type="button" title="Auto-translate to all languages via OpenRouter" class="px-3 py-1.5 border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:bg-surface-container-highest active:scale-95 transition-all flex items-center gap-1.5">
           <span class="material-symbols-outlined text-base">translate</span>
           <span id="translate-btn-label">Translate</span>
         </button>
-        <button id="publish-toggle-btn" type="button" class="px-3 py-1.5 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
+        <button id="publish-toggle-btn" type="button" class="px-3 py-1.5 bg-primary text-on-primary border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all">
           Publish
         </button>
-        <a id="view-post-link" href="#" class="hidden w-9 h-9 flex items-center justify-center rounded-xl border-2 border-on-surface hover:bg-surface-container-highest transition-colors" title="View post">
+        <a id="view-post-link" href="#" class="hidden w-9 h-9 flex items-center justify-center rounded-xl border border-outline-variant/40 hover:bg-surface-container-highest transition-colors" title="View post">
           <span class="material-symbols-outlined text-lg">open_in_new</span>
         </a>
       </div>
@@ -45,7 +45,7 @@ const { id } = Astro.params;
     </div>
 
     <!-- Mobile Tabs -->
-    <div class="flex-none sm:hidden flex border-b-2 border-on-surface">
+    <div class="flex-none sm:hidden flex border-b border-outline-variant/40">
       <button type="button" data-mobile-tab="details" class="mobile-tab flex-1 px-2 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center justify-center gap-1.5 border-on-surface text-on-surface">
         <span class="material-symbols-outlined text-sm">tune</span> Details
       </button>
@@ -60,13 +60,13 @@ const { id } = Astro.params;
     <!-- Body -->
     <div class="flex-1 flex min-h-0 relative">
       <!-- Desktop: Left Sidebar (metadata) -->
-      <div class="hidden sm:block flex-none w-72 xl:w-80 border-r-2 border-on-surface overflow-y-auto p-3 space-y-2.5 bg-surface no-scrollbar" id="left-sidebar">
+      <div class="hidden sm:block flex-none w-72 xl:w-80 border-r border-outline-variant/40 overflow-y-auto p-3 space-y-2.5 bg-surface no-scrollbar" id="left-sidebar">
         <div id="metadata-fields"></div>
       </div>
 
       <!-- Desktop: Right panel -->
       <div class="hidden sm:flex flex-1 flex-col min-w-0">
-        <div class="flex-none flex items-center border-b-2 border-on-surface px-1 bg-surface">
+        <div class="flex-none flex items-center border-b border-outline-variant/40 px-1 bg-surface">
           <button type="button" data-tab="editor" class="desktop-tab px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 -mb-px flex items-center gap-1.5 border-on-surface text-on-surface">
             <span class="material-symbols-outlined text-sm">edit</span> Write
           </button>
@@ -196,12 +196,12 @@ const { id } = Astro.params;
       <div class="flex gap-1.5">
         <input id="post-cover-image" type="text" placeholder="URL or upload" class="sf-input flex-1 !text-xs" />
         <input type="file" accept="image/*" class="hidden" id="cover-upload" />
-        <button type="button" id="cover-upload-btn" class="flex-none w-8 h-[30px] rounded-lg border-2 border-outline-variant flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
+        <button type="button" id="cover-upload-btn" class="flex-none w-8 h-[30px] rounded-lg border border-outline-variant/40 flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-highest transition-colors">
           <span class="material-symbols-outlined text-sm">upload</span>
         </button>
       </div>
       <div id="cover-preview" class="hidden mt-1.5">
-        <img id="cover-img" class="rounded-lg h-20 w-full object-cover border-2 border-outline-variant" />
+        <img id="cover-img" class="rounded-lg h-20 w-full object-cover border border-outline-variant/40" />
       </div>
     </div>
 
@@ -629,7 +629,7 @@ const { id } = Astro.params;
       badgeMobile.textContent = 'Published';
       badgeMobile.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container';
       toggleBtn.textContent = 'Unpublish';
-      toggleBtn.className = 'px-3 py-1.5 bg-outline text-surface border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all';
+      toggleBtn.className = 'px-3 py-1.5 bg-outline text-surface border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all';
       viewLink.href = `/blog/${currentSlug}`;
       viewLink.classList.remove('hidden');
     } else {
@@ -638,7 +638,7 @@ const { id } = Astro.params;
       badgeMobile.textContent = 'Draft';
       badgeMobile.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed';
       toggleBtn.textContent = 'Publish';
-      toggleBtn.className = 'px-3 py-1.5 bg-primary text-on-primary border-2 border-on-surface rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all';
+      toggleBtn.className = 'px-3 py-1.5 bg-primary text-on-primary border border-outline-variant/40 rounded-xl font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 active:scale-95 transition-all';
       viewLink.classList.add('hidden');
     }
 

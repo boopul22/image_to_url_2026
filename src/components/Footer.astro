@@ -52,9 +52,9 @@ const learnGroups: Group[] = [
           <input
             type="email"
             placeholder={t(locale, 'footer.emailPlaceholder')}
-            class="flex-1 bg-neutral-800 border-2 border-neutral-700 text-white placeholder:text-neutral-500 px-3 py-2 text-xs focus:border-rose-600 focus:outline-none"
+            class="flex-1 bg-neutral-800 border border-outline-variant/40 rounded-lg text-white placeholder:text-neutral-500 px-3 py-2 text-xs focus:border-rose-600 focus:outline-none"
           />
-          <button class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 font-headline font-semibold text-xs uppercase tracking-wide transition-colors border-2 border-rose-600">
+          <button class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-lg font-headline font-semibold text-xs uppercase tracking-wide transition-colors border border-rose-600">
             {t(locale, 'footer.join')}
           </button>
         </div>
@@ -121,7 +121,7 @@ const learnGroups: Group[] = [
     </div>
 
     <!-- Company / Our Tools — short enough to stay flat -->
-    <div class="mt-10 pt-6 border-t-2 border-neutral-800 grid gap-6 md:grid-cols-2">
+    <div class="mt-10 pt-6 border-t border-outline-variant/40 grid gap-6 md:grid-cols-2">
       <div>
         <span class={colHead}>{t(locale, 'footer.resources')}</span>
         <nav class="flex flex-wrap gap-x-5 gap-y-1">
@@ -155,7 +155,7 @@ const learnGroups: Group[] = [
       </div>
     </div>
 
-    <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row justify-between gap-2 text-xs text-neutral-400">
+    <div class="mt-8 pt-5 border-t border-outline-variant/40 flex flex-col sm:flex-row justify-between gap-2 text-xs text-neutral-400">
       <p>{t(locale, 'footer.copyright', { year: String(new Date().getFullYear()) })}</p>
       <p>Built with care · Hosted on Cloudflare</p>
     </div>
@@ -189,12 +189,12 @@ const learnGroups: Group[] = [
   .footer-dd > summary:hover .dd-sq { border-color: #e11d48; color: #e11d48; }
   .footer-dd[open] > summary { color: #fff; }
 
-  /* Brutal toggle square */
+  /* Soft toggle chip */
   .dd-sq {
     flex-shrink: 0;
     width: 16px;
     height: 16px;
-    border: 1.5px solid #525252; /* neutral-600 */
+    border: 1px solid #525252; /* neutral-600 */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -220,7 +220,7 @@ const learnGroups: Group[] = [
     border-left: 2px solid #e11d48;
   }
 
-  /* No motion: instant open — matches brutalist anti-smooth rule */
+  /* Minimal motion: instant open, no slide */
   .footer-dd > summary,
   .footer-dd .dd-sq { will-change: auto; }
 </style>

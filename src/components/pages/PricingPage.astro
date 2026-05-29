@@ -130,7 +130,7 @@ const pageSchema = [
     <!-- Pricing Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 items-start reveal-stagger">
       <!-- Tier: Free -->
-      <div class="bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 reveal">
+      <div class="bg-surface-container-lowest border border-outline-variant/40 p-5 sm:p-8 transition-transform duration-200 reveal">
         <div class="mb-5 sm:mb-8">
           <span class="font-label uppercase tracking-widest text-xs font-black text-outline">{t(locale, 'pricing.free.label')}</span>
           <h3 class="font-headline font-bold text-xl sm:text-2xl mt-2">{t(locale, 'pricing.free.name')}</h3>
@@ -151,14 +151,14 @@ const pageSchema = [
             <span class="text-sm font-medium">{t(locale, 'pricing.free.feature3')}</span>
           </li>
         </ul>
-        <button class="w-full py-4 border-2 border-on-background bg-surface-container hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
+        <button class="w-full py-4 border border-outline-variant/40 bg-surface-container hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
           {t(locale, 'pricing.free.cta')}
         </button>
       </div>
 
       <!-- Tier: Pro (Recommended) -->
-      <div class="relative bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 hard-shadow reveal">
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 text-xs font-bold tracking-widest uppercase border-2 border-on-background">
+      <div class="relative bg-surface-container-lowest border border-outline-variant/40 p-5 sm:p-8 transition-transform duration-200 hard-shadow reveal">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 text-xs font-bold tracking-widest uppercase border border-outline-variant/40">
           {t(locale, 'pricing.pro.badge')}
         </div>
         <div class="mb-5 sm:mb-8">
@@ -185,13 +185,13 @@ const pageSchema = [
             <span class="text-sm font-bold">{t(locale, 'pricing.pro.feature4')}</span>
           </li>
         </ul>
-        <button class="w-full py-4 bg-primary text-on-primary border-2 border-on-background font-black text-lg hard-shadow-hover transition-all active:scale-[0.98]">
+        <button class="w-full py-4 bg-primary text-on-primary border border-outline-variant/40 font-black text-lg hard-shadow-hover transition-all active:scale-[0.98]">
           {t(locale, 'pricing.pro.cta')}
         </button>
       </div>
 
       <!-- Tier: Business -->
-      <div class="bg-surface-container-lowest border-2 border-on-background p-5 sm:p-8 transition-transform duration-200 reveal">
+      <div class="bg-surface-container-lowest border border-outline-variant/40 p-5 sm:p-8 transition-transform duration-200 reveal">
         <div class="mb-5 sm:mb-8">
           <span class="font-label uppercase tracking-widest text-xs font-black text-outline">{t(locale, 'pricing.business.label')}</span>
           <h3 class="font-headline font-bold text-xl sm:text-2xl mt-2">{t(locale, 'pricing.business.name')}</h3>
@@ -216,7 +216,7 @@ const pageSchema = [
             <span class="text-sm font-medium">{t(locale, 'pricing.business.feature4')}</span>
           </li>
         </ul>
-        <button class="w-full py-4 border-2 border-on-background bg-surface-container-high hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
+        <button class="w-full py-4 border border-outline-variant/40 bg-surface-container-high hover:bg-surface-variant active:bg-surface-variant font-bold text-on-background transition-colors active:scale-[0.98]">
           {t(locale, 'pricing.business.cta')}
         </button>
       </div>
@@ -226,15 +226,15 @@ const pageSchema = [
     <section class="mt-20 sm:mt-40 max-w-4xl mx-auto">
       <h2 class="font-headline font-black text-3xl sm:text-3xl text-center mb-10 sm:mb-16 underline decoration-tertiary-fixed decoration-8 underline-offset-4">{t(locale, 'pricing.faq.title')}</h2>
       <div class="space-y-6">
-        <div class="bg-background border-2 border-on-background p-6 hard-shadow">
+        <div class="bg-background border border-outline-variant/40 p-6 hard-shadow">
           <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q1')}</h4>
           <p class="font-body text-on-background leading-relaxed">{t(locale, 'pricing.faq.a1')}</p>
         </div>
-        <div class="bg-background border-2 border-on-background p-6 hard-shadow">
+        <div class="bg-background border border-outline-variant/40 p-6 hard-shadow">
           <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q2')}</h4>
           <p class="font-body text-on-background leading-relaxed">{t(locale, 'pricing.faq.a2')}</p>
         </div>
-        <div class="bg-background border-2 border-on-background p-6 hard-shadow">
+        <div class="bg-background border border-outline-variant/40 p-6 hard-shadow">
           <h4 class="font-headline font-bold text-2xl mb-2">{t(locale, 'pricing.faq.q3')}</h4>
           <p class="font-body text-on-background leading-relaxed">{t(locale, 'pricing.faq.a3')}</p>
         </div>
@@ -242,15 +242,15 @@ const pageSchema = [
     </section>
 
     <!-- CTA Visual Section -->
-    <section class="mt-16 sm:mt-40 bg-surface-container border-2 border-on-background overflow-hidden flex flex-col lg:flex-row items-center p-4 sm:p-5 lg:p-12 relative">
+    <section class="mt-16 sm:mt-40 bg-surface-container border border-outline-variant/40 overflow-hidden flex flex-col lg:flex-row items-center p-4 sm:p-5 lg:p-12 relative">
       <div class="lg:w-1/2 mb-8 lg:mb-0">
         <h2 class="font-headline font-black text-lg sm:text-xl lg:text-4xl mb-4 sm:mb-6">{t(locale, 'pricing.cta.title')}</h2>
-        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-3 sm:py-4 border-2 border-on-background hard-shadow hard-shadow-hover transition-all font-black text-lg sm:text-xl active:scale-95">
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-3 sm:py-4 border border-outline-variant/40 hard-shadow hard-shadow-hover transition-all font-black text-lg sm:text-xl active:scale-95">
           {t(locale, 'pricing.cta.btn')}
         </a>
       </div>
       <div class="lg:w-1/2 flex justify-center">
-        <img class="border-2 border-on-background rotate-3 hard-shadow max-w-full h-auto max-h-64 sm:max-h-none" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" width="500" height="400" loading="lazy" decoding="async" />
+        <img class="border border-outline-variant/40 rotate-3 hard-shadow max-w-full h-auto max-h-64 sm:max-h-none" alt="Creative digital collage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHLTv0yKepjxJ8SlAYwhbJuZ-YcFiNsOwzBVx-4FUdRZDekcEGhAD-1H35uQKF4s1RePLiLB4-KADLHTpt8OK9mSQPA0EnwRQoMeCtylOYpBdk7vrJd1NYBzIw7vmjFs74Z65Hs7XD_iCHvgw7fJCt11lerimYUlNivB_bhsWYVlgY-9J43xK26iYWx1MMiiMcRSh_ORPUl17fGaGc0HfVScHRtu-niYI2Mh9xiaYoVjBpzn_bOdUup6YJDJidhpovAMMMrwvr90" width="500" height="400" loading="lazy" decoding="async" />
       </div>
     </section>
   </main>

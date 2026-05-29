@@ -52,20 +52,20 @@ const snipBb = url ? `[img]${url}[/img]` : '';
           <h1 class="text-xl sm:text-2xl font-headline italic font-black text-on-surface">URL copied to clipboard</h1>
         </div>
 
-        <div class="bg-surface border-2 border-on-surface rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
+        <div class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
           <!-- Thumbnail + URL -->
           <div class="flex items-start gap-3">
             <a id="thumb-link" href={url} target="_blank" rel="noopener" class="flex-shrink-0">
               <img id="thumb" src={url} alt="Uploaded image" loading="lazy" decoding="async"
-                   class="w-16 h-16 object-cover border-2 border-on-surface bg-surface-variant" />
+                   class="w-16 h-16 object-cover border border-outline-variant/40 bg-surface-variant" />
             </a>
             <div class="flex-1 min-w-0">
               <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Direct URL</label>
               <div class="flex gap-2 mt-1">
                 <input id="share-url" type="text" readonly value={url}
-                       class="flex-1 min-w-0 bg-white border-2 border-on-background px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
+                       class="flex-1 min-w-0 bg-white border border-outline-variant/40 px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
                 <button data-copy-target="share-url"
-                        class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border-2 border-on-surface brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
+                        class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
               </div>
             </div>
           </div>
@@ -75,32 +75,32 @@ const snipBb = url ? `[img]${url}[/img]` : '';
             <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Embed code</label>
             <div class="grid gap-2">
               <div class="flex gap-2">
-                <input id="snip-md" type="text" readonly value={snipMd} class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-                <button data-copy-target="snip-md" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Markdown</button>
+                <input id="snip-md" type="text" readonly value={snipMd} class="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
+                <button data-copy-target="snip-md" class="copy-btn bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Markdown</button>
               </div>
               <div class="flex gap-2">
-                <input id="snip-html" type="text" readonly value={snipHtml} class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-                <button data-copy-target="snip-html" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">HTML</button>
+                <input id="snip-html" type="text" readonly value={snipHtml} class="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
+                <button data-copy-target="snip-html" class="copy-btn bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">HTML</button>
               </div>
               <div class="flex gap-2">
-                <input id="snip-bb" type="text" readonly value={snipBb} class="flex-1 min-w-0 bg-surface-container-lowest border-2 border-on-background px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-                <button data-copy-target="snip-bb" class="copy-btn bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">BBCode</button>
+                <input id="snip-bb" type="text" readonly value={snipBb} class="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
+                <button data-copy-target="snip-bb" class="copy-btn bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">BBCode</button>
               </div>
             </div>
           </div>
 
           <!-- QR + open -->
-          <div class="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t-2 border-outline-variant">
-            <div class="flex-shrink-0 border-2 border-on-surface bg-white p-2">
+          <div class="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t border-outline-variant/40">
+            <div class="flex-shrink-0 border border-outline-variant/40 bg-white p-2">
               <canvas id="qr-canvas" width="160" height="160" class="block w-[160px] h-[160px]"></canvas>
             </div>
             <div class="flex-1 w-full space-y-2">
               <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Scan or share</p>
-              <button id="download-qr" class="w-full bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
+              <button id="download-qr" class="w-full bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
                 <span class="material-symbols-outlined text-base">download</span> Download QR
               </button>
               <a id="open-image" href={url} target="_blank" rel="noopener"
-                 class="w-full bg-surface border-2 border-on-surface font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
+                 class="w-full bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
                 <span class="material-symbols-outlined text-base">open_in_new</span> Open image
               </a>
             </div>
@@ -131,7 +131,7 @@ const snipBb = url ? `[img]${url}[/img]` : '';
         <span class="material-symbols-outlined text-5xl text-outline">link_off</span>
         <h1 class="text-xl font-headline italic font-black text-on-surface mt-3">No image URL</h1>
         <p class="text-on-surface-variant mt-1">This page opens after you copy an uploaded image link.</p>
-        <a href="/" class="inline-block mt-5 bg-rose-600 text-white font-headline font-semibold text-sm py-3 px-6 border-2 border-on-surface brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">Upload an image</a>
+        <a href="/" class="inline-block mt-5 bg-rose-600 text-white font-headline font-semibold text-sm py-3 px-6 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">Upload an image</a>
       </div>
     )}
   </main>

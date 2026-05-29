@@ -361,7 +361,7 @@ const toL = toLabel[to];
           success++;
         } catch (err: any) {
           const row = document.createElement('div');
-          row.className = 'border-2 border-error bg-white p-3 text-xs';
+          row.className = 'border border-error bg-white p-3 text-xs';
           row.textContent = `${file.name} — ${err?.message || 'failed'}`;
           resultsList.appendChild(row);
         }

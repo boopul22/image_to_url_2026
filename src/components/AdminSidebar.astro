@@ -13,7 +13,7 @@ const navItems = [
 <!-- Mobile sidebar toggle -->
 <button
   id="sidebar-toggle"
-  class="lg:hidden fixed z-50 w-12 h-12 bg-primary text-on-primary border-2 border-on-surface rounded-xl flex items-center justify-center hard-shadow active:scale-90 transition-transform"
+  class="lg:hidden fixed z-50 w-12 h-12 bg-primary text-on-primary border border-outline-variant/40 rounded-xl flex items-center justify-center hard-shadow active:scale-90 transition-transform"
   style="bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)); left: max(1.25rem, env(safe-area-inset-left, 1.25rem));"
   aria-label="Toggle sidebar"
 >
@@ -23,7 +23,7 @@ const navItems = [
 <!-- Backdrop -->
 <div id="sidebar-backdrop" class="lg:hidden fixed inset-0 bg-on-surface/50 z-30 transition-opacity duration-200 opacity-0 pointer-events-none backdrop-blur-sm" aria-hidden="true"></div>
 
-<aside id="admin-sidebar" class="admin-sidebar w-64 flex-shrink-0 bg-surface border-r-2 border-on-surface flex flex-col fixed lg:sticky top-0 lg:top-[var(--nav-h,57px)] left-0 z-40 h-dvh lg:h-[calc(100dvh-var(--nav-h,57px))] -translate-x-full lg:translate-x-0 transition-transform duration-200">
+<aside id="admin-sidebar" class="admin-sidebar w-64 flex-shrink-0 bg-surface border-r border-outline-variant/40 flex flex-col fixed lg:sticky top-0 lg:top-[var(--nav-h,57px)] left-0 z-40 h-dvh lg:h-[calc(100dvh-var(--nav-h,57px))] -translate-x-full lg:translate-x-0 transition-transform duration-200">
   <!-- Mobile: show header with close button -->
   <div class="flex items-center justify-between p-4 border-b border-outline-variant lg:pt-6 lg:pb-4 lg:px-6">
     <p class="font-label text-xs font-bold uppercase tracking-widest text-outline">Admin Console</p>
