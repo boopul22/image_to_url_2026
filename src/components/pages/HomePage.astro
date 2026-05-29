@@ -31,6 +31,18 @@ type DisplayReview = {
   quote: string;
 };
 
+// De-identify reviewers for public display: first name + last initial
+// (e.g. "Aman Sharma" -> "Aman S."). Single-word names are left as-is.
+// Real names/photos stay in the DB for admin moderation only.
+function maskName(full: string): string {
+  const parts = (full || '').trim().split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    const initial = parts[parts.length - 1][0];
+    return initial ? `${parts[0]} ${initial.toUpperCase()}.` : parts[0];
+  }
+  return parts[0] || 'ImageToURL user';
+}
+
 let reviews: DisplayReview[] = [];
 let reviewStats = { total: 0, average: 0 };
 try {
@@ -41,9 +53,9 @@ try {
   ]);
   reviewStats = stats;
   reviews = rows.map((r) => ({
-    name: r.name,
+    name: maskName(r.name),
     role: r.role,
-    avatar: r.avatar_url,
+    avatar: null, // de-identified: show initials, not real profile photos
     rating: r.rating,
     date: (r.created_at || '').slice(0, 10),
     quote: r.body,
