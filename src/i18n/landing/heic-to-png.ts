@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Want a hosted URL?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'HEIC से PNG — 100% ब्राउज़र | लॉसलेस iPhone', schemaName: 'HEIC से PNG कनवर्टर', h1Pre: 'HEIC से PNG', h1Highlight: 'लॉसलेस, निजी, मुफ्त।', intro: 'iPhone HEIC फोटो ड्रॉप करें और संपादित-तैयार PNG पाएं। WebAssembly डिकोडर ब्राउज़र में चलता है।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'HEIC a PNG — Navegador | Conversión sin pérdidas', schemaName: 'Convertidor HEIC a PNG', h1Pre: 'HEIC a PNG', h1Highlight: 'sin pérdidas, privado, gratis.', intro: 'Suelta fotos HEIC de iPhone y obtén PNG listos para editar.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'HEIC vers PNG — Navigateur | Conversion sans perte', schemaName: 'Convertisseur HEIC vers PNG', h1Pre: 'HEIC vers PNG', h1Highlight: 'sans perte, privé, gratuit.', intro: 'Déposez des photos HEIC d\'iPhone et obtenez des PNG prêts à éditer.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'HEIC zu PNG — Browser | Verlustfrei', schemaName: 'HEIC zu PNG Konverter', h1Pre: 'HEIC zu PNG', h1Highlight: 'verlustfrei, privat, kostenlos.', intro: 'iPhone HEIC-Fotos ablegen und bearbeitungsfertige PNGs erhalten.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'HEIC から PNG — ブラウザ | ロスレス iPhone 変換', schemaName: 'HEIC から PNG 変換ツール', h1Pre: 'HEIC から PNG', h1Highlight: 'ロスレス、プライベート、無料。', intro: 'iPhone HEIC 写真をドロップして編集可能な PNG を取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

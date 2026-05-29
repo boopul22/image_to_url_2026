@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Want a permanent URL?', ctaBody: 'After converting, click Get URL to host on our CDN.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'WebP से JPG कनवर्टर — 100% ब्राउज़र में | मुफ्त', schemaName: 'WebP से JPG कनवर्टर', h1Pre: 'WebP से JPG कनवर्टर', h1Highlight: 'असंगत फाइलें ठीक करें।', intro: 'WebP फाइलें जिन्हें कोई ऐप स्वीकार नहीं करता? यहाँ ड्रॉप करें और JPG पाएं।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'Convertidor WebP a JPG — 100% Navegador | Gratis', schemaName: 'Convertidor WebP a JPG', h1Pre: 'Convertidor WebP a JPG', h1Highlight: 'arregla archivos incompatibles.', intro: '¿Archivos WebP que no se aceptan? Suéltalos aquí y obtén JPG.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'Convertisseur WebP vers JPG — Navigateur | Gratuit', schemaName: 'Convertisseur WebP vers JPG', h1Pre: 'Convertisseur WebP vers JPG', h1Highlight: 'corrigez les fichiers incompatibles.', intro: 'Fichiers WebP refusés par une app ? Déposez-les ici pour obtenir des JPG.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'WebP zu JPG Konverter — 100% im Browser | Kostenlos', schemaName: 'WebP zu JPG Konverter', h1Pre: 'WebP zu JPG Konverter', h1Highlight: 'inkompatible Dateien reparieren.', intro: 'WebP-Dateien, die eine App nicht akzeptiert? Hier ablegen und JPG erhalten.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'WebP から JPG 変換ツール — 100% ブラウザ | 無料', schemaName: 'WebP から JPG 変換ツール', h1Pre: 'WebP から JPG 変換ツール', h1Highlight: '非対応ファイルを修正。', intro: 'アプリが受け付けない WebP ファイル？ここにドロップして JPG を取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

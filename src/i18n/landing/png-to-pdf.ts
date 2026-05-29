@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Host the PDF too?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'PNG से PDF कनवर्टर — 100% ब्राउज़र | मुफ्त', schemaName: 'PNG से PDF कनवर्टर', h1Pre: 'PNG से PDF', h1Highlight: 'मर्ज या अलग।', intro: 'PNG स्क्रीनशॉट, रसीदें या पेज स्कैन ड्रॉप करें — एक PDF या प्रत्येक के लिए एक PDF पाएं।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'Convertidor PNG a PDF — Navegador | Gratis', schemaName: 'Convertidor PNG a PDF', h1Pre: 'PNG a PDF', h1Highlight: 'fusionar o individual.', intro: 'Suelta capturas o escaneos PNG — obtén un PDF combinado o uno por imagen.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'Convertisseur PNG vers PDF — Navigateur | Gratuit', schemaName: 'Convertisseur PNG vers PDF', h1Pre: 'PNG vers PDF', h1Highlight: 'fusionner ou individuel.', intro: 'Déposez captures d\'écran ou scans PNG — obtenez un PDF fusionné ou un par image.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'PNG zu PDF Konverter — Browser | Kostenlos', schemaName: 'PNG zu PDF Konverter', h1Pre: 'PNG zu PDF', h1Highlight: 'zusammenführen oder einzeln.', intro: 'Legen Sie PNG-Screenshots oder Scans ab — erhalten Sie ein zusammengeführtes PDF oder eines pro Bild.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'PNG から PDF 変換ツール — ブラウザ | 無料', schemaName: 'PNG から PDF 変換ツール', h1Pre: 'PNG から PDF', h1Highlight: '結合または個別。', intro: 'PNG スクリーンショット、領収書、ページスキャンをドロップ — 一つの PDF または画像ごとに。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

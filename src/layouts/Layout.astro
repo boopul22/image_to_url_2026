@@ -113,12 +113,8 @@ const sitewideSchemas = [
 // landing pages. Uses a localized "Home" label for each supported locale.
 const SITE_URL = 'https://imagetourl.cloud';
 const HOME_LABELS: Record<string, string> = {
-  en: 'Home', hi: 'होम', es: 'Inicio', fr: 'Accueil', de: 'Startseite',
-  ja: 'ホーム', 'zh-Hans': '首页', id: 'Beranda', vi: 'Trang chủ',
-  'pt-BR': 'Início', tr: 'Ana Sayfa', tl: 'Home', pl: 'Strona główna',
-  nl: 'Home', it: 'Home', ar: 'الرئيسية', bn: 'হোম', fa: 'خانه',
-  ur: 'ہوم', ru: 'Главная', th: 'หน้าแรก', ko: '홈', sw: 'Nyumbani',
-  ms: 'Laman Utama', ta: 'முகப்பு', mr: 'मुख्यपृष्ठ', te: 'హోమ్', 'zh-Hant': '首頁',
+  en: 'Home', es: 'Inicio', fr: 'Accueil', de: 'Startseite',
+  ja: 'ホーム', 'zh-Hans': '首页',
 };
 function detectLocale(path: string): string | null {
   const m = path.match(/^\/([^\/]+)(?:\/|$)/);

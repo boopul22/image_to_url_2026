@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Host the decoded image?', ctaBody: 'Upload for a permanent URL.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'Base64 से इमेज — ब्राउज़र डिकोडर | मुफ्त', schemaName: 'Base64 से इमेज डिकोडर', h1Pre: 'Base64 से इमेज', h1Highlight: 'पेस्ट, प्रीव्यू, डाउनलोड।', intro: 'base64 या पूर्ण data URI पेस्ट करें — प्रीव्यू और डाउनलोड करने योग्य इमेज पाएं।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'Base64 a Imagen — Decodificador Navegador | Gratis', schemaName: 'Decodificador Base64 a Imagen', h1Pre: 'Base64 a Imagen', h1Highlight: 'pega, previsualiza, descarga.', intro: 'Pega un string base64 o un data URI completo — obtén un archivo descargable.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'Base64 vers Image — Décodeur Navigateur | Gratuit', schemaName: 'Décodeur Base64 vers Image', h1Pre: 'Base64 vers Image', h1Highlight: 'collez, prévisualisez, téléchargez.', intro: 'Collez une chaîne base64 ou un data URI complet — obtenez un fichier image téléchargeable.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'Base64 zu Bild — Browser-Decoder | Kostenlos', schemaName: 'Base64 zu Bild Decoder', h1Pre: 'Base64 zu Bild', h1Highlight: 'einfügen, vorschauen, herunterladen.', intro: 'Base64-String oder vollständige Data-URI einfügen — herunterladbare Bilddatei erhalten.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'Base64 から画像 — ブラウザデコーダー | 無料', schemaName: 'Base64 から画像デコーダー', h1Pre: 'Base64 から画像', h1Highlight: '貼り付け、プレビュー、ダウンロード。', intro: 'base64 文字列または完全な data URI を貼り付け — プレビュー可能でダウンロード可能な画像を取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Want a hosted URL?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'JPG से WebP — ब्राउज़र में, 25–35% छोटा', schemaName: 'JPG से WebP कनवर्टर', h1Pre: 'JPG से WebP', h1Highlight: 'हल्के पेज, वही दिखावट।', intro: 'वेब के लिए WebP से JPG को 25–35% छोटा करें।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'JPG a WebP — Navegador, 25–35% más pequeño', schemaName: 'Convertidor JPG a WebP', h1Pre: 'JPG a WebP', h1Highlight: 'páginas más ligeras, mismo aspecto.', intro: 'Reduce JPG un 25–35% con WebP para la web.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'JPG vers WebP — Navigateur, 25–35% plus petit', schemaName: 'Convertisseur JPG vers WebP', h1Pre: 'JPG vers WebP', h1Highlight: 'pages plus légères, même rendu.', intro: 'Réduisez les JPG de 25–35% avec WebP pour le web.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'JPG zu WebP — Browser, 25–35% kleiner', schemaName: 'JPG zu WebP Konverter', h1Pre: 'JPG zu WebP', h1Highlight: 'leichtere Seiten, gleiches Aussehen.', intro: 'Verkleinern Sie JPG um 25–35% mit WebP für das Web.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'JPG から WebP — ブラウザ、25–35% 小さい', schemaName: 'JPG から WebP 変換ツール', h1Pre: 'JPG から WebP', h1Highlight: '軽いページ、同じ見た目。', intro: 'ウェブ用に WebP で JPG を 25–35% 小さく。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

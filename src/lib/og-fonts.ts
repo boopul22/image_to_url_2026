@@ -20,20 +20,8 @@ export const BRAND_FAMILY = 'Space Grotesk';
 // so Satori has glyph coverage.
 const SCRIPT_FAMILY: Record<Locale, string> = {
   en: BRAND_FAMILY, es: BRAND_FAMILY, fr: BRAND_FAMILY, de: BRAND_FAMILY,
-  it: BRAND_FAMILY, nl: BRAND_FAMILY, pl: BRAND_FAMILY, 'pt-BR': BRAND_FAMILY,
-  tr: BRAND_FAMILY, vi: BRAND_FAMILY, id: BRAND_FAMILY, ms: BRAND_FAMILY,
-  tl: BRAND_FAMILY, sw: BRAND_FAMILY,
-  ru: 'Noto Sans',                                   // Cyrillic
-  ar: 'Noto Sans Arabic', fa: 'Noto Sans Arabic', ur: 'Noto Sans Arabic',
-  hi: 'Noto Sans Devanagari', mr: 'Noto Sans Devanagari',
-  bn: 'Noto Sans Bengali',
-  ta: 'Noto Sans Tamil',
-  te: 'Noto Sans Telugu',
-  th: 'Noto Sans Thai',
   ja: 'Noto Sans JP',
-  ko: 'Noto Sans KR',
   'zh-Hans': 'Noto Sans SC',
-  'zh-Hant': 'Noto Sans TC',
 };
 
 export function isValidLocale(v: string | undefined | null): v is Locale {
@@ -54,10 +42,7 @@ export function isLatinLocale(locale: Locale): boolean {
 // locales we render a clean English card instead — correct English beats
 // garbled localized text. Latin, Cyrillic, CJK (no shaping), Thai and Korean
 // render acceptably and stay localized.
-export const NEEDS_LATIN_FALLBACK: ReadonlySet<Locale> = new Set<Locale>([
-  'ar', 'fa', 'ur',                 // Arabic script (RTL joining)
-  'hi', 'mr', 'bn', 'ta', 'te',     // Indic (conjuncts / reordering)
-]);
+export const NEEDS_LATIN_FALLBACK: ReadonlySet<Locale> = new Set<Locale>([]);
 
 export interface SatoriFont {
   name: string;

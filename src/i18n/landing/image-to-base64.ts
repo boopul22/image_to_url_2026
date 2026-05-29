@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Need a hosted URL instead?', ctaBody: 'For images > 2 KB, a CDN URL is faster.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'इमेज से Base64 — 100% ब्राउज़र | मुफ्त', schemaName: 'इमेज से Base64 एन्कोडर', h1Pre: 'इमेज से Base64', h1Highlight: 'तत्काल डेटा URI।', intro: 'एक इमेज ड्रॉप करें — CSS, HTML, JSON या ईमेल के लिए तैयार डेटा URI पाएं।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'Imagen a Base64 — Navegador | Gratis', schemaName: 'Codificador Imagen a Base64', h1Pre: 'Imagen a Base64', h1Highlight: 'data URI instantáneo.', intro: 'Suelta una imagen — obtén un data URI listo para pegar en CSS, HTML o JSON.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'Image vers Base64 — Navigateur | Gratuit', schemaName: 'Encodeur Image vers Base64', h1Pre: 'Image vers Base64', h1Highlight: 'data URI instantané.', intro: 'Déposez une image — obtenez un data URI prêt à coller dans CSS, HTML ou JSON.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'Bild zu Base64 — Browser | Kostenlos', schemaName: 'Bild zu Base64 Encoder', h1Pre: 'Bild zu Base64', h1Highlight: 'sofort Data-URI.', intro: 'Bild ablegen — erhalten Sie eine einsatzbereite Data-URI für CSS, HTML oder JSON.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: '画像を Base64 に — ブラウザ | 無料', schemaName: '画像から Base64 エンコーダー', h1Pre: '画像を Base64 に', h1Highlight: '即座にデータ URI。', intro: '画像をドロップ — CSS、HTML、JSON、メール用のデータ URI を取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

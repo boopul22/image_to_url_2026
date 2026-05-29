@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Host the resized image?', ctaBody: 'Click Get URL on the main uploader.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'इमेज रीसाइज़र — 100% ब्राउज़र | मुफ्त', schemaName: 'इमेज रीसाइज़र', h1Pre: 'इमेज रीसाइज़र', h1Highlight: 'सटीक पिक्सेल, सटीक अनुपात।', intro: 'चौड़ाई, ऊंचाई, या प्रतिशत से इमेज स्केल करें। अनुपात लॉक, बैच समर्थन।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'Redimensionador de Imágenes — Navegador | Gratis', schemaName: 'Redimensionador de Imágenes', h1Pre: 'Redimensionador de Imágenes', h1Highlight: 'píxeles exactos, proporción exacta.', intro: 'Escala imágenes por ancho, alto o porcentaje.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'Redimensionneur d\'Images — Navigateur | Gratuit', schemaName: 'Redimensionneur d\'Images', h1Pre: 'Redimensionneur d\'Images', h1Highlight: 'pixels exacts, ratio exact.', intro: 'Redimensionnez les images par largeur, hauteur ou pourcentage.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'Bildgröße ändern — Browser | Kostenlos', schemaName: 'Bildgröße ändern', h1Pre: 'Bildgröße ändern', h1Highlight: 'exakte Pixel, exaktes Verhältnis.', intro: 'Skalieren Sie Bilder nach Breite, Höhe oder Prozent.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: '画像リサイザー — ブラウザ | 無料', schemaName: '画像リサイザー', h1Pre: '画像リサイザー', h1Highlight: '正確なピクセル、正確な比率。', intro: '幅、高さ、またはパーセントで画像をスケール。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

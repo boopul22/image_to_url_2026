@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Need favicons hosted?', ctaBody: 'Upload them to our CDN for fast delivery.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'फेविकॉन जनरेटर — 100% ब्राउज़र | सभी आकार + HTML', schemaName: 'फेविकॉन जनरेटर', h1Pre: 'फेविकॉन जनरेटर', h1Highlight: 'हर आकार, एक ड्रॉप।', intro: 'एक वर्गाकार इमेज ड्रॉप करें — 16, 32, 48, 180, 192, 512 favicon PNG और HTML स्निपेट पाएं।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'Generador de Favicon — Navegador | Gratis', schemaName: 'Generador de Favicon', h1Pre: 'Generador de Favicon', h1Highlight: 'todos los tamaños, un arrastre.', intro: 'Suelta una imagen cuadrada — obtén favicons 16, 32, 48, 180, 192, 512 PNG más el fragmento HTML.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'Générateur de Favicon — Navigateur | Gratuit', schemaName: 'Générateur de Favicon', h1Pre: 'Générateur de Favicon', h1Highlight: 'toutes les tailles, un dépôt.', intro: 'Déposez une image carrée — obtenez des favicons 16, 32, 48, 180, 192, 512 PNG plus le snippet HTML.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'Favicon Generator — Browser | Kostenlos', schemaName: 'Favicon Generator', h1Pre: 'Favicon Generator', h1Highlight: 'alle Größen, ein Ablegen.', intro: 'Quadratisches Bild ablegen — erhalten Sie Favicons 16, 32, 48, 180, 192, 512 PNG plus HTML-Snippet.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'Favicon ジェネレーター — ブラウザ | 無料', schemaName: 'Favicon ジェネレーター', h1Pre: 'Favicon ジェネレーター', h1Highlight: '全サイズ、ワンドロップ。', intro: '正方形の画像をドロップ — 16、32、48、180、192、512 favicon PNG と HTML スニペットを取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

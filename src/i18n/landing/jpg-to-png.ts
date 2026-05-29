@@ -39,15 +39,6 @@ const en: LandingContent = {
   ctaButton: 'Try the main uploader',
 };
 
-const hi: LandingContent = { ...en,
-  metaTitle: 'JPG से PNG कनवर्टर — 100% ब्राउज़र में | मुफ्त',
-  schemaName: 'JPG से PNG कनवर्टर',
-  badge: 'ब्राउज़र-ओनली टूल',
-  h1Pre: 'JPG से PNG कनवर्टर', h1Highlight: 'लॉसलेस, लोकल, मुफ्त।',
-  intro: 'JPG फाइलें ड्रॉप करें और PNG पाएं जिन्हें आप संपादित, ओवरले या पारदर्शिता जोड़ सकते हैं। रूपांतरण ब्राउज़र में होता है।',
-  howTitle: 'JPG को PNG में क्यों बदलें', whyTitle: 'JPG को PNG में क्यों बदलें', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
-  ctaTitle: 'PNG के लिए स्थायी URL चाहिए?', ctaBody: 'कनवर्ट करने के बाद, Get URL क्लिक करें।', ctaButton: 'मुख्य अपलोडर आज़माएं',
-};
 const es: LandingContent = { ...en,
   metaTitle: 'Convertidor JPG a PNG — 100% Navegador | Gratis',
   schemaName: 'Convertidor JPG a PNG',
@@ -85,4 +76,4 @@ const ja: LandingContent = { ...en,
   ctaTitle: 'PNG の永続 URL が必要？', ctaBody: '変換後、Get URL をクリック。', ctaButton: 'メインアップローダーを試す',
 };
 
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });

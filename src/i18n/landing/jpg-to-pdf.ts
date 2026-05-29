@@ -34,9 +34,8 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Host the PDF?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
 };
-const hi: LandingContent = { ...en, metaTitle: 'JPG से PDF — 100% ब्राउज़र | फोटो मर्ज, मुफ्त', schemaName: 'JPG से PDF कनवर्टर', h1Pre: 'JPG से PDF', h1Highlight: 'फोटो को एक फ़ाइल में मर्ज करें।', intro: 'JPG फोटो, रसीदें, या स्कैन को एक PDF में मिलाएं।', faqTitle: 'अक्सर पूछे जाने वाले प्रश्न' };
 const es: LandingContent = { ...en, metaTitle: 'JPG a PDF — Navegador | Fusionar Fotos, Gratis', schemaName: 'Convertidor JPG a PDF', h1Pre: 'JPG a PDF', h1Highlight: 'fusiona fotos en un archivo.', intro: 'Combina fotos, recibos o escaneos JPG en un solo PDF.', faqTitle: 'Preguntas frecuentes' };
 const fr: LandingContent = { ...en, metaTitle: 'JPG vers PDF — Navigateur | Fusionner Photos, Gratuit', schemaName: 'Convertisseur JPG vers PDF', h1Pre: 'JPG vers PDF', h1Highlight: 'fusionnez photos en un fichier.', intro: 'Combinez photos, reçus, ou scans JPG en un seul PDF.', faqTitle: 'Questions fréquentes' };
 const de: LandingContent = { ...en, metaTitle: 'JPG zu PDF — Browser | Fotos zusammenführen, kostenlos', schemaName: 'JPG zu PDF Konverter', h1Pre: 'JPG zu PDF', h1Highlight: 'Fotos zu einer Datei zusammenführen.', intro: 'Kombinieren Sie JPG-Fotos, Belege oder Scans zu einer einzigen PDF.', faqTitle: 'Häufige Fragen' };
 const ja: LandingContent = { ...en, metaTitle: 'JPG から PDF — ブラウザ | 写真結合、無料', schemaName: 'JPG から PDF 変換ツール', h1Pre: 'JPG から PDF', h1Highlight: '写真を一つに結合。', intro: 'JPG の写真、領収書、ページスキャンを一つの PDF に結合。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { hi, es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
