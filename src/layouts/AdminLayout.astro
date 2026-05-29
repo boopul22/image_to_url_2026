@@ -1,0 +1,154 @@
+---
+/**
+ * Minimal, self-contained admin shell. Deliberately does NOT use the public
+ * Layout/Nav (no AdSense, GA, OG/schema, marketing chrome, or square-edged
+ * design tokens). Imports global.css only for the Tailwind engine + fonts, then
+ * admin.css for the scoped monochrome system. Everything lives under .admin-root.
+ */
+import '../styles/global.css';
+import '../styles/admin.css';
+import Icon from '../components/admin/Icon.astro';
+
+interface Props {
+  title?: string;
+  activePage?: string;
+  /** Visible page heading in the content header. */
+  heading?: string;
+  /** Small uppercase eyebrow above the heading. */
+  eyebrow?: string;
+  /** Subtitle line under the heading. */
+  subtitle?: string;
+}
+const {
+  title = 'Admin',
+  activePage = 'dashboard',
+  heading,
+  eyebrow,
+  subtitle,
+} = Astro.props;
+
+const user = Astro.locals.user!;
+
+const nav = [
+  { id: 'dashboard', label: 'Dashboard',     icon: 'dashboard', href: '/admin' },
+  { id: 'cms',       label: 'Content',        icon: 'content',   href: '/admin/cms' },
+  { id: 'images',    label: 'Image Library',  icon: 'images',    href: '/admin/images' },
+  { id: 'reviews',   label: 'Reviews',        icon: 'star',      href: '/admin/reviews' },
+  { id: 'users',     label: 'Users',          icon: 'users',     href: '/admin/users' },
+];
+
+const initials = (user.name || 'A').split(' ').map((s: string) => s[0]).slice(0, 2).join('').toUpperCase();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#09090b" />
+    <title>{title} · ImageToURL Admin</title>
+  </head>
+  <body>
+    <div class="admin-root min-h-dvh flex" style="--sidebar-w: 248px;">
+
+      <!-- ===== Sidebar ===== -->
+      <aside
+        id="adm-sidebar"
+        class="fixed lg:sticky top-0 left-0 z-50 h-dvh w-[var(--sidebar-w)] flex-shrink-0 flex flex-col -translate-x-full lg:translate-x-0 transition-transform duration-200"
+        style="background: var(--a-surface); border-right: 1px solid var(--a-border);"
+      >
+        <!-- brand -->
+        <div class="flex items-center justify-between gap-2 px-5 h-16 flex-none" style="border-bottom: 1px solid var(--a-border);">
+          <a href="/admin" class="flex items-center gap-2.5 min-w-0">
+            <span class="flex-none w-8 h-8 rounded-[8px] flex items-center justify-center" style="background: var(--a-fg); color:#fff;">
+              <Icon name="image" size={17} />
+            </span>
+            <span class="min-w-0">
+              <span class="block text-[13px] font-semibold leading-tight" style="color: var(--a-fg);">ImageToURL</span>
+              <span class="block a-eyebrow leading-tight">Admin</span>
+            </span>
+          </a>
+          <button id="adm-sidebar-close" class="lg:hidden a-btn a-btn-ghost a-btn-icon a-btn-sm" aria-label="Close menu">
+            <Icon name="x" size={18} />
+          </button>
+        </div>
+
+        <!-- nav -->
+        <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
+          {nav.map((item) => (
+            <a href={item.href} class:list={["a-nav-item", { 'is-active': activePage === item.id }]}>
+              <Icon name={item.icon} size={18} />
+              <span>{item.label}</span>
+            </a>
+          ))}
+        </nav>
+
+        <!-- footer -->
+        <div class="px-3 py-3 space-y-0.5 flex-none" style="border-top: 1px solid var(--a-border);">
+          <a href="/" target="_blank" rel="noopener" class="a-nav-item">
+            <Icon name="globe" size={18} /><span>View site</span>
+          </a>
+          <a href="/dashboard" class="a-nav-item">
+            <Icon name="settings" size={18} /><span>Settings</span>
+          </a>
+          <a href="/api/auth/logout" class="a-nav-item">
+            <Icon name="logout" size={18} /><span>Log out</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- backdrop (mobile) -->
+      <div id="adm-backdrop" class="lg:hidden fixed inset-0 z-40 opacity-0 pointer-events-none transition-opacity duration-200" style="background: rgba(9,9,11,.45);" aria-hidden="true"></div>
+
+      <!-- ===== Main column ===== -->
+      <div class="flex-1 min-w-0 flex flex-col">
+
+        <!-- topbar -->
+        <header class="sticky top-0 z-30 h-16 flex-none flex items-center gap-3 px-4 sm:px-6"
+                style="background: rgba(255,255,255,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--a-border);">
+          <button id="adm-sidebar-open" class="lg:hidden a-btn a-btn-ghost a-btn-icon" aria-label="Open menu">
+            <Icon name="menu" size={20} />
+          </button>
+          <div class="flex-1 min-w-0">
+            <p class="text-[13px] font-medium truncate" style="color: var(--a-muted);">
+              {nav.find(n => n.id === activePage)?.label ?? 'Admin'}
+            </p>
+          </div>
+          <div class="flex items-center gap-2.5">
+            {user.avatarUrl
+              ? <img src={user.avatarUrl} alt="" class="w-8 h-8 rounded-full object-cover" style="border:1px solid var(--a-border);" referrerpolicy="no-referrer" />
+              : <span class="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-semibold" style="background: var(--a-surface-2); border:1px solid var(--a-border); color: var(--a-text);">{initials}</span>}
+            <span class="hidden sm:block text-[13px] font-medium truncate max-w-[140px]" style="color: var(--a-text);">{user.name}</span>
+          </div>
+        </header>
+
+        <!-- content -->
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto">
+          {(heading || eyebrow) && (
+            <div class="flex items-start justify-between gap-4 flex-wrap mb-6">
+              <div class="min-w-0">
+                {eyebrow && <p class="a-eyebrow mb-1.5">{eyebrow}</p>}
+                {heading && <h1 class="a-title">{heading}</h1>}
+                {subtitle && <p class="text-sm mt-1.5" style="color: var(--a-muted);">{subtitle}</p>}
+              </div>
+              <div class="flex items-center gap-2 flex-wrap"><slot name="actions" /></div>
+            </div>
+          )}
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const sb = document.getElementById('adm-sidebar');
+      const bd = document.getElementById('adm-backdrop');
+      const open = () => { sb?.classList.remove('-translate-x-full'); bd?.classList.remove('opacity-0','pointer-events-none'); document.body.style.overflow='hidden'; };
+      const close = () => { sb?.classList.add('-translate-x-full'); bd?.classList.add('opacity-0','pointer-events-none'); document.body.style.overflow=''; };
+      document.getElementById('adm-sidebar-open')?.addEventListener('click', open);
+      document.getElementById('adm-sidebar-close')?.addEventListener('click', close);
+      bd?.addEventListener('click', close);
+      sb?.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', () => { if (innerWidth < 1024) close(); }));
+    </script>
+  </body>
+</html>

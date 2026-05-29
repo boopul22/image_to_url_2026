@@ -1,46 +1,36 @@
 ---
 export const prerender = false;
 
-import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
-import AdminSidebar from '../../components/AdminSidebar.astro';
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+Astro.response.headers.set('Cache-Control', 'private, no-store');
 ---
 
-<Layout title="Reviews - Admin - ImageToURL" noindex={true}>
-  <Nav activePage="admin" />
-
-  <div class="flex">
-    <AdminSidebar activePage="reviews" />
-
-    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-headline italic font-black text-on-surface">Reviews</h1>
-          <p class="text-on-surface-variant mt-1">Approve, feature, or remove user-submitted reviews shown on the homepage.</p>
-        </div>
-      </div>
-
-      <!-- Status tabs -->
-      <div class="flex items-center gap-2" id="review-tabs">
-        <button data-status="pending" class="review-tab bg-primary text-on-primary px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40">Pending</button>
-        <button data-status="approved" class="review-tab bg-surface text-on-surface-variant px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40">Approved</button>
-        <button data-status="rejected" class="review-tab bg-surface text-on-surface-variant px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40">Rejected</button>
-        <button data-status="" class="review-tab bg-surface text-on-surface-variant px-4 py-2 rounded-lg font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40">All</button>
-      </div>
-
-      <div id="reviews-list" class="space-y-3">
-        <div class="p-8 text-center text-outline">
-          <span class="material-symbols-outlined text-4xl">hourglass_empty</span>
-          <p class="font-label text-xs uppercase mt-2">Loading...</p>
-        </div>
-      </div>
-    </main>
+<AdminLayout
+  title="Reviews"
+  activePage="reviews"
+  eyebrow="Moderation"
+  heading="Reviews"
+  subtitle="Approve, feature, or remove user-submitted reviews shown on the homepage."
+>
+  <!-- Status tabs -->
+  <div class="a-tabs mb-5" id="review-tabs" role="tablist">
+    <button data-status="pending"  class="a-tab is-active" role="tab" aria-selected="true">Pending</button>
+    <button data-status="approved" class="a-tab" role="tab" aria-selected="false">Approved</button>
+    <button data-status="rejected" class="a-tab" role="tab" aria-selected="false">Rejected</button>
+    <button data-status=""         class="a-tab" role="tab" aria-selected="false">All</button>
   </div>
-</Layout>
+
+  <div id="reviews-list" class="space-y-3">
+    <div class="a-card a-card-pad text-center" style="color: var(--a-subtle);">
+      <p class="text-sm">Loading…</p>
+    </div>
+  </div>
+</AdminLayout>
 
 <script>
   const listEl = document.getElementById('reviews-list')!;
-  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.review-tab'));
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.a-tab'));
   let currentStatus = 'pending';
 
   function esc(s: string): string {
@@ -50,50 +40,57 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
   }
 
   function stars(n: number): string {
-    return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n);
+    const filled = '★'.repeat(n), empty = '☆'.repeat(5 - n);
+    return `<span style="color:var(--a-fg);letter-spacing:1px;font-size:13px">${filled}<span style="color:var(--a-subtle)">${empty}</span></span>`;
+  }
+
+  function statusBadge(status: string): string {
+    const map: Record<string, string> = {
+      pending: 'a-badge-warn', approved: 'a-badge-ok', rejected: 'a-badge-danger',
+    };
+    return `<span class="a-badge ${map[status] || ''}">${esc(status)}</span>`;
   }
 
   function actionsFor(r: any): string {
     const btn = (action: string, label: string, cls: string) =>
-      `<button data-id="${r.id}" data-action="${action}" class="rv-action ${cls} px-3 py-1.5 rounded-lg font-label text-[11px] font-bold uppercase tracking-wider border border-outline-variant/40">${label}</button>`;
+      `<button data-id="${r.id}" data-action="${action}" class="rv-action a-btn a-btn-sm ${cls}">${label}</button>`;
     const out: string[] = [];
-    if (r.status !== 'approved') out.push(btn('approve', 'Approve', 'bg-primary text-on-primary'));
-    if (r.status !== 'rejected') out.push(btn('reject', 'Reject', 'bg-surface text-on-surface-variant'));
-    out.push(btn(r.featured ? 'unfeature' : 'feature', r.featured ? 'Unfeature' : 'Feature', 'bg-surface text-on-surface-variant'));
-    out.push(btn('delete', 'Delete', 'bg-surface text-error'));
-    return out.join(' ');
+    if (r.status !== 'approved') out.push(btn('approve', 'Approve', 'a-btn-primary'));
+    if (r.status !== 'rejected') out.push(btn('reject', 'Reject', ''));
+    out.push(btn(r.featured ? 'unfeature' : 'feature', r.featured ? 'Unfeature' : 'Feature', ''));
+    out.push(btn('delete', 'Delete', 'a-btn-danger'));
+    return out.join('');
   }
 
   function render(reviews: any[]) {
     if (!reviews.length) {
-      listEl.innerHTML = `<div class="p-8 text-center text-outline"><p class="font-label text-xs uppercase">No reviews here.</p></div>`;
+      listEl.innerHTML = `<div class="a-card a-card-pad text-center" style="color: var(--a-subtle);"><p class="text-sm">No reviews here.</p></div>`;
       return;
     }
-    listEl.innerHTML = reviews
-      .map(
-        (r) => `
-      <div class="bg-surface border border-outline-variant/40 rounded-xl p-4 sm:p-5 flex flex-col gap-3" data-row="${r.id}">
+    listEl.innerHTML = reviews.map((r) => `
+      <div class="a-card a-card-pad flex flex-col gap-3" data-row="${r.id}">
         <div class="flex items-start justify-between gap-3">
           <div class="flex items-center gap-3 min-w-0">
-            <div class="w-9 h-9 rounded-full overflow-hidden bg-primary-fixed flex-shrink-0 flex items-center justify-center text-xs font-black">
+            <div class="w-9 h-9 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="background:var(--a-surface-2);border:1px solid var(--a-border);color:var(--a-text)">
               ${r.avatar_url ? `<img src="${esc(r.avatar_url)}" referrerpolicy="no-referrer" class="w-full h-full object-cover" onerror="this.remove()"/>` : esc((r.name || '?').slice(0, 1))}
             </div>
             <div class="min-w-0">
-              <p class="font-bold text-sm truncate">${esc(r.name)}${r.role ? ` · <span class="text-on-surface-variant font-normal">${esc(r.role)}</span>` : ''}</p>
-              <p class="text-xs text-on-surface-variant">${esc(r.created_at)} · ${r.featured ? 'Featured · ' : ''}<span class="uppercase">${esc(r.status)}</span></p>
+              <p class="font-semibold text-sm truncate" style="color:var(--a-fg)">${esc(r.name)}${r.role ? ` <span style="color:var(--a-muted);font-weight:400">· ${esc(r.role)}</span>` : ''}</p>
+              <p class="text-xs mt-0.5" style="color:var(--a-subtle)">${esc(r.created_at)}</p>
             </div>
           </div>
-          <span class="text-amber-500 text-sm flex-shrink-0" title="${r.rating}/5">${stars(r.rating)}</span>
+          <div class="flex flex-col items-end gap-1.5 flex-shrink-0">
+            ${stars(r.rating)}
+            <div class="flex items-center gap-1.5">${r.featured ? '<span class="a-badge a-badge-solid">Featured</span>' : ''}${statusBadge(r.status)}</div>
+          </div>
         </div>
-        <p class="font-body text-sm text-on-surface leading-relaxed">${esc(r.body)}</p>
+        <p class="text-sm leading-relaxed" style="color:var(--a-text)">${esc(r.body)}</p>
         <div class="flex flex-wrap gap-2 pt-1">${actionsFor(r)}</div>
-      </div>`,
-      )
-      .join('');
+      </div>`).join('');
   }
 
   async function load() {
-    listEl.innerHTML = `<div class="p-8 text-center text-outline"><span class="material-symbols-outlined text-4xl">hourglass_empty</span></div>`;
+    listEl.innerHTML = `<div class="a-card a-card-pad text-center" style="color: var(--a-subtle);"><p class="text-sm">Loading…</p></div>`;
     const res = await fetch(`/api/admin/reviews?status=${encodeURIComponent(currentStatus)}`);
     const data = await res.json();
     render(data.reviews || []);
@@ -104,10 +101,8 @@ import AdminSidebar from '../../components/AdminSidebar.astro';
       currentStatus = tab.dataset.status || '';
       tabs.forEach((t) => {
         const active = t === tab;
-        t.classList.toggle('bg-primary', active);
-        t.classList.toggle('text-on-primary', active);
-        t.classList.toggle('bg-surface', !active);
-        t.classList.toggle('text-on-surface-variant', !active);
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', String(active));
       });
       load();
     });

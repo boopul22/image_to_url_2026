@@ -1,172 +1,149 @@
 ---
 export const prerender = false;
 
-import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
-import AdminSidebar from '../../components/AdminSidebar.astro';
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import Icon from '../../components/admin/Icon.astro';
+
+Astro.response.headers.set('Cache-Control', 'private, no-store');
 ---
 
-<Layout title="Image Library - Admin - ImageToURL" noindex={true}>
-  <Nav activePage="admin" />
+<AdminLayout
+  title="Image Library"
+  activePage="images"
+  eyebrow="Media"
+  heading="Image library"
+  subtitle="Every uploaded asset across the platform."
+>
+  <label slot="actions" class="a-btn a-btn-primary cursor-pointer">
+    <Icon name="upload" size={16} /> Upload
+    <input type="file" accept="image/*" multiple class="hidden" id="admin-upload-input" />
+  </label>
 
-  <div class="flex">
-    <AdminSidebar activePage="images" />
-
-    <main class="flex-1 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 bg-surface-container-lowest min-h-[calc(100dvh-var(--nav-h,57px))]">
-      <!-- Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-headline italic font-black text-on-surface">Image Library</h1>
-          <p class="text-sm sm:text-base text-on-surface-variant mt-1">Manage, curate, and optimize your global media assets with ease.</p>
-        </div>
-        <label class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label text-xs font-bold uppercase tracking-wider border border-outline-variant/40 hard-shadow hover:-translate-y-1 active:scale-95 transition-all cursor-pointer flex items-center gap-2 self-start sm:self-auto">
-          <span class="material-symbols-outlined text-lg">upload</span>
-          Upload New Assets
-          <input type="file" accept="image/*" multiple class="hidden" id="admin-upload-input" />
-        </label>
-      </div>
-
-      <!-- Filters -->
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
-        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-          <div class="flex items-center gap-2 px-3 py-2 border border-outline-variant/40 rounded-lg bg-surface">
-            <span class="material-symbols-outlined text-sm text-outline">calendar_today</span>
-            <input type="text" placeholder="mm/dd/yyyy" class="bg-transparent text-sm w-24 focus:outline-none font-body" />
-          </div>
-          <div class="flex gap-1" id="type-filters">
-            <button class="px-4 py-2.5 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-on-surface text-surface active:scale-95 transition-all" data-type="all">All</button>
-            <button class="px-4 py-2.5 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="jpg">JPG</button>
-            <button class="px-4 py-2.5 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="png">PNG</button>
-            <button class="px-4 py-2.5 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="webp">WebP</button>
-            <button class="px-4 py-2.5 rounded-full border border-outline-variant/40 text-xs font-bold uppercase bg-surface hover:bg-surface-container-highest active:scale-95 transition-all" data-type="gif">GIF</button>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="text-sm text-on-surface-variant" id="total-count">— assets total</span>
-          <div class="flex border border-outline-variant/40 rounded-lg overflow-hidden">
-            <button class="p-3 bg-on-surface text-surface" id="view-grid">
-              <span class="material-symbols-outlined text-lg">grid_view</span>
-            </button>
-            <button class="p-3 bg-surface hover:bg-surface-container-highest transition-colors" id="view-list">
-              <span class="material-symbols-outlined text-lg">view_list</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Image Grid -->
-      <div id="images-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-        <div class="col-span-full p-12 text-center text-outline">
-          <span class="material-symbols-outlined text-5xl">hourglass_empty</span>
-          <p class="font-label text-xs uppercase mt-3">Loading images...</p>
-        </div>
-      </div>
-
-      <!-- Pagination -->
-      <div id="pagination" class="flex justify-center items-center gap-2 pt-4"></div>
-    </main>
+  <div class="flex items-center justify-between gap-3 mb-4">
+    <p class="text-xs a-subtle" id="total-count">— assets</p>
+    <p class="text-xs a-subtle hidden sm:flex items-center gap-1.5"><Icon name="upload-cloud" size={15} /> Drop files anywhere to upload</p>
   </div>
-</Layout>
+
+  <!-- drop zone wraps the grid -->
+  <div id="drop-zone" class="rounded-[14px] transition-colors" style="outline: 2px dashed transparent; outline-offset: 4px;">
+    <div id="images-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+      <div class="col-span-full a-card a-card-pad text-center a-subtle"><p class="text-sm">Loading images…</p></div>
+    </div>
+  </div>
+
+  <div id="pagination" class="flex justify-center items-center gap-1.5 pt-6"></div>
+</AdminLayout>
 
 <script>
+  const ICON_LINK = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
+  const ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>';
+  const ICON_TRASH = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>';
+  const ICON_PLUS = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>';
+
   function esc(s: string): string {
     const d = document.createElement('div');
-    d.textContent = s;
+    d.textContent = s ?? '';
     return d.innerHTML;
   }
 
   let currentPage = 1;
 
-  async function loadImages(page: number, search = '') {
-    const params = new URLSearchParams({ page: String(page) });
-    if (search) params.set('search', search);
+  function showToast(message: string) {
+    document.querySelector('.admin-toast')?.remove();
+    const t = document.createElement('div');
+    t.className = 'admin-toast';
+    t.textContent = message;
+    t.setAttribute('style', 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--a-fg);color:#fff;padding:.65rem 1.1rem;border-radius:10px;font-size:.8125rem;font-weight:550;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.18);transition:opacity .3s');
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2000);
+  }
 
-    const res = await fetch(`/api/admin/images?${params}`);
+  async function loadImages(page: number) {
+    const res = await fetch(`/api/admin/images?page=${page}`);
     const data = await res.json();
     currentPage = page;
-
-    document.getElementById('total-count')!.textContent = `${data.total.toLocaleString()} assets total`;
+    document.getElementById('total-count')!.textContent = `${data.total.toLocaleString()} assets`;
 
     const grid = document.getElementById('images-grid')!;
     if (!data.images?.length) {
-      grid.innerHTML = '<div class="col-span-full p-12 text-center text-outline"><span class="material-symbols-outlined text-5xl">image</span><p class="font-label text-xs uppercase mt-3">No images found</p></div>';
+      grid.innerHTML = '<div class="col-span-full a-card a-card-pad text-center a-subtle"><p class="text-sm">No images yet</p></div>';
       document.getElementById('pagination')!.innerHTML = '';
       return;
     }
 
     grid.innerHTML = data.images.map((img: any) => `
-      <div class="bg-surface border border-outline-variant/40 rounded-xl overflow-hidden hard-shadow group hover:-translate-y-1 transition-all">
-        <div class="h-44 bg-surface-container-highest overflow-hidden relative">
-          <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" />
-          <span class="absolute top-2 right-2 bg-on-surface/80 text-surface text-xs font-bold uppercase px-2 py-0.5 rounded-full">${esc(img.mime_type.split('/')[1])}</span>
+      <div class="a-card overflow-hidden group">
+        <div class="relative aspect-[4/3] overflow-hidden" style="background:var(--a-surface-2)">
+          <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+          <span class="a-badge a-badge-solid" style="position:absolute;top:.5rem;right:.5rem;text-transform:uppercase">${esc((img.mime_type || '/').split('/')[1] || '?')}</span>
         </div>
-        <div class="p-4 space-y-2">
-          <h3 class="font-bold text-sm truncate" title="${esc(img.filename)}">${esc(img.filename)}</h3>
-          <div class="flex items-center justify-between text-xs text-outline uppercase tracking-wider">
-            <span>Date: ${new Date(img.created_at).toLocaleDateString()}</span>
-            <span>Size: ${(img.size_bytes / (1024 * 1024)).toFixed(1)} MB</span>
+        <div class="p-3.5">
+          <p class="text-sm font-semibold truncate" style="color:var(--a-fg)" title="${esc(img.filename)}">${esc(img.filename)}</p>
+          <div class="flex items-center justify-between text-[11px] a-subtle mt-1">
+            <span>${new Date(img.created_at).toLocaleDateString()}</span>
+            <span class="a-num">${(img.size_bytes / (1024 * 1024)).toFixed(1)} MB</span>
           </div>
-          <div class="flex items-center justify-between pt-2">
-            <button onclick="copyUrl('${esc(img.url)}')" class="text-primary font-label text-xs font-bold flex items-center gap-1 hover:underline">
-              View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
-            <button onclick="deleteImage('${esc(img.id)}')" aria-label="Delete image" class="text-error hover:text-on-error hover:bg-error active:bg-error w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-              <span class="material-symbols-outlined text-sm">delete</span>
-            </button>
+          <div class="flex items-center gap-1.5 mt-3">
+            <a href="${esc(img.url)}" target="_blank" rel="noopener" class="a-btn a-btn-sm flex-1" title="Open">${ICON_LINK}<span>Open</span></a>
+            <button onclick="copyUrl('${esc(img.url)}')" class="a-btn a-btn-sm a-btn-icon" title="Copy URL">${ICON_COPY}</button>
+            <button onclick="deleteImage('${esc(img.id)}')" class="a-btn a-btn-sm a-btn-icon a-btn-danger" title="Delete">${ICON_TRASH}</button>
           </div>
         </div>
-      </div>
-    `).join('') + `
-      <div class="bg-surface border border-dashed border-outline rounded-xl flex flex-col items-center justify-center p-8 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer group min-h-[280px]" id="quick-upload-card">
-        <div class="w-14 h-14 rounded-full bg-surface-container-highest border border-outline-variant/40 flex items-center justify-center mb-4 group-hover:border-primary group-hover:bg-primary/10 transition-colors">
-          <span class="material-symbols-outlined text-2xl text-outline group-hover:text-primary transition-colors">add</span>
-        </div>
-        <p class="font-headline italic text-lg font-bold text-on-surface mb-1">Quick Upload</p>
-        <p class="text-xs text-outline text-center">Drag and drop to start processing</p>
-      </div>
-    `;
+      </div>`).join('') + `
+      <button id="quick-upload-card" class="a-card flex flex-col items-center justify-center p-8 min-h-[240px] cursor-pointer transition-colors" style="border-style:dashed;color:var(--a-muted)">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full mb-3" style="background:var(--a-surface-2);border:1px solid var(--a-border)">${ICON_PLUS}</span>
+        <p class="text-sm font-semibold" style="color:var(--a-fg)">Quick upload</p>
+        <p class="text-xs a-subtle mt-0.5 text-center">Click or drop files to add</p>
+      </button>`;
 
-    document.getElementById('quick-upload-card')?.addEventListener('click', () => {
-      document.getElementById('admin-upload-input')?.click();
-    });
+    document.getElementById('quick-upload-card')?.addEventListener('click', () =>
+      document.getElementById('admin-upload-input')?.click());
 
-    // Pagination
     const pag = document.getElementById('pagination')!;
     if (data.totalPages > 1) {
-      let html = `<button onclick="loadPage(${Math.max(1, page - 1)})" class="w-10 h-10 border border-outline-variant/40 rounded-lg flex items-center justify-center hover:bg-surface-container-highest transition-colors ${page === 1 ? 'opacity-30' : ''}"><span class="material-symbols-outlined text-sm">chevron_left</span></button>`;
-      for (let p = 1; p <= Math.min(data.totalPages, 5); p++) {
-        html += `<button onclick="loadPage(${p})" class="w-10 h-10 border border-outline-variant/40 rounded-lg flex items-center justify-center font-label text-xs font-bold ${p === page ? 'bg-primary text-on-primary' : 'bg-surface hover:bg-surface-container-highest'} transition-colors">${p}</button>`;
-      }
-      if (data.totalPages > 5) html += `<span class="px-2 text-outline">...</span><button onclick="loadPage(${data.totalPages})" class="w-10 h-10 border border-outline-variant/40 rounded-lg flex items-center justify-center font-label text-xs font-bold bg-surface hover:bg-surface-container-highest transition-colors">${data.totalPages}</button>`;
-      html += `<button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="w-10 h-10 border border-outline-variant/40 rounded-lg flex items-center justify-center hover:bg-surface-container-highest transition-colors ${page === data.totalPages ? 'opacity-30' : ''}"><span class="material-symbols-outlined text-sm">chevron_right</span></button>`;
+      const btn = (p: number, label: string, disabled = false, active = false) =>
+        `<button onclick="loadPage(${p})" class="a-btn a-btn-sm a-btn-icon ${active ? 'a-btn-primary' : ''}" ${disabled ? 'disabled' : ''}>${label}</button>`;
+      let html = btn(Math.max(1, page - 1), '‹', page === 1);
+      for (let p = 1; p <= Math.min(data.totalPages, 5); p++) html += btn(p, String(p), false, p === page);
+      if (data.totalPages > 5) html += `<span class="a-subtle px-1">…</span>` + btn(data.totalPages, String(data.totalPages), false, data.totalPages === page);
+      html += btn(Math.min(data.totalPages, page + 1), '›', page === data.totalPages);
       pag.innerHTML = html;
-    } else {
-      pag.innerHTML = '';
-    }
+    } else { pag.innerHTML = ''; }
   }
 
-  (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url);
+  (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url).then(() => showToast('URL copied'));
   (window as any).loadPage = (page: number) => loadImages(page);
   (window as any).deleteImage = async (id: string) => {
     if (!confirm('Delete this image permanently?')) return;
-    await fetch('/api/admin/images', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    });
+    await fetch('/api/admin/images', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
+    showToast('Image deleted');
     loadImages(currentPage);
   };
 
-  document.getElementById('admin-upload-input')?.addEventListener('change', async (e) => {
-    const files = (e.target as HTMLInputElement).files;
-    if (!files?.length) return;
-    for (const file of files) {
+  async function uploadFiles(files: FileList | File[]) {
+    const list = Array.from(files).filter(f => f.type.startsWith('image/'));
+    if (!list.length) return;
+    showToast(`Uploading ${list.length} file${list.length > 1 ? 's' : ''}…`);
+    for (const file of list) {
       const form = new FormData();
       form.append('file', file);
       await fetch('/api/upload', { method: 'POST', body: form });
     }
+    showToast('Upload complete');
     loadImages(1);
+  }
+
+  document.getElementById('admin-upload-input')?.addEventListener('change', (e) => {
+    const files = (e.target as HTMLInputElement).files;
+    if (files?.length) uploadFiles(files);
   });
+
+  // Drag-and-drop anywhere over the drop zone
+  const dz = document.getElementById('drop-zone')!;
+  const setDrag = (on: boolean) => { dz.style.outlineColor = on ? 'var(--a-fg)' : 'transparent'; dz.style.background = on ? 'var(--a-surface-2)' : 'transparent'; };
+  ['dragenter', 'dragover'].forEach(ev => dz.addEventListener(ev, (e) => { e.preventDefault(); setDrag(true); }));
+  ['dragleave', 'drop'].forEach(ev => dz.addEventListener(ev, (e) => { e.preventDefault(); if (ev === 'dragleave' && dz.contains((e as DragEvent).relatedTarget as Node)) return; setDrag(false); }));
+  dz.addEventListener('drop', (e) => { const dt = (e as DragEvent).dataTransfer; if (dt?.files?.length) uploadFiles(dt.files); });
 
   loadImages(1);
 </script>
