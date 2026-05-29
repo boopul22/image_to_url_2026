@@ -1,0 +1,105 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 Times-Italic;
+\f3\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat0\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid101\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\deftab720
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 ImageToURL \'97 Google Ads API Tool Design Document\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs24 \cf0 Applicant:
+\f1\b0  ImageToURL (imagetourl.cloud)\uc0\u8232 
+\f0\b Manager account (MCC):
+\f1\b0  271-257-4999\uc0\u8232 
+\f0\b Contact:
+\f1\b0  bipul281b@gmail.com\uc0\u8232 
+\f0\b Access requested:
+\f1\b0  Basic Access\uc0\u8232 
+\f0\b Tool type:
+\f1\b0  Internal command-line utility (single operator, not distributed)\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 1. Overview\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 ImageToURL operates imagetourl.cloud, a free online tool that converts an uploaded image into a hosted direct URL. The site is monetized through display advertising and does not sell a product. We are building a small internal command-line script to perform keyword research that informs the SEO content and landing pages we publish on our own website. The tool is used only by the site owner; it is not a product, is not distributed, and is not made available to any third party or the public.\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 2. Google Ads API usage\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Service used:
+\f1\b0  KeywordPlanIdeaService\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Method used:
+\f1\b0  GenerateKeywordIdeas (read-only)\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Seeds:
+\f1\b0  a short list of seed keywords and our own site URL (imagetourl.cloud).\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Targeting:
+\f1\b0  language = English, geo = United States (additional locales later).\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 No mutate/write calls.
+\f1\b0  The tool only reads keyword ideas and metrics (average monthly searches, competition, and top-of-page bid ranges). It does not create, edit, pause, or delete campaigns, ads, budgets, or any account entity.\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 3. Architecture\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 A Node.js (v22) script using the open-source 
+\f2\i google-ads-api
+\f1\i0  client library.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 OAuth2: a one-time consent flow mints a refresh token with the 
+\f3\fs26 https://www.googleapis.com/auth/adwords
+\f1\fs24  scope. Credentials are stored in a local, git-ignored environment file.\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 The script authenticates with the developer token (manager account 271-257-4999) plus the refresh token, and queries GenerateKeywordIdeas against our own Google Ads account (205-600-6470).\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Results are written locally to CSV and JSON files and printed as a console table for manual review during content planning.\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 4. Users and access\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 Internal only \'97 the single site owner runs the script from a local machine. There is no user interface, no login system, no multi-tenant access, and no redistribution of API data.\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 5. Request volume and quotas\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 Very low. The script is run manually, on demand, a handful of times per week, with a small number of seed keywords per run. We will respect all rate limits and use-quota restrictions and will not attempt automated high-frequency querying.\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 6. Data handling and compliance\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 Keyword-idea data is used solely for our own internal SEO planning and stored locally. It is not shared, resold, or exposed to end users. We will keep the API contact email current and comply with the Google Ads API Terms and Conditions and all applicable policies.\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 7. Example output\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b0\fs26 \cf0 keyword                         avg_monthly_searches  competition  low_bid  high_bid\
+image to url                    18100                 LOW          0.12     0.74\
+convert image to url            4400                  LOW          0.10     0.61\
+png to url                      2900                  LOW          0.09     0.55\
+upload image get link           1600                  MEDIUM       0.15     0.88\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\i\fs24 \cf0 (Illustrative format only \'97 real values are returned by GenerateKeywordIdeas.)
+\f1\i0 \
+}

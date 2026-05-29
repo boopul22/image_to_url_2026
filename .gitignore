@@ -29,3 +29,13 @@ pnpm-debug.log*
 # stitch design assets
 stitch_assets/
 .dev.vars
+
+# Keyword Planner generated output
+scripts/keyword-ideas/output/*.json
+scripts/keyword-ideas/output/*.csv
+scripts/seo-audit/output/
+
+# local tool artifacts (not source)
+.playwright-mcp/
+.lighthouse/
+.claude/scheduled_tasks.lock

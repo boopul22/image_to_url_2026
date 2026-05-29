@@ -1,0 +1,64 @@
+<html><head><meta charset="utf-8"></head><body>
+<h1>ImageToURL — Google Ads API Tool Design Document</h1>
+<p><b>Applicant:</b> ImageToURL (imagetourl.cloud)<br>
+<b>Manager account (MCC):</b> 271-257-4999<br>
+<b>Contact:</b> bipul281b@gmail.com<br>
+<b>Access requested:</b> Basic Access<br>
+<b>Tool type:</b> Internal command-line utility (single operator, not distributed)</p>
+
+<h2>1. Overview</h2>
+<p>ImageToURL operates imagetourl.cloud, a free online tool that converts an uploaded
+image into a hosted direct URL. The site is monetized through display advertising and
+does not sell a product. We are building a small internal command-line script to perform
+keyword research that informs the SEO content and landing pages we publish on our own
+website. The tool is used only by the site owner; it is not a product, is not distributed,
+and is not made available to any third party or the public.</p>
+
+<h2>2. Google Ads API usage</h2>
+<ul>
+<li><b>Service used:</b> KeywordPlanIdeaService</li>
+<li><b>Method used:</b> GenerateKeywordIdeas (read-only)</li>
+<li><b>Seeds:</b> a short list of seed keywords and our own site URL (imagetourl.cloud).</li>
+<li><b>Targeting:</b> language = English, geo = United States (additional locales later).</li>
+<li><b>No mutate/write calls.</b> The tool only reads keyword ideas and metrics
+(average monthly searches, competition, and top-of-page bid ranges). It does not create,
+edit, pause, or delete campaigns, ads, budgets, or any account entity.</li>
+</ul>
+
+<h2>3. Architecture</h2>
+<p>A Node.js (v22) script using the open-source <i>google-ads-api</i> client library.</p>
+<ol>
+<li>OAuth2: a one-time consent flow mints a refresh token with the
+<code>https://www.googleapis.com/auth/adwords</code> scope. Credentials are stored in a
+local, git-ignored environment file.</li>
+<li>The script authenticates with the developer token (manager account 271-257-4999) plus
+the refresh token, and queries GenerateKeywordIdeas against our own Google Ads account
+(205-600-6470).</li>
+<li>Results are written locally to CSV and JSON files and printed as a console table for
+manual review during content planning.</li>
+</ol>
+
+<h2>4. Users and access</h2>
+<p>Internal only — the single site owner runs the script from a local machine. There is no
+user interface, no login system, no multi-tenant access, and no redistribution of API data.</p>
+
+<h2>5. Request volume and quotas</h2>
+<p>Very low. The script is run manually, on demand, a handful of times per week, with a
+small number of seed keywords per run. We will respect all rate limits and use-quota
+restrictions and will not attempt automated high-frequency querying.</p>
+
+<h2>6. Data handling and compliance</h2>
+<p>Keyword-idea data is used solely for our own internal SEO planning and stored locally.
+It is not shared, resold, or exposed to end users. We will keep the API contact email
+current and comply with the Google Ads API Terms and Conditions and all applicable policies.</p>
+
+<h2>7. Example output</h2>
+<pre>
+keyword                         avg_monthly_searches  competition  low_bid  high_bid
+image to url                    18100                 LOW          0.12     0.74
+convert image to url            4400                  LOW          0.10     0.61
+png to url                      2900                  LOW          0.09     0.55
+upload image get link           1600                  MEDIUM       0.15     0.88
+</pre>
+<p><i>(Illustrative format only — real values are returned by GenerateKeywordIdeas.)</i></p>
+</body></html>

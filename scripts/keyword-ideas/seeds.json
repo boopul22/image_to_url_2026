@@ -1,0 +1,16 @@
+{
+  "_comment": "Seed keywords + URL for Google Ads GenerateKeywordIdeas. Edit freely. Max 20 seed keywords per request (Google limit).",
+  "seedKeywords": [
+    "image to url",
+    "convert image to url",
+    "image to link converter",
+    "upload image get link",
+    "image url generator",
+    "png to url",
+    "jpg to url",
+    "photo to link",
+    "screenshot to url",
+    "free image hosting direct link"
+  ],
+  "seedUrl": "https://imagetourl.cloud/en/"
+}
