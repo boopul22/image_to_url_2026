@@ -267,16 +267,14 @@ const pageSchema = [
       </div>
 
       <!-- Website-use tip: nudge a logged-in "never delete" duration for permanent embeds -->
-      <div class="mt-2 flex justify-center">
-        <button type="button" aria-label="Tip for using images on your website"
-                class="group relative inline-flex items-center gap-1 text-[11px] font-medium text-on-surface-variant hover:text-on-surface transition-colors">
-          <span class="material-symbols-outlined text-sm text-rose-600" style="font-variation-settings:'FILL' 1;">info</span>
-          Using this image on your website?
-          <span role="tooltip"
-                class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 max-w-[80vw] bg-on-surface text-white text-[11px] leading-snug px-3 py-2 text-center opacity-0 translate-y-1 transition-all duration-150 z-30 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0">
-            If you’re using this image on your website, log in and pick “Never delete” so your link stays live forever and never breaks.
-          </span>
-        </button>
+      <!-- Always-visible tip: nudge "Never delete" for images embedded on a site -->
+      <div class="mt-2 flex items-start justify-center gap-1.5 max-w-sm mx-auto text-center">
+        <svg class="w-3.5 h-3.5 mt-px flex-shrink-0 text-rose-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2zm0 4h2v6h-2z"/>
+        </svg>
+        <p class="text-[11px] leading-snug text-on-surface-variant">
+          Using this image on your website? <span class="font-semibold text-on-surface">Sign in and pick “Never delete”</span> — auto-expire links will stop working after a few weeks.
+        </p>
       </div>
       <div
         id="expires-in-warning"
