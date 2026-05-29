@@ -141,9 +141,10 @@ const pageSchema = [
         </div>
 
         <!-- AdSense — responsive banner (full-width-responsive lets AdSense pick best size per device).
-             Above the fold → stays eager (inline push); .ad-reserve holds its height so the
-             uploader below doesn't jump when the ad fills. -->
-        <div class="w-full max-w-2xl mx-auto mb-4">
+             MOBILE: order-last drops this BELOW the uploader so a tall ad fill can't shove the
+             hero/uploader down (the CLS fix). DESKTOP: lg:order-none restores it above the uploader
+             in the center column. .ad-reserve holds its height either way. -->
+        <div class="w-full max-w-2xl mx-auto mb-4 order-last mt-4 lg:order-none lg:mt-0">
           <div class="ad-reserve">
             <ins
               class="adsbygoogle"

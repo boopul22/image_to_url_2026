@@ -55,12 +55,12 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* DM Sans metric-matched fallback. Space Grotesk has no dedicated fallback —
-   the old Arial Black/Impact fallback rendered at weight 900 regardless of the
-   declared font-weight, so any Space Grotesk text rendered before the variable
-   font loaded looked like the heaviest headline on the page. With Space Grotesk
-   preloaded in Layout.astro, the FOUT window is short enough that the system
-   sans-serif fallback in the stack is fine. */
+/* Metric-matched fallbacks. Under load throttling the preloaded variable fonts
+   don't arrive before first paint, so the page renders in the fallback then swaps
+   — and because the headline uses a fixed line-height, a width mismatch re-wraps it
+   and shifts the whole page below (this was the dominant CLS, ~0.75, not the ads).
+   These overrides make Helvetica/Arial occupy the SAME box as the web font, so the
+   swap is invisible (no re-wrap, no shift). */
 @font-face {
   font-family: 'DM-Sans-fallback';
   src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
@@ -69,11 +69,21 @@
   descent-override: 24%;
   line-gap-override: 0%;
 }
+/* Space Grotesk fallback — overrides derived from Space Grotesk's metrics
+   (unitsPerEm 1000, ascent .995, descent .250, avg-width ratio vs Arial 1.0384). */
+@font-face {
+  font-family: 'Space-Grotesk-fallback';
+  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
+  ascent-override: 95.81%;
+  descent-override: 24.07%;
+  line-gap-override: 0%;
+  size-adjust: 103.84%;
+}
 
 @theme {
-  --font-headline: "Space Grotesk Variable", "Space Grotesk", sans-serif;
+  --font-headline: "Space Grotesk Variable", "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
   --font-body: "DM Sans Variable", "DM Sans", "DM-Sans-fallback", system-ui, sans-serif;
-  --font-label: "Space Grotesk Variable", "Space Grotesk", sans-serif;
+  --font-label: "Space Grotesk Variable", "Space Grotesk", "Space-Grotesk-fallback", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: #fcfcfc;
@@ -546,12 +556,14 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 100px;
-}
-@media (min-width: 480px) {
-  .ad-reserve { min-height: 250px; }
+  /* Sized to the observed mobile responsive fill (~300–400px) so the ad doesn't
+     grow much when it loads. On mobile these slots sit BELOW the uploader, so any
+     residual growth pushes off-screen content (≈0 visible shift). */
+  min-height: 300px;
 }
 @media (min-width: 1024px) {
+  /* Desktop banner lives in the ~672px center column (skyscrapers handle the
+     sides); it fills shorter, so reserve less to avoid dead whitespace. */
   .ad-reserve { min-height: 280px; }
 }
 
