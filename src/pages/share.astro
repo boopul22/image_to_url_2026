@@ -328,6 +328,18 @@ const snipBb = url ? `[img]${url}[/img]` : '';
       });
       if (!blob) return; // tainted canvas (cross-origin) or encode failure → clean only
 
+      // Show the watermark instantly from the locally-rendered canvas — don't make
+      // the user wait for the upload + re-download round trip below (that wait is
+      // the ~1s "pop-in"). The background upload still produces the shareable URL,
+      // which silently swaps in (visually identical image, so no second flash).
+      if (activeTab === 'branded') {
+        try {
+          const localPreview = URL.createObjectURL(blob);
+          thumb.addEventListener('load', () => URL.revokeObjectURL(localPreview), { once: true });
+          thumb.src = localPreview;
+        } catch { /* fall back to the post-upload swap */ }
+      }
+
       const fd = new FormData();
       fd.append('file', new File([blob], `branded-${originalId}.png`, { type: 'image/png' }));
       fd.append('original_id', originalId);
