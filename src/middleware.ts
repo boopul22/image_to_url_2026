@@ -49,6 +49,18 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   const url0 = new URL(request.url);
   const path = url0.pathname;
 
+  // Canonical host: 301 www → apex. www.imagetourl.cloud otherwise serves a
+  // full duplicate of the site (bad for SEO, and its Origin breaks the
+  // same-origin upload guard). GET/HEAD only — a 301 on a POST would drop the
+  // request body; the upload guard accepts www directly for that case.
+  if (
+    url0.hostname === 'www.imagetourl.cloud' &&
+    (request.method === 'GET' || request.method === 'HEAD')
+  ) {
+    url0.hostname = 'imagetourl.cloud';
+    return redirect(url0.toString(), 301);
+  }
+
   // Homepage: serve /en/ content at / via an internal rewrite instead of a 301.
   // A network redirect on the most-requested URL cost ~330–760ms in Lighthouse
   // (delays FCP/LCP). The rewrite keeps the address bar at / but renders the

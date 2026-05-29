@@ -5,6 +5,7 @@ import { uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
 import { embedAttribution } from '../../lib/images/metadata';
+import { isSameSiteRequest } from '../../lib/same-origin';
 
 // Stores a "branded" copy of an already-uploaded image — the /share page draws a
 // white "imagetourl.cloud" strip on top of the original (client-side canvas) and
@@ -33,15 +34,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   try {
     // Same-origin only — this is an internal helper for the share page, not a
     // public API (mirrors the guard in api/upload.ts).
-    const origin = request.headers.get('origin');
-    const referer = request.headers.get('referer');
-    const allowedOrigins = [
-      'https://imagetourl.cloud',
-      'http://localhost:4321',
-      'http://localhost:3000',
-    ];
-    const requestOrigin = origin || (referer ? new URL(referer).origin : null);
-    if (!requestOrigin || !allowedOrigins.some((o) => requestOrigin.startsWith(o))) {
+    if (!isSameSiteRequest(request)) {
       return json({ error: 'Not available.' }, 403);
     }
 
@@ -78,7 +71,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const reqUrlOrigin = new URL(request.url).origin;
     const siteOrigin = reqUrlOrigin.startsWith('http://localhost')
       ? 'https://imagetourl.cloud'
-      : reqUrlOrigin;
+      : reqUrlOrigin.replace('://www.', '://'); // canonical apex, never www
 
     // Dedupe: reuse an existing branded variant for this original if we have one.
     const existing = await db

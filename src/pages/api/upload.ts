@@ -6,6 +6,7 @@ import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
 import { resolveExpiresAt } from '../../lib/images/delete';
 import { embedAttribution } from '../../lib/images/metadata';
+import { isSameSiteRequest } from '../../lib/same-origin';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -62,16 +63,9 @@ function formatResetIn(oldestUtc: string | null): string {
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    // Block ALL external API access — only allow requests from our own site
-    const origin = request.headers.get('origin');
-    const referer = request.headers.get('referer');
-    const allowedOrigins = [
-      'https://imagetourl.cloud',
-      'http://localhost:4321',
-      'http://localhost:3000',
-    ];
-    const requestOrigin = origin || (referer ? new URL(referer).origin : null);
-    if (!requestOrigin || !allowedOrigins.some(o => requestOrigin.startsWith(o))) {
+    // Block external API access — only allow requests a browser makes from our
+    // own site (apex + www + localhost). See lib/same-origin.ts.
+    if (!isSameSiteRequest(request)) {
       return new Response(
         JSON.stringify({ error: 'API access is not available. Please use imagetourl.cloud to upload images.' }),
         { status: 403, headers: { 'Content-Type': 'application/json' } },
@@ -199,7 +193,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const reqUrlOrigin = new URL(request.url).origin;
     const siteOrigin = reqUrlOrigin.startsWith('http://localhost')
       ? 'https://imagetourl.cloud'
-      : reqUrlOrigin;
+      : reqUrlOrigin.replace('://www.', '://'); // canonical apex, never www
     const imageUrl = `${siteOrigin}/${id}.${ext}`;
 
     // Save to D1
