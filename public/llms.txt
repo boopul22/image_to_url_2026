@@ -16,106 +16,98 @@
 - Business ($49/mo): Team workspaces, ultra-high resolution, 50 MB uploads, dedicated support
 
 ## Core Pages
-- Homepage / Upload tool: https://imagetourl.cloud/
-- Features: https://imagetourl.cloud/features
-- Pricing: https://imagetourl.cloud/pricing
-- Blog: https://imagetourl.cloud/blog
-- API Documentation: https://imagetourl.cloud/docs
-- About: https://imagetourl.cloud/about
-
+- [Homepage / Upload tool](https://imagetourl.cloud/)
+- [Features](https://imagetourl.cloud/features)
+- [Pricing](https://imagetourl.cloud/pricing)
+- [Blog](https://imagetourl.cloud/blog)
+- [API Documentation](https://imagetourl.cloud/docs)
+- [About](https://imagetourl.cloud/about)
 ## URL Conversion Tools (upload → CDN URL)
-- PNG to URL: https://imagetourl.cloud/png-to-url
-- JPG to URL: https://imagetourl.cloud/jpg-to-url
-- GIF to URL: https://imagetourl.cloud/gif-to-url
-- WebP to URL: https://imagetourl.cloud/webp-to-url
-- Photo to URL: https://imagetourl.cloud/photo-to-url
-- Screenshot to URL: https://imagetourl.cloud/screenshot-to-url
-- Image URL Generator: https://imagetourl.cloud/image-url-generator
-- Bulk Image Upload: https://imagetourl.cloud/bulk-image-upload
-- Image Embed Code Generator: https://imagetourl.cloud/image-embed-code-generator
-- Direct Image Link: https://imagetourl.cloud/direct-image-link
-
+- [PNG to URL](https://imagetourl.cloud/png-to-url)
+- [JPG to URL](https://imagetourl.cloud/jpg-to-url)
+- [GIF to URL](https://imagetourl.cloud/gif-to-url)
+- [WebP to URL](https://imagetourl.cloud/webp-to-url)
+- [Photo to URL](https://imagetourl.cloud/photo-to-url)
+- [Screenshot to URL](https://imagetourl.cloud/screenshot-to-url)
+- [Image URL Generator](https://imagetourl.cloud/image-url-generator)
+- [Bulk Image Upload](https://imagetourl.cloud/bulk-image-upload)
+- [Image Embed Code Generator](https://imagetourl.cloud/image-embed-code-generator)
+- [Direct Image Link](https://imagetourl.cloud/direct-image-link)
 ## Format Converters (browser-only, no upload)
-- HEIC to JPG: https://imagetourl.cloud/heic-to-jpg
-- HEIC to PNG: https://imagetourl.cloud/heic-to-png
-- HEIC to PDF: https://imagetourl.cloud/heic-to-pdf
-- PNG to JPG: https://imagetourl.cloud/png-to-jpg
-- JPG to PNG: https://imagetourl.cloud/jpg-to-png
-- PNG to WebP: https://imagetourl.cloud/png-to-webp
-- JPG to WebP: https://imagetourl.cloud/jpg-to-webp
-- WebP to JPG: https://imagetourl.cloud/webp-to-jpg
-- WebP to PNG: https://imagetourl.cloud/webp-to-png
-- PNG to PDF: https://imagetourl.cloud/png-to-pdf
-- JPG to PDF: https://imagetourl.cloud/jpg-to-pdf
-
+- [HEIC to JPG](https://imagetourl.cloud/heic-to-jpg)
+- [HEIC to PNG](https://imagetourl.cloud/heic-to-png)
+- [HEIC to PDF](https://imagetourl.cloud/heic-to-pdf)
+- [PNG to JPG](https://imagetourl.cloud/png-to-jpg)
+- [JPG to PNG](https://imagetourl.cloud/jpg-to-png)
+- [PNG to WebP](https://imagetourl.cloud/png-to-webp)
+- [JPG to WebP](https://imagetourl.cloud/jpg-to-webp)
+- [WebP to JPG](https://imagetourl.cloud/webp-to-jpg)
+- [WebP to PNG](https://imagetourl.cloud/webp-to-png)
+- [PNG to PDF](https://imagetourl.cloud/png-to-pdf)
+- [JPG to PDF](https://imagetourl.cloud/jpg-to-pdf)
 ## Image Utilities
-- Image Compressor: https://imagetourl.cloud/image-compressor
-- Image Resizer: https://imagetourl.cloud/image-resizer
-- Image to Base64: https://imagetourl.cloud/image-to-base64
-- Base64 to Image: https://imagetourl.cloud/base64-to-image
-- Favicon Generator: https://imagetourl.cloud/favicon-generator
-
+- [Image Compressor](https://imagetourl.cloud/image-compressor)
+- [Image Resizer](https://imagetourl.cloud/image-resizer)
+- [Image to Base64](https://imagetourl.cloud/image-to-base64)
+- [Base64 to Image](https://imagetourl.cloud/base64-to-image)
+- [Favicon Generator](https://imagetourl.cloud/favicon-generator)
 ## Platform Use Cases
-- WordPress: https://imagetourl.cloud/image-hosting-for-wordpress
-- Shopify: https://imagetourl.cloud/image-hosting-for-shopify
-- Discord: https://imagetourl.cloud/image-hosting-for-discord
-- eBay: https://imagetourl.cloud/image-hosting-for-ebay
-- GitHub README: https://imagetourl.cloud/image-hosting-for-github-readme
-- Notion: https://imagetourl.cloud/image-hosting-for-notion
-- Reddit: https://imagetourl.cloud/image-hosting-for-reddit
-- X / Twitter: https://imagetourl.cloud/image-hosting-for-twitter
-- Instagram: https://imagetourl.cloud/image-hosting-for-instagram
-- Pinterest: https://imagetourl.cloud/image-hosting-for-pinterest
-- Substack: https://imagetourl.cloud/image-hosting-for-substack
-- Medium: https://imagetourl.cloud/image-hosting-for-medium
-- LinkedIn: https://imagetourl.cloud/image-hosting-for-linkedin
-- Webflow: https://imagetourl.cloud/image-hosting-for-webflow
-- Squarespace: https://imagetourl.cloud/image-hosting-for-squarespace
-- Wix: https://imagetourl.cloud/image-hosting-for-wix
-- Framer: https://imagetourl.cloud/image-hosting-for-framer
-- Stack Overflow: https://imagetourl.cloud/image-hosting-for-stack-overflow
-- Markdown: https://imagetourl.cloud/image-hosting-for-markdown
-- Next.js: https://imagetourl.cloud/image-hosting-for-nextjs
-- Jira: https://imagetourl.cloud/image-hosting-for-jira
-- WhatsApp: https://imagetourl.cloud/image-to-url-for-whatsapp
-- Email Signatures: https://imagetourl.cloud/image-hosting-for-email-signatures
-- Newsletters: https://imagetourl.cloud/image-hosting-for-newsletters
-- Forums: https://imagetourl.cloud/image-hosting-for-forums
-- Google Sheets: https://imagetourl.cloud/image-hosting-for-google-sheets
-- Google Forms: https://imagetourl.cloud/image-hosting-for-google-forms
-- ChatGPT: https://imagetourl.cloud/image-url-for-chatgpt
-
+- [WordPress](https://imagetourl.cloud/image-hosting-for-wordpress)
+- [Shopify](https://imagetourl.cloud/image-hosting-for-shopify)
+- [Discord](https://imagetourl.cloud/image-hosting-for-discord)
+- [eBay](https://imagetourl.cloud/image-hosting-for-ebay)
+- [GitHub README](https://imagetourl.cloud/image-hosting-for-github-readme)
+- [Notion](https://imagetourl.cloud/image-hosting-for-notion)
+- [Reddit](https://imagetourl.cloud/image-hosting-for-reddit)
+- [X / Twitter](https://imagetourl.cloud/image-hosting-for-twitter)
+- [Instagram](https://imagetourl.cloud/image-hosting-for-instagram)
+- [Pinterest](https://imagetourl.cloud/image-hosting-for-pinterest)
+- [Substack](https://imagetourl.cloud/image-hosting-for-substack)
+- [Medium](https://imagetourl.cloud/image-hosting-for-medium)
+- [LinkedIn](https://imagetourl.cloud/image-hosting-for-linkedin)
+- [Webflow](https://imagetourl.cloud/image-hosting-for-webflow)
+- [Squarespace](https://imagetourl.cloud/image-hosting-for-squarespace)
+- [Wix](https://imagetourl.cloud/image-hosting-for-wix)
+- [Framer](https://imagetourl.cloud/image-hosting-for-framer)
+- [Stack Overflow](https://imagetourl.cloud/image-hosting-for-stack-overflow)
+- [Markdown](https://imagetourl.cloud/image-hosting-for-markdown)
+- [Next.js](https://imagetourl.cloud/image-hosting-for-nextjs)
+- [Jira](https://imagetourl.cloud/image-hosting-for-jira)
+- [WhatsApp](https://imagetourl.cloud/image-to-url-for-whatsapp)
+- [Email Signatures](https://imagetourl.cloud/image-hosting-for-email-signatures)
+- [Newsletters](https://imagetourl.cloud/image-hosting-for-newsletters)
+- [Forums](https://imagetourl.cloud/image-hosting-for-forums)
+- [Google Sheets](https://imagetourl.cloud/image-hosting-for-google-sheets)
+- [Google Forms](https://imagetourl.cloud/image-hosting-for-google-forms)
+- [ChatGPT](https://imagetourl.cloud/image-url-for-chatgpt)
 ## Developer / API
-- Upload API: https://imagetourl.cloud/image-upload-api
-- REST API reference: https://imagetourl.cloud/image-hosting-rest-api
-- Python: https://imagetourl.cloud/image-hosting-api-python
-- Node.js: https://imagetourl.cloud/image-hosting-api-nodejs
-- PHP: https://imagetourl.cloud/image-hosting-api-php
-- cURL: https://imagetourl.cloud/image-hosting-api-curl
-- Zapier: https://imagetourl.cloud/image-upload-zapier
-- Make (Integromat): https://imagetourl.cloud/image-upload-make
-- n8n: https://imagetourl.cloud/image-upload-n8n
-
+- [Upload API](https://imagetourl.cloud/image-upload-api)
+- [REST API reference](https://imagetourl.cloud/image-hosting-rest-api)
+- [Python](https://imagetourl.cloud/image-hosting-api-python)
+- [Node.js](https://imagetourl.cloud/image-hosting-api-nodejs)
+- [PHP](https://imagetourl.cloud/image-hosting-api-php)
+- [cURL](https://imagetourl.cloud/image-hosting-api-curl)
+- [Zapier](https://imagetourl.cloud/image-upload-zapier)
+- [Make (Integromat)](https://imagetourl.cloud/image-upload-make)
+- [n8n](https://imagetourl.cloud/image-upload-n8n)
 ## Comparisons
-- vs Imgur: https://imagetourl.cloud/imagetourl-vs-imgur
-- vs ImgBB: https://imagetourl.cloud/imagetourl-vs-imgbb
-- vs Cloudinary: https://imagetourl.cloud/imagetourl-vs-cloudinary
-- Imgur vs ImgBB: https://imagetourl.cloud/imgur-vs-imgbb
-- Imgur alternative: https://imagetourl.cloud/imgur-alternative
-- ImgBB alternative: https://imagetourl.cloud/imgbb-alternative
-- Cloudinary alternative: https://imagetourl.cloud/cloudinary-alternative
-- Postimages alternative: https://imagetourl.cloud/postimages-alternative
-- Google Photos direct link: https://imagetourl.cloud/google-photos-direct-link
-- Dropbox direct image link: https://imagetourl.cloud/dropbox-direct-image-link
-
+- [vs Imgur](https://imagetourl.cloud/imagetourl-vs-imgur)
+- [vs ImgBB](https://imagetourl.cloud/imagetourl-vs-imgbb)
+- [vs Cloudinary](https://imagetourl.cloud/imagetourl-vs-cloudinary)
+- [Imgur vs ImgBB](https://imagetourl.cloud/imgur-vs-imgbb)
+- [Imgur alternative](https://imagetourl.cloud/imgur-alternative)
+- [ImgBB alternative](https://imagetourl.cloud/imgbb-alternative)
+- [Cloudinary alternative](https://imagetourl.cloud/cloudinary-alternative)
+- [Postimages alternative](https://imagetourl.cloud/postimages-alternative)
+- [Google Photos direct link](https://imagetourl.cloud/google-photos-direct-link)
+- [Dropbox direct image link](https://imagetourl.cloud/dropbox-direct-image-link)
 ## Answer-First Q&A Pages
-- How to get a direct URL for an image: https://imagetourl.cloud/how-to-get-direct-url-for-image
-- How to share an image as a link: https://imagetourl.cloud/how-to-share-image-as-link
-- How to embed an image in an email: https://imagetourl.cloud/how-to-embed-image-in-email
-- What is image hotlinking: https://imagetourl.cloud/what-is-image-hotlinking
-- How to host an image for free: https://imagetourl.cloud/how-to-host-image-for-free
-- How long does ImageToURL store images: https://imagetourl.cloud/how-long-does-imagetourl-store-images
-
+- [How to get a direct URL for an image](https://imagetourl.cloud/how-to-get-direct-url-for-image)
+- [How to share an image as a link](https://imagetourl.cloud/how-to-share-image-as-link)
+- [How to embed an image in an email](https://imagetourl.cloud/how-to-embed-image-in-email)
+- [What is image hotlinking](https://imagetourl.cloud/what-is-image-hotlinking)
+- [How to host an image for free](https://imagetourl.cloud/how-to-host-image-for-free)
+- [How long does ImageToURL store images](https://imagetourl.cloud/how-long-does-imagetourl-store-images)
 ## How It Works
 1. Upload: Drag an image into the upload zone or POST to the API
 2. Convert (optional): Client-side conversion for HEIC / PDF / format swaps — zero network egress

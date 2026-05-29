@@ -36,11 +36,11 @@ export async function GET({ params }: APIContext): Promise<Response> {
   const intro = INTRO[locale] || INTRO[defaultLocale];
 
   let body = `# ImageToURL (${locale})\n\n> ${intro}\n\n`;
-  body += `## Canonical site (English)\n- ${SITE}/\n\n`;
-  body += `## Localized homepage\n- ${SITE}/${locale}/\n\n`;
+  body += `## Canonical site (English)\n- [Homepage](${SITE}/)\n\n`;
+  body += `## Localized homepage\n- [${locale} homepage](${SITE}/${locale}/)\n\n`;
   body += `## Key pages (English URLs)\n`;
-  for (const p of KEY_PAGES) body += `- ${SITE}/${p}\n`;
-  body += `\n## Full site map\n- ${SITE}/sitemap.xml\n- ${SITE}/llms-full.txt\n`;
+  for (const p of KEY_PAGES) body += `- [${p}](${SITE}/${p})\n`;
+  body += `\n## Full site map\n- [Sitemap](${SITE}/sitemap.xml)\n- [Full LLM reference](${SITE}/llms-full.txt)\n`;
 
   return new Response(body, {
     status: 200,
