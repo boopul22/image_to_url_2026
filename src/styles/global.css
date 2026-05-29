@@ -531,6 +531,30 @@ h1, h2, h3, h4, h5, h6 {
   contain-intrinsic-size: auto 800px;
 }
 
+/* Reserve height for responsive AdSense slots so the iframe filling in later
+   doesn't shift the layout (this is what killed CLS — slots rendered at 0px then
+   expanded). Always lives on a DEDICATED inner div wrapping the <ins>, never on a
+   wrapper that toggles visibility (lg:hidden/hidden): unlayered rules here beat
+   Tailwind utilities, so display:flex would override `hidden` and leak mobile ads
+   onto desktop. The ad is centered; a fill shorter than the reserve shows centered
+   whitespace (no shift), a taller fill grows the box slightly. We intentionally do
+   NOT collapse on `unfilled` — collapsing after the ad request returns is itself a
+   late layout shift; an empty reserved box is the CLS-safe trade. min-heights are
+   tuned to the common fill per breakpoint. */
+.ad-reserve {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100px;
+}
+@media (min-width: 480px) {
+  .ad-reserve { min-height: 250px; }
+}
+@media (min-width: 1024px) {
+  .ad-reserve { min-height: 280px; }
+}
+
 /* Focus visible styles for accessibility */
 :focus-visible {
   outline: 2px solid #171717;

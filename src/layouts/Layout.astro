@@ -316,6 +316,37 @@ function hreflangUrl(loc: Locale): string {
       }
     </script>
 
+    <!-- Lazy-load below-the-fold ad slots. Slots marked data-ad-lazy are NOT pushed
+         at parse time; we request them ~300px before they scroll into view. This is
+         Google's recommended pre-trigger (200–400px) so the ad is filled by the time
+         it's viewable — viewability/revenue is preserved while one fewer concurrent
+         AdSense fill competes in the FCP/LCP window. Above-the-fold slots keep their
+         own inline push and are untouched. display:none slots (e.g. lg:hidden on the
+         wrong breakpoint) never intersect, so they're correctly never requested. -->
+    <script is:inline>
+      (function () {
+        var pushed = new WeakSet();
+        function fill(ins) {
+          if (pushed.has(ins) || ins.hasAttribute('data-ad-pushed')) return;
+          pushed.add(ins);
+          ins.setAttribute('data-ad-pushed', '');
+          try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+        }
+        var slots = document.querySelectorAll('ins.adsbygoogle[data-ad-lazy]:not([data-ad-pushed])');
+        if (!slots.length) return;
+        if (!('IntersectionObserver' in window)) {
+          slots.forEach(fill);
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { fill(e.target); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '300px 0px', threshold: 0 });
+        slots.forEach(function (s) { io.observe(s); });
+      })();
+    </script>
+
     <!-- GA4 — interaction-gated to avoid blocking LCP. AdSense moved to <head>
          as a normal async script so Auto Ads can render on first paint. -->
     <script is:inline>
