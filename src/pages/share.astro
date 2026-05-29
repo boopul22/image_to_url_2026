@@ -53,20 +53,28 @@ const snipBb = url ? `[img]${url}[/img]` : '';
         </div>
 
         <div class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
-          <!-- Thumbnail + URL -->
-          <div class="flex items-start gap-3">
-            <a id="thumb-link" href={url} target="_blank" rel="noopener" class="flex-shrink-0">
-              <img id="thumb" src={url} alt="Uploaded image" loading="lazy" decoding="async"
-                   class="w-16 h-16 object-cover border border-outline-variant/40 bg-surface-variant" />
-            </a>
-            <div class="flex-1 min-w-0">
-              <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Direct URL</label>
-              <div class="flex gap-2 mt-1">
-                <input id="share-url" type="text" readonly value={url}
-                       class="flex-1 min-w-0 bg-white border border-outline-variant/40 px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-                <button data-copy-target="share-url"
-                        class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
-              </div>
+          <!-- Big preview (shows the branded version once it's ready) -->
+          <a id="thumb-link" href={url} target="_blank" rel="noopener" class="block">
+            <img id="thumb" src={url} alt="Uploaded image" loading="lazy" decoding="async"
+                 class="w-full max-h-72 object-contain border border-outline-variant/40 bg-surface-variant" />
+          </a>
+
+          <!-- Watermark / clean tabs — revealed by JS once the branded variant is ready -->
+          <div id="wm-tabs" class="hidden grid grid-cols-2 gap-2" role="tablist">
+            <button id="tab-branded" type="button" data-tab="branded"
+                    class="wm-tab font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 border border-outline-variant/40 transition-colors">With watermark</button>
+            <button id="tab-clean" type="button" data-tab="clean"
+                    class="wm-tab font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 border border-outline-variant/40 transition-colors">Without watermark</button>
+          </div>
+
+          <!-- Direct URL -->
+          <div>
+            <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Direct URL</label>
+            <div class="flex gap-2 mt-1">
+              <input id="share-url" type="text" readonly value={url}
+                     class="flex-1 min-w-0 bg-white border border-outline-variant/40 px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
+              <button data-copy-target="share-url"
+                      class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
             </div>
           </div>
 
@@ -149,7 +157,8 @@ const snipBb = url ? `[img]${url}[/img]` : '';
     window.setTimeout(() => { btn.textContent = btn.dataset.label!; }, 1500);
   }
 
-  // Copy buttons (each copies its target input's value)
+  // Copy buttons (each copies its target input's value — values are kept in sync
+  // with the active tab, so this works for both clean and branded URLs).
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const targetId = btn.dataset.copyTarget!;
@@ -159,27 +168,159 @@ const snipBb = url ? `[img]${url}[/img]` : '';
     });
   });
 
-  // QR + download — only present in the valid state. The URL is read from the
-  // (already server-validated) #share-url input, so it never has to be re-parsed.
   const urlInput = document.getElementById('share-url') as HTMLInputElement | null;
   const canvas = document.getElementById('qr-canvas') as HTMLCanvasElement | null;
-  if (urlInput && canvas) {
-    const url = urlInput.value;
 
-    // QR code — rendered fully client-side, the URL never leaves the browser.
-    QRCode.toCanvas(canvas, url, { width: 160, margin: 1 }).catch(() => {
-      canvas.closest('div')?.classList.add('hidden');
+  if (urlInput && canvas) {
+    const cleanUrl = urlInput.value;
+    let brandedUrl: string | null = null;
+    let activeTab: 'branded' | 'clean' = 'branded';
+
+    const thumb = document.getElementById('thumb') as HTMLImageElement;
+    const thumbLink = document.getElementById('thumb-link') as HTMLAnchorElement;
+    const openImage = document.getElementById('open-image') as HTMLAnchorElement | null;
+    const snipMd = document.getElementById('snip-md') as HTMLInputElement | null;
+    const snipHtml = document.getElementById('snip-html') as HTMLInputElement | null;
+    const snipBb = document.getElementById('snip-bb') as HTMLInputElement | null;
+    const tabs = document.getElementById('wm-tabs');
+    const tabBranded = document.getElementById('tab-branded') as HTMLButtonElement | null;
+    const tabClean = document.getElementById('tab-clean') as HTMLButtonElement | null;
+
+    function currentUrl(): string {
+      return activeTab === 'branded' && brandedUrl ? brandedUrl : cleanUrl;
+    }
+
+    function renderQR(u: string) {
+      QRCode.toCanvas(canvas, u, { width: 160, margin: 1 }).catch(() => {
+        canvas!.closest('div')?.classList.add('hidden');
+      });
+    }
+
+    function setTabStyles() {
+      const active = ['bg-rose-600', 'text-white'];
+      const idle = ['bg-surface', 'text-on-surface'];
+      [tabBranded, tabClean].forEach((t) => { if (t) t.classList.remove(...active, ...idle); });
+      (activeTab === 'branded' ? tabBranded : tabClean)?.classList.add(...active);
+      (activeTab === 'branded' ? tabClean : tabBranded)?.classList.add(...idle);
+    }
+
+    function syncUI() {
+      const u = currentUrl();
+      urlInput!.value = u;
+      thumb.src = u;
+      thumbLink.href = u;
+      if (openImage) openImage.href = u;
+      if (snipMd) snipMd.value = `![](${u})`;
+      if (snipHtml) snipHtml.value = `<img src="${u}" alt="">`;
+      if (snipBb) snipBb.value = `[img]${u}[/img]`;
+      renderQR(u);
+      setTabStyles();
+    }
+
+    function revealTabs() {
+      if (!tabs) return;
+      tabs.classList.remove('hidden');
+      setTabStyles();
+    }
+
+    [tabBranded, tabClean].forEach((t) => {
+      t?.addEventListener('click', () => {
+        const next = t.dataset.tab as 'branded' | 'clean';
+        if (next === activeTab) return;
+        activeTab = next;
+        syncUI();
+      });
     });
 
-    // Download QR as PNG
+    // Initial paint (clean — branded swaps in once ready).
+    renderQR(cleanUrl);
+
+    // Download QR as PNG (uses whatever's currently shown).
     document.getElementById('download-qr')!.addEventListener('click', () => {
       try {
         const a = document.createElement('a');
-        const name = (url.split('/').pop() || 'image').replace(/\.[^.]+$/, '');
+        const name = (currentUrl().split('/').pop() || 'image').replace(/\.[^.]+$/, '');
         a.href = canvas.toDataURL('image/png');
         a.download = `${name}-qr.png`;
         a.click();
       } catch { /* ignore */ }
     });
+
+    // ── Branded variant: draw a white "imagetourl.cloud" strip above the image
+    // on a canvas, upload it in the background, and reveal the tabs once ready. ──
+    const ID_RE = /^[a-z0-9]{8}$/;
+    const ext = (cleanUrl.split('.').pop() || '').toLowerCase();
+    const originalId = (cleanUrl.split('/').pop() || '').replace(/\.[^.]+$/, '');
+    const brandable = ID_RE.test(originalId) && ext !== 'gif' && ext !== 'svg';
+
+    async function applyBranded(u: string) {
+      brandedUrl = u;
+      try { localStorage.setItem(`wm:${cleanUrl}`, u); } catch { /* ignore */ }
+      revealTabs();
+      if (activeTab === 'branded') syncUI();
+    }
+
+    async function generateBranded() {
+      if (!brandable) return;
+
+      // Reuse a previously generated variant for this image (no network).
+      try {
+        const cached = localStorage.getItem(`wm:${cleanUrl}`);
+        if (cached) { await applyBranded(cached); return; }
+      } catch { /* ignore */ }
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      const loaded = new Promise<boolean>((resolve) => {
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+      });
+      img.src = cleanUrl;
+      if (!(await loaded) || !img.naturalWidth) return;
+
+      // Best-effort: make sure the brand font is ready before we rasterize text.
+      try { await (document as any).fonts?.load?.('600 24px "Space Grotesk Variable"'); } catch { /* ignore */ }
+
+      // Cap the long edge so the generated PNG stays a sensible size.
+      const scale = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.round(img.naturalWidth * scale);
+      const h = Math.round(img.naturalHeight * scale);
+      const stripH = Math.min(56, Math.max(44, Math.round(h * 0.08)));
+
+      const c = document.createElement('canvas');
+      c.width = w;
+      c.height = h + stripH;
+      const ctx = c.getContext('2d');
+      if (!ctx) return;
+
+      // White strip + centered brand text.
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, w, stripH);
+      ctx.fillStyle = '#171717';
+      ctx.font = `600 ${Math.round(stripH * 0.42)}px "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('imagetourl.cloud', w / 2, stripH / 2 + 1);
+
+      // Original image below the strip.
+      ctx.drawImage(img, 0, stripH, w, h);
+
+      const blob: Blob | null = await new Promise((resolve) => {
+        try { c.toBlob((b) => resolve(b), 'image/png'); } catch { resolve(null); }
+      });
+      if (!blob) return; // tainted canvas (cross-origin) or encode failure → clean only
+
+      const fd = new FormData();
+      fd.append('file', new File([blob], `branded-${originalId}.png`, { type: 'image/png' }));
+      fd.append('original_id', originalId);
+
+      try {
+        const res = await fetch('/api/brand-image', { method: 'POST', body: fd });
+        const data = await res.json();
+        if (res.ok && data?.data?.url) await applyBranded(data.data.url as string);
+      } catch { /* leave clean-only */ }
+    }
+
+    generateBranded();
   }
 </script>

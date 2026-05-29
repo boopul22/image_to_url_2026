@@ -49,6 +49,7 @@
   "home.upload.uploadAnother": "Upload another",
   "home.upload.copy": "COPY",
   "home.upload.copied": "COPIED!",
+  "home.upload.getLink": "Get Link",
   "home.upload.failed": "Upload failed",
   "home.upload.tryAgain": "Try again",
   "home.upload.uploadingFile": "Uploading {name}",

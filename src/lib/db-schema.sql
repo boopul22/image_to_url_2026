@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS images (
   uploaded_via TEXT DEFAULT 'web',
   adblock INTEGER NOT NULL DEFAULT 0,
   api_key_id TEXT,
+  branded_of TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   expires_at TEXT,
   deleted_at TEXT
@@ -40,6 +41,9 @@ CREATE INDEX IF NOT EXISTS idx_images_user_id ON images(user_id);
 CREATE INDEX IF NOT EXISTS idx_images_expires_at
   ON images(expires_at)
   WHERE expires_at IS NOT NULL AND deleted_at IS NULL;
+CREATE INDEX IF NOT EXISTS idx_images_branded_of
+  ON images(branded_of)
+  WHERE branded_of IS NOT NULL;
 
 CREATE TABLE IF NOT EXISTS api_keys (
   id TEXT PRIMARY KEY,
