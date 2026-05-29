@@ -785,6 +785,20 @@ const pageSchema = [
 
       if (!response.ok || data.error) {
         clearInterval(progressInterval);
+        // Daily rate limit: show the friendly reason inline. Only nudge guests
+        // to sign in — logged-in users already have the higher cap, so they get
+        // a "try again later / email us" message instead.
+        if (data.limit) {
+          showState('error');
+          errorText.textContent = data.error;
+          const isAnon = data.limit.scope === 'anon';
+          errorSignin.classList.toggle('hidden', !isAnon);
+          errorSignin.classList.toggle('flex', isAnon);
+          if (isAnon) showLoginError();
+          else showRetryError();
+          fileInput.value = '';
+          return;
+        }
         throw new Error(data.error || i18n.failed);
       }
 

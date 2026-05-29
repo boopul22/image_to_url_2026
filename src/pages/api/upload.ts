@@ -30,7 +30,12 @@ function getExtension(mimeType: string): string {
   return map[mimeType] || 'bin';
 }
 
-const ANON_UPLOAD_LIMIT = 5;
+// Daily upload limits. Hosting images costs real money in storage + bandwidth,
+// so uploads are capped per rolling 24h window. Guests get a small free
+// allowance; signing in raises it. Email CONTACT_EMAIL to request more.
+const ANON_DAILY_LIMIT = 5;
+const USER_DAILY_LIMIT = 25;
+const CONTACT_EMAIL = 'blog.boopul@gmail.com';
 
 function getClientIP(request: Request): string {
   return (
@@ -38,6 +43,21 @@ function getClientIP(request: Request): string {
     request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
     '0.0.0.0'
   );
+}
+
+// Human-friendly "resets in ~X" string, derived from the oldest upload still
+// inside the 24h window (SQLite stores UTC as 'YYYY-MM-DD HH:MM:SS'). The
+// window frees up exactly 24h after that oldest upload.
+function formatResetIn(oldestUtc: string | null): string {
+  if (!oldestUtc) return 'a little while';
+  const oldestMs = new Date(oldestUtc.replace(' ', 'T') + 'Z').getTime();
+  if (Number.isNaN(oldestMs)) return 'a little while';
+  const diff = oldestMs + 24 * 60 * 60 * 1000 - Date.now();
+  if (diff <= 0) return 'a few moments';
+  const minutes = Math.ceil(diff / 60000);
+  if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'}`;
+  const hours = Math.round(minutes / 60);
+  return `${hours} hour${hours === 1 ? '' : 's'}`;
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
@@ -61,18 +81,55 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const user = locals.user;
     const db = getDB(locals);
 
-    // Anonymous upload limit check
-    if (!user) {
-      const ip = getClientIP(request);
-      const result = await db
-        .prepare('SELECT COUNT(*) as count FROM anonymous_uploads WHERE ip_address = ?')
-        .bind(ip)
-        .first<{ count: number }>();
+    // Daily rate limit — a friendly 429 that explains *why* we cap uploads (we
+    // pay for storage + bandwidth) and how to get more (sign in, or email us).
+    // Counts a rolling 24h window so the allowance trickles back, not all at once.
+    if (user) {
+      const row = await db
+        .prepare(
+          `SELECT COUNT(*) as count, MIN(created_at) as oldest
+             FROM images
+            WHERE user_id = ? AND branded_of IS NULL
+              AND created_at >= datetime('now', '-1 day')`,
+        )
+        .bind(user.id)
+        .first<{ count: number; oldest: string | null }>();
 
-      if (result && result.count >= ANON_UPLOAD_LIMIT) {
+      if (row && row.count >= USER_DAILY_LIMIT) {
+        const resetIn = formatResetIn(row.oldest);
         return new Response(
           JSON.stringify({
-            error: `Upload limit reached. Anonymous users can upload up to ${ANON_UPLOAD_LIMIT} images. Please sign in for unlimited uploads.`,
+            error:
+              `You've reached your daily limit of ${USER_DAILY_LIMIT} uploads. ` +
+              `Hosting images costs us real money in storage and bandwidth, so we cap uploads each day to keep imagetourl.cloud free for everyone. ` +
+              `Your limit resets in about ${resetIn}. ` +
+              `Need a higher limit? Just email us at ${CONTACT_EMAIL} and we'll happily raise it for you.`,
+            limit: { scope: 'user', limit: USER_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
+          }),
+          { status: 429, headers: { 'Content-Type': 'application/json' } },
+        );
+      }
+    } else {
+      const ip = getClientIP(request);
+      const row = await db
+        .prepare(
+          `SELECT COUNT(*) as count, MIN(created_at) as oldest
+             FROM anonymous_uploads
+            WHERE ip_address = ? AND created_at >= datetime('now', '-1 day')`,
+        )
+        .bind(ip)
+        .first<{ count: number; oldest: string | null }>();
+
+      if (row && row.count >= ANON_DAILY_LIMIT) {
+        const resetIn = formatResetIn(row.oldest);
+        return new Response(
+          JSON.stringify({
+            error:
+              `You've reached your daily limit of ${ANON_DAILY_LIMIT} uploads for guests. ` +
+              `Hosting images costs us real money in storage and bandwidth, so we cap free uploads each day to keep imagetourl.cloud free for everyone. ` +
+              `Sign in (it's free) to get ${USER_DAILY_LIMIT} uploads per day — or your limit resets in about ${resetIn}. ` +
+              `Need even more? Just email us at ${CONTACT_EMAIL}.`,
+            limit: { scope: 'anon', limit: ANON_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
           }),
           { status: 429, headers: { 'Content-Type': 'application/json' } },
         );
