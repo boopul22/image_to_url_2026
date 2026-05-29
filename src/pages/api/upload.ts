@@ -5,6 +5,7 @@ import { uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
 import { resolveExpiresAt } from '../../lib/images/delete';
+import { embedAttribution } from '../../lib/images/metadata';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -125,7 +126,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Anonymous uploads go to "anonymous" folder, logged-in to "uploads"
     const folder = user ? 'uploads' : 'anonymous';
     const key = `${folder}/${id}.${ext}`;
-    const body = new Uint8Array(await file.arrayBuffer());
+    // Embed imagetourl.cloud attribution metadata (no-op + safe on failure).
+    const body = embedAttribution(new Uint8Array(await file.arrayBuffer()), file.type);
 
     await uploadToR2({
       accountId,
@@ -152,7 +154,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
           `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock, expires_at)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         )
-        .bind(id, user?.id ?? null, key, imageUrl, file.name, file.size, file.type, uploadedVia, adblock, expiresAt)
+        .bind(id, user?.id ?? null, key, imageUrl, file.name, body.length, file.type, uploadedVia, adblock, expiresAt)
         .run();
 
       // Track anonymous upload count

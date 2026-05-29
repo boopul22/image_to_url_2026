@@ -4,6 +4,7 @@ import type { APIRoute } from 'astro';
 import { uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
 import { getEnv } from '../../lib/env';
+import { embedAttribution } from '../../lib/images/metadata';
 
 // Stores a "branded" copy of an already-uploaded image — the /share page draws a
 // white "imagetourl.cloud" strip on top of the original (client-side canvas) and
@@ -99,7 +100,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     const id = generateId();
     const key = `branded/${id}.png`;
-    const body = new Uint8Array(await file.arrayBuffer());
+    // Embed imagetourl.cloud attribution metadata (canvas strips it, so re-add here).
+    const body = embedAttribution(new Uint8Array(await file.arrayBuffer()), 'image/png');
 
     await uploadToR2({
       accountId,
@@ -125,7 +127,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
           key,
           imageUrl,
           `branded-${originalId}.png`,
-          file.size,
+          body.length,
           'image/png',
           originalId,
           original.expires_at ?? null,
