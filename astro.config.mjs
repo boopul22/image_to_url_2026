@@ -8,7 +8,12 @@ export default defineConfig({
   site: 'https://imagetourl.cloud',
   trailingSlash: 'ignore',
   adapter: cloudflare({
-    remoteBindings: true,
+    // Local miniflare bindings by default — no Cloudflare login needed, so a
+    // content contributor can run `npm run dev` with zero credentials.
+    // Set REMOTE_BINDINGS=1 (npm run dev:remote) to proxy D1/R2/KV/IMAGES to the
+    // live account for real-data work. The `remote = true` flag on the D1 binding
+    // in wrangler.toml only takes effect when this is enabled.
+    remoteBindings: process.env.REMOTE_BINDINGS === '1',
   }),
   i18n: {
     defaultLocale: 'en',
