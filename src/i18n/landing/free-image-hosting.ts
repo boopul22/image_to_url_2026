@@ -41,6 +41,10 @@ export const content: LandingContentMap = {
       {
         "title": "No Signup Required",
         "body": "Start uploading instantly. No account creation, no email verification — just drag, drop, and share."
+      },
+      {
+        "title": "A free picture URL, always",
+        "body": "Every upload gives you a free picture URL and a free pic URL, both permanent, with no account needed."
       }
     ],
     "faqTitle": "Frequently Asked Questions",

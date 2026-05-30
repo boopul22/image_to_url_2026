@@ -45,6 +45,14 @@ export const content: LandingContentMap = {
       {
         "title": "Universal Compatibility",
         "body": "Our direct URLs work perfectly in img tags, email clients, and API responses without any referrer restrictions."
+      },
+      {
+        "title": "A direct link for any picture",
+        "body": "A direct link picture works just like an image link. Add that picture link to website builders like WordPress or Wix, with no gallery page in the way."
+      },
+      {
+        "title": "Find and reuse every link",
+        "body": "Search website link picture or find link with picture from an older upload anytime. You get pictures with URL link format, plus pictures with URL codes for embeds."
       }
     ],
     "faqTitle": "Frequently Asked Questions",

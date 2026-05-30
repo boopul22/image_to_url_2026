@@ -45,6 +45,10 @@ export const content: LandingContentMap = {
       {
         "title": "Easy Sharing",
         "body": "Copy your URL with one click or grab an embed code. Every URL works everywhere — websites, forums, and messaging apps."
+      },
+      {
+        "title": "A picture link creator too",
+        "body": "Call it what you like. A picture link creator, a pic link creator, or a photo link creator all mean the same thing here: your upload becomes an online picture URL you can paste anywhere."
       }
     ],
     "faqTitle": "Frequently Asked Questions",

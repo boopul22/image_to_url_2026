@@ -45,6 +45,14 @@ export const content: LandingContentMap = {
       {
         "title": "All Photo Formats",
         "body": "Upload JPG, PNG, WebP, or any common photo format. We handle them all with original quality preserved."
+      },
+      {
+        "title": "Made for any pic",
+        "body": "Drop in a pic and a pic URL comes back, free. The same upload handles a photo or a picture, so you can share those pic links wherever you need them."
+      },
+      {
+        "title": "From a pic to a link",
+        "body": "Need to make pic URL links for a chat or a forum? Turn a pic into URL form in one upload, and the free pic URL is yours to keep."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
