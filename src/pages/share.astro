@@ -167,6 +167,31 @@ const snipBb = url ? `[img]${url}[/img]` : '';
     window.setTimeout(() => { btn.textContent = btn.dataset.label!; }, 1500);
   }
 
+  // Shared analytics state — written by the watermark/tab logic below, read by the
+  // copy handlers. `variant` tracks what URL is actually live: 'clean' until the
+  // watermark finishes generating, even though the branded tab is the default.
+  const copyState: { variant: 'branded' | 'clean'; imageId: string } = { variant: 'clean', imageId: '' };
+
+  const COPY_FORMATS: Record<string, string> = {
+    'share-url': 'url',
+    'snip-md': 'markdown',
+    'snip-html': 'html',
+    'snip-bb': 'bbcode',
+  };
+
+  // Beacon a copy/download event so we can measure watermarked-vs-clean choice.
+  // text/plain Blob = CORS-safelisted, so sendBeacon delivers it without a preflight.
+  function sendCopyEvent(format: string) {
+    try {
+      const payload = JSON.stringify({
+        variant: copyState.variant,
+        format,
+        imageId: copyState.imageId || undefined,
+      });
+      navigator.sendBeacon('/api/copy-event', new Blob([payload], { type: 'text/plain' }));
+    } catch { /* analytics is best-effort */ }
+  }
+
   // Copy buttons (each copies its target input's value — values are kept in sync
   // with the active tab, so this works for both clean and branded URLs).
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
@@ -175,6 +200,8 @@ const snipBb = url ? `[img]${url}[/img]` : '';
       const value = (document.getElementById(targetId) as HTMLInputElement).value;
       try { await navigator.clipboard.writeText(value); } catch { /* ignore */ }
       flash(btn, 'Copied!');
+      const fmt = COPY_FORMATS[targetId];
+      if (fmt) sendCopyEvent(fmt);
     });
   });
 
@@ -216,6 +243,7 @@ const snipBb = url ? `[img]${url}[/img]` : '';
 
     function syncUI() {
       const u = currentUrl();
+      copyState.variant = activeTab === 'branded' && brandedUrl ? 'branded' : 'clean';
       urlInput!.value = u;
       thumb.src = u;
       thumbLink.href = u;
@@ -254,6 +282,7 @@ const snipBb = url ? `[img]${url}[/img]` : '';
         a.href = canvas.toDataURL('image/png');
         a.download = `${name}-qr.png`;
         a.click();
+        sendCopyEvent('qr');
       } catch { /* ignore */ }
     });
 
@@ -262,6 +291,7 @@ const snipBb = url ? `[img]${url}[/img]` : '';
     const ID_RE = /^[a-z0-9]{8}$/;
     const ext = (cleanUrl.split('.').pop() || '').toLowerCase();
     const originalId = (cleanUrl.split('/').pop() || '').replace(/\.[^.]+$/, '');
+    if (ID_RE.test(originalId)) copyState.imageId = originalId;
     const brandable = ID_RE.test(originalId) && ext !== 'gif' && ext !== 'svg';
 
     async function applyBranded(u: string) {
