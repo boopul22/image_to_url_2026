@@ -8,6 +8,9 @@
   "scripts": {
     "dev": "astro dev",
     "web": "astro dev",
+    "dev:remote": "REMOTE_BINDINGS=1 astro dev",
+    "setup": "node scripts/setup-local-db.mjs",
+    "setup:db": "node scripts/setup-local-db.mjs",
     "prebuild": "node scripts/generate-icon-names.mjs && node scripts/download-material-symbols.mjs",
     "build": "astro build && node scripts/patch-worker-entry.mjs",
     "preview": "astro preview",

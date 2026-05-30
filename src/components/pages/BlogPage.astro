@@ -19,9 +19,18 @@ function lp(path: string): string {
 Astro.response.headers.set('CDN-Cache-Control', 'public, max-age=300, stale-while-revalidate=3600');
 Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
 
-const db = getDB(Astro.locals);
-const { posts } = await getPublishedPostsLocalized(db, locale, { limit: 50 });
-const categories = await getCategories(db);
+// Degrade gracefully when the (local) D1 has empty/missing cms tables —
+// fall back to an empty blog list instead of a 500. Mirrors HomePage.astro.
+let posts: Awaited<ReturnType<typeof getPublishedPostsLocalized>>['posts'] = [];
+let categories: Awaited<ReturnType<typeof getCategories>> = [];
+try {
+  const db = getDB(Astro.locals);
+  ({ posts } = await getPublishedPostsLocalized(db, locale, { limit: 50 }));
+  categories = await getCategories(db);
+} catch (err) {
+  // No DB binding / empty tables (e.g. credential-free local dev) — empty list.
+  console.error('blog index load failed', err);
+}
 
 ---
 

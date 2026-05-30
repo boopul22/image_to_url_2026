@@ -11,9 +11,9 @@
  * skyscrapers are hidden and the horizontal banner stays visible.
  */
 ---
-<div class="w-full mb-8 sm:mb-10 lg:relative lg:left-1/2 lg:-translate-x-1/2 lg:w-screen lg:max-w-6xl lg:px-6">
-  <div class="w-full lg:flex lg:items-start lg:justify-center lg:gap-6">
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden lg:sticky lg:top-20 lg:self-start" aria-label="Sponsored">
+<div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
+  <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
+    <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
       <ins
         class="adsbygoogle"
         style="display:block"
@@ -23,7 +23,7 @@
       <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </aside>
 
-    <div class="w-full lg:flex-1 lg:max-w-2xl lg:min-w-0">
+    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
       <div class="w-full max-w-2xl mx-auto mb-4">
         <div class="ad-reserve">
           <ins
@@ -38,7 +38,7 @@
       <slot />
       <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
            Below the fold → lazy-loaded by the observer in Layout.astro (data-ad-lazy). -->
-      <div class="lg:hidden w-full max-w-2xl mx-auto mt-6">
+      <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
         <div class="ad-reserve">
           <ins
             class="adsbygoogle"
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden lg:sticky lg:top-20 lg:self-start" aria-label="Sponsored">
+    <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
       <ins
         class="adsbygoogle"
         style="display:block"

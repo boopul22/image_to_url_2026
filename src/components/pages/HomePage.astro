@@ -190,10 +190,10 @@ const pageSchema = [
   <Nav activePage="home" />
 
   <!-- Hero Section — Immediate, action-focused -->
-  <section class="max-w-4xl lg:max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
-    <div class="w-full lg:flex lg:items-start lg:justify-center lg:gap-6">
+  <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
+    <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
       <!-- Vertical ad — left (160x600 wide skyscraper, bottom-aligned with upload tool) -->
-      <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden lg:sticky lg:top-20 lg:self-start" aria-label="Sponsored">
+      <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
         <ins
           class="adsbygoogle"
           style="display:block"
@@ -204,7 +204,7 @@ const pageSchema = [
       </aside>
 
       <!-- Center column: badge, headline, upload tool -->
-      <div class="flex flex-col text-center lg:flex-1 lg:max-w-2xl lg:min-w-0">
+      <div class="flex flex-col text-center xl:flex-1 xl:max-w-2xl xl:min-w-0">
         <div class="max-w-4xl mx-auto w-full">
           <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-medium uppercase tracking-widest mb-3 border border-outline-variant/40">
             {t(locale, 'home.hero.badge')}
@@ -376,7 +376,7 @@ const pageSchema = [
       </div><!-- /center column -->
 
       <!-- Vertical ad — right (160x600 wide skyscraper, bottom-aligned with upload tool) -->
-      <aside class="hidden lg:block lg:flex-shrink-0 lg:w-[160px] lg:h-[600px] lg:overflow-hidden lg:sticky lg:top-20 lg:self-start" aria-label="Sponsored">
+      <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
         <ins
           class="adsbygoogle"
           style="display:block"
@@ -398,7 +398,7 @@ const pageSchema = [
 
   <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
        Below the fold → lazy-loaded by the observer in Layout.astro (data-ad-lazy). -->
-  <div class="lg:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6">
+  <div class="xl:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6">
     <div class="ad-reserve">
       <ins
         class="adsbygoogle"

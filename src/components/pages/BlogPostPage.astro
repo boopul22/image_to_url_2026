@@ -18,7 +18,15 @@ function lp(path: string): string {
 const { slug } = Astro.params;
 const db = getDB(Astro.locals);
 
-const post = await getPostBySlugLocalized(db, slug as string, locale);
+// Degrade gracefully when the (local) D1 has empty/missing cms tables —
+// treat a thrown fetch like a missing post (same not-found path below).
+let post: Awaited<ReturnType<typeof getPostBySlugLocalized>> = null;
+try {
+  post = await getPostBySlugLocalized(db, slug as string, locale);
+} catch (err) {
+  // No DB binding / empty tables (e.g. credential-free local dev) — not found.
+  console.error('blog post load failed', err);
+}
 
 if (!post) {
   return Astro.redirect(lp('/blog'));
