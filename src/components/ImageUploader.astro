@@ -182,25 +182,27 @@ import AdBanner from './ads/AdBanner.astro';
           <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">flash_on</span> Instant</span>
         </div>
 
-        <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
-             Multiplex (autorelaxed); below the fold → lazy-loaded by the observer (data-ad-lazy). -->
-        <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
-          <div class="ad-reserve">
-            <ins
-              class="adsbygoogle"
-              style="display:block"
-              data-ad-format="autorelaxed"
-              data-ad-client="ca-pub-7803867089582138"
-              data-ad-slot="1349470215"
-              data-ad-lazy></ins>
-          </div>
-        </div>
       </div><!-- /soft-uploader -->
     </div><!-- /center column -->
 
-    <!-- Right rail — two stacked responsive ad units (vertical + square) -->
+    <!-- Right rail — two stacked responsive square ad units -->
     <AdRail side="right" />
   </div><!-- /flex wrapper -->
+
+  <!-- Mobile/tablet in-content Multiplex — fills the slot gap where desktop has
+       rails. Kept LAST in DOM (after both rails) so its lazy fill can't steal an
+       earlier eager rail's push. Below the fold → lazy-loaded by the observer. -->
+  <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
+    <div class="ad-reserve">
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-format="autorelaxed"
+        data-ad-client="ca-pub-7803867089582138"
+        data-ad-slot="1349470215"
+        data-ad-lazy></ins>
+    </div>
+  </div>
 </div><!-- /ad-wrapped outer -->
 
 <script>

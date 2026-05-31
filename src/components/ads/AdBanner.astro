@@ -15,8 +15,9 @@
  * .ad-reserve holds height so a tall fill doesn't shift layout (CLS); unfilled
  * slots are collapsed by the global rule in Layout.astro.
  *
- * Slots (auto + full-width-responsive): both halves use the Square unit
- * (6615226419) — the top bar is split into two square boxes.
+ * Slots (auto + full-width-responsive): the top bar is split into two square
+ * boxes, each its own distinct square ad unit (left 3577999532, right 3713730906)
+ * — distinct units so AdSense doesn't unfill duplicates.
  *
  * `class` is passed onto the outer wrapper so callers can control spacing/order
  * (e.g. the homepage hero passes order-last to drop it below the uploader on
@@ -39,7 +40,7 @@ const PUB = 'ca-pub-7803867089582138';
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-ad-client={PUB}
-        data-ad-slot="6615226419"
+        data-ad-slot="3577999532"
         data-ad-lazy={lazy ? '' : undefined}></ins>
       {!lazy && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
     </div>
@@ -51,7 +52,7 @@ const PUB = 'ca-pub-7803867089582138';
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-ad-client={PUB}
-        data-ad-slot="6615226419"
+        data-ad-slot="3713730906"
         data-ad-lazy={lazy ? '' : undefined}></ins>
       {!lazy && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
     </div>

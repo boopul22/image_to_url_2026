@@ -22,21 +22,23 @@ import AdBanner from './ads/AdBanner.astro';
     <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
       <AdBanner class="mb-4" />
       <slot />
-      <!-- Mobile/tablet in-content Multiplex — fills the slot gap where desktop has
-           rails. Below the fold → lazy-loaded by the observer in Layout.astro. -->
-      <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
-        <div class="ad-reserve">
-          <ins
-            class="adsbygoogle"
-            style="display:block"
-            data-ad-format="autorelaxed"
-            data-ad-client="ca-pub-7803867089582138"
-            data-ad-slot="1349470215"
-            data-ad-lazy></ins>
-        </div>
-      </div>
     </div>
 
     <AdRail side="right" />
+  </div>
+
+  <!-- Mobile/tablet in-content Multiplex — fills the slot gap where desktop has
+       rails. Kept LAST in DOM (after both rails) so its lazy fill can't steal an
+       earlier eager rail's push. Below the fold → lazy-loaded by the observer. -->
+  <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
+    <div class="ad-reserve">
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-format="autorelaxed"
+        data-ad-client="ca-pub-7803867089582138"
+        data-ad-slot="1349470215"
+        data-ad-lazy></ins>
+    </div>
   </div>
 </div>
