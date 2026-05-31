@@ -13,7 +13,7 @@
  * specific slot, so out-of-DOM-order lazy fills would misalign.
  *
  * Slots (data-ad-format="auto" + full-width-responsive, so each adapts to the
- * 280px rail): top = Vertical (1115981593), bottom = Square (6615226419).
+ * 280px rail): both boxes use the Square unit (6615226419).
  */
 interface Props {
   side?: 'left' | 'right';
@@ -26,14 +26,14 @@ const PUB = 'ca-pub-7803867089582138';
   aria-label="Sponsored"
   data-rail={side}
 >
-  <!-- Top: vertical / skyscraper -->
+  <!-- Top: square -->
   <ins
     class="adsbygoogle"
     style="display:block"
     data-ad-format="auto"
     data-full-width-responsive="true"
     data-ad-client={PUB}
-    data-ad-slot="1115981593"></ins>
+    data-ad-slot="6615226419"></ins>
   <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
   <!-- Bottom: square -->
