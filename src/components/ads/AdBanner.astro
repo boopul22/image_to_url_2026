@@ -15,8 +15,8 @@
  * .ad-reserve holds height so a tall fill doesn't shift layout (CLS); unfilled
  * slots are collapsed by the global rule in Layout.astro.
  *
- * Slots (auto + full-width-responsive): left = Horizontal (8598885796),
- * right = Square (6615226419).
+ * Slots (auto + full-width-responsive): both halves use the Square unit
+ * (6615226419) — the top bar is split into two square boxes.
  *
  * `class` is passed onto the outer wrapper so callers can control spacing/order
  * (e.g. the homepage hero passes order-last to drop it below the uploader on
@@ -31,7 +31,7 @@ const PUB = 'ca-pub-7803867089582138';
 ---
 <div class:list={['w-full max-w-2xl mx-auto', cls]}>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    <!-- Left: horizontal -->
+    <!-- Left: square -->
     <div class="ad-reserve">
       <ins
         class="adsbygoogle"
@@ -39,7 +39,7 @@ const PUB = 'ca-pub-7803867089582138';
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-ad-client={PUB}
-        data-ad-slot="8598885796"
+        data-ad-slot="6615226419"
         data-ad-lazy={lazy ? '' : undefined}></ins>
       {!lazy && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
     </div>
