@@ -70,61 +70,6 @@ const user = Astro.locals.user!;
       </div>
     </section>
 
-    <!-- API Keys Section -->
-    <section>
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-headline italic font-black text-on-surface flex items-center gap-3">
-          <span class="material-symbols-outlined text-tertiary">key</span>
-          API Keys
-        </h2>
-        <button
-          id="generate-key-btn"
-          class="bg-primary text-on-primary px-5 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-1 transition-all"
-        >
-          Generate New Key
-        </button>
-      </div>
-
-      <!-- New Key Modal -->
-      <div id="new-key-modal" class="hidden mb-6 p-6 bg-tertiary-fixed border border-outline-variant/40 hard-shadow">
-        <p class="font-label text-xs font-bold uppercase tracking-wider text-on-tertiary-fixed mb-2">
-          Your new API key (copy it now — it won't be shown again):
-        </p>
-        <div class="flex items-center gap-2">
-          <code id="new-key-value" class="flex-1 bg-on-surface text-surface p-3 rounded text-sm font-mono break-all"></code>
-          <button id="copy-new-key" class="bg-on-surface text-tertiary-fixed px-4 py-3 rounded font-label text-xs font-bold uppercase">
-            Copy
-          </button>
-        </div>
-      </div>
-
-      <!-- Generate Key Dialog -->
-      <div id="key-name-dialog" class="hidden mb-6 p-6 bg-surface-container border border-outline-variant/40 hard-shadow">
-        <label class="font-label text-xs font-bold uppercase tracking-wider block mb-2">Key Name</label>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <input
-            id="key-name-input"
-            type="text"
-            placeholder="e.g. My App, CI Pipeline"
-            class="flex-1 bg-surface border border-outline-variant/40 px-4 py-2 font-body text-sm focus:outline-none focus:border-primary"
-          />
-          <button id="confirm-generate" class="bg-primary text-on-primary px-5 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase">
-            Create
-          </button>
-          <button id="cancel-generate" class="bg-surface border border-outline-variant/40 px-5 py-2 font-label text-xs font-bold uppercase">
-            Cancel
-          </button>
-        </div>
-      </div>
-
-      <div id="api-keys-list" class="space-y-3">
-        <div class="text-center text-outline py-8">
-          <span class="material-symbols-outlined text-4xl mb-2">hourglass_empty</span>
-          <p class="font-label text-xs uppercase">Loading keys...</p>
-        </div>
-      </div>
-    </section>
-
     <!-- Images Section -->
     <section>
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -234,78 +179,6 @@ const user = Astro.locals.user!;
     statStorage.textContent = formatBytes(stats.totalBytes);
     statExpiring.textContent = String(stats.expiringSoon);
   }
-
-  // ---- API Keys ----
-  const keysList = document.getElementById('api-keys-list')!;
-  const generateBtn = document.getElementById('generate-key-btn')!;
-  const keyNameDialog = document.getElementById('key-name-dialog')!;
-  const keyNameInput = document.getElementById('key-name-input') as HTMLInputElement;
-  const newKeyModal = document.getElementById('new-key-modal')!;
-  const newKeyValue = document.getElementById('new-key-value')!;
-
-  generateBtn.addEventListener('click', () => {
-    keyNameDialog.classList.remove('hidden');
-    keyNameInput.focus();
-  });
-
-  document.getElementById('cancel-generate')!.addEventListener('click', () => {
-    keyNameDialog.classList.add('hidden');
-    keyNameInput.value = '';
-  });
-
-  document.getElementById('confirm-generate')!.addEventListener('click', async () => {
-    const name = keyNameInput.value.trim();
-    if (!name) return;
-    const res = await fetch('/api/dashboard/api-keys', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name }),
-    });
-    const data = await res.json();
-    if (data.key) {
-      keyNameDialog.classList.add('hidden');
-      keyNameInput.value = '';
-      newKeyValue.textContent = data.key;
-      newKeyModal.classList.remove('hidden');
-      loadKeys();
-    }
-  });
-
-  document.getElementById('copy-new-key')!.addEventListener('click', () => {
-    navigator.clipboard.writeText(newKeyValue.textContent || '');
-  });
-
-  async function loadKeys() {
-    const res = await fetch('/api/dashboard/api-keys');
-    const data = await res.json();
-    if (!data.keys?.length) {
-      keysList.innerHTML = '<div class="text-center text-outline py-8"><p class="font-label text-xs uppercase">No API keys yet</p></div>';
-      return;
-    }
-    keysList.innerHTML = data.keys.map((k: any) => `
-      <div class="flex items-center gap-4 p-4 bg-surface border border-outline-variant/40 hard-shadow">
-        <div class="flex-1">
-          <span class="font-bold text-sm">${esc(k.name)}</span>
-          <code class="ml-3 text-xs text-outline font-mono">${esc(k.key_prefix)}...</code>
-        </div>
-        <span class="text-xs text-outline">${k.last_used_at ? 'Last used: ' + new Date(k.last_used_at).toLocaleDateString() : 'Never used'}</span>
-        ${k.revoked_at
-          ? '<span class="font-label text-xs font-bold text-error uppercase">Revoked</span>'
-          : `<button onclick="revokeKey('${esc(k.id)}')" class="font-label text-xs font-bold uppercase text-error hover:-translate-y-0.5 transition-all">Revoke</button>`
-        }
-      </div>
-    `).join('');
-  }
-
-  (window as any).revokeKey = async (id: string) => {
-    if (!confirm('Revoke this API key?')) return;
-    await fetch('/api/dashboard/api-keys', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    });
-    loadKeys();
-  };
 
   // ---- Images state ----
   const imagesGrid = document.getElementById('images-grid')!;
@@ -474,6 +347,5 @@ const user = Astro.locals.user!;
   loadMoreBtn.addEventListener('click', () => loadImages(currentPage + 1));
 
   // Initial load
-  loadKeys();
   loadImages(1);
 </script>
