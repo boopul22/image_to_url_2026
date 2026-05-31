@@ -9,6 +9,8 @@
  * The soft radii/shadows come from the scoped `.soft-uploader` layer in global.css;
  * the rest of the site stays brutalist.
  */
+import AdRail from './ads/AdRail.astro';
+import AdBanner from './ads/AdBanner.astro';
 ---
 
 <!-- Tool-area ads: left + right 160x600 skyscrapers flank the uploader on lg+,
@@ -17,31 +19,13 @@
      columns + gaps fit (~1040px) inside an lg:max-w-6xl frame. -->
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-    <!-- Left skyscraper -->
-    <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </aside>
+    <!-- Left rail — two stacked responsive ad units (vertical + square) -->
+    <AdRail side="left" />
 
     <!-- Center column: top horizontal banner + uploader widget + trust signals -->
     <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
-      <!-- Top responsive banner — full-width-responsive lets AdSense pick the best size per device -->
-      <div class="w-full max-w-2xl mx-auto mb-4">
-        <div class="ad-reserve">
-          <ins
-            class="adsbygoogle"
-            style="display:block"
-            data-ad-format="autorelaxed"
-            data-ad-client="ca-pub-7803867089582138"
-            data-ad-slot="7116802219"></ins>
-        </div>
-        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
+      <!-- Banner — two responsive ad units (horizontal + square), side-by-side on sm+ -->
+      <AdBanner class="mb-4" />
 
       <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
         <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
@@ -199,7 +183,7 @@
         </div>
 
         <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
-             Below the fold → lazy-loaded by the observer in Layout.astro (data-ad-lazy). -->
+             Multiplex (autorelaxed); below the fold → lazy-loaded by the observer (data-ad-lazy). -->
         <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
           <div class="ad-reserve">
             <ins
@@ -207,23 +191,15 @@
               style="display:block"
               data-ad-format="autorelaxed"
               data-ad-client="ca-pub-7803867089582138"
-              data-ad-slot="7116802219"
+              data-ad-slot="1349470215"
               data-ad-lazy></ins>
           </div>
         </div>
       </div><!-- /soft-uploader -->
     </div><!-- /center column -->
 
-    <!-- Right skyscraper -->
-    <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </aside>
+    <!-- Right rail — two stacked responsive ad units (vertical + square) -->
+    <AdRail side="right" />
   </div><!-- /flex wrapper -->
 </div><!-- /ad-wrapped outer -->
 

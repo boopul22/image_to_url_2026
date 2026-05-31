@@ -1,43 +1,29 @@
 ---
 /**
  * Wraps a tool widget (HEIC converter, canvas converter, PDF converter,
- * image compressor, image resizer, etc.) with the homepage-style 3-slot
- * ad layout: left + right 160x600 skyscrapers on lg+, plus a 90px
- * horizontal banner above the widget.
+ * image compressor, image resizer, etc.) with the site's responsive ad layout:
+ *   - Left + right sticky RAILS (two stacked units each), xl+ only.
+ *   - A BANNER (two units side-by-side on sm+) above the widget.
+ *   - A mobile/tablet in-content Multiplex unit below the widget, lazy-loaded,
+ *     to fill the gap where desktop shows the rails.
  *
- * Uses the standard left-1/2/-translate-x-1/2 breakout so the wrapper
- * expands from its parent's max-w-5xl frame up to lg:max-w-6xl, giving
- * room for 160 + ~672 + 160 columns + gaps (~1040px). Below lg the
- * skyscrapers are hidden and the horizontal banner stays visible.
+ * The wrapper breaks out of its parent's max-w-5xl frame at xl via
+ * left-1/2 / -translate-x-1/2 / w-screen so the three columns + gaps fit
+ * (~280 + 672 + 280) inside an xl:max-w-7xl frame. Below xl the rails are
+ * hidden and only the banner + in-content units remain.
  */
+import AdRail from './ads/AdRail.astro';
+import AdBanner from './ads/AdBanner.astro';
 ---
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-    <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </aside>
+    <AdRail side="left" />
 
     <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
-      <div class="w-full max-w-2xl mx-auto mb-4">
-        <div class="ad-reserve">
-          <ins
-            class="adsbygoogle"
-            style="display:block"
-            data-ad-format="autorelaxed"
-            data-ad-client="ca-pub-7803867089582138"
-            data-ad-slot="7116802219"></ins>
-        </div>
-        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
+      <AdBanner class="mb-4" />
       <slot />
-      <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
-           Below the fold → lazy-loaded by the observer in Layout.astro (data-ad-lazy). -->
+      <!-- Mobile/tablet in-content Multiplex — fills the slot gap where desktop has
+           rails. Below the fold → lazy-loaded by the observer in Layout.astro. -->
       <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
         <div class="ad-reserve">
           <ins
@@ -45,20 +31,12 @@
             style="display:block"
             data-ad-format="autorelaxed"
             data-ad-client="ca-pub-7803867089582138"
-            data-ad-slot="7116802219"
+            data-ad-slot="1349470215"
             data-ad-lazy></ins>
         </div>
       </div>
     </div>
 
-    <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </aside>
+    <AdRail side="right" />
   </div>
 </div>

@@ -1,0 +1,48 @@
+---
+/**
+ * Banner above the tool = TWO ad units. Side-by-side on sm+ (the wide split in
+ * the mockup), stacked to one column on mobile. Each <ins> keeps its own inline
+ * push({}) right after it — same DOM-order fill contract as AdRail.
+ *
+ * .ad-reserve holds height so a tall fill doesn't shift layout (CLS); unfilled
+ * slots are collapsed by the global rule in Layout.astro.
+ *
+ * Slots (auto + full-width-responsive): left = Horizontal (8598885796),
+ * right = Square (6615226419).
+ *
+ * `class` is passed onto the outer wrapper so callers can control spacing/order
+ * (e.g. the homepage hero passes order-last to drop it below the uploader on
+ * mobile for CLS).
+ */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+const PUB = 'ca-pub-7803867089582138';
+---
+<div class:list={['w-full max-w-2xl mx-auto', cls]}>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <!-- Left: horizontal -->
+    <div class="ad-reserve">
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+        data-ad-client={PUB}
+        data-ad-slot="8598885796"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <!-- Right: square -->
+    <div class="ad-reserve">
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+        data-ad-client={PUB}
+        data-ad-slot="6615226419"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+</div>

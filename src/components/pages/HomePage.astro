@@ -7,6 +7,8 @@ import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
+import AdRail from '../ads/AdRail.astro';
+import AdBanner from '../ads/AdBanner.astro';
 
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -192,16 +194,8 @@ const pageSchema = [
   <!-- Hero Section — Immediate, action-focused -->
   <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
     <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-      <!-- Vertical ad — left (160x600 wide skyscraper, bottom-aligned with upload tool) -->
-      <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-        <ins
-          class="adsbygoogle"
-          style="display:block"
-          data-ad-format="autorelaxed"
-          data-ad-client="ca-pub-7803867089582138"
-          data-ad-slot="1349470215"></ins>
-        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </aside>
+      <!-- Left rail — two stacked responsive ad units (vertical + square) -->
+      <AdRail side="left" />
 
       <!-- Center column: badge, headline, upload tool -->
       <div class="flex flex-col text-center xl:flex-1 xl:max-w-2xl xl:min-w-0">
@@ -217,21 +211,10 @@ const pageSchema = [
           </p>
         </div>
 
-        <!-- AdSense — responsive banner (full-width-responsive lets AdSense pick best size per device).
-             MOBILE: order-last drops this BELOW the uploader so a tall ad fill can't shove the
-             hero/uploader down (the CLS fix). DESKTOP: lg:order-none restores it above the uploader
-             in the center column. .ad-reserve holds its height either way. -->
-        <div class="w-full max-w-2xl mx-auto mb-4 order-last mt-4 lg:order-none lg:mt-0">
-          <div class="ad-reserve">
-            <ins
-              class="adsbygoogle"
-              style="display:block"
-              data-ad-format="autorelaxed"
-              data-ad-client="ca-pub-7803867089582138"
-              data-ad-slot="7116802219"></ins>
-          </div>
-          <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <!-- Banner — two responsive ad units (horizontal + square), side-by-side on
+             sm+, stacked on mobile. MOBILE: order-last drops it BELOW the uploader so a
+             tall fill can't shove the hero down (CLS); DESKTOP: lg:order-none restores it above. -->
+        <AdBanner class="mb-4 order-last mt-4 lg:order-none lg:mt-0" />
 
     <div class="soft-uploader w-full max-w-xl mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" class="hidden" />
@@ -375,16 +358,8 @@ const pageSchema = [
         </div>
       </div><!-- /center column -->
 
-      <!-- Vertical ad — right (160x600 wide skyscraper, bottom-aligned with upload tool) -->
-      <aside class="hidden xl:block xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-        <ins
-          class="adsbygoogle"
-          style="display:block"
-          data-ad-format="autorelaxed"
-          data-ad-client="ca-pub-7803867089582138"
-          data-ad-slot="1349470215"></ins>
-        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </aside>
+      <!-- Right rail — two stacked responsive ad units (vertical + square) -->
+      <AdRail side="right" />
     </div><!-- /flex wrapper -->
 
     <!-- Trust Signals — pushed to bottom of viewport -->
@@ -397,7 +372,8 @@ const pageSchema = [
   </section>
 
   <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
-       Below the fold → lazy-loaded by the observer in Layout.astro (data-ad-lazy). -->
+       Multiplex (autorelaxed) grid; below the fold → lazy-loaded by the observer in
+       Layout.astro (data-ad-lazy). -->
   <div class="xl:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6">
     <div class="ad-reserve">
       <ins
@@ -405,7 +381,7 @@ const pageSchema = [
         style="display:block"
         data-ad-format="autorelaxed"
         data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="7116802219"
+        data-ad-slot="1349470215"
         data-ad-lazy></ins>
     </div>
   </div>

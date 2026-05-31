@@ -1,0 +1,48 @@
+---
+/**
+ * One side rail = TWO stacked ad units, shown only on xl+ (mobile/tablet never
+ * render the rails — they collapse to the in-content ad instead). Sticky so the
+ * pair stays beside the tool as the user scrolls (works now that <body> uses
+ * overflow-x: clip, not hidden).
+ *
+ * Loading: each <ins> keeps its own inline push({}) right after it — the proven
+ * pattern from the old single-rail markup. AdSense fills statusless <ins> in DOM
+ * order, so an inline push immediately after each one always targets THAT slot
+ * (every earlier slot already got its push from its own preceding script). Don't
+ * reorder these into a lazy/observer scheme — a bare push() can't target a
+ * specific slot, so out-of-DOM-order lazy fills would misalign.
+ *
+ * Slots (data-ad-format="auto" + full-width-responsive, so each adapts to the
+ * 280px rail): top = Vertical (1115981593), bottom = Square (6615226419).
+ */
+interface Props {
+  side?: 'left' | 'right';
+}
+const { side = 'left' } = Astro.props;
+const PUB = 'ca-pub-7803867089582138';
+---
+<aside
+  class="hidden xl:flex xl:flex-col xl:gap-4 xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start"
+  aria-label="Sponsored"
+  data-rail={side}
+>
+  <!-- Top: vertical / skyscraper -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot="1115981593"></ins>
+  <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <!-- Bottom: square -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot="6615226419"></ins>
+  <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</aside>
