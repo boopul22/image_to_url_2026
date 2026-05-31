@@ -38,38 +38,35 @@ const user = Astro.locals.user!;
       </div>
     </section>
 
-    <!-- Upload Section -->
-    <section>
-      <h2 class="text-2xl font-headline italic font-black text-on-surface mb-6 flex items-center gap-3">
-        <span class="material-symbols-outlined text-primary">cloud_upload</span>
-        Upload Image
-      </h2>
-      <div class="soft-uploader su-card su-inner-shadow bg-surface-container border border-outline-variant/40 p-2 sm:p-3">
-        <div
-          id="upload-zone"
-          class="su-drop group bg-white border border-dashed border-outline-variant p-8 sm:p-12 text-center cursor-pointer hover:border-rose-400 hover:bg-rose-50 transition-all duration-300"
-        >
-          <span class="material-symbols-outlined text-6xl text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 mb-4">cloud_upload</span>
-          <p class="text-sm font-medium text-on-surface-variant">
-            Drop files to upload
-          </p>
-          <p class="text-xs text-on-surface-variant/70 mt-2">JPG, PNG, WebP, GIF, SVG — Max 10MB</p>
-          <input type="file" id="file-input" accept="image/*" class="hidden" />
+    <!-- Overview Stats -->
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
+        <div class="flex items-center gap-2 text-on-surface-variant mb-1">
+          <span class="material-symbols-outlined text-secondary text-lg">photo_library</span>
+          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Images</span>
         </div>
-        <div id="upload-result" class="mt-3 hidden">
-          <div class="su-control flex items-center gap-3 p-4 bg-surface-container-low border border-outline-variant">
-            <span class="material-symbols-outlined text-rose-600" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-            <input
-              id="upload-url"
-              type="text"
-              readonly
-              class="flex-1 bg-transparent text-sm font-mono focus:outline-none"
-            />
-            <button id="copy-upload-url" class="text-xs font-bold text-primary hover:-translate-y-0.5 transition-all">
-              Copy
-            </button>
-          </div>
+        <p id="stat-total" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+      </div>
+      <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
+        <div class="flex items-center gap-2 text-on-surface-variant mb-1">
+          <span class="material-symbols-outlined text-primary text-lg">database</span>
+          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Storage</span>
         </div>
+        <p id="stat-storage" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+      </div>
+      <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
+        <div class="flex items-center gap-2 text-on-surface-variant mb-1">
+          <span class="material-symbols-outlined text-tertiary text-lg">schedule</span>
+          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Expiring Soon</span>
+        </div>
+        <p id="stat-expiring" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+      </div>
+      <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
+        <div class="flex items-center gap-2 text-on-surface-variant mb-1">
+          <span class="material-symbols-outlined text-secondary text-lg">badge</span>
+          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Account</span>
+        </div>
+        <p class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface capitalize">{user.role}</p>
       </div>
     </section>
 
@@ -130,10 +127,61 @@ const user = Astro.locals.user!;
 
     <!-- Images Section -->
     <section>
-      <h2 class="text-2xl font-headline italic font-black text-on-surface mb-6 flex items-center gap-3">
-        <span class="material-symbols-outlined text-secondary">photo_library</span>
-        Your Images
-      </h2>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <h2 class="text-2xl font-headline italic font-black text-on-surface flex items-center gap-3">
+          <span class="material-symbols-outlined text-secondary">photo_library</span>
+          Your Images
+        </h2>
+        <div class="flex items-center gap-2">
+          <div class="relative flex-1 sm:flex-none">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-lg pointer-events-none">search</span>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Search by filename"
+              class="w-full sm:w-56 bg-surface border border-outline-variant/40 pl-10 pr-3 py-2 font-body text-sm focus:outline-none focus:border-primary"
+            />
+          </div>
+          <select
+            id="sort-select"
+            class="bg-surface border border-outline-variant/40 px-3 py-2 font-body text-sm focus:outline-none focus:border-primary cursor-pointer"
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="largest">Largest</option>
+            <option value="smallest">Smallest</option>
+            <option value="name">Name (A–Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Selection Toolbar -->
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <button
+          id="select-toggle"
+          class="bg-surface border border-outline-variant/40 px-4 py-2 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 transition-all"
+        >
+          Select
+        </button>
+        <div id="bulk-bar" class="hidden flex-wrap items-center gap-3">
+          <button id="select-all" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:-translate-y-0.5 transition-all">
+            Select all
+          </button>
+          <button id="select-none" class="font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:-translate-y-0.5 transition-all">
+            Clear
+          </button>
+          <span id="selection-count" class="font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">0 selected</span>
+          <button
+            id="bulk-delete-btn"
+            disabled
+            class="bg-error text-on-error px-4 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-sm">delete</span>
+            Delete Selected
+          </button>
+        </div>
+      </div>
+
       <div id="images-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div class="col-span-full text-center text-outline py-12">
           <span class="material-symbols-outlined text-4xl mb-2">hourglass_empty</span>
@@ -158,41 +206,36 @@ const user = Astro.locals.user!;
     return d.innerHTML;
   }
 
-  // Upload
-  const uploadZone = document.getElementById('upload-zone')!;
-  const fileInput = document.getElementById('file-input') as HTMLInputElement;
-  const uploadResult = document.getElementById('upload-result')!;
-  const uploadUrl = document.getElementById('upload-url') as HTMLInputElement;
-
-  uploadZone.addEventListener('click', () => fileInput.click());
-  uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('border-rose-400', 'bg-rose-50'); });
-  uploadZone.addEventListener('dragleave', () => { uploadZone.classList.remove('border-rose-400', 'bg-rose-50'); });
-  uploadZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadZone.classList.remove('border-rose-400', 'bg-rose-50');
-    if (e.dataTransfer?.files[0]) uploadFile(e.dataTransfer.files[0]);
-  });
-  fileInput.addEventListener('change', () => { if (fileInput.files?.[0]) uploadFile(fileInput.files[0]); });
-
-  async function uploadFile(file: File) {
-    const form = new FormData();
-    form.append('file', file);
-    try {
-      const res = await fetch('/api/upload', { method: 'POST', body: form });
-      const data = await res.json();
-      if (data.success) {
-        uploadUrl.value = data.data.url;
-        uploadResult.classList.remove('hidden');
-        loadImages(1);
-      }
-    } catch {}
+  function formatBytes(bytes: number): string {
+    if (!bytes) return '0 KB';
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
   }
 
-  document.getElementById('copy-upload-url')!.addEventListener('click', () => {
-    navigator.clipboard.writeText(uploadUrl.value);
-  });
+  function formatExpiry(iso: string): string {
+    const ms = new Date(iso.replace(' ', 'T') + 'Z').getTime() - Date.now();
+    if (ms <= 0) return 'soon';
+    const m = Math.round(ms / 60000);
+    if (m < 60) return `in ${m}m`;
+    const h = Math.round(m / 60);
+    if (h < 48) return `in ${h}h`;
+    return `in ${Math.round(h / 24)}d`;
+  }
 
-  // API Keys
+  // ---- Stats ----
+  const statTotal = document.getElementById('stat-total')!;
+  const statStorage = document.getElementById('stat-storage')!;
+  const statExpiring = document.getElementById('stat-expiring')!;
+
+  function renderStats(stats: { totalImages: number; totalBytes: number; expiringSoon: number } | undefined) {
+    if (!stats) return;
+    statTotal.textContent = String(stats.totalImages);
+    statStorage.textContent = formatBytes(stats.totalBytes);
+    statExpiring.textContent = String(stats.expiringSoon);
+  }
+
+  // ---- API Keys ----
   const keysList = document.getElementById('api-keys-list')!;
   const generateBtn = document.getElementById('generate-key-btn')!;
   const keyNameDialog = document.getElementById('key-name-dialog')!;
@@ -264,39 +307,54 @@ const user = Astro.locals.user!;
     loadKeys();
   };
 
-  // Images
+  // ---- Images state ----
   const imagesGrid = document.getElementById('images-grid')!;
   const loadMoreWrapper = document.getElementById('load-more-wrapper')!;
   const loadMoreBtn = document.getElementById('load-more-btn')!;
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+
   let currentPage = 1;
+  let totalPages = 1;
   let allImages: any[] = [];
+  let selectMode = false;
+  const selected = new Set<string>();
 
   async function loadImages(page: number) {
-    const res = await fetch(`/api/dashboard/images?page=${page}`);
+    const params = new URLSearchParams({ page: String(page), sort: sortSelect.value });
+    const q = searchInput.value.trim();
+    if (q) params.set('search', q);
+
+    const res = await fetch(`/api/dashboard/images?${params.toString()}`);
     const data = await res.json();
 
-    if (page === 1) allImages = data.images;
-    else allImages = [...allImages, ...data.images];
+    if (page === 1) allImages = data.images || [];
+    else allImages = [...allImages, ...(data.images || [])];
 
-    currentPage = page;
+    currentPage = data.page || page;
+    totalPages = data.totalPages || 1;
+    renderStats(data.stats);
     renderImages();
 
-    if (page < data.totalPages) {
-      loadMoreWrapper.classList.remove('hidden');
-    } else {
-      loadMoreWrapper.classList.add('hidden');
-    }
+    loadMoreWrapper.classList.toggle('hidden', currentPage >= totalPages);
   }
 
   function renderImages() {
     if (!allImages.length) {
-      imagesGrid.innerHTML = '<div class="col-span-full text-center text-outline py-12"><span class="material-symbols-outlined text-4xl mb-2">image</span><p class="font-label text-xs uppercase">No images uploaded yet</p></div>';
+      const q = searchInput.value.trim();
+      const msg = q ? `No images match "${esc(q)}"` : 'No images uploaded yet';
+      imagesGrid.innerHTML = `<div class="col-span-full text-center text-outline py-12"><span class="material-symbols-outlined text-4xl mb-2">image</span><p class="font-label text-xs uppercase">${msg}</p></div>`;
       return;
     }
-    imagesGrid.innerHTML = allImages.map((img: any) => `
-      <div class="bg-surface border border-outline-variant/40 overflow-hidden hard-shadow group">
-        <div class="h-40 bg-surface-container-highest overflow-hidden">
+    imagesGrid.innerHTML = allImages.map((img: any) => {
+      const isSel = selected.has(img.id);
+      return `
+      <div class="image-card bg-surface border ${isSel ? 'border-primary ring-2 ring-primary' : 'border-outline-variant/40'} overflow-hidden hard-shadow group relative" data-id="${esc(img.id)}">
+        <div class="h-40 bg-surface-container-highest overflow-hidden relative cursor-pointer select-hit">
           <img src="${esc(img.url)}" alt="${esc(img.filename)}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+          <label class="select-box absolute top-2 left-2 ${selectMode ? 'flex' : 'hidden'} items-center justify-center w-6 h-6 bg-surface/90 border border-outline-variant rounded cursor-pointer">
+            <input type="checkbox" class="select-checkbox accent-primary w-4 h-4 cursor-pointer" data-id="${esc(img.id)}" ${isSel ? 'checked' : ''} />
+          </label>
         </div>
         <div class="p-3 space-y-2">
           <p class="text-xs font-bold truncate" title="${esc(img.filename)}">${esc(img.filename)}</p>
@@ -310,19 +368,88 @@ const user = Astro.locals.user!;
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
+
+    // Wire up selection interactions on the freshly rendered cards.
+    imagesGrid.querySelectorAll<HTMLInputElement>('.select-checkbox').forEach((cb) => {
+      cb.addEventListener('change', () => toggleSelected(cb.dataset.id!, cb.checked));
+      cb.addEventListener('click', (e) => e.stopPropagation());
+    });
+    if (selectMode) {
+      imagesGrid.querySelectorAll<HTMLElement>('.select-hit').forEach((hit) => {
+        hit.addEventListener('click', () => {
+          const card = hit.closest('.image-card') as HTMLElement;
+          const id = card?.dataset.id;
+          if (id) toggleSelected(id, !selected.has(id));
+        });
+      });
+    }
   }
 
-  function formatExpiry(iso: string): string {
-    const ms = new Date(iso.replace(' ', 'T') + 'Z').getTime() - Date.now();
-    if (ms <= 0) return 'soon';
-    const m = Math.round(ms / 60000);
-    if (m < 60) return `in ${m}m`;
-    const h = Math.round(m / 60);
-    if (h < 48) return `in ${h}h`;
-    return `in ${Math.round(h / 24)}d`;
+  // ---- Selection ----
+  const selectToggle = document.getElementById('select-toggle')!;
+  const bulkBar = document.getElementById('bulk-bar')!;
+  const selectionCount = document.getElementById('selection-count')!;
+  const bulkDeleteBtn = document.getElementById('bulk-delete-btn') as HTMLButtonElement;
+
+  function updateSelectionUI() {
+    selectionCount.textContent = `${selected.size} selected`;
+    bulkDeleteBtn.disabled = selected.size === 0;
   }
 
+  function toggleSelected(id: string, on: boolean) {
+    if (on) selected.add(id);
+    else selected.delete(id);
+    updateSelectionUI();
+    renderImages();
+  }
+
+  selectToggle.addEventListener('click', () => {
+    selectMode = !selectMode;
+    selectToggle.classList.toggle('bg-primary', selectMode);
+    selectToggle.classList.toggle('text-on-primary', selectMode);
+    bulkBar.classList.toggle('hidden', !selectMode);
+    bulkBar.classList.toggle('flex', selectMode);
+    if (!selectMode) selected.clear();
+    updateSelectionUI();
+    renderImages();
+  });
+
+  document.getElementById('select-all')!.addEventListener('click', () => {
+    allImages.forEach((img) => selected.add(img.id));
+    updateSelectionUI();
+    renderImages();
+  });
+
+  document.getElementById('select-none')!.addEventListener('click', () => {
+    selected.clear();
+    updateSelectionUI();
+    renderImages();
+  });
+
+  bulkDeleteBtn.addEventListener('click', async () => {
+    const ids = [...selected];
+    if (!ids.length) return;
+    if (!confirm(`Delete ${ids.length} image${ids.length === 1 ? '' : 's'} permanently? This cannot be undone.`)) return;
+
+    bulkDeleteBtn.disabled = true;
+    const res = await fetch('/api/dashboard/images', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids }),
+    });
+    if (res.ok) {
+      selected.clear();
+      updateSelectionUI();
+      await loadImages(1);
+    } else {
+      bulkDeleteBtn.disabled = false;
+      alert('Some images could not be deleted. Please try again.');
+    }
+  });
+
+  // ---- Single image actions ----
   (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url);
   (window as any).deleteImage = async (id: string) => {
     if (!confirm('Delete this image permanently?')) return;
@@ -331,8 +458,18 @@ const user = Astro.locals.user!;
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
     });
+    selected.delete(id);
+    updateSelectionUI();
     loadImages(1);
   };
+
+  // ---- Search + sort (debounced search) ----
+  let searchTimer: ReturnType<typeof setTimeout>;
+  searchInput.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => loadImages(1), 300);
+  });
+  sortSelect.addEventListener('change', () => loadImages(1));
 
   loadMoreBtn.addEventListener('click', () => loadImages(currentPage + 1));
 
