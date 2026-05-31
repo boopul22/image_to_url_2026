@@ -10,6 +10,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import ToolAdSurround from '../components/ToolAdSurround.astro';
+import AdBanner from '../components/ads/AdBanner.astro';
 
 // Never cache at the CDN (the content is per-?u= and trivial); also keep it out
 // of the index.
@@ -129,20 +130,12 @@ const snipBb = url ? `[img]${url}[/img]` : '';
       </div>
       </ToolAdSurround>
 
-      <!-- Desktop "post-action" ad. Share page is the highest-dwell moment in
-           the funnel; once the user finishes copying / scanning QR their gaze
-           drops here. Mobile already gets the equivalent slot via ToolAdSurround. -->
-      <div class="hidden lg:block w-full mt-8">
-        <div class="ad-reserve">
-          <ins
-            class="adsbygoogle"
-            style="display:block"
-            data-ad-format="autorelaxed"
-            data-ad-client="ca-pub-7803867089582138"
-            data-ad-slot="7116802219"
-            data-ad-lazy></ins>
-        </div>
-      </div>
+      <!-- Desktop "post-action" banner. Share page is the highest-dwell moment in
+           the funnel; once the user finishes copying / scanning QR their gaze drops
+           here. Two responsive units (horizontal + square), lazy-loaded (below the
+           fold) and desktop-only — mobile already gets the in-content unit via
+           ToolAdSurround. Last ad cluster in DOM, so lazy fills can't misalign. -->
+      <AdBanner lazy class="hidden lg:block mt-8" />
     ) : (
       <!-- Invalid / missing URL state -->
       <div id="share-empty" class="text-center py-10">

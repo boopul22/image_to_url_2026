@@ -1,8 +1,16 @@
 ---
 /**
- * Banner above the tool = TWO ad units. Side-by-side on sm+ (the wide split in
- * the mockup), stacked to one column on mobile. Each <ins> keeps its own inline
- * push({}) right after it — same DOM-order fill contract as AdRail.
+ * Banner = TWO ad units. Side-by-side on sm+ (the wide split in the mockup),
+ * stacked to one column on mobile.
+ *
+ * Loading modes:
+ *   - eager (default): each <ins> keeps its own inline push({}) right after it
+ *     — the DOM-order fill contract (use above the fold, e.g. over the tool).
+ *   - lazy ({lazy}): no inline push; each <ins> gets data-ad-lazy so the shared
+ *     IntersectionObserver in Layout.astro fills it ~300px before view. Use
+ *     below the fold (e.g. the share-page post-action banner). Only safe when
+ *     this banner is the LAST ad cluster in DOM, so the observer's bare push()
+ *     can't misalign with an earlier eager slot.
  *
  * .ad-reserve holds height so a tall fill doesn't shift layout (CLS); unfilled
  * slots are collapsed by the global rule in Layout.astro.
@@ -16,8 +24,9 @@
  */
 interface Props {
   class?: string;
+  lazy?: boolean;
 }
-const { class: cls = '' } = Astro.props;
+const { class: cls = '', lazy = false } = Astro.props;
 const PUB = 'ca-pub-7803867089582138';
 ---
 <div class:list={['w-full max-w-2xl mx-auto', cls]}>
@@ -30,8 +39,9 @@ const PUB = 'ca-pub-7803867089582138';
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-ad-client={PUB}
-        data-ad-slot="8598885796"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        data-ad-slot="8598885796"
+        data-ad-lazy={lazy ? '' : undefined}></ins>
+      {!lazy && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
     </div>
     <!-- Right: square -->
     <div class="ad-reserve">
@@ -41,8 +51,9 @@ const PUB = 'ca-pub-7803867089582138';
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-ad-client={PUB}
-        data-ad-slot="6615226419"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        data-ad-slot="6615226419"
+        data-ad-lazy={lazy ? '' : undefined}></ins>
+      {!lazy && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
     </div>
   </div>
 </div>
