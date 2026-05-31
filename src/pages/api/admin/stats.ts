@@ -35,6 +35,7 @@ export const GET: APIRoute = async ({ locals }) => {
     recentSignups,
     dormantUsers,
     ctaBreakdown,
+    copyAgg,
   ] = await Promise.all([
     // All upload counts / storage / source splits in one pass, filtered to live images.
     db
@@ -264,6 +265,28 @@ export const GET: APIRoute = async ({ locals }) => {
          ORDER BY count DESC`,
       )
       .all<{ link_id: string; count: number }>(),
+
+    // Watermark choice on the share page: of the links visitors actually COPIED,
+    // how many were the branded (watermarked) variant vs the clean one. Source is
+    // copy_events (one row per copy, variant='branded'|'clean'). Guarded with
+    // .catch so a missing table (fresh local dev DB) degrades to zeroes instead of
+    // failing the whole stats payload.
+    db
+      .prepare(
+        `SELECT
+           COUNT(*)                                                                                 AS total,
+           SUM(CASE WHEN variant = 'branded' THEN 1 ELSE 0 END)                                      AS branded,
+           SUM(CASE WHEN variant = 'clean'   THEN 1 ELSE 0 END)                                      AS clean,
+           SUM(CASE WHEN created_at >= datetime('now', '-30 days')                       THEN 1 ELSE 0 END) AS total_30d,
+           SUM(CASE WHEN variant = 'branded' AND created_at >= datetime('now', '-30 days') THEN 1 ELSE 0 END) AS branded_30d,
+           SUM(CASE WHEN variant = 'clean'   AND created_at >= datetime('now', '-30 days') THEN 1 ELSE 0 END) AS clean_30d
+         FROM copy_events`,
+      )
+      .first<{
+        total: number; branded: number; clean: number;
+        total_30d: number; branded_30d: number; clean_30d: number;
+      }>()
+      .catch(() => null),
   ]);
 
   const img = imageAgg!;
@@ -341,6 +364,17 @@ export const GET: APIRoute = async ({ locals }) => {
       engagement: {
         activeSessions: sessionAgg?.count ?? 0,
         ctaBreakdown: ctaBreakdown.results ?? [],
+      },
+      // Watermarked-vs-clean share-link copies (see copy_events query above).
+      watermark: {
+        brandedAllTime: copyAgg?.branded ?? 0,
+        cleanAllTime: copyAgg?.clean ?? 0,
+        totalAllTime: copyAgg?.total ?? 0,
+        branded30d: copyAgg?.branded_30d ?? 0,
+        clean30d: copyAgg?.clean_30d ?? 0,
+        total30d: copyAgg?.total_30d ?? 0,
+        brandedPct30d:
+          (copyAgg?.total_30d ?? 0) > 0 ? (copyAgg!.branded_30d / copyAgg!.total_30d) * 100 : 0,
       },
       dailySeries: dailySeries.results ?? [],
       hourOfDay: hourOfDay.results ?? [],

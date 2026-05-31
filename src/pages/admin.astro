@@ -122,6 +122,17 @@ const firstName = user.name.split(' ')[0];
             <div class="a-seg a-seg-2" id="comp-noab-bar" style="width:0%"></div>
           </div>
         </div>
+        <div>
+          <div class="flex items-baseline justify-between text-xs mb-1.5">
+            <span class="font-medium" style="color:var(--a-fg)">With watermark <span class="a-subtle font-normal" id="comp-wm-num">—</span></span>
+            <span class="a-muted">No watermark <span class="font-medium" style="color:var(--a-fg)" id="comp-nowm-num">—</span></span>
+          </div>
+          <div class="a-track">
+            <div class="a-seg a-seg-1" id="comp-wm-bar" style="width:0%"></div>
+            <div class="a-seg a-seg-2" id="comp-nowm-bar" style="width:0%"></div>
+          </div>
+          <p class="text-[11px] a-subtle mt-1" id="comp-wm-sub">Share-page link copies · last 30 days</p>
+        </div>
       </div>
     </div>
 
@@ -312,6 +323,22 @@ const firstName = user.name.split(' ')[0];
     document.getElementById('comp-ab-num')!.textContent = fmt(d.sources.adblock30d ?? 0);
     document.getElementById('comp-noab-num')!.textContent = fmt(d.sources.noAdblock30d ?? 0);
     setW('comp-ab-bar', d.sources.adblock30d ?? 0); setW('comp-noab-bar', d.sources.noAdblock30d ?? 0);
+
+    // Watermark choice has its own denominator (total link copies, not uploads).
+    const wm = d.watermark ?? {};
+    const wmBranded = wm.branded30d ?? 0;
+    const wmClean = wm.clean30d ?? 0;
+    const wmTotal = wm.total30d ?? 0;
+    const wmPct = (n: number) => (wmTotal > 0 ? (n / wmTotal) * 100 : 0);
+    const wmFmt = (n: number) => `${n.toLocaleString()} (${wmPct(n).toFixed(0)}%)`;
+    document.getElementById('comp-wm-num')!.textContent = wmFmt(wmBranded);
+    document.getElementById('comp-nowm-num')!.textContent = wmFmt(wmClean);
+    (document.getElementById('comp-wm-bar') as HTMLElement).style.width = `${wmPct(wmBranded)}%`;
+    (document.getElementById('comp-nowm-bar') as HTMLElement).style.width = `${wmPct(wmClean)}%`;
+    document.getElementById('comp-wm-sub')!.textContent =
+      wmTotal > 0
+        ? `Share-page link copies · last 30 days · ${wmTotal.toLocaleString()} total`
+        : 'Share-page link copies · last 30 days · no copies yet';
   }
 
   function avatarHTML(r: any): string {
