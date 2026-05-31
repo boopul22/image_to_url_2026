@@ -28,29 +28,43 @@ function genId(): string {
   return id;
 }
 
-/** Approved reviews joined with author name/avatar, featured first then newest. */
-export async function getApprovedReviews(db: D1Database, limit = 24): Promise<ReviewRow[]> {
-  const res = await db
-    .prepare(
-      `SELECT r.*, u.name, u.avatar_url
-         FROM reviews r JOIN users u ON u.id = r.user_id
-        WHERE r.status = 'approved'
-        ORDER BY r.featured DESC, r.created_at DESC
-        LIMIT ?`,
-    )
-    .bind(limit)
-    .all<ReviewRow>();
-  return res.results ?? [];
+/** Approved reviews joined with author name/avatar, featured first then newest.
+ *  Degrades to an empty list when there's no DB binding or the `reviews` table
+ *  doesn't exist yet (e.g. a fresh local dev DB) — same graceful-fallback
+ *  contract as getDB() returning null, so content pages never 500 in dev. */
+export async function getApprovedReviews(db: D1Database | null, limit = 24): Promise<ReviewRow[]> {
+  if (!db) return [];
+  try {
+    const res = await db
+      .prepare(
+        `SELECT r.*, u.name, u.avatar_url
+           FROM reviews r JOIN users u ON u.id = r.user_id
+          WHERE r.status = 'approved'
+          ORDER BY r.featured DESC, r.created_at DESC
+          LIMIT ?`,
+      )
+      .bind(limit)
+      .all<ReviewRow>();
+    return res.results ?? [];
+  } catch {
+    return [];
+  }
 }
 
-/** Count + average rating across all approved reviews. */
-export async function getReviewStats(db: D1Database): Promise<ReviewStats> {
-  const row = await db
-    .prepare(`SELECT COUNT(*) AS total, AVG(rating) AS avg FROM reviews WHERE status = 'approved'`)
-    .first<{ total: number; avg: number | null }>();
-  const total = row?.total ?? 0;
-  const average = total > 0 && row?.avg != null ? Math.round(row.avg * 10) / 10 : 0;
-  return { total, average };
+/** Count + average rating across all approved reviews.
+ *  Degrades to zeroes when the DB/table is unavailable (see getApprovedReviews). */
+export async function getReviewStats(db: D1Database | null): Promise<ReviewStats> {
+  if (!db) return { total: 0, average: 0 };
+  try {
+    const row = await db
+      .prepare(`SELECT COUNT(*) AS total, AVG(rating) AS avg FROM reviews WHERE status = 'approved'`)
+      .first<{ total: number; avg: number | null }>();
+    const total = row?.total ?? 0;
+    const average = total > 0 && row?.avg != null ? Math.round(row.avg * 10) / 10 : 0;
+    return { total, average };
+  } catch {
+    return { total: 0, average: 0 };
+  }
 }
 
 /** The current user's existing review, if any (for prefilling / one-per-user). */

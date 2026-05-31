@@ -53,6 +53,9 @@ These need production credentials and are not part of content work:
 - **Blog posts** — blog content lives in the production database, not in the repo,
   so the blog index/pages render **empty** locally. Don't try to edit blog posts in
   files or in the local database.
+- **Homepage reviews carousel** — reviews are user-submitted and live in the
+  production database, so the carousel is **empty** locally. The section degrades
+  to its empty state with no error; the rest of the homepage renders normally.
 
 ## Known cosmetic quirks in dev (not real errors)
 
