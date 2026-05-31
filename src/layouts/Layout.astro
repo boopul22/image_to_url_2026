@@ -250,10 +250,13 @@ function hreflangUrl(loc: Locale): string {
       crossorigin
     />
 
-    <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP -->
+    <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP.
+         fonts.gstatic.com is included because AdSense pulls its own Roboto woff2s from there;
+         resolving DNS early warms that fetch without an eager TLS handshake on the LCP path. -->
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
     <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
     <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
     <!-- AdSense loader (global). Loaded on every page so Auto Ads + manual <ins> slots
          can render without waiting for user interaction. async + fetchpriority=low keeps
