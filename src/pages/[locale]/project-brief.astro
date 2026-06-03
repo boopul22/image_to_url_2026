@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 export const prerender = false;
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
@@ -94,10 +95,10 @@ const countries = [
 
       <!-- Inline trust strip -->
       <div class="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 text-xs font-label uppercase tracking-wider text-on-surface-variant">
-        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">bolt</span> 24h reply</span>
-        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">request_quote</span> Fixed-price quote</span>
-        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">lock</span> Stays private</span>
-        <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">public</span> Worldwide</span>
+        <span class="inline-flex items-center gap-2"><Icon name="bolt" class="text-primary text-base" /> 24h reply</span>
+        <span class="inline-flex items-center gap-2"><Icon name="request_quote" class="text-primary text-base" /> Fixed-price quote</span>
+        <span class="inline-flex items-center gap-2"><Icon name="lock" class="text-primary text-base" /> Stays private</span>
+        <span class="inline-flex items-center gap-2"><Icon name="public" class="text-primary text-base" /> Worldwide</span>
       </div>
     </header>
 
@@ -119,7 +120,7 @@ const countries = [
         <!-- Success panel (hidden until submit) -->
         <div id="brief-success" class="hidden">
           <div class="w-16 h-16 bg-primary-fixed border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-primary" style="font-size:40px;">check_circle</span>
+            <Icon name="check_circle" class="text-primary" style="font-size:40px" />
           </div>
           <h3 class="text-2xl sm:text-3xl font-black font-headline tracking-tight mb-3">Brief received.</h3>
           <p class="font-body text-on-surface-variant mb-8 max-w-xl">Thanks — we got it. A real human reply is coming from <strong class="text-on-background">blog.boopul@gmail.com</strong> within 24 hours.</p>
@@ -144,11 +145,11 @@ const countries = [
 
           <div class="flex flex-col sm:flex-row gap-3">
             <a href={lp('/')} class="inline-flex items-center justify-center gap-2 bg-on-surface text-surface px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
-              <span class="material-symbols-outlined text-xl">home</span>
+              <Icon name="home" class="text-xl" />
               Back to home
             </a>
             <a href={lp('/blog')} class="inline-flex items-center justify-center gap-2 bg-white text-on-background px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg">
-              <span class="material-symbols-outlined text-xl">menu_book</span>
+              <Icon name="menu_book" class="text-xl" />
               Read the blog
             </a>
           </div>
@@ -191,7 +192,7 @@ const countries = [
                   <label for="bf-country" class="font-label text-[11px] font-bold uppercase tracking-wider block mb-2">Country <span class="text-rose-600">*</span></label>
                   <div class="relative">
                     <input id="bf-country" name="country" required list="bf-country-list" placeholder="Start typing…" autocomplete="country-name" class="bf-input pr-10" />
-                    <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">public</span>
+                    <Icon name="public" class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" />
                     <datalist id="bf-country-list">
                       {countries.map((c) => <option value={c} />)}
                     </datalist>
@@ -229,7 +230,7 @@ const countries = [
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3" role="radiogroup" aria-label="Project type">
                 {projectTypes.map((t) => (
                   <button type="button" class="bf-tile group" data-tile="project-type" data-value={t.value} role="radio" aria-checked="false">
-                    <span class="material-symbols-outlined text-2xl sm:text-[26px] text-on-surface-variant group-[.is-active]:text-primary transition-colors">{t.icon}</span>
+                    <Icon name={t.icon} class="text-2xl sm:text-[26px] text-on-surface-variant group-[.is-active]:text-primary transition-colors" />
                     <span class="font-headline font-bold text-sm leading-tight mt-2 block">{t.label}</span>
                     <span class="font-body text-[11px] text-on-surface-variant leading-tight mt-0.5 block">{t.sub}</span>
                   </button>
@@ -247,7 +248,7 @@ const countries = [
                 {features.map((f) => (
                   <label class="bf-chip">
                     <input type="checkbox" name="features" value={f.value} class="sr-only peer" />
-                    <span class="material-symbols-outlined text-base opacity-0 peer-checked:opacity-100 transition-opacity -ml-1 mr-0.5">check</span>
+                    <Icon name="check" class="text-base opacity-0 peer-checked:opacity-100 transition-opacity -ml-1 mr-0.5" />
                     <span>{f.label}</span>
                   </label>
                 ))}
@@ -349,12 +350,12 @@ const countries = [
               </div>
               <div class="flex items-center gap-3">
                 <button id="brief-reset" type="button" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-label uppercase tracking-wider text-on-surface-variant hover:text-on-background transition-colors">
-                  <span class="material-symbols-outlined text-base">refresh</span>
+                  <Icon name="refresh" class="text-base" />
                   Clear
                 </button>
                 <button id="brief-submit" type="submit" class="inline-flex items-center gap-2 bg-primary text-on-primary px-7 sm:px-10 py-3 sm:py-3.5 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
                   <span>Send brief</span>
-                  <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                  <Icon name="arrow_forward" class="text-lg" />
                 </button>
               </div>
             </div>

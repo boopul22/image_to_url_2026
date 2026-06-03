@@ -1,0 +1,35 @@
+---
+// Inline-SVG icon (Material Symbols, weight 400). Replaces the old icon FONT:
+// no font download, no preload, no FOUT, no missing-glyph-shows-as-text. The
+// path data is generated offline into src/data/icon-svgs.ts by
+// scripts/generate-icon-svgs.mjs (runs in predev/prebuild), so it can't drift.
+//
+// Sizing/coloring mirror the legacy `.material-symbols-outlined` class so usages
+// don't shift: the SVG is 1em square (scales with `text-*` font-size, default
+// 24px) and fills with currentColor (follows `text-*` color utilities).
+import { ICON_SVGS, ICON_SVGS_FILL, ICON_VIEWBOX, ICON_DEFAULT_VIEWBOX } from '../data/icon-svgs';
+
+interface Props {
+  name: string;
+  /** Use the filled variant (was `font-variation-settings: 'FILL' 1`). */
+  fill?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { name, fill, class: className, ...rest } = Astro.props;
+const inner = (fill ? ICON_SVGS_FILL[name] : undefined) ?? ICON_SVGS[name] ?? '';
+const viewBox = ICON_VIEWBOX[name] ?? ICON_DEFAULT_VIEWBOX;
+
+if (!inner && import.meta.env.DEV) {
+  console.warn(`[Icon] no SVG for "${name}" — add it via the icon pipeline.`);
+}
+---
+<svg
+  class:list={['ms-icon', className]}
+  viewBox={viewBox}
+  aria-hidden="true"
+  focusable="false"
+  {...rest}
+  set:html={inner}
+/>

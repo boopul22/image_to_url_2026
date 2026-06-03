@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 // CSR-like — SSR with no caching. SEO doesn't matter here.
 export const prerender = false;
 
@@ -42,28 +43,28 @@ const user = Astro.locals.user!;
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <span class="material-symbols-outlined text-secondary text-lg">photo_library</span>
+          <Icon name="photo_library" class="text-secondary text-lg" />
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Images</span>
         </div>
         <p id="stat-total" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
       </div>
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <span class="material-symbols-outlined text-primary text-lg">database</span>
+          <Icon name="database" class="text-primary text-lg" />
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Storage</span>
         </div>
         <p id="stat-storage" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
       </div>
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <span class="material-symbols-outlined text-tertiary text-lg">schedule</span>
+          <Icon name="schedule" class="text-tertiary text-lg" />
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Expiring Soon</span>
         </div>
         <p id="stat-expiring" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
       </div>
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <span class="material-symbols-outlined text-secondary text-lg">badge</span>
+          <Icon name="badge" class="text-secondary text-lg" />
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Account</span>
         </div>
         <p class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface capitalize">{user.role}</p>
@@ -74,12 +75,12 @@ const user = Astro.locals.user!;
     <section>
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <h2 class="text-2xl font-headline italic font-black text-on-surface flex items-center gap-3">
-          <span class="material-symbols-outlined text-secondary">photo_library</span>
+          <Icon name="photo_library" class="text-secondary" />
           Your Images
         </h2>
         <div class="flex items-center gap-2">
           <div class="relative flex-1 sm:flex-none">
-            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-lg pointer-events-none">search</span>
+            <Icon name="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-lg pointer-events-none" />
             <input
               id="search-input"
               type="search"
@@ -121,7 +122,7 @@ const user = Astro.locals.user!;
             disabled
             class="bg-error text-on-error px-4 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase tracking-wider hard-shadow hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 flex items-center gap-2"
           >
-            <span class="material-symbols-outlined text-sm">delete</span>
+            <Icon name="delete" class="text-sm" />
             Delete Selected
           </button>
         </div>
@@ -129,7 +130,7 @@ const user = Astro.locals.user!;
 
       <div id="images-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div class="col-span-full text-center text-outline py-12">
-          <span class="material-symbols-outlined text-4xl mb-2">hourglass_empty</span>
+          <Icon name="hourglass_empty" class="text-4xl mb-2" />
           <p class="font-label text-xs uppercase">Loading images...</p>
         </div>
       </div>
@@ -145,6 +146,7 @@ const user = Astro.locals.user!;
 </Layout>
 
 <script>
+  import { ic_image, ic_delete } from '../data/icon-svgs';
   function esc(s: string): string {
     const d = document.createElement('div');
     d.textContent = s;
@@ -216,7 +218,7 @@ const user = Astro.locals.user!;
     if (!allImages.length) {
       const q = searchInput.value.trim();
       const msg = q ? `No images match "${esc(q)}"` : 'No images uploaded yet';
-      imagesGrid.innerHTML = `<div class="col-span-full text-center text-outline py-12"><span class="material-symbols-outlined text-4xl mb-2">image</span><p class="font-label text-xs uppercase">${msg}</p></div>`;
+      imagesGrid.innerHTML = `<div class="col-span-full text-center text-outline py-12"><svg class="ms-icon text-4xl mb-2" viewBox="0 -960 960 960">${ic_image}</svg><p class="font-label text-xs uppercase">${msg}</p></div>`;
       return;
     }
     imagesGrid.innerHTML = allImages.map((img: any) => {
@@ -236,7 +238,7 @@ const user = Astro.locals.user!;
           <div class="flex gap-2">
             <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-2.5 border border-outline-variant/40 text-xs font-bold uppercase hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Copy URL</button>
             <button onclick="deleteImage('${esc(img.id)}')" class="py-2.5 px-3 border border-error text-error text-xs font-bold uppercase hover:bg-error hover:text-on-error active:bg-error active:text-on-error transition-colors">
-              <span class="material-symbols-outlined text-sm">delete</span>
+              <svg class="ms-icon text-sm" viewBox="0 -960 960 960">${ic_delete}</svg>
             </button>
           </div>
         </div>

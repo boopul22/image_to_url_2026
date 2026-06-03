@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -90,28 +91,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">check_circle</span>
+            <Icon name="check_circle" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Images Never Break</h3>
           <p class="font-body text-on-surface-variant">Your email signature logo and headshot display correctly every single time. Permanent URLs mean no more broken image icons embarrassing you in front of clients and prospects.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">attach_file_off</span>
+            <Icon name="attach_file_off" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">No File Attachments</h3>
           <p class="font-body text-on-surface-variant">Externally hosted images load from the web instead of being attached to every email. This keeps your messages lightweight, avoids spam filters, and prevents the annoying "image001.png" attachment.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">devices</span>
+            <Icon name="devices" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Works Across All Clients</h3>
           <p class="font-body text-on-surface-variant">ImageToURL links render correctly in Gmail, Outlook, Apple Mail, Yahoo Mail, Thunderbird, and every other major email client. One URL, universal compatibility.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">all_inclusive</span>
+            <Icon name="all_inclusive" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Permanent URLs</h3>
           <p class="font-body text-on-surface-variant">Your image URLs never expire. Set up your email signature once, and the images will continue working in every email you have ever sent and every email you will send in the future.</p>
@@ -130,28 +131,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">mail</span>
+            <Icon name="mail" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Gmail</h3>
           <p class="font-body text-on-surface-variant text-sm">Paste your ImageToURL link in Gmail's signature settings under the image URL option. Works with personal and Google Workspace accounts.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">desktop_windows</span>
+            <Icon name="desktop_windows" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Outlook</h3>
           <p class="font-body text-on-surface-variant text-sm">Works with Outlook desktop, Outlook.com, and Microsoft 365. Insert your image URL in the signature editor for consistent display across platforms.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">phone_iphone</span>
+            <Icon name="phone_iphone" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Apple Mail</h3>
           <p class="font-body text-on-surface-variant text-sm">Add your logo or headshot to Apple Mail signatures on Mac, iPhone, and iPad. The URL loads your image on every device automatically.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">bolt</span>
+            <Icon name="bolt" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Thunderbird</h3>
           <p class="font-body text-on-surface-variant text-sm">Use HTML signatures in Thunderbird with your ImageToURL link. The image loads from the web each time, keeping your signature current.</p>
@@ -170,21 +171,21 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">aspect_ratio</span>
+            <Icon name="aspect_ratio" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Optimal Sizes</h3>
           <p class="font-body text-on-surface-variant">Logos: 200-300px wide. Headshots: 100-150px. Banners: 600px max width. Always specify dimensions in your HTML to prevent layout shifts when the email loads.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">image</span>
+            <Icon name="image" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Best Formats</h3>
           <p class="font-body text-on-surface-variant">Use PNG for logos with transparency. Use JPEG for headshot photos. Keep file sizes under 100KB for instant loading. Avoid SVG as some email clients do not support it.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">high_quality</span>
+            <Icon name="high_quality" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Retina Ready</h3>
           <p class="font-body text-on-surface-variant">Upload images at 2x the display size for crisp rendering on high-DPI screens. A 200px display logo should be uploaded as a 400px image with the width attribute set to 200.</p>
@@ -204,35 +205,35 @@ const faqSchema = {
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Why do email signature images sometimes appear as broken?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Email signature images break when the hosting service expires the URL, blocks hotlinking, or goes offline. Free image hosts like Imgur often block email client requests. ImageToURL provides permanent, direct URLs with no hotlink restrictions, so your signature images always display.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>What image size should I use for email signatures?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">For logos, use 200-300 pixels wide. For headshots, 100-150 pixels works best. Keep file sizes under 100KB for fast loading. Use PNG for logos with transparency or JPEG for headshot photos. Always specify width and height in your HTML to prevent layout shifts.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Does this work with Gmail signatures?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Gmail fully supports external image URLs in signatures. Go to Gmail Settings, then Signature, click the image icon, select "Web Address (URL)", and paste your ImageToURL link. The image will display in every email you send.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Will my signature images show as attachments?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. When you use an externally hosted image URL (like from ImageToURL), the image is loaded from the web when the recipient opens the email. It does not get attached to the email as a file, keeping your emails lightweight and professional.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I use the same image URL for my entire team?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Upload your company logo once and share the same URL with your entire team. Everyone uses the same link in their signature, and if you ever need to update the logo, you can upload a new version and update the single URL.</div>
         </details>
@@ -253,21 +254,21 @@ const faqSchema = {
             <h3 class="font-headline font-bold text-base mb-1">Newsletter Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Reliable image hosting for email campaigns</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/free-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image for free with global CDN</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-url-generator" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
             <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

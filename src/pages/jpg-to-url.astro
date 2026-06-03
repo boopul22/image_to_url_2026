@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -141,28 +142,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">devices</span>
+            <Icon name="devices" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Universal Compatibility</h3>
           <p class="font-body text-on-surface-variant">JPG is the most widely supported image format. Works everywhere — every browser, every device, every platform.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">compress</span>
+            <Icon name="compress" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Optimized File Size</h3>
           <p class="font-body text-on-surface-variant">JPG compression delivers excellent quality at smaller file sizes, meaning faster page loads and quicker sharing.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">photo_camera</span>
+            <Icon name="photo_camera" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Perfect for Photos</h3>
           <p class="font-body text-on-surface-variant">JPG excels at handling photographic images with millions of colors and smooth gradients.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">email</span>
+            <Icon name="email" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Email-Friendly</h3>
           <p class="font-body text-on-surface-variant">JPG images embed perfectly in email clients, newsletters, and email signatures without compatibility issues.</p>
@@ -181,28 +182,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">edit_note</span>
+            <Icon name="edit_note" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Bloggers & Writers</h3>
           <p class="font-body text-on-surface-variant">Embed photos in blog posts, articles, and content management systems with permanent URLs.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">campaign</span>
+            <Icon name="campaign" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Email Marketers</h3>
           <p class="font-body text-on-surface-variant">Host newsletter images and email signature photos with reliable, fast-loading URLs.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">groups</span>
+            <Icon name="groups" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Social Media Managers</h3>
           <p class="font-body text-on-surface-variant">Share product photos, event images, and promotional content as direct links.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">house</span>
+            <Icon name="house" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Real Estate Agents</h3>
           <p class="font-body text-on-surface-variant">Host property listing photos for MLS, Zillow, and classified ad platforms.</p>
@@ -222,7 +223,7 @@ const faqSchema = {
         <details class="bg-primary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             How do I convert a JPG image to a URL link online for free?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Drop your JPG into the uploader at the top of this page. We host it on a global CDN and hand you a permanent .jpg URL in a couple of seconds. There is no signup, no watermark, and no fee for the upload-and-share flow.</p>
@@ -231,7 +232,7 @@ const faqSchema = {
         <details class="bg-secondary-container border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             What's the maximum JPG file size I can upload?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Free users can upload JPG images up to 2MB. With a free account, the limit increases to 10MB — more than enough for most photos.</p>
@@ -240,7 +241,7 @@ const faqSchema = {
         <details class="bg-tertiary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Does ImageToURL compress my JPG images?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">No. Your JPG files are stored and served exactly as uploaded. We never re-compress or alter your image quality.</p>
@@ -249,7 +250,7 @@ const faqSchema = {
         <details class="bg-primary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             What's the difference between JPG and JPEG?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">There is no difference — JPG and JPEG are the same format. The shorter .jpg extension exists because older Windows systems required three-letter extensions. ImageToURL supports both.</p>
@@ -258,7 +259,7 @@ const faqSchema = {
         <details class="bg-surface-variant border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Can I hotlink my JPG images on other websites?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Yes. Every JPG upload generates a direct image URL that supports hotlinking. Embed it in any website, forum, or email without restrictions.</p>
@@ -267,7 +268,7 @@ const faqSchema = {
         <details class="bg-secondary-container border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             How fast are JPG images served?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Your images are served from a global CDN with edge servers worldwide. Most users experience load times under 100ms regardless of location.</p>
@@ -290,21 +291,21 @@ const faqSchema = {
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">PNG to URL</h3>
             <p class="font-body text-on-surface-variant text-sm">Convert PNG images with transparency preserved</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
         <a href="/webp-to-url" class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
           <div>
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">WebP to URL</h3>
             <p class="font-body text-on-surface-variant text-sm">Convert modern WebP images to shareable links</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
         <a href="/bulk-image-upload" class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
           <div>
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">Bulk Image Upload</h3>
             <p class="font-body text-on-surface-variant text-sm">Upload multiple images at once</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
       </div>
     </div>

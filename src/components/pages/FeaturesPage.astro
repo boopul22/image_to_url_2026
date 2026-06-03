@@ -1,4 +1,5 @@
 ---
+import Icon from '../Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
@@ -35,18 +36,18 @@ function lp(path: string): string {
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4">
         <div class="lg:col-span-7 bg-secondary-container border border-outline-variant/40 p-6 sm:p-10 rounded-xl hard-shadow relative overflow-hidden group">
           <div class="absolute top-4 right-4 text-secondary opacity-20 group-hover:rotate-12 transition-transform duration-300">
-            <span class="material-symbols-outlined text-[120px]">bolt</span>
+            <Icon name="bolt" class="text-[120px]" />
           </div>
           <div class="relative z-10">
             <h3 class="text-lg sm:text-xl font-black font-headline mb-4">{t(locale, 'features.speed.cdn.title')}</h3>
             <p class="text-lg font-headline font-medium mb-8 max-w-md">{t(locale, 'features.speed.cdn.description')}</p>
             <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
-              {t(locale, 'features.exploreAll')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
             </a>
           </div>
         </div>
         <div class="lg:col-span-5 bg-surface-container-highest border border-outline-variant/40 p-6 sm:p-10 rounded-xl hard-shadow flex flex-col justify-center text-center">
-          <div class="mb-6"><span class="material-symbols-outlined text-primary text-5xl">speed</span></div>
+          <div class="mb-6"><Icon name="speed" class="text-primary text-5xl" /></div>
           <h3 class="text-2xl font-black font-headline mb-2">{t(locale, 'features.speed.uptime.title')}</h3>
           <p class="font-body text-on-surface-variant">{t(locale, 'features.speed.uptime.description')}</p>
         </div>
@@ -69,7 +70,7 @@ function lp(path: string): string {
               <h3 class="text-2xl font-black font-headline mb-2">{t(locale, 'features.security.https.title')}</h3>
               <p class="font-body text-on-surface-variant mb-4">{t(locale, 'features.security.https.description')}</p>
               <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
-                {t(locale, 'features.exploreAll')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
               </a>
             </div>
           </div>
@@ -84,7 +85,7 @@ function lp(path: string): string {
               <h3 class="text-2xl font-black font-headline mb-2">{t(locale, 'features.security.noSignup.title')}</h3>
               <p class="font-body text-on-surface-variant mb-4">{t(locale, 'features.security.noSignup.description')}</p>
               <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
-                {t(locale, 'features.exploreAll')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
               </a>
             </div>
           </div>
@@ -100,32 +101,32 @@ function lp(path: string): string {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-16 h-16 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-6 -rotate-3">
-            <span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+            <Icon name="terminal" class="text-primary text-3xl" />
           </div>
           <h3 class="text-2xl font-black font-headline mb-3">{t(locale, 'features.devtools.api.title')}</h3>
           <p class="font-body text-on-surface-variant mb-8 flex-grow">{t(locale, 'features.devtools.api.description')}</p>
           <a href={lp('/docs')} class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
-            {t(locale, 'features.exploreAll')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
           </a>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4 rotate-2">
-            <span class="material-symbols-outlined text-tertiary text-lg sm:text-xl">code</span>
+            <Icon name="code" class="text-tertiary text-lg sm:text-xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">{t(locale, 'features.devtools.markdown.title')}</h3>
           <p class="font-body text-on-surface-variant mb-8 flex-grow">{t(locale, 'features.devtools.markdown.description')}</p>
           <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
-            {t(locale, 'features.exploreAll')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
           </a>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4 -rotate-2">
-            <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">hub</span>
+            <Icon name="hub" class="text-secondary text-lg sm:text-xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">{t(locale, 'features.devtools.endpoints.title')}</h3>
           <p class="font-body text-on-surface-variant mb-8 flex-grow">{t(locale, 'features.devtools.endpoints.description')}</p>
           <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
-            {t(locale, 'features.exploreAll')} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
           </a>
         </div>
       </div>

@@ -6,13 +6,13 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "predev": "node scripts/generate-icon-names.mjs && node scripts/download-material-symbols.mjs",
+    "predev": "node scripts/generate-icon-names.mjs && node scripts/generate-icon-svgs.mjs",
     "dev": "astro dev",
     "web": "astro dev",
     "dev:remote": "REMOTE_BINDINGS=1 astro dev",
     "setup": "node scripts/setup-local-db.mjs",
     "setup:db": "node scripts/setup-local-db.mjs",
-    "prebuild": "node scripts/generate-icon-names.mjs && node scripts/download-material-symbols.mjs",
+    "prebuild": "node scripts/generate-icon-names.mjs && node scripts/generate-icon-svgs.mjs",
     "build": "astro build && node scripts/patch-worker-entry.mjs",
     "preview": "astro preview",
     "astro": "astro",
@@ -42,6 +42,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@cloudflare/workers-types": "^4.20260331.1",
+    "@material-symbols/svg-400": "^0.44.11",
     "@types/qrcode": "^1.5.6",
     "typescript": "^5.9.3",
     "wrangler": "^4.84.1"

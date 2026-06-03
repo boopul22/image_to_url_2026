@@ -26,33 +26,18 @@
   }
 }
 
-/* Self-hosted Material Symbols subset — WOFF2 sits in public/fonts/, downloaded
-   at build time by scripts/download-material-symbols.mjs (subsetted to the 221
-   glyphs we actually render). font-display:block + preload in Layout.astro:
-   same-origin preloaded font lands inside the ~100ms block window, so the
-   ligature text never flashes before the glyph paints. */
-@font-face {
-  font-family: 'Material Symbols Outlined';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
-}
-
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
+/* Icons are inline SVG (see src/components/Icon.astro), not a font — no font
+   download, no preload, no FOUT. `.ms-icon` mirrors the legacy sizing/coloring so
+   existing usages don't shift: 1em square (default 24px, overridable via `text-*`
+   font-size) and filled with currentColor (follows `text-*` color utilities). */
+.ms-icon {
   font-size: 24px;
+  width: 1em;
+  height: 1em;
   line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
   display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+  fill: currentColor;
 }
 
 /* Metric-matched fallbacks. Under load throttling the preloaded variable fonts
@@ -526,12 +511,6 @@ h1, h2, h3, h4, h5, h6 {
   scroll-snap-align: start;
 }
 
-/* Material icons */
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-  display: inline-block;
-  vertical-align: middle;
-}
 
 /* Skip layout/paint for offscreen sections. Pair with contain-intrinsic-size
    to avoid scrollbar jump / anchor-link mis-landing. Apply ONLY to below-fold

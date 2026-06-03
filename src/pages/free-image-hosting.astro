@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -59,28 +60,28 @@ const schema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">cloud_upload</span>
+            <Icon name="cloud_upload" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Unlimited Free Uploads</h3>
           <p class="font-body text-on-surface-variant">Upload as many images as you want, completely free. No hidden fees, no storage caps — just straightforward image hosting that scales with your needs.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">public</span>
+            <Icon name="public" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Global CDN Network</h3>
           <p class="font-body text-on-surface-variant">Your images are delivered from edge servers worldwide, ensuring fast load times no matter where your audience is located.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">lock</span>
+            <Icon name="lock" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Secure Image Hosting</h3>
           <p class="font-body text-on-surface-variant">Every image is served over HTTPS with full encryption. Your content stays safe and your links remain trustworthy across all platforms.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">person_off</span>
+            <Icon name="person_off" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">No Signup Required</h3>
           <p class="font-body text-on-surface-variant">Start uploading instantly. No account creation, no email verification — just drag, drop, and share. It really is that simple.</p>
@@ -99,28 +100,28 @@ const schema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">all_inclusive</span>
+            <Icon name="all_inclusive" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Permanent Image Links</h3>
           <p class="font-body text-on-surface-variant">Your image URLs never expire. Share them in emails, documents, or embed them in websites — they will always work.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">block</span>
+            <Icon name="block" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Ad-Free Experience</h3>
           <p class="font-body text-on-surface-variant">Clean, distraction-free image hosting. No pop-ups, no banners, no interstitials — just your images, delivered fast.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">high_quality</span>
+            <Icon name="high_quality" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">High-Quality Storage</h3>
           <p class="font-body text-on-surface-variant">No compression, no quality loss. Your images are stored and served in their original quality, exactly as you uploaded them.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">language</span>
+            <Icon name="language" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Public Image Hosting</h3>
           <p class="font-body text-on-surface-variant">Share your images anywhere on the web. Embed in forums, blogs, social media, or send direct links to anyone.</p>
@@ -159,21 +160,21 @@ const schema = {
             <h3 class="font-headline font-bold text-base mb-1">PNG to URL</h3>
             <p class="text-sm text-on-surface-variant">Convert PNG images with transparency preserved</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/jpg-to-url" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">JPG to URL</h3>
             <p class="text-sm text-on-surface-variant">Convert JPEG photos to shareable links</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-url-generator" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
             <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image format</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

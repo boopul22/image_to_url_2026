@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev          # astro dev at http://localhost:4321  (root / → /en/)
-npm run build        # astro build + scripts/patch-worker-entry.mjs (prebuild fetches icons/fonts)
+npm run build        # astro build + scripts/patch-worker-entry.mjs (prebuild regenerates inline-SVG icons offline)
 npm run preview      # astro preview (local Workers preview)
 npm run astro -- check   # TypeScript/Astro type-check (tsconfig extends astro/strict). There is NO separate lint/test setup.
 
@@ -27,7 +27,8 @@ npm run kw:ideas     # GenerateKeywordIdeas
 There are **no automated tests and no linter** — `npm run astro -- check` is the only static check. The `scripts/test-footer-*.mjs` files are ad-hoc live-URL probes, not a test suite.
 
 ### Local dev gotchas
-- `astro dev` returns **500 for the `@fontsource` `.woff2` files** (and some `/src/*` assets) because the Cloudflare vite-plugin's miniflare sandbox can't serve them — text falls back to Helvetica. This is dev-only; it resolves in a real build. **Material Symbols icons load fine** (served from `public/`). To truly validate fonts/bindings, run `npm run build`.
+- `astro dev` returns **500 for the `@fontsource` `.woff2` files** (and some `/src/*` assets) because the Cloudflare vite-plugin's miniflare sandbox can't serve them — text falls back to Helvetica. This is dev-only; it resolves in a real build. **Icons are unaffected** — they're inline SVG (no font). To truly validate fonts/bindings, run `npm run build`.
+- **Icons are inline SVG, not a font.** Use `<Icon name="cloud_upload" class="text-xl text-rose-600" fill? />` (`src/components/Icon.astro`). Path data is generated **offline** from the `@material-symbols/svg-400` package into `src/data/icon-svgs.ts` by `scripts/generate-icon-svgs.mjs` (runs in `predev`/`prebuild` after `generate-icon-names.mjs`); the file is committed so a fresh clone works with zero setup, and regenerated each run so it can't drift. Add a new icon just by using `<Icon name="...">` — the pipeline picks it up. Ligature-alias names the SVG package lacks are mapped in the generator's `ALIASES`/`MANUAL` tables. **Client-side scripts** that swap an icon at runtime import the tree-shakeable `ic_<name>` const (e.g. `el.innerHTML = ic_hourglass_top`) — never set `textContent` to an icon name. There is no icon `@font-face`, preload, or woff2 anymore.
 - Bindings (D1/R2/KV/IMAGES) use `remoteBindings: true`, so dev talks to the real remote resources.
 - After editing a component, `.wrangler` ISR cache can make localized pages 404 the new bundle — clear `.wrangler` + `node_modules/.cache` before rebuilding to verify locally.
 

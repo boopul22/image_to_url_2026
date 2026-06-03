@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -90,28 +91,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">share</span>
+            <Icon name="share" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Share Beyond Discord</h3>
           <p class="font-body text-on-surface-variant">Midjourney images live inside Discord by default. Host them here so you can share on Twitter, Reddit, your blog, or anywhere else with a clean, direct link.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">palette</span>
+            <Icon name="palette" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Build Your Portfolio</h3>
           <p class="font-body text-on-surface-variant">Curate your best AI art with permanent links. Embed them in portfolio sites, Notion pages, or Behance — your work stays online and accessible forever.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">all_inclusive</span>
+            <Icon name="all_inclusive" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Permanent URLs</h3>
           <p class="font-body text-on-surface-variant">Discord CDN links expire. Social media compresses your art. Our URLs are permanent and serve your images at full quality, exactly as you created them.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">high_quality</span>
+            <Icon name="high_quality" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Zero Compression</h3>
           <p class="font-body text-on-surface-variant">Every detail in your AI art matters. We store and deliver your images at their original resolution and quality — no compression, no artifacts, no quality loss.</p>
@@ -130,28 +131,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">auto_awesome</span>
+            <Icon name="auto_awesome" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Midjourney</h3>
           <p class="font-body text-on-surface-variant text-sm">Save your Midjourney generations from Discord and upload them for permanent hosting with direct links.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">smart_toy</span>
+            <Icon name="smart_toy" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">DALL-E</h3>
           <p class="font-body text-on-surface-variant text-sm">Download your DALL-E creations from ChatGPT and host them here. OpenAI URLs expire — ours never do.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">memory</span>
+            <Icon name="memory" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Stable Diffusion</h3>
           <p class="font-body text-on-surface-variant text-sm">Host your Stable Diffusion outputs with full quality preservation. Perfect for sharing ComfyUI and A1111 renders.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">brush</span>
+            <Icon name="brush" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Leonardo AI</h3>
           <p class="font-body text-on-surface-variant text-sm">Upload Leonardo AI generations and share them anywhere with clean, embeddable URLs that never expire.</p>
@@ -170,28 +171,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">palette</span>
+            <Icon name="palette" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">AI Artists</h3>
           <p class="font-body text-on-surface-variant text-sm">Showcase your AI art with permanent, high-quality links. Build a shareable gallery without paying for hosting.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">engineering</span>
+            <Icon name="engineering" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Prompt Engineers</h3>
           <p class="font-body text-on-surface-variant text-sm">Share prompt results with clients or communities. Host comparison grids and style studies with reliable URLs.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">web</span>
+            <Icon name="web" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">AI Portfolios</h3>
           <p class="font-body text-on-surface-variant text-sm">Embed AI-generated work into personal sites, Notion portfolios, or Carrd pages with direct image URLs.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">thumb_up</span>
+            <Icon name="thumb_up" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Social Sharing</h3>
           <p class="font-body text-on-surface-variant text-sm">Post AI art on Twitter, Reddit, or forums with URLs that load fast and display correctly everywhere.</p>
@@ -211,35 +212,35 @@ const faqSchema = {
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I host Midjourney images for free?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Upload any Midjourney image to ImageToURL and get a permanent, shareable URL instantly. No account required, no watermarks added.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Does ImageToURL compress my AI-generated art?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. We store and serve your images in their original quality. Every pixel of your AI art is preserved exactly as you created it.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Do AI image URLs expire?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">No. Every URL we generate is permanent. Your AI art will remain accessible at the same link forever, with no expiration dates.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I use hosted AI images in my portfolio?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Our direct image URLs work perfectly in portfolio websites, Notion pages, personal blogs, and any platform that supports image embedding.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Which AI image generators are supported?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImageToURL works with images from any AI generator including Midjourney, DALL-E, Stable Diffusion, Leonardo AI, Adobe Firefly, and all others. If you can save the image, you can host it here.</div>
         </details>
@@ -260,21 +261,21 @@ const faqSchema = {
             <h3 class="font-headline font-bold text-base mb-1">Image URLs for ChatGPT</h3>
             <p class="text-sm text-on-surface-variant">Get image URLs for ChatGPT Vision analysis</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/free-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/permanent-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Permanent Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">URLs that never expire or break</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

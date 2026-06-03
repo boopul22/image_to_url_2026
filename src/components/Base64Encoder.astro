@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 /**
  * Client-side image → base64 data URI encoder.
  *
@@ -20,7 +21,7 @@
   <!-- Privacy strip -->
   <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
     <div class="flex items-center gap-2 min-w-0">
-      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <Icon name="lock" class="text-rose-600 text-lg flex-shrink-0" fill />
       <div class="min-w-0">
         <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
         <p class="text-[11px] leading-tight text-on-surface-variant">FileReader.readAsDataURL — nothing uploaded</p>
@@ -38,7 +39,7 @@
   <div id="b64e-panel" class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id="b64e-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
       <div id="b64e-drop" class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">data_object</span>
+        <Icon name="data_object" class="text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl" />
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop an image here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · GIF · WebP · SVG · BMP · AVIF</p>
@@ -55,7 +56,7 @@
     <!-- Result -->
     <div id="b64e-state-result" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-4">
-        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <Icon name="check_circle" class="text-secondary text-lg sm:text-xl" />
         <span class="font-bold text-secondary text-sm sm:text-lg">Encoded</span>
         <button id="b64e-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Encode another</button>
       </div>
@@ -96,7 +97,7 @@
     <!-- Error -->
     <div id="b64e-state-error" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-3">
-        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <Icon name="error" class="text-error text-lg sm:text-xl" />
         <span class="font-bold text-error text-sm sm:text-lg">Encoding failed</span>
         <button id="b64e-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>

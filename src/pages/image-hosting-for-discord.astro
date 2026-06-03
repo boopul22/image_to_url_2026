@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -90,28 +91,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">timer_off</span>
+            <Icon name="timer_off" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">CDN Links Expire</h3>
           <p class="font-body text-on-surface-variant">Since 2023, Discord uses signed URLs with expiration tokens. Images you upload to Discord get temporary links that stop working after a period, breaking any external references.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">broken_image</span>
+            <Icon name="broken_image" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Embeds Break Over Time</h3>
           <p class="font-body text-on-surface-variant">Bot embeds, webhook messages, and pinned images that rely on Discord CDN URLs eventually show broken image placeholders. External hosting keeps your embeds looking clean permanently.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">smart_toy</span>
+            <Icon name="smart_toy" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Bot-Friendly URLs</h3>
           <p class="font-body text-on-surface-variant">ImageToURL links work perfectly in Discord.js, discord.py, and any bot framework. Set embed image fields with a permanent URL that never needs refreshing or token management.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">link</span>
+            <Icon name="link" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Direct Hotlinks</h3>
           <p class="font-body text-on-surface-variant">Every uploaded image gets a clean, direct URL with the correct content-type headers. Discord automatically renders these as inline image previews in any channel.</p>
@@ -130,28 +131,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">smart_toy</span>
+            <Icon name="smart_toy" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Bot Developers</h3>
           <p class="font-body text-on-surface-variant text-sm">Use permanent image URLs in bot embeds, welcome messages, and automated responses without worrying about expired links.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">shield_person</span>
+            <Icon name="shield_person" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Server Admins</h3>
           <p class="font-body text-on-surface-variant text-sm">Set up server rules, info channels, and role descriptions with images that stay visible permanently, even in pinned messages.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">groups</span>
+            <Icon name="groups" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Community Managers</h3>
           <p class="font-body text-on-surface-variant text-sm">Create event announcements, community guides, and resource channels with reliable image embeds that never break.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">sports_esports</span>
+            <Icon name="sports_esports" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Gamers</h3>
           <p class="font-body text-on-surface-variant text-sm">Share screenshots, game clips, memes, and fan art with permanent links that work in any Discord server or DM.</p>
@@ -171,35 +172,35 @@ const faqSchema = {
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Why do Discord image links expire?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Discord changed their CDN in 2023 to use signed URLs with expiration tokens. Images uploaded directly to Discord now have URLs that expire after a set period, causing broken images in bookmarks, wikis, and external embeds. ImageToURL provides permanent URLs that never expire.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I use ImageToURL images in Discord bot embeds?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL provides direct image URLs that work perfectly in Discord bot embed fields. The URLs are served over HTTPS with proper content-type headers, so Discord renders them as inline images in embed messages.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Do ImageToURL links work in Discord markdown?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. You can paste an ImageToURL link directly into a Discord message and it will display as an embedded image preview. The URLs also work in Discord's markdown format for bot messages and webhook content.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Is there a file size limit for Discord image hosting?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImageToURL supports images up to 25MB, which covers virtually any image you would want to share on Discord. Unlike Discord's free tier which limits uploads to 25MB (or 50MB with Nitro), your images are hosted permanently without file size degradation.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I host animated GIFs for Discord?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL fully supports animated GIFs. Upload your GIF and get a permanent URL that plays the animation when embedded in Discord messages, bot embeds, or server descriptions.</div>
         </details>
@@ -220,21 +221,21 @@ const faqSchema = {
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image for free with global CDN</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-hosting-for-forums" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Forum Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">BBCode and HTML ready image links</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-hosting-for-github-readme" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">GitHub README Hosting</h3>
             <p class="text-sm text-on-surface-variant">Permanent images for your README files</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

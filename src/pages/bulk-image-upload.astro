@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -41,7 +42,7 @@ const schema = {
       </p>
       <div class="mt-6 sm:mt-10">
         <a href={lp('/')} class="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
-          <span class="material-symbols-outlined text-xl">cloud_upload</span>
+          <Icon name="cloud_upload" class="text-xl" />
           Start Bulk Upload
         </a>
       </div>
@@ -61,7 +62,7 @@ const schema = {
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">01</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-secondary text-2xl">photo_library</span>
+            <Icon name="photo_library" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Select Images</h3>
           <p class="font-body text-on-surface-variant text-sm">Choose multiple files from your device — select as many as you need.</p>
@@ -69,7 +70,7 @@ const schema = {
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">02</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-tertiary text-2xl">sync</span>
+            <Icon name="sync" class="text-tertiary text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Batch Processing</h3>
           <p class="font-body text-on-surface-variant text-sm">All images are processed simultaneously on our high-speed servers.</p>
@@ -77,7 +78,7 @@ const schema = {
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">03</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-primary text-2xl">link</span>
+            <Icon name="link" class="text-primary text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">URL Generation</h3>
           <p class="font-body text-on-surface-variant text-sm">Each image gets its own permanent, shareable URL instantly.</p>
@@ -85,7 +86,7 @@ const schema = {
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">04</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-on-surface text-2xl">download</span>
+            <Icon name="download" class="text-on-surface text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Export &amp; Share</h3>
           <p class="font-body text-on-surface-variant text-sm">Copy all URLs at once or export them as a list for easy integration.</p>
@@ -104,28 +105,28 @@ const schema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 -rotate-3">
-            <span class="material-symbols-outlined text-secondary text-2xl">collections</span>
+            <Icon name="collections" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Multiple Image Upload</h3>
           <p class="font-body text-on-surface-variant flex-grow">Select dozens of files at once from your device. Drag and drop an entire folder or use the file picker to choose specific images.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 rotate-2">
-            <span class="material-symbols-outlined text-tertiary text-2xl">dynamic_feed</span>
+            <Icon name="dynamic_feed" class="text-tertiary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Batch URL Generation</h3>
           <p class="font-body text-on-surface-variant flex-grow">All URLs are generated in parallel, not one-by-one. Get all your links back in seconds, no matter how many images you upload.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 -rotate-2">
-            <span class="material-symbols-outlined text-primary text-2xl">hourglass_top</span>
+            <Icon name="hourglass_top" class="text-primary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Progress Tracking</h3>
           <p class="font-body text-on-surface-variant flex-grow">See real-time upload progress for every file. Know exactly which images are uploading, completed, or need attention.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow flex flex-col">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 rotate-3">
-            <span class="material-symbols-outlined text-on-surface text-2xl">table_chart</span>
+            <Icon name="table_chart" class="text-on-surface text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Bulk Export Options</h3>
           <p class="font-body text-on-surface-variant flex-grow">Copy all URLs to clipboard with one click, or export them as a formatted list ready for spreadsheets and databases.</p>
@@ -143,22 +144,22 @@ const schema = {
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 reveal">
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">storefront</span>
+          <Icon name="storefront" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">E-commerce Stores</h3>
           <p class="font-body text-on-surface-variant text-sm">Upload entire product catalogs and get URLs ready for your shop listings.</p>
         </div>
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">brush</span>
+          <Icon name="brush" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Content Creators</h3>
           <p class="font-body text-on-surface-variant text-sm">Batch upload images for blogs, newsletters, and social media campaigns.</p>
         </div>
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">terminal</span>
+          <Icon name="terminal" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Web Developers</h3>
           <p class="font-body text-on-surface-variant text-sm">Upload all project assets at once and embed the URLs directly in your code.</p>
         </div>
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">apartment</span>
+          <Icon name="apartment" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Digital Agencies</h3>
           <p class="font-body text-on-surface-variant text-sm">Manage client deliverables and share entire image sets via permanent URLs.</p>
         </div>
@@ -179,21 +180,21 @@ const schema = {
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/photo-to-url" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Photo to URL</h3>
             <p class="text-sm text-on-surface-variant">Turn any photo into a shareable link</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/gif-to-url" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">GIF to URL</h3>
             <p class="text-sm text-on-surface-variant">Host animated GIFs with direct links</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>
@@ -207,7 +208,7 @@ const schema = {
         <h2 class="text-xl sm:text-2xl font-black font-headline mb-4">Upload your images in bulk</h2>
         <p class="text-surface/70 mb-8 max-w-lg mx-auto">Free, fast, and no signup required. Select multiple images and get all your URLs instantly.</p>
         <a href={lp('/')} class="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow-hover active:scale-95 transition-all">
-          <span class="material-symbols-outlined text-xl">cloud_upload</span>
+          <Icon name="cloud_upload" class="text-xl" />
           Start Bulk Upload
         </a>
       </div>

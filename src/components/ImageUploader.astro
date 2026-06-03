@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 /**
  * Reusable image uploader widget.
  * Embeds the drag-and-drop upload panel with progress, success, and error states.
@@ -40,7 +41,7 @@ import AdBanner from './ads/AdBanner.astro';
             <!-- State: idle / uploading -->
             <div id="state-idle" class="relative min-h-[320px]">
               <div id="drop-zone" class="group absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 pb-24 cursor-pointer" role="button" tabindex="0">
-                <span class="material-symbols-outlined text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon">cloud_upload</span>
+                <Icon name="cloud_upload" class="text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon" />
                 <div class="text-center">
                   <p class="text-on-surface-variant font-medium text-sm sm:text-base transition-opacity duration-300 group-hover:opacity-70" id="upload-text">Drop files to upload</p>
                   <p class="text-xs sm:text-sm text-on-surface-variant/70 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
@@ -54,7 +55,7 @@ import AdBanner from './ads/AdBanner.astro';
               <!-- Floating action island: auto-delete + Browse -->
               <div class="su-island su-soft-shadow absolute bottom-5 left-1/2 -translate-x-1/2 z-10 bg-white border border-outline-variant/30 flex items-center gap-2 p-2 w-[92%] max-w-[380px]">
                 <div class="su-control flex items-center gap-2 bg-surface-container-low px-3 py-2 flex-1 min-w-0 hover:bg-surface-container transition-colors">
-                  <span class="material-symbols-outlined text-rose-600 text-base flex-shrink-0" style="font-variation-settings: 'FILL' 1;">schedule</span>
+                  <Icon name="schedule" class="text-rose-600 text-base flex-shrink-0" fill />
                   <div class="relative flex-1 min-w-0">
                     <select
                       id="expires-in"
@@ -65,7 +66,7 @@ import AdBanner from './ads/AdBanner.astro';
                       <option value="auto">Auto-expire</option>
                       <option value="never">Never delete</option>
                     </select>
-                    <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-base pointer-events-none">expand_more</span>
+                    <Icon name="expand_more" class="absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-base pointer-events-none" />
                   </div>
                 </div>
                 <button
@@ -82,7 +83,7 @@ import AdBanner from './ads/AdBanner.astro';
             <!-- State: success -->
             <div id="state-success" class="p-4 sm:p-6 hidden">
               <div class="flex items-center gap-3 mb-4">
-                <span class="material-symbols-outlined text-rose-600 text-lg sm:text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <Icon name="check_circle" class="text-rose-600 text-lg sm:text-xl" fill />
                 <span class="font-bold text-on-surface text-sm sm:text-lg">Uploaded!</span>
                 <button id="upload-another" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
                   Upload another
@@ -97,14 +98,14 @@ import AdBanner from './ads/AdBanner.astro';
               <!-- ExtractPics cross-promo CTA -->
               <a href="https://www.extractpics.com/" target="_blank" rel="noopener" data-track-click="extractpics-cta" class="flex items-center gap-3 mt-4 pt-4 border-t border-outline-variant/40 hover:opacity-90 transition-opacity group">
                 <span class="su-control flex-shrink-0 inline-flex items-center justify-center w-9 h-9 bg-rose-50 text-rose-600">
-                  <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">image_search</span>
+                  <Icon name="image_search" class="text-xl" fill />
                 </span>
                 <div class="flex-1 min-w-0">
                   <span class="text-xs sm:text-sm font-bold text-on-background">Need images from a website?</span>
                   <p class="text-xs text-on-surface-variant mt-0.5">ExtractPics — grab every image from any URL, free</p>
                 </div>
                 <span class="su-btn flex-shrink-0 inline-flex items-center gap-1 bg-rose-600 text-white px-3 py-2 font-bold text-xs group-hover:translate-x-0.5 transition-transform">
-                  Try it <span class="material-symbols-outlined text-sm">open_in_new</span>
+                  Try it <Icon name="open_in_new" class="text-sm" />
                 </span>
               </a>
             </div>
@@ -112,7 +113,7 @@ import AdBanner from './ads/AdBanner.astro';
             <!-- State: batch success -->
             <div id="state-batch" class="p-4 sm:p-6 hidden">
               <div class="flex items-center gap-3 mb-4">
-                <span class="material-symbols-outlined text-rose-600 text-lg sm:text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <Icon name="check_circle" class="text-rose-600 text-lg sm:text-xl" fill />
                 <span class="font-bold text-on-surface text-sm sm:text-lg" id="batch-heading">Uploaded 0 files</span>
                 <button id="batch-another" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
                   Upload more
@@ -127,7 +128,7 @@ import AdBanner from './ads/AdBanner.astro';
             <!-- State: error -->
             <div id="state-error" class="p-4 sm:p-6 hidden">
               <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-error flex-shrink-0 text-2xl">error</span>
+                <Icon name="error" class="text-error flex-shrink-0 text-2xl" />
                 <span class="font-bold text-on-error-container text-sm sm:text-base flex-1 min-w-0" id="error-text">Upload failed</span>
                 <button id="error-retry" class="text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
                   Try again
@@ -138,9 +139,9 @@ import AdBanner from './ads/AdBanner.astro';
               </div>
               <!-- Sign in CTA for limit errors -->
               <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t border-outline-variant/40 text-on-background hover:opacity-80 transition-opacity group">
-                <span class="material-symbols-outlined text-base text-primary">login</span>
+                <Icon name="login" class="text-base text-primary" />
                 <span class="text-xs sm:text-sm font-bold">Sign in to get more uploads</span>
-                <span class="material-symbols-outlined text-sm text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                <Icon name="arrow_forward" class="text-sm text-primary group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>
           </div>
@@ -176,10 +177,10 @@ import AdBanner from './ads/AdBanner.astro';
 
         <!-- Trust signals -->
         <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-5 sm:mt-6 text-xs sm:text-sm text-on-surface-variant font-label font-bold uppercase tracking-wider">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">rocket_launch</span> CDN</span>
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">lock</span> SSL</span>
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">link</span> Permanent</span>
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base sm:text-lg" style="font-variation-settings: 'FILL' 1;">flash_on</span> Instant</span>
+          <span class="flex items-center gap-1.5"><Icon name="rocket_launch" class="text-primary text-base sm:text-lg" fill /> CDN</span>
+          <span class="flex items-center gap-1.5"><Icon name="lock" class="text-primary text-base sm:text-lg" fill /> SSL</span>
+          <span class="flex items-center gap-1.5"><Icon name="link" class="text-primary text-base sm:text-lg" fill /> Permanent</span>
+          <span class="flex items-center gap-1.5"><Icon name="flash_on" class="text-primary text-base sm:text-lg" fill /> Instant</span>
         </div>
 
       </div><!-- /soft-uploader -->
@@ -206,6 +207,7 @@ import AdBanner from './ads/AdBanner.astro';
 </div><!-- /ad-wrapped outer -->
 
 <script>
+  import { ic_cloud_upload, ic_hourglass_top } from '../data/icon-svgs';
   // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
   // Shared with HomePage.astro so both uploaders report the same signal.
 
@@ -294,7 +296,7 @@ import AdBanner from './ads/AdBanner.astro';
     showState('idle');
     progressBar.classList.add('hidden');
     progressFill.style.width = '0%';
-    uploadIcon.textContent = 'cloud_upload';
+    uploadIcon.innerHTML = ic_cloud_upload;
     uploadText.textContent = 'Drop files to upload';
     uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG — up to 10 MB';
     uploadBtn.textContent = 'Select File';
@@ -371,7 +373,7 @@ import AdBanner from './ads/AdBanner.astro';
     showState('idle');
     progressBar.classList.remove('hidden');
     progressFill.style.width = '0%';
-    uploadIcon.textContent = 'hourglass_top';
+    uploadIcon.innerHTML = ic_hourglass_top;
     uploadText.textContent = `Uploading 0 / ${files.length}`;
     uploadSubtext.textContent = 'Batch upload in progress…';
     uploadBtn.textContent = 'Uploading...';
@@ -475,7 +477,7 @@ import AdBanner from './ads/AdBanner.astro';
     showState('idle');
     progressBar.classList.remove('hidden');
     progressFill.style.width = '0%';
-    uploadIcon.textContent = 'hourglass_top';
+    uploadIcon.innerHTML = ic_hourglass_top;
     uploadText.textContent = `Uploading ${file.name}`;
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1]?.toUpperCase() || 'FILE'}`;
     uploadBtn.textContent = 'Uploading...';

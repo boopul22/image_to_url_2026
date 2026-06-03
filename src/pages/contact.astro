@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -45,7 +46,7 @@ const schema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-secondary text-2xl">email</span>
+            <Icon name="email" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Email Support</h3>
           <p class="font-body text-on-surface-variant mb-3">For technical help, account issues, or general questions.</p>
@@ -53,21 +54,21 @@ const schema = {
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-tertiary text-2xl">chat</span>
+            <Icon name="chat" class="text-tertiary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">General Inquiries</h3>
           <p class="font-body text-on-surface-variant">Partnership proposals, media inquiries, or anything else — drop us a line.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-primary text-2xl">bug_report</span>
+            <Icon name="bug_report" class="text-primary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Bug Reports</h3>
           <p class="font-body text-on-surface-variant">Found something broken? Let us know and we'll fix it fast.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-on-surface text-2xl">lightbulb</span>
+            <Icon name="lightbulb" class="text-on-surface text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Feature Requests</h3>
           <p class="font-body text-on-surface-variant">Have an idea that would make ImageToURL better? We're all ears.</p>
@@ -163,7 +164,7 @@ const schema = {
         <h2 class="text-xl sm:text-2xl font-black font-headline mb-4">Still have questions?</h2>
         <p class="text-surface/70 mb-8 max-w-lg mx-auto">Try our image hosting tool — it's free, fast, and requires no signup.</p>
         <a href={lp('/')} class="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow-hover active:scale-95 transition-all">
-          <span class="material-symbols-outlined text-xl">cloud_upload</span>
+          <Icon name="cloud_upload" class="text-xl" />
           Try ImageToURL Free
         </a>
       </div>

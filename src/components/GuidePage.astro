@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 /**
  * Long-form guide / pillar-post layout. Used for in-depth SEO/content pages
  * at /guides/*. Each guide supplies title, intro, a list of sections (with
@@ -66,7 +67,7 @@ const faqSchema = {
           <h2 class="text-sm font-black font-headline uppercase tracking-wider mb-3">Key points</h2>
           <ul class="flex flex-col gap-2 font-body text-on-surface-variant">
             {keyPoints.map(k => (
-              <li class="flex gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0">check_circle</span><span>{k}</span></li>
+              <li class="flex gap-2"><Icon name="check_circle" class="text-primary text-base flex-shrink-0" /><span>{k}</span></li>
             ))}
           </ul>
         </div>
@@ -86,7 +87,7 @@ const faqSchema = {
         <div class="flex flex-col gap-3 sm:gap-4">
           {faqs.map((f, i) => (
             <details class={`border border-outline-variant/40 rounded-xl hard-shadow group ${i % 2 === 0 ? 'bg-secondary-container' : 'bg-surface-variant'}`}>
-              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{f.q}<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span></summary>
+              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">{f.q}<Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" /></summary>
               <div class="px-4 sm:px-5 pb-4 sm:pb-5"><p class="font-body text-on-surface-variant">{f.a}</p></div>
             </details>
           ))}
@@ -105,7 +106,7 @@ const faqSchema = {
                   <h3 class="text-sm sm:text-base font-black font-headline mb-1">{r.title}</h3>
                   <p class="font-body text-on-surface-variant text-sm">{r.body}</p>
                 </div>
-                <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+                <Icon name="arrow_forward" class="text-primary text-2xl" />
               </a>
             ))}
           </div>

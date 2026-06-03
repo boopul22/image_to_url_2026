@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -90,28 +91,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">database</span>
+            <Icon name="database" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Bloats Your Repository</h3>
           <p class="font-body text-on-surface-variant">Git stores every version of every file in its history. A few screenshots can quickly balloon your .git directory to hundreds of megabytes, since binary files cannot be delta-compressed.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">speed</span>
+            <Icon name="speed" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Slows Down Clones</h3>
           <p class="font-body text-on-surface-variant">Every <code class="bg-on-background/10 px-1 rounded text-sm">git clone</code> downloads the entire history including all image versions. New contributors wait minutes instead of seconds to get started on your project.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">difference</span>
+            <Icon name="difference" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Clutters Your Diffs</h3>
           <p class="font-body text-on-surface-variant">Binary files show up as changed in pull requests but cannot be meaningfully reviewed. They add noise to code reviews and make it harder to see what actually changed in a commit.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">cloud_off</span>
+            <Icon name="cloud_off" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Wastes Storage Quotas</h3>
           <p class="font-body text-on-surface-variant">GitHub has soft limits on repository size (recommended under 1GB). Images eat through that budget quickly, especially for active projects with frequent screenshot updates.</p>
@@ -162,28 +163,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">code</span>
+            <Icon name="code" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Open Source Projects</h3>
           <p class="font-body text-on-surface-variant text-sm">Add screenshots, architecture diagrams, and demo GIFs to your README without bloating the repo for every contributor.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">menu_book</span>
+            <Icon name="menu_book" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Documentation</h3>
           <p class="font-body text-on-surface-variant text-sm">Host tutorial screenshots, API response examples, and workflow diagrams externally for cleaner documentation repos.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">person</span>
+            <Icon name="person" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Portfolio READMEs</h3>
           <p class="font-body text-on-surface-variant text-sm">Showcase project screenshots and demo videos in your GitHub profile README with fast-loading, permanent images.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">apartment</span>
+            <Icon name="apartment" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Organization Profiles</h3>
           <p class="font-body text-on-surface-variant text-sm">Add logos, team photos, and branding to your GitHub organization's profile README with reliable external hosting.</p>
@@ -203,35 +204,35 @@ const faqSchema = {
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Why should I not commit images directly to my GitHub repo?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Git tracks every version of every file. Binary image files cannot be diffed efficiently, so every change adds the full file size to your repo history. Over time, this bloats your .git directory, slows down clones, and wastes storage for every contributor.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>How do I add an externally hosted image to a GitHub README?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Upload your image to ImageToURL, copy the permanent URL, then add it to your README using standard Markdown syntax: <code>![Alt text](https://your-image-url)</code>. GitHub renders the image inline when anyone views your repository.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Will the images load on private repositories too?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Since the images are hosted externally on ImageToURL's CDN, they load independently of GitHub's access controls. Anyone with access to the repository will see the images, regardless of whether the repo is public or private.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Do ImageToURL links work in GitHub wikis and issues?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. ImageToURL links work anywhere GitHub renders Markdown — README files, wiki pages, issue comments, pull request descriptions, and discussion threads. The same permanent URL works across all of these contexts.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>What happens if ImageToURL goes down?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">ImageToURL uses a globally distributed CDN with high availability. Images are replicated across multiple edge servers. In the unlikely event of downtime, images are restored automatically when service resumes. Your URLs remain the same permanently.</div>
         </details>
@@ -252,21 +253,21 @@ const faqSchema = {
             <h3 class="font-headline font-bold text-base mb-1">Image URL Generator</h3>
             <p class="text-sm text-on-surface-variant">Generate shareable URLs for any image format</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-hosting-for-discord" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Discord Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Permanent embed links for Discord</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-hosting-for-notion" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Notion Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Permanent URLs for Notion pages</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

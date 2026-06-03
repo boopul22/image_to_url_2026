@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -56,28 +57,28 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">quiz</span>
+            <Icon name="quiz" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Richer Surveys</h3>
           <p class="font-body text-on-surface-variant">Add context to your questions with screenshots, product images, or diagrams. Visual surveys get higher completion rates and more accurate responses.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">image</span>
+            <Icon name="image" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Visual Questions</h3>
           <p class="font-body text-on-surface-variant">Create picture-based multiple choice, "identify this image" quizzes, or visual preference polls. Images make questions clearer and more engaging.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">palette</span>
+            <Icon name="palette" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Branded Forms</h3>
           <p class="font-body text-on-surface-variant">Add your logo, brand graphics, and custom headers to make forms look professional. External hosting gives you full control over image quality and dimensions.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">rate_review</span>
+            <Icon name="rate_review" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Product Feedback</h3>
           <p class="font-body text-on-surface-variant">Show product mockups, design variations, or packaging options and collect feedback. Visual context leads to more meaningful and actionable responses.</p>
@@ -97,7 +98,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">01</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
+            <Icon name="cloud_upload" class="text-primary text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Upload Your Image</h3>
           <p class="font-body text-on-surface-variant text-sm">Drag and drop or select any image. Supports JPG, PNG, WebP, GIF, and SVG formats.</p>
@@ -105,7 +106,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">02</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-primary text-2xl">content_copy</span>
+            <Icon name="content_copy" class="text-primary text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Copy the URL</h3>
           <p class="font-body text-on-surface-variant text-sm">Get a permanent, CDN-backed image URL instantly. One click to copy to clipboard.</p>
@@ -113,7 +114,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow text-center">
           <span class="inline-block font-headline italic font-black text-4xl text-primary/30 mb-3">03</span>
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5 mx-auto">
-            <span class="material-symbols-outlined text-primary text-2xl">add_photo_alternate</span>
+            <Icon name="add_photo_alternate" class="text-primary text-2xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Add to Google Forms</h3>
           <p class="font-body text-on-surface-variant text-sm">Click the image icon in the Forms editor, choose "URL", and paste your link. The image appears in your form instantly.</p>
@@ -131,22 +132,22 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 reveal">
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">school</span>
+          <Icon name="school" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Teachers &amp; Quizzes</h3>
           <p class="font-body text-on-surface-variant text-sm">Create image-based quiz questions, diagram labeling exercises, and visual assessments for students.</p>
         </div>
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">shopping_bag</span>
+          <Icon name="shopping_bag" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Product Surveys</h3>
           <p class="font-body text-on-surface-variant text-sm">Show product images, packaging options, or design mockups and collect customer preferences.</p>
         </div>
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">visibility</span>
+          <Icon name="visibility" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Visual Assessments</h3>
           <p class="font-body text-on-surface-variant text-sm">Build visual identification tests, design reviews, and image-based evaluations for any context.</p>
         </div>
         <div class="bg-surface border border-outline-variant/40 p-6 rounded-xl hard-shadow">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">analytics</span>
+          <Icon name="analytics" class="text-primary text-3xl mb-4 block" />
           <h3 class="font-headline font-bold text-lg mb-2">Market Research</h3>
           <p class="font-body text-on-surface-variant text-sm">Show ad creatives, branding options, or competitor screenshots and gauge audience reactions.</p>
         </div>
@@ -165,35 +166,35 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>How do I add an image to a Google Form question?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">In the Google Forms editor, click the image icon next to any question or answer option. Select "URL" as the source, paste your ImageToURL link, and the image will be embedded in your form.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I add images to individual answer options?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Google Forms allows images on both questions and individual multiple-choice or checkbox options. Upload each image to ImageToURL and paste the URLs into the respective answer option image fields.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Will form respondents be able to see the images?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL provides public, CDN-backed URLs. Anyone who opens your form will see the images load instantly, regardless of their device or location. No extra sharing permissions needed.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Do the images stay in my form permanently?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL generates permanent URLs that never expire. Your form images will remain visible for as long as your form is active, with no maintenance needed.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I use these images in Google Forms quizzes?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. Image-based questions are common in quizzes for visual identification, diagram labeling, and picture-based multiple choice. Upload your quiz images to ImageToURL and add them via URL in the Forms editor.</div>
         </details>
@@ -214,21 +215,21 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
             <h3 class="font-headline font-bold text-base mb-1">Google Sheets Hosting</h3>
             <p class="text-sm text-on-surface-variant">Image URLs for Google Sheets =IMAGE() function</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/free-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image format for free with CDN delivery</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/screenshot-to-url" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Screenshot to URL</h3>
             <p class="text-sm text-on-surface-variant">Turn screenshots into shareable links instantly</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

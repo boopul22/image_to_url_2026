@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -107,7 +108,7 @@ const faqSchema = {
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-black font-headline text-lg mb-4">1</div>
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">upload_file</span>
+            <Icon name="upload_file" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Upload Your WebP</h3>
           <p class="font-body text-on-surface-variant">Drag & drop or click to select your WebP file. We accept all WebP variants including lossy, lossless, and animated.</p>
@@ -115,7 +116,7 @@ const faqSchema = {
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-black font-headline text-lg mb-4">2</div>
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">link</span>
+            <Icon name="link" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Get Your URL</h3>
           <p class="font-body text-on-surface-variant">Your WebP is uploaded to our global CDN instantly. A permanent, direct image URL is generated automatically.</p>
@@ -123,7 +124,7 @@ const faqSchema = {
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-black font-headline text-lg mb-4">3</div>
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">share</span>
+            <Icon name="share" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Share Anywhere</h3>
           <p class="font-body text-on-surface-variant">Copy your URL and use it anywhere — HTML, Markdown, forums, emails, or social media.</p>
@@ -142,28 +143,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">compress</span>
+            <Icon name="compress" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Smaller File Sizes</h3>
           <p class="font-body text-on-surface-variant">WebP delivers up to 30% smaller files than PNG and JPG with equivalent quality. Faster page loads for your users.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">auto_awesome</span>
+            <Icon name="auto_awesome" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Superior Image Quality</h3>
           <p class="font-body text-on-surface-variant">Google's modern format combines the best of both worlds: lossy compression like JPG with transparency like PNG.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">public</span>
+            <Icon name="public" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Growing Browser Support</h3>
           <p class="font-body text-on-surface-variant">WebP is now supported by Chrome, Firefox, Safari, and Edge. Over 97% of browsers handle WebP natively.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">gif_box</span>
+            <Icon name="gif_box" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Animation Support</h3>
           <p class="font-body text-on-surface-variant">WebP supports animation like GIF but with vastly smaller file sizes. Modern animated images at a fraction of the bandwidth.</p>
@@ -182,28 +183,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">code</span>
+            <Icon name="code" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Web Developers</h3>
           <p class="font-body text-on-surface-variant">Serve modern, optimized images with direct URLs. Perfect for progressive web apps and performance-focused sites.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">speed</span>
+            <Icon name="speed" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Performance Enthusiasts</h3>
           <p class="font-body text-on-surface-variant">Reduce image payload by 30% or more. Improve Core Web Vitals and page load times with WebP.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">smart_toy</span>
+            <Icon name="smart_toy" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">AI Image Creators</h3>
           <p class="font-body text-on-surface-variant">Many AI image generators output WebP. Host your AI-generated art with permanent, shareable URLs.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">brush</span>
+            <Icon name="brush" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Content Creators</h3>
           <p class="font-body text-on-surface-variant">Upload blog images, thumbnails, and social media assets in WebP for faster delivery without quality loss.</p>
@@ -223,7 +224,7 @@ const faqSchema = {
         <details class="bg-secondary-container border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             What is WebP format?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">WebP is a modern image format developed by Google that provides superior compression for both lossy and lossless images. It supports transparency and animation while being 25-34% smaller than equivalent PNG or JPG files.</p>
@@ -232,7 +233,7 @@ const faqSchema = {
         <details class="bg-tertiary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Does ImageToURL preserve WebP quality?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Yes, we store your WebP files exactly as uploaded. No re-encoding, no compression artifacts, no quality degradation.</p>
@@ -241,7 +242,7 @@ const faqSchema = {
         <details class="bg-primary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Can I embed WebP URLs anywhere?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Yes. Our direct URLs work anywhere images are supported. However, note that WebP may not display on very old browsers — in those cases, consider also uploading a PNG fallback.</p>
@@ -250,7 +251,7 @@ const faqSchema = {
         <details class="bg-surface-variant border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Is WebP better than PNG?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">It depends on your use case. WebP offers smaller file sizes than PNG with similar quality, including transparency support. PNG is better when you need universal legacy browser support or lossless archival quality.</p>
@@ -259,7 +260,7 @@ const faqSchema = {
         <details class="bg-secondary-container border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             What's the maximum WebP file size?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Free uploads support WebP files up to 2MB. Create a free account to upload WebP images up to 10MB.</p>
@@ -282,21 +283,21 @@ const faqSchema = {
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">PNG to URL</h3>
             <p class="font-body text-on-surface-variant text-sm">Convert PNG images to shareable links</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
         <a href="/jpg-to-url" class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
           <div>
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">JPG to URL</h3>
             <p class="font-body text-on-surface-variant text-sm">Convert JPEG photos to shareable links</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
         <a href="/free-image-hosting" class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
           <div>
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">Free Image Hosting</h3>
             <p class="font-body text-on-surface-variant text-sm">Host any image format for free</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
       </div>
     </div>

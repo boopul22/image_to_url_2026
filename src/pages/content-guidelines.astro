@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -42,28 +43,28 @@ const schema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
         <div class="bg-error-container border border-error p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-error rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-error text-2xl">block</span>
+            <Icon name="block" class="text-error text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Adult &amp; Sexual Content</h3>
           <p class="font-body text-on-error-container text-sm">Pornographic, sexually explicit, or nudity-containing images are strictly prohibited. This includes both real and AI-generated content.</p>
         </div>
         <div class="bg-error-container border border-error p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-error rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-error text-2xl">dangerous</span>
+            <Icon name="dangerous" class="text-error text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Violence &amp; Hate Speech</h3>
           <p class="font-body text-on-error-container text-sm">Graphic violence, gore, hate symbols, or content promoting discrimination based on race, gender, religion, or any protected characteristic.</p>
         </div>
         <div class="bg-error-container border border-error p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-error rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-error text-2xl">gavel</span>
+            <Icon name="gavel" class="text-error text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Illegal Content</h3>
           <p class="font-body text-on-error-container text-sm">Any content that violates local or international laws, including child exploitation material (CSAM), drug trafficking, or terrorism-related content.</p>
         </div>
         <div class="bg-error-container border border-error p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-error rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-error text-2xl">copyright</span>
+            <Icon name="copyright" class="text-error text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Copyright Violations</h3>
           <p class="font-body text-on-error-container text-sm">Images you don't own or have permission to use. Watermark removal, pirated content, and trademark infringement are all prohibited.</p>
@@ -80,28 +81,28 @@ const schema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 reveal">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-secondary text-2xl">business</span>
+            <Icon name="business" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Business &amp; Professional</h3>
           <p class="font-body text-on-surface-variant text-sm">Product photos, company logos, marketing materials, presentations, infographics, and professional portfolio images.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-secondary text-2xl">school</span>
+            <Icon name="school" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Educational &amp; Creative</h3>
           <p class="font-body text-on-surface-variant text-sm">Tutorials, diagrams, artwork, photography, illustrations, memes, and original creative works.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-secondary text-2xl">group</span>
+            <Icon name="group" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Personal &amp; Social</h3>
           <p class="font-body text-on-surface-variant text-sm">Personal photos, screenshots, social media images, profile pictures, and everyday life photography.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-secondary text-2xl">code</span>
+            <Icon name="code" class="text-secondary text-2xl" />
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-2">Web &amp; Technical</h3>
           <p class="font-body text-on-surface-variant text-sm">Website assets, app screenshots, UI mockups, code snippets as images, and technical documentation graphics.</p>
@@ -118,7 +119,7 @@ const schema = {
       <div class="bg-tertiary-fixed border border-outline-variant/40 p-6 sm:p-10 rounded-xl hard-shadow max-w-3xl reveal">
         <div class="flex items-start gap-5">
           <div class="w-14 h-14 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-tertiary text-2xl">smart_toy</span>
+            <Icon name="smart_toy" class="text-tertiary text-2xl" />
           </div>
           <div>
             <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">Automated AI-Powered Moderation</h3>

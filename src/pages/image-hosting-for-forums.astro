@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -90,28 +91,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">link</span>
+            <Icon name="link" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Direct Image Links</h3>
           <p class="font-body text-on-surface-variant">Every upload gives you a clean, direct URL that points to the image file itself. No landing pages, no redirects. Paste it into any forum and the image displays inline immediately.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">code</span>
+            <Icon name="code" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">BBCode and HTML Ready</h3>
           <p class="font-body text-on-surface-variant">Get your image URL formatted for any forum system. Works with BBCode [img] tags for phpBB and vBulletin, HTML img tags for modern forums, and Markdown syntax for Reddit and Discourse.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">block</span>
+            <Icon name="block" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Zero Ads</h3>
           <p class="font-body text-on-surface-variant">No pop-ups, no interstitials, no banner ads, no sponsored content. Other image hosts force users to navigate through ads to see your image. ImageToURL serves images directly and cleanly.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">all_inclusive</span>
+            <Icon name="all_inclusive" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Permanent Hosting</h3>
           <p class="font-body text-on-surface-variant">Forum threads live for years. Your images will too. No auto-deletion after 90 days, no inactive account purges. Every image URL you create works forever.</p>
@@ -157,28 +158,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">forum</span>
+            <Icon name="forum" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">phpBB Forums</h3>
           <p class="font-body text-on-surface-variant text-sm">Upload images and paste BBCode [img] tags directly into phpBB posts and signatures for inline image display.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">chat</span>
+            <Icon name="chat" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">vBulletin</h3>
           <p class="font-body text-on-surface-variant text-sm">Direct image URLs work perfectly with vBulletin's BBCode image embedding. No hotlink restrictions or broken thumbnails.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">reddit</span>
+            <Icon name="reddit" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Reddit</h3>
           <p class="font-body text-on-surface-variant text-sm">Share images in Reddit posts and comments using Markdown links. Permanent URLs that work across every subreddit.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">hub</span>
+            <Icon name="hub" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Discourse</h3>
           <p class="font-body text-on-surface-variant text-sm">Modern Discourse forums render ImageToURL links automatically as inline images. Works in posts, replies, and topic descriptions.</p>
@@ -198,35 +199,35 @@ const faqSchema = {
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>What is BBCode image hosting?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">BBCode is a markup language used by many forums like phpBB and vBulletin. To embed an image, you wrap a direct image URL in [img] tags: [img]https://your-image-url[/img]. ImageToURL provides the direct image URLs needed for BBCode to work correctly.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Why do forum image hosts show ads or pop-ups?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Many free image hosting services generate revenue by showing ads on their image pages or injecting pop-ups when someone clicks an image link. ImageToURL provides clean, direct image links with zero ads, pop-ups, or interstitials. Your images are served directly without any intermediary pages.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Will my forum images stay online permanently?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. ImageToURL provides permanent hosting for all uploaded images. Forum threads can stay active for years, and your images will continue to display correctly for as long as the thread exists. There are no expiration dates or automatic deletion policies.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Does ImageToURL work with Reddit?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. While Reddit has its own image hosting, ImageToURL links work perfectly in Reddit posts and comments using Markdown syntax: ![description](https://your-image-url). This is especially useful for subreddits that allow direct image links and for commenting with images.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I upload screenshots from games and software?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. ImageToURL supports all common image formats including PNG (perfect for screenshots with text), JPEG (for photos), GIF (for animated content), and WebP. Upload your screenshots and get direct links ready to paste into any forum post.</div>
         </details>
@@ -247,21 +248,21 @@ const faqSchema = {
             <h3 class="font-headline font-bold text-base mb-1">Discord Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Permanent embed links for Discord servers</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-hosting-for-ebay" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">eBay Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Product image URLs for eBay listings</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/free-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image for free with global CDN</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

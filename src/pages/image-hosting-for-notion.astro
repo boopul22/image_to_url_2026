@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -90,28 +91,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">timer_off</span>
+            <Icon name="timer_off" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">URLs Expire Silently</h3>
           <p class="font-body text-on-surface-variant">Notion generates temporary signed URLs for uploaded images. These tokens expire without warning, leaving blank spaces where your images used to be. You often do not notice until someone reports it.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">public</span>
+            <Icon name="public" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Published Pages Break</h3>
           <p class="font-body text-on-surface-variant">When you publish a Notion page to the web, images that looked fine in your workspace can stop loading for visitors. The published page serves expired image URLs to anyone viewing it.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">share</span>
+            <Icon name="share" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Shared Links Fail</h3>
           <p class="font-body text-on-surface-variant">Sharing a Notion page link with a client or colleague works initially, but the images on that page can expire before they get around to viewing it, making your content look broken.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">lock</span>
+            <Icon name="lock" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Internal-Only URLs</h3>
           <p class="font-body text-on-surface-variant">Notion's image URLs are authenticated to your workspace. They cannot be reliably used in external tools, integrations, or other platforms that read from your Notion content via API.</p>
@@ -131,7 +132,7 @@ const faqSchema = {
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <span class="inline-block font-black font-headline text-lg sm:text-xl opacity-15 mb-3">01</span>
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">upload</span>
+            <Icon name="upload" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Upload Your Image</h3>
           <p class="font-body text-on-surface-variant">Drag and drop your image above or click to browse. We support JPG, PNG, WebP, GIF, and SVG with no quality loss.</p>
@@ -139,7 +140,7 @@ const faqSchema = {
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <span class="inline-block font-black font-headline text-lg sm:text-xl opacity-15 mb-3">02</span>
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">content_copy</span>
+            <Icon name="content_copy" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Copy the Permanent URL</h3>
           <p class="font-body text-on-surface-variant">Your image gets a permanent URL instantly. Click to copy it to your clipboard. This URL will never expire or change.</p>
@@ -147,7 +148,7 @@ const faqSchema = {
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <span class="inline-block font-black font-headline text-lg sm:text-xl opacity-15 mb-3">03</span>
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">add_photo_alternate</span>
+            <Icon name="add_photo_alternate" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Embed in Notion</h3>
           <p class="font-body text-on-surface-variant">In Notion, type <code class="bg-on-background/10 px-1 rounded text-sm">/image</code>, choose "Embed link", and paste the URL. Your image loads from ImageToURL and never expires.</p>
@@ -166,28 +167,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">public</span>
+            <Icon name="public" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Published Pages</h3>
           <p class="font-body text-on-surface-variant text-sm">Keep images loading reliably on Notion pages published to the web. No more expired images for your visitors.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">groups</span>
+            <Icon name="groups" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Team Wikis</h3>
           <p class="font-body text-on-surface-variant text-sm">Diagrams, screenshots, and reference images in your team wiki stay visible for every team member, every time.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">web</span>
+            <Icon name="web" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Portfolio Sites</h3>
           <p class="font-body text-on-surface-variant text-sm">Building a portfolio with Notion, Super, or Fruition? External images ensure your work samples always display correctly.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">description</span>
+            <Icon name="description" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-lg font-black font-headline mb-2">Documentation</h3>
           <p class="font-body text-on-surface-variant text-sm">Product docs, SOPs, and knowledge bases with images that load reliably for anyone with access to your Notion workspace.</p>
@@ -207,35 +208,35 @@ const faqSchema = {
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Why do images break on published Notion pages?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Notion uses temporary signed URLs for images stored in its workspace. These URLs contain authentication tokens that expire after a period. When the token expires, the image stops loading on published pages, shared links, and embedded Notion content. External hosting with permanent URLs solves this completely.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>How do I use an external image in Notion?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Upload your image to ImageToURL, copy the permanent URL, then in Notion type /image, select "Embed link", and paste the URL. The image will load from ImageToURL's CDN and never expire, even on published Notion pages.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Will externally hosted images work in Notion's API?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. When you use an external image URL in Notion, the API returns the URL as type "external" instead of type "file". External URLs are stable and permanent, making them reliable for integrations, automations, and any tool that reads Notion content via the API.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Do ImageToURL images work in Notion templates?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Absolutely. When someone duplicates a Notion template that contains externally hosted images, the image URLs carry over perfectly. Unlike Notion-hosted images which can break after duplication, ImageToURL links always resolve correctly for every copy of the template.</div>
         </details>
         <details class="group border border-outline-variant/40 hard-shadow mb-3">
           <summary class="flex items-center justify-between p-4 sm:p-5 cursor-pointer font-headline font-bold text-sm sm:text-base">
             <span>Can I use this for a Notion website built with Super or Fruition?</span>
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-on-surface-variant text-sm sm:text-base">Yes. Notion website builders like Super, Fruition, and Potion all benefit from externally hosted images. Since these tools render your Notion pages as websites, having permanent image URLs ensures your site's images never break due to Notion's expiring internal URLs.</div>
         </details>
@@ -256,21 +257,21 @@ const faqSchema = {
             <h3 class="font-headline font-bold text-base mb-1">GitHub README Hosting</h3>
             <p class="text-sm text-on-surface-variant">Permanent images for Markdown docs</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/image-hosting-for-newsletters" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Newsletter Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Reliable images for email campaigns</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
         <a href="/free-image-hosting" class="border border-outline-variant/40 p-5 sm:p-6 rounded-xl hard-shadow hover:-translate-y-1 transition-transform flex items-center justify-between gap-3">
           <div>
             <h3 class="font-headline font-bold text-base mb-1">Free Image Hosting</h3>
             <p class="text-sm text-on-surface-variant">Host any image for free with CDN delivery</p>
           </div>
-          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary" />
         </a>
       </div>
     </div>

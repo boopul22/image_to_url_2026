@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
@@ -145,28 +146,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">layers</span>
+            <Icon name="layers" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Transparency Support</h3>
           <p class="font-body text-on-surface-variant">PNG is the gold standard for images with transparent backgrounds. Logos, icons, overlays — all preserved perfectly.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">high_quality</span>
+            <Icon name="high_quality" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Lossless Quality</h3>
           <p class="font-body text-on-surface-variant">Unlike JPG, PNG uses lossless compression. Your image quality is preserved pixel-for-pixel, exactly as uploaded.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">web</span>
+            <Icon name="web" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Web Graphics Standard</h3>
           <p class="font-body text-on-surface-variant">PNG is universally supported across all browsers, devices, and platforms. The most reliable format for web graphics.</p>
         </div>
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">print</span>
+            <Icon name="print" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Print-Ready Resolution</h3>
           <p class="font-body text-on-surface-variant">High-resolution PNGs maintain sharp detail for both screen display and print-quality output.</p>
@@ -185,28 +186,28 @@ const faqSchema = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">palette</span>
+            <Icon name="palette" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Web Designers</h3>
           <p class="font-body text-on-surface-variant">Host logos, icons, and UI assets with transparency intact for seamless website integration.</p>
         </div>
         <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">description</span>
+            <Icon name="description" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Documentation Writers</h3>
           <p class="font-body text-on-surface-variant">Embed crisp screenshots and diagrams in Markdown, Notion, and GitHub READMEs.</p>
         </div>
         <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">storefront</span>
+            <Icon name="storefront" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">E-Commerce Sellers</h3>
           <p class="font-body text-on-surface-variant">Product images with transparent backgrounds for eBay, Amazon, and Shopify listings.</p>
         </div>
         <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal">
           <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white border border-outline-variant/40 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-            <span class="material-symbols-outlined text-primary text-lg sm:text-xl">code</span>
+            <Icon name="code" class="text-primary text-lg sm:text-xl" />
           </div>
           <h3 class="text-base sm:text-lg font-black font-headline mb-2">Developers</h3>
           <p class="font-body text-on-surface-variant">Host interface mockups, architecture diagrams, and API documentation images.</p>
@@ -226,7 +227,7 @@ const faqSchema = {
         <details class="bg-secondary-container border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Does ImageToURL preserve PNG transparency?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Yes, we store your PNG files exactly as uploaded — no compression, no conversion, no quality loss. Transparency is fully preserved.</p>
@@ -235,7 +236,7 @@ const faqSchema = {
         <details class="bg-tertiary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             What's the maximum PNG file size?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Free users can upload PNGs up to 2MB. With a free account, the limit increases to 10MB.</p>
@@ -244,7 +245,7 @@ const faqSchema = {
         <details class="bg-primary-fixed border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Can I get a direct link to my PNG?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Yes. Every upload generates a direct image URL (ending in .png) that you can hotlink, embed, or share anywhere.</p>
@@ -253,7 +254,7 @@ const faqSchema = {
         <details class="bg-surface-variant border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             How long do PNG URLs last?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Your image URLs are permanent and never expire. Once uploaded, your PNG is hosted indefinitely.</p>
@@ -262,7 +263,7 @@ const faqSchema = {
         <details class="bg-secondary-container border border-outline-variant/40 rounded-xl hard-shadow group">
           <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between">
             Is PNG to URL conversion free?
-            <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
           </summary>
           <div class="px-4 sm:px-5 pb-4 sm:pb-5">
             <p class="font-body text-on-surface-variant">Completely free. No signup required, no watermarks, no ads. Just upload and get your link.</p>
@@ -285,21 +286,21 @@ const faqSchema = {
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">JPG to URL</h3>
             <p class="font-body text-on-surface-variant text-sm">Convert JPEG photos to shareable links</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
         <a href="/gif-to-url" class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
           <div>
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">GIF to URL</h3>
             <p class="font-body text-on-surface-variant text-sm">Host animated GIFs with direct URLs</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
         <a href="/free-image-hosting" class="bg-surface-variant border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow hard-shadow-hover flex items-center justify-between transition-all reveal">
           <div>
             <h3 class="text-sm sm:text-base font-black font-headline mb-1">Free Image Hosting</h3>
             <p class="font-body text-on-surface-variant text-sm">Host any image format for free</p>
           </div>
-          <span class="material-symbols-outlined text-primary text-2xl">arrow_forward</span>
+          <Icon name="arrow_forward" class="text-primary text-2xl" />
         </a>
       </div>
     </div>

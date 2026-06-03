@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 /**
  * Client-side image format converter for formats the browser can decode/encode
  * natively via <canvas>: PNG, JPG, WEBP (and read-only: GIF/BMP/TIFF via Image).
@@ -50,7 +51,7 @@ const toL = toLabel[to];
   <!-- Quality + privacy strip -->
   <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
-      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <Icon name="lock" class="text-rose-600 text-lg flex-shrink-0" fill />
       <div class="min-w-0">
         <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
         <p class="text-[11px] leading-tight text-on-surface-variant">Files never leave your device</p>
@@ -69,7 +70,7 @@ const toL = toLabel[to];
   <div id={`${idPrefix}-panel`} class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id={`${idPrefix}-state-idle`} class="px-6 py-12 sm:px-10 sm:py-16">
       <div id={`${idPrefix}-drop`} class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">cloud_upload</span>
+        <Icon name="cloud_upload" class="text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl" />
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop {fromL} files here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">Multi-select OK — runs on your device</p>
@@ -86,7 +87,7 @@ const toL = toLabel[to];
     <!-- Results -->
     <div id={`${idPrefix}-state-results`} class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-4">
-        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <Icon name="check_circle" class="text-secondary text-lg sm:text-xl" />
         <span class="font-bold text-secondary text-sm sm:text-lg" id={`${idPrefix}-results-heading`}>Converted 0 files</span>
         <button id={`${idPrefix}-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Convert more</button>
       </div>
@@ -96,7 +97,7 @@ const toL = toLabel[to];
     <!-- Error -->
     <div id={`${idPrefix}-state-error`} class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-3">
-        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <Icon name="error" class="text-error text-lg sm:text-xl" />
         <span class="font-bold text-error text-sm sm:text-lg">Conversion failed</span>
         <button id={`${idPrefix}-error-reset`} class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>

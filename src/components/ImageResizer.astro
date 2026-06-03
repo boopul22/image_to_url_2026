@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 /**
  * Client-side image resizer with linked width/height inputs, preset target
  * sizes, quality control, optional format conversion, and a live "source
@@ -13,7 +14,7 @@
   <!-- Privacy strip -->
   <div class="su-control bg-white border border-outline-variant/40 mb-2 px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2 min-w-0">
-      <span class="material-symbols-outlined text-rose-600 text-lg flex-shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <Icon name="lock" class="text-rose-600 text-lg flex-shrink-0" fill />
       <div class="min-w-0">
         <p class="text-xs font-bold uppercase tracking-wider text-on-background">100% in your browser</p>
         <p class="text-[11px] leading-tight text-on-surface-variant">Files never leave your device</p>
@@ -37,7 +38,7 @@
         title="Lock aspect ratio"
         class="su-btn border border-outline-variant bg-rose-600 text-white flex items-center justify-center w-10 h-10 mb-0 transition-colors"
       >
-        <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;" id="irsz-lock-icon">lock</span>
+        <Icon name="lock" class="text-lg" fill id="irsz-lock-icon" />
       </button>
       <div class="flex-1 min-w-[7rem]">
         <label for="irsz-h" class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Height (px)</label>
@@ -87,7 +88,7 @@
   <div id="irsz-panel" class="su-drop bg-white border border-dashed border-outline-variant overflow-hidden transition-all duration-300">
     <div id="irsz-state-idle" class="px-6 py-12 sm:px-10 sm:py-16">
       <div id="irsz-drop" class="group flex flex-col items-center gap-3 cursor-pointer" role="button" tabindex="0">
-        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl">aspect_ratio</span>
+        <Icon name="aspect_ratio" class="text-on-surface-variant/40 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-4xl sm:text-5xl" />
         <div class="text-center">
           <p class="text-on-background font-semibold text-sm sm:text-base font-headline uppercase tracking-wider">Drop images here or click to browse</p>
           <p class="text-xs sm:text-sm text-on-surface-variant mt-2">PNG · JPG · WebP — multi-select OK</p>
@@ -103,7 +104,7 @@
 
     <div id="irsz-state-results" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-4">
-        <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">check_circle</span>
+        <Icon name="check_circle" class="text-secondary text-lg sm:text-xl" />
         <span class="font-bold text-secondary text-sm sm:text-lg" id="irsz-results-heading">Resized</span>
         <button id="irsz-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">Resize more</button>
       </div>
@@ -112,7 +113,7 @@
 
     <div id="irsz-state-error" class="p-4 sm:p-6 hidden">
       <div class="flex items-center gap-3 mb-3">
-        <span class="material-symbols-outlined text-error text-lg sm:text-xl">error</span>
+        <Icon name="error" class="text-error text-lg sm:text-xl" />
         <span class="font-bold text-error text-sm sm:text-lg">Resize failed</span>
         <button id="irsz-error-reset" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline">Try again</button>
       </div>
@@ -123,6 +124,7 @@
 </div>
 
 <script>
+  import { ic_lock, ic_lock_open } from '../data/icon-svgs';
   const input = document.getElementById('irsz-input') as HTMLInputElement;
   const drop = document.getElementById('irsz-drop') as HTMLDivElement;
   const panel = document.getElementById('irsz-panel') as HTMLDivElement;
@@ -168,7 +170,7 @@
   }
 
   function updateLockUi() {
-    lockIcon.textContent = locked ? 'lock' : 'lock_open';
+    lockIcon.innerHTML = locked ? ic_lock : ic_lock_open;
     lockBtn.setAttribute('aria-pressed', String(locked));
     lockBtn.classList.toggle('bg-rose-600', locked);
     lockBtn.classList.toggle('text-white', locked);

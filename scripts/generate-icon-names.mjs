@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-// Scans src/ for Material Symbols icon usages and writes the subset list to
-// src/data/material-icons.ts. Layout.astro imports this list and appends
-// `&icon_names=...` to the Google Fonts URL so only the glyphs we actually
-// render ship to the browser (full font is ~300 KiB; subset is ~15–25 KiB).
+// Scans src/ for icon usages (<Icon name="...">, nav-link `icon:` fields, etc.)
+// and writes the deduped list to src/data/material-icons.ts. generate-icon-svgs.mjs
+// reads that list and emits inline-SVG path data (from the offline
+// @material-symbols/svg-400 package) for exactly those icons — no icon font, no
+// network. Runs first in predev/prebuild.
 
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -29,7 +30,11 @@ const icons = new Set();
 
 // Patterns that capture icon names. Keep these tight to avoid false positives.
 const patterns = [
-  // Static span content: <span class="material-symbols-outlined ...">icon_name</span>
+  // Inline-SVG component: <Icon name="icon_name" .../>
+  /<Icon\b[^>]*?\bname=["']([a-z][a-z0-9_]*)["']/g,
+  // Dynamic component with a literal fallback: <Icon name={foo || 'icon_name'} />
+  /<Icon\b[^>]*?\bname=\{[^}]*?['"]([a-z][a-z0-9_]*)['"][^}]*\}/g,
+  // Legacy static span content (pre-SVG migration): <span class="material-symbols-outlined ...">icon_name</span>
   /material-symbols-outlined[^<>]*>\s*([a-z][a-z0-9_]*)\s*</g,
   // Array-literal config: { icon: 'icon_name' } / iconFallback: "icon_name"
   /\bicon(?:Fallback)?\s*:\s*['"]([a-z][a-z0-9_]*)['"]/g,
