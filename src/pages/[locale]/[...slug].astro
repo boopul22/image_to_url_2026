@@ -199,6 +199,28 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       </div>
     </section>
 
+    {c.useCasesTitle && c.useCases && c.useCases.length > 0 && (
+      <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6">
+          <div class="flex items-baseline gap-4 mb-3 sm:mb-4 reveal">
+            <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.useCasesTitle}</h2>
+            <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+          </div>
+          {c.useCasesIntro && (
+            <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed mb-5 sm:mb-8 reveal">{c.useCasesIntro}</p>
+          )}
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {c.useCases.map((item, i) => (
+              <div class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed'][i % 3]} border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow reveal`}>
+                <h3 class="text-base sm:text-lg font-black font-headline mb-2">{item.title}</h3>
+                <p class="font-body text-on-surface-variant">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
     <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">

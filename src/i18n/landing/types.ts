@@ -19,6 +19,10 @@ export interface LandingContent {
   whyItems: { title: string; body: string }[];
   faqTitle: string;
   faqs: { q: string; a: string }[];
+  // Optional extra "use cases" section, rendered after the Why section.
+  useCasesTitle?: string;
+  useCasesIntro?: string;
+  useCases?: { title: string; body: string }[];
   ctaTitle: string;
   ctaBody: string;
   ctaButton: string;
