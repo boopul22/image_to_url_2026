@@ -16,13 +16,19 @@
 //
 // Runs in prebuild after generate-icon-names.mjs.
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const ICONS_TS = join(ROOT, 'src', 'data', 'material-icons.ts');
 const FONT_OUT = join(ROOT, 'public', 'fonts', 'material-symbols-outlined.woff2');
+// Sidecar recording the icon-set the committed font was built for. Committed
+// alongside the font so a fresh clone (or `predev`) can tell "the font already
+// matches the code" and skip the network entirely. When this drifts from the
+// CSV, the subset is stale and we refetch.
+const HASH_OUT = join(ROOT, 'public', 'fonts', '.material-symbols.hash');
 
 // Matches Google's Chrome UA sniffing so the CSS response references WOFF2 (not TTF).
 const CHROME_UA =
@@ -65,14 +71,39 @@ async function downloadFont(url) {
 
 async function main() {
   const csv = readIconCsv();
-  console.log(`Fetching Material Symbols subset (${csv.split(',').length} glyphs)...`);
-  const css = await fetchCss(csv);
-  const woff2Url = extractWoff2Url(css);
+  const wantHash = createHash('sha256').update(csv).digest('hex');
+  const haveFont = existsSync(FONT_OUT);
+  const haveHash = existsSync(HASH_OUT) ? readFileSync(HASH_OUT, 'utf8').trim() : null;
 
-  console.log(`Downloading ${woff2Url}...`);
-  const fontBuf = await downloadFont(woff2Url);
+  // Fast path: the committed font already matches the icon set used in code, so
+  // there's nothing to download. Keeps `predev`/fresh clones instant and offline.
+  if (haveFont && haveHash === wantHash) {
+    console.log(`Material Symbols subset up to date (${csv.split(',').length} glyphs) — skipping fetch.`);
+    return;
+  }
+
+  console.log(`Fetching Material Symbols subset (${csv.split(',').length} glyphs)...`);
+  let css, woff2Url, fontBuf;
+  try {
+    css = await fetchCss(csv);
+    woff2Url = extractWoff2Url(css);
+    console.log(`Downloading ${woff2Url}...`);
+    fontBuf = await downloadFont(woff2Url);
+  } catch (err) {
+    // Network blocked / Google Fonts unreachable. If we already have a font on
+    // disk, keep it rather than breaking the contributor's build or dev server —
+    // it may be slightly stale, but it renders. Only hard-fail when there is no
+    // font at all (nothing to fall back to).
+    if (haveFont) {
+      console.warn(`[download-material-symbols] fetch failed (${err.message}); keeping existing font.`);
+      return;
+    }
+    throw err;
+  }
+
   mkdirSync(dirname(FONT_OUT), { recursive: true });
   writeFileSync(FONT_OUT, fontBuf);
+  writeFileSync(HASH_OUT, wantHash + '\n');
   console.log(`  → ${FONT_OUT} (${(fontBuf.length / 1024).toFixed(1)} KiB)`);
 }
 

@@ -6,6 +6,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node scripts/generate-icon-names.mjs && node scripts/download-material-symbols.mjs",
     "dev": "astro dev",
     "web": "astro dev",
     "dev:remote": "REMOTE_BINDINGS=1 astro dev",

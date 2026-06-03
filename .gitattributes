@@ -1,0 +1,16 @@
+# Treat fonts and other binary assets as binary so git never applies line-ending
+# or text normalization to them (which silently corrupts the file across machines
+# and OSes — a corrupted icon font is why icons stopped rendering on a clone).
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.pdf   binary
