@@ -1,10 +1,6 @@
-# Astro Starter Kit: Basics
+# Image to URL
 
-```sh
-npm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+A web app for uploading images and getting shareable URLs, built with Astro and deployed on Cloudflare.
 
 ## 🚀 Project Structure
 
