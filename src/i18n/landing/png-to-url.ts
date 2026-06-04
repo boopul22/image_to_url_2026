@@ -10,10 +10,10 @@ export const content: LandingContentMap = {
     "schemaName": "PNG to URL Converter",
     "schemaDescription": "Convert any PNG image to a URL link, free and online with lossless quality and transparency preserved.",
     "badge": "PNG CONVERTER",
-    "h1Pre": "Convert PNG image to URL link",
-    "h1Highlight": "free and online.",
-    "intro": "Upload any PNG and get a permanent, shareable URL in seconds. Transparency stays intact, lossless quality, every pixel preserved.",
-    "howTitle": "How It Works",
+    "h1Pre": "PNG to URL Converter — Convert Image to Link",
+    "h1Highlight": "Free & Online",
+    "intro": "Use our free PNG to URL converter to turn any PNG into a permanent, shareable link in seconds. Upload your file and get a direct URL — with the transparent background and full quality kept exactly as you uploaded it.",
+    "howTitle": "How to Convert a PNG to a URL",
     "steps": [
       {
         "title": "Upload Your PNG",
@@ -43,27 +43,47 @@ export const content: LandingContentMap = {
         "body": "PNG is universally supported across all browsers, devices, and platforms. The most reliable format for web graphics."
       }
     ],
+    "useCasesTitle": "What Can You Do With a PNG URL?",
+    "useCasesIntro": "Once your PNG has a link, you can drop it almost anywhere on the web:",
+    "useCases": [
+      {
+        "title": "Embed in Websites",
+        "body": "Paste the link straight into your HTML or website builder and the image loads instantly — no separate hosting to set up."
+      },
+      {
+        "title": "Use in Markdown & Forums",
+        "body": "Drop it into a README, a Reddit post, or any forum — it shows up as a real image, not just plain text."
+      },
+      {
+        "title": "Share on Discord, Email & Social",
+        "body": "Send the link in Discord, add it to an email signature, or post it on social — it loads as an actual image, not an attachment."
+      }
+    ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
+        "q": "How do I turn a PNG into a URL?",
+        "a": "Upload your PNG using the converter above. We generate a direct link in seconds that you can copy and share anywhere — no signup needed."
+      },
+      {
+        "q": "How do I get a URL for a PNG?",
+        "a": "Drop your PNG into the upload box or click browse. You'll get a direct, shareable image link within a few seconds."
+      },
+      {
         "q": "Does ImageToURL preserve PNG transparency?",
-        "a": "Yes, we store your PNG files exactly as uploaded — no compression, no conversion, no quality loss. Transparency is fully preserved."
+        "a": "Yes. The transparent background stays intact and nothing is compressed — your image looks exactly like the file you uploaded."
       },
       {
         "q": "What's the maximum PNG file size?",
-        "a": "Free users can upload PNGs up to 2MB. With a free account, the limit increases to 10MB."
+        "a": "You can upload PNG files up to 10MB."
       },
       {
-        "q": "Can I get a direct link to my PNG?",
-        "a": "Yes. Every upload generates a direct image URL (ending in .png) that you can hotlink, embed, or share anywhere."
+        "q": "Is it free?",
+        "a": "Yes, completely free. No signup, no watermarks."
       },
       {
         "q": "How long do PNG URLs last?",
-        "a": "Your image URLs are permanent and never expire. Once uploaded, your PNG is hosted indefinitely."
-      },
-      {
-        "q": "Is PNG to URL conversion free?",
-        "a": "Completely free. No signup required, no watermarks, no ads. Just upload and get your link."
+        "a": "Uploaded files are kept for a few weeks, then automatically cleared."
       }
     ],
     "ctaTitle": "Convert your PNG to a shareable URL",
