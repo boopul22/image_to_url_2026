@@ -526,9 +526,11 @@ h1, h2, h3, h4, h5, h6 {
    wrapper that toggles visibility (lg:hidden/hidden): unlayered rules here beat
    Tailwind utilities, so display:flex would override `hidden` and leak mobile ads
    onto desktop. The ad is centered; a fill shorter than the reserve shows centered
-   whitespace (no shift), a taller fill grows the box slightly. We intentionally do
-   NOT collapse on `unfilled` — collapsing after the ad request returns is itself a
-   late layout shift; an empty reserved box is the CLS-safe trade. min-heights are
+   whitespace (no shift), a taller fill grows the box slightly. The reserve holds
+   its height WHILE the request is in flight (data-ad-status unset) so a fill never
+   shifts layout; once Google returns `unfilled` (no ad to serve) the reserve
+   collapses entirely (see the :has rule below) so no blank white patch is left —
+   a deliberate late shift accepted in trade for clean empty space. min-heights are
    tuned to the common fill per breakpoint. */
 .ad-reserve {
   display: flex;
@@ -544,6 +546,14 @@ h1, h2, h3, h4, h5, h6 {
   /* Desktop banner lives in the ~672px center column (skyscrapers handle the
      sides); it fills shorter, so reserve less to avoid dead whitespace. */
   .ad-reserve { min-height: 280px; }
+}
+/* No ad to show → no reserved space. When AdSense marks a slot `unfilled`
+   (Google chose not to render, or there are no ads), collapse its reserve so the
+   page shows zero blank height instead of a 280–300px white patch. The reserve is
+   only ever collapsed AFTER the request resolves, so an actually-filled slot keeps
+   its space and never shifts. */
+.ad-reserve:has(> ins.adsbygoogle[data-ad-status="unfilled"]) {
+  display: none;
 }
 
 /* Focus visible styles for accessibility */

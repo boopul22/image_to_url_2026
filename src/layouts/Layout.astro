@@ -251,15 +251,46 @@ function hreflangUrl(loc: Locale): string {
     <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
-    <!-- AdSense loader (global). Loaded on every page so Auto Ads + manual <ins> slots
-         can render without waiting for user interaction. async + fetchpriority=low keeps
-         it off the LCP critical path. -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138"
-      crossorigin="anonymous"
-      fetchpriority="low"
-    ></script>
+    <!-- AdSense loader (global) — DEFERRED off the FCP/LCP path. The adsbygoogle.js
+         library is injected on the first of: (1) any user interaction, (2) an ad
+         slot nearing the viewport (400px), or (3) a 2.5s idle fallback. The idle
+         fallback guarantees ads still load for passive users, so impressions are
+         preserved — this defers *when* the library loads, it does NOT remove any ad.
+         Component inline push({}) calls queue harmlessly on the window.adsbygoogle
+         array until the library loads, and by then slots have layout, which also
+         eliminates the prior `adsbygoogle.push() availableWidth=0` console error.
+         (Loading it eagerly on first paint was the main Performance drag.) -->
+    <script is:inline>
+      (function () {
+        var loaded = false;
+        function loadAds() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138';
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (evt) {
+          window.addEventListener(evt, loadAds, { once: true, passive: true });
+        });
+        function observeAds() {
+          if (!('IntersectionObserver' in window)) { loadAds(); return; }
+          var slots = document.querySelectorAll('ins.adsbygoogle');
+          if (!slots.length) return;
+          var io = new IntersectionObserver(function (entries) {
+            for (var i = 0; i < entries.length; i++) {
+              if (entries[i].isIntersecting) { loadAds(); io.disconnect(); break; }
+            }
+          }, { rootMargin: '400px 0px' });
+          slots.forEach(function (s) { io.observe(s); });
+        }
+        if (document.readyState !== 'loading') observeAds();
+        else document.addEventListener('DOMContentLoaded', observeAds);
+        setTimeout(loadAds, 2500);
+      })();
+    </script>
 
     <!-- Collapse ad slots Google returns as "unfilled" so empty placeholders
          don't reserve blank space (e.g. the 90px banner that otherwise sits
