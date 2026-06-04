@@ -16,6 +16,8 @@
   "blogPost.published": "发布于",
   "blogPost.related": "相关文章",
   "blogPost.share": "分享本文",
+  "blogPost.copyLink": "复制链接",
+  "blogPost.shareByEmail": "通过电子邮件分享",
   "blogPost.shareDescription": "帮助更多人发现优质内容！",
   "blogPost.uncategorized": "未分类",
   "docs.auth.description": "ImageToURL API使用API密钥进行请求身份验证。您可以在控制面板中查看和管理API密钥。API密钥拥有很多权限，请确保妥善保管！",

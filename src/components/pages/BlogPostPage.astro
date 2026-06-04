@@ -364,13 +364,13 @@ const faqSchema = post.faqItems?.length ? {
         <div class="flex flex-wrap justify-between items-center gap-6 mt-4">
           <p class="font-headline text-xl italic font-bold">{t(locale, 'blogPost.shareDescription')}</p>
           <div class="flex gap-4">
-            <button class="w-12 h-12 bg-surface border border-outline-variant/40 rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+            <button type="button" aria-label={t(locale, 'blogPost.share')} class="w-12 h-12 bg-surface border border-outline-variant/40 rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
               <Icon name="share" />
             </button>
-            <button class="w-12 h-12 bg-surface border border-outline-variant/40 rounded-full flex items-center justify-center hover:-translate-y-1 hover:-rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+            <button type="button" aria-label={t(locale, 'blogPost.copyLink')} class="w-12 h-12 bg-surface border border-outline-variant/40 rounded-full flex items-center justify-center hover:-translate-y-1 hover:-rotate-6 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
               <Icon name="link" />
             </button>
-            <button class="w-12 h-12 bg-surface border border-outline-variant/40 rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-3 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
+            <button type="button" aria-label={t(locale, 'blogPost.shareByEmail')} class="w-12 h-12 bg-surface border border-outline-variant/40 rounded-full flex items-center justify-center hover:-translate-y-1 hover:rotate-3 active:scale-95 transition-all" style="box-shadow: 3px 3px 0px 0px rgba(30,26,37,1);">
               <Icon name="mail" />
             </button>
           </div>

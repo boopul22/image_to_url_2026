@@ -16,6 +16,8 @@
   "blogPost.published": "Veröffentlicht",
   "blogPost.related": "Verwandte Beiträge",
   "blogPost.share": "Diesen Artikel teilen",
+  "blogPost.copyLink": "Link kopieren",
+  "blogPost.shareByEmail": "Per E-Mail teilen",
   "blogPost.shareDescription": "Hilf anderen, großartige Inhalte zu entdecken!",
   "blogPost.uncategorized": "Unkategorisiert",
   "docs.auth.description": "Die ImageToURL API verwendet API-Schlüssel zur Authentifizierung von Anfragen. Du kannst deine API-Schlüssel im Dashboard einsehen und verwalten. Deine API-Schlüssel haben viele Berechtigungen, also bewahre sie sicher auf!",

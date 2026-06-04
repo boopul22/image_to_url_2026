@@ -228,6 +228,8 @@
   "blogPost.updated": "Last updated",
   "blogPost.uncategorized": "Uncategorized",
   "blogPost.share": "Share this Article",
+  "blogPost.copyLink": "Copy link",
+  "blogPost.shareByEmail": "Share by email",
   "blogPost.shareDescription": "Help others discover great content!",
   "blogPost.related": "Related Posts",
   "docs.meta.title": "API Documentation — REST API Reference | ImageToURL",

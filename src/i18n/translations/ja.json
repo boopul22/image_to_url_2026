@@ -16,6 +16,8 @@
   "blogPost.published": "公開日",
   "blogPost.related": "関連記事",
   "blogPost.share": "この記事を共有",
+  "blogPost.copyLink": "リンクをコピー",
+  "blogPost.shareByEmail": "メールで共有",
   "blogPost.shareDescription": "素晴らしいコンテンツを他の人にも！",
   "blogPost.uncategorized": "未分類",
   "docs.auth.description": "ImageToURL APIはAPIキーを使用してリクエストを認証します。ダッシュボードでAPIキーを表示・管理できます。APIキーには多くの権限がありますので、安全に保管してください！",
