@@ -3,7 +3,7 @@ import { fillLocales } from './types';
 
 const en: LandingContent = {
   metaTitle: 'PNG to JPG Converter — 100% in Browser | Free, No Upload',
-  metaDescription: 'Convert PNG to JPG in your browser. Zero upload, no watermark, unlimited files. Free and private — runs entirely on your device.',
+  metaDescription: 'Convert PNG to JPG in your browser for smaller, universally compatible photos. Zero upload, no watermark, unlimited files. Free, private, runs on your device.',
   schemaName: 'PNG to JPG Converter',
   schemaDescription: 'Convert PNG images to JPG entirely in your browser. Files never leave your device.',
   badge: 'Browser-only Tool',
@@ -43,7 +43,7 @@ const en: LandingContent = {
 const es: LandingContent = {
   ...en,
   metaTitle: 'Convertidor PNG a JPG — 100% en el Navegador | Gratis',
-  metaDescription: 'Convierte PNG a JPG en tu navegador. Sin subidas, sin marca de agua, archivos ilimitados. Gratuito y privado.',
+  metaDescription: 'Convierte PNG a JPG directamente en tu navegador para fotos más ligeras y compatibles con todo. Sin subidas, sin marca de agua y archivos ilimitados. Gratis y privado.',
   schemaName: 'Convertidor PNG a JPG',
   badge: 'Herramienta solo en el navegador',
   h1Pre: 'Convertidor PNG a JPG',
@@ -60,7 +60,7 @@ const es: LandingContent = {
 const fr: LandingContent = {
   ...en,
   metaTitle: 'Convertisseur PNG vers JPG — 100% Navigateur | Gratuit',
-  metaDescription: 'Convertissez PNG en JPG dans votre navigateur. Aucun envoi, aucun filigrane, fichiers illimités. Gratuit et privé.',
+  metaDescription: 'Convertissez vos PNG en JPG directement dans le navigateur pour des photos plus légères et compatibles partout. Aucun envoi, aucun filigrane, fichiers illimités. Gratuit et privé.',
   schemaName: 'Convertisseur PNG vers JPG',
   badge: 'Outil navigateur uniquement',
   h1Pre: 'Convertisseur PNG vers JPG',
@@ -108,4 +108,21 @@ const ja: LandingContent = {
   ctaButton: 'メインアップローダーを試す',
 };
 
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+const zhHans: LandingContent = {
+  ...en,
+  metaTitle: 'PNG 转 JPG 转换器 — 100% 浏览器 | 免费',
+  metaDescription: '在浏览器中将 PNG 转换为更小、通用兼容的 JPG。无需上传、无水印、文件数量不限。免费且私密 — 完全在你的设备上运行。',
+  schemaName: 'PNG 转 JPG 转换器',
+  badge: '纯浏览器工具',
+  h1Pre: 'PNG 转 JPG 转换器',
+  h1Highlight: '在你的设备上运行。',
+  intro: '拖入 PNG 文件，立即获得 JPG — 更小、通用兼容、可随时发邮件或上传到任何地方。转换在本地进行。无需上传、无需注册、无水印。',
+  howTitle: '工作原理',
+  whyTitle: '为什么要把 PNG 转换为 JPG？',
+  faqTitle: '常见问题',
+  ctaTitle: '需要 JPG 的永久链接？',
+  ctaBody: '转换后，点击 Get URL 即可托管到我们的 CDN — 免费、无需注册。',
+  ctaButton: '试用主上传器',
+};
+
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });

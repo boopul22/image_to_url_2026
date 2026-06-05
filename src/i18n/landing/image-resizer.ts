@@ -2,7 +2,7 @@ import type { LandingContent, LandingContentMap } from './types';
 import { fillLocales } from './types';
 const en: LandingContent = {
   metaTitle: 'Image Resizer — 100% Browser | Free, Unlimited',
-  metaDescription: 'Resize JPG, PNG, WebP in your browser. By pixels or percent, aspect-lock, no upload.',
+  metaDescription: 'Resize JPG, PNG, and WebP images in your browser by exact pixels or percentage, with aspect-ratio lock and batch support. Free, unlimited, no upload.',
   schemaName: 'Image Resizer',
   schemaDescription: 'Resize images by pixel width, height, or percentage in your browser.',
   badge: 'Browser-only Tool',
@@ -34,8 +34,9 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Host the resized image?', ctaBody: 'Click Get URL on the main uploader.', ctaButton: 'Try the main uploader',
 };
-const es: LandingContent = { ...en, metaTitle: 'Redimensionador de Imágenes — Navegador | Gratis', schemaName: 'Redimensionador de Imágenes', h1Pre: 'Redimensionador de Imágenes', h1Highlight: 'píxeles exactos, proporción exacta.', intro: 'Escala imágenes por ancho, alto o porcentaje.', faqTitle: 'Preguntas frecuentes' };
-const fr: LandingContent = { ...en, metaTitle: 'Redimensionneur d\'Images — Navigateur | Gratuit', schemaName: 'Redimensionneur d\'Images', h1Pre: 'Redimensionneur d\'Images', h1Highlight: 'pixels exacts, ratio exact.', intro: 'Redimensionnez les images par largeur, hauteur ou pourcentage.', faqTitle: 'Questions fréquentes' };
-const de: LandingContent = { ...en, metaTitle: 'Bildgröße ändern — Browser | Kostenlos', schemaName: 'Bildgröße ändern', h1Pre: 'Bildgröße ändern', h1Highlight: 'exakte Pixel, exaktes Verhältnis.', intro: 'Skalieren Sie Bilder nach Breite, Höhe oder Prozent.', faqTitle: 'Häufige Fragen' };
-const ja: LandingContent = { ...en, metaTitle: '画像リサイザー — ブラウザ | 無料', schemaName: '画像リサイザー', h1Pre: '画像リサイザー', h1Highlight: '正確なピクセル、正確な比率。', intro: '幅、高さ、またはパーセントで画像をスケール。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+const es: LandingContent = { ...en, metaTitle: 'Redimensionador de Imágenes — Navegador | Gratis', metaDescription: 'Redimensiona imágenes JPG, PNG y WebP en tu navegador por píxeles exactos o porcentaje, con bloqueo de proporción y por lotes. Gratis, ilimitado, sin subir nada.', schemaName: 'Redimensionador de Imágenes', h1Pre: 'Redimensionador de Imágenes', h1Highlight: 'píxeles exactos, proporción exacta.', intro: 'Escala imágenes por ancho, alto o porcentaje.', faqTitle: 'Preguntas frecuentes' };
+const fr: LandingContent = { ...en, metaTitle: 'Redimensionneur d\'Images — Navigateur | Gratuit', metaDescription: 'Redimensionnez vos images JPG, PNG et WebP dans votre navigateur en pixels exacts ou pourcentage, avec verrouillage du ratio et par lots. Gratuit, illimité, sans envoi.', schemaName: 'Redimensionneur d\'Images', h1Pre: 'Redimensionneur d\'Images', h1Highlight: 'pixels exacts, ratio exact.', intro: 'Redimensionnez les images par largeur, hauteur ou pourcentage.', faqTitle: 'Questions fréquentes' };
+const de: LandingContent = { ...en, metaTitle: 'Bildgröße ändern — Browser | Kostenlos', metaDescription: 'Ändern Sie die Größe von JPG-, PNG- und WebP-Bildern im Browser nach exakten Pixeln oder Prozent, mit Seitenverhältnis-Sperre und Stapelverarbeitung. Gratis, ohne Upload.', schemaName: 'Bildgröße ändern', h1Pre: 'Bildgröße ändern', h1Highlight: 'exakte Pixel, exaktes Verhältnis.', intro: 'Skalieren Sie Bilder nach Breite, Höhe oder Prozent.', faqTitle: 'Häufige Fragen' };
+const ja: LandingContent = { ...en, metaTitle: '画像リサイザー — ブラウザ | 無料', metaDescription: 'JPG・PNG・WebP 画像を正確なピクセルまたはパーセントでブラウザ内リサイズ。縦横比ロックと一括処理対応。無料、無制限、アップロード不要、完全プライベート。', schemaName: '画像リサイザー', h1Pre: '画像リサイザー', h1Highlight: '正確なピクセル、正確な比率。', intro: '幅、高さ、またはパーセントで画像をスケール。', faqTitle: 'よくある質問' };
+const zhHans: LandingContent = { ...en, metaTitle: '图片尺寸调整 — 纯浏览器 | 免费', metaDescription: '在浏览器中按精确像素或百分比调整 JPG、PNG 和 WebP 图片尺寸，支持锁定宽高比和批量处理。免费、无限制、无需上传、完全私密。', schemaName: '图片尺寸调整工具', h1Pre: '图片尺寸调整', h1Highlight: '精确像素，精确比例。', intro: '按宽度、高度或百分比缩放图片。', faqTitle: '常见问题' };
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });

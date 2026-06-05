@@ -17,7 +17,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
   { "@type": "Question", "name": "Does the image stay accessible forever?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, uploads are permanent as long as they comply with content guidelines. No bandwidth caps, no inactivity removal." } }
 ] };
 ---
-<Layout title="Dropbox Direct Image Link — How to Embed Dropbox Images" description="Dropbox share links don't embed as images. Here's the stable workaround: download and re-host for a real direct URL." schema={[schema, faqSchema]} noHreflang>
+<Layout title="Dropbox Direct Image Link — How to Embed Dropbox Images" description="Dropbox share links open a preview page and the ?dl=1 trick gets rate-limited. The stable fix: download and re-host once for a real direct image URL." schema={[schema, faqSchema]} noHreflang>
   <Nav />
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">

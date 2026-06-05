@@ -33,6 +33,8 @@ const NON_LOCALIZED_EXACT = new Set([
   // Cluster F GEO Q&A pages
   '/how-to-get-direct-url-for-image', '/how-to-share-image-as-link', '/how-to-embed-image-in-email',
   '/what-is-image-hotlinking', '/how-to-host-image-for-free', '/how-long-does-imagetourl-store-images',
+  // Link-to-us backlink/badge page (English-only, not in landing registry)
+  '/link-to-us',
 ]);
 
 function isNonLocalized(path: string): boolean {

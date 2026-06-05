@@ -22,6 +22,7 @@
 - [Blog](https://imagetourl.cloud/blog)
 - [API Documentation](https://imagetourl.cloud/docs)
 - [About](https://imagetourl.cloud/about)
+- [Link to Us / badges & embed](https://imagetourl.cloud/link-to-us)
 ## URL Conversion Tools (upload → CDN URL)
 - [PNG to URL](https://imagetourl.cloud/png-to-url)
 - [JPG to URL](https://imagetourl.cloud/jpg-to-url)

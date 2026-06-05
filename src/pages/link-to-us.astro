@@ -1,0 +1,149 @@
+---
+import Icon from '../components/Icon.astro';
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+function lp(path: string): string {
+  return `/${locale}${path}`;
+}
+
+const SITE = 'https://imagetourl.cloud';
+
+// Ready-to-paste backlink snippets. Other site owners, bloggers, and tool
+// directories can drop any of these in to link back to ImageToURL — the
+// standard, legitimate way a site earns inbound links from real domains.
+const textLink = `<a href="${SITE}/" target="_blank" rel="noopener">Free Image Hosting by ImageToURL</a>`;
+
+const badgeSmall = `<a href="${SITE}/" target="_blank" rel="noopener" title="Free image hosting — upload an image, get a permanent URL" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#e11d48;color:#fff;font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:13px;font-weight:700;line-height:1;text-decoration:none;border-radius:4px;">&#128247; ImageToURL &middot; Free Image Hosting</a>`;
+
+const badgeOutline = `<a href="${SITE}/" target="_blank" rel="noopener" title="Upload an image and get a free, permanent direct URL" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:2px solid #e11d48;color:#e11d48;font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:13px;font-weight:700;line-height:1;text-decoration:none;border-radius:4px;">Image to URL &rarr; imagetourl.cloud</a>`;
+
+const markdownLink = `[Free Image Hosting by ImageToURL](${SITE}/)`;
+
+const poweredBy = `<p style="font-family:system-ui,sans-serif;font-size:12px;color:#64748b;">Images hosted with <a href="${SITE}/" target="_blank" rel="noopener" style="color:#e11d48;font-weight:600;">ImageToURL</a> — free, permanent, CDN-delivered.</p>`;
+
+const snippets = [
+  { id: 'text', label: 'Simple text link', desc: 'The cleanest option for in-article links and resource pages.', code: textLink },
+  { id: 'badge-solid', label: 'Solid badge', desc: 'A bold button-style badge for sidebars, footers, and "tools we use" sections.', code: badgeSmall },
+  { id: 'badge-outline', label: 'Outline badge', desc: 'A lighter badge that blends into most page designs.', code: badgeOutline },
+  { id: 'markdown', label: 'Markdown link', desc: 'For READMEs, docs, GitHub, Reddit, and Markdown-based blogs.', code: markdownLink },
+  { id: 'powered', label: '"Powered by" attribution', desc: 'Drop under galleries or embeds where you host images through us.', code: poweredBy },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Link to ImageToURL — Badges, Buttons & Embed Code",
+  "description": "Official badges, buttons, text links, Markdown snippets, and powered-by credit for linking back to ImageToURL from your website, blog, README, or resource page.",
+  "url": `${SITE}/link-to-us`,
+  "isPartOf": { "@id": `${SITE}/#website` },
+  "publisher": { "@id": `${SITE}/#organization` }
+};
+---
+
+<Layout
+  title="Link to Us — Free Badges, Buttons & Embed Code | ImageToURL"
+  description="Want to link to ImageToURL? Grab a free badge, button, text link, Markdown snippet, or powered-by credit — copy, paste, and link back to us in one click."
+  schema={schema}
+  noHreflang
+>
+  <Nav />
+
+  <main class="max-w-5xl mx-auto px-3 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <header class="mb-6 sm:mb-10 reveal">
+      <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">Link to Us</span>
+      <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
+        Link to ImageToURL <span class="italic text-primary">in one copy-paste.</span>
+      </h1>
+      <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
+        Found our free tools useful? Linking back helps other people discover them. Pick any badge, button, text link, or embed below — copy it, paste it on your site, README, or resource page, and you're done. No attribution rules, no strings attached.
+      </p>
+    </header>
+
+    <!-- Snippets -->
+    <section class="grid grid-cols-1 gap-4 sm:gap-5">
+      {snippets.map((s) => (
+        <div class="border border-outline-variant/40 rounded-xl hard-shadow p-4 sm:p-6 reveal">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-base sm:text-lg font-black font-headline mb-1">{s.label}</h2>
+              <p class="font-body text-sm text-on-surface-variant">{s.desc}</p>
+            </div>
+            <button type="button" class="copy-btn shrink-0 inline-flex items-center gap-1.5 bg-primary text-on-primary px-3 py-2 border border-outline-variant/40 font-label text-xs font-bold uppercase tracking-wider hard-shadow active:scale-95 transition-all" data-target={`snip-${s.id}`}>
+              <Icon name="content_copy" class="text-sm" />
+              <span class="copy-label">Copy</span>
+            </button>
+          </div>
+
+          {/* Live preview for the visual badges */}
+          {(s.id === 'badge-solid' || s.id === 'badge-outline' || s.id === 'text' || s.id === 'powered') && (
+            <div class="mb-3 p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg" set:html={s.code} />
+          )}
+
+          <textarea id={`snip-${s.id}`} readonly rows={2} class="w-full font-mono text-xs bg-surface-container-low border border-outline-variant/40 rounded-lg p-3 text-on-surface-variant resize-y" set:text={s.code}></textarea>
+        </div>
+      ))}
+    </section>
+
+    <!-- Why link -->
+    <section class="mt-10 sm:mt-14 reveal">
+      <div class="flex items-baseline gap-4 mb-5 sm:mb-6">
+        <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Other ways to mention us</h2>
+        <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div class="bg-secondary-container border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
+          <h3 class="text-base font-black font-headline mb-2">Tool roundups & directories</h3>
+          <p class="font-body text-sm text-on-surface-variant">Adding a free image host to a "best free tools" list or a software directory? We'd love to be included — point readers at the homepage or any specific converter.</p>
+        </div>
+        <div class="bg-tertiary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
+          <h3 class="text-base font-black font-headline mb-2">Tutorials & answers</h3>
+          <p class="font-body text-sm text-on-surface-variant">Writing a guide or answering a forum question about getting a direct image URL? Link the exact tool that solves it — e.g. <a href={lp('/')} class="text-primary font-semibold hover:underline">the uploader</a> or <a href="/screenshot-to-url" class="text-primary font-semibold hover:underline">screenshot to URL</a>.</p>
+        </div>
+        <div class="bg-primary-fixed border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">
+          <h3 class="text-base font-black font-headline mb-2">Cite us in your content</h3>
+          <p class="font-body text-sm text-on-surface-variant">Comparing image hosts or explaining a workflow? A plain link in the body of an article or newsletter is the most valuable mention of all — no badge required.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mt-10 sm:mt-14 reveal">
+      <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border border-outline-variant/40 hard-shadow text-center">
+        <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-3">Thanks for spreading the word</h2>
+        <p class="font-body text-surface/70 mb-5 max-w-lg mx-auto">Every link helps a few more people host an image for free without signing up. Try the tool yourself if you haven't yet.</p>
+        <a href={lp('/')} class="inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow active:scale-95 transition-all">
+          Upload an Image
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var ta = document.getElementById(btn.getAttribute('data-target'));
+      if (!ta) return;
+      var label = btn.querySelector('.copy-label');
+      function done() {
+        if (label) { var old = label.textContent; label.textContent = 'Copied!'; setTimeout(function () { label.textContent = old; }, 1600); }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(ta.value).then(done, function () { ta.select(); document.execCommand('copy'); done(); });
+      } else {
+        ta.select(); document.execCommand('copy'); done();
+      }
+    });
+  });
+</script>

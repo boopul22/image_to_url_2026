@@ -2,7 +2,7 @@ import type { LandingContent, LandingContentMap } from './types';
 import { fillLocales } from './types';
 const en: LandingContent = {
   metaTitle: 'Image Compressor — 100% in Browser | Free, No Upload',
-  metaDescription: 'Compress JPG, PNG, and WebP in your browser. Adjustable quality, before/after sizes. Free, no signup.',
+  metaDescription: 'Compress JPG, PNG, and WebP images in your browser with adjustable quality and live before/after sizes. Free, batch-friendly, no signup, no upload.',
   schemaName: 'Image Compressor',
   schemaDescription: 'Compress PNG, JPG, and WebP images in your browser. Adjustable quality and format.',
   badge: 'Browser-only Tool',
@@ -34,8 +34,9 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Need a hosted URL?', ctaBody: 'Upload the compressed file for a permanent link.', ctaButton: 'Try the main uploader',
 };
-const es: LandingContent = { ...en, metaTitle: 'Compresor de Imágenes — Navegador | Gratis', schemaName: 'Compresor de Imágenes', h1Pre: 'Compresor de Imágenes', h1Highlight: 'la mitad del tamaño.', intro: 'Reduce JPG, PNG o WebP sin subirlos. Tamaños antes/después en vivo.', faqTitle: 'Preguntas frecuentes' };
-const fr: LandingContent = { ...en, metaTitle: 'Compresseur d\'Images — Navigateur | Gratuit', schemaName: 'Compresseur d\'Images', h1Pre: 'Compresseur d\'Images', h1Highlight: 'moitié taille.', intro: 'Réduisez JPG, PNG ou WebP sans envoi. Tailles avant/après en direct.', faqTitle: 'Questions fréquentes' };
-const de: LandingContent = { ...en, metaTitle: 'Bildkomprimierer — Browser | Kostenlos', schemaName: 'Bildkomprimierer', h1Pre: 'Bildkomprimierer', h1Highlight: 'halbe Größe, gleiches Aussehen.', intro: 'Verkleinern Sie JPG, PNG oder WebP, ohne sie hochzuladen.', faqTitle: 'Häufige Fragen' };
-const ja: LandingContent = { ...en, metaTitle: '画像圧縮ツール — ブラウザ | 無料', schemaName: '画像圧縮ツール', h1Pre: '画像圧縮ツール', h1Highlight: 'サイズ半分、同じ見た目。', intro: 'アップロードなしで JPG、PNG、WebP を縮小。ライブでサイズ比較。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+const es: LandingContent = { ...en, metaTitle: 'Compresor de Imágenes — Navegador | Gratis', metaDescription: 'Comprime imágenes JPG, PNG y WebP en tu navegador con calidad ajustable y tamaños antes/después en vivo. Gratis, por lotes, sin registro — sin subir archivos.', schemaName: 'Compresor de Imágenes', h1Pre: 'Compresor de Imágenes', h1Highlight: 'la mitad del tamaño.', intro: 'Reduce JPG, PNG o WebP sin subirlos. Tamaños antes/después en vivo.', faqTitle: 'Preguntas frecuentes' };
+const fr: LandingContent = { ...en, metaTitle: 'Compresseur d\'Images — Navigateur | Gratuit', metaDescription: 'Compressez vos images JPG, PNG et WebP dans votre navigateur avec qualité réglable et tailles avant/après en direct. Gratuit, par lots, sans inscription ni envoi.', schemaName: 'Compresseur d\'Images', h1Pre: 'Compresseur d\'Images', h1Highlight: 'moitié taille.', intro: 'Réduisez JPG, PNG ou WebP sans envoi. Tailles avant/après en direct.', faqTitle: 'Questions fréquentes' };
+const de: LandingContent = { ...en, metaTitle: 'Bildkomprimierer — Browser | Kostenlos', metaDescription: 'Komprimieren Sie JPG-, PNG- und WebP-Bilder im Browser mit einstellbarer Qualität und Live-Größenvergleich. Kostenlos, stapelfähig, ohne Anmeldung oder Upload.', schemaName: 'Bildkomprimierer', h1Pre: 'Bildkomprimierer', h1Highlight: 'halbe Größe, gleiches Aussehen.', intro: 'Verkleinern Sie JPG, PNG oder WebP, ohne sie hochzuladen.', faqTitle: 'Häufige Fragen' };
+const ja: LandingContent = { ...en, metaTitle: '画像圧縮ツール — ブラウザ | 無料', metaDescription: 'JPG・PNG・WebP 画像を品質調整しながらブラウザで圧縮。前後のサイズをリアルタイム表示。無料、一括処理対応、登録不要、アップロードなし。', schemaName: '画像圧縮ツール', h1Pre: '画像圧縮ツール', h1Highlight: 'サイズ半分、同じ見た目。', intro: 'アップロードなしで JPG、PNG、WebP を縮小。ライブでサイズ比較。', faqTitle: 'よくある質問' };
+const zhHans: LandingContent = { ...en, metaTitle: '图片压缩工具 — 纯浏览器 | 免费', metaDescription: '在浏览器中压缩 JPG、PNG 和 WebP 图片，质量可调，实时显示压缩前后的大小。免费、支持批量、无需注册 — 文件不会被上传。', schemaName: '图片压缩工具', h1Pre: '图片压缩工具', h1Highlight: '尺寸减半，外观不变。', intro: '无需上传即可缩小 JPG、PNG 或 WebP，实时对比压缩前后大小。', faqTitle: '常见问题' };
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });

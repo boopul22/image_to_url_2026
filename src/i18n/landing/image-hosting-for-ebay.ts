@@ -286,7 +286,7 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "eBay出品用無料画像ホスティング | ImageToURL",
-    "metaDescription": "eBay出品用の商品画像を永続的な直接URLでホスティング。登録不要、完全無料。eBayの画像要件に完全対応。",
+    "metaDescription": "eBay出品用の商品写真を永続的な直接画像URLでホスティング。完全無料、登録不要、透かしなし。ドラッグ＆ドロップでアップロードし、HTMLエディタにそのまま貼り付けられます。",
     "schemaName": "ImageToURL",
     "schemaDescription": "登録や透かしなしで、eBay出品用の商品画像を永続的な直接URLでホスティングします。",
     "badge": "eBayセラー向け",
@@ -356,7 +356,7 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "eBay 商品图片免费托管 | ImageToURL",
-    "metaDescription": "为 eBay 商品详情页提供永久、直接的图片链接。免费使用，无需注册。完美适配 eBay 图片要求。",
+    "metaDescription": "为 eBay 商品详情页托管商品图片，获取永久、直接的图片链接。完全免费，无需注册，无水印。拖放上传即可直接粘贴到 eBay 的 HTML 编辑器中使用。",
     "schemaName": "ImageToURL",
     "schemaDescription": "为 eBay 商品详情页提供永久、直接的图片链接，无需注册，无水印。",
     "badge": "eBay 卖家",

@@ -2,7 +2,7 @@ import type { LandingContent, LandingContentMap } from './types';
 import { fillLocales } from './types';
 const en: LandingContent = {
   metaTitle: 'HEIC to PNG — 100% Browser | Lossless iPhone Conversion',
-  metaDescription: 'Convert iPhone HEIC photos to lossless PNG in your browser. Free, private, no upload.',
+  metaDescription: 'Convert iPhone HEIC photos to edit-ready lossless PNG with a WebAssembly decoder in your browser. Free and private, no upload — photos never leave your device.',
   schemaName: 'HEIC to PNG Converter',
   schemaDescription: 'Convert iPhone HEIC photos to lossless PNG entirely in your browser.',
   badge: 'Browser-only Tool',
@@ -34,8 +34,9 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Want a hosted URL?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
 };
-const es: LandingContent = { ...en, metaTitle: 'HEIC a PNG — Navegador | Conversión sin pérdidas', schemaName: 'Convertidor HEIC a PNG', h1Pre: 'HEIC a PNG', h1Highlight: 'sin pérdidas, privado, gratis.', intro: 'Suelta fotos HEIC de iPhone y obtén PNG listos para editar.', faqTitle: 'Preguntas frecuentes' };
-const fr: LandingContent = { ...en, metaTitle: 'HEIC vers PNG — Navigateur | Conversion sans perte', schemaName: 'Convertisseur HEIC vers PNG', h1Pre: 'HEIC vers PNG', h1Highlight: 'sans perte, privé, gratuit.', intro: 'Déposez des photos HEIC d\'iPhone et obtenez des PNG prêts à éditer.', faqTitle: 'Questions fréquentes' };
-const de: LandingContent = { ...en, metaTitle: 'HEIC zu PNG — Browser | Verlustfrei', schemaName: 'HEIC zu PNG Konverter', h1Pre: 'HEIC zu PNG', h1Highlight: 'verlustfrei, privat, kostenlos.', intro: 'iPhone HEIC-Fotos ablegen und bearbeitungsfertige PNGs erhalten.', faqTitle: 'Häufige Fragen' };
-const ja: LandingContent = { ...en, metaTitle: 'HEIC から PNG — ブラウザ | ロスレス iPhone 変換', schemaName: 'HEIC から PNG 変換ツール', h1Pre: 'HEIC から PNG', h1Highlight: 'ロスレス、プライベート、無料。', intro: 'iPhone HEIC 写真をドロップして編集可能な PNG を取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+const es: LandingContent = { ...en, metaTitle: 'HEIC a PNG — Navegador | Conversión sin pérdidas', metaDescription: 'Convierte fotos HEIC de iPhone a PNG sin pérdidas y listos para editar con un decodificador WebAssembly en tu navegador. Gratis y privado, sin subir nada.', schemaName: 'Convertidor HEIC a PNG', h1Pre: 'HEIC a PNG', h1Highlight: 'sin pérdidas, privado, gratis.', intro: 'Suelta fotos HEIC de iPhone y obtén PNG listos para editar.', faqTitle: 'Preguntas frecuentes' };
+const fr: LandingContent = { ...en, metaTitle: 'HEIC vers PNG — Navigateur | Conversion sans perte', metaDescription: 'Convertissez vos photos HEIC d\'iPhone en PNG sans perte et prêts à éditer grâce à un décodeur WebAssembly dans votre navigateur. Gratuit et privé, sans envoi.', schemaName: 'Convertisseur HEIC vers PNG', h1Pre: 'HEIC vers PNG', h1Highlight: 'sans perte, privé, gratuit.', intro: 'Déposez des photos HEIC d\'iPhone et obtenez des PNG prêts à éditer.', faqTitle: 'Questions fréquentes' };
+const de: LandingContent = { ...en, metaTitle: 'HEIC zu PNG — Browser | Verlustfrei', metaDescription: 'Konvertieren Sie iPhone-HEIC-Fotos mit einem WebAssembly-Decoder im Browser in verlustfreie, bearbeitungsfertige PNGs. Kostenlos und privat, ohne Upload.', schemaName: 'HEIC zu PNG Konverter', h1Pre: 'HEIC zu PNG', h1Highlight: 'verlustfrei, privat, kostenlos.', intro: 'iPhone HEIC-Fotos ablegen und bearbeitungsfertige PNGs erhalten.', faqTitle: 'Häufige Fragen' };
+const ja: LandingContent = { ...en, metaTitle: 'HEIC から PNG — ブラウザ | ロスレス iPhone 変換', metaDescription: 'WebAssembly デコーダーで iPhone の HEIC 写真を編集可能なロスレス PNG に変換。無料でプライベート、アップロード不要 — 写真は端末から出ません。', schemaName: 'HEIC から PNG 変換ツール', h1Pre: 'HEIC から PNG', h1Highlight: 'ロスレス、プライベート、無料。', intro: 'iPhone HEIC 写真をドロップして編集可能な PNG を取得。', faqTitle: 'よくある質問' };
+const zhHans: LandingContent = { ...en, metaTitle: 'HEIC 转 PNG — 纯浏览器 | 无损 iPhone 转换', metaDescription: '使用 WebAssembly 解码器在浏览器中将 iPhone 的 HEIC 照片转换为可编辑的无损 PNG。免费、私密、无需上传 — 照片不离开你的设备。', schemaName: 'HEIC 转 PNG 转换器', h1Pre: 'HEIC 转 PNG', h1Highlight: '无损、私密、免费。', intro: '拖入 iPhone 的 HEIC 照片，获得可直接编辑的 PNG。', faqTitle: '常见问题' };
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });

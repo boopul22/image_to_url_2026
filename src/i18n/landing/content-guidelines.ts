@@ -316,7 +316,7 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "内容准则与可接受使用政策 | ImageToURL",
-    "metaDescription": "阅读 ImageToURL 的内容准则。了解我们免费图片托管平台上允许和禁止的内容，以确保社区安全。",
+    "metaDescription": "阅读 ImageToURL 的内容准则与可接受使用政策。了解我们免费图片托管平台上允许和禁止上传的内容，以及我们如何审核违规图片，共同维护安全的社区环境。",
     "schemaName": "ImageToURL 内容准则",
     "schemaDescription": "ImageToURL 图片托管平台的官方内容审核政策和可接受使用标准。",
     "badge": "安全准则",

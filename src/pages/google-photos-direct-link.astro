@@ -17,7 +17,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
   { "@type": "Question", "name": "What about Google Drive image links?", "acceptedAnswer": { "@type": "Answer", "text": "Same problem — Drive links resolve to preview HTML. The drive.google.com/uc?id= trick sometimes works as a direct link but is unreliable and often rate-limited. Re-hosting is the stable answer." } }
 ] };
 ---
-<Layout title="Google Photos Direct Link — How to Get a Real Image URL" description="Google Photos doesn't provide direct image URLs. Here's the workaround: download + re-host for a permanent CDN link." schema={[schema, faqSchema]} noHreflang>
+<Layout title="Google Photos Direct Link — How to Get a Real Image URL" description="Google Photos share links resolve to album pages, not raw images. Download the photo and re-host it here for a permanent, embeddable CDN URL." schema={[schema, faqSchema]} noHreflang>
   <Nav />
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">

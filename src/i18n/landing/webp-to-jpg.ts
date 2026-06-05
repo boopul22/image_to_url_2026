@@ -2,7 +2,7 @@ import type { LandingContent, LandingContentMap } from './types';
 import { fillLocales } from './types';
 const en: LandingContent = {
   metaTitle: 'WebP to JPG Converter — 100% in Browser | Free',
-  metaDescription: 'Convert WebP to JPG in your browser. Free, no upload, no watermark, unlimited files.',
+  metaDescription: 'Convert WebP to JPG in your browser to fix files that print shops, old software, and email clients reject. Free, no upload, no watermark, unlimited files.',
   schemaName: 'WebP to JPG Converter',
   schemaDescription: 'Convert WebP images to JPG locally in your browser. Fix incompatible files.',
   badge: 'Browser-only Tool',
@@ -34,8 +34,9 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Want a permanent URL?', ctaBody: 'After converting, click Get URL to host on our CDN.', ctaButton: 'Try the main uploader',
 };
-const es: LandingContent = { ...en, metaTitle: 'Convertidor WebP a JPG — 100% Navegador | Gratis', schemaName: 'Convertidor WebP a JPG', h1Pre: 'Convertidor WebP a JPG', h1Highlight: 'arregla archivos incompatibles.', intro: '¿Archivos WebP que no se aceptan? Suéltalos aquí y obtén JPG.', faqTitle: 'Preguntas frecuentes' };
-const fr: LandingContent = { ...en, metaTitle: 'Convertisseur WebP vers JPG — Navigateur | Gratuit', schemaName: 'Convertisseur WebP vers JPG', h1Pre: 'Convertisseur WebP vers JPG', h1Highlight: 'corrigez les fichiers incompatibles.', intro: 'Fichiers WebP refusés par une app ? Déposez-les ici pour obtenir des JPG.', faqTitle: 'Questions fréquentes' };
-const de: LandingContent = { ...en, metaTitle: 'WebP zu JPG Konverter — 100% im Browser | Kostenlos', schemaName: 'WebP zu JPG Konverter', h1Pre: 'WebP zu JPG Konverter', h1Highlight: 'inkompatible Dateien reparieren.', intro: 'WebP-Dateien, die eine App nicht akzeptiert? Hier ablegen und JPG erhalten.', faqTitle: 'Häufige Fragen' };
-const ja: LandingContent = { ...en, metaTitle: 'WebP から JPG 変換ツール — 100% ブラウザ | 無料', schemaName: 'WebP から JPG 変換ツール', h1Pre: 'WebP から JPG 変換ツール', h1Highlight: '非対応ファイルを修正。', intro: 'アプリが受け付けない WebP ファイル？ここにドロップして JPG を取得。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+const es: LandingContent = { ...en, metaTitle: 'Convertidor WebP a JPG — 100% Navegador | Gratis', metaDescription: 'Convierte WebP a JPG en tu navegador para arreglar archivos que rechazan imprentas, software antiguo y clientes de correo. Gratis, sin subir nada, sin marca de agua.', schemaName: 'Convertidor WebP a JPG', h1Pre: 'Convertidor WebP a JPG', h1Highlight: 'arregla archivos incompatibles.', intro: '¿Archivos WebP que no se aceptan? Suéltalos aquí y obtén JPG.', faqTitle: 'Preguntas frecuentes' };
+const fr: LandingContent = { ...en, metaTitle: 'Convertisseur WebP vers JPG — Navigateur | Gratuit', metaDescription: 'Convertissez WebP en JPG dans votre navigateur pour corriger les fichiers refusés par les imprimeurs, vieux logiciels et clients mail. Gratuit, sans envoi, sans filigrane.', schemaName: 'Convertisseur WebP vers JPG', h1Pre: 'Convertisseur WebP vers JPG', h1Highlight: 'corrigez les fichiers incompatibles.', intro: 'Fichiers WebP refusés par une app ? Déposez-les ici pour obtenir des JPG.', faqTitle: 'Questions fréquentes' };
+const de: LandingContent = { ...en, metaTitle: 'WebP zu JPG Konverter — 100% im Browser | Kostenlos', metaDescription: 'Konvertieren Sie WebP im Browser zu JPG, um Dateien zu reparieren, die Druckereien, alte Software und E-Mail-Clients ablehnen. Kostenlos, ohne Upload, ohne Wasserzeichen.', schemaName: 'WebP zu JPG Konverter', h1Pre: 'WebP zu JPG Konverter', h1Highlight: 'inkompatible Dateien reparieren.', intro: 'WebP-Dateien, die eine App nicht akzeptiert? Hier ablegen und JPG erhalten.', faqTitle: 'Häufige Fragen' };
+const ja: LandingContent = { ...en, metaTitle: 'WebP から JPG 変換ツール — 100% ブラウザ | 無料', metaDescription: '印刷所・古いソフト・メールクライアントが拒否する WebP ファイルをブラウザ内で JPG に変換して解決。無料、アップロード不要、透かしなし、ファイル数無制限。', schemaName: 'WebP から JPG 変換ツール', h1Pre: 'WebP から JPG 変換ツール', h1Highlight: '非対応ファイルを修正。', intro: 'アプリが受け付けない WebP ファイル？ここにドロップして JPG を取得。', faqTitle: 'よくある質問' };
+const zhHans: LandingContent = { ...en, metaTitle: 'WebP 转 JPG 转换器 — 100% 浏览器 | 免费', metaDescription: '在浏览器中将 WebP 转换为 JPG，解决打印店、旧软件和邮件客户端不接受的文件问题。免费、无需上传、无水印、文件数量不限。', schemaName: 'WebP 转 JPG 转换器', h1Pre: 'WebP 转 JPG 转换器', h1Highlight: '修复不兼容的文件。', intro: '遇到应用不接受的 WebP 文件？拖到这里即可获得 JPG。', faqTitle: '常见问题' };
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });

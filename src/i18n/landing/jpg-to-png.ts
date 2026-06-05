@@ -3,7 +3,7 @@ import { fillLocales } from './types';
 
 const en: LandingContent = {
   metaTitle: 'JPG to PNG Converter — 100% in Browser | Free & Private',
-  metaDescription: 'Convert JPG to PNG locally in your browser. Lossless re-encode, no upload, no watermark, unlimited files.',
+  metaDescription: 'Convert JPG to PNG locally in your browser with lossless re-encoding, ready for editing or adding transparency. No upload, no watermark, unlimited files, free.',
   schemaName: 'JPG to PNG Converter',
   schemaDescription: 'Convert JPG images to PNG entirely in your browser using lossless re-encoding.',
   badge: 'Browser-only Tool',
@@ -41,6 +41,7 @@ const en: LandingContent = {
 
 const es: LandingContent = { ...en,
   metaTitle: 'Convertidor JPG a PNG — 100% Navegador | Gratis',
+  metaDescription: 'Convierte JPG a PNG localmente en tu navegador con re-codificación sin pérdidas, listo para editar o añadir transparencia. Sin subir nada, sin marca de agua, gratis.',
   schemaName: 'Convertidor JPG a PNG',
   badge: 'Herramienta solo en el navegador',
   h1Pre: 'Convertidor JPG a PNG', h1Highlight: 'sin pérdidas, local, gratis.',
@@ -50,6 +51,7 @@ const es: LandingContent = { ...en,
 };
 const fr: LandingContent = { ...en,
   metaTitle: 'Convertisseur JPG vers PNG — 100% Navigateur | Gratuit',
+  metaDescription: 'Convertissez JPG en PNG localement dans votre navigateur avec un ré-encodage sans perte, prêt à éditer ou ajouter de la transparence. Sans envoi, sans filigrane, gratuit.',
   schemaName: 'Convertisseur JPG vers PNG',
   badge: 'Outil navigateur uniquement',
   h1Pre: 'Convertisseur JPG vers PNG', h1Highlight: 'sans perte, local, gratuit.',
@@ -59,6 +61,7 @@ const fr: LandingContent = { ...en,
 };
 const de: LandingContent = { ...en,
   metaTitle: 'JPG zu PNG Konverter — 100% im Browser | Kostenlos',
+  metaDescription: 'Konvertieren Sie JPG verlustfrei zu PNG lokal im Browser, bereit zum Bearbeiten oder für Transparenz. Ohne Upload, ohne Wasserzeichen, unbegrenzte Dateien, kostenlos.',
   schemaName: 'JPG zu PNG Konverter',
   badge: 'Nur-Browser-Tool',
   h1Pre: 'JPG zu PNG Konverter', h1Highlight: 'verlustfrei, lokal, kostenlos.',
@@ -68,6 +71,7 @@ const de: LandingContent = { ...en,
 };
 const ja: LandingContent = { ...en,
   metaTitle: 'JPG から PNG 変換ツール — 100% ブラウザ | 無料',
+  metaDescription: 'JPG をブラウザ内でロスレス再エンコードして PNG に変換。編集や透過の追加に最適。アップロード不要、透かしなし、ファイル数無制限、無料。',
   schemaName: 'JPG から PNG 変換ツール',
   badge: 'ブラウザ専用ツール',
   h1Pre: 'JPG から PNG 変換ツール', h1Highlight: 'ロスレス、ローカル、無料。',
@@ -75,5 +79,15 @@ const ja: LandingContent = { ...en,
   howTitle: 'なぜ PNG を選ぶか', whyTitle: 'なぜ PNG を選ぶか', faqTitle: 'よくある質問',
   ctaTitle: 'PNG の永続 URL が必要？', ctaBody: '変換後、Get URL をクリック。', ctaButton: 'メインアップローダーを試す',
 };
+const zhHans: LandingContent = { ...en,
+  metaTitle: 'JPG 转 PNG 转换器 — 100% 浏览器 | 免费',
+  metaDescription: '在浏览器中本地将 JPG 无损重新编码为 PNG，便于编辑或添加透明度。无需上传、无水印、文件数量不限、免费。',
+  schemaName: 'JPG 转 PNG 转换器',
+  badge: '纯浏览器工具',
+  h1Pre: 'JPG 转 PNG 转换器', h1Highlight: '无损、本地、免费。',
+  intro: '拖入 JPG 文件，获得可编辑、可叠加或添加透明度的 PNG。转换在浏览器中进行。',
+  howTitle: '何时该选择 PNG', whyTitle: '何时该选择 PNG', faqTitle: '常见问题',
+  ctaTitle: '需要 PNG 的永久链接？', ctaBody: '转换后，点击 Get URL。', ctaButton: '试用主上传器',
+};
 
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });

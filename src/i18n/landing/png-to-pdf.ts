@@ -2,7 +2,7 @@ import type { LandingContent, LandingContentMap } from './types';
 import { fillLocales } from './types';
 const en: LandingContent = {
   metaTitle: 'PNG to PDF Converter — 100% Browser | Free, No Upload',
-  metaDescription: 'Merge PNG files into a single PDF in your browser. Free, no upload, no watermark.',
+  metaDescription: 'Merge PNG screenshots, receipts, and scans into one multi-page PDF, or one PDF per image, in your browser. Free, no upload, no watermark — transparency preserved.',
   schemaName: 'PNG to PDF Converter',
   schemaDescription: 'Merge PNG images into a multi-page PDF entirely in your browser.',
   badge: 'Browser-only Tool',
@@ -34,8 +34,9 @@ const en: LandingContent = {
   ],
   ctaTitle: 'Host the PDF too?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
 };
-const es: LandingContent = { ...en, metaTitle: 'Convertidor PNG a PDF — Navegador | Gratis', schemaName: 'Convertidor PNG a PDF', h1Pre: 'PNG a PDF', h1Highlight: 'fusionar o individual.', intro: 'Suelta capturas o escaneos PNG — obtén un PDF combinado o uno por imagen.', faqTitle: 'Preguntas frecuentes' };
-const fr: LandingContent = { ...en, metaTitle: 'Convertisseur PNG vers PDF — Navigateur | Gratuit', schemaName: 'Convertisseur PNG vers PDF', h1Pre: 'PNG vers PDF', h1Highlight: 'fusionner ou individuel.', intro: 'Déposez captures d\'écran ou scans PNG — obtenez un PDF fusionné ou un par image.', faqTitle: 'Questions fréquentes' };
-const de: LandingContent = { ...en, metaTitle: 'PNG zu PDF Konverter — Browser | Kostenlos', schemaName: 'PNG zu PDF Konverter', h1Pre: 'PNG zu PDF', h1Highlight: 'zusammenführen oder einzeln.', intro: 'Legen Sie PNG-Screenshots oder Scans ab — erhalten Sie ein zusammengeführtes PDF oder eines pro Bild.', faqTitle: 'Häufige Fragen' };
-const ja: LandingContent = { ...en, metaTitle: 'PNG から PDF 変換ツール — ブラウザ | 無料', schemaName: 'PNG から PDF 変換ツール', h1Pre: 'PNG から PDF', h1Highlight: '結合または個別。', intro: 'PNG スクリーンショット、領収書、ページスキャンをドロップ — 一つの PDF または画像ごとに。', faqTitle: 'よくある質問' };
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja });
+const es: LandingContent = { ...en, metaTitle: 'Convertidor PNG a PDF — Navegador | Gratis', metaDescription: 'Combina capturas, recibos y escaneos PNG en un PDF de varias páginas, o uno por imagen, en tu navegador. Gratis, sin subir nada, sin marca de agua — transparencia intacta.', schemaName: 'Convertidor PNG a PDF', h1Pre: 'PNG a PDF', h1Highlight: 'fusionar o individual.', intro: 'Suelta capturas o escaneos PNG — obtén un PDF combinado o uno por imagen.', faqTitle: 'Preguntas frecuentes' };
+const fr: LandingContent = { ...en, metaTitle: 'Convertisseur PNG vers PDF — Navigateur | Gratuit', metaDescription: 'Combinez captures, reçus et scans PNG en un PDF multipage, ou un par image, dans votre navigateur. Gratuit, sans envoi, sans filigrane — transparence préservée.', schemaName: 'Convertisseur PNG vers PDF', h1Pre: 'PNG vers PDF', h1Highlight: 'fusionner ou individuel.', intro: 'Déposez captures d\'écran ou scans PNG — obtenez un PDF fusionné ou un par image.', faqTitle: 'Questions fréquentes' };
+const de: LandingContent = { ...en, metaTitle: 'PNG zu PDF Konverter — Browser | Kostenlos', metaDescription: 'Führen Sie PNG-Screenshots, Belege und Scans im Browser zu einer mehrseitigen PDF oder einer PDF pro Bild zusammen. Kostenlos, ohne Upload, ohne Wasserzeichen, Transparenz bleibt.', schemaName: 'PNG zu PDF Konverter', h1Pre: 'PNG zu PDF', h1Highlight: 'zusammenführen oder einzeln.', intro: 'Legen Sie PNG-Screenshots oder Scans ab — erhalten Sie ein zusammengeführtes PDF oder eines pro Bild.', faqTitle: 'Häufige Fragen' };
+const ja: LandingContent = { ...en, metaTitle: 'PNG から PDF 変換ツール — ブラウザ | 無料', metaDescription: 'PNG のスクリーンショット・領収書・スキャンをブラウザ内で 1 つの複数ページ PDF、または画像ごとの PDF に結合。無料、アップロード不要、透かしなし、透明度保持。', schemaName: 'PNG から PDF 変換ツール', h1Pre: 'PNG から PDF', h1Highlight: '結合または個別。', intro: 'PNG スクリーンショット、領収書、ページスキャンをドロップ — 一つの PDF または画像ごとに。', faqTitle: 'よくある質問' };
+const zhHans: LandingContent = { ...en, metaTitle: 'PNG 转 PDF 转换器 — 纯浏览器 | 免费', metaDescription: '在浏览器中将 PNG 截图、收据和扫描件合并为一个多页 PDF，或每张图片生成一个 PDF。免费、无需上传、无水印 — 保留透明度。', schemaName: 'PNG 转 PDF 转换器', h1Pre: 'PNG 转 PDF', h1Highlight: '合并或单独。', intro: '拖入 PNG 截图、收据或扫描件 — 获得合并的 PDF 或每张图片一个 PDF。', faqTitle: '常见问题' };
+export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });
