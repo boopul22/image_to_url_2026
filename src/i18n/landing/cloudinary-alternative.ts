@@ -3,7 +3,7 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   en: {
     metaTitle: 'Cloudinary Alternative — Free Image Hosting | ImageToURL',
-    metaDescription: 'Free, no-signup alternative to Cloudinary for simple image hosting and direct URLs. 5–10× cheaper at scale. Global CDN, permanent links.',
+    metaDescription: 'Free, no-signup alternative to Cloudinary for simple image hosting and direct URLs. 5–10× cheaper at scale, with a global CDN and permanent links.',
     schemaName: 'Cloudinary Alternative',
     schemaDescription: 'Free, no-signup alternative to Cloudinary for simple image hosting and direct URLs.',
     badge: 'COMPARISON',

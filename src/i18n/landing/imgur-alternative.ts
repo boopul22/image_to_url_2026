@@ -6,7 +6,7 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Best Imgur Alternative (2026) — Free, No Account",
-    "metaDescription": "Looking for an Imgur alternative? ImageToURL offers free image hosting with no account required, permanent links, direct URLs, and no ads. The best Imgur replacement.",
+    "metaDescription": "Looking for an Imgur alternative? ImageToURL gives you free image hosting with no account, permanent direct links, and no ads or gallery pages.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A free, ad-free image hosting platform providing permanent direct URLs without requiring user accounts.",
     "badge": "IMGUR ALTERNATIVE",
