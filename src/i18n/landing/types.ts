@@ -18,6 +18,8 @@ export interface LandingContent {
   whyTitle: string;
   whyItems: { title: string; body: string }[];
   faqTitle: string;
+  // Optional short lead-in paragraph rendered above the FAQ list.
+  faqIntro?: string;
   faqs: { q: string; a: string }[];
   // Optional extra "use cases" section, rendered after the Why section.
   useCasesTitle?: string;

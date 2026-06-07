@@ -227,6 +227,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
           <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.faqTitle}</h2>
           <div class="h-1 flex-grow bg-on-background opacity-10"></div>
         </div>
+        {c.faqIntro && <p class="text-sm sm:text-base text-on-surface-variant mb-5 sm:mb-8 reveal">{c.faqIntro}</p>}
         <div class="space-y-4 reveal">
           {c.faqs.map((f, i) => (
             <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border border-outline-variant/40 rounded-xl hard-shadow group`}>

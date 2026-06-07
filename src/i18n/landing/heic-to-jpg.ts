@@ -5,15 +5,15 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "HEIC to JPG Converter — 100% in your browser | ImageToURL",
-    "metaDescription": "Convert HEIC photos from your iPhone to JPG entirely in your browser. Files never leave your device. Free, unlimited, no signup, no upload.",
+    "metaTitle": "HEIC to JPG Converter | Free, Private, No Upload",
+    "metaDescription": "Convert HEIC to JPG free, right in your browser. Your iPhone photos never get uploaded. Works on Windows, Mac, iPhone and Android. No signup needed.",
     "schemaName": "HEIC to JPG Converter",
     "schemaDescription": "Convert HEIC and HEIF photos from your iPhone to JPG entirely in your browser without uploading files to a server.",
     "badge": "BROWSER-ONLY TOOL",
-    "h1Pre": "HEIC to JPG Converter",
-    "h1Highlight": "100% in your browser.",
-    "intro": "Drop your iPhone HEIC photos here and get JPG files instantly. Conversion runs entirely on your device — your photos never leave your computer.",
-    "howTitle": "How It Works",
+    "h1Pre": "HEIC to JPG Converter,",
+    "h1Highlight": "100% in Your Browser",
+    "intro": "Drop your iPhone HEIC photos here and get JPG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere.",
+    "howTitle": "How to convert HEIC to JPG",
     "steps": [
       {
         "title": "Drop your HEIC files",
@@ -21,18 +21,18 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Convert in your browser",
-        "body": "A WebAssembly decoder runs locally on your device. Zero network calls — verify it in DevTools."
+        "body": "A WebAssembly decoder does the work right on your device. No files get sent to a server, and you can check that yourself in DevTools."
       },
       {
         "title": "Download or host",
-        "body": "Save the JPG to your device, or one-click 'Get URL' to host it on our CDN and grab a shareable link."
+        "body": "Save the JPG to your device, or click 'Get URL' to host it on our CDN and get a shareable link."
       }
     ],
     "whyTitle": "Why convert HEIC to JPG?",
     "whyItems": [
       {
-        "title": "Windows compatibility",
-        "body": "Windows can't open HEIC out of the box without paid codecs. JPG opens everywhere, every time."
+        "title": "Works on Windows",
+        "body": "Windows can't open HEIC without a paid codec. JPG opens everywhere, on any PC, with no extra setup."
       },
       {
         "title": "Android & messaging",
@@ -44,30 +44,30 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Privacy by default",
-        "body": "Other converters upload your photos to their servers. Ours never does — the file stays on your device."
+        "body": "Other converters upload your photos to their servers. This one doesn't. Your files stay on your device the entire time."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
         "q": "Are my photos really private?",
-        "a": "Yes. Conversion happens entirely in your browser using WebAssembly. No file is uploaded to any server."
+        "a": "Yes. The conversion happens entirely in your browser, so your HEIC photos never leave your computer or phone. Nothing gets uploaded unless you choose to host a file with 'Get URL'."
       },
       {
-        "q": "What is HEIC and why do I need to convert it?",
-        "a": "HEIC is the default iPhone photo format. It isn't widely supported on Windows or web browsers, so you need to convert it to JPG to share it."
+        "q": "What is HEIC?",
+        "a": "HEIC is the format the iPhone uses to save photos. It saves space, but a lot of apps, Windows PCs, and websites can't open it. Converting HEIC to JPG makes your photos work everywhere."
       },
       {
-        "q": "Is there a file size or count limit?",
-        "a": "No. Because conversion happens locally in your browser, there is no upload limit. You can convert as many files as your memory allows."
+        "q": "How do I convert HEIC to JPG on iPhone, Windows, or Mac?",
+        "a": "The same way on every device. Open this page, drop your HEIC files into the box, and download the JPG. It runs in any modern browser, so there's nothing to install on Windows, Mac, iPhone, or Android."
       },
       {
         "q": "Will I lose quality converting HEIC to JPG?",
-        "a": "We default to 92% quality, which is visually indistinguishable from the original. You can adjust the slider from 60% to 100%."
+        "a": "No noticeable loss. You can set the quality slider up to 92 for sharp, full-resolution JPGs that look the same as the original."
       },
       {
         "q": "Is this really free?",
-        "a": "Yes, completely free with no signup, no watermarks, and no ads. Since the work happens on your computer, there is no cost to run it."
+        "a": "Yes, it's completely free with no signup and no file limits. Convert as many photos as you like, as often as you like."
       }
     ],
     "ctaTitle": "Need a permanent URL too?",
@@ -75,15 +75,15 @@ export const content: LandingContentMap = {
     "ctaButton": "Try the main uploader"
   },
   "es": {
-    "metaTitle": "Convertidor de HEIC a JPG — 100% en tu navegador | ImageToURL",
-    "metaDescription": "Convierte fotos HEIC de tu iPhone a JPG directamente en tu navegador. Los archivos nunca salen de tu dispositivo. Gratis, ilimitado, sin registro, sin subidas.",
+    "metaTitle": "Convertidor de HEIC a JPG | Gratis, Privado, Sin Subida",
+    "metaDescription": "Convierte HEIC a JPG gratis, directamente en tu navegador. Tus fotos de iPhone nunca se suben. Funciona en Windows, Mac, iPhone y Android. Sin registro.",
     "schemaName": "Convertidor de HEIC a JPG",
-    "schemaDescription": "Convierte fotos HEIC y HEIF de tu iPhone a JPG directamente en tu navegador sin subir archivos a un servidor.",
+    "schemaDescription": "Convierte fotos HEIC y HEIF de tu iPhone a JPG completamente en tu navegador sin subir archivos a un servidor.",
     "badge": "HERRAMIENTA SOLO EN NAVEGADOR",
-    "h1Pre": "Convertidor de HEIC a JPG",
-    "h1Highlight": "100% en tu navegador.",
-    "intro": "Suelta tus fotos HEIC de iPhone aquí y obtén archivos JPG al instante. La conversión se ejecuta completamente en tu dispositivo; tus fotos nunca salen de tu computadora.",
-    "howTitle": "Cómo funciona",
+    "h1Pre": "Convertidor de HEIC a JPG,",
+    "h1Highlight": "100% en tu navegador",
+    "intro": "Suelta tus fotos HEIC de iPhone aquí y obtén archivos JPG en segundos. La conversión completa se ejecuta en tu propio dispositivo, así que tus fotos nunca se suben a ningún lado.",
+    "howTitle": "Cómo convertir HEIC a JPG",
     "steps": [
       {
         "title": "Suelta tus archivos HEIC",
@@ -91,7 +91,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Convierte en tu navegador",
-        "body": "Un decodificador WebAssembly se ejecuta localmente en tu dispositivo. Cero llamadas de red; verifícalo en las herramientas de desarrollador (DevTools)."
+        "body": "Un decodificador WebAssembly hace el trabajo directamente en tu dispositivo. Ningún archivo se envía a un servidor, y puedes comprobarlo tú mismo en DevTools."
       },
       {
         "title": "Descarga u hospeda",
@@ -101,59 +101,59 @@ export const content: LandingContentMap = {
     "whyTitle": "¿Por qué convertir HEIC a JPG?",
     "whyItems": [
       {
-        "title": "Compatibilidad con Windows",
-        "body": "Windows no puede abrir HEIC de forma nativa sin códecs de pago. JPG se abre en todas partes, siempre."
+        "title": "Funciona en Windows",
+        "body": "Windows no puede abrir HEIC sin un códec de pago. JPG se abre en todas partes, en cualquier PC, sin configuración adicional."
       },
       {
         "title": "Android y mensajería",
-        "body": "Muchos teléfonos Android y aplicaciones de chat aún tienen problemas con HEIC. JPG funciona perfectamente en WhatsApp, Messenger y correo electrónico."
+        "body": "Muchos teléfonos Android y aplicaciones de chat aún tienen problemas con HEIC. JPG simplemente funciona en WhatsApp, Messenger y correo electrónico."
       },
       {
         "title": "Web y redes sociales",
-        "body": "La mayoría de los blogs, CMS y plataformas sociales antiguas rechazan las subidas en HEIC. Convierte primero para evitar errores de carga."
+        "body": "La mayoría de los blogs, CMS y plataformas sociales antiguas rechazan las subidas en HEIC. Convierte primero para evitar el error de subida."
       },
       {
         "title": "Privacidad por defecto",
-        "body": "Otros convertidores suben tus fotos a sus servidores. El nuestro nunca lo hace; el archivo permanece en tu dispositivo."
+        "body": "Otros convertidores suben tus fotos a sus servidores. Este no. Tus archivos permanecen en tu dispositivo todo el tiempo."
       }
     ],
     "faqTitle": "Preguntas frecuentes",
     "faqs": [
       {
         "q": "¿Mis fotos son realmente privadas?",
-        "a": "Sí. La conversión ocurre completamente en tu navegador usando WebAssembly. Ningún archivo se sube a ningún servidor."
+        "a": "Sí. La conversión ocurre completamente en tu navegador, así que tus fotos HEIC nunca salen de tu computadora o teléfono. Nada se sube a menos que elijas alojar un archivo con 'Obtener URL'."
       },
       {
-        "q": "¿Qué es HEIC y por qué necesito convertirlo?",
-        "a": "HEIC es el formato de foto predeterminado del iPhone. No es ampliamente compatible con Windows o navegadores web, por lo que debes convertirlo a JPG para compartirlo."
+        "q": "¿Qué es HEIC?",
+        "a": "HEIC es el formato que usa el iPhone para guardar fotos. Ahorra espacio, pero muchas aplicaciones, PCs con Windows y sitios web no pueden abrirlo. Convertir HEIC a JPG hace que tus fotos funcionen en todas partes."
       },
       {
-        "q": "¿Hay un límite de tamaño o cantidad de archivos?",
-        "a": "No. Debido a que la conversión ocurre localmente en tu navegador, no hay límite de subida. Puedes convertir tantos archivos como tu memoria permita."
+        "q": "¿Cómo convierto HEIC a JPG en iPhone, Windows o Mac?",
+        "a": "De la misma manera en cada dispositivo. Abre esta página, suelta tus archivos HEIC en el cuadro y descarga el JPG. Funciona en cualquier navegador moderno, así que no hay nada que instalar en Windows, Mac, iPhone o Android."
       },
       {
         "q": "¿Perderé calidad al convertir HEIC a JPG?",
-        "a": "Usamos una calidad predeterminada del 92%, que es visualmente indistinguible del original. Puedes ajustar el control deslizante del 60% al 100%."
+        "a": "Sin pérdida apreciable. Puedes ajustar el control deslizante de calidad hasta 92 para obtener JPG nítidos y de resolución completa que se ven igual que el original."
       },
       {
         "q": "¿Es esto realmente gratis?",
-        "a": "Sí, completamente gratis, sin registro, sin marcas de agua y sin anuncios. Dado que el trabajo ocurre en tu computadora, no hay costo de ejecución."
+        "a": "Sí, es completamente gratis, sin registro y sin límite de archivos. Convierte tantas fotos como quieras, con la frecuencia que desees."
       }
     ],
     "ctaTitle": "¿Necesitas también una URL permanente?",
-    "ctaBody": "Después de convertir, haz clic en 'Obtener URL' en cualquier archivo para alojarlo en nuestra CDN global; gratis y sin registro.",
+    "ctaBody": "Después de convertir, haz clic en 'Obtener URL' en cualquier archivo para alojarlo en nuestra CDN global — gratis, sin registro.",
     "ctaButton": "Probar el cargador principal"
   },
   "fr": {
-    "metaTitle": "Convertisseur HEIC en JPG — 100% dans votre navigateur | ImageToURL",
-    "metaDescription": "Convertissez vos photos HEIC d'iPhone en JPG directement dans votre navigateur. Vos fichiers ne quittent jamais votre appareil. Gratuit, illimité, sans inscription, sans téléchargement.",
+    "metaTitle": "Convertisseur HEIC en JPG | Gratuit, Privé, Sans Upload",
+    "metaDescription": "Convertissez HEIC en JPG gratuitement dans votre navigateur. Vos photos iPhone ne sont jamais téléchargées. Fonctionne sur Windows, Mac, iPhone et Android. Sans inscription.",
     "schemaName": "Convertisseur HEIC en JPG",
-    "schemaDescription": "Convertissez vos photos HEIC et HEIF d'iPhone en JPG entièrement dans votre navigateur sans envoyer de fichiers vers un serveur.",
-    "badge": "OUTIL 100% NAVIGATEUR",
-    "h1Pre": "Convertisseur HEIC en JPG",
-    "h1Highlight": "100% dans votre navigateur.",
-    "intro": "Déposez vos photos HEIC d'iPhone ici et obtenez des fichiers JPG instantanément. La conversion s'effectue entièrement sur votre appareil — vos photos ne quittent jamais votre ordinateur.",
-    "howTitle": "Comment ça marche",
+    "schemaDescription": "Convertissez des photos HEIC et HEIF de votre iPhone en JPG entièrement dans votre navigateur sans envoyer de fichiers vers un serveur.",
+    "badge": "OUTIL NAVIGATEUR UNIQUEMENT",
+    "h1Pre": "Convertisseur HEIC en JPG,",
+    "h1Highlight": "100% dans votre navigateur",
+    "intro": "Déposez vos photos HEIC iPhone ici et obtenez des fichiers JPG en quelques secondes. La conversion entière s'effectue sur votre propre appareil — vos photos ne sont donc jamais uploadées nulle part.",
+    "howTitle": "Comment convertir HEIC en JPG",
     "steps": [
       {
         "title": "Déposez vos fichiers HEIC",
@@ -161,7 +161,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Convertissez dans votre navigateur",
-        "body": "Un décodeur WebAssembly s'exécute localement sur votre appareil. Aucun appel réseau — vérifiez-le dans les outils de développement (DevTools)."
+        "body": "Un décodeur WebAssembly effectue le travail directement sur votre appareil. Aucun fichier n'est envoyé vers un serveur, et vous pouvez le vérifier vous-même dans les DevTools."
       },
       {
         "title": "Téléchargez ou hébergez",
@@ -171,59 +171,59 @@ export const content: LandingContentMap = {
     "whyTitle": "Pourquoi convertir HEIC en JPG ?",
     "whyItems": [
       {
-        "title": "Compatibilité Windows",
-        "body": "Windows ne peut pas ouvrir les fichiers HEIC nativement sans codecs payants. Le format JPG s'ouvre partout, tout le temps."
+        "title": "Fonctionne sur Windows",
+        "body": "Windows ne peut pas ouvrir HEIC sans un codec payant. JPG s'ouvre partout, sur n'importe quel PC, sans configuration supplémentaire."
       },
       {
         "title": "Android et messagerie",
-        "body": "De nombreux téléphones Android et applications de messagerie ont encore du mal avec le format HEIC. Le JPG fonctionne parfaitement dans WhatsApp, Messenger et par e-mail."
+        "body": "De nombreux téléphones Android et applications de messagerie ont encore du mal avec HEIC. JPG fonctionne simplement dans WhatsApp, Messenger et les e-mails."
       },
       {
         "title": "Web et réseaux sociaux",
-        "body": "La plupart des blogs, CMS et anciennes plateformes sociales rejettent les téléchargements HEIC. Convertissez d'abord pour éviter les erreurs d'importation."
+        "body": "La plupart des blogs, CMS et anciennes plateformes sociales rejettent les téléchargements HEIC. Convertissez d'abord pour éviter l'erreur d'importation."
       },
       {
         "title": "Confidentialité par défaut",
-        "body": "Les autres convertisseurs envoient vos photos sur leurs serveurs. Le nôtre ne le fait jamais — le fichier reste sur votre appareil."
+        "body": "Les autres convertisseurs téléchargent vos photos sur leurs serveurs. Celui-ci ne le fait pas. Vos fichiers restent sur votre appareil tout le temps."
       }
     ],
     "faqTitle": "Questions fréquentes",
     "faqs": [
       {
         "q": "Mes photos sont-elles vraiment privées ?",
-        "a": "Oui. La conversion se fait entièrement dans votre navigateur via WebAssembly. Aucun fichier n'est envoyé vers un serveur."
+        "a": "Oui. La conversion se fait entièrement dans votre navigateur, vos photos HEIC ne quittent donc jamais votre ordinateur ou téléphone. Rien n'est téléchargé sauf si vous choisissez d'héberger un fichier avec 'Obtenir l'URL'."
       },
       {
-        "q": "Qu'est-ce que le HEIC et pourquoi dois-je le convertir ?",
-        "a": "Le HEIC est le format photo par défaut de l'iPhone. Il n'est pas largement pris en charge sur Windows ou les navigateurs web, vous devez donc le convertir en JPG pour le partager."
+        "q": "Qu'est-ce que HEIC ?",
+        "a": "HEIC est le format qu'utilise l'iPhone pour sauvegarder les photos. Il économise de l'espace, mais beaucoup d'applications, de PCs Windows et de sites web ne peuvent pas l'ouvrir. Convertir HEIC en JPG fait fonctionner vos photos partout."
       },
       {
-        "q": "Y a-t-il une limite de taille ou de nombre de fichiers ?",
-        "a": "Non. Comme la conversion se fait localement dans votre navigateur, il n'y a pas de limite d'envoi. Vous pouvez convertir autant de fichiers que votre mémoire le permet."
+        "q": "Comment convertir HEIC en JPG sur iPhone, Windows ou Mac ?",
+        "a": "De la même façon sur chaque appareil. Ouvrez cette page, déposez vos fichiers HEIC dans la zone et téléchargez le JPG. Ça fonctionne dans n'importe quel navigateur moderne, donc rien à installer sur Windows, Mac, iPhone ou Android."
       },
       {
-        "q": "Vais-je perdre en qualité en convertissant HEIC en JPG ?",
-        "a": "Nous utilisons par défaut une qualité de 92%, visuellement identique à l'original. Vous pouvez ajuster le curseur de 60% à 100%."
+        "q": "Vais-je perdre de la qualité en convertissant HEIC en JPG ?",
+        "a": "Aucune perte perceptible. Vous pouvez régler le curseur de qualité jusqu'à 92 pour des JPG nets et en pleine résolution qui semblent identiques à l'original."
       },
       {
         "q": "Est-ce vraiment gratuit ?",
-        "a": "Oui, totalement gratuit, sans inscription, sans filigrane et sans publicité. Comme le travail s'effectue sur votre ordinateur, cela ne coûte rien."
+        "a": "Oui, c'est complètement gratuit sans inscription et sans limites de fichiers. Convertissez autant de photos que vous voulez, aussi souvent que vous le souhaitez."
       }
     ],
-    "ctaTitle": "Besoin d'une URL permanente ?",
+    "ctaTitle": "Besoin d'une URL permanente aussi ?",
     "ctaBody": "Après la conversion, cliquez sur 'Obtenir l'URL' sur n'importe quel fichier pour l'héberger sur notre CDN mondial — gratuit, sans inscription.",
     "ctaButton": "Essayer l'outil principal"
   },
   "de": {
-    "metaTitle": "HEIC zu JPG Konverter — 100% in Ihrem Browser | ImageToURL",
-    "metaDescription": "Konvertieren Sie HEIC-Fotos von Ihrem iPhone direkt in Ihrem Browser zu JPG. Dateien verlassen niemals Ihr Gerät. Kostenlos, unbegrenzt, ohne Anmeldung, kein Upload.",
+    "metaTitle": "HEIC zu JPG Konverter | Kostenlos, Privat, Kein Upload",
+    "metaDescription": "Konvertieren Sie HEIC kostenlos zu JPG, direkt im Browser. Ihre iPhone-Fotos werden nie hochgeladen. Funktioniert auf Windows, Mac, iPhone und Android. Keine Anmeldung.",
     "schemaName": "HEIC zu JPG Konverter",
-    "schemaDescription": "Konvertieren Sie HEIC- und HEIF-Fotos von Ihrem iPhone direkt in Ihrem Browser zu JPG, ohne Dateien auf einen Server hochzuladen.",
-    "badge": "BROWSER-ONLY TOOL",
-    "h1Pre": "HEIC zu JPG Konverter",
-    "h1Highlight": "100% in Ihrem Browser.",
-    "intro": "Ziehen Sie Ihre iPhone HEIC-Fotos hierher und erhalten Sie sofort JPG-Dateien. Die Konvertierung erfolgt vollständig auf Ihrem Gerät – Ihre Fotos verlassen niemals Ihren Computer.",
-    "howTitle": "So funktioniert es",
+    "schemaDescription": "Konvertieren Sie HEIC- und HEIF-Fotos von Ihrem iPhone zu JPG vollständig in Ihrem Browser, ohne Dateien auf einen Server hochzuladen.",
+    "badge": "NUR-BROWSER-TOOL",
+    "h1Pre": "HEIC zu JPG Konverter,",
+    "h1Highlight": "100% in Ihrem Browser",
+    "intro": "Legen Sie Ihre iPhone HEIC-Fotos hier ab und erhalten Sie JPG-Dateien in Sekunden. Die gesamte Konvertierung läuft auf Ihrem eigenen Gerät, sodass Ihre Fotos nirgendwo hochgeladen werden.",
+    "howTitle": "So konvertieren Sie HEIC zu JPG",
     "steps": [
       {
         "title": "HEIC-Dateien ablegen",
@@ -231,7 +231,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Im Browser konvertieren",
-        "body": "Ein WebAssembly-Decoder läuft lokal auf Ihrem Gerät. Keine Netzwerkaufrufe – überprüfen Sie dies in den DevTools."
+        "body": "Ein WebAssembly-Decoder erledigt die Arbeit direkt auf Ihrem Gerät. Es werden keine Dateien an einen Server gesendet, und das können Sie selbst in den DevTools überprüfen."
       },
       {
         "title": "Herunterladen oder hosten",
@@ -241,59 +241,59 @@ export const content: LandingContentMap = {
     "whyTitle": "Warum HEIC in JPG konvertieren?",
     "whyItems": [
       {
-        "title": "Windows-Kompatibilität",
-        "body": "Windows kann HEIC ohne kostenpflichtige Codecs nicht nativ öffnen. JPG lässt sich überall und jederzeit öffnen."
+        "title": "Funktioniert auf Windows",
+        "body": "Windows kann HEIC ohne einen kostenpflichtigen Codec nicht öffnen. JPG lässt sich überall öffnen, auf jedem PC, ohne zusätzliche Einrichtung."
       },
       {
         "title": "Android & Messenger",
-        "body": "Viele Android-Telefone und Chat-Apps haben Probleme mit HEIC. JPG funktioniert einfach in WhatsApp, Messenger und E-Mails."
+        "body": "Viele Android-Telefone und Chat-Apps haben immer noch Probleme mit HEIC. JPG funktioniert einfach in WhatsApp, Messenger und E-Mails."
       },
       {
         "title": "Web & Social Media",
-        "body": "Die meisten Blogs, CMS und ältere soziale Plattformen lehnen HEIC-Uploads ab. Konvertieren Sie zuerst, um Upload-Fehler zu vermeiden."
+        "body": "Die meisten Blogs, CMS und ältere soziale Plattformen lehnen HEIC-Uploads ab. Konvertieren Sie zuerst, um den Upload-Fehler zu vermeiden."
       },
       {
         "title": "Datenschutz als Standard",
-        "body": "Andere Konverter laden Ihre Fotos auf ihre Server hoch. Unser Tool tut dies nie – die Datei bleibt auf Ihrem Gerät."
+        "body": "Andere Konverter laden Ihre Fotos auf ihre Server hoch. Dieses Tool tut das nicht. Ihre Dateien bleiben die ganze Zeit auf Ihrem Gerät."
       }
     ],
     "faqTitle": "Häufig gestellte Fragen",
     "faqs": [
       {
         "q": "Sind meine Fotos wirklich privat?",
-        "a": "Ja. Die Konvertierung erfolgt vollständig in Ihrem Browser mittels WebAssembly. Es wird keine Datei auf einen Server hochgeladen."
+        "a": "Ja. Die Konvertierung erfolgt vollständig in Ihrem Browser, sodass Ihre HEIC-Fotos Ihren Computer oder Ihr Telefon niemals verlassen. Es wird nichts hochgeladen, es sei denn, Sie wählen, eine Datei mit 'URL abrufen' zu hosten."
       },
       {
-        "q": "Was ist HEIC und warum muss ich es konvertieren?",
-        "a": "HEIC ist das Standard-Fotoformat des iPhones. Es wird unter Windows oder in Webbrowsern nicht umfassend unterstützt, daher müssen Sie es in JPG konvertieren, um es zu teilen."
+        "q": "Was ist HEIC?",
+        "a": "HEIC ist das Format, das das iPhone zum Speichern von Fotos verwendet. Es spart Speicherplatz, aber viele Apps, Windows-PCs und Websites können es nicht öffnen. Das Konvertieren von HEIC zu JPG sorgt dafür, dass Ihre Fotos überall funktionieren."
       },
       {
-        "q": "Gibt es ein Limit für Dateigröße oder Anzahl?",
-        "a": "Nein. Da die Konvertierung lokal in Ihrem Browser stattfindet, gibt es kein Upload-Limit. Sie können so viele Dateien konvertieren, wie Ihr Arbeitsspeicher zulässt."
+        "q": "Wie konvertiere ich HEIC zu JPG auf iPhone, Windows oder Mac?",
+        "a": "Auf jedem Gerät gleich. Öffnen Sie diese Seite, legen Sie Ihre HEIC-Dateien in das Feld und laden Sie das JPG herunter. Es läuft in jedem modernen Browser, sodass auf Windows, Mac, iPhone oder Android nichts installiert werden muss."
       },
       {
-        "q": "Verliere ich bei der Konvertierung von HEIC zu JPG an Qualität?",
-        "a": "Wir verwenden standardmäßig 92% Qualität, was visuell nicht vom Original zu unterscheiden ist. Sie können den Regler von 60% bis 100% anpassen."
+        "q": "Verliere ich Qualität beim Konvertieren von HEIC zu JPG?",
+        "a": "Kein merklicher Verlust. Sie können den Qualitätsregler auf bis zu 92 einstellen, um scharfe JPGs in voller Auflösung zu erhalten, die genauso aussehen wie das Original."
       },
       {
         "q": "Ist das wirklich kostenlos?",
-        "a": "Ja, komplett kostenlos ohne Anmeldung, ohne Wasserzeichen und ohne Werbung. Da die Arbeit auf Ihrem Computer stattfindet, entstehen keine Kosten für den Betrieb."
+        "a": "Ja, komplett kostenlos ohne Anmeldung und ohne Dateilimits. Konvertieren Sie so viele Fotos wie Sie möchten, so oft Sie möchten."
       }
     ],
     "ctaTitle": "Benötigen Sie auch eine dauerhafte URL?",
-    "ctaBody": "Klicken Sie nach der Konvertierung bei einer beliebigen Datei auf 'URL abrufen', um sie auf unserem globalen CDN zu hosten – kostenlos und ohne Anmeldung.",
+    "ctaBody": "Klicken Sie nach der Konvertierung bei einer beliebigen Datei auf 'URL abrufen', um sie auf unserem globalen CDN zu hosten — kostenlos und ohne Anmeldung.",
     "ctaButton": "Haupt-Uploader ausprobieren"
   },
   "ja": {
-    "metaTitle": "HEIC to JPG 変換 — ブラウザで完結 | ImageToURL",
-    "metaDescription": "iPhoneのHEIC写真をブラウザ上でJPGに変換。ファイルはデバイスから一切送信されません。無料、無制限、登録不要、アップロードなし。",
-    "schemaName": "HEIC to JPG 変換",
-    "schemaDescription": "サーバーにアップロードすることなく、ブラウザ上でiPhoneのHEIC/HEIF写真をJPGに変換します。",
+    "metaTitle": "HEIC to JPG 変換 | 無料・プライベート・アップロード不要",
+    "metaDescription": "iPhoneのHEIC写真をブラウザで無料JPG変換。写真はアップロードされません。Windows・Mac・iPhone・Android対応、登録不要。",
+    "schemaName": "HEIC to JPG 変換ツール",
+    "schemaDescription": "サーバーへのアップロードなしに、ブラウザ上でiPhoneのHEIC・HEIF写真をJPGに変換します。",
     "badge": "ブラウザ完結型ツール",
-    "h1Pre": "HEIC to JPG 変換",
-    "h1Highlight": "ブラウザで100%完結。",
-    "intro": "iPhoneのHEIC写真をドラッグ＆ドロップするだけで、すぐにJPGファイルに変換。処理はすべてデバイス内で行われるため、写真はPCから外部へ送信されません。",
-    "howTitle": "使い方",
+    "h1Pre": "HEIC to JPG 変換ツール,",
+    "h1Highlight": "100% ブラウザで完結",
+    "intro": "iPhoneのHEIC写真をここにドロップするだけで、数秒でJPGファイルに変換できます。変換処理はすべてデバイス上で行われるため、写真はどこにもアップロードされません。",
+    "howTitle": "HEIC to JPGの変換方法",
     "steps": [
       {
         "title": "HEICファイルをドロップ",
@@ -301,69 +301,69 @@ export const content: LandingContentMap = {
       },
       {
         "title": "ブラウザで変換",
-        "body": "WebAssemblyデコーダーがデバイス上でローカルに動作します。ネットワーク通信はゼロ。DevToolsで確認可能です。"
+        "body": "WebAssemblyデコーダーがデバイス上で直接処理します。サーバーへのファイル送信はなく、DevToolsで自分で確認することもできます。"
       },
       {
         "title": "ダウンロードまたはホスト",
-        "body": "JPGをデバイスに保存するか、「URLを取得」をクリックしてCDNでホストし、共有リンクを作成できます。"
+        "body": "JPGをデバイスに保存するか、「URLを取得」をクリックしてCDNでホストし、共有リンクを取得できます。"
       }
     ],
     "whyTitle": "なぜHEICをJPGに変換するのか？",
     "whyItems": [
       {
-        "title": "Windowsとの互換性",
-        "body": "Windowsでは有料コーデックなしでHEICを開くことができません。JPGならどこでも確実に開けます。"
+        "title": "Windowsで動作する",
+        "body": "Windowsでは有料コーデックなしでHEICを開くことができません。JPGならどのPCでも追加設定なしで開けます。"
       },
       {
         "title": "Androidとメッセージアプリ",
-        "body": "多くのAndroid端末やチャットアプリはHEICに未対応です。WhatsApp、Messenger、メールなどではJPGが確実です。"
+        "body": "多くのAndroid端末やチャットアプリはHEICにまだ対応していません。WhatsApp、Messenger、メールではJPGが確実に機能します。"
       },
       {
         "title": "WebとSNS",
-        "body": "多くのブログ、CMS、古いSNSプラットフォームはHEICのアップロードを拒否します。事前に変換してエラーを防ぎましょう。"
+        "body": "多くのブログ、CMS、古いSNSプラットフォームはHEICのアップロードを拒否します。先に変換してエラーを回避しましょう。"
       },
       {
-        "title": "プライバシー重視",
-        "body": "他の変換サイトは写真をサーバーにアップロードしますが、当サイトは違います。ファイルは常にあなたのデバイス内に留まります。"
+        "title": "デフォルトでプライバシー保護",
+        "body": "他の変換サービスは写真をサーバーにアップロードしますが、このツールは違います。ファイルは終始あなたのデバイス内に留まります。"
       }
     ],
     "faqTitle": "よくある質問",
     "faqs": [
       {
         "q": "写真は本当にプライベートですか？",
-        "a": "はい。変換はブラウザ内のWebAssemblyで完結します。サーバーへのファイルアップロードは一切ありません。"
+        "a": "はい。変換はブラウザ内で完全に行われるため、HEIC写真はパソコンやスマートフォンから外部へ送信されません。「URLを取得」でファイルをホストすることを選ばない限り、何もアップロードされません。"
       },
       {
-        "q": "HEICとは何ですか？なぜ変換が必要なのですか？",
-        "a": "HEICはiPhoneの標準写真形式です。WindowsやWebブラウザでのサポートが不十分なため、共有するにはJPGへの変換が必要です。"
+        "q": "HEICとは何ですか？",
+        "a": "HEICはiPhoneが写真を保存するために使用するフォーマットです。容量を節約できますが、多くのアプリ、Windows PC、ウェブサイトで開けません。HEIC to JPGに変換することで、あらゆる場所で写真が使えるようになります。"
       },
       {
-        "q": "ファイルサイズや枚数に制限はありますか？",
-        "a": "いいえ。ブラウザ内でローカル変換を行うため、アップロード制限はありません。メモリが許す限り何枚でも変換可能です。"
+        "q": "iPhone・Windows・MacでHEICをJPGに変換するには？",
+        "a": "どのデバイスでも同じ方法です。このページを開き、HEICファイルをボックスにドロップし、JPGをダウンロードするだけです。あらゆる最新ブラウザで動作するため、Windows・Mac・iPhone・Androidに何もインストールする必要はありません。"
       },
       {
-        "q": "変換で画質は落ちますか？",
-        "a": "デフォルトで92%の品質に設定しており、見た目ではオリジナルと区別がつきません。スライダーで60%から100%まで調整可能です。"
+        "q": "HEIC to JPGに変換すると画質が落ちますか？",
+        "a": "ほとんど気になりません。品質スライダーを92まで設定することで、オリジナルと同じくシャープで高解像度のJPGが得られます。"
       },
       {
         "q": "本当に無料ですか？",
-        "a": "はい、登録や透かし、広告なしで完全に無料です。処理はすべてあなたのPC上で行われるため、運営コストがかかりません。"
+        "a": "はい、登録なし・ファイル制限なしで完全に無料です。好きな枚数を、好きなだけ変換できます。"
       }
     ],
     "ctaTitle": "永続的なURLも必要ですか？",
     "ctaBody": "変換後、各ファイルの「URLを取得」をクリックすると、グローバルCDNでホストできます（無料・登録不要）。",
-    "ctaButton": "アップローダーを試す"
+    "ctaButton": "メインアップローダーを試す"
   },
   "zh-Hans": {
-    "metaTitle": "HEIC 转 JPG 转换器 — 100% 在浏览器中完成 | ImageToURL",
-    "metaDescription": "将 iPhone 的 HEIC 照片直接在浏览器中转换为 JPG。文件绝不会离开您的设备。免费、无限制、无需注册、无需上传。",
+    "metaTitle": "HEIC 转 JPG 转换器 | 免费、私密、无需上传",
+    "metaDescription": "在浏览器中免费将 iPhone 的 HEIC 转为 JPG。照片不会上传，支持 Windows、Mac、iPhone 和 Android，无需注册。",
     "schemaName": "HEIC 转 JPG 转换器",
-    "schemaDescription": "将 iPhone 的 HEIC 和 HEIF 照片直接在浏览器中转换为 JPG，无需将文件上传到服务器。",
+    "schemaDescription": "无需上传文件至服务器，完全在浏览器中将 iPhone 的 HEIC 和 HEIF 照片转换为 JPG。",
     "badge": "纯浏览器工具",
-    "h1Pre": "HEIC 转 JPG 转换器",
-    "h1Highlight": "100% 在浏览器中完成。",
-    "intro": "将您的 iPhone HEIC 照片拖放到此处，即可立即获取 JPG 文件。转换过程完全在您的设备上运行 — 您的照片绝不会离开您的电脑。",
-    "howTitle": "工作原理",
+    "h1Pre": "HEIC 转 JPG 转换器,",
+    "h1Highlight": "100% 在浏览器中完成",
+    "intro": "将您的 iPhone HEIC 照片拖放至此，数秒内即可获得 JPG 文件。整个转换过程在您自己的设备上运行，照片不会上传到任何地方。",
+    "howTitle": "如何将 HEIC 转换为 JPG",
     "steps": [
       {
         "title": "拖放您的 HEIC 文件",
@@ -371,18 +371,18 @@ export const content: LandingContentMap = {
       },
       {
         "title": "在浏览器中转换",
-        "body": "WebAssembly 解码器在您的设备上本地运行。零网络调用 — 您可以在 DevTools 中进行验证。"
+        "body": "WebAssembly 解码器直接在您的设备上运行。没有文件会发送到服务器，您可以在 DevTools 中自行验证。"
       },
       {
         "title": "下载或托管",
-        "body": "将 JPG 保存到您的设备，或点击“获取 URL”将其托管在我们的 CDN 上并获取可共享的链接。"
+        "body": "将 JPG 保存到您的设备，或点击「获取 URL」将其托管在我们的 CDN 上，获取可共享的链接。"
       }
     ],
     "whyTitle": "为什么要将 HEIC 转换为 JPG？",
     "whyItems": [
       {
-        "title": "Windows 兼容性",
-        "body": "Windows 在没有付费编解码器的情况下无法直接打开 HEIC。JPG 则随时随地都能打开。"
+        "title": "适用于 Windows",
+        "body": "Windows 在没有付费编解码器的情况下无法打开 HEIC。JPG 可在任何 PC 上随时打开，无需额外设置。"
       },
       {
         "title": "Android 和即时通讯",
@@ -390,38 +390,38 @@ export const content: LandingContentMap = {
       },
       {
         "title": "网页和社交媒体",
-        "body": "大多数博客、CMS 和旧版社交平台拒绝 HEIC 上传。先转换以避免上传错误。"
+        "body": "大多数博客、CMS 和旧版社交平台拒绝上传 HEIC。先转换以避免上传错误。"
       },
       {
         "title": "默认隐私保护",
-        "body": "其他转换器会将您的照片上传到他们的服务器。我们绝不会这样做 — 文件始终保留在您的设备上。"
+        "body": "其他转换器会将您的照片上传到其服务器。此工具不会。您的文件全程保留在您的设备上。"
       }
     ],
     "faqTitle": "常见问题解答",
     "faqs": [
       {
-        "q": "我的照片真的私密吗？",
-        "a": "是的。转换完全在您的浏览器中使用 WebAssembly 完成。没有任何文件会被上传到任何服务器。"
+        "q": "我的照片真的是私密的吗？",
+        "a": "是的。转换完全在您的浏览器中进行，因此您的 HEIC 照片永远不会离开您的电脑或手机。除非您选择使用「获取 URL」托管文件，否则不会上传任何内容。"
       },
       {
-        "q": "什么是 HEIC，为什么我需要转换它？",
-        "a": "HEIC 是 iPhone 的默认照片格式。它在 Windows 或网页浏览器上的支持度不高，因此您需要将其转换为 JPG 才能分享。"
+        "q": "什么是 HEIC？",
+        "a": "HEIC 是 iPhone 用于保存照片的格式。它节省存储空间，但许多应用程序、Windows PC 和网站无法打开它。将 HEIC 转换为 JPG 可让您的照片在任何地方都能使用。"
       },
       {
-        "q": "有文件大小或数量限制吗？",
-        "a": "没有。因为转换是在您的浏览器中本地进行的，所以没有上传限制。只要您的内存允许，您可以转换任意数量的文件。"
+        "q": "如何在 iPhone、Windows 或 Mac 上将 HEIC 转换为 JPG？",
+        "a": "每台设备的操作方式相同。打开此页面，将 HEIC 文件拖入方框，然后下载 JPG。它可在任何现代浏览器中运行，因此在 Windows、Mac、iPhone 或 Android 上无需安装任何东西。"
       },
       {
-        "q": "将 HEIC 转换为 JPG 会损失质量吗？",
-        "a": "我们默认使用 92% 的质量，这在视觉上与原图无异。您可以将滑块从 60% 调整到 100%。"
+        "q": "将 HEIC 转换为 JPG 会损失画质吗？",
+        "a": "几乎没有明显损失。您可以将画质滑块调至 92，获得清晰、全分辨率的 JPG，效果与原图相同。"
       },
       {
         "q": "这真的是免费的吗？",
-        "a": "是的，完全免费，无需注册、无水印、无广告。由于处理过程在您的电脑上完成，因此运行它没有任何成本。"
+        "a": "是的，完全免费，无需注册，没有文件数量限制。随时转换任意数量的照片。"
       }
     ],
-    "ctaTitle": "也需要永久 URL 吗？",
-    "ctaBody": "转换后，点击任意文件上的“获取 URL”，即可将其托管在我们的全球 CDN 上 — 免费且无需注册。",
-    "ctaButton": "尝试主上传器"
+    "ctaTitle": "还需要一个永久 URL 吗？",
+    "ctaBody": "转换后，点击任意文件上的「获取 URL」，即可将其托管在我们的全球 CDN 上 — 免费，无需注册。",
+    "ctaButton": "试用主上传器"
   },
 } as LandingContentMap;
