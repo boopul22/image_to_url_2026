@@ -8,15 +8,17 @@ import Icon from './Icon.astro';
  * "Get URL" button on each result is the single point of upload.
  */
 export interface Props {
-  /** source format id — matches Accept list. e.g. 'png' */
-  from: 'png' | 'jpg' | 'webp' | 'gif' | 'bmp';
+  /** source format id — matches Accept list. e.g. 'png'. 'image' accepts any image type. */
+  from: 'png' | 'jpg' | 'webp' | 'gif' | 'bmp' | 'avif' | 'jfif' | 'tiff' | 'image';
   /** output format id. */
   to: 'png' | 'jpg' | 'webp';
   /** id prefix — lets multiple converters coexist on one page. */
   idPrefix?: string;
+  /** override the downloaded file extension (e.g. 'jpeg' for a JPG→JPEG page). */
+  outExtOverride?: string;
 }
 
-const { from, to, idPrefix = 'conv' } = Astro.props;
+const { from, to, idPrefix = 'conv', outExtOverride } = Astro.props;
 
 const acceptMap: Record<Props['from'], string> = {
   png: '.png,image/png',
@@ -24,6 +26,10 @@ const acceptMap: Record<Props['from'], string> = {
   webp: '.webp,image/webp',
   gif: '.gif,image/gif',
   bmp: '.bmp,image/bmp',
+  avif: '.avif,image/avif',
+  jfif: '.jfif,.jpe,.jpeg,.jpg,image/jpeg',
+  tiff: '.tif,.tiff,image/tiff',
+  image: 'image/*',
 };
 const toMime: Record<Props['to'], string> = {
   png: 'image/png',
@@ -33,12 +39,13 @@ const toMime: Record<Props['to'], string> = {
 const toExt: Record<Props['to'], string> = { png: 'png', jpg: 'jpg', webp: 'webp' };
 const fromLabel: Record<Props['from'], string> = {
   png: 'PNG', jpg: 'JPG', webp: 'WEBP', gif: 'GIF', bmp: 'BMP',
+  avif: 'AVIF', jfif: 'JFIF', tiff: 'TIFF', image: 'image',
 };
 const toLabel: Record<Props['to'], string> = { png: 'PNG', jpg: 'JPG', webp: 'WEBP' };
 
 const accept = acceptMap[from];
 const outMime = toMime[to];
-const outExt = toExt[to];
+const outExt = outExtOverride ?? toExt[to];
 const supportsQuality = to === 'jpg' || to === 'webp';
 const fromL = fromLabel[from];
 const toL = toLabel[to];

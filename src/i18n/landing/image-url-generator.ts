@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image URL Generator Free — Convert Images to URLs Instantly | ImageToURL",
+    "metaTitle": "Free Image URL Generator — Image to URL in Seconds",
     "metaDescription": "Free image URL generator. Upload any image and get a permanent, shareable link in seconds. No signup, no watermark, no fee. Built for developers.",
     "schemaName": "Free Image URL Generator",
     "schemaDescription": "Upload any image and get a permanent, shareable link in seconds with no signup or fees.",
@@ -47,8 +47,8 @@ export const content: LandingContentMap = {
         "body": "Copy your URL with one click or grab an embed code. Every URL works everywhere — websites, forums, and messaging apps."
       },
       {
-        "title": "A picture link creator too",
-        "body": "Call it what you like. A picture link creator, a pic link creator, or a photo link creator all mean the same thing here: your upload becomes an online picture URL you can paste anywhere."
+        "title": "Picture, photo, or link generator",
+        "body": "Whether you came looking for a picture URL generator, a photo URL generator, or an image link generator, this is the tool. Upload once and your file becomes a shareable link you can paste anywhere."
       }
     ],
     "faqTitle": "Frequently Asked Questions",

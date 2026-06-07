@@ -27,7 +27,7 @@ type WidgetSpec =
   | { kind: 'heic-to-jpg' }
   | { kind: 'heic-to-png' }
   | { kind: 'pdf'; from: 'png' | 'jpg' | 'heic' }
-  | { kind: 'canvas'; from: 'png' | 'jpg' | 'webp'; to: 'png' | 'jpg' | 'webp'; idPrefix: string }
+  | { kind: 'canvas'; from: 'png' | 'jpg' | 'webp' | 'gif' | 'bmp' | 'avif' | 'jfif' | 'tiff' | 'image'; to: 'png' | 'jpg' | 'webp'; idPrefix: string; outExt?: string }
   | { kind: 'compressor' }
   | { kind: 'resizer' }
   | { kind: 'base64-encoder' }
@@ -47,6 +47,13 @@ const WIDGETS: Partial<Record<PageKey, WidgetSpec>> = {
   'jpg-to-webp':  { kind: 'canvas', from: 'jpg',  to: 'webp', idPrefix: 'jpg2webp' },
   'png-to-pdf':   { kind: 'pdf', from: 'png' },
   'jpg-to-pdf':   { kind: 'pdf', from: 'jpg' },
+  // Cluster G — new "to JPG" converters (any/jpeg/jfif/avif/tiff → jpg)
+  'convert-to-jpg': { kind: 'canvas', from: 'image', to: 'jpg', idPrefix: 'any2jpg' },
+  'jpeg-to-jpg':    { kind: 'canvas', from: 'jpg',   to: 'jpg', idPrefix: 'jpeg2jpg' },
+  'jfif-to-jpg':    { kind: 'canvas', from: 'jfif',  to: 'jpg', idPrefix: 'jfif2jpg' },
+  'jpg-to-jpeg':    { kind: 'canvas', from: 'jpg',   to: 'jpg', idPrefix: 'jpg2jpeg', outExt: 'jpeg' },
+  'avif-to-jpg':    { kind: 'canvas', from: 'avif',  to: 'jpg', idPrefix: 'avif2jpg' },
+  'tiff-to-jpg':    { kind: 'canvas', from: 'tiff',  to: 'jpg', idPrefix: 'tiff2jpg' },
   // Cluster B — utilities
   'image-compressor': { kind: 'compressor' },
   'image-resizer':    { kind: 'resizer' },
@@ -143,7 +150,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       {widget.kind === 'heic-to-jpg' && <ToolAdSurround><HeicConverter /></ToolAdSurround>}
       {widget.kind === 'heic-to-png' && <ToolAdSurround><HeicPngConverter /></ToolAdSurround>}
       {widget.kind === 'pdf' && <ToolAdSurround><PdfConverter from={widget.from} idPrefix={`pdf-${widget.from}-${locale}`} /></ToolAdSurround>}
-      {widget.kind === 'canvas' && <ToolAdSurround><CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} /></ToolAdSurround>}
+      {widget.kind === 'canvas' && <ToolAdSurround><CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} outExtOverride={widget.outExt} /></ToolAdSurround>}
       {widget.kind === 'compressor' && <ToolAdSurround><ImageCompressor /></ToolAdSurround>}
       {widget.kind === 'resizer' && <ToolAdSurround><ImageResizer /></ToolAdSurround>}
       {widget.kind === 'base64-encoder' && <ToolAdSurround><Base64Encoder /></ToolAdSurround>}

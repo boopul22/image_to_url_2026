@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image URLs for Google Sheets — =IMAGE() Function | ImageToURL",
+    "metaTitle": "Image URLs for Google Sheets — =IMAGE() Function",
     "metaDescription": "Get image URLs that work with Google Sheets =IMAGE() function. Upload images, get direct URLs, and display them in your spreadsheets instantly.",
     "schemaName": "Image URLs for Google Sheets",
     "schemaDescription": "A tool to generate direct image URLs compatible with the Google Sheets =IMAGE() function for seamless spreadsheet integration.",

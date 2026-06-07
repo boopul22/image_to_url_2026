@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Photo to URL — Turn Any Photo into a Shareable Link | ImageToURL",
+    "metaTitle": "Photo to URL — Turn Any Photo into a Shareable Link",
     "metaDescription": "Turn any photo into a shareable URL in seconds. Upload from phone or computer, get a permanent link instantly. Free photo hosting, no signup required.",
     "schemaName": "Photo to URL Converter",
     "schemaDescription": "A free web tool that converts any uploaded photo into a permanent, shareable URL instantly without requiring registration.",
@@ -51,8 +51,8 @@ export const content: LandingContentMap = {
         "body": "Drop in a pic and a pic URL comes back, free. The same upload handles a photo or a picture, so you can share those pic links wherever you need them."
       },
       {
-        "title": "From a pic to a link",
-        "body": "Need to make pic URL links for a chat or a forum? Turn a pic into URL form in one upload, and the free pic URL is yours to keep."
+        "title": "Photo to link, your way",
+        "body": "Use it as a photo URL converter or a photo to link tool. Upload a photo and it creates a photo URL on the spot, ready to share in a chat, a forum, or an email."
       }
     ],
     "faqTitle": "Frequently Asked Questions",

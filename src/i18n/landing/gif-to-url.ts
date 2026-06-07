@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "GIF to URL — Host Animated GIFs & Get Direct Links | ImageToURL",
+    "metaTitle": "GIF to URL — Host Animated GIFs & Get Direct Links",
     "metaDescription": "Host animated GIFs and get instant shareable URLs. Full animation preserved, direct links for embedding anywhere. Free GIF hosting, no signup required.",
     "schemaName": "GIF to URL",
     "schemaDescription": "Host animated GIFs and get instant shareable URLs with full animation preservation and direct links for embedding.",

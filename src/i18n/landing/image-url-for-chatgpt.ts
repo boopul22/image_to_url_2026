@@ -5,8 +5,8 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Get Image URLs for ChatGPT Vision — Free & Instant | ImageToURL",
-    "metaDescription": "ChatGPT vision needs public image URLs. Upload your image, get an instant URL, and paste it into ChatGPT. Free, no signup required.",
+    "metaTitle": "Get Image URLs for ChatGPT Vision — Free & Instant",
+    "metaDescription": "ChatGPT Vision needs a public image URL. Upload your image, get an instant link, and paste it into ChatGPT. Free, no signup, and links never expire.",
     "schemaName": "Image URLs for ChatGPT",
     "schemaDescription": "Upload images and get public URLs for ChatGPT Vision. Free, instant, no signup required.",
     "badge": "CHATGPT USERS",

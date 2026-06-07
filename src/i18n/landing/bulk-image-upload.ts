@@ -5,8 +5,8 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Bulk Image Upload - Upload Multiple Images at Once | ImageToURL",
-    "metaDescription": "Upload multiple images at once with ImageToURL's bulk upload feature. Get instant URLs for all your images. Perfect for e-commerce, agencies, and content creators.",
+    "metaTitle": "Bulk Image Upload - Upload Multiple Images at Once",
+    "metaDescription": "Upload multiple images at once and get instant URLs for all of them. Perfect for e-commerce, agencies, and content creators. Free, no signup needed.",
     "schemaName": "ImageToURL Bulk Uploader",
     "schemaDescription": "A web-based tool for uploading multiple images simultaneously to generate instant, shareable URLs.",
     "badge": "BULK UPLOAD",

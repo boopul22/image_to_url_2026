@@ -5,8 +5,8 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL for Vercel — Direct CDN Links for Static Sites | ImageToURL",
-    "metaDescription": "Host images outside your Vercel deploy and embed them with permanent URLs. Skip the build size limit, ship faster, keep your repo clean.",
+    "metaTitle": "Image to URL for Vercel — Direct CDN Image Links",
+    "metaDescription": "Host images outside your Vercel deploy and embed them with permanent CDN URLs. Skip the build size limit, ship faster, and keep your repo clean and small.",
     "schemaName": "Image to URL Converter for Vercel",
     "schemaDescription": "Generate permanent CDN URLs for images you embed in Vercel-hosted Next.js, Astro, or static sites.",
     "badge": "Vercel Image URLs",

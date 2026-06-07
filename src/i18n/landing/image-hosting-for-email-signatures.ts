@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for Email Signatures — Permanent URLs | ImageToURL",
+    "metaTitle": "Image Hosting for Email Signatures — Permanent URLs",
     "metaDescription": "Host logo and headshot images for email signatures with permanent, reliable URLs. Works with Gmail, Outlook, Apple Mail, and all major email clients.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Host logo and headshot images for email signatures with permanent, reliable URLs.",

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Free Image Hosting - Upload Images & Get Instant URLs | ImageToURL",
+    "metaTitle": "Free Image Hosting - Upload Images & Get Instant URLs",
     "metaDescription": "Host your images for free with ImageToURL. No signup required, permanent links, global CDN delivery, and support for JPG, PNG, WebP, GIF, SVG formats.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A free, no-signup image hosting service that provides permanent links and global CDN delivery for various image formats.",

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Embed Code Generator — HTML, BBCode & Markdown | ImageToURL",
+    "metaTitle": "Image Embed Code Generator — HTML, BBCode & Markdown",
     "metaDescription": "Upload an image and get ready-to-use embed codes in HTML, BBCode, and Markdown. Free embed code generator for websites, forums, and documentation.",
     "schemaName": "Image Embed Code Generator",
     "schemaDescription": "Upload an image and get ready-to-use embed codes in HTML, BBCode, and Markdown.",

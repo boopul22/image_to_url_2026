@@ -51,6 +51,12 @@ export type PageKey =
   // Cluster A — format-pair converters (browser-side)
   | 'png-to-jpg'
   | 'jpg-to-png'
+  | 'convert-to-jpg'
+  | 'jpeg-to-jpg'
+  | 'jfif-to-jpg'
+  | 'jpg-to-jpeg'
+  | 'avif-to-jpg'
+  | 'tiff-to-jpg'
   | 'webp-to-jpg'
   | 'webp-to-png'
   | 'png-to-webp'
@@ -111,6 +117,12 @@ export const SLUGS: Record<PageKey, LocaleSlugMap> = {
   // Cluster A — format-pair converters
   'png-to-jpg': { en: 'png-to-jpg', es: 'convertir-png-a-jpg', fr: 'convertir-png-en-jpg', de: 'png-in-jpg-umwandeln', ja: 'png-を-jpg-に変換', 'zh-Hans': 'png-转-jpg' },
   'jpg-to-png': { en: 'jpg-to-png', es: 'convertir-jpg-a-png', fr: 'convertir-jpg-en-png', de: 'jpg-in-png-umwandeln', ja: 'jpg-を-png-に変換', 'zh-Hans': 'jpg-转-png' },
+  'convert-to-jpg': { en: 'convert-to-jpg' },
+  'jpeg-to-jpg': { en: 'jpeg-to-jpg' },
+  'jfif-to-jpg': { en: 'jfif-to-jpg' },
+  'jpg-to-jpeg': { en: 'jpg-to-jpeg' },
+  'avif-to-jpg': { en: 'avif-to-jpg' },
+  'tiff-to-jpg': { en: 'tiff-to-jpg' },
   'webp-to-jpg': { en: 'webp-to-jpg', es: 'convertir-webp-a-jpg', fr: 'convertir-webp-en-jpg', de: 'webp-in-jpg-umwandeln', ja: 'webp-を-jpg-に変換', 'zh-Hans': 'webp-转-jpg' },
   'webp-to-png': { en: 'webp-to-png', es: 'convertir-webp-a-png', fr: 'convertir-webp-en-png', de: 'webp-in-png-umwandeln', ja: 'webp-を-png-に変換', 'zh-Hans': 'webp-转-png' },
   'png-to-webp': { en: 'png-to-webp', es: 'convertir-png-a-webp', fr: 'convertir-png-en-webp', de: 'png-in-webp-umwandeln', ja: 'png-を-webp-に変換', 'zh-Hans': 'png-转-webp' },

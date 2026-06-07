@@ -5,14 +5,14 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Direct Image Link Hosting — Clean Hotlinkable URLs | ImageToURL",
+    "metaTitle": "Direct Image Link Hosting — Clean Hotlinkable URLs",
     "metaDescription": "Get direct image links that end in .jpg, .png, .gif — not gallery pages with ads. Hotlink-friendly URLs for embedding anywhere on the web.",
     "schemaName": "Direct Image Link Hosting",
     "schemaDescription": "A tool to generate direct, ad-free image URLs that are optimized for hotlinking and embedding in websites, forums, and emails.",
     "badge": "DIRECT IMAGE LINKS",
     "h1Pre": "Direct Image Links",
     "h1Highlight": "no gallery pages.",
-    "intro": "Get clean, hotlinkable image URLs that point straight to your file. No gallery wrappers, no ads, no redirects — just the image, ready to embed anywhere.",
+    "intro": "Turn an image into a link that points straight to the file, with no gallery wrapper, no ads, and no redirects. Upload a picture and get a clean, hotlinkable URL you can use as an image link anywhere, from HTML and Markdown to forums and email.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -51,8 +51,8 @@ export const content: LandingContentMap = {
         "body": "A direct link picture works just like an image link. Add that picture link to website builders like WordPress or Wix, with no gallery page in the way."
       },
       {
-        "title": "Find and reuse every link",
-        "body": "Search website link picture or find link with picture from an older upload anytime. You get pictures with URL link format, plus pictures with URL codes for embeds."
+        "title": "A link for any picture",
+        "body": "Need a link for a picture fast? Upload it and you get an image-as-a-link URL that works the same in a website builder like WordPress or Wix, a forum post, or an email, with no gallery page in between."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
@@ -76,6 +76,10 @@ export const content: LandingContentMap = {
       {
         "q": "Does Imgur provide direct image links?",
         "a": "Imgur defaults to gallery pages with ads. ImageToURL provides a clean, direct link by default every time."
+      },
+      {
+        "q": "How do I turn an image into a link?",
+        "a": "Upload your image here and copy the direct URL we generate. That URL is your image as a link: paste it anywhere to show the picture, or wrap it in an anchor tag to make it clickable."
       }
     ],
     "ctaTitle": "Get a direct image link now",

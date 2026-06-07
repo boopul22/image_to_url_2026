@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for WordPress — Speed Up Your Site | ImageToURL",
+    "metaTitle": "Image Hosting for WordPress — Speed Up Your Site",
     "metaDescription": "Speed up WordPress by hosting images externally on a free CDN. Reduce server load, improve Core Web Vitals, and get permanent image URLs.",
     "schemaName": "Image Hosting for WordPress",
     "schemaDescription": "Speed up WordPress by hosting images externally on a free CDN to reduce server load and improve Core Web Vitals.",

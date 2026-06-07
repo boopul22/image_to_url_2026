@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL Permanent — Hosting That Never Expires | ImageToURL",
+    "metaTitle": "Image to URL Permanent — Hosting That Never Expires",
     "metaDescription": "Permanent image to URL hosting. Upload once, share forever. Image links that never expire, never break, and never disappear. Free, no signup.",
     "schemaName": "Permanent Image Hosting",
     "schemaDescription": "Image URLs that never expire or break, providing reliable hosting for your visual content.",

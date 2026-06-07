@@ -5,8 +5,8 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL for HTML — Get Direct <img> Tag Links | ImageToURL",
-    "metaDescription": "Convert any image to a direct URL you can drop straight into an HTML <img> tag. No signup, permanent links, fast CDN delivery.",
+    "metaTitle": "Image to URL for HTML — Get Direct <img> Tag Links",
+    "metaDescription": "Convert any image to a direct URL you can drop straight into an HTML <img> tag. Permanent links, fast CDN, no signup, works in any framework or CMS.",
     "schemaName": "Image to URL Converter for HTML",
     "schemaDescription": "Turn any image into a direct URL ready for the src attribute of an HTML img tag.",
     "badge": "HTML Image URLs",
