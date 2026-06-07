@@ -7,7 +7,7 @@ const en: LandingContent = {
   schemaDescription: 'Merge PNG images into a multi-page PDF entirely in your browser.',
   badge: 'Browser-only Tool',
   h1Pre: 'PNG to PDF Converter,', h1Highlight: 'Merge or Individual',
-  intro: 'Drop your PNG screenshots, receipts, or page scans and get one multi-page PDF or a separate PDF for each image. Everything runs in your browser.',
+  intro: 'Turn your PNG images into a clean PDF for free, with no upload and no signup. Merge several PNGs into one multi-page PDF for receipts, scans, or screenshot reports, or save each as its own PDF.',
   howTitle: 'How to convert PNG to PDF',
   steps: [
     { title: 'Drop PNGs', body: 'Drag one or more PNG files in. They line up in the order you add them.' },
@@ -44,7 +44,7 @@ const es: LandingContent = {
   schemaDescription: 'Combina imágenes PNG en un PDF de varias páginas completamente en tu navegador.',
   badge: 'Herramienta solo en navegador',
   h1Pre: 'Convertidor PNG a PDF,', h1Highlight: 'Combinar o Individual',
-  intro: 'Suelta tus capturas PNG, recibos o escaneos y obtén un PDF de varias páginas o uno por imagen. Todo se ejecuta en tu navegador.',
+  intro: 'Convierte tus imágenes PNG en un PDF limpio gratis, sin subir nada y sin registro. Combina varios PNG en un PDF de varias páginas para recibos, escaneos o informes de capturas de pantalla, o guarda cada uno como su propio PDF.',
   howTitle: 'Cómo convertir PNG a PDF',
   steps: [
     { title: 'Suelta los PNG', body: 'Arrastra uno o más archivos PNG. Se ordenan según los vayas añadiendo.' },
@@ -83,7 +83,7 @@ const fr: LandingContent = {
   schemaDescription: 'Fusionnez des images PNG en un PDF multipage entièrement dans votre navigateur.',
   badge: 'Outil navigateur uniquement',
   h1Pre: 'Convertisseur PNG vers PDF,', h1Highlight: 'Fusionner ou Individuel',
-  intro: 'Déposez vos captures d\'écran PNG, reçus ou scans et obtenez un PDF multipage ou un PDF séparé par image. Tout s\'exécute dans votre navigateur.',
+  intro: 'Transformez vos images PNG en un PDF propre gratuitement, sans upload ni inscription. Fusionnez plusieurs PNG en un seul PDF multipage pour des reçus, des scans ou des rapports de captures d\'écran, ou enregistrez chacun comme son propre PDF.',
   howTitle: 'Comment convertir PNG en PDF',
   steps: [
     { title: 'Déposez les PNG', body: 'Faites glisser un ou plusieurs fichiers PNG. Ils s\'ordonnent dans l\'ordre d\'ajout.' },
@@ -122,7 +122,7 @@ const de: LandingContent = {
   schemaDescription: 'PNG-Bilder komplett im Browser in eine mehrseitige PDF zusammenführen.',
   badge: 'Nur-Browser-Tool',
   h1Pre: 'PNG in PDF Konverter,', h1Highlight: 'Zusammenführen oder Einzeln',
-  intro: 'Legen Sie Ihre PNG-Screenshots, Belege oder Seitenscans ab und erhalten Sie eine mehrseitige PDF oder eine separate PDF pro Bild. Alles läuft im Browser.',
+  intro: 'Verwandeln Sie Ihre PNG-Bilder kostenlos in eine saubere PDF, ohne Upload und ohne Anmeldung. Führen Sie mehrere PNGs zu einer mehrseitigen PDF für Belege, Scans oder Screenshot-Berichte zusammen, oder speichern Sie jedes als eigene PDF.',
   howTitle: 'So wandeln Sie PNG in PDF um',
   steps: [
     { title: 'PNGs ablegen', body: 'Ziehen Sie eine oder mehrere PNG-Dateien hinein. Sie werden in der Reihenfolge angeordnet, in der Sie sie hinzufügen.' },
@@ -161,7 +161,7 @@ const ja: LandingContent = {
   schemaDescription: 'PNG 画像をブラウザ内で複数ページの PDF にまとめます。',
   badge: 'ブラウザのみで動作',
   h1Pre: 'PNG → PDF 変換ツール,', h1Highlight: 'まとめてまたは個別',
-  intro: 'PNG のスクリーンショット、領収書、ページスキャンをドロップして、複数ページの PDF か画像ごとの個別 PDF を取得。すべてブラウザ内で動作します。',
+  intro: 'PNG 画像を無料できれいな PDF に変換。アップロードも登録も不要です。複数の PNG を 1 つの複数ページ PDF にまとめて領収書・スキャン・スクリーンショットレポートにしたり、画像ごとに個別の PDF として保存できます。',
   howTitle: 'PNG を PDF に変換する方法',
   steps: [
     { title: 'PNG をドロップ', body: '1 枚以上の PNG ファイルをドラッグして追加します。追加した順に並びます。' },
@@ -200,7 +200,7 @@ const zhHans: LandingContent = {
   schemaDescription: '在浏览器中将 PNG 图片合并为多页 PDF。',
   badge: '纯浏览器工具',
   h1Pre: 'PNG 转 PDF 转换器,', h1Highlight: '合并或单独',
-  intro: '拖入 PNG 截图、收据或页面扫描件，获得一个多页 PDF 或每张图片一个独立 PDF。全程在浏览器中运行。',
+  intro: '免费将您的 PNG 图片转换为干净的 PDF，无需上传，无需注册。将多张 PNG 合并为一个多页 PDF，用于收据、扫描件或截图报告，或将每张单独保存为 PDF。',
   howTitle: '如何将 PNG 转换为 PDF',
   steps: [
     { title: '拖入 PNG', body: '将一个或多个 PNG 文件拖入，按添加顺序排列。' },
