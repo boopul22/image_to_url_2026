@@ -470,6 +470,138 @@ h1, h2, h3, h4, h5, h6 {
       border-left-width: 5px;
     }
   }
+
+  /* ====================================================================
+     Blog reading experience — scoped to .blog-article so the 28 landing
+     pages keep their tighter marketing measure. Goals: comfortable long-
+     read measure (~70ch), 18–19px body, generous rhythm, clear hierarchy,
+     soft square-edged chrome. Neutrals tinted toward the brand charcoal
+     (#1e1a25). No colored side-stripe accents.
+     ==================================================================== */
+  .blog-article .landing-prose { color: #2c2833; }
+
+  /* Body copy: larger and airier than marketing prose. */
+  .blog-article .landing-prose p,
+  .blog-article .landing-prose li {
+    font-size: 1.125rem;
+    line-height: 1.78;
+    color: #2c2833;
+  }
+  @media (min-width: 640px) {
+    .blog-article .landing-prose p,
+    .blog-article .landing-prose.blog-html-content p,
+    .blog-article .landing-prose li {
+      font-size: 1.1875rem;
+      line-height: 1.8;
+    }
+  }
+  .blog-article .landing-prose.blog-html-content p {
+    font-size: 1.125rem;
+    line-height: 1.78;
+  }
+
+  /* Vertical rhythm: clearer separation between blocks. */
+  .blog-article .landing-prose > * + *,
+  .blog-article .landing-prose.blog-html-content > * + * { margin-top: 1.6rem; }
+
+  /* Lead paragraph (standfirst): the opening sets the tone, larger + darker. */
+  .blog-article .blog-lead,
+  .blog-article .landing-prose.blog-html-content > p:first-child {
+    font-size: 1.3125rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: #1e1a25;
+  }
+  @media (min-width: 640px) {
+    .blog-article .blog-lead,
+    .blog-article .landing-prose.blog-html-content > p:first-child {
+      font-size: 1.4375rem;
+      line-height: 1.62;
+    }
+  }
+
+  /* H2: section break marked by a short rose rule above (a top accent,
+     never a side-stripe). Fluid scale, normal-case Space Grotesk. */
+  .blog-article .landing-prose h2,
+  .blog-article .landing-prose.blog-html-content h2 {
+    font-size: clamp(1.5rem, 1.18rem + 1.45vw, 1.95rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: #1e1a25;
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  @media (min-width: 640px) {
+    .blog-article .landing-prose h2,
+    .blog-article .landing-prose.blog-html-content h2 { margin-top: 3.5rem; }
+  }
+  .blog-article .landing-prose h2::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    background: #e11d48;
+    margin-bottom: 1.1rem;
+  }
+  .blog-article .landing-prose h2:first-child,
+  .blog-article .landing-prose.blog-html-content h2:first-child { margin-top: 0; }
+
+  /* H3: hierarchy through size + weight, no left border. */
+  .blog-article .landing-prose h3,
+  .blog-article .landing-prose.blog-html-content h3 {
+    font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.4rem);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #1e1a25;
+    margin-top: 2.25rem;
+    margin-bottom: 0.6rem;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  /* Links: a touch lighter underline for elegance at reading size. */
+  .blog-article .landing-prose a {
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+
+  /* Blockquote: full hairline border + warm paper tint + recessed shadow.
+     Never a bare left-stripe. */
+  .blog-article .landing-prose blockquote {
+    margin: 2.25rem 0;
+    padding: 1.5rem 1.75rem;
+    background: #faf6ec;
+    border: 1px solid #ece3c7;
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.04);
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: #1e1a25;
+  }
+  .blog-article .landing-prose blockquote p {
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+  }
+  .blog-article .landing-prose blockquote p + p { margin-top: 0.75rem; }
+
+  /* Figures + captions for inline imagery. */
+  .blog-article .landing-prose figure { margin: 2.25rem 0; }
+  .blog-article .landing-prose figcaption {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #6b6675;
+    text-align: center;
+    margin-top: 0.7rem;
+  }
+  .blog-article .landing-prose.blog-html-content img { margin: 0; }
+
+  /* TOC scroll-spy active state. */
+  .blog-toc a.is-active { color: #e11d48; }
+  .blog-toc a.is-active span:last-child { font-weight: 700; }
 }
 
 /* Reveal classes kept as no-ops for compatibility — brutalism snaps, no fades. */
