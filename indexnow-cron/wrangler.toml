@@ -1,0 +1,10 @@
+# Dedicated worker: submits the imagetourl.cloud sitemap to IndexNow daily.
+# The name is intentionally descriptive so it's obvious in the CF dashboard
+# what this scheduled worker does. No bindings/secrets required.
+name = "imagetourl-indexnow-submit"
+main = "index.js"
+compatibility_date = "2026-03-15"
+
+[triggers]
+# Daily at 03:00 UTC — resubmit the full sitemap to IndexNow.
+crons = ["0 3 * * *"]
