@@ -1,204 +1,427 @@
-import type { LandingContent, LandingContentMap } from './types';
-import { fillLocales } from './types';
-const en: LandingContent = {
-  metaTitle: 'HEIC to PNG Converter | Free, Private, No Upload',
-  metaDescription: 'Convert HEIC to PNG free, right in your browser. Your iPhone photos never get uploaded. Works on Windows, Mac, iPhone and Android. No signup needed.',
-  schemaName: 'HEIC to PNG Converter',
-  schemaDescription: 'Convert iPhone HEIC photos to lossless PNG entirely in your browser.',
-  badge: 'Browser-only Tool',
-  h1Pre: 'HEIC to PNG Converter,', h1Highlight: '100% in Your Browser',
-  intro: 'Drop your iPhone HEIC photos here and get PNG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere.',
-  howTitle: 'How to convert HEIC to PNG',
-  steps: [
-    { title: 'Drop HEIC files', body: 'Drag .heic or .heif files into the drop zone.' },
-    { title: 'Browser decodes via WebAssembly', body: 'A WebAssembly decoder does the work right on your device. No files get sent to a server, and you can check that yourself in DevTools.' },
-    { title: 'Download the PNG', body: 'Save the PNG to your device, or click \'Get URL\' to host it on our CDN and get a shareable link.' },
-  ],
-  whyTitle: 'Why convert HEIC to PNG?',
-  whyItems: [
-    { title: 'Editable', body: 'PNG re-saves without further quality loss.' },
-    { title: 'Transparent capable', body: 'You can later erase backgrounds.' },
-    { title: 'Universally supported', body: 'Every app, OS, and print pipeline accepts PNG.' },
-    { title: 'Privacy by default', body: 'Other converters upload your photos to their servers. This one doesn\'t. Your files stay on your device the entire time.' },
-  ],
-  faqTitle: 'FAQ',
-  faqs: [
-    { q: 'Are my photos really private?', a: 'Yes. The conversion happens entirely in your browser, so your HEIC photos never leave your computer or phone. Nothing gets uploaded unless you choose to host a file with \'Get URL\'.' },
-    { q: 'What is HEIC?', a: 'HEIC is the format the iPhone uses to save photos. It saves space, but a lot of apps, Windows PCs, and websites can\'t open it. Converting HEIC to PNG makes your photos work everywhere.' },
-    { q: 'How do I convert HEIC to PNG on iPhone, Windows, or Mac?', a: 'The same way on every device. Open this page, drop your HEIC files into the box, and download the PNG. It runs in any modern browser, so there\'s nothing to install on Windows, Mac, iPhone, or Android.' },
-    { q: 'Will I lose quality converting HEIC to PNG?', a: 'No. PNG is lossless, so your converted photo keeps full quality with no extra compression added.' },
-    { q: 'Is this really free?', a: 'Yes, it\'s completely free with no signup and no file limits. Convert as many photos as you like, as often as you like.' },
-  ],
-  ctaTitle: 'Want a hosted URL?', ctaBody: 'Click Get URL after conversion.', ctaButton: 'Try the main uploader',
-};
-const es: LandingContent = {
-  ...en,
-  metaTitle: 'Convertidor de HEIC a PNG | Gratis, Privado, Sin Subir',
-  metaDescription: 'Convierte fotos HEIC de iPhone a PNG gratis en tu navegador. Tus fotos nunca se suben. Funciona en Windows, Mac, iPhone y Android. Sin registro.',
-  schemaName: 'Convertidor de HEIC a PNG',
-  schemaDescription: 'Convierte fotos HEIC de iPhone a PNG sin pérdidas completamente en tu navegador.',
-  badge: 'Herramienta solo de navegador',
-  h1Pre: 'Convertidor de HEIC a PNG,', h1Highlight: '100% en tu navegador',
-  intro: 'Suelta tus fotos HEIC de iPhone aquí y obtén archivos PNG en segundos. La conversión completa se ejecuta en tu propio dispositivo, por lo que tus fotos nunca se suben a ningún lugar.',
-  howTitle: 'Cómo convertir HEIC a PNG',
-  steps: [
-    { title: 'Suelta archivos HEIC', body: 'Arrastra archivos .heic o .heif a la zona de soltar.' },
-    { title: 'El navegador decodifica con WebAssembly', body: 'Un decodificador WebAssembly hace el trabajo directamente en tu dispositivo. No se envían archivos a ningún servidor, y puedes comprobarlo tú mismo en DevTools.' },
-    { title: 'Descarga el PNG', body: 'Guarda el PNG en tu dispositivo, o haz clic en \'Obtener URL\' para alojarlo en nuestro CDN y obtener un enlace para compartir.' },
-  ],
-  whyTitle: '¿Por qué convertir HEIC a PNG?',
-  whyItems: [
-    { title: 'Editable', body: 'PNG se guarda de nuevo sin más pérdida de calidad.' },
-    { title: 'Compatible con transparencia', body: 'Puedes borrar fondos más adelante.' },
-    { title: 'Compatibilidad universal', body: 'Todas las aplicaciones, sistemas operativos y flujos de impresión aceptan PNG.' },
-    { title: 'Privacidad por defecto', body: 'Otros convertidores suben tus fotos a sus servidores. Este no lo hace. Tus archivos permanecen en tu dispositivo todo el tiempo.' },
-  ],
-  faqTitle: 'Preguntas frecuentes',
-  faqs: [
-    { q: '¿Mis fotos son realmente privadas?', a: 'Sí. La conversión ocurre completamente en tu navegador, por lo que tus fotos HEIC nunca salen de tu computadora o teléfono. No se sube nada a menos que elijas alojar un archivo con \'Obtener URL\'.' },
-    { q: '¿Qué es HEIC?', a: 'HEIC es el formato que usa el iPhone para guardar fotos. Ahorra espacio, pero muchas aplicaciones, PCs con Windows y sitios web no pueden abrirlo. Convertir HEIC a PNG hace que tus fotos funcionen en todas partes.' },
-    { q: '¿Cómo convierto HEIC a PNG en iPhone, Windows o Mac?', a: 'De la misma manera en todos los dispositivos. Abre esta página, suelta tus archivos HEIC en el cuadro y descarga el PNG. Funciona en cualquier navegador moderno, así que no hay nada que instalar en Windows, Mac, iPhone o Android.' },
-    { q: '¿Perderé calidad al convertir HEIC a PNG?', a: 'No. PNG es sin pérdidas, por lo que tu foto convertida conserva toda la calidad sin compresión adicional.' },
-    { q: '¿Es realmente gratis?', a: 'Sí, es completamente gratis sin registro y sin límites de archivos. Convierte tantas fotos como quieras, con la frecuencia que quieras.' },
-  ],
-  ctaTitle: '¿Quieres una URL alojada?',
-  ctaBody: 'Haz clic en Obtener URL después de la conversión.',
-  ctaButton: 'Probar el cargador principal',
-};
-const fr: LandingContent = {
-  ...en,
-  metaTitle: 'Convertisseur HEIC en PNG | Gratuit, Privé, Sans Envoi',
-  metaDescription: 'Convertissez vos photos HEIC iPhone en PNG gratuitement dans votre navigateur. Vos photos ne sont jamais envoyées. Fonctionne sur Windows, Mac, iPhone et Android. Sans inscription.',
-  schemaName: 'Convertisseur HEIC en PNG',
-  schemaDescription: 'Convertissez les photos HEIC iPhone en PNG sans perte entièrement dans votre navigateur.',
-  badge: 'Outil navigateur uniquement',
-  h1Pre: 'Convertisseur HEIC en PNG,', h1Highlight: '100% dans votre navigateur',
-  intro: 'Déposez vos photos HEIC iPhone ici et obtenez des fichiers PNG en quelques secondes. La conversion s\'effectue entièrement sur votre appareil, vos photos ne sont donc jamais envoyées nulle part.',
-  howTitle: 'Comment convertir HEIC en PNG',
-  steps: [
-    { title: 'Déposez les fichiers HEIC', body: 'Faites glisser des fichiers .heic ou .heif dans la zone de dépôt.' },
-    { title: 'Le navigateur décode via WebAssembly', body: 'Un décodeur WebAssembly fait le travail directement sur votre appareil. Aucun fichier n\'est envoyé à un serveur, et vous pouvez le vérifier vous-même dans DevTools.' },
-    { title: 'Téléchargez le PNG', body: 'Enregistrez le PNG sur votre appareil, ou cliquez sur \'Obtenir l\'URL\' pour l\'héberger sur notre CDN et obtenir un lien partageable.' },
-  ],
-  whyTitle: 'Pourquoi convertir HEIC en PNG ?',
-  whyItems: [
-    { title: 'Modifiable', body: 'PNG se réenregistre sans perte de qualité supplémentaire.' },
-    { title: 'Compatible transparence', body: 'Vous pouvez effacer les arrière-plans ultérieurement.' },
-    { title: 'Universellement pris en charge', body: 'Chaque application, système d\'exploitation et pipeline d\'impression accepte le PNG.' },
-    { title: 'Confidentialité par défaut', body: 'D\'autres convertisseurs envoient vos photos sur leurs serveurs. Celui-ci ne le fait pas. Vos fichiers restent sur votre appareil en permanence.' },
-  ],
-  faqTitle: 'Questions fréquentes',
-  faqs: [
-    { q: 'Mes photos sont-elles vraiment privées ?', a: 'Oui. La conversion s\'effectue entièrement dans votre navigateur, donc vos photos HEIC ne quittent jamais votre ordinateur ou téléphone. Rien n\'est envoyé, sauf si vous choisissez d\'héberger un fichier avec \'Obtenir l\'URL\'.' },
-    { q: 'Qu\'est-ce que HEIC ?', a: 'HEIC est le format utilisé par iPhone pour enregistrer des photos. Il économise de l\'espace, mais de nombreuses applications, PC Windows et sites web ne peuvent pas l\'ouvrir. Convertir HEIC en PNG rend vos photos utilisables partout.' },
-    { q: 'Comment convertir HEIC en PNG sur iPhone, Windows ou Mac ?', a: 'De la même façon sur tous les appareils. Ouvrez cette page, déposez vos fichiers HEIC dans la zone et téléchargez le PNG. Cela fonctionne dans n\'importe quel navigateur moderne, donc il n\'y a rien à installer sur Windows, Mac, iPhone ou Android.' },
-    { q: 'Vais-je perdre de la qualité en convertissant HEIC en PNG ?', a: 'Non. PNG est sans perte, donc votre photo convertie conserve toute sa qualité sans compression supplémentaire.' },
-    { q: 'Est-ce vraiment gratuit ?', a: 'Oui, c\'est entièrement gratuit, sans inscription et sans limite de fichiers. Convertissez autant de photos que vous voulez, aussi souvent que vous le souhaitez.' },
-  ],
-  ctaTitle: 'Vous voulez une URL hébergée ?',
-  ctaBody: 'Cliquez sur Obtenir l\'URL après la conversion.',
-  ctaButton: 'Essayer l\'outil de téléchargement principal',
-};
-const de: LandingContent = {
-  ...en,
-  metaTitle: 'HEIC zu PNG Konverter | Kostenlos, Privat, Kein Upload',
-  metaDescription: 'Konvertieren Sie iPhone-HEIC-Fotos kostenlos im Browser in PNG. Ihre Fotos werden niemals hochgeladen. Funktioniert auf Windows, Mac, iPhone und Android. Keine Anmeldung.',
-  schemaName: 'HEIC zu PNG Konverter',
-  schemaDescription: 'Konvertieren Sie iPhone HEIC-Fotos verlustfrei und vollständig im Browser in PNG.',
-  badge: 'Reines Browser-Tool',
-  h1Pre: 'HEIC zu PNG Konverter,', h1Highlight: '100% in Ihrem Browser',
-  intro: 'Ziehen Sie Ihre iPhone HEIC-Fotos hierher und erhalten Sie PNG-Dateien in Sekunden. Die gesamte Konvertierung findet auf Ihrem eigenen Gerät statt, sodass Ihre Fotos niemals hochgeladen werden.',
-  howTitle: 'So konvertieren Sie HEIC zu PNG',
-  steps: [
-    { title: 'HEIC-Dateien ablegen', body: 'Ziehen Sie .heic- oder .heif-Dateien in die Ablagezone.' },
-    { title: 'Browser decodiert via WebAssembly', body: 'Ein WebAssembly-Decoder erledigt die Arbeit direkt auf Ihrem Gerät. Es werden keine Dateien an einen Server gesendet, und Sie können das selbst in DevTools überprüfen.' },
-    { title: 'PNG herunterladen', body: 'Speichern Sie die PNG auf Ihrem Gerät, oder klicken Sie auf \'URL abrufen\', um sie auf unserem CDN zu hosten und einen teilbaren Link zu erhalten.' },
-  ],
-  whyTitle: 'Warum HEIC zu PNG konvertieren?',
-  whyItems: [
-    { title: 'Bearbeitbar', body: 'PNG wird ohne weiteren Qualitätsverlust erneut gespeichert.' },
-    { title: 'Transparenz möglich', body: 'Sie können Hintergründe später entfernen.' },
-    { title: 'Universell unterstützt', body: 'Jede App, jedes Betriebssystem und jede Druckpipeline akzeptiert PNG.' },
-    { title: 'Datenschutz als Standard', body: 'Andere Konverter laden Ihre Fotos auf ihre Server hoch. Dieser nicht. Ihre Dateien bleiben die ganze Zeit auf Ihrem Gerät.' },
-  ],
-  faqTitle: 'Häufige Fragen',
-  faqs: [
-    { q: 'Sind meine Fotos wirklich privat?', a: 'Ja. Die Konvertierung findet vollständig in Ihrem Browser statt, sodass Ihre HEIC-Fotos niemals Ihren Computer oder Ihr Telefon verlassen. Es wird nichts hochgeladen, es sei denn, Sie möchten eine Datei mit \'URL abrufen\' hosten.' },
-    { q: 'Was ist HEIC?', a: 'HEIC ist das Format, das das iPhone zum Speichern von Fotos verwendet. Es spart Speicherplatz, aber viele Apps, Windows-PCs und Websites können es nicht öffnen. Durch die Konvertierung von HEIC zu PNG funktionieren Ihre Fotos überall.' },
-    { q: 'Wie konvertiere ich HEIC zu PNG auf iPhone, Windows oder Mac?', a: 'Auf jedem Gerät auf die gleiche Weise. Öffnen Sie diese Seite, ziehen Sie Ihre HEIC-Dateien in das Feld und laden Sie die PNG herunter. Es funktioniert in jedem modernen Browser, sodass auf Windows, Mac, iPhone oder Android nichts installiert werden muss.' },
-    { q: 'Verliere ich Qualität beim Konvertieren von HEIC zu PNG?', a: 'Nein. PNG ist verlustfrei, sodass Ihr konvertiertes Foto die volle Qualität ohne zusätzliche Komprimierung behält.' },
-    { q: 'Ist das wirklich kostenlos?', a: 'Ja, es ist völlig kostenlos ohne Anmeldung und ohne Dateilimits. Konvertieren Sie so viele Fotos wie Sie möchten, so oft wie Sie möchten.' },
-  ],
-  ctaTitle: 'Möchten Sie eine gehostete URL?',
-  ctaBody: 'Klicken Sie nach der Konvertierung auf URL abrufen.',
-  ctaButton: 'Zum Haupt-Uploader',
-};
-const ja: LandingContent = {
-  ...en,
-  metaTitle: 'HEIC から PNG 変換 | 無料・プライベート・アップロード不要',
-  metaDescription: 'iPhone の HEIC 写真をブラウザで無料に PNG に変換。写真はアップロードされません。Windows、Mac、iPhone、Android 対応。',
-  schemaName: 'HEIC から PNG 変換ツール',
-  schemaDescription: 'iPhone の HEIC 写真を完全にブラウザ内でロスレス PNG に変換。',
-  badge: 'ブラウザのみのツール',
-  h1Pre: 'HEIC から PNG 変換ツール,', h1Highlight: '100% ブラウザ内で完結',
-  intro: 'iPhone の HEIC 写真をここにドロップすると、数秒で PNG ファイルが得られます。変換はすべてお使いのデバイス上で実行されるため、写真がアップロードされることはありません。',
-  howTitle: 'HEIC から PNG への変換方法',
-  steps: [
-    { title: 'HEIC ファイルをドロップ', body: '.heic または .heif ファイルをドロップゾーンにドラッグしてください。' },
-    { title: 'ブラウザが WebAssembly でデコード', body: 'WebAssembly デコーダーがお使いのデバイス上で処理を行います。ファイルはサーバーに送信されず、DevTools でご自身で確認することもできます。' },
-    { title: 'PNG をダウンロード', body: 'PNG をデバイスに保存するか、\'URLを取得\' をクリックして CDN にホストし、共有可能なリンクを取得してください。' },
-  ],
-  whyTitle: 'なぜ HEIC を PNG に変換するのか？',
-  whyItems: [
-    { title: '編集可能', body: 'PNG は再保存しても画質が劣化しません。' },
-    { title: '透過に対応', body: '後から背景を消去できます。' },
-    { title: '幅広いサポート', body: 'あらゆるアプリ、OS、印刷パイプラインで PNG が利用できます。' },
-    { title: 'デフォルトでプライベート', body: '他のコンバーターは写真をサーバーにアップロードします。このツールはそうしません。ファイルは常にあなたのデバイス上にあります。' },
-  ],
-  faqTitle: 'よくある質問',
-  faqs: [
-    { q: '写真は本当にプライベートですか？', a: 'はい。変換はすべてブラウザ内で行われるため、HEIC 写真がコンピューターやスマートフォンから外に出ることはありません。\'URLを取得\' でファイルをホストすることを選ばない限り、何もアップロードされません。' },
-    { q: 'HEIC とは何ですか？', a: 'HEIC は iPhone が写真の保存に使用するフォーマットです。容量を節約できますが、多くのアプリ、Windows PC、ウェブサイトでは開けません。HEIC を PNG に変換することで、どこでも写真を使えるようになります。' },
-    { q: 'iPhone、Windows、Mac で HEIC を PNG に変換するには？', a: 'どのデバイスでも同じ方法です。このページを開き、HEIC ファイルをボックスにドロップして、PNG をダウンロードしてください。モダンなブラウザで動作するため、Windows、Mac、iPhone、Android に何かをインストールする必要はありません。' },
-    { q: 'HEIC から PNG に変換すると画質が落ちますか？', a: 'いいえ。PNG はロスレスなので、変換後の写真は追加の圧縮なしに完全な画質を保ちます。' },
-    { q: '本当に無料ですか？', a: 'はい、登録不要・ファイル数制限なしで完全無料です。好きなだけ何度でも写真を変換できます。' },
-  ],
-  ctaTitle: 'ホスト型 URL が必要ですか？',
-  ctaBody: '変換後に URLを取得 をクリックしてください。',
-  ctaButton: 'メインアップローダーを試す',
-};
-const zhHans: LandingContent = {
-  ...en,
-  metaTitle: 'HEIC 转 PNG 转换器 | 免费、私密、无需上传',
-  metaDescription: '在浏览器中免费将 iPhone HEIC 照片转换为 PNG。照片不会被上传。支持 Windows、Mac、iPhone 和 Android。无需注册。',
-  schemaName: 'HEIC 转 PNG 转换器',
-  schemaDescription: '完全在浏览器中将 iPhone HEIC 照片转换为无损 PNG。',
-  badge: '纯浏览器工具',
-  h1Pre: 'HEIC 转 PNG 转换器,', h1Highlight: '100% 在您的浏览器中完成',
-  intro: '将您的 iPhone HEIC 照片拖放到这里，几秒钟内即可获得 PNG 文件。整个转换过程在您自己的设备上运行，您的照片不会被上传到任何地方。',
-  howTitle: '如何将 HEIC 转换为 PNG',
-  steps: [
-    { title: '拖入 HEIC 文件', body: '将 .heic 或 .heif 文件拖入上传区域。' },
-    { title: '浏览器通过 WebAssembly 解码', body: 'WebAssembly 解码器在您的设备上完成所有处理。文件不会发送到服务器，您可以在 DevTools 中自行验证。' },
-    { title: '下载 PNG', body: '将 PNG 保存到您的设备，或点击\'获取 URL\'将其托管到我们的 CDN 并获得可分享的链接。' },
-  ],
-  whyTitle: '为什么将 HEIC 转换为 PNG？',
-  whyItems: [
-    { title: '可编辑', body: 'PNG 重新保存时不会有额外的质量损失。' },
-    { title: '支持透明度', body: '您可以在之后删除背景。' },
-    { title: '广泛兼容', body: '每个应用程序、操作系统和打印流程都支持 PNG。' },
-    { title: '默认保护隐私', body: '其他转换器会将您的照片上传到他们的服务器。这个工具不会。您的文件始终保留在您的设备上。' },
-  ],
-  faqTitle: '常见问题',
-  faqs: [
-    { q: '我的照片真的是私密的吗？', a: '是的。转换完全在您的浏览器中进行，因此您的 HEIC 照片永远不会离开您的电脑或手机。除非您选择使用\'获取 URL\'托管文件，否则不会上传任何内容。' },
-    { q: '什么是 HEIC？', a: 'HEIC 是 iPhone 用于保存照片的格式。它节省空间，但很多应用程序、Windows 电脑和网站无法打开它。将 HEIC 转换为 PNG 可以让您的照片在任何地方都能使用。' },
-    { q: '如何在 iPhone、Windows 或 Mac 上将 HEIC 转换为 PNG？', a: '在所有设备上方法相同。打开此页面，将您的 HEIC 文件拖入框中，然后下载 PNG。它可以在任何现代浏览器中运行，因此在 Windows、Mac、iPhone 或 Android 上无需安装任何东西。' },
-    { q: '将 HEIC 转换为 PNG 会损失质量吗？', a: '不会。PNG 是无损的，因此您转换后的照片保持完整质量，不会添加额外的压缩。' },
-    { q: '这真的是免费的吗？', a: '是的，完全免费，无需注册，无文件数量限制。随时随意转换任意数量的照片。' },
-  ],
-  ctaTitle: '需要托管 URL 吗？',
-  ctaBody: '转换后点击获取 URL。',
-  ctaButton: '试用主上传工具',
-};
-export const content: LandingContentMap = fillLocales(en, { es, fr, de, ja, 'zh-Hans': zhHans });
+import type { LandingContentMap } from './types';
+
+// Non-English entries maintained by scripts/translate-landing.mjs.
+// Re-run with --force to overwrite.
+
+export const content: LandingContentMap = {
+  "en": {
+    "metaTitle": "HEIC to PNG Converter | Free, Private, No Upload",
+    "metaDescription": "Convert HEIC to PNG free, right in your browser. Your iPhone photos never get uploaded. Works on Windows, Mac, iPhone and Android. No signup needed.",
+    "schemaName": "HEIC to PNG Converter",
+    "schemaDescription": "Convert iPhone HEIC photos to lossless PNG entirely in your browser.",
+    "badge": "Browser-only Tool",
+    "h1Pre": "HEIC to PNG Converter,",
+    "h1Highlight": "100% in Your Browser",
+    "intro": "Drop your iPhone HEIC photos here and get PNG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere.",
+    "howTitle": "How to convert HEIC to PNG",
+    "steps": [
+      {
+        "title": "Drop HEIC files",
+        "body": "Drag .heic or .heif files into the drop zone."
+      },
+      {
+        "title": "Browser decodes via WebAssembly",
+        "body": "A WebAssembly decoder does the work right on your device. No files get sent to a server, and you can check that yourself in DevTools."
+      },
+      {
+        "title": "Download the PNG",
+        "body": "Save the PNG to your device, or click 'Get URL' to host it on our CDN and get a shareable link."
+      }
+    ],
+    "whyTitle": "Why convert HEIC to PNG?",
+    "whyItems": [
+      {
+        "title": "Editable",
+        "body": "PNG re-saves without further quality loss."
+      },
+      {
+        "title": "Transparent capable",
+        "body": "You can later erase backgrounds."
+      },
+      {
+        "title": "Universally supported",
+        "body": "Every app, OS, and print pipeline accepts PNG."
+      },
+      {
+        "title": "Privacy by default",
+        "body": "Other converters upload your photos to their servers. This one doesn't. Your files stay on your device the entire time."
+      }
+    ],
+    "faqTitle": "FAQ",
+    "faqs": [
+      {
+        "q": "Are my photos really private?",
+        "a": "Yes. The conversion happens entirely in your browser, so your HEIC photos never leave your computer or phone. Nothing gets uploaded unless you choose to host a file with 'Get URL'."
+      },
+      {
+        "q": "What is HEIC?",
+        "a": "HEIC is the format the iPhone uses to save photos. It saves space, but a lot of apps, Windows PCs, and websites can't open it. Converting HEIC to PNG makes your photos work everywhere."
+      },
+      {
+        "q": "How do I convert HEIC to PNG on iPhone, Windows, or Mac?",
+        "a": "The same way on every device. Open this page, drop your HEIC files into the box, and download the PNG. It runs in any modern browser, so there's nothing to install on Windows, Mac, iPhone, or Android."
+      },
+      {
+        "q": "Will I lose quality converting HEIC to PNG?",
+        "a": "No. PNG is lossless, so your converted photo keeps full quality with no extra compression added."
+      },
+      {
+        "q": "Is this really free?",
+        "a": "Yes, it's completely free with no signup and no file limits. Convert as many photos as you like, as often as you like."
+      }
+    ],
+    "ctaTitle": "Want a hosted URL?",
+    "ctaBody": "Click Get URL after conversion.",
+    "ctaButton": "Try the main uploader"
+  },
+  "es": {
+    "metaTitle": "Convertidor de HEIC a PNG | Gratis, privado, sin subidas",
+    "metaDescription": "Convierte HEIC a PNG gratis directamente en tu navegador. Tus fotos de iPhone nunca se suben. Funciona en Windows, Mac, iPhone y Android. Sin registro.",
+    "schemaName": "Convertidor de HEIC a PNG",
+    "schemaDescription": "Convierte fotos HEIC de iPhone a PNG sin pérdida directamente en tu navegador.",
+    "badge": "Herramienta exclusiva de navegador",
+    "h1Pre": "Convertidor de HEIC a PNG,",
+    "h1Highlight": "100% en tu navegador",
+    "intro": "Suelta tus fotos HEIC de iPhone aquí y obtén archivos PNG en segundos. Toda la conversión se ejecuta en tu propio dispositivo, por lo que tus fotos nunca se suben a ningún lugar.",
+    "howTitle": "Cómo convertir HEIC a PNG",
+    "steps": [
+      {
+        "title": "Suelta los archivos HEIC",
+        "body": "Arrastra archivos .heic o .heif a la zona de carga."
+      },
+      {
+        "title": "El navegador decodifica vía WebAssembly",
+        "body": "Un decodificador WebAssembly hace el trabajo directamente en tu dispositivo. No se envían archivos a un servidor, y puedes verificarlo tú mismo en las herramientas de desarrollo."
+      },
+      {
+        "title": "Descarga el PNG",
+        "body": "Guarda el PNG en tu dispositivo o haz clic en 'Obtener URL' para alojarlo en nuestra CDN y obtener un enlace para compartir."
+      }
+    ],
+    "whyTitle": "¿Por qué convertir HEIC a PNG?",
+    "whyItems": [
+      {
+        "title": "Editable",
+        "body": "El formato PNG permite guardar sin pérdida de calidad adicional."
+      },
+      {
+        "title": "Soporta transparencia",
+        "body": "Puedes borrar fondos posteriormente."
+      },
+      {
+        "title": "Soporte universal",
+        "body": "Todas las aplicaciones, sistemas operativos y flujos de impresión aceptan PNG."
+      },
+      {
+        "title": "Privacidad por defecto",
+        "body": "Otros convertidores suben tus fotos a sus servidores. Este no. Tus archivos permanecen en tu dispositivo todo el tiempo."
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes",
+    "faqs": [
+      {
+        "q": "¿Mis fotos son realmente privadas?",
+        "a": "Sí. La conversión ocurre completamente en tu navegador, por lo que tus fotos HEIC nunca abandonan tu computadora o teléfono. Nada se sube a menos que elijas alojar un archivo con 'Obtener URL'."
+      },
+      {
+        "q": "¿Qué es HEIC?",
+        "a": "HEIC es el formato que usa el iPhone para guardar fotos. Ahorra espacio, pero muchas aplicaciones, PCs con Windows y sitios web no pueden abrirlo. Convertir HEIC a PNG hace que tus fotos funcionen en todas partes."
+      },
+      {
+        "q": "¿Cómo convierto HEIC a PNG en iPhone, Windows o Mac?",
+        "a": "De la misma manera en cada dispositivo. Abre esta página, suelta tus archivos HEIC en el cuadro y descarga el PNG. Funciona en cualquier navegador moderno, por lo que no hay nada que instalar en Windows, Mac, iPhone o Android."
+      },
+      {
+        "q": "¿Perderé calidad al convertir HEIC a PNG?",
+        "a": "No. PNG no tiene pérdida, por lo que tu foto convertida mantiene la calidad completa sin compresión adicional."
+      },
+      {
+        "q": "¿Es realmente gratis?",
+        "a": "Sí, es completamente gratis, sin registro y sin límites de archivos. Convierte tantas fotos como quieras, tan seguido como desees."
+      }
+    ],
+    "ctaTitle": "¿Quieres una URL alojada?",
+    "ctaBody": "Haz clic en Obtener URL después de la conversión.",
+    "ctaButton": "Probar el cargador principal"
+  },
+  "fr": {
+    "metaTitle": "Convertisseur HEIC en PNG | Gratuit, privé, sans téléchargement",
+    "metaDescription": "Convertissez vos fichiers HEIC en PNG gratuitement, directement dans votre navigateur. Vos photos d'iPhone ne sont jamais téléchargées sur un serveur. Fonctionne sur Windows, Mac, iPhone et Android. Aucune inscription requise.",
+    "schemaName": "Convertisseur HEIC en PNG",
+    "schemaDescription": "Convertissez vos photos HEIC d'iPhone en PNG sans perte, entièrement dans votre navigateur.",
+    "badge": "Outil 100% navigateur",
+    "h1Pre": "Convertisseur HEIC en PNG,",
+    "h1Highlight": "100% dans votre navigateur",
+    "intro": "Déposez vos photos HEIC d'iPhone ici et obtenez des fichiers PNG en quelques secondes. Toute la conversion s'effectue sur votre appareil, vos photos ne sont donc jamais envoyées nulle part.",
+    "howTitle": "Comment convertir HEIC en PNG",
+    "steps": [
+      {
+        "title": "Déposez vos fichiers HEIC",
+        "body": "Glissez vos fichiers .heic ou .heif dans la zone de dépôt."
+      },
+      {
+        "title": "Décodage via WebAssembly",
+        "body": "Un décodeur WebAssembly effectue le travail directement sur votre appareil. Aucun fichier n'est envoyé vers un serveur, vous pouvez le vérifier vous-même dans les outils de développement."
+      },
+      {
+        "title": "Téléchargez le PNG",
+        "body": "Enregistrez le PNG sur votre appareil, ou cliquez sur 'Obtenir l'URL' pour l'héberger sur notre CDN et obtenir un lien partageable."
+      }
+    ],
+    "whyTitle": "Pourquoi convertir HEIC en PNG ?",
+    "whyItems": [
+      {
+        "title": "Modifiable",
+        "body": "Le format PNG permet de réenregistrer sans perte de qualité supplémentaire."
+      },
+      {
+        "title": "Gestion de la transparence",
+        "body": "Vous pouvez facilement supprimer les arrière-plans par la suite."
+      },
+      {
+        "title": "Compatibilité universelle",
+        "body": "Toutes les applications, systèmes d'exploitation et outils d'impression acceptent le format PNG."
+      },
+      {
+        "title": "Confidentialité par défaut",
+        "body": "Les autres convertisseurs téléchargent vos photos sur leurs serveurs. Celui-ci ne le fait pas. Vos fichiers restent sur votre appareil tout au long du processus."
+      }
+    ],
+    "faqTitle": "FAQ",
+    "faqs": [
+      {
+        "q": "Mes photos sont-elles vraiment privées ?",
+        "a": "Oui. La conversion se fait entièrement dans votre navigateur, vos photos HEIC ne quittent donc jamais votre ordinateur ou votre téléphone. Rien n'est téléchargé à moins que vous ne choisissiez d'héberger un fichier avec 'Obtenir l'URL'."
+      },
+      {
+        "q": "Qu'est-ce que le format HEIC ?",
+        "a": "HEIC est le format utilisé par l'iPhone pour enregistrer les photos. Il permet d'économiser de l'espace, mais de nombreuses applications, PC Windows et sites web ne peuvent pas l'ouvrir. Convertir HEIC en PNG rend vos photos compatibles partout."
+      },
+      {
+        "q": "Comment convertir HEIC en PNG sur iPhone, Windows ou Mac ?",
+        "a": "La méthode est identique sur tous les appareils. Ouvrez cette page, déposez vos fichiers HEIC dans la zone prévue et téléchargez le PNG. Cela fonctionne dans n'importe quel navigateur moderne, il n'y a donc rien à installer sur Windows, Mac, iPhone ou Android."
+      },
+      {
+        "q": "Vais-je perdre en qualité en convertissant HEIC en PNG ?",
+        "a": "Non. Le format PNG est sans perte, votre photo convertie conserve donc sa qualité totale sans compression supplémentaire."
+      },
+      {
+        "q": "Est-ce vraiment gratuit ?",
+        "a": "Oui, c'est entièrement gratuit, sans inscription et sans limite de fichiers. Convertissez autant de photos que vous le souhaitez, aussi souvent que vous le voulez."
+      }
+    ],
+    "ctaTitle": "Besoin d'une URL hébergée ?",
+    "ctaBody": "Cliquez sur Obtenir l'URL après la conversion.",
+    "ctaButton": "Essayer l'outil principal"
+  },
+  "de": {
+    "metaTitle": "HEIC in PNG umwandeln | Kostenlos, privat, kein Upload",
+    "metaDescription": "Wandeln Sie HEIC kostenlos direkt in Ihrem Browser in PNG um. Ihre iPhone-Fotos werden nie hochgeladen. Funktioniert auf Windows, Mac, iPhone und Android. Keine Anmeldung erforderlich.",
+    "schemaName": "HEIC in PNG Konverter",
+    "schemaDescription": "Wandeln Sie iPhone HEIC-Fotos verlustfrei direkt in Ihrem Browser in PNG um.",
+    "badge": "Browser-basiertes Tool",
+    "h1Pre": "HEIC in PNG umwandeln,",
+    "h1Highlight": "100% in Ihrem Browser",
+    "intro": "Ziehen Sie Ihre iPhone HEIC-Fotos hierher und erhalten Sie in Sekunden PNG-Dateien. Die gesamte Konvertierung läuft auf Ihrem eigenen Gerät, sodass Ihre Fotos nirgendwohin hochgeladen werden.",
+    "howTitle": "So wandeln Sie HEIC in PNG um",
+    "steps": [
+      {
+        "title": "HEIC-Dateien ablegen",
+        "body": "Ziehen Sie .heic- oder .heif-Dateien in den Ablagebereich."
+      },
+      {
+        "title": "Browser-Dekodierung via WebAssembly",
+        "body": "Ein WebAssembly-Dekoder erledigt die Arbeit direkt auf Ihrem Gerät. Es werden keine Dateien an einen Server gesendet, was Sie selbst in den DevTools überprüfen können."
+      },
+      {
+        "title": "PNG herunterladen",
+        "body": "Speichern Sie das PNG auf Ihrem Gerät oder klicken Sie auf 'URL abrufen', um es auf unserem CDN zu hosten und einen teilbaren Link zu erhalten."
+      }
+    ],
+    "whyTitle": "Warum HEIC in PNG umwandeln?",
+    "whyItems": [
+      {
+        "title": "Bearbeitbar",
+        "body": "PNG lässt sich ohne weiteren Qualitätsverlust erneut speichern."
+      },
+      {
+        "title": "Transparenzfähig",
+        "body": "Sie können später Hintergründe entfernen."
+      },
+      {
+        "title": "Universell unterstützt",
+        "body": "Jede App, jedes Betriebssystem und jeder Druck-Workflow akzeptiert PNG."
+      },
+      {
+        "title": "Datenschutz als Standard",
+        "body": "Andere Konverter laden Ihre Fotos auf ihre Server hoch. Dieser nicht. Ihre Dateien bleiben die ganze Zeit auf Ihrem Gerät."
+      }
+    ],
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqs": [
+      {
+        "q": "Sind meine Fotos wirklich privat?",
+        "a": "Ja. Die Konvertierung findet vollständig in Ihrem Browser statt, sodass Ihre HEIC-Fotos Ihren Computer oder Ihr Telefon nie verlassen. Es wird nichts hochgeladen, es sei denn, Sie entscheiden sich dafür, eine Datei mit 'URL abrufen' zu hosten."
+      },
+      {
+        "q": "Was ist HEIC?",
+        "a": "HEIC ist das Format, das das iPhone zum Speichern von Fotos verwendet. Es spart Platz, aber viele Apps, Windows-PCs und Websites können es nicht öffnen. Die Konvertierung von HEIC in PNG sorgt dafür, dass Ihre Fotos überall funktionieren."
+      },
+      {
+        "q": "Wie wandle ich HEIC auf iPhone, Windows oder Mac in PNG um?",
+        "a": "Auf jedem Gerät gleich. Öffnen Sie diese Seite, ziehen Sie Ihre HEIC-Dateien in das Feld und laden Sie das PNG herunter. Es läuft in jedem modernen Browser, daher muss auf Windows, Mac, iPhone oder Android nichts installiert werden."
+      },
+      {
+        "q": "Verliere ich bei der Konvertierung von HEIC in PNG an Qualität?",
+        "a": "Nein. PNG ist verlustfrei, daher behält Ihr konvertiertes Foto die volle Qualität ohne zusätzliche Komprimierung."
+      },
+      {
+        "q": "Ist das wirklich kostenlos?",
+        "a": "Ja, es ist komplett kostenlos, ohne Anmeldung und ohne Dateibeschränkungen. Konvertieren Sie so viele Fotos, wie Sie möchten, so oft Sie möchten."
+      }
+    ],
+    "ctaTitle": "Möchten Sie eine gehostete URL?",
+    "ctaBody": "Klicken Sie nach der Konvertierung auf URL abrufen.",
+    "ctaButton": "Haupt-Uploader ausprobieren"
+  },
+  "ja": {
+    "metaTitle": "HEIC to PNG 変換 | 無料・プライバシー保護・アップロード不要",
+    "metaDescription": "ブラウザ上でHEICをPNGに無料で変換。iPhoneの写真はサーバーにアップロードされません。Windows、Mac、iPhone、Androidで動作。登録不要。",
+    "schemaName": "HEIC to PNG 変換ツール",
+    "schemaDescription": "iPhoneのHEIC写真をブラウザ上で完全にロスレスなPNGに変換します。",
+    "badge": "ブラウザ完結型ツール",
+    "h1Pre": "HEIC to PNG 変換、",
+    "h1Highlight": "100%ブラウザ内で完結",
+    "intro": "iPhoneのHEIC写真をドラッグ＆ドロップするだけで、数秒でPNGファイルに変換。変換処理はすべてお使いのデバイス内で行われるため、写真が外部にアップロードされることはありません。",
+    "howTitle": "HEICからPNGへの変換方法",
+    "steps": [
+      {
+        "title": "HEICファイルをドロップ",
+        "body": ".heicまたは.heifファイルをドロップゾーンにドラッグしてください。"
+      },
+      {
+        "title": "WebAssemblyでブラウザ処理",
+        "body": "WebAssemblyデコーダーがデバイス上で直接処理を実行します。サーバーにファイルが送信されることはなく、ブラウザのデベロッパーツールで通信を確認できます。"
+      },
+      {
+        "title": "PNGをダウンロード",
+        "body": "PNGをデバイスに保存するか、「URLを取得」をクリックしてCDNでホストし、共有リンクを作成できます。"
+      }
+    ],
+    "whyTitle": "HEICをPNGに変換する理由",
+    "whyItems": [
+      {
+        "title": "編集に適している",
+        "body": "PNGは再保存しても画質が劣化しません。"
+      },
+      {
+        "title": "透過に対応",
+        "body": "後から背景を透過させることが可能です。"
+      },
+      {
+        "title": "高い互換性",
+        "body": "あらゆるアプリ、OS、印刷環境でPNGはサポートされています。"
+      },
+      {
+        "title": "プライバシー重視",
+        "body": "他の変換ツールとは異なり、サーバーに写真をアップロードしません。ファイルは常にデバイス内に留まります。"
+      }
+    ],
+    "faqTitle": "よくある質問",
+    "faqs": [
+      {
+        "q": "写真は本当にプライベートですか？",
+        "a": "はい。変換はすべてブラウザ内で行われるため、HEIC写真がPCやスマホから外部へ送信されることはありません。「URLを取得」機能でファイルをホストしない限り、何もアップロードされません。"
+      },
+      {
+        "q": "HEICとは何ですか？",
+        "a": "HEICはiPhoneで写真保存に使用される形式です。容量を節約できますが、多くのアプリやWindows PC、Webサイトでは開けません。PNGに変換することで、どこでも写真を利用できるようになります。"
+      },
+      {
+        "q": "iPhone、Windows、MacでHEICをPNGに変換するには？",
+        "a": "どのデバイスでも同じ方法です。このページを開き、HEICファイルをボックスにドロップしてPNGをダウンロードするだけです。モダンなブラウザであれば動作するため、インストールは不要です。"
+      },
+      {
+        "q": "変換で画質は落ちますか？",
+        "a": "いいえ。PNGはロスレス形式のため、追加の圧縮なしで元の画質を完全に保持します。"
+      },
+      {
+        "q": "本当に無料ですか？",
+        "a": "はい。登録不要でファイル制限もありません。何枚でも、何度でも無料で変換できます。"
+      }
+    ],
+    "ctaTitle": "ホストされたURLが必要ですか？",
+    "ctaBody": "変換後に「URLを取得」をクリックしてください。",
+    "ctaButton": "アップローダーを試す"
+  },
+  "zh-Hans": {
+    "metaTitle": "HEIC 转 PNG 转换器 | 免费、隐私、无需上传",
+    "metaDescription": "直接在浏览器中免费将 HEIC 转换为 PNG。您的 iPhone 照片无需上传。适用于 Windows、Mac、iPhone 和 Android。无需注册。",
+    "schemaName": "HEIC 转 PNG 转换器",
+    "schemaDescription": "完全在您的浏览器中将 iPhone HEIC 照片转换为无损 PNG。",
+    "badge": "纯浏览器工具",
+    "h1Pre": "HEIC 转 PNG 转换器，",
+    "h1Highlight": "100% 在您的浏览器中完成",
+    "intro": "将您的 iPhone HEIC 照片拖放到此处，即可在几秒钟内获得 PNG 文件。整个转换过程在您的设备上运行，因此您的照片永远不会上传到任何地方。",
+    "howTitle": "如何将 HEIC 转换为 PNG",
+    "steps": [
+      {
+        "title": "拖放 HEIC 文件",
+        "body": "将 .heic 或 .heif 文件拖入放置区域。"
+      },
+      {
+        "title": "浏览器通过 WebAssembly 解码",
+        "body": "WebAssembly 解码器直接在您的设备上完成工作。没有任何文件会被发送到服务器，您可以在 DevTools 中自行验证。"
+      },
+      {
+        "title": "下载 PNG",
+        "body": "将 PNG 保存到您的设备，或点击“获取 URL”将其托管在我们的 CDN 上并获取可共享的链接。"
+      }
+    ],
+    "whyTitle": "为什么要将 HEIC 转换为 PNG？",
+    "whyItems": [
+      {
+        "title": "可编辑",
+        "body": "PNG 再次保存时不会造成进一步的质量损失。"
+      },
+      {
+        "title": "支持透明度",
+        "body": "您可以稍后擦除背景。"
+      },
+      {
+        "title": "通用支持",
+        "body": "所有应用程序、操作系统和打印流程都接受 PNG。"
+      },
+      {
+        "title": "默认隐私",
+        "body": "其他转换器会将您的照片上传到他们的服务器。而此工具不会。您的文件始终保留在您的设备上。"
+      }
+    ],
+    "faqTitle": "常见问题解答",
+    "faqs": [
+      {
+        "q": "我的照片真的私密吗？",
+        "a": "是的。转换完全在您的浏览器中进行，因此您的 HEIC 照片永远不会离开您的电脑或手机。除非您选择使用“获取 URL”托管文件，否则不会上传任何内容。"
+      },
+      {
+        "q": "什么是 HEIC？",
+        "a": "HEIC 是 iPhone 用于保存照片的格式。它节省空间，但许多应用程序、Windows PC 和网站无法打开它。将 HEIC 转换为 PNG 可以让您的照片在任何地方都能使用。"
+      },
+      {
+        "q": "如何在 iPhone、Windows 或 Mac 上将 HEIC 转换为 PNG？",
+        "a": "在所有设备上的操作方式相同。打开此页面，将您的 HEIC 文件拖入框中，然后下载 PNG。它可以在任何现代浏览器中运行，因此无需在 Windows、Mac、iPhone 或 Android 上安装任何软件。"
+      },
+      {
+        "q": "将 HEIC 转换为 PNG 会损失质量吗？",
+        "a": "不会。PNG 是无损的，因此您转换后的照片将保持完整质量，不会增加额外的压缩。"
+      },
+      {
+        "q": "这真的是免费的吗？",
+        "a": "是的，完全免费，无需注册，也没有文件限制。您可以根据需要随时转换任意数量的照片。"
+      }
+    ],
+    "ctaTitle": "需要托管 URL？",
+    "ctaBody": "转换后点击“获取 URL”。",
+    "ctaButton": "尝试主上传器"
+  }
+} as LandingContentMap;
