@@ -3,5 +3,4 @@ main = "index.js"
 compatibility_date = "2026-03-15"
 
 [triggers]
-# */15 → expire-images pinger; 0 3 * * * → daily IndexNow sitemap resubmission
-crons = ["*/15 * * * *", "0 3 * * *"]
+crons = ["*/15 * * * *"]
