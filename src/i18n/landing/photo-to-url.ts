@@ -5,81 +5,89 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Photo to URL — Turn Any Photo into a Shareable Link",
-    "metaDescription": "Turn any photo into a shareable URL in seconds. Upload from phone or computer, get a permanent link instantly. Free photo hosting, no signup required.",
+    "metaTitle": "Photo to URL — Turn a Photo into a Link Free | ImageToURL",
+    "metaDescription": "Photo to URL in seconds: upload from your phone or computer and get a direct, shareable link. Free, no signup, no watermark. Works as a photo to link tool.",
     "schemaName": "Photo to URL Converter",
-    "schemaDescription": "A free web tool that converts any uploaded photo into a permanent, shareable URL instantly without requiring registration.",
+    "schemaDescription": "A free web tool that turns any uploaded photo into a direct, shareable URL, with no signup, no watermark, and uploads straight from a phone or computer.",
     "badge": "PHOTO SHARING",
-    "h1Pre": "Photo to URL",
-    "h1Highlight": "in seconds.",
-    "intro": "Turn any photo into a shareable URL in seconds. Upload from your phone or computer and get a permanent link instantly with no signup or fees.",
-    "howTitle": "How It Works",
+    "h1Pre": "Photo to URL,",
+    "h1Highlight": "photo to link in seconds",
+    "intro": "Photo to URL is the quickest way to share a picture without sending the file itself. Upload from your phone or computer, and you get a direct link you can paste into a chat, a forum, or a post. No signup, no watermark, and the link works as a photo to link anywhere you drop it.",
+    "howTitle": "How Photo to URL Works",
     "steps": [
       {
-        "title": "Choose Your Photo",
-        "body": "Select a photo from your phone, tablet, or computer. Drag & drop or tap to browse — it works on any device."
+        "title": "Pick a Photo",
+        "body": "Tap the upload area on your phone to grab a shot from your camera roll, or drag a file in from your computer. JPG, PNG, HEIC, and WebP all work, up to 10MB."
       },
       {
-        "title": "Instant Upload",
-        "body": "Your photo uploads to our global CDN in under 3 seconds. A permanent, shareable URL is created automatically."
+        "title": "Get the Link",
+        "body": "Your photo lands on a fast CDN and a direct URL comes back right away. Nothing gets compressed, so the picture looks the way you uploaded it."
       },
       {
-        "title": "Share the Link",
-        "body": "Copy your photo URL and share it via text, email, social media, or embed it in any website or document."
+        "title": "Paste It Anywhere",
+        "body": "Copy the link and send it. Because it is a direct image URL, it renders as the actual photo in chat apps, forums, and social posts instead of showing as plain text."
       }
     ],
     "whyTitle": "Why Use Photo to URL?",
     "whyItems": [
       {
-        "title": "Works on Every Device",
-        "body": "Upload photos directly from your iPhone, Android, iPad, or desktop. Our interface adapts to any screen size."
+        "title": "Built for Phones",
+        "body": "Most people reach a photo to URL tool to share something straight off their phone. Tap, upload, copy the link, and you are done. iPhone, Android, and tablets all work in the browser with nothing to install."
       },
       {
-        "title": "No Account Needed",
-        "body": "Just open the page and upload. No registration, no email, no password. Share photos in under 10 seconds."
+        "title": "Photo to Link That Embeds",
+        "body": "The link you get is a direct, hotlinkable image URL. Drop that photo to link into Discord, a Reddit thread, or an email and it shows up as the picture itself, not an attachment you have to download."
       },
       {
-        "title": "Permanent Photo Links",
-        "body": "Your photo URLs never expire. Share them today, access them years from now. Guaranteed permanence."
-      },
-      {
-        "title": "All Photo Formats",
-        "body": "Upload JPG, PNG, WebP, or any common photo format. We handle them all with original quality preserved."
-      },
-      {
-        "title": "Made for any pic",
-        "body": "Drop in a pic and a pic URL comes back, free. The same upload handles a photo or a picture, so you can share those pic links wherever you need them."
-      },
-      {
-        "title": "Photo to link, your way",
-        "body": "Use it as a photo URL converter or a photo to link tool. Upload a photo and it creates a photo URL on the spot, ready to share in a chat, a forum, or an email."
+        "title": "No Account, No Watermark",
+        "body": "There is no signup and nothing stamped on your image. Open the page, upload anonymously, and the photo stays exactly as you sent it."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "useCasesTitle": "Where a Photo to URL Link Helps",
+    "useCasesIntro": "Once your picture has a link, you can use it in places that only accept a URL:",
+    "useCases": [
+      {
+        "title": "Share in Chat From Your Phone",
+        "body": "Snap a photo, upload it, and send a photo to link in WhatsApp, Telegram, or a group chat. The receiver sees the image inline without you sending the heavy file."
+      },
+      {
+        "title": "Post on Forums and Social",
+        "body": "Forums and many social sites want an image address rather than a file. Paste your photo URL and the picture appears in the post."
+      },
+      {
+        "title": "Add to Listings and Docs",
+        "body": "Marketplace listings, spreadsheets, and forms often ask for an image link. Your direct photo URL fills that field and loads the photo for anyone who opens it."
+      }
+    ],
+    "faqTitle": "Photo to URL Questions, Answered",
     "faqs": [
       {
-        "q": "Can I upload photos from my phone?",
-        "a": "Absolutely. Our uploader works on iPhone, Android, iPad, and all mobile browsers. Just tap the upload area to select from your photo library."
+        "q": "How do I turn a photo into a link?",
+        "a": "Upload the photo using the box above. A direct link is generated in a few seconds. Copy it and paste it wherever you need to share the picture. No account is required."
       },
       {
-        "q": "Will my photo quality be reduced?",
-        "a": "No. We store and serve your photos in their original quality. No compression, no resizing, no watermarks."
+        "q": "Can I upload a photo from my phone?",
+        "a": "Yes. Open this page in your phone browser and tap the upload area to pick a shot from your camera roll. It works the same on iPhone, Android, and tablets."
       },
       {
-        "q": "How do I share my photo URL?",
-        "a": "After uploading, copy the generated URL and paste it anywhere — text messages, emails, social media posts, documents, or websites."
+        "q": "Will my photo lose quality?",
+        "a": "No. The photo is served the way you uploaded it, with no compression, resizing, or watermark."
       },
       {
-        "q": "Are photo URLs permanent?",
-        "a": "Yes. Once uploaded, your photo URL is permanent and will never expire. It's hosted on our global CDN for fast access worldwide."
+        "q": "What photo formats and sizes can I upload?",
+        "a": "JPG, PNG, HEIC, and WebP are all supported, with files up to 10MB each."
       },
       {
-        "q": "Is this really free?",
-        "a": "Yes, completely free. No signup required, no hidden fees, no premium upsells needed for basic photo sharing."
+        "q": "Does the link embed as the actual photo?",
+        "a": "Yes. It is a direct, hotlinkable image URL, so chat apps, forums, and social posts render it as the photo rather than a text link."
+      },
+      {
+        "q": "Is it really free with no signup?",
+        "a": "It is free and anonymous. There is no registration, no email, and no watermark for sharing your photos."
       }
     ],
-    "ctaTitle": "Turn your photo into a shareable link",
-    "ctaBody": "Upload any photo and get a permanent URL in seconds with no signup, no watermarks, and no catch.",
+    "ctaTitle": "Turn your photo to URL now",
+    "ctaBody": "Upload a photo from your phone or computer and get a direct, shareable link in seconds. No signup, no watermark, no catch.",
     "ctaButton": "Upload Photo Now"
   },
   "es": {
@@ -431,5 +439,5 @@ export const content: LandingContentMap = {
     "ctaTitle": "将您的照片转换为可分享的链接",
     "ctaBody": "上传任何照片，几秒钟内即可获得永久 URL，无需注册、无水印，没有任何套路。",
     "ctaButton": "立即上传照片"
-  },
+  }
 } as LandingContentMap;

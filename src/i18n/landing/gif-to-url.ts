@@ -5,73 +5,89 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "GIF to URL — Host Animated GIFs & Get Direct Links",
-    "metaDescription": "Host animated GIFs and get instant shareable URLs. Full animation preserved, direct links for embedding anywhere. Free GIF hosting, no signup required.",
-    "schemaName": "GIF to URL",
-    "schemaDescription": "Host animated GIFs and get instant shareable URLs with full animation preservation and direct links for embedding.",
+    "metaTitle": "GIF to URL — Get a Direct Link That Stays Animated | ImageToURL",
+    "metaDescription": "Turn a GIF to URL or a GIF to link in seconds. The direct link plays the animation inline in Discord, Reddit, and forums. Free, no signup, GIFs up to 10MB.",
+    "schemaName": "GIF to URL Converter",
+    "schemaDescription": "Convert a GIF to a URL or direct link that stays animated. Free hosting with no signup, no watermark, and inline playback in Discord, Reddit, and forums.",
     "badge": "GIF HOSTING",
-    "h1Pre": "GIF to URL",
-    "h1Highlight": "— animations preserved.",
-    "intro": "Upload your animated GIFs and get permanent, direct URLs instantly. Every frame is preserved with fast CDN delivery for free embedding anywhere.",
-    "howTitle": "How It Works",
+    "h1Pre": "GIF to URL — ",
+    "h1Highlight": "a direct link that stays animated",
+    "intro": "Our GIF to URL tool hands you a direct link that still plays the animation, not a frozen first frame. Drop the GIF to link straight into Discord, Reddit, or a forum and it loops inline like it should. No signup, no watermark, and nothing gets compressed.",
+    "howTitle": "How the GIF to URL tool works",
     "steps": [
       {
-        "title": "Upload Your GIF",
-        "body": "Drag & drop or click to select your animated GIF. We support all frame counts and animations up to 10MB."
+        "title": "Drop in your GIF",
+        "body": "Drag the animated GIF onto the box or click to browse. Anything up to 10MB works, and you stay anonymous - no account needed."
       },
       {
-        "title": "Get Your URL",
-        "body": "Your GIF is uploaded to our global CDN instantly. A permanent, direct .gif URL is generated automatically."
+        "title": "Grab the direct link",
+        "body": "Upload finishes in a couple of seconds and you get a direct .gif URL on our CDN. Copy it with one tap."
       },
       {
-        "title": "Embed Anywhere",
-        "body": "Copy your URL and embed it in Discord, Reddit, forums, HTML pages, or share it directly in messages."
+        "title": "Paste it where you chat",
+        "body": "Drop the link into Discord, Reddit, Slack, a forum, or raw HTML. The GIF plays right there in the message instead of sitting as a flat thumbnail."
       }
     ],
-    "whyTitle": "Why Host GIFs with Us?",
+    "whyTitle": "Why use this GIF to URL tool",
     "whyItems": [
       {
-        "title": "Full Animation Support",
-        "body": "Every frame of your animated GIF is preserved. No conversion, no quality loss, and no frame dropping."
+        "title": "The animation survives",
+        "body": "We don't re-encode or flatten anything. Every frame in your GIF stays put, so the link animates exactly like the file on your machine."
       },
       {
-        "title": "Direct Embedding",
-        "body": "Get direct .gif URLs that embed perfectly in forums, Discord, Reddit, and HTML pages."
+        "title": "One direct GIF to link, ready to embed",
+        "body": "You get a clean .gif link that hotlinks anywhere. Forums, wikis, Discord, Reddit - paste it and the GIF loads as a real moving image."
       },
       {
-        "title": "No File Size Surprises",
-        "body": "Upload GIFs up to 10MB. We handle the bandwidth so your animations load fast everywhere."
-      },
-      {
-        "title": "Hotlink-Friendly",
-        "body": "Our URLs support hotlinking, allowing you to embed GIFs in any website, wiki, or forum without restrictions."
+        "title": "Free with room to breathe",
+        "body": "Upload GIFs up to 10MB at no cost. No watermark stamped on top, no signup wall, no compression eating your colors."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "useCasesTitle": "What you can do with a GIF to URL link",
+    "useCasesIntro": "Once your GIF has a direct link, it travels anywhere that reads a URL:",
+    "useCases": [
+      {
+        "title": "React in Discord and Slack",
+        "body": "Paste the GIF to link in a channel and it loops inline. Handy for reaction GIFs, quick demos, or a bug repro your team can watch without downloading anything."
+      },
+      {
+        "title": "Post moving images on Reddit and forums",
+        "body": "Most forums won't host a GIF for you. Drop in the direct link instead and the animation shows up in your post, not a dead attachment icon."
+      },
+      {
+        "title": "Embed in HTML, wikis, and READMEs",
+        "body": "Use the .gif URL in an img tag or Markdown and the animation plays on the page. Good for docs, tutorials, and project pages that need a short looping clip."
+      }
+    ],
+    "faqTitle": "GIF to URL questions, answered",
     "faqs": [
       {
-        "q": "Does ImageToURL preserve GIF animations?",
-        "a": "Yes, every frame of your animated GIF is preserved exactly as uploaded. We never convert, compress, or drop frames from your animations."
+        "q": "How do I convert a GIF to a link?",
+        "a": "Drop your GIF into the box above or click to browse. In a couple of seconds you get a direct GIF to link you can copy and paste anywhere. No signup, no watermark."
       },
       {
-        "q": "Is there a limit on the number of frames in a GIF?",
-        "a": "No frame limit. As long as your GIF file is within the size limit, all frames are preserved."
+        "q": "Does the GIF stay animated after I get the URL?",
+        "a": "Yes. We keep every frame and never re-encode the file, so the link plays the full animation, not a single still frame."
       },
       {
-        "q": "Can I embed my GIF in Discord or Reddit?",
-        "a": "Absolutely. Your GIF URL is a direct link that embeds automatically in Discord, Reddit, Slack, and most other platforms."
+        "q": "Will the GIF link play inline in Discord and Reddit?",
+        "a": "It does. The direct .gif URL embeds and loops right in the message or post on Discord, Reddit, Slack, and most forums."
       },
       {
-        "q": "Are GIF URLs permanent?",
-        "a": "Yes. Once uploaded, your GIF URL never expires. It remains accessible and shareable indefinitely."
+        "q": "What's the largest GIF I can upload?",
+        "a": "Up to 10MB per GIF. That covers most reaction clips and short loops without trouble."
       },
       {
-        "q": "Can I upload large GIF files?",
-        "a": "Free anonymous uploads support GIFs up to 2MB. Create a free account to upload GIFs up to 10MB."
+        "q": "Is the GIF to URL tool really free?",
+        "a": "Yes, completely free. No account, no watermark, and nothing gets compressed on the way through."
+      },
+      {
+        "q": "Can I hotlink the GIF on my own website?",
+        "a": "Go ahead. The link is hotlink-friendly, so you can use it in an img tag, a wiki, or a forum signature and the GIF loads straight from our CDN."
       }
     ],
-    "ctaTitle": "Host your animated GIF in seconds",
-    "ctaBody": "Upload your GIF and get a permanent, embeddable link with no signup, no frame loss, and no catch.",
+    "ctaTitle": "Convert your GIF to URL now",
+    "ctaBody": "Upload an animated GIF and get a direct link that keeps moving, free and with no signup. Paste it into Discord, Reddit, or any forum and watch it loop.",
     "ctaButton": "Upload GIF Now"
   },
   "es": {
@@ -423,5 +439,5 @@ export const content: LandingContentMap = {
     "ctaTitle": "几秒钟内托管您的动态 GIF",
     "ctaBody": "上传您的 GIF，获取永久、可嵌入的链接，无需注册，无帧丢失，没有任何附加条件。",
     "ctaButton": "立即上传 GIF"
-  },
+  }
 } as LandingContentMap;

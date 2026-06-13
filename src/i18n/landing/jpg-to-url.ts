@@ -5,65 +5,89 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Convert JPG Image to URL Link — Online & Free | ImageToURL",
-    "metaDescription": "Convert JPG image to URL link online and free. Upload any JPG or JPEG and get a permanent direct link in seconds. Image to URL JPG, no signup needed.",
-    "schemaName": "Convert JPG Image to URL Link",
-    "schemaDescription": "Convert any JPG image to a URL link online and free with direct .jpg URLs, no signup, and permanent hosting.",
-    "badge": "JPG CONVERTER",
-    "h1Pre": "Convert JPG image to URL link",
-    "h1Highlight": "online and free.",
-    "intro": "Upload any JPG or JPEG and get a permanent, shareable URL in seconds. The fastest image to URL JPG converter on the web.",
-    "howTitle": "How It Works",
+    "metaTitle": "JPG to URL - Convert JPG to a Link Free | ImageToURL",
+    "metaDescription": "JPG to URL in seconds. Upload a JPG or JPEG and get a permanent direct link that embeds in Discord, Reddit, and forums. Free, no signup, up to 10MB.",
+    "schemaName": "JPG to URL Converter",
+    "schemaDescription": "Convert JPG to URL online and free. Get a permanent direct .jpg link that embeds anywhere, with no signup, no watermark, and no compression.",
+    "badge": "JPG TO URL",
+    "h1Pre": "JPG to URL,",
+    "h1Highlight": "free and anonymous.",
+    "intro": "JPG to URL takes one drag and drop: upload a JPG or JPEG and get a permanent direct link back in seconds. No account, no email, no watermark. The link points straight at your image, so it embeds in Discord, Reddit, and forums and renders as the picture instead of plain text.",
+    "howTitle": "How JPG to URL works",
     "steps": [
       {
-        "title": "Upload Your JPG",
-        "body": "Drag & drop or click to select your JPG or JPEG file. Supports high-resolution photos up to 10MB."
+        "title": "Drop your JPG in",
+        "body": "Drag a JPG or JPEG onto the box above or click to pick one. Files up to 10MB are fine, including full-size photos straight off a phone or camera."
       },
       {
-        "title": "Get Your URL",
-        "body": "Your JPG is uploaded to our global CDN instantly. A permanent, direct image URL is generated automatically."
+        "title": "We host it on a fast CDN",
+        "body": "Your file lands on a global CDN within a second or two. No signup runs in the background, and nothing gets compressed or re-encoded along the way."
       },
       {
-        "title": "Share Anywhere",
-        "body": "Copy your URL and use it anywhere — blogs, emails, forums, social media, or embed it in your website."
+        "title": "Copy the direct link",
+        "body": "You get a permanent .jpg URL that ends in the image itself. Paste it into a chat, a forum post, an email, or your site's HTML."
       }
     ],
-    "whyTitle": "Why JPG?",
+    "whyTitle": "Why use JPG to URL here",
     "whyItems": [
       {
-        "title": "Universal Compatibility",
-        "body": "JPG is the most widely supported image format. Works everywhere — every browser, every device, every platform."
+        "title": "A link that actually embeds",
+        "body": "The JPG to URL output is a direct image link, not a gallery page. Drop it in Discord or Reddit and it unfurls as the photo, the way a hosted image should."
       },
       {
-        "title": "Optimized File Size",
-        "body": "JPG compression delivers excellent quality at smaller file sizes, meaning faster page loads and quicker sharing."
+        "title": "Anonymous, no account",
+        "body": "There is no login wall and no email box. Upload a JPG, grab the URL, and close the tab. We don't tie the link to a profile."
       },
       {
-        "title": "Perfect for Photos",
-        "body": "JPG excels at handling photographic images with millions of colors and smooth gradients."
+        "title": "Original quality, kept",
+        "body": "We serve the exact file you uploaded. No re-compression, no watermark, no quality drop between the JPG you had and the URL you share."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "useCasesTitle": "What people use JPG to URL for",
+    "useCasesIntro": "A direct JPG link travels further than an attachment. Here are three places it earns its keep.",
+    "useCases": [
+      {
+        "title": "Getting a JPG link for chat and forums",
+        "body": "Some platforms won't let you attach a file but will accept a link. Turn your JPG into a link and paste it into Discord, a forum reply, or a Reddit comment, where it shows up as the image."
+      },
+      {
+        "title": "Embedding photos in a website",
+        "body": "Need a src for an img tag? The hotlinkable .jpg URL slots straight into your HTML, a blog post, or an email signature with no extra hosting setup."
+      },
+      {
+        "title": "Sharing a screenshot fast",
+        "body": "Snap a JPG, upload it, send the link. The recipient opens one tap and sees the picture, no zip file and no download prompt."
+      }
+    ],
+    "faqTitle": "JPG to URL questions, answered",
     "faqs": [
       {
-        "q": "How do I convert a JPG image to a URL link online for free?",
-        "a": "Drop your JPG into the uploader at the top of this page. We host it on a global CDN and hand you a permanent .jpg URL in a couple of seconds."
+        "q": "How do I convert a JPG to a URL for free?",
+        "a": "Drop your JPG into the uploader at the top of this page. We host it on a global CDN and hand back a permanent .jpg URL in a couple of seconds. It's free and there's no signup."
       },
       {
-        "q": "What's the maximum JPG file size I can upload?",
-        "a": "Free users can upload JPG images up to 2MB. With a free account, the limit increases to 10MB — more than enough for most photos."
+        "q": "How do I convert a JPG to a link?",
+        "a": "It's the same upload. A JPG to link is just a direct image URL: drop the file in, copy the link we generate, and paste it wherever you need it. Because the link ends in the image itself, it embeds in Discord, Reddit, and forums and renders as the photo rather than as text."
       },
       {
-        "q": "Does ImageToURL compress my JPG images?",
-        "a": "No. Your JPG files are stored and served exactly as uploaded. We never re-compress or alter your image quality."
+        "q": "What's the largest JPG I can upload?",
+        "a": "Up to 10MB per JPG or JPEG, which covers most phone and camera photos without resizing first."
       },
       {
-        "q": "Can I hotlink my JPG images on other websites?",
-        "a": "Yes. Every JPG upload generates a direct image URL that supports hotlinking. Embed it in any website, forum, or email without restrictions."
+        "q": "Does the JPG to URL tool compress my image?",
+        "a": "No. Your JPG is served exactly as uploaded. We don't re-compress it, add a watermark, or touch the quality."
+      },
+      {
+        "q": "Is the link permanent, and can I hotlink it?",
+        "a": "Yes to both. The URL stays live and is hotlinkable, so you can embed it directly in a site, forum, or email without it breaking."
+      },
+      {
+        "q": "Do I need an account or an email?",
+        "a": "Neither. JPG to URL works anonymously. Upload, copy the link, and go. No login, no email, no profile attached to your image."
       }
     ],
-    "ctaTitle": "Convert your JPG to a shareable URL",
-    "ctaBody": "Upload your photo and get a permanent link in seconds with no signup or compression.",
+    "ctaTitle": "Convert your JPG to URL now",
+    "ctaBody": "Upload a JPG or JPEG and get a permanent, hotlinkable link in seconds. Free, anonymous, no watermark, and no compression.",
     "ctaButton": "Upload JPG Now"
   },
   "es": {
@@ -375,5 +399,5 @@ export const content: LandingContentMap = {
     "ctaTitle": "将您的 JPG 转换为可分享的 URL",
     "ctaBody": "上传您的照片，几秒钟内即可获得永久链接，无需注册，无压缩。",
     "ctaButton": "立即上传 JPG"
-  },
+  }
 } as LandingContentMap;

@@ -12,8 +12,8 @@ export const content: LandingContentMap = {
     "badge": "PNG CONVERTER",
     "h1Pre": "PNG to URL Converter — Convert Image to Link",
     "h1Highlight": "Free & Online",
-    "intro": "Use our free PNG to URL converter to turn any PNG into a permanent, shareable link in seconds. Upload your file and get a direct URL — with the transparent background and full quality kept exactly as you uploaded it.",
-    "howTitle": "How to Convert a PNG to a URL",
+    "intro": "Use our free PNG to URL converter to turn any PNG into a permanent, shareable link in seconds. Upload your file and get a direct URL - with the transparent background and full quality kept exactly as you uploaded it.",
+    "howTitle": "How to Convert a PNG to URL",
     "steps": [
       {
         "title": "Upload Your PNG",
@@ -25,14 +25,14 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Share Anywhere",
-        "body": "Copy your URL and use it anywhere — HTML, Markdown, forums, emails, or social media."
+        "body": "Copy your URL and use it anywhere - HTML, Markdown, forums, emails, or social media."
       }
     ],
-    "whyTitle": "Why PNG?",
+    "whyTitle": "Why convert a PNG to URL?",
     "whyItems": [
       {
         "title": "Transparency Support",
-        "body": "PNG is the gold standard for images with transparent backgrounds. Logos, icons, overlays — all preserved perfectly."
+        "body": "PNG is the gold standard for images with transparent backgrounds. Logos, icons, overlays - all preserved perfectly."
       },
       {
         "title": "Lossless Quality",
@@ -40,7 +40,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Web Graphics Standard",
-        "body": "PNG is universally supported across all browsers, devices, and platforms. The most reliable format for web graphics."
+        "body": "PNG is universally supported across all browsers, devices, and platforms. Turn one into a link and it works everywhere on the web."
       }
     ],
     "useCasesTitle": "What Can You Do With a PNG URL?",
@@ -48,30 +48,34 @@ export const content: LandingContentMap = {
     "useCases": [
       {
         "title": "Embed in Websites",
-        "body": "Paste the link straight into your HTML or website builder and the image loads instantly — no separate hosting to set up."
+        "body": "Paste the link straight into your HTML or website builder and the image loads instantly - no separate hosting to set up."
       },
       {
         "title": "Use in Markdown & Forums",
-        "body": "Drop it into a README, a Reddit post, or any forum — it shows up as a real image, not just plain text."
+        "body": "Drop it into a README, a Reddit post, or any forum - it shows up as a real image, not just plain text."
       },
       {
         "title": "Share on Discord, Email & Social",
-        "body": "Send the link in Discord, add it to an email signature, or post it on social — it loads as an actual image, not an attachment."
+        "body": "Send the link in Discord, add it to an email signature, or post it on social - it loads as an actual image, not an attachment."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "faqTitle": "PNG to URL FAQ",
     "faqs": [
       {
         "q": "How do I turn a PNG into a URL?",
-        "a": "Upload your PNG using the converter above. We generate a direct link in seconds that you can copy and share anywhere — no signup needed."
+        "a": "Upload your PNG using the converter above. We generate a direct link in seconds that you can copy and share anywhere - no signup needed."
       },
       {
         "q": "How do I get a URL for a PNG?",
         "a": "Drop your PNG into the upload box or click browse. You'll get a direct, shareable image link within a few seconds."
       },
       {
+        "q": "How do I convert a PNG to a link?",
+        "a": "It's the same process - upload your PNG and you get a direct link to it that you can paste anywhere. \"PNG to URL\" and \"PNG to link\" mean the same thing here."
+      },
+      {
         "q": "Does ImageToURL preserve PNG transparency?",
-        "a": "Yes. The transparent background stays intact and nothing is compressed — your image looks exactly like the file you uploaded."
+        "a": "Yes. The transparent background stays intact and nothing is compressed - your image looks exactly like the file you uploaded."
       },
       {
         "q": "What's the maximum PNG file size?",
@@ -419,5 +423,5 @@ export const content: LandingContentMap = {
     "ctaTitle": "将您的 PNG 转换为可分享的 URL",
     "ctaBody": "上传您的 PNG，几秒钟内即可获得永久链接，无需注册，无水印。",
     "ctaButton": "立即上传 PNG"
-  },
+  }
 } as LandingContentMap;

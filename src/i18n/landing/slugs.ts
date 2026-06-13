@@ -22,6 +22,8 @@ export type PageKey =
   | 'photo-to-url'
   | 'screenshot-to-url'
   | 'image-url-generator'
+  | 'image-to-url-converter'
+  | 'image-to-link'
   | 'image-embed-code-generator'
   | 'image-url-for-chatgpt'
   | 'image-to-url-for-whatsapp'
@@ -88,6 +90,8 @@ export const SLUGS: Record<PageKey, LocaleSlugMap> = {
   'photo-to-url': { en: 'photo-to-url', es: 'convertir-foto-a-url', fr: 'convertir-photo-en-url', de: 'foto-in-url-umwandeln', ja: '写真-url-変換', 'zh-Hans': '照片转链接' },
   'screenshot-to-url': { en: 'screenshot-to-url', es: 'convertir-captura-a-url', fr: 'convertir-capture-ecran-en-url', de: 'screenshot-in-url-umwandeln', ja: 'スクリーンショット-url-変換', 'zh-Hans': '截图转链接' },
   'image-url-generator': { en: 'image-url-generator', es: 'generador-de-url-de-imagen', fr: 'generateur-url-image-gratuit', de: 'bild-zu-url-konverter', ja: '画像-url-生成', 'zh-Hans': '图片转链接生成器' },
+  'image-to-url-converter': { en: 'image-to-url-converter' },
+  'image-to-link': { en: 'image-to-link' },
   'image-embed-code-generator': { en: 'image-embed-code-generator', es: 'generador-codigo-incrustar-imagenes', fr: 'generateur-code-embed-image', de: 'bild-embed-code-generator', ja: '画像-埋め込み-コード-生成', 'zh-Hans': '图片-嵌入-代码-生成器' },
   'image-url-for-chatgpt': { en: 'image-url-for-chatgpt', es: 'url-de-imagen-para-chatgpt', fr: 'url-image-pour-chatgpt', de: 'bild-url-fuer-chatgpt-erstellen', ja: 'chatgpt-画像url-変換', 'zh-Hans': 'chatgpt-tupian-lianjie' },
   'image-to-url-for-whatsapp': { en: 'image-to-url-for-whatsapp', es: 'compartir-imagenes-whatsapp-url', fr: 'partager-images-whatsapp-url', de: 'bilder-auf-whatsapp-teilen', ja: 'whatsapp-gazo-kyoyu', 'zh-Hans': 'whatsapp-图片-链接-分享' },

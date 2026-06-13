@@ -40,6 +40,8 @@ export function getNavGroups(locale: Locale): NavGroups {
   return {
     tools: [],
     convert: [
+      lp(locale, 'image-to-url-converter', 'Image to URL Converter', 'link'),
+      lp(locale, 'image-to-link', 'Image to Link', 'link'),
       lp(locale, 'png-to-url', 'PNG to URL', 'image'),
       lp(locale, 'jpg-to-url', 'JPG to URL', 'photo'),
       lp(locale, 'gif-to-url', 'GIF to URL', 'gif_box'),

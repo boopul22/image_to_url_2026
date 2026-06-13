@@ -5,78 +5,90 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Free Image URL Generator — Image to URL in Seconds",
-    "metaDescription": "Free image URL generator. Upload any image and get a permanent, shareable link in seconds. No signup, no watermark, no fee. Built for developers.",
+    "metaTitle": "Free Image URL Generator — Get a Direct Image Link",
+    "metaDescription": "Free image URL generator and image link generator. Upload a JPG, PNG, WebP or GIF and get a direct, permanent link in seconds. No signup, no watermark.",
     "schemaName": "Free Image URL Generator",
-    "schemaDescription": "Upload any image and get a permanent, shareable link in seconds with no signup or fees.",
+    "schemaDescription": "Upload an image and get a direct, permanent URL in seconds. Free image url generator and image link generator with no signup or watermark.",
     "badge": "URL GENERATOR",
-    "h1Pre": "Free Image URL Generator",
-    "h1Highlight": "in seconds.",
-    "intro": "Upload any image and instantly convert it into a permanent, shareable URL. No software to install, no account to create, just fast and reliable link generation.",
-    "howTitle": "How It Works",
+    "h1Pre": "Free Image URL Generator and ",
+    "h1Highlight": "Image Link Generator",
+    "intro": "This free image url generator turns any photo into a direct, hotlinkable link you can paste anywhere. Drop in a JPG, PNG, WebP or GIF up to 10MB and the image link generator hands back a clean URL in seconds. No account, no watermark, no software to install. The link points straight at your file, so it embeds in HTML, Markdown, Discord, Reddit and forum posts without breaking.",
+    "howTitle": "How the Image URL Generator Works",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Drag and drop your image or click to browse your files. We support JPG, PNG, WebP, GIF, and SVG formats."
+        "title": "Drop in your file",
+        "body": "Drag an image onto the box or click to browse. JPG, PNG, WebP and GIF are supported, up to 10MB each. Nothing is compressed, so the file you upload is the file people see."
       },
       {
-        "title": "Instant URL Generation",
-        "body": "Your unique image URL is generated in milliseconds. No waiting or processing queues — it is ready the moment your upload completes."
+        "title": "Get a direct link",
+        "body": "The moment the upload finishes, the image url generator returns a direct URL ending in the real file extension. There is no processing queue and no waiting screen."
       },
       {
-        "title": "Copy & Share",
-        "body": "Use your image URL anywhere on the web. Paste it in emails, embed it in websites, or share it on social media."
+        "title": "Copy and paste it anywhere",
+        "body": "Copy the link with one click. Paste it into an img tag, a Markdown file, a Discord message or an API call. Because it is a direct link, it renders as an actual image rather than a download."
       }
     ],
-    "whyTitle": "Why Use Our Generator",
+    "whyTitle": "Why Use This Image URL Generator",
     "whyItems": [
       {
-        "title": "Instant Generation",
-        "body": "URLs are ready in under a second. Our infrastructure processes your upload and generates a permanent link almost instantly."
+        "title": "Direct, hotlinkable URLs",
+        "body": "Every link points straight at the image file, not a viewer page. That is what lets it embed in HTML, Markdown, Discord and Reddit. Many hosts wrap your image in an ad page, which breaks hotlinking. This one does not."
       },
       {
-        "title": "Permanent URLs",
-        "body": "Links that never expire or break. Once generated, your image URL will work forever — no time limits or expiration dates."
+        "title": "Image link generator with no account",
+        "body": "The image link generator runs anonymously. You never sign up, log in or hand over an email. Open the page, upload, copy your link, done. Good for quick shares and good for scripts."
       },
       {
-        "title": "Bulk URL Generator",
-        "body": "Need URLs for multiple images? Upload a batch and generate all your links at once, perfect for large projects."
-      },
-      {
-        "title": "Easy Sharing",
-        "body": "Copy your URL with one click or grab an embed code. Every URL works everywhere — websites, forums, and messaging apps."
-      },
-      {
-        "title": "Picture, photo, or link generator",
-        "body": "Whether you came looking for a picture URL generator, a photo URL generator, or an image link generator, this is the tool. Upload once and your file becomes a shareable link you can paste anywhere."
+        "title": "Built for dev and API use",
+        "body": "Files load from a fast global CDN, the URLs are clean and predictable, and nothing is re-encoded. Wire the link into a README, a webhook payload or a config file and it behaves like any other static asset."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "useCasesTitle": "What People Build With the Image URL Generator",
+    "useCasesIntro": "Once you have a link from the image url generator, it slots into most places that expect a plain image URL:",
+    "useCases": [
+      {
+        "title": "Embed in HTML and Markdown",
+        "body": "Paste the URL into an img src tag or Markdown image syntax. It loads inline in docs, READMEs and static sites with no extra hosting to configure."
+      },
+      {
+        "title": "Post in Discord, Reddit and forums",
+        "body": "Drop the link into a Discord channel, a Reddit comment or a forum thread and it unfurls as a real image. The image link generator output is plain enough that these platforms preview it automatically."
+      },
+      {
+        "title": "Feed it to an API or webhook",
+        "body": "Need a public image URL for an API request, a bot or an automation? Generate one here and reference it directly. No auth token is attached to the link."
+      }
+    ],
+    "faqTitle": "Image URL Generator FAQ",
     "faqs": [
       {
-        "q": "Is this image URL generator really free?",
-        "a": "Yes, our service is completely free to use. There are no hidden fees, subscriptions, or watermarks added to your images."
+        "q": "What is an image link generator, and how do I generate a link for an image?",
+        "a": "An image link generator takes a file off your device and gives it a public web address. Upload your image in the box above and you get a direct link back within seconds. Copy that link and paste it wherever you need the image to appear."
       },
       {
-        "q": "Do I need to create an account?",
-        "a": "No account is required. You can upload and generate image URLs instantly without signing up or providing personal information."
+        "q": "Is the image url generator free?",
+        "a": "Yes. Generating links is free with no hidden fees, no subscription and no watermark stamped on your image."
       },
       {
-        "q": "How long do the image links last?",
-        "a": "The links we generate are permanent. We do not delete your images, so your links will remain active indefinitely."
+        "q": "Do I need an account?",
+        "a": "No. The tool is anonymous. There is no signup and no login, so you can generate a link without creating an account or sharing an email."
       },
       {
-        "q": "What file formats are supported?",
-        "a": "We support all common image formats, including JPG, PNG, WebP, GIF, and SVG."
+        "q": "Will the link embed in Discord or Reddit?",
+        "a": "Yes. The URL points straight at the image file, so Discord, Reddit and most forums show it as a real image preview instead of a plain text link or an attachment."
       },
       {
-        "q": "Can I use these links for my website?",
-        "a": "Absolutely. Our generated URLs are perfect for embedding images in websites, blogs, documentation, and README files."
+        "q": "Is the image link permanent?",
+        "a": "Generated links stay live for a long time, then expire after a stretch of inactivity. For pages you control, like a website or README, keep your original file so you can re-upload if a link ever ages out."
+      },
+      {
+        "q": "Which image formats and file sizes work?",
+        "a": "JPG, PNG, WebP and GIF are supported, up to 10MB per file. Nothing is compressed or re-encoded, so the generated link serves your image at full quality."
       }
     ],
-    "ctaTitle": "Generate your first image URL",
-    "ctaBody": "Upload an image and get a permanent, shareable link in seconds with no signup required.",
-    "ctaButton": "Get Started Free"
+    "ctaTitle": "Try the image url generator",
+    "ctaBody": "Upload a JPG, PNG, WebP or GIF and get a direct, shareable link in seconds. No signup, no watermark.",
+    "ctaButton": "Generate Image URL"
   },
   "es": {
     "metaTitle": "Generador de URL de imagen gratuito — Convierte imágenes a URL al instante | ImageToURL",
@@ -427,5 +439,5 @@ export const content: LandingContentMap = {
     "ctaTitle": "生成您的第一个图片URL",
     "ctaBody": "上传图片，几秒钟内即可获得永久、可共享的链接，无需注册。",
     "ctaButton": "免费开始"
-  },
+  }
 } as LandingContentMap;
