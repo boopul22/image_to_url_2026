@@ -43,12 +43,21 @@ const patterns = [
   /material-symbols-outlined[^{]*\{[^}]*['"]([a-z][a-z0-9_]*)['"][^}]*['"]([a-z][a-z0-9_]*)['"][^}]*\}/g,
   // nav-links.ts helpers — lp(locale, 'key', 'Label', 'icon_name') / en('/path', 'Label', 'icon_name')
   /\b(?:lp|en)\([^)]*,\s*['"]([a-z][a-z0-9_]*)['"]\s*\)/g,
+  // Client-script consts — import { ic_hourglass_top } / el.innerHTML = ic_hourglass_top.
+  // These icons are swapped at runtime and never appear in an <Icon name>; without
+  // this the generator drops them and the build fails on a missing ic_<name> export.
+  /\bic_([a-z][a-z0-9_]*)\b/g,
 ];
+
+// The generated SVG module defines `export const ic_<name>` for every icon, so
+// scanning it would re-add the entire previous set and the list could never
+// shrink. Skip it (and material-icons.ts, this script's own output).
+const SVGS = join(SRC, 'data', 'icon-svgs.ts');
 
 let filesScanned = 0;
 for (const file of walk(SRC)) {
-  // Skip the generated file itself
-  if (file === OUT) continue;
+  // Skip the generated files themselves
+  if (file === OUT || file === SVGS) continue;
   filesScanned++;
   const text = readFileSync(file, 'utf8');
   for (const pat of patterns) {

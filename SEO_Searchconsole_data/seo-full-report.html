@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imagetourl.cloud — Full Search Console Report</title>
+<style>
+  :root{
+    --bg:#0e1014; --card:#171a21; --card2:#1e222b; --line:#2a2f3a;
+    --ink:#e9ecf1; --muted:#98a1b1; --rose:#f43f5e; --rose2:#fb7185;
+    --green:#34d399; --amber:#fbbf24; --blue:#60a5fa; --violet:#a78bfa; --cyan:#22d3ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:30px 22px 90px}
+  h1{font-size:31px;margin:14px 0 4px;letter-spacing:-.6px}
+  h2{font-size:20px;margin:8px 0 4px;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+  .sec{margin-top:46px}
+  h2 .ic{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;
+    background:var(--card2);border:1px solid var(--line);font-size:15px}
+  .sub{color:var(--muted);margin:2px 0 14px;max-width:840px}
+  .pill{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 10px;border-radius:999px}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:22px 0 6px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px}
+  .kpi .v{font-size:24px;font-weight:700;letter-spacing:-.5px}
+  .kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
+  .kpi .d{font-size:11.5px;margin-top:6px}
+  .up{color:var(--green)} .warn{color:var(--amber)} .bad{color:var(--rose2)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:10px}
+  .card.pad{padding:18px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  .q{font-weight:600}
+  .pos{font-weight:700}.p-good{color:var(--green)}.p-mid{color:var(--amber)}.p-bad{color:var(--rose2)}
+  .tag{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+  .t-win{background:rgba(52,211,153,.16);color:var(--green)}
+  .t-gap{background:rgba(244,63,94,.16);color:var(--rose2)}
+  .t-fix{background:rgba(251,191,36,.16);color:var(--amber)}
+  .t-push{background:rgba(96,165,250,.16);color:var(--blue)}
+  .banner{border-left:3px solid var(--rose);background:linear-gradient(90deg,rgba(244,63,94,.10),transparent);
+    padding:14px 18px;border-radius:10px;margin:8px 0}
+  .banner b{color:var(--rose2)}
+  .bar{height:7px;border-radius:4px;background:var(--card2);overflow:hidden;min-width:70px}
+  .bar i{display:block;height:100%}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .mini{font-size:12.5px;color:var(--muted)}
+  .legend{display:flex;gap:18px;font-size:12.5px;color:var(--muted);margin:6px 0 0 4px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .clu{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line)}
+  .clu:last-child{border-bottom:none}
+  .clu .nm{flex:0 0 230px;font-weight:600}
+  .clu .track{flex:1;height:22px;background:var(--card2);border-radius:6px;overflow:hidden;position:relative}
+  .clu .track i{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--rose2))}
+  .clu .val{flex:0 0 130px;text-align:right;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+  .action{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:13.5px}
+  .action b{color:var(--ink)} .est{color:var(--green);font-weight:700}
+  .num0{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--rose);color:#fff;font-weight:700;font-size:13px;margin-right:8px}
+  .foot{color:var(--muted);font-size:12px;margin-top:54px;border-top:1px solid var(--line);padding-top:16px}
+  code{background:var(--card2);padding:1px 6px;border-radius:5px;font-size:12.5px}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+  .toc a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  .toc a:hover{color:var(--ink);border-color:var(--rose)}
+  @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}
+    .clu .nm{flex-basis:140px}.hide-sm{display:none}h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="pill">Google Search Console · Web · Last 3 months · 12 Mar – 11 Jun 2026 · 92 days</span>
+  <h1>imagetourl.cloud — Full Performance Report</h1>
+  <p class="sub">A complete read of every dataset in the folder: traffic trend, devices, geography, top &amp; under-performing pages, search intent, brand split, and technical hygiene — with a prioritized action plan.</p>
+  <div class="toc">
+    <a href="#summary">Executive summary</a>
+    <a href="#trend">Growth trend</a>
+    <a href="#devices">Devices</a>
+    <a href="#geo">Geography</a>
+    <a href="#pages">Pages</a>
+    <a href="#intent">Search intent</a>
+    <a href="#brand">Brand</a>
+    <a href="#hygiene">Technical hygiene</a>
+    <a href="#plan">Action plan</a>
+  </div>
+
+  <!-- ===== EXECUTIVE SUMMARY ===== -->
+  <div class="sec" id="summary">
+  <h2><span class="ic">📊</span> Executive summary</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v">3,455</div><div class="l">Total clicks</div><div class="d up">▲ ~19× Mar→Jun</div></div>
+    <div class="kpi"><div class="v">71,134</div><div class="l">Impressions</div><div class="d up">▲ ~21× Mar→Jun</div></div>
+    <div class="kpi"><div class="v">4.86%</div><div class="l">Avg CTR</div><div class="d warn">below page-1 norm</div></div>
+    <div class="kpi"><div class="v">~17</div><div class="l">Avg position</div><div class="d warn">page-2 average</div></div>
+    <div class="kpi"><div class="v">200</div><div class="l">Countries</div><div class="d up">global reach</div></div>
+  </div>
+  <div class="banner">
+    <b>The story in one line:</b> a young site growing fast on the back of a strong <b>non-English localization strategy</b> (89% of clicks are non-brand). Two things are capping it: <b>(1)</b> we rank but get few clicks because page titles say "URL" while users type "link"; <b>(2)</b> we're nearly invisible in the big <b>Western markets (US/UK/DE)</b> where we sit on page 7. Most upside needs <b>zero new pages</b> — just title/snippet fixes and authority.
+  </div>
+  </div>
+
+  <!-- ===== TREND ===== -->
+  <div class="sec" id="trend">
+  <h2><span class="ic">📈</span> Growth trend — 92 days</h2>
+  <p class="sub">Daily impressions exploded from ~100/day in March to a peak of <b style="color:var(--ink)">2,471/day</b> on Jun 4. The takeoff began late April. Clicks track the same curve (peak 127 on Jun 5). This is healthy, compounding organic growth — the strategy is working.</p>
+  <div class="card pad">
+    <svg id="chart" viewBox="0 0 1040 300" width="100%" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--blue)"></i> Impressions / day</span>
+      <span><i class="dot" style="background:var(--rose)"></i> Clicks / day</span>
+    </div>
+  </div>
+  <div class="grid3" style="margin-top:12px">
+    <div class="action"><b>March</b><br><span class="mini">105 clicks · 2,214 impr · ~6 clicks/day</span></div>
+    <div class="action"><b>May (full month)</b><br><span class="mini">2,009 clicks · 40,573 impr · the breakout</span></div>
+    <div class="action"><b>Last 7 days</b><br><span class="mini">~108 clicks/day · ~2,108 impr/day</span></div>
+  </div>
+  </div>
+
+  <!-- ===== DEVICES ===== -->
+  <div class="sec" id="devices">
+  <h2><span class="ic">📱</span> Devices — desktop is the weak spot</h2>
+  <p class="sub">Mobile converts at <b style="color:var(--green)">6.4% CTR</b> and ranks #13; desktop converts at just <b style="color:var(--rose2)">4.0%</b> and ranks #24 — almost twice as deep. The reason is geographic: desktop traffic skews to Western markets where we rank poorly (see Geography).</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>Device</th><th class="n">Clicks</th><th class="n">Impr.</th><th class="n">CTR</th><th class="n">Position</th><th class="hide-sm">Share of clicks</th></tr></thead>
+      <tbody>
+        <tr><td class="q">Mobile</td><td class="n">1,472</td><td class="n">23,118</td><td class="n p-good">6.37%</td><td class="n pos p-good">13.2</td><td class="hide-sm"><div class="bar"><i style="width:43%;background:var(--green)"></i></div></td></tr>
+        <tr><td class="q">Desktop</td><td class="n">1,898</td><td class="n">46,939</td><td class="n p-bad">4.04%</td><td class="n pos p-bad">24.3</td><td class="hide-sm"><div class="bar"><i style="width:55%;background:var(--rose)"></i></div></td></tr>
+        <tr><td class="q">Tablet</td><td class="n">85</td><td class="n">1,077</td><td class="n p-good">7.89%</td><td class="n pos p-good">13.5</td><td class="hide-sm"><div class="bar"><i style="width:2%;background:var(--blue)"></i></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mini" style="margin-top:8px">⚠️ Desktop pulls <b>67% of impressions</b> but ranks #24 — the single biggest "shown but not clicked" pool. It's a ranking problem in the West, not a UX problem.</p>
+  </div>
+
+  <!-- ===== GEOGRAPHY ===== -->
+  <div class="sec" id="geo">
+  <h2><span class="ic">🌍</span> Geography — winning the world, losing the West</h2>
+  <div class="grid2">
+    <div>
+      <p class="sub" style="min-height:42px">✅ <b style="color:var(--green)">Where we win</b> — page-1 rankings &amp; strong CTR. The localization play is paying off.</p>
+      <div class="card">
+        <table>
+          <thead><tr><th>Country</th><th class="n">Clicks</th><th class="n">Pos.</th><th class="n">CTR</th></tr></thead>
+          <tbody>
+            <tr><td>🇮🇳 India</td><td class="n">411</td><td class="n pos p-mid">14.5</td><td class="n">5.0%</td></tr>
+            <tr><td>🇮🇩 Indonesia</td><td class="n">370</td><td class="n pos p-mid">11.5</td><td class="n">5.8%</td></tr>
+            <tr><td>🇷🇺 Russia</td><td class="n">192</td><td class="n pos p-mid">13.6</td><td class="n">7.3%</td></tr>
+            <tr><td>🇯🇵 Japan</td><td class="n">163</td><td class="n pos p-mid">12.2</td><td class="n">6.3%</td></tr>
+            <tr><td>🇫🇷 France</td><td class="n">158</td><td class="n pos p-mid">11.3</td><td class="n">6.8%</td></tr>
+            <tr><td>🇮🇷 Iran</td><td class="n">126</td><td class="n pos p-good">8.1</td><td class="n p-good">13.8%</td></tr>
+            <tr><td>🇹🇭 Thailand</td><td class="n">102</td><td class="n pos p-good">9.2</td><td class="n">5.4%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <p class="sub" style="min-height:42px">🔴 <b style="color:var(--rose2)">Where we're invisible</b> — huge impressions, page-7 rankings, ~0% CTR. The biggest single growth ceiling.</p>
+      <div class="card">
+        <table>
+          <thead><tr><th>Country</th><th class="n">Impr.</th><th class="n">Pos.</th><th class="n">CTR</th></tr></thead>
+          <tbody>
+            <tr><td>🇺🇸 United States</td><td class="n">6,491</td><td class="n pos p-bad">66.6</td><td class="n p-bad">0.4%</td></tr>
+            <tr><td>🇬🇧 United Kingdom</td><td class="n">1,568</td><td class="n pos p-bad">69.4</td><td class="n p-bad">0.5%</td></tr>
+            <tr><td>🇩🇪 Germany</td><td class="n">1,018</td><td class="n pos p-bad">71.2</td><td class="n p-bad">0.4%</td></tr>
+            <tr><td>🇪🇸 Spain</td><td class="n">400</td><td class="n pos p-bad">53.4</td><td class="n p-bad">0.2%</td></tr>
+            <tr><td>🇨🇦 Canada</td><td class="n">356</td><td class="n pos p-bad">58.9</td><td class="n p-bad">0.3%</td></tr>
+            <tr><td>🇳🇱 Netherlands</td><td class="n">313</td><td class="n pos p-bad">60.9</td><td class="n p-bad">0.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p class="mini" style="margin-top:10px">The US alone shows us <b>6,491 impressions</b> but at position 67 → 28 clicks. This is an <b>authority/backlink problem</b>, not a localization one — the non-English playbook won't fix it. English pages need links + content depth to break onto page 1.</p>
+  </div>
+
+  <!-- ===== PAGES ===== -->
+  <div class="sec" id="pages">
+  <h2><span class="ic">📄</span> Pages — stars and bleeders</h2>
+  <div class="grid2">
+    <div>
+      <p class="sub" style="min-height:24px">⭐ <b style="color:var(--green)">Top performers</b></p>
+      <div class="card">
+        <table>
+          <thead><tr><th>Page</th><th class="n">Clicks</th><th class="n">CTR</th><th class="n">Pos.</th></tr></thead>
+          <tbody>
+            <tr><td class="q">/en/png-to-url/</td><td class="n">600</td><td class="n p-good">10.4%</td><td class="n pos p-good">6.6</td></tr>
+            <tr><td class="q">/en/ (home)</td><td class="n">813</td><td class="n">3.5%</td><td class="n pos p-bad">22.5</td></tr>
+            <tr><td class="q">/en/jpg-to-url/</td><td class="n">413</td><td class="n">4.6%</td><td class="n pos p-mid">16.2</td></tr>
+            <tr><td class="q">/en/gif-to-url/</td><td class="n">166</td><td class="n p-good">10.6%</td><td class="n pos p-mid">12.5</td></tr>
+            <tr><td class="q">/en/webp-to-url/</td><td class="n">55</td><td class="n p-good">20.8%</td><td class="n pos p-good">4.8</td></tr>
+            <tr><td class="q">/ru/…png-v-ssylku/</td><td class="n">84</td><td class="n p-good">25.5%</td><td class="n pos p-good">5.3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <p class="sub" style="min-height:24px">🩸 <b style="color:var(--rose2)">Bleeding impressions</b> — big reach, ~0% CTR</p>
+      <div class="card">
+        <table>
+          <thead><tr><th>Page</th><th class="n">Impr.</th><th class="n">CTR</th><th class="n">Pos.</th></tr></thead>
+          <tbody>
+            <tr><td class="q">/en/blog/free-image-hosting…</td><td class="n">2,063</td><td class="n p-bad">0.3%</td><td class="n pos p-bad">62.6</td></tr>
+            <tr><td class="q">/en/image-url-generator/</td><td class="n">1,168</td><td class="n p-bad">0.4%</td><td class="n pos p-bad">69.0</td></tr>
+            <tr><td class="q">/en/photo-to-url/</td><td class="n">884</td><td class="n p-bad">4.4%</td><td class="n pos p-bad">35.8</td></tr>
+            <tr><td class="q">/en/ home (desktop/West)</td><td class="n">23,257</td><td class="n p-bad">3.5%</td><td class="n pos p-bad">22.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mini" style="margin-top:8px">These 3 pages alone show <b>~4,100 impressions</b> at near-zero CTR — stuck on pages 4–7. They need real content + internal links to climb.</p>
+    </div>
+  </div>
+  </div>
+
+  <!-- ===== INTENT ===== -->
+  <div class="sec" id="intent">
+  <h2><span class="ic">🎯</span> Search intent — where the business actually is</h2>
+  <p class="sub">Grouping all 1,000 queries by intent shows the core business is overwhelmingly <b style="color:var(--ink)">"convert image → URL/link"</b>. "Hosting" queries pull big impressions but almost no clicks — we rank badly for them (a clear opportunity).</p>
+  <div class="card">
+    <div class="clu"><div class="nm">Image → URL / link convert</div><div class="track"><i style="width:100%"></i></div><div class="val">1,664 clk · 29.5k imp</div></div>
+    <div class="clu"><div class="nm">Image hosting / imgur / cdn</div><div class="track"><i style="width:11%"></i></div><div class="val bad">26 clk · 3.1k imp</div></div>
+    <div class="clu"><div class="nm">Format convert (png/jpg/webp/heic)</div><div class="track"><i style="width:2%"></i></div><div class="val">41 clk · 506 imp</div></div>
+    <div class="clu"><div class="nm">Base64 / compress / resize</div><div class="track"><i style="width:1%"></i></div><div class="val">0 clk · 51 imp</div></div>
+  </div>
+  <p class="mini" style="margin-top:8px">💡 The <b>"hosting" cluster (3,141 impressions, 0.8% CTR)</b> is almost entirely untapped — we get shown but rank too low to be clicked. Strengthening <code>free-image-hosting</code> &amp; <code>imgur-alternative</code> pages unlocks it.</p>
+  </div>
+
+  <!-- ===== BRAND ===== -->
+  <div class="sec" id="brand">
+  <h2><span class="ic">🏷️</span> Brand vs non-brand — healthy mix</h2>
+  <div class="grid2">
+    <div class="card pad">
+      <div style="display:flex;align-items:center;gap:16px">
+        <svg viewBox="0 0 36 36" width="92" height="92">
+          <circle cx="18" cy="18" r="15.9" fill="none" stroke="#2a2f3a" stroke-width="4"/>
+          <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--rose)" stroke-width="4"
+            stroke-dasharray="11 89" stroke-dashoffset="25" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div style="font-size:22px;font-weight:700">89% non-brand</div>
+          <div class="mini">1,726 clicks from generic searches · 209 brand clicks (11%)</div>
+        </div>
+      </div>
+    </div>
+    <div class="action" style="display:flex;align-items:center">
+      <div><b>Why this is good:</b> a young site earning 89% of traffic from non-brand discovery means SEO — not reputation — is driving growth. Brand terms like <code>imagetourl.cloud</code> convert at <b style="color:var(--green)">77% CTR</b>, confirming people are starting to remember you. As authority grows, branded search will compound on top of this.</div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ===== HYGIENE ===== -->
+  <div class="sec" id="hygiene">
+  <h2><span class="ic">🧹</span> Technical hygiene — equity leaks</h2>
+  <p class="sub">The crawl data exposes duplicate-URL issues that split ranking signals across versions of the same page.</p>
+  <div class="grid3">
+    <div class="action"><b style="color:var(--rose2);font-size:18px">116</b> <span class="tag t-gap">fix</span><br><b>www. URLs indexed</b><br><span class="mini">Duplicate subdomain (151 clicks). Need 301 www → apex.</span></div>
+    <div class="action"><b style="color:var(--amber);font-size:18px">36</b> <span class="tag t-fix">redirect</span><br><b>Legacy /tools/ &amp; /use-cases/</b><br><span class="mini">Old architecture competing with current pages.</span></div>
+    <div class="action"><b style="color:var(--amber);font-size:18px">4</b> <span class="tag t-fix">minor</span><br><b>Fragment (#) URLs</b><br><span class="mini">Blog anchors indexed as separate pages.</span></div>
+  </div>
+  <p class="mini" style="margin-top:10px">Also seen: trailing-slash + locale-prefix duplicates (<code>/screenshot-to-url</code> vs <code>/en/screenshot-to-url/</code>) and a malformed <code>/deols/image-to-url</code> templating glitch. Your recent deletion of ~34 root <code>.astro</code> pages is the right move — confirm they 301 to <code>/en/</code> equivalents.</p>
+  </div>
+
+  <!-- ===== ACTION PLAN ===== -->
+  <div class="sec" id="plan">
+  <h2><span class="ic">🚀</span> Prioritized action plan</h2>
+  <p class="sub">Ordered by ROI — effort vs. impressions already waiting to be captured.</p>
+  <div class="card pad" style="display:flex;flex-direction:column;gap:12px">
+    <div class="action"><span class="num0">1</span><b>Fix "link" wording in titles</b> <span class="tag t-fix">1 day · zero risk</span><br>
+      <span class="mini">Users search "jpg to link / image to link / gif to link" but titles say "URL". On page 1 already, 1–2% CTR. Add "&amp; Link" to titles + meta on <code>jpg/png/gif/image-to-url</code>.</span><br><span class="est">≈ +150 clicks/mo</span></div>
+    <div class="action"><span class="num0">2</span><b>Push "image to url" #11 → top-5</b> <span class="tag t-push">ongoing</span><br>
+      <span class="mini">6,300 impr/mo stuck on page 2 — the biggest single volume lever. Internal links from homepage + deeper content/FAQ.</span><br><span class="est">≈ +250 clicks/mo</span></div>
+    <div class="action"><span class="num0">3</span><b>Rescue bleeding pages</b> <span class="tag t-fix">1 week</span><br>
+      <span class="mini"><code>image-url-generator</code> (#69), the <code>free-image-hosting</code> blog (#63), <code>photo-to-url</code> (#36) — ~4,100 impr at ~0% CTR. Rewrite/expand content, fix internal linking.</span><br><span class="est">≈ +90 clicks/mo</span></div>
+    <div class="action"><span class="num0">4</span><b>Build the "image-to-link" page</b> <span class="tag t-gap">2–3 days</span><br>
+      <span class="mini">~1,200 impr/mo for "image to link / image link generator" with no dedicated page. Clone an existing tool layout.</span><br><span class="est">≈ +80 clicks/mo</span></div>
+    <div class="action"><span class="num0">5</span><b>Attack the Western (US/UK/DE) gap</b> <span class="tag t-gap">long-term</span><br>
+      <span class="mini">9,000+ impr/mo at position 60–70. This is authority/backlinks, not localization — the slow but largest ceiling.</span><br><span class="est">huge but slow</span></div>
+    <div class="action"><span class="num0">6</span><b>Clean up duplicate URLs</b> <span class="tag t-fix">1 day</span><br>
+      <span class="mini">301 www → apex; redirect legacy <code>/tools/</code> &amp; <code>/use-cases/</code>; verify deleted root pages 301 to <code>/en/</code>. Stops equity-splitting across 150+ URLs.</span><br><span class="est">consolidates rankings</span></div>
+  </div>
+  </div>
+
+  <p class="foot">
+    Sources analyzed: <code>Chart.csv</code> (92 daily rows), <code>Queries.csv</code> (1,000), <code>Pages.csv</code> (1,000), <code>Countries.csv</code> (200), <code>Devices.csv</code>, <code>Filters.csv</code>, <code>Search appearance.csv</code> (empty). Position = average ranking (lower is better). Click estimates use standard CTR-by-position curves and are directional. Totals differ slightly between Property total (71,134 impr) and per-page sums (78,052) because GSC anonymizes/aggregates rare queries — expected behavior.
+  </p>
+
+</div>
+
+<script>
+const IMP=[87,90,103,137,95,126,73,79,163,122,99,102,105,99,121,136,159,86,118,114,97,115,107,102,120,97,139,118,97,60,70,74,68,73,66,119,117,133,128,150,226,247,261,218,201,253,328,307,364,358,372,434,535,662,849,1000,1051,981,902,918,1130,1168,1146,1264,1407,1277,1367,1579,1213,1144,1102,1183,1475,1832,1976,1948,1953,2215,2235,1982,2273,2357,2330,2094,2000,2158,2288,2471,2391,1990,1813,1642];
+const CLK=[4,4,5,3,9,12,2,4,8,2,4,0,7,3,8,8,5,4,4,9,4,3,6,5,8,2,2,7,4,0,3,2,4,1,3,5,2,4,2,6,5,8,12,14,6,13,16,10,10,23,15,32,31,35,46,48,67,37,50,55,68,45,55,55,59,47,81,92,65,54,72,98,90,82,95,87,60,103,103,83,99,85,126,91,94,127,120,108,109,111,85,95];
+const DATES=["03-12","03-19","03-26","04-02","04-09","04-16","04-23","04-30","05-07","05-14","05-21","05-28","06-04","06-11"];
+const W=1040,H=300,PL=48,PR=44,PT=18,PB=34;
+const iw=W-PL-PR, ih=H-PT-PB, n=IMP.length;
+const maxI=Math.max(...IMP), maxC=Math.max(...CLK);
+const x=i=>PL+iw*i/(n-1);
+const yI=v=>PT+ih*(1-v/maxI);
+const yC=v=>PT+ih*(1-v/maxC);
+const path=(arr,yf)=>arr.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+yf(v).toFixed(1)).join(' ');
+const area=(arr,yf)=>path(arr,yf)+` L${x(n-1).toFixed(1)} ${(PT+ih)} L${PL} ${(PT+ih)} Z`;
+let g='';
+// gridlines
+for(let k=0;k<=4;k++){const yy=PT+ih*k/4;const val=Math.round(maxI*(1-k/4));
+  g+=`<line x1="${PL}" y1="${yy}" x2="${W-PR}" y2="${yy}" stroke="#222732" stroke-width="1"/>`;
+  g+=`<text x="${PL-8}" y="${yy+4}" fill="#6b7280" font-size="11" text-anchor="end">${val.toLocaleString()}</text>`;}
+// x labels (every ~7 days)
+DATES.forEach((d,k)=>{const xi=PL+iw*k/(DATES.length-1);
+  g+=`<text x="${xi}" y="${H-12}" fill="#6b7280" font-size="10.5" text-anchor="middle">${d}</text>`;});
+g+=`<defs><linearGradient id="ig" x1="0" x2="0" y1="0" y2="1">
+  <stop offset="0" stop-color="#60a5fa" stop-opacity=".28"/><stop offset="1" stop-color="#60a5fa" stop-opacity="0"/></linearGradient></defs>`;
+g+=`<path d="${area(IMP,yI)}" fill="url(#ig)"/>`;
+g+=`<path d="${path(IMP,yI)}" fill="none" stroke="#60a5fa" stroke-width="2.2"/>`;
+g+=`<path d="${path(CLK,yC)}" fill="none" stroke="#f43f5e" stroke-width="2.2"/>`;
+// peak marker
+const pk=IMP.indexOf(maxI);
+g+=`<circle cx="${x(pk)}" cy="${yI(maxI)}" r="3.5" fill="#60a5fa"/>`;
+g+=`<text x="${x(pk)}" y="${yI(maxI)-8}" fill="#9aa3b2" font-size="10.5" text-anchor="middle">peak 2,471</text>`;
+document.getElementById('chart').innerHTML=g;
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imagetourl.cloud — Website & Technical Audit</title>
+<style>
+  :root{
+    --bg:#0e1014; --card:#171a21; --card2:#1e222b; --line:#2a2f3a;
+    --ink:#e9ecf1; --muted:#98a1b1; --rose:#f43f5e; --rose2:#fb7185;
+    --green:#34d399; --amber:#fbbf24; --blue:#60a5fa; --violet:#a78bfa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:30px 22px 90px}
+  h1{font-size:30px;margin:14px 0 4px;letter-spacing:-.6px}
+  h2{font-size:20px;margin:0 0 4px;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+  .sec{margin-top:44px}
+  h2 .ic{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--card2);border:1px solid var(--line);font-size:15px}
+  .sub{color:var(--muted);margin:2px 0 14px;max-width:860px}
+  .pill{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 10px;border-radius:999px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:10px}
+  .card.pad{padding:18px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  .st{display:inline-block;font-size:10.5px;padding:2px 9px;border-radius:999px;font-weight:700;white-space:nowrap}
+  .s-ok{background:rgba(52,211,153,.15);color:var(--green)}
+  .s-bad{background:rgba(244,63,94,.16);color:var(--rose2)}
+  .s-warn{background:rgba(251,191,36,.16);color:var(--amber)}
+  .s-info{background:rgba(96,165,250,.16);color:var(--blue)}
+  .mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+  code{background:var(--card2);padding:1px 6px;border-radius:5px;font-size:12.5px}
+  .banner{border-left:3px solid var(--rose);background:linear-gradient(90deg,rgba(244,63,94,.10),transparent);padding:14px 18px;border-radius:10px;margin:8px 0}
+  .banner b{color:var(--rose2)}
+  .good-banner{border-left-color:var(--green);background:linear-gradient(90deg,rgba(52,211,153,.10),transparent)}
+  .good-banner b{color:var(--green)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .scorebox{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+  .ring{position:relative;width:96px;height:96px;flex:0 0 96px}
+  .ring .lbl{position:absolute;inset:0;display:grid;place-items:center;font-size:26px;font-weight:800}
+  .mini{font-size:12.5px;color:var(--muted)}
+  .action{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:13.5px}
+  .action b{color:var(--ink)} .est{color:var(--green);font-weight:700}
+  .num0{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--rose);color:#fff;font-weight:700;font-size:13px;margin-right:8px}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+  .toc a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  .toc a:hover{color:var(--ink);border-color:var(--rose)}
+  .foot{color:var(--muted);font-size:12px;margin-top:54px;border-top:1px solid var(--line);padding-top:16px}
+  .chk{color:var(--green)} .x{color:var(--rose2)} .tilde{color:var(--amber)}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}h1{font-size:24px}.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="pill">Code + live-crawl audit · cross-referenced against Search Console data · 13 Jun 2026</span>
+  <h1>Website &amp; Technical Audit</h1>
+  <p class="sub">I audited two layers: the <b style="color:var(--ink)">codebase</b> (<code>middleware.ts</code>, landing templates, <code>HomePage.astro</code>, schema, sitemap) <b>and</b> the <b style="color:var(--ink)">live production site</b> (real <code>curl</code> crawl). The key discovery: the code is mostly solid, but <b style="color:var(--rose2)">production doesn't match it</b> — the www-duplicate and root-stub problems GSC flagged are still live because fixes aren't deployed or can't catch static pages. On top of that, the structural bottleneck is <b style="color:var(--rose2)">internal linking</b>.</p>
+  <div class="toc">
+    <a href="#verdict">Verdict</a>
+    <a href="#live">⚡ Live production audit</a>
+    <a href="#recon">Data vs code reconciliation</a>
+    <a href="#link">"Link" wording</a>
+    <a href="#pages">Missing pages</a>
+    <a href="#linking">Internal linking</a>
+    <a href="#schema">Schema &amp; content</a>
+    <a href="#tech">Technical hygiene</a>
+    <a href="#plan">Revised action plan</a>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="sec" id="verdict">
+  <h2><span class="ic">⚖️</span> The verdict</h2>
+  <div class="grid3" style="margin-top:14px">
+    <div class="scorebox">
+      <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#2a2f3a" stroke-width="3.4"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--green)" stroke-width="3.4" stroke-dasharray="85 15" stroke-dashoffset="25" stroke-linecap="round"/></svg><div class="lbl chk">A-</div></div>
+      <div><b>Technical SEO</b><div class="mini">Canonicals, hreflang, 410s, www-301, root-301 — almost all correctly implemented in middleware.</div></div>
+    </div>
+    <div class="scorebox">
+      <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#2a2f3a" stroke-width="3.4"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--amber)" stroke-width="3.4" stroke-dasharray="58 42" stroke-dashoffset="25" stroke-linecap="round"/></svg><div class="lbl tilde">C+</div></div>
+      <div><b>On-page content</b><div class="mini">Landing pages decent; homepage thin &amp; ad-heavy; "link" gaps on 3 pages.</div></div>
+    </div>
+    <div class="scorebox">
+      <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#2a2f3a" stroke-width="3.4"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--rose)" stroke-width="3.4" stroke-dasharray="30 70" stroke-dashoffset="25" stroke-linecap="round"/></svg><div class="lbl x">D</div></div>
+      <div><b>Internal linking</b><div class="mini">The real problem. Homepage links to <b>zero</b> landing pages; no sibling cross-linking.</div></div>
+    </div>
+  </div>
+  <div class="banner" style="margin-top:16px">
+    <b>Biggest discovery:</b> The site is technically clean — most "fixes" are already shipped. What's actually capping page-2 keywords is <b>internal-link starvation</b>: the homepage body (your highest-authority page) links to <b>none</b> of the landing pages, and the ~28 landing pages don't cross-link to each other — they all just point back to the homepage. PageRank can't flow to the pages that need it.
+  </div>
+  </div>
+
+  <!-- LIVE PRODUCTION AUDIT -->
+  <div class="sec" id="live">
+  <h2><span class="ic">⚡</span> Live production audit — what's actually serving</h2>
+  <p class="sub">I crawled the real production site (<code>curl</code>, Googlebot-style). Critical discovery: <b style="color:var(--rose2)">the live site doesn't match the code</b>. Several fixes exist in the repo but aren't firing in production — which is exactly why the GSC hygiene problems are still active.</p>
+  <div class="banner">
+    <b>Headline:</b> the www-duplicate and root-stub problems Search Console flagged are <b>still live right now</b> — not because the code is missing, but because the fixes aren't deployed/aren't firing for static pages. These are real, fixable, and currently bleeding equity.
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>Live check</th><th>Actual production response</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>www landing page<br><span class="mini mono">www…/en/png-to-url/</span></td><td>Returns <b class="x">HTTP 200</b> — a full duplicate page (canonical→apex mitigates, but Google indexed 116). The worker's www→apex 301 does <b>not</b> fire for prerendered pages — they're served straight from Cloudflare's asset layer.</td><td><span class="st s-bad">live duplicate</span></td></tr>
+        <tr><td>www homepage<br><span class="mini mono">www…/</span></td><td><b class="chk">301 → apex</b>. The redirect fires for SSR routes but not static ones — confirming the asset-layer bypass above.</td><td><span class="st s-warn">inconsistent</span></td></tr>
+        <tr><td>Root slug stub<br><span class="mini mono">/png-to-url/</span></td><td>Serves a <b class="x">meta-refresh stub</b> (<span class="mono">&lt;meta http-equiv="refresh"&gt;</span>), <b>not a 301</b>. The git-staged root-page deletions are <b>not deployed</b> — the "root-page-duplicate-stubs" issue is live.</td><td><span class="st s-bad">not deployed</span></td></tr>
+        <tr><td>Legacy /tools/<br><span class="mini mono">/en/tools/image-to-url</span></td><td>Returns <b class="tilde">404</b>, not the intended <b>410</b>. The 410 logic in <code>middleware.ts</code> isn't firing live (de-indexes either way, but 410 is the cleaner signal).</td><td><span class="st s-warn">code≠live</span></td></tr>
+        <tr><td>Homepage FAQPage schema</td><td><b class="x">Absent.</b> Live JSON-LD has WebApplication, 24× Review, Breadcrumb… but <b>no FAQPage</b>, despite visible FAQs.</td><td><span class="st s-bad">missing</span></td></tr>
+        <tr><td>image-to-url-converter<br>image-to-link</td><td>Both <b class="x">404</b> — confirmed the high-impression keywords have no live page.</td><td><span class="st s-bad">missing</span></td></tr>
+        <tr><td>http → https</td><td><b class="chk">301 → https</b>. Correct.</td><td><span class="st s-ok">ok</span></td></tr>
+        <tr><td>Canonical / hreflang (apex)</td><td><b class="chk">Present &amp; correct</b> — self-referencing canonical, proper meta. Live titles confirm "link" wording (png/jpg have "URL Link"; image-url-generator has none).</td><td><span class="st s-ok">ok</span></td></tr>
+        <tr><td>Sitemap</td><td><b class="chk">200</b>, valid XML, <b>507 URLs</b> with hreflang. Healthy.</td><td><span class="st s-ok">ok</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="action"><b>🔴 Fix the www duplicate at the edge</b><br><span class="mini">The worker can't catch static pages on www. Add a <b>Cloudflare Redirect Rule / Bulk Redirect</b>: <code>www.imagetourl.cloud/*</code> → <code>imagetourl.cloud/$1</code> (301). This runs before the asset layer and kills all 116 duplicates at once. Code-level redirect alone won't do it.</span></div>
+    <div class="action"><b>🔴 Deploy the root-page deletions</b><br><span class="mini">The staged deletions of ~34 root <code>.astro</code> stubs are sitting in your working tree, undeployed. Production still serves meta-refresh stubs (soft-404 to Google). Commit + push so middleware's real 301 takes over.</span></div>
+  </div>
+  </div>
+
+  <!-- RECONCILIATION -->
+  <div class="sec" id="recon">
+  <h2><span class="ic">🔍</span> What I claimed vs. what the code actually does</h2>
+  <p class="sub">Grounding each Search-Console-derived recommendation in the real implementation. Several were already handled — focus shifts to what's genuinely open.</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>Earlier recommendation</th><th>Code reality</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>"Add a www → apex 301"</td><td><span class="mono">middleware.ts:58-64</span> codes a 301, but <b class="x">live it's not firing for static pages</b> — www landing pages return 200 duplicates. The worker can't intercept prerendered assets on www. <b>Needs an edge Redirect Rule</b>, not a code redirect.</td><td><span class="st s-bad">live duplicate</span></td></tr>
+        <tr><td>"Redirect legacy /tools/ & /use-cases/"</td><td>Code returns 410, but <b class="tilde">live serves 404</b> — the 410 logic isn't firing in production. Both de-index, but code≠live here.</td><td><span class="st s-warn">code≠live</span></td></tr>
+        <tr><td>"Make deleted root pages 301 to /en/"</td><td><b class="x">Not live yet</b> — production still serves meta-refresh stubs for <code>/png-to-url/</code>. The deletions are staged in your working tree but <b>undeployed</b>. Ship them and middleware's 301 takes over.</td><td><span class="st s-bad">not deployed</span></td></tr>
+        <tr><td>"Target the 'link' keyword family"</td><td><b>"url" and "link" are two separate keywords</b> — both relevant, both worth ranking. <code>jpg-to-url</code> &amp; <code>png-to-url</code> already include "link" (good baseline), but "jpg to link" still gets just <b>1.1% CTR at pos 8.9</b> — a live snippet/prominence opportunity, not a solved one. The other pages don't target "link" at all.</td><td><span class="st s-bad">live opportunity</span></td></tr>
+        <tr><td>"Add canonical + hreflang"</td><td>Self-referencing canonical + full hreflang set with x-default already emitted (<span class="mono">Layout.astro:192-207</span>).</td><td><span class="st s-ok">already done</span></td></tr>
+        <tr><td>"Build image-to-link / image-to-url-converter pages"</td><td>Confirmed <b>no such pageKey exists</b>. "image to url converter" (1,934 impr, pos 13) ranks off the homepage by accident.</td><td><span class="st s-bad">genuine gap</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <!-- LINK WORDING -->
+  <div class="sec" id="link">
+  <h2><span class="ic">🔗</span> "url" vs "link" — two separate keyword families</h2>
+  <p class="sub"><b style="color:var(--ink)">"X to url" and "X to link" are distinct queries</b> — separate impressions, separate rankings, separate intent in Google's eyes. Both are relevant and both deserve to be targeted. Having "link" on a page is a <b>baseline, not a finish line</b>: a page can rank for "jpg to url" yet still convert badly on "jpg to link". So no page here is "done" — every one has a live "link" opportunity, even the ones that already use the word.</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>Page</th><th>"link" present?</th><th>"link"-query performance</th><th class="hide-sm">Opportunity</th></tr></thead>
+      <tbody>
+        <tr><td class="q">jpg-to-url</td><td><span class="chk">✔ in title+H1</span></td><td class="mini">"jpg to link" — <b class="x">1.1% CTR @ #8.9</b>, 1,462 impr. Word is there, clicks aren't.</td><td class="hide-sm mini">Boost "link" prominence in title front + meta; add a "JPG to Link" H2/FAQ block</td></tr>
+        <tr><td class="q">png-to-url</td><td><span class="chk">✔ in title+H1</span></td><td class="mini">Best coverage — but still worth a dedicated "PNG to Link" section</td><td class="hide-sm mini">Keep; use as the template for the others</td></tr>
+        <tr><td class="q">gif-to-url</td><td><span class="tilde">~ title only</span></td><td class="mini">"gif to link" #9.0, 8.8% CTR (decent) — H1/intro omit "link"</td><td class="hide-sm mini">Add "&amp; direct link" to H1 + intro</td></tr>
+        <tr><td class="q">photo-to-url</td><td><span class="tilde">~ title only</span></td><td class="mini">H1 "Photo to URL in seconds" — "photo to link" not above the fold</td><td class="hide-sm mini">Add "link" to H1/intro + a section</td></tr>
+        <tr><td class="q">image-url-generator</td><td><span class="x">✗ neither</span></td><td class="mini">Title/H1 never say "link"; "image link generator" (#42) untargeted; page bleeds at #69</td><td class="hide-sm mini"><b>Rewrite</b> to target both "url generator" &amp; "link generator"</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mini" style="margin-top:8px">Correct framing: <b>treat "url" and "link" as two target keywords on every converter page</b> — exact-match in title/H1 where natural, plus a dedicated "…to Link" H2 + FAQ. The "jpg to link" case proves the point: the word is present, it ranks #8.9, yet 1.1% CTR means the <i>link</i> intent is under-served. That's a real opportunity, not a solved one.</p>
+  </div>
+
+  <!-- MISSING PAGES -->
+  <div class="sec" id="pages">
+  <h2><span class="ic">➕</span> Missing pages — confirmed gaps</h2>
+  <div class="grid2">
+    <div class="action"><b>image-to-url-converter</b> <span class="st s-bad">no page</span><br>
+      <span class="mini">1,934 impr/mo at pos 13, ranking off the homepage by accident. A dedicated pageKey with exact-match title/H1 + the uploader would let a focused page rank instead of the diluted homepage. Clone <code>png-to-url.ts</code> (richest template).</span></div>
+    <div class="action"><b>image-to-link / image-link-generator</b> <span class="st s-bad">no page</span><br>
+      <span class="mini">~1,200 impr/mo ("image to link" #24, "image link generator" #42) with no target. Note <code>direct-image-link</code> exists but targets hotlinking/CDN intent — different query. Needs its own page.</span></div>
+  </div>
+  <p class="mini" style="margin-top:10px">✅ Good news: the build picks up new pages automatically — drop a <code>landing/&lt;key&gt;.ts</code> module + a <code>slugs.ts</code> entry and <code>getStaticPaths</code> generates all locale combos. No routing work needed.</p>
+  </div>
+
+  <!-- INTERNAL LINKING -->
+  <div class="sec" id="linking">
+  <h2><span class="ic">🕸️</span> Internal linking — the real bottleneck</h2>
+  <p class="sub">This is what the GSC data couldn't show but the code makes obvious. It explains why high-intent pages sit on page 2 despite big impressions.</p>
+  <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
+    <div><span class="x" style="font-weight:700">✗ Homepage body links to ZERO landing pages.</span> <span class="mini">The only <code>href</code>s in <code>HomePage.astro</code> are 4× <code>/api/auth/login</code>. Your highest-authority page passes none of that authority to jpg/png/photo/converter pages.</span></div>
+    <div><span class="x" style="font-weight:700">✗ No sibling cross-linking.</span> <span class="mini">The landing template (<code>[...slug].astro</code>) has no <code>relatedTools</code> field. All ~28 pages link only <i>back</i> to the homepage — equity flows in, never sideways.</span></div>
+    <div><span class="tilde" style="font-weight:700">~ Nav/footer links exist but are weak.</span> <span class="mini">High-value pages are in <code>nav-links.ts</code>, but rendered inside JS-collapsed dropdowns / <code>&lt;details&gt;</code> accordions — boilerplate sitewide links pass thin, undifferentiated equity.</span></div>
+  </div>
+  <div class="good-banner banner" style="margin-top:12px">
+    <b>The fix is high-leverage and low-effort:</b> (1) add a contextual "Popular tools" link grid in the homepage <i>body</i> (real <code>&lt;a&gt;</code> links) pointing at the page-2 keyword pages; (2) add a <code>relatedTools</code> section to the landing template so siblings interlink. Both are pure internal-link wins that directly push "image to url", "jpg to url", "image to url converter" upward — no backlinks required.
+  </div>
+  </div>
+
+  <!-- SCHEMA & CONTENT -->
+  <div class="sec" id="schema">
+  <h2><span class="ic">🧩</span> Schema &amp; homepage content</h2>
+  <div class="grid2">
+    <div class="card">
+      <table>
+        <thead><tr><th>Schema</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Organization + WebSite (sitewide)</td><td><span class="st s-ok">✔ present</span></td></tr>
+          <tr><td>Landing pages: WebApplication + FAQPage</td><td><span class="st s-ok">✔ present</span></td></tr>
+          <tr><td>Homepage: WebApplication + Review/Rating</td><td><span class="st s-ok">✔ present</span></td></tr>
+          <tr><td><b>Homepage: FAQPage</b></td><td><span class="st s-bad">✗ MISSING</span></td></tr>
+          <tr><td>Homepage breadcrumb</td><td><span class="st s-warn">~ skipped for /</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="action" style="display:flex;align-items:center">
+      <div><b>Two easy wins:</b><br>
+      <span class="mini">① The homepage renders 5–6 visible FAQs but emits no <code>FAQPage</code> JSON-LD — a free SERP rich-result/CTR boost for your money keyword "image to url". The strings already exist (<code>home.faq.*</code>).<br><br>
+      ② The homepage is <b>thin &amp; ad-heavy</b> for a position-22 money keyword — all body copy comes from short i18n keys, dominated by the uploader + ad units. Add a substantial prose block using "image to url converter" naturally in an H2 + paragraphs.</span></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- TECH HYGIENE -->
+  <div class="sec" id="tech">
+  <h2><span class="ic">🛠️</span> Technical hygiene — mostly clean</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Check</th><th>Finding</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>www → apex 301</td><td><b class="x">LIVE: www landing pages serve 200 duplicates</b> (worker 301 only fires on SSR routes, not prerendered assets). Fix with a Cloudflare <b>Redirect Rule</b> <code>www.*</code>→apex — the code redirect can't catch static pages.</td><td><span class="st s-bad">live duplicate</span></td></tr>
+        <tr><td>Legacy /tools/ &amp; /use-cases/</td><td>Code intends 410; <b class="tilde">live serves 404</b>. Not firing in prod. De-indexes either way; redeploy to get the cleaner 410. Also broaden <code>/use-cases/</code> beyond <code>/en/</code>.</td><td><span class="st s-warn">code≠live</span></td></tr>
+        <tr><td>Root slug 301</td><td><b class="x">LIVE: serves meta-refresh stub</b>, not 301. Staged deletions undeployed. Ship them → middleware 301 takes over.</td><td><span class="st s-bad">not deployed</span></td></tr>
+        <tr><td>Trailing slash</td><td><code>trailingSlash:'ignore'</code> — no enforcing 301. Both <code>/x</code> &amp; <code>/x/</code> serve 200; consolidation relies on canonical only. 301 target lacks trailing slash while canonical has it — minor mismatch.</td><td><span class="st s-warn">relies on canonical</span></td></tr>
+        <tr><td>Canonical + hreflang + x-default</td><td>Correct &amp; self-consistent.</td><td><span class="st s-ok">ok</span></td></tr>
+        <tr><td>hreflang locale count</td><td><span class="hide-sm"></span>Worth verifying the hreflang/sitemap cover all <b>28</b> locales (CLAUDE.md) vs a smaller set — confirm no localized pages are orphaned from hreflang.</td><td><span class="st s-info">verify</span></td></tr>
+        <tr><td>Sitemap + robots</td><td>Full multi-locale sitemap with hreflang; clean robots.txt with per-bot rules + image-sitemap.</td><td><span class="st s-ok">ok</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <!-- REVISED PLAN -->
+  <div class="sec" id="plan">
+  <h2><span class="ic">🚀</span> Revised action plan (code-grounded)</h2>
+  <p class="sub">Re-prioritized now that I know what's already built. Internal linking jumps to #1 because it's the highest-leverage thing genuinely missing.</p>
+  <div class="card pad" style="display:flex;flex-direction:column;gap:12px">
+    <div class="action"><span class="num0">0</span><b>Deploy what's already fixed + edge www-redirect</b> <span class="st s-bad">live bleed · 30 min</span><br>
+      <span class="mini">Two quick wins from the live crawl: <b>(a)</b> commit + push the staged root-page deletions so production stops serving meta-refresh stubs; <b>(b)</b> add a Cloudflare Redirect Rule <code>www.*</code>→apex (301) to kill the 116 live duplicate URLs the worker can't catch. Pure cleanup, immediate equity consolidation.</span><br><span class="est">stops active equity loss</span></div>
+    <div class="action"><span class="num0">1</span><b>Internal linking overhaul</b> <span class="st s-bad">highest leverage · 1 day</span><br>
+      <span class="mini">Add an in-body "Popular tools" link grid to <code>HomePage.astro</code> (real <code>&lt;a&gt;</code> to jpg/png/photo/gif-to-url + converter), and a <code>relatedTools</code> block to <code>[...slug].astro</code> so siblings cross-link. Directly lifts every page-2 keyword.</span><br><span class="est">≈ +250–350 clicks/mo</span></div>
+    <div class="action"><span class="num0">2</span><b>Create <code>image-to-url-converter</code> page</b> <span class="st s-bad">2–3 hrs</span><br>
+      <span class="mini">Clone <code>png-to-url.ts</code>, exact-match title/H1. Captures the pos-13 / 1,934-impr keyword that has no home and frees the homepage to focus on "image to url".</span><br><span class="est">≈ +90 clicks/mo</span></div>
+    <div class="action"><span class="num0">3</span><b>Add FAQPage schema + prose to homepage</b> <span class="st s-warn">2 hrs</span><br>
+      <span class="mini">Emit <code>FAQPage</code> JSON-LD from existing <code>home.faq.*</code> strings; add a real content block targeting "image to url converter". Free CTR + relevance for the #22 money keyword.</span><br><span class="est">CTR boost on 23k impr</span></div>
+    <div class="action"><span class="num0">4</span><b>Target "link" as its own keyword on every converter page</b> <span class="st s-warn">half day</span><br>
+      <span class="mini">"X to link" ≠ "X to url" — both relevant. Add a dedicated "…to Link" H2 + FAQ to <b>all</b> converter pages (incl. jpg/png, whose "link" queries still convert poorly — "jpg to link" is 1.1% CTR @ #8.9). Add "link" to the H1/intro of <code>gif-to-url</code> &amp; <code>photo-to-url</code>; rewrite <code>image-url-generator</code> (bleeds at #69) to target "image link generator" too.</span><br><span class="est">≈ +100–150 clicks/mo</span></div>
+    <div class="action"><span class="num0">5</span><b>Build <code>image-to-link</code> page</b> <span class="st s-bad">2–3 hrs</span><br>
+      <span class="mini">New pageKey for the ~1,200 untargeted "image to link" impressions. Distinct from <code>direct-image-link</code>.</span><br><span class="est">≈ +80 clicks/mo</span></div>
+    <div class="action"><span class="num0">6</span><b>Western-market authority</b> <span class="st s-info">long-term</span><br>
+      <span class="mini">US/UK/DE at position 60–70 is a backlink/authority problem — no code change fixes it. Slowest but largest ceiling.</span><br><span class="est">huge but slow</span></div>
+  </div>
+  </div>
+
+  <p class="foot">
+    Method: (1) three parallel code-exploration passes over <code>src/middleware.ts</code>, <code>src/i18n/landing/*</code>, <code>src/components/pages/HomePage.astro</code>, <code>src/lib/nav-links.ts</code>, <code>src/layouts/Layout.astro</code>, <code>astro.config.mjs</code>, <code>wrangler.toml</code>, sitemap/robots; (2) a <b>live production crawl</b> via <code>curl</code> (Googlebot UA) checking real status codes, redirects, titles, canonicals, and JSON-LD on apex + www. Cross-referenced against the Search Console export. Click estimates are directional.
+  </p>
+
+</div>
+</body>
+</html>
