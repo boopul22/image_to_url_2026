@@ -49,15 +49,29 @@ const snipBb = url ? `[img]${url}[/img]` : '';
       <!-- Valid state (server-rendered, no client reveal) -->
       <ToolAdSurround>
       <div id="share-main">
-        <div class="mb-5">
-          <div class="flex items-center gap-2">
-            <Icon name="check_circle" class="text-secondary text-xl sm:text-2xl" fill />
-            <h1 class="text-lg sm:text-2xl font-headline italic font-black text-on-surface">Your link is ready</h1>
+        <!-- Success intro fills the first screen; an animated cue invites the user
+             to scroll down to the copy card (which sits just below the fold). -->
+        <div class="relative flex flex-col items-center justify-center text-center min-h-[calc(100svh_-_9rem)] pb-20">
+          <div>
+            <Icon name="check_circle" class="text-secondary text-4xl sm:text-5xl mx-auto" fill />
+            <h1 class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface mt-3">Your link is ready</h1>
+            <p class="text-sm text-on-surface-variant mt-2 max-w-xs mx-auto">Scroll down to copy your URL, grab the embed code, or download the QR.</p>
           </div>
-          <p class="text-xs sm:text-sm text-on-surface-variant mt-1 ml-8">Scroll down to copy your URL.</p>
+
+          <!-- Minimal scroll cue → smooth-scrolls to the copy card -->
+          <a
+            href="#share-card"
+            aria-label="Scroll down to your link"
+            class="share-scroll-cue group absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-on-surface-variant hover:text-rose-600 transition-colors"
+          >
+            <span class="font-label text-[10px] font-bold uppercase tracking-[0.22em]">Scroll to copy</span>
+            <span class="flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant/60 group-hover:border-rose-600 transition-colors">
+              <Icon name="expand_more" class="share-scroll-arrow text-2xl" />
+            </span>
+          </a>
         </div>
 
-        <div class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
+        <div id="share-card" class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5 scroll-mt-24">
           <!-- Big preview (shows the branded version once it's ready) -->
           <a id="thumb-link" href={url} target="_blank" rel="noopener"
              class="block bg-surface-container-lowest border border-outline-variant/40 overflow-hidden">
@@ -150,6 +164,23 @@ const snipBb = url ? `[img]${url}[/img]` : '';
 
   <Footer />
 </Layout>
+
+<style>
+  /* Share scroll cue — gentle downward bounce (transform/opacity only, so it's
+     GPU-composited: no layout/paint thrash, no CLS, Lighthouse-safe). */
+  @keyframes share-scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.85; }
+    50%      { transform: translateY(4px); opacity: 1; }
+  }
+  .share-scroll-arrow {
+    display: inline-block;
+    animation: share-scroll-bounce 1.8s ease-in-out infinite;
+  }
+  .share-scroll-cue:hover .share-scroll-arrow { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .share-scroll-arrow { animation: none; }
+  }
+</style>
 
 <script>
   import QRCode from 'qrcode';
