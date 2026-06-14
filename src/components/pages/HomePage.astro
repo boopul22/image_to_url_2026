@@ -576,45 +576,6 @@ const pageSchema = [
         )}
       </div>
     </div>
-
-    {currentUser && (
-      <div id="review-modal" class="hidden fixed inset-0 z-[60] items-center justify-center p-4">
-        <div id="review-backdrop" class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm"></div>
-        <div role="dialog" aria-modal="true" aria-labelledby="review-modal-title" class="relative w-full max-w-md bg-surface border border-outline-variant/40 rounded-2xl p-5 sm:p-6 shadow-xl">
-          <div class="flex items-center justify-between mb-4">
-            <h3 id="review-modal-title" class="font-headline font-black text-on-background text-base">Write a review</h3>
-            <button type="button" id="review-close" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer" aria-label="Close">
-              <Icon name="close" class="text-lg" />
-            </button>
-          </div>
-          <form id="review-form" class="space-y-4">
-            <div>
-              <label class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Your rating</label>
-              <div id="review-stars" class="flex items-center gap-1" role="radiogroup" aria-label="Rating">
-                {[1,2,3,4,5].map((n) => (
-                  <button type="button" class="review-star w-9 h-9 flex items-center justify-center cursor-pointer text-outline-variant" data-value={n} aria-label={`${n} star${n>1?'s':''}`}>
-                    <Icon name="star" class="text-2xl" />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label for="review-role" class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">What you do <span class="font-normal lowercase">(optional)</span></label>
-              <input id="review-role" type="text" maxlength="40" placeholder="e.g. Web Developer" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant/40 rounded-lg font-body text-sm focus:outline-none focus:border-primary" />
-            </div>
-            <div>
-              <label for="review-body" class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Your review</label>
-              <textarea id="review-body" rows="4" maxlength="600" placeholder="What do you use ImageToURL for, and how's it working out?" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant/40 rounded-lg font-body text-sm focus:outline-none focus:border-primary resize-none"></textarea>
-            </div>
-            <p id="review-msg" class="hidden text-sm font-medium"></p>
-            <div class="flex items-center justify-end gap-2 pt-1">
-              <button type="button" id="review-cancel" class="px-4 py-2.5 rounded-lg font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:bg-surface-container-highest transition-colors cursor-pointer">Cancel</button>
-              <button type="submit" id="review-submit" class="px-5 py-2.5 rounded-lg font-label text-xs font-bold uppercase tracking-wider bg-primary text-on-primary border border-outline-variant/40 hover:-translate-y-0.5 transition-transform active:scale-95 cursor-pointer disabled:opacity-60">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    )}
   </section>
 
   <!-- FAQ Accordion -->
@@ -694,6 +655,49 @@ const pageSchema = [
   </section>
 
   <Footer />
+
+  {/* Review modal — kept at the top level (outside the cv-auto/overflow-hidden
+      reviews section) so `position: fixed` is relative to the viewport. Nesting it
+      inside a content-visibility/overflow-hidden ancestor clipped + mis-positioned
+      it, making the dialog appear stuck under the nav. */}
+  {currentUser && (
+    <div id="review-modal" class="hidden fixed inset-0 z-[60] items-center justify-center p-4">
+      <div id="review-backdrop" class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm"></div>
+      <div role="dialog" aria-modal="true" aria-labelledby="review-modal-title" class="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-surface border border-outline-variant/40 rounded-2xl p-5 sm:p-6 shadow-xl">
+        <div class="flex items-center justify-between mb-4">
+          <h3 id="review-modal-title" class="font-headline font-black text-on-background text-base">Write a review</h3>
+          <button type="button" id="review-close" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer" aria-label="Close">
+            <Icon name="close" class="text-lg" />
+          </button>
+        </div>
+        <form id="review-form" class="space-y-4">
+          <div>
+            <label class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Your rating</label>
+            <div id="review-stars" class="flex items-center gap-1" role="radiogroup" aria-label="Rating">
+              {[1,2,3,4,5].map((n) => (
+                <button type="button" class="review-star w-9 h-9 flex items-center justify-center cursor-pointer text-outline-variant" data-value={n} aria-label={`${n} star${n>1?'s':''}`}>
+                  <Icon name="star" class="text-2xl" />
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label for="review-role" class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">What you do <span class="font-normal lowercase">(optional)</span></label>
+            <input id="review-role" type="text" maxlength="40" placeholder="e.g. Web Developer" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant/40 rounded-lg font-body text-sm focus:outline-none focus:border-primary" />
+          </div>
+          <div>
+            <label for="review-body" class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Your review</label>
+            <textarea id="review-body" rows="4" maxlength="600" placeholder="What do you use ImageToURL for, and how's it working out?" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant/40 rounded-lg font-body text-sm focus:outline-none focus:border-primary resize-none"></textarea>
+          </div>
+          <p id="review-msg" class="hidden text-sm font-medium"></p>
+          <div class="flex items-center justify-end gap-2 pt-1">
+            <button type="button" id="review-cancel" class="px-4 py-2.5 rounded-lg font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:bg-surface-container-highest transition-colors cursor-pointer">Cancel</button>
+            <button type="submit" id="review-submit" class="px-5 py-2.5 rounded-lg font-label text-xs font-bold uppercase tracking-wider bg-primary text-on-primary border border-outline-variant/40 hover:-translate-y-0.5 transition-transform active:scale-95 cursor-pointer disabled:opacity-60">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )}
 </Layout>
 
 <script>
