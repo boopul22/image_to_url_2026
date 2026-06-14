@@ -13,14 +13,12 @@
  * hidden and only the banner + in-content units remain.
  */
 import AdRail from './ads/AdRail.astro';
-import AdBanner from './ads/AdBanner.astro';
 ---
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
     <AdRail side="left" />
 
     <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
-      <AdBanner class="mb-4" />
       <slot />
     </div>
 
