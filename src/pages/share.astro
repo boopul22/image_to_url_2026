@@ -125,6 +125,22 @@ const snipBb = url ? `[img]${url}[/img]` : '';
           </div>
         </div>
 
+        <!-- ExtractPics cross-promo — shown on the share screen, so every tool that
+             routes here after copy surfaces it (not crammed next to the copy button). -->
+        <a href="https://www.extractpics.com/" target="_blank" rel="noopener" data-track-click="extractpics-cta"
+           class="flex items-center gap-3 mt-5 bg-surface border border-outline-variant/40 brutal-shadow p-4 hover:opacity-90 transition-opacity group">
+          <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 border border-outline-variant/40">
+            <Icon name="image_search" class="text-xl" fill />
+          </span>
+          <div class="flex-1 min-w-0">
+            <span class="text-sm font-bold text-on-background">Need images from a website?</span>
+            <p class="text-xs text-on-surface-variant mt-0.5">ExtractPics — grab every image from any URL, free</p>
+          </div>
+          <span class="flex-shrink-0 inline-flex items-center gap-1 bg-rose-600 text-white px-3 py-2 font-bold text-xs border border-outline-variant/40 group-hover:translate-x-0.5 transition-transform">
+            Try it <Icon name="open_in_new" class="text-sm" />
+          </span>
+        </a>
+
         <div class="mt-5 text-center">
           <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
         </div>
@@ -320,7 +336,7 @@ const snipBb = url ? `[img]${url}[/img]` : '';
       const scale = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
       const w = Math.round(img.naturalWidth * scale);
       const h = Math.round(img.naturalHeight * scale);
-      const stripH = Math.min(56, Math.max(44, Math.round(h * 0.08)));
+      const stripH = Math.min(80, Math.max(60, Math.round(h * 0.11)));
 
       const c = document.createElement('canvas');
       c.width = w;
@@ -328,21 +344,33 @@ const snipBb = url ? `[img]${url}[/img]` : '';
       const ctx = c.getContext('2d');
       if (!ctx) return;
 
-      // White strip + centered brand text, shrunk to fit narrow images.
-      const wmText = 'Uploaded on imagetourl.cloud';
+      // White strip + centered brand text, shrunk to fit narrow images. The brand
+      // link is drawn in rose so it stands out from the "Uploaded on" prefix.
+      const wmPrefix = 'Uploaded on ';
+      const wmLink = 'imagetourl.cloud';
+      const wmText = wmPrefix + wmLink;
+      const fontFor = (px: number) => `600 ${px}px "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif`;
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, w, stripH);
-      ctx.fillStyle = '#171717';
-      ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       const maxTextW = w * 0.9;
-      let fontPx = Math.round(stripH * 0.42);
+      let fontPx = Math.round(stripH * 0.46);
       while (fontPx > 9) {
-        ctx.font = `600 ${fontPx}px "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif`;
+        ctx.font = fontFor(fontPx);
         if (ctx.measureText(wmText).width <= maxTextW) break;
         fontPx -= 1;
       }
-      ctx.fillText(wmText, w / 2, stripH / 2 + 1);
+      ctx.font = fontFor(fontPx);
+      // Two-tone, centered: dark prefix + rose brand link.
+      ctx.textAlign = 'left';
+      const prefixW = ctx.measureText(wmPrefix).width;
+      const linkW = ctx.measureText(wmLink).width;
+      const startX = (w - (prefixW + linkW)) / 2;
+      const cy = stripH / 2 + 1;
+      ctx.fillStyle = '#171717';
+      ctx.fillText(wmPrefix, startX, cy);
+      ctx.fillStyle = '#e11d48';
+      ctx.fillText(wmLink, startX + prefixW, cy);
 
       // Original image below the strip.
       ctx.drawImage(img, 0, stripH, w, h);
