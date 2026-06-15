@@ -33,6 +33,25 @@ export interface LandingContent {
   // WebApplication JSON-LD so search engines see the page as recently updated.
   datePublished?: string;
   dateModified?: string;
+
+  // --- Optional richer SEO sections (only some pages populate these) ---
+  // A compact "at a glance" data block (key/value specs). Rendered after the hero.
+  specsTitle?: string;
+  specs?: { label: string; value: string }[];
+  // A comparison table. `comparisonColumns` are the header cells; each row's
+  // `cells` array must align to the columns (first cell is usually the tool name).
+  comparisonTitle?: string;
+  comparisonIntro?: string;
+  comparisonColumns?: string[];
+  comparisonRows?: { cells: string[] }[];
+  // Extra long-form prose sections (each an <h2> + paragraph) for topical depth.
+  sections?: { heading: string; body: string }[];
+  // Internal links to related pages. `pageKey` resolves to a localized URL;
+  // `label` is the (translatable) anchor text.
+  relatedTitle?: string;
+  related?: { pageKey: string; label: string }[];
+  // Opt-in: emit HowTo JSON-LD built from `steps` for richer search results.
+  howToSchema?: boolean;
 }
 
 export type LandingContentMap = Record<Locale, LandingContent>;

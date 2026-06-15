@@ -161,6 +161,58 @@ const LANDING_SCHEMA = {
         ctaTitle: { type: 'string' },
         ctaBody: { type: 'string' },
         ctaButton: { type: 'string' },
+        useCasesTitle: { type: 'string' },
+        useCasesIntro: { type: 'string' },
+        useCases: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { title: { type: 'string' }, body: { type: 'string' } },
+            required: ['title', 'body'],
+            additionalProperties: false,
+          },
+        },
+        specsTitle: { type: 'string' },
+        specs: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { label: { type: 'string' }, value: { type: 'string' } },
+            required: ['label', 'value'],
+            additionalProperties: false,
+          },
+        },
+        comparisonTitle: { type: 'string' },
+        comparisonIntro: { type: 'string' },
+        comparisonColumns: { type: 'array', items: { type: 'string' } },
+        comparisonRows: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { cells: { type: 'array', items: { type: 'string' } } },
+            required: ['cells'],
+            additionalProperties: false,
+          },
+        },
+        sections: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { heading: { type: 'string' }, body: { type: 'string' } },
+            required: ['heading', 'body'],
+            additionalProperties: false,
+          },
+        },
+        relatedTitle: { type: 'string' },
+        related: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { pageKey: { type: 'string' }, label: { type: 'string' } },
+            required: ['pageKey', 'label'],
+            additionalProperties: false,
+          },
+        },
       },
       required: ['metaTitle', 'metaDescription', 'schemaName', 'schemaDescription', 'badge', 'h1Pre', 'h1Highlight', 'intro', 'howTitle', 'steps', 'whyTitle', 'whyItems', 'faqTitle', 'faqs', 'ctaTitle', 'ctaBody', 'ctaButton'],
       additionalProperties: false,
@@ -299,6 +351,8 @@ Rules:
 - Preserve all JSON structure exactly.
 - Translate every string field; keep array shapes unchanged.
 - Keep placeholders, brand names, technical terms (HTML, <img>, CDN, URL, JPG, PNG, etc.) unchanged.
+- In "comparisonColumns"/"comparisonRows": keep product/brand names (Imgur, Catbox, ImgBB, Postimages, ImageToURL) unchanged; translate only descriptive cells; keep each row's "cells" count equal to the number of columns.
+- In "related": NEVER change the "pageKey" values (they are URL identifiers); translate only "label".
 - Keep it concise and natural — no AI clichés.
 - Output valid JSON only.`;
 
