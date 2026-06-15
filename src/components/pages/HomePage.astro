@@ -6,6 +6,7 @@ import Footer from '../Footer.astro';
 import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
+import { localizedUrl } from '../../i18n/landing/registry';
 import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
 import AdRail from '../ads/AdRail.astro';
@@ -642,6 +643,14 @@ const pageSchema = [
       )}
     </div>
   </section>
+
+  <!-- Related: dedicated Image to URL page (internal backlink) -->
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 pb-2 text-center reveal">
+    <a href={localizedUrl('image-to-url', locale)} class="inline-flex items-center gap-1.5 font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline underline-offset-4">
+      <Icon name="link" class="text-base" />
+      Image to URL tool - free, no sign-up
+    </a>
+  </div>
 
   <!-- Final CTA -->
   <section class="cv-auto py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">

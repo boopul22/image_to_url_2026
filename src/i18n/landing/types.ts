@@ -28,6 +28,11 @@ export interface LandingContent {
   ctaTitle: string;
   ctaBody: string;
   ctaButton: string;
+  // Optional freshness signals for structured data (ISO 8601, e.g. "2026-06-15").
+  // When set, the dynamic route adds datePublished/dateModified to the page's
+  // WebApplication JSON-LD so search engines see the page as recently updated.
+  datePublished?: string;
+  dateModified?: string;
 }
 
 export type LandingContentMap = Record<Locale, LandingContent>;

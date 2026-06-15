@@ -22,6 +22,7 @@ export type PageKey =
   | 'photo-to-url'
   | 'screenshot-to-url'
   | 'image-url-generator'
+  | 'image-to-url'
   | 'image-to-url-converter'
   | 'image-to-link'
   | 'image-embed-code-generator'
@@ -90,6 +91,7 @@ export const SLUGS: Record<PageKey, LocaleSlugMap> = {
   'photo-to-url': { en: 'photo-to-url', es: 'convertir-foto-a-url', fr: 'convertir-photo-en-url', de: 'foto-in-url-umwandeln', ja: '写真-url-変換', 'zh-Hans': '照片转链接' },
   'screenshot-to-url': { en: 'screenshot-to-url', es: 'convertir-captura-a-url', fr: 'convertir-capture-ecran-en-url', de: 'screenshot-in-url-umwandeln', ja: 'スクリーンショット-url-変換', 'zh-Hans': '截图转链接' },
   'image-url-generator': { en: 'image-url-generator', es: 'generador-de-url-de-imagen', fr: 'generateur-url-image-gratuit', de: 'bild-zu-url-konverter', ja: '画像-url-生成', 'zh-Hans': '图片转链接生成器' },
+  'image-to-url': { en: 'image-to-url', es: 'imagen-a-url', de: 'bild-zu-url', 'zh-Hans': 'tupian-zhuan-lianjie', fr: 'image-vers-url', ja: 'gazo-url-henkan' },
   'image-to-url-converter': { en: 'image-to-url-converter', es: 'convertir-imagen-a-url', fr: 'convertir-image-en-url', de: 'bild-in-url-umwandeln', ja: '画像-url-変換', 'zh-Hans': '图片转链接-转换器' },
   'image-to-link': { en: 'image-to-link', es: 'convertir-imagen-a-enlace', fr: 'convertir-image-en-lien', de: 'bild-in-link-umwandeln', ja: 'gazo-link-henkan', 'zh-Hans': '图片转链接' },
   'image-embed-code-generator': { en: 'image-embed-code-generator', es: 'generador-codigo-incrustar-imagenes', fr: 'generateur-code-embed-image', de: 'bild-embed-code-generator', ja: '画像-埋め込み-コード-生成', 'zh-Hans': '图片-嵌入-代码-生成器' },

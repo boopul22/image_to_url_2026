@@ -202,7 +202,13 @@ export async function GET({ locals }: APIContext): Promise<Response> {
   // Localized tool/landing pages — one <url> per (locale, pageKey) with
   // xhtml:link alternates pointing at each locale's translated slug.
   const landingLastmod = '2026-04-18';
+  // Per-page lastmod overrides for recently refreshed pages (keeps the sitemap
+  // signal aligned with the page's JSON-LD dateModified).
+  const lastmodOverrides: Partial<Record<string, string>> = {
+    'image-to-url': '2026-06-15',
+  };
   for (const pageKey of PAGE_KEYS) {
+    const pageLastmod = lastmodOverrides[pageKey] ?? landingLastmod;
     // Landing pages canonicalize to a trailing-slash URL; emit the canonical
     // form so Google doesn't follow a 307 on every entry.
     const alternates = locales
@@ -213,7 +219,7 @@ export async function GET({ locals }: APIContext): Promise<Response> {
       const locUrl = `${SITE}/${loc}/${getSlug(pageKey, loc)}/`;
       urlEntries.push(`  <url>
     <loc>${escapeXml(locUrl)}</loc>
-    <lastmod>${landingLastmod}</lastmod>
+    <lastmod>${pageLastmod}</lastmod>
 ${alternates}
 ${xDefault}
   </url>`);

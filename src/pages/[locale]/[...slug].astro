@@ -118,6 +118,9 @@ const schema = {
   description: c.schemaDescription,
   inLanguage: locale,
   provider: { '@id': 'https://imagetourl.cloud/#organization' },
+  // Freshness signals — only emitted for pages that declare them in content.
+  ...(c.datePublished ? { datePublished: c.datePublished } : {}),
+  ...(c.dateModified ? { dateModified: c.dateModified } : {}),
 };
 
 const faqSchema = {

@@ -5,23 +5,23 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL Converter — Free, No Signup | ImageToURL",
-    "metaDescription": "Free image to URL converter. Upload a JPG, PNG, WebP or GIF and get a permanent direct link that embeds cleanly in Discord, Reddit and forums. No signup.",
+    "metaTitle": "Image to URL Converter — Free Direct Link, No Signup | ImageToURL",
+    "metaDescription": "Free image to URL converter. Upload a JPG, PNG, WebP, GIF or SVG and get a direct link that embeds cleanly in Discord, Reddit and forums - no signup, no compression, no watermark.",
     "schemaName": "Image to URL Converter",
-    "schemaDescription": "A free image to URL converter that turns any image into a permanent, direct link. No account, no watermark, fast global CDN.",
+    "schemaDescription": "A free image to URL converter that turns any image into a direct, full-quality link. No account, no watermark, fast global CDN.",
     "badge": "IMAGE TO URL",
     "h1Pre": "Image to URL Converter — ",
     "h1Highlight": "Free, No Signup",
-    "intro": "This image to URL converter turns any picture into a direct, shareable link in a couple of seconds. Drop in a JPG, PNG, WebP or GIF and you get a clean image to URL link you can paste anywhere - no account, no watermark, and nothing stripped out of your file.",
+    "intro": "This image to URL converter turns any picture into a direct, shareable link in a couple of seconds. Drop in a JPG, PNG, WebP, GIF or SVG and you get a clean image to URL link you can paste anywhere - no account, no watermark, and nothing re-compressed or downscaled out of your file.",
     "howTitle": "How the image to URL converter works",
     "steps": [
       {
         "title": "Drop in your image",
-        "body": "Drag a file onto the box or click to browse. The converter takes JPG, PNG, WebP and GIF, up to 10MB each."
+        "body": "Drag a file onto the box or click to browse. The converter takes JPG, PNG, WebP, GIF and SVG, up to 10MB each."
       },
       {
         "title": "Get a direct link",
-        "body": "Your file lands on a fast global CDN and a permanent image to URL link is generated right away. Nothing is compressed, so the image stays exactly as you uploaded it."
+        "body": "Your file lands on a fast global CDN and a direct image to URL link is generated right away. Nothing is compressed or resized, so the image stays exactly as you uploaded it - full resolution, full quality."
       },
       {
         "title": "Copy and paste it anywhere",
@@ -39,8 +39,8 @@ export const content: LandingContentMap = {
         "body": "The URL points straight at the image, so Discord, Reddit and most forums render it inline instead of showing a gallery page or a download attachment."
       },
       {
-        "title": "Permanent and untouched",
-        "body": "Your link stays the same and keeps working, and the file isn't re-compressed or watermarked. What you upload is what people see."
+        "title": "Full quality, no downscaling",
+        "body": "The file isn't re-compressed, resized or watermarked - unlike hosts that quietly shrink hotlinked images to around 1,280px. What you upload is exactly what people see, at full resolution."
       }
     ],
     "useCasesTitle": "What you can do with an image to URL converter link",
@@ -79,15 +79,23 @@ export const content: LandingContentMap = {
       },
       {
         "q": "How long does the link last?",
-        "a": "Links are permanent for normal sharing. Files are kept for a good while and then eventually cleared, so it's best for sharing rather than as your only backup."
+        "a": "Anonymous uploads stay live until our monthly storage sweep, so you get at least a couple of weeks and often longer - plenty for sharing in a thread or chat. Want a link that never expires? Create a free account and choose \"keep forever\" when you upload. Either way, treat it as sharing rather than your only backup."
       },
       {
         "q": "Does it compress my image?",
-        "a": "No. The file you get back is the file you uploaded - no re-compression and no quality loss. It supports JPG, PNG, WebP and GIF."
+        "a": "No. The file you get back is the file you uploaded - no re-compression, no resizing and no quality loss, so it won't get shrunk to a smaller resolution the way some hosts do. It supports JPG, PNG, WebP, GIF and SVG."
+      },
+      {
+        "q": "Is this a free Imgur alternative?",
+        "a": "Yes. After Imgur ended anonymous uploads, a lot of people needed a no-account way to turn an image into a link - that's exactly what this does. Drag in a file, copy the direct URL, and you're done. No gallery page, no app, no email."
+      },
+      {
+        "q": "What image formats can I convert to a URL?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link you get ends in the real file extension, so it hotlinks and embeds exactly the way the original file would."
       }
     ],
     "ctaTitle": "Try the image to URL converter now",
-    "ctaBody": "Upload a JPG, PNG, WebP or GIF and get a permanent, direct link in seconds. No signup, no watermark.",
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. No signup, no compression, no watermark.",
     "ctaButton": "Upload Image Now"
   },
   "es": {
