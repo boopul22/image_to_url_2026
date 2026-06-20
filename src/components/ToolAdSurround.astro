@@ -18,7 +18,9 @@ import AdRail from './ads/AdRail.astro';
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
     <AdRail side="left" />
 
-    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
+    <!-- `data-share-mount`: where the global ShareDestination injects the share panel
+         on a ?u= redirect, so it's flanked by THESE already-filling rails. -->
+    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0" data-share-mount>
       <slot />
     </div>
 

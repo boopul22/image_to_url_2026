@@ -6,15 +6,20 @@ import type { Locale } from '../i18n/config';
 import type { PageKey } from '../i18n/landing/slugs';
 // Global share surface, rendered once in Layout.astro so it exists on EVERY page.
 //
-// Two entry points (exposed on window for the uploaders' "Get Link" handlers):
-//   - revealShareDest(url)  → reveal the panel + side ads in-place (home page).
-//   - shareGoRandom(url)    → navigate to a RANDOM landing page with ?u=<url>;
-//                             that page's ShareDestination auto-reveals on load.
-// Plus: on load, if a valid ?u= is present (a redirected visitor), auto-reveal.
+// Flow:
+//   - shareGoRandom(url): the uploaders' "Get Link" handler navigates to a RANDOM
+//     landing page with ?u=<url>.
+//   - On the destination, this component reads ?u= on load and MOUNTS the share
+//     panel into that page's existing ad-rail center column ([data-share-mount],
+//     present in ImageUploader + ToolAdSurround). That way the panel is flanked by
+//     the page's OWN already-filling side ads — no duplicate ad slots, no fragile
+//     dynamic ad fills. Then it strips ?u= from the URL.
+//   - revealShareDest(url): in-place reveal fallback (same mount logic) if ever
+//     called without navigation.
 //
-// The destination list is computed SERVER-SIDE in the current locale via
-// localizedUrl(), so redirects stay in the visitor's language. Curated toward
-// higher-commercial-intent (higher-CPC) pages for RPM.
+// Destinations are computed SERVER-SIDE in the visitor's locale via localizedUrl()
+// and curated toward higher-CPC pages for RPM. Every curated page has an uploader
+// or converter widget, so [data-share-mount] always exists there.
 
 const locale: Locale = ((Astro.locals as any).locale as Locale) ?? defaultLocale;
 
@@ -41,36 +46,11 @@ const DEST_KEYS: PageKey[] = [
   'free-image-hosting',
 ];
 const destURLs = DEST_KEYS.map((k) => localizedUrl(k, locale));
-
-const PUB = 'ca-pub-7803867089582138';
 ---
 
-<!-- Hidden until revealed. Sits at the top of <body>; revealShareDest() moves it
-     just below the site header for a natural "result on top" placement. -->
-<div id="share-dest" hidden class="w-full bg-background">
-  <div class="mx-auto max-w-7xl px-4 py-6 sm:py-8 xl:flex xl:items-start xl:justify-center xl:gap-6">
-    <!-- Left side ad (xl+). Deferred push: filled by revealShareDest after the
-         container is visible (a hidden push would throw availableWidth=0). -->
-    <aside class="hidden xl:block xl:w-[280px] xl:flex-shrink-0 xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-      <ins class="adsbygoogle sd-ad" style="display:block" data-ad-format="auto"
-           data-full-width-responsive="true" data-ad-client={PUB} data-ad-slot="7695843568"></ins>
-    </aside>
-
-    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
-      <SharePanel />
-    </div>
-
-    <aside class="hidden xl:block xl:w-[280px] xl:flex-shrink-0 xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
-      <ins class="adsbygoogle sd-ad" style="display:block" data-ad-format="auto"
-           data-full-width-responsive="true" data-ad-client={PUB} data-ad-slot="3728678394"></ins>
-    </aside>
-  </div>
-
-  <!-- Mobile/tablet in-content unit (no side rails below xl). Deferred push. -->
-  <div class="xl:hidden w-full max-w-2xl mx-auto px-4">
-    <ins class="adsbygoogle sd-ad" style="display:block" data-ad-format="autorelaxed"
-         data-ad-client={PUB} data-ad-slot="1349470215"></ins>
-  </div>
+<!-- Hidden host for the panel until a ?u= reveal moves it into [data-share-mount]. -->
+<div id="share-dest" hidden class="w-full">
+  <SharePanel />
 </div>
 
 <!-- Server-computed, locale-correct random destinations for the routing helper. -->
@@ -85,45 +65,32 @@ const PUB = 'ca-pub-7803867089582138';
   const w = window as any;
   if (destEl) {
     const dest: HTMLElement = destEl;
-
-    // Push any not-yet-filled side/in-content ad units inside the revealed block.
-    function pushDestAds() {
-      const isXl = window.matchMedia('(min-width:1280px)').matches;
-      dest.querySelectorAll<HTMLElement>('ins.sd-ad:not([data-pushed])').forEach((ins) => {
-        // Side rails are xl-only; below xl they're display:none (0 width) → skip
-        // the rail push but still allow the visible in-content unit.
-        const railHidden = ins.closest('aside') && !isXl;
-        if (railHidden) { ins.classList.remove('adsbygoogle'); ins.setAttribute('data-pushed', '1'); return; }
-        if (ins.offsetParent === null && ins.offsetWidth === 0) return; // still hidden
-        ins.setAttribute('data-pushed', '1');
-        try { (w.adsbygoogle = w.adsbygoogle || []).push({}); } catch { /* ignore */ }
-      });
-    }
-
-    // Place the reveal block right below the site header (nav) the first time.
-    let moved = false;
-    function placeBelowHeader() {
-      if (moved) return;
-      moved = true;
-      const header = document.querySelector('header, nav');
-      if (header && header.parentElement) header.insertAdjacentElement('afterend', dest);
-    }
+    let mounted = false;
 
     function doReveal(u: string) {
-      placeBelowHeader();
+      // Move the panel into the page's ad-rail center column so the page's own
+      // (already-filling) side ads flank it. Fall back to just below the header.
+      if (!mounted) {
+        mounted = true;
+        const mount = document.querySelector('[data-share-mount]');
+        if (mount) {
+          mount.prepend(dest);
+        } else {
+          const header = document.querySelector('header, nav');
+          if (header) header.insertAdjacentElement('afterend', dest);
+        }
+      }
       dest.hidden = false;
       if (typeof w.showSharePanel === 'function') w.showSharePanel(u);
-      // Ads need a tick for layout after un-hiding.
-      window.setTimeout(pushDestAds, 60);
     }
 
-    // In-place reveal (home page).
+    // In-place reveal (no navigation) — kept for flexibility.
     w.revealShareDest = (raw: string) => {
       const u = getValidUrl(raw);
       if (u) doReveal(u);
     };
 
-    // Navigate to a random landing page (other uploaders), carrying ?u=.
+    // "Get Link" → navigate to a random landing page carrying ?u=.
     w.shareGoRandom = (raw: string) => {
       const u = getValidUrl(raw);
       if (!u) return;
@@ -137,7 +104,7 @@ const PUB = 'ca-pub-7803867089582138';
       location.href = target + '?u=' + encodeURIComponent(u);
     };
 
-    // Redirected visitor: auto-reveal if a valid ?u= is present, then clean the URL.
+    // Redirected visitor: auto-reveal on a valid ?u=, then clean the URL.
     const fromQuery = getValidUrl(new URLSearchParams(location.search).get('u'));
     if (fromQuery) {
       doReveal(fromQuery);

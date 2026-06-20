@@ -850,9 +850,9 @@ const pageSchema = [
   });
 
   copyBtn.addEventListener('click', () => {
-    // "Get Link" — reveal the share widget in-place on the home page (URL, copy,
-    // formats, QR, watermark) + side ads, no navigation.
-    (window as any).revealShareDest(resultUrl.value);
+    // "Get Link" — route to a random landing page that surfaces the share widget
+    // (URL, copy, formats, QR, watermark) on top + side ads, for higher-RPM dwell.
+    (window as any).shareGoRandom(resultUrl.value);
   });
 
   uploadAnother.addEventListener('click', resetIdle);
