@@ -89,7 +89,7 @@ const toolsDropdown = getNavGroups(locale);
           {t(locale, 'nav.tools')}
           <Icon name="expand_more" class="text-sm" />
         </button>
-        <div id="tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-surface border border-outline-variant/40 hard-shadow overflow-hidden z-50 w-[780px] max-h-[80vh] overflow-y-auto">
+        <div id="tools-dropdown-desktop" class="hidden fixed top-16 right-[calc((100vw-min(100vw,72rem))/2+1.5rem)] rounded-xl bg-surface border border-outline-variant/40 hard-shadow overflow-hidden z-50 w-[780px] max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-y-auto">
           <!-- Row 1: Utilities + Features + Use Cases -->
           <div class="grid grid-cols-3 gap-0 divide-x divide-outline-variant/40 border-b border-outline-variant/40">
             <div class="p-4">
@@ -170,7 +170,7 @@ const toolsDropdown = getNavGroups(locale);
           Tools
           <Icon name="expand_more" class="text-sm" />
         </button>
-        <div id="our-tools-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-surface border border-outline-variant/40 hard-shadow overflow-hidden z-50 w-[780px] max-h-[80vh] overflow-y-auto">
+        <div id="our-tools-dropdown-desktop" class="hidden fixed top-16 right-[calc((100vw-min(100vw,72rem))/2+1.5rem)] rounded-xl bg-surface border border-outline-variant/40 hard-shadow overflow-hidden z-50 w-[780px] max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-y-auto">
           <div class="grid grid-cols-3 gap-0 divide-x divide-outline-variant/40">
             <div class="p-4">
               <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
