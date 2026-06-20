@@ -1,39 +1,24 @@
 ---
 import Icon from '../components/Icon.astro';
-// Standalone "URL copied" share screen. The uploader copy buttons send the user
-// here (with ?u=<image url>) AFTER the normal clipboard copy. Self-contained:
-// the URL is validated + the content rendered SERVER-SIDE so there's no client
-// "reveal" pop-in (zero layout shift). Only the QR canvas + copy/download
-// handlers run on the client.
+// Standalone "URL copied" share screen — now a thin SSR fallback. The uploaders
+// reveal the same widget IN-PLACE (window.showSharePanel) without leaving the
+// content page; this route still exists for old links/bookmarks that carry ?u=.
+// The widget itself lives in SharePanel.astro (single source of truth).
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import SharePanel from '../components/SharePanel.astro';
 import ToolAdSurround from '../components/ToolAdSurround.astro';
 import AdBanner from '../components/ads/AdBanner.astro';
+import { getValidUrl } from '../lib/share-url';
 
 // Never cache at the CDN (the content is per-?u= and trivial); also keep it out
 // of the index.
 Astro.response.headers.set('Cache-Control', 'private, no-store');
 
-// Only render image URLs that belong to us — prevents reflected content / XSS
-// via the ?u= param (it's used as an <img src>, in snippets, and in the QR).
-const ALLOWED_HOSTS = ['imagetourl.cloud', 'cdn.imagetourl.cloud'];
-
-function getValidUrl(raw: string | null): string | null {
-  if (!raw) return null;
-  let parsed: URL;
-  try { parsed = new URL(raw); } catch { return null; }
-  if (parsed.protocol !== 'https:') return null;
-  if (!ALLOWED_HOSTS.includes(parsed.hostname)) return null;
-  return parsed.href;
-}
-
 const url = getValidUrl(Astro.url.searchParams.get('u'));
-const snipMd = url ? `![](${url})` : '';
-const snipHtml = url ? `<img src="${url}" alt="">` : '';
-const snipBb = url ? `[img]${url}[/img]` : '';
 ---
 
 <Layout
@@ -46,112 +31,17 @@ const snipBb = url ? `[img]${url}[/img]` : '';
 
   <main class="max-w-xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
     {url ? (
-      <!-- Valid state (server-rendered, no client reveal) -->
       <ToolAdSurround>
-      <div id="share-main">
-        <div class="mb-5">
-          <div class="flex items-center gap-2">
-            <Icon name="check_circle" class="text-secondary text-xl sm:text-2xl" fill />
-            <h1 class="text-lg sm:text-2xl font-headline italic font-black text-on-surface">Your link is ready</h1>
-          </div>
-          <p class="text-xs sm:text-sm text-on-surface-variant mt-1 ml-8">Scroll down to copy your URL.</p>
-        </div>
-
-        <div class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
-          <!-- Big preview (shows the branded version once it's ready) -->
-          <a id="thumb-link" href={url} target="_blank" rel="noopener"
-             class="block bg-surface-container-lowest border border-outline-variant/40 overflow-hidden">
-            <img id="thumb" src={url} alt="Uploaded image" loading="lazy" decoding="async"
-                 class="block mx-auto w-auto max-w-full max-h-[26rem] object-contain" />
-          </a>
-
-          <!-- Tiny watermark toggle — revealed by JS once the branded variant is ready.
-               Default = watermarked (marketing); "No watermark" stays small but findable. -->
-          <div id="wm-toggle" class="hidden items-center justify-end gap-2 -mt-2">
-            <span class="font-label text-[10px] font-medium uppercase tracking-wider text-on-surface-variant">Link:</span>
-            <div class="inline-flex items-center border border-outline-variant/40 overflow-hidden" role="tablist">
-              <button id="tab-branded" type="button" data-tab="branded"
-                      class="wm-tab text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 transition-colors">Watermark</button>
-              <button id="tab-clean" type="button" data-tab="clean"
-                      class="wm-tab text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border-l border-outline-variant/40 transition-colors">No watermark</button>
-            </div>
-          </div>
-
-          <!-- Direct URL -->
-          <div>
-            <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Direct URL</label>
-            <div class="flex gap-2 mt-1">
-              <input id="share-url" type="text" readonly value={url}
-                     class="flex-1 min-w-0 bg-white border border-outline-variant/40 px-3 py-2 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-              <button data-copy-target="share-url"
-                      class="copy-btn bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-xs py-2 px-4 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide flex-shrink-0">Copy</button>
-            </div>
-          </div>
-
-          <!-- Format snippets -->
-          <div class="space-y-2">
-            <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Embed code</label>
-            <div class="grid gap-2">
-              <div class="flex gap-2">
-                <input id="snip-md" type="text" readonly value={snipMd} class="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-                <button data-copy-target="snip-md" class="copy-btn bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Markdown</button>
-              </div>
-              <div class="flex gap-2">
-                <input id="snip-html" type="text" readonly value={snipHtml} class="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-                <button data-copy-target="snip-html" class="copy-btn bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">HTML</button>
-              </div>
-              <div class="flex gap-2">
-                <input id="snip-bb" type="text" readonly value={snipBb} class="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none" />
-                <button data-copy-target="snip-bb" class="copy-btn bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">BBCode</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- QR + open -->
-          <div class="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t border-outline-variant/40">
-            <div class="flex-shrink-0 border border-outline-variant/40 bg-white p-2">
-              <canvas id="qr-canvas" width="160" height="160" class="block w-[160px] h-[160px]"></canvas>
-            </div>
-            <div class="flex-1 w-full space-y-2">
-              <p class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Scan or share</p>
-              <button id="download-qr" class="w-full bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
-                <Icon name="download" class="text-base" /> Download QR
-              </button>
-              <a id="open-image" href={url} target="_blank" rel="noopener"
-                 class="w-full bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex items-center justify-center gap-1.5">
-                <Icon name="open_in_new" class="text-base" /> Open image
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- ExtractPics cross-promo — shown on the share screen, so every tool that
-             routes here after copy surfaces it (not crammed next to the copy button). -->
-        <a href="https://www.extractpics.com/" target="_blank" rel="noopener" data-track-click="extractpics-cta"
-           class="flex items-center gap-3 mt-5 bg-surface border border-outline-variant/40 brutal-shadow p-4 hover:opacity-90 transition-opacity group">
-          <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 border border-outline-variant/40">
-            <Icon name="image_search" class="text-xl" fill />
-          </span>
-          <div class="flex-1 min-w-0">
-            <span class="text-sm font-bold text-on-background">Need images from a website?</span>
-            <p class="text-xs text-on-surface-variant mt-0.5">ExtractPics — grab every image from any URL, free</p>
-          </div>
-          <span class="flex-shrink-0 inline-flex items-center gap-1 bg-rose-600 text-white px-3 py-2 font-bold text-xs border border-outline-variant/40 group-hover:translate-x-0.5 transition-transform">
-            Try it <Icon name="open_in_new" class="text-sm" />
-          </span>
-        </a>
-
+        <SharePanel url={url} />
         <div class="mt-5 text-center">
           <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
         </div>
-      </div>
       </ToolAdSurround>
 
       <!-- Desktop "post-action" banner. Share page is the highest-dwell moment in
            the funnel; once the user finishes copying / scanning QR their gaze drops
-           here. Two responsive units (horizontal + square), lazy-loaded (below the
-           fold) and desktop-only — mobile already gets the in-content unit via
-           ToolAdSurround. Last ad cluster in DOM, so lazy fills can't misalign. -->
+           here. Lazy-loaded (below the fold) and desktop-only — mobile already gets
+           the in-content unit via ToolAdSurround. -->
       <AdBanner lazy class="hidden lg:block mt-8" />
     ) : (
       <!-- Invalid / missing URL state -->
@@ -166,243 +56,3 @@ const snipBb = url ? `[img]${url}[/img]` : '';
 
   <Footer />
 </Layout>
-
-<script>
-  import QRCode from 'qrcode';
-
-  function flash(btn: HTMLElement, label: string) {
-    const original = btn.dataset.label ?? btn.textContent ?? '';
-    if (!btn.dataset.label) btn.dataset.label = original;
-    btn.textContent = label;
-    window.setTimeout(() => { btn.textContent = btn.dataset.label!; }, 1500);
-  }
-
-  // Shared analytics state — written by the watermark/tab logic below, read by the
-  // copy handlers. `variant` tracks what URL is actually live: 'clean' until the
-  // watermark finishes generating, even though the branded tab is the default.
-  const copyState: { variant: 'branded' | 'clean'; imageId: string } = { variant: 'clean', imageId: '' };
-
-  const COPY_FORMATS: Record<string, string> = {
-    'share-url': 'url',
-    'snip-md': 'markdown',
-    'snip-html': 'html',
-    'snip-bb': 'bbcode',
-  };
-
-  // Beacon a copy/download event so we can measure watermarked-vs-clean choice.
-  // text/plain Blob = CORS-safelisted, so sendBeacon delivers it without a preflight.
-  function sendCopyEvent(format: string) {
-    try {
-      const payload = JSON.stringify({
-        variant: copyState.variant,
-        format,
-        imageId: copyState.imageId || undefined,
-      });
-      navigator.sendBeacon('/api/copy-event', new Blob([payload], { type: 'text/plain' }));
-    } catch { /* analytics is best-effort */ }
-  }
-
-  // Copy buttons (each copies its target input's value — values are kept in sync
-  // with the active tab, so this works for both clean and branded URLs).
-  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const targetId = btn.dataset.copyTarget!;
-      const value = (document.getElementById(targetId) as HTMLInputElement).value;
-      try { await navigator.clipboard.writeText(value); } catch { /* ignore */ }
-      flash(btn, 'Copied!');
-      const fmt = COPY_FORMATS[targetId];
-      if (fmt) sendCopyEvent(fmt);
-    });
-  });
-
-  const urlInput = document.getElementById('share-url') as HTMLInputElement | null;
-  const canvas = document.getElementById('qr-canvas') as HTMLCanvasElement | null;
-
-  if (urlInput && canvas) {
-    const cleanUrl = urlInput.value;
-    let brandedUrl: string | null = null;
-    let activeTab: 'branded' | 'clean' = 'branded';
-
-    const thumb = document.getElementById('thumb') as HTMLImageElement;
-    const thumbLink = document.getElementById('thumb-link') as HTMLAnchorElement;
-    const openImage = document.getElementById('open-image') as HTMLAnchorElement | null;
-    const snipMd = document.getElementById('snip-md') as HTMLInputElement | null;
-    const snipHtml = document.getElementById('snip-html') as HTMLInputElement | null;
-    const snipBb = document.getElementById('snip-bb') as HTMLInputElement | null;
-    const wmToggle = document.getElementById('wm-toggle');
-    const tabBranded = document.getElementById('tab-branded') as HTMLButtonElement | null;
-    const tabClean = document.getElementById('tab-clean') as HTMLButtonElement | null;
-
-    function currentUrl(): string {
-      return activeTab === 'branded' && brandedUrl ? brandedUrl : cleanUrl;
-    }
-
-    function renderQR(u: string) {
-      QRCode.toCanvas(canvas, u, { width: 160, margin: 1 }).catch(() => {
-        canvas!.closest('div')?.classList.add('hidden');
-      });
-    }
-
-    function setTabStyles() {
-      const active = ['bg-rose-600', 'text-white'];
-      const idle = ['bg-white', 'text-on-surface-variant', 'hover:bg-surface-container'];
-      [tabBranded, tabClean].forEach((t) => { if (t) t.classList.remove(...active, ...idle); });
-      (activeTab === 'branded' ? tabBranded : tabClean)?.classList.add(...active);
-      (activeTab === 'branded' ? tabClean : tabBranded)?.classList.add(...idle);
-    }
-
-    function syncUI() {
-      const u = currentUrl();
-      copyState.variant = activeTab === 'branded' && brandedUrl ? 'branded' : 'clean';
-      urlInput!.value = u;
-      thumb.src = u;
-      thumbLink.href = u;
-      if (openImage) openImage.href = u;
-      if (snipMd) snipMd.value = `![](${u})`;
-      if (snipHtml) snipHtml.value = `<img src="${u}" alt="">`;
-      if (snipBb) snipBb.value = `[img]${u}[/img]`;
-      renderQR(u);
-      setTabStyles();
-    }
-
-    function revealTabs() {
-      if (!wmToggle) return;
-      wmToggle.classList.remove('hidden');
-      wmToggle.classList.add('flex');
-      setTabStyles();
-    }
-
-    [tabBranded, tabClean].forEach((t) => {
-      t?.addEventListener('click', () => {
-        const next = t.dataset.tab as 'branded' | 'clean';
-        if (next === activeTab) return;
-        activeTab = next;
-        syncUI();
-      });
-    });
-
-    // Initial paint (clean — branded swaps in once ready).
-    renderQR(cleanUrl);
-
-    // Download QR as PNG (uses whatever's currently shown).
-    document.getElementById('download-qr')!.addEventListener('click', () => {
-      try {
-        const a = document.createElement('a');
-        const name = (currentUrl().split('/').pop() || 'image').replace(/\.[^.]+$/, '');
-        a.href = canvas.toDataURL('image/png');
-        a.download = `${name}-qr.png`;
-        a.click();
-        sendCopyEvent('qr');
-      } catch { /* ignore */ }
-    });
-
-    // ── Branded variant: draw a white "imagetourl.cloud" strip above the image
-    // on a canvas, upload it in the background, and reveal the tabs once ready. ──
-    const ID_RE = /^[a-z0-9]{8}$/;
-    const ext = (cleanUrl.split('.').pop() || '').toLowerCase();
-    const originalId = (cleanUrl.split('/').pop() || '').replace(/\.[^.]+$/, '');
-    if (ID_RE.test(originalId)) copyState.imageId = originalId;
-    const brandable = ID_RE.test(originalId) && ext !== 'gif' && ext !== 'svg';
-
-    async function applyBranded(u: string) {
-      brandedUrl = u;
-      try { localStorage.setItem(`wm:${cleanUrl}`, u); } catch { /* ignore */ }
-      revealTabs();
-      if (activeTab === 'branded') syncUI();
-    }
-
-    async function generateBranded() {
-      if (!brandable) return;
-
-      // Reuse a previously generated variant for this image (no network).
-      try {
-        const cached = localStorage.getItem(`wm:${cleanUrl}`);
-        if (cached) { await applyBranded(cached); return; }
-      } catch { /* ignore */ }
-
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      const loaded = new Promise<boolean>((resolve) => {
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-      });
-      img.src = cleanUrl;
-      if (!(await loaded) || !img.naturalWidth) return;
-
-      // Best-effort: make sure the brand font is ready before we rasterize text.
-      try { await (document as any).fonts?.load?.('600 24px "Space Grotesk Variable"'); } catch { /* ignore */ }
-
-      // Cap the long edge so the generated PNG stays a sensible size.
-      const scale = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
-      const w = Math.round(img.naturalWidth * scale);
-      const h = Math.round(img.naturalHeight * scale);
-      const stripH = Math.min(80, Math.max(60, Math.round(h * 0.11)));
-
-      const c = document.createElement('canvas');
-      c.width = w;
-      c.height = h + stripH;
-      const ctx = c.getContext('2d');
-      if (!ctx) return;
-
-      // White strip + centered brand text, shrunk to fit narrow images. The brand
-      // link is drawn in rose so it stands out from the "Uploaded on" prefix.
-      const wmPrefix = 'Uploaded on ';
-      const wmLink = 'imagetourl.cloud';
-      const wmText = wmPrefix + wmLink;
-      const fontFor = (px: number) => `600 ${px}px "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif`;
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, w, stripH);
-      ctx.textBaseline = 'middle';
-      const maxTextW = w * 0.9;
-      let fontPx = Math.round(stripH * 0.46);
-      while (fontPx > 9) {
-        ctx.font = fontFor(fontPx);
-        if (ctx.measureText(wmText).width <= maxTextW) break;
-        fontPx -= 1;
-      }
-      ctx.font = fontFor(fontPx);
-      // Two-tone, centered: dark prefix + rose brand link.
-      ctx.textAlign = 'left';
-      const prefixW = ctx.measureText(wmPrefix).width;
-      const linkW = ctx.measureText(wmLink).width;
-      const startX = (w - (prefixW + linkW)) / 2;
-      const cy = stripH / 2 + 1;
-      ctx.fillStyle = '#171717';
-      ctx.fillText(wmPrefix, startX, cy);
-      ctx.fillStyle = '#e11d48';
-      ctx.fillText(wmLink, startX + prefixW, cy);
-
-      // Original image below the strip.
-      ctx.drawImage(img, 0, stripH, w, h);
-
-      const blob: Blob | null = await new Promise((resolve) => {
-        try { c.toBlob((b) => resolve(b), 'image/png'); } catch { resolve(null); }
-      });
-      if (!blob) return; // tainted canvas (cross-origin) or encode failure → clean only
-
-      // Show the watermark instantly from the locally-rendered canvas — don't make
-      // the user wait for the upload + re-download round trip below (that wait is
-      // the ~1s "pop-in"). The background upload still produces the shareable URL,
-      // which silently swaps in (visually identical image, so no second flash).
-      if (activeTab === 'branded') {
-        try {
-          const localPreview = URL.createObjectURL(blob);
-          thumb.addEventListener('load', () => URL.revokeObjectURL(localPreview), { once: true });
-          thumb.src = localPreview;
-        } catch { /* fall back to the post-upload swap */ }
-      }
-
-      const fd = new FormData();
-      fd.append('file', new File([blob], `branded-${originalId}.png`, { type: 'image/png' }));
-      fd.append('original_id', originalId);
-
-      try {
-        const res = await fetch('/api/brand-image', { method: 'POST', body: fd });
-        const data = await res.json();
-        if (res.ok && data?.data?.url) await applyBranded(data.data.url as string);
-      } catch { /* leave clean-only */ }
-    }
-
-    generateBranded();
-  }
-</script>

@@ -1,5 +1,6 @@
 ---
 import Icon from '../Icon.astro';
+import SharePanel from '../SharePanel.astro';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
@@ -191,6 +192,12 @@ const pageSchema = [
 
 <Layout schema={pageSchema} title={t(locale, 'home.meta.title')} description={t(locale, 'home.meta.description')}>
   <Nav activePage="home" />
+
+  <!-- Share widget — hidden until "Get Link"; revealed in-place via window.showSharePanel,
+       so the user stays on this content-rich page instead of leaving for /share. -->
+  <div class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+    <SharePanel />
+  </div>
 
   <!-- Hero Section — Immediate, action-focused -->
   <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
@@ -850,9 +857,9 @@ const pageSchema = [
   });
 
   copyBtn.addEventListener('click', () => {
-    // "Get Link" — no copy here; send the user to the share screen, which owns
-    // copying (plus more formats + QR).
-    window.location.href = '/share?u=' + encodeURIComponent(resultUrl.value);
+    // "Get Link" — no copy here; reveal the share widget in-place (it owns copying,
+    // formats, QR, watermark) so the user stays on this content-rich page.
+    (window as any).showSharePanel(resultUrl.value);
   });
 
   uploadAnother.addEventListener('click', resetIdle);

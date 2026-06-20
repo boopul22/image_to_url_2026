@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import SharePanel from './SharePanel.astro';
 /**
  * Client-side HEIC/HEIF → JPG converter.
  * heic2any is dynamically imported on first interaction so the WASM payload
@@ -7,6 +8,9 @@ import Icon from './Icon.astro';
  * the optional "Host this JPG" button is the single point of network egress.
  */
 ---
+
+<!-- Share widget — hidden until "Get Link"; revealed in-place via window.showSharePanel. -->
+<SharePanel />
 
 <div class="soft-uploader w-full max-w-2xl mx-auto">
   <input
@@ -237,10 +241,10 @@ import Icon from './Icon.astro';
         copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
         copy.textContent = 'Copy';
         copy.addEventListener('click', async () => {
-          // Copy, then send the user to the share screen (more formats + QR) — same as the
-          // main uploader. The navigation is what lets Google's overlay/vignette ad fire.
+          // Copy, then reveal the share widget in-place (more formats + QR + watermark)
+          // so the user stays on this content-rich page.
           try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
-          window.location.href = '/share?u=' + encodeURIComponent(hosted);
+          (window as any).showSharePanel(hosted);
         });
         row.appendChild(urlInput);
         row.appendChild(copy);

@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import SharePanel from './SharePanel.astro';
 /**
  * Client-side image → PDF converter. Uses jsPDF, dynamically imported so the
  * library (~40KB gzipped) never enters the initial bundle. Accepts PNG, JPG,
@@ -22,6 +23,9 @@ const acceptMap = {
 const accept = acceptMap[from];
 const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
 ---
+
+<!-- Share widget — hidden until "Get Link"; revealed in-place via window.showSharePanel. -->
+<SharePanel />
 
 <div class="soft-uploader w-full max-w-2xl mx-auto" data-pdf-root={idPrefix} data-pdf-from={from}>
   <input type="file" id={`${idPrefix}-input`} accept={accept} multiple class="hidden" />
@@ -256,10 +260,10 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
           copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
           copy.textContent = 'Copy';
           copy.addEventListener('click', async () => {
-            // Copy, then send the user to the share screen (more formats + QR) — same as the
-            // main uploader. The navigation is what lets Google's overlay/vignette ad fire.
+            // Copy, then reveal the share widget in-place (more formats + QR + watermark)
+            // so the user stays on this content-rich page.
             try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
-            window.location.href = '/share?u=' + encodeURIComponent(hosted);
+            (window as any).showSharePanel(hosted);
           });
           row.appendChild(inp); row.appendChild(copy);
         } catch (err: any) {
