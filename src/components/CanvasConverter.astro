@@ -1,6 +1,5 @@
 ---
 import Icon from './Icon.astro';
-import SharePanel from './SharePanel.astro';
 /**
  * Client-side image format converter for formats the browser can decode/encode
  * natively via <canvas>: PNG, JPG, WEBP (and read-only: GIF/BMP/TIFF via Image).
@@ -51,9 +50,6 @@ const supportsQuality = to === 'jpg' || to === 'webp';
 const fromL = fromLabel[from];
 const toL = toLabel[to];
 ---
-
-<!-- Share widget — hidden until "Get Link"; revealed in-place via window.showSharePanel. -->
-<SharePanel />
 
 <div class="soft-uploader w-full max-w-2xl mx-auto" data-conv-root={idPrefix} data-conv-from={from} data-conv-to={to} data-conv-mime={outMime} data-conv-ext={outExt}>
   <input type="file" id={`${idPrefix}-input`} accept={accept} multiple class="hidden" />
@@ -328,10 +324,10 @@ const toL = toLabel[to];
           copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
           copy.textContent = 'Copy';
           copy.addEventListener('click', async () => {
-            // Copy, then reveal the share widget in-place (more formats + QR + watermark)
-            // so the user stays on this content-rich page.
+            // Copy, then route to a random landing page that surfaces the share widget
+            // (more formats + QR + watermark) on top + side ads for higher-RPM dwell.
             try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
-            (window as any).showSharePanel(hosted);
+            (window as any).shareGoRandom(hosted);
           });
           row.appendChild(urlInput);
           row.appendChild(copy);

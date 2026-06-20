@@ -11,11 +11,7 @@ import Icon from './Icon.astro';
  * the rest of the site stays brutalist.
  */
 import AdRail from './ads/AdRail.astro';
-import SharePanel from './SharePanel.astro';
 ---
-
-<!-- Share widget — hidden until "Get Link"; revealed in-place via window.showSharePanel. -->
-<SharePanel />
 
 <!-- Tool-area ads: left + right 160x600 skyscrapers flank the uploader on lg+,
      with a 90px horizontal banner above. The wrapper breaks out of its parent's
@@ -432,9 +428,9 @@ import SharePanel from './SharePanel.astro';
   batchAnother.addEventListener('click', resetIdle);
 
   copyBtn.addEventListener('click', () => {
-    // "Get Link" — no copy here; reveal the share widget in-place (it owns copying,
-    // formats, QR, watermark) so the user stays on this content-rich page.
-    (window as any).showSharePanel(resultUrl.value);
+    // "Get Link" — route to a random landing page that surfaces the share widget
+    // (URL, copy, QR, watermark) on top + side ads, for higher-RPM dwell.
+    (window as any).shareGoRandom(resultUrl.value);
   });
 
 

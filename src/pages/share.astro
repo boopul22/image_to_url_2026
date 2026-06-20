@@ -1,51 +1,41 @@
 ---
 import Icon from '../components/Icon.astro';
-// Standalone "URL copied" share screen — now a thin SSR fallback. The uploaders
-// reveal the same widget IN-PLACE (window.showSharePanel) without leaving the
-// content page; this route still exists for old links/bookmarks that carry ?u=.
-// The widget itself lives in SharePanel.astro (single source of truth).
+// Thin SSR fallback for old /share?u= links/bookmarks. The share widget itself
+// is now the GLOBAL ShareDestination (rendered in Layout on every page), which
+// auto-reveals on a valid ?u= — so this page must NOT render its own SharePanel
+// or side ads (that would duplicate the global one's DOM ids + ad slots).
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import SharePanel from '../components/SharePanel.astro';
-import ToolAdSurround from '../components/ToolAdSurround.astro';
-import AdBanner from '../components/ads/AdBanner.astro';
 import { getValidUrl } from '../lib/share-url';
 
-// Never cache at the CDN (the content is per-?u= and trivial); also keep it out
-// of the index.
+// Never cache at the CDN (per-?u=) and keep it out of the index.
 Astro.response.headers.set('Cache-Control', 'private, no-store');
 
 const url = getValidUrl(Astro.url.searchParams.get('u'));
 ---
 
-<Layout
-  title="Image URL Copied — ImageToURL"
-  description="Your image URL is ready. Copy it as a direct link, Markdown, HTML, or BBCode, scan the QR code, or upload another image — free, permanent hosting with no account required."
-  noindex={true}
-  noHreflang
->
+<Layout title="Image URL Copied — ImageToURL" description="Your image URL is ready — copy it, grab the embed code, or scan the QR." noindex={true} noHreflang>
   <Nav />
 
   <main class="max-w-xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
     {url ? (
-      <ToolAdSurround>
-        <SharePanel url={url} />
-        <div class="mt-5 text-center">
+      <!-- Valid link: the global ShareDestination reveals the rich widget above.
+           This is the no-JS / pre-reveal graceful fallback. -->
+      <div class="text-center py-6">
+        <Icon name="check_circle" class="text-secondary text-4xl" fill />
+        <h1 class="text-xl font-headline italic font-black text-on-surface mt-3">Your link is ready</h1>
+        <p class="text-on-surface-variant mt-1 text-sm">Your image URL:</p>
+        <a href={url} class="inline-block mt-2 break-all font-mono text-sm text-primary hover:underline">{url}</a>
+        <div class="mt-6">
           <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
         </div>
-      </ToolAdSurround>
-
-      <!-- Desktop "post-action" banner. Share page is the highest-dwell moment in
-           the funnel; once the user finishes copying / scanning QR their gaze drops
-           here. Lazy-loaded (below the fold) and desktop-only — mobile already gets
-           the in-content unit via ToolAdSurround. -->
-      <AdBanner lazy class="hidden lg:block mt-8" />
+      </div>
     ) : (
       <!-- Invalid / missing URL state -->
-      <div id="share-empty" class="text-center py-10">
+      <div class="text-center py-10">
         <Icon name="link_off" class="text-5xl text-outline" />
         <h1 class="text-xl font-headline italic font-black text-on-surface mt-3">No image URL</h1>
         <p class="text-on-surface-variant mt-1">This page opens after you copy an uploaded image link.</p>

@@ -1,0 +1,151 @@
+---
+import SharePanel from './SharePanel.astro';
+import { localizedUrl } from '../i18n/landing/registry';
+import { defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+import type { PageKey } from '../i18n/landing/slugs';
+// Global share surface, rendered once in Layout.astro so it exists on EVERY page.
+//
+// Two entry points (exposed on window for the uploaders' "Get Link" handlers):
+//   - revealShareDest(url)  → reveal the panel + side ads in-place (home page).
+//   - shareGoRandom(url)    → navigate to a RANDOM landing page with ?u=<url>;
+//                             that page's ShareDestination auto-reveals on load.
+// Plus: on load, if a valid ?u= is present (a redirected visitor), auto-reveal.
+//
+// The destination list is computed SERVER-SIDE in the current locale via
+// localizedUrl(), so redirects stay in the visitor's language. Curated toward
+// higher-commercial-intent (higher-CPC) pages for RPM.
+
+const locale: Locale = ((Astro.locals as any).locale as Locale) ?? defaultLocale;
+
+const DEST_KEYS: PageKey[] = [
+  'image-hosting-for-ebay',
+  'image-hosting-for-shopify',
+  'image-hosting-for-wordpress',
+  'image-hosting-for-notion',
+  'image-hosting-for-email-signatures',
+  'image-hosting-for-newsletters',
+  'image-hosting-for-google-forms',
+  'image-hosting-for-google-sheets',
+  'image-hosting-for-github-readme',
+  'image-hosting-for-discord',
+  'image-hosting-for-forums',
+  'jpg-to-pdf',
+  'png-to-pdf',
+  'heic-to-pdf',
+  'image-compressor',
+  'image-resizer',
+  'png-to-webp',
+  'jpg-to-webp',
+  'permanent-image-hosting',
+  'free-image-hosting',
+];
+const destURLs = DEST_KEYS.map((k) => localizedUrl(k, locale));
+
+const PUB = 'ca-pub-7803867089582138';
+---
+
+<!-- Hidden until revealed. Sits at the top of <body>; revealShareDest() moves it
+     just below the site header for a natural "result on top" placement. -->
+<div id="share-dest" hidden class="w-full bg-background">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:py-8 xl:flex xl:items-start xl:justify-center xl:gap-6">
+    <!-- Left side ad (xl+). Deferred push: filled by revealShareDest after the
+         container is visible (a hidden push would throw availableWidth=0). -->
+    <aside class="hidden xl:block xl:w-[280px] xl:flex-shrink-0 xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
+      <ins class="adsbygoogle sd-ad" style="display:block" data-ad-format="auto"
+           data-full-width-responsive="true" data-ad-client={PUB} data-ad-slot="7695843568"></ins>
+    </aside>
+
+    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
+      <SharePanel />
+    </div>
+
+    <aside class="hidden xl:block xl:w-[280px] xl:flex-shrink-0 xl:sticky xl:top-20 xl:self-start" aria-label="Sponsored">
+      <ins class="adsbygoogle sd-ad" style="display:block" data-ad-format="auto"
+           data-full-width-responsive="true" data-ad-client={PUB} data-ad-slot="3728678394"></ins>
+    </aside>
+  </div>
+
+  <!-- Mobile/tablet in-content unit (no side rails below xl). Deferred push. -->
+  <div class="xl:hidden w-full max-w-2xl mx-auto px-4">
+    <ins class="adsbygoogle sd-ad" style="display:block" data-ad-format="autorelaxed"
+         data-ad-client={PUB} data-ad-slot="1349470215"></ins>
+  </div>
+</div>
+
+<!-- Server-computed, locale-correct random destinations for the routing helper. -->
+<script is:inline define:vars={{ destURLs }}>
+  window.__shareDestPages = destURLs;
+</script>
+
+<script>
+  import { getValidUrl } from '../lib/share-url';
+
+  const destEl = document.getElementById('share-dest');
+  const w = window as any;
+  if (destEl) {
+    const dest: HTMLElement = destEl;
+
+    // Push any not-yet-filled side/in-content ad units inside the revealed block.
+    function pushDestAds() {
+      const isXl = window.matchMedia('(min-width:1280px)').matches;
+      dest.querySelectorAll<HTMLElement>('ins.sd-ad:not([data-pushed])').forEach((ins) => {
+        // Side rails are xl-only; below xl they're display:none (0 width) → skip
+        // the rail push but still allow the visible in-content unit.
+        const railHidden = ins.closest('aside') && !isXl;
+        if (railHidden) { ins.classList.remove('adsbygoogle'); ins.setAttribute('data-pushed', '1'); return; }
+        if (ins.offsetParent === null && ins.offsetWidth === 0) return; // still hidden
+        ins.setAttribute('data-pushed', '1');
+        try { (w.adsbygoogle = w.adsbygoogle || []).push({}); } catch { /* ignore */ }
+      });
+    }
+
+    // Place the reveal block right below the site header (nav) the first time.
+    let moved = false;
+    function placeBelowHeader() {
+      if (moved) return;
+      moved = true;
+      const header = document.querySelector('header, nav');
+      if (header && header.parentElement) header.insertAdjacentElement('afterend', dest);
+    }
+
+    function doReveal(u: string) {
+      placeBelowHeader();
+      dest.hidden = false;
+      if (typeof w.showSharePanel === 'function') w.showSharePanel(u);
+      // Ads need a tick for layout after un-hiding.
+      window.setTimeout(pushDestAds, 60);
+    }
+
+    // In-place reveal (home page).
+    w.revealShareDest = (raw: string) => {
+      const u = getValidUrl(raw);
+      if (u) doReveal(u);
+    };
+
+    // Navigate to a random landing page (other uploaders), carrying ?u=.
+    w.shareGoRandom = (raw: string) => {
+      const u = getValidUrl(raw);
+      if (!u) return;
+      const here = location.pathname.replace(/\/$/, '');
+      const pages = ((w.__shareDestPages as string[]) || []).filter(
+        (p) => p && p.replace(/\/$/, '') !== here,
+      );
+      const target = pages.length
+        ? pages[Math.floor(Math.random() * pages.length)]
+        : '/share';
+      location.href = target + '?u=' + encodeURIComponent(u);
+    };
+
+    // Redirected visitor: auto-reveal if a valid ?u= is present, then clean the URL.
+    const fromQuery = getValidUrl(new URLSearchParams(location.search).get('u'));
+    if (fromQuery) {
+      doReveal(fromQuery);
+      try {
+        const url = new URL(location.href);
+        url.searchParams.delete('u');
+        history.replaceState({}, '', url.pathname + url.search + url.hash);
+      } catch { /* ignore */ }
+    }
+  }
+</script>
