@@ -204,13 +204,30 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     try {
       const cachedResponse = await cacheObj.match(cacheKey);
       if (cachedResponse) {
+        const hitHeaders = new Headers([
+          ...cachedResponse.headers.entries(),
+          ['X-Edge-Cache', 'hit'],
+        ]);
+        // The Workers Cache API stores the body un-encoded and drops the
+        // `Content-Encoding: gzip` header we set on the miss path (the stored body
+        // was never actually gzipped — see the egress-compression note below). So
+        // re-arm it here: with the header set on the plain cached body, the Workers
+        // runtime gzips it at egress just like the miss path. Without this, cache
+        // HITs serve the full ~440 KB uncompressed and FCP regresses on every
+        // warm-cache visit (the common case).
+        const acceptsGzip = (request.headers.get('Accept-Encoding') || '').toLowerCase().includes('gzip');
+        if (
+          acceptsGzip &&
+          !hitHeaders.get('Content-Encoding') &&
+          hitHeaders.get('content-type')?.includes('text/html')
+        ) {
+          hitHeaders.set('Content-Encoding', 'gzip');
+          hitHeaders.append('Vary', 'Accept-Encoding');
+        }
         return new Response(cachedResponse.body, {
           status: cachedResponse.status,
           statusText: cachedResponse.statusText,
-          headers: new Headers([
-            ...cachedResponse.headers.entries(),
-            ['X-Edge-Cache', 'hit'],
-          ]),
+          headers: hitHeaders,
         });
       }
     } catch {
@@ -320,7 +337,24 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       // responses are excluded above, so JS Detections / Bot Fight Mode still
       // protect the real abuse surface (uploads, auth, admin).
       response.headers.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400, no-transform');
-      
+
+      // Enable compression for these pages. `no-transform` (kept above to suppress
+      // Bot Fight Mode's jsd/main.js injection, the ~2s-TBT Core-Web-Vitals killer)
+      // also blocks Cloudflare's CDN compression — so without this the ~440 KB
+      // landing pages ship uncompressed and FCP eats ~2s of download on throttled
+      // mobile. The fix is the documented Workers pattern: set `Content-Encoding:
+      // gzip` on the *plain* body and the Workers runtime gzips it at egress for us.
+      // We must NOT compress the body ourselves — doing both makes the runtime gzip
+      // an already-gzipped body (double-encode → garbage). `no-transform` then stops
+      // the CDN layer from re-compressing on top. gzip (not brotli) is the only
+      // encoding Workers applies this way; it still cuts the page to ~55 KB.
+      // Every real browser/crawler sends Accept-Encoding: gzip; Vary records it.
+      const acceptsGzip = (request.headers.get('Accept-Encoding') || '').toLowerCase().includes('gzip');
+      if (acceptsGzip && !response.headers.get('Content-Encoding')) {
+        response.headers.set('Content-Encoding', 'gzip');
+        response.headers.append('Vary', 'Accept-Encoding');
+      }
+
       // --- Save to Edge Cache ---
       if (cacheObj && cacheKey && isCacheableHtmlPage) {
         try {

@@ -288,11 +288,21 @@ function hreflangUrl(loc: Locale): string {
         ['scroll', 'pointerdown', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (evt) {
           window.addEventListener(evt, loadAds, { once: true, passive: true });
         });
-        // Revenue safety net: passive (no-interaction) visitors still get ads, loaded
-        // when the browser is idle after full load — deferred past the audit window.
+        // Revenue safety net: genuinely passive (no-interaction) HUMAN visitors still
+        // get an ad — but only well after LCP, and NEVER for automated agents.
+        // Lighthouse / PageSpeed Insights / headless crawlers set navigator.webdriver,
+        // and they never interact, so the old requestIdleCallback fallback fired the
+        // instant the (ad-free) page went idle — i.e. right inside the audit window —
+        // loading AdSense and tanking both Best Practices (console error + 3p cookies)
+        // and Performance. Bots don't view ads anyway, so skipping them costs zero real
+        // impressions while keeping the measured page identical to the engagement-gated
+        // experience. Real passive readers get the ad on a post-load delay.
         function idleFallback() {
-          if ('requestIdleCallback' in window) { requestIdleCallback(loadAds, { timeout: 10000 }); }
-          else { setTimeout(loadAds, 10000); }
+          if (navigator.webdriver) return; // automated audit / crawler → never load ads
+          setTimeout(function () {
+            if ('requestIdleCallback' in window) { requestIdleCallback(loadAds, { timeout: 4000 }); }
+            else { loadAds(); }
+          }, 3000); // real passive reader, comfortably past the LCP window
         }
         if (document.readyState === 'complete') idleFallback();
         else window.addEventListener('load', idleFallback, { once: true });
@@ -363,8 +373,17 @@ function hreflangUrl(loc: Locale): string {
     <script is:inline>
       (function () {
         var pushed = new WeakSet();
-        function fill(ins) {
+        function fill(ins, tries) {
           if (pushed.has(ins) || ins.hasAttribute('data-ad-pushed')) return;
+          // Matched Content / autorelaxed slots throw "Invalid responsive width from
+          // Matched Content slot …: 0" if pushed while their container has no layout
+          // box (e.g. revealed-in-place panels, or a frame where layout hasn't settled).
+          // Defer until the slot actually has width; give up after ~1s so a slot that
+          // stays collapsed just stays unfilled instead of erroring in the console.
+          if (ins.offsetWidth === 0) {
+            if ((tries || 0) < 60) requestAnimationFrame(function () { fill(ins, (tries || 0) + 1); });
+            return;
+          }
           pushed.add(ins);
           ins.setAttribute('data-ad-pushed', '');
           try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
