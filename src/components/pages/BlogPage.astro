@@ -94,7 +94,7 @@ try {
                     <>
                       <div class="p-8 flex flex-col justify-center flex-1">
                         <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-4 block`}>{post.categoryName || t(locale, 'blog.uncategorized')}</span>
-                        <h3 class="font-headline text-3xl font-black text-on-surface mb-4 group-hover:text-on-background transition-colors">{post.title}</h3>
+                        <h2 class="font-headline text-3xl font-black text-on-surface mb-4 group-hover:text-on-background transition-colors">{post.title}</h2>
                         <p class="font-body text-on-surface-variant mb-6 leading-relaxed">{post.excerpt}</p>
                         <span class="font-label text-xs font-black uppercase text-on-background flex items-center gap-1">
                           {t(locale, 'blog.readMore')} <Icon name="arrow_forward" class="text-sm" />
@@ -147,7 +147,7 @@ try {
                       </div>
                       <div class="p-6 flex flex-col flex-1">
                         <span class={`font-label text-xs font-bold uppercase text-${post.categoryColor || 'primary'} tracking-widest mb-3 block`}>{post.categoryName || t(locale, 'blog.uncategorized')}</span>
-                        <h3 class="font-headline text-2xl font-black text-on-surface mb-4 group-hover:text-on-background transition-colors">{post.title}</h3>
+                        <h2 class="font-headline text-2xl font-black text-on-surface mb-4 group-hover:text-on-background transition-colors">{post.title}</h2>
                         <p class="font-body text-sm text-on-surface-variant mb-6 flex-1">{post.excerpt}</p>
                         <span class="font-label text-xs font-black uppercase text-on-background flex items-center gap-1 mt-auto">
                           {t(locale, 'blog.readMore')} <Icon name="arrow_forward" class="text-sm" />
