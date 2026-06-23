@@ -52,6 +52,17 @@ const {
   lastModified,
 } = Astro.props;
 
+// Clamp the meta description to <=158 chars at a word boundary so it never
+// trips "description too long" or gets truncated mid-word in SERPs. OG/Twitter
+// descriptions can run longer, so they keep the full text.
+const metaDescription = description.length <= 158
+  ? description
+  : (() => {
+      const cut = description.slice(0, 158);
+      const atWord = cut.replace(/\s+\S*$/, '').trim();
+      return atWord.length > 0 ? atWord : cut.trim();
+    })();
+
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const basePath = stripLocalePrefix(Astro.url.pathname);
@@ -192,7 +203,7 @@ function hreflangUrl(loc: Locale): string {
     <link rel="manifest" href="/site.webmanifest?v=2" />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="theme-color" content="#e11d48" />
 
     <!-- hreflang for all locales (skip for root-level English-only pages) -->

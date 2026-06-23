@@ -203,7 +203,7 @@ const faqSchema = post.faqItems?.length ? {
 ---
 
 <Layout
-  title={`${post.title} — ImageToURL Blog`}
+  title={post.title.length > 48 ? post.title : `${post.title} — ImageToURL Blog`}
   description={post.excerpt || ''}
   ogImage={imgUrl(post.coverImage, 1200) || '/og-default.png'}
   ogType="article"
