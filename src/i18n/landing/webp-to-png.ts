@@ -106,6 +106,12 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de WebP a PNG | Gratis, sin pérdidas, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-webp", "label": "PNG a WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG a WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC a PNG" }
+    ],
     "metaDescription": "Convierte WebP a PNG gratis en tu navegador manteniendo la transparencia y la calidad total. Sin subidas, sin registro. Funciona en Windows, Mac y iPhone.",
     "schemaName": "Convertidor de WebP a PNG",
     "schemaDescription": "Convierte imágenes WebP a PNG sin pérdidas en tu navegador, preservando la transparencia.",
@@ -200,6 +206,12 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur WebP en PNG | Gratuit, sans perte, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-webp", "label": "PNG vers WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG vers WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC vers PNG" }
+    ],
     "metaDescription": "Convertissez vos fichiers WebP en PNG gratuitement dans votre navigateur, en conservant la transparence et la qualité totale. Aucun téléchargement, aucune inscription. Fonctionne sur Windows, Mac et iPhone.",
     "schemaName": "Convertisseur WebP en PNG",
     "schemaDescription": "Convertissez vos images WebP en PNG sans perte directement dans votre navigateur, en préservant la transparence.",
@@ -294,6 +306,12 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "WebP zu PNG Konverter | Kostenlos, verlustfrei, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-webp", "label": "PNG zu WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG zu WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC zu PNG" }
+    ],
     "metaDescription": "Konvertieren Sie WebP kostenlos in Ihrem Browser zu PNG. Transparenz und volle Qualität bleiben erhalten. Kein Upload, keine Registrierung. Funktioniert auf Windows, Mac und iPhone.",
     "schemaName": "WebP zu PNG Konverter",
     "schemaDescription": "Konvertieren Sie WebP-Bilder verlustfrei in Ihrem Browser zu PNG und bewahren Sie dabei die Transparenz.",
@@ -388,6 +406,12 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "WebP PNG 変換 | 無料・ロスレス・アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-webp", "label": "PNG→WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG→WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC→PNG" }
+    ],
     "metaDescription": "ブラウザ上でWebPをPNGに無料で変換。透過性を維持し、画質を落とさず変換します。アップロードや登録は不要。Windows、Mac、iPhoneで動作します。",
     "schemaName": "WebP PNG 変換ツール",
     "schemaDescription": "ブラウザ上でWebP画像をロスレスでPNGに変換し、透過性を保持します。",
@@ -482,6 +506,12 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "WebP 转 PNG 转换器 | 免费、无损、无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-webp", "label": "PNG 转 WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG 转 WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC 转 PNG" }
+    ],
     "metaDescription": "在浏览器中免费将 WebP 转换为 PNG，保留透明度和完整画质。无需上传，无需注册。支持 Windows、Mac 和 iPhone。",
     "schemaName": "WebP 转 PNG 转换器",
     "schemaDescription": "在浏览器中将 WebP 图像无损转换为 PNG，并保留透明度。",

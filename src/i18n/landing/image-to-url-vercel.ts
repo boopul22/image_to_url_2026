@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Imagen a URL para Vercel — Enlaces CDN directos para sitios estáticos | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Generador de código incrustado de imagen" },
+      { "pageKey": "image-url-for-chatgpt", "label": "URL de imagen para ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL de imagen para WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "URL de imagen para HTML" }
+    ],
     "metaDescription": "Aloja imágenes fuera de tu deploy de Vercel y úsalas con URLs permanentes. Evita el límite de tamaño de build, despliega más rápido, mantén tu repo limpio.",
     "schemaName": "Conversor de Imagen a URL para Vercel",
     "schemaDescription": "Genera URLs CDN permanentes para imágenes que incrustas en sitios Next.js, Astro o estáticos alojados en Vercel.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Image vers URL pour Vercel — Liens CDN directs pour sites statiques | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré d'image" },
+      { "pageKey": "image-url-for-chatgpt", "label": "URL d'image pour ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL d'image pour WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "URL d'image pour HTML" }
+    ],
     "metaDescription": "Hébergez vos images en dehors de votre déploiement Vercel et intégrez-les via des URLs permanentes. Évitez la limite de taille de build, déployez plus vite, gardez votre repo propre.",
     "schemaName": "Convertisseur Image vers URL pour Vercel",
     "schemaDescription": "Générez des URLs CDN permanentes pour les images intégrées dans vos sites Next.js, Astro ou statiques hébergés sur Vercel.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild zu URL für Vercel — Direkte CDN-Links für statische Sites | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Bild-Embed-Code-Generator" },
+      { "pageKey": "image-url-for-chatgpt", "label": "Bild-URL für ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Bild-URL für WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "Bild-URL für HTML" }
+    ],
     "metaDescription": "Hoste Bilder außerhalb deines Vercel-Deploys und binde sie mit dauerhaften URLs ein. Umgehe das Build-Größenlimit, deploy schneller, halte dein Repo schlank.",
     "schemaName": "Bild-zu-URL-Konverter für Vercel",
     "schemaDescription": "Erzeuge dauerhafte CDN-URLs für Bilder, die du in Vercel-gehostete Next.js-, Astro- oder statische Sites einbettest.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Vercel 用画像 URL 変換 — 静的サイト向け直接 CDN リンク | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "画像埋め込みコード生成" },
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT用画像URL" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp用画像URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML用画像URL" }
+    ],
     "metaDescription": "画像を Vercel デプロイの外でホストし、永続 URL で埋め込みましょう。ビルドサイズ制限を回避し、デプロイを高速化、リポジトリをすっきり保ちます。",
     "schemaName": "Vercel 用画像 URL 変換ツール",
     "schemaDescription": "Vercel でホストする Next.js、Astro、静的サイトに埋め込む画像のための永続 CDN URL を生成します。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Vercel 图片转 URL — 面向静态站点的直连 CDN 链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "图片嵌入代码生成器" },
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT 图片 URL" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp 图片 URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML 图片 URL" }
+    ],
     "metaDescription": "把图片托管在 Vercel 部署之外,通过永久 URL 嵌入。绕开构建体积限制、更快上线、保持代码仓干净。",
     "schemaName": "Vercel 图片转 URL 工具",
     "schemaDescription": "为部署在 Vercel 上的 Next.js、Astro 或静态站点中嵌入的图片生成永久 CDN URL。",

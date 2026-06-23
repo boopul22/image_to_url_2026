@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratuito para anuncios de eBay | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Para GitHub" }
+    ],
     "metaDescription": "Aloja imágenes de productos para anuncios de eBay con URLs directas y permanentes. Gratis, sin registro. Funciona perfectamente con los requisitos de eBay.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Aloja imágenes de productos para anuncios de eBay con URLs directas y permanentes sin necesidad de registro ni marcas de agua.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images gratuit pour annonces eBay | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Pour GitHub" }
+    ],
     "metaDescription": "Hébergez vos photos de produits pour eBay avec des URLs directes et permanentes. Gratuit, sans inscription. Compatible avec les exigences d'eBay.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Hébergez vos images de produits pour eBay avec des URLs directes et permanentes, sans inscription ni filigrane.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Kostenloses Image Hosting für eBay-Angebote | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Für GitHub" }
+    ],
     "metaDescription": "Hosten Sie Produktbilder für eBay-Angebote mit permanenten, direkten URLs. Kostenlos, keine Registrierung erforderlich. Perfekt für die Bildanforderungen von eBay.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Hosten Sie Produktbilder für eBay-Angebote mit permanenten, direkten URLs ohne Registrierung oder Wasserzeichen.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "eBay出品用無料画像ホスティング | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "GitHub用" }
+    ],
     "metaDescription": "eBay出品用の商品写真を永続的な直接画像URLでホスティング。完全無料、登録不要、透かしなし。ドラッグ＆ドロップでアップロードし、HTMLエディタにそのまま貼り付けられます。",
     "schemaName": "ImageToURL",
     "schemaDescription": "登録や透かしなしで、eBay出品用の商品画像を永続的な直接URLでホスティングします。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "eBay 商品图片免费托管 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "用于 GitHub" }
+    ],
     "metaDescription": "为 eBay 商品详情页托管商品图片，获取永久、直接的图片链接。完全免费，无需注册，无水印。拖放上传即可直接粘贴到 eBay 的 HTML 编辑器中使用。",
     "schemaName": "ImageToURL",
     "schemaDescription": "为 eBay 商品详情页提供永久、直接的图片链接，无需注册，无水印。",

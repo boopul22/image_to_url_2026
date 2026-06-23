@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "CDN de imágenes gratis — Entrega global | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" },
+      { "pageKey": "ai-image-hosting", "label": "Hosting de imágenes con IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Carga anónima de imágenes" },
+      { "pageKey": "bulk-image-upload", "label": "Carga masiva de imágenes" }
+    ],
     "metaDescription": "Entrega imágenes a nivel mundial con nuestro CDN gratuito. Servidores edge globales, HTTPS y sin límites de ancho de banda. El CDN de imágenes más rápido para desarrolladores y creadores.",
     "schemaName": "CDN de imágenes gratis",
     "schemaDescription": "Entrega imágenes a nivel mundial con nuestro CDN gratuito que cuenta con servidores edge globales, HTTPS y sin límites de ancho de banda.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "CDN d'images gratuit — Diffusion mondiale | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" },
+      { "pageKey": "ai-image-hosting", "label": "Hébergement d'images IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Téléchargement d'image anonyme" },
+      { "pageKey": "bulk-image-upload", "label": "Téléchargement d'images en masse" }
+    ],
     "metaDescription": "Diffusez vos images dans le monde entier avec notre CDN gratuit. Serveurs edge mondiaux, HTTPS, sans limite de bande passante. Le CDN d'images gratuit le plus rapide pour les développeurs et créateurs.",
     "schemaName": "CDN d'images gratuit",
     "schemaDescription": "Diffusez vos images dans le monde entier avec notre CDN gratuit incluant des serveurs edge mondiaux, HTTPS et aucune limite de bande passante.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Kostenloses Image CDN — Globale Bildauslieferung | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" },
+      { "pageKey": "ai-image-hosting", "label": "KI-Bild-Hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymes Bild-Upload" },
+      { "pageKey": "bulk-image-upload", "label": "Massen-Bild-Upload" }
+    ],
     "metaDescription": "Liefern Sie Bilder weltweit mit unserem kostenlosen CDN aus. Globale Edge-Server, HTTPS, keine Bandbreitenbegrenzung. Das schnellste kostenlose Image CDN für Entwickler und Kreative.",
     "schemaName": "Kostenloses Image CDN",
     "schemaDescription": "Liefern Sie Bilder weltweit mit unserem kostenlosen CDN aus, das globale Edge-Server, HTTPS und keine Bandbreitenbegrenzung bietet.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "無料画像CDN — グローバル画像配信 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" },
+      { "pageKey": "ai-image-hosting", "label": "AI画像ホスティング" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名画像アップロード" },
+      { "pageKey": "bulk-image-upload", "label": "一括画像アップロード" }
+    ],
     "metaDescription": "無料CDNで世界中に画像を配信。グローバルエッジサーバー、HTTPS対応、帯域幅制限なし。開発者やクリエイターに最適な最速の無料画像CDN。",
     "schemaName": "無料画像CDN",
     "schemaDescription": "グローバルエッジサーバー、HTTPS対応、帯域幅制限なしの無料CDNで、世界中に画像を配信します。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "免费图片 CDN — 全球图片分发 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" },
+      { "pageKey": "ai-image-hosting", "label": "AI 图片托管" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名图片上传" },
+      { "pageKey": "bulk-image-upload", "label": "批量上传图片" }
+    ],
     "metaDescription": "使用我们的免费 CDN 在全球范围内分发图片。拥有全球边缘服务器、HTTPS 支持且无带宽限制。专为开发者和创作者打造的最快免费图片 CDN。",
     "schemaName": "免费图片 CDN",
     "schemaDescription": "通过我们拥有全球边缘服务器、HTTPS 支持且无带宽限制的免费 CDN 分发您的图片。",

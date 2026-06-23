@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Compresor de imágenes — 100% en el navegador | Gratis, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-resizer", "label": "Redimensionador de imágenes" },
+      { "pageKey": "image-to-base64", "label": "Imagen a Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 a imagen" },
+      { "pageKey": "favicon-generator", "label": "Generador de favicon" }
+    ],
     "metaDescription": "Comprime imágenes JPG, PNG y WebP en tu navegador con calidad ajustable y vista previa en tiempo real. Gratis, por lotes, sin registro ni subidas a servidores.",
     "schemaName": "Compresor de imágenes",
     "schemaDescription": "Comprime imágenes PNG, JPG y WebP en tu navegador. Calidad y formato ajustables.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Compresseur d'image — 100% dans le navigateur | Gratuit, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-resizer", "label": "Outil de redimensionnement d'images" },
+      { "pageKey": "image-to-base64", "label": "Image vers Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 vers image" },
+      { "pageKey": "favicon-generator", "label": "Générateur de favicon" }
+    ],
     "metaDescription": "Compressez vos images JPG, PNG et WebP directement dans votre navigateur avec une qualité réglable et un aperçu avant/après. Gratuit, par lots, sans inscription, sans envoi sur serveur.",
     "schemaName": "Compresseur d'image",
     "schemaDescription": "Compressez des images PNG, JPG et WebP dans votre navigateur. Qualité et format ajustables.",
@@ -259,6 +273,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bildkompressor — 100% im Browser | Kostenlos, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-resizer", "label": "Bildgrößenänderungstool" },
+      { "pageKey": "image-to-base64", "label": "Bild zu Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 zu Bild" },
+      { "pageKey": "favicon-generator", "label": "Favicon-Generator" }
+    ],
     "metaDescription": "Komprimieren Sie JPG-, PNG- und WebP-Bilder direkt in Ihrem Browser mit einstellbarer Qualität und Live-Vorschau. Kostenlos, stapelverarbeitungsfähig, ohne Anmeldung, ohne Upload.",
     "schemaName": "Bildkompressor",
     "schemaDescription": "Komprimieren Sie PNG-, JPG- und WebP-Bilder in Ihrem Browser. Einstellbare Qualität und Formate.",
@@ -341,6 +362,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像圧縮ツール — ブラウザで完結 | 無料・アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-resizer", "label": "画像リサイザー" },
+      { "pageKey": "image-to-base64", "label": "画像→Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64→画像" },
+      { "pageKey": "favicon-generator", "label": "ファビコン生成" }
+    ],
     "metaDescription": "JPG、PNG、WebP画像をブラウザ上で圧縮。画質調整や圧縮前後のサイズ比較もリアルタイムで確認可能。無料、一括処理対応、登録不要、サーバーへのアップロードもありません。",
     "schemaName": "画像圧縮ツール",
     "schemaDescription": "ブラウザ上でPNG、JPG、WebP画像を圧縮。画質やフォーマットの調整が可能。",
@@ -423,6 +451,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片压缩工具 — 100% 浏览器本地处理 | 免费，无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-resizer", "label": "图片缩放工具" },
+      { "pageKey": "image-to-base64", "label": "图片转 Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 转图片" },
+      { "pageKey": "favicon-generator", "label": "Favicon 生成器" }
+    ],
     "metaDescription": "在浏览器中压缩 JPG、PNG 和 WebP 图片，支持调节质量并实时预览压缩前后大小。免费、支持批量、无需注册、无需上传。",
     "schemaName": "图片压缩工具",
     "schemaDescription": "在浏览器中压缩 PNG、JPG 和 WebP 图片。支持自定义质量和格式。",

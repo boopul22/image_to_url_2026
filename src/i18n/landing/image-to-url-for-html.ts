@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Imagen a URL para HTML — Enlaces directos para etiqueta <img> | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Generador de código incrustado de imagen" },
+      { "pageKey": "image-url-for-chatgpt", "label": "URL de imagen para ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL de imagen para WhatsApp" },
+      { "pageKey": "image-to-url-vercel", "label": "Hosting de imágenes para Vercel" }
+    ],
     "metaDescription": "Convierte cualquier imagen en una URL directa que puedes pegar en una etiqueta HTML <img>. Sin registro, enlaces permanentes, entrega rápida vía CDN.",
     "schemaName": "Conversor de Imagen a URL para HTML",
     "schemaDescription": "Convierte cualquier imagen en una URL directa lista para el atributo src de una etiqueta img de HTML.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Image vers URL pour HTML — Liens directs pour balise <img> | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré d'image" },
+      { "pageKey": "image-url-for-chatgpt", "label": "URL d'image pour ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL d'image pour WhatsApp" },
+      { "pageKey": "image-to-url-vercel", "label": "Hébergement d'images pour Vercel" }
+    ],
     "metaDescription": "Convertissez n'importe quelle image en URL directe à coller dans une balise HTML <img>. Sans inscription, liens permanents, livraison rapide via CDN.",
     "schemaName": "Convertisseur Image vers URL pour HTML",
     "schemaDescription": "Transformez n'importe quelle image en URL directe prête pour l'attribut src d'une balise img HTML.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild zu URL für HTML — Direkte Links für <img>-Tag | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Bild-Embed-Code-Generator" },
+      { "pageKey": "image-url-for-chatgpt", "label": "Bild-URL für ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Bild-URL für WhatsApp" },
+      { "pageKey": "image-to-url-vercel", "label": "Bild-Hosting für Vercel" }
+    ],
     "metaDescription": "Wandle jedes Bild in eine direkte URL um, die du direkt in ein HTML <img>-Tag einfügen kannst. Keine Anmeldung, dauerhafte Links, schnelle CDN-Auslieferung.",
     "schemaName": "Bild-zu-URL-Konverter für HTML",
     "schemaDescription": "Verwandle jedes Bild in eine direkte URL, bereit für das src-Attribut eines HTML img-Tags.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "HTML 用の画像 URL 変換 — <img> タグ向け直接リンク | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "画像埋め込みコード生成" },
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT用画像URL" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp用画像URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel用画像ホスティング" }
+    ],
     "metaDescription": "画像を HTML の <img> タグにそのまま貼り付けられる直接 URL に変換します。登録不要、永続リンク、高速 CDN 配信。",
     "schemaName": "HTML 用画像 URL 変換ツール",
     "schemaDescription": "画像を HTML の img タグの src 属性にそのまま使える直接 URL に変換します。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "HTML 图片转 URL — 获取 <img> 标签直链 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "图片嵌入代码生成器" },
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT 图片 URL" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp 图片 URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel 图片托管" }
+    ],
     "metaDescription": "将任意图片转换为可直接粘贴到 HTML <img> 标签中的直链。无需注册、永久链接、CDN 高速分发。",
     "schemaName": "HTML 图片转 URL 工具",
     "schemaDescription": "将任意图片转换为可直接用于 HTML img 标签 src 属性的直链。",

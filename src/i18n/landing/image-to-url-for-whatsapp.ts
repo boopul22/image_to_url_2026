@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Comparte imágenes mediante URL en WhatsApp | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Generador de código incrustado de imagen" },
+      { "pageKey": "image-url-for-chatgpt", "label": "URL de imagen para ChatGPT" },
+      { "pageKey": "image-to-url-for-html", "label": "URL de imagen para HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Hosting de imágenes para Vercel" }
+    ],
     "metaDescription": "Comparte imágenes como enlaces en WhatsApp en lugar de archivos adjuntos. Sin compresión, sin pérdida de calidad. Obtén una URL permanente y compártela en cualquier chat.",
     "schemaName": "ImageToURL para WhatsApp",
     "schemaDescription": "Una herramienta para generar URLs de imágenes permanentes para compartir fotos de alta calidad en WhatsApp sin compresión.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Partagez des images via URL sur WhatsApp | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré d'image" },
+      { "pageKey": "image-url-for-chatgpt", "label": "URL d'image pour ChatGPT" },
+      { "pageKey": "image-to-url-for-html", "label": "URL d'image pour HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Hébergement d'images pour Vercel" }
+    ],
     "metaDescription": "Partagez vos images sous forme de liens sur WhatsApp au lieu de pièces jointes. Aucune compression, aucune perte de qualité. Obtenez une URL permanente et partagez-la dans n'importe quelle discussion.",
     "schemaName": "ImageToURL pour WhatsApp",
     "schemaDescription": "Un outil pour générer des URL d'images permanentes afin de partager des photos de haute qualité sur WhatsApp sans compression.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bilder per URL auf WhatsApp teilen | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Bild-Embed-Code-Generator" },
+      { "pageKey": "image-url-for-chatgpt", "label": "Bild-URL für ChatGPT" },
+      { "pageKey": "image-to-url-for-html", "label": "Bild-URL für HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Bild-Hosting für Vercel" }
+    ],
     "metaDescription": "Teilen Sie Bilder als Links auf WhatsApp statt als Dateianhänge. Keine Komprimierung, kein Qualitätsverlust. Erhalten Sie eine permanente URL und teilen Sie diese in jedem Chat.",
     "schemaName": "ImageToURL für WhatsApp",
     "schemaDescription": "Ein Tool zur Erstellung permanenter Bild-URLs, um hochwertige Fotos ohne Komprimierung auf WhatsApp zu teilen.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "WhatsAppで画像をURL共有 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "画像埋め込みコード生成" },
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT用画像URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML用画像URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel用画像ホスティング" }
+    ],
     "metaDescription": "WhatsAppで画像をファイル添付ではなくリンクとして共有。圧縮なし、画質劣化なし。永久URLを取得して、あらゆるチャットで共有しましょう。",
     "schemaName": "ImageToURL for WhatsApp",
     "schemaDescription": "WhatsAppで高画質な写真を圧縮なしで共有するための、永久画像URL生成ツール。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "通过 URL 在 WhatsApp 上分享图片 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "图片嵌入代码生成器" },
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT 图片 URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML 图片 URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel 图片托管" }
+    ],
     "metaDescription": "在 WhatsApp 上以链接形式分享图片，而非文件附件。无压缩，无画质损失。获取永久 URL 并在任何聊天中分享。",
     "schemaName": "用于 WhatsApp 的 ImageToURL",
     "schemaDescription": "一个用于生成永久图片 URL 的工具，可在 WhatsApp 上分享高质量照片而无需压缩。",

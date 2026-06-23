@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratis - Sube imágenes y obtén URLs al instante | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "ai-image-hosting", "label": "Hosting de imágenes con IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Carga anónima de imágenes" },
+      { "pageKey": "bulk-image-upload", "label": "Carga masiva de imágenes" }
+    ],
     "metaDescription": "Aloja tus imágenes gratis con ImageToURL. Sin registro, enlaces permanentes, entrega por CDN global y soporte para formatos JPG, PNG, WebP, GIF y SVG.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Un servicio de alojamiento de imágenes gratuito y sin registro que ofrece enlaces permanentes y entrega por CDN global para varios formatos de imagen.",
@@ -141,6 +148,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images gratuit - Téléchargez et obtenez des URLs instantanées | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "ai-image-hosting", "label": "Hébergement d'images IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Téléchargement d'image anonyme" },
+      { "pageKey": "bulk-image-upload", "label": "Téléchargement d'images en masse" }
+    ],
     "metaDescription": "Hébergez vos images gratuitement avec ImageToURL. Aucune inscription requise, liens permanents, livraison via CDN mondial et support des formats JPG, PNG, WebP, GIF, SVG.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Un service d'hébergement d'images gratuit sans inscription, offrant des liens permanents et une livraison via CDN mondial pour divers formats d'image.",
@@ -203,6 +217,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Kostenloses Image Hosting - Bilder hochladen & sofort URLs erhalten | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "ai-image-hosting", "label": "KI-Bild-Hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymes Bild-Upload" },
+      { "pageKey": "bulk-image-upload", "label": "Massen-Bild-Upload" }
+    ],
     "metaDescription": "Hosten Sie Ihre Bilder kostenlos mit ImageToURL. Keine Registrierung erforderlich, permanente Links, globale CDN-Bereitstellung und Unterstützung für JPG, PNG, WebP, GIF, SVG-Formate.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Ein kostenloser Image-Hosting-Dienst ohne Registrierung, der permanente Links und globale CDN-Bereitstellung für verschiedene Bildformate bietet.",
@@ -265,6 +286,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "無料画像ホスティング - 画像をアップロードして即座にURLを取得 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI画像ホスティング" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名画像アップロード" },
+      { "pageKey": "bulk-image-upload", "label": "一括画像アップロード" }
+    ],
     "metaDescription": "ImageToURLで画像を無料でホストしましょう。登録不要、永久リンク、グローバルCDN配信、JPG、PNG、WebP、GIF、SVG形式に対応。",
     "schemaName": "ImageToURL",
     "schemaDescription": "登録不要の無料画像ホスティングサービス。様々な画像形式に対して永久リンクとグローバルCDN配信を提供します。",
@@ -327,6 +355,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "免费图片托管 - 上传图片并获取即时链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI 图片托管" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名图片上传" },
+      { "pageKey": "bulk-image-upload", "label": "批量上传图片" }
+    ],
     "metaDescription": "使用 ImageToURL 免费托管您的图片。无需注册，提供永久链接、全球 CDN 分发，并支持 JPG、PNG、WebP、GIF、SVG 格式。",
     "schemaName": "ImageToURL",
     "schemaDescription": "一个免费、无需注册的图片托管服务，为各种图片格式提供永久链接和全球 CDN 分发。",

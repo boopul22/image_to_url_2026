@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "WebP a URL — Convierte imágenes WebP a enlaces compartibles | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Imagen a URL" },
+      { "pageKey": "image-to-url-converter", "label": "Convertidor de imagen a URL" },
+      { "pageKey": "image-to-link", "label": "Imagen a enlace" },
+      { "pageKey": "image-url-generator", "label": "Generador de URL de imagen" }
+    ],
     "metaDescription": "Convierte imágenes WebP a URLs compartibles al instante. Formato de nueva generación con tamaños de archivo más pequeños y calidad superior. Alojamiento WebP gratuito, sin registro.",
     "schemaName": "Convertidor de WebP a URL",
     "schemaDescription": "Convierte imágenes WebP a URLs compartibles al instante con la calidad del formato de nueva generación.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "WebP vers URL — Convertissez vos images WebP en liens partageables | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image vers URL" },
+      { "pageKey": "image-to-url-converter", "label": "Convertisseur d'image en URL" },
+      { "pageKey": "image-to-link", "label": "Image vers lien" },
+      { "pageKey": "image-url-generator", "label": "Générateur d'URL d'image" }
+    ],
     "metaDescription": "Convertissez instantanément vos images WebP en URL partageables. Un format nouvelle génération offrant des fichiers plus légers et une qualité supérieure. Hébergement WebP gratuit, aucune inscription requise.",
     "schemaName": "Convertisseur WebP vers URL",
     "schemaDescription": "Convertissez instantanément vos images WebP en URL partageables avec la qualité d'un format nouvelle génération.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "WebP zu URL — WebP-Bilder in teilbare Links umwandeln | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild zu URL" },
+      { "pageKey": "image-to-url-converter", "label": "Bild-zu-URL-Konverter" },
+      { "pageKey": "image-to-link", "label": "Bild zu Link" },
+      { "pageKey": "image-url-generator", "label": "Bild-URL-Generator" }
+    ],
     "metaDescription": "Wandeln Sie WebP-Bilder sofort in teilbare URLs um. Das moderne Format mit kleineren Dateigrößen und überragender Qualität. Kostenloses WebP-Hosting, keine Registrierung erforderlich.",
     "schemaName": "WebP zu URL Konverter",
     "schemaDescription": "Wandeln Sie WebP-Bilder sofort in teilbare URLs um – mit der Qualität des modernen Formats.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "WebPをURLに変換 — WebP画像を共有可能なリンクへ | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL" },
+      { "pageKey": "image-to-url-converter", "label": "画像→URL変換" },
+      { "pageKey": "image-to-link", "label": "画像→リンク" },
+      { "pageKey": "image-url-generator", "label": "画像URL生成" }
+    ],
     "metaDescription": "WebP画像を即座に共有可能なURLに変換。次世代フォーマットでファイルサイズを抑えつつ高品質を維持。登録不要、無料のWebPホスティング。",
     "schemaName": "WebP to URL コンバーター",
     "schemaDescription": "次世代フォーマットの品質を保ったまま、WebP画像を即座に共有可能なURLに変換します。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "WebP 转 URL — 将 WebP 图片转换为可分享链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL" },
+      { "pageKey": "image-to-url-converter", "label": "图片转 URL 转换器" },
+      { "pageKey": "image-to-link", "label": "图片转链接" },
+      { "pageKey": "image-url-generator", "label": "图片 URL 生成器" }
+    ],
     "metaDescription": "立即将 WebP 图片转换为可分享的 URL。新一代格式，文件更小，画质更优。免费 WebP 托管，无需注册。",
     "schemaName": "WebP 转 URL 转换器",
     "schemaDescription": "利用新一代格式的优势，立即将 WebP 图片转换为可分享的 URL。",

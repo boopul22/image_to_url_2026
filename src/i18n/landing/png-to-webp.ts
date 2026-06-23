@@ -94,6 +94,12 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de PNG a WebP | Gratis, 60-85% más ligero",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP a PNG" },
+      { "pageKey": "jpg-to-webp", "label": "JPG a WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC a PNG" }
+    ],
     "metaDescription": "Convierte PNG a WebP gratis en tu navegador y reduce el tamaño de tus archivos entre un 60 y 85% manteniendo la transparencia. Sin subidas, sin registros. Funciona en Windows, Mac y iPhone.",
     "schemaName": "Convertidor de PNG a WebP",
     "schemaDescription": "Convierte imágenes PNG a WebP en tu navegador. Archivos más pequeños, transparencia preservada.",
@@ -176,6 +182,12 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur PNG en WebP | Gratuit, 60-85% plus léger",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP vers PNG" },
+      { "pageKey": "jpg-to-webp", "label": "JPG vers WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC vers PNG" }
+    ],
     "metaDescription": "Convertissez vos PNG en WebP gratuitement dans votre navigateur et réduisez la taille de vos fichiers de 60 à 85% tout en conservant la transparence. Sans téléchargement, sans inscription. Fonctionne sur Windows, Mac et iPhone.",
     "schemaName": "Convertisseur PNG en WebP",
     "schemaDescription": "Convertissez des images PNG en WebP directement dans votre navigateur. Fichiers plus légers, transparence préservée.",
@@ -258,6 +270,12 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "PNG in WebP umwandeln | Kostenlos, 60-85% kleiner",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP zu PNG" },
+      { "pageKey": "jpg-to-webp", "label": "JPG zu WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC zu PNG" }
+    ],
     "metaDescription": "Wandeln Sie PNG kostenlos direkt im Browser in WebP um und verkleinern Sie Dateien um 60 bis 85% bei voller Transparenz. Kein Upload, keine Registrierung. Funktioniert auf Windows, Mac und iPhone.",
     "schemaName": "PNG in WebP Konverter",
     "schemaDescription": "Wandeln Sie PNG-Bilder direkt im Browser in WebP um. Kleinere Dateien, Transparenz bleibt erhalten.",
@@ -340,6 +358,12 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "PNGをWebPに変換 | 無料で60-85%軽量化",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP→PNG" },
+      { "pageKey": "jpg-to-webp", "label": "JPG→WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC→PNG" }
+    ],
     "metaDescription": "ブラウザ上でPNGをWebPに無料で変換。透明度を維持したままファイルサイズを60〜85%削減します。アップロード不要、登録不要。Windows、Mac、iPhoneで動作します。",
     "schemaName": "PNG to WebP変換ツール",
     "schemaDescription": "ブラウザでPNG画像をWebPに変換。ファイルサイズを削減し、透明度も保持します。",
@@ -422,6 +446,12 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "PNG 转 WebP 转换器 | 免费，体积缩小 60-85%",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP 转 PNG" },
+      { "pageKey": "jpg-to-webp", "label": "JPG 转 WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC 转 PNG" }
+    ],
     "metaDescription": "在浏览器中免费将 PNG 转换为 WebP，在保持透明度的同时将文件体积缩小 60% 至 85%。无需上传，无需注册。适用于 Windows、Mac 和 iPhone。",
     "schemaName": "PNG 转 WebP 转换器",
     "schemaDescription": "在浏览器中将 PNG 图像转换为 WebP。文件更小，且保留透明度。",

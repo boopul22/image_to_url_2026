@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Obtén URLs de imágenes para ChatGPT Vision — Gratis e instantáneo | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Generador de código incrustado de imagen" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL de imagen para WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "URL de imagen para HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Hosting de imágenes para Vercel" }
+    ],
     "metaDescription": "ChatGPT Vision necesita URLs de imágenes públicas. Sube tu imagen, obtén una URL al instante y pégala en ChatGPT. Gratis, sin registro.",
     "schemaName": "URLs de imágenes para ChatGPT",
     "schemaDescription": "Sube imágenes y obtén URLs públicas para ChatGPT Vision. Gratis, instantáneo y sin necesidad de registro.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Obtenez des URL d'images pour ChatGPT Vision — Gratuit et instantané | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré d'image" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL d'image pour WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "URL d'image pour HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Hébergement d'images pour Vercel" }
+    ],
     "metaDescription": "ChatGPT Vision nécessite des URL d'images publiques. Téléchargez votre image, obtenez une URL instantanée et collez-la dans ChatGPT. Gratuit, sans inscription.",
     "schemaName": "URL d'images pour ChatGPT",
     "schemaDescription": "Téléchargez des images et obtenez des URL publiques pour ChatGPT Vision. Gratuit, instantané, sans inscription.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-URLs für ChatGPT Vision erhalten — Kostenlos & Sofort | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Bild-Embed-Code-Generator" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Bild-URL für WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "Bild-URL für HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Bild-Hosting für Vercel" }
+    ],
     "metaDescription": "ChatGPT Vision benötigt öffentliche Bild-URLs. Laden Sie Ihr Bild hoch, erhalten Sie sofort eine URL und fügen Sie diese in ChatGPT ein. Kostenlos, keine Registrierung erforderlich.",
     "schemaName": "Bild-URLs für ChatGPT",
     "schemaDescription": "Laden Sie Bilder hoch und erhalten Sie öffentliche URLs für ChatGPT Vision. Kostenlos, sofort, keine Registrierung erforderlich.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "ChatGPT Vision用画像URLを即時作成 — 無料 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "画像埋め込みコード生成" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp用画像URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML用画像URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel用画像ホスティング" }
+    ],
     "metaDescription": "ChatGPT Visionには公開画像URLが必要です。画像をアップロードして即座にURLを取得し、ChatGPTに貼り付けるだけ。登録不要で完全無料。",
     "schemaName": "ChatGPT用画像URL",
     "schemaDescription": "画像をアップロードしてChatGPT Vision用の公開URLを取得。登録不要、即時発行、完全無料。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "获取 ChatGPT Vision 所需的图片 URL — 免费且即时 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "图片嵌入代码生成器" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp 图片 URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML 图片 URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel 图片托管" }
+    ],
     "metaDescription": "ChatGPT Vision 需要公开的图片 URL。上传图片，获取即时链接，并将其粘贴到 ChatGPT 中。免费，无需注册。",
     "schemaName": "ChatGPT 图片 URL",
     "schemaDescription": "上传图片并获取 ChatGPT Vision 所需的公开 URL。免费、即时，无需注册。",

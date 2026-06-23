@@ -99,6 +99,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Foto a URL — Convierte cualquier foto en un enlace compartible | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Imagen a URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG a URL" },
+      { "pageKey": "screenshot-to-url", "label": "Captura a URL" },
+      { "pageKey": "png-to-url", "label": "PNG a URL" }
+    ],
     "metaDescription": "Convierte cualquier foto en una URL compartible en segundos. Sube desde tu teléfono o computadora y obtén un enlace permanente al instante. Alojamiento de fotos gratuito, sin registro.",
     "schemaName": "Convertidor de Foto a URL",
     "schemaDescription": "Una herramienta web gratuita que convierte cualquier foto subida en una URL permanente y compartible al instante sin necesidad de registro.",
@@ -169,6 +176,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Photo en URL — Transformez n'importe quelle photo en lien partageable | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image vers URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG vers URL" },
+      { "pageKey": "screenshot-to-url", "label": "Capture d'écran vers URL" },
+      { "pageKey": "png-to-url", "label": "PNG vers URL" }
+    ],
     "metaDescription": "Transformez n'importe quelle photo en URL partageable en quelques secondes. Téléchargez depuis votre téléphone ou ordinateur, obtenez un lien permanent instantanément. Hébergement photo gratuit, sans inscription.",
     "schemaName": "Convertisseur de photo en URL",
     "schemaDescription": "Un outil web gratuit qui convertit instantanément toute photo téléchargée en une URL permanente et partageable, sans inscription requise.",
@@ -239,6 +253,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Foto in URL — Verwandeln Sie jedes Foto in einen teilbaren Link | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild zu URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG zu URL" },
+      { "pageKey": "screenshot-to-url", "label": "Screenshot zu URL" },
+      { "pageKey": "png-to-url", "label": "PNG zu URL" }
+    ],
     "metaDescription": "Verwandeln Sie jedes Foto in Sekundenschnelle in eine teilbare URL. Laden Sie es vom Handy oder Computer hoch und erhalten Sie sofort einen permanenten Link. Kostenloses Foto-Hosting, keine Registrierung erforderlich.",
     "schemaName": "Foto-zu-URL-Konverter",
     "schemaDescription": "Ein kostenloses Web-Tool, das jedes hochgeladene Foto sofort in eine permanente, teilbare URL umwandelt, ohne dass eine Registrierung erforderlich ist.",
@@ -309,6 +330,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "写真からURLへ — 写真を共有可能なリンクに変換 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG→URL" },
+      { "pageKey": "screenshot-to-url", "label": "スクリーンショット→URL" },
+      { "pageKey": "png-to-url", "label": "PNG→URL" }
+    ],
     "metaDescription": "写真を数秒で共有可能なURLに変換。スマホやPCからアップロードして、すぐに永続的なリンクを取得。登録不要の無料画像ホスティング。",
     "schemaName": "写真からURLへの変換ツール",
     "schemaDescription": "アップロードした写真を登録不要で即座に永続的な共有URLに変換する無料Webツール。",
@@ -379,6 +407,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "照片转链接 — 将任何照片转换为可分享的链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG 转 URL" },
+      { "pageKey": "screenshot-to-url", "label": "截图转 URL" },
+      { "pageKey": "png-to-url", "label": "PNG 转 URL" }
+    ],
     "metaDescription": "在几秒钟内将任何照片转换为可分享的 URL。从手机或电脑上传，立即获取永久链接。免费照片托管，无需注册。",
     "schemaName": "照片转链接工具",
     "schemaDescription": "一个免费的在线工具，可将任何上传的照片立即转换为永久、可分享的 URL，无需注册。",

@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para páginas de Notion — URLs permanentes | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Las URLs de imágenes de Notion caducan en páginas publicadas. Usa ImageToURL para obtener enlaces permanentes que nunca fallan en tu espacio de trabajo de Notion.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Una herramienta que proporciona URLs de imágenes permanentes y fiables para páginas de Notion, evitando enlaces rotos en contenido publicado.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images pour Notion — URLs permanentes | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Les URLs d'images de Notion expirent sur les pages publiées. Utilisez ImageToURL pour obtenir des liens permanents qui ne se briseront jamais dans votre espace Notion.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Un outil qui fournit des URLs d'images permanentes et fiables pour les pages Notion afin d'éviter les liens brisés sur le contenu publié.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-Hosting für Notion-Seiten — Dauerhafte URLs | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Die internen Bild-URLs von Notion laufen auf veröffentlichten Seiten ab. Nutzen Sie ImageToURL für dauerhafte Bild-URLs, die in Ihrem Notion-Workspace nie kaputtgehen.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Ein Tool, das dauerhafte, zuverlässige Bild-URLs für Notion-Seiten bereitstellt, um defekte Links auf veröffentlichten Inhalten zu vermeiden.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Notionページ向け画像ホスティング — 永続的なURL | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "Notionの標準画像URLは公開ページで期限切れになります。ImageToURLを使って、Notionワークスペースでリンク切れを起こさない永続的な画像URLを作成しましょう。",
     "schemaName": "ImageToURL",
     "schemaDescription": "Notionページでリンク切れを防ぐため、信頼性の高い永続的な画像URLを提供するツール。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Notion 页面图片托管 — 永久链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "Notion 内置的图片链接在发布页面后会失效。使用 ImageToURL 获取永久有效的图片链接，确保您的 Notion 工作区图片永不损坏。",
     "schemaName": "ImageToURL",
     "schemaDescription": "一个为 Notion 页面提供永久、可靠图片链接的工具，防止已发布内容出现图片损坏。",

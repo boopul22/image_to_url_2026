@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para WordPress — Acelera tu sitio | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Acelera WordPress alojando imágenes externamente en una CDN gratuita. Reduce la carga del servidor, mejora los Core Web Vitals y obtén URLs de imagen permanentes.",
     "schemaName": "Alojamiento de imágenes para WordPress",
     "schemaDescription": "Acelera WordPress alojando imágenes externamente en una CDN gratuita para reducir la carga del servidor y mejorar los Core Web Vitals.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images pour WordPress — Accélérez votre site | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Accélérez WordPress en hébergeant vos images sur un CDN gratuit. Réduisez la charge serveur, améliorez les Core Web Vitals et obtenez des URL d'images permanentes.",
     "schemaName": "Hébergement d'images pour WordPress",
     "schemaDescription": "Accélérez WordPress en hébergeant vos images sur un CDN gratuit pour réduire la charge serveur et améliorer les Core Web Vitals.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bildhosting für WordPress — Beschleunigen Sie Ihre Website | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Beschleunigen Sie WordPress durch externes Bildhosting auf einem kostenlosen CDN. Reduzieren Sie die Serverlast, verbessern Sie die Core Web Vitals und erhalten Sie permanente Bild-URLs.",
     "schemaName": "Bildhosting für WordPress",
     "schemaDescription": "Beschleunigen Sie WordPress durch externes Bildhosting auf einem kostenlosen CDN, um die Serverlast zu reduzieren und die Core Web Vitals zu verbessern.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "WordPress向け画像ホスティング — サイトを高速化 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "無料CDNで画像を外部ホスティングしてWordPressを高速化。サーバー負荷を軽減し、Core Web Vitalsを改善。永続的な画像URLを取得できます。",
     "schemaName": "WordPress向け画像ホスティング",
     "schemaDescription": "無料CDNで画像を外部ホスティングし、サーバー負荷を軽減してCore Web Vitalsを改善することでWordPressを高速化します。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "WordPress 图片托管 — 加速您的网站 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "通过免费 CDN 外部托管图片来加速 WordPress。减轻服务器负载，改善核心网页指标 (Core Web Vitals)，并获取永久图片 URL。",
     "schemaName": "WordPress 图片托管",
     "schemaDescription": "通过免费 CDN 外部托管图片来加速 WordPress，从而减轻服务器负载并改善核心网页指标。",

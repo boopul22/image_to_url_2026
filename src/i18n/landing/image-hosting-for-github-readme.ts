@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para archivos README de GitHub | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Aloja imágenes para archivos README de GitHub con URLs permanentes. Deja de subir archivos binarios a tu repositorio para obtener clones más rápidos y un historial de proyecto más limpio.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Una herramienta para alojar imágenes para archivos README de GitHub con URLs permanentes para evitar el exceso de peso en el repositorio.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images pour fichiers README GitHub | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Hébergez vos images pour fichiers README GitHub avec des URL permanentes. Évitez de commiter des fichiers binaires pour des clones plus rapides et un historique de projet propre.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Un outil pour héberger des images pour les fichiers README GitHub avec des URL permanentes afin d'éviter l'alourdissement des dépôts.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bildhosting für GitHub README-Dateien | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Hosten Sie Bilder für GitHub README-Dateien mit permanenten URLs. Vermeiden Sie das Committen von Binärdateien in Ihr Repo für schnellere Clones und eine saubere Projekthistorie.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Ein Tool zum Hosten von Bildern für GitHub README-Dateien mit permanenten URLs, um Repository-Bloat zu vermeiden.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "GitHub README用画像ホスティング | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "GitHub README用の画像を永続的なURLでホストしましょう。バイナリファイルをリポジトリにコミットせず、クローンを高速化し、プロジェクト履歴をクリーンに保ちます。",
     "schemaName": "ImageToURL",
     "schemaDescription": "リポジトリの肥大化を防ぐため、GitHub README用の画像を永続的なURLでホストするツールです。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "GitHub README 文件图片托管 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "为 GitHub README 文件托管图片并获取永久链接。无需将二进制文件提交到仓库，让克隆速度更快，项目历史更整洁。",
     "schemaName": "ImageToURL",
     "schemaDescription": "一个为 GitHub README 文件托管图片并提供永久链接的工具，旨在防止仓库臃肿。",

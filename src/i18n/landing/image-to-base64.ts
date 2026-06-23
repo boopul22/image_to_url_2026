@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Imagen a Base64 — 100% en navegador | Codificador gratuito",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresor de imágenes" },
+      { "pageKey": "image-resizer", "label": "Redimensionador de imágenes" },
+      { "pageKey": "base64-to-image", "label": "Base64 a imagen" },
+      { "pageKey": "favicon-generator", "label": "Generador de favicon" }
+    ],
     "metaDescription": "Convierte cualquier imagen PNG, JPG, GIF, SVG o WebP a una URI de datos base64 para pegar en CSS, HTML o JSON. Instantáneo, gratuito, funciona en tu navegador, sin subidas.",
     "schemaName": "Codificador de imagen a Base64",
     "schemaDescription": "Codifica imágenes como URIs de datos base64 localmente en tu navegador.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Image en Base64 — 100% navigateur | Encodeur gratuit",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresseur d'images" },
+      { "pageKey": "image-resizer", "label": "Outil de redimensionnement d'images" },
+      { "pageKey": "base64-to-image", "label": "Base64 vers image" },
+      { "pageKey": "favicon-generator", "label": "Générateur de favicon" }
+    ],
     "metaDescription": "Convertissez n'importe quelle image PNG, JPG, GIF, SVG ou WebP en URI de données base64 à coller dans votre CSS, HTML ou JSON. Instantané, gratuit, s'exécute dans votre navigateur, aucun téléchargement.",
     "schemaName": "Encodeur d'image en Base64",
     "schemaDescription": "Encodez vos images en URI de données base64 localement dans votre navigateur.",
@@ -259,6 +273,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild zu Base64 — 100% Browser | Kostenloser Encoder",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Bildkompressor" },
+      { "pageKey": "image-resizer", "label": "Bildgrößenänderungstool" },
+      { "pageKey": "base64-to-image", "label": "Base64 zu Bild" },
+      { "pageKey": "favicon-generator", "label": "Favicon-Generator" }
+    ],
     "metaDescription": "Konvertieren Sie jedes PNG, JPG, GIF, SVG oder WebP Bild in einen Base64 Data URI für CSS, HTML oder JSON. Sofort, kostenlos, direkt im Browser, kein Upload.",
     "schemaName": "Bild zu Base64 Encoder",
     "schemaDescription": "Kodieren Sie Bilder lokal in Ihrem Browser als Base64 Data URIs.",
@@ -341,6 +362,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像からBase64へ変換 — ブラウザ完結型 | 無料エンコーダー",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-compressor", "label": "画像圧縮" },
+      { "pageKey": "image-resizer", "label": "画像リサイザー" },
+      { "pageKey": "base64-to-image", "label": "Base64→画像" },
+      { "pageKey": "favicon-generator", "label": "ファビコン生成" }
+    ],
     "metaDescription": "PNG、JPG、GIF、SVG、WebP画像をCSS、HTML、JSONに貼り付け可能なbase64データURIに変換します。ブラウザ上で即座に変換、アップロード不要の無料ツールです。",
     "schemaName": "画像からBase64へのエンコーダー",
     "schemaDescription": "ブラウザ上でローカルに画像をbase64データURIへエンコードします。",
@@ -423,6 +451,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片转 Base64 — 100% 浏览器运行 | 免费编码器",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-compressor", "label": "图片压缩工具" },
+      { "pageKey": "image-resizer", "label": "图片缩放工具" },
+      { "pageKey": "base64-to-image", "label": "Base64 转图片" },
+      { "pageKey": "favicon-generator", "label": "Favicon 生成器" }
+    ],
     "metaDescription": "将任何 PNG、JPG、GIF、SVG 或 WebP 图片转换为可粘贴到 CSS、HTML 或 JSON 中的 base64 数据 URI。即时、免费、在浏览器中运行，无需上传。",
     "schemaName": "图片转 Base64 编码器",
     "schemaDescription": "在浏览器中本地将图片编码为 base64 数据 URI。",

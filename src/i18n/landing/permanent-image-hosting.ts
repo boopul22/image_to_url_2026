@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Imagen a URL permanente — Alojamiento que nunca caduca | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" },
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "ai-image-hosting", "label": "Hosting de imágenes con IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Carga anónima de imágenes" }
+    ],
     "metaDescription": "Alojamiento de imágenes a URL permanente. Sube una vez, comparte para siempre. Enlaces de imagen que nunca caducan, nunca se rompen y nunca desaparecen. Gratis, sin registro.",
     "schemaName": "Alojamiento de imágenes permanente",
     "schemaDescription": "URLs de imágenes que nunca caducan ni se rompen, proporcionando un alojamiento fiable para su contenido visual.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Image vers URL permanente — Hébergement qui n'expire jamais | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" },
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "ai-image-hosting", "label": "Hébergement d'images IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Téléchargement d'image anonyme" }
+    ],
     "metaDescription": "Hébergement d'image vers URL permanent. Téléchargez une fois, partagez pour toujours. Des liens d'images qui n'expirent jamais, ne se cassent pas et ne disparaissent pas. Gratuit, sans inscription.",
     "schemaName": "Hébergement d'images permanent",
     "schemaDescription": "Des URL d'images qui n'expirent jamais et ne se cassent pas, offrant un hébergement fiable pour votre contenu visuel.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild zu URL dauerhaft — Hosting, das niemals abläuft | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" },
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "ai-image-hosting", "label": "KI-Bild-Hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymes Bild-Upload" }
+    ],
     "metaDescription": "Dauerhaftes Bild-zu-URL-Hosting. Einmal hochladen, für immer teilen. Bild-Links, die niemals ablaufen, nicht kaputtgehen und nicht verschwinden. Kostenlos, ohne Registrierung.",
     "schemaName": "Dauerhaftes Bild-Hosting",
     "schemaDescription": "Bild-URLs, die niemals ablaufen oder kaputtgehen, und zuverlässiges Hosting für Ihre visuellen Inhalte bieten.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像URL永続化 — 期限切れのないホスティング | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" },
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI画像ホスティング" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名画像アップロード" }
+    ],
     "metaDescription": "永続的な画像URLホスティング。一度アップロードすれば、ずっと共有可能。期限切れやリンク切れのない、消えない画像リンク。登録不要で無料。",
     "schemaName": "永続画像ホスティング",
     "schemaDescription": "期限切れやリンク切れのない画像URL。ビジュアルコンテンツに信頼性の高いホスティングを提供します。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "永久图片转URL — 永不过期的托管服务 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" },
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI 图片托管" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名图片上传" }
+    ],
     "metaDescription": "永久图片转URL托管。一次上传，永久分享。图片链接永不过期、永不失效、永不消失。免费，无需注册。",
     "schemaName": "永久图片托管",
     "schemaDescription": "永不过期或失效的图片URL，为您的视觉内容提供可靠的托管服务。",

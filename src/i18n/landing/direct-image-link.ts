@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de enlaces directos a imágenes — URLs limpias para hotlinking | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" },
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "ai-image-hosting", "label": "Hosting de imágenes con IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Carga anónima de imágenes" }
+    ],
     "metaDescription": "Obtén enlaces directos a imágenes que terminan en .jpg, .png, .gif, sin páginas de galería con anuncios. URLs aptas para hotlinking e incrustar en cualquier lugar de la web.",
     "schemaName": "Alojamiento de enlaces directos a imágenes",
     "schemaDescription": "Una herramienta para generar URLs de imágenes directas y sin anuncios, optimizadas para hotlinking e incrustación en sitios web, foros y correos electrónicos.",
@@ -165,6 +172,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images avec lien direct — URLs propres et hotlinkables | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" },
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "ai-image-hosting", "label": "Hébergement d'images IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Téléchargement d'image anonyme" }
+    ],
     "metaDescription": "Obtenez des liens d'images directs se terminant par .jpg, .png, .gif — pas de pages de galerie avec publicités. URLs compatibles avec le hotlinking pour intégration partout sur le web.",
     "schemaName": "Hébergement d'images avec lien direct",
     "schemaDescription": "Un outil pour générer des URLs d'images directes et sans publicité, optimisées pour le hotlinking et l'intégration dans des sites web, forums et emails.",
@@ -235,6 +249,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Direktes Bild-Hosting — Saubere Hotlink-URLs | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" },
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "ai-image-hosting", "label": "KI-Bild-Hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymes Bild-Upload" }
+    ],
     "metaDescription": "Erhalten Sie direkte Bild-Links, die auf .jpg, .png oder .gif enden — keine Galerie-Seiten mit Werbung. Hotlink-freundliche URLs zum Einbetten im Web.",
     "schemaName": "Direktes Bild-Hosting",
     "schemaDescription": "Ein Tool zur Erstellung direkter, werbefreier Bild-URLs, optimiert für Hotlinking und das Einbetten in Websites, Foren und E-Mails.",
@@ -305,6 +326,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "ダイレクト画像リンクホスティング — クリーンな直リンク用URL | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" },
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI画像ホスティング" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名画像アップロード" }
+    ],
     "metaDescription": "広告付きのギャラリーページではなく、.jpg、.png、.gifで終わる直接的な画像リンクを取得。Web上のどこにでも埋め込み可能な、直リンク対応のURLを提供します。",
     "schemaName": "ダイレクト画像リンクホスティング",
     "schemaDescription": "Webサイト、フォーラム、メールへの埋め込みや直リンクに最適化された、広告なしの直接的な画像URLを生成するツールです。",
@@ -375,6 +403,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "直接图片链接托管 — 纯净可外链 URL | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" },
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI 图片托管" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名图片上传" }
+    ],
     "metaDescription": "获取以 .jpg、.png、.gif 结尾的直接图片链接，而非带有广告的图库页面。适用于在网页任何位置嵌入的友好外链 URL。",
     "schemaName": "直接图片链接托管",
     "schemaDescription": "一个用于生成直接、无广告图片 URL 的工具，针对网站、论坛和电子邮件中的外链和嵌入进行了优化。",

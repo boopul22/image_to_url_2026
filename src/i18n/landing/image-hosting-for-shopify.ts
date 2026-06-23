@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratuito para tiendas Shopify | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Aloja imágenes de productos y secciones personalizadas para tu tienda Shopify. Alojamiento de imágenes gratuito con CDN y URLs permanentes para páginas personalizadas de Shopify.",
     "schemaName": "Alojamiento de imágenes para Shopify",
     "schemaDescription": "Aloja imágenes de productos y secciones personalizadas para tu tienda Shopify con URLs permanentes respaldadas por CDN.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images gratuit pour boutiques Shopify | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Hébergez vos images de produits et sections personnalisées pour votre boutique Shopify. Hébergement d'images gratuit via CDN avec URLs permanentes pour vos pages Shopify.",
     "schemaName": "Hébergement d'images pour Shopify",
     "schemaDescription": "Hébergez vos images de produits et sections personnalisées pour votre boutique Shopify avec des URLs permanentes via CDN.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Kostenloses Bild-Hosting für Shopify-Shops | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Hosten Sie Produktbilder und benutzerdefinierte Sektionsbilder für Ihren Shopify-Shop. Kostenloses CDN-gestütztes Bild-Hosting mit permanenten URLs für individuelle Shopify-Seiten.",
     "schemaName": "Bild-Hosting für Shopify",
     "schemaDescription": "Hosten Sie Produktbilder und benutzerdefinierte Sektionsbilder für Ihren Shopify-Shop mit permanenten CDN-gestützten URLs.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Shopifyストア向け無料画像ホスティング | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "Shopifyストアの商品画像やカスタムセクション用画像をホスト。CDN対応の無料画像ホスティングで、カスタムページ用の永続的なURLを提供します。",
     "schemaName": "Shopify向け画像ホスティング",
     "schemaDescription": "CDN対応の永続的なURLを使用して、Shopifyストアの商品画像やカスタムセクション用画像をホストします。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Shopify 商店免费图片托管 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "为您的 Shopify 商店托管产品图片和自定义板块图片。提供永久 URL 的免费 CDN 图片托管服务，适用于 Shopify 自定义页面。",
     "schemaName": "Shopify 图片托管",
     "schemaDescription": "使用带有永久 CDN URL 的服务，为您的 Shopify 商店托管产品图片和自定义板块图片。",

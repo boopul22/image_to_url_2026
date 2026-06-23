@@ -84,6 +84,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de JPG a JPEG — Gratis e instantáneo",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" }
+    ],
     "metaDescription": "Convierte JPG a JPEG gratis en tu navegador. La misma imagen, solo con la extensión .jpeg que requieren algunos formularios. Un clic, sin subidas, sin registros, sin pérdida de calidad.",
     "schemaName": "Convertidor de JPG a JPEG",
     "schemaDescription": "Cambia el nombre y guarda archivos JPG con la extensión .jpeg localmente en tu navegador. No requiere subida de archivos.",
@@ -154,6 +161,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur JPG en JPEG — Gratuit et instantané",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" }
+    ],
     "metaDescription": "Convertissez vos JPG en JPEG gratuitement dans votre navigateur. Même image, juste l'extension .jpeg requise par certains formulaires. Un clic, aucun téléchargement, aucune inscription, aucune perte de qualité.",
     "schemaName": "Convertisseur JPG en JPEG",
     "schemaDescription": "Renommez et enregistrez vos fichiers JPG avec l'extension .jpeg localement dans votre navigateur. Aucun envoi requis.",
@@ -224,6 +238,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "JPG zu JPEG Konverter — Kostenlos & Sofort",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" }
+    ],
     "metaDescription": "Konvertieren Sie JPG zu JPEG kostenlos in Ihrem Browser. Dasselbe Bild, nur mit der .jpeg-Endung, die manche Upload-Formulare verlangen. Ein Klick, kein Upload, keine Anmeldung, kein Qualitätsverlust.",
     "schemaName": "JPG zu JPEG Konverter",
     "schemaDescription": "Benennen Sie JPG-Dateien lokal in Ihrem Browser in .jpeg um und speichern Sie diese neu. Kein Upload erforderlich.",
@@ -294,6 +315,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "JPGからJPEGへの変換 — 無料で即座に",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" }
+    ],
     "metaDescription": "ブラウザ上でJPGをJPEGに無料で変換。中身は同じ画像ですが、アップロードフォームで.jpeg拡張子が必要な場合に最適です。ワンクリック、アップロード不要、登録不要、画質劣化もありません。",
     "schemaName": "JPGからJPEGへの変換ツール",
     "schemaDescription": "ブラウザ上でローカルにJPGファイルを.jpeg拡張子にリネーム・再保存します。アップロードは不要です。",
@@ -364,6 +392,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "JPG 转 JPEG 转换器 — 免费且即时",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" }
+    ],
     "metaDescription": "在浏览器中免费将 JPG 转换为 JPEG。图像内容完全相同，仅更改为某些上传表单所需的 .jpeg 后缀。一键操作，无需上传，无需注册，无画质损失。",
     "schemaName": "JPG 转 JPEG 转换器",
     "schemaDescription": "在浏览器本地重命名并重新保存为 .jpeg 后缀的 JPG 文件。无需上传。",

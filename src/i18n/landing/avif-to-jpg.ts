@@ -84,6 +84,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "AVIF a JPG — Convertidor online gratuito, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" }
+    ],
     "metaDescription": "Convierte AVIF a JPG gratis en tu navegador. Abre esas imágenes .avif de nueva generación en cualquier aplicación convirtiéndolas a JPG universales. Sin subidas, sin registros, sin marcas de agua.",
     "schemaName": "Convertidor de AVIF a JPG",
     "schemaDescription": "Convierte imágenes AVIF a JPG localmente en tu navegador. No requiere subidas.",
@@ -154,6 +161,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertir AVIF en JPG — Convertisseur en ligne gratuit, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" }
+    ],
     "metaDescription": "Convertissez vos fichiers AVIF en JPG gratuitement dans votre navigateur. Ouvrez vos images .avif nouvelle génération dans n'importe quelle application en les transformant en JPG universels. Aucun téléchargement, aucune inscription, aucun filigrane.",
     "schemaName": "Convertisseur AVIF en JPG",
     "schemaDescription": "Convertissez vos images AVIF en JPG localement dans votre navigateur. Aucun téléchargement requis.",
@@ -224,6 +238,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "AVIF in JPG umwandeln — Kostenloser Online-Konverter, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" }
+    ],
     "metaDescription": "Konvertieren Sie AVIF kostenlos direkt in Ihrem Browser in JPG. Öffnen Sie AVIF-Bilder in jeder App, indem Sie sie in universelle JPGs umwandeln. Kein Upload, keine Registrierung, kein Wasserzeichen.",
     "schemaName": "AVIF zu JPG Konverter",
     "schemaDescription": "Konvertieren Sie AVIF-Bilder lokal in Ihrem Browser in JPG. Kein Upload erforderlich.",
@@ -294,6 +315,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "AVIFからJPGへ — 無料オンライン変換、アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" }
+    ],
     "metaDescription": "ブラウザ上でAVIFをJPGに無料で変換。次世代フォーマットの.avif画像を汎用的なJPGに変換して、あらゆるアプリで開けるようにしましょう。アップロード不要、登録不要、透かしも入りません。",
     "schemaName": "AVIFからJPGへの変換ツール",
     "schemaDescription": "ブラウザ上でAVIF画像をローカルでJPGに変換します。アップロードは一切不要です。",
@@ -364,6 +392,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "AVIF 转 JPG — 免费在线转换器，无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" }
+    ],
     "metaDescription": "在浏览器中免费将 AVIF 转换为 JPG。将新一代 .avif 图像转换为通用的 JPG 格式，即可在任何应用程序中打开。无需上传、无需注册、无水印。",
     "schemaName": "AVIF 转 JPG 转换器",
     "schemaDescription": "在浏览器中本地将 AVIF 图像转换为 JPG。无需上传。",

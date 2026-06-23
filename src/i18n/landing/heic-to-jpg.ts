@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de HEIC a JPG | Gratis, Privado, Sin Subida",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" }
+    ],
     "metaDescription": "Convierte HEIC a JPG gratis, directamente en tu navegador. Tus fotos de iPhone nunca se suben. Funciona en Windows, Mac, iPhone y Android. Sin registro.",
     "schemaName": "Convertidor de HEIC a JPG",
     "schemaDescription": "Convierte fotos HEIC y HEIF de tu iPhone a JPG completamente en tu navegador sin subir archivos a un servidor.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur HEIC en JPG | Gratuit, Privé, Sans Upload",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" }
+    ],
     "metaDescription": "Convertissez HEIC en JPG gratuitement dans votre navigateur. Vos photos iPhone ne sont jamais téléchargées. Fonctionne sur Windows, Mac, iPhone et Android. Sans inscription.",
     "schemaName": "Convertisseur HEIC en JPG",
     "schemaDescription": "Convertissez des photos HEIC et HEIF de votre iPhone en JPG entièrement dans votre navigateur sans envoyer de fichiers vers un serveur.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "HEIC zu JPG Konverter | Kostenlos, Privat, Kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" }
+    ],
     "metaDescription": "Konvertieren Sie HEIC kostenlos zu JPG, direkt im Browser. Ihre iPhone-Fotos werden nie hochgeladen. Funktioniert auf Windows, Mac, iPhone und Android. Keine Anmeldung.",
     "schemaName": "HEIC zu JPG Konverter",
     "schemaDescription": "Konvertieren Sie HEIC- und HEIF-Fotos von Ihrem iPhone zu JPG vollständig in Ihrem Browser, ohne Dateien auf einen Server hochzuladen.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "HEIC to JPG 変換 | 無料・プライベート・アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" }
+    ],
     "metaDescription": "iPhoneのHEIC写真をブラウザで無料JPG変換。写真はアップロードされません。Windows・Mac・iPhone・Android対応、登録不要。",
     "schemaName": "HEIC to JPG 変換ツール",
     "schemaDescription": "サーバーへのアップロードなしに、ブラウザ上でiPhoneのHEIC・HEIF写真をJPGに変換します。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "HEIC 转 JPG 转换器 | 免费、私密、无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" }
+    ],
     "metaDescription": "在浏览器中免费将 iPhone 的 HEIC 转为 JPG。照片不会上传，支持 Windows、Mac、iPhone 和 Android，无需注册。",
     "schemaName": "HEIC 转 JPG 转换器",
     "schemaDescription": "无需上传文件至服务器，完全在浏览器中将 iPhone 的 HEIC 和 HEIF 照片转换为 JPG。",

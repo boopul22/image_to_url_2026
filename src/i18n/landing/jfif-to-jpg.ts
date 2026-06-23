@@ -84,6 +84,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de JFIF a JPG — Gratis, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" }
+    ],
     "metaDescription": "Convierte JFIF a JPG gratis en tu navegador. Convierte los archivos .jfif que Windows guarda en imágenes .jpg normales que puedes abrir y compartir en cualquier lugar. Sin subidas, sin registros.",
     "schemaName": "Convertidor de JFIF a JPG",
     "schemaDescription": "Convierte archivos JFIF a JPG estándar localmente en tu navegador. No requiere subida de archivos.",
@@ -154,6 +161,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur JFIF en JPG — Gratuit, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" }
+    ],
     "metaDescription": "Convertissez vos fichiers JFIF en JPG gratuitement dans votre navigateur. Transformez les fichiers .jfif enregistrés par Windows en images .jpg standard, compatibles partout. Aucun envoi sur serveur, aucune inscription.",
     "schemaName": "Convertisseur JFIF en JPG",
     "schemaDescription": "Convertissez vos fichiers JFIF en JPG standard localement dans votre navigateur. Aucun envoi requis.",
@@ -224,6 +238,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "JFIF in JPG Konverter — Kostenlos, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" }
+    ],
     "metaDescription": "Konvertieren Sie JFIF kostenlos direkt in Ihrem Browser in JPG. Wandeln Sie die von Windows gespeicherten .jfif-Dateien in normale .jpg-Bilder um, die Sie überall öffnen und teilen können. Kein Upload, keine Registrierung.",
     "schemaName": "JFIF in JPG Konverter",
     "schemaDescription": "Konvertieren Sie JFIF-Dateien lokal in Ihrem Browser in Standard-JPG. Kein Upload erforderlich.",
@@ -294,6 +315,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "JFIFからJPGへの変換ツール — 無料、アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" }
+    ],
     "metaDescription": "ブラウザ上でJFIFをJPGに無料で変換。Windowsで保存された.jfifファイルを、どこでも開いて共有できる標準的な.jpg画像に変換します。アップロードや登録は一切不要です。",
     "schemaName": "JFIFからJPGへの変換ツール",
     "schemaDescription": "ブラウザ上でJFIFファイルを標準的なJPGにローカル変換。アップロードは不要です。",
@@ -364,6 +392,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "JFIF 转 JPG 转换器 — 免费，无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" }
+    ],
     "metaDescription": "在浏览器中免费将 JFIF 转换为 JPG。将 Windows 保存的 .jfif 文件转换为可在任何地方打开和共享的标准 .jpg 图像。无需上传，无需注册。",
     "schemaName": "JFIF 转 JPG 转换器",
     "schemaDescription": "在浏览器中本地将 JFIF 文件转换为标准 JPG。无需上传。",

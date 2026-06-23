@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para boletines informativos | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Alojamiento de imágenes fiable para boletines. Obtén URLs permanentes que funcionan con Mailchimp, Substack, ConvertKit y todas las plataformas de email.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Alojamiento de imágenes fiable para boletines con URLs permanentes respaldadas por CDN que funcionan en todas las plataformas principales.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images pour newsletters | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Hébergement d'images fiable pour vos newsletters. Obtenez des URL permanentes compatibles avec Mailchimp, Substack, ConvertKit et toutes les plateformes d'emailing.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Hébergement d'images fiable pour newsletters avec des URL permanentes via CDN, compatibles avec toutes les plateformes majeures.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bildhosting für E-Mail-Newsletter | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Zuverlässiges Bildhosting für E-Mail-Newsletter. Erhalten Sie permanente URLs, die mit Mailchimp, Substack, ConvertKit und allen Newsletter-Plattformen funktionieren.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Zuverlässiges Bildhosting für E-Mail-Newsletter mit permanenten, CDN-gestützten URLs, die mit allen gängigen Plattformen funktionieren.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "メールマガジン用画像ホスティング | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "メールマガジンに最適な信頼性の高い画像ホスティング。Mailchimp、Substack、ConvertKitなど、あらゆるプラットフォームで機能する永続的なURLを取得できます。",
     "schemaName": "ImageToURL",
     "schemaDescription": "主要なすべてのプラットフォームで機能する、CDN対応の永続的なURLを備えたメールマガジン用画像ホスティング。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "邮件通讯图片托管 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "可靠的邮件通讯图片托管服务。获取适用于 Mailchimp、Substack、ConvertKit 及所有邮件平台的永久链接。",
     "schemaName": "ImageToURL",
     "schemaDescription": "为邮件通讯提供可靠的图片托管服务，通过 CDN 加速的永久链接，适用于所有主流平台。",

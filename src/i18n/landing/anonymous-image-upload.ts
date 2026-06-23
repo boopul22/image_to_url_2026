@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Subida de imágenes anónima — Sin cuenta necesaria | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" },
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "ai-image-hosting", "label": "Hosting de imágenes con IA" },
+      { "pageKey": "bulk-image-upload", "label": "Carga masiva de imágenes" }
+    ],
     "metaDescription": "Sube imágenes de forma anónima sin crear una cuenta. Sin registro, sin correo electrónico, sin seguimiento. Solo arrastra, suelta y obtén tu enlace. Gratis y privado.",
     "schemaName": "Subida de imágenes anónima - ImageToURL",
     "schemaDescription": "Sube imágenes de forma anónima sin crear una cuenta, sin registro, correo electrónico o seguimiento requerido.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images anonyme — Aucun compte requis | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" },
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "ai-image-hosting", "label": "Hébergement d'images IA" },
+      { "pageKey": "bulk-image-upload", "label": "Téléchargement d'images en masse" }
+    ],
     "metaDescription": "Hébergez vos images anonymement sans créer de compte. Pas d'inscription, pas d'e-mail, pas de suivi. Glissez, déposez et obtenez votre lien. Gratuit et privé.",
     "schemaName": "Hébergement d'images anonyme - ImageToURL",
     "schemaDescription": "Hébergez des images anonymement sans créer de compte, sans inscription, sans e-mail et sans suivi.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Anonymer Bild-Upload — Kein Konto erforderlich | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" },
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "ai-image-hosting", "label": "KI-Bild-Hosting" },
+      { "pageKey": "bulk-image-upload", "label": "Massen-Bild-Upload" }
+    ],
     "metaDescription": "Laden Sie Bilder anonym hoch, ohne ein Konto zu erstellen. Keine Registrierung, keine E-Mail, kein Tracking. Einfach per Drag & Drop zum Link. Kostenlos und privat.",
     "schemaName": "Anonymer Bild-Upload - ImageToURL",
     "schemaDescription": "Laden Sie Bilder anonym hoch, ohne ein Konto zu erstellen. Keine Registrierung, E-Mail oder Tracking erforderlich.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "匿名画像アップロード — アカウント不要 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" },
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI画像ホスティング" },
+      { "pageKey": "bulk-image-upload", "label": "一括画像アップロード" }
+    ],
     "metaDescription": "アカウント作成なしで画像を匿名アップロード。登録、メールアドレス、追跡は一切不要。ドラッグ＆ドロップで即座にリンクを取得。無料かつプライベート。",
     "schemaName": "匿名画像アップロード - ImageToURL",
     "schemaDescription": "アカウント作成、メールアドレス、追跡不要で画像を匿名アップロードできます。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "匿名图片上传 — 无需注册 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" },
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI 图片托管" },
+      { "pageKey": "bulk-image-upload", "label": "批量上传图片" }
+    ],
     "metaDescription": "无需创建账户即可匿名上传图片。无需注册、无需邮箱、无追踪。只需拖放，即可获取链接。免费且私密。",
     "schemaName": "匿名图片上传 - ImageToURL",
     "schemaDescription": "无需创建账户、无需注册、无需邮箱或追踪即可匿名上传图片。",

@@ -77,6 +77,11 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "La mejor alternativa a Imgur (2026) — Gratis, sin cuenta | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "Alternativa a ImgBB" },
+      { "pageKey": "cloudinary-alternative", "label": "Alternativa a Cloudinary" }
+    ],
     "metaDescription": "¿Buscas una alternativa a Imgur? ImageToURL ofrece alojamiento de imágenes gratuito sin necesidad de cuenta, enlaces permanentes, URLs directas y sin anuncios. El mejor reemplazo para Imgur.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Una plataforma de alojamiento de imágenes gratuita y sin anuncios que proporciona URLs directas permanentes sin requerir cuentas de usuario.",
@@ -143,6 +148,11 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Meilleure alternative à Imgur (2026) — Gratuit, sans compte | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "Alternative à ImgBB" },
+      { "pageKey": "cloudinary-alternative", "label": "Alternative à Cloudinary" }
+    ],
     "metaDescription": "Vous cherchez une alternative à Imgur ? ImageToURL propose un hébergement d'images gratuit sans compte, des liens permanents, des URL directes et aucune publicité. Le meilleur remplaçant d'Imgur.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Une plateforme d'hébergement d'images gratuite et sans publicité, fournissant des URL directes permanentes sans nécessiter de compte utilisateur.",
@@ -209,6 +219,11 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Beste Imgur Alternative (2026) — Kostenlos, ohne Konto | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "ImgBB-Alternative" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary-Alternative" }
+    ],
     "metaDescription": "Suchen Sie eine Imgur-Alternative? ImageToURL bietet kostenloses Image-Hosting ohne Konto, permanente Links, direkte URLs und ohne Werbung. Der beste Imgur-Ersatz.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Eine kostenlose, werbefreie Image-Hosting-Plattform, die permanente direkte URLs ohne Benutzerkonto bereitstellt.",
@@ -275,6 +290,11 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "最高のImgur代替サービス (2026年) — 無料・アカウント不要 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "ImgBB代替" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary代替" }
+    ],
     "metaDescription": "Imgurの代替サービスをお探しですか？ImageToURLなら、アカウント不要で永久リンク、直接URL、広告なしの無料画像ホスティングが利用可能です。Imgurに代わる最適な選択肢です。",
     "schemaName": "ImageToURL",
     "schemaDescription": "アカウント登録不要で、永久的な直接URLを提供する広告なしの無料画像ホスティングプラットフォーム。",
@@ -341,6 +361,11 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "最佳 Imgur 替代品 (2026) — 免费、无需注册 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "ImgBB 替代品" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary 替代品" }
+    ],
     "metaDescription": "正在寻找 Imgur 替代品？ImageToURL 提供免费图像托管服务，无需注册账号，支持永久链接、直接 URL 且无广告。这是最好的 Imgur 替代方案。",
     "schemaName": "ImageToURL",
     "schemaDescription": "一个免费、无广告的图像托管平台，提供永久直接 URL，无需用户注册。",

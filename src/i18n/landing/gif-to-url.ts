@@ -99,6 +99,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "GIF a URL — Aloja GIFs animados y obtén enlaces directos | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertir cualquier imagen en enlace" },
+      { "pageKey": "png-to-url", "label": "PNG a URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG a URL" },
+      { "pageKey": "webp-to-url", "label": "WebP a URL" }
+    ],
     "metaDescription": "Aloja GIFs animados y obtén enlaces compartibles al instante. Animación completa preservada, enlaces directos para incrustar en cualquier lugar. Alojamiento de GIF gratuito, sin registro.",
     "schemaName": "GIF a URL",
     "schemaDescription": "Aloja GIFs animados y obtén enlaces directos al instante con preservación total de la animación y enlaces para incrustar.",
@@ -169,6 +176,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "GIF vers URL — Hébergez vos GIF animés et obtenez des liens directs | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertir n'importe quelle image en lien" },
+      { "pageKey": "png-to-url", "label": "PNG vers URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG vers URL" },
+      { "pageKey": "webp-to-url", "label": "WebP vers URL" }
+    ],
     "metaDescription": "Hébergez vos GIF animés et obtenez instantanément des URL partageables. Animation préservée, liens directs pour intégration partout. Hébergement GIF gratuit, sans inscription.",
     "schemaName": "GIF vers URL",
     "schemaDescription": "Hébergez vos GIF animés et obtenez des URL directes instantanées avec préservation totale de l'animation pour l'intégration.",
@@ -239,6 +253,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "GIF zu URL — Animierte GIFs hosten & Direktlinks erhalten | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Jedes Bild in einen Link umwandeln" },
+      { "pageKey": "png-to-url", "label": "PNG zu URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG zu URL" },
+      { "pageKey": "webp-to-url", "label": "WebP zu URL" }
+    ],
     "metaDescription": "Hosten Sie animierte GIFs und erhalten Sie sofort teilbare URLs. Volle Animation bleibt erhalten, Direktlinks zum Einbetten überall. Kostenloses GIF-Hosting, keine Registrierung erforderlich.",
     "schemaName": "GIF zu URL",
     "schemaDescription": "Hosten Sie animierte GIFs und erhalten Sie sofort teilbare URLs mit voller Animationserhaltung und Direktlinks zum Einbetten.",
@@ -309,6 +330,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "GIF to URL — アニメーションGIFのホスティングと直リンク取得 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像をリンクに変換" },
+      { "pageKey": "png-to-url", "label": "PNG→URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG→URL" },
+      { "pageKey": "webp-to-url", "label": "WebP→URL" }
+    ],
     "metaDescription": "アニメーションGIFをアップロードして、すぐに共有可能なURLを取得。アニメーションを完全に保持し、どこでも埋め込み可能な直リンクを提供します。登録不要の無料GIFホスティング。",
     "schemaName": "GIF to URL",
     "schemaDescription": "アニメーションGIFをアップロードして、アニメーションを完全に保持したまま、すぐに共有可能な直リンクを取得できます。",
@@ -379,6 +407,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "GIF 转 URL — 托管动态 GIF 并获取直链 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "将任意图片转为链接" },
+      { "pageKey": "png-to-url", "label": "PNG 转 URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG 转 URL" },
+      { "pageKey": "webp-to-url", "label": "WebP 转 URL" }
+    ],
     "metaDescription": "托管动态 GIF 并立即获取可分享的 URL。完整保留动画效果，提供适用于任何地方嵌入的直链。免费 GIF 托管，无需注册。",
     "schemaName": "GIF to URL",
     "schemaDescription": "托管动态 GIF 并立即获取可完整保留动画效果的直链，方便嵌入到任何地方。",

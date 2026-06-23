@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratuito para foros | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Para GitHub" }
+    ],
     "metaDescription": "Aloja imágenes para publicaciones en foros con soporte para BBCode y HTML. Enlaces directos que funcionan en phpBB, vBulletin, Reddit y todas las plataformas de foros.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Un servicio de alojamiento de imágenes gratuito que proporciona URLs directas y sin publicidad para publicaciones en foros, BBCode e incrustación HTML.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images gratuit pour forums | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Pour GitHub" }
+    ],
     "metaDescription": "Hébergez vos images pour forums avec support BBCode et HTML. Liens directs compatibles avec phpBB, vBulletin, Reddit et toutes les plateformes de forum.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Un service d'hébergement d'images gratuit fournissant des URLs directes sans publicité pour les forums, le BBCode et l'intégration HTML.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Kostenloses Bildhosting für Forenbeiträge | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Für GitHub" }
+    ],
     "metaDescription": "Hosten Sie Bilder für Forenbeiträge mit BBCode- und HTML-Unterstützung. Direkte Bild-Links für phpBB, vBulletin, Reddit und alle Foren-Plattformen.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Ein kostenloser Bildhosting-Dienst, der direkte, werbefreie Bild-URLs für Forenbeiträge, BBCode und HTML-Einbettungen bereitstellt.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "掲示板投稿用無料画像ホスティング | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "GitHub用" }
+    ],
     "metaDescription": "BBCodeやHTMLに対応した掲示板投稿用画像ホスティング。phpBB、vBulletin、Redditなど、あらゆる掲示板プラットフォームで動作する直接リンクを提供します。",
     "schemaName": "ImageToURL",
     "schemaDescription": "掲示板投稿、BBCode、HTML埋め込み用に、広告なしの直接画像URLを提供する無料画像ホスティングサービス。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "论坛帖子免费图片托管 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "用于 GitHub" }
+    ],
     "metaDescription": "为论坛帖子托管图片，支持 BBCode 和 HTML。提供适用于 phpBB、vBulletin、Reddit 及所有论坛平台的直接图片链接。",
     "schemaName": "ImageToURL",
     "schemaDescription": "一个免费的图片托管服务，为论坛帖子、BBCode 和 HTML 嵌入提供直接、无广告的图片链接。",

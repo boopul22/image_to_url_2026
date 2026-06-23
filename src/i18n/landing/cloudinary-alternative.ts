@@ -44,6 +44,13 @@ export const content: LandingContentMap = {
   },
   es: {
     metaTitle: 'Alternativa a Cloudinary — Hosting de imágenes gratis | ImageToURL',
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "Alternativa a ImgBB" },
+      { "pageKey": "imgur-alternative", "label": "Alternativa a Imgur" },
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" }
+    ],
     metaDescription: 'Alternativa gratuita y sin registro a Cloudinary para hosting de imágenes y URLs directas. 5–10 veces más barato a escala. CDN global, enlaces permanentes.',
     schemaName: 'Alternativa a Cloudinary',
     schemaDescription: 'Alternativa gratuita y sin registro a Cloudinary para hosting de imágenes y URLs directas.',
@@ -78,6 +85,13 @@ export const content: LandingContentMap = {
   },
   fr: {
     metaTitle: 'Alternative Cloudinary — Hébergement d\'images gratuit | ImageToURL',
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "Alternative à ImgBB" },
+      { "pageKey": "imgur-alternative", "label": "Alternative à Imgur" },
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" }
+    ],
     metaDescription: 'Alternative gratuite et sans inscription à Cloudinary pour l\'hébergement d\'images et les URL directes. 5-10x moins cher. CDN mondial, liens permanents.',
     schemaName: 'Alternative Cloudinary',
     schemaDescription: 'Alternative gratuite et sans inscription à Cloudinary pour l\'hébergement d\'images et les URL directes.',
@@ -112,6 +126,13 @@ export const content: LandingContentMap = {
   },
   de: {
     metaTitle: 'Cloudinary Alternative — Kostenloses Bilder-Hosting | ImageToURL',
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "ImgBB-Alternative" },
+      { "pageKey": "imgur-alternative", "label": "Imgur-Alternative" },
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" }
+    ],
     metaDescription: 'Kostenlose Cloudinary-Alternative ohne Anmeldung für einfaches Bilder-Hosting und Direkt-URLs. 5–10x günstiger. Globales CDN, permanente Links.',
     schemaName: 'Cloudinary Alternative',
     schemaDescription: 'Kostenlose Cloudinary-Alternative ohne Anmeldung für einfaches Bilder-Hosting und Direkt-URLs.',
@@ -146,6 +167,13 @@ export const content: LandingContentMap = {
   },
   ja: {
     metaTitle: 'Cloudinary の代替 — 無料画像ホスティング | ImageToURL',
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "ImgBB代替" },
+      { "pageKey": "imgur-alternative", "label": "Imgur代替" },
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" }
+    ],
     metaDescription: 'Cloudinary の無料、登録不要な代替ツール。シンプルな画像ホスティングとダイレクト URL 用。大規模利用で 5〜10 倍安価。グローバル CDN、永続リンク。',
     schemaName: 'Cloudinary 代替ツール',
     schemaDescription: 'シンプルな画像ホスティングとダイレクト URL のための Cloudinary の無料、登録不要な代替ツール。',
@@ -180,6 +208,13 @@ export const content: LandingContentMap = {
   },
   'zh-Hans': {
     metaTitle: 'Cloudinary 替代方案 — 免费图片托管 | ImageToURL',
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "imgbb-alternative", "label": "ImgBB 替代品" },
+      { "pageKey": "imgur-alternative", "label": "Imgur 替代品" },
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" }
+    ],
     metaDescription: '无需注册的 Cloudinary 免费替代方案，适用于简单图片托管及直连 URL。大规模使用成本降低 5-10 倍。全球 CDN，永久链接。',
     schemaName: 'Cloudinary 替代方案',
     schemaDescription: '无需注册的 Cloudinary 免费替代方案，适用于简单图片托管及直连 URL。',

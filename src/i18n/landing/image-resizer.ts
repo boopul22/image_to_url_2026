@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Redimensionador de imágenes — 100% en navegador | Gratis, ilimitado",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresor de imágenes" },
+      { "pageKey": "image-to-base64", "label": "Imagen a Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 a imagen" },
+      { "pageKey": "favicon-generator", "label": "Generador de favicon" }
+    ],
     "metaDescription": "Cambia el tamaño de imágenes JPG, PNG y WebP en tu navegador por píxeles exactos o porcentaje, con bloqueo de relación de aspecto y soporte por lotes. Gratis, ilimitado, sin subidas.",
     "schemaName": "Redimensionador de imágenes",
     "schemaDescription": "Cambia el tamaño de imágenes por ancho, alto o porcentaje en tu navegador.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Redimensionner une image — 100% navigateur | Gratuit, illimité",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresseur d'images" },
+      { "pageKey": "image-to-base64", "label": "Image vers Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 vers image" },
+      { "pageKey": "favicon-generator", "label": "Générateur de favicon" }
+    ],
     "metaDescription": "Redimensionnez vos images JPG, PNG et WebP directement dans votre navigateur par pixels ou pourcentage, avec verrouillage du ratio et support par lots. Gratuit, illimité, sans téléchargement.",
     "schemaName": "Redimensionneur d'image",
     "schemaDescription": "Redimensionnez vos images par largeur, hauteur ou pourcentage dans votre navigateur.",
@@ -259,6 +273,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bildgrößen-Änderung — 100% im Browser | Kostenlos, unbegrenzt",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Bildkompressor" },
+      { "pageKey": "image-to-base64", "label": "Bild zu Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 zu Bild" },
+      { "pageKey": "favicon-generator", "label": "Favicon-Generator" }
+    ],
     "metaDescription": "Ändern Sie die Größe von JPG-, PNG- und WebP-Bildern direkt im Browser nach exakten Pixeln oder Prozenten, mit Seitenverhältnis-Sperre und Batch-Unterstützung. Kostenlos, unbegrenzt, kein Upload.",
     "schemaName": "Bildgrößen-Änderung",
     "schemaDescription": "Ändern Sie die Bildgröße nach Pixelbreite, -höhe oder Prozentsatz direkt in Ihrem Browser.",
@@ -341,6 +362,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像リサイズ — ブラウザで完結 | 無料・無制限",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-compressor", "label": "画像圧縮" },
+      { "pageKey": "image-to-base64", "label": "画像→Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64→画像" },
+      { "pageKey": "favicon-generator", "label": "ファビコン生成" }
+    ],
     "metaDescription": "JPG、PNG、WebP画像をブラウザ上でピクセルやパーセンテージ指定でリサイズ。アスペクト比固定、一括処理対応。アップロード不要で完全無料。",
     "schemaName": "画像リサイズツール",
     "schemaDescription": "ブラウザ上で画像の幅、高さ、またはパーセンテージを指定してリサイズします。",
@@ -423,6 +451,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片调整大小工具 — 100% 浏览器处理 | 免费、无限制",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-compressor", "label": "图片压缩工具" },
+      { "pageKey": "image-to-base64", "label": "图片转 Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 转图片" },
+      { "pageKey": "favicon-generator", "label": "Favicon 生成器" }
+    ],
     "metaDescription": "在浏览器中按精确像素或百分比调整 JPG、PNG 和 WebP 图片大小，支持锁定宽高比和批量处理。免费、无限制、无需上传。",
     "schemaName": "图片调整大小工具",
     "schemaDescription": "在浏览器中按像素宽度、高度或百分比调整图片大小。",

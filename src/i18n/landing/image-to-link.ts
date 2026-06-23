@@ -99,6 +99,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Imagen a enlace — Generador gratuito de enlaces directos de imágenes | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertidor de imagen a URL" },
+      { "pageKey": "image-embed-code-generator", "label": "Generador de código incrustado de imagen" },
+      { "pageKey": "direct-image-link", "label": "Enlace directo a imagen" },
+      { "pageKey": "image-url-generator", "label": "Generador de URL de imagen" }
+    ],
     "metaDescription": "Convierte cualquier imagen a enlace gratis y sin registro. Obtén un enlace directo y hotlinkable que se muestra como la imagen en Discord, Reddit y foros. Permanente y anónimo.",
     "schemaName": "Generador de imagen a enlace",
     "schemaDescription": "Convierte cualquier imagen en un enlace directo y compartible que se carga como la imagen misma en Discord, Reddit, foros y chats. Gratis, sin registro, sin compresión.",
@@ -169,6 +176,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Image vers lien — Générateur gratuit de liens directs d'images | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertisseur d'image en URL" },
+      { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré d'image" },
+      { "pageKey": "direct-image-link", "label": "Lien d'image direct" },
+      { "pageKey": "image-url-generator", "label": "Générateur d'URL d'image" }
+    ],
     "metaDescription": "Transformez n'importe quelle image en lien gratuitement et sans inscription. Obtenez un lien direct et partageable qui s'affiche comme une image sur Discord, Reddit et les forums. Permanent et anonyme.",
     "schemaName": "Générateur d'image vers lien",
     "schemaDescription": "Convertissez n'importe quelle image en un lien direct et partageable qui se charge comme l'image elle-même sur Discord, Reddit, les forums et les chats. Gratuit, sans inscription, sans compression.",
@@ -239,6 +253,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild in Link — Kostenloser Generator für direkte Bild-Links | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild-zu-URL-Konverter" },
+      { "pageKey": "image-embed-code-generator", "label": "Bild-Embed-Code-Generator" },
+      { "pageKey": "direct-image-link", "label": "Direkter Bildlink" },
+      { "pageKey": "image-url-generator", "label": "Bild-URL-Generator" }
+    ],
     "metaDescription": "Verwandeln Sie jedes Bild kostenlos und ohne Registrierung in einen Link. Erhalten Sie einen direkten, hotlink-fähigen Link, der in Discord, Reddit und Foren als Bild angezeigt wird. Permanent und anonym.",
     "schemaName": "Bild-in-Link-Generator",
     "schemaDescription": "Konvertieren Sie jedes Bild in einen direkten, teilbaren Link, der in Discord, Reddit, Foren und Chats direkt als Bild geladen wird. Kostenlos, ohne Registrierung, ohne Komprimierung.",
@@ -309,6 +330,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像リンク変換 — 無料の直接画像リンク生成ツール | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL変換" },
+      { "pageKey": "image-embed-code-generator", "label": "画像埋め込みコード生成" },
+      { "pageKey": "direct-image-link", "label": "直接画像リンク" },
+      { "pageKey": "image-url-generator", "label": "画像URL生成" }
+    ],
     "metaDescription": "登録不要で、どんな画像も無料でリンクに変換。Discord、Reddit、掲示板で画像として直接表示されるホットリンク用URLを取得できます。永続的かつ匿名で利用可能です。",
     "schemaName": "画像リンク生成ツール",
     "schemaDescription": "画像をDiscord、Reddit、掲示板、チャットで直接表示される共有リンクに変換します。登録不要、圧縮なしの無料ツールです。",
@@ -379,6 +407,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片转链接 — 免费直接图片链接生成器 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL 转换器" },
+      { "pageKey": "image-embed-code-generator", "label": "图片嵌入代码生成器" },
+      { "pageKey": "direct-image-link", "label": "直链" },
+      { "pageKey": "image-url-generator", "label": "图片 URL 生成器" }
+    ],
     "metaDescription": "无需注册，将任何图片转换为链接。获取可直接嵌入 Discord、Reddit 和论坛的直链，图片将直接显示。永久有效且完全匿名。",
     "schemaName": "图片转链接生成器",
     "schemaDescription": "将任何图片转换为直接、可分享的链接，在 Discord、Reddit、论坛和聊天中直接显示为图片。免费、无需注册、无压缩。",

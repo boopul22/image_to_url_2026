@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "URLs de imágenes para Google Forms | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Añade imágenes a Google Forms usando URLs alojadas. Perfecto para encuestas, cuestionarios y formularios que necesitan contenido visual. Gratis e instantáneo.",
     "schemaName": "URLs de imágenes para Google Forms",
     "schemaDescription": "Añade imágenes a Google Forms usando URLs alojadas para encuestas, cuestionarios y formularios.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "URLs d'images pour Google Forms | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Ajoutez des images à vos Google Forms via des URL hébergées. Idéal pour les sondages, quiz et questionnaires nécessitant du contenu visuel. Gratuit et instantané.",
     "schemaName": "URLs d'images pour Google Forms",
     "schemaDescription": "Ajoutez des images à vos Google Forms via des URL hébergées pour vos sondages, quiz et questionnaires.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-URLs für Google Forms | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Fügen Sie Google Forms Bilder über gehostete URLs hinzu. Perfekt für Umfragen, Quizze und Fragebögen, die visuelle Inhalte benötigen. Kostenlos und sofort einsatzbereit.",
     "schemaName": "Bild-URLs für Google Forms",
     "schemaDescription": "Fügen Sie Google Forms Bilder über gehostete URLs für Umfragen, Quizze und Fragebögen hinzu.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Googleフォーム用画像URL | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "ホストされたURLを使用してGoogleフォームに画像を追加。アンケート、クイズ、質問票に最適なビジュアルコンテンツを無料で即座に作成できます。",
     "schemaName": "Googleフォーム用画像URL",
     "schemaDescription": "ホストされたURLを使用して、アンケート、クイズ、質問票用の画像をGoogleフォームに追加します。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Google Forms 图片链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "使用托管链接将图片添加到 Google Forms。非常适合需要视觉内容的调查、测验和问卷。免费且即时。",
     "schemaName": "Google Forms 图片链接",
     "schemaDescription": "使用托管 URL 将图片添加到 Google Forms，用于调查、测验和问卷。",

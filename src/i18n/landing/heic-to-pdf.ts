@@ -97,6 +97,11 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de HEIC a PDF | Gratis, combinar en un solo PDF",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-pdf", "label": "PNG a PDF" },
+      { "pageKey": "jpg-to-pdf", "label": "JPG a PDF" }
+    ],
     "metaDescription": "Convierte HEIC a PDF gratis en tu navegador y combina varias fotos de iPhone en un solo PDF. Sin subidas, sin registro. Funciona en iPhone, Windows y Mac.",
     "schemaName": "Convertidor de HEIC a PDF",
     "schemaDescription": "Convierte y combina fotos HEIC de iPhone en un solo PDF directamente en tu navegador.",
@@ -183,6 +188,11 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur HEIC en PDF | Gratuit, fusionnez en un seul PDF",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-pdf", "label": "PNG vers PDF" },
+      { "pageKey": "jpg-to-pdf", "label": "JPG vers PDF" }
+    ],
     "metaDescription": "Convertissez vos fichiers HEIC en PDF gratuitement dans votre navigateur et fusionnez plusieurs photos d'iPhone en un seul PDF. Aucun téléchargement, aucune inscription. Fonctionne sur iPhone, Windows et Mac.",
     "schemaName": "Convertisseur HEIC en PDF",
     "schemaDescription": "Convertissez et fusionnez des photos HEIC d'iPhone en un seul PDF directement dans votre navigateur.",
@@ -269,6 +279,11 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "HEIC in PDF umwandeln | Kostenlos, in ein PDF zusammenfügen",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-pdf", "label": "PNG zu PDF" },
+      { "pageKey": "jpg-to-pdf", "label": "JPG zu PDF" }
+    ],
     "metaDescription": "Wandeln Sie HEIC kostenlos in Ihrem Browser in PDF um und fügen Sie mehrere iPhone-Fotos zu einem PDF zusammen. Kein Upload, keine Registrierung. Funktioniert auf iPhone, Windows und Mac.",
     "schemaName": "HEIC in PDF Konverter",
     "schemaDescription": "Wandeln Sie iPhone HEIC-Fotos in Ihrem Browser um und fügen Sie sie zu einem einzigen PDF zusammen.",
@@ -355,6 +370,11 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "HEIC PDF 変換 | 無料で1つのPDFに結合",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-pdf", "label": "PNG→PDF" },
+      { "pageKey": "jpg-to-pdf", "label": "JPG→PDF" }
+    ],
     "metaDescription": "ブラウザ上でHEICをPDFに無料で変換し、複数のiPhone写真を1つのPDFに結合します。アップロード不要、登録不要。iPhone、Windows、Macで動作します。",
     "schemaName": "HEIC PDF 変換ツール",
     "schemaDescription": "ブラウザ上でiPhoneのHEIC写真を変換し、1つのPDFに結合します。",
@@ -441,6 +461,11 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "HEIC 转 PDF 转换器 | 免费，合并为单个 PDF",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-pdf", "label": "PNG 转 PDF" },
+      { "pageKey": "jpg-to-pdf", "label": "JPG 转 PDF" }
+    ],
     "metaDescription": "在浏览器中免费将 HEIC 转换为 PDF，并将多张 iPhone 照片合并为一个 PDF。无需上传，无需注册。适用于 iPhone、Windows 和 Mac。",
     "schemaName": "HEIC 转 PDF 转换器",
     "schemaDescription": "在浏览器中将 iPhone 的 HEIC 照片转换并合并为单个 PDF。",

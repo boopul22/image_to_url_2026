@@ -88,6 +88,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertir a JPG — Conversor gratuito de imágenes a JPG online",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG a JPEG" }
+    ],
     "metaDescription": "Convierte cualquier imagen a JPG gratis, directamente en tu navegador. Suelta un archivo PNG, WebP, AVIF, GIF o BMP y descarga un JPG limpio. Sin subidas, sin registro, sin marcas de agua.",
     "schemaName": "Convertir a JPG",
     "schemaDescription": "Convierte imágenes PNG, WebP, AVIF, GIF y BMP a JPG localmente en tu navegador. No requiere subida de archivos.",
@@ -162,6 +169,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertir en JPG — Convertisseur d'images en JPG gratuit en ligne",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG vers JPEG" }
+    ],
     "metaDescription": "Convertissez n'importe quelle image en JPG gratuitement, directement dans votre navigateur. Déposez un fichier PNG, WebP, AVIF, GIF ou BMP et téléchargez un JPG propre. Sans téléchargement sur serveur, sans inscription, sans filigrane.",
     "schemaName": "Convertir en JPG",
     "schemaDescription": "Convertissez des images PNG, WebP, AVIF, GIF et BMP en JPG localement dans votre navigateur. Aucun envoi requis.",
@@ -236,6 +250,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "In JPG umwandeln — Kostenloser Online-Bild-zu-JPG-Konverter",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG zu JPEG" }
+    ],
     "metaDescription": "Wandeln Sie jedes Bild kostenlos direkt in Ihrem Browser in JPG um. Ziehen Sie PNG, WebP, AVIF, GIF oder BMP hinein und laden Sie ein sauberes JPG herunter. Kein Upload, keine Registrierung, kein Wasserzeichen.",
     "schemaName": "In JPG umwandeln",
     "schemaDescription": "Wandeln Sie PNG-, WebP-, AVIF-, GIF- und BMP-Bilder lokal in Ihrem Browser in JPG um. Kein Upload erforderlich.",
@@ -310,6 +331,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "JPG変換 — 無料オンライン画像JPGコンバーター",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG→JPEG" }
+    ],
     "metaDescription": "ブラウザ上で画像を無料でJPGに変換。PNG、WebP、AVIF、GIF、BMPをドラッグ＆ドロップするだけで、きれいなJPGに変換できます。アップロード不要、登録不要、透かしなし。",
     "schemaName": "JPG変換",
     "schemaDescription": "PNG、WebP、AVIF、GIF、BMP画像をブラウザ上でローカルにJPG変換。アップロードは不要です。",
@@ -384,6 +412,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "转换为 JPG — 免费在线图片转 JPG 工具",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG 转 JPEG" }
+    ],
     "metaDescription": "直接在浏览器中将任何图片免费转换为 JPG。拖入 PNG、WebP、AVIF、GIF 或 BMP，即可下载清晰的 JPG。无需上传、无需注册、无水印。",
     "schemaName": "转换为 JPG",
     "schemaDescription": "在浏览器中本地将 PNG、WebP、AVIF、GIF 和 BMP 图片转换为 JPG。无需上传。",

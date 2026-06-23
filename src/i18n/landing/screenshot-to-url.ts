@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Captura de pantalla a URL — Comparte capturas como enlaces | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Imagen a URL" },
+      { "pageKey": "image-to-url-converter", "label": "Convertidor de imagen a URL" },
+      { "pageKey": "image-to-link", "label": "Imagen a enlace" },
+      { "pageKey": "image-url-generator", "label": "Generador de URL de imagen" }
+    ],
     "metaDescription": "Convierte capturas de pantalla en URLs compartibles en segundos. Pega desde el portapapeles, arrastra y suelta, o sube archivos. Ideal para reportes de errores, tutoriales y compartir rápidamente.",
     "schemaName": "Convertidor de captura de pantalla a URL",
     "schemaDescription": "Una herramienta web que convierte instantáneamente capturas de pantalla desde tu portapapeles o archivos en URLs permanentes y compartibles.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Capture d'écran vers URL — Partagez vos captures sous forme de liens | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image vers URL" },
+      { "pageKey": "image-to-url-converter", "label": "Convertisseur d'image en URL" },
+      { "pageKey": "image-to-link", "label": "Image vers lien" },
+      { "pageKey": "image-url-generator", "label": "Générateur d'URL d'image" }
+    ],
     "metaDescription": "Transformez vos captures d'écran en URL partageables en quelques secondes. Collez depuis le presse-papiers, glissez-déposez ou téléchargez. Idéal pour les rapports de bugs, tutoriels et partages rapides.",
     "schemaName": "Convertisseur de capture d'écran en URL",
     "schemaDescription": "Un outil web qui convertit instantanément les captures d'écran de votre presse-papiers ou de vos fichiers en URL permanentes et partageables.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Screenshot in URL umwandeln — Screenshots als Link teilen | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild zu URL" },
+      { "pageKey": "image-to-url-converter", "label": "Bild-zu-URL-Konverter" },
+      { "pageKey": "image-to-link", "label": "Bild zu Link" },
+      { "pageKey": "image-url-generator", "label": "Bild-URL-Generator" }
+    ],
     "metaDescription": "Verwandeln Sie Screenshots in Sekunden in teilbare URLs. Einfach aus der Zwischenablage einfügen, per Drag & Drop hochladen oder auswählen. Perfekt für Bug-Reports, Tutorials und schnelles Teilen.",
     "schemaName": "Screenshot-zu-URL-Konverter",
     "schemaDescription": "Ein webbasiertes Tool, das Screenshots aus der Zwischenablage oder von Dateien sofort in dauerhafte, teilbare URLs umwandelt.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "スクリーンショットをURLに変換 — 画像をリンクとして共有 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL" },
+      { "pageKey": "image-to-url-converter", "label": "画像→URL変換" },
+      { "pageKey": "image-to-link", "label": "画像→リンク" },
+      { "pageKey": "image-url-generator", "label": "画像URL生成" }
+    ],
     "metaDescription": "スクリーンショットを数秒で共有可能なURLに変換。クリップボードからの貼り付け、ドラッグ＆ドロップ、アップロードに対応。バグ報告やチュートリアル、素早い共有に最適です。",
     "schemaName": "スクリーンショットURL変換ツール",
     "schemaDescription": "クリップボードやファイルからスクリーンショットを即座に永続的な共有URLに変換するWebツール。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "截图转链接 — 将截图转换为链接分享 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL" },
+      { "pageKey": "image-to-url-converter", "label": "图片转 URL 转换器" },
+      { "pageKey": "image-to-link", "label": "图片转链接" },
+      { "pageKey": "image-url-generator", "label": "图片 URL 生成器" }
+    ],
     "metaDescription": "几秒钟内将截图转换为可分享的链接。支持剪贴板粘贴、拖拽或上传。非常适合错误报告、教程和快速分享。",
     "schemaName": "截图转链接转换器",
     "schemaDescription": "一款基于网页的工具，可立即将剪贴板或文件中的截图转换为永久、可分享的链接。",

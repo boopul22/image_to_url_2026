@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "URLs de imágenes para Google Sheets — Función =IMAGE() | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" }
+    ],
     "metaDescription": "Obtén URLs de imágenes compatibles con la función =IMAGE() de Google Sheets. Sube imágenes, obtén URLs directas y muéstralas en tus hojas de cálculo al instante.",
     "schemaName": "URLs de imágenes para Google Sheets",
     "schemaDescription": "Una herramienta para generar URLs directas de imágenes compatibles con la función =IMAGE() de Google Sheets para una integración perfecta en hojas de cálculo.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "URLs d'images pour Google Sheets — Fonction =IMAGE() | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" }
+    ],
     "metaDescription": "Obtenez des URLs d'images compatibles avec la fonction =IMAGE() de Google Sheets. Téléchargez vos images, récupérez des URLs directes et affichez-les instantanément dans vos feuilles de calcul.",
     "schemaName": "URLs d'images pour Google Sheets",
     "schemaDescription": "Un outil pour générer des URLs d'images directes compatibles avec la fonction =IMAGE() de Google Sheets pour une intégration fluide dans vos feuilles de calcul.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-URLs für Google Sheets — =IMAGE() Funktion | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" }
+    ],
     "metaDescription": "Erhalten Sie Bild-URLs, die mit der =IMAGE() Funktion in Google Sheets funktionieren. Laden Sie Bilder hoch, erhalten Sie direkte URLs und zeigen Sie diese sofort in Ihren Tabellen an.",
     "schemaName": "Bild-URLs für Google Sheets",
     "schemaDescription": "Ein Tool zur Generierung direkter Bild-URLs, die mit der Google Sheets =IMAGE() Funktion für eine nahtlose Tabellenintegration kompatibel sind.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Google Sheets用画像URL — =IMAGE()関数対応 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" }
+    ],
     "metaDescription": "Google Sheetsの=IMAGE()関数で使える画像URLを作成。画像をアップロードして直接リンクを取得し、スプレッドシートに即座に表示させましょう。",
     "schemaName": "Google Sheets用画像URL",
     "schemaDescription": "Google Sheetsの=IMAGE()関数と互換性のある直接画像URLを生成し、スプレッドシートへのシームレスな統合を実現するツールです。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Google Sheets 图片链接 — =IMAGE() 函数 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" }
+    ],
     "metaDescription": "获取适用于 Google Sheets =IMAGE() 函数的图片链接。上传图片，获取直链，并在电子表格中即时显示。",
     "schemaName": "Google Sheets 图片链接",
     "schemaDescription": "一个用于生成与 Google Sheets =IMAGE() 函数兼容的直链工具，实现电子表格的无缝集成。",

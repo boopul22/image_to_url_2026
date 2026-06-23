@@ -99,6 +99,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Generador de URL de imagen gratuito — Convierte imágenes a URL al instante | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Imagen a URL" },
+      { "pageKey": "image-embed-code-generator", "label": "Generador de código incrustado" },
+      { "pageKey": "image-to-link", "label": "Imagen a enlace" },
+      { "pageKey": "bulk-image-upload", "label": "Carga masiva de imágenes" }
+    ],
     "metaDescription": "Generador de URL de imagen gratuito. Sube cualquier imagen y obtén un enlace permanente y compartible en segundos. Sin registro, sin marcas de agua, sin costo. Creado para desarrolladores.",
     "schemaName": "Generador de URL de imagen gratuito",
     "schemaDescription": "Sube cualquier imagen y obtén un enlace permanente y compartible en segundos sin registros ni tarifas.",
@@ -169,6 +176,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Générateur d'URL d'image gratuit — Convertissez vos images en URL instantanément | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image vers URL" },
+      { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré" },
+      { "pageKey": "image-to-link", "label": "Image vers lien" },
+      { "pageKey": "bulk-image-upload", "label": "Téléchargement d'images en masse" }
+    ],
     "metaDescription": "Générateur d'URL d'image gratuit. Téléchargez n'importe quelle image et obtenez un lien permanent et partageable en quelques secondes. Sans inscription, sans filigrane, sans frais. Conçu pour les développeurs.",
     "schemaName": "Générateur d'URL d'image gratuit",
     "schemaDescription": "Téléchargez n'importe quelle image et obtenez un lien permanent et partageable en quelques secondes, sans inscription ni frais.",
@@ -239,6 +253,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Kostenloser Bild-zu-URL-Generator — Bilder sofort in URLs umwandeln | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild zu URL" },
+      { "pageKey": "image-embed-code-generator", "label": "Embed-Code-Generator" },
+      { "pageKey": "image-to-link", "label": "Bild zu Link" },
+      { "pageKey": "bulk-image-upload", "label": "Massen-Bild-Upload" }
+    ],
     "metaDescription": "Kostenloser Bild-zu-URL-Generator. Laden Sie jedes Bild hoch und erhalten Sie in Sekunden einen permanenten, teilbaren Link. Keine Registrierung, kein Wasserzeichen, keine Gebühren. Für Entwickler gemacht.",
     "schemaName": "Kostenloser Bild-zu-URL-Generator",
     "schemaDescription": "Laden Sie jedes Bild hoch und erhalten Sie in Sekunden einen permanenten, teilbaren Link ohne Registrierung oder Gebühren.",
@@ -309,6 +330,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "無料画像URL生成ツール — 画像を瞬時にURLへ変換 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL" },
+      { "pageKey": "image-embed-code-generator", "label": "埋め込みコード生成" },
+      { "pageKey": "image-to-link", "label": "画像→リンク" },
+      { "pageKey": "bulk-image-upload", "label": "一括画像アップロード" }
+    ],
     "metaDescription": "無料の画像URL生成ツール。画像をアップロードして、数秒で永続的な共有リンクを取得。登録不要、透かしなし、完全無料。開発者向け。",
     "schemaName": "無料画像URL生成ツール",
     "schemaDescription": "画像をアップロードして、登録や料金なしで数秒で永続的な共有リンクを取得できます。",
@@ -379,6 +407,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "免费图片转链接生成器 — 立即将图片转换为URL | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL" },
+      { "pageKey": "image-embed-code-generator", "label": "嵌入代码生成器" },
+      { "pageKey": "image-to-link", "label": "图片转链接" },
+      { "pageKey": "bulk-image-upload", "label": "批量上传图片" }
+    ],
     "metaDescription": "免费图片URL生成器。上传任何图片，几秒钟内即可获得永久、可共享的链接。无需注册，无水印，完全免费。专为开发者打造。",
     "schemaName": "免费图片URL生成器",
     "schemaDescription": "上传任何图片，无需注册或付费，几秒钟内即可获得永久、可共享的链接。",

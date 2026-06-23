@@ -103,6 +103,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertir imagen PNG a enlace URL — Gratis en línea | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertir cualquier imagen a URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG a URL" },
+      { "pageKey": "gif-to-url", "label": "GIF a URL" },
+      { "pageKey": "png-to-jpg", "label": "Convertir PNG a JPG" }
+    ],
     "metaDescription": "Convierte imágenes PNG a enlaces URL de forma gratuita y en línea. Sube cualquier PNG y obtén una URL directa y permanente con transparencia preservada. No requiere registro.",
     "schemaName": "Convertidor de PNG a URL",
     "schemaDescription": "Convierte cualquier imagen PNG a un enlace URL, gratis y en línea, con calidad sin pérdidas y transparencia preservada.",
@@ -169,6 +176,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertir une image PNG en lien URL — Gratuit en ligne | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertir n'importe quelle image en URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG vers URL" },
+      { "pageKey": "gif-to-url", "label": "GIF vers URL" },
+      { "pageKey": "png-to-jpg", "label": "Convertir PNG en JPG" }
+    ],
     "metaDescription": "Convertissez une image PNG en lien URL gratuitement et en ligne. Téléchargez n'importe quel PNG et obtenez une URL .png directe et permanente avec transparence préservée. Aucune inscription requise.",
     "schemaName": "Convertisseur PNG vers URL",
     "schemaDescription": "Convertissez n'importe quelle image PNG en lien URL, gratuitement et en ligne, avec une qualité sans perte et une transparence préservée.",
@@ -235,6 +249,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "PNG-Bild in URL-Link umwandeln — Kostenlos online | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Jedes Bild in eine URL umwandeln" },
+      { "pageKey": "jpg-to-url", "label": "JPG zu URL" },
+      { "pageKey": "gif-to-url", "label": "GIF zu URL" },
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG konvertieren" }
+    ],
     "metaDescription": "Wandeln Sie PNG-Bilder online und kostenlos in URL-Links um. Laden Sie jedes PNG hoch und erhalten Sie eine permanente, direkte .png-URL unter Beibehaltung der Transparenz. Keine Registrierung erforderlich.",
     "schemaName": "PNG-zu-URL-Konverter",
     "schemaDescription": "Wandeln Sie jedes PNG-Bild kostenlos und online in einen URL-Link um, mit verlustfreier Qualität und erhaltener Transparenz.",
@@ -301,6 +322,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "PNG画像をURLリンクに変換 — 無料オンライン | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像をURLに変換" },
+      { "pageKey": "jpg-to-url", "label": "JPG→URL" },
+      { "pageKey": "gif-to-url", "label": "GIF→URL" },
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG変換" }
+    ],
     "metaDescription": "PNG画像をオンラインで無料でURLリンクに変換。PNGをアップロードするだけで、透明度を保持したまま永続的な直接.png URLを取得できます。登録不要。",
     "schemaName": "PNG to URL コンバーター",
     "schemaDescription": "PNG画像をURLリンクに変換。ロスレス品質と透明度を維持したまま、オンラインで無料で利用可能です。",
@@ -367,6 +395,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "PNG 图片转 URL 链接 — 免费在线 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "任意图片转 URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG 转 URL" },
+      { "pageKey": "gif-to-url", "label": "GIF 转 URL" },
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" }
+    ],
     "metaDescription": "在线免费将 PNG 图片转换为 URL 链接。上传任意 PNG，即可获取保留透明度的永久直接 .png 链接。无需注册。",
     "schemaName": "PNG 转 URL 转换器",
     "schemaDescription": "在线免费将任何 PNG 图片转换为 URL 链接，保持无损画质和透明度。",

@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para firmas de email — URLs permanentes | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Para Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Para GitHub" }
+    ],
     "metaDescription": "Aloja logotipos y fotos de perfil para firmas de email con URLs permanentes y fiables. Funciona con Gmail, Outlook, Apple Mail y todos los clientes de correo principales.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Aloja logotipos y fotos de perfil para firmas de email con URLs permanentes y fiables.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images pour signatures email — URLs permanentes | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Pour Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Pour GitHub" }
+    ],
     "metaDescription": "Hébergez vos logos et portraits pour signatures email avec des URLs permanentes et fiables. Compatible avec Gmail, Outlook, Apple Mail et tous les principaux clients mail.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Hébergez vos logos et portraits pour signatures email avec des URLs permanentes et fiables.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bildhosting für E-Mail-Signaturen — Permanente URLs | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Für Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Für GitHub" }
+    ],
     "metaDescription": "Hosten Sie Logos und Porträtfotos für E-Mail-Signaturen mit permanenten, zuverlässigen URLs. Funktioniert mit Gmail, Outlook, Apple Mail und allen gängigen E-Mail-Clients.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Hosten Sie Logos und Porträtfotos für E-Mail-Signaturen mit permanenten, zuverlässigen URLs.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "メール署名用画像ホスティング — 永続的なURL | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "Discord用" },
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "GitHub用" }
+    ],
     "metaDescription": "メール署名用のロゴや顔写真を、永続的で信頼性の高いURLでホスティング。Gmail、Outlook、Apple Mailなど、すべての主要なメールクライアントに対応。",
     "schemaName": "ImageToURL",
     "schemaDescription": "メール署名用のロゴや顔写真を、永続的で信頼性の高いURLでホスティングします。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "电子邮件签名图片托管 — 永久链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "用于 Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "用于 GitHub" }
+    ],
     "metaDescription": "为电子邮件签名托管Logo和头像图片，提供永久、可靠的URL。适用于Gmail、Outlook、Apple Mail及所有主流电子邮件客户端。",
     "schemaName": "ImageToURL",
     "schemaDescription": "为电子邮件签名托管Logo和头像图片，提供永久、可靠的URL。",

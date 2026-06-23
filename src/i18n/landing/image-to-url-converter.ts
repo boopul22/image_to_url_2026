@@ -107,6 +107,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de imagen a URL — Gratis, sin registro | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Imagen a URL" },
+      { "pageKey": "image-to-link", "label": "Herramienta de imagen a enlace" },
+      { "pageKey": "image-url-generator", "label": "Generador de URL de imagen" },
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" }
+    ],
     "metaDescription": "Convertidor gratuito de imagen a URL. Sube un JPG, PNG, WebP o GIF y obtén un enlace directo permanente que se integra perfectamente en Discord, Reddit y foros. Sin registro.",
     "schemaName": "Convertidor de imagen a URL",
     "schemaDescription": "Un convertidor gratuito de imagen a URL que convierte cualquier imagen en un enlace directo y permanente. Sin cuenta, sin marcas de agua, CDN global rápido.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur d'image en URL — Gratuit, sans inscription | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image vers URL" },
+      { "pageKey": "image-to-link", "label": "Outil d'image vers lien" },
+      { "pageKey": "image-url-generator", "label": "Générateur d'URL d'image" },
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" }
+    ],
     "metaDescription": "Convertisseur d'image en URL gratuit. Téléchargez un JPG, PNG, WebP ou GIF et obtenez un lien direct permanent qui s'intègre parfaitement sur Discord, Reddit et les forums. Aucune inscription.",
     "schemaName": "Convertisseur d'image en URL",
     "schemaDescription": "Un convertisseur d'image en URL gratuit qui transforme n'importe quelle image en un lien direct permanent. Pas de compte, pas de filigrane, CDN mondial rapide.",
@@ -247,6 +261,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-in-URL-Konverter — Kostenlos, ohne Registrierung | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild zu URL" },
+      { "pageKey": "image-to-link", "label": "Bild-zu-Link-Werkzeug" },
+      { "pageKey": "image-url-generator", "label": "Bild-URL-Generator" },
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" }
+    ],
     "metaDescription": "Kostenloser Bild-in-URL-Konverter. Laden Sie ein JPG, PNG, WebP oder GIF hoch und erhalten Sie einen permanenten Direktlink, der in Discord, Reddit und Foren sauber eingebettet wird. Keine Registrierung.",
     "schemaName": "Bild-in-URL-Konverter",
     "schemaDescription": "Ein kostenloser Bild-in-URL-Konverter, der jedes Bild in einen permanenten Direktlink verwandelt. Kein Konto, kein Wasserzeichen, schnelles globales CDN.",
@@ -317,6 +338,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像URL変換ツール — 無料・登録不要 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL" },
+      { "pageKey": "image-to-link", "label": "画像→リンク変換" },
+      { "pageKey": "image-url-generator", "label": "画像URL生成" },
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" }
+    ],
     "metaDescription": "無料の画像URL変換ツール。JPG、PNG、WebP、GIFをアップロードして、DiscordやReddit、掲示板に直接埋め込める永続的な直リンクを取得しましょう。登録不要です。",
     "schemaName": "画像URL変換ツール",
     "schemaDescription": "画像を永続的な直リンクに変換する無料ツール。アカウント作成や透かしなし。高速なグローバルCDNを利用。",
@@ -387,6 +415,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片转链接转换器 — 免费，无需注册 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL" },
+      { "pageKey": "image-to-link", "label": "图片转链接工具" },
+      { "pageKey": "image-url-generator", "label": "图片 URL 生成器" },
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" }
+    ],
     "metaDescription": "免费的图片转链接转换器。上传 JPG、PNG、WebP 或 GIF，即可获得可嵌入 Discord、Reddit 和论坛的永久直链。无需注册。",
     "schemaName": "图片转链接转换器",
     "schemaDescription": "一款免费的图片转链接转换器，可将任何图片转换为永久直链。无需账户，无水印，基于快速全球 CDN。",

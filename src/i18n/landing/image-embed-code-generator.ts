@@ -83,6 +83,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Generador de código para incrustar imágenes — HTML, BBCode y Markdown | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-url-for-chatgpt", "label": "URL de imagen para ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL de imagen para WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "URL de imagen para HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Hosting de imágenes para Vercel" }
+    ],
     "metaDescription": "Sube una imagen y obtén códigos listos para usar en HTML, BBCode y Markdown. Generador gratuito de códigos de incrustación para sitios web, foros y documentación.",
     "schemaName": "Generador de código para incrustar imágenes",
     "schemaDescription": "Sube una imagen y obtén códigos listos para usar en HTML, BBCode y Markdown.",
@@ -153,6 +160,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Générateur de code embed image — HTML, BBCode & Markdown | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-url-for-chatgpt", "label": "URL d'image pour ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "URL d'image pour WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "URL d'image pour HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Hébergement d'images pour Vercel" }
+    ],
     "metaDescription": "Téléchargez une image et obtenez des codes d'intégration prêts à l'emploi en HTML, BBCode et Markdown. Générateur gratuit pour sites web, forums et documentation.",
     "schemaName": "Générateur de code embed image",
     "schemaDescription": "Téléchargez une image et obtenez des codes d'intégration prêts à l'emploi en HTML, BBCode et Markdown.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-Embed-Code-Generator — HTML, BBCode & Markdown | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-url-for-chatgpt", "label": "Bild-URL für ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Bild-URL für WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "Bild-URL für HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Bild-Hosting für Vercel" }
+    ],
     "metaDescription": "Laden Sie ein Bild hoch und erhalten Sie sofort einsatzbereite Embed-Codes in HTML, BBCode und Markdown. Kostenloser Generator für Websites, Foren und Dokumentationen.",
     "schemaName": "Bild-Embed-Code-Generator",
     "schemaDescription": "Laden Sie ein Bild hoch und erhalten Sie sofort einsatzbereite Embed-Codes in HTML, BBCode und Markdown.",
@@ -293,6 +314,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像埋め込みコード生成ツール — HTML, BBCode, Markdown | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT用画像URL" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp用画像URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML用画像URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel用画像ホスティング" }
+    ],
     "metaDescription": "画像をアップロードして、HTML、BBCode、Markdown形式の埋め込みコードを即座に取得。Webサイト、掲示板、ドキュメント用の無料埋め込みコード生成ツール。",
     "schemaName": "画像埋め込みコード生成ツール",
     "schemaDescription": "画像をアップロードして、HTML、BBCode、Markdown形式の埋め込みコードを即座に取得。",
@@ -363,6 +391,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片嵌入代码生成器 — HTML, BBCode 和 Markdown | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-url-for-chatgpt", "label": "ChatGPT 图片 URL" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "WhatsApp 图片 URL" },
+      { "pageKey": "image-to-url-for-html", "label": "HTML 图片 URL" },
+      { "pageKey": "image-to-url-vercel", "label": "Vercel 图片托管" }
+    ],
     "metaDescription": "上传图片并获取现成的 HTML、BBCode 和 Markdown 嵌入代码。适用于网站、论坛和文档的免费嵌入代码生成器。",
     "schemaName": "图片嵌入代码生成器",
     "schemaDescription": "上传图片并获取现成的 HTML、BBCode 和 Markdown 嵌入代码。",

@@ -100,6 +100,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de WebP a JPG | Gratis, rápido, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" }
+    ],
     "metaDescription": "Convierte WebP a JPG gratis en tu navegador cuando una aplicación no acepte WebP. Sin subidas, sin registros. Funciona en Windows, Mac y iPhone.",
     "schemaName": "Convertidor de WebP a JPG",
     "schemaDescription": "Convierte imágenes WebP a JPG localmente en tu navegador. Soluciona archivos incompatibles.",
@@ -186,6 +193,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur WebP en JPG | Gratuit, rapide, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" }
+    ],
     "metaDescription": "Convertissez vos fichiers WebP en JPG gratuitement dans votre navigateur. Sans envoi sur serveur, sans inscription. Fonctionne sur Windows, Mac et iPhone.",
     "schemaName": "Convertisseur WebP en JPG",
     "schemaDescription": "Convertissez vos images WebP en JPG localement dans votre navigateur. Corrigez vos fichiers incompatibles.",
@@ -272,6 +286,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "WebP zu JPG Konverter | Kostenlos, schnell, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" }
+    ],
     "metaDescription": "Konvertieren Sie WebP kostenlos im Browser zu JPG, wenn eine App WebP nicht akzeptiert. Kein Upload, keine Registrierung. Funktioniert auf Windows, Mac und iPhone.",
     "schemaName": "WebP zu JPG Konverter",
     "schemaDescription": "Konvertieren Sie WebP-Bilder lokal in Ihrem Browser zu JPG. Beheben Sie Inkompatibilitätsprobleme.",
@@ -358,6 +379,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "WebPからJPGへの変換ツール | 無料・高速・アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" }
+    ],
     "metaDescription": "アプリがWebPに対応していない場合、ブラウザ上でWebPをJPGに無料で変換できます。アップロードや登録は不要。Windows、Mac、iPhoneで動作します。",
     "schemaName": "WebPからJPGへの変換ツール",
     "schemaDescription": "ブラウザ上でWebP画像をJPGにローカル変換。互換性のないファイルを修正します。",
@@ -444,6 +472,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "WebP 转 JPG 转换器 | 免费、快速、无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" }
+    ],
     "metaDescription": "当应用程序不支持 WebP 时，在浏览器中免费将 WebP 转换为 JPG。无需上传，无需注册。适用于 Windows、Mac 和 iPhone。",
     "schemaName": "WebP 转 JPG 转换器",
     "schemaDescription": "在浏览器中本地将 WebP 图像转换为 JPG。修复不兼容的文件。",

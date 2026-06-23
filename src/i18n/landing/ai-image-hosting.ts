@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes IA — Aloja arte generado por IA gratis | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" },
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "anonymous-image-upload", "label": "Carga anónima de imágenes" },
+      { "pageKey": "bulk-image-upload", "label": "Carga masiva de imágenes" }
+    ],
     "metaDescription": "Alojamiento gratuito para imágenes generadas por IA de Midjourney, DALL-E, Stable Diffusion y más. Obtén URLs permanentes para tu arte IA. Sin registro.",
     "schemaName": "Alojamiento de imágenes IA",
     "schemaDescription": "Alojamiento gratuito para imágenes generadas por IA de Midjourney, DALL-E, Stable Diffusion y más con URLs permanentes.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images IA — Hébergez gratuitement vos créations IA | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" },
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "anonymous-image-upload", "label": "Téléchargement d'image anonyme" },
+      { "pageKey": "bulk-image-upload", "label": "Téléchargement d'images en masse" }
+    ],
     "metaDescription": "Hébergement gratuit pour vos images générées par IA (Midjourney, DALL-E, Stable Diffusion, etc.). Obtenez des URL permanentes pour vos œuvres. Aucune inscription requise.",
     "schemaName": "Hébergement d'images IA",
     "schemaDescription": "Hébergement gratuit pour images générées par IA (Midjourney, DALL-E, Stable Diffusion, etc.) avec URL permanentes.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "KI-Bild-Hosting — KI-Kunst kostenlos hosten | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" },
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymes Bild-Upload" },
+      { "pageKey": "bulk-image-upload", "label": "Massen-Bild-Upload" }
+    ],
     "metaDescription": "Kostenloses Hosting für KI-generierte Bilder von Midjourney, DALL-E, Stable Diffusion und mehr. Erhalten Sie permanente URLs für Ihre KI-Kunst. Keine Registrierung erforderlich.",
     "schemaName": "KI-Bild-Hosting",
     "schemaDescription": "Kostenloses Hosting für KI-generierte Bilder von Midjourney, DALL-E, Stable Diffusion und mehr mit permanenten URLs.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "AI画像ホスティング — AI生成アートを無料でホスト | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" },
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名画像アップロード" },
+      { "pageKey": "bulk-image-upload", "label": "一括画像アップロード" }
+    ],
     "metaDescription": "Midjourney、DALL-E、Stable Diffusionなどで生成したAI画像の無料ホスティング。AIアートの永続的なURLを取得。登録不要。",
     "schemaName": "AI画像ホスティング",
     "schemaDescription": "Midjourney、DALL-E、Stable Diffusionなどで生成したAI画像を、永続的なURLで無料ホスティング。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "AI 图像托管 — 免费托管 AI 生成艺术作品 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" },
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名图片上传" },
+      { "pageKey": "bulk-image-upload", "label": "批量上传图片" }
+    ],
     "metaDescription": "为 Midjourney、DALL-E、Stable Diffusion 等生成的 AI 图像提供免费托管。获取 AI 艺术作品的永久链接，无需注册。",
     "schemaName": "AI 图像托管",
     "schemaDescription": "为 Midjourney、DALL-E、Stable Diffusion 等生成的 AI 图像提供免费托管及永久链接。",

@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para Discord — Enlaces permanentes | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-hosting-for-ebay", "label": "Para eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Para firmas de correo" },
+      { "pageKey": "image-hosting-for-forums", "label": "Para foros" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Para GitHub" }
+    ],
     "metaDescription": "Obtén URLs de imágenes permanentes para embeds de Discord. Los enlaces de la CDN de Discord caducan; usa ImageToURL para un alojamiento fiable y permanente que funciona en Discord.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Obtén URLs de imágenes permanentes para embeds de Discord y evita imágenes rotas causadas por tokens de CDN caducados.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Hébergement d'images pour Discord — Liens d'intégration permanents | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-hosting-for-ebay", "label": "Pour eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Pour les signatures e-mail" },
+      { "pageKey": "image-hosting-for-forums", "label": "Pour les forums" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Pour GitHub" }
+    ],
     "metaDescription": "Obtenez des URL d'images permanentes pour les intégrations Discord. Les liens CDN de Discord expirent — utilisez ImageToURL pour un hébergement fiable et permanent qui fonctionne sur Discord.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Obtenez des URL d'images permanentes pour les intégrations Discord afin d'éviter les images brisées causées par l'expiration des jetons CDN.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild-Hosting für Discord — Permanente Embed-Links | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-hosting-for-ebay", "label": "Für eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "Für E-Mail-Signaturen" },
+      { "pageKey": "image-hosting-for-forums", "label": "Für Foren" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "Für GitHub" }
+    ],
     "metaDescription": "Erhalte permanente Bild-URLs für Discord-Embeds. Discord-CDN-Links laufen ab – nutze ImageToURL für zuverlässiges, dauerhaftes Bild-Hosting, das in Discord funktioniert.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Erhalte permanente Bild-URLs für Discord-Embeds, um defekte Bilder durch ablaufende CDN-Token zu vermeiden.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Discord用画像ホスティング — 永続的な埋め込みリンク | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-hosting-for-ebay", "label": "eBay用" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "メール署名用" },
+      { "pageKey": "image-hosting-for-forums", "label": "フォーラム用" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "GitHub用" }
+    ],
     "metaDescription": "Discordの埋め込み用として永続的な画像URLを取得。DiscordのCDNリンクは期限切れになります。ImageToURLを使って、Discordで確実に機能する永続的な画像ホスティングを利用しましょう。",
     "schemaName": "ImageToURL",
     "schemaDescription": "CDNトークンの期限切れによる画像リンク切れを防ぐため、Discord埋め込み用の永続的な画像URLを取得します。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Discord 专用图片托管 — 永久嵌入链接 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-hosting-for-ebay", "label": "用于 eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "用于邮件签名" },
+      { "pageKey": "image-hosting-for-forums", "label": "用于论坛" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "用于 GitHub" }
+    ],
     "metaDescription": "获取用于 Discord 嵌入的永久图片链接。Discord CDN 链接会过期，使用 ImageToURL 获取在 Discord 中稳定、永久的图片托管服务。",
     "schemaName": "ImageToURL",
     "schemaDescription": "获取用于 Discord 嵌入的永久图片链接，防止因 CDN 令牌过期导致的图片失效问题。",

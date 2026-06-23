@@ -79,6 +79,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Carga masiva de imágenes - Sube varias imágenes a la vez | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hosting gratuito de imágenes" },
+      { "pageKey": "free-image-cdn", "label": "CDN de imágenes gratuito" },
+      { "pageKey": "ai-image-hosting", "label": "Hosting de imágenes con IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Carga anónima de imágenes" }
+    ],
     "metaDescription": "Sube varias imágenes simultáneamente con la función de carga masiva de ImageToURL. Obtén URLs instantáneas para todas tus imágenes. Ideal para e-commerce, agencias y creadores de contenido.",
     "schemaName": "Cargador masivo de ImageToURL",
     "schemaDescription": "Una herramienta web para subir múltiples imágenes simultáneamente y generar URLs instantáneas y compartibles.",
@@ -145,6 +152,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Téléchargement d'images en masse - Importez plusieurs images à la fois | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Hébergement d'images gratuit" },
+      { "pageKey": "free-image-cdn", "label": "CDN d'images gratuit" },
+      { "pageKey": "ai-image-hosting", "label": "Hébergement d'images IA" },
+      { "pageKey": "anonymous-image-upload", "label": "Téléchargement d'image anonyme" }
+    ],
     "metaDescription": "Importez plusieurs images simultanément avec la fonction de téléchargement en masse d'ImageToURL. Obtenez des URL instantanées pour toutes vos images. Idéal pour l'e-commerce, les agences et les créateurs de contenu.",
     "schemaName": "ImageToURL Bulk Uploader",
     "schemaDescription": "Un outil web pour importer plusieurs images simultanément afin de générer des URL instantanées et partageables.",
@@ -211,6 +225,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bulk-Bild-Upload - Mehrere Bilder gleichzeitig hochladen | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Kostenloses Bild-Hosting" },
+      { "pageKey": "free-image-cdn", "label": "Kostenloses Bild-CDN" },
+      { "pageKey": "ai-image-hosting", "label": "KI-Bild-Hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymes Bild-Upload" }
+    ],
     "metaDescription": "Laden Sie mehrere Bilder gleichzeitig mit der Bulk-Upload-Funktion von ImageToURL hoch. Erhalten Sie sofort URLs für alle Ihre Bilder. Perfekt für E-Commerce, Agenturen und Content Creator.",
     "schemaName": "ImageToURL Bulk-Uploader",
     "schemaDescription": "Ein webbasiertes Tool zum gleichzeitigen Hochladen mehrerer Bilder, um sofort teilbare URLs zu generieren.",
@@ -277,6 +298,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "一括画像アップロード - 複数の画像を一度にアップロード | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "無料画像ホスティング" },
+      { "pageKey": "free-image-cdn", "label": "無料画像CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI画像ホスティング" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名画像アップロード" }
+    ],
     "metaDescription": "ImageToURLの一括アップロード機能で、複数の画像を一度にアップロードしましょう。すべての画像に対して即座にURLを発行します。Eコマース、代理店、コンテンツクリエイターに最適です。",
     "schemaName": "ImageToURL 一括アップローダー",
     "schemaDescription": "複数の画像を同時にアップロードし、共有可能なURLを即座に生成するためのWebベースのツールです。",
@@ -343,6 +371,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "批量图片上传 - 一次上传多张图片 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "免费图片托管" },
+      { "pageKey": "free-image-cdn", "label": "免费图片 CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI 图片托管" },
+      { "pageKey": "anonymous-image-upload", "label": "匿名图片上传" }
+    ],
     "metaDescription": "使用 ImageToURL 的批量上传功能，一次性上传多张图片。立即获取所有图片的 URL。非常适合电子商务、代理机构和内容创作者。",
     "schemaName": "ImageToURL 批量上传工具",
     "schemaDescription": "一个基于网络的工具，可同时上传多张图片并生成即时、可共享的 URL。",

@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Base64 a imagen — Decodificador en navegador | Gratis",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresor de imágenes" },
+      { "pageKey": "image-resizer", "label": "Redimensionador de imágenes" },
+      { "pageKey": "image-to-base64", "label": "Imagen a Base64" },
+      { "pageKey": "favicon-generator", "label": "Generador de favicon" }
+    ],
     "metaDescription": "Decodifica cadenas base64 y URIs de datos en archivos de imagen descargables directamente en tu navegador. Gratis, instantáneo, local y sin subidas.",
     "schemaName": "Decodificador de Base64 a imagen",
     "schemaDescription": "Decodifica URIs de datos base64 a archivos de imagen localmente en tu navegador.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Base64 vers Image — Décodeur par navigateur | Gratuit",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresseur d'images" },
+      { "pageKey": "image-resizer", "label": "Outil de redimensionnement d'images" },
+      { "pageKey": "image-to-base64", "label": "Image vers Base64" },
+      { "pageKey": "favicon-generator", "label": "Générateur de favicon" }
+    ],
     "metaDescription": "Décodez vos chaînes base64 et data URIs en fichiers image prévisualisables et téléchargeables directement dans votre navigateur. Gratuit, instantané, 100% local, sans téléchargement.",
     "schemaName": "Décodeur Base64 vers Image",
     "schemaDescription": "Décodez les data URIs base64 en fichiers image localement dans votre navigateur.",
@@ -259,6 +273,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Base64 in Bild umwandeln — Browser-Decoder | Kostenlos",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Bildkompressor" },
+      { "pageKey": "image-resizer", "label": "Bildgrößenänderungstool" },
+      { "pageKey": "image-to-base64", "label": "Bild zu Base64" },
+      { "pageKey": "favicon-generator", "label": "Favicon-Generator" }
+    ],
     "metaDescription": "Dekodieren Sie Base64-Strings und Data-URIs direkt in Ihrem Browser in eine Bilddatei. Kostenlos, sofort, lokal und ohne Upload.",
     "schemaName": "Base64-zu-Bild-Decoder",
     "schemaDescription": "Dekodieren Sie Base64-Data-URIs lokal in Ihrem Browser in Bilddateien.",
@@ -341,6 +362,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "Base64から画像へ — ブラウザデコーダー | 無料",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-compressor", "label": "画像圧縮" },
+      { "pageKey": "image-resizer", "label": "画像リサイザー" },
+      { "pageKey": "image-to-base64", "label": "画像→Base64" },
+      { "pageKey": "favicon-generator", "label": "ファビコン生成" }
+    ],
     "metaDescription": "Base64文字列やデータURIをブラウザ上で即座にデコードし、プレビューおよびダウンロード可能な画像ファイルに変換します。完全ローカル処理でアップロード不要、無料です。",
     "schemaName": "Base64画像デコーダー",
     "schemaDescription": "ブラウザ上でBase64データURIを画像ファイルにローカルデコードします。",
@@ -423,6 +451,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Base64 转图片 — 浏览器解码器 | 免费",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-compressor", "label": "图片压缩工具" },
+      { "pageKey": "image-resizer", "label": "图片缩放工具" },
+      { "pageKey": "image-to-base64", "label": "图片转 Base64" },
+      { "pageKey": "favicon-generator", "label": "Favicon 生成器" }
+    ],
     "metaDescription": "在浏览器中直接将 Base64 字符串和 Data URI 解码为可预览、可下载的图片文件。免费、即时、完全本地化，无需上传。",
     "schemaName": "Base64 转图片解码器",
     "schemaDescription": "在浏览器中本地将 Base64 Data URI 解码为图片文件。",

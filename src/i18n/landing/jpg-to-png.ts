@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de JPG a PNG | Gratis, sin pérdida, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG a JPEG" }
+    ],
     "metaDescription": "Convierte JPG a PNG gratis directamente en tu navegador. Calidad sin pérdida, añade transparencia, sin subir archivos. Funciona en Windows, Mac y iPhone, sin registro.",
     "schemaName": "Convertidor de JPG a PNG",
     "schemaDescription": "Convierte imágenes JPG a PNG completamente en tu navegador usando re-codificación sin pérdida.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur JPG en PNG | Gratuit, sans perte, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG vers JPEG" }
+    ],
     "metaDescription": "Convertissez vos JPG en PNG gratuitement, directement dans votre navigateur. Qualité sans perte, ajout de transparence, aucune donnée envoyée. Fonctionne sur Windows, Mac et iPhone, sans inscription.",
     "schemaName": "Convertisseur JPG en PNG",
     "schemaDescription": "Convertissez vos images JPG en PNG entièrement dans votre navigateur grâce à un réencodage sans perte.",
@@ -259,6 +273,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "JPG in PNG konvertieren | Kostenlos, verlustfrei, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG zu JPEG" }
+    ],
     "metaDescription": "Konvertieren Sie JPG kostenlos direkt in Ihrem Browser in PNG. Verlustfreie Qualität, Transparenz hinzufügen, kein Upload. Funktioniert auf Windows, Mac und iPhone, keine Registrierung.",
     "schemaName": "JPG in PNG Konverter",
     "schemaDescription": "Konvertieren Sie JPG-Bilder vollständig in Ihrem Browser in PNG mittels verlustfreier Neukodierung.",
@@ -341,6 +362,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "JPG to PNG 変換 | 無料・ロスレス・アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG→JPEG" }
+    ],
     "metaDescription": "ブラウザ上でJPGをPNGに無料で変換。ロスレス品質で透明度も追加可能、サーバーへのアップロードもありません。Windows、Mac、iPhoneで動作し、登録も不要です。",
     "schemaName": "JPG to PNG 変換ツール",
     "schemaDescription": "ブラウザ内でロスレス再エンコードを行い、JPG画像をPNGに変換します。",
@@ -423,6 +451,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "JPG 转 PNG 转换器 | 免费、无损、无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG 转 JPEG" }
+    ],
     "metaDescription": "直接在浏览器中免费将 JPG 转换为 PNG。无损画质，支持添加透明度，无需上传。适用于 Windows、Mac 和 iPhone，无需注册。",
     "schemaName": "JPG 转 PNG 转换器",
     "schemaDescription": "使用无损重编码技术，直接在浏览器中将 JPG 图像转换为 PNG。",

@@ -82,6 +82,12 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de HEIC a PNG | Gratis, privado, sin subidas",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP a PNG" },
+      { "pageKey": "png-to-webp", "label": "PNG a WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG a WebP" }
+    ],
     "metaDescription": "Convierte HEIC a PNG gratis directamente en tu navegador. Tus fotos de iPhone nunca se suben. Funciona en Windows, Mac, iPhone y Android. Sin registro.",
     "schemaName": "Convertidor de HEIC a PNG",
     "schemaDescription": "Convierte fotos HEIC de iPhone a PNG sin pérdida directamente en tu navegador.",
@@ -152,6 +158,12 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur HEIC en PNG | Gratuit, privé, sans téléchargement",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP vers PNG" },
+      { "pageKey": "png-to-webp", "label": "PNG vers WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG vers WebP" }
+    ],
     "metaDescription": "Convertissez vos fichiers HEIC en PNG gratuitement, directement dans votre navigateur. Vos photos d'iPhone ne sont jamais téléchargées sur un serveur. Fonctionne sur Windows, Mac, iPhone et Android. Aucune inscription requise.",
     "schemaName": "Convertisseur HEIC en PNG",
     "schemaDescription": "Convertissez vos photos HEIC d'iPhone en PNG sans perte, entièrement dans votre navigateur.",
@@ -222,6 +234,12 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "HEIC in PNG umwandeln | Kostenlos, privat, kein Upload",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP zu PNG" },
+      { "pageKey": "png-to-webp", "label": "PNG zu WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG zu WebP" }
+    ],
     "metaDescription": "Wandeln Sie HEIC kostenlos direkt in Ihrem Browser in PNG um. Ihre iPhone-Fotos werden nie hochgeladen. Funktioniert auf Windows, Mac, iPhone und Android. Keine Anmeldung erforderlich.",
     "schemaName": "HEIC in PNG Konverter",
     "schemaDescription": "Wandeln Sie iPhone HEIC-Fotos verlustfrei direkt in Ihrem Browser in PNG um.",
@@ -292,6 +310,12 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "HEIC to PNG 変換 | 無料・プライバシー保護・アップロード不要",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP→PNG" },
+      { "pageKey": "png-to-webp", "label": "PNG→WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG→WebP" }
+    ],
     "metaDescription": "ブラウザ上でHEICをPNGに無料で変換。iPhoneの写真はサーバーにアップロードされません。Windows、Mac、iPhone、Androidで動作。登録不要。",
     "schemaName": "HEIC to PNG 変換ツール",
     "schemaDescription": "iPhoneのHEIC写真をブラウザ上で完全にロスレスなPNGに変換します。",
@@ -362,6 +386,12 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "HEIC 转 PNG 转换器 | 免费、隐私、无需上传",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP 转 PNG" },
+      { "pageKey": "png-to-webp", "label": "PNG 转 WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG 转 WebP" }
+    ],
     "metaDescription": "直接在浏览器中免费将 HEIC 转换为 PNG。您的 iPhone 照片无需上传。适用于 Windows、Mac、iPhone 和 Android。无需注册。",
     "schemaName": "HEIC 转 PNG 转换器",
     "schemaDescription": "完全在您的浏览器中将 iPhone HEIC 照片转换为无损 PNG。",

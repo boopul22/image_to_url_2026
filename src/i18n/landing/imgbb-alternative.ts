@@ -81,6 +81,11 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Alternativa a ImgBB — Más rápida, limpia y gratuita | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "imgur-alternative", "label": "Alternativa a Imgur" },
+      { "pageKey": "cloudinary-alternative", "label": "Alternativa a Cloudinary" }
+    ],
     "metaDescription": "¿Buscas una alternativa a ImgBB? ImageToURL es más rápida, limpia y totalmente gratuita. Sin anuncios, sin compresión y con enlaces directos permanentes.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Una alternativa a ImgBB más rápida y limpia, sin anuncios, sin compresión y con enlaces directos permanentes.",
@@ -151,6 +156,11 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Alternative à ImgBB — Plus rapide, plus propre, gratuite | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "imgur-alternative", "label": "Alternative à Imgur" },
+      { "pageKey": "cloudinary-alternative", "label": "Alternative à Cloudinary" }
+    ],
     "metaDescription": "Vous cherchez une alternative à ImgBB ? ImageToURL est plus rapide, plus épuré et totalement gratuit. Sans publicité, sans compression, avec des liens directs permanents.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Une alternative plus rapide et plus propre à ImgBB, sans publicité, sans compression et avec des liens directs permanents.",
@@ -221,6 +231,11 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "ImgBB Alternative — Schneller, sauberer, kostenlos | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "imgur-alternative", "label": "Imgur-Alternative" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary-Alternative" }
+    ],
     "metaDescription": "Suchen Sie eine ImgBB Alternative? ImageToURL ist schneller, sauberer und komplett kostenlos. Keine Werbung, keine Komprimierung, dauerhafte direkte Bild-Links.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Eine schnellere, sauberere Alternative zu ImgBB ohne Werbung, ohne Komprimierung und mit dauerhaften direkten Bild-Links.",
@@ -291,6 +306,11 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "ImgBBの代替サービス — より高速、クリーン、無料 | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "imgur-alternative", "label": "Imgur代替" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary代替" }
+    ],
     "metaDescription": "ImgBBの代替をお探しですか？ImageToURLは、より高速でクリーン、そして完全無料です。広告なし、圧縮なし、永久的な直接画像リンクを提供します。",
     "schemaName": "ImageToURL",
     "schemaDescription": "広告や圧縮がなく、永久的な直接リンクを提供する、ImgBBのより高速でクリーンな代替サービス。",
@@ -361,6 +381,11 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "ImgBB 最佳替代品 — 更快、更简洁、免费 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "imgur-alternative", "label": "Imgur 替代品" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary 替代品" }
+    ],
     "metaDescription": "正在寻找 ImgBB 的替代品？ImageToURL 更快、更简洁且完全免费。无广告、无压缩、提供永久直接图片链接。",
     "schemaName": "ImageToURL",
     "schemaDescription": "ImgBB 的更快、更简洁的替代方案，无广告、无压缩，并提供永久直接图片链接。",

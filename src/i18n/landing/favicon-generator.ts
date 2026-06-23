@@ -95,6 +95,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Generador de Favicon — 100% en el navegador | Todos los tamaños + HTML",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresor de imágenes" },
+      { "pageKey": "image-resizer", "label": "Redimensionador de imágenes" },
+      { "pageKey": "image-to-base64", "label": "Imagen a Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 a imagen" }
+    ],
     "metaDescription": "Genera favicons en todos los tamaños necesarios (16 a 512) a partir de una imagen, además de un fragmento HTML listo para copiar. Gratis, funciona en tu navegador, sin subidas.",
     "schemaName": "Generador de Favicon",
     "schemaDescription": "Genera favicons en tamaños 16/32/48/180/192/512 a partir de una sola imagen fuente.",
@@ -177,6 +184,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Générateur de favicon — 100% navigateur | Toutes tailles + HTML",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Compresseur d'images" },
+      { "pageKey": "image-resizer", "label": "Outil de redimensionnement d'images" },
+      { "pageKey": "image-to-base64", "label": "Image vers Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 vers image" }
+    ],
     "metaDescription": "Générez des favicons dans toutes les tailles requises (16 à 512) à partir d'une seule image, avec un extrait HTML prêt à l'emploi. Gratuit, fonctionne dans votre navigateur, aucun téléchargement.",
     "schemaName": "Générateur de favicon",
     "schemaDescription": "Générez des favicons aux tailles 16/32/48/180/192/512 à partir d'une seule image source.",
@@ -259,6 +273,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Favicon Generator — 100% Browser | Alle Größen + HTML",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Bildkompressor" },
+      { "pageKey": "image-resizer", "label": "Bildgrößenänderungstool" },
+      { "pageKey": "image-to-base64", "label": "Bild zu Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 zu Bild" }
+    ],
     "metaDescription": "Erstelle Favicons in allen benötigten Größen (16 bis 512) aus einem Quellbild, inklusive HTML-Snippet zum Kopieren. Kostenlos, läuft direkt im Browser, kein Upload.",
     "schemaName": "Favicon Generator",
     "schemaDescription": "Erstelle Favicons in den Größen 16/32/48/180/192/512 aus einem einzigen Quellbild.",
@@ -341,6 +362,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "ファビコン生成ツール — ブラウザ完結型 | 全サイズ対応 + HTMLコード",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-compressor", "label": "画像圧縮" },
+      { "pageKey": "image-resizer", "label": "画像リサイザー" },
+      { "pageKey": "image-to-base64", "label": "画像→Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64→画像" }
+    ],
     "metaDescription": "1枚の画像から必要なすべてのサイズ（16〜512px）のファビコンを生成。HTMLスニペットも提供。ブラウザ上で動作し、アップロード不要の無料ツールです。",
     "schemaName": "ファビコン生成ツール",
     "schemaDescription": "1枚の画像から16/32/48/180/192/512pxサイズのファビコンを生成します。",
@@ -423,6 +451,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "Favicon 生成器 — 100% 浏览器运行 | 全尺寸 + HTML",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-compressor", "label": "图片压缩工具" },
+      { "pageKey": "image-resizer", "label": "图片缩放工具" },
+      { "pageKey": "image-to-base64", "label": "图片转 Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 转图片" }
+    ],
     "metaDescription": "通过一张源图片生成所有所需尺寸（16 到 512）的 favicon，并提供可直接粘贴的 HTML 代码片段。免费、浏览器内运行，无需上传。",
     "schemaName": "Favicon 生成器",
     "schemaDescription": "通过一张源图片生成 16/32/48/180/192/512 尺寸的 favicon。",

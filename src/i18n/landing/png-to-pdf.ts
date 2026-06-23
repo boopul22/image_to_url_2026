@@ -101,6 +101,11 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de PNG a PDF | Gratis, combinar en un solo PDF",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "jpg-to-pdf", "label": "JPG a PDF" },
+      { "pageKey": "heic-to-pdf", "label": "HEIC a PDF" }
+    ],
     "metaDescription": "Convierte PNG a PDF gratis en tu navegador. Combina varias imágenes PNG en un solo PDF o crea uno por imagen. Sin subidas, sin registros. Funciona en cualquier dispositivo.",
     "schemaName": "Convertidor de PNG a PDF",
     "schemaDescription": "Combina imágenes PNG en un PDF de varias páginas directamente en tu navegador.",
@@ -191,6 +196,11 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur PNG en PDF | Gratuit, fusionnez en un seul PDF",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "jpg-to-pdf", "label": "JPG vers PDF" },
+      { "pageKey": "heic-to-pdf", "label": "HEIC vers PDF" }
+    ],
     "metaDescription": "Convertissez vos PNG en PDF gratuitement dans votre navigateur. Fusionnez plusieurs images PNG en un seul PDF ou créez un fichier par image. Aucun téléchargement, aucune inscription. Fonctionne sur tout appareil.",
     "schemaName": "Convertisseur PNG en PDF",
     "schemaDescription": "Fusionnez des images PNG en un PDF multipage directement dans votre navigateur.",
@@ -281,6 +291,11 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "PNG in PDF umwandeln | Kostenlos, in ein PDF zusammenfügen",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "jpg-to-pdf", "label": "JPG zu PDF" },
+      { "pageKey": "heic-to-pdf", "label": "HEIC zu PDF" }
+    ],
     "metaDescription": "Wandeln Sie PNG kostenlos im Browser in PDF um. Fügen Sie mehrere PNG-Bilder zu einem PDF zusammen oder erstellen Sie einzelne Dateien. Kein Upload, keine Registrierung. Funktioniert auf jedem Gerät.",
     "schemaName": "PNG in PDF Konverter",
     "schemaDescription": "Fügen Sie PNG-Bilder direkt in Ihrem Browser zu einem mehrseitigen PDF zusammen.",
@@ -371,6 +386,11 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "PNGからPDFへの変換 | 無料で1つのPDFに結合",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "jpg-to-pdf", "label": "JPG→PDF" },
+      { "pageKey": "heic-to-pdf", "label": "HEIC→PDF" }
+    ],
     "metaDescription": "ブラウザ上でPNGを無料でPDFに変換。複数のPNG画像を1つのPDFに結合、または画像ごとにPDFを作成できます。アップロード不要、登録不要。あらゆるデバイスで動作します。",
     "schemaName": "PNGからPDFへの変換ツール",
     "schemaDescription": "ブラウザ上でPNG画像を複数ページのPDFに結合します。",
@@ -461,6 +481,11 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "PNG 转 PDF 转换器 | 免费，合并为单个 PDF",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "jpg-to-pdf", "label": "JPG 转 PDF" },
+      { "pageKey": "heic-to-pdf", "label": "HEIC 转 PDF" }
+    ],
     "metaDescription": "在浏览器中免费将 PNG 转换为 PDF。将多个 PNG 图片合并为一个 PDF，或将每张图片单独转换为 PDF。无需上传，无需注册。适用于任何设备。",
     "schemaName": "PNG 转 PDF 转换器",
     "schemaDescription": "完全在浏览器中将 PNG 图片合并为多页 PDF。",

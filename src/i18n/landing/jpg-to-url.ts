@@ -99,6 +99,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertir imagen JPG a enlace URL — Online y gratis | ImageToURL",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertidor de imagen a URL" },
+      { "pageKey": "png-to-url", "label": "PNG a URL" },
+      { "pageKey": "photo-to-url", "label": "Foto a URL" },
+      { "pageKey": "jpg-to-png", "label": "Convertir JPG a PNG" }
+    ],
     "metaDescription": "Convierte imágenes JPG a enlaces URL online y gratis. Sube cualquier JPG o JPEG y obtén un enlace directo permanente en segundos. Convertidor de imagen a URL JPG, sin registro.",
     "schemaName": "Convertir imagen JPG a enlace URL",
     "schemaDescription": "Convierte cualquier imagen JPG a un enlace URL online y gratis con URLs .jpg directas, sin registro y alojamiento permanente.",
@@ -161,6 +168,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertir une image JPG en lien URL — En ligne et gratuit | ImageToURL",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convertisseur d'image en URL" },
+      { "pageKey": "png-to-url", "label": "PNG vers URL" },
+      { "pageKey": "photo-to-url", "label": "Photo vers URL" },
+      { "pageKey": "jpg-to-png", "label": "Convertir JPG en PNG" }
+    ],
     "metaDescription": "Convertissez une image JPG en lien URL en ligne et gratuitement. Téléchargez n'importe quel JPG ou JPEG et obtenez un lien direct permanent en quelques secondes. Image vers URL JPG, aucune inscription requise.",
     "schemaName": "Convertir une image JPG en lien URL",
     "schemaDescription": "Convertissez n'importe quelle image JPG en lien URL en ligne et gratuitement avec des URL .jpg directes, sans inscription et avec hébergement permanent.",
@@ -223,6 +237,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "JPG-Bild in URL-Link umwandeln — Online & Kostenlos | ImageToURL",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Bild-zu-URL-Konverter" },
+      { "pageKey": "png-to-url", "label": "PNG zu URL" },
+      { "pageKey": "photo-to-url", "label": "Foto zu URL" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG konvertieren" }
+    ],
     "metaDescription": "Wandeln Sie JPG-Bilder online und kostenlos in URL-Links um. Laden Sie jedes JPG oder JPEG hoch und erhalten Sie in Sekunden einen permanenten Direktlink. Image to URL JPG, keine Registrierung erforderlich.",
     "schemaName": "JPG-Bild in URL-Link umwandeln",
     "schemaDescription": "Wandeln Sie jedes JPG-Bild online und kostenlos in einen URL-Link um – mit direkten .jpg-URLs, ohne Registrierung und mit permanentem Hosting.",
@@ -285,6 +306,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "JPG画像をURLリンクに変換 — 無料オンラインツール | ImageToURL",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "image-to-url", "label": "画像→URL変換" },
+      { "pageKey": "png-to-url", "label": "PNG→URL" },
+      { "pageKey": "photo-to-url", "label": "写真→URL" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG変換" }
+    ],
     "metaDescription": "JPG画像をオンラインで無料でURLリンクに変換。JPGやJPEGをアップロードするだけで、数秒で永続的な直接リンクを取得できます。登録不要のJPG画像URL変換ツール。",
     "schemaName": "JPG画像をURLリンクに変換",
     "schemaDescription": "JPG画像をオンラインで無料でURLリンクに変換。直接的な.jpg URLを取得でき、登録不要で永続的にホスティングされます。",
@@ -347,6 +375,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "JPG 图片转 URL 链接 — 在线免费 | ImageToURL",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "image-to-url", "label": "图片转 URL 转换器" },
+      { "pageKey": "png-to-url", "label": "PNG 转 URL" },
+      { "pageKey": "photo-to-url", "label": "照片转 URL" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" }
+    ],
     "metaDescription": "在线免费将 JPG 图片转换为 URL 链接。上传任意 JPG 或 JPEG 文件，几秒钟内即可获得永久直链。无需注册，快速实现图片转 URL。",
     "schemaName": "JPG 图片转 URL 链接",
     "schemaDescription": "在线免费将任何 JPG 图片转换为 URL 链接，提供永久 .jpg 直链，无需注册，永久托管。",

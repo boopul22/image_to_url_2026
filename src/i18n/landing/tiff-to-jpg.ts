@@ -84,6 +84,13 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Convertidor de TIFF a JPG — Gratis, en tu navegador",
+    "relatedTitle": "Herramientas de imagen relacionadas",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG a JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG a PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir a JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG a JPG" }
+    ],
     "metaDescription": "Convierte TIFF a JPG gratis en tu navegador. Reduce escaneos .tif y .tiff grandes a JPG compactos y fáciles de compartir. Sin subidas, sin registro, sin marcas de agua, sin software.",
     "schemaName": "Convertidor de TIFF a JPG",
     "schemaDescription": "Convierte imágenes TIFF a JPG localmente en tu navegador. No requiere subida de archivos.",
@@ -154,6 +161,13 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Convertisseur TIFF en JPG — Gratuit, dans votre navigateur",
+    "relatedTitle": "Outils d'images connexes",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG vers JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG vers PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convertir en JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG vers JPG" }
+    ],
     "metaDescription": "Convertissez vos TIFF en JPG gratuitement dans votre navigateur. Réduisez vos scans .tif et .tiff volumineux en JPG compacts et faciles à partager. Sans téléchargement, sans inscription, sans filigrane, sans logiciel.",
     "schemaName": "Convertisseur TIFF en JPG",
     "schemaDescription": "Convertissez vos images TIFF en JPG localement dans votre navigateur. Aucun envoi sur serveur requis.",
@@ -224,6 +238,13 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "TIFF in JPG umwandeln — Kostenlos im Browser",
+    "relatedTitle": "Verwandte Bildwerkzeuge",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG zu JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG zu PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Zu JPG konvertieren" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG zu JPG" }
+    ],
     "metaDescription": "Wandeln Sie TIFF kostenlos in Ihrem Browser in JPG um. Verkleinern Sie große .tif- und .tiff-Scans zu kompakten, teilbaren JPGs. Kein Upload, keine Registrierung, kein Wasserzeichen, keine Software.",
     "schemaName": "TIFF in JPG Konverter",
     "schemaDescription": "Wandeln Sie TIFF-Bilder lokal in Ihrem Browser in JPG um. Kein Upload erforderlich.",
@@ -294,6 +315,13 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "TIFFからJPGへの変換ツール — ブラウザで無料利用",
+    "relatedTitle": "関連画像ツール",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG→JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG→PNG" },
+      { "pageKey": "convert-to-jpg", "label": "JPG変換" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG→JPG" }
+    ],
     "metaDescription": "ブラウザ上でTIFFをJPGに無料で変換。大きな.tifや.tiffスキャンデータを、共有しやすい軽量なJPGに変換します。アップロード不要、登録不要、透かしなし、ソフトのインストールも不要です。",
     "schemaName": "TIFFからJPGへの変換ツール",
     "schemaDescription": "ブラウザ内でローカルにTIFF画像をJPGへ変換。アップロードは不要です。",
@@ -364,6 +392,13 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "TIFF 转 JPG 转换器 — 免费，浏览器内完成",
+    "relatedTitle": "相关图片工具",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG 转 JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG 转 PNG" },
+      { "pageKey": "convert-to-jpg", "label": "转换为 JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG 转 JPG" }
+    ],
     "metaDescription": "在浏览器中免费将 TIFF 转换为 JPG。将大型 .tif 和 .tiff 扫描件压缩为小巧、易于分享的 JPG。无需上传、无需注册、无水印、无需安装软件。",
     "schemaName": "TIFF 转 JPG 转换器",
     "schemaDescription": "在浏览器中本地将 TIFF 图像转换为 JPG。无需上传。",
