@@ -68,6 +68,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Photo to URL Questions, Answered",
     "faqs": [
+      { "q": "What is a picture URL?", "a": "A picture URL is the direct web link to a photo file. Open it in a browser and you see just the photo; drop it into a webpage, chat or document and the photo appears inline. Upload above to turn any picture into one." },
       {
         "q": "How do I turn a photo into a link?",
         "a": "Upload the photo using the box above. A direct link is generated in a few seconds. Copy it and paste it wherever you need to share the picture. No account is required."

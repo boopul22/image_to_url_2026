@@ -166,6 +166,9 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to URL FAQ",
     "faqs": [
+      { "q": "How do I create a URL for an image?", "a": "Upload the image in the box above and you get a direct link ending in the real extension (.jpg, .png) within seconds, no account needed. That URL is the image’s web address — paste it anywhere you need the picture to appear." },
+      { "q": "How do I turn a photo or picture into a URL?", "a": "The same three steps work for any source: upload the photo, copy the generated direct link, and paste it where you need it. It works straight from a phone camera roll or a desktop file." },
+      { "q": "What is an image URL?", "a": "An image URL is the direct web address of an image file, like https://imagetourl.cloud/abc123.jpg. Pasted into a browser it shows just the image, and in an HTML image tag it embeds the picture. You get one by uploading the image to a host that returns a direct link." },
       {
         "q": "How do I convert an image to URL for free?",
         "a": "Upload your image in the box at the top of this page. It lands on our CDN and you get a direct link within a few seconds, ready to copy. No account and no payment, ever."
@@ -975,6 +978,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "画像URL変換に関するよくある質問",
     "faqs": [
+      { "q": "画像URLとは何ですか？", "a": "画像URLは画像ファイルの直接的なウェブアドレスです（例：https://imagetourl.cloud/abc123.jpg）。ブラウザで開くと画像だけが表示され、HTML や Markdown に埋め込むことができます。画像をアップロードして直接リンクを返すホストを使うことで、あなたの画像URLを取得できます。" },
       {
         "q": "無料で画像をURLに変換するには？",
         "a": "ページ上部のボックスに画像をアップロードしてください。CDNに保存され、数秒以内にコピー可能な直リンクが発行されます。アカウント登録や支払いは一切不要です。"

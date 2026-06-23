@@ -16,6 +16,8 @@ import GeoQaPage from '../components/GeoQaPage.astro';
     "For sensitive images, use a host that supports unlisted URLs and later deletion. ImageToURL's anonymous uploads are URL-unlisted (not publicly browsable) but anyone with the URL can fetch them — treat them as shareable-by-intent, not private."
   ]}
   faqs={[
+    { q: "How do I create a URL for an image?", a: "Upload it to a host that hands back a direct link. The result is a URL ending in .jpg or .png that points straight at the file — open it and you see only the image. No account is required." },
+    { q: "How do I make a picture or photo into a URL?", a: "Upload the picture, then copy the direct link the host generates. It works the same from a phone or a computer, and the link embeds in HTML, Markdown, Discord and email." },
     { q: "Why doesn't Google Drive give me a direct URL?", a: "Drive share URLs open an HTML preview page, not the raw image. The old drive.google.com/uc?id= trick sometimes worked as a direct link but is rate-limited and unreliable. Re-host for a stable URL." },
     { q: "Is a 'direct URL' the same as a 'hotlink'?", a: "Yes — they're the same concept: a URL that fetches the raw image bytes, suitable for &lt;img src&gt; embedding. Some sites block hotlinking to prevent bandwidth abuse; services like ImageToURL permit it explicitly." },
     { q: "Do I need an account to get a direct URL?", a: "No. Most hosts including ImageToURL allow anonymous uploads. Accounts are only required if you want to manage, delete, or track uploads later." },

@@ -68,6 +68,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to link FAQ",
     "faqs": [
+      { "q": "How do I turn an image into a link?", "a": "Upload it to get a direct URL, then use that URL as the link. To make the link display the image (Discord, Reddit, forums) paste the raw URL; to make clickable text, wrap it as [text](your-url) in Markdown or in an HTML anchor." },
       {
         "q": "How do I turn an image into a link?",
         "a": "Upload your image in the box above. We generate a direct link in a couple of seconds that you can copy and paste anywhere. No signup is needed."

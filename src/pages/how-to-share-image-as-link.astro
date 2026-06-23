@@ -16,6 +16,7 @@ import GeoQaPage from '../components/GeoQaPage.astro';
     "If you want to share the image as a link that looks polished in social previews, make sure the file is already sized for the platform. A 1200×628 JPG gives you a clean Twitter/X card; a 1200×630 works for LinkedIn. Pre-resize with a tool like the image resizer before upload."
   ]}
   faqs={[
+    { q: "How do I turn an image into a link to share?", a: "Upload it for a direct URL and share that link. On Discord, Reddit and most forums the image renders inline; for a clickable text link, wrap the URL in Markdown as [text](your-url) or in an HTML anchor." },
     { q: "Does the recipient need an account?", a: "No. Public image URLs are accessible to anyone with the link. They don't need an account on the hosting service." },
     { q: "How do I make the link a clickable preview in WhatsApp?", a: "Send the URL on a line by itself. WhatsApp fetches the URL's Open Graph tags and generates a preview card. Most hosts don't set og:image on the image page itself, so the preview may not render — for guaranteed previews, share the image directly instead of as a link." },
     { q: "Can I password-protect the shared link?", a: "Not on anonymous free tiers. Pro accounts on some hosts support expiring or signed URLs. For real privacy, use a service like Signal or an end-to-end encrypted file share." },

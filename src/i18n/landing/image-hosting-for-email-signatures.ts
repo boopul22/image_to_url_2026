@@ -56,6 +56,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
+      { "q": "How do I embed my signature image in an email?", "a": "Host the logo or banner here for a permanent direct URL, then point your signature’s image tag at that link. Email clients strip attachments from signatures, so a hosted URL is the reliable way to make the image render every time." },
       {
         "q": "Why do email signature images sometimes appear as broken?",
         "a": "Email signature images break when the hosting service expires the URL or blocks hotlinking. ImageToURL provides permanent, direct URLs with no restrictions."

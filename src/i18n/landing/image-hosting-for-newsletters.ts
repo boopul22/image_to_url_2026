@@ -52,6 +52,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
+      { "q": "How do I add an image to my newsletter by URL?", "a": "Paste the hosted image’s direct link into your newsletter tool’s image block or HTML. A CDN-backed URL loads fast for every subscriber and never expires mid-campaign, unlike attachments or private links." },
       {
         "q": "Why do newsletter images sometimes not display?",
         "a": "Newsletter images can fail due to expired URLs, broken hosting, or hotlink restrictions. ImageToURL provides permanent, CDN-backed links that ensure your images always render."
