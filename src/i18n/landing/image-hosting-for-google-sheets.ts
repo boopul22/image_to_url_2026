@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image URLs for Google Sheets — =IMAGE() Function",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Get image URLs that work with Google Sheets =IMAGE() function. Upload images, get direct URLs, and display them in your spreadsheets instantly.",
     "schemaName": "Image URLs for Google Sheets",
     "schemaDescription": "A tool to generate direct image URLs compatible with the Google Sheets =IMAGE() function for seamless spreadsheet integration.",

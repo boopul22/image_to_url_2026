@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image URLs for Google Forms | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Add images to Google Forms using hosted URLs. Perfect for surveys, quizzes, and questionnaires that need visual content. Free and instant.",
     "schemaName": "Image URLs for Google Forms",
     "schemaDescription": "Add images to Google Forms using hosted URLs for surveys, quizzes, and questionnaires.",

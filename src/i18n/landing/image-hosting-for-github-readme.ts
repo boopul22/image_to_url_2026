@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Hosting for GitHub README Files | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Host images for GitHub README files with permanent URLs. Stop committing binary files to your repo for faster clones and cleaner project history.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A tool to host images for GitHub README files with permanent URLs to prevent repository bloat.",

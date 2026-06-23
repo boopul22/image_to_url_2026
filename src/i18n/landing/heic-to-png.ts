@@ -6,6 +6,12 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "HEIC to PNG Converter | Free, Private, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP to PNG" },
+      { "pageKey": "png-to-webp", "label": "PNG to WebP" },
+      { "pageKey": "jpg-to-webp", "label": "JPG to WebP" }
+    ],
     "metaDescription": "Convert HEIC to PNG free, right in your browser. Your iPhone photos never get uploaded. Works on Windows, Mac, iPhone and Android. No signup needed.",
     "schemaName": "HEIC to PNG Converter",
     "schemaDescription": "Convert iPhone HEIC photos to lossless PNG entirely in your browser.",

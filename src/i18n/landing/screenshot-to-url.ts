@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Screenshot to URL — Share Screenshots as Links | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "image-to-url-converter", "label": "Image to URL converter" },
+      { "pageKey": "image-to-link", "label": "Image to link" },
+      { "pageKey": "image-url-generator", "label": "Image URL generator" }
+    ],
     "metaDescription": "Turn screenshots into shareable URLs in seconds. Paste from clipboard, drag & drop, or upload. Perfect for bug reports, tutorials, and quick sharing.",
     "schemaName": "Screenshot to URL Converter",
     "schemaDescription": "A web-based tool that instantly converts screenshots from your clipboard or files into permanent, shareable URLs.",

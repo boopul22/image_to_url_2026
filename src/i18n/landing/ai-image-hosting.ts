@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "AI Image Hosting — Host AI-Generated Art Free | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" },
+      { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
+    ],
     "metaDescription": "Free hosting for AI-generated images from Midjourney, DALL-E, Stable Diffusion, and more. Get permanent URLs for your AI art. No signup required.",
     "schemaName": "AI Image Hosting",
     "schemaDescription": "Free hosting for AI-generated images from Midjourney, DALL-E, Stable Diffusion, and more with permanent URLs.",

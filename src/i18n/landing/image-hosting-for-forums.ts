@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Free Image Hosting for Forum Posts | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
+    ],
     "metaDescription": "Host images for forum posts with BBCode and HTML support. Direct image links that work on phpBB, vBulletin, Reddit, and all forum platforms.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A free image hosting service providing direct, ad-free image URLs for forum posts, BBCode, and HTML embedding.",

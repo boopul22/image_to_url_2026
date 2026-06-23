@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "TIFF to JPG Converter — Free, In Your Browser",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" }
+    ],
     "metaDescription": "Convert TIFF to JPG free in your browser. Shrink large .tif and .tiff scans into compact, shareable JPGs. No upload, no signup, no watermark, no software.",
     "schemaName": "TIFF to JPG Converter",
     "schemaDescription": "Convert TIFF images to JPG locally in your browser. No upload required.",

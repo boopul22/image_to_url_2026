@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "WebP to URL — Convert WebP Images to Shareable Links",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "image-to-url-converter", "label": "Image to URL converter" },
+      { "pageKey": "image-to-link", "label": "Image to link" },
+      { "pageKey": "image-url-generator", "label": "Image URL generator" }
+    ],
     "metaDescription": "Convert WebP images to shareable URLs instantly. Next-gen format with smaller file sizes and superior quality. Free WebP hosting, no signup required.",
     "schemaName": "WebP to URL Converter",
     "schemaDescription": "Convert WebP images to shareable URLs instantly with next-gen format quality.",

@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Embed Code Generator — HTML, BBCode & Markdown",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-url-for-chatgpt", "label": "Image URL for ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Image URL for WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "Image URL for HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
+    ],
     "metaDescription": "Upload an image and get ready-to-use embed codes in HTML, BBCode, and Markdown. Free embed code generator for websites, forums, and documentation.",
     "schemaName": "Image Embed Code Generator",
     "schemaDescription": "Upload an image and get ready-to-use embed codes in HTML, BBCode, and Markdown.",

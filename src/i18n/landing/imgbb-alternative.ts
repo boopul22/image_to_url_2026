@@ -6,6 +6,11 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "ImgBB Alternative — Faster, Cleaner, Free | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "imgur-alternative", "label": "Imgur alternative" },
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary alternative" }
+    ],
     "metaDescription": "Looking for an ImgBB alternative? ImageToURL is faster, cleaner, and completely free. No ads, no compression, permanent direct image links.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A faster, cleaner alternative to ImgBB with no ads, no compression, and permanent direct image links.",

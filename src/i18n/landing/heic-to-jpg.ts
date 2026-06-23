@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "HEIC to JPG Converter | Free, Private, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" }
+    ],
     "metaDescription": "Convert HEIC to JPG free, right in your browser. Your iPhone photos never get uploaded. Works on Windows, Mac, iPhone and Android. No signup needed.",
     "schemaName": "HEIC to JPG Converter",
     "schemaDescription": "Convert HEIC and HEIF photos from your iPhone to JPG entirely in your browser without uploading files to a server.",

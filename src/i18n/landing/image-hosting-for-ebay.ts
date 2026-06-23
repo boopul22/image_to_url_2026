@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Free Image Hosting for eBay Listings | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
+    ],
     "metaDescription": "Host product images for eBay listings with permanent, direct URLs. Free, no signup required. Works perfectly with eBay's image requirements.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Host product images for eBay listings with permanent, direct URLs without any signup or watermarks.",

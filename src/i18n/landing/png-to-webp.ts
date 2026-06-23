@@ -6,6 +6,12 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "PNG to WebP Converter | Free, 60-85% Smaller",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "webp-to-png", "label": "WebP to PNG" },
+      { "pageKey": "jpg-to-webp", "label": "JPG to WebP" },
+      { "pageKey": "heic-to-png", "label": "HEIC to PNG" }
+    ],
     "metaDescription": "Convert PNG to WebP free in your browser and shrink files 60 to 85% with transparency kept. No upload, no signup. Works on Windows, Mac, and iPhone.",
     "schemaName": "PNG to WebP Converter",
     "schemaDescription": "Convert PNG images to WebP in your browser. Smaller files, transparency preserved.",

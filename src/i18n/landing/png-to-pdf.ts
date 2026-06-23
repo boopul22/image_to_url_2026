@@ -6,6 +6,11 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "PNG to PDF Converter | Free, Merge Into One PDF",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "jpg-to-pdf", "label": "JPG to PDF" },
+      { "pageKey": "heic-to-pdf", "label": "HEIC to PDF" }
+    ],
     "metaDescription": "Convert PNG to PDF free in your browser. Merge multiple PNG images into one PDF or make one per image. No upload, no signup. Works on any device.",
     "schemaName": "PNG to PDF Converter",
     "schemaDescription": "Merge PNG images into a multi-page PDF entirely in your browser.",

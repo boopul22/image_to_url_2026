@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "JPG to JPEG Converter — Free & Instant",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" }
+    ],
     "metaDescription": "Convert JPG to JPEG free in your browser. Same image, just the .jpeg extension some upload forms require. One click, no upload, no signup, no quality loss.",
     "schemaName": "JPG to JPEG Converter",
     "schemaDescription": "Rename and re-save JPG files with the .jpeg extension locally in your browser. No upload required.",

@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Direct Image Link Hosting — Clean Hotlinkable URLs",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" }
+    ],
     "metaDescription": "Get direct image links that end in .jpg, .png, .gif — not gallery pages with ads. Hotlink-friendly URLs for embedding anywhere on the web.",
     "schemaName": "Direct Image Link Hosting",
     "schemaDescription": "A tool to generate direct, ad-free image URLs that are optimized for hotlinking and embedding in websites, forums, and emails.",

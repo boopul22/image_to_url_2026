@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Anonymous Image Upload — No Account Required | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
+    ],
     "metaDescription": "Upload images anonymously without creating an account. No signup, no email, no tracking. Just drag, drop, and get your link. Free and private.",
     "schemaName": "Anonymous Image Upload - ImageToURL",
     "schemaDescription": "Upload images anonymously without creating an account with no signup, email, or tracking required.",

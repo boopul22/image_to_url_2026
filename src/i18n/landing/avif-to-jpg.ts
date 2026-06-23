@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "AVIF to JPG — Free Online Converter, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" }
+    ],
     "metaDescription": "Convert AVIF to JPG free in your browser. Open those next-gen .avif images in any app by turning them into universal JPGs. No upload, no signup, no watermark.",
     "schemaName": "AVIF to JPG Converter",
     "schemaDescription": "Convert AVIF images to JPG locally in your browser. No upload required.",

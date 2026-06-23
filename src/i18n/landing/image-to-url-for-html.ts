@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image to URL for HTML — Get Direct <img> Tag Links",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
+      { "pageKey": "image-url-for-chatgpt", "label": "Image URL for ChatGPT" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Image URL for WhatsApp" },
+      { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
+    ],
     "metaDescription": "Convert any image to a direct URL you can drop straight into an HTML <img> tag. Permanent links, fast CDN, no signup, works in any framework or CMS.",
     "schemaName": "Image to URL Converter for HTML",
     "schemaDescription": "Turn any image into a direct URL ready for the src attribute of an HTML img tag.",

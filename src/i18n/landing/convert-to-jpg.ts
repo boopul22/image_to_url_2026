@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Convert to JPG — Free Online Image to JPG Converter",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG to JPEG" }
+    ],
     "metaDescription": "Convert any image to JPG free, right in your browser. Drop a PNG, WebP, AVIF, GIF, or BMP and download a clean JPG. No upload, no signup, no watermark.",
     "schemaName": "Convert to JPG",
     "schemaDescription": "Convert PNG, WebP, AVIF, GIF, and BMP images to JPG locally in your browser. No upload required.",

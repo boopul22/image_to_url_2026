@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "JFIF to JPG Converter — Free, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" }
+    ],
     "metaDescription": "Convert JFIF to JPG free in your browser. Turn the .jfif files Windows saved into normal .jpg images you can open and share anywhere. No upload, no signup.",
     "schemaName": "JFIF to JPG Converter",
     "schemaDescription": "Convert JFIF files to standard JPG locally in your browser. No upload required.",

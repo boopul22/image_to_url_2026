@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Free Image Hosting - Upload Images & Get Instant URLs",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" },
+      { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
+    ],
     "metaDescription": "Host your images for free with ImageToURL. No signup required, permanent links, global CDN delivery, and support for JPG, PNG, WebP, GIF, SVG formats.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A free, no-signup image hosting service that provides permanent links and global CDN delivery for various image formats.",

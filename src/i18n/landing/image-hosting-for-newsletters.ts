@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Hosting for Email Newsletters | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Reliable image hosting for email newsletters. Get permanent URLs that work with Mailchimp, Substack, ConvertKit, and all newsletter platforms.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Reliable image hosting for email newsletters with permanent, CDN-backed URLs that work with all major platforms.",

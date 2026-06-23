@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Base64 to Image — Browser Decoder | Free",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Image compressor" },
+      { "pageKey": "image-resizer", "label": "Image resizer" },
+      { "pageKey": "image-to-base64", "label": "Image to Base64" },
+      { "pageKey": "favicon-generator", "label": "Favicon generator" }
+    ],
     "metaDescription": "Decode base64 strings and data URIs back into previewable, downloadable image files right in your browser. Free, instant, fully local, no upload.",
     "schemaName": "Base64 to Image Decoder",
     "schemaDescription": "Decode base64 data URIs to image files locally in your browser.",

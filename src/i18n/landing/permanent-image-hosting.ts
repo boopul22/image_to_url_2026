@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image to URL Permanent — Hosting That Never Expires",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" }
+    ],
     "metaDescription": "Permanent image to URL hosting. Upload once, share forever. Image links that never expire, never break, and never disappear. Free, no signup.",
     "schemaName": "Permanent Image Hosting",
     "schemaDescription": "Image URLs that never expire or break, providing reliable hosting for your visual content.",

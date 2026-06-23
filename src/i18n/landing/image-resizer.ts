@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Resizer — 100% Browser | Free, Unlimited",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Image compressor" },
+      { "pageKey": "image-to-base64", "label": "Image to Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 to image" },
+      { "pageKey": "favicon-generator", "label": "Favicon generator" }
+    ],
     "metaDescription": "Resize JPG, PNG, and WebP images in your browser by exact pixels or percentage, with aspect-ratio lock and batch support. Free, unlimited, no upload.",
     "schemaName": "Image Resizer",
     "schemaDescription": "Resize images by pixel width, height, or percentage in your browser.",

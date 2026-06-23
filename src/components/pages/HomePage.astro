@@ -644,12 +644,26 @@ const pageSchema = [
     </div>
   </section>
 
-  <!-- Related: dedicated Image to URL page (internal backlink) -->
+  <!-- Related: popular tools (internal links to striking-distance pages) -->
   <div class="max-w-3xl mx-auto px-4 sm:px-6 pb-2 text-center reveal">
     <a href={localizedUrl('image-to-url', locale)} class="inline-flex items-center gap-1.5 font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline underline-offset-4">
       <Icon name="link" class="text-base" />
       Image to URL tool - free, no sign-up
     </a>
+    <div class="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-1.5 font-label text-xs text-on-surface-variant">
+      {[
+        { k: 'image-to-url-converter', a: 'Image to URL converter' },
+        { k: 'image-to-link', a: 'Image to link' },
+        { k: 'image-url-generator', a: 'Image URL generator' },
+        { k: 'photo-to-url', a: 'Photo to URL' },
+        { k: 'png-to-url', a: 'PNG to URL' },
+        { k: 'jpg-to-url', a: 'JPG to URL' },
+        { k: 'screenshot-to-url', a: 'Screenshot to URL' },
+        { k: 'free-image-hosting', a: 'Free image hosting' },
+      ].map(l => (
+        <a href={localizedUrl(l.k as any, locale)} class="hover:text-primary hover:underline underline-offset-4">{l.a}</a>
+      ))}
+    </div>
   </div>
 
   <!-- Final CTA -->

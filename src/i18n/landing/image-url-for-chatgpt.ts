@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Get Image URLs for ChatGPT Vision — Free & Instant",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
+      { "pageKey": "image-to-url-for-whatsapp", "label": "Image URL for WhatsApp" },
+      { "pageKey": "image-to-url-for-html", "label": "Image URL for HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
+    ],
     "metaDescription": "ChatGPT Vision needs a public image URL. Upload your image, get an instant link, and paste it into ChatGPT. Free, no signup, and links never expire.",
     "schemaName": "Image URLs for ChatGPT",
     "schemaDescription": "Upload images and get public URLs for ChatGPT Vision. Free, instant, no signup required.",

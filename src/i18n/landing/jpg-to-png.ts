@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "JPG to PNG Converter | Free, Lossless, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" },
+      { "pageKey": "jpg-to-jpeg", "label": "JPG to JPEG" }
+    ],
     "metaDescription": "Convert JPG to PNG free, right in your browser. Lossless quality, add transparency, no upload. Works on Windows, Mac, and iPhone, no signup.",
     "schemaName": "JPG to PNG Converter",
     "schemaDescription": "Convert JPG images to PNG entirely in your browser using lossless re-encoding.",

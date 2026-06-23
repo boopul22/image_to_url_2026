@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Hosting for Email Signatures — Permanent URLs",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" },
+      { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
+    ],
     "metaDescription": "Host logo and headshot images for email signatures with permanent, reliable URLs. Works with Gmail, Outlook, Apple Mail, and all major email clients.",
     "schemaName": "ImageToURL",
     "schemaDescription": "Host logo and headshot images for email signatures with permanent, reliable URLs.",

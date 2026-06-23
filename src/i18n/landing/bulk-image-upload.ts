@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Bulk Image Upload - Upload Multiple Images at Once",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
+      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" }
+    ],
     "metaDescription": "Upload multiple images at once and get instant URLs for all of them. Perfect for e-commerce, agencies, and content creators. Free, no signup needed.",
     "schemaName": "ImageToURL Bulk Uploader",
     "schemaDescription": "A web-based tool for uploading multiple images simultaneously to generate instant, shareable URLs.",

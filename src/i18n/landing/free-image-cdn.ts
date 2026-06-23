@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Free Image CDN — Global Image Delivery | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
+      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" },
+      { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
+    ],
     "metaDescription": "Deliver images worldwide with our free CDN. Global edge servers, HTTPS, no bandwidth limits. The fastest free image CDN for developers and creators.",
     "schemaName": "Free Image CDN",
     "schemaDescription": "Deliver images worldwide with our free CDN featuring global edge servers, HTTPS, and no bandwidth limits.",

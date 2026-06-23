@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Favicon Generator — 100% Browser | All sizes + HTML",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-compressor", "label": "Image compressor" },
+      { "pageKey": "image-resizer", "label": "Image resizer" },
+      { "pageKey": "image-to-base64", "label": "Image to Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 to image" }
+    ],
     "metaDescription": "Generate favicons at every required size (16 to 512) from one source image, plus a ready-to-paste HTML snippet. Free, runs in your browser, no upload.",
     "schemaName": "Favicon Generator",
     "schemaDescription": "Generate favicons at 16/32/48/180/192/512 sizes from a single source image.",

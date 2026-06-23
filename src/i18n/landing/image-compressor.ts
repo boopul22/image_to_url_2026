@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Compressor — 100% in Browser | Free, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-resizer", "label": "Image resizer" },
+      { "pageKey": "image-to-base64", "label": "Image to Base64" },
+      { "pageKey": "base64-to-image", "label": "Base64 to image" },
+      { "pageKey": "favicon-generator", "label": "Favicon generator" }
+    ],
     "metaDescription": "Compress JPG, PNG, and WebP images in your browser with adjustable quality and live before/after sizes. Free, batch-friendly, no signup, no upload.",
     "schemaName": "Image Compressor",
     "schemaDescription": "Compress PNG, JPG, and WebP images in your browser. Adjustable quality and format.",

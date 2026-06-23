@@ -6,6 +6,11 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "HEIC to PDF Converter | Free, Merge Into One PDF",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-pdf", "label": "PNG to PDF" },
+      { "pageKey": "jpg-to-pdf", "label": "JPG to PDF" }
+    ],
     "metaDescription": "Convert HEIC to PDF free in your browser and merge multiple iPhone photos into one PDF. No upload, no signup. Works on iPhone, Windows, and Mac.",
     "schemaName": "HEIC to PDF Converter",
     "schemaDescription": "Convert and merge iPhone HEIC photos into a single PDF in your browser.",

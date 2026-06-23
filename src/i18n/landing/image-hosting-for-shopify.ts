@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Free Image Hosting for Shopify Stores | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Host product images and custom section images for your Shopify store. Free CDN-backed image hosting with permanent URLs for custom Shopify pages.",
     "schemaName": "Image Hosting for Shopify",
     "schemaDescription": "Host product images and custom section images for your Shopify store with permanent CDN-backed URLs.",

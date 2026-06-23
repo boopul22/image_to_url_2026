@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Share Images via URL on WhatsApp | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
+      { "pageKey": "image-url-for-chatgpt", "label": "Image URL for ChatGPT" },
+      { "pageKey": "image-to-url-for-html", "label": "Image URL for HTML" },
+      { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
+    ],
     "metaDescription": "Share images as links on WhatsApp instead of file attachments. No compression, no quality loss. Get a permanent URL and share it in any chat.",
     "schemaName": "ImageToURL for WhatsApp",
     "schemaDescription": "A tool to generate permanent image URLs for sharing high-quality photos on WhatsApp without compression.",

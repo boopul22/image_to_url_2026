@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "WebP to JPG Converter | Free, Fast, No Upload",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
+      { "pageKey": "jpg-to-png", "label": "JPG to PNG" },
+      { "pageKey": "convert-to-jpg", "label": "Convert to JPG" },
+      { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" }
+    ],
     "metaDescription": "Convert WebP to JPG free in your browser when an app won't accept WebP. No upload, no signup. Works on Windows, Mac, and iPhone.",
     "schemaName": "WebP to JPG Converter",
     "schemaDescription": "Convert WebP images to JPG locally in your browser. Fix incompatible files.",

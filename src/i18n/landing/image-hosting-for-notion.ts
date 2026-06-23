@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Hosting for Notion Pages — Permanent URLs | ImageToURL",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Notion's built-in image URLs expire on published pages. Use ImageToURL for permanent image URLs that never break in your Notion workspace.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A tool that provides permanent, reliable image URLs for Notion pages to prevent broken links on published content.",

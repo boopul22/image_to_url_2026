@@ -3,6 +3,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   en: {
     metaTitle: 'Cloudinary Alternative — Free Image Hosting | ImageToURL',
+    relatedTitle: 'Related image tools',
+    related: [
+      { pageKey: 'imgbb-alternative', label: 'ImgBB alternative' },
+      { pageKey: 'imgur-alternative', label: 'Imgur alternative' },
+      { pageKey: 'free-image-cdn', label: 'Free image CDN' },
+      { pageKey: 'free-image-hosting', label: 'Free image hosting' },
+    ],
     metaDescription: 'Free, no-signup alternative to Cloudinary for simple image hosting and direct URLs. 5–10× cheaper at scale, with a global CDN and permanent links.',
     schemaName: 'Cloudinary Alternative',
     schemaDescription: 'Free, no-signup alternative to Cloudinary for simple image hosting and direct URLs.',

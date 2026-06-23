@@ -6,6 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image Hosting for WordPress — Speed Up Your Site",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
+      { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
+      { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
+      { "pageKey": "image-hosting-for-forums", "label": "For forums" }
+    ],
     "metaDescription": "Speed up WordPress by hosting images externally on a free CDN. Cut server load, improve Core Web Vitals, and get permanent direct image URLs, no plugin needed.",
     "schemaName": "Image Hosting for WordPress",
     "schemaDescription": "Speed up WordPress by hosting images externally on a free CDN to reduce server load and improve Core Web Vitals.",
