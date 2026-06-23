@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { t } from '../../i18n/utils';
-import { defaultLocale } from '../../i18n/config';
+import { defaultLocale, locales } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPostBySlugLocalized, getRelatedPosts } from '../../lib/cms';
@@ -48,6 +48,15 @@ try {
     .all<{ locale: string; slug: string }>();
   for (const r of rows.results ?? []) blogLocaleSlugs[r.locale] = r.slug;
 } catch { /* non-fatal — language switcher just falls back to same-path behavior */ }
+
+// hreflang: emit alternates only for ACTIVE locales that actually have a
+// (translated) slug for this post, using the canonical translated URL so no
+// alternate points at a 301. Untranslated posts emit just en self + x-default.
+// Without this, Layout falls back to emitting /{loc}/blog/{englishSlug} for
+// every locale, which 301-redirects and breaks hreflang self/return links.
+const blogHreflangAlternates = locales
+  .filter((loc) => blogLocaleSlugs[loc])
+  .map((loc) => ({ locale: loc, url: `/${loc}/blog/${blogLocaleSlugs[loc]}` }));
 
 // ISR: Cache at CDN edge for 10 min, serve stale up to 1 day while revalidating.
 // Blog posts change infrequently so longer cache is safe.
@@ -199,6 +208,7 @@ const faqSchema = post.faqItems?.length ? {
   ogImage={imgUrl(post.coverImage, 1200) || '/og-default.png'}
   ogType="article"
   schema={articleSchema}
+  hreflangAlternates={blogHreflangAlternates.length ? blogHreflangAlternates : undefined}
 >
   {faqSchema && (
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

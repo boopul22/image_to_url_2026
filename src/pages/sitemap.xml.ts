@@ -260,13 +260,21 @@ ${xDefault}
   for (const post of postRows) {
     const perLocale = transBySlug.get(post.slug) ?? new Map<string, string>();
     const lastmod = toDateString(post.updated_at);
-    const alternates = locales.map(loc => {
-      const slug = loc === defaultLocale ? post.slug : (perLocale.get(loc) ?? post.slug);
-      return `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/blog/${slug}`)}" />`;
-    }).join('\n');
+    // Only emit locales that actually have a live URL: English (base slug) plus
+    // any active locale with a real translated slug. No English-slug fallback
+    // under non-English prefixes — those 301-redirect to the translated slug and
+    // would pollute the sitemap (3XX URLs) and break hreflang reciprocity.
+    const localeSlugs: { loc: string; slug: string }[] = [
+      { loc: defaultLocale, slug: post.slug },
+      ...locales
+        .filter(loc => loc !== defaultLocale && perLocale.has(loc))
+        .map(loc => ({ loc, slug: perLocale.get(loc)! })),
+    ];
+    const alternates = localeSlugs
+      .map(({ loc, slug }) => `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/blog/${slug}`)}" />`)
+      .join('\n');
     const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${SITE}/${defaultLocale}/blog/${post.slug}`)}" />`;
-    for (const loc of locales) {
-      const slug = loc === defaultLocale ? post.slug : (perLocale.get(loc) ?? post.slug);
+    for (const { loc, slug } of localeSlugs) {
       urlEntries.push(`  <url>
     <loc>${escapeXml(`${SITE}/${loc}/blog/${slug}`)}</loc>
     <lastmod>${lastmod}</lastmod>
