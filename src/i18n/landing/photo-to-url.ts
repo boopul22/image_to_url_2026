@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Photo to URL — Turn a Photo into a Link Free | ImageToURL",
     "metaDescription": "Photo to URL in seconds: upload from your phone or computer and get a direct, shareable link. Free, no signup, no watermark. Works as a photo to link tool.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG to URL" },
+      { "pageKey": "screenshot-to-url", "label": "Screenshot to URL" },
+      { "pageKey": "png-to-url", "label": "PNG to URL" }
+    ],
     "schemaName": "Photo to URL Converter",
     "schemaDescription": "A free web tool that turns any uploaded photo into a direct, shareable URL, with no signup, no watermark, and uploads straight from a phone or computer.",
     "badge": "PHOTO SHARING",

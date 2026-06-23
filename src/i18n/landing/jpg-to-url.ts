@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "JPG to URL - Convert JPG to a Link Free | ImageToURL",
     "metaDescription": "JPG to URL in seconds. Upload a JPG or JPEG and get a permanent direct link that embeds in Discord, Reddit, and forums. Free, no signup, up to 10MB.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL converter" },
+      { "pageKey": "png-to-url", "label": "PNG to URL" },
+      { "pageKey": "photo-to-url", "label": "Photo to URL" },
+      { "pageKey": "jpg-to-png", "label": "Convert JPG to PNG" }
+    ],
     "schemaName": "JPG to URL Converter",
     "schemaDescription": "Convert JPG to URL online and free. Get a permanent direct .jpg link that embeds anywhere, with no signup, no watermark, and no compression.",
     "badge": "JPG TO URL",

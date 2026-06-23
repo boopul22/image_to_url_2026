@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image to URL Converter — Free Direct Link, No Signup | ImageToURL",
     "metaDescription": "Free image to URL converter. Upload a JPG, PNG, WebP, GIF or SVG and get a direct link that embeds cleanly in Discord, Reddit and forums - no signup, no compression, no watermark.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "image-to-link", "label": "Image to link tool" },
+      { "pageKey": "image-url-generator", "label": "Image URL generator" },
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" }
+    ],
     "schemaName": "Image to URL Converter",
     "schemaDescription": "A free image to URL converter that turns any image into a direct, full-quality link. No account, no watermark, fast global CDN.",
     "badge": "IMAGE TO URL",

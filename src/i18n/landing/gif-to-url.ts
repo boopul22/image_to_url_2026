@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "GIF to URL — Get a Direct Link That Stays Animated | ImageToURL",
     "metaDescription": "Turn a GIF to URL or a GIF to link in seconds. The direct link plays the animation inline in Discord, Reddit, and forums. Free, no signup, GIFs up to 10MB.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Turn any image into a link" },
+      { "pageKey": "png-to-url", "label": "PNG to URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG to URL" },
+      { "pageKey": "webp-to-url", "label": "WebP to URL" }
+    ],
     "schemaName": "GIF to URL Converter",
     "schemaDescription": "Convert a GIF to a URL or direct link that stays animated. Free hosting with no signup, no watermark, and inline playback in Discord, Reddit, and forums.",
     "badge": "GIF HOSTING",

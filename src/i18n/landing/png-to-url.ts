@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Convert PNG Image to URL Link — Free Online | ImageToURL",
     "metaDescription": "Convert PNG image to URL link online and free. Upload any PNG and get a permanent direct .png URL with transparency preserved. No signup required.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Convert any image to a URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG to URL" },
+      { "pageKey": "gif-to-url", "label": "GIF to URL" },
+      { "pageKey": "png-to-jpg", "label": "Convert PNG to JPG" }
+    ],
     "schemaName": "PNG to URL Converter",
     "schemaDescription": "Convert any PNG image to a URL link, free and online with lossless quality and transparency preserved.",
     "badge": "PNG CONVERTER",

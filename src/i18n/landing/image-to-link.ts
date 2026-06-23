@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image to Link — Free Direct Image Link Generator | ImageToURL",
     "metaDescription": "Turn any image to link free with no signup. Get a direct, hotlinkable link that renders as the image in Discord, Reddit, and forums. Permanent and anonymous.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL converter" },
+      { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
+      { "pageKey": "direct-image-link", "label": "Direct image link" },
+      { "pageKey": "image-url-generator", "label": "Image URL generator" }
+    ],
     "schemaName": "Image to Link Generator",
     "schemaDescription": "Convert any image to a direct, shareable link that loads as the image itself in Discord, Reddit, forums, and chat. Free, no signup, no compression.",
     "badge": "IMAGE TO LINK",

@@ -7,6 +7,13 @@ export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Free Image URL Generator — Get a Direct Image Link",
     "metaDescription": "Free image URL generator and image link generator. Upload a JPG, PNG, WebP or GIF and get a direct, permanent link in seconds. No signup, no watermark.",
+    "relatedTitle": "Related image tools",
+    "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "image-embed-code-generator", "label": "Embed code generator" },
+      { "pageKey": "image-to-link", "label": "Image to link" },
+      { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
+    ],
     "schemaName": "Free Image URL Generator",
     "schemaDescription": "Upload an image and get a direct, permanent URL in seconds. Free image url generator and image link generator with no signup or watermark.",
     "badge": "URL GENERATOR",
