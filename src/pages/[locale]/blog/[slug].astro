@@ -43,6 +43,21 @@ if (slug) {
     if (locale !== 'en' && found.locale_slug && slug !== found.locale_slug) {
       return Astro.redirect(`/${locale}/blog/${found.locale_slug}`, 301);
     }
+
+    // Non-English locale but this post has NO translation for it: we'd
+    // otherwise serve English content under a non-English prefix — duplicate
+    // content with a self-canonical that hreflang can't self-reference (the
+    // post has no slug for this locale). Canonicalize to the English URL.
+    if (locale !== 'en' && !found.locale_slug) {
+      return Astro.redirect(`/en/blog/${found.en_slug}`, 301);
+    }
+
+    // English locale arriving at a *translated* slug (e.g. /en/blog/<es-slug>):
+    // the route resolves it and would serve the English post under a foreign
+    // slug — a duplicate with no inbound links. Canonicalize to the English slug.
+    if (locale === 'en' && slug !== found.en_slug) {
+      return Astro.redirect(`/en/blog/${found.en_slug}`, 301);
+    }
   } catch {
     // DB hiccup — fall through and let the component render its best effort.
   }

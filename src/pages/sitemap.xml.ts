@@ -98,6 +98,7 @@ const ROOT_PAGES: { path: string; lastmod: string }[] = [
   { path: '/image-hosting-for-pinterest',      lastmod: '2026-04-18' },
   { path: '/image-hosting-for-substack',       lastmod: '2026-04-18' },
   { path: '/image-hosting-for-medium',         lastmod: '2026-04-18' },
+  { path: '/image-hosting-for-ghost',          lastmod: '2026-06-23' },
   { path: '/image-hosting-for-linkedin',       lastmod: '2026-04-18' },
   { path: '/image-hosting-for-webflow',        lastmod: '2026-04-18' },
   { path: '/image-hosting-for-squarespace',    lastmod: '2026-04-18' },

@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import PlatformHostingPage from '../components/PlatformHostingPage.astro';
+---
+<PlatformHostingPage
+  platform="Ghost"
+  slug="image-hosting-for-ghost"
+  metaTitle="Image Hosting for Ghost — Portable CDN URLs for Your Blog"
+  metaDescription="Host Ghost blog and newsletter images on an external CDN so they survive migrations, theme changes, and self-hosted moves. Free, no signup, stable direct URLs."
+  h1Pre="Image hosting for Ghost"
+  h1Highlight="portable images that survive any migration."
+  intro="Ghost stores uploads in its own content/images folder (self-hosted) or on the Ghost(Pro) CDN. That's fine until you migrate hosts, switch from Pro to self-hosted, or reuse one image across many posts and newsletters. External URLs give you a single source of truth that never breaks."
+  why={[
+    { title: "Survive a self-hosted migration", body: "Moving Ghost between servers or providers means copying content/images and rewriting paths. Images referenced by an ImageToURL URL keep working no matter where the blog lives." },
+    { title: "Reuse across posts and newsletters", body: "Ghost email newsletters and web posts both accept image URLs. Host once here and drop the same direct link into every issue and article — no re-uploading per send." },
+    { title: "Markdown and HTML cards", body: "Ghost's Markdown card and HTML card take any image URL. Paste an ImageToURL link and the image renders inline with no upload step." },
+    { title: "Stable og:image for shares", body: "Host a 1600-wide variant here and point your post's feature image / og:image at it so social previews stay crisp and never 404 after a theme change." }
+  ]}
+  steps={[
+    { title: "Upload your images", body: "Drop the post's images here and copy each direct URL." },
+    { title: "Add an image by URL in Ghost", body: "In the editor, use a Markdown card (![alt](url)) or HTML card with an <img src> pointing at your ImageToURL link." },
+    { title: "Reuse in the newsletter", body: "Paste the same URLs into the email version — one source of truth for web and inbox." }
+  ]}
+  faqs={[
+    { q: "Does Ghost let me embed images by URL?", a: "Yes. Ghost's Markdown card and HTML card both accept external image URLs, and the feature image field takes a URL. Paste your ImageToURL link directly." },
+    { q: "Will Ghost re-host the image to its own storage?", a: "No. Unlike a direct upload, an image referenced by URL in a Markdown or HTML card stays on the external host — Ghost just renders it." },
+    { q: "Why not just use Ghost's built-in image upload?", a: "Built-in uploads live in your Ghost install's content/images folder (or the Pro CDN). If you migrate, switch providers, or go from Pro to self-hosted, those paths can break. External URLs are portable." },
+    { q: "Does this help with newsletters?", a: "Yes. Ghost email and web share the same content, and external URLs render in both. Host once, reuse in every issue without re-uploading." },
+    { q: "Max file size?", a: "Ghost's default upload cap is configurable but commonly 5–10 MB. ImageToURL free is 10 MB and Business is 50 MB, so you can host large feature photography externally and link to it." },
+    { q: "Animated GIFs?", a: "Both Ghost and ImageToURL accept GIF. For large animations, link the ImageToURL URL to keep your Ghost storage lean." },
+    { q: "Does an external image hurt SEO?", a: "No. The image's alt text and surrounding content live in your Ghost post as usual; the file just loads from a fast CDN. Use descriptive alt text in the card for best results." },
+    { q: "What about the site icon or theme assets?", a: "Site icon, logo, and theme assets are uploaded directly in Ghost settings and can't be set by URL. Keep the pristine source on ImageToURL for reuploads after a theme change." }
+  ]}
+  relatedSlugs={[
+    { href: "/image-hosting-for-substack", title: "Substack", body: "Same logic for Substack." },
+    { href: "/image-hosting-for-medium", title: "Medium", body: "Cross-post from Medium." },
+    { href: "/image-hosting-for-wordpress", title: "WordPress", body: "Offload WordPress media." }
+  ]}
+/>
