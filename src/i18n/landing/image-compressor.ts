@@ -20,6 +20,29 @@ export const content: LandingContentMap = {
     "h1Pre": "Image Compressor",
     "h1Highlight": "half the size, same look.",
     "intro": "Shrink JPG, PNG, or WebP files right in your browser, with nothing sent to a server. Drag in one image or a whole batch, slide the quality control, and watch the before/after size update live. Most photos drop 50 to 70 percent at a setting you can barely tell apart from the original. When you're done you can also grab a shareable https link for any file through the main uploader.",
+    "specsTitle": "Image compressor at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB per file"
+      },
+      {
+        "label": "Output",
+        "value": "Smaller file (+ optional link)"
+      }
+    ],
     "howTitle": "How It Works",
     "steps": [
       {
@@ -54,44 +77,149 @@ export const content: LandingContentMap = {
         "body": "Your files never leave your browser."
       }
     ],
-    "faqTitle": "FAQ",
+    "comparisonTitle": "How much each format shrinks",
+    "comparisonIntro": "How small a file gets depends on the format you save to and what the picture contains. Photos squeeze far more than flat graphics. Here is roughly what to expect when you re-encode a typical 24-bit source.",
+    "comparisonColumns": [
+      "Format",
+      "Compression type",
+      "Typical reduction",
+      "Keeps transparency",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "JPG",
+          "Lossy",
+          "60-80% on photos",
+          "No",
+          "Photographs and detailed scenes"
+        ]
+      },
+      {
+        "cells": [
+          "WebP (lossy)",
+          "Lossy",
+          "70-85% on photos",
+          "Yes",
+          "Web delivery where browsers support it"
+        ]
+      },
+      {
+        "cells": [
+          "WebP (lossless)",
+          "Lossless",
+          "20-30% over PNG",
+          "Yes",
+          "Logos and UI art that must stay exact"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "Lossless",
+          "10-40% on flat art",
+          "Yes",
+          "Screenshots, icons, sharp text"
+        ]
+      },
+      {
+        "cells": [
+          "GIF",
+          "Lossless (256 colors)",
+          "Varies, often small",
+          "Yes (1-bit)",
+          "Short loops and simple animation"
+        ]
+      }
+    ],
+    "useCasesTitle": "When compressing pays off",
+    "useCasesIntro": "Trimming file size before you publish or send fixes a lot of slow, clunky moments:",
+    "useCases": [
+      {
+        "title": "Faster web pages",
+        "body": "A hero image at 3 MB drags down load time and hurts your LCP score. Drop it to a few hundred KB and the page paints quicker, especially on phones and slow connections."
+      },
+      {
+        "title": "Email and chat attachments",
+        "body": "Gmail caps attachments around 25 MB and many work inboxes are stricter. Compressing a batch of photos lets the whole set fit in one message instead of bouncing back."
+      },
+      {
+        "title": "Marketplace and listing photos",
+        "body": "eBay, Etsy and forum uploaders often reject or downscale large files. A compressed JPG or WebP uploads cleanly and still looks sharp at the size buyers actually see."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "How image compression works: lossy vs lossless",
+        "body": "Compression makes a file smaller by storing the same picture more efficiently. Lossless methods, like PNG and lossless WebP, rebuild the image pixel for pixel, so nothing is thrown away and the result is identical to the source. They shrink flat graphics well but barely touch detailed photos. Lossy methods, like JPG and lossy WebP, discard data the eye is least likely to notice, mostly subtle color and high-frequency detail. That is why a photo can lose 70 percent of its size and still look the same on screen. The tradeoff is that each lossy save bakes in some loss, so you compress once from the original rather than re-saving over and over."
+      },
+      {
+        "heading": "How small can you go before quality drops",
+        "body": "Quality on a JPG or WebP runs from about 30 to 100, and the sweet spot for photos sits around 80 to 85. At that level you usually cut 50 to 70 percent of the size with no difference you can spot at normal viewing distance. Below roughly 60 you start to see blocky patches in skies, halos around hard edges, and smeared fine detail. Flat art with sharp lines and text shows damage sooner, so leave logos and screenshots higher or keep them lossless. The honest way to find your limit is to nudge the slider down, watch the before/after size, and stop the moment the preview looks soft."
+      },
+      {
+        "heading": "JPG vs PNG vs WebP for compression",
+        "body": "Pick the format by what the image is. JPG is built for photographs and gets them small, but it cannot hold transparency and it blurs crisp edges and text. PNG is lossless and perfect for screenshots, logos and anything with hard lines or a transparent background, though photos saved as PNG stay heavy. WebP is the flexible middle: it does both lossy and lossless, supports transparency, and usually beats JPG and PNG on size at similar quality. Nearly every current browser reads WebP, so it is a safe default for the web. If you need maximum compatibility with old software, JPG and PNG are still the safest bets."
+      }
+    ],
+    "faqTitle": "Image compressor FAQ",
     "faqs": [
       {
         "q": "How much can I compress without visible quality loss?",
-        "a": "For photos, quality 80–85 in JPG or WebP drops file size 50–70% and is visually indistinguishable on screens."
+        "a": "For photos, a quality of 80 to 85 in JPG or WebP usually cuts the file 50 to 70 percent with no difference you can spot on a screen. Watch the before/after size as you slide and stop when the preview starts to look soft."
+      },
+      {
+        "q": "What is the difference between lossy and lossless compression?",
+        "a": "Lossless keeps the picture identical to the source and shrinks flat graphics, but barely helps photos. Lossy throws away detail the eye is least likely to notice, so photos get much smaller at the cost of some quality. JPG and lossy WebP are lossy; PNG and lossless WebP are lossless."
       },
       {
         "q": "Is this really compressing, or just converting?",
-        "a": "Both. The image is re-encoded at a lower quality target."
+        "a": "It re-encodes the image at a lower quality target, which is real compression. You can also switch format at the same time, so a heavy PNG photo can become a much smaller JPG or WebP in one step."
       },
       {
         "q": "Does it upload my images?",
-        "a": "No. The compressor runs in your browser via canvas."
+        "a": "No. The compressor runs in your browser using the canvas, so files are processed on your own device and never sent to a server."
       },
       {
         "q": "Will PNG transparency be preserved?",
-        "a": "Only if you output PNG or WebP. JPG flattens to white."
+        "a": "Only if you output PNG or WebP, both of which support transparency. Saving to JPG flattens any transparent areas onto a white background, since JPG has no alpha channel."
       },
       {
-        "q": "Large images (10 MB+)?",
-        "a": "Works. No server roundtrip means you are bounded only by RAM."
+        "q": "Which format should I compress to?",
+        "a": "Use JPG or lossy WebP for photographs, and PNG or lossless WebP for screenshots, logos and anything with sharp text or transparency. WebP is a good default for the web because it handles both and is smaller at the same quality."
+      },
+      {
+        "q": "Can I compress large images over 10 MB?",
+        "a": "The uploader for shareable links accepts up to 10 MB per file. The in-browser compressor itself is bounded mainly by your device memory, so very large images still work, you just may not get a hosted link for the source if it is over the limit."
       },
       {
         "q": "Does it strip metadata?",
-        "a": "Yes. EXIF, GPS, and ICC profiles are dropped."
+        "a": "Yes. Re-encoding drops EXIF, GPS and ICC profile data, so camera details and location are not carried into the compressed file."
       },
       {
-        "q": "Batch hundreds of images?",
-        "a": "Yes - drop as many as you want."
+        "q": "Can I batch compress many images at once?",
+        "a": "Yes. Drop in as many files as you want and each one is compressed with the same settings, with its own before/after size shown."
       },
       {
-        "q": "Best use case?",
-        "a": "Web delivery, email attachments, and marketplace listings."
+        "q": "Will compressing the same file twice keep shrinking it?",
+        "a": "Not usefully. Each lossy save bakes in more loss without much extra size benefit, so quality degrades. Always compress once from the original rather than re-saving an already compressed file."
+      },
+      {
+        "q": "Can I get a shareable link to the compressed image?",
+        "a": "Yes. After compressing, run the smaller file through the main uploader on this site to get a direct https link that embeds in Discord, Reddit, forums and HTML."
+      },
+      {
+        "q": "What is the best use case for this?",
+        "a": "Speeding up web pages, fitting photos under email attachment caps, and preparing listing images for marketplaces that reject or downscale large files."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Need a hosted URL?",
     "ctaBody": "Upload the compressed file for a permanent link.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Compresor de imágenes — 100% en el navegador | Gratis, sin subidas",

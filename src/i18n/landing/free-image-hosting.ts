@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "FREE HOSTING",
     "h1Pre": "Free Image Hosting",
     "h1Highlight": "for everyone.",
-    "intro": "No signup required. No limits. Upload your images and get permanent, shareable links instantly - backed by a global CDN for lightning-fast delivery.",
+    "intro": "Free image hosting with nothing to pay and nothing to sign up for. Drop a JPG, PNG, WebP, GIF or SVG up to 10 MB in the box above and you get a direct link in a couple of seconds, served from a global CDN so it loads fast wherever people open it. Nothing gets compressed or watermarked, so the file you share is the file you uploaded. Anonymous links stay live for at least a couple of weeks; sign in free if you want one that sticks around forever.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -50,32 +50,96 @@ export const content: LandingContentMap = {
         "body": "Start uploading instantly. No account creation, no email verification - just drag, drop, and share."
       },
       {
-        "title": "A free picture URL, always",
-        "body": "Every upload gives you a free picture URL and a free pic URL, both permanent, with no account needed."
+        "title": "Honest about how long links last",
+        "body": "An anonymous upload stays live for at least a couple of weeks, until the monthly storage cleanup. Want a link that never goes away? Make a free account and mark the file 'keep forever' when you upload it."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "faqTitle": "Free image hosting FAQ",
     "faqs": [
       {
         "q": "Is this image hosting really free?",
-        "a": "Yes, our service is completely free to use with no hidden costs or subscription requirements."
+        "a": "Yes. There's no charge to upload, no subscription and no credit card. You don't even need an account to get a working link."
       },
       {
-        "q": "Do my image links ever expire?",
-        "a": "No, we provide permanent image hosting, so your links will remain active indefinitely."
+        "q": "Do I have to sign up?",
+        "a": "No. You can upload and copy a link without making an account. Signing in is optional, and the only thing it adds is the ability to mark a file 'keep forever' so its link doesn't get cleaned up."
       },
       {
-        "q": "Are there any file size limits?",
-        "a": "We support a wide range of file sizes, allowing you to host high-quality images without compression."
+        "q": "How long do the links last?",
+        "a": "Anonymous uploads stay live until the next monthly storage cleanup, so you get at least a couple of weeks and often longer. For a link that never expires, sign in free and choose 'keep forever' when you upload. Either way, keep your own copy of the file."
       },
       {
-        "q": "Can I use these images on my website?",
-        "a": "Absolutely, our generated URLs are perfect for embedding in blogs, forums, and websites."
+        "q": "What file types and sizes can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link you get ends in the real extension, so it hotlinks and embeds just like the original."
+      },
+      {
+        "q": "Does it compress or watermark my image?",
+        "a": "No. The file is served exactly as you uploaded it, at full resolution, with no re-encoding and no logo stamped on top."
+      },
+      {
+        "q": "Can I use these links on my website?",
+        "a": "Yes. The URL is a direct image link, so it works in an HTML <img> tag, Markdown, a CSS background-image, Notion, a README or any site builder that accepts an image address."
+      },
+      {
+        "q": "Will the link show up inline on Discord and Reddit?",
+        "a": "Yes. Because the link points straight at the image file rather than a gallery page, Discord, Reddit, Slack and most forums render it as a picture instead of a download button."
+      },
+      {
+        "q": "Is the upload private?",
+        "a": "The link is unguessable, but anyone who has it can open the image, since anonymous uploads are public. Don't post anything sensitive, and keep a local backup of the original."
+      },
+      {
+        "q": "Is this a good free Imgur alternative?",
+        "a": "For a lot of people, yes. Imgur dropped anonymous uploads in 2023, so if you just want to drop an image and grab a link without an account, this fills that gap."
+      },
+      {
+        "q": "How many images can I host?",
+        "a": "There's no overall library cap. Anonymous uploading has a daily limit to keep things fair; signing in free raises that limit if you're hosting a batch at once."
       }
     ],
     "ctaTitle": "Start hosting your images for free",
     "ctaBody": "Upload your first image in seconds. No signup, no credit card, no catch.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Free image hosting at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct CDN link" }
+    ],
+    "comparisonTitle": "Free image hosts compared",
+    "comparisonIntro": "Plenty of hosts will give you a free link. Where they differ is whether you need an account, how big a file you can drop, whether the image keeps its full quality, and how long the link stays up. Here's an honest side by side.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "useCasesTitle": "What free image hosting is good for",
+    "useCasesIntro": "Once your picture has a direct link, it slots into most places online:",
+    "useCases": [
+      { "title": "Chat and communities", "body": "Paste the link into Discord, a Reddit post or a forum thread and the image just shows up. No attachment, no extra click to open it." },
+      { "title": "Listings and signatures", "body": "Marketplace photos, classified ads and email-signature logos all need a hosted image. Drop the file here and use the link wherever the platform asks for a URL." },
+      { "title": "Quick shares and drafts", "body": "Sending a screenshot to a coworker or pasting a mockup into a ticket? A throwaway anonymous link is plenty for something nobody revisits in a month." }
+    ],
+    "sections": [
+      { "heading": "What does free image hosting mean?", "body": "Free image hosting is a service that stores your picture and hands back a web address pointing straight at it, at no cost. The address ends in the file's own extension, like .jpg or .png, so anything that reads a URL can load the image inline. That's different from sharing a file directly: instead of attaching a 4 MB photo to every message, you store it once and pass around a short link. Here the storage and the link are both free, there's no account required to get started, and the picture isn't compressed or shrunk on its way through." },
+      { "heading": "Free hosting vs paid hosting", "body": "Paid plans on hosts and CDNs make sense once you're serving heavy traffic, need analytics, or want guaranteed uptime in a contract. For most people sharing a screenshot, a meme or a product photo, none of that applies. A free link backed by a global CDN already loads fast from edge servers worldwide. The one honest trade-off is lifetime: free anonymous links here are cleaned up monthly, while a paid plan elsewhere keeps files indefinitely. You get the same 'keep forever' outcome at no cost by creating a free account and flagging the file." },
+      { "heading": "Are free image links safe to share?", "body": "Every link is served over HTTPS and points only at your image, with no redirect pages or trackers attached. The thing to remember is that an anonymous upload is public to anyone who has the link, so it isn't the place for private documents, ID photos or anything you wouldn't want a stranger to open. Keep your own copy of the original too, since free links are cleared on a regular schedule unless you sign in and keep them. Treat it like a public bulletin board, not a private vault." }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratis - Sube imágenes y obtén URLs al instante | ImageToURL",
