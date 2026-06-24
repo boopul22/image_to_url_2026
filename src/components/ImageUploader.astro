@@ -22,10 +22,8 @@ import AdRail from './ads/AdRail.astro';
     <!-- Left rail — two stacked responsive ad units (vertical + square) -->
     <AdRail side="left" />
 
-    <!-- Center column: uploader widget + trust signals. `data-share-mount` is where
-         the global ShareDestination injects the share panel on a ?u= redirect, so
-         the panel is flanked by THESE already-filling rails (no duplicate ad slots). -->
-    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0" data-share-mount>
+    <!-- Center column: uploader widget + trust signals. -->
+    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
       <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
         <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
 
@@ -430,9 +428,9 @@ import AdRail from './ads/AdRail.astro';
   batchAnother.addEventListener('click', resetIdle);
 
   copyBtn.addEventListener('click', () => {
-    // "Get Link" — route to a random landing page that surfaces the share widget
-    // (URL, copy, QR, watermark) on top + side ads, for higher-RPM dwell.
-    (window as any).shareGoRandom(resultUrl.value);
+    // "Get Link" — send the user to the /share screen, which owns the rich share
+    // widget (URL, copy, formats, QR, watermark) + ad rails.
+    window.location.href = '/share?u=' + encodeURIComponent(resultUrl.value);
   });
 
 

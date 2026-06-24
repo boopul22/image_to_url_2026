@@ -1,38 +1,44 @@
 ---
 import Icon from '../components/Icon.astro';
-// Thin SSR fallback for old /share?u= links/bookmarks. The share widget itself
-// is now the GLOBAL ShareDestination (rendered in Layout on every page), which
-// auto-reveals on a valid ?u= — so this page must NOT render its own SharePanel
-// or side ads (that would duplicate the global one's DOM ids + ad slots).
+// Standalone "URL copied" share screen. The uploaders' "Get Link" buttons send
+// the user here with ?u=<image url>. The widget itself is SharePanel.astro,
+// rendered SERVER-SIDE here (populated + visible, zero layout shift); only the QR
+// canvas + copy/watermark handlers run on the client. The URL is validated on our
+// own hosts (see lib/share-url.ts) before it's used as an <img src>, in snippets,
+// and in the QR — guarding against reflected content / XSS.
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ToolAdSurround from '../components/ToolAdSurround.astro';
+import SharePanel from '../components/SharePanel.astro';
 import { getValidUrl } from '../lib/share-url';
 
 // Never cache at the CDN (per-?u=) and keep it out of the index.
 Astro.response.headers.set('Cache-Control', 'private, no-store');
 
-const url = getValidUrl(Astro.url.searchParams.get('u'));
+const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
 ---
 
-<Layout title="Image URL Copied — ImageToURL" description="Your image URL is ready — copy it, grab the embed code, or scan the QR." noindex={true} noHreflang>
+<Layout
+  title="Image URL Copied — ImageToURL"
+  description="Your image URL is ready. Copy it as a direct link, Markdown, HTML, or BBCode, scan the QR code, or upload another image — free, permanent hosting with no account required."
+  noindex={true}
+  noHreflang
+>
   <Nav />
 
-  <main class="max-w-xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
     {url ? (
-      <!-- Valid link: the global ShareDestination reveals the rich widget above.
-           This is the no-JS / pre-reveal graceful fallback. -->
-      <div class="text-center py-6">
-        <Icon name="check_circle" class="text-secondary text-4xl" fill />
-        <h1 class="text-xl font-headline italic font-black text-on-surface mt-3">Your link is ready</h1>
-        <p class="text-on-surface-variant mt-1 text-sm">Your image URL:</p>
-        <a href={url} class="inline-block mt-2 break-all font-mono text-sm text-primary hover:underline">{url}</a>
-        <div class="mt-6">
+      <!-- Valid link: SharePanel renders populated + visible server-side, flanked
+           by the tool ad rails. -->
+      <ToolAdSurround>
+        <SharePanel url={url} />
+        <div class="max-w-xl mx-auto mt-6 text-center">
           <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
         </div>
-      </div>
+      </ToolAdSurround>
     ) : (
       <!-- Invalid / missing URL state -->
       <div class="text-center py-10">

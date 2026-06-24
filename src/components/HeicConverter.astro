@@ -237,10 +237,10 @@ import Icon from './Icon.astro';
         copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
         copy.textContent = 'Copy';
         copy.addEventListener('click', async () => {
-          // Copy, then route to a random landing page that surfaces the share widget
-          // (more formats + QR + watermark) on top + side ads for higher-RPM dwell.
+          // Copy, then send the user to the /share screen for the rich share
+          // widget (more formats + QR + watermark) + ad rails.
           try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
-          (window as any).shareGoRandom(hosted);
+          window.location.href = '/share?u=' + encodeURIComponent(hosted);
         });
         row.appendChild(urlInput);
         row.appendChild(copy);

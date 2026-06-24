@@ -935,9 +935,9 @@ const pageSchema = [
   });
 
   copyBtn.addEventListener('click', () => {
-    // "Get Link" — route to a random landing page that surfaces the share widget
-    // (URL, copy, formats, QR, watermark) on top + side ads, for higher-RPM dwell.
-    (window as any).shareGoRandom(resultUrl.value);
+    // "Get Link" — send the user to the /share screen, which owns the rich share
+    // widget (URL, copy, formats, QR, watermark) + ad rails.
+    window.location.href = '/share?u=' + encodeURIComponent(resultUrl.value);
   });
 
   uploadAnother.addEventListener('click', resetIdle);

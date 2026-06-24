@@ -140,7 +140,7 @@ import Icon from './Icon.astro';
         const copy = document.createElement('button');
         copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
         copy.textContent = 'Copy';
-        copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ } (window as any).shareGoRandom(hosted); });
+        copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ } window.location.href = '/share?u=' + encodeURIComponent(hosted); });
         row.appendChild(inp); row.appendChild(copy);
       } catch (err: any) {
         host.disabled = false; host.textContent = 'Retry';
