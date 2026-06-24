@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Convert to JPG — Free Online Image to JPG Converter",
+    "metaTitle": "Convert to JPG - Free Online Image to JPG Converter",
     "metaDescription": "Convert any image to JPG free. Drop a PNG, WebP, HEIC, GIF, BMP, or TIFF and download a clean JPG. No signup, no watermark, up to 10 MB.",
     "schemaName": "Convert to JPG",
     "schemaDescription": "Convert PNG, WebP, HEIC, GIF, BMP, and TIFF images to JPG. Free, no signup, no watermark, up to 10 MB.",

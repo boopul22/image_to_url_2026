@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "FREE HOSTING",
     "h1Pre": "Free Image Hosting",
     "h1Highlight": "for everyone.",
-    "intro": "No signup required. No limits. Upload your images and get permanent, shareable links instantly — backed by a global CDN for lightning-fast delivery.",
+    "intro": "No signup required. No limits. Upload your images and get permanent, shareable links instantly - backed by a global CDN for lightning-fast delivery.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -39,7 +39,7 @@ export const content: LandingContentMap = {
     "whyItems": [
       {
         "title": "Unlimited Free Uploads",
-        "body": "Upload as many images as you want, completely free. No hidden fees, no storage caps — just straightforward image hosting."
+        "body": "Upload as many images as you want, completely free. No hidden fees, no storage caps - just straightforward image hosting."
       },
       {
         "title": "Global CDN Network",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "No Signup Required",
-        "body": "Start uploading instantly. No account creation, no email verification — just drag, drop, and share."
+        "body": "Start uploading instantly. No account creation, no email verification - just drag, drop, and share."
       },
       {
         "title": "A free picture URL, always",

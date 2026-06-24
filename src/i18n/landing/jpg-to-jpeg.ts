@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "JPG to JPEG Converter — Free & Instant",
+    "metaTitle": "JPG to JPEG Converter - Free & Instant",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "JPG to JPEG,",
     "h1Highlight": "the extension some forms want",
-    "intro": "Some upload forms only accept .jpeg, not .jpg, even though the two are identical. Drop your .jpg files here to convert JPG to JPEG and download them with the .jpeg extension, all in your browser.",
+    "intro": "Some upload forms only accept .jpeg, not .jpg, even though the two are identical. This tool is the fix: it re-saves your file with the .jpeg extension a picky form is looking for, without changing the image at all. Drop your .jpg files in the box, download them as .jpeg, and the photo inside stays the same. Everything runs in your browser, and you can grab a shareable link to the result afterwards.",
     "howTitle": "How to convert JPG to JPEG",
     "steps": [
       {
@@ -54,6 +54,63 @@ export const content: LandingContentMap = {
         "body": "Files are processed in your browser. Nothing is uploaded unless you click Get URL."
       }
     ],
+    "specsTitle": "JPG to JPEG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input", "value": "JPG (.jpg)" },
+      { "label": "Output", "value": "JPEG (.jpeg)" },
+      { "label": "Max size", "value": "10 MB" }
+    ],
+    "comparisonTitle": "JPG, JPEG and the extensions people confuse them with",
+    "comparisonIntro": "The important fact first: .jpg and .jpeg are the same format and the same image. The table sorts out which extension to reach for and which names belong to genuinely different formats.",
+    "comparisonColumns": [
+      "Extension",
+      "Identical format?",
+      "Common on",
+      "Why it exists",
+      "Use it when"
+    ],
+    "comparisonRows": [
+      { "cells": [".jpeg", "Yes", "Mac, cameras, some forms", "The original full spelling", "A form demands .jpeg"] },
+      { "cells": [".jpg", "Yes", "Windows, most software", "Old three-letter limit", "Almost everywhere else"] },
+      { "cells": [".jpe", "Yes", "Rare legacy software", "Another JPEG alias", "You almost never need it"] },
+      { "cells": [".png", "No", "Everywhere", "A separate format", "You need transparency"] },
+      { "cells": [".webp", "No", "Web", "Newer, smaller format", "Web image size matters"] }
+    ],
+    "useCasesTitle": "When converting JPG to JPEG helps",
+    "useCasesIntro": "The image never needs changing here - this is about giving a strict system the exact extension it wants:",
+    "useCases": [
+      {
+        "title": "Job and government portals",
+        "body": "Some application forms check the extension text and only accept .jpeg, bouncing a perfectly good .jpg over the spelling alone."
+      },
+      {
+        "title": "Software that wants .jpeg",
+        "body": "A handful of older or specialised programs list .jpeg specifically. Handing over the matching extension avoids an import error."
+      },
+      {
+        "title": "Following a strict file spec",
+        "body": "When a brief or submission guideline literally says JPEG, a .jpeg file keeps you inside the rules with no back-and-forth."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Is .jpg the same as .jpeg?",
+        "body": "Yes, completely. JPG and JPEG are two spellings of one image format, named after the Joint Photographic Experts Group. A file saved as photo.jpg and the same file saved as photo.jpeg are identical inside, with the same compression and the same pixels. Changing one to the other does not alter the picture in any way. The whole reason this conversion exists is that some software and some upload forms check the text of the extension rather than the contents of the file."
+      },
+      {
+        "heading": "Why would a form only accept .jpeg?",
+        "body": "Usually a strict validation rule. Instead of reading the file to confirm it is a JPEG, the form simply checks whether the name ends in .jpeg, and rejects anything else - including a valid .jpg. It is a quirk of how the form was built, not a sign that your image is wrong. Re-saving the file with the .jpeg extension gives the form exactly the string it is testing for, and the upload goes through."
+      },
+      {
+        "heading": "Does adding the extra letter hurt quality?",
+        "body": "No. Because both extensions describe the same JPEG format, switching from .jpg to .jpeg is essentially a rename and re-save. At quality 92 the output looks identical to the input. The only minor change is that re-saving typically clears EXIF metadata such as camera model and GPS location, which is often a small bonus when you are about to upload a photo somewhere public."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24",
     "faqTitle": "FAQ",
     "faqIntro": "Convert JPG to JPEG free and online, with no signup and no watermark. Your files stay on your device.",
     "faqs": [
@@ -63,19 +120,47 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Why would a form need .jpeg?",
-        "a": "Some uploaders match the extension text exactly and only look for .jpeg. Converting gives them the name they expect."
+        "a": "Some uploaders match the extension text exactly and only look for .jpeg, rejecting a valid .jpg. Converting gives them the name they expect."
+      },
+      {
+        "q": "Can I just rename .jpg to .jpeg?",
+        "a": "Yes, that is essentially the change. Renaming works, but this tool does it cleanly and saves you fighting with Windows hidden extensions."
+      },
+      {
+        "q": "Will renaming break the file?",
+        "a": "No. The contents are already JPEG, so changing the extension to .jpeg leaves the image intact and openable everywhere."
       },
       {
         "q": "Will my image lose quality?",
         "a": "Practically none. Since both are JPEG, the conversion is close to a straight rename at quality 92."
       },
       {
+        "q": "Is .jpe also valid?",
+        "a": "Yes, .jpe is another rarely used alias for the same JPEG format. You will almost never be asked for it, but it is not wrong."
+      },
+      {
+        "q": "Does Windows handle .jpeg correctly?",
+        "a": "Yes. Modern Windows opens .jpeg files without any trouble; the three-letter .jpg habit is just a holdover from older systems."
+      },
+      {
+        "q": "Will a .jpeg open everywhere a .jpg does?",
+        "a": "Yes. Any app or browser that opens .jpg also opens .jpeg, since they are the same format under the hood."
+      },
+      {
+        "q": "Does converting strip metadata?",
+        "a": "Re-saving usually clears EXIF data like camera and location, which many people prefer before uploading a photo in public."
+      },
+      {
         "q": "Can I convert a batch?",
-        "a": "Yes. Drop several .jpg files at once and they all save with the .jpeg extension."
+        "a": "Yes. Drop several .jpg files at once and they all save with the .jpeg extension, one after another."
       },
       {
         "q": "Are my files uploaded?",
         "a": "No. The conversion runs in your browser. Your files only leave the device if you click Get URL to host one."
+      },
+      {
+        "q": "Can I get a link to the .jpeg?",
+        "a": "Yes. After converting, click Get URL to host the .jpeg on our CDN and get a direct https link you can paste anywhere."
       }
     ],
     "ctaTitle": "Want a permanent URL?",

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "AVIF to JPG — Free Online Converter, No Upload",
+    "metaTitle": "AVIF to JPG - Free Online Converter, No Upload",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "png-to-jpg", "label": "PNG to JPG" },

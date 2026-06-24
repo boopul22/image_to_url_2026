@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image URLs for Google Sheets — =IMAGE() Function",
+    "metaTitle": "Image URLs for Google Sheets - =IMAGE() Function",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-hosting-for-discord", "label": "For Discord" },

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Free Image CDN — Global Image Delivery | ImageToURL",
+    "metaTitle": "Free Image CDN - Global Image Delivery | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "free-image-hosting", "label": "Free image hosting" },
@@ -18,8 +18,8 @@ export const content: LandingContentMap = {
     "schemaDescription": "Deliver images worldwide with our free CDN featuring global edge servers, HTTPS, and no bandwidth limits.",
     "badge": "FREE CDN",
     "h1Pre": "Free Image CDN",
-    "h1Highlight": "— global delivery.",
-    "intro": "Deliver your images at lightning speed from 300+ edge servers worldwide. Enjoy free CDN hosting with HTTPS, no bandwidth limits, and sub-100ms latency.",
+    "h1Highlight": " - global delivery.",
+    "intro": "Drop an image here and it lands on a global edge network, so it loads fast whether your visitor is in Tokyo or Toronto. Every link is served over HTTPS, there's no bandwidth cap to worry about, and the file keeps its full quality with no re-compression. No account needed to get a link, and nothing to configure on your end.",
     "howTitle": "How Our CDN Works",
     "steps": [
       {
@@ -75,11 +75,71 @@ export const content: LandingContentMap = {
       {
         "q": "Can I use this CDN for my website or app?",
         "a": "Absolutely. Our CDN-delivered image URLs can be embedded in any website, web app, or mobile platform."
+      },
+      {
+        "q": "What image formats and sizes can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it hotlinks the same way the original file would."
+      },
+      {
+        "q": "Do the CDN links work in an <img> tag or Markdown?",
+        "a": "Yes. It's a normal direct image URL, so it drops into HTML <img src>, Markdown image syntax, CSS background-image and any site builder that accepts an image link."
+      },
+      {
+        "q": "How long do the image links stay live?",
+        "a": "Anonymous uploads last until the monthly storage cleanup, so a couple of weeks at minimum and often longer. Want a link that stays put? Create a free account and choose 'keep forever' when you upload. Keep your own copy as a backup either way."
+      },
+      {
+        "q": "Does the CDN re-compress my images?",
+        "a": "No. Files are served at the resolution you uploaded, with no re-encoding and no watermark added. What you put in is what visitors see."
+      },
+      {
+        "q": "Is it fine for a high-traffic site?",
+        "a": "Yes. Because requests are answered from a nearby edge cache, a busy page spreads its image load across the network instead of hammering a single origin server."
       }
     ],
     "ctaTitle": "Start using our free image CDN",
     "ctaBody": "Upload an image and get a CDN-backed URL in seconds with global delivery at zero cost.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Free image CDN at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Network", "value": "Global edge servers" },
+      { "label": "Max size", "value": "10 MB per file" },
+      { "label": "Output", "value": "Direct HTTPS CDN link" }
+    ],
+    "comparisonTitle": "Free image hosts compared",
+    "comparisonIntro": "Most free hosts can hand you a link. Where they part ways is edge delivery, how big a file you can drop, whether the link hotlinks cleanly, and how long it lasts. Here's how the popular ones line up.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "useCasesTitle": "Where edge-delivered image links help",
+    "useCasesIntro": "Once an image has a fast CDN link, it slots into anything that loads pictures over the web:",
+    "useCases": [
+      { "title": "Websites and blogs", "body": "Reference the URL in your HTML or CMS and the picture loads from a nearby edge node instead of your own box, so pages feel quicker for far-away readers." },
+      { "title": "Web and mobile apps", "body": "Point your frontend at the link and let the edge soak up the traffic. There's no origin server to scale when a screen suddenly gets popular." },
+      { "title": "Listings and storefronts", "body": "Product shots and marketplace photos load fast for buyers worldwide, which matters most on a page that carries a dozen images at once." }
+    ],
+    "sections": [
+      { "heading": "What is an image CDN?", "body": "A content delivery network keeps copies of your image on servers spread across the world. When someone opens a page with that image, the request is answered by the node closest to them rather than a single machine in one country. That shorter round trip is what makes the picture appear faster. The link you get here is already wired into that network, so there's nothing to set up: upload the file, copy the URL, and every visitor is automatically routed to a nearby edge cache." },
+      { "heading": "Why edge delivery changes load time", "body": "Distance is latency. A request that crosses an ocean to reach one server adds real milliseconds before the first byte arrives, and on a page full of images those delays stack up. Edge delivery cuts that distance by answering from a cache near the viewer. The first load might fetch from the origin, but after that the image sits warm at the edge and comes back almost instantly. For a global audience that's the gap between a page that feels snappy and one that drags on slow connections." },
+      { "heading": "Hotlinking from a CDN vs your own server", "body": "Embed an image straight from your own host and every view eats your bandwidth, which hurts when traffic spikes. Hotlinking from a CDN link spreads that load across the edge network instead, so a sudden rush of visitors won't knock your site over. The URL ends in the real file extension, so it behaves in an HTML img tag, Markdown, CSS background-image, Discord and Reddit exactly like a normal image. You upload once and let the network carry the requests." }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "CDN de imágenes gratis — Entrega global | ImageToURL",

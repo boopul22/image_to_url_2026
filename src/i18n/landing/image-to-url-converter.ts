@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL Converter — Free Direct Link, No Signup | ImageToURL",
+    "metaTitle": "Image to URL Converter - Free Direct Link, No Signup | ImageToURL",
     "metaDescription": "Free image to URL converter. Upload a JPG, PNG, WebP, GIF or SVG and get a direct link that embeds cleanly in Discord, Reddit and forums - no signup, no compression, no watermark.",
     "relatedTitle": "Related image tools",
     "related": [
@@ -17,7 +17,7 @@ export const content: LandingContentMap = {
     "schemaName": "Image to URL Converter",
     "schemaDescription": "A free image to URL converter that turns any image into a direct, full-quality link. No account, no watermark, fast global CDN.",
     "badge": "IMAGE TO URL",
-    "h1Pre": "Image to URL Converter — ",
+    "h1Pre": "Image to URL Converter -",
     "h1Highlight": "Free, No Signup",
     "intro": "This image to URL converter turns any picture into a direct, shareable link in a couple of seconds. Drop in a JPG, PNG, WebP, GIF or SVG and you get a clean image to URL link you can paste anywhere - no account, no watermark, and nothing re-compressed or downscaled out of your file.",
     "howTitle": "How the image to URL converter works",

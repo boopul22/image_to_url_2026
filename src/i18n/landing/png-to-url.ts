@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Convert PNG Image to URL Link — Free Online | ImageToURL",
+    "metaTitle": "Convert PNG Image to URL Link - Free Online | ImageToURL",
     "metaDescription": "Convert PNG image to URL link online and free. Upload any PNG and get a permanent direct .png URL with transparency preserved. No signup required.",
     "relatedTitle": "Related image tools",
     "related": [
@@ -17,7 +17,7 @@ export const content: LandingContentMap = {
     "schemaName": "PNG to URL Converter",
     "schemaDescription": "Convert any PNG image to a URL link, free and online with lossless quality and transparency preserved.",
     "badge": "PNG CONVERTER",
-    "h1Pre": "PNG to URL Converter — Convert Image to Link",
+    "h1Pre": "PNG to URL Converter - Convert Image to Link",
     "h1Highlight": "Free & Online",
     "intro": "Drop a PNG in the box above and you get a direct link in a couple of seconds, no account needed. The transparent background stays put and nothing is recompressed, so a logo or screenshot looks exactly like the file you uploaded. The link ends in .png, so it embeds inline on Discord, Reddit, a forum, an email, or any HTML page. Copy it and paste it wherever you need the image to show up.",
     "howTitle": "How to Convert a PNG to URL",

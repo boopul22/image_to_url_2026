@@ -166,7 +166,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to URL FAQ",
     "faqs": [
-      { "q": "How do I create a URL for an image?", "a": "Upload the image in the box above and you get a direct link ending in the real extension (.jpg, .png) within seconds, no account needed. That URL is the image’s web address — paste it anywhere you need the picture to appear." },
+      { "q": "How do I create a URL for an image?", "a": "Upload the image in the box above and you get a direct link ending in the real extension (.jpg, .png) within seconds, no account needed. That URL is the image’s web address - paste it anywhere you need the picture to appear." },
       { "q": "How do I turn a photo or picture into a URL?", "a": "The same three steps work for any source: upload the photo, copy the generated direct link, and paste it where you need it. It works straight from a phone camera roll or a desktop file." },
       { "q": "What is an image URL?", "a": "An image URL is the direct web address of an image file, like https://imagetourl.cloud/abc123.jpg. Pasted into a browser it shows just the image, and in an HTML image tag it embeds the picture. You get one by uploading the image to a host that returns a direct link." },
       {

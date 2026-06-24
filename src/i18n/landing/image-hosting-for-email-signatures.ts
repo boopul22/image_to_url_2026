@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for Email Signatures — Permanent URLs",
+    "metaTitle": "Image Hosting for Email Signatures - Permanent URLs",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-hosting-for-discord", "label": "For Discord" },

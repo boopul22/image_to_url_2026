@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Base64 to Image — Browser Decoder | Free",
+    "metaTitle": "Base64 to Image - Browser Decoder | Free",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-compressor", "label": "Image compressor" },
@@ -19,79 +19,177 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "Base64 to Image",
     "h1Highlight": "paste, preview, download.",
-    "intro": "Paste a base64 string or a full data URI — get a previewable, downloadable image file. Fully local.",
-    "howTitle": "How to decode",
+    "intro": "Got a long base64 string and no idea what picture is hiding inside it? Paste it in the box above, with or without the data:image/...;base64,... prefix, and the real image appears so you can preview it and download it as a PNG or JPG. Everything runs in your browser, so the string never leaves your device and the result shows up instantly. If you then want a shareable https link for the recovered picture, you can pass it to the main uploader.",
+    "specsTitle": "Base64 to image at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Input",
+        "value": "Base64 data URI or raw Base64"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Image file (PNG/JPG) + optional link"
+      }
+    ],
+    "howTitle": "How to decode base64 to an image",
     "steps": [
       {
         "title": "Paste base64 or data URI",
-        "body": "Paste either the full data:image/...;base64,... string or just the base64 payload."
+        "body": "Drop in either the full data:image/...;base64,... string or just the raw base64 payload. The string can come from CSS, an API response, a database field or another tool - it all works."
       },
       {
         "title": "Click Decode",
-        "body": "The image preview appears; click Download to save."
+        "body": "The picture renders right away in your browser. A full data URI keeps its own MIME type; a bare base64 chunk is treated as PNG by default."
       },
       {
-        "title": "Save",
-        "body": "Use the downloaded file as a normal image."
+        "title": "Download or host it",
+        "body": "Save the file to your device as a normal image, or send it to the uploader if you want a short https link to share."
       }
     ],
-    "whyTitle": "Why decode base64",
+    "whyTitle": "Why decode base64 here",
     "whyItems": [
       {
-        "title": "Debug data URIs",
-        "body": "Verify that an encoded data URI actually represents the expected image."
+        "title": "Nothing leaves your browser",
+        "body": "Decoding is a local atob() and Blob step. The string is never sent to a server, which matters when it came from private config or an internal API."
       },
       {
-        "title": "Extract from config",
-        "body": "Pull inline images out of JSON config and save as files."
+        "title": "Check what a data URI really is",
+        "body": "Inline data URIs are unreadable by eye. Paste one here to confirm it holds the image you expect before you ship it in code or email."
       },
       {
-        "title": "Email-embedded images",
-        "body": "Recover images embedded in email source."
+        "title": "Get a normal file back",
+        "body": "Once decoded you have a regular PNG, JPG, GIF, WebP or SVG you can open, edit or upload anywhere - no special viewer needed."
       },
       {
-        "title": "Offline recovery",
-        "body": "No internet needed — runs fully in your browser."
+        "title": "Works offline and instantly",
+        "body": "There's no upload wait and no internet round trip. Open the page once and it keeps decoding even with the connection dropped."
       }
     ],
-    "faqTitle": "FAQ",
+    "comparisonTitle": "Base64 vs a hosted URL",
+    "comparisonIntro": "A base64 data URI and a hosted image URL both put a picture into a page, but they behave very differently. One inlines the bytes as text, the other points at a file on a server. Here's when each makes sense.",
+    "comparisonColumns": [
+      "Method",
+      "Needs hosting",
+      "Good for",
+      "Downsides"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Base64 data URI",
+          "No hosting",
+          "Tiny inline assets, single-file HTML, email, code",
+          "Long unreadable string, about 33% larger, not shareable as a link, not cached separately"
+        ]
+      },
+      {
+        "cells": [
+          "Hosted image URL",
+          "Needs a host",
+          "Sharing, large images, pictures reused across pages",
+          "One extra network request, but the file is short, cacheable and easy to paste"
+        ]
+      }
+    ],
+    "useCasesTitle": "When people decode a base64 string",
+    "useCasesIntro": "A base64 image can land in your lap from all sorts of places. These are the common ones:",
+    "useCases": [
+      {
+        "title": "From an API or database",
+        "body": "Some APIs and DB columns store images as base64 text. Paste the value here to pull the actual picture out and save it as a file."
+      },
+      {
+        "title": "From CSS or HTML source",
+        "body": "Inline background-image: url(data:...) rules and embedded <img src=data:...> tags hide a real image. Decode it to inspect or reuse the asset."
+      },
+      {
+        "title": "From an email or export",
+        "body": "Email source and some app exports embed images as base64. Recover them here instead of hunting for the original file."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a base64 image?",
+        "body": "A base64 image is a picture encoded as plain text so it can be dropped straight into code, CSS or an email instead of living in a separate file. The text usually starts with a data URI prefix like data:image/png;base64, followed by a long run of letters, digits, plus and slash characters. A browser reads that string, turns it back into the original bytes and shows the picture. Nothing about the image changes - it's the same pixels, just written in a format that travels inside text. Decoding simply reverses the process and hands you the file again."
+      },
+      {
+        "heading": "When to use base64 vs a URL",
+        "body": "Base64 is handy for tiny, fixed assets: a small icon in a stylesheet, a logo in an HTML email, or a single-file page with no external requests. Because the bytes live inside the document, there's no extra request and nothing to host. For anything bigger or anything you want to share, a hosted URL wins. A link is short, you can paste it into a chat or a post, the file caches on its own, and the same image can be reused across many pages without bloating each one. As a rough rule, inline below a few kilobytes and link above it."
+      },
+      {
+        "heading": "Why base64 makes files about 33% bigger",
+        "body": "Base64 maps every 3 bytes of binary data onto 4 ASCII characters. Each character it uses is itself one byte of text, so 3 bytes in become 4 bytes out - a jump of roughly one third. That's the trade for making binary safe to store and send as plain text: you accept about 33% more size. On a 2 KB icon the overhead is trivial, but on a 2 MB photo it adds hundreds of kilobytes and makes the surrounding code hard to read. This is the main reason large images belong in real files behind a URL rather than inlined as base64."
+      }
+    ],
+    "faqTitle": "Base64 to image FAQ",
     "faqs": [
       {
+        "q": "How do I convert a base64 string into an image?",
+        "a": "Paste the string into the box above and click Decode. The picture appears right away and you can download it as a PNG or JPG. It works with or without the data:image prefix."
+      },
+      {
         "q": "Do I need the data: prefix?",
-        "a": "Either works. If full data URI, decoder uses embedded MIME. If raw, defaults to PNG."
+        "a": "No. A full data URI keeps its embedded MIME type, so the output matches the original format. A raw base64 chunk with no prefix is decoded as PNG by default, which is fine for most cases."
       },
       {
-        "q": "Why is nothing happening after paste?",
-        "a": "Usually invisible line breaks. Remove them or paste as plain text."
+        "q": "Is anything uploaded when I decode?",
+        "a": "No. The decode happens locally with the browser's atob() and the Blob constructor. The string never goes to a server, so it's safe for private or internal data."
       },
       {
-        "q": "Is anything uploaded?",
-        "a": "No. Decoding is a local atob() and Blob constructor."
+        "q": "What image formats can I get out?",
+        "a": "Whatever was encoded: PNG, JPG, GIF, WebP or SVG. A full data URI tells the decoder the exact type; a bare payload comes out as PNG."
       },
       {
-        "q": "What formats can I get out?",
-        "a": "PNG, JPG, GIF, WebP, SVG — whatever was encoded."
+        "q": "Why is nothing happening after I paste?",
+        "a": "Usually there are invisible line breaks or spaces in the string. Remove them, or paste as plain text, then decode again. A truncated string that's missing its end will also fail."
       },
       {
-        "q": "Max paste length?",
-        "a": "Several MB in textarea. Past ~10 MB performance degrades."
+        "q": "Is there a size limit on the string?",
+        "a": "A textarea handles several megabytes of base64 fine. Past about 10 MB of text the browser slows down, which lines up with a roughly 7 MB original image."
       },
       {
-        "q": "Transparent PNG looks blank?",
-        "a": "It might actually have transparency. Right-click Save to verify."
+        "q": "My transparent PNG looks blank - is it broken?",
+        "a": "Probably not. A PNG with full transparency can look empty against a white page. Download it and open it over a dark or checkered background to confirm the pixels are there."
       },
       {
-        "q": "Base64 URL-safe variants?",
-        "a": "Yes — we normalize - to + and _ to /."
+        "q": "Does it handle URL-safe base64?",
+        "a": "Yes. URL-safe base64 swaps + for - and / for _. The decoder normalizes those back before converting, so strings from URLs and tokens still work."
       },
       {
-        "q": "Data URI with URL-encoded SVG?",
-        "a": "Preview works; open in new tab to see the SVG."
+        "q": "Can I decode a data URI that holds an SVG?",
+        "a": "Yes. SVG data URIs preview correctly. If the SVG was URL-encoded rather than base64-encoded, open the result in a new tab to see it render."
+      },
+      {
+        "q": "Does decoding change or compress the image?",
+        "a": "No. Decoding is exact and lossless - you get back the same bytes that were encoded. There's no resizing, re-compression or watermark."
+      },
+      {
+        "q": "Can I get a shareable link for the decoded image?",
+        "a": "Yes. After you save the file, send it to the main uploader to get a direct https link that embeds in Discord, Reddit, forums and email. Base64 itself can't be shared as a link."
+      },
+      {
+        "q": "Why would an image be stored as base64 in the first place?",
+        "a": "To keep it inside text. APIs, JSON config, CSS, single-file HTML and email all benefit from embedding a small image directly instead of pointing at a separate file. The cost is the larger size and unreadable string."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Host the decoded image?",
-    "ctaBody": "Upload for a permanent URL.",
-    "ctaButton": "Try the main uploader"
+    "ctaBody": "Upload the picture you just recovered to get a permanent, shareable https link in seconds. No sign-up needed.",
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Base64 a imagen — Decodificador en navegador | Gratis",

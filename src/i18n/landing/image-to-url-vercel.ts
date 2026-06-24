@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL for Vercel — Direct CDN Image Links",
+    "metaTitle": "Image to URL for Vercel - Direct CDN Image Links",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },

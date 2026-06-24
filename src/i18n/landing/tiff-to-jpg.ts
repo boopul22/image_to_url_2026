@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "TIFF to JPG Converter — Free, In Your Browser",
+    "metaTitle": "TIFF to JPG Converter - Free, In Your Browser",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "TIFF to JPG Converter,",
     "h1Highlight": "shrink big scans",
-    "intro": "TIFF files are large and many apps and websites will not accept them. Drop your .tif or .tiff here to convert TIFF to JPG and get a smaller, universally supported image, processed right in your browser.",
+    "intro": "TIFF files are large and many apps and websites will not accept them. Drop your .tif or .tiff here to convert TIFF to JPG and get a smaller, universally supported image, processed right in your browser. TIFF is a lossless, print-grade format, so the trade is simple: a JPG is far lighter and opens everywhere, at the cost of some fine detail. After converting you can also get a shareable https link to the result.",
     "howTitle": "How to convert TIFF to JPG",
     "steps": [
       {
@@ -54,16 +54,92 @@ export const content: LandingContentMap = {
         "body": "Files are converted in your browser. Nothing is uploaded unless you click Get URL."
       }
     ],
+    "specsTitle": "TIFF to JPG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input", "value": "TIFF (.tif, .tiff)" },
+      { "label": "Output", "value": "JPG (.jpg)" },
+      { "label": "Max size", "value": "10 MB" }
+    ],
+    "comparisonTitle": "TIFF vs JPG and other formats",
+    "comparisonIntro": "TIFF is built for print and archiving, not the web. The table below shows what you trade when you convert: a big drop in file size and far wider support, against a small loss of detail you rarely notice on screen.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Typical file size",
+      "Web support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["TIFF", "Lossless (usually)", "Very large", "None", "Print, scanning, archiving"] },
+      { "cells": ["JPG", "Lossy", "Small", "Everywhere", "Photos, web, sharing"] },
+      { "cells": ["PNG", "Lossless", "Large", "Everywhere", "Graphics, transparency"] },
+      { "cells": ["WebP", "Lossy or lossless", "Small", "Most browsers", "Modern web images"] }
+    ],
+    "useCasesTitle": "When TIFF to JPG helps",
+    "useCasesIntro": "A TIFF is great in a print shop and awkward almost everywhere else. Converting fixes that:",
+    "useCases": [
+      {
+        "title": "Emailing scanned documents",
+        "body": "A scanned contract or receipt saved as TIFF can be tens of megabytes. As a JPG it drops to a size that actually sends."
+      },
+      {
+        "title": "Uploading to web forms",
+        "body": "Most upload boxes reject .tif and .tiff outright. JPG is accepted by job portals, government forms and marketplaces."
+      },
+      {
+        "title": "Posting photos online",
+        "body": "Social platforms, blogs and chat apps all expect web formats. A JPG loads fast and displays inline; a TIFF usually will not load at all."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a TIFF file?",
+        "body": "TIFF (Tagged Image File Format) is a high-end raster format used in photography, scanning, publishing and archiving. It is usually lossless, meaning it keeps every pixel exactly as captured, and it can hold extras like layers, multiple pages and CMYK colour for print. All of that fidelity comes at a price: TIFF files are big, often ten to fifty times the size of the same image as a JPG, and browsers do not display them. That is fine for a print workflow and a problem the moment you want to share or upload the image."
+      },
+      {
+        "heading": "TIFF vs JPG for photos",
+        "body": "For master copies and printing, TIFF wins because it stores the full, uncompressed image. For everything online, JPG wins. JPG uses lossy compression to shrink a photo dramatically while keeping it sharp to the eye, which is exactly what email, websites and social apps want. A good workflow is to keep the TIFF as your archive and hand out a JPG for day-to-day use. Convert when you need to send, post or upload; keep the original when you might reprint."
+      },
+      {
+        "heading": "Will I lose quality converting TIFF to JPG?",
+        "body": "Some, because JPG is lossy and TIFF usually is not. In practice the loss is hard to spot at normal viewing sizes - at quality 92 a converted scan or photo still looks crisp while taking a fraction of the space. Where it matters is repeated editing or large-format printing, where re-compression can soften fine detail. The safe approach is to keep the TIFF as your high-quality master and use the JPG for sharing and the web."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24",
     "faqTitle": "FAQ",
     "faqIntro": "Convert TIFF to JPG free and online, with no signup and no watermark. Your files stay on your device.",
     "faqs": [
       {
         "q": "Why convert TIFF to JPG?",
-        "a": "TIFF files are large and not widely supported online. JPG is small and opens everywhere, which makes it the better choice for sharing."
+        "a": "TIFF files are large and not widely supported online. JPG is small and opens everywhere, which makes it the better choice for sharing and uploading."
+      },
+      {
+        "q": "What is TIFF used for?",
+        "a": "TIFF is common in print, professional photography, scanning and archiving, where keeping every pixel matters more than file size or web compatibility."
+      },
+      {
+        "q": "Why are TIFF files so big?",
+        "a": "TIFF is usually lossless, so it stores the full image with little or no compression. The same photo as a JPG can be ten to fifty times smaller."
       },
       {
         "q": "Will I lose quality?",
         "a": "JPG is lossy, so very fine detail softens slightly, but at quality 92 a scan or photo still looks sharp at a tiny fraction of the size."
+      },
+      {
+        "q": "Is TIFF higher quality than JPG?",
+        "a": "Technically yes, because it keeps every pixel uncompressed. On screen, at normal sizes, a quality 92 JPG looks the same to most eyes while being far smaller."
+      },
+      {
+        "q": "Should I keep the original TIFF?",
+        "a": "If you might reprint or edit again, yes. Keep the TIFF as your master and use the JPG for sharing, email and the web."
+      },
+      {
+        "q": "What is the difference between .tif and .tiff?",
+        "a": "Nothing. They are the same format with two spellings of the extension, a leftover from systems that limited names to three letters."
       },
       {
         "q": "My TIFF will not open. What now?",
@@ -76,6 +152,10 @@ export const content: LandingContentMap = {
       {
         "q": "Are my files uploaded?",
         "a": "No. The conversion runs locally in your browser. Your files only leave the device if you click Get URL to host one."
+      },
+      {
+        "q": "Can I get a link to the JPG?",
+        "a": "Yes. After converting, click Get URL to host the JPG on our CDN and get a direct https link you can share anywhere."
       }
     ],
     "ctaTitle": "Want a permanent URL?",

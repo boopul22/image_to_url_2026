@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Photo to URL — Turn a Photo into a Link Free | ImageToURL",
+    "metaTitle": "Photo to URL - Turn a Photo into a Link Free | ImageToURL",
     "metaDescription": "Photo to URL in seconds: upload from your phone or computer and get a direct, shareable link. Free, no signup, no watermark. Works as a photo to link tool.",
     "relatedTitle": "Related image tools",
     "related": [

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for Notion Pages — Permanent URLs | ImageToURL",
+    "metaTitle": "Image Hosting for Notion Pages - Permanent URLs | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-hosting-for-discord", "label": "For Discord" },

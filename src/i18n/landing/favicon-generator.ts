@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Favicon Generator — 100% Browser | All sizes + HTML",
+    "metaTitle": "Favicon Generator - 100% Browser | All sizes + HTML",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-compressor", "label": "Image compressor" },
@@ -19,79 +19,195 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "Favicon Generator",
     "h1Highlight": "every size, one drop.",
-    "intro": "Drop a square image (512×512 ideal) — get 16, 32, 48, 180, 192, and 512 favicon PNGs plus a ready-to-paste HTML snippet.",
-    "howTitle": "How It Works",
+    "intro": "Drop a square image and get back the favicon files browsers and phones actually ask for: 16, 32, 180, 192 and 512 pixel PNGs, plus a ready-to-paste set of <link> tags. Everything runs in your browser using a canvas, so the picture never leaves your device. A 512×512 source works best because the tool scales down, never up. Download the icons, or upload them here to get a shareable https link.",
+    "specsTitle": "Favicon generator at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Input formats",
+        "value": "PNG, JPG, SVG"
+      },
+      {
+        "label": "Sizes",
+        "value": "16, 32, 180, 192, 512"
+      },
+      {
+        "label": "Output",
+        "value": "PNG icons (+ optional link)"
+      }
+    ],
+    "howTitle": "How the favicon generator works",
     "steps": [
       {
         "title": "Drop a square image",
-        "body": "A 512×512 PNG or JPG is ideal — the tool scales down from your source."
+        "body": "Drag a PNG, JPG or SVG onto the box. A 512×512 source is ideal since the tool only scales down, and a square picture avoids any awkward cropping."
       },
       {
         "title": "Download each size",
-        "body": "16×16, 32×32, 48×48, 180×180, 192×192, 512×512 PNGs appear."
+        "body": "You get 16×16, 32×32, 180×180, 192×192 and 512×512 PNGs at once. Each one is rendered straight from your source on a canvas, so nothing is uploaded unless you ask."
       },
       {
         "title": "Paste the HTML snippet",
-        "body": "Copy the generated <link> tags into your <head>."
+        "body": "Copy the generated <link rel=\"icon\"> and apple-touch-icon tags into your page <head>, drop the PNGs in your site root, and reference 192 and 512 in a web app manifest for PWA installs."
       }
     ],
-    "whyTitle": "Why all these sizes",
+    "whyTitle": "Why generate the icons here",
     "whyItems": [
       {
-        "title": "32×32 — browser tabs",
-        "body": "The default every browser picks for tabs."
+        "title": "All the real sizes at once",
+        "body": "Browsers, iOS and Android each want a different size. Instead of resizing by hand five times, you drop one image and get every file you need in a single pass."
       },
       {
-        "title": "180×180 — Apple touch",
-        "body": "Home-screen icon on iOS."
+        "title": "Nothing is uploaded",
+        "body": "The resizing happens in your browser on a canvas. Your logo stays on your machine, which matters when the icon is from an unreleased product or a private project."
       },
       {
-        "title": "192×192 / 512×512 — PWA",
-        "body": "Manifest icons for Android install."
+        "title": "A snippet you can paste",
+        "body": "You also get the matching <link> tags. No guessing which rel value goes with which size, and no copy-pasting from a half-remembered Stack Overflow answer."
       },
       {
-        "title": "16×16 / 48×48 — legacy",
-        "body": "Cramped bookmark bars and Windows shortcuts."
+        "title": "Host the icons if you want",
+        "body": "Need a quick link to a 512 icon for a manifest or a README? Upload the output here and you get a direct https URL, no separate hosting to set up."
       }
     ],
-    "faqTitle": "FAQ",
+    "comparisonTitle": "Favicon sizes and where each one is used",
+    "comparisonIntro": "Each size answers a specific request from a browser or device. Here is what gets generated and where it shows up, so you know which files actually matter for your site.",
+    "comparisonColumns": [
+      "Size",
+      "Format",
+      "Where it is used"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "16×16",
+          "PNG / ICO",
+          "Browser tab and bookmark"
+        ]
+      },
+      {
+        "cells": [
+          "32×32",
+          "PNG",
+          "Taskbar and retina (higher-DPI) tab"
+        ]
+      },
+      {
+        "cells": [
+          "180×180",
+          "PNG",
+          "apple-touch-icon, iOS home screen"
+        ]
+      },
+      {
+        "cells": [
+          "192×192",
+          "PNG",
+          "Android / PWA web app manifest"
+        ]
+      },
+      {
+        "cells": [
+          "512×512",
+          "PNG",
+          "PWA splash and install icon"
+        ]
+      }
+    ],
+    "useCasesTitle": "When you need a favicon",
+    "useCasesIntro": "Any site that opens in a browser tab should have one. A few common moments:",
+    "useCases": [
+      {
+        "title": "A new site or landing page",
+        "body": "You launched something and the tab still shows the blank default icon. Drop your logo in, add the tags, and the tab shows your mark instead of a generic globe."
+      },
+      {
+        "title": "Turning a site into a PWA",
+        "body": "Android install prompts and home-screen icons read the 192 and 512 PNGs from your web app manifest. Generate both, point the manifest at them, and the install icon looks sharp."
+      },
+      {
+        "title": "iOS home-screen shortcuts",
+        "body": "When someone adds your page to their iPhone home screen, iOS uses the 180×180 apple-touch-icon. Without it, iOS just screenshots the page, which rarely looks good."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a favicon?",
+        "body": "A favicon is the small icon a browser shows next to a page title in the tab, in the bookmark list, and in history. The name is short for 'favorite icon', from the early days when it appeared mostly in bookmarks. Today the same idea covers a wider set of icons: the tab mark, the icon iOS uses for a home-screen shortcut, and the larger icons Android and progressive web apps use when someone installs your site. They are all just square images at fixed sizes, referenced from your page <head> or a web app manifest."
+      },
+      {
+        "heading": "Which favicon sizes do I actually need?",
+        "body": "For browser tabs and bookmarks you want 16×16 and 32×32. Apple devices use a 180×180 apple-touch-icon for home-screen shortcuts. If you support installable web apps, the manifest needs 192×192 and 512×512. The old approach was a single multi-size .ico file, and that still works for very old browsers, but most modern sites just ship PNGs plus a small manifest. If you only had time for two files, 32×32 and 180×180 cover the everyday cases; add 192 and 512 the moment you care about installs."
+      },
+      {
+        "heading": "How to add a favicon to your site",
+        "body": "Put the PNG files in your site root or an /icons folder. In the page <head>, add <link rel=\"icon\" sizes=\"32x32\" href=\"/favicon-32.png\"> for the tab icon and <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\"> for iOS. For installable apps, list the 192 and 512 PNGs inside a site.webmanifest file and reference it with <link rel=\"manifest\" href=\"/site.webmanifest\">. The generated snippet here already wires these up, so you can paste it and swap in your filenames."
+      }
+    ],
+    "faqTitle": "Favicon generator FAQ",
     "faqs": [
       {
-        "q": "What sizes do I need in 2026?",
-        "a": "32×32 (tabs), 180×180 (iOS), 192/512 (PWA). 16×16 for bookmarks, 48×48 for Windows."
+        "q": "What size should a favicon be?",
+        "a": "There is no single size. Generate 16×16 and 32×32 for browser tabs and bookmarks, 180×180 for the iOS apple-touch-icon, and 192×192 plus 512×512 for Android and PWA installs. Starting from a 512×512 source keeps every scaled-down version crisp."
       },
       {
-        "q": "Do I still need .ico?",
-        "a": "No for modern browsers. IE11 still asks for /favicon.ico if you need it."
+        "q": "Do I need an .ico file?",
+        "a": "Not for modern browsers, which happily read PNG icons. The .ico format is the old multi-size container, and a /favicon.ico in your root is still a safe fallback for very old browsers. Most current sites ship PNGs plus a web app manifest instead."
       },
       {
-        "q": "SVG favicon — better?",
-        "a": "Better for flat logos. Worse for photographic logos."
+        "q": "How do I add a favicon in HTML?",
+        "a": "Put the PNGs in your site root, then add <link rel=\"icon\" sizes=\"32x32\" href=\"/favicon-32.png\"> and <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\"> inside <head>. For PWA install icons, reference the 192 and 512 PNGs from a site.webmanifest. The tool gives you this snippet to paste."
       },
       {
-        "q": "Is anything uploaded?",
-        "a": "No. Canvas resizing in your browser."
+        "q": "Why is my favicon not showing up?",
+        "a": "Browsers cache favicons hard, so the most common cause is an old cached icon. Try a hard refresh, open the page in a private window, or load the icon URL directly to confirm it exists. Also check that the <link> path matches where the file actually lives."
       },
       {
-        "q": "Non-square logo?",
-        "a": "The tool center-crops to square before scaling."
+        "q": "What is the best source image for a favicon?",
+        "a": "A square image, at least 512×512, with a simple design that stays readable when shrunk to 16 pixels. Fine detail and small text disappear at tab size, so a bold mark or single letter usually reads better than a full logo with a tagline."
       },
       {
-        "q": "Light and dark mode?",
-        "a": "Use a PNG with a colored badge, or SVG with prefers-color-scheme."
+        "q": "What is an apple-touch-icon?",
+        "a": "It is the 180×180 icon iOS uses when someone adds your site to their home screen. You reference it with <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"...\">. Without one, iOS just takes a screenshot of the page, which usually looks rough as an icon."
       },
       {
-        "q": "What HTML do I need?",
-        "a": "The generated snippet wires up <link rel=\"icon\">, Apple touch icon, and manifest."
+        "q": "Which icons do I need for a PWA?",
+        "a": "Android and progressive web apps read 192×192 and 512×512 PNGs from your web app manifest. The 192 is the home-screen icon and the 512 is used for the splash and install prompt. List both in the manifest's icons array with their sizes."
       },
       {
-        "q": "Need a manifest.json?",
-        "a": "Only for PWA install prompt."
+        "q": "Can a favicon have a transparent background?",
+        "a": "Yes. PNG supports transparency, so the icon can sit on the browser's own tab background. For Apple touch icons, iOS adds rounded corners and a solid background anyway, so a transparent area there may render on white."
+      },
+      {
+        "q": "Is my image uploaded anywhere?",
+        "a": "No. The resizing runs in your browser on a canvas, so the source image stays on your device. If you choose to host the output for a shareable link, only then is a file sent to our CDN."
+      },
+      {
+        "q": "My logo is not square. What happens?",
+        "a": "Favicons are square, so a wide or tall logo will be center-cropped before scaling. For the best result, start from a square version or one with even padding so nothing important sits near the edges."
+      },
+      {
+        "q": "Should I use an SVG favicon?",
+        "a": "An SVG icon scales cleanly and supports light and dark variants with prefers-color-scheme, which is great for flat logos. Photographic or highly detailed marks do better as PNGs. You can ship an SVG plus PNG fallbacks for the sizes that need them."
+      },
+      {
+        "q": "Do I need a manifest.json?",
+        "a": "Only if you want your site to be installable as a PWA. The manifest (often named site.webmanifest) lists the 192 and 512 icons and controls the install name and theme. For a plain website, the <link rel=\"icon\"> and apple-touch-icon tags are enough."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Need favicons hosted?",
     "ctaBody": "Upload them to our CDN for fast delivery.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Generador de Favicon — 100% en el navegador | Todos los tamaños + HTML",

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Resizer — 100% Browser | Free, Unlimited",
+    "metaTitle": "Image Resizer - 100% Browser | Free, Unlimited",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-compressor", "label": "Image compressor" },
@@ -19,79 +19,195 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "Image Resizer",
     "h1Highlight": "exact pixels, exact ratio.",
-    "intro": "Scale images by width, height, or percent. Aspect-ratio lock, batch support, zero upload.",
-    "howTitle": "How It Works",
+    "intro": "Need a photo at a specific pixel size? Drop it in the box above, type a width or a height, and the picture scales to fit while the other side adjusts on its own so nothing looks stretched. It runs in your browser on JPG, PNG, WebP and GIF files up to 10 MB. Download the result, and if you want a link to share, send it through the main uploader to get an https URL.",
+    "specsTitle": "Image resizer at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Resized image (+ optional link)"
+      }
+    ],
+    "howTitle": "How to resize an image",
     "steps": [
       {
-        "title": "Drop images",
-        "body": "Drag PNG / JPG / WebP files into the drop zone."
+        "title": "Drop your file in",
+        "body": "Drag a photo onto the box or click to pick one. JPG, PNG, WebP and GIF all work, up to 10 MB each. The original stays untouched on your device."
       },
       {
-        "title": "Pick a mode & value",
-        "body": "Enter a target width, height, or percentage."
+        "title": "Set a width or height",
+        "body": "Type the size you want in pixels, or use a percentage to shrink by a set amount. With aspect ratio locked, the other dimension fills in automatically so the image keeps its shape."
       },
       {
-        "title": "Download",
-        "body": "Each output shows the new dimensions and file size."
+        "title": "Download or get a link",
+        "body": "Save the resized file to your device. Want to share it? Send it through the main uploader and you get a direct https link you can paste anywhere."
       }
     ],
-    "whyTitle": "Why resize in browser",
+    "whyTitle": "Why resize before you post",
     "whyItems": [
       {
-        "title": "Exact sizes for platforms",
-        "body": "Instagram 1080, eBay 1600, LinkedIn 1200 — hit the spec."
+        "title": "Hit a platform's exact size",
+        "body": "Instagram wants 1080 px square, YouTube thumbnails are 1280x720, an Open Graph card is 1200x630. Matching the spec yourself beats letting a site crop or squash your image for you."
       },
       {
-        "title": "Batch shrinking",
-        "body": "Percent-scale many photos at once before upload."
+        "title": "Smaller files load faster",
+        "body": "A 4000 px phone photo is overkill for a 800 px blog column. Scaling it down first cuts the file size and the page loads quicker."
       },
       {
-        "title": "No quality drop from uploading",
-        "body": "Resize first; services recompress less."
+        "title": "Nothing leaves your device",
+        "body": "The resizing happens in your browser, so the photo is not sent to a server just to change its dimensions. That keeps private shots private."
       },
       {
-        "title": "Privacy",
-        "body": "Files never leave your device."
+        "title": "Keep the whole picture",
+        "body": "Resizing scales the full frame down. Unlike cropping, you do not lose the edges, so the composition stays the same, just smaller."
       }
     ],
-    "faqTitle": "FAQ",
+    "comparisonTitle": "Common target sizes and what they are for",
+    "comparisonIntro": "Most resizing jobs are about hitting a known size for a platform. Here are sizes people reach for most often, with the dimensions and where each one fits.",
+    "comparisonColumns": [
+      "Target size",
+      "Dimensions",
+      "Common use"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Instagram square",
+          "1080x1080",
+          "Square feed post or profile-friendly image"
+        ]
+      },
+      {
+        "cells": [
+          "YouTube thumbnail",
+          "1280x720",
+          "Video thumbnail, also standard 720p"
+        ]
+      },
+      {
+        "cells": [
+          "Full HD",
+          "1920x1080",
+          "Wallpaper, slide background, 1080p screen"
+        ]
+      },
+      {
+        "cells": [
+          "Social share card",
+          "1200x630",
+          "Open Graph and Twitter link previews"
+        ]
+      },
+      {
+        "cells": [
+          "Facebook cover",
+          "851x315",
+          "Page cover banner"
+        ]
+      }
+    ],
+    "useCasesTitle": "When resizing helps",
+    "useCasesIntro": "A quick size change solves a lot of everyday image problems:",
+    "useCases": [
+      {
+        "title": "Social posts and thumbnails",
+        "body": "Get a photo to 1080x1080 for Instagram or 1280x720 for a YouTube thumbnail so the platform shows it the way you intended instead of auto-cropping it."
+      },
+      {
+        "title": "Faster web pages",
+        "body": "Shrink large camera images down to the width your layout actually uses. The page weighs less and visitors are not downloading pixels they never see."
+      },
+      {
+        "title": "Profile and avatar images",
+        "body": "Many sites want a small square avatar. Scale a photo down to something like 400x400 before you upload so it stays sharp at the size it is shown."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What does resizing an image do?",
+        "body": "Resizing changes how many pixels an image is made of. When you set a new width or height, the tool redraws the whole picture at that size, so a 4000x3000 photo can become 800x600 or 1600x1200. Every part of the frame is still there, just rendered with more or fewer pixels. With aspect ratio locked, the width and height shrink together, so a wide photo stays wide and a portrait stays tall. That lock is what keeps people and objects looking normal instead of squashed. You can unlock it if you genuinely need an exact size and do not mind some stretching."
+      },
+      {
+        "heading": "Resize vs crop vs compress",
+        "body": "These three get mixed up a lot. Resizing changes the pixel dimensions while keeping the entire image, so the whole scene stays visible at a new size. Cropping cuts pixels off the edges to change the framing or the shape, so you lose whatever was outside the crop. Compressing lowers the file size at the same dimensions by storing the image more efficiently, which can soften fine detail but does not change width or height. If you want a specific size, resize. If you want to remove distracting edges, crop. If the file is just too heavy, compress."
+      },
+      {
+        "heading": "Will resizing reduce quality?",
+        "body": "Making an image smaller is generally safe and looks crisp, because you are throwing away pixels you did not need and the result stays sharp. Going the other way is the problem. Upscaling past the original resolution looks soft because there is no extra detail to add, so the tool can only guess at the in-between pixels and the edges go fuzzy. A 500 px image blown up to 2000 px will never match a photo shot at 2000 px. For best results, start from the largest version you have and scale down to the size you need rather than up."
+      }
+    ],
+    "faqTitle": "Image resizer FAQ",
     "faqs": [
       {
-        "q": "Does it preserve aspect ratio?",
-        "a": "By default, yes. Lock Ratio is on."
+        "q": "How do I resize an image without distorting it?",
+        "a": "Keep aspect ratio locked, which is on by default. Set just the width or just the height and let the other side adjust on its own. That way the proportions stay the same and nothing looks stretched."
       },
       {
-        "q": "What resampling is used?",
-        "a": "The browser's high-quality image smoothing — bicubic or Lanczos-like."
+        "q": "Can I resize to exact dimensions?",
+        "a": "Yes. Type the width and height you want in pixels. If you need an exact size that does not match the original proportions, unlock the aspect ratio, but be aware the image may stretch slightly to fill those dimensions."
       },
       {
-        "q": "Can I upscale?",
-        "a": "Yes, but browser resampling cannot invent detail."
+        "q": "Does it keep the aspect ratio?",
+        "a": "By default, yes. When you change one dimension the other scales to match, so a 3:2 photo stays 3:2. You can turn the lock off if you want to force an exact width and height."
       },
       {
-        "q": "Does it upload anything?",
-        "a": "No. All resizing happens in-browser via canvas."
+        "q": "Will resizing blur my image?",
+        "a": "Scaling down stays sharp. Scaling up past the original size looks soft, because there is no extra detail to fill in. Start from the biggest version of the image you have and resize down for the cleanest result."
       },
       {
-        "q": "Does it preserve format?",
-        "a": "Yes — PNG stays PNG, JPG stays JPG, WebP stays WebP."
+        "q": "What formats can I resize?",
+        "a": "JPG, PNG, WebP and GIF, up to 10 MB per file. The output keeps the same format, so a PNG stays a PNG and a JPG stays a JPG."
       },
       {
-        "q": "What happens to EXIF?",
-        "a": "Stripped — canvas re-encoding drops all metadata."
+        "q": "How do I resize a photo for Instagram?",
+        "a": "Instagram square posts are 1080x1080. Set the width to 1080 with the ratio locked, then crop beforehand if your photo is not already square. For portrait posts, 1080x1350 is the taller option."
       },
       {
-        "q": "Percent or pixels?",
-        "a": "Pixels when a platform has a spec. Percent for batch-shrinking."
+        "q": "How do I make a 1280x720 YouTube thumbnail?",
+        "a": "Set the width to 1280 and the height to 720. If your image is not already 16:9, crop it to that shape first so it does not stretch when you hit the exact size."
       },
       {
-        "q": "Batch different sizes?",
-        "a": "Not at once — this tool applies one rule. Run twice for split outputs."
+        "q": "Does the tool upload my image anywhere?",
+        "a": "No. The resizing runs in your browser, so the photo is not sent to a server. If you later want a shareable link, you choose to send the result through the main uploader."
+      },
+      {
+        "q": "Can I get a link to the resized image?",
+        "a": "Yes. After resizing, download the file and run it through the main uploader on this site. You get a direct https link that embeds in Discord, Reddit, forums and HTML."
+      },
+      {
+        "q": "Should I resize by pixels or percentage?",
+        "a": "Use pixels when a platform gives you a specific size to hit. Use a percentage when you just want everything smaller, like shrinking a batch of camera photos to half their size."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "10 MB per image, which covers almost any photo, screenshot or graphic. If a file is bigger, compress it first and then resize."
+      },
+      {
+        "q": "What happens to EXIF data?",
+        "a": "It is dropped. Re-encoding the image during resize removes camera metadata like location and shutter settings, which is handy if you would rather not share that."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Host the resized image?",
     "ctaBody": "Click Get URL on the main uploader.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Redimensionador de imágenes — 100% en navegador | Gratis, ilimitado",

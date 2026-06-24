@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Anonymous Image Upload — No Account Required | ImageToURL",
+    "metaTitle": "Anonymous Image Upload - No Account Required | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "free-image-hosting", "label": "Free image hosting" },
@@ -18,8 +18,8 @@ export const content: LandingContentMap = {
     "schemaDescription": "Upload images anonymously without creating an account with no signup, email, or tracking required.",
     "badge": "ANONYMOUS UPLOAD",
     "h1Pre": "Anonymous Image Upload",
-    "h1Highlight": "— no account needed.",
-    "intro": "No signup forms, no email addresses, and no tracking cookies. Just drag, drop, and get your shareable image link instantly.",
+    "h1Highlight": " - no account needed.",
+    "intro": "No signup form, no email box, no profile to fill out. Drag an image in, copy the link, and you're done in seconds. Anonymous just means there's no account tied to the upload, so it's quick - but it also means the link is public to anyone who has it. Worth knowing before you share something sensitive.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -46,40 +46,100 @@ export const content: LandingContentMap = {
         "body": "We never ask for your email address, ensuring your inbox stays free from marketing spam."
       },
       {
-        "title": "No Tracking",
-        "body": "We do not use tracking cookies or analytics pixels, keeping your upload activity completely private."
+        "title": "No Profile, No History",
+        "body": "Uploads aren't tied to an account, so there's no public gallery of your files and nothing linking one upload to the next."
       },
       {
         "title": "Instant Access",
-        "body": "Experience zero friction; open the page, drop your file, and get your link in under 10 seconds."
+        "body": "Zero friction: open the page, drop your file, and copy the link in under 10 seconds. No verification step in the way."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
-        "q": "Do I need to create an account to upload images?",
-        "a": "No. ImageToURL requires no account, no registration, and no email address. Simply drag and drop your image and get a link instantly."
+        "q": "Do I need an account to upload?",
+        "a": "No. There's no registration and no email to hand over. Drag and drop your image and you get a link straight away."
       },
       {
-        "q": "Does ImageToURL track who uploads images?",
-        "a": "We do not associate uploads with user identities. There are no user accounts, no cookies tracking your history, and no personal data collected."
+        "q": "What does 'anonymous' actually mean here?",
+        "a": "It means the upload isn't attached to a user account or profile. There's no login, no public gallery under your name, and nothing connecting one upload to another."
       },
       {
-        "q": "Are anonymous uploads permanent?",
-        "a": "Yes. Anonymous uploads receive the same permanent URLs as any other upload with no reduced quality or shorter retention."
+        "q": "Can someone trace the image back to me?",
+        "a": "There's no account or name on the file. We do log a request IP briefly to stop abuse and enforce daily limits, but that isn't shown to anyone. For real privacy, strip EXIF metadata first, since a photo can carry GPS and camera details on its own."
       },
       {
-        "q": "Can someone trace an uploaded image back to me?",
-        "a": "We do not store IP addresses or identifying information. We recommend stripping EXIF metadata before uploading if your image contains location data."
+        "q": "Who can see my anonymous upload?",
+        "a": "Anyone who has the link. The URL isn't listed or searchable, but it isn't secret either, so treat anything you upload as public and don't post images you'd want kept private."
       },
       {
-        "q": "Is ImageToURL free for anonymous uploads?",
-        "a": "Yes. ImageToURL is completely free for all users with no premium tiers or hidden costs."
+        "q": "How long do anonymous links last?",
+        "a": "Until the monthly storage cleanup, so a couple of weeks at minimum and usually longer. Need one that sticks around? Create a free account and choose 'keep forever' when you upload."
+      },
+      {
+        "q": "Should I keep my own copy of the file?",
+        "a": "Yes. Because anonymous links are temporary, hold onto the original on your device so you can re-upload if the link is eventually cleared."
+      },
+      {
+        "q": "Does it compress or watermark my image?",
+        "a": "No. You get the same file back at full resolution, with no re-compression and no watermark stamped on it."
+      },
+      {
+        "q": "Will the anonymous link embed in Discord, Reddit and forums?",
+        "a": "Yes. The URL points right at the image file, so it shows up inline as the picture rather than a download button or a preview card."
+      },
+      {
+        "q": "What formats and size can I upload anonymously?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The anonymous link is identical in quality to a signed-in one; the only difference is how long it lasts."
+      },
+      {
+        "q": "Is anonymous upload free?",
+        "a": "Yes, completely. There's no premium tier and no hidden cost. Signing in is optional and only adds the 'keep forever' choice."
       }
     ],
     "ctaTitle": "Upload anonymously in seconds",
-    "ctaBody": "No account, no email, no tracking—just drop your image and get a link.",
-    "ctaButton": "Upload Now"
+    "ctaBody": "No account, no email, no tracking - just drop your image and get a link.",
+    "ctaButton": "Upload Now",
+    "specsTitle": "Anonymous upload at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Email", "value": "Never asked" },
+      { "label": "Max size", "value": "10 MB per file" },
+      { "label": "Visibility", "value": "Public to anyone with the link" }
+    ],
+    "comparisonTitle": "Which hosts let you skip the account",
+    "comparisonIntro": "Anonymous upload sounds standard, but it isn't. Imgur dropped it in 2023, and others gate features behind a login. Here's who still lets you upload without signing in.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] }
+    ],
+    "useCasesTitle": "When skipping the account makes sense",
+    "useCasesIntro": "No-login upload fits the moments where signing up would just be in the way:",
+    "useCases": [
+      { "title": "One-off shares", "body": "A screenshot for a support chat or a forum reply doesn't need an account behind it. Drop it, copy the link, move on." },
+      { "title": "Throwaway and burner posts", "body": "Sharing something you don't want connected to your usual handle? No profile means there's no public history tying the upload to you." },
+      { "title": "Quick links from a borrowed device", "body": "On someone else's computer you may not want to log in anywhere. Anonymous upload gets you a link without leaving an account signed in." }
+    ],
+    "sections": [
+      { "heading": "What anonymous upload does and doesn't hide", "body": "Anonymous here means no account, no email and no public profile attached to your file. What it doesn't mean is invisible. To keep the service from being abused we briefly log the request IP to enforce daily limits, and that's normal for any free host. More importantly, the image itself can give you away: photos often carry EXIF metadata with GPS coordinates, a device model and a timestamp. If privacy matters, strip that metadata before uploading. Anonymous lowers the friction, but it isn't a cloak." },
+      { "heading": "Anonymous links are public, so plan for it", "body": "An anonymous URL isn't listed in a gallery and isn't indexed, but anyone you give it to can open it and pass it on. There's no password on the file. Treat every anonymous upload as public: fine for memes, screenshots and art you're sharing anyway, not fine for IDs, private documents or anything you'd regret being seen. If you need access control, that's a different kind of tool than a free image host." },
+      { "heading": "How long an anonymous link lasts", "body": "Skipping the account has one trade-off: lifetime. Anonymous uploads live until the next monthly storage cleanup, which is at least a couple of weeks and often more, but not forever. For a one-off share that's plenty. If you need the link to stay put - say it's going into documentation or a portfolio - create a free account and choose 'keep forever' instead. Keep your own copy of the file regardless, so you can re-upload if a temporary link is cleared." }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Subida de imágenes anónima — Sin cuenta necesaria | ImageToURL",

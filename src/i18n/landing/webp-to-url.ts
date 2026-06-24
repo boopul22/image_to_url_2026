@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "WebP to URL — Convert WebP Images to Shareable Links",
+    "metaTitle": "WebP to URL - Convert WebP Images to Shareable Links",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-to-url", "label": "Image to URL" },

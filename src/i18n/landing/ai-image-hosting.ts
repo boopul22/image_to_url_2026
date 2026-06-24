@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "AI Image Hosting — Host AI-Generated Art Free | ImageToURL",
+    "metaTitle": "AI Image Hosting - Host AI-Generated Art Free | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "free-image-hosting", "label": "Free image hosting" },
@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "AI CREATORS",
     "h1Pre": "AI Image Hosting",
     "h1Highlight": "for creators.",
-    "intro": "Your Midjourney masterpieces and DALL-E creations deserve a permanent home. Upload AI-generated art and get shareable, direct URLs instantly — no signup, no compression, no limits.",
+    "intro": "Your Midjourney renders, DALL-E experiments and Stable Diffusion batches get stuck inside the app that made them. Upload one here and you get a clean direct link you can paste into Twitter, Reddit, a portfolio or a Discord that isn't the Midjourney server. No signup to get a link, no compression on the way through, and full resolution kept. Sign in if you want the link to stick around for good.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -43,39 +43,99 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Build Your Portfolio",
-        "body": "Curate your best AI art with permanent links. Embed them in portfolio sites, Notion pages, or Behance — your work stays online forever."
+        "body": "Curate your best AI art with permanent links. Embed them in portfolio sites, Notion pages, or Behance - your work stays online forever."
       },
       {
         "title": "Zero Compression",
-        "body": "Every detail in your AI art matters. We store and deliver your images at their original resolution and quality — no artifacts or quality loss."
+        "body": "Every detail in your AI art matters. We store and deliver your images at their original resolution and quality - no artifacts or quality loss."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
         "q": "Can I host Midjourney images for free?",
-        "a": "Yes. Upload any Midjourney image to ImageToURL and get a permanent, shareable URL instantly. No account required, no watermarks added."
+        "a": "Yes. Save the upscale from Discord, drop it here, and you get a direct shareable URL in seconds. No account needed to grab a link, and no watermark is added."
       },
       {
-        "q": "Does ImageToURL compress my AI-generated art?",
-        "a": "No. We store and serve your images in their original quality. Every pixel of your AI art is preserved exactly as you created it."
+        "q": "How do I get a Midjourney image out of Discord?",
+        "a": "Open the upscaled image in Discord, save it to your device, then upload that file here. You get back a normal https link that works anywhere, not just inside the Midjourney server."
       },
       {
-        "q": "Do AI image URLs expire?",
-        "a": "No. Every URL we generate is permanent. Your AI art will remain accessible at the same link forever, with no expiration dates."
+        "q": "Does this compress my AI art?",
+        "a": "No. The file is served at the resolution you uploaded, with no re-encoding. Fine detail, fur, text and sharp edges from your render stay intact."
+      },
+      {
+        "q": "Do the image links expire?",
+        "a": "Anonymous uploads last until the monthly storage cleanup, so a couple of weeks at least. For a portfolio piece you want to keep, sign in with a free account and choose 'keep forever' so the link doesn't disappear."
       },
       {
         "q": "Can I use hosted AI images in my portfolio?",
-        "a": "Absolutely. Our direct image URLs work perfectly in portfolio websites, Notion pages, personal blogs, and any platform that supports image embedding."
+        "a": "Yes. The direct URL works in portfolio sites, Notion pages, Behance embeds, personal blogs and anywhere that accepts an image link. Use a signed-in 'keep forever' link for work you want online long-term."
       },
       {
-        "q": "Which AI image generators are supported?",
-        "a": "ImageToURL works with images from any AI generator including Midjourney, DALL-E, Stable Diffusion, Leonardo AI, Adobe Firefly, and all others."
+        "q": "Which AI image generators does it work with?",
+        "a": "Any of them. The output is just a PNG, JPG or WebP, so Midjourney, DALL-E, Stable Diffusion, Leonardo, Adobe Firefly, Flux and the rest all upload the same way."
+      },
+      {
+        "q": "What about transparent PNGs from my generator?",
+        "a": "Transparency is preserved. Upload the PNG and the alpha channel comes through, so cut-out characters and logos keep their see-through background."
+      },
+      {
+        "q": "Will the link embed inline on Discord and Reddit?",
+        "a": "Yes. Because the URL points straight at the image file, it renders as the picture inline instead of a download or a gallery page."
+      },
+      {
+        "q": "Is there a file size limit for AI renders?",
+        "a": "10 MB per file, which covers most 1024px to 2048px outputs. If a big upscale is larger, compress it lightly first and then upload."
+      },
+      {
+        "q": "Do you claim any rights over images I upload?",
+        "a": "No. Your art stays yours. Just remember anonymous links are public to anyone who has the URL, so keep a private copy of anything you're not ready to share."
       }
     ],
     "ctaTitle": "Give your AI art a permanent home",
     "ctaBody": "Upload your AI-generated images and get instant, shareable links for free, with no account needed.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "AI image hosting at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "PNG, JPG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB per render" },
+      { "label": "Output", "value": "Direct CDN link" }
+    ],
+    "comparisonTitle": "Where AI artists host their renders",
+    "comparisonIntro": "AI output is just an image file, so any host works in theory. In practice you care about quality kept, clean hotlinks for sharing, and how long the link lives. Here's the rundown.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "useCasesTitle": "What AI creators do with a direct link",
+    "useCasesIntro": "Once your render has its own URL, it leaves the generator and goes wherever you share work:",
+    "useCases": [
+      { "title": "Posting outside Discord", "body": "Midjourney lives in Discord by default. A direct link lets you drop the same image into Twitter, Reddit or a forum without screenshotting a chat window." },
+      { "title": "Portfolios and case studies", "body": "Embed your best renders in a Notion page, a portfolio site or a write-up of your prompt workflow. Sign in and keep them so the embeds don't break." },
+      { "title": "Prompt sharing and feedback", "body": "Paste the link alongside your prompt in a critique thread or a prompt-sharing community so people see the result at full quality." }
+    ],
+    "sections": [
+      { "heading": "Why AI images get stuck inside the app", "body": "Most generators hand you the picture inside their own walls. Midjourney sits in a Discord channel, some web tools only show the image behind a login, and a saved file on your desktop isn't something you can paste into a forum. Hosting solves that last step: it turns the render into a plain https address that any site, chat or document can load. You're not exporting anything fancy, just giving the file a home on the open web so a link is all you need to share it." },
+      { "heading": "Does hosting change my render's quality?", "body": "No. The file is stored and served exactly as uploaded, with no re-compression and no resizing. That matters for AI art because the texture, fine linework and any embedded text are the parts that show compression damage first. A host that quietly scales images down to 1280px would soften a detailed 2K upscale. Here a PNG stays a PNG and a transparent background stays transparent, so what you generated is what your audience sees." },
+      { "heading": "Keeping a render online for the long run", "body": "If a piece is going in a portfolio or a tutorial, you want its link to outlast the month. Anonymous uploads are temporary - handy for a quick share, but cleared on the monthly sweep. Create a free account and mark the upload 'keep forever' and the link stays good. Either way, hold onto your original file and your prompt, since the source render is the one thing a host can't regenerate for you." }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes IA — Aloja arte generado por IA gratis | ImageToURL",

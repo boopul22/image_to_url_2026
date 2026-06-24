@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "GIF to URL — Get a Direct Link That Stays Animated | ImageToURL",
+    "metaTitle": "GIF to URL - Get a Direct Link That Stays Animated | ImageToURL",
     "metaDescription": "Turn a GIF to URL or a GIF to link in seconds. The direct link plays the animation inline in Discord, Reddit, and forums. Free, no signup, GIFs up to 10MB.",
     "relatedTitle": "Related image tools",
     "related": [
@@ -17,7 +17,7 @@ export const content: LandingContentMap = {
     "schemaName": "GIF to URL Converter",
     "schemaDescription": "Convert a GIF to a URL or direct link that stays animated. Free hosting with no signup, no watermark, and inline playback in Discord, Reddit, and forums.",
     "badge": "GIF HOSTING",
-    "h1Pre": "GIF to URL — ",
+    "h1Pre": "GIF to URL -",
     "h1Highlight": "a direct link that stays animated",
     "intro": "Our GIF to URL tool hands you a direct link that still plays the animation, not a frozen first frame. Drop the GIF to link straight into Discord, Reddit, or a forum and it loops inline like it should. No signup, no watermark, and nothing gets compressed.",
     "howTitle": "How the GIF to URL tool works",
@@ -403,7 +403,7 @@ export const content: LandingContentMap = {
     "schemaName": "GIF to URL",
     "schemaDescription": "アニメーションGIFをアップロードして、アニメーションを完全に保持したまま、すぐに共有可能な直リンクを取得できます。",
     "badge": "GIFホスティング",
-    "h1Pre": "GIF to URL",
+    "h1Pre": "GIF to URL -",
     "h1Highlight": "— アニメーションをそのまま保持。",
     "intro": "アニメーションGIFをアップロードして、永続的な直リンクを即座に取得。すべてのフレームが保持され、高速なCDN配信により、どこでも無料で埋め込み可能です。",
     "howTitle": "利用方法",

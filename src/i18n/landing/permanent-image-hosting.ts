@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL Permanent — Hosting That Never Expires",
+    "metaTitle": "Image to URL Permanent - Hosting That Never Expires",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "free-image-hosting", "label": "Free image hosting" },
@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "PERMANENT LINKS",
     "h1Pre": "Image to URL,",
     "h1Highlight": "permanent and forever.",
-    "intro": "Upload once, share forever. Your image to URL link is permanent and will not expire, break, or disappear.",
+    "intro": "Tired of image links that vanish a month after you post them? Upload here and, with a free account, you can mark any file 'keep forever' so its link stays put for good. Even anonymous uploads last at least a couple of weeks, not hours, before the monthly cleanup. Either way you get a clean direct URL that embeds as the real image, no compression and no watermark.",
     "howTitle": "The Link Rot Problem",
     "steps": [
       {
@@ -38,12 +38,16 @@ export const content: LandingContentMap = {
     "whyTitle": "Our Permanence Guarantee",
     "whyItems": [
       {
-        "title": "No Expiration Dates",
-        "body": "Your URLs have no time limits. No 30-day, 90-day, or 1-year expirations. Once generated, a link works permanently."
+        "title": "Keep forever when you sign in",
+        "body": "Make a free account and you can flag any upload 'keep forever', so the link never gets swept up. There's no 30-day, 90-day or 1-year timer counting down on those files."
       },
       {
-        "title": "Enterprise-Grade Storage",
-        "body": "Images are stored on infrastructure designed for 99.999999999% durability, protected against hardware failures."
+        "title": "Weeks, not hours, for anonymous links",
+        "body": "Don't want to sign in? Anonymous uploads still stay live until the next monthly storage cleanup, so you get a couple of weeks at minimum, usually longer. Keep your own copy as a backup."
+      },
+      {
+        "title": "Durable cloud storage",
+        "body": "Files sit on resilient object storage built to survive hardware failures, so a kept link keeps resolving to the same image you uploaded."
       },
       {
         "title": "Original Quality Preserved",
@@ -53,29 +57,85 @@ export const content: LandingContentMap = {
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
-        "q": "What does \"image to URL permanent\" actually mean here?",
-        "a": "It means the URL we generate for your image keeps working forever. There is no expiration timer, no inactivity sweep, and no plan to migrate URLs."
+        "q": "How do I get a link that stays forever?",
+        "a": "Sign in with a free account and pick 'keep forever' when you upload. That tells us to leave the file out of the monthly storage cleanup, so the URL keeps resolving for good."
       },
       {
-        "q": "Do image URLs on ImageToURL really never expire?",
-        "a": "Yes. Once you upload an image, the URL is permanent. There are no expiration dates, no auto-deletion after inactivity, and no time-based limits."
+        "q": "How long do anonymous uploads last?",
+        "a": "Until the next monthly storage cleanup, which works out to at least a couple of weeks and often more. If you need a guarantee, sign in and choose 'keep forever' instead."
       },
       {
-        "q": "Why do other image hosts delete images?",
-        "a": "Many free image hosts delete images after periods of inactivity or change their terms. We built ImageToURL specifically to solve this problem."
+        "q": "Why do other free image hosts delete images?",
+        "a": "Many sweep files after a stretch of inactivity, cap free storage, or simply change their terms. Signing in and marking a file 'keep forever' here is the way to avoid that fate."
       },
       {
-        "q": "Can I use permanent image URLs in documentation?",
-        "a": "Absolutely. Permanent URLs are ideal for technical documentation, README files, and wikis where broken images cause confusion."
+        "q": "Does keeping a link forever cost anything?",
+        "a": "No. The account is free and so is the 'keep forever' option. There are no paid tiers or hidden fees."
       },
       {
-        "q": "Is there a limit on how many permanent images I can host?",
-        "a": "There are no limits on the number of images you can host. Upload as many as you need — every single one gets a permanent, shareable URL."
+        "q": "Can I use these links in documentation and READMEs?",
+        "a": "Yes, and it's a good fit. A kept link is stable, so technical docs, README files and wikis won't sprout broken images later. Use a signed-in 'keep forever' upload for anything long-lived."
+      },
+      {
+        "q": "Does the image keep its original quality?",
+        "a": "Yes. There's no compression, no re-encoding and no watermark. The file is served exactly as you uploaded it, at full resolution."
+      },
+      {
+        "q": "Will the link break if I link to it from many places?",
+        "a": "No. The URL points straight at the file and is served over HTTPS from a global network, so it loads the same whether one page or a hundred embed it."
+      },
+      {
+        "q": "What formats and sizes can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it hotlinks and embeds like the original."
+      },
+      {
+        "q": "Should I still keep my own copy?",
+        "a": "Yes. Even with 'keep forever', it's smart to hold onto the original file. Anonymous links in particular are temporary, so a local backup means you can always re-upload."
       }
     ],
     "ctaTitle": "Upload images that last forever",
-    "ctaBody": "No expiration dates, no link rot, and no hidden fees—just permanent image URLs in seconds.",
-    "ctaButton": "Upload Now"
+    "ctaBody": "No expiration dates, no link rot, and no hidden fees - just permanent image URLs in seconds.",
+    "ctaButton": "Upload Now",
+    "specsTitle": "Permanent image hosting at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Only to keep links forever" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Link lifetime", "value": "Weeks anonymous, forever signed in" }
+    ],
+    "comparisonTitle": "How long links last, host by host",
+    "comparisonIntro": "Lifetime is where free image hosts differ most. Some keep files for good, some expire them, and some quietly tie everything to an account. Here's the honest picture.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] }
+    ],
+    "useCasesTitle": "When you want a link that won't rot",
+    "useCasesIntro": "A kept link earns its keep anywhere a broken image would be a problem later:",
+    "useCases": [
+      { "title": "Docs and READMEs", "body": "Screenshots in a README or a help center need to still load a year from now. Sign in, mark them 'keep forever', and they stay put." },
+      { "title": "Forum and wiki posts", "body": "Old threads get read for years. A stable link means your diagram or screenshot is still there long after you posted it." },
+      { "title": "Product listings and signatures", "body": "Marketplace photos and email-signature logos look broken the moment a link dies. A kept URL keeps them showing up." }
+    ],
+    "sections": [
+      { "heading": "What 'permanent' really means here", "body": "It's worth being straight about this. A signed-in upload marked 'keep forever' is left out of our monthly storage cleanup, so its link keeps working indefinitely. An anonymous upload is temporary by design: it lives until the next cleanup, which is at least a couple of weeks out and usually longer. So 'permanent' is a choice you make by signing in, not something every random upload gets automatically. If a link absolutely must survive, take the few seconds to create a free account first." },
+      { "heading": "What causes link rot, and how to dodge it", "body": "Link rot is when a URL that once showed an image stops working. It happens when a host deletes inactive files, caps free storage, rebrands, or shuts down. You can't control another company's roadmap, but you can lower the risk: keep the original file, use a signed-in 'keep forever' link for anything long-lived, and avoid pasting a throwaway anonymous URL into a page you expect to outlast the month. A local backup is the real safety net, because you can always re-upload." },
+      { "heading": "Permanent hosting vs an expiring link", "body": "An expiring link is fine for a quick share - a one-off screenshot in a chat that nobody revisits. Permanent hosting is for the opposite: documentation, portfolios, listings, anything someone might open months later. The two aren't rivals so much as different jobs. Here you get both: drop a file anonymously for the quick stuff, or sign in and keep it forever for the things that need to stick around." }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Imagen a URL permanente — Alojamiento que nunca caduca | ImageToURL",

@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "ImgBB Alternative — Faster, Cleaner, Free | ImageToURL",
+    "metaTitle": "ImgBB Alternative - Faster, Cleaner, Free | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "imgur-alternative", "label": "Imgur alternative" },
@@ -17,67 +17,203 @@ export const content: LandingContentMap = {
     "badge": "IMGBB ALTERNATIVE",
     "h1Pre": "A Better ImgBB",
     "h1Highlight": "Alternative.",
-    "intro": "Tired of ImgBB's ads, slow uploads, and compression? ImageToURL is the faster, cleaner image host — free, with permanent direct links and zero compromises.",
-    "howTitle": "How It Works",
+    "intro": "ImgBB is a fine free image host, but every upload lands on its own image page wrapped in ads, and the link you copy often points at that page rather than the file. If all you want is a clean link to drop into Discord or a forum, that gets in the way. ImageToURL skips the account and the gallery page: drop a JPG, PNG, WebP, GIF or SVG up to 10MB and you get a direct https link in about two seconds, at full quality, with no watermark and no ad page around it.",
+    "specsTitle": "ImageToURL at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link"
+      }
+    ],
+    "howTitle": "How it works",
     "steps": [
       {
-        "title": "Upload Instantly",
-        "body": "Drag and drop your images into our uploader. Our global CDN ensures your files are processed and stored in milliseconds."
+        "title": "Drop your image in",
+        "body": "Drag a file onto the box above or click to pick one from your device. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. No account screen, no email to confirm first."
       },
       {
-        "title": "Get Direct Links",
-        "body": "Receive clean, permanent direct URLs for every image. No gallery pages or ad-heavy wrappers to navigate."
+        "title": "Copy the direct link",
+        "body": "Your image lands on a global CDN and a direct link appears right away. It ends in the real file extension, so it behaves like the original file and not a page about it."
       },
       {
-        "title": "Share Anywhere",
-        "body": "Embed your images seamlessly in your apps, websites, or Discord servers with full-quality, high-speed delivery."
+        "title": "Paste it anywhere",
+        "body": "Drop the URL into Discord, a Reddit comment, a forum post, an email or an HTML img tag. It renders as the picture inline, with no ad page and no extra click for the person reading."
       }
     ],
-    "whyTitle": "Why Switch from ImgBB",
+    "whyTitle": "Why people pick a direct-link host over ImgBB",
     "whyItems": [
       {
-        "title": "Zero Ads",
-        "body": "ImgBB surrounds your content with banners and pop-ups. We provide a distraction-free environment for your images."
+        "title": "A direct link, not an image page",
+        "body": "ImgBB puts each upload on its own viewer page with ads around it. If you only want a raw link that embeds inline, that page is friction. Here you get the file URL straight up."
       },
       {
-        "title": "No Compression",
-        "body": "We never re-encode or downscale your files. Your high-resolution photos stay exactly as you uploaded them."
+        "title": "No ads in the way",
+        "body": "There is no gallery, no banners and no pop-ups wrapped around your image. The link points at the file and nothing else, so nobody you share it with sees an ad page first."
       },
       {
-        "title": "Global CDN",
-        "body": "With 300+ edge locations, your images load instantly for viewers anywhere in the world, unlike ImgBB's limited infrastructure."
+        "title": "Full quality, no watermark",
+        "body": "Your file comes back at the same resolution you uploaded, with no re-compression and no badge stamped on it. What you put in is what other people see."
       },
       {
-        "title": "Permanent Hosting",
-        "body": "Forget about auto-deletion or inactivity timers. Your links are permanent and will never expire."
+        "title": "Clear about how long links last",
+        "body": "Anonymous links stay live for at least a couple of weeks and are cleared on a monthly storage cleanup. Want one that sticks around? Make a free account and choose 'keep forever' when you upload."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "ImgBB alternatives compared",
+    "comparisonIntro": "All of these hosts will hand you a link. Where they differ is whether you need an account, how big a file you can drop, whether the link points straight at the image, and how long it stays up. Here is how a few popular options line up.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "ImageToURL",
+          "Yes",
+          "10 MB",
+          "Yes",
+          "Yes",
+          "Weeks free, forever when signed in"
+        ]
+      },
+      {
+        "cells": [
+          "ImgBB",
+          "Yes",
+          "32 MB",
+          "Yes",
+          "Yes",
+          "Permanent or optional expiry"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur",
+          "No (since 2023)",
+          "20 MB",
+          "Limited",
+          "Yes",
+          "Tied to your account"
+        ]
+      },
+      {
+        "cells": [
+          "Postimages",
+          "Yes",
+          "24 MB",
+          "Yes",
+          "No (resized to 1280px)",
+          "Permanent"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a clean direct link helps",
+    "useCasesIntro": "Once your picture has its own URL ending in the real extension, it slots into the places an ImgBB link can feel clunky:",
+    "useCases": [
+      {
+        "title": "Discord and forums",
+        "body": "Paste the link in a channel or thread and the image renders inline. No image page to open, no ads for the person reading, and no 'view on host' detour."
+      },
+      {
+        "title": "Bug reports and tickets",
+        "body": "Attach a screenshot to a GitHub issue, a support ticket or a Notion doc by dropping in the URL. It loads as the image itself, so reviewers see it without leaving the page."
+      },
+      {
+        "title": "Email and Markdown",
+        "body": "Add the link to a signature, a Markdown README or a chat message. Because it hotlinks the file directly, recipients see the picture instead of a broken preview or an ad-wrapped page."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is ImgBB?",
+        "body": "ImgBB is a free image host that has been around for years. You can upload without an account, files can be up to 32MB, and you can set an optional expiry so a link deletes itself after a chosen time. Each upload gets its own viewer page on the site, with sharing codes for forums, HTML and BBCode, and that page carries ads. It is a solid, reliable host for storing and sharing images. The one rough edge for some people is that the share flow centres on those image pages, and the link many users copy points at the page rather than straight at the file."
+      },
+      {
+        "heading": "ImgBB vs a plain direct-link host",
+        "body": "The two are built for slightly different jobs. ImgBB is part gallery: every image gets a page, sharing codes and ads around it. A direct-link host like this one has no viewer page at all. You upload a file and get a URL that ends in .jpg or .png and points at the raw image. That is the right tool when you want the picture to appear inline somewhere else, like a Discord chat or a Markdown file, rather than send someone to a separate page. If you want ImgBB's bigger 32MB cap or its built-in expiry timers, ImgBB is still worth keeping for those uploads."
+      },
+      {
+        "heading": "Is it safe to switch?",
+        "body": "For quick sharing, yes, with a couple of things to keep in mind. Every link here is served over HTTPS and points only at your file, with no redirect pages or trackers attached. Anonymous uploads are public to anyone who has the link, so do not post anything private, and keep your own copy of the original. Free links clear on a regular monthly cleanup rather than living forever, so for anything you need to keep, make a free account and mark it 'keep forever', or hold onto the source file. ImgBB stays a perfectly good host alongside this one."
+      }
+    ],
+    "faqTitle": "ImgBB alternative FAQ",
     "faqs": [
       {
-        "q": "Why should I switch from ImgBB?",
-        "a": "ImgBB has increasingly aggressive advertising, slow upload speeds, image compression that degrades quality, and limited API capabilities. ImageToURL offers a cleaner, faster experience with no ads and no compression."
+        "q": "Is ImgBB free?",
+        "a": "Yes, ImgBB is free to use, and you can upload without an account. It funds itself with ads shown on the image pages and around the site."
       },
       {
-        "q": "Is ImageToURL faster than ImgBB?",
-        "a": "Yes. ImageToURL uses a global CDN with 300+ edge locations for both uploads and delivery. Images upload faster and load faster for viewers compared to ImgBB's infrastructure."
+        "q": "Why would I switch from ImgBB?",
+        "a": "Mostly for a cleaner link. ImgBB puts each upload on its own ad-supported viewer page, and the link people copy often points at that page. If you just want a direct URL that embeds inline with no ads, a plain direct-link host fits better."
       },
       {
-        "q": "Does ImageToURL compress images like ImgBB?",
-        "a": "No. ImageToURL stores and serves your images at their original quality. ImgBB compresses larger images, which can noticeably reduce quality for high-resolution photos and detailed graphics."
+        "q": "What is the best free ImgBB alternative?",
+        "a": "It depends on what you need. For a quick direct link with no account, no ads and full quality, ImageToURL works well. Postimages is another free option, and Imgur is good if you want a community gallery. ImgBB itself is still fine for larger files and built-in expiry."
       },
       {
-        "q": "Does ImageToURL have an API like ImgBB?",
-        "a": "ImageToURL provides a straightforward upload interface that works for programmatic use cases. Our direct URLs are designed to work seamlessly with any application or workflow."
+        "q": "Do I need an account to use ImageToURL?",
+        "a": "No. You can upload and get a direct link without signing up. An account is optional and mainly useful if you want a link that stays up permanently."
       },
       {
-        "q": "Are ImgBB image links permanent?",
-        "a": "ImgBB offers optional auto-deletion timers and may remove inactive content. ImageToURL provides truly permanent URLs with no expiration dates and no inactivity-based deletion."
+        "q": "Does ImgBB compress my images?",
+        "a": "ImgBB can re-encode and resize larger uploads, which may soften high-resolution photos and detailed graphics. ImageToURL keeps your file at the resolution you uploaded with no re-compression."
+      },
+      {
+        "q": "What image formats and sizes can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. ImgBB allows larger files (up to 32MB), so for very big images that limit is worth knowing."
+      },
+      {
+        "q": "Will the link embed in Discord and forums?",
+        "a": "Yes. Because the URL points right at the image file and ends in the real extension, Discord shows it inline as a picture instead of a link card. The same is true on Reddit, Slack and most forums."
+      },
+      {
+        "q": "Does it add a watermark?",
+        "a": "No. You get back the same file you uploaded with no watermark and no badge added."
+      },
+      {
+        "q": "How long do the links last?",
+        "a": "Anonymous uploads stay live until the monthly storage cleanup, so you get a couple of weeks at minimum and often longer. For a link that never expires, create a free account and pick 'keep forever' when you upload."
+      },
+      {
+        "q": "Are ImgBB links permanent?",
+        "a": "ImgBB links are permanent by default, but you can set an optional auto-delete timer when you upload. On ImageToURL, anonymous links clear on the monthly cleanup, while signed-in 'keep forever' uploads stay up."
+      },
+      {
+        "q": "Can I move my old ImgBB images here?",
+        "a": "Yes. Download the images from ImgBB, then upload them here to get fresh direct links. Keep the originals as a backup either way."
+      },
+      {
+        "q": "Are my uploads private?",
+        "a": "Anonymous uploads are public to anyone who has the link. There is no feed listing them, but the URL is not secret, so do not use it for anything sensitive."
       }
     ],
-    "ctaTitle": "Upgrade from ImgBB today",
-    "ctaBody": "Faster uploads, no ads, no compression. Experience image hosting done right.",
-    "ctaButton": "Upload Now"
+    "howToSchema": true,
+    "ctaTitle": "Get a clean direct link, no account",
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. No sign-up, no compression, no watermark, no ad page.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alternativa a ImgBB — Más rápida, limpia y gratuita | ImageToURL",

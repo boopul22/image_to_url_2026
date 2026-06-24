@@ -67,7 +67,7 @@ export const content: LandingContentMap = {
       }
     ],
     "ctaTitle": "Still have questions?",
-    "ctaBody": "Try our image hosting tool — it's free, fast, and requires no signup.",
+    "ctaBody": "Try our image hosting tool - it's free, fast, and requires no signup.",
     "ctaButton": "Try ImageToURL Free"
   },
   "es": {

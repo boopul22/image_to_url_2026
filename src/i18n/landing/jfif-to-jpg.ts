@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "JFIF to JPG Converter — Free, No Upload",
+    "metaTitle": "JFIF to JPG Converter - Free, No Upload",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "JFIF to JPG Converter,",
     "h1Highlight": "fix those .jfif files",
-    "intro": "Windows sometimes saves photos as .jfif, and plenty of apps refuse to open them. Drop them here to convert JFIF to JPG and get standard .jpg files back, processed entirely in your browser.",
+    "intro": "Windows sometimes saves photos as .jfif, and plenty of apps refuse to open them. Drop them here to convert JFIF to JPG and get standard .jpg files back, processed entirely in your browser. JFIF is really just a JPEG with an unusual extension, so the picture inside stays exactly the same. Once you have the .jpg, you can grab a shareable https link to it in one click.",
     "howTitle": "How to convert JFIF to JPG",
     "steps": [
       {
@@ -54,28 +54,109 @@ export const content: LandingContentMap = {
         "body": "Conversion happens on your device. Your photos are never uploaded unless you click Get URL."
       }
     ],
+    "specsTitle": "JFIF to JPG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input", "value": "JFIF (.jfif)" },
+      { "label": "Output", "value": "JPG (.jpg)" },
+      { "label": "Max size", "value": "10 MB" }
+    ],
+    "comparisonTitle": "JFIF, JPG and the formats around them",
+    "comparisonIntro": "JFIF is not really a separate format - it is a JPEG that ended up with a confusing extension. Here is how it sits next to the names you see every day, so you can tell what is actually different and what is just a label.",
+    "comparisonColumns": [
+      "Format",
+      "What it is",
+      "Compression",
+      "App support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["JFIF", "A JPEG with a .jfif extension", "Lossy", "Patchy, the extension trips apps up", "Nothing special - convert it"] },
+      { "cells": ["JPG", "The everyday JPEG", "Lossy", "Everywhere", "Photos, sharing, uploads"] },
+      { "cells": ["JPEG", "Same format as JPG", "Lossy", "Everywhere", "Identical to JPG"] },
+      { "cells": ["PNG", "Lossless graphics format", "Lossless", "Everywhere", "Logos, screenshots, transparency"] },
+      { "cells": ["WebP", "Modern web format", "Lossy or lossless", "Most browsers", "Smaller web images"] }
+    ],
+    "useCasesTitle": "When converting JFIF helps",
+    "useCasesIntro": "The trouble with .jfif is almost always the extension, not the image. Renaming it to .jpg clears these up:",
+    "useCases": [
+      {
+        "title": "Opening in editors",
+        "body": "Some photo apps and older versions of Photoshop will not open a .jfif at all. A plain .jpg loads without complaint."
+      },
+      {
+        "title": "Uploading to forms and sites",
+        "body": "Job portals, marketplaces and older CMS upload boxes often reject .jfif. The same picture as a .jpg sails through."
+      },
+      {
+        "title": "Sharing with other people",
+        "body": "Send a .jpg and nobody asks what a .jfif is or why it will not open. It just shows up as the photo."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a JFIF file?",
+        "body": "JFIF stands for JPEG File Interchange Format. It is the standard wrapper that holds JPEG image data, so a .jfif file is a normal JPEG photo - the same compression, the same pixels. The odd part is the extension. Most JPEGs are saved as .jpg or .jpeg, but certain Windows and browser combinations save downloaded images as .jfif instead. Nothing is wrong with the file; the name just confuses apps that check the extension before the contents. Converting to .jpg fixes that mismatch without touching the image."
+      },
+      {
+        "heading": "Can I just rename .jfif to .jpg?",
+        "body": "Often, yes. Because the bytes inside are already JPEG, changing the extension from .jfif to .jpg is usually enough to make stubborn apps cooperate. The catch is that Windows hides file extensions by default, so renaming can be fiddly and easy to get wrong. This tool does the same job reliably: it re-saves each file as a clean .jpg in one step, no digging through folder options or worrying about a half-renamed file."
+      },
+      {
+        "heading": "JFIF vs JPG: is there any real difference?",
+        "body": "For everyday use, no. JFIF and JPG describe the same JPEG image, and converting between them does not change the photo in any way you would notice. At quality 92 the output is visually identical to the input. The only thing that changes is the extension, and that is exactly the point: a .jpg name is recognised by every editor, browser, printer and upload form, while .jfif quietly breaks in a surprising number of them."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24",
     "faqTitle": "FAQ",
     "faqIntro": "Convert JFIF to JPG free and online, with no signup and no watermark. Your files stay on your device.",
     "faqs": [
       {
         "q": "Why did my photo save as .jfif?",
-        "a": "Some Windows and browser combinations save downloaded JPEGs with the .jfif extension. The image data is normal JPEG underneath."
+        "a": "Some Windows and browser combinations save downloaded JPEGs with the .jfif extension, usually because of a registry quirk. The image data is normal JPEG underneath, so nothing is actually broken."
+      },
+      {
+        "q": "What is a JFIF file?",
+        "a": "JFIF (JPEG File Interchange Format) is the standard container for JPEG image data. A .jfif file is just a JPEG with a different label on the end of the name."
       },
       {
         "q": "Is JFIF the same as JPG?",
-        "a": "Almost. JFIF is the standard JPEG file format. Converting to .jpg gives you the same picture with an extension every app understands."
+        "a": "Almost entirely. JFIF is the standard JPEG file format, and .jpg is the usual extension for it. Converting to .jpg gives you the same picture with a name every app understands."
+      },
+      {
+        "q": "Can I just rename .jfif to .jpg?",
+        "a": "Usually that works, since the file is already JPEG inside. But Windows hides extensions by default, so renaming is error-prone. This tool re-saves a clean .jpg for you instead."
       },
       {
         "q": "Will the quality change?",
-        "a": "Barely. It is a JPEG either way, so at quality 92 the converted file looks the same as the original."
+        "a": "Barely. It is a JPEG either way, so at quality 92 the converted file looks the same as the original. You can lower the quality if you want a smaller file."
       },
       {
         "q": "Can I convert several at once?",
         "a": "Yes. Drop a batch of .jfif files and they convert to .jpg one after another, right in your browser."
       },
       {
+        "q": "Does converting remove EXIF data?",
+        "a": "Re-saving usually drops EXIF metadata such as location and camera details, so the resulting .jpg is a little more private than the original."
+      },
+      {
+        "q": "Can I open a .jfif on a Mac?",
+        "a": "Preview on macOS opens most .jfif files since they are really JPEGs. If an app still refuses, converting to .jpg removes any doubt."
+      },
+      {
+        "q": "How do I stop Windows saving images as JFIF?",
+        "a": "It comes from a registry association and is fiddly to change safely. Most people find it easier to just convert the occasional .jfif to .jpg as it comes up."
+      },
+      {
         "q": "Are my files uploaded?",
-        "a": "No. The whole process runs locally. Your files only leave the device if you click Get URL to host one."
+        "a": "No. The whole process runs locally in your browser. Your files only leave the device if you click Get URL to host one."
+      },
+      {
+        "q": "Can I get a link to the converted JPG?",
+        "a": "Yes. After converting, click Get URL and the .jpg is hosted on our CDN with a direct https link you can paste into chat, a forum or an email."
       }
     ],
     "ctaTitle": "Want a permanent URL?",

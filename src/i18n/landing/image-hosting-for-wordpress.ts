@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for WordPress — Free, No Plugin, CDN URLs",
+    "metaTitle": "Image Hosting for WordPress - Free, No Plugin, CDN URLs",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-hosting-for-discord", "label": "For Discord" },

@@ -39,3 +39,6 @@ scripts/seo-audit/output/
 .playwright-mcp/
 .lighthouse/
 .claude/scheduled_tasks.lock
+
+# Firecrawl scratch output
+.firecrawl/

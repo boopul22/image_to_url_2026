@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to Link — Free Direct Image Link Generator | ImageToURL",
+    "metaTitle": "Image to Link - Free Direct Image Link Generator | ImageToURL",
     "metaDescription": "Turn any image to link free with no signup. Get a direct, hotlinkable link that renders as the image in Discord, Reddit, and forums. Permanent and anonymous.",
     "relatedTitle": "Related image tools",
     "related": [
@@ -17,7 +17,7 @@ export const content: LandingContentMap = {
     "schemaName": "Image to Link Generator",
     "schemaDescription": "Convert any image to a direct, shareable link that loads as the image itself in Discord, Reddit, forums, and chat. Free, no signup, no compression.",
     "badge": "IMAGE TO LINK",
-    "h1Pre": "Image to Link — ",
+    "h1Pre": "Image to Link -",
     "h1Highlight": "a direct link that shows your image",
     "intro": "This image to link tool gives you a direct, hotlinkable URL that loads as the picture itself, not a webpage or a gallery page. Paste it into Discord, Reddit, a forum post, or a chat and people see the image inline. No signup, no watermark, nothing to click through.",
     "howTitle": "How the image to link tool works",

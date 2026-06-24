@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Compressor — 100% in Browser | Free, No Upload",
+    "metaTitle": "Image Compressor - 100% in Browser | Free, No Upload",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-resizer", "label": "Image resizer" },
@@ -82,7 +82,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Batch hundreds of images?",
-        "a": "Yes — drop as many as you want."
+        "a": "Yes - drop as many as you want."
       },
       {
         "q": "Best use case?",

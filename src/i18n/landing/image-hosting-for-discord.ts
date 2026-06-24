@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for Discord — Permanent Embed Links",
+    "metaTitle": "Image Hosting for Discord - Permanent Embed Links",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-hosting-for-ebay", "label": "For eBay" },
@@ -13,7 +13,7 @@ export const content: LandingContentMap = {
       { "pageKey": "image-hosting-for-forums", "label": "For forums" },
       { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
     ],
-    "metaDescription": "Get stable image URLs for Discord embeds. Discord's own CDN links carry expiring tokens and eventually break — host here for free and get a direct link that keeps working.",
+    "metaDescription": "Get stable image URLs for Discord embeds. Discord's own CDN links carry expiring tokens and eventually break - host here for free and get a direct link that keeps working.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A free way to host images for Discord and get a direct link that stays stable in messages, bot embeds, and webhooks instead of expiring like Discord's own CDN URLs.",
     "badge": "DISCORD USERS",

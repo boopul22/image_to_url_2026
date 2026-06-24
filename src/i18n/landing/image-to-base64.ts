@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to Base64 — 100% Browser | Free Encoder",
+    "metaTitle": "Image to Base64 - 100% Browser | Free Encoder",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-compressor", "label": "Image compressor" },
@@ -19,79 +19,185 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "Image to Base64",
     "h1Highlight": "instant data URI.",
-    "intro": "Drop an image — get a ready-to-paste data URI for CSS, HTML, JSON, or email. Runs in your browser.",
-    "howTitle": "How to convert",
+    "intro": "Drop an image and you get back a Base64 data URI you can paste straight into CSS, an HTML <img src>, a JSON config, an SVG, or an email template. The string starts with data:image/png;base64, and contains the whole picture as text, so the browser reads it without a separate file request. Everything runs in your browser, so nothing is uploaded and the encoding is instant. This is the encode direction: image goes in, a data URI comes out.",
+    "specsTitle": "Image to Base64 at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Base64 data URI"
+      }
+    ],
+    "howTitle": "How to convert an image to Base64",
     "steps": [
       {
         "title": "Drop an image",
-        "body": "Drop any PNG, JPG, GIF, SVG, or WebP."
+        "body": "Drag a PNG, JPG, WebP, GIF or SVG onto the box, or click to pick one. It stays on your device - the file is read locally, not sent to a server."
       },
       {
         "title": "Copy the data URI",
-        "body": "The full data:image/...;base64,... string appears in the output box."
+        "body": "The full data:image/...;base64,... string appears in the output box. Hit copy and the whole encoded image lands on your clipboard as plain text."
       },
       {
-        "title": "Paste anywhere",
-        "body": "Use in CSS url(), HTML <img src>, or JSON config."
+        "title": "Paste it where you need it",
+        "body": "Drop the string into a CSS url(), an HTML <img src>, a JSON value, an inline SVG or an email template. The image shows up with no extra request."
       }
     ],
-    "whyTitle": "When to use base64",
+    "whyTitle": "When Base64 is the right call",
     "whyItems": [
       {
-        "title": "Tiny icons",
-        "body": "Embed sub-1KB icons inline to avoid a network request."
+        "title": "Tiny inline icons",
+        "body": "For a sub-1KB icon or a small UI sprite, inlining the data URI saves a round trip to the server. The image is part of the file that already loaded."
       },
       {
         "title": "Email HTML",
-        "body": "When you cannot link external assets."
+        "body": "Many email clients block linked external images. A data URI travels inside the message, so a small logo or signature graphic renders without a remote fetch."
       },
       {
-        "title": "Inline CSS",
-        "body": "Eliminate the extra HTTP request for critical background images."
+        "title": "Single-file embeds",
+        "body": "When you want one self-contained HTML or SVG with no separate asset folder, Base64 lets you fold the picture into the source. Handy for a quick demo or a bookmarklet."
       },
       {
-        "title": "Offline apps",
-        "body": "Bundle images into source for fully offline use."
+        "title": "Critical background images",
+        "body": "A small CSS background that has to paint immediately can be inlined as background-image: url('data:...') so it does not wait on a second request."
       }
     ],
-    "faqTitle": "FAQ",
+    "comparisonTitle": "Base64 data URI vs a hosted URL",
+    "comparisonIntro": "Encoding an image as Base64 and hosting it somewhere both put a picture in your page, but they suit very different jobs. The data URI lives inside your code; a hosted link is a separate file the browser fetches and caches. Here is when each one wins.",
+    "comparisonColumns": [
+      "Method",
+      "Needs hosting",
+      "Good for",
+      "Downsides"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Base64 data URI",
+          "No hosting",
+          "Tiny inline icons, email, single-file embeds",
+          "Bloats HTML, ~33% bigger, not cached separately"
+        ]
+      },
+      {
+        "cells": [
+          "Hosted image URL",
+          "Needs a host",
+          "Large or repeated images, sharing a link",
+          "One extra request, but the file is cacheable"
+        ]
+      },
+      {
+        "cells": [
+          "Inline SVG (no Base64)",
+          "No hosting",
+          "Vector icons and logos",
+          "Only works for SVG, clutters markup"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a Base64 data URI fits",
+    "useCasesIntro": "Once an image is a string of text, it drops into places a file path cannot reach:",
+    "useCases": [
+      {
+        "title": "CSS and stylesheets",
+        "body": "Inline a small background or a custom cursor with background-image: url('data:image/png;base64,...'). One fewer request, and the style ships with the rule."
+      },
+      {
+        "title": "HTML and email",
+        "body": "Put the string in <img src=\"data:image/...\"> so the picture is baked into the page or the message. Good for a logo that must show even when remote images are blocked."
+      },
+      {
+        "title": "JSON and config files",
+        "body": "Store a small avatar or icon as a Base64 value inside a JSON payload or a config object, so the data travels with the rest of your settings."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a Base64 image?",
+        "body": "A Base64 image is the binary contents of a picture rewritten as plain text. The encoder reads the raw bytes of your PNG, JPG or SVG and maps them to a 64-character alphabet of letters, digits, plus and slash. The result is wrapped in a data URI that names the type, like data:image/png;base64, followed by the encoded text. Because it is text, you can paste it anywhere a string is allowed - CSS, an HTML attribute, a JSON field. The browser decodes it back to the original image when it renders, so there is no separate file and no extra network request."
+      },
+      {
+        "heading": "When to use Base64 vs a URL",
+        "body": "Reach for Base64 when the image is small and tied to one place: a sub-1KB icon, an email logo, a single self-contained HTML file. Inlining saves a request and keeps everything in one piece. Reach for a hosted URL when the image is large, shared across many pages, or something you want to send as a link. A hosted file is cached by the browser, so it loads once and is reused, while a data URI is re-parsed everywhere it appears. If you mainly want a short link to share, the main uploader gives you a direct https URL instead."
+      },
+      {
+        "heading": "Why Base64 makes files about 33% bigger",
+        "body": "Base64 trades size for portability. It takes every 3 bytes of binary data and writes them as 4 ASCII characters, so the encoded text is roughly one-third larger than the original file. A 9 KB image becomes about 12 KB of string. That overhead is fine for a tiny icon but adds up fast for photos, and unlike a real file the inline string is not cached on its own. This is why Base64 is a poor fit for large or repeated images: it bloats the HTML, slows down parsing, and the browser cannot reuse it the way it reuses a hosted file."
+      }
+    ],
+    "faqTitle": "Image to Base64 FAQ",
     "faqs": [
       {
-        "q": "What is base64 image encoding?",
-        "a": "Base64 encodes binary data as ASCII text — lets you embed images directly inside CSS, HTML, or JSON."
+        "q": "What is a Base64 image data URI?",
+        "a": "It is an image rewritten as text and wrapped in a data: URI, like data:image/png;base64,iVBORw0KGgo... The prefix tells the browser the type, and the long string is the picture encoded in Base64. You can paste it anywhere a string is accepted instead of linking to a file."
       },
       {
-        "q": "When should I use base64 instead of a URL?",
-        "a": "For tiny images, emails, or inline CSS. For anything bigger, use a hosted URL — base64 inflates size by ~33%."
+        "q": "How do I convert an image to Base64?",
+        "a": "Drop your PNG, JPG, WebP, GIF or SVG in the box above. The tool reads it in your browser and shows the full data:image/...;base64,... string in the output box. Copy it and paste it into your CSS, HTML, JSON or email."
       },
       {
-        "q": "Why is the base64 string so big?",
-        "a": "Base64 costs 4 chars per 3 bytes — ~33% overhead."
+        "q": "Is my image uploaded anywhere?",
+        "a": "No. The encoding happens locally in your browser with the FileReader API, so the file never leaves your device. That makes it safe for private or work images and means it works offline once the page has loaded."
       },
       {
-        "q": "Is anything uploaded?",
-        "a": "No. Local FileReader.readAsDataURL call."
+        "q": "When should I use Base64 instead of a hosted URL?",
+        "a": "Use Base64 for tiny inline assets - small icons, an email logo, a single self-contained file. Use a hosted URL for large images, anything repeated across pages, or a link you want to share, since hosted files are cached and do not bloat your markup."
       },
       {
-        "q": "SVG encoding?",
-        "a": "Works. URL-encoding can be smaller for SVG."
+        "q": "Why is the Base64 string so long?",
+        "a": "Base64 encodes 3 bytes of binary as 4 text characters, so the output is about 33% larger than the original file. That is the cost of turning binary into something you can paste as text. For big images the string gets unwieldy fast."
       },
       {
-        "q": "How to use in CSS?",
-        "a": "Paste inside url() — background-image: url('data:image/png;base64,...')."
+        "q": "How do I use a data URI in CSS?",
+        "a": "Paste it inside url(), for example background-image: url('data:image/png;base64,...'). It works for backgrounds, list markers, custom cursors and mask images, and saves one network request for small graphics."
       },
       {
-        "q": "How in HTML?",
-        "a": "Put in img src: <img src=\"data:image/png;base64,...\">."
+        "q": "How do I use a data URI in HTML?",
+        "a": "Put the whole string in the src attribute: <img src=\"data:image/png;base64,...\" alt=\"...\">. The browser decodes and shows the image without fetching a separate file."
       },
       {
-        "q": "Any file-size limit?",
-        "a": "Practical browser limits around 2 MB for inline data URIs."
+        "q": "Can I encode an SVG to Base64?",
+        "a": "Yes, SVG works like any other format. For SVG you often get a smaller result with URL-encoding (data:image/svg+xml,...) than Base64, since SVG is already text, but Base64 is the safer choice if the markup contains characters that need escaping."
+      },
+      {
+        "q": "Is there a size limit for data URIs?",
+        "a": "The tool handles files up to 10 MB, but in practice keep inline data URIs small - a few KB at most. Large strings slow down HTML parsing and are not cached, so a real file URL is faster for anything sizeable."
+      },
+      {
+        "q": "Does Base64 compress or shrink my image?",
+        "a": "No. Base64 is an encoding, not compression. It actually makes the data about a third larger. If you need a smaller file, compress or resize the image first, then encode the result."
+      },
+      {
+        "q": "Can I turn the data URI back into an image?",
+        "a": "Yes. The Base64 to image tool decodes a data:image/... string back into a downloadable file. The two tools are the reverse of each other."
+      },
+      {
+        "q": "Will a Base64 image work in email?",
+        "a": "Often, for small images. A data URI travels inside the message, so it can render when a client blocks external images, though some clients (notably parts of Outlook) strip data URIs, so test before relying on it for an important send."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Need a hosted URL instead?",
-    "ctaBody": "For images > 2 KB, a CDN URL is faster.",
-    "ctaButton": "Try the main uploader"
+    "ctaBody": "For anything bigger than a small icon, a direct CDN link is faster and stays cached. Upload your image and get a shareable https URL in seconds.",
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Imagen a Base64 — 100% en navegador | Codificador gratuito",

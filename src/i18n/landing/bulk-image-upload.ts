@@ -19,12 +19,12 @@ export const content: LandingContentMap = {
     "badge": "BULK UPLOAD",
     "h1Pre": "Bulk Image Upload",
     "h1Highlight": "made simple.",
-    "intro": "Upload dozens of images at once and get instant, shareable URLs for every single one. No signup, no limits.",
+    "intro": "Got a folder of product shots or screenshots to share? Select them all at once and get a separate direct link for every file, instead of uploading one at a time. No signup to start, and each link is a clean direct URL that embeds anywhere. There's a daily cap to keep the free tier sane - a handful of files for guests, more when you sign in - so it suits everyday batches rather than thousand-image dumps.",
     "howTitle": "How Bulk Upload Works",
     "steps": [
       {
         "title": "Select Images",
-        "body": "Choose multiple files from your device—select as many as you need to process at once."
+        "body": "Choose multiple files from your device - select as many as you need to process at once."
       },
       {
         "title": "Batch Processing",
@@ -57,25 +57,85 @@ export const content: LandingContentMap = {
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
-        "q": "Is there a limit to how many images I can upload?",
-        "a": "No, you can upload as many images as you need in a single batch without any artificial limits."
+        "q": "How many images can I upload at once?",
+        "a": "You can select a batch in one go, but there's a daily upload cap on the free tier: a small number for anonymous users and a higher allowance when you sign in. It's built for everyday batches, not bulk dumps of hundreds of files."
       },
       {
-        "q": "Do I need to sign up to use the bulk uploader?",
-        "a": "Not at all. You can use our bulk upload tool completely anonymously without creating an account."
+        "q": "Do I need to sign up for bulk upload?",
+        "a": "No. You can batch-upload anonymously. Signing in with a free account raises your daily limit and lets you mark files 'keep forever'."
       },
       {
-        "q": "Are the generated URLs permanent?",
-        "a": "Yes, once your images are uploaded, the URLs are permanent and ready to be used in your projects."
+        "q": "Do I get one link or one link per image?",
+        "a": "One direct URL per file. Each image is uploaded and linked separately, so you end up with a list of links you can copy in one go."
       },
       {
-        "q": "Can I export the links to a spreadsheet?",
-        "a": "Absolutely. You can copy all generated URLs at once or export them as a formatted list for easy integration."
+        "q": "Can I copy all the links at once?",
+        "a": "Yes. Once the batch finishes you can copy every generated URL together, which makes it easy to paste them straight into a spreadsheet or a doc."
+      },
+      {
+        "q": "Are the bulk-uploaded links permanent?",
+        "a": "Anonymous uploads last until the monthly storage cleanup, so at least a couple of weeks. For links you need to keep, sign in and choose 'keep forever' before you upload the batch."
+      },
+      {
+        "q": "Does each file keep its full quality?",
+        "a": "Yes. Every image in the batch is served at its original resolution, with no compression and no watermark, exactly like a single upload."
+      },
+      {
+        "q": "What formats and size limits apply to a batch?",
+        "a": "Each file can be JPG, PNG, WebP, GIF or SVG, up to 10 MB. Mixed formats in one batch are fine."
+      },
+      {
+        "q": "Can I drag a whole folder in?",
+        "a": "Yes. Drag and drop multiple files or a folder onto the uploader, or use the file picker and select several at once."
+      },
+      {
+        "q": "What if I have more images than the daily limit?",
+        "a": "Sign in for the higher allowance, or split the work across days. Either way, keep your originals so you can re-upload anything that needs a fresh link later."
       }
     ],
     "ctaTitle": "Upload your images in bulk",
     "ctaBody": "Free, fast, and no signup required; select multiple images and get all your URLs instantly.",
-    "ctaButton": "Start Bulk Upload"
+    "ctaButton": "Start Bulk Upload",
+    "specsTitle": "Bulk upload at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Optional (higher daily limit)" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Per file", "value": "10 MB" },
+      { "label": "Output", "value": "One direct link per image" }
+    ],
+    "comparisonTitle": "Free hosts for batch uploads",
+    "comparisonIntro": "When you're uploading a stack of files, the things that matter are per-file size, whether each link hotlinks cleanly, and how long the links last. Here's how the common hosts compare.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] }
+    ],
+    "useCasesTitle": "Who reaches for batch upload",
+    "useCasesIntro": "Anyone juggling more than a couple of images at a time gets the most out of uploading in bulk:",
+    "useCases": [
+      { "title": "Online sellers", "body": "Turn a folder of product photos into a list of direct links for your listings, marketplace posts or a price sheet, all in one pass." },
+      { "title": "Agencies and freelancers", "body": "Hand a client a tidy set of image URLs for a mockup, a deck or a content calendar without emailing files back and forth." },
+      { "title": "Writers and creators", "body": "Get links for every screenshot or graphic in an article at once, then paste them into your CMS or Markdown as you write." }
+    ],
+    "sections": [
+      { "heading": "How batch uploading saves time", "body": "Uploading images one by one means repeating the same click, wait and copy for every file. Batch upload collapses that into a single step: pick the whole set, let them go up together, and collect all the links at the end. For a product catalog or a folder of screenshots that's the difference between a couple of minutes and a tedious afternoon. Each file still gets its own direct URL, so you keep the flexibility of individual links while skipping the repetitive part." },
+      { "heading": "Getting your links into a spreadsheet", "body": "The handy part of a batch is the list of URLs you get back. Copy them all at once and paste the column straight into Google Sheets or Excel next to product names, SKUs or alt text. From there it's easy to map each image to wherever it belongs - a listing template, a CMS import, a content brief. Because every URL points directly at the file, the same list works in HTML, Markdown and most site builders without any reformatting." },
+      { "heading": "Working with the daily limit", "body": "To keep the free tier from being abused, uploads are capped per day - a handful for anonymous users and a larger allowance once you sign in with a free account. For most everyday batches that's plenty. If you've got more than the cap allows, sign in for the higher limit or split the job across a couple of days. And keep your original files: anonymous links are temporary, so a local copy means you can always re-upload a batch later if you need fresh links." }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Carga masiva de imágenes - Sube varias imágenes a la vez | ImageToURL",

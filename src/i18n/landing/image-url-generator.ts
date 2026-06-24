@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Free Image URL Generator — Get a Direct Image Link",
+    "metaTitle": "Free Image URL Generator - Get a Direct Image Link",
     "metaDescription": "Free image URL generator and image link generator. Upload a JPG, PNG, WebP or GIF and get a direct, permanent link in seconds. No signup, no watermark.",
     "relatedTitle": "Related image tools",
     "related": [

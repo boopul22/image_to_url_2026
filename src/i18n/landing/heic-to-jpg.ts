@@ -209,7 +209,7 @@ export const content: LandingContentMap = {
     "datePublished": "2026-06-15",
     "dateModified": "2026-06-24",
     "ctaTitle": "Need a permanent URL too?",
-    "ctaBody": "After converting, click 'Get URL' on any file to host it on our global CDN — free, no signup.",
+    "ctaBody": "After converting, click 'Get URL' on any file to host it on our global CDN - free, no signup.",
     "ctaButton": "Try the main uploader"
   },
   "es": {
