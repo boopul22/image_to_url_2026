@@ -185,6 +185,16 @@ const pageSchema = [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": canonicalHomeUrl }
       ]
     }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${canonicalHomeUrl}#faq`,
+    "mainEntity": ['q1', 'q2', 'q3', 'q4', 'q5', ...(locale === 'en' ? ['q6'] : []), 'q7', 'q8', 'q9', 'q10'].map((n) => ({
+      "@type": "Question",
+      "name": t(locale, `home.faq.${n}`),
+      "acceptedAnswer": { "@type": "Answer", "text": t(locale, `home.faq.a${n.slice(1)}`) }
+    }))
   }
 ];
 ---
@@ -482,6 +492,56 @@ const pageSchema = [
 
 
 
+  <!-- How-to — targets informational "how to make an image url" long-tail cluster.
+       Safe for the homepage: informational intent, the tool itself lives here, and no
+       dedicated landing page owns the how-to queries (those pages own transactional terms). -->
+  <section class="cv-auto max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="text-center mb-5 sm:mb-7 reveal">
+      <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.howTo.title')}</h2>
+      <p class="font-body text-on-surface-variant text-sm">{t(locale, 'home.howTo.subtitle')}</p>
+    </div>
+    <div class="flex flex-col gap-3 sm:gap-4 font-body text-on-surface-variant text-sm leading-relaxed reveal">
+      <p>{t(locale, 'home.howTo.p1')}</p>
+      <p>{t(locale, 'home.howTo.p2')}</p>
+      <p>{t(locale, 'home.howTo.p3')}</p>
+    </div>
+  </section>
+
+  <!-- Tool routing matrix ("which tool do you need?") — the hub→spoke internal-link layer.
+       Descriptive anchors to format/use-case spokes the homepage shouldn't keyword-target
+       itself. Deliberately distinct from the popular-tools row near the CTA (no overlap),
+       and intentionally NOT a "vs Imgur/ImgBB" comparison (that would cannibalize the
+       imgur-alternative / imgbb-alternative / cloudinary-alternative pages). -->
+  <section class="cv-auto py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-5 sm:mb-8 reveal">
+        <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-2 sm:mb-3">{t(locale, 'home.tools.title')}</h2>
+        <p class="font-body text-on-surface-variant text-sm">{t(locale, 'home.tools.subtitle')}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 reveal-stagger">
+        {[
+          { icon: 'photo_camera', caseKey: 'home.tools.heic', k: 'heic-to-jpg', a: 'HEIC to JPG' },
+          { icon: 'compress', caseKey: 'home.tools.compress', k: 'image-compressor', a: 'Image Compressor' },
+          { icon: 'burst_mode', caseKey: 'home.tools.bulk', k: 'bulk-image-upload', a: 'Bulk Image Upload' },
+          { icon: 'forum', caseKey: 'home.tools.discord', k: 'image-hosting-for-discord', a: 'Image hosting for Discord' },
+          { icon: 'code', caseKey: 'home.tools.github', k: 'image-hosting-for-github-readme', a: 'GitHub README hosting' },
+          { icon: 'data_object', caseKey: 'home.tools.base64', k: 'image-to-base64', a: 'Image to Base64' },
+        ].map((row) => (
+          <a href={localizedUrl(row.k as any, locale)} class="reveal group bg-surface-container rounded-2xl p-4 sm:p-5 flex items-center gap-3 hover:-translate-y-0.5 transition-transform">
+            <Icon name={row.icon} class="text-primary text-2xl flex-shrink-0" />
+            <div class="min-w-0">
+              <p class="font-body text-on-surface-variant text-xs leading-tight mb-0.5">{t(locale, row.caseKey)}</p>
+              <p class="font-headline font-black text-on-background text-sm group-hover:text-primary transition-colors flex items-center gap-1">
+                {row.a}
+                <Icon name="arrow_forward" class="text-sm group-hover:translate-x-0.5 transition-transform" />
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Reviews marquee -->
   <section id="reviews" class="cv-auto px-4 sm:px-6 py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40 overflow-hidden">
     <div class="max-w-5xl mx-auto">
@@ -641,6 +701,17 @@ const pageSchema = [
           </div>
         </div>
       )}
+      {['7', '8', '9', '10'].map((n) => (
+        <div class="faq-item bg-surface-container rounded-xl">
+          <button class="faq-toggle w-full flex items-center justify-between p-4 sm:p-5 text-left cursor-pointer" aria-expanded="false">
+            <span class="font-headline font-black text-on-background text-sm sm:text-base pr-4">{t(locale, `home.faq.q${n}`)}</span>
+            <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
+          </button>
+          <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
+            <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, `home.faq.a${n}`)}</p>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 
