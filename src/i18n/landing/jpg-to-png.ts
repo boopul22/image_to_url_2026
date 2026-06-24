@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "JPG to PNG Converter,",
     "h1Highlight": "Lossless and Free",
-    "intro": "Drop your JPG files and get PNG files you can edit, overlay, or add transparency to. The conversion runs in your browser, so your images never leave your device.",
+    "intro": "Drop your JPG files and get back lossless PNG copies you can edit, overlay, or add transparency to. Worth being honest up front: PNG can't recover detail the JPG already threw away. What it does is stop any further quality loss, hand you a format that design tools and printers often demand, and let you add a transparent background later. The conversion runs in your browser, so your images never leave your device, and you can grab a shareable https link to any result.",
     "howTitle": "How to convert JPG to PNG",
     "steps": [
       {
@@ -87,11 +87,84 @@ export const content: LandingContentMap = {
       {
         "q": "How do I convert JPG to PNG on Windows, Mac, or iPhone?",
         "a": "It works in any modern browser on Windows, Mac, and iPhone. Open the page, drop your JPG files, and download the PNGs. There is nothing to install."
+      },
+      {
+        "q": "When should I convert JPG to PNG?",
+        "a": "Convert when a tool, printer, or design app accepts only PNG, when you are about to edit an image several times and want to stop generation loss, or when you need a transparent background. For a plain photo you are just sharing, JPG is usually the better choice."
+      },
+      {
+        "q": "Is PNG lossless?",
+        "a": "Yes. PNG stores every pixel exactly, with no compression artifacts. Re-saving a PNG over and over does not degrade it, unlike JPG, which loses a little detail each time you export."
+      },
+      {
+        "q": "Can converting fix a blurry or compressed JPG?",
+        "a": "No. The blocky JPG artifacts are baked into the pixels, and PNG just copies them faithfully. To get a cleaner image you need the original source file, not a format change."
+      },
+      {
+        "q": "Does the PNG keep the same dimensions?",
+        "a": "Yes. The width and height stay identical. Only the file format and the size on disk change."
       }
     ],
     "ctaTitle": "Need a permanent URL for the PNG?",
     "ctaBody": "After converting, click 'Get URL' on any file to host it on our CDN. Free, no signup.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "specsTitle": "JPG to PNG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input format", "value": "JPG / JPEG" },
+      { "label": "Output format", "value": "PNG (lossless)" },
+      { "label": "Max size to host", "value": "10 MB" }
+    ],
+    "comparisonTitle": "PNG vs JPG vs WebP",
+    "comparisonIntro": "Switching to PNG makes sense for some images and not others. Here is how the main formats compare on the things that matter when you convert away from JPG.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Safe to re-edit",
+      "Browser support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["PNG", "Lossless", "Yes, full alpha", "Yes, no loss on re-save", "All browsers", "Logos, screenshots, editing"] },
+      { "cells": ["JPG", "Lossy", "No", "No, loses detail each save", "All browsers", "Photos, sharing, email"] },
+      { "cells": ["WebP", "Lossy or lossless", "Yes", "Lossless mode only", "All current browsers", "Modern web pages"] },
+      { "cells": ["TIFF", "Lossless", "Yes", "Yes", "Limited, not for web", "Print and archiving"] }
+    ],
+    "useCasesTitle": "When you actually need a PNG",
+    "useCasesIntro": "PNG is the right target in a few specific situations:",
+    "useCases": [
+      {
+        "title": "Software that only takes PNG",
+        "body": "Some print shops, icon generators, slide tools, and academic journals reject JPG and want PNG or TIFF. Converting once gets your file through the upload without a fight."
+      },
+      {
+        "title": "Editing without stacking up JPG loss",
+        "body": "Every time you save a JPG it re-compresses and loses a little more. Convert to PNG before a round of edits so each save stays pixel-perfect, then export back to JPG at the end if you need a small file."
+      },
+      {
+        "title": "Adding a transparent background",
+        "body": "You cannot make a JPG transparent, but a PNG supports a full alpha channel. Convert first, then erase the background in any editor to drop the subject onto a new color or layout."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Will converting restore lost JPG quality?",
+        "body": "No, and it is worth being clear about this. A JPG has already discarded detail to shrink itself, and that detail is gone for good. Converting to PNG just wraps the same pixels in a lossless container, so the image looks identical, not sharper, and the file ends up larger. The real value is forward-looking: from this point on, edits and re-saves won't pile on any more compression damage. If you want a genuinely cleaner image, you need the original uncompressed source, not a format swap."
+      },
+      {
+        "heading": "When is PNG the better choice?",
+        "body": "PNG wins whenever you need transparency, crisp edges, or repeated edits. Logos, icons, line art, and screenshots full of text all stay sharp in PNG because nothing gets compressed away. It is also the safe working format while you edit, since saving a PNG never degrades it. The trade-off is size: a photographic PNG is much heavier than the JPG, so for plain photos you are only sharing, JPG stays the smarter pick. Reach for PNG when quality and editability matter more than bytes."
+      },
+      {
+        "heading": "Does PNG support transparency?",
+        "body": "Yes. PNG carries a full alpha channel, so each pixel can be fully visible, fully transparent, or anything in between. That is the one thing JPG cannot do. Converting a JPG to PNG does not add transparency by itself, since the JPG had none to begin with, but it gives you a file that can hold it. Once the image is a PNG, you can erase the background or cut out a subject in an editor, and those transparent areas will survive every save."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de JPG a PNG | Gratis, sin pérdida, sin subidas",

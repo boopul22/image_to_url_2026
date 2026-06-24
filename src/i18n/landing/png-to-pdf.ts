@@ -53,6 +53,94 @@ export const content: LandingContentMap = {
       }
     ],
     "faqTitle": "FAQ",
+    "ctaTitle": "Host the PDF too?",
+    "ctaBody": "Convert your PNG files to PDF, then click 'Get URL' to host it for free. No signup.",
+    "ctaButton": "Try the main uploader",
+    "specsTitle": "PNG to PDF at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Converts", "value": "PNG to PDF" },
+      { "label": "Merge", "value": "Many PNGs into one PDF" },
+      { "label": "Output", "value": "PDF download + optional shareable link" }
+    ],
+    "comparisonTitle": "PNG vs other formats for a PDF",
+    "comparisonIntro": "When you are building a document, the source format decides how many files you end up with and how the pages look. PDF is the wrapper everyone can open; PNG and JPG are the pictures that go inside. Here is how they line up.",
+    "comparisonColumns": [
+      "Format",
+      "Multiple images in one file",
+      "Keeps transparency",
+      "Print-ready",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "PDF",
+          "Yes",
+          "No (transparent areas turn white)",
+          "Yes",
+          "Documents, printing, email"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "No (one image per file)",
+          "Yes",
+          "OK",
+          "Screenshots, graphics, diagrams"
+        ]
+      },
+      {
+        "cells": [
+          "JPG",
+          "No (one image per file)",
+          "No",
+          "OK",
+          "Photos"
+        ]
+      },
+      {
+        "cells": [
+          "HEIC",
+          "No (one image per file)",
+          "No",
+          "Limited",
+          "iPhone photos"
+        ]
+      }
+    ],
+    "useCasesTitle": "When a single PDF beats a folder of PNGs",
+    "useCasesIntro": "A loose pile of image files is awkward to send and easy to lose track of. Wrapping them in one document fixes the ordering and the page count in one step:",
+    "useCases": [
+      {
+        "title": "A run of screenshots as one report",
+        "body": "You captured a bug across eight screens. Drop the PNGs in the order you took them, merge, and you hand over a single report instead of eight attachments your reviewer has to open one by one."
+      },
+      {
+        "title": "Receipts and diagrams for filing",
+        "body": "Scanned receipts, a floor plan, a couple of charts. Combine them into one document and the whole set stays together when you archive it or email it to an accountant."
+      },
+      {
+        "title": "Graphics as a print-ready packet",
+        "body": "Sending logo variants or poster mockups to a print shop? One PDF with each graphic on its own A4 page is easier to print and harder to misorder than a zip of separate images."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why turn PNG screenshots into a PDF?",
+        "body": "Screenshots pile up fast, and a folder of twenty PNGs is a pain to send. A PDF puts them in a fixed order, one per page, so the person on the other end scrolls through them like a document instead of opening files one at a time. It is also the format almost every email client, ticketing tool and print queue accepts without complaint. If you are documenting a bug, writing a how-to, or handing off design feedback, a single PDF keeps the sequence intact and reads the way you meant it to."
+      },
+      {
+        "heading": "What happens to PNG transparency in a PDF?",
+        "body": "PNG can store transparent pixels, which is why logos and UI cutouts sit cleanly on any background. A PDF page does not work that way. Each page has a solid surface, so any see-through area in your image is filled with white when it lands in the document. The visible parts of the picture stay sharp and full quality. If a transparent background matters to you, keep the original PNG and share that instead, or place the image on the exact background color you want before converting."
+      },
+      {
+        "heading": "PNG vs JPG before making a PDF",
+        "body": "PNG is lossless, so text, screenshots and line art come out crisp with no blocky artifacts around edges. The trade-off is file size: a detailed PNG is heavier than the same shot saved as JPG. JPG throws away some detail to stay small, which is fine for photos but smears fine text and sharp borders. For a document built from screenshots, diagrams or graphics, PNG sources give you a cleaner result. For pages that are mostly photographs, JPG sources keep the PDF smaller without a visible hit."
+      }
+    ],
     "faqs": [
       {
         "q": "Does this upload my PNGs?",
@@ -61,6 +149,10 @@ export const content: LandingContentMap = {
       {
         "q": "Can I put multiple PNGs into one PDF?",
         "a": "Yes. Turn on 'Merge into one PDF' and drop all your PNG files. They go in one per page, in order, into a single PDF."
+      },
+      {
+        "q": "Can I reorder the pages before downloading?",
+        "a": "Yes. The images appear in the order you add them, so add them in the sequence you want, or rearrange them in the list before you hit Download."
       },
       {
         "q": "What page size?",
@@ -95,9 +187,9 @@ export const content: LandingContentMap = {
         "a": "It works in any modern browser on Windows, Mac, and iPhone. Drop your PNG files and download the PDF. There is nothing to install."
       }
     ],
-    "ctaTitle": "Host the PDF too?",
-    "ctaBody": "Convert your PNG files to PDF, then click 'Get URL' to host it for free. No signup.",
-    "ctaButton": "Try the main uploader"
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de PNG a PDF | Gratis, combinar en un solo PDF",

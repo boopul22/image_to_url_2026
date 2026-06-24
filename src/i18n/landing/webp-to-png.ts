@@ -18,7 +18,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "WebP to PNG Converter,",
     "h1Highlight": "Transparency Intact",
-    "intro": "Convert WebP to PNG and keep the transparent background. The re-encoding is lossless and runs in your browser, with no upload.",
+    "intro": "Got a WebP graphic with a transparent background that you need as a PNG? This converter rebuilds the file as a true PNG in your browser, with the alpha channel intact and no quality lost along the way. Nothing is uploaded, so logos, stickers and screenshots stay on your device. When you do want to share the result, one click hosts the PNG and hands you a link.",
     "howTitle": "How to convert WebP to PNG",
     "steps": [
       {
@@ -98,8 +98,73 @@ export const content: LandingContentMap = {
       {
         "q": "Can I convert multiple WebP files to PNG at once?",
         "a": "Yes. Drop or select several WebP files together and they convert to PNG one after another, so you can do a whole batch in one go."
+      },
+      {
+        "q": "What is a WebP file, and why won't some apps open it?",
+        "a": "WebP is a modern image format that makes small files and supports transparency. Browsers read it fine, but some design tools, older programs and upload forms don't accept it yet, so converting to PNG gets the image working in those places."
+      },
+      {
+        "q": "Should I pick PNG or JPG?",
+        "a": "Choose PNG when the image has a transparent background or needs to stay lossless, like a logo, icon or screenshot. Pick JPG instead for ordinary photos with no transparency, where a smaller file matters more than perfect pixels."
       }
     ],
+    "specsTitle": "WebP to PNG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input formats", "value": "WebP, with or without transparency" },
+      { "label": "Output", "value": "PNG, lossless with alpha" },
+      { "label": "Max size", "value": "No fixed limit, runs in your browser" }
+    ],
+    "comparisonTitle": "WebP, PNG and JPG compared",
+    "comparisonIntro": "When a file has to keep a transparent background or stay pixel-perfect, the target format matters. Here is how PNG compares with WebP and the other common options, so it's clear why PNG is the safe pick for graphics.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Typical file size",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["PNG", "Lossless", "Yes (full alpha)", "Large", "Logos, icons, screenshots"] },
+      { "cells": ["WebP", "Lossy or lossless", "Yes", "Smallest", "Modern web pages"] },
+      { "cells": ["JPG", "Lossy", "No", "Small", "Photos without transparency"] },
+      { "cells": ["GIF", "Lossless, 256 colors", "Yes (1-bit)", "Small", "Simple animation"] },
+      { "cells": ["SVG", "Vector, lossless", "Yes", "Tiny for flat art", "Logos and icons that scale"] }
+    ],
+    "useCasesTitle": "When WebP to PNG is the right call",
+    "useCasesIntro": "PNG is the format to reach for whenever transparency or exact pixels matter:",
+    "useCases": [
+      {
+        "title": "Logos and stickers with clear backgrounds",
+        "body": "A transparent WebP becomes a transparent PNG, so the logo drops onto any color without a white rectangle around it."
+      },
+      {
+        "title": "Design tools that want PNG",
+        "body": "Some editors, slide tools and app pipelines accept PNG but not WebP. Converting first means the asset imports cleanly."
+      },
+      {
+        "title": "Screenshots and UI mockups",
+        "body": "PNG keeps sharp text and flat color with no compression smudging, which is why it's the standard for screenshots and interface art."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why choose PNG over JPG?",
+        "body": "Both PNG and JPG open just about everywhere, so the choice comes down to what the image needs. PNG is lossless and keeps a full alpha channel, so transparent areas stay transparent and fine details like text edges stay crisp. JPG is smaller, but it is lossy and has no transparency, so a clear background turns into a solid color. For a logo, an icon, a sticker or a screenshot, PNG is the right target. For a plain photo with no transparency, JPG is fine and lighter. This tool gives you the lossless PNG route."
+      },
+      {
+        "heading": "Does the transparency really survive?",
+        "body": "Yes. The converter reads the alpha channel from the WebP and writes the same per-pixel transparency into the PNG, so there is no white box and no matte color added behind the image. A semi-transparent edge stays semi-transparent. The quickest way to check is to drop the PNG onto a colored background: if the see-through parts show that color through, the alpha came across correctly. If your WebP had no transparency to begin with, the PNG simply stays fully opaque, which is normal."
+      },
+      {
+        "heading": "Why is the PNG bigger than the WebP?",
+        "body": "This is expected, not a fault. WebP leans on modern compression and can throw away data to stay tiny, while PNG stores every pixel exactly with lossless compression. Keeping all that detail costs space, so a PNG is often several times the size of the WebP it came from. In return you get a file any editor opens, that holds its transparency, and that won't lose more quality each time you save it. If small size matters more than editing, the original WebP is still the lighter option."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24",
     "ctaTitle": "Need a hosted URL?",
     "ctaBody": "After converting, click 'Get URL' to host any PNG on our CDN. Free, no signup.",
     "ctaButton": "Try the main uploader"

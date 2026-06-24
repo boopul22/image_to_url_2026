@@ -13,73 +13,201 @@ export const content: LandingContentMap = {
       { "pageKey": "image-hosting-for-forums", "label": "For forums" },
       { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
     ],
-    "metaDescription": "Host product images for eBay listings with permanent, direct URLs. Free, no signup required. Works perfectly with eBay's image requirements.",
+    "metaDescription": "Host eBay item photos and get a direct image URL you can drop into your listing description HTML, buyer messages or a selling forum. Free, no signup, no watermark, 10MB.",
     "schemaName": "ImageToURL",
-    "schemaDescription": "Host product images for eBay listings with permanent, direct URLs without any signup or watermarks.",
+    "schemaDescription": "A free tool that turns eBay item photos into direct image URLs for listing descriptions, messages and forums. No account, no watermark, full quality.",
     "badge": "EBAY SELLERS",
     "h1Pre": "Image Hosting for eBay",
     "h1Highlight": "listings.",
-    "intro": "Upload your product photos and get permanent, direct image URLs that work perfectly in eBay listing descriptions. Free to use, no account required.",
-    "howTitle": "How to Use for eBay",
+    "intro": "Need a public link for an item photo so you can drop it into your eBay listing description? Upload the picture above and you get a direct URL in a couple of seconds. Paste it into the description HTML with an <img> tag to show extra angles beyond the gallery slots, or share it in a buyer message or a selling forum. It works on JPG, PNG, WebP and GIF up to 10MB, there's no watermark, and the photo isn't squeezed or shrunk on the way through.",
+    "specsTitle": "eBay image hosting at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link for <img> tags"
+      }
+    ],
+    "howTitle": "How to use it for eBay",
     "steps": [
       {
-        "title": "Upload Product Photos",
-        "body": "Drag and drop your product images above. We accept JPG, PNG, WebP, and GIF formats with no quality loss."
+        "title": "Upload your item photo",
+        "body": "Drag a product shot onto the box above or click to pick one. JPG, PNG, WebP and GIF all work, up to 10MB each, and the file isn't recompressed."
       },
       {
-        "title": "Copy the Image URL",
-        "body": "Your permanent direct link is ready instantly. Click to copy the URL to your clipboard."
+        "title": "Copy the direct link",
+        "body": "Your photo lands on a fast CDN and a direct URL appears right away. It ends in the real file extension, so it behaves like the original image file."
       },
       {
-        "title": "Paste in Your eBay Listing",
-        "body": "Add the URL to your eBay listing description using the HTML editor. Use an <img> tag and your image appears instantly."
+        "title": "Paste it in your listing description",
+        "body": "Open the HTML view of your eBay description and add an <img src=\"...\"> tag with the link. The photo loads inline. The link also works in buyer messages and forum posts."
       }
     ],
-    "whyTitle": "Why eBay Sellers Need External Hosting",
+    "whyTitle": "Why eBay sellers reach for an outside link",
     "whyItems": [
       {
-        "title": "Imgur Blocks eBay Embeds",
-        "body": "Popular free image hosts like Imgur actively block hotlinking from eBay, causing broken images in your listings."
+        "title": "More photos than the gallery allows",
+        "body": "eBay gives you photo slots for the main gallery, but sellers often want extra close-ups in the description itself. A hosted link lets you embed as many angle and condition shots as you like inside the listing HTML."
       },
       {
-        "title": "Permanent URLs",
-        "body": "Your image links never expire, ensuring your product photos display correctly for as long as your listing exists."
+        "title": "No account, no email",
+        "body": "There's nothing to sign up for. Imgur dropped anonymous uploads back in 2023, so a lot of sellers went looking for something simpler. Upload, copy, paste."
       },
       {
-        "title": "No Watermarks",
-        "body": "Your images are served exactly as you uploaded them, with no branding overlays or distracting watermarks."
+        "title": "Full quality, no watermark",
+        "body": "The file comes back exactly as you sent it, with no branding overlay and no resizing. Buyers see the same sharp photo you uploaded."
       },
       {
-        "title": "Direct Image Links",
-        "body": "Get clean, direct URLs that point straight to your file, perfect for embedding into eBay's HTML editor."
+        "title": "One link, reused anywhere",
+        "body": "The same URL can sit in several listings, go out in a message to a buyer, or get pasted into a reselling forum. It points straight at the image file every time."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "Hosted image link vs eBay's own photo slots",
+    "comparisonIntro": "These two things do different jobs. eBay's photo uploader runs the main gallery and the zoom view, and a hosted link is for everything else, mostly the description HTML and anywhere you need to share the picture. Here's how they line up.",
+    "comparisonColumns": [
+      "Capability",
+      "eBay photo gallery",
+      "Hosted image URL"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Where it appears",
+          "Main gallery and zoom view",
+          "Inside the listing description HTML"
+        ]
+      },
+      {
+        "cells": [
+          "How many images",
+          "Up to 24 photos per listing",
+          "As many as you embed"
+        ]
+      },
+      {
+        "cells": [
+          "Reuse across listings",
+          "Re-upload to each one",
+          "Same link in every listing"
+        ]
+      },
+      {
+        "cells": [
+          "Share in messages or forums",
+          "No, gallery only",
+          "Yes, paste the link anywhere"
+        ]
+      },
+      {
+        "cells": [
+          "Cost",
+          "Free",
+          "Free"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where eBay sellers use a hosted link",
+    "useCasesIntro": "Once a photo has a direct URL, it slots into the places eBay's gallery can't reach:",
+    "useCases": [
+      {
+        "title": "Extra description photos",
+        "body": "Embed close-ups of a flaw, a serial number or a bundle layout right in the description so buyers see them without leaving the page."
+      },
+      {
+        "title": "Buyer messages and disputes",
+        "body": "Send a condition photo in a message, or attach proof to a return or 'item not as described' case by pasting a link instead of a bulky file."
+      },
+      {
+        "title": "Forums and cross-listing",
+        "body": "Share an item pic in a reselling or collector community for a price check, or drop the same link into a cross-post on another marketplace."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Where a hosted link fits on eBay",
+        "body": "eBay's main photos are uploaded into eBay itself, and that's still where your gallery and zoom images belong. An outside link is for the listing description, the part you can edit as HTML. Sellers use it to add extra angles, measurement charts or condition shots beyond the gallery slots. The same URL is handy outside the listing too, in messages to buyers or a forum post. So a hosted image doesn't replace eBay's photo uploader, it covers the spots eBay's gallery doesn't reach."
+      },
+      {
+        "heading": "Will the image embed inside a description?",
+        "body": "Yes, as long as you use a direct link in an HTML <img> tag. eBay's description editor has an HTML or code view where you paste something like <img src=\"https://imagetourl.cloud/abc123.jpg\">, and the photo loads inline. The link here ends in the real file extension and is served over HTTPS, which eBay needs, so it won't trip the mixed-content warning that breaks plain http images. Switch to the HTML view, drop the tag where you want the picture, and preview before you save."
+      },
+      {
+        "heading": "How long will the image stay up?",
+        "body": "Anonymous uploads stay live for at least a couple of weeks and usually longer, then get cleared on a regular storage cleanup. eBay listings can run for months, so if a photo needs to last the whole time, make a free account and choose 'keep forever' when you upload. Either way, hold on to your own copy of the file. If a link is ever cleared you can re-upload in seconds and swap the URL in your description."
+      }
+    ],
+    "faqTitle": "eBay image hosting FAQ",
     "faqs": [
       {
         "q": "Why do I need external image hosting for eBay?",
-        "a": "External hosting gives you more control over image quality, lets you use images across multiple listings, and avoids eBay's own compression."
+        "a": "The gallery slots cover your main photos, but the description is HTML, so extra pictures there need a direct image URL. Hosting also gives you one link you can reuse across listings and paste into messages or forums."
+      },
+      {
+        "q": "Can I add hosted photos to my eBay listing description?",
+        "a": "Yes. Open the HTML or code view of the description editor and add an <img src=\"...\"> tag with your link. The photo shows up inline when the listing goes live, alongside whatever text you've written."
+      },
+      {
+        "q": "Can a hosted URL replace eBay's main gallery photos?",
+        "a": "No, and it isn't meant to. Your gallery and zoom images are uploaded into eBay directly. A hosted link is for the description HTML and for sharing photos in messages, forums and cross-posts."
       },
       {
         "q": "Does Imgur work for eBay listings?",
-        "a": "Imgur has historically blocked hotlinking from eBay. ImageToURL provides direct image URLs specifically designed to work on marketplaces."
+        "a": "Imgur is awkward for marketplaces, and it dropped anonymous uploads in 2023, so you'd need an account first. The direct links here are made to embed cleanly in description HTML without a login."
       },
       {
-        "q": "Will my eBay images stay online permanently?",
-        "a": "Yes. Images uploaded to ImageToURL are hosted permanently with no expiration dates."
+        "q": "How long will my eBay image link stay online?",
+        "a": "Anonymous links last at least a couple of weeks and often longer, then clear on a regular cleanup. Listings can run for months, so sign in and pick 'keep forever' for photos that need to last, and keep your own backup of the file."
       },
       {
         "q": "What image sizes work best for eBay?",
-        "a": "eBay recommends at least 500 pixels on the longest side, with 1600 pixels being ideal for the zoom feature."
+        "a": "eBay suggests at least 500 pixels on the longest side, and 1600 pixels is a good target so the zoom feature looks sharp. This tool keeps your photo at full resolution, so whatever you upload is what buyers see."
       },
       {
         "q": "Can I use the same image URL across multiple eBay listings?",
-        "a": "Absolutely. You can reuse the same link in as many listings as you need, which is perfect for standard product photos or banners."
+        "a": "Yes. One link works in as many listings as you want, which is handy for a standard banner, a returns-policy graphic or a sizing chart you reuse on every item."
+      },
+      {
+        "q": "What image formats can I upload?",
+        "a": "JPG, PNG, WebP and GIF, up to 10MB per file. The link ends in the real extension, so it embeds in the description HTML the same way the original file would."
+      },
+      {
+        "q": "Does it compress or watermark my photo?",
+        "a": "No. You get the same file back at full quality, with no re-compression and no branding overlay. That matters for condition shots where buyers are zooming in on detail."
+      },
+      {
+        "q": "Can I share an item photo in eBay messages or a forum?",
+        "a": "Yes. Copy the link and paste it into a buyer message, a return case or a selling community thread. Anyone who clicks it sees the photo, no download needed."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "10MB per image, which covers almost any product photo. If a shot is larger, resize or compress it a little first, then upload it to get the link."
+      },
+      {
+        "q": "Are the links safe to share with buyers?",
+        "a": "Every link is served over HTTPS and points only at your image, with no redirect pages. Just remember anonymous uploads are public to anyone with the link, so don't host anything private."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Make your eBay listings stand out",
-    "ctaBody": "Upload your product photos and get permanent URLs in seconds with no signup or watermarks.",
-    "ctaButton": "Upload Now"
+    "ctaBody": "Upload an item photo and get a direct URL in seconds for your description HTML, messages or forum posts. No signup, no compression, no watermark.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratuito para anuncios de eBay | ImageToURL",

@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "FORUM USERS",
     "h1Pre": "Image Hosting for Forum",
     "h1Highlight": "Posts.",
-    "intro": "Upload your images and get direct links ready for BBCode, HTML, and Markdown. No ads, no pop-ups, no expiring URLs—just clean image hosting for any forum.",
+    "intro": "Most forums show an image when you give them a direct link to the file, usually wrapped in [img] tags on phpBB-style boards or written as Markdown on newer ones. Upload your screenshot or graphic here and you get exactly that: a clean URL ending in the real extension, ready to paste into a post or signature. There are no ad pages, no pop-ups and no recompression, and for threads that stay up for years you can sign in and mark the image 'keep forever'.",
     "howTitle": "Embed Code Examples",
     "steps": [
       {
@@ -75,11 +75,88 @@ export const content: LandingContentMap = {
       {
         "q": "Can I upload screenshots from games and software?",
         "a": "Absolutely. We support all common image formats including PNG, JPEG, GIF, and WebP, making it perfect for sharing game screenshots."
+      },
+      {
+        "q": "How do I use the link in BBCode [img] tags?",
+        "a": "Wrap the direct URL in tags: [img]https://imagetourl.cloud/abc.png[/img]. Because the link ends in the real file extension, phpBB, vBulletin, SMF and MyBB render it inline instead of showing a clickable text link."
+      },
+      {
+        "q": "What's the file size and format limit?",
+        "a": "Up to 10 MB per file, covering JPG, PNG, WebP, GIF and SVG. That's enough for high-resolution game screenshots and detailed diagrams without having to crop them down first."
+      },
+      {
+        "q": "Does it resize or recompress my screenshot?",
+        "a": "No. The file comes back at full resolution with no watermark, unlike some forum hosts that quietly scale hotlinked images down. What you upload is what the thread shows."
+      },
+      {
+        "q": "Will the image still load years from now?",
+        "a": "Forum threads can stay relevant for years, so this matters. Anonymous links last at least a couple of weeks; for a long-lived post, sign in with a free account and pick 'keep forever' so your screenshots don't rot into broken images later."
+      },
+      {
+        "q": "Are forum uploads private?",
+        "a": "No. Anonymous uploads are public to anyone with the link, which suits forum screenshots fine. Don't post anything private, and keep your own copy of each file as a backup."
       }
     ],
     "ctaTitle": "Get your images forum-ready in seconds",
     "ctaBody": "Upload an image, get a direct URL with BBCode, HTML, and Markdown embed codes with no ads and no signup.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Forum image hosting at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required (recommended for keep-forever)" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct link for [img], HTML, Markdown" }
+    ],
+    "useCasesTitle": "What forum users post",
+    "useCasesIntro": "The kinds of images that need a direct link to show up in a thread:",
+    "useCases": [
+      {
+        "title": "Game and software screenshots",
+        "body": "Bug reports, build showcases, settings walkthroughs. Full-resolution PNGs paste straight into [img] tags so others can actually read the detail."
+      },
+      {
+        "title": "Guides and tutorials",
+        "body": "Step-by-step posts with diagrams or annotated shots. Host each image and drop the links inline so the guide reads top to bottom."
+      },
+      {
+        "title": "Signatures and avatars",
+        "body": "A banner under every post or a custom avatar. One hosted URL works across the board you're active on."
+      }
+    ],
+    "comparisonTitle": "Forum image hosts compared",
+    "comparisonIntro": "Plenty of hosts will hand a forum user a link, but they vary on ads, file size, whether they keep full quality, and how long the image survives. Here's how the common ones stack up for posting.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Ad-free image page",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "No", "Yes", "Tied to your account"] },
+      { "cells": ["Postimages", "Yes", "No", "No (resized to 1280px)", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "No", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "Yes", "Yes", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "BBCode, HTML and Markdown - what each forum wants",
+        "body": "Older boards built on phpBB, vBulletin, SMF or MyBB use BBCode, so you wrap a direct link in [img]...[/img]. Forums that allow HTML take a standard <img src> tag. Newer communities like Reddit, Discourse and GitHub Discussions use Markdown, where the syntax is an exclamation mark, square brackets and the URL in parentheses. The one thing they all share is that the link must point straight at the image file. That's the kind of URL you get here, so the same upload works whichever markup your forum speaks."
+      },
+      {
+        "heading": "Why ad-heavy image hosts annoy forum users",
+        "body": "A lot of free hosts make money by wrapping your image in a page full of ads and pop-ups, then making the actual direct link hard to find. Other users get sent to a cluttered landing page instead of just seeing the picture, and moderators sometimes ban those domains outright. A clean direct link sidesteps all that: it loads the image and nothing else, served over HTTPS with no redirect or tracker bolted on, which is exactly what a [img] tag expects."
+      },
+      {
+        "heading": "Keeping screenshots alive in old threads",
+        "body": "Dead images are the curse of old forums - half the helpful threads from years ago are full of broken thumbnails because the host purged inactive uploads. Anonymous links here last a couple of weeks at minimum, which is fine for a throwaway reply. For a guide or bug report you want people finding later, sign in free and choose 'keep forever' so the screenshots stay put. Keep your own copies too, since no free host should be your only backup."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratuito para foros | ImageToURL",

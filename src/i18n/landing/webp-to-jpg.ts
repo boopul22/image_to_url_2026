@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "WebP to JPG Converter,",
     "h1Highlight": "Fix Incompatible Files",
-    "intro": "Stuck with WebP files an app won't accept? Drop them here and convert WebP to JPG instantly, all in your browser with no upload.",
+    "intro": "Downloaded an image that saved as .webp and now something won't open it? This page rewrites those files as ordinary JPGs right in your browser, so there's no upload and nothing waits on a server. It handles photos and screenshots, you choose the quality, and what you get back is a plain .jpg that opens in any app, prints at a kiosk, or attaches to an email. If you later want to share the photo as a link, one click hosts the JPG for you.",
     "howTitle": "How to convert WebP to JPG",
     "steps": [
       {
@@ -92,8 +92,73 @@ export const content: LandingContentMap = {
       {
         "q": "Can I convert multiple WebP files at once?",
         "a": "Yes. Select or drop several WebP files together and they convert to JPG one after another, so you can do a whole batch in one go."
+      },
+      {
+        "q": "What is a WebP file?",
+        "a": "WebP is an image format from Google that packs photos and graphics into smaller files than JPG or PNG. Browsers handle it well, but plenty of apps and devices still don't, which is why a .webp download sometimes refuses to open and people switch it to JPG."
+      },
+      {
+        "q": "Should I convert to JPG or PNG?",
+        "a": "Pick JPG for ordinary photos that don't need a transparent background, since the file stays small and opens everywhere. Choose PNG when the image has transparency or you want no added compression, like a logo or a screenshot."
       }
     ],
+    "specsTitle": "WebP to JPG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input formats", "value": "WebP, including animated" },
+      { "label": "Output", "value": "JPG photo (.jpg)" },
+      { "label": "Max size", "value": "No fixed limit, runs in your browser" }
+    ],
+    "comparisonTitle": "WebP, JPG and PNG compared",
+    "comparisonIntro": "Choosing a target format comes down to what you need: the smallest file, transparency, or the widest compatibility. Here is how the common web formats line up, so you can see why JPG is the safe pick for photos.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Typical file size",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["WebP", "Lossy or lossless", "Yes", "Smallest", "Modern web pages"] },
+      { "cells": ["JPG", "Lossy", "No", "Small", "Photos, email, printing"] },
+      { "cells": ["PNG", "Lossless", "Yes", "Large", "Logos, screenshots, graphics"] },
+      { "cells": ["GIF", "Lossless, 256 colors", "Yes (1-bit)", "Small to medium", "Simple animation"] },
+      { "cells": ["TIFF", "Lossless", "Yes", "Very large", "Print and archival"] }
+    ],
+    "useCasesTitle": "When converting a WebP photo to JPG helps",
+    "useCasesIntro": "A JPG opens just about everywhere, which is the whole point. These are the moments people reach for it:",
+    "useCases": [
+      {
+        "title": "A site rejects your upload",
+        "body": "Job boards, marketplaces, government forms and older upload tools often allow JPG and PNG but not WebP. A quick swap gets the photo accepted."
+      },
+      {
+        "title": "Printing photos",
+        "body": "Drugstore kiosks and online print labs expect JPG or TIFF. Hand them a .webp and the order stalls. Convert first and the print goes through."
+      },
+      {
+        "title": "Sharing with older software",
+        "body": "If someone is on an older Office build or an older photo viewer, a JPG saves a back-and-forth. It opens with no plugin and no fuss."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why convert a WebP back to JPG?",
+        "body": "WebP is the newer format, and it makes smaller files than JPG at a similar look, which is why so many sites now save images that way. The catch is support outside the browser. Plenty of desktop apps, print kiosks, older Office versions and upload forms still expect a JPG and quietly refuse a .webp. Turning the file into a JPG is about compatibility, not quality: you are changing the wrapper so the photo opens where you need it. For everyday photos that don't need transparency, JPG is the format almost everything understands."
+      },
+      {
+        "heading": "What happens to transparency and animation?",
+        "body": "JPG has no alpha channel, so it cannot store a transparent area. If your WebP has a see-through background, those spots are filled with a solid color, white by default, when it becomes a JPG. For a normal photo this changes nothing, since photos are already fully opaque. Animation is the other limit: a JPG holds a single frame, so an animated WebP saves as one still image. If you need the transparency or the motion, convert to PNG instead, or keep a GIF or short video for anything that moves."
+      },
+      {
+        "heading": "Will the photo look worse?",
+        "body": "A JPG is lossy, which means it drops some detail to stay small. Converting from a WebP that was already compressed can't add back anything lost the first time; you are re-saving, not restoring. In practice, at a quality around 92 the difference is very hard to spot on a normal photo, and your original WebP is left untouched on your device so you always have it. If you want no added loss and the file can be larger, choose PNG rather than JPG."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24",
     "ctaTitle": "Want a permanent URL?",
     "ctaBody": "After converting, click 'Get URL' to host any JPG on our CDN. Free, no signup.",
     "ctaButton": "Try the main uploader"

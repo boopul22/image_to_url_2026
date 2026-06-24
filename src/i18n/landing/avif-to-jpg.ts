@@ -76,8 +76,84 @@ export const content: LandingContentMap = {
       {
         "q": "Are my files uploaded anywhere?",
         "a": "No. The conversion is local. Your files only leave the device if you click Get URL to host one."
+      },
+      {
+        "q": "Is AVIF better than JPG?",
+        "a": "For loading a web page, yes - AVIF files are much smaller at the same quality. For compatibility, no - JPG opens on far more devices and apps. Convert to JPG when you need a file that just works everywhere."
+      },
+      {
+        "q": "Can Windows Photos open AVIF?",
+        "a": "Only with an extra codec from the Microsoft Store, and not on every version of Windows. Converting to JPG skips the hassle, since JPG opens in Photos out of the box."
+      },
+      {
+        "q": "Does the JPG keep transparency?",
+        "a": "No. JPG has no transparency channel, so any transparent areas in the AVIF fill with a solid background, usually white. If you need transparency, convert to PNG instead."
+      },
+      {
+        "q": "Will the JPG be bigger than the original AVIF?",
+        "a": "Usually, yes. AVIF compresses more efficiently, so the same picture as a JPG often takes two to five times the space. That extra size is the price of universal compatibility."
+      },
+      {
+        "q": "Can I get a link to the converted JPG?",
+        "a": "Yes. After converting, click Get URL and the JPG is hosted on our CDN with a direct https link you can paste into chat, email or a web page."
       }
     ],
+    "specsTitle": "AVIF to JPG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input", "value": "AVIF (.avif)" },
+      { "label": "Output", "value": "JPG" },
+      { "label": "Max size", "value": "10 MB" }
+    ],
+    "useCasesTitle": "When AVIF to JPG helps",
+    "useCasesIntro": "Converting comes up most often when a file simply refuses to cooperate:",
+    "useCases": [
+      {
+        "title": "Editing in older software",
+        "body": "Photoshop versions before 2024, many phone gallery apps, and office tools cannot open .avif. A JPG drops straight in."
+      },
+      {
+        "title": "Sending to other people",
+        "body": "Email a JPG and you skip the 'it won't open on my end' reply. Almost nobody runs into trouble with a plain JPG."
+      },
+      {
+        "title": "Uploading to forms and sites",
+        "body": "Plenty of upload boxes quietly reject .avif. JPG sails through job portals, marketplaces, and older CMS uploads."
+      }
+    ],
+    "comparisonTitle": "AVIF vs JPG and other formats",
+    "comparisonIntro": "AVIF wins on file size but loses on compatibility. Here is how it lines up against the formats you already use, so you can see what you gain and what you give up by converting.",
+    "comparisonColumns": [
+      "Format",
+      "Typical size",
+      "Transparency",
+      "Browser support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["AVIF", "Smallest", "Yes", "Modern browsers only", "Fast-loading web images"] },
+      { "cells": ["JPG", "Medium", "No", "Everywhere", "Photos, sharing, uploads"] },
+      { "cells": ["PNG", "Large", "Yes", "Everywhere", "Graphics, screenshots, logos"] },
+      { "cells": ["WebP", "Small", "Yes", "Most browsers", "Web images with wide support"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is AVIF and why convert it?",
+        "body": "AVIF (AV1 Image File Format) is built on the AV1 video codec. It packs photos into much smaller files than JPG at the same visual quality, which is why fast websites have started using it. The catch is reach: only fairly recent versions of Chrome, Firefox, Safari and Edge decode it, and a lot of desktop apps, printers and older phones still draw a blank. If you downloaded an .avif and nothing will open it, converting to JPG trades a bit of file size for a format everything understands."
+      },
+      {
+        "heading": "AVIF vs JPG: what actually changes",
+        "body": "JPG has been around since the early 1990s and is the safest, most compatible photo format there is. AVIF is newer and smarter about compression, so the same picture takes less space. When you convert AVIF to JPG, the image grows a little on disk and picks up JPG's lossy compression, but it gains the ability to open on almost any device. For a photo you need to share or edit today, that swap is usually worth it."
+      },
+      {
+        "heading": "Will I lose quality converting to JPG?",
+        "body": "A small amount, yes. JPG is lossy, so re-encoding drops some data the eye rarely notices. At quality 92 a converted photo looks the same as the AVIF in normal viewing; you would need to zoom in hard on fine gradients to spot a difference. The file does grow, since JPG is less efficient than AVIF. If you want the smallest possible JPG, slide the quality down and check the result before you download."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24",
     "ctaTitle": "Want a permanent URL?",
     "ctaBody": "After converting, click Get URL to host any JPG on our CDN. Free, no signup.",
     "ctaButton": "Try the main uploader"

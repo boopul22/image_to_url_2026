@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Direct Image Link Hosting — Clean Hotlinkable URLs",
+    "metaTitle": "Direct Image Link - Free Hotlinkable URL, No Gallery Page | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "free-image-hosting", "label": "Free image hosting" },
@@ -13,85 +13,213 @@ export const content: LandingContentMap = {
       { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
       { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" }
     ],
-    "metaDescription": "Get direct image links that end in .jpg, .png, .gif — not gallery pages with ads. Hotlink-friendly URLs for embedding anywhere on the web.",
-    "schemaName": "Direct Image Link Hosting",
-    "schemaDescription": "A tool to generate direct, ad-free image URLs that are optimized for hotlinking and embedding in websites, forums, and emails.",
-    "badge": "DIRECT IMAGE LINKS",
-    "h1Pre": "Direct Image Links",
-    "h1Highlight": "no gallery pages.",
-    "intro": "Turn an image into a link that points straight to the file, with no gallery wrapper, no ads, and no redirects. Upload a picture and get a clean, hotlinkable URL you can use as an image link anywhere, from HTML and Markdown to forums and email.",
-    "howTitle": "How It Works",
+    "metaDescription": "Get a direct image link that ends in .jpg, .png or .webp and opens the raw file - not a gallery page. Free, no sign-up, hotlinks inline in HTML, Discord and email.",
+    "schemaName": "Direct Image Link",
+    "schemaDescription": "A free tool that gives you a direct image link ending in the real file extension, so the raw image loads and embeds inline instead of opening a page.",
+    "badge": "DIRECT IMAGE LINK",
+    "h1Pre": "Direct Image Link:",
+    "h1Highlight": "the file, not a page",
+    "intro": "A direct image link points straight at the image file, so the URL ends in .jpg, .png or .webp and loads the raw picture on its own. That's the kind of link forums, Discord, email and HTML need to embed an image inline. Upload your file in the box above and you get a clean direct link in a couple of seconds, no account required. It works on JPG, PNG, WebP, GIF and SVG up to 10MB, with no watermark and nothing compressed on the way through.",
+    "specsTitle": "Direct image link at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Link type",
+        "value": "Direct, ends in file extension"
+      }
+    ],
+    "howTitle": "How to get a direct image link",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Select any image file from your device to upload it instantly to our high-speed servers."
+        "title": "Upload the file",
+        "body": "Drag your image onto the box or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. The file goes onto a fast global CDN."
       },
       {
-        "title": "Get Direct URL",
-        "body": "We provide a clean, permanent link that points directly to your image file, not a gallery page."
+        "title": "Copy the direct link",
+        "body": "You get a URL that ends in the real file extension, like .jpg or .png. Open it and you see just the image, no surrounding page, no ads, no click-through."
       },
       {
-        "title": "Embed Anywhere",
-        "body": "Copy and paste your direct link into your website, forum, or email to display your image instantly."
+        "title": "Embed or paste it",
+        "body": "Drop the link into an HTML img tag, Markdown, a forum post, a Discord message or an email and the picture shows up inline instead of as a link to a page."
       }
     ],
-    "whyTitle": "Why Use Direct Links?",
+    "whyTitle": "Why you need a direct link, not a page link",
     "whyItems": [
       {
-        "title": "Clean URLs",
-        "body": "Our links point straight to the file, ensuring your viewers see only the image without any distracting interface."
+        "title": "Forums and BBCode need it",
+        "body": "Forum image tags and BBCode only embed a URL that ends in an image extension. Paste an Imgur gallery page or a Drive viewer link and you get a dead box or a text link, not the picture."
       },
       {
-        "title": "No Ads",
-        "body": "Bypass annoying gallery ads and pop-ups that clutter the user experience on other hosting platforms."
+        "title": "HTML and Markdown embed it inline",
+        "body": "An HTML img tag and Markdown image syntax both expect a direct file URL. Give them a direct link and the image loads in place; give them a page link and nothing renders."
       },
       {
-        "title": "Hotlink-Friendly",
-        "body": "We support direct hotlinking, so your images load reliably in HTML, Markdown, and across all your projects."
+        "title": "Discord, Slack and Reddit show the image",
+        "body": "Chat apps unfurl a direct link straight into the picture. A page link usually shows a small preview card or just the text, which is not what you want in a thread."
       },
       {
-        "title": "Universal Compatibility",
-        "body": "Our direct URLs work perfectly in img tags, email clients, and API responses without any referrer restrictions."
-      },
-      {
-        "title": "A direct link for any picture",
-        "body": "A direct link picture works just like an image link. Add that picture link to website builders like WordPress or Wix, with no gallery page in the way."
-      },
-      {
-        "title": "A link for any picture",
-        "body": "Need a link for a picture fast? Upload it and you get an image-as-a-link URL that works the same in a website builder like WordPress or Wix, a forum post, or an email, with no gallery page in between."
+        "title": "Full quality, no resizing",
+        "body": "The link points at your original file at full resolution. Some hosts quietly scale hotlinked images down to around 1,280px; this one leaves your file exactly as you uploaded it."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "Direct link vs page link",
+    "comparisonIntro": "The fastest way to tell the two apart is the end of the URL and what opens when you click it. A direct link ends in an image extension and shows the raw file; a page or share link opens a webpage that contains the image. Here is how common sources compare.",
+    "comparisonColumns": [
+      "Link type",
+      "Ends in file extension",
+      "Embeds inline",
+      "Opens a page",
+      "Example source"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Direct image link",
+          "Yes (.jpg, .png, .webp)",
+          "Yes",
+          "No",
+          "ImageToURL, Catbox, ImgBB direct URL"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur gallery page",
+          "No",
+          "No",
+          "Yes",
+          "imgur.com/a/abc123"
+        ]
+      },
+      {
+        "cells": [
+          "Google Drive share link",
+          "No",
+          "No",
+          "Yes",
+          "drive.google.com/file/d/..."
+        ]
+      },
+      {
+        "cells": [
+          "Webpage with image",
+          "No",
+          "No",
+          "Yes",
+          "Any blog post or product page"
+        ]
+      },
+      {
+        "cells": [
+          "Right-click 'Copy image address'",
+          "Usually yes",
+          "Yes",
+          "No",
+          "Image already on a live page"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a direct image link is the only thing that works",
+    "useCasesIntro": "Once your picture has a direct link, it drops straight into the places that refuse page links:",
+    "useCases": [
+      {
+        "title": "Forum and BBCode posts",
+        "body": "Wrap the direct URL in image tags or BBCode and the picture renders inside your post. A gallery page link would just sit there as plain text."
+      },
+      {
+        "title": "Website builders and HTML",
+        "body": "Paste the link into an img tag, a WordPress or Wix image field, a Notion page or a README and the image loads inline with no extra hosting to set up."
+      },
+      {
+        "title": "Email signatures and chat",
+        "body": "Add the direct link to an HTML email or a Slack message and recipients see the actual image instead of a broken box or a link they have to open."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a direct image link?",
+        "body": "A direct image link is a web address that points at the image file itself, so it ends in the file's own extension like .jpg, .png or .webp. Open it in a browser and you see only the picture, with no menu, no comments and no ads around it. Because the URL is the raw file, anything that reads a URL can load the image in place: an HTML img tag, Markdown, a forum's image tag, a chat app. That is the difference from a page link, which opens a webpage that happens to contain the image and cannot be embedded on its own."
+      },
+      {
+        "heading": "How to tell if a link is direct",
+        "body": "Three quick checks. First, look at the end of the URL: a direct link finishes in an image extension such as .jpg, .png, .gif or .webp. Second, open it in a fresh browser tab. If you see just the image on a blank background, it is direct; if you land on a gallery, a viewer or a full webpage, it is not. Third, try it in an HTML img tag or a Markdown image. A direct link shows the picture, while a page link renders nothing or shows broken-image text."
+      },
+      {
+        "heading": "Turning an indirect link into a direct one",
+        "body": "You cannot force a Google Drive viewer URL or an Imgur gallery page to behave like a file link, because those addresses point at pages, not at the raw image. The reliable fix is to re-host the picture. Save the image to your device, then upload it here and copy the direct link we hand back. The new URL ends in the real extension and embeds inline straight away. Keep your own copy of the file as a backup, since anonymous links are cleared on a regular cleanup schedule."
+      }
+    ],
+    "faqTitle": "Direct image link FAQ",
     "faqs": [
       {
         "q": "What is a direct image link?",
-        "a": "A direct image link points straight to the image file itself, not to a gallery page. When you open it, you see only the image."
+        "a": "It is a URL that points straight at the image file, ending in the real extension like .jpg or .png. Opening it shows only the picture, and you can embed it inline in HTML, Markdown, forums and chat apps."
       },
       {
-        "q": "Why are direct links better than gallery links?",
-        "a": "Direct links are ad-free, load faster, and are required for embedding images in HTML, emails, and forums."
+        "q": "How do I know if a link is direct or not?",
+        "a": "Check the end of the URL and what opens. A direct link ends in an image extension and loads just the image on a blank page. If clicking it opens a gallery, a viewer or a webpage, it is an indirect page link."
       },
       {
-        "q": "Can I hotlink ImageToURL images on my website?",
-        "a": "Yes, we fully support hotlinking. You can embed our URLs in your website's HTML without bandwidth throttling."
+        "q": "How do I get a direct link for my image?",
+        "a": "Upload the file in the box above. Within a couple of seconds you get a URL ending in the real file extension that loads the raw image. No account and no payment are needed."
       },
       {
-        "q": "Do direct image links work in emails?",
-        "a": "Yes, direct links are the only way to ensure images display inline correctly within HTML email clients."
+        "q": "Why won't my Imgur or Google Drive link embed?",
+        "a": "Those links open a page that contains the image, not the file itself, so an img tag or a forum image tag has nothing to render. Re-host the image here to get a direct link that embeds inline."
       },
       {
-        "q": "Does Imgur provide direct image links?",
-        "a": "Imgur defaults to gallery pages with ads. ImageToURL provides a clean, direct link by default every time."
+        "q": "How do I convert an indirect link to a direct one?",
+        "a": "You cannot rewrite a page URL into a file URL by hand. Save the image, then upload it here and use the direct link we generate. That new URL ends in the file extension and works in any img tag."
       },
       {
-        "q": "How do I turn an image into a link?",
-        "a": "Upload your image here and copy the direct URL we generate. That URL is your image as a link: paste it anywhere to show the picture, or wrap it in an anchor tag to make it clickable."
+        "q": "Does the direct link work in HTML and Markdown?",
+        "a": "Yes. The URL is a normal direct image link, so it works in HTML img src tags, Markdown image syntax, CSS background-image and any website builder that accepts an image URL."
+      },
+      {
+        "q": "Will it embed in Discord, Slack and forums?",
+        "a": "Yes. Because the link points right at the file, Discord and Slack unfurl it into the picture, and forum image tags or BBCode render it inline instead of showing plain text."
+      },
+      {
+        "q": "Do direct image links work in email?",
+        "a": "Yes. A direct file URL is what HTML email clients need to show an image inline. A page link tends to break or appear as a plain hyperlink in the message."
+      },
+      {
+        "q": "Does it compress or resize my image?",
+        "a": "No. You get back the same file at full resolution, with no re-compression and no watermark. That is different from hosts that scale hotlinked images down to a smaller width."
+      },
+      {
+        "q": "What formats and file size are supported?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link ends in the matching extension, so it hotlinks the same way the original file would."
+      },
+      {
+        "q": "How long does the direct link stay live?",
+        "a": "Anonymous links stay up until our monthly storage cleanup, so you get at least a couple of weeks and often longer. Sign in for free and choose 'keep forever' if you need a permanent link, and keep your own backup either way."
+      },
+      {
+        "q": "Are the links safe to share?",
+        "a": "Each link is served over HTTPS and points only at your image, with no redirect pages or trackers. Anonymous uploads are public to anyone with the link, so do not post anything private."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Get a direct image link now",
-    "ctaBody": "Upload your image and get a clean, hotlinkable URL without any gallery pages or ads.",
-    "ctaButton": "Upload Your Image"
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link that ends in the file extension and embeds inline. No sign-up, no compression, no gallery page.",
+    "ctaButton": "Upload Your Image",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de enlaces directos a imágenes — URLs limpias para hotlinking | ImageToURL",

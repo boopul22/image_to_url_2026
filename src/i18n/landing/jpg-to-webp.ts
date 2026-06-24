@@ -18,7 +18,15 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "JPG to WebP Converter,",
     "h1Highlight": "Lighter Pages, Same Look",
-    "intro": "Convert your JPG files to WebP and cut their size by 25 to 35% for faster-loading pages. Everything runs in your browser, with no upload and no signup.",
+    "intro": "Need a lighter version of a photo for the web? Drop your JPGs in the box above and they re-encode to WebP in your browser, usually 25 to 35% smaller at the same visual quality. There is no upload, no signup, and no watermark, and files up to 10 MB work. Once a file is converted you can download it or click 'Get URL' to get a shareable https link.",
+    "specsTitle": "JPG to WebP at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input", "value": "JPG / JPEG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "WebP (with optional hosted link)" }
+    ],
     "howTitle": "How to convert JPG to WebP",
     "steps": [
       {
@@ -51,6 +59,88 @@ export const content: LandingContentMap = {
       {
         "title": "Free and local",
         "body": "No upload. Everything runs on your device."
+      }
+    ],
+    "comparisonTitle": "JPG vs WebP at the same photo",
+    "comparisonIntro": "JPG and WebP are both built for photographs, but WebP is the newer codec and it packs the same picture into less space. Here is how the two formats line up for a typical photo on a web page.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Typical file size",
+      "Transparency",
+      "Browser support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "JPG",
+          "Lossy only",
+          "Baseline",
+          "No",
+          "Everywhere, including old clients",
+          "Photos for the widest reach"
+        ]
+      },
+      {
+        "cells": [
+          "WebP (lossy)",
+          "Lossy",
+          "25 to 35% smaller",
+          "Yes (alpha)",
+          "All current browsers",
+          "Photos on modern web pages"
+        ]
+      },
+      {
+        "cells": [
+          "WebP (lossless)",
+          "Lossless",
+          "Bigger than lossy WebP",
+          "Yes (alpha)",
+          "All current browsers",
+          "Flat graphics, not photos"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "Lossless",
+          "Much larger for photos",
+          "Yes (alpha)",
+          "Everywhere",
+          "Logos, screenshots, line art"
+        ]
+      }
+    ],
+    "useCasesTitle": "When JPG to WebP pays off",
+    "useCasesIntro": "Shaving a third off every photo adds up fast. These are the spots where it helps the most:",
+    "useCases": [
+      {
+        "title": "Speeding up a web page",
+        "body": "Photos are usually the heaviest thing on a page. Swapping JPG hero shots and galleries for WebP cuts image weight, which is one of the easier ways to move your Largest Contentful Paint in the right direction."
+      },
+      {
+        "title": "Photo-heavy galleries and blogs",
+        "body": "If a post has a dozen photos, the savings stack up. Smaller files mean less data on mobile connections and quicker scrolling without any visible drop in quality."
+      },
+      {
+        "title": "Email and storage trimming",
+        "body": "When you just need a lighter copy of a photo to attach or archive, WebP gives you the same image in less space. Keep the original JPG if a recipient might be on very old software."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why convert JPG to WebP?",
+        "body": "JPG is the default for photos, but it was designed in the early 1990s. WebP came out of Google later and uses smarter compression, so the same photo lands 25 to 35% smaller at a quality you can't tell apart by eye. On a page full of images that is real bandwidth saved and a faster load, which is why image weight shows up directly in Core Web Vitals and Lighthouse scoring. If your photos are currently JPG, this is close to free performance."
+      },
+      {
+        "heading": "Does converting lose quality?",
+        "body": "JPG is already a lossy format, so some detail was thrown away the first time the photo was saved. Converting to WebP doesn't bring any of that back, and re-encoding a lossy file always loses a little more. The trick is to keep the quality high. At a setting around 92 the WebP looks the same as the source while still coming out smaller. Drop to 75 or 80 only when you want the tiniest file and can accept a faint softening on close inspection."
+      },
+      {
+        "heading": "Is WebP supported everywhere?",
+        "body": "On the web, effectively yes. Chrome, Firefox, Edge and Safari all render WebP, which covers well over 98% of browsers in use. The gaps are old devices, a few legacy desktop apps, and some older email clients that still expect JPG or PNG. For a public web page that is a non-issue. If you are sending a file to someone on unknown software, keeping the original JPG as a fallback is the safe move."
       }
     ],
     "faqTitle": "FAQ",
@@ -86,11 +176,30 @@ export const content: LandingContentMap = {
       {
         "q": "Folder drop?",
         "a": "Yes. Drop a whole folder and every JPG inside converts to WebP, one after another."
+      },
+      {
+        "q": "Can I get a shareable link for the WebP?",
+        "a": "Yes. After a file converts, click 'Get URL' and it is hosted for free with a direct https link you can paste into a page, a chat or an email. Without that click, nothing leaves your device."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "Up to 10 MB per file, which covers nearly any photo. If a JPG is larger than that, compress or resize it first and then convert."
+      },
+      {
+        "q": "Does WebP show up in email?",
+        "a": "Most modern mail apps display WebP fine, but a few older ones still expect JPG or PNG. If you are unsure who is on the other end, attach the original JPG to be safe."
+      },
+      {
+        "q": "Is it really free with no account?",
+        "a": "Yes. The converter is free, there is no signup, and there is no watermark on the result. You only need an account if you later want a hosted link that you choose to keep forever."
       }
     ],
     "ctaTitle": "Want a hosted URL?",
     "ctaBody": "Convert your JPG files, then click 'Get URL' to host any WebP for free. No signup.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de JPG a WebP | Gratis, 25-35% más ligero",

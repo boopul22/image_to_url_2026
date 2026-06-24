@@ -17,7 +17,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "HEIC to PDF Converter,",
     "h1Highlight": "iPhone Photos in One File",
-    "intro": "Drop your iPhone HEIC photos and they get decoded and merged into one shareable PDF, all in your browser. Nothing gets uploaded.",
+    "intro": "Drop your iPhone HEIC photos and each one is decoded to an image, then combined into a PDF right in your browser. Nothing is uploaded. You can merge several pictures into one multi-page document or make a separate PDF per file. When you're done, click 'Get URL' to host the PDF and get a shareable https link.",
     "howTitle": "How to convert HEIC to PDF",
     "steps": [
       {
@@ -89,11 +89,107 @@ export const content: LandingContentMap = {
       {
         "q": "How do I convert HEIC to PDF on iPhone, Windows, or Mac?",
         "a": "The same way on every device. Drop your HEIC files into the box and download the PDF. It runs in any modern browser, so there is nothing to install on iPhone, Windows, or Mac."
+      },
+      {
+        "q": "Can I reorder the pages?",
+        "a": "Photos go into the PDF in the order you add them, so arrange the files before you drop them. To change the order afterward, remove the files and add them again in the sequence you want."
+      },
+      {
+        "q": "What page size does the PDF use?",
+        "a": "Each photo is auto-fit to a standard A4 page, so the document prints cleanly and opens the same on any screen. Tall and wide photos are scaled to fit without cropping."
       }
     ],
     "ctaTitle": "Host the PDF?",
     "ctaBody": "Convert your HEIC files into a PDF, then click 'Get URL' to host it for free. No signup.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "specsTitle": "At a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Converts", "value": "HEIC/HEIF to PDF" },
+      { "label": "Merge", "value": "Many photos into one PDF" },
+      { "label": "Output", "value": "PDF download + optional shareable link" }
+    ],
+    "comparisonTitle": "PDF vs the image formats it replaces",
+    "comparisonIntro": "When you need to send or print a batch of photos, the file format decides how smooth that is. PDF holds many images in one document and opens on any device. Here's how it compares to the picture formats your iPhone hands you.",
+    "comparisonColumns": [
+      "Format",
+      "Multiple images in one file",
+      "Print-ready",
+      "Opens everywhere",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "PDF",
+          "Yes",
+          "Yes",
+          "Yes",
+          "Documents, receipts, and printing"
+        ]
+      },
+      {
+        "cells": [
+          "HEIC",
+          "No",
+          "Awkward, needs conversion",
+          "Apple devices only",
+          "Saving iPhone storage space"
+        ]
+      },
+      {
+        "cells": [
+          "JPG",
+          "One image per file",
+          "Yes",
+          "Yes",
+          "A single photo"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "One image per file",
+          "Yes",
+          "Yes",
+          "A single screenshot or graphic"
+        ]
+      }
+    ],
+    "useCasesTitle": "When a single PDF is the easy answer",
+    "useCasesIntro": "Bundling photos into one document saves everyone the hassle of juggling loose files:",
+    "useCases": [
+      {
+        "title": "Email a stack of receipts",
+        "body": "Snap your receipts or scanned forms, merge them into one PDF, and attach a single file. The accountant or HR gets one thing to open instead of twelve separate photos."
+      },
+      {
+        "title": "Send trip photos as one document",
+        "body": "Pull the best shots from a weekend away into one PDF and send it to family. They scroll through page by page, and nobody has to download each picture on its own."
+      },
+      {
+        "title": "Print at a shop that wants PDF",
+        "body": "Many print counters and photo labs ask for a PDF rather than raw HEIC files their software can't read. Convert first and your iPhone photos are ready to hand over."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is HEIC and why turn it into a PDF?",
+        "body": "HEIC is Apple's High Efficiency format. Since iOS 11 most iPhones save photos this way because it stores good-looking pictures in roughly half the space of a JPG. The catch shows up the moment you leave the Apple world. Windows, older Android phones, plenty of email clients, and most print software either refuse to open a .heic file or show a blank box. A PDF sidesteps all of that. It is the format almost every device already knows how to display and print, so wrapping your photos in one means the person on the other end can just open it."
+      },
+      {
+        "heading": "When a PDF beats separate image files",
+        "body": "If you only have one picture to share, an image file is fine. The moment you have several that belong together, loose files get messy. Ten attachments are easy to lose, hard to keep in order, and annoying to open one at a time. A PDF keeps the pages in sequence inside a single file you can name, email, or upload in one go. It also prints predictably: each photo lands on its own page at a fixed size instead of relying on whatever the viewer's image app decides to do."
+      },
+      {
+        "heading": "Merging multiple iPhone photos into one PDF",
+        "body": "Tick the merge option, then drop all your HEIC files in at once. Each photo is decoded and added as its own page, in the order you selected them, into one document. This is handy for a set of receipts, a scanned multi-page form you photographed, or a small album you want to send as a single file. One note worth keeping in mind: camera EXIF data such as location and shutter settings is not carried into the PDF, since the photos become flat page images. Hang on to the original HEIC files if you still need that metadata."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de HEIC a PDF | Gratis, combinar en un solo PDF",

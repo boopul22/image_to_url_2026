@@ -99,11 +99,69 @@ export const content: LandingContentMap = {
       {
         "q": "What image formats can I convert to a URL?",
         "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link you get ends in the real file extension, so it hotlinks and embeds exactly the way the original file would."
+      },
+      {
+        "q": "Do I need to install any software?",
+        "a": "No. The whole thing runs in your browser. There's no app, extension or desktop program to download, so it works the same on Windows, Mac, Linux, Android and iOS."
+      },
+      {
+        "q": "Does the converter work on a phone?",
+        "a": "Yes. Open the page on your phone, tap the box, and pick a shot from your camera roll. You get the same direct link you'd get on a desktop, ready to paste into a chat or post."
+      },
+      {
+        "q": "Can I convert several images one after another?",
+        "a": "Yes. Convert one, copy its link, then drop in the next. There's no daily cap to worry about for casual use, so you can run a batch of screenshots or photos in a row."
+      },
+      {
+        "q": "Does the converter change my file format?",
+        "a": "No. This is a hosting converter, not a format converter. A PNG stays a PNG and a JPG stays a JPG - it just gives the file a web address. If you need to switch formats, convert the file first, then turn it into a URL."
       }
     ],
     "ctaTitle": "Try the image to URL converter now",
     "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. No signup, no compression, no watermark.",
-    "ctaButton": "Upload Image Now"
+    "ctaButton": "Upload Image Now",
+    "specsTitle": "Image to URL converter at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats in", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct CDN link" }
+    ],
+    "comparisonTitle": "Free image to URL converters compared",
+    "comparisonIntro": "An online converter is only as good as the link it hands back. The differences between free tools come down to whether you need an account, how big a file you can drop, and whether the picture keeps its original quality. Here's how the common ones stack up.",
+    "comparisonColumns": [
+      "Tool",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What does an image to URL converter do?",
+        "body": "It takes an image sitting on your phone or computer and hands back a web address that points straight at it. Before that, the file only exists locally, so you can't paste it into a chat or a web page. After you run it through, the picture lives on a public CDN and the link works anywhere a URL does. There's no format change involved: a PNG stays a PNG, a JPG stays a JPG. The job is hosting plus a clean direct link that ends in the real extension, done in the browser in a second or two."
+      },
+      {
+        "heading": "Converter vs uploader vs image editor",
+        "body": "These three get mixed up. An uploader just stores your file, and you might still have to dig the direct link out of a gallery page. An image editor crops, resizes or recolors pixels and changes the file itself. This converter does neither. It leaves the image untouched and gives you a ready-to-paste link, so you keep full quality and skip the gallery step. If you do need to crop or shrink something, edit it first, then run it through here to get the URL."
+      },
+      {
+        "heading": "Is an online converter safe?",
+        "body": "Running images through an online tool is fine for anything you'd be comfortable sharing. Every link is served over HTTPS and points only at your file, with no redirect pages or trackers attached. The one catch: anonymous uploads are public to anyone who has the link, and there's no password on them. So don't convert ID scans, private documents or anything sensitive, and keep your own copy of the original, since free links are wiped on a regular cleanup. For files you want locked down, a logged-in host is the better fit."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de imagen a URL — Gratis, sin registro | ImageToURL",

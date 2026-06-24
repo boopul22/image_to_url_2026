@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "NEWSLETTERS",
     "h1Pre": "Image Hosting for Email",
     "h1Highlight": "Newsletters.",
-    "intro": "Reliable image hosting that works with every newsletter platform. Upload once, get a permanent URL that renders perfectly in every subscriber's inbox.",
+    "intro": "Email newsletters reference every image by an absolute https link - inbox clients won't load a file off your laptop or a relative path, so the picture has to live somewhere on the open web. Upload your banner, header or product shot here and you get a direct link that drops into Mailchimp, Substack, ConvertKit, Beehiiv or raw HTML. It keeps full quality with no watermark, and for issues that sit in an archive for years you can sign in and mark the image 'keep forever' so it never goes missing.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -72,11 +72,88 @@ export const content: LandingContentMap = {
       {
         "q": "Are there bandwidth limits for newsletter images?",
         "a": "Our CDN scales automatically, so whether you have 100 or 100,000 subscribers, your images will load reliably every time."
+      },
+      {
+        "q": "Why can't I just attach the image to the email?",
+        "a": "Attachments don't show up inline in most newsletters and they bloat the message, which hurts deliverability. Newsletters render images from an https link instead, so the body stays light and the picture appears in the reading pane. A hosted URL is the standard way to do that."
+      },
+      {
+        "q": "Does it work with ConvertKit, Beehiiv and other platforms?",
+        "a": "Yes. Any platform with an 'image by URL' field or an HTML block accepts the link, including ConvertKit, Beehiiv, MailerLite and most ESPs. Paste the URL where the editor asks for an image address."
+      },
+      {
+        "q": "Should I sign in for newsletter images?",
+        "a": "It's worth it. Anonymous links last at least a couple of weeks, which covers a single send, but newsletter issues often stay readable in archives and inboxes for years. Create a free account and choose 'keep forever' so an old issue doesn't suddenly show broken images."
+      },
+      {
+        "q": "What size and format should newsletter images be?",
+        "a": "JPG works well for photos and PNG for logos or anything with text or transparency, up to 10 MB. Keep the width around 600px for the main content area so it looks sharp without slowing the load. The file is served at full quality with no recompression."
+      },
+      {
+        "q": "Will the same image show in every email client?",
+        "a": "A direct https link renders in Gmail, Outlook, Apple Mail and the rest. Just remember many clients block images until the reader clicks 'show images', so set meaningful alt text and don't bury key information inside the graphic alone."
       }
     ],
     "ctaTitle": "Your newsletter deserves reliable images",
     "ctaBody": "Upload your newsletter images and get permanent URLs that work with every email platform and client.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Newsletter image hosting at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required (recommended for keep-forever)" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct https link" }
+    ],
+    "useCasesTitle": "What newsletter creators host here",
+    "useCasesIntro": "Anything that needs an https link to show up in the inbox:",
+    "useCases": [
+      {
+        "title": "Headers and banners",
+        "body": "The masthead at the top of each issue. Host it once, reuse the same link across every send so your branding stays consistent."
+      },
+      {
+        "title": "Product and content shots",
+        "body": "Photos for a featured product, a new blog post or an event. Drop each link into the matching image block in your editor."
+      },
+      {
+        "title": "Footer logos and badges",
+        "body": "Company logo, social icons or a 'forward to a friend' graphic that sits at the bottom of every email."
+      }
+    ],
+    "comparisonTitle": "Ways to put an image in a newsletter",
+    "comparisonIntro": "Newsletter tools give you a couple of ways to add a picture, but only one keeps an archived issue looking right years later. Here's the trade-off.",
+    "comparisonColumns": [
+      "Method",
+      "Shows inline",
+      "Survives long-term",
+      "Reuse across issues",
+      "Notes"
+    ],
+    "comparisonRows": [
+      { "cells": ["Hosted direct link (signed in)", "Yes", "Yes (keep forever)", "Yes", "Best for evergreen issues"] },
+      { "cells": ["Hosted link (anonymous)", "Yes", "Weeks, then cleared", "Yes", "Fine for a single send"] },
+      { "cells": ["Platform's own uploader", "Yes", "Tied to that platform", "Within that tool", "Locked in if you switch ESP"] },
+      { "cells": ["Email attachment", "Usually no", "n/a", "No", "Bloats the email, hurts delivery"] },
+      { "cells": ["Hotlink from a website", "Yes", "Until the source moves it", "Yes", "Breaks on the next site redesign"] }
+    ],
+    "sections": [
+      {
+        "heading": "Why newsletters need a hosted URL",
+        "body": "An email is just HTML, and an image in HTML loads from an absolute address like https://imagetourl.cloud/abc.png. There's no folder the inbox can reach on your computer, so a local file or a relative path shows nothing. That's why every newsletter editor asks for an image you either upload to its servers or point at by URL. Hosting the file yourself and pasting the link gives you one address that behaves the same in every client and every issue."
+      },
+      {
+        "heading": "Keeping images alive in the archive",
+        "body": "Most newsletters keep a public archive, and subscribers often reopen old issues months later. If the image link dies, those issues look broken. Anonymous uploads here are cleared on a regular cleanup, so for anything you want to last, sign in free and choose 'keep forever'. It costs nothing and means a year-old issue still renders. Always keep your own copy of the original files too, as a safety net."
+      },
+      {
+        "heading": "A note on blocked images and alt text",
+        "body": "Plenty of email clients hide images until the reader clicks 'display images', and some never show them at all. So treat the picture as an enhancement, not the whole message: write clear alt text for every image, and don't lock your call to action or key details inside a graphic alone. A hosted URL gets the picture there reliably, but good alt text is what carries the meaning when it's switched off."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para boletines informativos | ImageToURL",

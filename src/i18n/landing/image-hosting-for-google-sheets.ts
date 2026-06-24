@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "GOOGLE SHEETS",
     "h1Pre": "Image URLs for Google",
     "h1Highlight": "Sheets.",
-    "intro": "Upload images and get direct URLs that work with Google Sheets' =IMAGE() function. Display product photos, icons, and visuals right inside your spreadsheet cells.",
+    "intro": "Google Sheets can show a picture inside a cell with the IMAGE(\"url\") formula, but that formula needs a direct link to the actual image file - not a Drive share page and not a web page that happens to contain the photo. Upload your image here, copy the link it returns, and drop it straight into =IMAGE(). It handles JPG, PNG, WebP, GIF and SVG up to 10 MB, with no recompression and no watermark, so product photos, icons and charts stay crisp in the grid.",
     "howTitle": "How It Works with Google Sheets",
     "steps": [
       {
@@ -75,11 +75,88 @@ export const content: LandingContentMap = {
       {
         "q": "Is there a limit on how many images I can add?",
         "a": "There is no limit from our side. While Google Sheets may slow down with thousands of images, typical catalogs and dashboards work perfectly."
+      },
+      {
+        "q": "What is the difference between =IMAGE() and Insert > Image?",
+        "a": "=IMAGE() puts the picture inside a cell, so it moves, sorts and filters with the row - ideal for product catalogs and dashboards. Insert > Image > Image over cells floats the picture on top of the grid and doesn't sort with your data. For a link-driven list, the formula is almost always what you want."
+      },
+      {
+        "q": "What's the syntax for =IMAGE() with a custom size?",
+        "a": "Use =IMAGE(url, mode). Mode 1 fits the image to the cell keeping aspect ratio, 2 stretches it, 3 keeps original size, and 4 lets you set height and width in pixels, like =IMAGE(\"https://imagetourl.cloud/abc.png\", 4, 80, 120)."
+      },
+      {
+        "q": "What image formats and sizes are supported?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB each. Transparent PNGs keep their transparency, which is handy for logos and icons sitting in coloured cells."
+      },
+      {
+        "q": "Do the image links expire?",
+        "a": "Anonymous links last at least a couple of weeks. For a sheet you'll keep around - a price list, an asset tracker, a dashboard - sign in with a free account and choose 'keep forever' so the cells don't turn into broken-image errors months later."
+      },
+      {
+        "q": "Are the images private?",
+        "a": "No. =IMAGE() only works with publicly reachable URLs, and anonymous uploads here are public to anyone with the link. That's fine for catalog and product images, but don't host confidential material this way."
       }
     ],
     "ctaTitle": "Add images to your spreadsheets today",
     "ctaBody": "Upload an image, copy the URL, and use =IMAGE() in Google Sheets in seconds.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Images for Google Sheets at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct URL for =IMAGE()" }
+    ],
+    "useCasesTitle": "Where =IMAGE() links earn their keep",
+    "useCasesIntro": "A direct URL in a cell turns a plain spreadsheet into something you can actually read at a glance:",
+    "useCases": [
+      {
+        "title": "Product catalogs",
+        "body": "Put a thumbnail next to every SKU so the photo sorts and filters with the row. Inventory and pricing sheets get far easier to scan."
+      },
+      {
+        "title": "Dashboards and reports",
+        "body": "Drop logos, flags or status icons into summary tables. Because the image lives in the cell, it travels with the data when you reorganise."
+      },
+      {
+        "title": "Asset and content trackers",
+        "body": "Track creative, listings or social posts with a preview image beside each entry instead of a folder full of files to open separately."
+      }
+    ],
+    "comparisonTitle": "Ways to show an image in Google Sheets",
+    "comparisonIntro": "Sheets offers a few routes to a picture in the grid, and they behave differently when you sort, share or move the file. Here's the practical comparison.",
+    "comparisonColumns": [
+      "Method",
+      "Public URL needed",
+      "Moves with the row",
+      "Works for collaborators",
+      "Notes"
+    ],
+    "comparisonRows": [
+      { "cells": ["=IMAGE(direct URL)", "Yes", "Yes (in-cell)", "Yes", "The reliable route for link-driven lists"] },
+      { "cells": ["Insert > Image over cells", "No", "No (floats on top)", "Yes", "Good for one logo, not for data rows"] },
+      { "cells": ["=IMAGE(Drive link)", "Yes", "Yes", "Often fails", "Drive link is a viewer page, not the file"] },
+      { "cells": ["=IMAGE(web page URL)", "Yes", "Yes", "Risky", "Errors unless it ends at the raw image"] },
+      { "cells": ["=IMAGE(Imgur page)", "Yes", "Yes", "No", "Gallery page, not a direct file link"] }
+    ],
+    "sections": [
+      {
+        "heading": "How the =IMAGE() function works",
+        "body": "The formula takes the form =IMAGE(url, [mode], [height], [width]). The url has to be a direct link to the image file, served over the open web - that's the part people trip on. Mode 1 is the default and fits the picture to the cell while keeping its proportions; mode 4 lets you pin an exact pixel size. Paste the link this tool gives you between the quotes and the cell fills with the picture. Resize the row or column and, in fit mode, the image scales to match."
+      },
+      {
+        "heading": "Why Google Drive links break in =IMAGE()",
+        "body": "Copying a Drive file's share link feels like the obvious move, but that URL opens a Drive preview page rather than the raw image. =IMAGE() can't turn a web page into a picture, so the cell shows an error or a broken thumbnail. People then spend ages hunting for the 'right' Drive URL format. A host that returns a true direct link sidesteps the whole problem - the URL ends in the file extension and points straight at the bytes Sheets needs."
+      },
+      {
+        "heading": "Keeping a spreadsheet's images alive",
+        "body": "If a sheet is a quick scratch list, anonymous links lasting a couple of weeks are fine. But a catalog or dashboard you'll revisit deserves links that won't vanish: sign in free and mark uploads 'keep forever' so no cell turns into a broken-image box later. Bear in mind anyone you share the sheet with can read the image URLs, and the images themselves are public, so reserve this for catalog and reporting visuals rather than anything confidential."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "URLs de imágenes para Google Sheets — Función =IMAGE() | ImageToURL",

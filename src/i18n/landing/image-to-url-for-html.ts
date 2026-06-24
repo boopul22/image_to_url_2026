@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL for HTML — Get Direct <img> Tag Links",
+    "metaTitle": "Image to URL for HTML - Direct <img> Tag Links | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
@@ -13,73 +13,204 @@ export const content: LandingContentMap = {
       { "pageKey": "image-to-url-for-whatsapp", "label": "Image URL for WhatsApp" },
       { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
     ],
-    "metaDescription": "Convert any image to a direct URL you can drop straight into an HTML <img> tag. Permanent links, fast CDN, no signup, works in any framework or CMS.",
+    "metaDescription": "Turn any image into a direct https URL you can drop straight into an HTML <img> tag, CSS background-image or srcset. Free, no signup, no compression, 10MB.",
     "schemaName": "Image to URL Converter for HTML",
     "schemaDescription": "Turn any image into a direct URL ready for the src attribute of an HTML img tag.",
     "badge": "HTML Image URLs",
     "h1Pre": "Image to URL",
     "h1Highlight": "for HTML.",
-    "intro": "Upload your image and get a clean, direct link you can paste straight into an HTML img tag. The URL works in any web page, any framework, any CMS, and it stays online for good.",
-    "howTitle": "How It Works",
+    "intro": "To show a picture on a web page you need an absolute https link, not a file sitting on your laptop. Drop your image in the box above and you get a direct URL that goes straight into an HTML <img> tag, a CSS background-image, or a srcset. It ends in the real file extension, it loads on any domain, and it keeps full quality with nothing squeezed down. Copy it, paste it into your markup, and the picture renders the moment the page loads.",
+    "specsTitle": "HTML image URLs at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct https CDN link for <img src>"
+      }
+    ],
+    "howTitle": "How to get an image URL for HTML",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Drop a JPG, PNG, WebP, GIF or SVG into the uploader. Files up to 10MB on a free account."
+        "title": "Upload your image",
+        "body": "Drag a JPG, PNG, WebP, GIF or SVG into the box, or click to pick one. Files can be up to 10MB each, and nothing gets re-compressed on the way through."
       },
       {
-        "title": "Copy the Direct URL",
-        "body": "We hand you a clean URL that ends in the file extension. No gallery wrappers, no redirects, no tracking."
+        "title": "Copy the direct URL",
+        "body": "You get a clean https link that ends in the file extension. No gallery page wrapping it, no redirect hop, no tracking query string tacked on."
       },
       {
-        "title": "Paste It Into Your HTML",
-        "body": "Drop the link into the src attribute of an <img> tag and ship. The image renders the second the page loads."
+        "title": "Paste it into your markup",
+        "body": "Drop the link into the src attribute of an <img> tag, a CSS background-image, or a srcset. The picture shows up inline as soon as the page loads."
       }
     ],
-    "whyTitle": "Built for HTML Developers",
+    "whyTitle": "Why a hosted link beats a local path",
     "whyItems": [
       {
-        "title": "Clean src Attribute",
-        "body": "The URL points straight at the image file, so your <img> tag works without scripts, redirects, or extra requests."
+        "title": "Clean src attribute",
+        "body": "The URL points straight at the image file, so your <img> tag works with no scripts, no redirects and no extra round trip. The browser fetches the picture and renders it."
       },
       {
-        "title": "Works With Every Framework",
-        "body": "React, Vue, Svelte, Astro, plain HTML, WordPress, Webflow. If it accepts a URL, it works."
+        "title": "Works after you deploy",
+        "body": "A path like ./images/logo.png only resolves on your own machine. An absolute https URL loads the same way on localhost, on staging and in production, so images do not vanish when you ship."
       },
       {
-        "title": "Hotlink Friendly",
-        "body": "We allow embedding on any domain. No referer checks, no broken images on third-party sites."
+        "title": "Works with every framework",
+        "body": "React, Vue, Svelte, Astro, plain HTML, WordPress, Webflow, a Markdown README. If it accepts a URL in an image tag, this link drops in."
       },
       {
-        "title": "Permanent Links",
-        "body": "Your URL stays live indefinitely. Pages and READMEs you wrote years ago will keep their visuals."
+        "title": "Links you can keep for good",
+        "body": "Anonymous uploads stay live for at least a couple of weeks. Sign in free and choose 'keep forever' for pages and READMEs that need their visuals years from now."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "Ways to put an image in HTML, compared",
+    "comparisonIntro": "There's more than one way to get a picture into a web page. Each one trades off page weight, caching and whether it still works after you deploy. Here's how the common methods line up.",
+    "comparisonColumns": [
+      "Method",
+      "Page weight",
+      "Cached separately",
+      "Works after deploy",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Hosted CDN URL (this tool)",
+          "Light",
+          "Yes",
+          "Yes",
+          "Most production and shared images"
+        ]
+      },
+      {
+        "cells": [
+          "Local file path (./img.png)",
+          "Light",
+          "Yes",
+          "No, breaks once deployed",
+          "Quick local testing only"
+        ]
+      },
+      {
+        "cells": [
+          "Base64 / data URI",
+          "Heavy, inflates the HTML",
+          "No, re-sent every load",
+          "Yes",
+          "Tiny inline icons on purpose"
+        ]
+      },
+      {
+        "cells": [
+          "Hotlinking another site",
+          "Light",
+          "Depends on their server",
+          "Risky, can break anytime",
+          "Not recommended"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where an HTML image URL fits",
+    "useCasesIntro": "Once the picture has a direct link, the same URL works in every spot that accepts an image address:",
+    "useCases": [
+      {
+        "title": "The <img> tag",
+        "body": "Paste it into src and add alt text: <img src=\"https://imagetourl.cloud/photo.jpg\" alt=\"red bike\">. That's the whole job, no build step."
+      },
+      {
+        "title": "CSS background-image",
+        "body": "Use it in a stylesheet with background-image: url('https://imagetourl.cloud/photo.jpg'). Handy for hero banners, section backgrounds and decorative fills."
+      },
+      {
+        "title": "Email and Markdown",
+        "body": "The link also embeds in HTML email and Markdown image syntax, ![alt](url), so docs, newsletters and READMEs show the picture inline."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why a local file path breaks once you deploy",
+        "body": "When you write <img src=\"./photo.jpg\"> or open a file:/// link, the browser looks for that file relative to the current page on the current machine. It works in your editor preview because the file is right there. The moment you push to a host, that path points at a file the server doesn't have, and visitors see a broken image icon. An absolute https URL solves it because the address is the same everywhere: the browser fetches the picture from the CDN no matter which domain or environment the page is running on. That's the core reason to host the image and reference it by link."
+      },
+      {
+        "heading": "Using the link in srcset and background-image",
+        "body": "A direct URL isn't limited to a single src. You can list it in srcset with width descriptors so the browser picks the right size on retina and mobile screens, for example srcset=\"small.jpg 480w, large.jpg 1200w\". The same link drops into CSS as background-image: url(...), into the <picture> element, and into a link rel=preload tag if you want it loaded early. Because the URL ends in the real extension, the browser knows the format up front and doesn't need an extra request to guess it. One hosted file, many places to reference it."
+      },
+      {
+        "heading": "Direct link vs base64 data URI",
+        "body": "You can inline an image directly in HTML as a base64 data URI, but it has real costs. The encoded text is roughly a third larger than the file, it bloats every page that includes it, and the browser can't cache it on its own the way it caches a separate file, so it gets re-downloaded with the markup each time. Data URIs make sense for tiny icons you want to avoid a request for. For anything bigger, a hosted https URL keeps your HTML small and lets the CDN cache the image once and reuse it across pages and visits."
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
     "faqs": [
       {
         "q": "How do I add an image to HTML using a URL?",
-        "a": "Upload your image, copy the URL we generate, and paste it into the src attribute of an <img> tag, like this: <img src=\"https://imagetourl.cloud/your-image.jpg\" alt=\"description\">. That is everything you need."
+        "a": "Upload your image, copy the URL we generate, and paste it into the src attribute of an <img> tag, like this: <img src=\"https://imagetourl.cloud/your-image.jpg\" alt=\"description\">. That's everything you need, no build step or hosting setup."
       },
       {
-        "q": "Will the link work in any browser?",
-        "a": "Yes. The URL points at a static image file served from a global CDN, so every browser, mobile device, and email client can load it."
+        "q": "Why does my local image path break after I deploy?",
+        "a": "A relative path like ./img.png or a file:/// link only resolves on your own computer. After you push the site, the server has no file at that path, so the browser shows a broken image. Host the picture and reference it by its absolute https URL instead, and it loads everywhere."
+      },
+      {
+        "q": "Can I use the link in CSS background-image?",
+        "a": "Yes. Drop it into a stylesheet as background-image: url('https://imagetourl.cloud/your-image.jpg'). It works for hero sections, banners and any decorative background the same way it works in an <img> tag."
+      },
+      {
+        "q": "Does the URL work in srcset for responsive images?",
+        "a": "Yes. Add it to a srcset list with width descriptors, like srcset=\"a.jpg 480w, b.jpg 1200w\", and the browser picks the best size for the screen. It also works inside a <picture> element."
+      },
+      {
+        "q": "Should I use a base64 data URI instead of a hosted URL?",
+        "a": "Only for tiny icons. A data URI inflates your HTML by about a third and can't be cached separately, so it's re-sent on every load. For photos and larger graphics, a hosted https URL keeps the page light and lets the CDN cache the file."
+      },
+      {
+        "q": "Will the link work in every browser?",
+        "a": "Yes. The URL points at a static image file served from a global CDN, so every browser, mobile device and email client can load it. Because it ends in the real extension, the format is known without an extra request."
       },
       {
         "q": "Can I use these URLs on a website I do not own?",
-        "a": "Yes. Hotlinking is allowed across any domain. The link works in forums, comment sections, README files, and embedded widgets."
+        "a": "Yes, hotlinking your own uploaded image is allowed across any domain. What you should not do is hotlink a picture from someone else's server, since they can move or block it and your image breaks. Upload the file here and use the link you get back."
       },
       {
         "q": "Do the URLs include the file extension?",
-        "a": "Yes. URLs end in .jpg, .png, .webp, .gif or .svg. That keeps your <img> tag valid and lets browsers detect the format without an extra HEAD request."
+        "a": "Yes. URLs end in .jpg, .png, .webp, .gif or .svg, which keeps your <img> tag valid and lets browsers detect the format up front instead of doing an extra HEAD request."
+      },
+      {
+        "q": "Do I still need alt text?",
+        "a": "Yes. The URL handles where the image lives, but you write the alt attribute yourself: <img src=\"...\" alt=\"what the picture shows\">. Good alt text helps screen readers and shows up if the image ever fails to load."
+      },
+      {
+        "q": "What formats and sizes can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The image keeps its full resolution with no re-compression and no watermark, so what you upload is exactly what loads in the page."
       },
       {
         "q": "Is the service free for HTML developers?",
-        "a": "The core upload-and-share workflow is free for everyone, with no signup. Free accounts unlock larger files and a personal dashboard."
+        "a": "Yes. The upload-and-link workflow is free with no signup. A free account adds a dashboard and the option to keep a link forever instead of letting it expire."
+      },
+      {
+        "q": "How long do the links stay online?",
+        "a": "Anonymous uploads stay live for at least a couple of weeks and are cleared on a regular storage cleanup. For a link that never expires, create a free account and choose 'keep forever' when you upload. Either way, keep your own copy of the file as a backup."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Get an HTML-ready image URL",
-    "ctaBody": "Upload your file and grab a direct link in seconds. Drop it in your <img> tag and you are done.",
-    "ctaButton": "Upload Image"
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and grab a direct link in seconds. Drop it in your <img> tag and you're done.",
+    "ctaButton": "Upload Image",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Imagen a URL para HTML — Enlaces directos para etiqueta <img> | ImageToURL",

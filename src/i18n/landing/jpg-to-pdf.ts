@@ -17,7 +17,30 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "JPG to PDF Converter,",
     "h1Highlight": "Merge Photos Into One File",
-    "intro": "Turn your JPG photos into a clean PDF for free, with no upload and no watermark. Merge several JPGs into one multi-page PDF for receipts, scans, or photo albums, or save each image as its own PDF.",
+    "intro": "Turn your JPG photos into a clean PDF for free, with no upload and no watermark. Your images are placed into the document on your own device, so nothing is re-encoded and the quality you started with is the quality you keep. Merge several photos into one multi-page file for receipts, scans, or trip albums, or save each picture as its own PDF. When the file is ready, click 'Get URL' to host it and share an https link.",
+    "specsTitle": "At a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Converts",
+        "value": "JPG to PDF"
+      },
+      {
+        "label": "Merge",
+        "value": "Many JPGs into one PDF"
+      },
+      {
+        "label": "Output",
+        "value": "PDF download + optional shareable link"
+      }
+    ],
     "howTitle": "How to convert JPG to PDF",
     "steps": [
       {
@@ -89,11 +112,99 @@ export const content: LandingContentMap = {
       {
         "q": "How do I merge multiple JPGs into one PDF?",
         "a": "Turn on 'Merge into one PDF' and drop all your JPG files. They go in one per page, in order, into a single PDF you can download or share."
+      },
+      {
+        "q": "Can I add a PNG or HEIC to the same PDF?",
+        "a": "This page is built around JPG files. For other formats, use the PNG to PDF or HEIC to PDF tool instead, or convert those images to JPG first and add them here."
+      },
+      {
+        "q": "Is the text in my photos searchable in the PDF?",
+        "a": "No. A PDF built from photos holds each image as a picture, not as selectable text. If you scanned a document and need to copy or search the words, run the file through an OCR tool after converting."
       }
     ],
+    "comparisonTitle": "JPG, PNG and PDF for sharing documents",
+    "comparisonIntro": "JPG and PNG hold a single picture each. PDF wraps one or many images into a document you can email as one attachment and print anywhere. Here is how the formats line up when the goal is sharing.",
+    "comparisonColumns": [
+      "Format",
+      "Multiple images in one file",
+      "Print-ready",
+      "Re-compresses image",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "PDF",
+          "Yes, many pages",
+          "Yes, auto-fit to A4",
+          "No, photos embed as-is",
+          "Documents, multi-page sets, printing"
+        ]
+      },
+      {
+        "cells": [
+          "JPG",
+          "No, one per file",
+          "OK for single photos",
+          "Already lossy",
+          "Photos and camera shots"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "No, one per file",
+          "OK for single graphics",
+          "Lossless",
+          "Screenshots, logos, line art"
+        ]
+      },
+      {
+        "cells": [
+          "HEIC",
+          "No, one per file",
+          "Limited support",
+          "Lossy",
+          "iPhone storage, not for sharing"
+        ]
+      }
+    ],
+    "useCasesTitle": "When a PDF is the right call",
+    "useCasesIntro": "A document beats a pile of loose images whenever the files belong together:",
+    "useCases": [
+      {
+        "title": "Filing receipts and scans",
+        "body": "Photograph each receipt or scanned page, then drop them all in with merge on. You end up with one dated PDF for the month instead of twenty separate images to keep track of."
+      },
+      {
+        "title": "Sharing a photo album",
+        "body": "Package the photos from a trip or a product shoot as a single file. The person on the other end opens one attachment and pages through everything in order, no zip to unpack."
+      },
+      {
+        "title": "Uploading to a form",
+        "body": "Plenty of school, visa, and job portals only accept PDF. Merge the pages of your application into one file so it slides through the upload box without a fight."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why convert JPG to PDF?",
+        "body": "A JPG holds one photo. The moment you have a few that belong together, a stack of loose images gets awkward to send and easy to lose. A PDF gathers them into a single document that opens and prints the same way on a phone, a laptop, or an office printer. You attach one file to an email instead of ten. Pages fit to A4 automatically, so portrait and landscape shots both sit cleanly. For receipts, scanned forms, or a set of photos, one tidy file is simply easier to hand off."
+      },
+      {
+        "heading": "When a single PDF beats separate JPGs",
+        "body": "Separate images are fine for one quick photo. They fall apart once order and grouping matter. Email clients scatter multiple attachments, and the reader has to open each one. Print dialogs treat loose images as separate jobs. Many upload forms reject anything that is not a PDF outright. Bundling the pictures into one document fixes all three: the order you set is the order people see, printing is one job, and the file passes a PDF-only check. If you only ever share a single picture, a plain JPG link is lighter and the better pick."
+      },
+      {
+        "heading": "Does combining JPGs into a PDF lose quality?",
+        "body": "No. Putting a photo into a PDF does not run it through another round of compression. The image is embedded as-is, so it looks exactly like the JPG you dropped in. The catch worth knowing: a JPG is already a lossy file, so the PDF cannot be sharper than the original photo, only equal to it. If you want crisp text or a transparent background, JPG is the wrong source to begin with. For ordinary photos and scans, the result is faithful to what you started with."
+      }
+    ],
+    "howToSchema": true,
     "ctaTitle": "Host the PDF?",
     "ctaBody": "Convert your JPG files to PDF, then click 'Get URL' to host it for free. No signup.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de JPG a PDF | Gratis, combinar en un solo PDF",

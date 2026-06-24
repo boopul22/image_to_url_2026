@@ -6,6 +6,204 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Convert to JPG — Free Online Image to JPG Converter",
+    "metaDescription": "Convert any image to JPG free. Drop a PNG, WebP, HEIC, GIF, BMP, or TIFF and download a clean JPG. No signup, no watermark, up to 10 MB.",
+    "schemaName": "Convert to JPG",
+    "schemaDescription": "Convert PNG, WebP, HEIC, GIF, BMP, and TIFF images to JPG. Free, no signup, no watermark, up to 10 MB.",
+    "badge": "Browser-only Tool",
+    "h1Pre": "Convert to JPG,",
+    "h1Highlight": "any image, free",
+    "intro": "Need a JPG and have something else? Drop almost any picture here and turn it into a JPG in a couple of seconds. PNG, WebP, HEIC, GIF, BMP, and TIFF all work, the tool is free with no signup and no watermark, and files can be up to 10 MB. The result is a clean .jpg you can download, and if you want a link to share it, you can host it afterward.",
+    "specsTitle": "Convert to JPG at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Input formats",
+        "value": "PNG, WebP, HEIC, GIF, BMP, TIFF"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "JPG"
+      }
+    ],
+    "howTitle": "How to convert an image to JPG",
+    "steps": [
+      {
+        "title": "Drop your images",
+        "body": "Drag your files into the box or click to pick them. PNG, WebP, HEIC, GIF, BMP, and TIFF are all accepted, up to 10 MB each, and you can queue a whole batch at once."
+      },
+      {
+        "title": "Set the quality",
+        "body": "Quality 92 keeps photos sharp at a sensible file size. Slide it down if you want the JPG even smaller, or leave it where it is for everyday use."
+      },
+      {
+        "title": "Download the JPGs",
+        "body": "Click Download on each result to save the .jpg. Want a link instead? Use Get URL to host the file and copy a shareable https address."
+      }
+    ],
+    "whyTitle": "Why convert to JPG?",
+    "whyItems": [
+      {
+        "title": "Opens everywhere",
+        "body": "JPG is the one photo format that every phone, laptop, printer, browser, and app already understands. If you are sending a picture to someone and you are not sure what they can open, JPG is the safe pick."
+      },
+      {
+        "title": "Smaller files",
+        "body": "JPG uses lossy compression, so a heavy PNG, TIFF, or BMP usually drops to a fraction of its size. That means faster uploads and fewer files bouncing off email or form size limits."
+      },
+      {
+        "title": "One tool for many formats",
+        "body": "No need to find a separate WebP, HEIC, or TIFF converter. Drop any of those here and a JPG comes back, so you are not juggling a different site for each input type."
+      },
+      {
+        "title": "Handles iPhone HEIC",
+        "body": "Photos straight off an iPhone are often HEIC, which plenty of sites and older apps refuse. Converting those shots to JPG fixes the upload error without touching your camera settings."
+      }
+    ],
+    "comparisonTitle": "JPG vs the formats people convert from",
+    "comparisonIntro": "JPG is small and works anywhere, but it is not the right answer for every image. Here is how it compares with the common formats people convert from, so you can decide whether JPG fits or whether to keep the original.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Typical size",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "JPG",
+          "Lossy",
+          "No",
+          "Small",
+          "Photos, sharing, broad compatibility"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "Lossless",
+          "Yes",
+          "Large",
+          "Logos, screenshots, transparent graphics"
+        ]
+      },
+      {
+        "cells": [
+          "WebP",
+          "Lossy or lossless",
+          "Yes",
+          "Smaller than JPG",
+          "Web images on modern browsers"
+        ]
+      },
+      {
+        "cells": [
+          "HEIC",
+          "Lossy",
+          "No",
+          "Small",
+          "iPhone photos (limited support elsewhere)"
+        ]
+      },
+      {
+        "cells": [
+          "GIF",
+          "Lossless, 256 colors",
+          "Yes (1-bit)",
+          "Medium",
+          "Short animations, simple graphics"
+        ]
+      }
+    ],
+    "useCasesTitle": "When converting to JPG helps",
+    "useCasesIntro": "A JPG is the format that just works when you need to hand a picture to someone or something else. A few common cases:",
+    "useCases": [
+      {
+        "title": "Uploads that reject your file",
+        "body": "Job portals, government forms, and older websites often accept JPG only. Convert a PNG or HEIC first and the upload goes through."
+      },
+      {
+        "title": "iPhone photos for everyone else",
+        "body": "Send a HEIC shot to a Windows PC or an Android phone and it may not open. A JPG copy shows up correctly on any device."
+      },
+      {
+        "title": "Trimming file size",
+        "body": "A 12 MB TIFF or a bulky PNG can shrink dramatically as a JPG, which is handy for email attachments and slow connections."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why convert images to JPG?",
+        "body": "Two reasons cover most cases: size and compatibility. JPG uses lossy compression that throws away detail your eye barely notices, so photos come out far smaller than a PNG, TIFF, or BMP of the same image. That makes them quick to upload and easy to email. The format is also ancient by web standards, which is a good thing here: every browser, printer, phone, and photo app can open a JPG without a plugin or a recent update. When you are not sure what the other person or system can read, a JPG is the answer that almost never fails."
+      },
+      {
+        "heading": "What happens to transparency?",
+        "body": "JPG cannot store transparency at all. So when you convert a PNG or WebP that has a see-through background, those clear areas get filled in, usually with solid white. For a photo that has no transparent pixels, this changes nothing. For a logo, icon, or sticker meant to sit on top of another image, the white box around it can look wrong. If you need the background to stay clear, keep the PNG or WebP and skip the JPG step. Convert to JPG only when the image is a normal rectangular photo."
+      },
+      {
+        "heading": "JPG vs PNG vs WebP",
+        "body": "PNG is lossless and supports transparency, so it is the right choice for screenshots, logos, and line art, but the files are large. WebP is the modern middle ground: smaller than JPG at similar quality and it handles transparency, though some older software still cannot open it. JPG wins on one thing, reach. It is the format you can send to anyone and trust them to open. Pick PNG when you need crisp edges or a clear background, WebP when you control a modern website, and JPG when a photo just needs to go everywhere and stay light."
+      }
+    ],
+    "faqTitle": "Convert to JPG FAQ",
+    "faqIntro": "Turn PNG, WebP, HEIC, GIF, BMP, and TIFF images into JPG, free and online, with no signup and no watermark.",
+    "faqs": [
+      {
+        "q": "Which formats can I convert to JPG?",
+        "a": "PNG, WebP, HEIC, GIF, BMP, and TIFF all convert to JPG here. Whatever the input, you get back a standard .jpg you can open and share anywhere."
+      },
+      {
+        "q": "Is JPG the same as JPEG?",
+        "a": "Yes. JPG and JPEG are the exact same format, just two spellings of the file extension. The .jpg name caught on because older systems limited extensions to three letters. There is no difference in quality or how the file behaves."
+      },
+      {
+        "q": "Does converting to JPG lose quality?",
+        "a": "JPG is lossy, so a little detail is dropped, but at quality 92 it is hard to notice. Converting once is fine. Try not to re-save a JPG over and over, since each save shaves off a bit more."
+      },
+      {
+        "q": "What happens to transparent areas?",
+        "a": "JPG has no transparency, so any clear areas are filled in, usually with white. For a regular photo this changes nothing. For a logo or graphic with a transparent background, keep the PNG or WebP instead."
+      },
+      {
+        "q": "Can I convert HEIC from my iPhone to JPG?",
+        "a": "Yes, and it is one of the most common reasons people convert. HEIC saves space on the phone but many websites, Windows PCs, and older apps cannot open it. A JPG copy works everywhere."
+      },
+      {
+        "q": "Will the JPG be smaller than my original?",
+        "a": "Usually, yes. Converting a PNG, TIFF, or BMP to JPG often cuts the file size a lot because of JPG compression. A HEIC or WebP file may already be small, so the JPG can be similar or slightly larger."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "Each file can be up to 10 MB, which covers almost any photo or screenshot. If a file is bigger than that, resize or compress it first, then convert it to JPG."
+      },
+      {
+        "q": "Can I convert several images at once?",
+        "a": "Yes. Drop a whole batch and each one converts to JPG in turn. You can download them one by one as they finish."
+      },
+      {
+        "q": "Do I need to sign up or pay?",
+        "a": "No. The converter is free, needs no account, and adds no watermark. You only sign in if you later want a hosted link that never expires."
+      },
+      {
+        "q": "Can I get a shareable link to the JPG?",
+        "a": "Yes. After converting, use Get URL to host the JPG and copy a direct https link. That link embeds the image in Discord, forums, email, and HTML, the same as any direct image URL."
+      },
+      {
+        "q": "Should I always convert to JPG?",
+        "a": "No. JPG is great for photos and sharing, but it is the wrong choice for transparent graphics, sharp screenshots, or anything you will edit repeatedly. For those, PNG or WebP keeps the image cleaner."
+      }
+    ],
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "png-to-jpg", "label": "PNG to JPG" },
@@ -13,78 +211,12 @@ export const content: LandingContentMap = {
       { "pageKey": "jpeg-to-jpg", "label": "JPEG to JPG" },
       { "pageKey": "jpg-to-jpeg", "label": "JPG to JPEG" }
     ],
-    "metaDescription": "Convert any image to JPG free, right in your browser. Drop a PNG, WebP, AVIF, GIF, or BMP and download a clean JPG. No upload, no signup, no watermark.",
-    "schemaName": "Convert to JPG",
-    "schemaDescription": "Convert PNG, WebP, AVIF, GIF, and BMP images to JPG locally in your browser. No upload required.",
-    "badge": "Browser-only Tool",
-    "h1Pre": "Convert to JPG,",
-    "h1Highlight": "any image, free",
-    "intro": "Need a JPG? Drop almost any image and convert to JPG right here. PNG, WebP, AVIF, GIF, and BMP all work, and the whole thing runs in your browser, so nothing is uploaded unless you choose to host it.",
-    "howTitle": "How to convert an image to JPG",
-    "steps": [
-      {
-        "title": "Drop your images",
-        "body": "Drag your files into the box or click to pick them. You can select a whole batch at once."
-      },
-      {
-        "title": "Set the quality",
-        "body": "Quality 92 keeps photos crisp. Slide it down if you want a smaller file size."
-      },
-      {
-        "title": "Download the JPGs",
-        "body": "Click Download on each result. Nothing leaves your device during the conversion."
-      }
-    ],
-    "whyTitle": "Why convert to JPG?",
-    "whyItems": [
-      {
-        "title": "Works everywhere",
-        "body": "JPG opens on every phone, laptop, printer, and website. It is the safest format to send to someone else."
-      },
-      {
-        "title": "Smaller files",
-        "body": "JPG compression shrinks big photos so they upload faster and fit inside email and form size limits."
-      },
-      {
-        "title": "One tool, many formats",
-        "body": "Instead of hunting for a separate WebP, AVIF, or PNG converter, drop any of them here and get a JPG back."
-      },
-      {
-        "title": "Private by default",
-        "body": "The conversion runs on your device. Your photos are never sent to a server unless you click Get URL."
-      }
-    ],
-    "faqTitle": "FAQ",
-    "faqIntro": "Convert images to JPG free and online, with no signup and no watermark. Your files stay on your device.",
-    "faqs": [
-      {
-        "q": "Which formats can I convert to JPG?",
-        "a": "PNG, WebP, AVIF, GIF, and BMP all convert here. AVIF needs a recent browser, which most people already have."
-      },
-      {
-        "q": "Does converting to JPG lose quality?",
-        "a": "JPG is lossy, so there is a tiny change, but at quality 92 it is hard to spot. Your original file stays untouched."
-      },
-      {
-        "q": "What happens to transparent areas?",
-        "a": "JPG has no transparency, so any clear areas are filled with white. Keep the PNG or use a PNG tool if you need transparency."
-      },
-      {
-        "q": "Are my images uploaded?",
-        "a": "No. Everything runs in your browser. Your files only leave your device if you click Get URL to host one."
-      },
-      {
-        "q": "Can I convert several images at once?",
-        "a": "Yes. Drop a whole folder and each image converts to JPG one after another, right on your device."
-      },
-      {
-        "q": "Does it keep EXIF data?",
-        "a": "No. Re-encoding drops EXIF metadata, which also helps protect your privacy when you share the image."
-      }
-    ],
+    "howToSchema": true,
     "ctaTitle": "Want a permanent URL?",
     "ctaBody": "After converting, click Get URL to host any JPG on our CDN. Free, no signup.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertir a JPG — Conversor gratuito de imágenes a JPG online",

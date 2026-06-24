@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "PNG to JPG Converter,",
     "h1Highlight": "Runs on Your Device",
-    "intro": "Drop your PNG files and get JPGs in seconds. They come out smaller and work everywhere, ready to email or upload. The conversion runs on your device, with no upload, no signup, and no watermark.",
+    "intro": "Drop your PNG files and get JPGs back in a few seconds. The new files are much smaller and open anywhere, which makes them easy to email, attach to a form, or upload to a listing. One thing to know up front: JPG has no transparency, so any see-through areas in a PNG turn solid, white by default. The conversion runs on your device with no upload, no signup, and no watermark, and you can grab a shareable https link to any result if you want one.",
     "howTitle": "How to convert PNG to JPG",
     "steps": [
       {
@@ -87,11 +87,84 @@ export const content: LandingContentMap = {
       {
         "q": "How do I convert PNG to JPG on Windows, Mac, or iPhone?",
         "a": "It works in any modern browser on Windows, Mac, and iPhone. Just open the page, drop your PNG files, and download the JPGs. There is nothing to install."
+      },
+      {
+        "q": "Is converting PNG to JPG lossy?",
+        "a": "Yes. JPG uses lossy compression, so a small amount of detail is dropped to make the file tiny. At quality 92 the loss is invisible on photos. For text, logos, or sharp lines, PNG keeps the edges cleaner, so keep those as PNG."
+      },
+      {
+        "q": "Does converting change the image's resolution?",
+        "a": "No. The pixel dimensions stay exactly the same. Only the file size shrinks, because JPG packs the same picture into far fewer bytes than PNG."
+      },
+      {
+        "q": "Can I pick a background color other than white?",
+        "a": "Transparent areas are filled with white here. If you need a different matte color behind the image, set that background in an editor first, then convert the flattened PNG to JPG."
+      },
+      {
+        "q": "Should I keep the original PNG?",
+        "a": "If the image is a logo, icon, or screenshot with text, keep the PNG as your master copy and use the JPG only for sharing. For ordinary photos the JPG is fine on its own."
       }
     ],
     "ctaTitle": "Want a permanent link to the JPG?",
     "ctaBody": "After converting, click 'Get URL' on any file to host it on our CDN. Free, no signup, no expiry.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "specsTitle": "PNG to JPG at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input format", "value": "PNG" },
+      { "label": "Output format", "value": "JPG" },
+      { "label": "Max size to host", "value": "10 MB" }
+    ],
+    "comparisonTitle": "PNG, JPG and WebP compared",
+    "comparisonIntro": "PNG and JPG solve different problems, and WebP tries to cover both. Here is how the common web formats line up so you can pick the right one before you convert.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Typical file size",
+      "Browser support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      { "cells": ["PNG", "Lossless", "Yes, full alpha", "Large", "All browsers", "Logos, screenshots, line art"] },
+      { "cells": ["JPG", "Lossy", "No", "Small", "All browsers", "Photos, email, listings"] },
+      { "cells": ["WebP", "Lossy or lossless", "Yes", "Smallest at the same quality", "All current browsers", "Modern web pages"] },
+      { "cells": ["GIF", "Lossless, 256 colors", "Yes, 1-bit", "Small for simple art", "All browsers", "Short animations, simple graphics"] }
+    ],
+    "useCasesTitle": "When PNG to JPG is the right move",
+    "useCasesIntro": "Reach for a JPG whenever file size matters more than a transparent background:",
+    "useCases": [
+      {
+        "title": "Sending photos by email",
+        "body": "A folder of phone photos saved as PNG can blow past Gmail's 25 MB cap fast. As JPGs the same set drops to a few megabytes, so it all fits in one message."
+      },
+      {
+        "title": "Uploading to listings and forms",
+        "body": "eBay, Etsy, Facebook Marketplace and most web forms re-compress images on their end anyway. Handing them a slim JPG uploads faster and skips the wasted bandwidth of a heavy PNG."
+      },
+      {
+        "title": "Shrinking screenshots",
+        "body": "Screenshots saved as PNG are surprisingly large because of all the flat color. Convert to JPG when you just need to show what is on screen and don't need crisp text."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "JPG vs PNG: which should you use?",
+        "body": "Pick JPG for photographs and any image with smooth color gradients. Its lossy compression drops detail your eye won't miss, and the files come out small. Pick PNG for logos, icons, screenshots with text, and anything that needs a transparent background or razor-sharp edges. PNG keeps every pixel exactly, which is why those files are bigger. A quick rule: if the image came from a camera, JPG is fine; if it has flat color, hard lines, or transparency, leave it as PNG. Converting PNG to JPG is the right call when the picture is photographic and you mainly care about size."
+      },
+      {
+        "heading": "Why is my PNG file so large?",
+        "body": "PNG stores every pixel with no loss, so a detailed photo can run 5 to 10 times bigger than the same shot as JPG. Phone screenshots and exports from design tools often default to PNG too, which is why a simple grab can land at several megabytes. That size is worth paying for graphics with sharp edges or transparency, but for an ordinary photo it is mostly wasted bytes. Converting to JPG re-compresses the image at a quality setting (around 92 works well), which cuts the file down sharply while it still looks clean to the eye."
+      },
+      {
+        "heading": "What happens to transparency?",
+        "body": "JPG has no alpha channel, so it cannot store transparency at all. When you convert a PNG with see-through areas, those pixels have to become a solid color. This tool fills them with white, the safe default for most photos and screenshots. If your image is a logo or sticker meant to sit on a colored background, that white fill will show as a boxy edge, so keep it as a PNG or set a matching background color in an editor before converting. For plain photos there is nothing transparent to lose, so the fill never comes into play."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de PNG a JPG | Gratis, privado, sin subidas",

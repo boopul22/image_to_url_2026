@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "DEVELOPER TOOLS",
     "h1Pre": "Image Hosting for GitHub",
     "h1Highlight": "README files.",
-    "intro": "Stop committing binary images to your repos. Upload to ImageToURL, get a permanent URL, and keep your repositories lean and your clones fast.",
+    "intro": "Committing screenshots and diagrams straight into a repo feels easy until the .git folder is 200 MB and a fresh clone crawls. Upload your image here instead, copy the direct link, and drop it into your README with one line of Markdown. The file sits on a CDN, not in your git history, so the repo stays small and the README still renders the picture inline. It works the same for public and private projects, profile READMEs, wikis and issue threads.",
     "howTitle": "How to Use in Markdown",
     "steps": [
       {
@@ -48,6 +48,119 @@ export const content: LandingContentMap = {
       {
         "title": "Clutters Your Diffs",
         "body": "Binary files add noise to pull requests and cannot be meaningfully reviewed, making it harder to track actual code changes."
+      },
+      {
+        "title": "One clean link for badges and banners",
+        "body": "A direct https link is handy beyond the README too. Reuse the same URL for a project banner, a shields.io style badge background, or a screenshot you reference from the docs and the wiki, without copying the file into three places."
+      }
+    ],
+    "specsTitle": "What you get at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB per file"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link for Markdown"
+      }
+    ],
+    "comparisonTitle": "Hosted link vs committing the image",
+    "comparisonIntro": "There are a few ways to get an image into a README. They mostly differ on what happens to your repo size, how fast a clone runs, and whether the link stays put. Here is how the common options compare.",
+    "comparisonColumns": [
+      "Approach",
+      "Repo size",
+      "Clone speed",
+      "Update without a commit",
+      "Stable link"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Hosted link (ImageToURL)",
+          "No impact",
+          "Unaffected",
+          "Yes, swap the file at the URL",
+          "Yes, forever when signed in"
+        ]
+      },
+      {
+        "cells": [
+          "Commit image into the repo",
+          "Grows with every edit",
+          "Slower over time",
+          "No, needs a new commit",
+          "Yes, but it bloats history"
+        ]
+      },
+      {
+        "cells": [
+          "Paste into an issue (githubusercontent)",
+          "No impact",
+          "Unaffected",
+          "No",
+          "Can break if the issue changes"
+        ]
+      },
+      {
+        "cells": [
+          "Git LFS",
+          "Smaller checkout",
+          "Needs LFS set up",
+          "No, needs a new commit",
+          "Yes, within storage quotas"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur link",
+          "No impact",
+          "Unaffected",
+          "Yes",
+          "Account-tied, no anon since 2023"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a hosted image link helps",
+    "useCasesIntro": "Once your picture has a direct link, it slots into the spots a README usually needs:",
+    "useCases": [
+      {
+        "title": "Banner and logo at the top",
+        "body": "Put a project banner or logo above the title with ![](url). HTML works too, so <img src=\"url\" width=\"480\"> keeps it from filling the whole page."
+      },
+      {
+        "title": "Screenshots and demo GIFs",
+        "body": "Show the tool actually running. A GIF or a few screenshots make a README far more convincing than a wall of text, and they never touch your clone size."
+      },
+      {
+        "title": "Profile READMEs, wikis and issues",
+        "body": "The same link drops into your github.com/username profile README, wiki pages, and issue or pull request comments wherever GitHub renders Markdown."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Markdown vs HTML for README images",
+        "body": "GitHub READMEs are Markdown, and the plain image syntax is ![alt text](https://your-image-url). That embeds the picture inline as long as the URL points straight at the file. GitHub Markdown also accepts a bit of HTML, which is the trick for sizing and alignment: <img src=\"https://your-image-url\" width=\"480\" alt=\"app screenshot\">. Use the Markdown form for simple images and the <img> tag when you need a fixed width, a banner that does not span the full column, or a centered logo. Both read the same direct link, so you upload once and pick whichever syntax fits."
+      },
+      {
+        "heading": "Why keep binary images out of the repo",
+        "body": "Git stores history, and it cannot delta-compress binaries the way it does text. Edit a 1 MB screenshot ten times and you can carry close to 10 MB of dead weight that every clone and fetch has to pull, forever. The README still looks identical either way. Linking to an external file keeps the working tree to code and docs, so pull request diffs stay readable and new contributors get going in seconds. If you already committed big images, an external link is the cheap fix going forward, and history rewriting tools handle the cleanup if you want the old copies gone."
+      },
+      {
+        "heading": "Will the links stay up?",
+        "body": "Files are served over HTTPS from a CDN, so they load independently of GitHub and work in private repos too. One honest note on lifetime: anonymous uploads stay live for a couple of weeks at minimum and are cleared on a monthly cleanup, which is fine for a quick issue screenshot. For a README image you want around long term, sign in for free and choose keep forever so the link does not vanish. Either way, keep the original file in hand, and remember anonymous uploads are public to anyone with the URL."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
@@ -69,13 +182,40 @@ export const content: LandingContentMap = {
         "a": "Absolutely. ImageToURL links work anywhere GitHub renders Markdown, including wiki pages, issue comments, and pull request descriptions."
       },
       {
-        "q": "What happens if ImageToURL goes down?",
-        "a": "We use a globally distributed CDN with high availability. Images are replicated across multiple edge servers to ensure your URLs remain permanent and reliable."
+        "q": "What is the exact Markdown syntax for a README image?",
+        "a": "Use ![alt text](https://your-image-url). The alt text shows if the image fails to load and helps screen readers. As long as the URL points straight at the file, GitHub renders it inline."
+      },
+      {
+        "q": "How do I set the width or center an image in a README?",
+        "a": "GitHub Markdown allows HTML, so use an <img> tag: <img src=\"https://your-image-url\" width=\"480\" alt=\"screenshot\">. To center it, wrap it in <p align=\"center\">...</p>. Plain ![](url) has no size control."
+      },
+      {
+        "q": "Can I host a demo GIF for my README?",
+        "a": "Yes. GIF is supported up to 10 MB. Upload it, copy the link, and embed it the same way as a static image. A short demo GIF often explains a project faster than paragraphs of text."
+      },
+      {
+        "q": "Do the links expire?",
+        "a": "Anonymous uploads last a couple of weeks at minimum and are cleared on a monthly cleanup, which suits a quick issue screenshot. For a README image you want around long term, sign in for free and choose keep forever. Keep the original file as a backup either way."
+      },
+      {
+        "q": "What happens if the host has an outage?",
+        "a": "Files are served from a CDN replicated across edge locations, so brief issues are rare and load is spread out. No external host is guaranteed forever, though, so for critical project images sign in and keep the original so you can re-upload if needed."
+      },
+      {
+        "q": "What image formats and sizes are supported?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it embeds in Markdown exactly like the original file would."
+      },
+      {
+        "q": "Does it compress or resize my image?",
+        "a": "No. You get back the same file at full quality, with no re-compression and no watermark. A logo or diagram stays crisp in the rendered README."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Keep your repos lean and your READMEs sharp",
-    "ctaBody": "Upload screenshots and diagrams to get permanent Markdown-ready URLs without any repo bloat.",
-    "ctaButton": "Upload Now"
+    "ctaBody": "Upload screenshots and diagrams to get Markdown-ready links without any repo bloat. No sign-up, no compression, no watermark.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para archivos README de GitHub | ImageToURL",

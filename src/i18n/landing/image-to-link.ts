@@ -68,26 +68,38 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to link FAQ",
     "faqs": [
-      { "q": "How do I turn an image into a link?", "a": "Upload it to get a direct URL, then use that URL as the link. To make the link display the image (Discord, Reddit, forums) paste the raw URL; to make clickable text, wrap it as [text](your-url) in Markdown or in an HTML anchor." },
-      {
-        "q": "How do I turn an image into a link?",
-        "a": "Upload your image in the box above. We generate a direct link in a couple of seconds that you can copy and paste anywhere. No signup is needed."
-      },
+      { "q": "How do I turn an image into a link?", "a": "Upload it in the box above to get a direct URL, then use that URL as the link. To make the link display the image (Discord, Reddit, forums) paste the raw URL; to make clickable text, wrap it as [text](your-url) in Markdown or in an HTML anchor. No signup is needed and it takes a couple of seconds." },
       {
         "q": "What is an image link generator?",
-        "a": "It is a tool that takes your uploaded picture and gives back a direct URL pointing at the file. That link is what you share, and supported sites render it as the image."
+        "a": "It is a tool that takes your uploaded picture and gives back a direct URL pointing at the file. That link is what you share, and supported sites render it as the image instead of a download or a gallery page."
       },
       {
         "q": "Will the link show the image in Discord, Reddit, or forums?",
         "a": "Yes. The link points straight at the image file, so Discord, most subreddits, and typical forums embed it as the picture rather than showing a plain attachment or a gallery page."
       },
       {
-        "q": "Is it free and anonymous?",
-        "a": "Both. There is no charge, no account, and no email required. Upload, copy your link, and go."
+        "q": "Why won't my image link show up as a picture?",
+        "a": "You've probably copied a page link instead of a direct one. A gallery or article address points at a web page, not the file, so it shows a link card or nothing at all. Grab the image's own URL - the one that ends in .jpg, .png, .webp or .gif - which is exactly what you get here."
       },
       {
-        "q": "Is the link permanent?",
-        "a": "Your link is permanent and shareable for normal use. Files are kept on the CDN and then eventually cleared, so it is meant for sharing rather than long-term archival storage."
+        "q": "Can I use the link in HTML or Markdown?",
+        "a": "Yes. It's a normal direct image URL, so it works in an HTML <img src> tag, Markdown image syntax, CSS background-image, and any site builder that accepts an image link."
+      },
+      {
+        "q": "Is it free and anonymous?",
+        "a": "Both. There is no charge, no account, and no email required. Upload, copy your link, and go. People moved here in numbers after Imgur ended anonymous uploads in 2023."
+      },
+      {
+        "q": "How long does the link last?",
+        "a": "Anonymous uploads stay live until our monthly storage cleanup, so you get at least a couple of weeks and usually more. Need a link that never expires? Make a free account and choose \"keep forever\" when you upload. Either way, keep your own copy of the original as a backup."
+      },
+      {
+        "q": "Does it compress my image or add a watermark?",
+        "a": "No. The file you get back is the file you uploaded, at full resolution, with no re-compression and no watermark. That's different from hosts that quietly shrink hotlinked images to around 1,280px."
+      },
+      {
+        "q": "What image formats and sizes work?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link ends in the real extension, so it hotlinks and embeds the same way the original file would."
       },
       {
         "q": "What is the difference between an image link and an image URL?",
@@ -96,7 +108,49 @@ export const content: LandingContentMap = {
     ],
     "ctaTitle": "Get your image to link now",
     "ctaBody": "Upload a JPG, PNG, WebP, or GIF and copy a direct link that shows the image. Free, no signup, no watermark.",
-    "ctaButton": "Upload Image Now"
+    "ctaButton": "Upload Image Now",
+    "specsTitle": "Image to link at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct image link" }
+    ],
+    "comparisonTitle": "Image link hosts compared",
+    "comparisonIntro": "Plenty of free hosts will give you a link. Where they differ is whether you need an account, how large a file you can upload, and whether the link actually embeds as the picture instead of opening a page. Here's how the popular ones compare.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is an image link?",
+        "body": "An image link is a web address that points at a picture file rather than at a page about it. It usually ends in .jpg, .png, .webp or .gif, and when you open it you see only the image, nothing else. That's what makes it useful: apps that understand a URL can pull the picture in and show it inline. A normal website link, by contrast, lands you on a full page with menus, text and ads around the image. The link this tool makes is the first kind, the one that embeds."
+      },
+      {
+        "heading": "Direct image link vs page link",
+        "body": "A direct image link goes straight to the file - something like https://imagetourl.cloud/abc123.png - and ends in an image extension. Paste it into Discord or Reddit and the picture appears on its own. A page link, like an Imgur or Flickr gallery address, points at a web page that wraps the image in everything else on the site. Those don't embed; they show a link card or make people click through. If a picture won't display when you paste it, you've almost certainly grabbed a page link. The fix is to copy the image's own direct address, which is what you get here."
+      },
+      {
+        "heading": "Why share a link instead of the file?",
+        "body": "Attachments are clumsy. They sit behind a download button, they bloat email threads, and some forums and chat apps block them or cap the size. A link sidesteps all of that. One short URL renders the picture inline, costs nothing to send, and you can drop the same link in ten different places without re-uploading. It also keeps the original on your own machine, since you only share the copy on the CDN. For screenshots, memes, bug reports and reference images, a link is usually the cleaner way to go."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Imagen a enlace — Generador gratuito de enlaces directos de imágenes | ImageToURL",

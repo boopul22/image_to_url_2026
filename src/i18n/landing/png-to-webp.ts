@@ -18,7 +18,15 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "PNG to WebP Converter,",
     "h1Highlight": "Half the Size",
-    "intro": "Convert your PNG files to WebP and cut their size by 60 to 85%, with transparency kept. Everything runs in your browser, with no upload and no signup.",
+    "intro": "PNG files keep every pixel and the transparency you need, but they get heavy fast. Drop your PNGs in the box above to re-encode them as WebP, which keeps the same alpha transparency while cutting the file size, often by 60 to 85% on photographic or detailed images. It runs in your browser, with no upload, no signup, and no watermark, on files up to 10 MB. Download the result or click 'Get URL' for a shareable https link.",
+    "specsTitle": "PNG to WebP at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input", "value": "PNG (alpha kept)" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "WebP (with optional hosted link)" }
+    ],
     "howTitle": "How to convert PNG to WebP",
     "steps": [
       {
@@ -51,6 +59,88 @@ export const content: LandingContentMap = {
       {
         "title": "Better than JPG alternative",
         "body": "For transparent images, WebP beats PNG for size and JPG for transparency."
+      }
+    ],
+    "comparisonTitle": "PNG vs WebP for web graphics",
+    "comparisonIntro": "PNG is lossless and keeps transparency, which is why logos, icons and screenshots are saved as PNG. The catch is size. WebP holds the same transparency but compresses far harder, so here is how the formats compare for graphics work.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Typical file size",
+      "Browser support",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "PNG",
+          "Lossless",
+          "Yes (alpha)",
+          "Baseline (often large)",
+          "Everywhere",
+          "Source files, tiny icons, line art"
+        ]
+      },
+      {
+        "cells": [
+          "WebP (lossless)",
+          "Lossless",
+          "Yes (alpha)",
+          "Smaller than PNG",
+          "All current browsers",
+          "Sharp graphics with exact pixels"
+        ]
+      },
+      {
+        "cells": [
+          "WebP (lossy)",
+          "Lossy",
+          "Yes (alpha)",
+          "60 to 85% smaller",
+          "All current browsers",
+          "Detailed or photographic graphics"
+        ]
+      },
+      {
+        "cells": [
+          "JPG",
+          "Lossy",
+          "No",
+          "Small",
+          "Everywhere",
+          "Photos with no transparency"
+        ]
+      }
+    ],
+    "useCasesTitle": "When PNG to WebP makes sense",
+    "useCasesIntro": "The big win is keeping a clear background while dropping most of the weight. These are the cases where it helps most:",
+    "useCases": [
+      {
+        "title": "Logos and UI assets on the web",
+        "body": "A transparent logo or an icon set saved as PNG can be surprisingly heavy. WebP keeps the cut-out edges and the alpha channel intact while the file gets much lighter, so your interface loads faster."
+      },
+      {
+        "title": "Screenshots and product shots",
+        "body": "Screenshots saved as PNG balloon in size. Converting to WebP shrinks them a lot with no visible change to the text or fine lines, which is handy for docs, tutorials and listings."
+      },
+      {
+        "title": "Faster pages without losing the background",
+        "body": "Anywhere you would normally reach for PNG to preserve transparency, WebP gives you the same result at a fraction of the bytes. That feeds straight into page speed and Core Web Vitals."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why convert PNG to WebP?",
+        "body": "PNG is lossless, so it stores graphics with perfect pixels and supports transparency. That makes it the right pick for logos, screenshots and line art, but it also makes files big, especially once an image has lots of color or detail. WebP supports the same alpha transparency and compresses much harder, so the same graphic comes out far smaller. For anything that lives on a web page, that size cut is close to free speed, and the transparent background still works exactly as it did in the PNG."
+      },
+      {
+        "heading": "Lossless or lossy: which WebP should I pick?",
+        "body": "WebP can do both. Lossless WebP keeps every pixel like PNG does and is still usually smaller, which suits flat graphics, icons and anything with crisp edges. Lossy WebP throws away a little data the way JPG does, but it shrinks detailed or photographic images dramatically, which is where the 60 to 85% savings come from. A high lossy quality, roughly 85 to 92, looks identical for most graphics while giving you the smaller file. Both modes keep transparency."
+      },
+      {
+        "heading": "When should I keep PNG instead?",
+        "body": "WebP is the better web format most of the time, but PNG still wins in a few spots. Keep PNG for tiny icons where the file is already a few kilobytes and conversion saves nothing, for source files you plan to edit again, and for any tool or platform that only accepts PNG, such as some app stores, older design software and certain print workflows. When in doubt, keep the PNG original and use the WebP copy for the live site."
       }
     ],
     "faqTitle": "FAQ",
@@ -86,11 +176,30 @@ export const content: LandingContentMap = {
       {
         "q": "Does EXIF carry over?",
         "a": "No. Re-encoding to WebP drops the EXIF data, which also helps with privacy."
+      },
+      {
+        "q": "Will my logo's transparent background stay clear?",
+        "a": "Yes. WebP uses the same alpha channel as PNG, so a cut-out logo or icon keeps its transparent background after conversion."
+      },
+      {
+        "q": "Can I get a shareable link for the WebP?",
+        "a": "Yes. Once a file converts, click 'Get URL' and it is hosted for free with a direct https link. Skip that step and the file never leaves your device."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "Up to 10 MB per file. That covers almost any graphic or screenshot. For something larger, resize it first and then convert."
+      },
+      {
+        "q": "Is the converter free and account-free?",
+        "a": "Yes. It is free, there is no signup, and the WebP comes out with no watermark. An account is only needed if you later want a hosted link kept forever."
       }
     ],
     "ctaTitle": "Want a hosted URL?",
     "ctaBody": "Convert your PNG files, then click 'Get URL' to host any WebP for free. No signup.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de PNG a WebP | Gratis, 60-85% más ligero",

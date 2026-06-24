@@ -86,16 +86,78 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is the image link permanent?",
-        "a": "Generated links stay live for a long time, then expire after a stretch of inactivity. For pages you control, like a website or README, keep your original file so you can re-upload if a link ever ages out."
+        "a": "Anonymous links stay live for at least a couple of weeks, then clear on a routine storage cleanup. Want a generated link that never expires? Create a free account and choose 'keep forever' when you upload. For a site or README you control, keep the original file so you can re-generate if a link ever ages out."
       },
       {
         "q": "Which image formats and file sizes work?",
         "a": "JPG, PNG, WebP and GIF are supported, up to 10MB per file. Nothing is compressed or re-encoded, so the generated link serves your image at full quality."
+      },
+      {
+        "q": "What does a generated image URL look like?",
+        "a": "A short https address that ends in the file extension, like https://imagetourl.cloud/abc123.jpg. That extension is the part that makes it embed as an image. There is no viewer page, no ad wrapper and no redirect sitting between the link and your file."
+      },
+      {
+        "q": "Can I generate links for several images at once?",
+        "a": "Yes. Upload your images one after another and copy each link as it comes back, or use the bulk upload tool when you have a whole batch. Every file gets its own direct URL."
+      },
+      {
+        "q": "Can I use the generated URL in an <img> tag or Markdown?",
+        "a": "Yes. It is a plain direct image link, so it works in an HTML <img src> tag, Markdown image syntax, a CSS background-image rule and any site builder that accepts an image URL."
+      },
+      {
+        "q": "Does generating a URL compress or change my image?",
+        "a": "No. The file is stored and served exactly as you uploaded it, at full resolution, with no re-encoding and no watermark. The link points at the original, not a copy."
+      },
+      {
+        "q": "Is it safe to share a generated link?",
+        "a": "The link runs over HTTPS and points only at your image. Just remember an anonymous link is public to anyone who has it, so don't generate one for anything private, and keep your own copy of the file as a backup."
       }
     ],
     "ctaTitle": "Try the image url generator",
     "ctaBody": "Upload a JPG, PNG, WebP or GIF and get a direct, shareable link in seconds. No signup, no watermark.",
-    "ctaButton": "Generate Image URL"
+    "ctaButton": "Generate Image URL",
+    "specsTitle": "Image URL generator at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct CDN link (.jpg/.png)" }
+    ],
+    "comparisonTitle": "Image URL generators compared",
+    "comparisonIntro": "Plenty of tools will generate an image link. The differences show up in whether you need an account first, how large a file you can drop, and whether the link points straight at your image or at a viewer page. Here is how the common ones compare.",
+    "comparisonColumns": [
+      "Tool",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is an image URL generator?",
+        "body": "An image URL generator takes a file off your device, stores it on a web server, and hands back a public address that points at the image. Before that step your photo only exists locally, so nothing online can load it. After it, the image has a real https link that ends in .jpg, .png or .webp. The generator does the upload and the addressing in one move, so you skip FTP, cloud dashboards and any hosting setup. You drop the file, you copy the link. From there, anything that reads a URL can show your picture."
+      },
+      {
+        "heading": "What a generated image URL looks like",
+        "body": "A link from here looks like https://imagetourl.cloud/abc123.jpg, a short path that ends in the real file extension. That ending matters. It tells browsers, Discord and Reddit that the address is an image, so they render it inline instead of offering a download or a card. Compare that to a gallery link like imgur.com/a/xyz, which opens a page wrapped around the picture and often won't hotlink at all. A direct generated URL has no viewer page, no ads and no redirect. Paste it into an img tag and it just loads."
+      },
+      {
+        "heading": "Are generated links safe to share?",
+        "body": "Every link is served over HTTPS and points only at your file, with no tracker or redirect bolted on. The thing to keep in mind is that an anonymous link is public to anyone who has it, with no password on it. So don't generate links for private documents or anything you would not want seen, and hold onto your own copy of the original. Free links also clear on a regular cleanup, so for a site or README you control, keep the source file and re-generate if a link ever ages out."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Generador de URL de imagen gratuito — Convierte imágenes a URL al instante | ImageToURL",

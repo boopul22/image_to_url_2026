@@ -5,75 +5,215 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Best Imgur Alternative (2026) — Free, No Account",
+    "metaTitle": "Imgur Alternative - Free, No Account, Direct Links | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "imgbb-alternative", "label": "ImgBB alternative" },
       { "pageKey": "cloudinary-alternative", "label": "Cloudinary alternative" }
     ],
-    "metaDescription": "Looking for an Imgur alternative? ImageToURL gives you free image hosting with no account, permanent direct links, and no ads or gallery pages.",
-    "schemaName": "ImageToURL",
-    "schemaDescription": "A free, ad-free image hosting platform providing permanent direct URLs without requiring user accounts.",
+    "metaDescription": "Want an Imgur alternative that skips the account? Drop a JPG, PNG, WebP, GIF or SVG and get a direct https link in seconds. No sign-up, no watermark, full quality, 10MB.",
+    "schemaName": "Imgur Alternative",
+    "schemaDescription": "A free Imgur alternative that turns any image into a direct, full-quality link. No account, no watermark, no gallery page, fast global CDN.",
     "badge": "IMGUR ALTERNATIVE",
-    "h1Pre": "The Best Imgur",
-    "h1Highlight": "Alternative.",
-    "intro": "Imgur is not what it used to be. ImageToURL is the simple, ad-free image host you have been looking for — permanent links, direct URLs, no account required.",
-    "howTitle": "How It Works",
+    "h1Pre": "A simpler Imgur",
+    "h1Highlight": "alternative, no account",
+    "intro": "Since Imgur dropped anonymous uploads in 2023, getting a quick image link there means making an account first and tying the picture to it. If all you want is a direct link to paste into Discord or a forum, that's a lot of overhead. ImageToURL skips the sign-up: drop a JPG, PNG, WebP, GIF or SVG up to 10MB and you get a direct https link in about two seconds, at full quality, with no watermark and no gallery page wrapped around it.",
+    "specsTitle": "ImageToURL at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link"
+      }
+    ],
+    "howTitle": "How it works",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Simply drag and drop your image file into our uploader or click to select it from your device."
+        "title": "Drop your image in",
+        "body": "Drag a file onto the box above or click to pick one from your device. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. No account screen first."
       },
       {
-        "title": "Get Your Link",
-        "body": "Our system instantly processes your file and generates a direct, permanent URL for your image."
+        "title": "Copy the direct link",
+        "body": "Your image lands on a global CDN and a direct link appears right away. It ends in the real file extension, so it behaves like the original file, not a page about it."
       },
       {
-        "title": "Share Anywhere",
-        "body": "Copy your direct link and share it on forums, Discord, or anywhere else without worrying about ads or expiration."
+        "title": "Paste it anywhere",
+        "body": "Drop the URL into Discord, a Reddit comment, a forum post, an email or an HTML img tag. It shows up as the picture inline, with no gallery page and no extra click."
       }
     ],
-    "whyTitle": "Why Switch from Imgur",
+    "whyTitle": "Why people pick a simple host over Imgur",
     "whyItems": [
       {
-        "title": "No More Mass Purges",
-        "body": "Unlike Imgur, we do not delete images based on inactivity or age, ensuring your content stays online forever."
+        "title": "No account to make",
+        "body": "Imgur now needs you to be signed in to upload, and the image gets attached to that account. Here there's nothing to register for. Upload, copy the link, move on."
       },
       {
-        "title": "Zero Ad Distractions",
-        "body": "We provide a clean, ad-free viewing experience so your audience sees only your image, not promotional clutter."
+        "title": "A direct link, not a gallery",
+        "body": "Imgur is built around its own image pages and community. If you just want a raw link that embeds inline, those pages get in the way. This gives you the file URL straight up."
       },
       {
-        "title": "Direct URL Access",
-        "body": "We provide direct image links by default, skipping the unnecessary gallery pages and social bloat found on Imgur."
+        "title": "Full quality, no watermark",
+        "body": "Your file comes back at the same resolution you uploaded, with no re-compression and no badge stamped on it. What you put in is what other people see."
+      },
+      {
+        "title": "Clear about how long links last",
+        "body": "Anonymous links stay live for at least a couple of weeks and are cleared on a monthly storage cleanup. Want one that sticks around? Make a free account and choose 'keep forever' when you upload."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "Imgur alternatives compared",
+    "comparisonIntro": "Most of these hosts will hand you a link. Where they differ is whether you need an account at all, how big a file you can drop, and whether the link points straight at the image. Here's how a few popular options line up.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "ImageToURL",
+          "Yes",
+          "10 MB",
+          "Yes",
+          "Yes",
+          "Weeks free, forever when signed in"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur",
+          "No (since 2023)",
+          "20 MB",
+          "Limited",
+          "Yes",
+          "Tied to your account"
+        ]
+      },
+      {
+        "cells": [
+          "ImgBB",
+          "Yes",
+          "32 MB",
+          "Yes",
+          "Yes",
+          "Optional expiry"
+        ]
+      },
+      {
+        "cells": [
+          "Postimages",
+          "Yes",
+          "24 MB",
+          "Yes",
+          "No (resized to 1280px)",
+          "Permanent"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a direct image link helps",
+    "useCasesIntro": "Once your picture has its own URL, it slots into the places Imgur links used to:",
+    "useCases": [
+      {
+        "title": "Discord and forums",
+        "body": "Paste the link in a channel or thread and the image renders inline. No gallery tab to open, no 'view on Imgur' detour for the person reading."
+      },
+      {
+        "title": "Bug reports and tickets",
+        "body": "Attach a screenshot to a GitHub issue, a support ticket or a Notion doc by dropping in the URL. It loads as the image, so reviewers see it without leaving the page."
+      },
+      {
+        "title": "Email and chat",
+        "body": "Add the link to a signature or a message. Because it hotlinks the file directly, recipients see the picture instead of a broken preview box."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What changed with Imgur in 2023?",
+        "body": "In April 2023 Imgur stopped allowing anonymous uploads, so posting an image now requires an account, and that image is tied to it. Around the same time the site tightened its rules on adult and explicit material and began removing old, unused anonymous content that had built up over the years. None of that makes Imgur a bad site. It is still a solid community and gallery platform. It just means the old habit of dropping a file there for a throwaway link no longer fits the way it works now."
+      },
+      {
+        "heading": "Imgur vs a plain direct-link host",
+        "body": "The two are built for different jobs. Imgur is a destination: image pages, comments, votes, a front-page feed. A direct-link host like this one has no feed and no profile. You upload a file and get a URL that ends in .jpg or .png and points at the raw image. That is the right tool when you want the picture to appear inline somewhere else, like a Discord chat or a forum post, rather than send people to a separate page. If you actually want the community and the gallery, Imgur is still the better pick."
+      },
+      {
+        "heading": "Is it safe to switch away from Imgur?",
+        "body": "For quick sharing, yes, with a couple of things to know. Every link here is served over HTTPS and points only at your file, with no redirect pages or trackers attached. Anonymous uploads are public to anyone who has the link, so don't post anything private, and keep your own copy of the file. Free links clear on a regular monthly cleanup rather than living forever, so for anything you need to keep, make a free account and mark it 'keep forever', or hold onto the original."
+      }
+    ],
+    "faqTitle": "Imgur alternative FAQ",
     "faqs": [
       {
-        "q": "Why are people looking for Imgur alternatives?",
-        "a": "Imgur has faced issues like mass deletion of anonymous images, increasing ad saturation, and a shift toward social media, leading users to seek more reliable hosting."
+        "q": "Is Imgur free?",
+        "a": "Yes, Imgur is free to use. The main change is that you now need an account to upload, so it is no longer a one-step anonymous link tool the way it was before 2023."
       },
       {
-        "q": "Is ImageToURL really free like Imgur?",
-        "a": "Yes, ImageToURL is completely free. We do not show ads, do not require accounts, and do not have premium tiers or hidden limitations."
+        "q": "Did Imgur remove anonymous uploads?",
+        "a": "Yes. In April 2023 Imgur ended anonymous uploads. You now have to be signed in to post an image, and the image is tied to your account."
       },
       {
-        "q": "Will ImageToURL delete my images like Imgur did?",
-        "a": "No. We provide permanent image hosting. We do not delete images based on inactivity, age, or account status."
+        "q": "Does Imgur still allow anonymous uploads?",
+        "a": "No. Since the 2023 change, uploading on Imgur requires an account. If you want to get a link without signing in, you need a host that still allows anonymous uploads, like this one."
       },
       {
-        "q": "Can I migrate my images from Imgur to ImageToURL?",
-        "a": "Yes. Simply download your images from Imgur and re-upload them to ImageToURL to get new, permanent links that will never expire."
+        "q": "Why did people move off Imgur?",
+        "a": "A few reasons: the end of anonymous uploads, the removal of old unused anonymous content, and tighter content rules. For people who only wanted a fast direct link, a lighter host without an account simply fits better."
       },
       {
-        "q": "Does ImageToURL have a community or social features?",
-        "a": "No. We are focused purely on image hosting without comments, upvotes, or social feeds, keeping your experience simple and fast."
+        "q": "What is the best free Imgur alternative?",
+        "a": "It depends on what you need. If you want a quick direct link with no account and full quality, ImageToURL works well. ImgBB and Postimages are also free and worth a look. If you want a community gallery, Imgur itself is still good."
+      },
+      {
+        "q": "Do I need an account to use ImageToURL?",
+        "a": "No. You can upload and get a direct link without signing up. An account is optional and mainly useful if you want a link that stays up permanently."
+      },
+      {
+        "q": "What image formats can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link you get ends in the real extension, so it hotlinks and embeds the same way the original file would."
+      },
+      {
+        "q": "Will the link embed in Discord?",
+        "a": "Yes. Because the URL points right at the image file, Discord shows it inline as a picture instead of a link card or a gallery page. The same is true on Reddit and most forums."
+      },
+      {
+        "q": "Does it compress or watermark my image?",
+        "a": "No. You get back the same file you uploaded at full resolution, with no re-compression and no watermark added."
+      },
+      {
+        "q": "How long do the links last?",
+        "a": "Anonymous uploads stay live until the monthly storage cleanup, so you get a couple of weeks at minimum and often longer. For a link that never expires, create a free account and pick 'keep forever' when you upload."
+      },
+      {
+        "q": "Can I move my old Imgur images here?",
+        "a": "Yes. Download the images from your Imgur account, then upload them here to get fresh direct links. Keep the originals as a backup either way."
+      },
+      {
+        "q": "Are my uploads private?",
+        "a": "Anonymous uploads are public to anyone who has the link. There is no feed listing them, but the URL is not secret, so don't use it for anything sensitive."
       }
     ],
-    "ctaTitle": "Make the switch from Imgur",
-    "ctaBody": "Free image hosting with no ads, no account, and permanent links.",
-    "ctaButton": "Upload Now"
+    "howToSchema": true,
+    "ctaTitle": "Get a direct image link, no account",
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. No sign-up, no compression, no watermark, no gallery page.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "La mejor alternativa a Imgur (2026) — Gratis, sin cuenta | ImageToURL",

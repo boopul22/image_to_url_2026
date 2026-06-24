@@ -13,9 +13,9 @@ export const content: LandingContentMap = {
       { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" },
       { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
     ],
-    "metaDescription": "Host your images for free with ImageToURL. No signup required, permanent links, global CDN delivery, and support for JPG, PNG, WebP, GIF, SVG formats.",
+    "metaDescription": "Free image hosting with no signup. Upload JPG, PNG, WebP, GIF or SVG up to 10 MB and get a direct CDN link you can paste into Discord, forums, and HTML.",
     "schemaName": "ImageToURL",
-    "schemaDescription": "A free, no-signup image hosting service that provides permanent links and global CDN delivery for various image formats.",
+    "schemaDescription": "A free, no-signup image hosting service that returns a direct CDN link for JPG, PNG, WebP, GIF and SVG files up to 10 MB.",
     "badge": "FREE HOSTING",
     "h1Pre": "Free Image Hosting",
     "h1Highlight": "for everyone.",

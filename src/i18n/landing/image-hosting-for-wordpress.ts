@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Hosting for WordPress — Speed Up Your Site",
+    "metaTitle": "Image Hosting for WordPress — Free, No Plugin, CDN URLs",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-hosting-for-discord", "label": "For Discord" },
@@ -13,69 +13,219 @@ export const content: LandingContentMap = {
       { "pageKey": "image-hosting-for-email-signatures", "label": "For email signatures" },
       { "pageKey": "image-hosting-for-forums", "label": "For forums" }
     ],
-    "metaDescription": "Speed up WordPress by hosting images externally on a free CDN. Cut server load, improve Core Web Vitals, and get permanent direct image URLs, no plugin needed.",
+    "metaDescription": "Host images for WordPress on a free CDN. Keep your wp-uploads folder small, cut bandwidth, and paste a direct image URL into the block editor. No plugin, no account.",
     "schemaName": "Image Hosting for WordPress",
-    "schemaDescription": "Speed up WordPress by hosting images externally on a free CDN to reduce server load and improve Core Web Vitals.",
+    "schemaDescription": "A free way to host images for WordPress off your own server. Get a direct CDN link and paste it into the block editor, a Custom HTML block, or your theme.",
     "badge": "WORDPRESS",
     "h1Pre": "Image Hosting for WordPress",
-    "h1Highlight": "speed up your site.",
-    "intro": "Offload your images to a free global CDN. Reduce server load, improve Core Web Vitals, and keep your WordPress site fast — no plugins required.",
-    "howTitle": "How to Use",
+    "h1Highlight": "free, no plugin needed.",
+    "intro": "WordPress has its own media library, so why host images somewhere else? Because every photo you upload there sits on your hosting disk, gets copied into every backup, and eats the bandwidth your plan pays for. Drop an image in the box above and you get a direct link in about two seconds. Paste that URL into the block editor, a Custom HTML block, your theme files, or an email, and the picture loads from a fast CDN instead of your server. No plugin, no account, and nothing gets compressed on the way through.",
+    "specsTitle": "Image hosting for WordPress at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link"
+      }
+    ],
+    "howTitle": "How to host an image for WordPress",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Drag and drop or select any image from your device. Supports JPG, PNG, WebP, GIF, and SVG."
+        "title": "Upload your image",
+        "body": "Drag a file onto the box above or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. Nothing is resized or recompressed."
       },
       {
-        "title": "Copy the URL",
-        "body": "Instantly get a permanent, CDN-backed URL for your image. One click to copy it to your clipboard."
+        "title": "Copy the link",
+        "body": "Your image lands on a global CDN and a direct URL appears right away. It ends in the real file extension, so it behaves exactly like a file in wp-uploads would."
       },
       {
-        "title": "Paste in WordPress",
-        "body": "Use the Image block, Custom HTML block, or paste directly into the Classic Editor. Your image loads instantly from the CDN."
+        "title": "Paste it into WordPress",
+        "body": "In the block editor, add an Image block and choose 'Insert from URL'. Or drop the link inside a Custom HTML block as <img src=\"...\">, a widget, or your theme code. It loads off the CDN, not your host."
       }
     ],
-    "whyTitle": "Why External Image Hosting for WordPress",
+    "whyTitle": "Why host WordPress images externally",
     "whyItems": [
       {
-        "title": "Reduce Server Load",
-        "body": "Every image request handled by your WordPress host eats bandwidth and CPU. Offload images to a CDN so your server can focus on delivering pages."
+        "title": "Keep your disk and backups small",
+        "body": "Media is usually the biggest thing in a WordPress backup. Years of full-size uploads can balloon wp-content to several gigabytes, which makes every backup slower and your hosting plan tighter. Images you host elsewhere never touch that folder."
       },
       {
-        "title": "Improve Page Speed",
-        "body": "CDN-hosted images load from the nearest edge server to your visitor. Faster image delivery means better Largest Contentful Paint scores."
+        "title": "Offload bandwidth from your host",
+        "body": "Images are often 60 to 80 percent of a page's weight. Serving them from a CDN means those requests hit edge servers near your visitor instead of your origin, so a cheap shared plan stops choking when a post does well."
       },
       {
-        "title": "Lower Bandwidth Costs",
-        "body": "Images often account for 60-80% of page weight. By hosting them externally, you slash bandwidth usage on your WordPress host."
+        "title": "No plugin to maintain",
+        "body": "Offload plugins add settings, a paid tier, and one more thing that can break on a core update. Pasting a plain URL needs none of that. The link is just text in your post, so there's nothing to keep updated."
+      },
+      {
+        "title": "Full quality, no extra processing",
+        "body": "WordPress generates several scaled copies of every upload and can re-encode large images. Here you get back the exact file you put in, at full resolution, with no watermark and no second copies cluttering your media folder."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "WordPress image hosts compared",
+    "comparisonIntro": "Plenty of free hosts can hand you a link to paste into WordPress. They differ on whether you need an account, how big a file you can drop, whether the link hotlinks straight into an Image block, and how long it stays live. Here's how the common ones line up.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "ImageToURL",
+          "Yes",
+          "10 MB",
+          "Yes",
+          "Yes",
+          "Weeks free, forever when signed in"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur",
+          "No (since 2023)",
+          "20 MB",
+          "Limited",
+          "Yes",
+          "Tied to your account"
+        ]
+      },
+      {
+        "cells": [
+          "ImgBB",
+          "Yes",
+          "32 MB",
+          "Yes",
+          "Yes",
+          "Optional expiry"
+        ]
+      },
+      {
+        "cells": [
+          "Catbox",
+          "Yes",
+          "200 MB",
+          "Yes",
+          "Yes",
+          "Permanent"
+        ]
+      },
+      {
+        "cells": [
+          "Postimages",
+          "Yes",
+          "24 MB",
+          "Yes",
+          "No (resized to 1280px)",
+          "Permanent"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a hosted image URL helps in WordPress",
+    "useCasesIntro": "Once a picture has a direct link, it slots into most parts of a WordPress site:",
+    "useCases": [
+      {
+        "title": "Block editor and Custom HTML",
+        "body": "Use 'Insert from URL' on an Image block, or write <img src> inside a Custom HTML block. Both load the picture straight from the CDN with no upload to your media library."
+      },
+      {
+        "title": "Themes and email",
+        "body": "Reference the URL in a child theme template, a header logo, or a transactional and newsletter email. The same link works everywhere a normal image address does."
+      },
+      {
+        "title": "Multi-site reuse",
+        "body": "Run several WordPress installs? Upload an image once and paste the one URL across all of them, instead of re-uploading the same banner to each media library."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "External hosting vs the WordPress media library",
+        "body": "The media library is fine for most sites, and you don't have to abandon it. The trade-off is simple. Anything in the library lives on your hosting disk, gets duplicated into every scaled size, and rides along in each backup. An external URL keeps the file off your server entirely, so your disk usage, backup size, and origin bandwidth all stay flat no matter how many images a post uses. A good rule: keep small site graphics in the library where the editor manages them, and host the heavy or rarely changing images, like big hero shots or downloadable graphics, on a CDN link."
+      },
+      {
+        "heading": "How to insert an external image in the block editor",
+        "body": "Add an Image block, click the upload area, and pick 'Insert from URL'. Paste the link you copied here and the picture appears. For more control, use a Custom HTML block and write your own tag, like <img src=\"https://imagetourl.cloud/abc123.jpg\" alt=\"...\" loading=\"lazy\">. The Custom HTML route lets you set alt text, lazy loading, and width yourself, which matters for accessibility and Core Web Vitals. Most page builders, including Elementor and similar tools, also have a field that accepts an external image URL."
+      },
+      {
+        "heading": "Are externally hosted images safe and good for SEO?",
+        "body": "Every link is served over HTTPS and points only at your file, with no redirect or tracker attached. For SEO, search engines index images by their URL whether that URL is on your domain or a CDN, so a hosted image can still rank and still help the page, as long as you add real alt text. One caveat: anonymous uploads are public to anyone with the link, so don't host private client material, and keep your own copy as a backup since free links are cleared on a regular cleanup."
+      }
+    ],
+    "faqTitle": "WordPress image hosting FAQ",
     "faqs": [
       {
         "q": "Can I use externally hosted images in WordPress?",
-        "a": "Yes. WordPress supports external image URLs in both the Block Editor and Classic Editor. Simply paste the image URL into an Image block or use the Custom HTML block."
+        "a": "Yes. The block editor's Image block has an 'Insert from URL' option, and a Custom HTML block accepts a normal <img src> tag. The Classic Editor and most page builders take an external image URL too."
       },
       {
-        "q": "Will external images slow down my WordPress site?",
-        "a": "No, the opposite. Images served from a global CDN load faster than images hosted on your WordPress server, especially if your hosting plan has limited resources."
+        "q": "How do I add an image by URL in the WordPress block editor?",
+        "a": "Add an Image block, click the upload area, and choose 'Insert from URL'. Paste the link from the box above and the picture loads from the CDN. For custom alt text or lazy loading, use a Custom HTML block instead."
       },
       {
-        "q": "Do the image URLs expire?",
-        "a": "No. All image URLs generated by ImageToURL are permanent. Once uploaded, your images remain accessible at the same URL indefinitely."
+        "q": "Does this replace the WordPress media library?",
+        "a": "Not entirely, and it doesn't have to. The library still handles galleries and featured images well. External hosting is best for heavy images you want off your disk and out of your backups. Many sites use both."
       },
       {
-        "q": "Can I use these URLs in WooCommerce product listings?",
-        "a": "Yes. You can use externally hosted image URLs in WooCommerce product descriptions, custom fields, and page builder sections."
+        "q": "Will external images slow down my site?",
+        "a": "Usually they speed it up. Images served from a global CDN load from an edge server near the visitor, which is often faster than a budget shared host serving its own files. Add loading=\"lazy\" in a Custom HTML block to help further."
       },
       {
-        "q": "Is there a file size limit for uploads?",
-        "a": "ImageToURL supports generous upload sizes for common image formats including JPG, PNG, WebP, GIF, and SVG. No signup is required."
+        "q": "Do I need a plugin?",
+        "a": "No. Pasting a direct URL into a block or template needs no plugin at all. That means nothing extra to configure, update, or break when WordPress core changes."
+      },
+      {
+        "q": "Will this lower my hosting bandwidth and disk usage?",
+        "a": "Yes. Images you host externally never sit in wp-uploads, so they don't grow your disk usage or your backups, and visitors pull them from the CDN instead of your origin, which trims bandwidth."
+      },
+      {
+        "q": "Can I use these URLs in WooCommerce listings?",
+        "a": "Yes. An external image URL works in WooCommerce product descriptions, custom fields, and page builder sections the same way it works anywhere else in WordPress."
+      },
+      {
+        "q": "Do the image links expire?",
+        "a": "Anonymous uploads stay live until our regular storage cleanup, so you get a couple of weeks at minimum and often longer. Want a link that never goes away? Create a free account and pick 'keep forever' when you upload."
+      },
+      {
+        "q": "Will external images still show up in Google Images?",
+        "a": "Yes. Search engines index an image by its URL regardless of which server hosts it. Add clear alt text and a descriptive filename and a hosted image can rank just like one in your media library."
+      },
+      {
+        "q": "Does it compress or resize my image?",
+        "a": "No. You get back the same file you uploaded, at full resolution, with no re-compression and no watermark. WordPress normally makes several scaled copies of an upload; here there's just the one file."
+      },
+      {
+        "q": "What formats and sizes can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. If an image is larger, compress or resize it first, then upload it and copy the link."
+      },
+      {
+        "q": "Can I host the same image across several WordPress sites?",
+        "a": "Yes. Upload it once and paste the single URL into each site. That beats re-uploading the same logo or banner into every separate media library."
       }
     ],
-    "ctaTitle": "Speed up your WordPress site today",
-    "ctaBody": "Upload an image, get a CDN-backed URL, and paste it into WordPress with no plugins or hassle.",
-    "ctaButton": "Upload Now"
+    "howToSchema": true,
+    "ctaTitle": "Host your WordPress images off your server",
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct CDN link in seconds. Paste it into the block editor or a Custom HTML block. No plugin, no account, no compression.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para WordPress — Acelera tu sitio | ImageToURL",

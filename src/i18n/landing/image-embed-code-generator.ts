@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image Embed Code Generator — HTML, BBCode & Markdown",
+    "metaTitle": "Image Embed Code Generator - HTML, Markdown, BBCode | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-url-for-chatgpt", "label": "Image URL for ChatGPT" },
@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "EMBED CODES",
     "h1Pre": "Image Embed Code",
     "h1Highlight": "Generator.",
-    "intro": "Upload an image and get instant embed codes in HTML, BBCode, and Markdown. Copy, paste, done.",
+    "intro": "Host an image here and you get the link wrapped in ready-to-paste embed code, not just a bare URL. The same upload gives you an HTML img tag for websites and email, Markdown for GitHub and docs, and BBCode for older forums. Each snippet has a copy button, so you grab the one your platform speaks and paste it straight in. Files up to 10 MB, no account, no watermark, full quality kept.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -54,32 +54,140 @@ export const content: LandingContentMap = {
         "body": "Add images to wiki articles, knowledge bases, and collaborative documentation with the right embed format."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "faqTitle": "Image embed code FAQ",
     "faqs": [
       {
-        "q": "What embed code formats does ImageToURL generate?",
-        "a": "ImageToURL generates embed codes in three formats: HTML (img tags for websites), BBCode (for forums like phpBB and vBulletin), and Markdown (for GitHub, GitLab, documentation sites, and note-taking apps)."
+        "q": "What embed code formats do I get?",
+        "a": "Three: an HTML img tag for websites and email, Markdown for GitHub, Reddit, Notion and docs, and BBCode for phpBB-style forums. You also get the plain direct URL on its own, in case you just need the link to drop into Discord or a chat box."
       },
       {
-        "q": "Can I customize the embed code?",
-        "a": "The generated embed codes use your image URL with standard formatting. You can freely modify the generated code to add custom classes, alt text, dimensions, or styling before pasting it into your project."
+        "q": "What does the HTML embed code look like?",
+        "a": "It is a standard image tag pointing at your hosted file, for example <img src='https://imagetourl.cloud/abc123.jpg' alt=''>. Add a few words to the alt attribute for accessibility and SEO, and the browser renders the picture inline wherever the tag sits."
       },
       {
-        "q": "Which forums support BBCode image embedding?",
-        "a": "Most traditional forums support BBCode, including phpBB, vBulletin, XenForo, Discourse, and many others. BBCode image tags use the [img] syntax that these platforms recognize and render as inline images."
+        "q": "How do I embed an image in Markdown?",
+        "a": "Use the image syntax ![alt](https://imagetourl.cloud/abc123.jpg). The exclamation mark is what tells Markdown to show the image instead of a clickable text link. This is the format GitHub READMEs, Reddit, Notion and most static-site generators expect."
       },
       {
-        "q": "Will the embedded image always work?",
-        "a": "Yes. ImageToURL provides permanent image URLs backed by a global CDN. Once embedded, your image will load reliably from any location. The URLs never expire, so your embedded images will continue working indefinitely."
+        "q": "What is BBCode and where do I use it?",
+        "a": "BBCode is the old forum markup that wraps a URL in square-bracket tags, like [img]https://imagetourl.cloud/abc123.jpg[/img]. phpBB, vBulletin, XenForo and many gaming or hobby forums still run on it. Paste that snippet into a post and the board renders your image inline."
       },
       {
-        "q": "Can I use the Markdown code in GitHub README files?",
-        "a": "Absolutely. Our Markdown image syntax works perfectly in GitHub README files, GitLab wikis, Notion pages, Obsidian notes, and any other platform that renders Markdown."
+        "q": "Which format should I pick?",
+        "a": "Match it to where you are pasting. HTML for a website, email template or anything you control the page source of. Markdown for GitHub, Reddit, Notion and documentation. BBCode for forums that use [img] tags. If none of those apply, the plain direct URL works in Discord, Slack and chat apps that auto-preview links."
+      },
+      {
+        "q": "Can I edit the generated embed code?",
+        "a": "Yes. The snippets are plain text, so you can fill in the alt attribute, add a width or height, or wrap the HTML tag in a link before you paste. The image URL itself stays the same no matter how you format around it."
+      },
+      {
+        "q": "Why is the alt text empty in the HTML snippet?",
+        "a": "It ships as alt='' so the tag is valid out of the box, but you should add a short description of the image. Good alt text helps screen readers and gives search engines context. Decorative images can keep the empty alt on purpose."
+      },
+      {
+        "q": "What image formats and sizes are supported?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The hosted link ends in the real extension, so the embed code points at a genuine image file and renders the same way the original would."
+      },
+      {
+        "q": "Do the embedded images stay up?",
+        "a": "Anonymous uploads stay live until the monthly storage cleanup, so you get a couple of weeks at least, often longer. If you need an embed that never breaks, create a free account and choose 'keep forever' when you upload. Keep your own copy of the file either way."
+      },
+      {
+        "q": "Does the embed code work in email?",
+        "a": "The HTML img tag does. Most email clients load remote images over HTTPS, though some hide them until the reader clicks 'show images', which is normal email behaviour rather than a problem with the link."
       }
     ],
     "ctaTitle": "Generate your embed code now",
     "ctaBody": "Upload an image and get HTML, BBCode, or Markdown embed codes instantly, with no signup required.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Embed code generator at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Input formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Embed formats", "value": "HTML, Markdown, BBCode" }
+    ],
+    "comparisonTitle": "Embed formats compared",
+    "comparisonIntro": "The same hosted image can be pasted as four different snippets. They all point at the same file, but each one is written for a different kind of platform. Here is when to reach for each.",
+    "comparisonColumns": [
+      "Format",
+      "Syntax example",
+      "Where it works",
+      "Renders inline",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "HTML img",
+          "<img src='url' alt=''>",
+          "Websites, email, web apps",
+          "Yes",
+          "Pages you control the source of"
+        ]
+      },
+      {
+        "cells": [
+          "Markdown",
+          "![alt](url)",
+          "GitHub, Reddit, Notion, docs",
+          "Yes",
+          "READMEs and documentation"
+        ]
+      },
+      {
+        "cells": [
+          "BBCode",
+          "[img]url[/img]",
+          "phpBB, vBulletin, XenForo",
+          "Yes",
+          "Older and hobby forums"
+        ]
+      },
+      {
+        "cells": [
+          "Direct URL",
+          "https://imagetourl.cloud/abc.jpg",
+          "Discord, Slack, chat apps",
+          "Auto-preview",
+          "Chat and quick sharing"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where the embed codes get used",
+    "useCasesIntro": "Pick the snippet that matches your destination and the image just appears:",
+    "useCases": [
+      {
+        "title": "Blogs and websites",
+        "body": "Drop the HTML img tag into a post, a template or a site builder. Set the alt text, and the picture loads inline on WordPress, Ghost, Hugo or hand-written HTML."
+      },
+      {
+        "title": "Docs and READMEs",
+        "body": "Paste the Markdown snippet into a GitHub README, a GitLab wiki, a Notion page or an Obsidian note. The exclamation-mark syntax renders the image rather than a text link."
+      },
+      {
+        "title": "Forums and communities",
+        "body": "Older boards still run on BBCode. The [img] snippet shows your screenshot or graphic inline in phpBB, vBulletin and XenForo threads without an attachment."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "HTML, Markdown and BBCode: what is the difference?",
+        "body": "All three wrap the same direct link, they just use different punctuation that different platforms understand. HTML uses an img tag, like <img src='https://imagetourl.cloud/abc123.jpg' alt=''>, and is read by browsers and email clients. Markdown uses ![alt](https://imagetourl.cloud/abc123.jpg), which GitHub, Reddit and Notion turn into a picture. BBCode uses [img]https://imagetourl.cloud/abc123.jpg[/img] and is the markup classic forums expect. An image embed code generator hands you all three so you do not have to remember the syntax or type it by hand."
+      },
+      {
+        "heading": "Why a hosted link beats pasting the image",
+        "body": "Embed code needs a public web address to point at. A file sitting on your laptop has no URL, so the snippet has nothing to load. Hosting the image first gives it a direct https address ending in the real extension, which is exactly what an img tag, a Markdown image or a [img] tag needs. Upload once and the same link feeds every format. Because the file lives on a global CDN, it loads quickly for readers anywhere instead of depending on your own machine being online."
+      },
+      {
+        "heading": "Always add alt text",
+        "body": "The HTML and Markdown snippets include an alt slot for a reason. Alt text is the short description a screen reader announces and a browser shows if the image fails to load. It also gives search engines a clue about the picture. The generated code ships with an empty alt so it is valid immediately, but a few honest words describing the image is better for accessibility and SEO. Leave alt empty only when the image is purely decorative and adds nothing for a reader who cannot see it."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Generador de código para incrustar imágenes — HTML, BBCode y Markdown | ImageToURL",

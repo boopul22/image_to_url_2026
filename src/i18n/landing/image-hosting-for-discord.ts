@@ -13,69 +13,219 @@ export const content: LandingContentMap = {
       { "pageKey": "image-hosting-for-forums", "label": "For forums" },
       { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
     ],
-    "metaDescription": "Get permanent image URLs for Discord embeds. Discord CDN links expire — use ImageToURL for reliable, permanent image hosting that works in Discord.",
+    "metaDescription": "Get stable image URLs for Discord embeds. Discord's own CDN links carry expiring tokens and eventually break — host here for free and get a direct link that keeps working.",
     "schemaName": "ImageToURL",
-    "schemaDescription": "Get permanent image URLs for Discord embeds to prevent broken images caused by expiring CDN tokens.",
+    "schemaDescription": "A free way to host images for Discord and get a direct link that stays stable in messages, bot embeds, and webhooks instead of expiring like Discord's own CDN URLs.",
     "badge": "DISCORD USERS",
     "h1Pre": "Image Hosting for Discord",
     "h1Highlight": "that never expires.",
-    "intro": "Discord CDN links expire and break your embeds. Upload your images here and get permanent, reliable URLs that work forever in Discord messages, bots, and webhooks.",
+    "intro": "Copy an image link out of Discord and paste it somewhere else, and a few weeks later it's a broken box. That's because Discord's CDN started signing attachment URLs with an expiry parameter, so those links die outside the chat. Upload your picture here instead and you get a plain direct link that ends in the real file extension. It embeds inline in channels, drops into bot embeds and webhook avatars, and keeps loading long after a copied Discord URL would have stopped.",
+    "specsTitle": "Discord image hosting at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link"
+      }
+    ],
     "howTitle": "How It Works",
     "steps": [
       {
         "title": "Upload Your Image",
-        "body": "Select any image file from your device to upload it to our high-speed global CDN."
+        "body": "Drag a screenshot, meme, art piece or GIF onto the box, or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each."
       },
       {
-        "title": "Get Permanent URL",
-        "body": "Receive a direct, stable image link that is optimized for Discord's embed system."
+        "title": "Copy the direct link",
+        "body": "The file lands on a fast CDN and you get a link that ends in the real extension, like .png or .gif. Nothing gets resized or watermarked, so it stays exactly as you uploaded it."
       },
       {
-        "title": "Embed in Discord",
-        "body": "Paste your link into any Discord message, bot embed, or webhook to display it permanently."
+        "title": "Use it in Discord",
+        "body": "Paste it into a channel and it shows inline, or drop it into a bot embed field or webhook config. The link doesn't carry an expiry token, so it keeps loading."
       }
     ],
     "whyTitle": "Why Discord Users Need External Hosting",
     "whyItems": [
       {
-        "title": "CDN Links Expire",
-        "body": "Since 2023, Discord uses signed URLs with expiration tokens that break external references over time."
+        "title": "Discord links carry an expiry",
+        "body": "Around 2023 and 2024 Discord moved attachment URLs on cdn.discordapp.com and media.discordapp.net to signed links with an expiry parameter. Inside the app they refresh, but a link you copied out breaks later."
       },
       {
-        "title": "Embeds Stay Visible",
-        "body": "Avoid broken image placeholders in your bot embeds, webhooks, and pinned messages."
+        "title": "Embeds keep showing the image",
+        "body": "Bot embeds, webhook avatars and pinned messages that point at a copied Discord URL turn into broken placeholders once the token lapses. A stable host avoids that."
       },
       {
-        "title": "Bot-Friendly Integration",
-        "body": "Our URLs work perfectly with Discord.js, discord.py, and other frameworks without token management."
+        "title": "Easy with bots and webhooks",
+        "body": "Bots set image fields in embed JSON with a plain URL. discord.js and discord.py both want a normal https link, which is exactly what you get here, no token juggling."
+      },
+      {
+        "title": "Full quality, no account",
+        "body": "There's nothing to sign up for, and your file isn't compressed or scaled down. What you upload is what people see in the server."
+      }
+    ],
+    "comparisonTitle": "Hosting here vs other options for Discord",
+    "comparisonIntro": "Uploading straight into Discord is fine for a one-off message you'll never reuse. The trouble starts when you want that same link in a bot embed, a wiki, or another site. Here's how the common options compare for that job.",
+    "comparisonColumns": [
+      "Option",
+      "No sign-up",
+      "Link stays stable",
+      "Embeds inline in Discord",
+      "Safe for bot/webhook embeds",
+      "Max file size"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "ImageToURL",
+          "Yes",
+          "Weeks free, forever signed in",
+          "Yes",
+          "Yes",
+          "10 MB"
+        ]
+      },
+      {
+        "cells": [
+          "Discord attachment URL",
+          "Discord account",
+          "No, signed token expires",
+          "Yes inside Discord",
+          "Breaks over time",
+          "Plan based"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur",
+          "No (since 2023)",
+          "Tied to your account",
+          "Yes",
+          "Yes",
+          "20 MB"
+        ]
+      },
+      {
+        "cells": [
+          "Catbox",
+          "Yes",
+          "Permanent",
+          "Yes",
+          "Yes",
+          "200 MB"
+        ]
+      },
+      {
+        "cells": [
+          "ImgBB",
+          "Yes",
+          "Optional expiry",
+          "Yes",
+          "Yes",
+          "32 MB"
+        ]
+      }
+    ],
+    "useCasesTitle": "What people host for Discord",
+    "useCasesIntro": "Once an image has a direct link, it fits into the parts of Discord that need a real URL:",
+    "useCases": [
+      {
+        "title": "Bot and embed images",
+        "body": "Set the image or thumbnail field of an embed to the link. It loads the same way every time, with no expiring token to refresh."
+      },
+      {
+        "title": "Webhook avatars and art",
+        "body": "Point a webhook avatar at the URL, or post art in a channel without the link going stale a couple of weeks later."
+      },
+      {
+        "title": "Server assets and guides",
+        "body": "Source images for emoji and stickers, plus screenshots in pinned how-to messages that need to stay readable for new members."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why Discord CDN links break",
+        "body": "When you upload a file to Discord, the link you can copy looks like cdn.discordapp.com or media.discordapp.net followed by a query string. Those extra parameters are a signed token with an expiry time. Inside the Discord client the link is refreshed for you, so you never notice. The moment you paste that URL somewhere else, a bot embed, a wiki, a forum post, it keeps working only until the token lapses, then it 404s. Hosting the image on a separate site sidesteps the whole problem, because the link you copy here has no token to expire."
+      },
+      {
+        "heading": "Using image URLs in bot embeds and webhooks",
+        "body": "Discord bots don't attach files for embeds; they pass a URL string. In discord.js you set EmbedBuilder().setImage(url), and in discord.py you set embed.set_image(url=...). Webhooks work the same way for the avatar and any embed image. All of them want a plain https link that returns an actual image with the right content type. A link from here fits that exactly. It ends in .png, .jpg, .gif or .webp, so the bot framework and Discord both treat it as an image and render it inline rather than as a download."
+      },
+      {
+        "heading": "Which formats embed inline in Discord",
+        "body": "PNG and JPG cover screenshots and photos. GIF keeps animation when you share it as a direct .gif link. WebP works too and is smaller for the same quality. Animated content shows in the message preview as long as the URL points right at the file. SVG is handled as a download rather than an inline preview in chat, which is normal for most platforms, so for something that needs to show in a message a raster format is the safer pick. Whatever you upload keeps its original quality, since nothing is recompressed on the way through."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
         "q": "Why do Discord image links expire?",
-        "a": "Discord changed their CDN in 2023 to use signed URLs with expiration tokens. Images uploaded directly to Discord now have URLs that expire after a set period, causing broken images in bookmarks, wikis, and external embeds."
+        "a": "Discord changed its CDN to use signed URLs with an expiry parameter. Images uploaded directly to Discord get a link with a token baked in, and once that token lapses the link stops working in bookmarks, wikis, and external embeds. Inside the app the link is refreshed automatically, which is why it only seems to break elsewhere."
       },
       {
-        "q": "Can I use ImageToURL images in Discord bot embeds?",
-        "a": "Yes. ImageToURL provides direct image URLs that work perfectly in Discord bot embed fields. The URLs are served over HTTPS with proper content-type headers, so Discord renders them as inline images."
+        "q": "Can I use these images in Discord bot embeds?",
+        "a": "Yes. The link is a direct image URL served over HTTPS with the right content-type header, which is exactly what an embed image field expects. Set it as the image or thumbnail in your embed and it renders inline, with no token to manage."
       },
       {
-        "q": "Do ImageToURL links work in Discord markdown?",
-        "a": "Absolutely. You can paste an ImageToURL link directly into a Discord message and it will display as an embedded image preview."
+        "q": "Do the links work in Discord markdown and messages?",
+        "a": "Yes. Paste the link into a channel or DM and Discord shows it as an inline image preview, because the URL ends in the real file extension instead of pointing at a gallery page."
       },
       {
-        "q": "Is there a file size limit for Discord image hosting?",
-        "a": "ImageToURL supports images up to 25MB, which covers virtually any image you would want to share on Discord, hosted permanently without degradation."
+        "q": "Is there a file size limit?",
+        "a": "10MB per image, which covers almost any screenshot, meme, or piece of art you'd post in a server. If a file is bigger, shrink or compress it first, then upload."
       },
       {
         "q": "Can I host animated GIFs for Discord?",
-        "a": "Yes. ImageToURL fully supports animated GIFs. Upload your GIF and get a permanent URL that plays the animation when embedded in Discord messages."
+        "a": "Yes. Upload a GIF and you get a direct .gif link. When that link is posted in a message or set in an embed, the animation plays just like a normal Discord GIF."
+      },
+      {
+        "q": "Does it work with discord.js and discord.py?",
+        "a": "Yes. Both libraries take a plain URL string for embed images (setImage in discord.js, set_image in discord.py). A link from here drops straight into that field, so you don't have to upload a file with the message or refresh any token."
+      },
+      {
+        "q": "Do I need a Discord account or to sign up here?",
+        "a": "No account is needed to use this host. You only need a Discord account to post in servers, which you already have. Upload, copy the link, paste it in."
+      },
+      {
+        "q": "Will the link work for a webhook avatar?",
+        "a": "Yes. A webhook avatar is set with an image URL, and this link is a normal https image address, so it works there as well as in embeds."
+      },
+      {
+        "q": "Does it compress or watermark my image?",
+        "a": "No. Your file comes back at full resolution with no watermark and no re-compression, so art and screenshots stay sharp in the server."
+      },
+      {
+        "q": "What formats can I upload?",
+        "a": "JPG, PNG, WebP, GIF and SVG. For something that needs to show inline in a Discord message, stick to a raster format like PNG, JPG, GIF or WebP, since SVG is treated as a download."
+      },
+      {
+        "q": "How long do the links last?",
+        "a": "Anonymous uploads stay live until a monthly storage cleanup, so you get at least a couple of weeks and usually more. Want one that never goes away? Make a free account and choose 'keep forever' when you upload. Either way, keep your own copy as a backup."
+      },
+      {
+        "q": "Are the links private?",
+        "a": "Anonymous uploads are public to anyone who has the link, so don't post anything you wouldn't want a stranger to open. For a private server, the image is still reachable by URL, so treat it as shareable."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Stop losing images to expired Discord links",
-    "ctaBody": "Upload once, get a permanent URL that works in embeds, bots, webhooks, and messages forever.",
-    "ctaButton": "Upload Now"
+    "ctaBody": "Upload once and get a direct link that works in embeds, bots, webhooks, and messages without an expiry token. Free, no sign-up.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para Discord — Enlaces permanentes | ImageToURL",

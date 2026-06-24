@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Share Images via URL on WhatsApp | ImageToURL",
+    "metaTitle": "Image to URL for WhatsApp - Share a Link, Skip Compression | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
@@ -13,73 +13,204 @@ export const content: LandingContentMap = {
       { "pageKey": "image-to-url-for-html", "label": "Image URL for HTML" },
       { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
     ],
-    "metaDescription": "Share images as links on WhatsApp instead of file attachments. No compression, no quality loss. Get a permanent URL and share it in any chat.",
-    "schemaName": "ImageToURL for WhatsApp",
-    "schemaDescription": "A tool to generate permanent image URLs for sharing high-quality photos on WhatsApp without compression.",
+    "metaDescription": "Turn an image into a URL for WhatsApp instead of sending a compressed attachment. Free, no sign-up. Paste one link in any chat and recipients open the full-quality file.",
+    "schemaName": "Image to URL for WhatsApp",
+    "schemaDescription": "A free tool that turns any image into a direct link you can paste in a WhatsApp chat, so recipients open the full-quality file in their browser instead of a re-compressed attachment.",
     "badge": "WHATSAPP SHARING",
-    "h1Pre": "Image URLs for WhatsApp",
-    "h1Highlight": "sharing.",
-    "intro": "Share images as links instead of attachments. No compression, no quality loss, no storage limits. Upload once and share the URL in any WhatsApp chat.",
-    "howTitle": "How It Works",
+    "h1Pre": "Image to URL for WhatsApp:",
+    "h1Highlight": "share a link, not an attachment",
+    "intro": "Want to turn an image to URL for WhatsApp without making an account? Drop your picture in the box above and you get a direct link in a couple of seconds. Paste that link into any chat and WhatsApp shows a preview card; recipients tap it to open the full-quality file in their browser. The point is simple: WhatsApp re-compresses photos you send as attachments, while a hosted link still points at your original file. One link also reaches every chat or group without re-uploading the same photo to each person.",
+    "specsTitle": "Image to URL for WhatsApp at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link"
+      }
+    ],
+    "howTitle": "How to share an image link in WhatsApp",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Drag and drop or select any photo, screenshot, or graphic from your device."
+        "title": "Upload your image",
+        "body": "Drag a photo, screenshot or graphic onto the box, or tap to pick one from your camera roll. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each."
       },
       {
         "title": "Copy the URL",
-        "body": "Get a permanent, CDN-backed URL. One tap to copy it to your clipboard."
+        "body": "Your file lands on a fast CDN and a direct link pops out right away. It ends in the real extension, like .jpg or .png. One tap copies it."
       },
       {
-        "title": "Paste in WhatsApp",
-        "body": "Paste the link in any WhatsApp chat. Recipients see a preview and can tap to view the full-quality image."
+        "title": "Paste it in a chat",
+        "body": "Paste the link into any WhatsApp chat, group or status. WhatsApp shows a preview card, and recipients tap through to open the full-size file in their browser."
       }
     ],
-    "whyTitle": "Why Share Links Instead of Attachments",
+    "whyTitle": "Why a link beats a WhatsApp attachment",
     "whyItems": [
       {
-        "title": "No Compression",
-        "body": "WhatsApp aggressively compresses images sent as attachments, often reducing quality by 70% or more. Sharing a URL bypasses compression entirely."
+        "title": "Skips WhatsApp's photo compression",
+        "body": "Photos you send as attachments get re-encoded and shrunk so they move fast over mobile data. A link points at the file you uploaded, so whoever opens it sees the original, not a squeezed copy."
       },
       {
-        "title": "Full Quality Preserved",
-        "body": "Share high-resolution photos, detailed screenshots, and professional images without any quality degradation. Every pixel stays exactly as you uploaded it."
+        "title": "One link, every chat",
+        "body": "Share the same URL across as many one-on-one chats and groups as you like. You upload once instead of attaching the same picture to each conversation."
       },
       {
-        "title": "Works in Groups",
-        "body": "Share one URL in a group chat and everyone can view the full-quality image. No need to send the same attachment to multiple people."
+        "title": "No account, no email",
+        "body": "There's nothing to sign up for here. Drop the image in, copy the link, paste it. That's the whole flow, and it costs nothing."
       },
       {
-        "title": "No Storage Limit",
-        "body": "WhatsApp media takes up phone storage and can be lost when switching devices. Image URLs take zero storage and remain accessible permanently."
+        "title": "Honest about how long links last",
+        "body": "Anonymous links stay live for at least a couple of weeks and are cleared on a monthly storage cleanup. Want one that never goes away? Make a free account and pick 'keep forever' when you upload."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "Sharing a link vs sending a WhatsApp attachment",
+    "comparisonIntro": "Both get a picture in front of someone, but they behave differently. An attachment travels through WhatsApp's compression and lands in each person's chat storage; a hosted link stays at full quality and works the same in every chat. Here's the trade-off.",
+    "comparisonColumns": [
+      "Method",
+      "Quality kept",
+      "Re-usable across chats",
+      "Recipient sees",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Image URL (this tool)",
+          "Full, original file",
+          "Yes, one link everywhere",
+          "Preview card, taps to open full file",
+          "High-detail photos, reusing one image"
+        ]
+      },
+      {
+        "cells": [
+          "Photo attachment",
+          "Re-compressed by WhatsApp",
+          "No, re-send each time",
+          "Inline image, saved to their phone",
+          "Quick casual snaps"
+        ]
+      },
+      {
+        "cells": [
+          "Document attachment",
+          "Full quality, no compression",
+          "No, re-send each time",
+          "A file to download and open",
+          "Sending the exact file once"
+        ]
+      },
+      {
+        "cells": [
+          "WhatsApp status link",
+          "Full quality at the link",
+          "One link, seen by all contacts",
+          "Preview, taps to your hosted image",
+          "Broadcasting an image to everyone"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where an image link helps on WhatsApp",
+    "useCasesIntro": "Once your picture has a direct link, it slots into the places WhatsApp attachments fall short:",
+    "useCases": [
+      {
+        "title": "Groups and broadcasts",
+        "body": "Drop one link in a family or work group and everyone opens the same full-quality image. No re-sending the file to each chat or each person."
+      },
+      {
+        "title": "Business catalog and status",
+        "body": "Put an image link in a product description, a status update or a quick reply. Customers tap through to a clean, full-size shot instead of a blurry attachment."
+      },
+      {
+        "title": "Sending detailed images",
+        "body": "Screenshots of text, receipts, design proofs or maps stay readable. The recipient opens the original file in a browser, so fine detail survives."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Will the image preview show in a WhatsApp chat?",
+        "body": "When you paste a link into a chat, WhatsApp usually fetches a small preview card with a thumbnail before you send. Whether the card appears can depend on the network, the chat and WhatsApp's own caching, so treat it as a nice-to-have rather than a guarantee. Either way, the link itself always works: the recipient taps it and the image opens in their browser at full size. If no preview shows, a quick line of text like 'full-quality photo here' next to the link tells people what they are tapping."
+      },
+      {
+        "heading": "Link vs attachment: what actually changes",
+        "body": "Sending a photo as an attachment puts a copy in each recipient's chat, which then counts against their phone storage and can vanish when they switch devices or clear media. WhatsApp also re-encodes that copy to keep transfers small. A link does neither: nothing is stored on their phone, and the file they open is the one you uploaded. The trade-off is that opening a link takes a tap and a moment of data, where an inline photo is already there. For everyday snaps an attachment is fine; for detail or reuse, a link wins."
+      },
+      {
+        "heading": "Is it safe to share image links this way?",
+        "body": "Every link is served over HTTPS and points only at your image, with no redirect pages or trackers attached. The thing to remember is that anonymous uploads are public to anyone who has the link, so don't post anything private through a group where the URL could be forwarded. Keep your own copy of the file too, since free links are cleared on a regular schedule. For anything you need to rely on long term, sign in and choose to keep the upload."
+      }
+    ],
+    "faqTitle": "Image to URL for WhatsApp FAQ",
     "faqs": [
       {
-        "q": "Why share image links instead of attachments on WhatsApp?",
-        "a": "WhatsApp compresses images when sent as attachments, reducing quality significantly. Sharing a URL instead preserves the original image quality."
+        "q": "How do I share an image as a link on WhatsApp?",
+        "a": "Upload your image in the box above, copy the direct link it gives you, then paste that link into any WhatsApp chat, group or status. Recipients tap the link to open the full-size file in their browser."
+      },
+      {
+        "q": "Why share a link instead of sending the photo as an attachment?",
+        "a": "WhatsApp re-compresses photos sent as attachments so they transfer quickly. A hosted link still points at your original file, so the picture keeps its full quality and you can reuse the same link in every chat."
       },
       {
         "q": "Will the image preview show in the WhatsApp chat?",
-        "a": "Yes. When you paste an ImageToURL link in a WhatsApp chat, WhatsApp generates a link preview with a thumbnail of the image."
+        "a": "Usually yes. When you paste the link, WhatsApp tries to fetch a preview card with a thumbnail. It can depend on network and caching, so it isn't guaranteed, but the link always opens the full image when tapped."
+      },
+      {
+        "q": "Does the recipient see the full-quality image?",
+        "a": "Yes. Tapping the link opens your original uploaded file in their browser at full resolution. Nothing on our side compresses or resizes it."
       },
       {
         "q": "Does this work in WhatsApp groups?",
-        "a": "Yes. Image URLs work in one-on-one chats, group chats, WhatsApp Business, and WhatsApp Web."
+        "a": "Yes. A direct image link works the same in one-on-one chats, group chats, WhatsApp status, WhatsApp Business and WhatsApp Web. One link reaches everyone."
       },
       {
-        "q": "Do the image URLs expire?",
-        "a": "No. ImageToURL generates permanent URLs. Your shared images remain accessible indefinitely, unlike WhatsApp media."
+        "q": "Can I share the same image link in many chats?",
+        "a": "Yes, that's the main advantage. Upload once and paste the same URL into as many chats and groups as you want, without re-uploading the photo each time."
+      },
+      {
+        "q": "What image formats and sizes can I use?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link ends in the real extension, so it behaves like the original file when opened."
+      },
+      {
+        "q": "Can I share a screenshot or a photo from my camera roll?",
+        "a": "Yes. A screenshot or phone photo is just a PNG or JPG, so it uploads the same way. Pick it from your gallery, copy the link, and paste it in WhatsApp."
+      },
+      {
+        "q": "Do the image links expire?",
+        "a": "Anonymous links stay live for at least a couple of weeks and are removed on a monthly storage cleanup. For a link that lasts, create a free account and choose 'keep forever' when you upload. Keep your own copy either way."
+      },
+      {
+        "q": "Does the tool compress or watermark my image?",
+        "a": "No. You get back the exact file you uploaded, at full resolution, with no re-compression and no watermark. The only compression in the picture is the one WhatsApp would have applied to an attachment, which a link avoids."
+      },
+      {
+        "q": "Is it safe, and who can see the image?",
+        "a": "Links use HTTPS and point only at your file, with no trackers. But anonymous uploads are public to anyone with the link, so don't share anything private where the URL could be forwarded on."
       },
       {
         "q": "Can I share multiple images at once?",
-        "a": "Yes. Upload multiple images using our bulk upload feature, copy the URLs, and share them in your WhatsApp chat."
+        "a": "Yes. Upload several images, copy each direct link, and paste them into your WhatsApp chat. Each one opens its own full-quality file."
       }
     ],
-    "ctaTitle": "Share images without compression",
-    "ctaBody": "Upload an image, copy the URL, and paste it in WhatsApp for full quality, zero compression, and free sharing.",
-    "ctaButton": "Upload Now"
+    "howToSchema": true,
+    "ctaTitle": "Turn your image into a WhatsApp-ready link",
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. Paste it in any chat for full quality, no sign-up, no compression.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Comparte imágenes mediante URL en WhatsApp | ImageToURL",

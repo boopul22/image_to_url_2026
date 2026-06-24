@@ -66,6 +66,45 @@ export const content: LandingContentMap = {
         "body": "Use the .gif URL in an img tag or Markdown and the animation plays on the page. Good for docs, tutorials, and project pages that need a short looping clip."
       }
     ],
+    "specsTitle": "GIF to URL at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "Animated and static GIF" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct .gif CDN link" }
+    ],
+    "comparisonTitle": "GIF hosts compared",
+    "comparisonIntro": "Plenty of hosts will take a GIF and hand back a link. Where they part ways is whether you need an account, how big a file you can drop, and whether the link still moves. Some quietly turn a GIF into a video to save space, which breaks a plain img tag. Here's how the common ones line up.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Keeps animation",
+      "Direct hotlink",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Converts to MP4/GIFV", "Limited", "Tied to your account"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes (resized)", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is a GIF URL?",
+        "body": "A GIF URL is a direct web address that ends in .gif and points at the animated file itself, not a page that wraps around it. Because it links to the raw file, a browser, a Discord channel, or a forum loads it and the loop starts on its own. A normal page link does the opposite: it opens a gallery or a download screen you have to click through. The link you get here is the direct kind. Paste it in an img tag, a Markdown image, or a chat box and the animation runs in place, exactly the way it does on your own machine."
+      },
+      {
+        "heading": "Does the animation still play from the link?",
+        "body": "Yes. The file goes onto our CDN byte for byte, with no re-encoding, so every frame stays intact and the loop runs the moment the link loads. Some hosts quietly turn larger GIFs into MP4 or a custom video wrapper to save space, which can strip the loop or break a plain img tag. We don't touch the file. The real catch with GIF is its own weight: the format is old and inefficient, so a few seconds of footage can run several megabytes. Keep it under 10MB and the link hotlinks cleanly everywhere you drop it."
+      },
+      {
+        "heading": "GIF vs WebP and MP4 for animation",
+        "body": "GIF is the most compatible animated format, but it is not the smallest. It caps out at 256 colors per frame, so gradients and video-style clips can look banded, and the files get heavy fast. Animated WebP and MP4 both compress far better at higher quality, often a fifth of the size. The trade-off is reach: a raw GIF link plays in nearly every chat app, forum, and email client, while WebP and MP4 still trip up a few older tools. If you need it to work everywhere with zero fuss, GIF is still the safe pick."
+      }
+    ],
     "faqTitle": "GIF to URL questions, answered",
     "faqs": [
       {
@@ -81,12 +120,32 @@ export const content: LandingContentMap = {
         "a": "It does. The direct .gif URL embeds and loops right in the message or post on Discord, Reddit, Slack, and most forums."
       },
       {
+        "q": "Can I use the GIF URL in an img tag or Markdown?",
+        "a": "Yes. It's a plain direct .gif link, so it works in an HTML <img src> tag, Markdown image syntax, a wiki, or a forum signature, and the animation plays right on the page."
+      },
+      {
         "q": "What's the largest GIF I can upload?",
-        "a": "Up to 10MB per GIF. That covers most reaction clips and short loops without trouble."
+        "a": "Up to 10MB per GIF. That covers most reaction clips and short loops. GIF is a heavy format, so longer or full-screen clips can blow past the limit fast."
+      },
+      {
+        "q": "Why is my GIF file so large?",
+        "a": "GIF stores each frame as a near-full image and tops out at 256 colors, so it has no real video compression. A short, smooth clip can easily run several megabytes. Trimming the length, dropping the frame rate, or cropping the canvas is the usual fix before uploading."
+      },
+      {
+        "q": "Does the tool compress the GIF or change its colors?",
+        "a": "No. You get back the same file you put in, with the same frames, timing, and palette. Nothing is re-encoded and there's no watermark, which is different from hosts that re-render or resize hotlinked GIFs."
+      },
+      {
+        "q": "How long does the GIF link stay live?",
+        "a": "Anonymous links last at least a couple of weeks and are cleared on a monthly storage cleanup. Want one that never expires? Make a free account and choose 'keep forever' when you upload. Either way, keep your own copy of the GIF as a backup."
       },
       {
         "q": "Is the GIF to URL tool really free?",
         "a": "Yes, completely free. No account, no watermark, and nothing gets compressed on the way through."
+      },
+      {
+        "q": "Should I use WebP or MP4 instead of GIF?",
+        "a": "If you control where it's posted and want smaller files at better quality, animated WebP or MP4 win easily. But a raw GIF link plays in the most places with no fallback needed, so for chats, forums, and email it's still the most reliable choice."
       },
       {
         "q": "Can I hotlink the GIF on my own website?",
@@ -95,7 +154,10 @@ export const content: LandingContentMap = {
     ],
     "ctaTitle": "Convert your GIF to URL now",
     "ctaBody": "Upload an animated GIF and get a direct link that keeps moving, free and with no signup. Paste it into Discord, Reddit, or any forum and watch it loop.",
-    "ctaButton": "Upload GIF Now"
+    "ctaButton": "Upload GIF Now",
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "GIF a URL — Aloja GIFs animados y obtén enlaces directos | ImageToURL",

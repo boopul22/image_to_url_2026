@@ -19,63 +19,207 @@ export const content: LandingContentMap = {
     "badge": "NOTION USERS",
     "h1Pre": "Image Hosting for Notion",
     "h1Highlight": "that never breaks.",
-    "intro": "Notion's internal image URLs expire on published pages and shared links. Upload to ImageToURL and get permanent image links that work everywhere Notion does.",
-    "howTitle": "How to Fix It",
-    "steps": [
+    "intro": "Notion lets you add an image by URL through the image block's Embed link field, so a direct https link to a picture shows up inline on the page. Upload your file here, copy the link, and paste it into that field. The same link works on as many Notion pages, databases and shared docs as you want, and it stays the same address even when you reuse the image somewhere else.",
+    "specsTitle": "Image hosting for Notion at a glance",
+    "specs": [
       {
-        "title": "Upload Your Image",
-        "body": "Drag and drop your image or click to browse. We support JPG, PNG, WebP, GIF, and SVG with no quality loss."
+        "label": "Price",
+        "value": "Free"
       },
       {
-        "title": "Copy the Permanent URL",
-        "body": "Your image gets a permanent URL instantly. Click to copy it to your clipboard. This URL will never expire or change."
+        "label": "Sign-up",
+        "value": "Not required"
       },
       {
-        "title": "Embed in Notion",
-        "body": "In Notion, type /image, choose 'Embed link', and paste the URL. Your image loads from ImageToURL and never expires."
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link for the Embed link field"
       }
     ],
-    "whyTitle": "The Notion Image Problem",
+    "howTitle": "How to add an image to Notion by URL",
+    "steps": [
+      {
+        "title": "Upload your image",
+        "body": "Drag and drop your file onto the box above or click to browse. JPG, PNG, WebP, GIF and SVG all work, up to 10 MB each, and nothing gets compressed or resized on the way through."
+      },
+      {
+        "title": "Copy the direct link",
+        "body": "Your image lands on a fast CDN and you get a direct https link that ends in the real file extension. Click to copy it. The same link can go into many pages, not just one."
+      },
+      {
+        "title": "Embed it in Notion",
+        "body": "In Notion, type /image, choose 'Embed link', and paste the URL. The picture loads inline from the link. You can also use it for a page cover or a callout illustration."
+      }
+    ],
+    "whyTitle": "Why host images outside Notion",
     "whyItems": [
       {
-        "title": "URLs Expire Silently",
-        "body": "Notion generates temporary signed URLs that expire without warning, leaving blank spaces where your images used to be."
+        "title": "Reuse one image everywhere",
+        "body": "An image you drop straight into a Notion block is tied to that page and workspace, so reusing it elsewhere usually means uploading it again. A single external link can sit in dozens of pages and databases at once, and updating that one file updates every place it appears."
       },
       {
-        "title": "Published Pages Break",
-        "body": "When you publish a Notion page to the web, images that looked fine in your workspace can stop loading for visitors."
+        "title": "Works on shared and published pages",
+        "body": "When you publish a Notion page or hand a share link to someone outside your workspace, an external URL behaves like any normal image on the web. The viewer's browser just loads it, no Notion login needed."
       },
       {
-        "title": "Shared Links Fail",
-        "body": "Sharing a Notion page link with a client or colleague works initially, but images can expire before they view it."
+        "title": "A link you actually control",
+        "body": "You hold the original file and the address. Move the image between Notion pages, drop it in a wiki, or paste it into a doc later, and the link never changes. No account or email is needed to get one."
+      },
+      {
+        "title": "Full quality, no watermark",
+        "body": "What you upload is exactly what shows up. There's no re-compression, no resizing down to a thumbnail, and nothing stamped on top. A crisp diagram or screenshot stays crisp on the page."
+      }
+    ],
+    "comparisonTitle": "External link vs uploading into Notion",
+    "comparisonIntro": "Both methods put an image on your page. They differ on whether you can reuse that image across pages, whether it survives on published or shared pages, and whether you end up with a plain link you control. Here's how the common options line up.",
+    "comparisonColumns": [
+      "Method",
+      "No sign-up",
+      "Reuse across pages",
+      "Direct link you control",
+      "Keeps full quality"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "ImageToURL link",
+          "Yes",
+          "Yes, paste anywhere",
+          "Yes",
+          "Yes"
+        ]
+      },
+      {
+        "cells": [
+          "Upload into Notion",
+          "Already signed in",
+          "Re-upload per page",
+          "No, internal only",
+          "Yes"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur link",
+          "No (since 2023)",
+          "Yes",
+          "Gallery page, not always direct",
+          "Yes"
+        ]
+      },
+      {
+        "cells": [
+          "ImgBB link",
+          "Yes",
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      {
+        "cells": [
+          "Catbox link",
+          "Yes",
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a hosted link helps in Notion",
+    "useCasesIntro": "Once your picture has a direct URL, it slots into the spots Notion accepts an image link:",
+    "useCases": [
+      {
+        "title": "Page covers and icons",
+        "body": "Set a page cover or a custom icon from a URL, then reuse the same link on every page that should share that look."
+      },
+      {
+        "title": "Team wikis and databases",
+        "body": "Put one diagram or logo in many wiki pages and database entries. They all point at the same file, so a single update flows everywhere."
+      },
+      {
+        "title": "Shared and published docs",
+        "body": "Hand a client a published page or a share link and the images load for them like any web image, no workspace access required."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "How to add an image by URL in Notion",
+        "body": "Notion's image block has two ways in: Upload, which stores the file inside your workspace, and Embed link, which loads a picture from a web address. To use a hosted image, type /image on the page, pick 'Embed link', and paste a direct URL that ends in .jpg, .png, .webp, .gif or .svg. The link this tool gives you ends in the real extension, so Notion treats it as an image and shows it inline. The same address also works for a page cover, where Notion asks for a link in the cover menu."
+      },
+      {
+        "heading": "Why reuse one URL across pages",
+        "body": "Say you have a logo, a banner, or a process diagram that belongs on ten different pages. Upload it into Notion ten times and you get ten separate copies, and fixing a typo in the diagram means redoing all ten. Host it once and paste the one link wherever it's needed. When you swap the file behind that link, every page updates at the same time. That single source of truth is the main reason teams keep shared images on an external host instead of inside the workspace."
+      },
+      {
+        "heading": "Are the links safe to use?",
+        "body": "Every link is served over HTTPS and points only at your image, with no redirect or tracking page in the middle. Worth knowing: anonymous uploads are public to anyone who has the link, so skip anything private and keep your own copy of the file. Free links stay live for at least a couple of weeks and are cleared on a monthly storage cleanup. If a page needs to stay up for the long run, make a free account and choose 'keep forever' when you upload."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
-        "q": "Why do images break on published Notion pages?",
-        "a": "Notion uses temporary signed URLs with authentication tokens that expire. External hosting with permanent URLs solves this."
+        "q": "How do I add an image to Notion by URL?",
+        "a": "Type /image on the page, choose 'Embed link', and paste a direct image URL. Upload your file here first to get one, then copy and paste the link. The image loads inline."
       },
       {
-        "q": "How do I use an external image in Notion?",
-        "a": "Upload to ImageToURL, copy the permanent link, then use the /image command in Notion to embed the URL."
+        "q": "What is the difference between Upload and Embed link in Notion?",
+        "a": "Upload stores the file inside your workspace. Embed link loads the image from a web address you provide, so the same link can be reused on other pages and stays under your control."
+      },
+      {
+        "q": "Can I use one image on several Notion pages?",
+        "a": "Yes. Paste the same URL into the image block on as many pages or database entries as you like. They all point at one file, so updating that file updates every page at once."
+      },
+      {
+        "q": "Can I set a Notion page cover from a URL?",
+        "a": "Yes. Open the cover menu, choose the link option, and paste your hosted image URL. You can reuse the same link across pages that should share a cover."
+      },
+      {
+        "q": "Do the images show on published and shared Notion pages?",
+        "a": "Yes. An external URL loads like any normal web image, so visitors to a published page or a share link see it without signing in to your workspace."
+      },
+      {
+        "q": "What image formats can I use?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, which is what Notion's Embed link field expects."
       },
       {
         "q": "Will externally hosted images work in Notion's API?",
-        "a": "Yes, external URLs are treated as 'external' type in the API, making them stable for integrations and automations."
+        "a": "Yes. External URLs are treated as the 'external' image type in the API, which keeps them stable for integrations and automations."
       },
       {
-        "q": "Do ImageToURL images work in Notion templates?",
-        "a": "Yes, they carry over perfectly when a template is duplicated, unlike internal Notion images which can break."
+        "q": "Do the links work in Notion templates?",
+        "a": "Yes. When someone duplicates a template, an external image link carries over and keeps loading the same file."
       },
       {
-        "q": "Can I use this for a Notion website built with Super or Fruition?",
-        "a": "Absolutely. These tools render your pages as websites, and permanent URLs ensure your site's images never break."
+        "q": "Can I use this for a Notion site built with Super or Fruition?",
+        "a": "Yes. Those tools render your pages as a website, and a plain hosted image URL loads there the same way it would anywhere else on the web."
+      },
+      {
+        "q": "Is it free, and do I need an account?",
+        "a": "It's free with no sign-up. Upload, copy the link, and paste it into Notion. An optional free account lets you pick 'keep forever' so a link never gets cleared."
+      },
+      {
+        "q": "Does it compress or resize my image?",
+        "a": "No. You get back the same file at full resolution, with no re-compression and no watermark, so diagrams and screenshots stay sharp on the page."
+      },
+      {
+        "q": "How long do the links last?",
+        "a": "Anonymous uploads stay live until the monthly storage cleanup, so a couple of weeks at minimum and often longer. For a page meant to last, sign in and choose 'keep forever', and keep your own backup of the file either way."
       }
     ],
-    "ctaTitle": "Fix your Notion images permanently",
-    "ctaBody": "Upload an image, get a permanent URL, and embed it in Notion to ensure your content never breaks.",
-    "ctaButton": "Upload Now"
+    "howToSchema": true,
+    "ctaTitle": "Add a permanent image link to Notion",
+    "ctaBody": "Upload an image, copy the direct link, and paste it into Notion's Embed link field. No sign-up, no compression, no watermark.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para páginas de Notion — URLs permanentes | ImageToURL",

@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "WEBP CONVERTER",
     "h1Pre": "WebP to URL",
     "h1Highlight": "next-gen format.",
-    "intro": "Upload any WebP image and get a permanent, shareable URL in seconds. Google's modern format with smaller files and superior quality — completely free.",
+    "intro": "Drop a WebP file in the box above and get a direct link in about two seconds, no account needed. WebP is Google's modern format: it holds the same quality as JPG or PNG in noticeably smaller files, and it handles transparency and animation too. The link ends in .webp and embeds inline in current browsers, chat apps, and websites. Nothing gets re-compressed, so what you upload is exactly what loads.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -28,11 +28,11 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Get Your URL",
-        "body": "Your WebP is uploaded to our global CDN instantly. A permanent, direct image URL is generated automatically."
+        "body": "Your WebP is uploaded to our global CDN instantly. A direct image URL is generated automatically and ready to copy."
       },
       {
         "title": "Share Anywhere",
-        "body": "Copy your URL and use it anywhere — HTML, Markdown, forums, emails, or social media."
+        "body": "Copy your URL and use it anywhere: HTML, Markdown, forums, emails, or social media."
       }
     ],
     "whyTitle": "Why WebP?",
@@ -50,32 +50,114 @@ export const content: LandingContentMap = {
         "body": "WebP supports animation like GIF but with vastly smaller file sizes. Modern animated images at a fraction of the bandwidth."
       }
     ],
+    "specsTitle": "WebP to URL at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "WebP (lossy, lossless, animated)" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct .webp CDN link" }
+    ],
+    "comparisonTitle": "WebP hosts compared",
+    "comparisonIntro": "Most free hosts will hand you a link for a WebP file. They differ on whether you need an account, how big a file you can drop, whether the image keeps its full quality, and how long the link lasts. A few also re-encode WebP into other formats. Here's how the popular ones compare.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "useCasesTitle": "Where a WebP link comes in handy",
+    "useCasesIntro": "Once your WebP has a direct link, the smaller file pays off anywhere it loads:",
+    "useCases": [
+      {
+        "title": "Websites and page speed",
+        "body": "Drop the .webp URL into an img tag, a Notion page, or a site builder and the picture loads inline, lighter than the same shot as PNG or JPG. Less weight means faster pages, which is the whole point of the format."
+      },
+      {
+        "title": "Discord, Slack, and chat",
+        "body": "Paste the link in a channel and it shows up as the image, not an attachment. WebP renders fine in modern chat apps, and the smaller file uploads and loads quicker on slow connections."
+      },
+      {
+        "title": "Markdown docs and READMEs",
+        "body": "Use the URL in Markdown image syntax for a GitHub README, a wiki, or a tutorial. The picture embeds on the page and the repo stays lean because the file is small."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a WebP URL?",
+        "body": "A WebP URL is a direct address that ends in .webp and points straight at the image file. Open it in a browser and you see just the picture; drop it in an img tag and it loads inline. WebP itself is a format Google released to replace JPG and PNG on the web. It keeps both lossy and lossless modes, supports an alpha channel for transparency, and can even animate. The link you get here is the raw file sitting on a CDN, so it behaves like any other image URL while carrying a smaller payload than the older formats."
+      },
+      {
+        "heading": "Why use WebP for a hotlink?",
+        "body": "Size is the main reason. A WebP is usually 25 to 35 percent smaller than the same image as JPG or PNG, and the gap is wider against an animated GIF. Smaller files mean the picture loads faster when someone opens your link, which matters on a busy forum thread or a page packed with graphics. You also keep transparency, so a logo or a sticker sits on any background with no white box around it. For anything that lives on the web and needs to look sharp without the weight, WebP is a sensible default."
+      },
+      {
+        "heading": "Does every browser and app show WebP?",
+        "body": "Almost. Every current browser, Chrome, Firefox, Safari, and Edge, has shown WebP for years, and most chat apps and CMS platforms render it without trouble. The gaps are older software: some email clients, a few legacy forum scripts, and very old phones may show a broken image instead of the picture. If your audience might be on dated tools, keep a PNG or JPG copy as a fallback, or test the link in the spot you plan to post it. For a modern website or a Discord server, WebP just works."
+      }
+    ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
         "q": "What is WebP format?",
-        "a": "WebP is a modern image format developed by Google that provides superior compression for both lossy and lossless images. It supports transparency and animation while being 25-34% smaller than equivalent PNG or JPG files."
+        "a": "WebP is a modern image format developed by Google that compresses both lossy and lossless images well. It supports transparency and animation while running 25 to 34% smaller than an equivalent PNG or JPG."
+      },
+      {
+        "q": "How do I convert a WebP to a URL?",
+        "a": "Upload your WebP in the box at the top of this page. It lands on our CDN and you get a direct .webp link within a couple of seconds, ready to copy. No account and no payment."
       },
       {
         "q": "Does ImageToURL preserve WebP quality?",
-        "a": "Yes, we store your WebP files exactly as uploaded. No re-encoding, no compression artifacts, no quality degradation."
-      },
-      {
-        "q": "Can I embed WebP URLs anywhere?",
-        "a": "Yes. Our direct URLs work anywhere images are supported. However, note that WebP may not display on very old browsers — in those cases, consider also uploading a PNG fallback."
-      },
-      {
-        "q": "Is WebP better than PNG?",
-        "a": "It depends on your use case. WebP offers smaller file sizes than PNG with similar quality, including transparency support. PNG is better when you need universal legacy browser support or lossless archival quality."
+        "a": "Yes. We store your WebP exactly as uploaded - no re-encoding, no extra compression, no quality loss, and no watermark."
       },
       {
         "q": "What's the maximum WebP file size?",
-        "a": "Free uploads support WebP files up to 2MB. Create a free account to upload WebP images up to 10MB."
+        "a": "Up to 10MB per WebP file, free and with no account. WebP files are small to begin with, so that limit covers almost any image you'd want to host."
+      },
+      {
+        "q": "Will the link work in modern browsers and apps?",
+        "a": "Yes. Every current browser and most chat apps and website builders display WebP. A handful of older email clients and legacy forum scripts don't, so for those keep a PNG or JPG copy as a fallback."
+      },
+      {
+        "q": "Will an animated WebP still play from the link?",
+        "a": "Yes. We don't re-encode the file, so an animated WebP keeps every frame and loops from the direct link, the same as it does locally, as long as the app you paste it into supports WebP."
+      },
+      {
+        "q": "Can I use the WebP URL in an <img> tag or Markdown?",
+        "a": "Yes. It's a normal direct image URL, so it works in HTML <img src> tags, Markdown image syntax, CSS background-image, and any site builder that accepts an image link."
+      },
+      {
+        "q": "Do the links expire?",
+        "a": "Anonymous links last at least a couple of weeks and are cleared on a monthly storage cleanup. For a link that never expires, make a free account and choose 'keep forever' when you upload. Keep your own copy as a backup either way."
+      },
+      {
+        "q": "Is WebP better than PNG?",
+        "a": "It depends on the job. WebP gives you smaller files than PNG at similar quality, with transparency support. PNG is the safer pick when you need universal legacy browser support or lossless archival quality."
+      },
+      {
+        "q": "Should I host the WebP or convert it to JPG first?",
+        "a": "If the place you're posting supports WebP, host it as-is and enjoy the smaller file. If you're not sure the destination handles WebP, a JPG copy is the more compatible choice for photos, though it loses transparency."
+      },
+      {
+        "q": "Is it really free with no signup?",
+        "a": "Yes. Upload a WebP, copy the link, done. No account, no email, and no watermark on your image."
       }
     ],
     "ctaTitle": "Convert your WebP to a shareable URL",
-    "ctaBody": "Upload your WebP image and get a permanent link in seconds. No signup, no compression, no catch.",
-    "ctaButton": "Upload WebP Now"
+    "ctaBody": "Upload your WebP image and get a direct link in seconds. No signup, no compression, no catch.",
+    "ctaButton": "Upload WebP Now",
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "WebP a URL — Convierte imágenes WebP a enlaces compartibles | ImageToURL",

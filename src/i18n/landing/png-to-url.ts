@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "PNG CONVERTER",
     "h1Pre": "PNG to URL Converter — Convert Image to Link",
     "h1Highlight": "Free & Online",
-    "intro": "Use our free PNG to URL converter to turn any PNG into a permanent, shareable link in seconds. Upload your file and get a direct URL - with the transparent background and full quality kept exactly as you uploaded it.",
+    "intro": "Drop a PNG in the box above and you get a direct link in a couple of seconds, no account needed. The transparent background stays put and nothing is recompressed, so a logo or screenshot looks exactly like the file you uploaded. The link ends in .png, so it embeds inline on Discord, Reddit, a forum, an email, or any HTML page. Copy it and paste it wherever you need the image to show up.",
     "howTitle": "How to Convert a PNG to URL",
     "steps": [
       {
@@ -70,36 +70,94 @@ export const content: LandingContentMap = {
     "faqs": [
       {
         "q": "How do I turn a PNG into a URL?",
-        "a": "Upload your PNG using the converter above. We generate a direct link in seconds that you can copy and share anywhere - no signup needed."
-      },
-      {
-        "q": "How do I get a URL for a PNG?",
-        "a": "Drop your PNG into the upload box or click browse. You'll get a direct, shareable image link within a few seconds."
+        "a": "Upload your PNG using the box above. You get a direct link ending in .png within a few seconds, ready to copy and paste anywhere. No signup needed."
       },
       {
         "q": "How do I convert a PNG to a link?",
-        "a": "It's the same process - upload your PNG and you get a direct link to it that you can paste anywhere. \"PNG to URL\" and \"PNG to link\" mean the same thing here."
+        "a": "It is the same thing - upload the file and you get a direct link to it. \"PNG to URL\" and \"PNG to link\" mean the same here: a clean web address that points straight at the image."
       },
       {
-        "q": "Does ImageToURL preserve PNG transparency?",
-        "a": "Yes. The transparent background stays intact and nothing is compressed - your image looks exactly like the file you uploaded."
+        "q": "Does it preserve PNG transparency?",
+        "a": "Yes. The alpha channel stays intact and nothing is flattened onto a white background. Your logo, icon, or cutout keeps its transparent edges exactly as you uploaded it."
+      },
+      {
+        "q": "Will the PNG be compressed or resized?",
+        "a": "No. The file is served at full resolution with no re-compression and no watermark. PNG is lossless, and we keep it that way."
+      },
+      {
+        "q": "Does the link work in an <img> tag or Markdown?",
+        "a": "Yes. It is a normal direct image URL ending in .png, so it works in HTML <img src> tags, Markdown image syntax, CSS background-image, and any site builder that takes an image link."
+      },
+      {
+        "q": "Will it embed in Discord and Reddit?",
+        "a": "Yes. Because the URL points at the image file itself, Discord, Reddit, and most forums show the PNG inline instead of a download or a gallery page."
       },
       {
         "q": "What's the maximum PNG file size?",
-        "a": "You can upload PNG files up to 10MB."
+        "a": "10MB per file. That covers almost any screenshot, logo, or graphic. If a PNG is bigger, you can convert it to JPG or compress it first, then upload that."
       },
       {
-        "q": "Is it free?",
-        "a": "Yes, completely free. No signup, no watermarks."
+        "q": "Should I use PNG or JPG for this?",
+        "a": "Use PNG when you need transparency or sharp edges - logos, icons, screenshots, text, and line art. Use JPG for photos, where it makes a much smaller file at similar visible quality."
       },
       {
         "q": "How long do PNG URLs last?",
-        "a": "Uploaded files are kept for a few weeks, then automatically cleared."
+        "a": "Anonymous uploads stay live for at least a couple of weeks and are cleared on a monthly cleanup. Want a link that never expires? Create a free account and choose \"keep forever\" when you upload."
+      },
+      {
+        "q": "Are uploaded PNGs private?",
+        "a": "Anonymous uploads are public to anyone who has the link. Don't post anything private, and keep your own copy of the file as a backup."
+      },
+      {
+        "q": "Is it free?",
+        "a": "Yes, completely free. No signup, no watermark, no payment ever."
       }
     ],
     "ctaTitle": "Convert your PNG to a shareable URL",
     "ctaBody": "Upload your PNG and get a permanent link in seconds with no signup or watermarks.",
-    "ctaButton": "Upload PNG Now"
+    "ctaButton": "Upload PNG Now",
+    "specsTitle": "PNG to URL at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "PNG (plus JPG, WebP, GIF, SVG)" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct .png link" }
+    ],
+    "comparisonTitle": "PNG hosts compared",
+    "comparisonIntro": "Plenty of free hosts will give you a link for a PNG. Where they differ is whether you need an account, how big a file you can drop, and - the one that bites PNG users - whether the transparent background survives. Here's how the popular ones handle it.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Keeps transparency",
+      "Direct .png link",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Not always (large PNGs become JPG)", "Limited", "Tied to your account"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is a PNG URL?",
+        "body": "A PNG URL is a direct web address that ends in .png and points straight at the image file, not at a page about it. Paste it into a browser and you see just the picture; drop it into an HTML <img> tag, a Markdown file, or a chat box and the PNG loads inline. Because it links to the raw file, the alpha channel comes along too, so transparent areas stay transparent. That is the point of a real .png link rather than a screenshot of a gallery page: anything that reads a URL can show the image directly."
+      },
+      {
+        "heading": "PNG vs JPG for a hotlink",
+        "body": "PNG is lossless and supports a transparent background, which makes it the right pick for logos, icons, screenshots, and anything with text or sharp edges. JPG throws away detail to shrink the file and cannot do transparency, so a logo on JPG ends up on a white box with fuzzy edges. The trade-off is size: a photo saved as PNG can be several times larger than the same photo as JPG. Rule of thumb - graphics and screenshots go PNG, camera photos go JPG. For sharing either as a link, the upload step is identical."
+      },
+      {
+        "heading": "Does the transparent background survive?",
+        "body": "Yes. We store and serve the exact file you upload, so the alpha channel is untouched and there is no flattening onto white. That matters because some hosts re-encode large PNGs to JPG to save space, which silently fills your transparent areas with a solid color. Drop a logo here and you can paste the resulting .png link onto a dark Discord theme or a colored web page, and the background shows through the way it should. Keep your own copy of the file too, since free links are cleared on a regular cleanup."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertir imagen PNG a enlace URL — Gratis en línea | ImageToURL",

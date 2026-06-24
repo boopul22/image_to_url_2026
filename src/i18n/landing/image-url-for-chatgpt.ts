@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Get Image URLs for ChatGPT Vision — Free & Instant",
+    "metaTitle": "Image URL for ChatGPT - Free Public Link AI Can Read | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
@@ -13,69 +13,213 @@ export const content: LandingContentMap = {
       { "pageKey": "image-to-url-for-html", "label": "Image URL for HTML" },
       { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
     ],
-    "metaDescription": "ChatGPT Vision needs a public image URL. Upload your image, get an instant link, and paste it into ChatGPT. Free, no signup, and links never expire.",
-    "schemaName": "Image URLs for ChatGPT",
-    "schemaDescription": "Upload images and get public URLs for ChatGPT Vision. Free, instant, no signup required.",
+    "metaDescription": "Get a public https image URL ChatGPT can actually fetch. Upload a JPG, PNG or WebP, copy the direct link, paste it into a prompt or an API image_url. Free, no signup.",
+    "schemaName": "Image URL for ChatGPT",
+    "schemaDescription": "Turn any image into a public https link that ChatGPT, Claude and Gemini can fetch and read. Free, instant, no account, no compression.",
     "badge": "CHATGPT USERS",
-    "h1Pre": "Image URLs for ChatGPT",
-    "h1Highlight": "instant & free.",
-    "intro": "ChatGPT Vision needs a public image URL to analyze your images. Upload here, copy the link, paste it into ChatGPT — done in seconds.",
-    "howTitle": "How It Works",
+    "h1Pre": "Image URL for ChatGPT:",
+    "h1Highlight": "a public link AI can read",
+    "intro": "ChatGPT and other AI models can only look at an image if it lives at a public https address their servers can reach. A file on your desktop or a private share link won't do it. Drop your picture in the box above, copy the direct link, and paste it into your prompt or an image_url field. It works on JPG, PNG, WebP, GIF and SVG up to 10 MB, with no account and no sign-up.",
+    "specsTitle": "Image URL for ChatGPT at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "JPG, PNG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Public https CDN link"
+      }
+    ],
+    "howTitle": "How to get an image URL for ChatGPT",
     "steps": [
       {
-        "title": "Upload Your Image",
-        "body": "Drag and drop or click to select your image. We support JPG, PNG, WebP, GIF, and SVG formats up to 25 MB."
+        "title": "Upload your image",
+        "body": "Drag your picture onto the box or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10 MB each. Nothing is compressed or resized."
       },
       {
-        "title": "Copy the URL",
-        "body": "Your public image URL is generated instantly. Click the copy button to grab the HTTPS link to your clipboard."
+        "title": "Copy the direct link",
+        "body": "Your image lands on a fast CDN and you get an https link ending in the real file extension. That extension matters: it tells the model it's pointing straight at an image, not a web page."
       },
       {
-        "title": "Paste in ChatGPT",
-        "body": "Paste the URL into any ChatGPT conversation. The vision model will automatically fetch and analyze your image."
+        "title": "Paste it into the model",
+        "body": "Drop the URL into a ChatGPT prompt, a custom GPT, or an API image_url input. The model fetches the file from the link and reads it. The same link works in Claude, Gemini and most automation tools."
       }
     ],
-    "whyTitle": "Why ChatGPT Needs Image URLs",
+    "whyTitle": "Why ChatGPT needs a public link, not a file",
     "whyItems": [
       {
-        "title": "Vision Requires Public URLs",
-        "body": "ChatGPT's vision model fetches images from the web. It needs a publicly accessible URL to download and process your image for analysis."
+        "title": "The model lives on a remote server",
+        "body": "ChatGPT runs in a data center, not on your machine. It can't open C:\\Users\\photo.jpg or /Users/you/Desktop/pic.png because it has no way to reach your hard drive. A public URL is the bridge."
       },
       {
-        "title": "Local Files Do Not Work",
-        "body": "You cannot paste a file path from your computer into ChatGPT. The AI runs on remote servers and has no access to your local filesystem."
+        "title": "It has to fetch the file itself",
+        "body": "When you pass an image_url, the model's servers make a request to that address and download the bytes. If the link needs a login, sits behind a firewall, or returns a preview page instead of the image, the fetch fails."
       },
       {
-        "title": "Instant Analysis",
-        "body": "ChatGPT processes your image in seconds once it has the URL. Ask questions about the image, get descriptions, or extract text."
+        "title": "Direct links beat share links",
+        "body": "Google Drive and Dropbox 'share' links usually open an HTML viewer, not the raw file, so the model gets a web page it can't parse. A direct CDN link that ends in .jpg or .png points at the actual image."
+      },
+      {
+        "title": "Full quality, no squeezing",
+        "body": "The link serves the same file you uploaded, at full resolution. Nothing is re-compressed or scaled down, so text in screenshots and fine detail in diagrams stay readable for the model."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "What kind of link can ChatGPT actually read?",
+    "comparisonIntro": "Not every link to an image is one a model can use. The model needs a public address that returns the raw image file with no login wall in front of it. Here's how the common ways of sharing an image compare.",
+    "comparisonColumns": [
+      "Method",
+      "AI can fetch it",
+      "Needs login",
+      "Direct file",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Direct CDN link (ImageToURL)",
+          "Yes",
+          "No",
+          "Yes",
+          "Pasting into ChatGPT, Claude or an API image_url"
+        ]
+      },
+      {
+        "cells": [
+          "Local file path",
+          "No",
+          "n/a",
+          "On your disk only",
+          "Nothing - the model can't reach it"
+        ]
+      },
+      {
+        "cells": [
+          "Google Drive share link",
+          "Usually no",
+          "Often",
+          "No (viewer page)",
+          "Storing files for yourself, not feeding AI"
+        ]
+      },
+      {
+        "cells": [
+          "Dropbox share link",
+          "Usually no",
+          "Sometimes",
+          "No (preview page)",
+          "Sending files to people"
+        ]
+      },
+      {
+        "cells": [
+          "Imgur gallery page",
+          "Partial",
+          "No",
+          "No (gallery, not the file)",
+          "Browsing, not direct model input"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where an AI-ready image link helps",
+    "useCasesIntro": "Once your picture has a public direct link, you can hand it to any model or tool that accepts an image address:",
+    "useCases": [
+      {
+        "title": "Prompts and custom GPTs",
+        "body": "Paste the link into a ChatGPT message and ask it to describe the scene, read the text, or critique a design. Custom GPTs and assistants can take the same URL in their instructions."
+      },
+      {
+        "title": "API image_url inputs",
+        "body": "Most vision APIs accept an image_url that has to be publicly reachable. Drop the CDN link into that field and your script can analyze images without uploading raw bytes every call."
+      },
+      {
+        "title": "Automations and agents",
+        "body": "Zapier flows, no-code agents and webhooks often pass images around as URLs. A stable https link is easier to move through a pipeline than a file attachment."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why local files and screenshots don't work",
+        "body": "When you take a screenshot or save a photo, it sits on your own device at a path like /Users/you/Desktop/shot.png. That path means nothing to ChatGPT, because the model isn't on your computer - it runs on remote servers that have no view of your filesystem. The fix is to give the image a public web address. Upload the file here, and it gets an https link the model can request and download on its own. You can keep the original on your machine; the link is just a copy the AI is allowed to reach."
+      },
+      {
+        "heading": "Why Drive and Dropbox links usually fail",
+        "body": "A Google Drive or Dropbox 'share' link almost never points at the raw image. It opens a viewer page wrapped in HTML, and often asks whoever clicks it to sign in or request access first. When a model follows that link, it gets a login screen or a page of markup, not the picture, so the analysis fails or returns nonsense. A direct link is different: it ends in .jpg, .png or .webp and returns only the image bytes. That's what a vision model expects, and it's exactly what you copy here."
+      },
+      {
+        "heading": "Keeping the link live long enough",
+        "body": "A model can only read your image while the link is up, so the URL needs to stay reachable until the request finishes. Anonymous uploads here stay live for at least a couple of weeks and are cleared on a monthly cleanup, which is plenty for a one-off prompt. If you're wiring an image into an API call or an automation that runs for months, sign in for free and choose 'keep forever' so the link doesn't disappear mid-flow. Anonymous links are public to anyone who has them, so skip private images and keep your own backup."
+      }
+    ],
+    "faqTitle": "Image URL for ChatGPT FAQ",
     "faqs": [
       {
         "q": "Why does ChatGPT need a public image URL?",
-        "a": "ChatGPT's vision feature can only analyze images that are hosted on the public internet with a direct URL. It cannot access files stored locally on your computer."
+        "a": "ChatGPT's vision model runs on remote servers and fetches images over the web. It needs a publicly reachable https address it can download, so a link behind a login or a file on your own computer won't work."
+      },
+      {
+        "q": "How do I give ChatGPT an image URL?",
+        "a": "Upload your image in the box above, copy the direct link, then paste it into your ChatGPT prompt. The model fetches the file from that link and reads it. No account needed."
       },
       {
         "q": "Can I paste a local file path into ChatGPT?",
-        "a": "No. ChatGPT cannot read local file paths like C:/Users/photo.jpg. You need to upload the image to a hosting service first."
+        "a": "No. A path like C:\\Users\\photo.jpg only exists on your device, and the model can't reach your device. Upload the image to get a public link, then paste that instead."
       },
       {
-        "q": "How do I use an image URL in ChatGPT?",
-        "a": "Upload your image to ImageToURL, copy the generated link, then paste it directly into your ChatGPT conversation."
+        "q": "Why doesn't my Google Drive link work with ChatGPT?",
+        "a": "Drive 'share' links open an HTML viewer page and often require sign-in, so the model gets a web page or a login screen rather than the image file. Use a direct link that ends in the file extension."
       },
       {
-        "q": "Does the image URL need to be HTTPS?",
-        "a": "Yes. ChatGPT requires secure HTTPS URLs. All ImageToURL links are served over HTTPS by default."
+        "q": "Does the image URL have to be HTTPS?",
+        "a": "Yes, use a secure https link. Every link from this tool is served over https by default and points straight at your image file."
       },
       {
-        "q": "Will my image URL work with other AI chatbots too?",
-        "a": "Yes. Our image URLs work with any AI tool that accepts public image URLs, including Claude, Gemini, and Perplexity."
+        "q": "Will this link work with Claude, Gemini and API tools?",
+        "a": "Yes. Any model or tool that accepts a public image address can use the same link, including Claude, Gemini, Perplexity and vision APIs that take an image_url field."
+      },
+      {
+        "q": "What image formats and sizes can I use?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, which is what tells a model it's a direct image rather than a page."
+      },
+      {
+        "q": "Is my image compressed before the model sees it?",
+        "a": "No. You get back the exact file you uploaded at full resolution, with no re-compression. That keeps text in screenshots and detail in charts sharp enough for the model to read."
+      },
+      {
+        "q": "How long does the link stay live?",
+        "a": "Anonymous links last at least a couple of weeks and are cleared on a monthly cleanup. For a link wired into an API or automation, sign in for free and pick 'keep forever' so it doesn't expire."
+      },
+      {
+        "q": "Is it safe to put my image behind a public link for AI?",
+        "a": "The link is https and points only at your image, but anonymous uploads are public to anyone who has the URL. Don't upload private or sensitive images, and keep your own copy as a backup."
+      },
+      {
+        "q": "Can I use the URL in an API image_url field?",
+        "a": "Yes. Most image APIs expect a publicly accessible image_url. Paste the CDN link into that field and the service fetches the file the same way ChatGPT does."
+      },
+      {
+        "q": "Why did my image fail with 'could not access the image'?",
+        "a": "That usually means the link wasn't public, needed a login, pointed at a page instead of the file, or had already expired. A fresh direct link from this tool, kept live, fixes all four."
       }
     ],
-    "ctaTitle": "Get your image URL for ChatGPT",
-    "ctaBody": "Upload an image, copy the link, paste it into ChatGPT. Takes less than 10 seconds.",
-    "ctaButton": "Upload Now"
+    "howToSchema": true,
+    "ctaTitle": "Get an image URL ChatGPT can read",
+    "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a public https link in seconds. Paste it into a prompt or an image_url field. No sign-up, no compression.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Obtén URLs de imágenes para ChatGPT Vision — Gratis e instantáneo | ImageToURL",

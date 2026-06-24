@@ -85,17 +85,79 @@ export const content: LandingContentMap = {
         "a": "No. Your JPG is served exactly as uploaded. We don't re-compress it, add a watermark, or touch the quality."
       },
       {
-        "q": "Is the link permanent, and can I hotlink it?",
-        "a": "Yes to both. The URL stays live and is hotlinkable, so you can embed it directly in a site, forum, or email without it breaking."
+        "q": "Is the link hotlinkable, and how long does it last?",
+        "a": "It is hotlinkable, yes: embed the .jpg URL directly in a site, forum, or email and it loads as the image. On lifetime, anonymous links stay live for at least a couple of weeks and usually longer, then clear on a routine cleanup. Want one that never expires? Make a free account and pick 'keep forever' when you upload. Keep your own copy of the original either way."
       },
       {
         "q": "Do I need an account or an email?",
         "a": "Neither. JPG to URL works anonymously. Upload, copy the link, and go. No login, no email, no profile attached to your image."
+      },
+      {
+        "q": "What is a .jpg URL?",
+        "a": "It is the direct web address of a JPG file, like https://imagetourl.cloud/photo.jpg. Open it and you see only the photo, with no page around it. Drop it into an img tag and the picture loads inline. The .jpg ending is what tells apps to treat the address as an image rather than a download."
+      },
+      {
+        "q": "Will the JPG link embed in Discord and Reddit?",
+        "a": "Yes. The URL ends in the image itself, so Discord, Reddit and most forums unfurl it as the photo instead of showing a plain link or an attachment."
+      },
+      {
+        "q": "Can I use the JPG URL in an <img> tag or Markdown?",
+        "a": "Yes. It is a normal direct link, so it works in HTML <img src> tags, Markdown image syntax, CSS background-image and any website builder that takes an image URL."
+      },
+      {
+        "q": "Does it matter if my file is JPG or JPEG?",
+        "a": "No. JPG and JPEG are the same format with two spellings of the extension, a leftover from old three-letter filename limits. Either one uploads the same way and gets the same kind of direct link."
+      },
+      {
+        "q": "Should I use JPG or PNG for my link?",
+        "a": "Use JPG for photographs. It is lossy and makes a smaller file that loads fast. Use PNG when you need a transparent background or crisp text and lines, like a logo or a UI screenshot. Both get a direct link here, so pick the format that fits the image."
       }
     ],
     "ctaTitle": "Convert your JPG to URL now",
     "ctaBody": "Upload a JPG or JPEG and get a permanent, hotlinkable link in seconds. Free, anonymous, no watermark, and no compression.",
-    "ctaButton": "Upload JPG Now"
+    "ctaButton": "Upload JPG Now",
+    "specsTitle": "JPG to URL at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, JPEG (also PNG, WebP, GIF, SVG)" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct .jpg CDN link" }
+    ],
+    "comparisonTitle": "JPG hosts compared",
+    "comparisonIntro": "Most free hosts can turn a JPG into a link, but they don't all behave the same. Some make you register, some shrink the photo, some wrap it in a viewer page that won't hotlink. Here is how the popular ones stack up for a plain .jpg link.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Max file size",
+      "Direct hotlink",
+      "Keeps full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
+      { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
+      { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
+      { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is a JPG URL?",
+        "body": "A JPG URL is the direct web address of a .jpg file, like https://imagetourl.cloud/photo.jpg. Open it in a browser and you see only the photo, with no page around it. Put it in an img tag and the picture loads. You get one by uploading the JPG to a host that returns a direct link, which is exactly what happens at the top of this page. The .jpg ending is the signal that lets Discord, Reddit and email clients treat the address as an image and show it inline rather than offering a download."
+      },
+      {
+        "heading": "JPG vs PNG for a link",
+        "body": "JPG and PNG solve different jobs. JPG is lossy and built for photographs, so a camera shot or a photo screenshot lands in a small file that loads fast. PNG is lossless and keeps sharp edges and transparency, which suits logos, icons and screenshots of text. If your image is a photo, a JPG link is usually the lighter choice. If you need a transparent background or crisp lines, convert to PNG first. Either way the link you get here behaves the same; only the file behind it differs."
+      },
+      {
+        "heading": "Does converting a JPG to a URL lose quality?",
+        "body": "No. There is a common worry that uploading re-compresses the photo. We don't. The file you drop in is the exact file we serve back at its URL, byte for byte, with no second JPG pass and no watermark. JPG is already a lossy format, so the smart move is to avoid re-saving it again and again, because each save throws away a little more detail. By hosting the original untouched, the link shows your photo at the quality you uploaded, not a degraded copy."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertir imagen JPG a enlace URL — Online y gratis | ImageToURL",

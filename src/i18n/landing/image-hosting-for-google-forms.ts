@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "GOOGLE FORMS",
     "h1Pre": "Image URLs for Google",
     "h1Highlight": "Forms.",
-    "intro": "Add images to your Google Forms surveys, quizzes, and questionnaires using hosted URLs. Upload once, paste the link, and your visual content is live.",
+    "intro": "Google Forms lets you add an image to a question, to individual answer options, or to the form header - but the URL option wants a real image link, not a file sitting on your desktop. Upload your picture here, copy the direct link it hands back, and paste that into the Forms image dialog. It works with JPG, PNG, WebP, GIF and SVG up to 10 MB, there's no watermark, and nothing gets recompressed on the way through.",
     "howTitle": "How to Add Images",
     "steps": [
       {
@@ -71,11 +71,88 @@ export const content: LandingContentMap = {
       {
         "q": "Can I use these images in Google Forms quizzes?",
         "a": "Absolutely. Image-based questions are common in quizzes for visual identification, diagram labeling, and picture-based multiple choice."
+      },
+      {
+        "q": "What image formats and sizes does it accept?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. That covers screenshots, logos, product photos and diagrams. The link you get back ends in the real extension, which is exactly what the Forms 'By URL' tab needs."
+      },
+      {
+        "q": "Is the image recompressed or watermarked?",
+        "a": "No. You get the same file back at full quality, with no watermark and no resizing. What you upload is what respondents see in the form."
+      },
+      {
+        "q": "How is this different from uploading straight to the form?",
+        "a": "Uploading from your device works fine for a one-off image, but it lives in your own Drive and you re-upload it for every new form. A hosted link is one URL you can paste into any form, any answer option, and even reuse across forms - handy when the same logo or diagram shows up in several surveys."
+      },
+      {
+        "q": "Do I need to sign in to get a link?",
+        "a": "No account is needed to upload and get a link. Anonymous links stay live for at least a couple of weeks. If your form runs for months, create a free account and choose 'keep forever' so the image never drops out."
+      },
+      {
+        "q": "Are the uploaded images private?",
+        "a": "Anonymous uploads are public to anyone with the link, which is fine for survey graphics but not for anything sensitive. Don't host private documents this way, and keep your own copy of each file as a backup."
       }
     ],
     "ctaTitle": "Make your Google Forms visual",
     "ctaBody": "Upload images, get permanent URLs, and add them to any Google Form in seconds.",
-    "ctaButton": "Upload Now"
+    "ctaButton": "Upload Now",
+    "specsTitle": "Images for Google Forms at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Works in", "value": "Questions, answer options, headers" }
+    ],
+    "useCasesTitle": "Where a hosted link helps in Forms",
+    "useCasesIntro": "Once your picture has a direct URL, it slots into the parts of a form that a plain file upload can't always reach:",
+    "useCases": [
+      {
+        "title": "Picture-based answer options",
+        "body": "Add a small image to each multiple-choice or checkbox option so people pick by sight - useful for product choices, logos or 'which one looks right' questions."
+      },
+      {
+        "title": "Branded headers",
+        "body": "Drop your logo or a banner into the form header by URL so every survey, RSVP or feedback form carries the same look without re-uploading the file each time."
+      },
+      {
+        "title": "Reference screenshots",
+        "body": "Show a screenshot or diagram inside a question so respondents know exactly what you're asking about before they answer."
+      }
+    ],
+    "comparisonTitle": "Ways to add an image to a Google Form",
+    "comparisonIntro": "Forms gives you a few ways to get a picture into a question. They differ on whether you need to sign in, whether the image works inside answer options, and whether you can reuse the same one across forms. Here's how they line up.",
+    "comparisonColumns": [
+      "Method",
+      "Sign-in",
+      "In answer options",
+      "Reuse across forms",
+      "Notes"
+    ],
+    "comparisonRows": [
+      { "cells": ["Direct hosted URL", "No", "Yes (paste link)", "Yes", "One link works everywhere"] },
+      { "cells": ["Upload from device", "Google account", "Yes", "No (re-upload each form)", "Stored in your Drive"] },
+      { "cells": ["Google Drive link", "Google account", "Often no", "Yes", "Usually opens a preview page, not the file"] },
+      { "cells": ["Image from the web", "No", "Yes", "Depends", "Breaks if the source goes down"] },
+      { "cells": ["Imgur page link", "Account (since 2023)", "No", "Yes", "Points to a gallery page, not the image"] }
+    ],
+    "sections": [
+      {
+        "heading": "How Google Forms handles images",
+        "body": "Forms can place an image in three spots: at the top of a question, on a single answer option, or in the form header. For the question and option spots you'll see an image picker with tabs for Upload, By URL, Search and Drive. The 'By URL' tab is the one that needs a direct link ending in .jpg, .png or .webp - the kind this tool produces. Header images are uploaded directly. So the trick is simple: host the picture once, grab the link, and paste it wherever Forms asks for a URL."
+      },
+      {
+        "heading": "Why a Google Drive link usually fails",
+        "body": "It feels natural to drop your image in Drive and copy its share link, but that link points at a Drive viewer page, not the raw image file. Forms (and Sheets, and most other tools) can't render a viewer page as a picture, so you get a broken icon or an error. A direct image URL skips the viewer entirely and serves the file itself, which is why it just works. If you've fought with Drive links before, this is the fix."
+      },
+      {
+        "heading": "Will the form images stay visible?",
+        "body": "Anonymous links here last at least a couple of weeks and usually longer, which is plenty for a quick poll or signup. For a form that stays open for months, that's worth thinking about: sign in with a free account and pick 'keep forever' so the image can't disappear mid-campaign. Every link is served over HTTPS with no redirect pages, and there are no ads on the image itself."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "URLs de imágenes para Google Forms | ImageToURL",

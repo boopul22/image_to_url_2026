@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "SHOPIFY",
     "h1Pre": "Image Hosting for Shopify",
     "h1Highlight": "stores.",
-    "intro": "Host custom section images, blog visuals, and marketing assets for your Shopify store. Free CDN-backed URLs that work everywhere in your Shopify admin.",
+    "intro": "Shopify already has its own media library and CDN for product photos, and you should keep using it for those. Where it gets awkward is the rest: an image inside a rich-text product description, a graphic in a blog post, a banner in a custom theme section, or a picture in an email blast. Drop the file here and you get a plain https link that ends in the real extension, ready to paste into description HTML, Liquid, or your email tool. It's free, there's no account to make, and the image isn't squeezed or resized on the way through.",
     "howTitle": "How to Use in Shopify",
     "steps": [
       {
@@ -46,36 +46,149 @@ export const content: LandingContentMap = {
         "body": "Enrich your Shopify blog with high-quality images. External hosting means no file manager limits and faster content creation for your editorial calendar."
       },
       {
-        "title": "Email Campaign Assets",
-        "body": "Use hosted image URLs in Shopify Email, Klaviyo, or Mailchimp campaigns. Permanent URLs mean your email images never break, even months later."
+        "title": "Email campaign assets",
+        "body": "Shopify Email, Klaviyo and Mailchimp all want a real image URL in the editor. Paste one in and the picture renders in the inbox. Sign in and pick 'keep forever' so the link is still live when the campaign goes out months later."
+      },
+      {
+        "title": "Quick links for support and ads",
+        "body": "Need to show a customer a sizing chart in a chat reply, or hand an image to a Meta or Google ad? Upload it, copy the link, and paste it. No file manager digging, no app to install."
+      }
+    ],
+    "specsTitle": "Shopify image hosting at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct CDN link" }
+    ],
+    "comparisonTitle": "Shopify media library vs an external image link",
+    "comparisonIntro": "These two are not rivals. Shopify's media library is the right home for product images and variants, since they tie into the catalog. An external link is just easier for the places Shopify's library is fiddly: description HTML, blog bodies, theme code and email. Here's where each one fits.",
+    "comparisonColumns": [
+      "Task",
+      "Shopify media library",
+      "External hosted link"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Product photos and variants",
+          "Best fit (ties to catalog)",
+          "Not the right tool"
+        ]
+      },
+      {
+        "cells": [
+          "Image inside a product description",
+          "Workable but clunky to grab the URL",
+          "Paste a plain link into the HTML"
+        ]
+      },
+      {
+        "cells": [
+          "Blog and article images",
+          "Supported",
+          "Quick, no file manager limits"
+        ]
+      },
+      {
+        "cells": [
+          "Custom Liquid or theme section",
+          "Needs a settings_data asset",
+          "Hardcode the link in the section"
+        ]
+      },
+      {
+        "cells": [
+          "Email and external ads",
+          "Not exposed",
+          "Direct https link works anywhere"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a hosted image link helps a Shopify store",
+    "useCasesIntro": "Once a picture has its own direct link, it slots into the corners of Shopify that the media library doesn't reach cleanly:",
+    "useCases": [
+      {
+        "title": "Product description HTML",
+        "body": "Switch the description editor to HTML and drop an <img src> with your link. Handy for size guides, ingredient panels and comparison graphics that don't belong in the main photo gallery."
+      },
+      {
+        "title": "Blog posts and pages",
+        "body": "Paste the link into a blog article or a custom page. The image loads inline, and you skip the round trip through the file manager for every screenshot or diagram."
+      },
+      {
+        "title": "Theme sections and email",
+        "body": "Hardcode a banner into a custom Liquid section, or use the link in Shopify Email and Klaviyo. The same URL works in both, so you reuse one asset across the storefront and the inbox."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Do you even need external hosting for Shopify?",
+        "body": "For product images, no. Upload those to the product itself so they live in your catalog and your theme can resize them. External hosting earns its place in the spots the media library can't reach without friction: an image dropped into rich-text description HTML, a picture in a blog article, a banner hardcoded into a custom Liquid section, or a graphic in an email campaign. In those places you just want a plain link you can paste, and that's all this does. Think of it as a complement to Shopify's own storage, not a replacement for the product uploader."
+      },
+      {
+        "heading": "What you get back, and what stays untouched",
+        "body": "Upload a JPG, PNG, WebP, GIF or SVG up to 10 MB and you get a direct https link that ends in the real file extension. Nothing is recompressed, resized or watermarked, so a crisp size chart stays crisp. That matters because Shopify's storefront CDN already handles resizing for product images through its own image tags. For the loose pieces, description graphics, blog visuals, email art, you usually want the file shown exactly as you made it, which is what a direct link does."
+      },
+      {
+        "heading": "How long do the links stay live?",
+        "body": "Be honest with yourself about this before you paste a link into a live store. Anonymous uploads stick around for at least a couple of weeks and are cleared on a regular storage cleanup, which is fine for a one-off support reply but risky for a product page meant to run for a year. If the image is part of your store long term, make a free account and choose 'keep forever' when you upload. Either way, keep your own copy of the file, and remember anonymous links are public to anyone who has them."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqs": [
       {
         "q": "Can I use external image URLs in Shopify?",
-        "a": "Yes. Shopify allows external image URLs in custom HTML sections, blog posts, custom pages, and email templates. You can paste any hosted image URL directly into the Shopify editor."
+        "a": "Yes. Shopify accepts external image URLs in rich-text product descriptions (via the HTML view), blog posts, custom pages, custom HTML and Liquid sections, and email templates. Paste the hosted link into the editor and the image loads."
       },
       {
-        "q": "Will externally hosted images affect my Shopify store speed?",
-        "a": "No. CDN-hosted images load from edge servers closest to your customer, often faster than images served from Shopify's own CDN for custom sections and blog content."
+        "q": "Should I host product photos here instead of in Shopify?",
+        "a": "No. Keep product photos in Shopify so they tie into the catalog and the theme can resize them automatically. This is for the other images: description graphics, blog visuals, theme banners and email art, where a plain link is just easier to paste."
+      },
+      {
+        "q": "How do I add an image to a product description?",
+        "a": "In the description editor, switch to the HTML view (the <> icon), then add an image tag with your link, like <img src=\"https://imagetourl.cloud/abc123.jpg\">. Save and the picture shows up in the description."
       },
       {
         "q": "Can I use these images in Shopify email campaigns?",
-        "a": "Absolutely. Externally hosted image URLs work perfectly in Shopify Email, Klaviyo, Mailchimp, and any other email marketing tool you connect to your store."
+        "a": "Yes. Shopify Email, Klaviyo and Mailchimp all take a real image URL in their editors, so a hosted link drops straight in. If the campaign goes out weeks later, sign in and choose keep forever so the link is still live."
       },
       {
-        "q": "Are the image URLs permanent?",
-        "a": "Yes. Every image uploaded to ImageToURL gets a permanent URL that never expires. Your Shopify store content will always display correctly."
+        "q": "Will an external image slow down my store?",
+        "a": "Not in any way customers will notice. The file is served over HTTPS from a global CDN. Product photos already go through Shopify's own image pipeline, so this only affects the handful of custom images you paste in yourself."
       },
       {
-        "q": "Do I need to install a Shopify app for this?",
-        "a": "No app installation needed. Simply upload your image to ImageToURL, copy the URL, and paste it wherever you need it in your Shopify admin. It works with any Shopify theme."
+        "q": "Are the links permanent?",
+        "a": "Anonymous uploads last at least a couple of weeks and are removed on a regular storage cleanup, which is fine for a quick support reply. For anything that lives in your store long term, make a free account and pick keep forever when you upload."
+      },
+      {
+        "q": "What image formats and sizes work?",
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it embeds the same way the original file would in an HTML img tag or Liquid."
+      },
+      {
+        "q": "Do I need a Shopify app for this?",
+        "a": "No. There's no app to install and nothing to add to your theme's app blocks. Upload here, copy the link, paste it where you need it. It works with any Shopify theme."
+      },
+      {
+        "q": "Can I put a hosted image in a custom Liquid or theme section?",
+        "a": "Yes. Hardcode the link in your section markup or pass it through a setting. Since it's a direct URL ending in the file extension, Liquid renders it like any other image source."
+      },
+      {
+        "q": "Is it safe to use for store images?",
+        "a": "Links are served over HTTPS with no redirect pages or trackers. The one thing to know: anonymous uploads are public to anyone who has the link, so don't post anything private and keep your own copy of the file as a backup."
+      },
+      {
+        "q": "Does it compress or watermark my image?",
+        "a": "No. You get back the same file you uploaded, at full quality, with no watermark. A sizing chart or ingredient panel stays sharp and readable."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Power up your Shopify store",
-    "ctaBody": "Upload images, get permanent URLs, and use them anywhere in your Shopify admin. Free, fast, no app required.",
-    "ctaButton": "Upload Now"
+    "ctaBody": "Upload an image, copy the direct link, and paste it into a description, blog post, theme section or email. Free, fast, no app required.",
+    "ctaButton": "Upload Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratuito para tiendas Shopify | ImageToURL",

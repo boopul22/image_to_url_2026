@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Pick a Photo",
-        "body": "Tap the upload area on your phone to grab a shot from your camera roll, or drag a file in from your computer. JPG, PNG, HEIC, and WebP all work, up to 10MB."
+        "body": "Tap the upload area on your phone to grab a shot from your camera roll, or drag a file in from your computer. JPG, PNG, WebP, GIF, and SVG all work, up to 10MB. If your iPhone saves photos as HEIC, export or save one as JPG first and upload that."
       },
       {
         "title": "Get the Link",
@@ -83,7 +83,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What photo formats and sizes can I upload?",
-        "a": "JPG, PNG, HEIC, and WebP are all supported, with files up to 10MB each."
+        "a": "JPG, PNG, WebP, GIF, and SVG are supported, up to 10MB each. iPhones often save shots as HEIC, which most websites can't display - save or export the photo as JPG first, then upload that."
       },
       {
         "q": "Does the link embed as the actual photo?",
@@ -92,11 +92,69 @@ export const content: LandingContentMap = {
       {
         "q": "Is it really free with no signup?",
         "a": "It is free and anonymous. There is no registration, no email, and no watermark for sharing your photos."
+      },
+      {
+        "q": "How long does the photo link stay live?",
+        "a": "Anonymous uploads stay up for at least a couple of weeks and get cleared on a monthly cleanup. If you want a photo link that never expires, make a free account and choose \"keep forever\" when you upload."
+      },
+      {
+        "q": "Can I upload an iPhone HEIC photo?",
+        "a": "Most browsers and sites can't display HEIC, so save or export the shot as JPG first - on iPhone, sharing or saving a copy usually does this - then upload the JPG and copy the link."
+      },
+      {
+        "q": "Are my uploaded photos private?",
+        "a": "No. Anonymous uploads are public to anyone who has the link, so don't share private photos this way, and keep your own copy as a backup."
+      },
+      {
+        "q": "Can I use the photo URL on a website or in an <img> tag?",
+        "a": "Yes. It is a normal direct image link, so it works in HTML <img src> tags, Markdown, CSS background-image, marketplace listings, and any site builder that accepts an image URL."
       }
     ],
     "ctaTitle": "Turn your photo to URL now",
     "ctaBody": "Upload a photo from your phone or computer and get a direct, shareable link in seconds. No signup, no watermark, no catch.",
-    "ctaButton": "Upload Photo Now"
+    "ctaButton": "Upload Photo Now",
+    "specsTitle": "Photo to URL at a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB" },
+      { "label": "Output", "value": "Direct CDN link" }
+    ],
+    "comparisonTitle": "Where to host a photo link",
+    "comparisonIntro": "Most free hosts can turn a photo into a link, but the details matter when the photo comes off a phone: can you upload from the browser, how big a file goes through, and does the picture stay full quality. Here's how the common options compare.",
+    "comparisonColumns": [
+      "Host",
+      "No sign-up",
+      "Upload from phone browser",
+      "Max file size",
+      "Full quality",
+      "Link lifetime"
+    ],
+    "comparisonRows": [
+      { "cells": ["ImageToURL", "Yes", "Yes", "10 MB", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["Imgur", "No (since 2023)", "App or account", "20 MB", "Re-encodes large photos", "Tied to your account"] },
+      { "cells": ["ImgBB", "Yes", "Yes", "32 MB", "Yes", "Optional expiry"] },
+      { "cells": ["Catbox", "Yes", "Yes", "200 MB", "Yes", "Permanent"] },
+      { "cells": ["Postimages", "Yes", "Yes", "24 MB", "No (resized to 1280px)", "Permanent"] }
+    ],
+    "sections": [
+      {
+        "heading": "What is a photo URL?",
+        "body": "A photo URL is the direct web address of your picture file, something like https://imagetourl.cloud/abc123.jpg. Open it in a browser and you see only the photo. Paste it into a chat, a forum post, a spreadsheet cell, or an HTML page and the picture loads in place. It is different from a link to a gallery or an album page, which makes people click through before they see anything. A photo URL skips that step - the address is the image, so any app that reads a link can show the shot directly."
+      },
+      {
+        "heading": "Sharing a photo by link vs by attachment",
+        "body": "Sending a photo as an attachment means the other person downloads a copy, and messaging apps often shrink it hard on the way to save bandwidth. A link sidesteps both problems. You upload once, then paste the URL into as many chats, posts, or docs as you want, and everyone loads the same full-size file. It is lighter on group chats, it does not clog inboxes, and the picture shows inline instead of as a file to open. The catch is that anyone with the link can view it, so use it for things you are fine sharing publicly."
+      },
+      {
+        "heading": "Will my photo lose quality?",
+        "body": "No. We serve the exact file you upload, with no compression, resizing, or watermark, so the photo looks the way it did on your device. That is the main reason to use a link instead of dropping the image straight into a chat app - WhatsApp, Messenger, and similar tools re-encode photos to small versions, softening detail and washing out color. The one thing to watch is format: iPhones often save shots as HEIC, which most sites can't display, so export a JPG copy before uploading. JPG, PNG, WebP, GIF, and SVG up to 10MB all go through untouched."
+      }
+    ],
+    "howToSchema": true,
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Foto a URL — Convierte cualquier foto en un enlace compartible | ImageToURL",

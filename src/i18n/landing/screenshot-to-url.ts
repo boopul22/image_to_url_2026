@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Screenshot to URL — Share Screenshots as Links | ImageToURL",
+    "metaTitle": "Screenshot to URL - share a screenshot as a link, free | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-to-url", "label": "Image to URL" },
@@ -13,69 +13,213 @@ export const content: LandingContentMap = {
       { "pageKey": "image-to-link", "label": "Image to link" },
       { "pageKey": "image-url-generator", "label": "Image URL generator" }
     ],
-    "metaDescription": "Turn screenshots into shareable URLs in seconds. Paste from clipboard, drag & drop, or upload. Perfect for bug reports, tutorials, and quick sharing.",
-    "schemaName": "Screenshot to URL Converter",
-    "schemaDescription": "A web-based tool that instantly converts screenshots from your clipboard or files into permanent, shareable URLs.",
-    "badge": "SCREENSHOT SHARING",
-    "h1Pre": "Screenshot to URL",
-    "h1Highlight": "— paste and share.",
-    "intro": "Turn screenshots into shareable URLs in seconds. Paste from clipboard, drag & drop, or upload — perfect for bug reports, tutorials, and quick sharing.",
-    "howTitle": "How It Works",
+    "metaDescription": "Turn a screenshot into a shareable link for free. Paste a copied capture or pick the saved PNG and get a direct URL for Slack, Jira, GitHub, Discord and email. No sign-up, no compression, 10MB.",
+    "schemaName": "Screenshot to URL",
+    "schemaDescription": "A free tool that turns a screenshot into a direct, full-quality link you can paste into a chat, ticket or issue. No account, no watermark, fast global CDN.",
+    "badge": "SCREENSHOT TO URL",
+    "h1Pre": "Screenshot to URL:",
+    "h1Highlight": "paste it, share it",
+    "intro": "A screenshot is just a PNG (or sometimes a JPG), so turning one into a link works the same way any image does. Paste a capture straight from your clipboard or pick the saved file, and you get a direct https link in about two seconds. Nothing is compressed or resized, so the text in your capture stays crisp and readable. Copy the link into a Slack message, a Jira ticket or a GitHub issue and it shows up inline instead of as a file attachment.",
+    "specsTitle": "Screenshot to URL at a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Formats",
+        "value": "PNG, JPG, WebP, GIF, SVG"
+      },
+      {
+        "label": "Max size",
+        "value": "10 MB"
+      },
+      {
+        "label": "Output",
+        "value": "Direct CDN link"
+      }
+    ],
+    "howTitle": "How to turn a screenshot into a link",
     "steps": [
       {
-        "title": "Capture Your Screen",
-        "body": "Take a screenshot using your system shortcut (Cmd+Shift+4 on Mac, Win+Shift+S on Windows, or any tool you prefer)."
+        "title": "Capture your screen",
+        "body": "Grab the shot with your usual shortcut: Cmd+Shift+4 on a Mac, Win+Shift+S on Windows, or whatever capture tool you like. Most of these copy a PNG to your clipboard and can also save a file."
       },
       {
-        "title": "Upload or Paste",
-        "body": "Drag your screenshot file into our uploader, or paste directly from your clipboard. Both methods work instantly."
+        "title": "Paste or pick the file",
+        "body": "Paste the copied screenshot straight into the box above, or drag the saved PNG onto it. Files up to 10MB work, which covers any full-screen capture from a 4K display."
       },
       {
-        "title": "Share the Link",
-        "body": "Copy the generated URL and paste it into Slack, email, GitHub issues, Jira tickets, or any conversation."
+        "title": "Copy the link and share",
+        "body": "A direct link pops out right away, ending in the real file extension. Drop it into Slack, a support ticket, a forum post or an email and the image renders inline."
       }
     ],
-    "whyTitle": "Why Screenshot to URL?",
+    "whyTitle": "Why share a screenshot as a link",
     "whyItems": [
       {
-        "title": "Clipboard Paste Support",
-        "body": "Paste screenshots directly from your clipboard. No need to save the file first — just Ctrl+V and upload."
+        "title": "No attachment to wrangle",
+        "body": "A link beats a file attachment in a lot of places. Forums, bug trackers and older ticketing tools often choke on uploads or strip them out. A URL just works, and anyone can open it without downloading anything."
       },
       {
-        "title": "Instant Bug Reports",
-        "body": "Capture an issue, upload the screenshot, share the URL in your bug tracker. The fastest bug reporting workflow."
+        "title": "Text stays sharp",
+        "body": "Screenshots are usually PNG because it's lossless, so error messages and code stay readable. This tool doesn't re-compress your file, so the link shows exactly the same pixels you captured - no JPEG mush around small text."
       },
       {
-        "title": "Clean Direct Links",
-        "body": "Get clean, direct image URLs — not gallery pages with ads. Perfect for embedding in documentation and tickets."
+        "title": "It embeds where you paste it",
+        "body": "Because the URL points right at the image, Discord, Slack, Reddit and most issue trackers show it inline instead of as a download button. Reviewers see the bug without an extra click."
+      },
+      {
+        "title": "No account, no email",
+        "body": "There's nothing to sign up for. Paste, copy, done. Imgur dropped anonymous uploads in 2023, so a lot of people now reach for a simpler box like this one."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "Sharing a screenshot link vs sending the file",
+    "comparisonIntro": "You can hand someone a screenshot a few different ways. Here's how a direct link compares to attaching the raw file or using a built-in OS share menu, based on what actually happens in a chat or a ticket.",
+    "comparisonColumns": [
+      "Method",
+      "Keeps text sharp",
+      "Needs an app",
+      "Embeds inline",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "Direct URL (this tool)",
+          "Yes (no re-compression)",
+          "No",
+          "Yes, almost everywhere",
+          "Bug reports, tickets, forums"
+        ]
+      },
+      {
+        "cells": [
+          "File attachment",
+          "Yes",
+          "Sometimes (size limits)",
+          "Chat only, not all trackers",
+          "One-off email or DM"
+        ]
+      },
+      {
+        "cells": [
+          "OS screenshot share menu",
+          "Yes",
+          "Yes (the share target)",
+          "Depends on target app",
+          "Quick send to one contact"
+        ]
+      },
+      {
+        "cells": [
+          "Paste into a doc",
+          "Usually downscaled",
+          "Yes (the editor)",
+          "Inside that doc only",
+          "Private notes"
+        ]
+      },
+      {
+        "cells": [
+          "Cloud drive link",
+          "Yes",
+          "Often",
+          "No (opens a viewer page)",
+          "Large batches of files"
+        ]
+      }
+    ],
+    "useCasesTitle": "Where a screenshot link comes in handy",
+    "useCasesIntro": "Once your capture has a direct link, it slots into the places where people actually report and discuss things:",
+    "useCases": [
+      {
+        "title": "Bug reports and tickets",
+        "body": "Paste the link into a Jira ticket, a GitHub issue or a support thread and the error shows inline. No 'see attached' that nobody can open."
+      },
+      {
+        "title": "Slack, Discord and forums",
+        "body": "Share a design, a chat, a game score or a console error in a channel or thread. The image appears in the message instead of as a download."
+      },
+      {
+        "title": "Docs and guides",
+        "body": "Drop the URL into a README, a Notion page or a how-to and the screenshot loads inline, so your steps are easy to follow."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why a link instead of the raw screenshot file?",
+        "body": "Sending the file works fine in a quick DM, but it falls apart in a lot of common spots. Bug trackers, forums and email threads often block attachments, cap the size, or bury them behind a download. A direct link sidesteps all of that. The recipient clicks once and sees the image, and the same URL works in a chat, a ticket and a doc without re-uploading. It also keeps a long thread readable: you paste a short link instead of stuffing a multi-megabyte PNG into every reply."
+      },
+      {
+        "heading": "PNG vs JPG for screenshots",
+        "body": "Most screen-capture tools save PNG, and that's the right call for screenshots. PNG is lossless, so straight edges, small UI text and code stay crisp with no blocky artifacts. JPG is built for photos and tends to smear the fine detail that makes a screenshot useful. This tool keeps whatever you upload exactly as-is, with no extra compression, so a PNG capture stays pixel-perfect. If your shot happens to be a JPG, that's fine too - it just hosts the file you give it and hands back a link that ends in the matching extension."
+      },
+      {
+        "heading": "Are screenshot links safe to share?",
+        "body": "Every link is served over HTTPS and points only at your image, with no redirect pages or trackers attached. One thing to keep in mind: anonymous uploads are public to anyone who has the link, so think twice before posting a capture that shows passwords, private messages or personal data. Crop those out first. Free links are cleared on a regular storage cleanup, so keep your own copy of anything you want long-term, or sign in and choose 'keep forever' so the URL doesn't disappear."
+      }
+    ],
+    "faqTitle": "Screenshot to URL FAQ",
     "faqs": [
       {
-        "q": "Can I paste a screenshot from my clipboard?",
-        "a": "Yes! After taking a screenshot, you can paste it directly into our uploader using Ctrl+V (or Cmd+V on Mac). No need to save the file first."
+        "q": "How do I turn a screenshot into a URL?",
+        "a": "Take your screenshot, then either paste it from the clipboard into the box above or drag the saved file in. You get a direct link ending in the real extension within a couple of seconds. Copy it and paste it wherever you need the image to appear."
       },
       {
-        "q": "What screenshot formats are supported?",
-        "a": "We support all common screenshot formats: PNG, JPG, WebP, and BMP. Whatever your OS or tool produces, we handle it."
+        "q": "Can I paste a screenshot straight from my clipboard?",
+        "a": "Yes. After you capture (Cmd+Shift+4 on Mac, Win+Shift+S on Windows), the image usually sits on your clipboard. Click the upload box and press Ctrl+V (Cmd+V on Mac) to drop it in without saving a file first. You can also pick the saved PNG if you prefer."
       },
       {
-        "q": "How fast is the upload?",
-        "a": "Screenshots typically upload in under 2 seconds. Your permanent URL is generated instantly upon upload completion."
+        "q": "What screenshot formats work?",
+        "a": "PNG, JPG, WebP, GIF and SVG, up to 10MB each. Screen captures are almost always PNG, which is exactly what you want for sharp text, and they upload the same as any other image."
       },
       {
-        "q": "Can I share screenshots in Slack and Discord?",
-        "a": "Yes. Copy your screenshot URL and paste it into any chat platform. Slack, Discord, Teams, and most chat apps will automatically show an image preview."
+        "q": "Will it compress my screenshot or blur the text?",
+        "a": "No. You get back the same file you put in, at full resolution, with no re-compression and no watermark. That matters for screenshots because the text and lines stay crisp instead of getting fuzzy."
       },
       {
-        "q": "Are screenshot URLs permanent?",
-        "a": "Yes. Every screenshot you upload gets a permanent URL that never expires. Share it in documentation today, and it will still work years from now."
+        "q": "Will the link show up inline in Slack, Discord and GitHub?",
+        "a": "Yes. The URL points right at the image file, so Slack, Discord, Teams, Reddit and most issue trackers render it as a picture in the message instead of a download link or a gallery page."
+      },
+      {
+        "q": "Can I paste the link into a Jira ticket or a GitHub issue?",
+        "a": "Yes. Paste the URL into the ticket or issue body and the screenshot embeds inline, so whoever picks up the bug sees it without opening an attachment. It also works in a support ticket or a forum post."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "10MB per image, which covers virtually any screen capture, even a full 4K or multi-monitor shot. If a file somehow runs larger, save it as PNG or crop it down and try again."
+      },
+      {
+        "q": "Do I need an account?",
+        "a": "No. There's no sign-up, no email and no app to install. Upload or paste, copy the link, and you're done."
+      },
+      {
+        "q": "Do the links expire?",
+        "a": "Anonymous links stay live until our regular storage cleanup, so you get at least a couple of weeks and often longer. Want one that sticks around for good? Create a free account and pick 'keep forever' when you upload. Either way, keep your own copy as a backup."
+      },
+      {
+        "q": "Can I use the link in an <img> tag or Markdown?",
+        "a": "Yes. It's a normal direct image URL, so it works in HTML <img src> tags, Markdown image syntax, CSS background-image and any site builder or docs tool that accepts an image link."
+      },
+      {
+        "q": "Is it safe to share a screenshot of something private?",
+        "a": "Treat anonymous uploads as public, since anyone with the link can open the image. Crop out passwords, tokens, private chats or personal details before you upload, or sign in to manage your own files."
+      },
+      {
+        "q": "How fast is it?",
+        "a": "A typical screenshot uploads in under two seconds, and the link is ready the moment the upload finishes. There's nothing to wait for and no processing queue."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Share your screenshot as a link",
-    "ctaBody": "Upload or paste a screenshot and get a permanent URL in seconds with no signup or ads.",
-    "ctaButton": "Upload Screenshot Now"
+    "ctaBody": "Paste a copied capture or upload the saved PNG and get a direct link in seconds. No sign-up, no compression, no watermark.",
+    "ctaButton": "Upload Screenshot Now",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Captura de pantalla a URL — Comparte capturas como enlaces | ImageToURL",

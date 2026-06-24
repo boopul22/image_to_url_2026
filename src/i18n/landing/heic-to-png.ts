@@ -18,7 +18,30 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "HEIC to PNG Converter,",
     "h1Highlight": "100% in Your Browser",
-    "intro": "Drop your iPhone HEIC photos here and get PNG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere.",
+    "intro": "Drop your iPhone HEIC photos here and get PNG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere. There's no signup, no watermark, and no daily cap. When a PNG is ready you can save it straight to your device, or click 'Get URL' to host the result and get a shareable https link (files up to 10 MB).",
+    "specsTitle": "At a glance",
+    "specs": [
+      {
+        "label": "Price",
+        "value": "Free"
+      },
+      {
+        "label": "Sign-up",
+        "value": "Not required"
+      },
+      {
+        "label": "Converts",
+        "value": "HEIC / HEIF to PNG"
+      },
+      {
+        "label": "Privacy",
+        "value": "Runs in your browser"
+      },
+      {
+        "label": "Output",
+        "value": "PNG download + optional shareable link"
+      }
+    ],
     "howTitle": "How to convert HEIC to PNG",
     "steps": [
       {
@@ -53,6 +76,83 @@ export const content: LandingContentMap = {
         "body": "Other converters upload your photos to their servers. This one doesn't. Your files stay on your device the entire time."
       }
     ],
+    "comparisonTitle": "HEIC, PNG and JPG compared",
+    "comparisonIntro": "Picking a format is a trade between file size and what you can do with the picture later. Here's how the three main photo formats line up, plus WebP for context.",
+    "comparisonColumns": [
+      "Format",
+      "Compression",
+      "Transparency",
+      "Typical size",
+      "Best for"
+    ],
+    "comparisonRows": [
+      {
+        "cells": [
+          "HEIC",
+          "Lossy, very efficient",
+          "Yes",
+          "Smallest",
+          "Saving space on Apple devices"
+        ]
+      },
+      {
+        "cells": [
+          "PNG",
+          "Lossless",
+          "Yes",
+          "Largest",
+          "Editing, graphics, screenshots"
+        ]
+      },
+      {
+        "cells": [
+          "JPG",
+          "Lossy",
+          "No",
+          "Small",
+          "Photos for the web and sharing"
+        ]
+      },
+      {
+        "cells": [
+          "WebP",
+          "Lossy or lossless",
+          "Yes",
+          "Small to medium",
+          "Modern web pages"
+        ]
+      }
+    ],
+    "useCasesTitle": "When PNG is the right pick",
+    "useCasesIntro": "PNG is the safe choice any time you plan to keep working on the image or you need exact, crisp pixels:",
+    "useCases": [
+      {
+        "title": "Editing without losing quality",
+        "body": "Open the PNG in Photoshop, GIMP or Figma, make changes, and save again. Because PNG is lossless, those repeated saves don't soften the photo the way re-saving a JPG would."
+      },
+      {
+        "title": "Logos, screenshots and graphics",
+        "body": "Sharp edges, flat color and text stay clean in PNG. Screenshots from your iPhone, app mockups and logos look crisp instead of blocky around the lines."
+      },
+      {
+        "title": "Apps that reject HEIC",
+        "body": "Some upload forms, older design tools and Windows programs won't take a .heic file but need full quality. A PNG gets accepted and keeps every detail."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is HEIC and why convert it to PNG?",
+        "body": "HEIC is Apple's High Efficiency Image format, the default since the iPhone 7. It packs a photo into roughly half the size of an equivalent JPG, which is great for your camera roll. The catch is support: plenty of Windows apps, web forms and older programs still can't open a .heic file. PNG goes the other way. It's lossless and almost every app, operating system and printer reads it. Turning an iPhone photo into PNG trades the small file size for something you can open and edit anywhere."
+      },
+      {
+        "heading": "PNG vs JPG for converted iPhone photos",
+        "body": "If you only care about a smaller file and the picture is a normal photo, JPG is fine and will be a lot lighter than PNG. The difference shows up when you edit. JPG throws away a little detail every time it's saved, so several rounds of cropping and re-saving slowly degrade the image. PNG keeps every pixel exactly, save after save. JPG also can't hold transparency. So pick JPG for quick photo sharing, and PNG when you plan to edit the image or need a clean background."
+      },
+      {
+        "heading": "Does PNG keep transparency and full quality?",
+        "body": "PNG is lossless, so the converted file holds the exact quality of the source photo with no extra compression. On transparency, one thing trips people up: a regular HEIC photo has a solid background, and converting it to PNG doesn't magically make that background see-through. What PNG gives you is the ability to hold transparency later. If you erase the background in an editor and save as PNG, those clear areas stay clear, which a JPG could never do."
+      }
+    ],
     "faqTitle": "FAQ",
     "faqs": [
       {
@@ -74,11 +174,38 @@ export const content: LandingContentMap = {
       {
         "q": "Is this really free?",
         "a": "Yes, it's completely free with no signup and no file limits. Convert as many photos as you like, as often as you like."
+      },
+      {
+        "q": "Why is my PNG bigger than the HEIC?",
+        "a": "That's expected. HEIC squeezes a photo down hard, while PNG stores it losslessly with no such compression. So the same picture takes more space as a PNG. You're trading file size for quality and universal support."
+      },
+      {
+        "q": "Should I pick PNG or JPG?",
+        "a": "Pick PNG when you plan to edit the image, need crisp text or graphics, or want transparency. Pick JPG when you just want a small file for a photo you're sharing online. JPG is lighter, but it's lossy and can't hold a transparent background."
+      },
+      {
+        "q": "Will my photo become transparent automatically?",
+        "a": "No. A normal photo has a solid background, and converting it to PNG keeps that background as is. PNG can hold transparency, but you'd have to erase the background yourself in an editor and save the result as PNG."
+      },
+      {
+        "q": "Can I convert several HEIC files at once?",
+        "a": "Yes. Drop multiple .heic or .heif files into the box and each one converts to its own PNG. You can save them one by one or grab a shareable link for any of them."
+      },
+      {
+        "q": "Does this work on Windows and Android?",
+        "a": "Yes. It runs in any modern browser, so the same page works on Windows, Android, Mac, iPhone and Linux. There's nothing to install and no HEIC codec to add to your system."
+      },
+      {
+        "q": "Is HEIF the same as HEIC?",
+        "a": "Close enough for this. HEIF is the container format, and HEIC is how Apple stores images inside it. Files end in .heic or .heif, and both convert to PNG here the same way."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Want a hosted URL?",
     "ctaBody": "Click Get URL after conversion.",
-    "ctaButton": "Try the main uploader"
+    "ctaButton": "Try the main uploader",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Convertidor de HEIC a PNG | Gratis, privado, sin subidas",

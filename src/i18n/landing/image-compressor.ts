@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "Image Compressor",
     "h1Highlight": "half the size, same look.",
-    "intro": "Shrink JPG, PNG, or WebP files without uploading them anywhere. Live before/after sizes, adjustable quality, batch-friendly.",
+    "intro": "Shrink JPG, PNG, or WebP files right in your browser, with nothing sent to a server. Drag in one image or a whole batch, slide the quality control, and watch the before/after size update live. Most photos drop 50 to 70 percent at a setting you can barely tell apart from the original. When you're done you can also grab a shareable https link for any file through the main uploader.",
     "howTitle": "How It Works",
     "steps": [
       {

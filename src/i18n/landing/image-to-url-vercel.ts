@@ -19,67 +19,142 @@ export const content: LandingContentMap = {
     "badge": "Vercel Image URLs",
     "h1Pre": "Image to URL",
     "h1Highlight": "for Vercel.",
-    "intro": "Stop bloating your Vercel deploy with raw image files. Upload here, get a direct URL, and embed it in your Next.js, Astro, or static site. Builds stay fast and your repo stays small.",
-    "howTitle": "How It Works",
+    "intro": "Committing big image files to a Vercel project is a quick way to bloat your repo and slow every deploy. Upload here instead and you get a plain https link to a CDN-hosted copy. Reference that URL in next/image, an <img> tag, OG meta, or MDX, and the binary never touches your git history. It is free, takes no signup, and the link works from any framework you ship on Vercel.",
+    "specsTitle": "At a glance",
+    "specs": [
+      { "label": "Price", "value": "Free" },
+      { "label": "Sign-up", "value": "Not required" },
+      { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
+      { "label": "Max size", "value": "10 MB per file" },
+      { "label": "Output", "value": "Direct https CDN link" }
+    ],
+    "howTitle": "How it works",
     "steps": [
       {
-        "title": "Upload Outside Your Repo",
-        "body": "Send your image to our CDN instead of committing it to your Vercel project. Keeps your build artifact small and your push history clean."
+        "title": "Upload outside your repo",
+        "body": "Send your image to our CDN instead of committing it to your Vercel project. The build artifact stays small and your push history stays clean."
       },
       {
-        "title": "Grab the Permanent URL",
-        "body": "We hand you a direct link that loads from a global edge cache. No build step needed, no redeploy when you swap the image."
+        "title": "Copy the direct link",
+        "body": "You get an https URL that ends in the real file extension and loads from a global edge cache. No build step, no redeploy when you swap the file."
       },
       {
-        "title": "Use It in Your Code",
-        "body": "Drop the URL into next/image, an Astro Image, or a plain <img> tag. It works the same way on Vercel as on any host."
+        "title": "Reference it in your code",
+        "body": "Drop the URL into next/image, a plain <img>, an OG meta tag, or a Markdown image. It behaves the same on Vercel as on any other host."
       }
     ],
-    "whyTitle": "Why Host Images Off-Vercel",
+    "whyTitle": "Why host images off your deploy",
     "whyItems": [
       {
-        "title": "Smaller Deploys",
-        "body": "Vercel charges for build minutes and bandwidth. Big binary assets in git slow every deploy and bloat the build cache."
+        "title": "Smaller, faster deploys",
+        "body": "Large binaries in git slow every clone and build, and they pad the deploy. A CDN link keeps that weight out of your bundle so pushes go through quickly."
       },
       {
-        "title": "Faster CI",
-        "body": "Skip the upload step on every deploy. Your repo stays light and pushes go through in seconds, not minutes."
+        "title": "No redeploy to change an image",
+        "body": "Update the hosted file and the URL keeps pointing at it. You skip a full build just to swap a screenshot or a hero image."
       },
       {
-        "title": "Edge-Cached Globally",
-        "body": "Images load from the closest edge POP to each visitor. Same speed model as Vercel's own CDN, no extra config."
+        "title": "Works with any framework",
+        "body": "Next.js, Astro, SvelteKit, a static export, it does not matter. The link is a normal https URL, so anything that can fetch a URL can use it."
       },
       {
-        "title": "Swap Without Redeploying",
-        "body": "Update an image without touching your code or triggering a new build. The URL stays the same."
+        "title": "One link, many places",
+        "body": "Reuse the same URL in the app, the README, a docs page, and a social card. There is nothing to copy into the repo more than once."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "comparisonTitle": "CDN link vs other ways to ship an image",
+    "comparisonIntro": "There is more than one way to get an image in front of a Vercel app. Here is how a hosted CDN link compares to the common alternatives.",
+    "comparisonColumns": ["Method", "Bloats repo", "Setup", "Cost", "Best for"],
+    "comparisonRows": [
+      { "cells": ["CDN link (this tool)", "No", "Upload, copy URL", "Free", "OG images, docs, demo and README assets"] },
+      { "cells": ["Commit to /public", "Yes", "git add, redeploy", "Free", "A few small, rarely changed images"] },
+      { "cells": ["Import into the bundle", "Yes", "import in code", "Free", "Tiny logos and icons"] },
+      { "cells": ["Vercel Blob", "No", "SDK and token", "Paid tier", "Programmatic uploads from inside the app"] },
+      { "cells": ["Another image host", "No", "Account, sometimes signup", "Varies", "General sharing outside a project"] }
+    ],
+    "useCasesTitle": "What developers use it for",
+    "useCasesIntro": "These are the spots where a stable external image URL saves you a commit or a redeploy.",
+    "useCases": [
+      {
+        "title": "Static OG and social cards",
+        "body": "Point your Open Graph and Twitter image meta at a hosted URL so previews render in Slack, Discord, and X without baking the file into every build."
+      },
+      {
+        "title": "README and docs images",
+        "body": "Screenshots and diagrams in a README or a docs page load from the link, so the markdown stays portable and the repo stays light."
+      },
+      {
+        "title": "Demo and placeholder content",
+        "body": "Seed a demo, a Storybook story, or build-time data with real image URLs instead of dropping large sample files into version control."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why keep large images out of git",
+        "body": "Git is built for text, not binaries. Every image you commit is stored in history forever, so the repo grows even after you delete the file, and clones and CI checkouts get slower over time. On Vercel that weight also rides along in the build cache and the deploy. Moving images to a CDN link breaks that pattern: the repo tracks a short URL string instead of a multi-megabyte file. You still version your code and config, just not the heavy assets that do not belong there."
+      },
+      {
+        "heading": "Using the link with next/image",
+        "body": "next/image can optimize remote images, but it only allows hosts you list. Add the CDN domain to images.remotePatterns (older Next versions used images.domains) in next.config, then pass the URL to the src prop with width and height. Next.js handles resizing and modern formats from there. If you would rather skip the allowlist, a plain <img> tag works with any URL and no config at all. Both approaches load the same hosted file, so pick based on whether you want Next's optimization pipeline."
+      },
+      {
+        "heading": "Is it safe to use in production",
+        "body": "The link is a normal https URL on a global edge cache, so load times are typically fast and consistent for visitors anywhere. One thing to know: anonymous uploads are public to anyone who has the link, and anonymous links last at least about two weeks before a monthly storage cleanup can remove them. For anything that must stay live for the long haul, sign in and choose keep forever, and always keep your own copy of the original. Do not upload private or sensitive images to an anonymous link."
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
     "faqs": [
       {
         "q": "Why not just put images in /public on Vercel?",
-        "a": "You can, and it works fine for a handful of images. Once you have dozens of large files, every deploy ships them all again, builds slow down, and your repo balloons. Hosting them off-Vercel keeps things tidy."
+        "a": "You can, and it is fine for a handful of small files. Once you have dozens of large images, every deploy ships them again, the build cache grows, and the repo balloons. A CDN link keeps that weight out entirely."
       },
       {
         "q": "Does this work with next/image?",
-        "a": "Yes. Pass the URL to the src prop and add the image domain to remotePatterns in next.config.js. Next.js will optimize it as if it were any external image."
+        "a": "Yes. Add the CDN domain to images.remotePatterns in next.config (older versions used images.domains), then pass the URL to the src prop. Next.js optimizes it like any other external image. A plain <img> tag needs no config at all."
+      },
+      {
+        "q": "What formats and size can I upload?",
+        "a": "JPG, PNG, WebP, GIF, and SVG, up to 10 MB per file. The link you get back ends in the real extension, so it embeds inline anywhere that accepts an image URL."
       },
       {
         "q": "Will it slow my page down?",
-        "a": "No. Images are served from a CDN with edge nodes worldwide. Real-world load times are usually under 100ms, similar to Vercel's own asset delivery."
+        "a": "No. Images are served from a CDN with edge nodes worldwide, so they load from a point of presence close to each visitor. There is no extra config to get that behavior."
       },
       {
-        "q": "Do the URLs survive when I redeploy?",
-        "a": "Yes. URLs are permanent and have nothing to do with your Vercel deploy. Roll back, redeploy, switch frameworks, the link keeps working."
+        "q": "Do the URLs survive a redeploy?",
+        "a": "Yes. The link has nothing to do with your Vercel deploy. Roll back, redeploy, or switch frameworks and it keeps resolving to the same file."
       },
       {
-        "q": "Is it free for hobby Vercel projects?",
-        "a": "Yes. The upload-and-share flow is free, no signup. Free accounts unlock larger files and a dashboard for managing your uploads."
+        "q": "Can I use the link in OG meta tags?",
+        "a": "Yes. Put the https URL in your og:image and twitter:image tags. Crawlers fetch it like any public image, so social previews work without bundling the file into the build."
+      },
+      {
+        "q": "Does it touch my repo or git history at all?",
+        "a": "No. The image lives on the CDN, and your code only references a URL string. Nothing large is added to version control, so clones and checkouts stay fast."
+      },
+      {
+        "q": "How long do the links last?",
+        "a": "Anonymous links last at least about two weeks and may be cleared during a monthly storage cleanup. Sign in and pick keep forever for anything you need to stay live long term, and keep a backup of the original."
+      },
+      {
+        "q": "Is the image private?",
+        "a": "No. Anonymous uploads are public to anyone with the link. That is fine for OG images and docs, but do not use it for private or sensitive content."
+      },
+      {
+        "q": "What about Vercel Blob or an S3 bucket?",
+        "a": "Those are good when your app uploads images programmatically at runtime. For static assets you reference in code or markdown, a free CDN link is faster to set up and needs no SDK or token."
+      },
+      {
+        "q": "Is it free for hobby projects?",
+        "a": "Yes. The upload-and-copy flow is free with no signup. A free account adds a dashboard for managing your uploads and the keep-forever option."
       }
     ],
+    "howToSchema": true,
     "ctaTitle": "Get a Vercel-ready image URL",
-    "ctaBody": "Upload once. Embed anywhere. Keep your Vercel deploy lean.",
-    "ctaButton": "Upload Image"
+    "ctaBody": "Upload once, copy the link, and keep your deploy lean.",
+    "ctaButton": "Upload Image",
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-24"
   },
   "es": {
     "metaTitle": "Imagen a URL para Vercel — Enlaces CDN directos para sitios estáticos | ImageToURL",
