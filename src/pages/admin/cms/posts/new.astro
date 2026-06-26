@@ -85,6 +85,7 @@ const user = Astro.locals.user!;
             <button type="button" data-action="blockquote" title="Blockquote" class="tb-btn"><Icon name="format_quote" class="text-base" /></button>
             <button type="button" data-action="link" title="Link" class="tb-btn"><Icon name="link" class="text-base" /></button>
             <button type="button" data-action="image" title="Insert Image" class="tb-btn"><Icon name="image" class="text-base" /></button>
+            <button type="button" data-action="imageAlt" title="Edit selected image's alt text (SEO)" class="tb-btn font-bold text-xs">ALT</button>
             <button type="button" data-action="horizontalRule" title="Horizontal Rule" class="tb-btn"><Icon name="horizontal_rule" class="text-base" /></button>
             <button type="button" data-action="table" title="Insert Table" class="tb-btn"><Icon name="table" class="text-base" /></button>
             <div class="tb-divider"></div>
@@ -129,6 +130,7 @@ const user = Astro.locals.user!;
           <button type="button" data-action="blockquote" title="Blockquote" class="tb-btn"><Icon name="format_quote" class="text-base" /></button>
           <button type="button" data-action="link" title="Link" class="tb-btn"><Icon name="link" class="text-base" /></button>
           <button type="button" data-action="image" title="Insert Image" class="tb-btn"><Icon name="image" class="text-base" /></button>
+          <button type="button" data-action="imageAlt" title="Edit selected image's alt text (SEO)" class="tb-btn font-bold text-xs">ALT</button>
           <button type="button" data-action="table" title="Insert Table" class="tb-btn"><Icon name="table" class="text-base" /></button>
           <div class="tb-divider"></div>
           <button type="button" data-action="undo" title="Undo" class="tb-btn"><Icon name="undo" class="text-base" /></button>
@@ -551,6 +553,14 @@ const user = Astro.locals.user!;
         break;
       }
       case 'image': imageInput.click(); break;
+      case 'imageAlt': {
+        if (!editor.isActive('image')) { window.alert('Click an image in the content first, then press ALT to edit its alt text.'); break; }
+        const current = editor.getAttributes('image').alt || '';
+        const alt = window.prompt('Alt text for this image (for SEO & accessibility):', current);
+        if (alt === null) break;
+        editor.chain().focus().updateAttributes('image', { alt }).run();
+        break;
+      }
       case 'horizontalRule': editor.chain().focus().setHorizontalRule().run(); break;
       case 'table': editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(); break;
       case 'addRowBefore': editor.chain().focus().addRowBefore().run(); break;
@@ -600,6 +610,15 @@ const user = Astro.locals.user!;
   wireToolbar(document.getElementById('table-toolbar-mobile')!);
   editor.on('selectionUpdate', updateAllToolbarStates);
   editor.on('update', updateAllToolbarStates);
+  editor.view.dom.addEventListener('dblclick', (ev) => {
+    const img = (ev.target as HTMLElement).closest('img');
+    if (!img) return;
+    const pos = editor.view.posAtDOM(img, 0);
+    editor.chain().focus().setNodeSelection(pos).run();
+    const current = editor.getAttributes('image').alt || '';
+    const alt = window.prompt('Alt text for this image (for SEO & accessibility):', current);
+    if (alt !== null) editor.chain().focus().updateAttributes('image', { alt }).run();
+  });
 
   // Image upload handler
   imageInput.addEventListener('change', async (e) => {
