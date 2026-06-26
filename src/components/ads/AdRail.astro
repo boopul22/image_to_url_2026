@@ -1,32 +1,28 @@
 ---
 /**
- * One side rail = a SINGLE fixed 160×600 skyscraper, shown only on xl+
- * (mobile/tablet never render the rails — they collapse to the in-content ad
- * instead). Sticky so it stays beside the tool as the user scrolls (works now
- * that <body> uses overflow-x: clip, not hidden).
+ * One side rail = TWO stacked ad units, shown only on xl+ (mobile/tablet never
+ * render the rails — they collapse to the in-content ad instead). Sticky so the
+ * pair stays beside the tool as the user scrolls (works now that <body> uses
+ * overflow-x: clip, not hidden).
  *
- * Why fixed 160×600 (not full-width responsive): a fixed slim tower centered in
- * the wider 280px rail leaves whitespace on both sides and reads as a small,
- * separate, intentional unit — the "contained ad island" look (cf. Speedtest /
- * Ziff Davis) — instead of a 280px-wide responsive blob that fills the rail
- * edge-to-edge. A muted "Advertisement" microlabel reinforces the separation.
- * Trade-off: 160×600 has lower demand than responsive, so to change the size or
- * go back to responsive, edit this one file. Slot id lives in lib/ads.ts.
+ * Loading: each <ins> keeps its own inline push({}) right after it — the proven
+ * pattern from the old single-rail markup. AdSense fills statusless <ins> in DOM
+ * order, so an inline push immediately after each one always targets THAT slot
+ * (every earlier slot already got its push from its own preceding script). Don't
+ * reorder these into a lazy/observer scheme — a bare push() can't target a
+ * specific slot, so out-of-DOM-order lazy fills would misalign.
  *
- * Loading: the <ins> keeps its own inline push({}) right after it. AdSense fills
- * statusless <ins> in DOM order, so an inline push immediately after it targets
- * THIS slot. Don't reorder into a lazy/observer scheme — a bare push() can't
- * target a specific slot, so out-of-DOM-order lazy fills would misalign.
- *
- * Mobile/tablet (< xl): the rail <aside> is display:none, so the rail <ins> has
+ * Mobile/tablet (< xl): the rail <aside> is display:none, so each rail <ins> has
  * zero width. Pushing it makes AdSense throw `No slot size for availableWidth=0`
  * (a Best-Practices console-error fail). The inline guard below only push()es at
  * xl+; below xl it instead strips the `adsbygoogle` class off the hidden <ins> so
  * the slot leaves AdSense's candidate pool entirely — otherwise the next *visible*
  * push (the banner) would grab this 0-width slot in DOM order and still throw.
  *
- * Each rail uses its own distinct ad unit (per AdSense best practice — reusing
- * one unit id across boxes makes AdSense unfill the duplicates).
+ * Slots (data-ad-format="auto" + full-width-responsive, so each adapts to the
+ * 280px rail): each of the four rail boxes is its own distinct square ad unit
+ * (per AdSense best practice — reusing one unit ID across boxes makes AdSense
+ * unfill the duplicates).
  */
 import { AD_CLIENT as PUB, AD_SLOTS } from '../../lib/ads';
 interface Props {
@@ -34,24 +30,35 @@ interface Props {
 }
 const { side = 'left' } = Astro.props;
 
-// One distinct ad unit per rail (ids centralised in lib/ads.ts).
+// One distinct square ad unit per rail box (ids centralised in lib/ads.ts).
 const SLOTS = {
-  left: AD_SLOTS.railLeftTop,
-  right: AD_SLOTS.railRightTop,
+  left: { top: AD_SLOTS.railLeftTop, bottom: AD_SLOTS.railLeftBottom },
+  right: { top: AD_SLOTS.railRightTop, bottom: AD_SLOTS.railRightBottom },
 } as const;
 const slot = SLOTS[side];
 ---
 <aside
-  class="hidden xl:flex xl:flex-col xl:items-center xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start"
+  class="hidden xl:flex xl:flex-col xl:gap-4 xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start"
   aria-label="Sponsored"
   data-rail={side}
 >
-  <span class="font-label text-[10px] font-medium uppercase tracking-widest text-outline mb-2 select-none">Advertisement</span>
-  <!-- Fixed 160×600 skyscraper, centered in the 280px rail (whitespace flanks it). -->
+  <!-- Top: square -->
   <ins
     class="adsbygoogle"
-    style="display:inline-block;width:160px;height:600px"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
     data-ad-client={PUB}
-    data-ad-slot={slot}></ins>
+    data-ad-slot={slot.top}></ins>
+  <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
+
+  <!-- Bottom: square -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot={slot.bottom}></ins>
   <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
 </aside>
