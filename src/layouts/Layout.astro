@@ -4,6 +4,7 @@ import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
 import AdBlockGate from '../components/AdBlockGate.astro';
+import { AD_CLIENT } from '../lib/ads';
 // Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
 // bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
 // to those same fingerprinted URLs, so the preload is always in sync with the CSS.
@@ -282,14 +283,14 @@ function hreflangUrl(loc: Locale): string {
          unchanged; scroll is an interaction trigger, so the library is already loading
          by the time any below-fold slot is pushed. Component inline push({}) calls
          queue harmlessly on the window.adsbygoogle array until the library loads. -->
-    <script is:inline>
+    <script is:inline define:vars={{ adClient: AD_CLIENT }}>
       (function () {
         var loaded = false;
         function loadAds() {
           if (loaded) return;
           loaded = true;
           var s = document.createElement('script');
-          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7803867089582138';
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + adClient;
           s.async = true;
           s.crossOrigin = 'anonymous';
           document.head.appendChild(s);

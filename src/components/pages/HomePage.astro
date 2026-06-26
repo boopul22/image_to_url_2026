@@ -10,6 +10,7 @@ import { localizedUrl } from '../../i18n/landing/registry';
 import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
 import AdRail from '../ads/AdRail.astro';
+import { AD_CLIENT, AD_SLOTS } from '../../lib/ads';
 
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -376,8 +377,8 @@ const pageSchema = [
         class="adsbygoogle"
         style="display:block"
         data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"
+        data-ad-client={AD_CLIENT}
+        data-ad-slot={AD_SLOTS.inContent}
         data-ad-lazy></ins>
     </div>
   </div>

@@ -24,16 +24,16 @@
  * (per AdSense best practice — reusing one unit ID across boxes makes AdSense
  * unfill the duplicates).
  */
+import { AD_CLIENT as PUB, AD_SLOTS } from '../../lib/ads';
 interface Props {
   side?: 'left' | 'right';
 }
 const { side = 'left' } = Astro.props;
-const PUB = 'ca-pub-7803867089582138';
 
-// One distinct square ad unit per rail box.
+// One distinct square ad unit per rail box (ids centralised in lib/ads.ts).
 const SLOTS = {
-  left: { top: '7695843568', bottom: '6204162876' },
-  right: { top: '3728678394', bottom: '2188896240' },
+  left: { top: AD_SLOTS.railLeftTop, bottom: AD_SLOTS.railLeftBottom },
+  right: { top: AD_SLOTS.railRightTop, bottom: AD_SLOTS.railRightBottom },
 } as const;
 const slot = SLOTS[side];
 ---

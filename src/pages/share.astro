@@ -31,14 +31,115 @@ const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
     {url ? (
-      <!-- Valid link: SharePanel renders populated + visible server-side, flanked
-           by the tool ad rails. -->
-      <ToolAdSurround>
-        <SharePanel url={url} />
-        <div class="max-w-xl mx-auto mt-6 text-center">
-          <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
-        </div>
-      </ToolAdSurround>
+      <Fragment>
+        <!-- Valid link: SharePanel renders populated + visible server-side, flanked
+             by the tool ad rails. -->
+        <ToolAdSurround>
+          <SharePanel url={url} />
+          <div class="max-w-xl mx-auto mt-6 text-center">
+            <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
+          </div>
+        </ToolAdSurround>
+
+        <!-- Publisher content (kept at the BOTTOM, below the share panel). This is
+             real, useful guidance about the link the visitor just created — it turns
+             /share from a bare "dead-end / Thank-You" screen into a content page, so
+             the ad units above are valuable-inventory compliant (Google forbids ads
+             on no-content screens). -->
+        <section class="max-w-3xl mx-auto mt-14 sm:mt-16">
+          <h2 class="text-2xl sm:text-3xl font-headline font-bold text-on-surface tracking-tight">Make the most of your image link</h2>
+          <p class="text-on-surface-variant mt-3 leading-relaxed">
+            Your image is now hosted on a fast global CDN and reachable from a single short
+            URL. Here is how to use that link, where it works best, and how long it lasts.
+          </p>
+
+          <div class="grid sm:grid-cols-3 gap-4 mt-8">
+            <div class="bg-surface border border-outline-variant/40 brutal-shadow p-5">
+              <span class="inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 border border-outline-variant/40">
+                <Icon name="link" class="text-xl" fill />
+              </span>
+              <h3 class="text-base font-bold text-on-surface mt-3">Four ready formats</h3>
+              <p class="text-sm text-on-surface-variant mt-1 leading-relaxed">
+                Copy the plain <strong>Direct URL</strong> for anywhere a link works, or grab the
+                <strong>Markdown</strong>, <strong>HTML</strong>, or <strong>BBCode</strong> snippet to
+                embed the image inline. The QR code carries the same link to a phone.
+              </p>
+            </div>
+            <div class="bg-surface border border-outline-variant/40 brutal-shadow p-5">
+              <span class="inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 border border-outline-variant/40">
+                <Icon name="public" class="text-xl" fill />
+              </span>
+              <h3 class="text-base font-bold text-on-surface mt-3">Where it works</h3>
+              <p class="text-sm text-on-surface-variant mt-1 leading-relaxed">
+                Paste it into forum posts, GitHub READMEs and issues, Discord and Slack,
+                marketplace listings, email signatures, support tickets, or anywhere that
+                accepts an image URL but not a file upload.
+              </p>
+            </div>
+            <div class="bg-surface border border-outline-variant/40 brutal-shadow p-5">
+              <span class="inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 border border-outline-variant/40">
+                <Icon name="schedule" class="text-xl" fill />
+              </span>
+              <h3 class="text-base font-bold text-on-surface mt-3">How long it lasts</h3>
+              <p class="text-sm text-on-surface-variant mt-1 leading-relaxed">
+                Guest uploads stay live for about two weeks. <a href="/" class="text-primary hover:underline">Sign in</a>
+                before uploading to keep your links permanent and manage every image from your
+                dashboard.
+              </p>
+            </div>
+          </div>
+
+          <h2 class="text-xl sm:text-2xl font-headline font-bold text-on-surface tracking-tight mt-12">Common questions</h2>
+          <div class="mt-4 divide-y divide-outline-variant/40 border-y border-outline-variant/40">
+            <details class="group py-4">
+              <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
+                Is the link free and permanent?
+                <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
+              </summary>
+              <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+                Hosting is free with no account required. Guest links auto-expire in roughly two
+                weeks; sign in before uploading and your links stay permanent.
+              </p>
+            </details>
+            <details class="group py-4">
+              <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
+                Can I share the image without the watermark?
+                <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
+              </summary>
+              <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+                Yes. The panel above offers both a watermarked and a clean "No watermark" version
+                of the link. Pick whichever you want before you copy it.
+              </p>
+            </details>
+            <details class="group py-4">
+              <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
+                Which image formats are supported?
+                <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
+              </summary>
+              <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+                JPG, PNG, WebP, GIF, and SVG up to 10MB. Need a different format or a smaller file?
+                Use one of the converters below first, then upload the result.
+              </p>
+            </details>
+          </div>
+
+          <h2 class="text-xl sm:text-2xl font-headline font-bold text-on-surface tracking-tight mt-12">Related tools</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+            <a href="/en/image-compressor" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+              <Icon name="compress" class="text-lg text-rose-600" /> Image compressor
+            </a>
+            <a href="/en/image-resizer" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+              <Icon name="crop" class="text-lg text-rose-600" /> Image resizer
+            </a>
+            <a href="/en/heic-to-jpg" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+              <Icon name="image" class="text-lg text-rose-600" /> HEIC to JPG
+            </a>
+            <a href="/en/favicon-generator" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+              <Icon name="star" class="text-lg text-rose-600" /> Favicon generator
+            </a>
+          </div>
+        </section>
+      </Fragment>
     ) : (
       <!-- Invalid / missing URL state -->
       <div class="text-center py-10">

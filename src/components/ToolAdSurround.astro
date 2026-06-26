@@ -13,6 +13,7 @@
  * hidden and only the banner + in-content units remain.
  */
 import AdRail from './ads/AdRail.astro';
+import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
 ---
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
@@ -34,8 +35,8 @@ import AdRail from './ads/AdRail.astro';
         class="adsbygoogle"
         style="display:block"
         data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"
+        data-ad-client={AD_CLIENT}
+        data-ad-slot={AD_SLOTS.inContent}
         data-ad-lazy></ins>
     </div>
   </div>

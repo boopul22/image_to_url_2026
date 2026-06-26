@@ -11,6 +11,7 @@ import Icon from './Icon.astro';
  * the rest of the site stays brutalist.
  */
 import AdRail from './ads/AdRail.astro';
+import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
 ---
 
 <!-- Tool-area ads: left + right 160x600 skyscrapers flank the uploader on lg+,
@@ -183,8 +184,8 @@ import AdRail from './ads/AdRail.astro';
         class="adsbygoogle"
         style="display:block"
         data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-7803867089582138"
-        data-ad-slot="1349470215"
+        data-ad-client={AD_CLIENT}
+        data-ad-slot={AD_SLOTS.inContent}
         data-ad-lazy></ins>
     </div>
   </div>
