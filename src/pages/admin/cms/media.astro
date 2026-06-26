@@ -84,6 +84,8 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
             <span class="a-badge" style="height:18px;text-transform:capitalize">${esc(m.folder)}</span>
             <span class="a-num">${(m.sizeBytes / 1024).toFixed(0)} KB</span>
           </div>
+          <label class="block text-[11px] a-subtle mt-2.5 mb-1" for="alt-${esc(m.id)}">Alt text</label>
+          <input id="alt-${esc(m.id)}" type="text" class="a-input alt-input" data-id="${esc(m.id)}" value="${esc(m.altText || '')}" placeholder="Describe this image…" style="height:30px;font-size:.75rem" />
           <div class="flex items-center gap-1.5 mt-2.5">
             <button onclick="copyUrl('${esc(m.url)}')" class="a-btn a-btn-sm flex-1">Copy URL</button>
             <button onclick="deleteMedia('${esc(m.id)}')" class="a-btn a-btn-sm a-btn-icon a-btn-danger" title="Delete">${ICON_TRASH}</button>
@@ -97,6 +99,27 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
          <span class="a-btn a-btn-sm a-btn-ghost" style="cursor:default">Page ${page} / ${data.totalPages}</span>
          <button onclick="loadPage(${Math.min(data.totalPages, page + 1)})" class="a-btn a-btn-sm" ${page === data.totalPages ? 'disabled' : ''}>Next</button>`
       : '';
+
+    grid.querySelectorAll('.alt-input').forEach((el) => {
+      const input = el as HTMLInputElement;
+      let last = input.value;
+      const save = async () => {
+        const altText = input.value.trim();
+        if (altText === last) return;
+        try {
+          const res = await fetch(`/api/admin/cms/media/${input.dataset.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ altText }),
+          });
+          if (!res.ok) throw new Error();
+          last = altText;
+          showToast('Alt text saved');
+        } catch { showToast('Failed to save alt text'); }
+      };
+      input.addEventListener('change', save);
+      input.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') { e.preventDefault(); input.blur(); } });
+    });
   }
 
   (window as any).copyUrl = (url: string) => navigator.clipboard.writeText(url).then(() => showToast('URL copied'));
