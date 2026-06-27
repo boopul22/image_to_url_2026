@@ -76,7 +76,8 @@ export type PageKey =
   | 'favicon-generator'
   | 'about'
   | 'contact'
-  | 'content-guidelines';
+  | 'content-guidelines'
+  | 'mp3-to-url';
 
 export type LocaleSlugMap = Partial<Record<Locale, string>>;
 
@@ -145,6 +146,7 @@ export const SLUGS: Record<PageKey, LocaleSlugMap> = {
   'favicon-generator': { en: 'favicon-generator', es: 'generador-de-favicon', fr: 'generateur-de-favicon', de: 'favicon-generator', ja: 'favicon-生成-ツール', 'zh-Hans': 'favicon-生成器' },
   'about': { en: 'about', es: 'sobre-imagetourl', fr: 'a-propos-imagetourl', de: 'ueber-imagetourl', ja: 'imagetourl-について', 'zh-Hans': '关于-imagetourl' },
   'contact': { en: 'contact', es: 'contacto-imagetourl', fr: 'contactez-imagetourl', de: 'kontakt-imagetourl', ja: 'お問い合わせ-imagetourl', 'zh-Hans': '联系-我们-支持' },
-  'content-guidelines': { en: 'content-guidelines', es: 'directrices-de-contenido', fr: 'directives-de-contenu', de: 'inhaltsrichtlinien-und-nutzungsbedingungen', ja: 'コンテンツ-ガイドライン', 'zh-Hans': '内容-准则' } };
+  'content-guidelines': { en: 'content-guidelines', es: 'directrices-de-contenido', fr: 'directives-de-contenu', de: 'inhaltsrichtlinien-und-nutzungsbedingungen', ja: 'コンテンツ-ガイドライン', 'zh-Hans': '内容-准则' },
+  'mp3-to-url': { en: 'mp3-to-url' } };
 
 export const PAGE_KEYS = Object.keys(SLUGS) as PageKey[];

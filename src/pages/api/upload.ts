@@ -8,8 +8,12 @@ import { resolveExpiresAt } from '../../lib/images/delete';
 import { embedAttribution } from '../../lib/images/metadata';
 import { isSameSiteRequest } from '../../lib/same-origin';
 
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml', 'audio/mpeg', 'audio/mp3'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+
+// MIME types we treat as audio. These go to a dedicated "mp3/" prefix in the
+// same R2 bucket instead of the image folders.
+const AUDIO_TYPES = ['audio/mpeg', 'audio/mp3'];
 
 function generateId(): string {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -27,6 +31,8 @@ function getExtension(mimeType: string): string {
     'image/webp': 'webp',
     'image/gif': 'gif',
     'image/svg+xml': 'svg',
+    'audio/mpeg': 'mp3',
+    'audio/mp3': 'mp3',
   };
   return map[mimeType] || 'bin';
 }
@@ -146,7 +152,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (!ALLOWED_TYPES.includes(file.type)) {
       return new Response(
         JSON.stringify({
-          error: `Unsupported file type: ${file.type}. Allowed: JPG, PNG, WebP, GIF, SVG`,
+          error: `Unsupported file type: ${file.type}. Allowed: JPG, PNG, WebP, GIF, SVG, MP3`,
         }),
         { status: 400, headers: { 'Content-Type': 'application/json' } },
       );
@@ -174,8 +180,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     const id = generateId();
     const ext = getExtension(file.type);
-    // Anonymous uploads go to "anonymous" folder, logged-in to "uploads"
-    const folder = user ? 'uploads' : 'anonymous';
+    // MP3s land in their own "mp3/" prefix (same bucket). Images keep the
+    // existing split: anonymous uploads → "anonymous", logged-in → "uploads".
+    // The short-URL handler resolves the object by r2_key, so the prefix is
+    // transparent to serving.
+    const folder = AUDIO_TYPES.includes(file.type) ? 'mp3' : user ? 'uploads' : 'anonymous';
     const key = `${folder}/${id}.${ext}`;
     // Embed imagetourl.cloud attribution metadata (no-op + safe on failure).
     const body = embedAttribution(new Uint8Array(await file.arrayBuffer()), file.type);

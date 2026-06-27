@@ -26,7 +26,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     <!-- Center column: uploader widget + trust signals. -->
     <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
       <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
-        <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" multiple class="hidden" />
+        <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" multiple class="hidden" />
 
         <!-- Soft drop card: padded gray shell -->
         <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
@@ -41,7 +41,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
                 <Icon name="cloud_upload" class="text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon" />
                 <div class="text-center">
                   <p class="text-on-surface-variant font-medium text-sm sm:text-base transition-opacity duration-300 group-hover:opacity-70" id="upload-text">Drop files to upload</p>
-                  <p class="text-[11px] sm:text-xs text-on-surface-variant/80 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
+                  <p class="text-[11px] sm:text-xs text-on-surface-variant/80 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG, MP3 &mdash; Max 10MB</p>
                 </div>
                 <div id="progress-bar" class="su-progress hidden w-full max-w-xs h-2 bg-surface-variant overflow-hidden">
                   <div id="progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300" style="width: 0%"></div>
@@ -278,7 +278,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     progressFill.style.width = '0%';
     uploadIcon.innerHTML = ic_cloud_upload;
     uploadText.textContent = 'Drop files to upload';
-    uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG — up to 10 MB';
+    uploadSubtext.textContent = 'JPG, PNG, WebP, GIF, SVG, MP3 — up to 10 MB';
     uploadBtn.textContent = 'Select File';
     fileInput.value = '';
     errorSignin.classList.add('hidden');

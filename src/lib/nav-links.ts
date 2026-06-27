@@ -48,6 +48,7 @@ export function getNavGroups(locale: Locale): NavGroups {
       lp(locale, 'webp-to-url', 'WebP to URL', 'web'),
       lp(locale, 'photo-to-url', 'Photo to URL', 'add_photo_alternate'),
       lp(locale, 'screenshot-to-url', 'Screenshot to URL', 'screenshot_monitor'),
+      lp(locale, 'mp3-to-url', 'MP3 to URL', 'music_note'),
     ],
     formatConvert: [
       lp(locale, 'heic-to-jpg', 'HEIC → JPG', 'photo_camera_back'),

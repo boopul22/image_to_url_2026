@@ -58,7 +58,7 @@ const INJECTION = `
 // [PATCH] Short-URL handler — serves /{id}.{ext} by looking up r2_key in D1
 // and streaming from R2 binding. Intercepts BEFORE app.match so the root
 // [...catchall] route doesn't 404 these paths.
-const __SHORT_URL_RE__ = /^\\/([a-z0-9]{8})\\.(jpg|jpeg|png|webp|gif|svg)$/;
+const __SHORT_URL_RE__ = /^\\/([a-z0-9]{8})\\.(jpg|jpeg|png|webp|gif|svg|mp3)$/;
 function __nowSqlUtc__() {
   return new Date().toISOString().replace('T', ' ').slice(0, 19);
 }
