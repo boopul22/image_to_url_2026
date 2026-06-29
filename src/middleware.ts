@@ -23,6 +23,7 @@ const NON_LOCALIZED_EXACT = new Set([
   // Cluster D platform use-cases
   '/image-hosting-for-reddit', '/image-hosting-for-twitter', '/image-hosting-for-instagram',
   '/image-hosting-for-pinterest', '/image-hosting-for-substack', '/image-hosting-for-medium',
+  '/image-hosting-for-ghost',
   '/image-hosting-for-linkedin', '/image-hosting-for-webflow', '/image-hosting-for-squarespace',
   '/image-hosting-for-wix', '/image-hosting-for-framer', '/image-hosting-for-stack-overflow',
   '/image-hosting-for-markdown', '/image-hosting-for-nextjs', '/image-hosting-for-jira',

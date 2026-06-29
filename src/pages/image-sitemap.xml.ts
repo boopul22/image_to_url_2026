@@ -15,24 +15,28 @@ type ImgEntry = {
   title: string;
 };
 
+// Page URLs use the canonical English landing form (/en/<slug>/, with trailing
+// slash). The old bare-root forms (/heic-to-jpg, /) 301-redirect to these now
+// that the converters live in the SLUGS landing registry, so listing the
+// redirecting URLs here put 3XX + non-canonical entries in the sitemap.
 const IMAGES: ImgEntry[] = [
-  { page: '/', image: SITE + '/og-default.png', caption: 'ImageToURL upload interface', title: 'Free image hosting with permanent URLs' },
-  { page: '/heic-to-jpg', image: SITE + '/og-default.png', caption: 'HEIC to JPG converter', title: 'Convert iPhone HEIC to JPG in your browser' },
-  { page: '/heic-to-png', image: SITE + '/og-default.png', caption: 'HEIC to PNG converter', title: 'HEIC to PNG lossless converter' },
-  { page: '/heic-to-pdf', image: SITE + '/og-default.png', caption: 'HEIC to PDF converter', title: 'Merge HEIC photos into PDF' },
-  { page: '/png-to-jpg', image: SITE + '/og-default.png', caption: 'PNG to JPG converter', title: 'Convert PNG to JPG in browser' },
-  { page: '/jpg-to-png', image: SITE + '/og-default.png', caption: 'JPG to PNG converter', title: 'Convert JPG to PNG lossless' },
-  { page: '/webp-to-jpg', image: SITE + '/og-default.png', caption: 'WebP to JPG converter', title: 'Convert WebP to JPG browser-only' },
-  { page: '/webp-to-png', image: SITE + '/og-default.png', caption: 'WebP to PNG converter', title: 'WebP to PNG preserves transparency' },
-  { page: '/png-to-webp', image: SITE + '/og-default.png', caption: 'PNG to WebP converter', title: 'PNG to WebP for smaller files' },
-  { page: '/jpg-to-webp', image: SITE + '/og-default.png', caption: 'JPG to WebP converter', title: 'JPG to WebP for faster pages' },
-  { page: '/png-to-pdf', image: SITE + '/og-default.png', caption: 'PNG to PDF converter', title: 'PNG to PDF merge in browser' },
-  { page: '/jpg-to-pdf', image: SITE + '/og-default.png', caption: 'JPG to PDF converter', title: 'JPG to PDF no watermark' },
-  { page: '/image-compressor', image: SITE + '/og-default.png', caption: 'Image compressor', title: 'Compress images locally' },
-  { page: '/image-resizer', image: SITE + '/og-default.png', caption: 'Image resizer', title: 'Resize images by pixels or percent' },
-  { page: '/favicon-generator', image: SITE + '/og-default.png', caption: 'Favicon generator', title: 'Generate favicons at every size' },
-  { page: '/image-to-base64', image: SITE + '/og-default.png', caption: 'Image to base64', title: 'Encode image as data URI' },
-  { page: '/base64-to-image', image: SITE + '/og-default.png', caption: 'Base64 to image', title: 'Decode base64 data URI to image' },
+  { page: '/en/', image: SITE + '/og-default.png', caption: 'ImageToURL upload interface', title: 'Free image hosting with permanent URLs' },
+  { page: '/en/heic-to-jpg/', image: SITE + '/og-default.png', caption: 'HEIC to JPG converter', title: 'Convert iPhone HEIC to JPG in your browser' },
+  { page: '/en/heic-to-png/', image: SITE + '/og-default.png', caption: 'HEIC to PNG converter', title: 'HEIC to PNG lossless converter' },
+  { page: '/en/heic-to-pdf/', image: SITE + '/og-default.png', caption: 'HEIC to PDF converter', title: 'Merge HEIC photos into PDF' },
+  { page: '/en/png-to-jpg/', image: SITE + '/og-default.png', caption: 'PNG to JPG converter', title: 'Convert PNG to JPG in browser' },
+  { page: '/en/jpg-to-png/', image: SITE + '/og-default.png', caption: 'JPG to PNG converter', title: 'Convert JPG to PNG lossless' },
+  { page: '/en/webp-to-jpg/', image: SITE + '/og-default.png', caption: 'WebP to JPG converter', title: 'Convert WebP to JPG browser-only' },
+  { page: '/en/webp-to-png/', image: SITE + '/og-default.png', caption: 'WebP to PNG converter', title: 'WebP to PNG preserves transparency' },
+  { page: '/en/png-to-webp/', image: SITE + '/og-default.png', caption: 'PNG to WebP converter', title: 'PNG to WebP for smaller files' },
+  { page: '/en/jpg-to-webp/', image: SITE + '/og-default.png', caption: 'JPG to WebP converter', title: 'JPG to WebP for faster pages' },
+  { page: '/en/png-to-pdf/', image: SITE + '/og-default.png', caption: 'PNG to PDF converter', title: 'PNG to PDF merge in browser' },
+  { page: '/en/jpg-to-pdf/', image: SITE + '/og-default.png', caption: 'JPG to PDF converter', title: 'JPG to PDF no watermark' },
+  { page: '/en/image-compressor/', image: SITE + '/og-default.png', caption: 'Image compressor', title: 'Compress images locally' },
+  { page: '/en/image-resizer/', image: SITE + '/og-default.png', caption: 'Image resizer', title: 'Resize images by pixels or percent' },
+  { page: '/en/favicon-generator/', image: SITE + '/og-default.png', caption: 'Favicon generator', title: 'Generate favicons at every size' },
+  { page: '/en/image-to-base64/', image: SITE + '/og-default.png', caption: 'Image to base64', title: 'Encode image as data URI' },
+  { page: '/en/base64-to-image/', image: SITE + '/og-default.png', caption: 'Base64 to image', title: 'Decode base64 data URI to image' },
 ];
 
 function escapeXml(str: string): string {

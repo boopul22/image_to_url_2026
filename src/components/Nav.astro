@@ -4,7 +4,7 @@ import { t, stripLocalePrefix } from '../i18n/utils';
 import { locales, localeLabels, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { getNavGroups } from '../lib/nav-links';
-import { resolveSlug, getSlug } from '../i18n/landing/registry';
+import { resolveSlug, localizedUrl } from '../i18n/landing/registry';
 
 const { activePage = "home", blogLocaleSlugs = null } = Astro.props as { activePage?: string; blogLocaleSlugs?: Record<string, string> | null };
 const user = Astro.locals.user;
@@ -29,8 +29,11 @@ const isEnglishOnlyRoot = !hasLocalePrefix && Astro.url.pathname !== '/' && !cur
 function langSwitchHref(loc: Locale): string {
   // Blog post? Use the per-locale translated slug directly (one hop, not two).
   if (blogLocaleSlugs && blogLocaleSlugs[loc]) return `/${loc}/blog/${blogLocaleSlugs[loc]}`;
-  // Landing page in the slug registry? Use its translated slug.
-  if (currentPageKey) return `/${loc}/${getSlug(currentPageKey, loc)}`;
+  // Landing page in the slug registry? Use its translated slug. localizedUrl()
+  // emits the trailing slash so the switcher href matches the page's canonical
+  // and hreflang URLs — otherwise the crawler follows the no-slash form and
+  // flags every localized page for "hreflang has no self/return link".
+  if (currentPageKey) return localizedUrl(currentPageKey, loc);
   // English-only page with no translated variant → keep the user on the same
   // URL. Clicking is effectively a no-op instead of dumping them on a locale
   // homepage. When translations land, this falls through to currentPageKey.
