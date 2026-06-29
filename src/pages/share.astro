@@ -93,7 +93,7 @@ const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
           <div class="mt-4 divide-y divide-outline-variant/40 border-y border-outline-variant/40">
             <details class="group py-4">
               <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
-                Is the link free and permanent?
+                <h3 class="m-0 font-semibold">Is the link free and permanent?</h3>
                 <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
               </summary>
               <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
@@ -103,7 +103,7 @@ const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
             </details>
             <details class="group py-4">
               <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
-                Can I share the image without the watermark?
+                <h3 class="m-0 font-semibold">Can I share the image without the watermark?</h3>
                 <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
               </summary>
               <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
@@ -113,7 +113,7 @@ const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
             </details>
             <details class="group py-4">
               <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
-                Which image formats are supported?
+                <h3 class="m-0 font-semibold">Which image formats are supported?</h3>
                 <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
               </summary>
               <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
@@ -125,16 +125,16 @@ const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
 
           <h2 class="text-xl sm:text-2xl font-headline font-bold text-on-surface tracking-tight mt-12">Related tools</h2>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
-            <a href="/en/image-compressor" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+            <a href="/en/image-compressor/" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
               <Icon name="compress" class="text-lg text-rose-600" /> Image compressor
             </a>
-            <a href="/en/image-resizer" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+            <a href="/en/image-resizer/" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
               <Icon name="crop" class="text-lg text-rose-600" /> Image resizer
             </a>
-            <a href="/en/heic-to-jpg" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+            <a href="/en/heic-to-jpg/" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
               <Icon name="image" class="text-lg text-rose-600" /> HEIC to JPG
             </a>
-            <a href="/en/favicon-generator" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
+            <a href="/en/favicon-generator/" class="flex items-center gap-2 bg-surface border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all p-3 text-sm font-medium text-on-surface">
               <Icon name="star" class="text-lg text-rose-600" /> Favicon generator
             </a>
           </div>
