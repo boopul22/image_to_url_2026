@@ -2,9 +2,10 @@
 import Icon from './Icon.astro';
 // Multi-image "your links are ready" view for the /share screen after a BULK
 // upload. Rendered SSR only (proper page section — no close button, no in-place
-// reveal). Deliberately a fast, flat LIST rather than N full SharePanels: no
-// per-row QR / watermark / snippet grid (cluttered at up to 25 rows). The single
-// SharePanel.astro still owns the rich single-image experience.
+// reveal). A fast, flat LIST rather than N full SharePanels (no per-row QR /
+// snippet grid — cluttered at up to 25 rows), but each row DOES get an
+// on-demand watermark toggle so the user can brand individual images. The single
+// SharePanel.astro still owns the full single-image experience.
 //
 // Every URL is pre-validated (https + our hosts) by getValidUrls() in share.astro
 // before it reaches here, so rendering them in <img src>, inputs and the copy-all
@@ -25,13 +26,6 @@ const { urls: rawUrls, skipped = 0, copyDelayMs } = Astro.props;
 // Defensive re-validation (never trust the caller): this is the last hop before
 // the URLs hit the DOM.
 const urls = getValidUrls(rawUrls);
-
-// Pre-build the three copy-all payloads server-side (validated URLs only).
-const copyData = {
-  plain: urls.join('\n'),
-  md: urls.map((u) => `![](${u})`).join('\n'),
-  html: urls.map((u) => `<img src="${u}" alt="">`).join('\n'),
-};
 ---
 
 <section id="share-multi" class="max-w-xl mx-auto"
@@ -43,7 +37,7 @@ const copyData = {
         {urls.length} link{urls.length === 1 ? '' : 's'} ready
       </h2>
     </div>
-    <p class="text-xs sm:text-sm text-on-surface-variant mt-1 ml-8">Copy them below — one at a time or all at once.</p>
+    <p class="text-xs sm:text-sm text-on-surface-variant mt-1 ml-8">Copy them below — one at a time or all at once. Toggle a watermark per image.</p>
   </div>
 
   {skipped > 0 && (
@@ -58,7 +52,8 @@ const copyData = {
   )}
 
   <div class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
-    <!-- Copy-all bar: format toggle + one button that copies every link. -->
+    <!-- Copy-all bar: format toggle + one button that copies every link
+         (reflecting each row's current watermark choice). -->
     <div>
       <div class="flex items-center justify-between gap-2 flex-wrap">
         <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">All links</label>
@@ -72,26 +67,33 @@ const copyData = {
         </div>
       </div>
       <textarea id="mc-all" readonly rows="3"
-                class="w-full mt-1 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600 resize-none"></textarea>
+                class="w-full mt-1 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600 resize-none">{urls.join('\n')}</textarea>
       <button id="mc-copy-all"
               class="mc-copy-all mt-2 w-full bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">
         Copy all {urls.length} links
       </button>
     </div>
 
-    <!-- Per-image rows: thumb + direct URL + copy. -->
+    <!-- Per-image rows: thumb + direct URL + per-row watermark toggle + copy. -->
     <div class="space-y-2 pt-2 border-t border-outline-variant/40">
       <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Each link</label>
       <div id="mc-list" class="flex flex-col gap-2 max-h-[28rem] overflow-auto">
-        {urls.map((u) => (
-          <div class="flex items-center gap-2">
+        {urls.map((u, i) => (
+          <div class="mc-row flex items-start gap-2" data-index={i}>
             <a href={u} target="_blank" rel="noopener"
                class="flex-shrink-0 block w-12 h-12 border border-outline-variant/40 bg-surface-container-lowest overflow-hidden">
-              <img src={u} alt="Uploaded image" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+              <img class="mc-thumb w-full h-full object-cover" src={u} alt="Uploaded image" loading="lazy" decoding="async" />
             </a>
-            <input type="text" readonly value={u}
-                   class="flex-1 min-w-0 bg-white border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600" />
-            <button type="button" data-copy-url={u}
+            <div class="flex-1 min-w-0">
+              <input type="text" readonly value={u}
+                     class="mc-url w-full bg-white border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600" />
+              <button type="button" data-index={i} aria-pressed="false" hidden
+                      class="mc-wm mt-1 inline-flex items-center gap-1 bg-surface border border-outline-variant/40 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 transition-colors">
+                <Icon name="branding_watermark" class="text-xs" />
+                <span class="mc-wm-label">Watermark</span>
+              </button>
+            </div>
+            <button type="button" data-index={i}
                     class="mc-copy bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Copy</button>
           </div>
         ))}
@@ -114,16 +116,24 @@ const copyData = {
     </span>
   </a>
 
-  <script type="application/json" id="mc-data" set:html={JSON.stringify(copyData)}></script>
+  <script type="application/json" id="mc-data" set:html={JSON.stringify(urls)}></script>
 </section>
 
 <script>
+  import { brandableId, generateBrandedUrl } from '../lib/watermark';
+
   const root = document.getElementById('share-multi');
   const allBox = document.getElementById('mc-all') as HTMLTextAreaElement | null;
   const dataEl = document.getElementById('mc-data');
 
   if (root && allBox && dataEl) {
-    const DATA: Record<string, string> = JSON.parse(dataEl.textContent || '{}');
+    const urls: string[] = JSON.parse(dataEl.textContent || '[]');
+    // Per-image state — `active` picks which URL the row's input, copy button and
+    // the copy-all payload use; `branded` is filled lazily the first time the
+    // user turns the watermark on for that image.
+    type Row = { clean: string; branded: string | null; active: 'clean' | 'branded'; busy: boolean };
+    const rows: Row[] = urls.map((u) => ({ clean: u, branded: null, active: 'clean', busy: false }));
+
     const fmtBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.mc-fmt'));
     const copyAllBtn = document.getElementById('mc-copy-all') as HTMLButtonElement | null;
     let activeFmt: 'plain' | 'md' | 'html' = 'plain';
@@ -143,6 +153,17 @@ const copyData = {
       } catch { /* best-effort */ }
     }
 
+    const urlFor = (r: Row) => (r.active === 'branded' && r.branded ? r.branded : r.clean);
+
+    function buildPayload(fmt: 'plain' | 'md' | 'html') {
+      return rows.map((r) => {
+        const u = urlFor(r);
+        if (fmt === 'md') return `![](${u})`;
+        if (fmt === 'html') return `<img src="${u}" alt="">`;
+        return u;
+      }).join('\n');
+    }
+
     function setFmtStyles() {
       const active = ['bg-rose-600', 'text-white'];
       const idle = ['bg-white', 'text-on-surface-variant', 'hover:bg-surface-container'];
@@ -153,9 +174,65 @@ const copyData = {
     }
 
     function syncAll() {
-      allBox!.value = DATA[activeFmt] ?? '';
+      allBox!.value = buildPayload(activeFmt);
       setFmtStyles();
     }
+
+    const rowEl = (i: number) => document.querySelector<HTMLElement>(`.mc-row[data-index="${i}"]`);
+
+    function syncRow(i: number) {
+      const r = rows[i];
+      const el = rowEl(i);
+      if (!el) return;
+      const input = el.querySelector<HTMLInputElement>('.mc-url');
+      if (input) input.value = urlFor(r);
+      const wmBtn = el.querySelector<HTMLButtonElement>('.mc-wm');
+      const label = el.querySelector<HTMLElement>('.mc-wm-label');
+      const on = r.active === 'branded';
+      if (wmBtn) {
+        wmBtn.classList.toggle('bg-rose-600', on);
+        wmBtn.classList.toggle('text-white', on);
+        wmBtn.classList.toggle('bg-surface', !on);
+        wmBtn.setAttribute('aria-pressed', String(on));
+        wmBtn.disabled = r.busy;
+        wmBtn.classList.toggle('opacity-60', r.busy);
+      }
+      if (label) label.textContent = r.busy ? 'Adding…' : (on ? 'Watermarked' : 'Watermark');
+    }
+
+    async function toggleWm(i: number) {
+      const r = rows[i];
+      if (r.busy) return;
+      // Turn OFF → back to clean.
+      if (r.active === 'branded') { r.active = 'clean'; syncRow(i); syncAll(); return; }
+      // Turn ON → reuse an already-generated variant, else generate it now.
+      r.active = 'branded';
+      if (r.branded) { syncRow(i); syncAll(); return; }
+      r.busy = true; syncRow(i);
+      const thumb = rowEl(i)?.querySelector<HTMLImageElement>('.mc-thumb');
+      const branded = await generateBrandedUrl(r.clean, (objUrl) => {
+        // Instant preview on the row thumb (only if still toggled on).
+        if (r.active === 'branded' && thumb) {
+          thumb.addEventListener('load', () => URL.revokeObjectURL(objUrl), { once: true });
+          thumb.src = objUrl;
+        }
+      });
+      r.busy = false;
+      if (branded) r.branded = branded;
+      else r.active = 'clean'; // generation failed → stay clean
+      syncRow(i);
+      syncAll();
+    }
+
+    // Reveal + wire the watermark toggle only for brandable images (our 8-char
+    // short-id, non GIF/SVG). Others keep the clean-only row.
+    rows.forEach((r, i) => {
+      const wmBtn = rowEl(i)?.querySelector<HTMLButtonElement>('.mc-wm');
+      if (!wmBtn) return;
+      if (!brandableId(r.clean)) { wmBtn.remove(); return; }
+      wmBtn.hidden = false;
+      wmBtn.addEventListener('click', () => toggleWm(i));
+    });
 
     fmtBtns.forEach((b) => b.addEventListener('click', () => {
       const next = b.dataset.fmt as 'plain' | 'md' | 'html';
@@ -170,18 +247,20 @@ const copyData = {
       beacon('multi-' + activeFmt);
     });
 
-    // Per-row copy (delegated).
+    // Per-row copy — copies that row's currently active (clean/branded) URL.
     document.querySelectorAll<HTMLButtonElement>('.mc-copy').forEach((btn) => {
       btn.addEventListener('click', async () => {
-        const url = btn.dataset.copyUrl!;
-        try { await navigator.clipboard.writeText(url); } catch { /* ignore */ }
+        const i = Number(btn.dataset.index);
+        const u = urlFor(rows[i]);
+        try { await navigator.clipboard.writeText(u); } catch { /* ignore */ }
         flash(btn, 'Copied!');
         beacon('multi-row');
       });
     });
 
-    // Copy-gate: hold the copy buttons for a moment so the eager ad renders
-    // first (same concept as SharePanel). Opt-in via data-copy-delay (/share only).
+    // Copy-gate: hold the COPY buttons for a moment so the eager ad renders first
+    // (same concept as SharePanel). The watermark toggle stays live. Opt-in via
+    // data-copy-delay (/share only).
     function runCopyGate(ms: number) {
       const btns = [copyAllBtn, ...document.querySelectorAll<HTMLButtonElement>('.mc-copy')].filter(Boolean) as HTMLButtonElement[];
       if (!btns.length) return;
@@ -200,6 +279,7 @@ const copyData = {
       }, 1000);
     }
 
+    rows.forEach((_, i) => syncRow(i));
     syncAll();
     const delay = Number(root.dataset.copyDelay) || 0;
     if (delay > 0) runCopyGate(delay);
