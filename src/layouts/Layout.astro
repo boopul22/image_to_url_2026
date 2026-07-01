@@ -35,6 +35,12 @@ interface Props {
   breadcrumbs?: { name: string; url: string }[];
   /** ISO-8601 date string surfaced as visible text and `WebPage.dateModified` */
   lastModified?: string;
+  /** Load the AdSense library IMMEDIATELY instead of interaction-gating it.
+   *  Only for noindex, non-cached dead-end screens (e.g. /share) where the
+   *  performance score is irrelevant and the high-intent visitor bounces fast —
+   *  so waiting for a scroll/click just burns the impression. Never set this on
+   *  an indexed content page; it defeats the LCP-protecting gate. */
+  eagerAds?: boolean;
 }
 
 const {
@@ -50,6 +56,7 @@ const {
   hreflangAlternates,
   breadcrumbs,
   lastModified,
+  eagerAds = false,
 } = Astro.props;
 
 // Clamp the meta description to <=158 chars at a word boundary so it never
@@ -283,7 +290,7 @@ function hreflangUrl(loc: Locale): string {
          unchanged; scroll is an interaction trigger, so the library is already loading
          by the time any below-fold slot is pushed. Component inline push({}) calls
          queue harmlessly on the window.adsbygoogle array until the library loads. -->
-    <script is:inline define:vars={{ adClient: AD_CLIENT }}>
+    <script is:inline define:vars={{ adClient: AD_CLIENT, eagerAds }}>
       (function () {
         var loaded = false;
         function loadAds() {
@@ -295,6 +302,10 @@ function hreflangUrl(loc: Locale): string {
           s.crossOrigin = 'anonymous';
           document.head.appendChild(s);
         }
+        // Eager pages (noindex, non-cached dead-ends like /share): load the library
+        // right now so the rail slots fill on first paint instead of waiting for an
+        // interaction. Safe because these pages are never audited for LCP/score.
+        if (eagerAds) { loadAds(); return; }
         // Primary: load on the first real user interaction.
         ['scroll', 'pointerdown', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (evt) {
           window.addEventListener(evt, loadAds, { once: true, passive: true });

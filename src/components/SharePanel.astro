@@ -18,16 +18,24 @@ import { getValidUrl } from '../lib/share-url';
 export interface Props {
   /** When set (SSR fallback), render the panel populated + visible. */
   url?: string;
+  /** Hold the copy buttons for this many ms after load, showing a visible
+   *  countdown, so the (eagerly-loaded) ad has time to render before the
+   *  high-intent visitor grabs the link and bounces. Opt-in — set ONLY on the
+   *  /share screen. The in-place panel embedded in the uploaders omits it, so
+   *  tool pages keep their instant copy. Only takes effect in the SSR-visible
+   *  path, never in the showSharePanel() in-place reveal. */
+  copyDelayMs?: number;
 }
 
-const { url } = Astro.props;
+const { url, copyDelayMs } = Astro.props;
 const valid = getValidUrl(url ?? null);
 const snipMd = valid ? `![](${valid})` : '';
 const snipHtml = valid ? `<img src="${valid}" alt="">` : '';
 const snipBb = valid ? `[img]${valid}[/img]` : '';
 ---
 
-<section id="share-panel" hidden={!valid} class="max-w-xl mx-auto">
+<section id="share-panel" hidden={!valid} class="max-w-xl mx-auto"
+         data-copy-delay={copyDelayMs && copyDelayMs > 0 ? String(copyDelayMs) : undefined}>
   <div id="share-main">
     <div class="mb-5 flex items-start justify-between gap-3">
       <div>
@@ -377,6 +385,44 @@ const snipBb = valid ? `[img]${valid}[/img]` : '';
 
     closeBtn?.addEventListener('click', () => { panel.hidden = true; });
 
+    // Copy-gate (/share only): briefly hold the copy buttons after load so the
+    // eagerly-loaded ad has a moment to render before the high-intent visitor
+    // copies and bounces. Shown as a visible countdown ("Preparing your link…")
+    // so it reads as preparing, not broken. Opt-in via data-copy-delay, which is
+    // set ONLY on the /share screen — the in-place panel on tool pages never sets
+    // it, and this only runs in the SSR-visible init below (not showSharePanel).
+    function runCopyGate(ms: number) {
+      const copyBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.copy-btn'));
+      if (!copyBtns.length) return;
+      const primary = copyBtns.find((b) => b.dataset.copyTarget === 'share-url') ?? copyBtns[0];
+      const subtitle = panel!.querySelector('#share-main p');
+      const primaryLabel = primary.textContent ?? 'Copy';
+      const subLabel = subtitle?.textContent ?? '';
+
+      copyBtns.forEach((b) => {
+        b.disabled = true;
+        b.classList.add('opacity-60', 'cursor-not-allowed');
+      });
+
+      let remaining = Math.max(1, Math.ceil(ms / 1000));
+      const paint = () => {
+        primary.textContent = remaining + 's';
+        if (subtitle) subtitle.textContent = `Preparing your link… ${remaining}s`;
+      };
+      paint();
+      const iv = window.setInterval(() => {
+        remaining -= 1;
+        if (remaining > 0) { paint(); return; }
+        window.clearInterval(iv);
+        copyBtns.forEach((b) => {
+          b.disabled = false;
+          b.classList.remove('opacity-60', 'cursor-not-allowed');
+        });
+        primary.textContent = primaryLabel;
+        if (subtitle) subtitle.textContent = subLabel;
+      }, 1000);
+    }
+
     // In-place reveal API for the uploaders' "Get Link" handlers.
     (window as any).showSharePanel = (raw: string) => {
       const u = getValidUrl(raw);
@@ -390,6 +436,10 @@ const snipBb = valid ? `[img]${valid}[/img]` : '';
     };
 
     // SSR fallback (/share): the panel is already visible + prefilled — init now.
-    if (!panel.hidden && urlInput.value) load(urlInput.value);
+    if (!panel.hidden && urlInput.value) {
+      load(urlInput.value);
+      const delay = Number(panel.dataset.copyDelay) || 0;
+      if (delay > 0) runCopyGate(delay);
+    }
   }
 </script>
