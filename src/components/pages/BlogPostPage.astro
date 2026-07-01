@@ -117,6 +117,12 @@ const displayHtml = post.htmlContent
   ? rewriteOwnedCdnImagesInHtml(renderedHtml ?? post.htmlContent, 800)
   : null;
 
+// Append the FAQ section as the final TOC entry (only when FAQs exist), so it
+// mirrors the on-page FAQ `<section id="faq">` below.
+if (post.faqItems?.length) {
+  tocItems.push({ id: 'faq', text: 'FAQ', level: 2 });
+}
+
 const showToc = tocItems.length >= 3;
 
 // `t()` returns the key string when a translation is missing, so a plain
@@ -242,11 +248,6 @@ const faqSchema = post.faqItems?.length ? {
         >
           <Fragment set:html={post.title.replace(/SVG/g, '<span class="relative whitespace-nowrap">SVG<span class="absolute bottom-1 left-0 w-full h-3 bg-tertiary/25 -z-10"></span></span>')} />
         </h1>
-        {post.excerpt && (
-          <p class="mt-4 sm:mt-5 text-lg sm:text-xl leading-relaxed text-on-surface-variant max-w-[42rem]">
-            {post.excerpt}
-          </p>
-        )}
         <div class="mt-7 sm:mt-8 flex flex-wrap items-center gap-x-5 gap-y-4">
           <div class="flex items-center gap-3">
             <img
@@ -382,7 +383,7 @@ const faqSchema = post.faqItems?.length ? {
 
       <!-- FAQ Section -->
       {post.faqItems && post.faqItems.length > 0 && (
-        <section class="mt-14 sm:mt-16">
+        <section id="faq" class="mt-14 sm:mt-16 scroll-mt-24">
           <h2 class="text-2xl sm:text-3xl font-headline font-black mb-6 flex items-center gap-3 text-on-surface tracking-tight">
             <Icon name="help" class="text-primary" />
             Frequently Asked Questions
