@@ -224,7 +224,7 @@ const pageSchema = [
         </div>
 
     <div class="soft-uploader w-full max-w-xl mx-auto">
-      <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" class="hidden" />
+      <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" multiple class="hidden" />
 
       <!-- Soft drop card: padded gray shell -->
       <div class="su-card su-inner-shadow bg-surface-container p-2 border border-outline-variant/40">
@@ -800,18 +800,21 @@ const pageSchema = [
   // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
   // Shared with the tool-page uploader so both report the same signal.
 
-  // Cached login check for the auto-delete "Never" gate.
-  let isLoggedIn: boolean | null = null;
-  async function fetchLoggedIn(): Promise<boolean> {
-    if (isLoggedIn !== null) return isLoggedIn;
-    try {
-      const res = await fetch('/api/me', { credentials: 'same-origin' });
-      const data = await res.json();
-      isLoggedIn = !!(data && data.user);
-    } catch {
-      isLoggedIn = false;
+  // Cached /api/me payload — the auto-delete "Never" gate reads .user; the bulk
+  // upload reads .upload.remaining to pre-slice a selection. One fetch per page;
+  // the server 429 is the real backstop, so a stale `remaining` only costs an
+  // extra "skipped" label.
+  let mePromise: Promise<any> | null = null;
+  function fetchMe(): Promise<any> {
+    if (!mePromise) {
+      mePromise = fetch('/api/me', { credentials: 'same-origin' })
+        .then((r) => r.json())
+        .catch(() => ({ user: null, upload: null }));
     }
-    return isLoggedIn;
+    return mePromise;
+  }
+  async function fetchLoggedIn(): Promise<boolean> {
+    return !!(await fetchMe()).user;
   }
 
   // Auto-delete dropdown: live-update the inline hint line.
@@ -928,12 +931,108 @@ const pageSchema = [
     e.preventDefault();
     panel.classList.remove('!border-rose-400', '!bg-rose-50');
     const files = e.dataTransfer?.files;
-    if (files && files.length > 0) uploadFile(files[0]);
+    if (files && files.length > 0) handleFiles(files);
   });
 
   fileInput.addEventListener('change', () => {
-    if (fileInput.files && fileInput.files.length > 0) uploadFile(fileInput.files[0]);
+    if (fileInput.files && fileInput.files.length > 0) handleFiles(fileInput.files);
   });
+
+  async function handleFiles(files: FileList) {
+    // Ad-block gate covers both single and bulk paths in one place.
+    if (!(await (window as any).__adblockGate?.check())) {
+      fileInput.value = '';
+      return;
+    }
+    if (files.length === 1) { uploadFile(files[0]); return; }
+    // Bulk path — open to everyone. Each file counts against the caller's daily
+    // quota (guest 5 / signed-in 25); uploadBatch pre-slices to what remains.
+    uploadBatch(Array.from(files));
+  }
+
+  const MAX_BATCH = 25; // never exceeds the highest daily quota (signed-in)
+
+  async function uploadBatch(files: File[]) {
+    // Pre-slice to what the caller's daily quota allows so we don't fire doomed
+    // requests. The server still enforces per file (429), so a stale/unknown
+    // remaining just means a few extra fast rejections handled below.
+    const me = await fetchMe();
+    const remaining = typeof me?.upload?.remaining === 'number' ? me.upload.remaining : Infinity;
+
+    if (remaining <= 0) {
+      // Nothing left today — mirror the single-file 429 UX (limit copy + sign-in).
+      showState('error');
+      errorText.textContent = me?.upload?.resetIn
+        ? `You've reached your daily upload limit. It resets in about ${me.upload.resetIn}.`
+        : "You've reached your daily upload limit.";
+      errorSignin.classList.remove('hidden');
+      errorSignin.classList.add('flex');
+      showLoginError();
+      fileInput.value = '';
+      return;
+    }
+
+    const toUpload = files.slice(0, Math.min(files.length, MAX_BATCH, remaining));
+
+    showState('idle');
+    progressBar.classList.remove('hidden');
+    progressFill.style.width = '0%';
+    uploadIcon.innerHTML = ic_hourglass_top;
+    uploadText.textContent = `Uploading 0 / ${toUpload.length}`;
+    uploadSubtext.textContent = 'Bulk upload in progress…';
+    uploadBtn.textContent = i18n.uploading;
+
+    const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
+    const ab = '0'; // gated in handleFiles
+    const results: { name: string; url: string }[] = [];
+    const failures: { name: string; error: string }[] = [];
+
+    for (let i = 0; i < toUpload.length; i++) {
+      const file = toUpload[i];
+      uploadText.textContent = `Uploading ${i + 1} / ${toUpload.length}`;
+      uploadSubtext.textContent = file.name;
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('adblock', ab);
+        if (expiresInEl) formData.append('expires_in', expiresInEl.value);
+        const response = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (!response.ok || data.error) {
+          // 429 backstop: a race pushed the count over between /api/me and now.
+          // Stop — every remaining file would 429 too; they're reported as skipped.
+          if (response.status === 429) { failures.push({ name: file.name, error: data.error || 'Daily limit reached' }); break; }
+          throw new Error(data.error || i18n.failed);
+        }
+        results.push({ name: file.name, url: data.data.url });
+      } catch (err: any) {
+        failures.push({ name: file.name, error: err.message || i18n.failed });
+      }
+      progressFill.style.width = `${Math.round(((i + 1) / toUpload.length) * 100)}%`;
+    }
+
+    if (results.length === 0) {
+      showState('error');
+      errorText.textContent = failures[0]?.error || 'All uploads failed';
+      return;
+    }
+
+    // Everything selected minus what actually got hosted (over-quota, over
+    // MAX_BATCH, or per-file failures) is reported as "skipped" on /share.
+    const skipped = files.length - results.length;
+
+    // A genuine single upload keeps the full rich single panel.
+    if (results.length === 1 && skipped === 0) {
+      window.location.href = '/share?u=' + encodeURIComponent(results[0].url);
+      return;
+    }
+
+    // Multiple links → the multi-image /share view (rich list + ad rails).
+    const params = new URLSearchParams();
+    for (const r of results) params.append('u', r.url);
+    if (skipped > 0) params.set('skipped', String(skipped));
+    window.location.href = '/share?' + params.toString();
+  }
 
   copyBtn.addEventListener('click', () => {
     // "Get Link" — send the user to the /share screen, which owns the rich share
@@ -954,12 +1053,7 @@ const pageSchema = [
   }
 
   async function uploadFile(file: File) {
-    // Ad-block gate: if the user has an ad-blocker we explain why we need it off
-    // and offer a retry. Cancelling leaves the uploader idle.
-    if (!(await (window as any).__adblockGate?.check())) {
-      fileInput.value = '';
-      return;
-    }
+    // Ad-block gate already ran in handleFiles (covers single + bulk paths).
 
     // "Never" requires a signed-in account; server clamps anon to 24h otherwise.
     if (expiresInSel?.value === 'never') {
