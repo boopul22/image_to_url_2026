@@ -121,7 +121,7 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
                     ? `<button onclick="postAction('${p.id}','unpublish')" class="a-btn a-btn-sm a-btn-ghost">Unpublish</button>`
                     : p.status === 'draft'
                     ? `<button onclick="postAction('${p.id}','publish')" class="a-btn a-btn-sm a-btn-primary">Publish</button>` : ''}
-                  <button onclick="postAction('${p.id}','archive')" class="a-btn a-btn-sm a-btn-danger">Archive</button>
+                  <button onclick="postAction('${p.id}','delete',this)" data-title="${esc(p.title)}" class="a-btn a-btn-sm a-btn-danger">Delete</button>
                 </div>
               </td>
             </tr>`).join('')}
@@ -140,10 +140,11 @@ Astro.response.headers.set('Cache-Control', 'private, no-store');
       : '';
   }
 
-  (window as any).postAction = async (id: string, action: string) => {
-    if (action === 'archive') {
-      if (!confirm('Archive this post?')) return;
-      await fetch('/api/admin/cms/posts', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
+  (window as any).postAction = async (id: string, action: string, el?: HTMLElement) => {
+    if (action === 'delete') {
+      const title = el?.dataset.title || 'this post';
+      if (!confirm(`Permanently delete “${title}”?\n\nThis removes it from the database for good and cannot be undone.`)) return;
+      await fetch('/api/admin/cms/posts', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, permanent: true }) });
     } else {
       await fetch(`/api/admin/cms/posts/${id}/${action}`, { method: 'POST' });
     }

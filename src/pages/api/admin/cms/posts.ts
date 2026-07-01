@@ -131,7 +131,7 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
 
   const db = getDB(locals);
   const body = await request.json();
-  const { id } = body;
+  const { id, permanent } = body;
 
   if (!id) {
     return new Response(JSON.stringify({ error: 'Missing post id' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
@@ -140,6 +140,24 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
   const post = await db.prepare('SELECT title FROM posts WHERE id = ?').bind(id).first<{ title: string }>();
   if (!post) {
     return new Response(JSON.stringify({ error: 'Post not found' }), { status: 404, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  if (permanent) {
+    // Hard delete: remove the post row and any translated copies (post_translations
+    // cascades on delete, but D1 doesn't always enforce FKs, so delete explicitly).
+    await db.prepare('DELETE FROM post_translations WHERE post_id = ?').bind(id).run();
+    await db.prepare('DELETE FROM posts WHERE id = ?').bind(id).run();
+
+    await logActivity(db, {
+      userId: locals.user.id,
+      userName: locals.user.name,
+      action: 'delete_post',
+      entityType: 'post',
+      entityId: id,
+      entityTitle: post.title,
+    });
+
+    return new Response(JSON.stringify({ success: true, deleted: true }), { headers: { 'Content-Type': 'application/json' } });
   }
 
   await db
