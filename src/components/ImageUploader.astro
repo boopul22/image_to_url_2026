@@ -94,20 +94,9 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
               </div>
             </div>
 
-            <!-- State: batch success -->
-            <div id="state-batch" class="p-4 sm:p-6 hidden">
-              <div class="flex items-center gap-3 mb-4">
-                <Icon name="check_circle" class="text-rose-600 text-lg sm:text-xl" fill />
-                <span class="font-bold text-on-surface text-sm sm:text-lg" id="batch-heading">Uploaded 0 files</span>
-                <button id="batch-another" class="ml-auto text-primary font-bold text-xs sm:text-sm hover:underline flex-shrink-0">
-                  Upload more
-                </button>
-              </div>
-              <div id="batch-list" class="flex flex-col gap-2 max-h-80 overflow-auto"></div>
-              <button id="batch-copy-all" class="su-btn mt-3 w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm py-3 px-6 transition-colors active:scale-95" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">
-                Copy all URLs
-              </button>
-            </div>
+            <!-- Bulk uploads (>1 file) no longer render an in-page list here —
+                 they navigate to the multi-image /share screen (rich list + ad
+                 rails). Single uploads use #state-success below. -->
 
             <!-- State: error -->
             <div id="state-error" class="p-4 sm:p-6 hidden">
@@ -196,18 +185,20 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
   // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
   // Shared with HomePage.astro so both uploaders report the same signal.
 
-  // Cached login check shared between the auto-delete gate and the batch-upload gate.
-  let isLoggedIn: boolean | null = null;
-  async function fetchLoggedIn(): Promise<boolean> {
-    if (isLoggedIn !== null) return isLoggedIn;
-    try {
-      const res = await fetch('/api/me', { credentials: 'same-origin' });
-      const data = await res.json();
-      isLoggedIn = !!(data && data.user);
-    } catch {
-      isLoggedIn = false;
+  // Cached /api/me payload — shared by the never-expire login gate and the
+  // bulk-upload quota pre-slice. One fetch per page; the server 429 is the real
+  // backstop, so a slightly stale `remaining` only costs an extra "skipped" label.
+  let mePromise: Promise<any> | null = null;
+  function fetchMe(): Promise<any> {
+    if (!mePromise) {
+      mePromise = fetch('/api/me', { credentials: 'same-origin' })
+        .then((r) => r.json())
+        .catch(() => ({ user: null, upload: null }));
     }
-    return isLoggedIn;
+    return mePromise;
+  }
+  async function fetchLoggedIn(): Promise<boolean> {
+    return !!(await fetchMe()).user;
   }
 
   const expiresInSel = document.getElementById('expires-in') as HTMLSelectElement | null;
@@ -250,12 +241,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
   const progressFill = document.getElementById('progress-fill')!;
   const stateIdle = document.getElementById('state-idle')!;
   const stateSuccess = document.getElementById('state-success')!;
-  const stateBatch = document.getElementById('state-batch')!;
   const stateError = document.getElementById('state-error')!;
-  const batchHeading = document.getElementById('batch-heading')!;
-  const batchList = document.getElementById('batch-list')!;
-  const batchCopyAll = document.getElementById('batch-copy-all')!;
-  const batchAnother = document.getElementById('batch-another')!;
   const resultUrl = document.getElementById('result-url') as HTMLInputElement;
   const copyBtn = document.getElementById('copy-btn')!;
   const uploadAnother = document.getElementById('upload-another')!;
@@ -265,10 +251,9 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
   const errorSignin = document.getElementById('error-signin')!;
   const errorPromo = document.getElementById('error-promo');
 
-  function showState(state: 'idle' | 'success' | 'batch' | 'error') {
+  function showState(state: 'idle' | 'success' | 'error') {
     stateIdle.classList.toggle('hidden', state !== 'idle');
     stateSuccess.classList.toggle('hidden', state !== 'success');
-    stateBatch.classList.toggle('hidden', state !== 'batch');
     stateError.classList.toggle('hidden', state !== 'error');
   }
 
@@ -335,38 +320,51 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
       uploadFile(files[0]);
       return;
     }
-    // Batch path — require login
-    const loggedIn = await fetchLoggedIn();
-    if (!loggedIn) {
+    // Bulk path — open to everyone. Each file counts against the caller's daily
+    // quota (guest 5 / signed-in 25); uploadBatch pre-slices to what remains.
+    uploadBatch(Array.from(files));
+  }
+
+  const MAX_BATCH = 25; // never exceeds the highest daily quota (signed-in)
+
+  async function uploadBatch(files: File[]) {
+    // Pre-slice to what the caller's daily quota allows so we don't fire doomed
+    // requests. The server still enforces per file (429), so a stale/unknown
+    // remaining just means a few extra fast rejections handled below.
+    const me = await fetchMe();
+    const remaining = typeof me?.upload?.remaining === 'number' ? me.upload.remaining : Infinity;
+
+    if (remaining <= 0) {
+      // Nothing left today — mirror the single-file 429 UX (limit copy + sign-in).
       showState('error');
-      errorText.textContent = 'Sign in to upload multiple images at once.';
+      errorText.textContent = me?.upload?.resetIn
+        ? `You've reached your daily upload limit. It resets in about ${me.upload.resetIn}.`
+        : "You've reached your daily upload limit.";
       errorSignin.classList.remove('hidden');
       errorSignin.classList.add('flex');
       showLoginError();
       fileInput.value = '';
       return;
     }
-    uploadBatch(Array.from(files));
-  }
 
-  async function uploadBatch(files: File[]) {
+    const toUpload = files.slice(0, Math.min(files.length, MAX_BATCH, remaining));
+
     showState('idle');
     progressBar.classList.remove('hidden');
     progressFill.style.width = '0%';
     uploadIcon.innerHTML = ic_hourglass_top;
-    uploadText.textContent = `Uploading 0 / ${files.length}`;
-    uploadSubtext.textContent = 'Batch upload in progress…';
+    uploadText.textContent = `Uploading 0 / ${toUpload.length}`;
+    uploadSubtext.textContent = 'Bulk upload in progress…';
     uploadBtn.textContent = 'Uploading...';
 
-    batchList.innerHTML = '';
     const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
     const ab = '0'; // gated in handleFiles
     const results: { name: string; url: string }[] = [];
     const failures: { name: string; error: string }[] = [];
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      uploadText.textContent = `Uploading ${i + 1} / ${files.length}`;
+    for (let i = 0; i < toUpload.length; i++) {
+      const file = toUpload[i];
+      uploadText.textContent = `Uploading ${i + 1} / ${toUpload.length}`;
       uploadSubtext.textContent = file.name;
       try {
         const formData = new FormData();
@@ -375,12 +373,17 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
         if (expiresInEl) formData.append('expires_in', expiresInEl.value);
         const response = await fetch('/api/upload', { method: 'POST', body: formData });
         const data = await response.json();
-        if (!response.ok || data.error) throw new Error(data.error || 'Upload failed');
+        if (!response.ok || data.error) {
+          // 429 backstop: a race pushed the count over between /api/me and now.
+          // Stop — every remaining file would 429 too; they'll be reported as skipped.
+          if (response.status === 429) { failures.push({ name: file.name, error: data.error || 'Daily limit reached' }); break; }
+          throw new Error(data.error || 'Upload failed');
+        }
         results.push({ name: file.name, url: data.data.url });
       } catch (err: any) {
         failures.push({ name: file.name, error: err.message || 'Upload failed' });
       }
-      progressFill.style.width = `${Math.round(((i + 1) / files.length) * 100)}%`;
+      progressFill.style.width = `${Math.round(((i + 1) / toUpload.length) * 100)}%`;
     }
 
     if (results.length === 0) {
@@ -389,44 +392,22 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
       return;
     }
 
-    batchHeading.textContent =
-      failures.length > 0
-        ? `Uploaded ${results.length} / ${files.length} (${failures.length} failed)`
-        : `Uploaded ${results.length} files`;
+    // Everything selected minus what actually got hosted (over-quota, over
+    // MAX_BATCH, or per-file failures) is reported as "skipped" on /share.
+    const skipped = files.length - results.length;
 
-    for (const r of results) {
-      const row = document.createElement('div');
-      row.className = 'flex items-center gap-2';
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.readOnly = true;
-      input.value = r.url;
-      input.className = 'su-control flex-1 min-w-0 bg-surface-container-low border border-outline-variant px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-500';
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.textContent = 'Copy';
-      btn.className = 'su-btn bg-white hover:bg-rose-600 hover:text-white text-on-surface font-bold text-xs py-2 px-3 border border-outline-variant transition-colors flex-shrink-0';
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(r.url);
-        btn.textContent = 'Copied!';
-        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
-      });
-      row.appendChild(input);
-      row.appendChild(btn);
-      batchList.appendChild(row);
+    // A genuine single upload keeps the full rich single panel.
+    if (results.length === 1 && skipped === 0) {
+      window.location.href = '/share?u=' + encodeURIComponent(results[0].url);
+      return;
     }
 
-    showState('batch');
+    // Multiple links → the multi-image /share view (rich list + ad rails).
+    const params = new URLSearchParams();
+    for (const r of results) params.append('u', r.url);
+    if (skipped > 0) params.set('skipped', String(skipped));
+    window.location.href = '/share?' + params.toString();
   }
-
-  batchCopyAll.addEventListener('click', () => {
-    const urls = Array.from(batchList.querySelectorAll('input')).map((i) => (i as HTMLInputElement).value).join('\n');
-    navigator.clipboard.writeText(urls);
-    (batchCopyAll as HTMLButtonElement).textContent = 'Copied!';
-    setTimeout(() => { (batchCopyAll as HTMLButtonElement).textContent = 'Copy all URLs'; }, 2000);
-  });
-
-  batchAnother.addEventListener('click', resetIdle);
 
   copyBtn.addEventListener('click', () => {
     // "Get Link" — send the user to the /share screen, which owns the rich share

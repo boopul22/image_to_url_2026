@@ -1,0 +1,207 @@
+---
+import Icon from './Icon.astro';
+// Multi-image "your links are ready" view for the /share screen after a BULK
+// upload. Rendered SSR only (proper page section — no close button, no in-place
+// reveal). Deliberately a fast, flat LIST rather than N full SharePanels: no
+// per-row QR / watermark / snippet grid (cluttered at up to 25 rows). The single
+// SharePanel.astro still owns the rich single-image experience.
+//
+// Every URL is pre-validated (https + our hosts) by getValidUrls() in share.astro
+// before it reaches here, so rendering them in <img src>, inputs and the copy-all
+// blobs is safe — same guarantee SharePanel relies on.
+import { getValidUrls } from '../lib/share-url';
+
+export interface Props {
+  /** Already validated + deduped + capped by share.astro. */
+  urls: string[];
+  /** How many selected files were NOT hosted (over daily quota / cap / failures). */
+  skipped?: number;
+  /** Hold the copy buttons for this many ms with a visible countdown so the
+   *  eagerly-loaded ad has time to render before the visitor grabs the links. */
+  copyDelayMs?: number;
+}
+
+const { urls: rawUrls, skipped = 0, copyDelayMs } = Astro.props;
+// Defensive re-validation (never trust the caller): this is the last hop before
+// the URLs hit the DOM.
+const urls = getValidUrls(rawUrls);
+
+// Pre-build the three copy-all payloads server-side (validated URLs only).
+const copyData = {
+  plain: urls.join('\n'),
+  md: urls.map((u) => `![](${u})`).join('\n'),
+  html: urls.map((u) => `<img src="${u}" alt="">`).join('\n'),
+};
+---
+
+<section id="share-multi" class="max-w-xl mx-auto"
+         data-copy-delay={copyDelayMs && copyDelayMs > 0 ? String(copyDelayMs) : undefined}>
+  <div class="mb-5">
+    <div class="flex items-center gap-2">
+      <Icon name="check_circle" class="text-secondary text-xl sm:text-2xl" fill />
+      <h2 class="text-lg sm:text-2xl font-headline italic font-black text-on-surface">
+        {urls.length} link{urls.length === 1 ? '' : 's'} ready
+      </h2>
+    </div>
+    <p class="text-xs sm:text-sm text-on-surface-variant mt-1 ml-8">Copy them below — one at a time or all at once.</p>
+  </div>
+
+  {skipped > 0 && (
+    <a href="/api/auth/login"
+       class="flex items-center gap-2 mb-4 bg-rose-50 border border-outline-variant/40 p-3 text-on-background hover:opacity-90 transition-opacity group">
+      <Icon name="info" class="text-base text-rose-600 flex-shrink-0" fill />
+      <span class="text-xs sm:text-sm font-medium flex-1 min-w-0">
+        <strong>{urls.length} uploaded · {skipped} skipped</strong> — daily limit reached. Sign in for more uploads.
+      </span>
+      <Icon name="arrow_forward" class="text-sm text-rose-600 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
+    </a>
+  )}
+
+  <div class="bg-surface border border-outline-variant/40 rounded-xl brutal-shadow p-4 sm:p-5 space-y-5">
+    <!-- Copy-all bar: format toggle + one button that copies every link. -->
+    <div>
+      <div class="flex items-center justify-between gap-2 flex-wrap">
+        <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">All links</label>
+        <div class="inline-flex items-center border border-outline-variant/40 overflow-hidden" role="tablist" aria-label="Copy-all format">
+          <button id="mc-fmt-plain" type="button" data-fmt="plain"
+                  class="mc-fmt text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 transition-colors">Plain</button>
+          <button id="mc-fmt-md" type="button" data-fmt="md"
+                  class="mc-fmt text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border-l border-outline-variant/40 transition-colors">Markdown</button>
+          <button id="mc-fmt-html" type="button" data-fmt="html"
+                  class="mc-fmt text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border-l border-outline-variant/40 transition-colors">HTML</button>
+        </div>
+      </div>
+      <textarea id="mc-all" readonly rows="3"
+                class="w-full mt-1 bg-surface-container-lowest border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600 resize-none"></textarea>
+      <button id="mc-copy-all"
+              class="mc-copy-all mt-2 w-full bg-rose-600 hover:bg-rose-700 text-white font-headline font-semibold text-sm py-3 px-6 border border-outline-variant/40 brutal-shadow brutal-shadow-hover transition-all uppercase tracking-wide">
+        Copy all {urls.length} links
+      </button>
+    </div>
+
+    <!-- Per-image rows: thumb + direct URL + copy. -->
+    <div class="space-y-2 pt-2 border-t border-outline-variant/40">
+      <label class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Each link</label>
+      <div id="mc-list" class="flex flex-col gap-2 max-h-[28rem] overflow-auto">
+        {urls.map((u) => (
+          <div class="flex items-center gap-2">
+            <a href={u} target="_blank" rel="noopener"
+               class="flex-shrink-0 block w-12 h-12 border border-outline-variant/40 bg-surface-container-lowest overflow-hidden">
+              <img src={u} alt="Uploaded image" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </a>
+            <input type="text" readonly value={u}
+                   class="flex-1 min-w-0 bg-white border border-outline-variant/40 px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-600" />
+            <button type="button" data-copy-url={u}
+                    class="mc-copy bg-surface border border-outline-variant/40 font-label text-[11px] font-bold uppercase tracking-wider py-2 px-3 brutal-shadow-hover transition-all flex-shrink-0">Copy</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- ExtractPics cross-promo — same block as the single share panel. -->
+  <a href="https://www.extractpics.com/" target="_blank" rel="noopener" data-track-click="extractpics-cta"
+     class="flex items-center gap-3 mt-5 bg-surface border border-outline-variant/40 brutal-shadow p-4 hover:opacity-90 transition-opacity group">
+    <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 border border-outline-variant/40">
+      <Icon name="image_search" class="text-xl" fill />
+    </span>
+    <div class="flex-1 min-w-0">
+      <span class="text-sm font-bold text-on-background">Need images from a website?</span>
+      <p class="text-xs text-on-surface-variant mt-0.5">ExtractPics — grab every image from any URL, free</p>
+    </div>
+    <span class="flex-shrink-0 inline-flex items-center gap-1 bg-rose-600 text-white px-3 py-2 font-bold text-xs border border-outline-variant/40 group-hover:translate-x-0.5 transition-transform">
+      Try it <Icon name="open_in_new" class="text-sm" />
+    </span>
+  </a>
+
+  <script type="application/json" id="mc-data" set:html={JSON.stringify(copyData)}></script>
+</section>
+
+<script>
+  const root = document.getElementById('share-multi');
+  const allBox = document.getElementById('mc-all') as HTMLTextAreaElement | null;
+  const dataEl = document.getElementById('mc-data');
+
+  if (root && allBox && dataEl) {
+    const DATA: Record<string, string> = JSON.parse(dataEl.textContent || '{}');
+    const fmtBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.mc-fmt'));
+    const copyAllBtn = document.getElementById('mc-copy-all') as HTMLButtonElement | null;
+    let activeFmt: 'plain' | 'md' | 'html' = 'plain';
+
+    function flash(btn: HTMLElement, label: string) {
+      const original = btn.dataset.label ?? btn.textContent ?? '';
+      if (!btn.dataset.label) btn.dataset.label = original;
+      btn.textContent = label;
+      window.setTimeout(() => { btn.textContent = btn.dataset.label!; }, 1500);
+    }
+
+    // Best-effort analytics, matching the single panel's copy-event pipeline.
+    function beacon(format: string) {
+      try {
+        navigator.sendBeacon('/api/copy-event',
+          new Blob([JSON.stringify({ variant: 'multi', format })], { type: 'text/plain' }));
+      } catch { /* best-effort */ }
+    }
+
+    function setFmtStyles() {
+      const active = ['bg-rose-600', 'text-white'];
+      const idle = ['bg-white', 'text-on-surface-variant', 'hover:bg-surface-container'];
+      fmtBtns.forEach((b) => {
+        b.classList.remove(...active, ...idle);
+        b.classList.add(...(b.dataset.fmt === activeFmt ? active : idle));
+      });
+    }
+
+    function syncAll() {
+      allBox!.value = DATA[activeFmt] ?? '';
+      setFmtStyles();
+    }
+
+    fmtBtns.forEach((b) => b.addEventListener('click', () => {
+      const next = b.dataset.fmt as 'plain' | 'md' | 'html';
+      if (next === activeFmt) return;
+      activeFmt = next;
+      syncAll();
+    }));
+
+    copyAllBtn?.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(allBox!.value); } catch { /* ignore */ }
+      flash(copyAllBtn, 'Copied!');
+      beacon('multi-' + activeFmt);
+    });
+
+    // Per-row copy (delegated).
+    document.querySelectorAll<HTMLButtonElement>('.mc-copy').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const url = btn.dataset.copyUrl!;
+        try { await navigator.clipboard.writeText(url); } catch { /* ignore */ }
+        flash(btn, 'Copied!');
+        beacon('multi-row');
+      });
+    });
+
+    // Copy-gate: hold the copy buttons for a moment so the eager ad renders
+    // first (same concept as SharePanel). Opt-in via data-copy-delay (/share only).
+    function runCopyGate(ms: number) {
+      const btns = [copyAllBtn, ...document.querySelectorAll<HTMLButtonElement>('.mc-copy')].filter(Boolean) as HTMLButtonElement[];
+      if (!btns.length) return;
+      const primary = copyAllBtn;
+      const primaryLabel = primary?.textContent ?? '';
+      btns.forEach((b) => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); });
+      let remaining = Math.max(1, Math.ceil(ms / 1000));
+      const paint = () => { if (primary) primary.textContent = `Preparing your links… ${remaining}s`; };
+      paint();
+      const iv = window.setInterval(() => {
+        remaining -= 1;
+        if (remaining > 0) { paint(); return; }
+        window.clearInterval(iv);
+        btns.forEach((b) => { b.disabled = false; b.classList.remove('opacity-60', 'cursor-not-allowed'); });
+        if (primary) primary.textContent = primaryLabel;
+      }, 1000);
+    }
+
+    syncAll();
+    const delay = Number(root.dataset.copyDelay) || 0;
+    if (delay > 0) runCopyGate(delay);
+  }
+</script>

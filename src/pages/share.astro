@@ -13,12 +13,19 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import ToolAdSurround from '../components/ToolAdSurround.astro';
 import SharePanel from '../components/SharePanel.astro';
-import { getValidUrl } from '../lib/share-url';
+import SharePanelMulti from '../components/SharePanelMulti.astro';
+import { getValidUrls } from '../lib/share-url';
 
 // Never cache at the CDN (per-?u=) and keep it out of the index.
 Astro.response.headers.set('Cache-Control', 'private, no-store');
 
-const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
+// One image → ?u=<url>; a bulk upload → repeated ?u= params (+ &skipped=N for
+// files that didn't fit the daily quota). Validate/dedupe every URL and cap the
+// count (keeps the query string small and bounds the list).
+const MAX_SHARE_URLS = 25;
+const urls = getValidUrls(Astro.url.searchParams.getAll('u')).slice(0, MAX_SHARE_URLS);
+const skipped = Number(Astro.url.searchParams.get('skipped')) || 0;
+const single = urls.length === 1 ? urls[0] : undefined;
 ---
 
 <Layout
@@ -31,12 +38,15 @@ const url = getValidUrl(Astro.url.searchParams.get('u')) ?? undefined;
   <Nav />
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-    {url ? (
+    {urls.length > 0 ? (
       <Fragment>
-        <!-- Valid link: SharePanel renders populated + visible server-side, flanked
-             by the tool ad rails. -->
+        <!-- Valid link(s): the share panel renders populated + visible server-side,
+             flanked by the tool ad rails. One URL → the rich single panel; several
+             (a bulk upload) → the multi-image list. -->
         <ToolAdSurround>
-          <SharePanel url={url} copyDelayMs={1500} />
+          {single
+            ? <SharePanel url={single} copyDelayMs={1500} />
+            : <SharePanelMulti urls={urls} skipped={skipped} copyDelayMs={1500} />}
           <div class="max-w-xl mx-auto mt-6 text-center">
             <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
           </div>

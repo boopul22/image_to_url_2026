@@ -7,6 +7,13 @@ import { getEnv } from '../../lib/env';
 import { resolveExpiresAt } from '../../lib/images/delete';
 import { embedAttribution } from '../../lib/images/metadata';
 import { isSameSiteRequest } from '../../lib/same-origin';
+import {
+  ANON_DAILY_LIMIT,
+  USER_DAILY_LIMIT,
+  CONTACT_EMAIL,
+  getClientIP,
+  formatResetIn,
+} from '../../lib/upload-limits';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml', 'audio/mpeg', 'audio/mp3'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -37,35 +44,8 @@ function getExtension(mimeType: string): string {
   return map[mimeType] || 'bin';
 }
 
-// Daily upload limits. Hosting images costs real money in storage + bandwidth,
-// so uploads are capped per rolling 24h window. Guests get a small free
-// allowance; signing in raises it. Email CONTACT_EMAIL to request more.
-const ANON_DAILY_LIMIT = 5;
-const USER_DAILY_LIMIT = 25;
-const CONTACT_EMAIL = 'blog.boopul@gmail.com';
-
-function getClientIP(request: Request): string {
-  return (
-    request.headers.get('cf-connecting-ip') ||
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    '0.0.0.0'
-  );
-}
-
-// Human-friendly "resets in ~X" string, derived from the oldest upload still
-// inside the 24h window (SQLite stores UTC as 'YYYY-MM-DD HH:MM:SS'). The
-// window frees up exactly 24h after that oldest upload.
-function formatResetIn(oldestUtc: string | null): string {
-  if (!oldestUtc) return 'a little while';
-  const oldestMs = new Date(oldestUtc.replace(' ', 'T') + 'Z').getTime();
-  if (Number.isNaN(oldestMs)) return 'a little while';
-  const diff = oldestMs + 24 * 60 * 60 * 1000 - Date.now();
-  if (diff <= 0) return 'a few moments';
-  const minutes = Math.ceil(diff / 60000);
-  if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'}`;
-  const hours = Math.round(minutes / 60);
-  return `${hours} hour${hours === 1 ? '' : 's'}`;
-}
+// Daily upload limits + helpers now live in ../../lib/upload-limits.ts so the
+// enforcer (below) and the quota reporter (/api/me) share one source of truth.
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
