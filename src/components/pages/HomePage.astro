@@ -885,8 +885,13 @@ const pageSchema = [
     stateError.classList.toggle('hidden', state !== 'error');
   }
 
+  // Destination the Get Link button navigates to; set by both the single and
+  // bulk upload paths (bulk carries multiple u= params + skipped count).
+  let shareHref = '';
+
   function resetIdle() {
     showState('idle');
+    shareHref = '';
     progressBar.classList.add('hidden');
     progressFill.style.width = '0%';
     uploadIcon.innerHTML = ic_cloud_upload;
@@ -1021,23 +1026,27 @@ const pageSchema = [
     // MAX_BATCH, or per-file failures) is reported as "skipped" on /share.
     const skipped = files.length - results.length;
 
-    // A genuine single upload keeps the full rich single panel.
+    // Land on the success panel; /share opens only when Get Link is clicked.
     if (results.length === 1 && skipped === 0) {
-      window.location.href = '/share?u=' + encodeURIComponent(results[0].url);
-      return;
+      shareHref = '/share?u=' + encodeURIComponent(results[0].url);
+      resultUrl.value = results[0].url;
+    } else {
+      const params = new URLSearchParams();
+      for (const r of results) params.append('u', r.url);
+      if (skipped > 0) params.set('skipped', String(skipped));
+      shareHref = '/share?' + params.toString();
+      resultUrl.value = skipped > 0
+        ? `${results.length} images uploaded · ${skipped} skipped`
+        : `${results.length} images uploaded`;
     }
-
-    // Multiple links → the multi-image /share view (rich list + ad rails).
-    const params = new URLSearchParams();
-    for (const r of results) params.append('u', r.url);
-    if (skipped > 0) params.set('skipped', String(skipped));
-    window.location.href = '/share?' + params.toString();
+    progressFill.style.width = '100%';
+    showState('success');
   }
 
   copyBtn.addEventListener('click', () => {
     // "Get Link" — send the user to the /share screen, which owns the rich share
     // widget (URL, copy, formats, QR, watermark) + ad rails.
-    window.location.href = '/share?u=' + encodeURIComponent(resultUrl.value);
+    window.location.href = shareHref || '/share?u=' + encodeURIComponent(resultUrl.value);
   });
 
   uploadAnother.addEventListener('click', resetIdle);
@@ -1129,6 +1138,7 @@ const pageSchema = [
       setTimeout(() => {
         showState('success');
         resultUrl.value = data.data.url;
+        shareHref = '/share?u=' + encodeURIComponent(data.data.url);
       }, 300);
 
     } catch (err: any) {
