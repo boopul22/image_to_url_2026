@@ -206,14 +206,13 @@ const pageSchema = [
 
   <!-- Hero Section — Immediate, action-focused -->
   <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
-    <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-4">
-      <!-- Left rail — 160x600 skyscraper -->
+    <AdLeaderboard />
+    <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
+      <!-- Left rail — 160x600 skyscraper in a 300px column -->
       <AdRail side="left" />
 
-      <!-- Center column: leaderboard at top (top-aligned with rails, Ookla-style),
-           then badge, headline, upload tool -->
-      <div class="flex flex-col text-center xl:flex-1 xl:max-w-[728px] xl:min-w-0">
-        <AdLeaderboard />
+      <!-- Center column fills between the two equal 300px rails → tool centered. -->
+      <div class="flex flex-col text-center xl:flex-1 xl:min-w-0">
         <div class="max-w-4xl mx-auto w-full">
           <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-medium uppercase tracking-widest mb-3 border border-outline-variant/40">
             {t(locale, 'home.hero.badge')}
