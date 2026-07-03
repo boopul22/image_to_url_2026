@@ -1,0 +1,2 @@
+current HEAD: 4199a05
+Backup of the ad system taken 2026-07-03 before switching to fixed leaderboard + skyscraper + squares layout.

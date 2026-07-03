@@ -1,25 +1,21 @@
 ---
 /**
  * Wraps a tool widget (HEIC converter, canvas converter, PDF converter,
- * image compressor, image resizer, etc.) with the site's Ookla-style ad frame
- * (fixed sizes, in normal flow, non-sticky):
- *   - A 728x90 LEADERBOARD across the top (xl+).
- *   - A 120x450 vertical unit on the LEFT + two stacked 400x400 squares on the
- *     RIGHT flanking the widget (xl+).
- *   - A mobile/tablet responsive in-content Multiplex unit below the widget,
- *     lazy-loaded, which is all the phone/tablet layout shows.
+ * image compressor, image resizer, etc.) with the site's responsive ad layout:
+ *   - Left + right sticky RAILS (two stacked units each), xl+ only.
+ *   - A BANNER (two units side-by-side on sm+) above the widget.
+ *   - A mobile/tablet in-content Multiplex unit below the widget, lazy-loaded,
+ *     to fill the gap where desktop shows the rails.
  *
- * The wrapper breaks out of its parent's frame at xl via
+ * The wrapper breaks out of its parent's max-w-5xl frame at xl via
  * left-1/2 / -translate-x-1/2 / w-screen so the three columns + gaps fit
- * (120 + 672 + 400) inside an xl:max-w-7xl frame. Below xl the leaderboard +
- * rails are hidden and only the responsive in-content unit remains.
+ * (~280 + 672 + 280) inside an xl:max-w-7xl frame. Below xl the rails are
+ * hidden and only the banner + in-content units remain.
  */
 import AdRail from './ads/AdRail.astro';
-import AdLeaderboard from './ads/AdLeaderboard.astro';
 import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
 ---
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
-  <AdLeaderboard />
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
     <AdRail side="left" />
 

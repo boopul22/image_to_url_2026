@@ -11,16 +11,19 @@ import Icon from './Icon.astro';
  * the rest of the site stays brutalist.
  */
 import AdRail from './ads/AdRail.astro';
+import AdLeaderboard from './ads/AdLeaderboard.astro';
 import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
 ---
 
-<!-- Tool-area ads: left + right 160x600 skyscrapers flank the uploader on lg+,
-     with a 90px horizontal banner above. The wrapper breaks out of its parent's
-     max-w-5xl constraint at lg+ via left-1/2/-translate-x-1/2 so all three
-     columns + gaps fit (~1040px) inside an lg:max-w-6xl frame. -->
+<!-- Tool-area ads (Ookla-style frame): 728x90 leaderboard on top, a 160x600
+     skyscraper on the left, two stacked 300x250 squares on the right, uploader
+     in the middle — xl+ only. The wrapper breaks out of its parent's max width
+     at xl via left-1/2/-translate-x-1/2 so all columns + gaps fit inside the
+     max-w-7xl frame. Below xl only the in-content unit remains. -->
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
+  <AdLeaderboard />
   <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-    <!-- Left rail — two stacked responsive ad units (vertical + square) -->
+    <!-- Left rail — 160x600 skyscraper -->
     <AdRail side="left" />
 
     <!-- Center column: uploader widget + trust signals. -->

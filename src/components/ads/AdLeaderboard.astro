@@ -1,0 +1,33 @@
+---
+/**
+ * Ookla-style TOP leaderboard (2026-07-03): one fixed 728x90 unit centred above
+ * the tool, shown only on xl+ (where the full frame — skyscraper + squares —
+ * also appears). Below xl the single in-content unit carries the page instead,
+ * so the 728px banner never overflows a narrow viewport.
+ *
+ * In normal flow, fixed size (mirrors the pasted leaderboard markup: no
+ * data-ad-format). It keeps its OWN inline push({}) right after the <ins> —
+ * AdSense fills statusless <ins> in DOM order, so the push targets THIS slot.
+ * Below xl the <ins> has zero width (parent is display:none), so the guard
+ * strips the `adsbygoogle` class instead of pushing, keeping a 0-width slot out
+ * of AdSense's candidate pool (avoids the `availableWidth=0` console error).
+ *
+ * NOTE: this deliberately does NOT include the raw
+ * `<script src=...adsbygoogle.js>` loader. The site loads that library once,
+ * interaction-gated, in Layout.astro (keeps it off the LCP/Lighthouse path).
+ * The push below just queues on window.adsbygoogle until the library arrives.
+ */
+import { AD_CLIENT as PUB, AD_SLOTS } from '../../lib/ads';
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<div class:list={['hidden xl:flex xl:justify-center w-full mb-6', cls]} aria-label="Sponsored">
+  <ins
+    class="adsbygoogle"
+    style="display:inline-block;width:728px;height:90px"
+    data-ad-client={PUB}
+    data-ad-slot={AD_SLOTS.topLeaderboard}></ins>
+  <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
+</div>

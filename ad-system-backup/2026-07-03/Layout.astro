@@ -1,0 +1,449 @@
+---
+import '../styles/global.css';
+import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+import { stripLocalePrefix } from '../i18n/utils';
+import AdBlockGate from '../components/AdBlockGate.astro';
+import { AD_CLIENT } from '../lib/ads';
+// Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
+// bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
+// to those same fingerprinted URLs, so the preload is always in sync with the CSS.
+import dmSansLatinUrl from '@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url';
+import spaceGroteskLatinUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Explicit OG/Twitter image. When omitted, a branded card is generated per
+   *  page+locale via /og/card.png from the title + ogSubtitle. */
+  ogImage?: string;
+  /** Subtitle line for the auto-generated OG card (defaults to `description`). */
+  ogSubtitle?: string;
+  /** English title used for the OG card's tofu-proof fallback when a non-Latin
+   *  locale's script font can't load. Pass the English metaTitle on localized
+   *  pages; defaults to the page's own (cleaned) title. */
+  ogTitleEn?: string;
+  ogType?: string;
+  noindex?: boolean;
+  schema?: object | object[];
+  /** Disable hreflang tags for root-level English-only pages (e.g. /png-to-url) */
+  noHreflang?: boolean;
+  /** Override hreflang generation with explicit per-locale URLs. Used by pages
+   *  with translated slugs where the URL differs per locale (dynamic landing route). */
+  hreflangAlternates?: { locale: Locale; url: string }[];
+  /** Breadcrumb items for BreadcrumbList schema: [{name, url}] */
+  breadcrumbs?: { name: string; url: string }[];
+  /** ISO-8601 date string surfaced as visible text and `WebPage.dateModified` */
+  lastModified?: string;
+  /** Load the AdSense library IMMEDIATELY instead of interaction-gating it.
+   *  Only for noindex, non-cached dead-end screens (e.g. /share) where the
+   *  performance score is irrelevant and the high-intent visitor bounces fast —
+   *  so waiting for a scroll/click just burns the impression. Never set this on
+   *  an indexed content page; it defeats the LCP-protecting gate. */
+  eagerAds?: boolean;
+}
+
+const {
+  title = "ImageToURL \u2014 Free Image Hosting | Turn Images into Shareable Links",
+  description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery. Upload JPG, PNG, WebP, GIF, SVG and get an instant shareable URL.",
+  ogImage,
+  ogSubtitle,
+  ogTitleEn,
+  ogType = "website",
+  noindex = false,
+  schema,
+  noHreflang = false,
+  hreflangAlternates,
+  breadcrumbs,
+  lastModified,
+  eagerAds = false,
+} = Astro.props;
+
+// Clamp the meta description to <=158 chars at a word boundary so it never
+// trips "description too long" or gets truncated mid-word in SERPs. OG/Twitter
+// descriptions can run longer, so they keep the full text.
+const metaDescription = description.length <= 158
+  ? description
+  : (() => {
+      const cut = description.slice(0, 158);
+      const atWord = cut.replace(/\s+\S*$/, '').trim();
+      return atWord.length > 0 ? atWord : cut.trim();
+    })();
+
+const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const basePath = stripLocalePrefix(Astro.url.pathname);
+
+// Sitewide schemas
+const sitewideSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://imagetourl.cloud/#organization",
+    "name": "ImageToURL",
+    "url": "https://imagetourl.cloud",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imagetourl.cloud/icon-512.png",
+      "width": 512,
+      "height": 512
+    },
+    "description": "ImageToURL is a cloud-based image hosting service that converts uploaded images into permanent, CDN-delivered shareable URLs instantly.",
+    "foundingDate": "2025",
+    "sameAs": [
+      "https://github.com/boopul22",
+      "https://www.instagram.com/bipul.skill",
+      "https://bipul.online/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "blog.boopul@gmail.com",
+      "contactType": "customer support",
+      "availableLanguage": ["English"]
+    },
+    "founder": {
+      "@type": "Person",
+      "@id": "https://imagetourl.cloud/#founder",
+      "name": "Bipul",
+      "url": "https://bipul.online/",
+      "sameAs": [
+        "https://github.com/boopul22",
+        "https://www.instagram.com/bipul.skill"
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://imagetourl.cloud/#website",
+    "url": "https://imagetourl.cloud",
+    "name": "ImageToURL",
+    "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
+    "publisher": { "@id": "https://imagetourl.cloud/#organization" },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": { "@type": "EntryPoint", "urlTemplate": "https://imagetourl.cloud/blog?search={search_term_string}" },
+      "query-input": "required name=search_term_string"
+    }
+  }
+];
+
+// Auto-generate breadcrumbs for root-level English pages AND locale-prefixed
+// landing pages. Uses a localized "Home" label for each supported locale.
+const SITE_URL = 'https://imagetourl.cloud';
+const HOME_LABELS: Record<string, string> = {
+  en: 'Home', es: 'Inicio', fr: 'Accueil', de: 'Startseite',
+  ja: 'ホーム', 'zh-Hans': '首页',
+};
+function detectLocale(path: string): string | null {
+  const m = path.match(/^\/([^\/]+)(?:\/|$)/);
+  if (!m) return null;
+  return HOME_LABELS[m[1]] !== undefined ? m[1] : null;
+}
+const pathname = Astro.url.pathname;
+const pageLocale = detectLocale(pathname);
+// Strip the trailing brand suffix ("\u2026 \u2014 ImageToURL", "\u2026 | ImageToURL", "\u2026 - ImageToURL").
+// Only treat an ASCII hyphen as a separator when it is space-padded \u2014 otherwise
+// hyphenated localized titles like "PNG-Bild in URL-Link umwandeln | ImageToURL"
+// were truncated to "PNG" (which also corrupted breadcrumbs and OG card titles).
+const cleanTitle = title.replace(/(?:\s*[\u2014\u2013|]|\s+-)\s*.*(?:ImageToURL|imagetourl).*$/i, '').trim();
+
+// OG/Twitter image. Use an explicit `ogImage` when provided (e.g. blog cover
+// images); otherwise generate a branded card per page+locale via /og/card.png.
+let ogImageUrl: string;
+if (ogImage) {
+  ogImageUrl = new URL(ogImage, Astro.site).href;
+} else {
+  const ogTitle = cleanTitle || 'ImageToURL';
+  const ogSub = (ogSubtitle ?? description ?? '').slice(0, 120);
+  const ogParams = new URLSearchParams({ t: ogTitle, l: locale });
+  if (ogSub) ogParams.set('s', ogSub);
+  ogParams.set('en', (ogTitleEn ?? ogTitle).slice(0, 90));
+  ogImageUrl = new URL(`/og/card.png?${ogParams.toString()}`, Astro.site).href;
+}
+const autoBreadcrumbs: { name: string; url: string }[] | undefined = breadcrumbs ?? (
+  pathname === '/' ? undefined :
+  pageLocale ? [
+    { name: HOME_LABELS[pageLocale], url: SITE_URL + `/${pageLocale}/` },
+    { name: cleanTitle, url: SITE_URL + pathname },
+  ] :
+  noHreflang ? [
+    { name: HOME_LABELS.en, url: SITE_URL + '/' },
+    { name: cleanTitle, url: SITE_URL + pathname },
+  ] : undefined
+);
+
+// BreadcrumbList schema
+const breadcrumbSchema = autoBreadcrumbs?.length ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": autoBreadcrumbs.map((crumb, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": crumb.name,
+    "item": crumb.url,
+  })),
+} : null;
+
+const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const allSchemas = [...sitewideSchemas, ...pageSchemas, ...(breadcrumbSchema ? [breadcrumbSchema] : [])];
+const schemaJson = JSON.stringify(allSchemas);
+
+// Build hreflang URLs for all locales
+const SITE = Astro.site?.origin ?? 'https://imagetourl.cloud';
+function hreflangUrl(loc: Locale): string {
+  return `${SITE}/${loc}${basePath}`;
+}
+---
+
+<!doctype html>
+<html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=2" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <link rel="manifest" href="/site.webmanifest?v=2" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+    <meta name="description" content={metaDescription} />
+    <meta name="theme-color" content="#e11d48" />
+
+    <!-- hreflang for all locales (skip for root-level English-only pages) -->
+    {!noHreflang && hreflangAlternates && hreflangAlternates.map(a => (
+      <link rel="alternate" hreflang={a.locale} href={`${SITE}${a.url}`} />
+    ))}
+    {!noHreflang && hreflangAlternates && (
+      <link rel="alternate" hreflang="x-default" href={`${SITE}${hreflangAlternates.find(a => a.locale === defaultLocale)?.url ?? '/'}`} />
+    )}
+    {!noHreflang && !hreflangAlternates && locales.map(loc => (
+      <link rel="alternate" hreflang={loc} href={hreflangUrl(loc)} />
+    ))}
+    {!noHreflang && !hreflangAlternates && <link rel="alternate" hreflang="x-default" href={hreflangUrl(defaultLocale)} />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="ImageToURL" />
+    <meta property="og:locale" content={localeOgTags[locale]} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <title>{title}</title>
+
+    <!-- Self-hosted fonts: preload the three woff2s the inlined CSS will reference
+         right after the HTML parses. Without these, busy pages (home: uploader JS +
+         AdSense + dense DOM) discover the fonts later than light pages, so the
+         FOUT window flashed the Space Grotesk fallback (Arial Black 900) on home
+         while /about/ had already swapped. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={dmSansLatinUrl}
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={spaceGroteskLatinUrl}
+      crossorigin
+    />
+
+    <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP.
+         fonts.gstatic.com is included because AdSense pulls its own Roboto woff2s from there;
+         resolving DNS early warms that fetch without an eager TLS handshake on the LCP path. -->
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+    <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- AdSense loader (global) — INTERACTION-GATED off the FCP/LCP path. The
+         adsbygoogle.js library (and its ~2.5s of main-thread script eval on mobile)
+         is injected on the FIRST real user interaction: scroll, pointerdown, click,
+         keydown, touchstart, or mousemove. Lighthouse / headless audits never do any
+         of these, so the library — and every ad — stays entirely OUT of the measured
+         load window. That is what lets the Performance score reach the 90s. Real
+         visitors trip one of these listeners within the first moment (a scroll, a
+         tap, the first mouse twitch), so the impression is preserved, just deferred.
+
+         A requestIdleCallback fallback fires AFTER `load` for the rare visitor who
+         never interacts, so passive readers still get an ad. It is deferred well past
+         the audit window (10s timeout) so it doesn't count against the score.
+
+         Note: this replaced the old (1) immediate viewport-IO trigger — which fired
+         the instant the above-the-fold banner was near view, i.e. on every page load,
+         defeating the gating — and (2) the 2.5s blanket timer, which fired inside
+         Lighthouse's trace. The per-slot below-the-fold lazy observer further down is
+         unchanged; scroll is an interaction trigger, so the library is already loading
+         by the time any below-fold slot is pushed. Component inline push({}) calls
+         queue harmlessly on the window.adsbygoogle array until the library loads. -->
+    <script is:inline define:vars={{ adClient: AD_CLIENT, eagerAds }}>
+      (function () {
+        var loaded = false;
+        function loadAds() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + adClient;
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+        // Eager pages (noindex, non-cached dead-ends like /share): load the library
+        // right now so the rail slots fill on first paint instead of waiting for an
+        // interaction. Safe because these pages are never audited for LCP/score.
+        if (eagerAds) { loadAds(); return; }
+        // Primary: load on the first real user interaction.
+        ['scroll', 'pointerdown', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (evt) {
+          window.addEventListener(evt, loadAds, { once: true, passive: true });
+        });
+        // Revenue safety net: genuinely passive (no-interaction) HUMAN visitors still
+        // get an ad — but only well after LCP, and NEVER for automated agents.
+        // Lighthouse / PageSpeed Insights / headless crawlers set navigator.webdriver,
+        // and they never interact, so the old requestIdleCallback fallback fired the
+        // instant the (ad-free) page went idle — i.e. right inside the audit window —
+        // loading AdSense and tanking both Best Practices (console error + 3p cookies)
+        // and Performance. Bots don't view ads anyway, so skipping them costs zero real
+        // impressions while keeping the measured page identical to the engagement-gated
+        // experience. Real passive readers get the ad on a post-load delay.
+        function idleFallback() {
+          if (navigator.webdriver) return; // automated audit / crawler → never load ads
+          setTimeout(function () {
+            if ('requestIdleCallback' in window) { requestIdleCallback(loadAds, { timeout: 4000 }); }
+            else { loadAds(); }
+          }, 3000); // real passive reader, comfortably past the LCP window
+        }
+        if (document.readyState === 'complete') idleFallback();
+        else window.addEventListener('load', idleFallback, { once: true });
+      })();
+    </script>
+
+    <!-- Collapse ad slots Google returns as "unfilled" so empty placeholders
+         don't reserve blank space (e.g. the 90px banner that otherwise sits
+         empty above the H1). Hiding *unfilled* slots is AdSense-compliant;
+         filled slots are never touched. The slot still reserves space while the
+         request is in flight (data-ad-status unset), so there's no CLS on fill. -->
+    <style is:global>
+      ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={schemaJson} />
+
+    <!-- Per-page head injections -->
+    <slot name="head" />
+  </head>
+  <body class="bg-background font-body text-on-surface relative overflow-x-clip">
+    <main>
+      <slot />
+    </main>
+    <AdBlockGate />
+    <script>
+      const revealed = new WeakSet();
+      function reveal(el: Element) {
+        if (!revealed.has(el)) {
+          revealed.add(el);
+          el.classList.add('revealed');
+        }
+      }
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+        }, { rootMargin: '50px 0px', threshold: 0 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      } else {
+        const revealCheck = () => {
+          document.querySelectorAll('.reveal:not(.revealed)').forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight + 50) reveal(el);
+          });
+        };
+        revealCheck();
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => { revealCheck(); ticking = false; });
+            ticking = true;
+          }
+        }, { passive: true });
+      }
+    </script>
+
+    <!-- Lazy-load below-the-fold ad slots. Slots marked data-ad-lazy are NOT pushed
+         at parse time; we request them ~300px before they scroll into view. This is
+         Google's recommended pre-trigger (200–400px) so the ad is filled by the time
+         it's viewable — viewability/revenue is preserved while one fewer concurrent
+         AdSense fill competes in the FCP/LCP window. Above-the-fold slots keep their
+         own inline push and are untouched. display:none slots (e.g. lg:hidden on the
+         wrong breakpoint) never intersect, so they're correctly never requested. -->
+    <script is:inline>
+      (function () {
+        var pushed = new WeakSet();
+        function fill(ins, tries) {
+          if (pushed.has(ins) || ins.hasAttribute('data-ad-pushed')) return;
+          // Matched Content / autorelaxed slots throw "Invalid responsive width from
+          // Matched Content slot …: 0" if pushed while their container has no layout
+          // box (e.g. revealed-in-place panels, or a frame where layout hasn't settled).
+          // Defer until the slot actually has width; give up after ~1s so a slot that
+          // stays collapsed just stays unfilled instead of erroring in the console.
+          if (ins.offsetWidth === 0) {
+            if ((tries || 0) < 60) requestAnimationFrame(function () { fill(ins, (tries || 0) + 1); });
+            return;
+          }
+          pushed.add(ins);
+          ins.setAttribute('data-ad-pushed', '');
+          try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+        }
+        var slots = document.querySelectorAll('ins.adsbygoogle[data-ad-lazy]:not([data-ad-pushed])');
+        if (!slots.length) return;
+        if (!('IntersectionObserver' in window)) {
+          slots.forEach(fill);
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { fill(e.target); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '300px 0px', threshold: 0 });
+        slots.forEach(function (s) { io.observe(s); });
+      })();
+    </script>
+
+    <!-- GA4 — interaction-gated to avoid blocking LCP. AdSense moved to <head>
+         as a normal async script so Auto Ads can render on first paint. -->
+    <script is:inline>
+      (function(){
+        var gaLoaded = false;
+        function loadGA() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CFY17JKKYK';
+          s.async = true;
+          s.fetchPriority = 'low';
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CFY17JKKYK');
+        }
+        ['scroll','click','keydown','touchstart'].forEach(function(evt){
+          document.addEventListener(evt, loadGA, {once:true, passive:true});
+        });
+      })();
+    </script>
+  </body>
+</html>
