@@ -3,13 +3,13 @@
  * Ookla-style side column (2026-07-03). Fixed pixel sizes, in normal flow,
  * shown only on xl+ (mobile/tablet collapse to the single in-content unit).
  *
- *   side="left"  → ONE 160x600 skyscraper, centred in a 300px column.
- *   side="right" → TWO stacked 300x250 rectangles, in a 300px column.
+ *   side="left"  → ONE 160x600 skyscraper (160px column).
+ *   side="right" → TWO stacked 300x250 rectangles (300px column).
  *
- * BOTH columns are the SAME 300px width (ads centred inside) so the center
- * column — and the tool in it — sits at the true viewport center. If the two
- * columns had different widths (160 vs 300) the tool would be pushed off-centre.
- * Ad sizes still mirror speedtest.net (160x600 skyscraper + two 300x250).
+ * Widths mirror speedtest.net's live frame exactly (160 left, 300 right),
+ * top-aligned with the leaderboard. The columns are intentionally unequal, so
+ * the center column (and the tool) sits slightly left of the viewport center —
+ * the same as Speedtest. This is the chosen "Ookla-exact" layout.
  *
  * Loading: each <ins> keeps its own inline push({}) right after it — AdSense
  * fills statusless <ins> in DOM order, so an inline push immediately after each
@@ -37,7 +37,7 @@ const { side = 'left' } = Astro.props;
 ---
 {side === 'left' ? (
   <aside
-    class="hidden xl:flex xl:flex-col xl:items-center xl:flex-shrink-0 xl:w-[300px]"
+    class="hidden xl:flex xl:flex-col xl:flex-shrink-0 xl:w-[160px]"
     aria-label="Sponsored"
     data-rail="left"
   >
@@ -51,7 +51,7 @@ const { side = 'left' } = Astro.props;
   </aside>
 ) : (
   <aside
-    class="hidden xl:flex xl:flex-col xl:items-center xl:gap-12 xl:flex-shrink-0 xl:w-[300px]"
+    class="hidden xl:flex xl:flex-col xl:gap-12 xl:flex-shrink-0 xl:w-[300px]"
     aria-label="Sponsored"
     data-rail="right"
   >
