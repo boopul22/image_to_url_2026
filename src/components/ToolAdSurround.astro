@@ -19,13 +19,13 @@ import AdLeaderboard from './ads/AdLeaderboard.astro';
 import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
 ---
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
-  <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-4">
+  <AdLeaderboard />
+  <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
     <AdRail side="left" />
 
-    <!-- Center column: leaderboard sits at the TOP, top-aligned with the side
-         rails (Ookla-exact). Center is 728px wide to hold the leaderboard. -->
-    <div class="w-full xl:flex-1 xl:max-w-[728px] xl:min-w-0">
-      <AdLeaderboard />
+    <!-- Center column fills between the two equal 300px rails, so the tool sits
+         at the true viewport center. -->
+    <div class="w-full xl:flex-1 xl:min-w-0">
       <slot />
     </div>
 
