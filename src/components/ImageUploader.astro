@@ -21,13 +21,14 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
      at xl via left-1/2/-translate-x-1/2 so all columns + gaps fit inside the
      max-w-7xl frame. Below xl only the in-content unit remains. -->
 <div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
-  <AdLeaderboard />
-  <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
+  <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-4">
     <!-- Left rail — 160x600 skyscraper -->
     <AdRail side="left" />
 
-    <!-- Center column: uploader widget + trust signals. -->
-    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
+    <!-- Center column: leaderboard at top (top-aligned with rails, Ookla-style)
+         + uploader widget + trust signals. -->
+    <div class="w-full xl:flex-1 xl:max-w-[728px] xl:min-w-0">
+      <AdLeaderboard />
       <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
         <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" multiple class="hidden" />
 

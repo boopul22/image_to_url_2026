@@ -338,6 +338,13 @@ function hreflangUrl(loc: Locale): string {
          request is in flight (data-ad-status unset), so there's no CLS on fill. -->
     <style is:global>
       ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+      /* Fixed-size Ookla frame units (.ad-fixed) are the exception: they reserve
+         their exact box from first paint and must KEEP it even when unfilled, so
+         there's no late collapse and therefore zero CLS. A slot that doesn't fill
+         shows blank space instead of shifting the page — the deliberate CLS-free
+         trade (this is how Speedtest/Ookla reserves its ad slots). Wins over the
+         collapse rule above via higher specificity (extra .ad-fixed class). */
+      ins.adsbygoogle.ad-fixed[data-ad-status="unfilled"] { display: inline-block !important; }
     </style>
 
     <!-- Structured Data -->

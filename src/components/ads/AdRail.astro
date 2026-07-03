@@ -3,8 +3,12 @@
  * Ookla-style side column (2026-07-03). Fixed pixel sizes, in normal flow,
  * shown only on xl+ (mobile/tablet collapse to the single in-content unit).
  *
- *   side="left"  → ONE 120x450 vertical unit.
- *   side="right" → TWO stacked 400x400 squares.
+ *   side="left"  → ONE 160x600 skyscraper.
+ *   side="right" → TWO stacked 300x250 rectangles.
+ *
+ * Sizes mirror speedtest.net's live frame (skyscraper 160x600, two 300x250
+ * medium rectangles) so the two columns are balanced (~600 vs ~548px) and the
+ * whole frame fits one viewport.
  *
  * Loading: each <ins> keeps its own inline push({}) right after it — AdSense
  * fills statusless <ins> in DOM order, so an inline push immediately after each
@@ -32,36 +36,36 @@ const { side = 'left' } = Astro.props;
 ---
 {side === 'left' ? (
   <aside
-    class="hidden xl:flex xl:flex-col xl:flex-shrink-0 xl:w-[120px]"
+    class="hidden xl:flex xl:flex-col xl:flex-shrink-0 xl:w-[160px]"
     aria-label="Sponsored"
     data-rail="left"
   >
-    <!-- 120x450 vertical -->
+    <!-- 160x600 skyscraper (matches speedtest.net stnext_skyscraper) -->
     <ins
-      class="adsbygoogle"
-      style="display:inline-block;width:120px;height:450px"
+      class="adsbygoogle ad-fixed"
+      style="display:inline-block;width:160px;height:600px"
       data-ad-client={PUB}
       data-ad-slot={AD_SLOTS.leftSkyscraper}></ins>
     <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
   </aside>
 ) : (
   <aside
-    class="hidden xl:flex xl:flex-col xl:gap-4 xl:flex-shrink-0 xl:w-[400px]"
+    class="hidden xl:flex xl:flex-col xl:gap-12 xl:flex-shrink-0 xl:w-[300px]"
     aria-label="Sponsored"
     data-rail="right"
   >
-    <!-- Top: 400x400 square -->
+    <!-- Top: 300x250 rectangle (matches speedtest.net stnext_top_rectangle) -->
     <ins
-      class="adsbygoogle"
-      style="display:inline-block;width:400px;height:400px"
+      class="adsbygoogle ad-fixed"
+      style="display:inline-block;width:300px;height:250px"
       data-ad-client={PUB}
       data-ad-slot={AD_SLOTS.rightSquareTop}></ins>
     <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
 
-    <!-- Bottom: 400x400 square -->
+    <!-- Bottom: 300x250 rectangle (matches speedtest.net stnext_bottom_rectangle) -->
     <ins
-      class="adsbygoogle"
-      style="display:inline-block;width:400px;height:400px"
+      class="adsbygoogle ad-fixed"
+      style="display:inline-block;width:300px;height:250px"
       data-ad-client={PUB}
       data-ad-slot={AD_SLOTS.rightSquareBottom}></ins>
     <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>

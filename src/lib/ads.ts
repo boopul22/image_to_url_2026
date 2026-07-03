@@ -40,11 +40,12 @@ export const AD_CLIENT = 'ca-pub-7803867089582138';
  *  ids here and nowhere else. The pre-Ookla ids are all kept for the recover
  *  path (see ad-system-backup/2026-07-03/). */
 export const AD_SLOTS = {
-  // Ookla-style frame — all dedicated FIXED-SIZE units (non-sticky, in flow, xl+)
-  topLeaderboard: '1507660968',      // 728x90
-  leftSkyscraper: '5672091084',      // 120x450
-  rightSquareTop: '7306782556',      // 400x400
-  rightSquareBottom: '8887457530',   // 400x400
+  // Ookla-style frame — sizes mirror speedtest.net's live frame so the columns
+  // are balanced and everything fits one viewport (non-sticky, in flow, xl+).
+  topLeaderboard: '1507660968',      // 728x90  (speedtest stnext_leaderboard)
+  leftSkyscraper: '6908161457',      // 160x600 (speedtest stnext_skyscraper)
+  rightSquareTop: '5842491796',      // 300x250 (speedtest stnext_top_rectangle)
+  rightSquareBottom: '8273214016',   // 300x250 (speedtest stnext_bottom_rectangle)
   // legacy ids (kept so the backup layout can be restored verbatim)
   railLeftTop: '7695843568',
   railLeftBottom: '6204162876',
