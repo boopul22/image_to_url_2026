@@ -11,6 +11,7 @@
 
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const SLUGS_FILE = new URL('../src/i18n/landing/slugs.ts', import.meta.url);
 const CHUNKS_DIR = new URL('../dist/server/chunks/', import.meta.url);
@@ -197,7 +198,7 @@ if (entries.length !== 1) {
   console.error(`[patch-worker] Expected exactly one worker-entry file, found: ${entries.join(', ')}`);
   process.exit(1);
 }
-const entryPath = join(CHUNKS_DIR.pathname, entries[0]);
+const entryPath = join(fileURLToPath(CHUNKS_DIR), entries[0]);
 let content = readFileSync(entryPath, 'utf8');
 
 if (content.includes('[PATCH] Cross-locale slug redirect')) {
