@@ -202,18 +202,6 @@ if (entries.length !== 1) {
 const entryPath = join(fileURLToPath(CHUNKS_DIR), entries[0]);
 let content = readFileSync(entryPath, 'utf8');
 
-if (content.includes('[PATCH] Cross-locale slug redirect')) {
-  console.log('[patch-worker] Already patched, skipping.');
-  process.exit(0);
-}
-if (!content.includes(PATCH_SEARCH)) {
-  console.error('[patch-worker] Anchor not found. Worker entry format may have changed.');
-  process.exit(1);
-}
-
-// Inject helper + patch handle() prologue
-content = content.replace(PATCH_SEARCH, INJECTION + PATCH_AT_START);
-
 // Modulepreload for the shared icon-svgs client chunk. Every page's entry
 // scripts (Nav etc.) statically import it, so without a hint browsers only
 // discover it after downloading + parsing the entry (HTML → Nav.js →
@@ -227,6 +215,25 @@ const iconChunk = readdirSync(join(CLIENT_DIR, '_astro')).find((f) => /^icon-svg
 if (iconChunk) {
   const iconUrl = `/_astro/${iconChunk}`;
   content = content.replaceAll('__ICON_SVGS_CHUNK_URL__', iconUrl);
+  // The middleware placeholder is bundled into its own server chunk
+  // (virtual_astro_middleware.mjs), not the worker entry — sweep every server
+  // module so the replacement can't miss if Rollup re-chunks.
+  const SERVER_DIR = fileURLToPath(new URL('../dist/server/', import.meta.url));
+  const serverStack = [SERVER_DIR];
+  let serverFiles = 0;
+  while (serverStack.length) {
+    for (const ent of readdirSync(serverStack.pop(), { withFileTypes: true })) {
+      const p = join(ent.parentPath, ent.name);
+      if (ent.isDirectory()) serverStack.push(p);
+      else if (ent.name.endsWith('.mjs') && ent.name !== entries[0]) {
+        const src = readFileSync(p, 'utf8');
+        if (!src.includes('__ICON_SVGS_CHUNK_URL__')) continue;
+        writeFileSync(p, src.replaceAll('__ICON_SVGS_CHUNK_URL__', iconUrl));
+        serverFiles++;
+      }
+    }
+  }
+  console.log(`[patch-worker] modulepreload placeholder replaced in ${serverFiles} server chunk(s)`);
   const preload = `<link rel="modulepreload" href="${iconUrl}">`;
   let pages = 0;
   const stack = [CLIENT_DIR];
@@ -251,6 +258,19 @@ if (iconChunk) {
 } else {
   console.warn('[patch-worker] icon-svgs client chunk not found; modulepreload injection skipped');
 }
+
+if (content.includes('[PATCH] Cross-locale slug redirect')) {
+  writeFileSync(entryPath, content);
+  console.log('[patch-worker] Redirect already patched, skipping injection.');
+  process.exit(0);
+}
+if (!content.includes(PATCH_SEARCH)) {
+  console.error('[patch-worker] Anchor not found. Worker entry format may have changed.');
+  process.exit(1);
+}
+
+// Inject helper + patch handle() prologue
+content = content.replace(PATCH_SEARCH, INJECTION + PATCH_AT_START);
 
 writeFileSync(entryPath, content);
 console.log(`[patch-worker] Injected cross-locale redirect into ${entries[0]}`);
