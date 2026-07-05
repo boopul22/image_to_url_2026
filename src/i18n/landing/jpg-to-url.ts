@@ -367,7 +367,7 @@ export const content: LandingContentMap = {
     "ctaButton": "Jetzt JPG hochladen"
   },
   "ja": {
-    "metaTitle": "JPG画像をURLリンクに変換 — 無料オンラインツール | ImageToURL",
+    "metaTitle": "JPG画像をURLリンクに変換 — 無料・登録不要で数秒 | ImageToURL",
     "relatedTitle": "関連画像ツール",
     "related": [
       { "pageKey": "image-to-url", "label": "画像→URL変換" },

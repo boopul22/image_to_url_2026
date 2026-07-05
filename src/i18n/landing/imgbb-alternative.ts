@@ -5,7 +5,7 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "ImgBB Alternative - Faster, Cleaner, Free | ImageToURL",
+    "metaTitle": "ImgBB Alternative — No Ads, No Account, Direct Links | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "imgur-alternative", "label": "Imgur alternative" },

@@ -290,7 +290,7 @@ export const content: LandingContentMap = {
     "ctaButton": "Subir ahora"
   },
   "fr": {
-    "metaTitle": "Partagez des images via URL sur WhatsApp | ImageToURL",
+    "metaTitle": "Image en URL pour WhatsApp — Gratuit, sans compression | ImageToURL",
     "relatedTitle": "Outils d'images connexes",
     "related": [
       { "pageKey": "image-embed-code-generator", "label": "Générateur de code intégré d'image" },
