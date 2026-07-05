@@ -1,12 +1,14 @@
 // Programmatic internal-linking module.
-// Given a page slug, returns a curated set of 3–5 related slugs for rendering
-// in a "Related" section. Taxonomy is explicit so we don't produce accidental
-// thin-content cross-linking.
+// Given a landing page key, returns a curated set of related registered pages
+// for rendering in a "More image to URL tools" section. Taxonomy is explicit so
+// we don't produce accidental thin-content cross-linking.
 
-export interface RelatedSlug { href: string; title: string; body: string }
+import type { PageKey } from '../i18n/landing/registry';
+
+export interface RelatedPage { pageKey: PageKey; title: string; body: string }
 
 // Page taxonomy: each page belongs to one or more tag groups. The related
-// resolver picks slugs from the same groups, de-duped, capped at 5.
+// resolver picks pages from the same groups, de-duped, capped at 6.
 type Tag =
   | 'format-conversion'
   | 'url-upload'
@@ -21,16 +23,30 @@ type Tag =
   | 'platform-cms'
   | 'platform-dev'
   | 'comparison'
-  | 'alternative'
-  | 'api'
-  | 'geo-qa';
+  | 'alternative';
 
 interface PageMeta { title: string; body: string; tags: Tag[] }
 
-const PAGES: Record<string, PageMeta> = {
-  // Cluster A — format pairs
-  'png-to-jpg': { title: 'PNG to JPG', body: 'Shrink PNG for email & marketplaces.', tags: ['format-conversion', 'png', 'jpg'] },
+const PAGES: Record<PageKey, PageMeta> = {
+  // Head terms and URL/link variants
+  'image-to-url': { title: 'Image to URL', body: 'Upload any image and get a direct link.', tags: ['url-upload'] },
+  'image-to-url-converter': { title: 'Image to URL Converter', body: 'Convert image files into shareable URLs.', tags: ['url-upload'] },
+  'image-to-link': { title: 'Image to Link', body: 'Turn a photo into a paste-ready link.', tags: ['url-upload'] },
+  'image-embed-code-generator': { title: 'Image Embed Code Generator', body: 'Generate HTML and Markdown embed snippets.', tags: ['url-upload', 'platform-dev'] },
+  'image-url-for-chatgpt': { title: 'Image URL for ChatGPT', body: 'Create URLs that work in AI prompts.', tags: ['url-upload', 'platform-dev'] },
+  'image-to-url-for-whatsapp': { title: 'Image to URL for WhatsApp', body: 'Share images as clean WhatsApp links.', tags: ['url-upload', 'platform-social'] },
+  'image-to-url-for-html': { title: 'Image to URL for HTML', body: 'Use direct image links in HTML.', tags: ['url-upload', 'platform-dev'] },
+  'image-to-url-vercel': { title: 'Image to URL for Vercel', body: 'Host images for Vercel apps.', tags: ['url-upload', 'platform-dev'] },
+
+  // Format converters
+  'png-to-jpg': { title: 'PNG to JPG', body: 'Shrink PNG for email and marketplaces.', tags: ['format-conversion', 'png', 'jpg'] },
   'jpg-to-png': { title: 'JPG to PNG', body: 'Lossless re-encode for edits.', tags: ['format-conversion', 'jpg', 'png'] },
+  'convert-to-jpg': { title: 'Convert to JPG', body: 'Convert many formats into JPG.', tags: ['format-conversion', 'jpg'] },
+  'jpeg-to-jpg': { title: 'JPEG to JPG', body: 'Normalize JPEG extensions.', tags: ['format-conversion', 'jpg'] },
+  'jfif-to-jpg': { title: 'JFIF to JPG', body: 'Fix JFIF files for apps and forms.', tags: ['format-conversion', 'jpg'] },
+  'jpg-to-jpeg': { title: 'JPG to JPEG', body: 'Rename and re-export JPG as JPEG.', tags: ['format-conversion', 'jpg'] },
+  'avif-to-jpg': { title: 'AVIF to JPG', body: 'Convert modern AVIF files to JPG.', tags: ['format-conversion', 'jpg'] },
+  'tiff-to-jpg': { title: 'TIFF to JPG', body: 'Convert large TIFF images to JPG.', tags: ['format-conversion', 'jpg'] },
   'webp-to-jpg': { title: 'WebP to JPG', body: 'Fix incompatible files.', tags: ['format-conversion', 'webp', 'jpg'] },
   'webp-to-png': { title: 'WebP to PNG', body: 'Keep transparency.', tags: ['format-conversion', 'webp', 'png'] },
   'png-to-webp': { title: 'PNG to WebP', body: 'Half the size, same look.', tags: ['format-conversion', 'png', 'webp'] },
@@ -50,90 +66,64 @@ const PAGES: Record<string, PageMeta> = {
   'screenshot-to-url': { title: 'Screenshot to URL', body: 'Screenshot to link.', tags: ['url-upload'] },
   'image-url-generator': { title: 'Image URL Generator', body: 'Generic upload.', tags: ['url-upload'] },
   'bulk-image-upload': { title: 'Bulk Upload', body: 'Many files at once.', tags: ['url-upload'] },
+  'free-image-hosting': { title: 'Free Image Hosting', body: 'Upload and host images for free.', tags: ['url-upload'] },
+  'free-image-cdn': { title: 'Free Image CDN', body: 'Serve images through a fast CDN.', tags: ['url-upload'] },
+  'ai-image-hosting': { title: 'AI Image Hosting', body: 'Host images for AI workflows.', tags: ['url-upload'] },
+  'anonymous-image-upload': { title: 'Anonymous Image Upload', body: 'Upload without creating an account.', tags: ['url-upload'] },
+  'direct-image-link': { title: 'Direct Image Link', body: 'Get a direct image file URL.', tags: ['url-upload'] },
+  'permanent-image-hosting': { title: 'Permanent Image Hosting', body: 'Keep important image links stable.', tags: ['url-upload'] },
+  'mp3-to-url': { title: 'MP3 to URL', body: 'Upload audio and get a direct link.', tags: ['url-upload'] },
 
-  // Cluster B — utilities
+  // Utilities
   'image-compressor': { title: 'Image Compressor', body: 'Smaller files, same quality.', tags: ['utility'] },
   'image-resizer': { title: 'Image Resizer', body: 'Exact pixels or percent.', tags: ['utility'] },
   'image-to-base64': { title: 'Image to Base64', body: 'Encode as data URI.', tags: ['utility'] },
   'base64-to-image': { title: 'Base64 to Image', body: 'Decode data URI.', tags: ['utility'] },
   'favicon-generator': { title: 'Favicon Generator', body: 'Every size at once.', tags: ['utility'] },
 
-  // Cluster C — comparisons
+  // Comparisons
   'imgur-alternative': { title: 'Imgur Alternative', body: 'Permanent URLs.', tags: ['alternative', 'comparison'] },
   'imgbb-alternative': { title: 'ImgBB Alternative', body: 'Ad-free hosting.', tags: ['alternative', 'comparison'] },
   'cloudinary-alternative': { title: 'Cloudinary Alternative', body: 'For teams who just need URLs.', tags: ['alternative', 'comparison'] },
-  'postimages-alternative': { title: 'Postimages Alternative', body: 'No ads, faster CDN.', tags: ['alternative', 'comparison'] },
-  'google-photos-direct-link': { title: 'Google Photos Direct Link', body: 'Real direct URLs.', tags: ['comparison'] },
-  'dropbox-direct-image-link': { title: 'Dropbox Direct Link', body: 'Stable embeds.', tags: ['comparison'] },
-  'imagetourl-vs-imgur': { title: 'vs Imgur', body: 'Permanence matters.', tags: ['comparison'] },
-  'imagetourl-vs-imgbb': { title: 'vs ImgBB', body: 'Quiet upgrades.', tags: ['comparison'] },
-  'imagetourl-vs-cloudinary': { title: 'vs Cloudinary', body: 'Honest tradeoffs.', tags: ['comparison'] },
-  'imgur-vs-imgbb': { title: 'Imgur vs ImgBB', body: 'Compare the two.', tags: ['comparison'] },
 
-  // Cluster D — platforms
-  'image-hosting-for-reddit': { title: 'Reddit', body: 'Embeds that survive.', tags: ['platform', 'platform-social'] },
-  'image-hosting-for-twitter': { title: 'X / Twitter', body: 'Link cards.', tags: ['platform', 'platform-social'] },
-  'image-hosting-for-instagram': { title: 'Instagram', body: 'Bio-link assets.', tags: ['platform', 'platform-social'] },
-  'image-hosting-for-pinterest': { title: 'Pinterest', body: 'Pin-friendly.', tags: ['platform', 'platform-social'] },
-  'image-hosting-for-substack': { title: 'Substack', body: 'Faster newsletters.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-medium': { title: 'Medium', body: 'Cross-post friendly.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-linkedin': { title: 'LinkedIn', body: 'Consistent cards.', tags: ['platform', 'platform-social'] },
-  'image-hosting-for-webflow': { title: 'Webflow', body: 'CMS-friendly.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-squarespace': { title: 'Squarespace', body: 'Code blocks & email.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-wix': { title: 'Wix', body: 'Velo & HTML.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-framer': { title: 'Framer', body: 'External CMS items.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-stack-overflow': { title: 'Stack Overflow', body: 'Screenshots that stay.', tags: ['platform', 'platform-dev'] },
-  'image-hosting-for-markdown': { title: 'Markdown', body: 'Every renderer.', tags: ['platform', 'platform-dev'] },
-  'image-hosting-for-nextjs': { title: 'Next.js', body: 'next/image patterns.', tags: ['platform', 'platform-dev'] },
-  'image-hosting-for-jira': { title: 'Jira', body: 'Repro screenshots.', tags: ['platform', 'platform-dev'] },
+  // Platforms
   'image-hosting-for-wordpress': { title: 'WordPress', body: 'WP integration.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-shopify': { title: 'Shopify', body: 'Commerce assets.', tags: ['platform', 'platform-cms'] },
-  'image-hosting-for-github-readme': { title: 'GitHub README', body: 'Repo screenshots.', tags: ['platform', 'platform-dev'] },
-  'image-hosting-for-notion': { title: 'Notion', body: 'Permanent Notion links.', tags: ['platform', 'platform-cms'] },
   'image-hosting-for-discord': { title: 'Discord', body: 'Discord embeds.', tags: ['platform', 'platform-social'] },
   'image-hosting-for-ebay': { title: 'eBay', body: 'Listing photos.', tags: ['platform'] },
+  'image-hosting-for-email-signatures': { title: 'Email Signatures', body: 'Hosted signature images.', tags: ['platform'] },
+  'image-hosting-for-forums': { title: 'Forums', body: 'BBCode and direct links.', tags: ['platform'] },
+  'image-hosting-for-github-readme': { title: 'GitHub README', body: 'Repo screenshots.', tags: ['platform', 'platform-dev'] },
+  'image-hosting-for-google-forms': { title: 'Google Forms', body: 'Image URLs for forms.', tags: ['platform'] },
+  'image-hosting-for-google-sheets': { title: 'Google Sheets', body: 'Use image URLs in sheets.', tags: ['platform'] },
+  'image-hosting-for-newsletters': { title: 'Newsletters', body: 'Stable images for email campaigns.', tags: ['platform', 'platform-cms'] },
+  'image-hosting-for-notion': { title: 'Notion', body: 'Permanent Notion links.', tags: ['platform', 'platform-cms'] },
+  'image-hosting-for-shopify': { title: 'Shopify', body: 'Commerce assets.', tags: ['platform', 'platform-cms'] },
 
-  // Cluster E — dev / API
-  'image-upload-api': { title: 'Upload API', body: 'REST endpoint.', tags: ['api'] },
-  'image-hosting-rest-api': { title: 'REST API Reference', body: 'Full endpoint docs.', tags: ['api'] },
-  'image-hosting-api-python': { title: 'Python', body: 'Python requests snippet.', tags: ['api', 'platform-dev'] },
-  'image-hosting-api-nodejs': { title: 'Node.js', body: 'Node fetch snippet.', tags: ['api', 'platform-dev'] },
-  'image-hosting-api-php': { title: 'PHP', body: 'PHP curl snippet.', tags: ['api', 'platform-dev'] },
-  'image-hosting-api-curl': { title: 'cURL', body: 'Shell examples.', tags: ['api', 'platform-dev'] },
-  'image-upload-zapier': { title: 'Zapier', body: 'No-code webhook.', tags: ['api'] },
-  'image-upload-make': { title: 'Make.com', body: 'HTTP module.', tags: ['api'] },
-  'image-upload-n8n': { title: 'n8n', body: 'Self-hosted flow.', tags: ['api'] },
-
-  // Cluster F — GEO Q&A
-  'how-to-get-direct-url-for-image': { title: 'How to get a direct URL', body: 'The 10-second method.', tags: ['geo-qa'] },
-  'how-to-share-image-as-link': { title: 'Share image as link', body: 'Universal method.', tags: ['geo-qa'] },
-  'how-to-embed-image-in-email': { title: 'Embed in email', body: 'Inline vs linked.', tags: ['geo-qa'] },
-  'what-is-image-hotlinking': { title: 'What is hotlinking', body: 'Defined.', tags: ['geo-qa'] },
-  'how-to-host-image-for-free': { title: 'Host for free', body: '2026 guide.', tags: ['geo-qa'] },
-  'how-long-does-imagetourl-store-images': { title: 'Retention policy', body: 'Store time explained.', tags: ['geo-qa'] },
+  // Company and policy pages still need outgoing internal discovery links.
+  'about': { title: 'Image to URL', body: 'Upload any image and get a direct link.', tags: ['url-upload'] },
+  'contact': { title: 'Free Image Hosting', body: 'Upload and host images for free.', tags: ['url-upload'] },
+  'content-guidelines': { title: 'Direct Image Link', body: 'Get a direct image file URL.', tags: ['url-upload'] },
 };
 
-const SITE_ROOT = '';
-
 /**
- * Return 3–5 related slugs for the given page. Prefers same-tag matches, with
- * a bias toward format-conversion pairs that share a format (png-to-jpg ↔ jpg-to-png).
+ * Return related pages for the given page. Prefers same-tag matches, with a
+ * bias toward format-conversion pairs that share a format.
  */
-export function relatedFor(slug: string, max = 4): RelatedSlug[] {
-  const self = PAGES[slug];
+export function relatedFor(pageKey: PageKey, max = 6): RelatedPage[] {
+  const self = PAGES[pageKey];
   if (!self) return [];
 
-  // Score every other page by shared-tag count
-  const scored: { slug: string; score: number }[] = [];
-  for (const [s, meta] of Object.entries(PAGES)) {
-    if (s === slug) continue;
-    const overlap = meta.tags.filter(t => self.tags.includes(t)).length;
+  const scored: { pageKey: PageKey; score: number }[] = [];
+  for (const [key, meta] of Object.entries(PAGES) as [PageKey, PageMeta][]) {
+    if (key === pageKey) continue;
+    const overlap = meta.tags.filter(tag => self.tags.includes(tag)).length;
     if (overlap === 0) continue;
-    scored.push({ slug: s, score: overlap });
+    scored.push({ pageKey: key, score: overlap });
   }
+
   scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, max).map(({ slug: s }) => {
-    const m = PAGES[s];
-    return { href: `${SITE_ROOT}/${s}`, title: m.title, body: m.body };
+  return scored.slice(0, max).map(({ pageKey: key }) => {
+    const meta = PAGES[key];
+    return { pageKey: key, title: meta.title, body: meta.body };
   });
 }

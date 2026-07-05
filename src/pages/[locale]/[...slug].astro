@@ -18,6 +18,7 @@ import ToolAdSurround from '../../components/ToolAdSurround.astro';
 import { locales, defaultLocale, type Locale } from '../../i18n/config';
 import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, isPageKey, type PageKey } from '../../i18n/landing/registry';
 import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
+import { relatedFor } from '../../lib/related-links';
 
 // Widget map: which custom converter/utility component to render per pageKey.
 // Pages not in this map fall back to the generic <ImageUploader>.
@@ -155,8 +156,15 @@ const howToSchema = c.howToSchema
 
 const schemas = [schema, faqSchema, ...(howToSchema ? [howToSchema] : [])];
 
-// Resolve related internal links (skip any unknown pageKey defensively).
-const relatedLinks = (c.related ?? [])
+// Resolve related internal links. Hand-authored content links win; otherwise
+// every registered landing page gets a localized internal-linking fallback.
+const relatedSource = c.related?.length
+  ? c.related
+  : relatedFor(pageKey).map(r => ({
+      pageKey: r.pageKey,
+      label: contentFor(r.pageKey)?.[locale]?.schemaName ?? r.title,
+    }));
+const relatedLinks = relatedSource
   .filter(r => isPageKey(r.pageKey))
   .map(r => ({ href: localizedUrl(r.pageKey as PageKey, locale), label: r.label }));
 
@@ -347,7 +355,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       <section class="py-8 sm:py-12">
         <div class="max-w-5xl mx-auto px-3 sm:px-6">
           <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
-            <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.relatedTitle ?? 'Related tools'}</h2>
+            <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.relatedTitle ?? 'More image to URL tools'}</h2>
             <div class="h-1 flex-grow bg-on-background opacity-10"></div>
           </div>
           <div class="flex flex-wrap gap-2 sm:gap-3 reveal">
