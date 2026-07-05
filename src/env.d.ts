@@ -4,6 +4,20 @@ type D1Database = import('@cloudflare/workers-types').D1Database;
 type R2Bucket = import('@cloudflare/workers-types').R2Bucket;
 type ImagesBinding = import('@cloudflare/workers-types/experimental').ImagesBinding;
 
+// Workers-runtime global (workerd only; absent in plain Node). Declared
+// minimally against the DOM Response so middleware can use it without pulling
+// workers-types' conflicting Response/Request globals into scope.
+interface MinimalHTMLRewriter {
+  on(
+    selector: string,
+    handlers: {
+      element?(el: { append(content: string, options?: { html?: boolean }): void }): void;
+    },
+  ): MinimalHTMLRewriter;
+  transform(response: Response): Response;
+}
+declare const HTMLRewriter: { new (): MinimalHTMLRewriter };
+
 declare namespace App {
   interface Locals {
     runtime: {

@@ -12,6 +12,7 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { gzipSync, gunzipSync } from 'node:zlib';
 
 const SLUGS_FILE = new URL('../src/i18n/landing/slugs.ts', import.meta.url);
 const CHUNKS_DIR = new URL('../dist/server/chunks/', import.meta.url);
@@ -212,6 +213,45 @@ if (!content.includes(PATCH_SEARCH)) {
 
 // Inject helper + patch handle() prologue
 content = content.replace(PATCH_SEARCH, INJECTION + PATCH_AT_START);
+
+// Modulepreload for the shared icon-svgs client chunk. Every page's entry
+// scripts (Nav etc.) statically import it, so without a hint browsers only
+// discover it after downloading + parsing the entry (HTML → Nav.js →
+// icon-svgs.js — the chain Lighthouse's network-dependency-tree flags).
+// SSR pages: middleware.ts appends a <link rel="modulepreload"> via
+// HTMLRewriter — its '__ICON_SVGS_CHUNK_URL__' placeholder gets the real
+// hashed URL here. Prerendered pages: served as static assets, so the tag is
+// written straight into their HTML.
+const CLIENT_DIR = fileURLToPath(new URL('../dist/client/', import.meta.url));
+const iconChunk = readdirSync(join(CLIENT_DIR, '_astro')).find((f) => /^icon-svgs\..+\.js$/.test(f));
+if (iconChunk) {
+  const iconUrl = `/_astro/${iconChunk}`;
+  content = content.replaceAll('__ICON_SVGS_CHUNK_URL__', iconUrl);
+  const preload = `<link rel="modulepreload" href="${iconUrl}">`;
+  let pages = 0;
+  const stack = [CLIENT_DIR];
+  while (stack.length) {
+    for (const ent of readdirSync(stack.pop(), { withFileTypes: true })) {
+      const p = join(ent.parentPath, ent.name);
+      if (ent.isDirectory()) stack.push(p);
+      else if (ent.name.endsWith('.html')) {
+        // Prerendered pages are pre-gzipped on disk (served with
+        // Content-Encoding: gzip); transparently unwrap and re-wrap.
+        const raw = readFileSync(p);
+        const isGz = raw[0] === 0x1f && raw[1] === 0x8b;
+        const html = (isGz ? gunzipSync(raw) : raw).toString('utf8');
+        if (html.includes('rel="modulepreload"') || !html.includes('_astro/')) continue;
+        const out = html.replace('<head>', '<head>' + preload);
+        writeFileSync(p, isGz ? gzipSync(out, { level: 9 }) : out);
+        pages++;
+      }
+    }
+  }
+  console.log(`[patch-worker] modulepreload ${iconUrl}: worker placeholder + ${pages} prerendered pages`);
+} else {
+  console.warn('[patch-worker] icon-svgs client chunk not found; modulepreload injection skipped');
+}
+
 writeFileSync(entryPath, content);
 console.log(`[patch-worker] Injected cross-locale redirect into ${entries[0]}`);
 console.log(`[patch-worker] Owners map: ${owner.size} slugs, validCombos: ${validCombos.size}`);

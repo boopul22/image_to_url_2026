@@ -293,6 +293,27 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     });
   }
 
+  // Preload the shared icon-svgs client chunk on HTML responses so browsers
+  // fetch it in parallel with the entry scripts instead of after parsing them
+  // (breaks the HTML → Nav.js → icon-svgs.js dependency chain Lighthouse
+  // flags). The hashed chunk URL only exists after the client build, so
+  // scripts/patch-worker-entry.mjs replaces the placeholder in the built
+  // worker; in dev the placeholder never starts with '/' and this is inert.
+  const ICON_SVGS_CHUNK = '__ICON_SVGS_CHUNK_URL__';
+  if (
+    ICON_SVGS_CHUNK.startsWith('/') &&
+    typeof HTMLRewriter !== 'undefined' &&
+    response.headers.get('content-type')?.includes('text/html')
+  ) {
+    response = new HTMLRewriter()
+      .on('head', {
+        element(head) {
+          head.append(`<link rel="modulepreload" href="${ICON_SVGS_CHUNK}">`, { html: true });
+        },
+      })
+      .transform(response);
+  }
+
   // Security headers — all responses
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
