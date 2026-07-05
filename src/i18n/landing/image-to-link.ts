@@ -68,7 +68,7 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to link FAQ",
     "faqs": [
-      { "q": "How do I turn an image into a link?", "a": "Upload it in the box above to get a direct URL, then use that URL as the link. To make the link display the image (Discord, Reddit, forums) paste the raw URL; to make clickable text, wrap it as [text](your-url) in Markdown or in an HTML anchor. No signup is needed and it takes a couple of seconds." },
+      { "q": "How do I turn an image into a link?", "a": "Upload it in the box above to get a direct URL, then use that URL as the link. To make the link display the image (Discord, Reddit, forums) paste the raw URL; to make clickable text, wrap it as [text](your-url) in Markdown or in an HTML anchor. The same steps make an image into a link whether it is a photo, a screenshot, or any other picture. No signup is needed and it takes a couple of seconds." },
       {
         "q": "What is an image link generator?",
         "a": "It is a tool that takes your uploaded picture and gives back a direct URL pointing at the file. That link is what you share, and supported sites render it as the image instead of a download or a gallery page."

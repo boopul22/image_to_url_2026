@@ -3,7 +3,7 @@ import { getSession } from './lib/session';
 import { getDB } from './lib/db';
 import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale, locales, type Locale } from './i18n/config';
-import { resolveSlug, ownerLocaleForSlug } from './i18n/landing/registry';
+import { resolveSlug, ownerLocaleForSlug, isPageKey, localizedUrl } from './i18n/landing/registry';
 
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
 const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
@@ -112,6 +112,27 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
         if (owner && owner !== loc) {
           return redirect(`/${owner}/${rawSlug}/${url0.search}`, 301);
         }
+      }
+    }
+  }
+
+  // Legacy /{locale}/tools/{slug} → current landing page. The old URL pattern
+  // still ranks in Google; 301 known pageKeys to their localized URL, unknown
+  // slugs fall through to the 410 conversion below. In production the patched
+  // worker entry handles this before routing (prerendered-404 trap means
+  // middleware never sees these URLs); this copy keeps dev and SSR consistent.
+  {
+    const seg = path.split('/');
+    if (
+      (locales as readonly string[]).includes(seg[1]) &&
+      seg[2] === 'tools' &&
+      seg[3] &&
+      (seg[4] === undefined || seg[4] === '')
+    ) {
+      let key = seg[3];
+      try { key = decodeURIComponent(seg[3]); } catch { /* keep raw */ }
+      if (isPageKey(key)) {
+        return redirect(localizedUrl(key, seg[1] as Locale) + url0.search, 301);
       }
     }
   }

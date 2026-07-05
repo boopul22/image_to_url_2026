@@ -70,7 +70,11 @@ export const content: LandingContentMap = {
     "faqs": [
       {
         "q": "What is an image link generator, and how do I generate a link for an image?",
-        "a": "An image link generator takes a file off your device and gives it a public web address. Upload your image in the box above and you get a direct link back within seconds. Copy that link and paste it wherever you need the image to appear."
+        "a": "An image link generator (also called an image URL creator) takes a file off your device and gives it a public web address. Upload your image in the box above and you get a direct link back within seconds. Copy that link and paste it wherever you need the image to appear."
+      },
+      {
+        "q": "How do I upload an image and get a URL?",
+        "a": "Drop the file into the upload box above or tap it to pick one from your device. As soon as the upload finishes, the URL for the image is generated and ready to copy — no extra steps, no account."
       },
       {
         "q": "Is the image url generator free?",

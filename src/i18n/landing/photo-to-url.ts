@@ -78,6 +78,10 @@ export const content: LandingContentMap = {
         "a": "Yes. Open this page in your phone browser and tap the upload area to pick a shot from your camera roll. It works the same on iPhone, Android, and tablets."
       },
       {
+        "q": "Can I convert several photos to URLs at once?",
+        "a": "Yes. Select multiple pics in the upload box and each photo gets its own direct URL. Every picture to URL conversion runs in the same batch, so you can copy all the links in one go."
+      },
+      {
         "q": "Will my photo lose quality?",
         "a": "No. The photo is served the way you uploaded it, with no compression, resizing, or watermark."
       },

@@ -30,9 +30,11 @@ const removedSlugsJson = JSON.stringify(removedRedirects.slugs || {});
 const src = readFileSync(SLUGS_FILE, 'utf8');
 const owner = new Map(); // decoded-slug → owning locale
 const validCombos = new Set(); // "<locale>/<slug>" for all valid (locale, slug) pairs including English fallback
+const toolsMap = {}; // pageKey → { locale: slug } non-English overrides (legacy /tools/ 301 targets)
 const outer = /'([a-z0-9-]+)':\s*\{\s*([^}]+)\}/g;
 let m;
 while ((m = outer.exec(src)) !== null) {
+  const pageKey = m[1];
   const body = m[2];
   const entries = {};
   const pair = /(?:'([a-zA-Z-]+)'|([a-zA-Z-]+))\s*:\s*'([^']+)'/g;
@@ -50,11 +52,21 @@ while ((m = outer.exec(src)) !== null) {
     const s = entries[loc] ?? enSlug;
     if (s) validCombos.add(`${loc}/${s}`);
   }
+  // Legacy /{locale}/tools/{pageKey} URLs used English pageKeys in every
+  // locale; record where the current localized slug differs so the 301 can
+  // land on the localized page directly.
+  const overrides = {};
+  for (const loc of LOCALES) {
+    const s = entries[loc];
+    if (s && s !== (enSlug ?? pageKey)) overrides[loc] = s;
+  }
+  toolsMap[pageKey] = overrides;
 }
 
 const ownerJson = JSON.stringify(Object.fromEntries(owner));
 const validJson = JSON.stringify([...validCombos]);
 const localesJson = JSON.stringify(LOCALES);
+const toolsJson = JSON.stringify(toolsMap);
 
 const INJECTION = `
 // [PATCH] Short-URL handler — serves /{id}.{ext} by looking up r2_key in D1
@@ -141,6 +153,44 @@ function __crossLocaleRedirect__(pathname, search) {
   if (!ownerLoc || ownerLoc === loc) return null;
   return \`/\${ownerLoc}/\${rawSlug}/\${search || ''}\`;
 }
+// [PATCH] Legacy /{locale}/tools/{slug} — the pre-2026 URL pattern. Some of
+// these still rank in Google (GSC 2026-07: /de/tools/gif-to-url pos 7.6 with
+// clicks landing on a 404). 301 known pageKeys to the current localized
+// landing page; 410 unknown slugs so Google drops them. Runs before
+// app.match because the prerendered [locale]/[...slug] trap means middleware
+// never sees these URLs.
+const __TOOLS__ = new Map(Object.entries(${toolsJson}));
+const __GONE_BODY__ = '<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Gone</title></head><body><h1>410 Gone</h1><p>This URL has been permanently removed. <a href="/en/">Go to homepage</a>.</p></body></html>';
+function __gone410__() {
+  return new Response(__GONE_BODY__, {
+    status: 410,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'X-Robots-Tag': 'noindex',
+      'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+    },
+  });
+}
+function __toolsRedirect__(pathname, search) {
+  const seg = pathname.split('/');
+  let loc, key;
+  if (seg[1] === 'tools') {
+    loc = 'en';
+    key = seg[2];
+    if (seg[3] && seg[3] !== '') return { gone: true };
+  } else if (seg[2] === 'tools') {
+    loc = __LOCALES__.has(seg[1]) ? seg[1] : 'en';
+    key = seg[3];
+    if (seg[4] && seg[4] !== '') return { gone: true };
+  } else {
+    return null;
+  }
+  if (!key) return { gone: true }; // bare /tools or /{locale}/tools
+  try { key = decodeURIComponent(key); } catch {}
+  const overrides = __TOOLS__.get(key);
+  if (overrides === undefined) return { gone: true };
+  return { target: '/' + loc + '/' + (overrides[loc] || key) + '/' + (search || '') };
+}
 // [PATCH] /{locale}/404 fast-path — bot loops at this URL burned ~640K worker
 // invocations on 2026-04-18. Skip middleware/SSR, return static 404 with a
 // long s-maxage so the edge absorbs repeats.
@@ -164,6 +214,26 @@ function __fastPath404__(pathname) {
 
 const PATCH_AT_START = `async function handle(request, env, context) {
   const { pathname: requestPathname } = new URL(request.url);
+  // [PATCH] Canonical host: 301 www → apex BEFORE any routing. Middleware has
+  // the same redirect but never runs for URLs caught by the prerendered-404
+  // trap — GSC showed 94 indexed www URLs, some returning 404 instead of 301.
+  // GET/HEAD only: a 301 on a POST would drop the request body.
+  if (request.method === 'GET' || request.method === 'HEAD') {
+    const u = new URL(request.url);
+    if (u.hostname === 'www.imagetourl.cloud') {
+      u.hostname = 'imagetourl.cloud';
+      return new Response(null, { status: 301, headers: { Location: u.toString(), 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } });
+    }
+  }
+  // [PATCH] Legacy /{locale}/tools/* 301/410 BEFORE removed-locale + routing.
+  {
+    const u = new URL(request.url);
+    const t = __toolsRedirect__(u.pathname, u.search);
+    if (t) {
+      if (t.gone) return __gone410__();
+      return new Response(null, { status: 301, headers: { Location: t.target, 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } });
+    }
+  }
   // [PATCH] Short-URL /{id}.{ext} BEFORE any routing.
   {
     const resp = await __shortUrlHandler__(requestPathname, request, env, context);
