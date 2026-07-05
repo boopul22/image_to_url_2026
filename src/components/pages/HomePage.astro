@@ -10,7 +10,6 @@ import { localizedUrl } from '../../i18n/landing/registry';
 import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
 import AdRail from '../ads/AdRail.astro';
-import AdLeaderboard from '../ads/AdLeaderboard.astro';
 import { AD_CLIENT, AD_SLOTS } from '../../lib/ads';
 
 
@@ -206,13 +205,12 @@ const pageSchema = [
 
   <!-- Hero Section — Immediate, action-focused -->
   <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
-    <AdLeaderboard />
     <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-      <!-- Left rail — 160x600 skyscraper in a 300px column -->
+      <!-- Left rail — two stacked responsive ad units (vertical + square) -->
       <AdRail side="left" />
 
-      <!-- Center column fills between the two equal 300px rails → tool centered. -->
-      <div class="flex flex-col text-center xl:flex-1 xl:min-w-0">
+      <!-- Center column: badge, headline, upload tool -->
+      <div class="flex flex-col text-center xl:flex-1 xl:max-w-2xl xl:min-w-0">
         <div class="max-w-4xl mx-auto w-full">
           <div class="inline-block bg-rose-600 text-white px-3 py-1 font-headline text-[10px] font-medium uppercase tracking-widest mb-3 border border-outline-variant/40">
             {t(locale, 'home.hero.badge')}

@@ -1,75 +1,64 @@
 ---
 /**
- * Ookla-style side column (2026-07-03). Fixed pixel sizes, in normal flow,
- * shown only on xl+ (mobile/tablet collapse to the single in-content unit).
+ * One side rail = TWO stacked ad units, shown only on xl+ (mobile/tablet never
+ * render the rails — they collapse to the in-content ad instead). Sticky so the
+ * pair stays beside the tool as the user scrolls (works now that <body> uses
+ * overflow-x: clip, not hidden).
  *
- *   side="left"  → ONE 160x600 skyscraper, centred in a 300px column.
- *   side="right" → TWO stacked 300x250 rectangles, in a 300px column.
+ * Loading: each <ins> keeps its own inline push({}) right after it — the proven
+ * pattern from the old single-rail markup. AdSense fills statusless <ins> in DOM
+ * order, so an inline push immediately after each one always targets THAT slot
+ * (every earlier slot already got its push from its own preceding script). Don't
+ * reorder these into a lazy/observer scheme — a bare push() can't target a
+ * specific slot, so out-of-DOM-order lazy fills would misalign.
  *
- * BOTH columns are the SAME 300px width (ads centred inside) so the center
- * column — and the upload tool in it — sits at the TRUE viewport center. Unequal
- * columns (160 vs 300) would push the tool off-centre, which looked wrong. The
- * leaderboard therefore lives as a centred bar on top (see the frame files),
- * not level with the rails. Ad sizes still mirror speedtest.net.
+ * Mobile/tablet (< xl): the rail <aside> is display:none, so each rail <ins> has
+ * zero width. Pushing it makes AdSense throw `No slot size for availableWidth=0`
+ * (a Best-Practices console-error fail). The inline guard below only push()es at
+ * xl+; below xl it instead strips the `adsbygoogle` class off the hidden <ins> so
+ * the slot leaves AdSense's candidate pool entirely — otherwise the next *visible*
+ * push (the banner) would grab this 0-width slot in DOM order and still throw.
  *
- * Loading: each <ins> keeps its own inline push({}) right after it — AdSense
- * fills statusless <ins> in DOM order, so an inline push immediately after each
- * one always targets THAT slot. Don't reorder into a lazy/observer scheme — a
- * bare push() can't target a specific slot, so out-of-DOM-order fills misalign.
- *
- * Mobile/tablet (< xl): the <aside> is display:none, so each <ins> has zero
- * width. Pushing a 0-width slot makes AdSense throw `No slot size for
- * availableWidth=0` (a Best-Practices console-error fail). The inline guard
- * below only push()es at xl+ (min-width:1280); below xl it strips the
- * `adsbygoogle` class off the hidden <ins> so the slot leaves AdSense's
- * candidate pool entirely — otherwise the next *visible* push (the leaderboard)
- * would grab this 0-width slot in DOM order and still throw.
- *
- * Sizes are fixed (display:inline-block;width;height) with no data-ad-format —
- * i.e. dedicated fixed units, mirroring the pasted 728x90 leaderboard markup.
- * Distinct unit id per box (ids centralised in lib/ads.ts) so AdSense doesn't
- * unfill duplicates.
+ * Slots (data-ad-format="auto" + full-width-responsive, so each adapts to the
+ * 280px rail): each of the four rail boxes is its own distinct square ad unit
+ * (per AdSense best practice — reusing one unit ID across boxes makes AdSense
+ * unfill the duplicates).
  */
 import { AD_CLIENT as PUB, AD_SLOTS } from '../../lib/ads';
 interface Props {
   side?: 'left' | 'right';
 }
 const { side = 'left' } = Astro.props;
----
-{side === 'left' ? (
-  <aside
-    class="hidden xl:flex xl:flex-col xl:items-center xl:flex-shrink-0 xl:w-[300px]"
-    aria-label="Sponsored"
-    data-rail="left"
-  >
-    <!-- 160x600 skyscraper (matches speedtest.net stnext_skyscraper) -->
-    <ins
-      class="adsbygoogle ad-fixed"
-      style="display:inline-block;width:160px;height:600px"
-      data-ad-client={PUB}
-      data-ad-slot={AD_SLOTS.leftSkyscraper}></ins>
-    <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
-  </aside>
-) : (
-  <aside
-    class="hidden xl:flex xl:flex-col xl:items-center xl:gap-12 xl:flex-shrink-0 xl:w-[300px]"
-    aria-label="Sponsored"
-    data-rail="right"
-  >
-    <!-- Top: 300x250 rectangle (matches speedtest.net stnext_top_rectangle) -->
-    <ins
-      class="adsbygoogle ad-fixed"
-      style="display:inline-block;width:300px;height:250px"
-      data-ad-client={PUB}
-      data-ad-slot={AD_SLOTS.rightSquareTop}></ins>
-    <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
 
-    <!-- Bottom: 300x250 rectangle (matches speedtest.net stnext_bottom_rectangle) -->
-    <ins
-      class="adsbygoogle ad-fixed"
-      style="display:inline-block;width:300px;height:250px"
-      data-ad-client={PUB}
-      data-ad-slot={AD_SLOTS.rightSquareBottom}></ins>
-    <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
-  </aside>
-)}
+// One distinct square ad unit per rail box (ids centralised in lib/ads.ts).
+const SLOTS = {
+  left: { top: AD_SLOTS.railLeftTop, bottom: AD_SLOTS.railLeftBottom },
+  right: { top: AD_SLOTS.railRightTop, bottom: AD_SLOTS.railRightBottom },
+} as const;
+const slot = SLOTS[side];
+---
+<aside
+  class="hidden xl:flex xl:flex-col xl:gap-4 xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start"
+  aria-label="Sponsored"
+  data-rail={side}
+>
+  <!-- Top: square -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot={slot.top}></ins>
+  <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
+
+  <!-- Bottom: square -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot={slot.bottom}></ins>
+  <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches){(adsbygoogle=window.adsbygoogle||[]).push({});}else if(i){i.classList.remove('adsbygoogle');}})();</script>
+</aside>
