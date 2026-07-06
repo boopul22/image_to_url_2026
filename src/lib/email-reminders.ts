@@ -23,11 +23,11 @@ type ReminderRecipient = {
 
 export const REMINDER_CAMPAIGN_KEY = 'inactive-user-reminder-v1';
 export const REMINDER_FROM = 'updates@imagetourl.cloud';
-export const REMINDER_FROM_NAME = 'ImageToURL Updates';
-export const REMINDER_SUBJECT = 'Need a quick image link?';
+export const REMINDER_FROM_NAME = 'ImageToURL';
+export const REMINDER_SUBJECT = 'Your ImageToURL account is ready when you need it';
 export const WELCOME_FROM = 'welcome@imagetourl.cloud';
 export const WELCOME_FROM_NAME = 'ImageToURL';
-export const WELCOME_SUBJECT = 'Welcome to ImageToURL';
+export const WELCOME_SUBJECT = 'Welcome to ImageToURL - your profile is ready';
 const REMINDER_COOLDOWN_DAYS = 21;
 
 export async function ensureEmailPreferences(db: D1Database, userId: string): Promise<void> {
@@ -231,41 +231,57 @@ function buildReminderEmail(opts: {
 } {
   const firstName = firstNameFor(opts.recipient.name);
   const siteUrl = normalizeBaseUrl(opts.baseUrl);
+  const logoUrl = `${siteUrl}/icon-192.png`;
   const uploadUrl = `${siteUrl}/en/`;
+  const dashboardUrl = `${siteUrl}/dashboard`;
   const unsubscribeUrl = `${siteUrl}/email/unsubscribe?token=${encodeURIComponent(opts.recipient.unsubscribe_token)}`;
   const reasonLine =
     opts.recipient.reason === 'no_uploads'
       ? 'Your account is ready whenever you need a clean image link.'
-      : 'It has been a little while since your last upload.';
+      : 'Your saved uploads and image tools are still ready for you.';
+  const preheader = 'Upload an image, open your profile, or manage reminder emails from ImageToURL.';
 
   const text = [
     `Hi ${firstName},`,
     '',
-    `${reasonLine} ImageToURL can turn a screenshot, product image, or email graphic into a shareable CDN link in seconds.`,
+    reasonLine,
     '',
-    `Upload an image: ${uploadUrl}`,
+    'With ImageToURL, you can turn screenshots, product photos, or email graphics into shareable links in seconds.',
     '',
-    'You are receiving this because you created an ImageToURL account.',
-    `Unsubscribe from reminder emails: ${unsubscribeUrl}`,
+    `Upload a new image: ${uploadUrl}`,
+    `Open your profile: ${dashboardUrl}`,
+    '',
+    'From your profile, you can review uploaded images, copy links again, and delete uploads you no longer need.',
+    '',
+    'You are receiving this because you opted in to ImageToURL updates and reminders.',
+    `Unsubscribe: ${unsubscribeUrl}`,
   ].join('\n');
 
   const html = `<!doctype html>
 <html>
-  <body style="margin:0;background:#f8fafc;color:#18181b;font-family:Arial,Helvetica,sans-serif;">
-    <div style="max-width:600px;margin:0 auto;padding:32px 20px;">
-      <div style="border:1px solid #e5e7eb;background:#ffffff;padding:28px;">
-        <p style="margin:0 0 18px;font-size:14px;color:#71717a;">ImageToURL</p>
-        <h1 style="margin:0 0 16px;font-size:28px;line-height:1.15;color:#111827;">Need a quick image link?</h1>
-        <p style="margin:0 0 14px;font-size:16px;line-height:1.6;">Hi ${escapeHtml(firstName)},</p>
-        <p style="margin:0 0 20px;font-size:16px;line-height:1.6;">${escapeHtml(reasonLine)} ImageToURL can turn a screenshot, product image, or email graphic into a shareable CDN link in seconds.</p>
-        <p style="margin:28px 0;">
-          <a href="${uploadUrl}" style="display:inline-block;background:#e11d48;color:#ffffff;text-decoration:none;padding:12px 18px;font-weight:700;">Upload an image</a>
+  <body style="margin:0;background:#f4f6f8;color:#18181b;font-family:Arial,Helvetica,sans-serif;">
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${escapeHtml(preheader)}</div>
+    <div style="max-width:640px;margin:0 auto;padding:36px 20px;">
+      <div style="border:1px solid #e4e7ec;background:#ffffff;padding:30px;">
+        <img src="${logoUrl}" width="42" height="42" alt="ImageToURL" style="display:block;border:0;margin:0 0 22px;" />
+        <p style="margin:0 0 12px;font-size:13px;line-height:1.5;color:#71717a;">ImageToURL update</p>
+        <h1 style="margin:0 0 16px;font-size:27px;line-height:1.18;color:#111827;font-weight:700;">Your image tools are ready whenever you need them</h1>
+        <p style="margin:0 0 14px;font-size:16px;line-height:1.6;color:#3f3f46;">Hi ${escapeHtml(firstName)},</p>
+        <p style="margin:0 0 18px;font-size:16px;line-height:1.6;color:#3f3f46;">${escapeHtml(reasonLine)} Upload a screenshot, product photo, or email graphic and ImageToURL will turn it into a shareable link in seconds.</p>
+        <div style="border-top:1px solid #e4e7ec;border-bottom:1px solid #e4e7ec;margin:24px 0;padding:18px 0;">
+          <p style="margin:0 0 8px;font-size:14px;line-height:1.55;color:#52525b;"><strong style="color:#111827;">Your profile keeps your uploads organized.</strong></p>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#52525b;">Review uploaded images, copy links again, and delete uploads you no longer need.</p>
+        </div>
+        <p style="margin:0 0 22px;">
+          <a href="${uploadUrl}" style="display:inline-block;background:#e11d48;color:#ffffff;text-decoration:none;padding:12px 18px;font-weight:700;">Upload image</a>
+          <a href="${dashboardUrl}" style="display:inline-block;color:#be123c;text-decoration:none;padding:12px 0 12px 14px;font-weight:700;">Open profile</a>
         </p>
-        <p style="margin:24px 0 0;font-size:13px;line-height:1.5;color:#71717a;">You are receiving this because you created an ImageToURL account.</p>
-        <p style="margin:8px 0 0;font-size:13px;line-height:1.5;color:#71717a;">
-          <a href="${unsubscribeUrl}" style="color:#be123c;">Unsubscribe from reminder emails</a>
+        <p style="margin:24px 0 0;font-size:12px;line-height:1.6;color:#71717a;">You are receiving this because you opted in to ImageToURL updates and reminders.</p>
+        <p style="margin:8px 0 0;font-size:12px;line-height:1.6;color:#71717a;">
+          <a href="${unsubscribeUrl}" style="color:#be123c;">Unsubscribe from these emails</a>
         </p>
       </div>
+      <p style="margin:14px 0 0;text-align:center;font-size:11px;line-height:1.5;color:#8a8f98;">ImageToURL - imagetourl.cloud</p>
     </div>
   </body>
 </html>`;
@@ -303,38 +319,44 @@ function buildWelcomeEmail(opts: {
   const logoUrl = `${siteUrl}/icon-192.png`;
   const uploadUrl = `${siteUrl}/en/`;
   const dashboardUrl = `${siteUrl}/dashboard`;
+  const preheader = 'Your ImageToURL profile is ready. Upload images, copy links, and manage signed-in uploads.';
 
   const text = [
     `Hi ${firstName},`,
     '',
-    'Welcome to ImageToURL.',
+    'Welcome to ImageToURL. Your profile is ready.',
     '',
-    'You can upload an image, copy a shareable link, and manage signed-in uploads from your profile.',
+    'You can upload images, copy shareable links, and manage signed-in uploads from your profile.',
     '',
-    `Upload an image: ${uploadUrl}`,
     `Open your profile: ${dashboardUrl}`,
+    `Upload an image: ${uploadUrl}`,
     '',
-    'From your profile you can review your images, copy links again, and delete uploads you no longer need.',
+    'From your profile, you can review your images, copy links again, and delete uploads you no longer need.',
+    '',
+    'This is a one-time account email from ImageToURL.',
   ].join('\n');
 
   const html = `<!doctype html>
 <html>
-  <body style="margin:0;background:#f6f7f9;color:#18181b;font-family:Arial,Helvetica,sans-serif;">
-    <div style="max-width:620px;margin:0 auto;padding:34px 20px;">
-      <div style="border:1px solid #e5e7eb;background:#ffffff;padding:30px;">
+  <body style="margin:0;background:#f4f6f8;color:#18181b;font-family:Arial,Helvetica,sans-serif;">
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${escapeHtml(preheader)}</div>
+    <div style="max-width:640px;margin:0 auto;padding:36px 20px;">
+      <div style="border:1px solid #e4e7ec;background:#ffffff;padding:30px;">
         <img src="${logoUrl}" width="42" height="42" alt="ImageToURL" style="display:block;border:0;margin:0 0 22px;" />
-        <h1 style="margin:0 0 14px;font-size:28px;line-height:1.15;color:#111827;">Welcome to ImageToURL</h1>
-        <p style="margin:0 0 18px;font-size:16px;line-height:1.6;color:#3f3f46;">Hi ${escapeHtml(firstName)}, your account is ready. You can upload images, copy shareable links, and keep track of signed-in uploads from your profile.</p>
-        <div style="border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;padding:18px 0;margin:24px 0;">
-          <p style="margin:0 0 10px;font-size:14px;line-height:1.5;color:#52525b;"><strong style="color:#111827;">Your profile keeps things organized.</strong></p>
+        <p style="margin:0 0 12px;font-size:13px;line-height:1.5;color:#71717a;">Account created</p>
+        <h1 style="margin:0 0 16px;font-size:27px;line-height:1.18;color:#111827;font-weight:700;">Welcome to ImageToURL</h1>
+        <p style="margin:0 0 18px;font-size:16px;line-height:1.6;color:#3f3f46;">Hi ${escapeHtml(firstName)}, your profile is ready. You can upload images, copy shareable links, and keep track of signed-in uploads from one place.</p>
+        <div style="border-top:1px solid #e4e7ec;border-bottom:1px solid #e4e7ec;padding:18px 0;margin:24px 0;">
+          <p style="margin:0 0 10px;font-size:14px;line-height:1.55;color:#52525b;"><strong style="color:#111827;">Your profile keeps things organized.</strong></p>
           <p style="margin:0;font-size:14px;line-height:1.6;color:#52525b;">Open it anytime to review uploaded images, copy links again, and delete uploads you no longer need.</p>
         </div>
         <p style="margin:0 0 22px;">
           <a href="${dashboardUrl}" style="display:inline-block;background:#e11d48;color:#ffffff;text-decoration:none;padding:12px 18px;font-weight:700;">Open profile</a>
           <a href="${uploadUrl}" style="display:inline-block;color:#be123c;text-decoration:none;padding:12px 0 12px 14px;font-weight:700;">Upload image</a>
         </p>
-        <p style="margin:0;color:#71717a;font-size:12px;line-height:1.5;">This is a one-time account email from ImageToURL.</p>
+        <p style="margin:0;color:#71717a;font-size:12px;line-height:1.6;">This is a one-time account email from ImageToURL.</p>
       </div>
+      <p style="margin:14px 0 0;text-align:center;font-size:11px;line-height:1.5;color:#8a8f98;">ImageToURL - imagetourl.cloud</p>
     </div>
   </body>
 </html>`;
