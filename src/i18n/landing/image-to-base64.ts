@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -177,7 +177,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a size limit for data URIs?",
-        "a": "The tool handles files up to 10 MB, but in practice keep inline data URIs small - a few KB at most. Large strings slow down HTML parsing and are not cached, so a real file URL is faster for anything sizeable."
+        "a": "The tool handles files up to 50 MB, but in practice keep inline data URIs small - a few KB at most. Large strings slow down HTML parsing and are not cached, so a real file URL is faster for anything sizeable."
       },
       {
         "q": "Does Base64 compress or shrink my image?",

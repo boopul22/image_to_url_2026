@@ -9,7 +9,7 @@ const schema = { "@context": "https://schema.org", "@type": "WebApplication", "n
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
   { "@type": "Question", "name": "What's the main difference?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB is optimized for forum culture with BBCode embeds and thumbnail variants. ImageToURL is CDN-first with a focused uploader, guest links, and signed-in keep-forever links." } },
   { "@type": "Question", "name": "Which is faster?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL for most regions — Cloudflare's edge network beats ImgBB's single-origin delivery outside North America. US users see roughly equal TTFB." } },
-  { "@type": "Question", "name": "Max file size?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB: 32 MB. ImageToURL currently accepts 10 MB per upload." } },
+  { "@type": "Question", "name": "Max file size?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB: 32 MB. ImageToURL currently accepts 50 MB per upload." } },
   { "@type": "Question", "name": "API comparison?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB exposes a public upload API with an API key. ImageToURL public API-key uploads are not live yet; use the website uploader today." } },
   { "@type": "Question", "name": "Does ImgBB show ads?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, on the gallery page. Direct image URLs themselves load as raw images on both services." } },
   { "@type": "Question", "name": "Custom expiration?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB offers 'auto-delete after X' on uploads. ImageToURL guest uploads are temporary, while signed-in users can choose Never delete before uploading." } },
@@ -35,7 +35,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
             <tbody class="font-body">
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads on gallery</td><td class="p-3">Ad-supported site</td><td class="p-3">Display</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">CDN</td><td class="p-3">Cloudflare</td><td class="p-3">Single-origin</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">10 MB</td><td class="p-3">32 MB</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">50 MB</td><td class="p-3">32 MB</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API tier</td><td class="p-3">Not public today</td><td class="p-3">Free with key</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Retention choice</td><td class="p-3">Guest expiry or signed-in Never delete</td><td class="p-3">Auto-delete options</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Thumbnails</td><td class="p-3">Pre-generate</td><td class="p-3">Auto, returned in JSON</td></tr>

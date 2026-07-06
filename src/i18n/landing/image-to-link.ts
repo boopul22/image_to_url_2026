@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your image",
-        "body": "Drag in a JPG, PNG, WebP, or GIF up to 10MB, or click to browse. There is no account to create and no email to hand over."
+        "body": "Drag in a JPG, PNG, WebP, or GIF up to 50MB, or click to browse. There is no account to create and no email to hand over."
       },
       {
         "title": "Copy the direct link",
@@ -99,7 +99,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes work?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link ends in the real extension, so it hotlinks and embeds the same way the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The link ends in the real extension, so it hotlinks and embeds the same way the original file would."
       },
       {
         "q": "What is the difference between an image link and an image URL?",
@@ -114,7 +114,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct image link" }
     ],
     "comparisonTitle": "Image link hosts compared",
@@ -128,7 +128,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
@@ -172,7 +172,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Sube tu imagen",
-        "body": "Arrastra un archivo JPG, PNG, WebP o GIF de hasta 10MB, o haz clic para buscarlo. No hay cuentas que crear ni correos electrónicos que proporcionar."
+        "body": "Arrastra un archivo JPG, PNG, WebP o GIF de hasta 50MB, o haz clic para buscarlo. No hay cuentas que crear ni correos electrónicos que proporcionar."
       },
       {
         "title": "Copia el enlace directo",
@@ -249,7 +249,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Téléchargez votre image",
-        "body": "Faites glisser un fichier JPG, PNG, WebP ou GIF jusqu'à 10 Mo, ou cliquez pour parcourir vos dossiers. Aucun compte à créer et aucune adresse e-mail à fournir."
+        "body": "Faites glisser un fichier JPG, PNG, WebP ou GIF jusqu'à 50 Mo, ou cliquez pour parcourir vos dossiers. Aucun compte à créer et aucune adresse e-mail à fournir."
       },
       {
         "title": "Copiez le lien direct",
@@ -326,7 +326,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Laden Sie Ihr Bild hoch",
-        "body": "Ziehen Sie ein JPG, PNG, WebP oder GIF bis zu 10 MB per Drag-and-Drop hinein oder klicken Sie zum Auswählen. Es ist kein Konto erforderlich und Sie müssen keine E-Mail-Adresse angeben."
+        "body": "Ziehen Sie ein JPG, PNG, WebP oder GIF bis zu 50 MB per Drag-and-Drop hinein oder klicken Sie zum Auswählen. Es ist kein Konto erforderlich und Sie müssen keine E-Mail-Adresse angeben."
       },
       {
         "title": "Kopieren Sie den direkten Link",
@@ -403,7 +403,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "画像をアップロード",
-        "body": "最大10MBまでのJPG、PNG、WebP、GIFファイルをドラッグ＆ドロップするか、クリックして選択してください。アカウント作成やメールアドレスの入力は不要です。"
+        "body": "最大50MBまでのJPG、PNG、WebP、GIFファイルをドラッグ＆ドロップするか、クリックして選択してください。アカウント作成やメールアドレスの入力は不要です。"
       },
       {
         "title": "直接リンクをコピー",
@@ -480,7 +480,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "上传您的图片",
-        "body": "拖入最大 10MB 的 JPG、PNG、WebP 或 GIF 文件，或点击进行浏览。无需创建账户，也无需提供电子邮件。"
+        "body": "拖入最大 50MB 的 JPG、PNG、WebP 或 GIF 文件，或点击进行浏览。无需创建账户，也无需提供电子邮件。"
       },
       {
         "title": "复制直接链接",

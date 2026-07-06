@@ -82,7 +82,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What's the file size and format limit?",
-        "a": "Up to 10 MB per file, covering JPG, PNG, WebP, GIF and SVG. That's enough for high-resolution game screenshots and detailed diagrams without having to crop them down first."
+        "a": "Up to 50 MB per file, covering JPG, PNG, WebP, GIF and SVG. That's enough for high-resolution game screenshots and detailed diagrams without having to crop them down first."
       },
       {
         "q": "Does it resize or recompress my screenshot?",
@@ -105,7 +105,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required (recommended for keep-forever)" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct link for [img], HTML, Markdown" }
     ],
     "useCasesTitle": "What forum users post",

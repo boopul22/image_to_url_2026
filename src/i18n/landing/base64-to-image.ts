@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -350,7 +350,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Longueur maximale de collage ?",
-        "a": "Plusieurs Mo dans la zone de texte. Au-delà de 10 Mo, les performances peuvent diminuer."
+        "a": "Plusieurs Mo dans la zone de texte. Au-delà de 50 Mo, les performances peuvent diminuer."
       },
       {
         "q": "Le PNG transparent semble vide ?",

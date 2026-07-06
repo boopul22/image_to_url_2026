@@ -13,13 +13,13 @@ export const content: LandingContentMap = {
       { "pageKey": "image-hosting-for-forums", "label": "For forums" },
       { "pageKey": "image-hosting-for-github-readme", "label": "For GitHub" }
     ],
-    "metaDescription": "Host eBay item photos and get a direct image URL you can drop into your listing description HTML, buyer messages or a selling forum. Free, no signup, no watermark, 10MB.",
+    "metaDescription": "Host eBay item photos and get a direct image URL you can drop into your listing description HTML, buyer messages or a selling forum. Free, no signup, no watermark, 50MB.",
     "schemaName": "ImageToURL",
     "schemaDescription": "A free tool that turns eBay item photos into direct image URLs for listing descriptions, messages and forums. No account, no watermark, full quality.",
     "badge": "EBAY SELLERS",
     "h1Pre": "Image Hosting for eBay",
     "h1Highlight": "listings.",
-    "intro": "Need a public link for an item photo so you can drop it into your eBay listing description? Upload the picture above and you get a direct URL in a couple of seconds. Paste it into the description HTML with an <img> tag to show extra angles beyond the gallery slots, or share it in a buyer message or a selling forum. It works on JPG, PNG, WebP and GIF up to 10MB, there's no watermark, and the photo isn't squeezed or shrunk on the way through.",
+    "intro": "Need a public link for an item photo so you can drop it into your eBay listing description? Upload the picture above and you get a direct URL in a couple of seconds. Paste it into the description HTML with an <img> tag to show extra angles beyond the gallery slots, or share it in a buyer message or a selling forum. It works on JPG, PNG, WebP and GIF up to 50MB, there's no watermark, and the photo isn't squeezed or shrunk on the way through.",
     "specsTitle": "eBay image hosting at a glance",
     "specs": [
       {
@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your item photo",
-        "body": "Drag a product shot onto the box above or click to pick one. JPG, PNG, WebP and GIF all work, up to 10MB each, and the file isn't recompressed."
+        "body": "Drag a product shot onto the box above or click to pick one. JPG, PNG, WebP and GIF all work, up to 50MB each, and the file isn't recompressed."
       },
       {
         "title": "Copy the direct link",
@@ -183,7 +183,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats can I upload?",
-        "a": "JPG, PNG, WebP and GIF, up to 10MB per file. The link ends in the real extension, so it embeds in the description HTML the same way the original file would."
+        "a": "JPG, PNG, WebP and GIF, up to 50MB per file. The link ends in the real extension, so it embeds in the description HTML the same way the original file would."
       },
       {
         "q": "Does it compress or watermark my photo?",
@@ -195,7 +195,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "10MB per image, which covers almost any product photo. If a shot is larger, resize or compress it a little first, then upload it to get the link."
+        "a": "50MB per image, which covers almost any product photo. If a shot is larger, resize or compress it a little first, then upload it to get the link."
       },
       {
         "q": "Are the links safe to share with buyers?",

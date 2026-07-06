@@ -13,7 +13,7 @@ export const content: LandingContentMap = {
       { "pageKey": "image-to-url-for-whatsapp", "label": "Image URL for WhatsApp" },
       { "pageKey": "image-to-url-vercel", "label": "Image hosting for Vercel" }
     ],
-    "metaDescription": "Turn any image into a direct https URL you can drop straight into an HTML <img> tag, CSS background-image or srcset. Free, no signup, no compression, 10MB.",
+    "metaDescription": "Turn any image into a direct https URL you can drop straight into an HTML <img> tag, CSS background-image or srcset. Free, no signup, no compression, 50MB.",
     "schemaName": "Image to URL Converter for HTML",
     "schemaDescription": "Turn any image into a direct URL ready for the src attribute of an HTML img tag.",
     "badge": "HTML Image URLs",
@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your image",
-        "body": "Drag a JPG, PNG, WebP, GIF or SVG into the box, or click to pick one. Files can be up to 10MB each, and nothing gets re-compressed on the way through."
+        "body": "Drag a JPG, PNG, WebP, GIF or SVG into the box, or click to pick one. Files can be up to 50MB each, and nothing gets re-compressed on the way through."
       },
       {
         "title": "Copy the direct URL",
@@ -194,7 +194,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The image keeps its full resolution with no re-compression and no watermark, so what you upload is exactly what loads in the page."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The image keeps its full resolution with no re-compression and no watermark, so what you upload is exactly what loads in the page."
       },
       {
         "q": "Is the service free for HTML developers?",
@@ -232,7 +232,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Sube tu imagen",
-        "body": "Arrastra un JPG, PNG, WebP, GIF o SVG al cargador. Archivos de hasta 10MB con una cuenta gratuita."
+        "body": "Arrastra un JPG, PNG, WebP, GIF o SVG al cargador. Archivos de hasta 50MB con una cuenta gratuita."
       },
       {
         "title": "Copia la URL directa",
@@ -309,7 +309,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Téléversez votre image",
-        "body": "Glissez un JPG, PNG, WebP, GIF ou SVG dans l'outil. Fichiers jusqu'à 10 Mo avec un compte gratuit."
+        "body": "Glissez un JPG, PNG, WebP, GIF ou SVG dans l'outil. Fichiers jusqu'à 50 Mo avec un compte gratuit."
       },
       {
         "title": "Copiez l'URL directe",
@@ -386,7 +386,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Bild hochladen",
-        "body": "Ziehe ein JPG, PNG, WebP, GIF oder SVG in den Uploader. Dateien bis zu 10 MB mit einem kostenlosen Konto."
+        "body": "Ziehe ein JPG, PNG, WebP, GIF oder SVG in den Uploader. Dateien bis zu 50 MB mit einem kostenlosen Konto."
       },
       {
         "title": "Direkte URL kopieren",
@@ -463,7 +463,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "画像をアップロード",
-        "body": "JPG、PNG、WebP、GIF、SVG をアップローダーにドロップしてください。無料アカウントなら 10MB まで対応。"
+        "body": "JPG、PNG、WebP、GIF、SVG をアップローダーにドロップしてください。無料アカウントなら 50MB まで対応。"
       },
       {
         "title": "直接 URL をコピー",
@@ -540,7 +540,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "上传图片",
-        "body": "将 JPG、PNG、WebP、GIF 或 SVG 拖到上传框中。免费账户支持最大 10MB。"
+        "body": "将 JPG、PNG、WebP、GIF 或 SVG 拖到上传框中。免费账户支持最大 50MB。"
       },
       {
         "title": "复制直链",

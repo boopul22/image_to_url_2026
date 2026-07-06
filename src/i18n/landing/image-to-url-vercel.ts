@@ -25,7 +25,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB per file" },
+      { "label": "Max size", "value": "50 MB per file" },
       { "label": "Output", "value": "Direct https CDN link" }
     ],
     "howTitle": "How it works",
@@ -114,7 +114,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and size can I upload?",
-        "a": "JPG, PNG, WebP, GIF, and SVG, up to 10 MB per file. The link you get back ends in the real extension, so it embeds inline anywhere that accepts an image URL."
+        "a": "JPG, PNG, WebP, GIF, and SVG, up to 50 MB per file. The link you get back ends in the real extension, so it embeds inline anywhere that accepts an image URL."
       },
       {
         "q": "Will it slow my page down?",

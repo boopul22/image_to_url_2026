@@ -60,7 +60,7 @@ export const content: LandingContentMap = {
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input", "value": "JPG (.jpg)" },
       { "label": "Output", "value": "JPEG (.jpeg)" },
-      { "label": "Max size", "value": "10 MB" }
+      { "label": "Max size", "value": "50 MB" }
     ],
     "comparisonTitle": "JPG, JPEG and the extensions people confuse them with",
     "comparisonIntro": "The important fact first: .jpg and .jpeg are the same format and the same image. The table sorts out which extension to reach for and which names belong to genuinely different formats.",

@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "EMBED CODES",
     "h1Pre": "Image Embed Code",
     "h1Highlight": "Generator.",
-    "intro": "Host an image here and you get the link wrapped in ready-to-paste embed code, not just a bare URL. The same upload gives you an HTML img tag for websites and email, Markdown for GitHub and docs, and BBCode for older forums. Each snippet has a copy button, so you grab the one your platform speaks and paste it straight in. Files up to 10 MB, no account, no watermark, full quality kept.",
+    "intro": "Host an image here and you get the link wrapped in ready-to-paste embed code, not just a bare URL. The same upload gives you an HTML img tag for websites and email, Markdown for GitHub and docs, and BBCode for older forums. Each snippet has a copy button, so you grab the one your platform speaks and paste it straight in. Files up to 50 MB, no account, no watermark, full quality kept.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -86,7 +86,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes are supported?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The hosted link ends in the real extension, so the embed code points at a genuine image file and renders the same way the original would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The hosted link ends in the real extension, so the embed code points at a genuine image file and renders the same way the original would."
       },
       {
         "q": "Do the embedded images stay up?",
@@ -105,7 +105,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Embed formats", "value": "HTML, Markdown, BBCode" }
     ],
     "comparisonTitle": "Embed formats compared",

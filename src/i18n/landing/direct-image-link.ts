@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "DIRECT IMAGE LINK",
     "h1Pre": "Direct Image Link:",
     "h1Highlight": "the file, not a page",
-    "intro": "A direct image link points straight at the image file, so the URL ends in .jpg, .png or .webp and loads the raw picture on its own. That's the kind of link forums, Discord, email and HTML need to embed an image inline. Upload your file in the box above and you get a clean direct link in a couple of seconds, no account required. It works on JPG, PNG, WebP, GIF and SVG up to 10MB, with no watermark and nothing compressed on the way through.",
+    "intro": "A direct image link points straight at the image file, so the URL ends in .jpg, .png or .webp and loads the raw picture on its own. That's the kind of link forums, Discord, email and HTML need to embed an image inline. Upload your file in the box above and you get a clean direct link in a couple of seconds, no account required. It works on JPG, PNG, WebP, GIF and SVG up to 50MB, with no watermark and nothing compressed on the way through.",
     "specsTitle": "Direct image link at a glance",
     "specs": [
       {
@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Link type",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload the file",
-        "body": "Drag your image onto the box or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. The file goes onto a fast global CDN."
+        "body": "Drag your image onto the box or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 50MB each. The file goes onto a fast global CDN."
       },
       {
         "title": "Copy the direct link",
@@ -203,7 +203,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and file size are supported?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link ends in the matching extension, so it hotlinks the same way the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The link ends in the matching extension, so it hotlinks the same way the original file would."
       },
       {
         "q": "How long does the direct link stay live?",

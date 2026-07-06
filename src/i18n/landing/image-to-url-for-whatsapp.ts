@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your image",
-        "body": "Drag a photo, screenshot or graphic onto the box, or tap to pick one from your camera roll. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each."
+        "body": "Drag a photo, screenshot or graphic onto the box, or tap to pick one from your camera roll. JPG, PNG, WebP, GIF and SVG all work, up to 50MB each."
       },
       {
         "title": "Copy the URL",
@@ -182,7 +182,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes can I use?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link ends in the real extension, so it behaves like the original file when opened."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The link ends in the real extension, so it behaves like the original file when opened."
       },
       {
         "q": "Can I share a screenshot or a photo from my camera roll?",

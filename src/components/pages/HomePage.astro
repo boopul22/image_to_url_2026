@@ -103,7 +103,7 @@ const pageSchema = [
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "browserRequirements": "Requires JavaScript and HTML5",
-    "description": "Upload any image and instantly receive a CDN-delivered shareable URL. Guest uploads auto-expire at monthly cleanup; signed-in users can choose keep-forever links. Supports JPG, PNG, WebP, GIF, and SVG up to 10 MB.",
+    "description": "Upload any image and instantly receive a CDN-delivered shareable URL. Guest uploads auto-expire at monthly cleanup; signed-in users can choose keep-forever links. Supports JPG, PNG, WebP, GIF, and SVG up to 50 MB.",
     "featureList": [
       "Drag and drop image upload",
       "Instant CDN URL generation",
@@ -123,7 +123,7 @@ const pageSchema = [
         "priceCurrency": "USD",
         "priceValidUntil": "2026-12-31",
         "availability": "https://schema.org/InStock",
-        "description": "5 guest uploads per rolling 24 hours, 10 MB per file, auto-expiring CDN links.",
+        "description": "5 guest uploads per rolling 24 hours, 50 MB per file, auto-expiring CDN links.",
         "url": "https://imagetourl.cloud/pricing"
       }
     ],
@@ -209,7 +209,7 @@ const pageSchema = [
               <Icon name="cloud_upload" class="text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon" />
               <div class="text-center">
                 <p class="text-on-surface-variant font-medium text-sm sm:text-base transition-opacity duration-300 group-hover:opacity-70" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
-                <p class="text-[11px] sm:text-xs text-on-surface-variant/80 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
+                <p class="text-[11px] sm:text-xs text-on-surface-variant/80 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 50MB</p>
               </div>
               <div id="progress-bar" class="su-progress hidden w-full max-w-xs h-2 bg-surface-variant overflow-hidden">
                 <div id="progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300" style="width: 0%"></div>
@@ -857,7 +857,7 @@ const pageSchema = [
     copy: panel.dataset.copy || 'COPY',
     failed: panel.dataset.failed || 'Upload failed',
     clickOrDrag: panel.dataset.clickOrDrag || 'Click to upload or drag & drop',
-    formats: panel.dataset.formats || 'JPG, PNG, WebP, GIF, SVG — up to 10 MB',
+    formats: panel.dataset.formats || 'JPG, PNG, WebP, GIF, SVG — up to 50 MB',
     selectFile: panel.dataset.selectFile || 'SELECT FILE',
     uploadingFile: panel.dataset.uploadingFile || 'Uploading {name}',
   };

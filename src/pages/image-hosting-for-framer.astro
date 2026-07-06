@@ -28,7 +28,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Can I use it with Framer's Form component?", a: "Forms don't display images by default. For a thumbnail inside a form (e.g. 'confirm avatar'), use a code component that reads the URL." },
     { q: "SEO — does Framer's image SEO help external URLs?", a: "Alt text set in Framer applies to the &lt;img&gt; tag regardless of source. Google and Bing crawl images by URL, so external hosting has neutral SEO impact." },
     { q: "og:image?", a: "Framer's page SEO settings accept a custom og:image URL. Point at ImageToURL for full control over link-preview cards." },
-    { q: "Max size?", a: "Framer has no explicit cap on external images. ImageToURL currently accepts 10 MB per upload." },
+    { q: "Max size?", a: "Framer has no explicit cap on external images. ImageToURL currently accepts 50 MB per upload." },
     { q: "Can I swap the image without touching Framer?", a: "Not with the same URL — ImageToURL URLs are content-addressed and immutable. For swap-without-re-deploy, point Framer at an Airtable/Sheets URL column that you can change freely." }
   ]}
   relatedSlugs={[

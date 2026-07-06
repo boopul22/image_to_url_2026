@@ -6,13 +6,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Convert to JPG - Free Online Image to JPG Converter",
-    "metaDescription": "Convert any image to JPG free. Drop a PNG, WebP, HEIC, GIF, BMP, or TIFF and download a clean JPG. No signup, no watermark, up to 10 MB.",
+    "metaDescription": "Convert any image to JPG free. Drop a PNG, WebP, HEIC, GIF, BMP, or TIFF and download a clean JPG. No signup, no watermark, up to 50 MB.",
     "schemaName": "Convert to JPG",
-    "schemaDescription": "Convert PNG, WebP, HEIC, GIF, BMP, and TIFF images to JPG. Free, no signup, no watermark, up to 10 MB.",
+    "schemaDescription": "Convert PNG, WebP, HEIC, GIF, BMP, and TIFF images to JPG. Free, no signup, no watermark, up to 50 MB.",
     "badge": "Browser-only Tool",
     "h1Pre": "Convert to JPG,",
     "h1Highlight": "any image, free",
-    "intro": "Need a JPG and have something else? Drop almost any picture here and turn it into a JPG in a couple of seconds. PNG, WebP, HEIC, GIF, BMP, and TIFF all work, the tool is free with no signup and no watermark, and files can be up to 10 MB. The result is a clean .jpg you can download, and if you want a link to share it, you can host it afterward.",
+    "intro": "Need a JPG and have something else? Drop almost any picture here and turn it into a JPG in a couple of seconds. PNG, WebP, HEIC, GIF, BMP, and TIFF all work, the tool is free with no signup and no watermark, and files can be up to 50 MB. The result is a clean .jpg you can download, and if you want a link to share it, you can host it afterward.",
     "specsTitle": "Convert to JPG at a glance",
     "specs": [
       {
@@ -29,7 +29,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -40,7 +40,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop your images",
-        "body": "Drag your files into the box or click to pick them. PNG, WebP, HEIC, GIF, BMP, and TIFF are all accepted, up to 10 MB each, and you can queue a whole batch at once."
+        "body": "Drag your files into the box or click to pick them. PNG, WebP, HEIC, GIF, BMP, and TIFF are all accepted, up to 50 MB each, and you can queue a whole batch at once."
       },
       {
         "title": "Set the quality",
@@ -185,7 +185,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "Each file can be up to 10 MB, which covers almost any photo or screenshot. If a file is bigger than that, resize or compress it first, then convert it to JPG."
+        "a": "Each file can be up to 50 MB, which covers almost any photo or screenshot. If a file is bigger than that, resize or compress it first, then convert it to JPG."
       },
       {
         "q": "Can I convert several images at once?",

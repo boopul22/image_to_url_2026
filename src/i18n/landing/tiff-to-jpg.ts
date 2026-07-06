@@ -60,7 +60,7 @@ export const content: LandingContentMap = {
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input", "value": "TIFF (.tif, .tiff)" },
       { "label": "Output", "value": "JPG (.jpg)" },
-      { "label": "Max size", "value": "10 MB" }
+      { "label": "Max size", "value": "50 MB" }
     ],
     "comparisonTitle": "TIFF vs JPG and other formats",
     "comparisonIntro": "TIFF is built for print and archiving, not the web. The table below shows what you trade when you convert: a big drop in file size and far wider support, against a small loss of detail you rarely notice on screen.",

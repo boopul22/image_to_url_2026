@@ -70,7 +70,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB per file"
+        "value": "50 MB per file"
       },
       {
         "label": "Output",
@@ -191,7 +191,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Can I host a demo GIF for my README?",
-        "a": "Yes. GIF is supported up to 10 MB. Upload it, copy the link, and embed it the same way as a static image. A short demo GIF often explains a project faster than paragraphs of text."
+        "a": "Yes. GIF is supported up to 50 MB. Upload it, copy the link, and embed it the same way as a static image. A short demo GIF often explains a project faster than paragraphs of text."
       },
       {
         "q": "Do the links expire?",
@@ -203,7 +203,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes are supported?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it embeds in Markdown exactly like the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, so it embeds in Markdown exactly like the original file would."
       },
       {
         "q": "Does it compress or resize my image?",

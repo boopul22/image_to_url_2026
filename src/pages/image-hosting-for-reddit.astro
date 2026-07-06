@@ -26,7 +26,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Does ImageToURL work in Old Reddit?", a: "Yes. Old Reddit's Markdown supports inline images via ![](url) syntax. ImageToURL gives you a stable URL that works identically in both Old and New Reddit." },
     { q: "Will Reddit rehost my image?", a: "If you submit a Link post with an image URL, Reddit sometimes mirrors it to i.redd.it. Sometimes not — depends on subreddit rules and the mobile app. Either way, your original URL keeps working as a fallback." },
     { q: "Any NSFW restriction?", a: "ImageToURL doesn't allow adult content. For NSFW subreddits, Reddit's native upload or Imgur is the right path." },
-    { q: "What's the max file size?", a: "10 MB per upload. Reddit's own image limit is 20 MB, so compress anything larger before uploading to ImageToURL." },
+    { q: "What's the max file size?", a: "50 MB per upload. Reddit's own image limit is 20 MB, so compress anything larger before uploading to ImageToURL." },
     { q: "Does the URL survive a subreddit ban?", a: "Yes — the URL lives on our CDN, not Reddit's. If a sub bans you or removes a post, the image is still accessible via its direct link." },
     { q: "Can I use this in Reddit automod rules?", a: "Yes. Any URL in an automod YAML works the same whether it points to imgur.com, i.redd.it, or imagetourl.cloud." },
     { q: "Does it track who views my image?", a: "Hosted-image analytics are not live today." }

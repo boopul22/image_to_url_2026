@@ -8,13 +8,13 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "Image to URL - Free, No Sign-Up, Instant Direct Link | ImageToURL",
-    "metaDescription": "Turn any image into a URL for free. Drop a JPG, PNG, WebP, GIF or SVG and get a direct link that works in Discord, Reddit, forums and email. No account, no compression, 10MB.",
+    "metaDescription": "Turn any image into a URL for free. Drop a JPG, PNG, WebP, GIF or SVG and get a direct link that works in Discord, Reddit, forums and email. No account, no compression, 50MB.",
     "schemaName": "Image to URL",
     "schemaDescription": "A free image to URL tool that turns any picture into a direct, full-quality link. No account, no watermark, fast global CDN.",
     "badge": "IMAGE TO URL",
     "h1Pre": "Image to URL:",
     "h1Highlight": "free, no sign-up needed",
-    "intro": "Need to turn an image to URL without making an account first? Drop your picture in the box above and you get a direct link in about two seconds. It works on JPG, PNG, WebP, GIF and SVG files up to 10MB, there's no watermark, and nothing gets squeezed or shrunk on the way through. Copy the link and paste it wherever you need it.",
+    "intro": "Need to turn an image to URL without making an account first? Drop your picture in the box above and you get a direct link in about two seconds. It works on JPG, PNG, WebP, GIF and SVG files up to 50MB, there's no watermark, and nothing gets squeezed or shrunk on the way through. Copy the link and paste it wherever you need it.",
     "specsTitle": "Image to URL at a glance",
     "specs": [
       {
@@ -31,7 +31,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -42,7 +42,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop your file in",
-        "body": "Drag an image onto the box or click to pick one from your device. Files can be up to 10MB each, and JPG, PNG, WebP, GIF and SVG all work."
+        "body": "Drag an image onto the box or click to pick one from your device. Files can be up to 50MB each, and JPG, PNG, WebP, GIF and SVG all work."
       },
       {
         "title": "Grab the link",
@@ -87,7 +87,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Yes",
-          "10 MB",
+          "50 MB",
           "Yes",
           "Yes",
           "Weeks free, forever when signed in"
@@ -175,7 +175,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats can I use?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link you get ends in the real extension, so it hotlinks and embeds the same way the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The link you get ends in the real extension, so it hotlinks and embeds the same way the original file would."
       },
       {
         "q": "Can I turn a screenshot or photo into a URL?",
@@ -199,7 +199,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "10MB per image, which covers almost any screenshot, photo or graphic. If a file is larger, compress or resize it first and then convert it to a URL."
+        "a": "50MB per image, which covers almost any screenshot, photo or graphic. If a file is larger, compress or resize it first and then convert it to a URL."
       },
       {
         "q": "Is this a good free Imgur alternative?",
@@ -242,18 +242,18 @@ export const content: LandingContentMap = {
   },
   "es": {
     "metaTitle": "Imagen a URL - Gratis, sin registro, enlace directo instantáneo | ImageToURL",
-    "metaDescription": "Convierte cualquier imagen a URL gratis. Sube un JPG, PNG, WebP, GIF o SVG y obtén un enlace directo que funciona en Discord, Reddit, foros y correo electrónico. Sin cuenta, sin compresión, hasta 10MB.",
+    "metaDescription": "Convierte cualquier imagen a URL gratis. Sube un JPG, PNG, WebP, GIF o SVG y obtén un enlace directo que funciona en Discord, Reddit, foros y correo electrónico. Sin cuenta, sin compresión, hasta 50MB.",
     "schemaName": "Imagen a URL",
     "schemaDescription": "Una herramienta gratuita para convertir imágenes a URL que transforma cualquier foto en un enlace directo de calidad completa. Sin cuenta, sin marcas de agua, CDN global rápido.",
     "badge": "IMAGEN A URL",
     "h1Pre": "Imagen a URL:",
     "h1Highlight": "gratis, sin necesidad de registro",
-    "intro": "¿Necesitas convertir una imagen a URL sin crear una cuenta primero? Suelta tu imagen en el cuadro de arriba y obtendrás un enlace directo en unos dos segundos. Funciona con archivos JPG, PNG, WebP, GIF y SVG de hasta 10MB, no tiene marcas de agua y nada se comprime ni se reduce en el proceso. Copia el enlace y pégalo donde lo necesites.",
+    "intro": "¿Necesitas convertir una imagen a URL sin crear una cuenta primero? Suelta tu imagen en el cuadro de arriba y obtendrás un enlace directo en unos dos segundos. Funciona con archivos JPG, PNG, WebP, GIF y SVG de hasta 50MB, no tiene marcas de agua y nada se comprime ni se reduce en el proceso. Copia el enlace y pégalo donde lo necesites.",
     "howTitle": "Cómo funciona la herramienta de imagen a URL",
     "steps": [
       {
         "title": "Sube tu archivo",
-        "body": "Arrastra una imagen al cuadro o haz clic para seleccionar una desde tu dispositivo. Los archivos pueden pesar hasta 10MB cada uno, y funcionan formatos JPG, PNG, WebP, GIF y SVG."
+        "body": "Arrastra una imagen al cuadro o haz clic para seleccionar una desde tu dispositivo. Los archivos pueden pesar hasta 50MB cada uno, y funcionan formatos JPG, PNG, WebP, GIF y SVG."
       },
       {
         "title": "Obtén el enlace",
@@ -291,7 +291,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Qué formatos de imagen puedo usar?",
-        "a": "JPG, PNG, WebP, GIF y SVG, hasta 10MB por archivo. El enlace que obtienes termina con la extensión real, por lo que se vincula e incrusta de la misma manera que lo haría el archivo original."
+        "a": "JPG, PNG, WebP, GIF y SVG, hasta 50MB por archivo. El enlace que obtienes termina con la extensión real, por lo que se vincula e incrusta de la misma manera que lo haría el archivo original."
       },
       {
         "q": "¿Puedo convertir una captura de pantalla o foto en una URL?",
@@ -315,7 +315,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Hay un límite de tamaño de archivo?",
-        "a": "10MB por imagen, lo que cubre casi cualquier captura de pantalla, foto o gráfico. Si un archivo es más grande, comprímelo o cambia su tamaño primero y luego conviértelo a una URL."
+        "a": "50MB por imagen, lo que cubre casi cualquier captura de pantalla, foto o gráfico. Si un archivo es más grande, comprímelo o cambia su tamaño primero y luego conviértelo a una URL."
       },
       {
         "q": "¿Es esta una buena alternativa gratuita a Imgur?",
@@ -357,7 +357,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Tamaño máximo",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Salida",
@@ -379,7 +379,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Sí",
-          "10 MB",
+          "50 MB",
           "Sí",
           "Sí",
           "Semanas gratis, siempre si inicias sesión"
@@ -473,18 +473,18 @@ export const content: LandingContentMap = {
   },
   "fr": {
     "metaTitle": "Image vers URL - Gratuit, sans inscription, lien direct instantané | ImageToURL",
-    "metaDescription": "Transformez n'importe quelle image en URL gratuitement. Déposez un fichier JPG, PNG, WebP, GIF ou SVG et obtenez un lien direct fonctionnant sur Discord, Reddit, les forums et par e-mail. Sans compte, sans compression, jusqu'à 10 Mo.",
+    "metaDescription": "Transformez n'importe quelle image en URL gratuitement. Déposez un fichier JPG, PNG, WebP, GIF ou SVG et obtenez un lien direct fonctionnant sur Discord, Reddit, les forums et par e-mail. Sans compte, sans compression, jusqu'à 50 Mo.",
     "schemaName": "Image vers URL",
     "schemaDescription": "Un outil gratuit pour transformer une image en URL, créant un lien direct en pleine qualité. Sans compte, sans filigrane, via un CDN mondial rapide.",
     "badge": "IMAGE VERS URL",
     "h1Pre": "Image vers URL :",
     "h1Highlight": "gratuit, aucune inscription requise",
-    "intro": "Besoin de transformer une image en URL sans créer de compte ? Déposez votre image dans la zone ci-dessus et obtenez un lien direct en deux secondes environ. Cela fonctionne avec les fichiers JPG, PNG, WebP, GIF et SVG jusqu'à 10 Mo, sans filigrane, et sans aucune perte de qualité. Copiez le lien et collez-le où vous le souhaitez.",
+    "intro": "Besoin de transformer une image en URL sans créer de compte ? Déposez votre image dans la zone ci-dessus et obtenez un lien direct en deux secondes environ. Cela fonctionne avec les fichiers JPG, PNG, WebP, GIF et SVG jusqu'à 50 Mo, sans filigrane, et sans aucune perte de qualité. Copiez le lien et collez-le où vous le souhaitez.",
     "howTitle": "Comment fonctionne l'outil Image vers URL",
     "steps": [
       {
         "title": "Déposez votre fichier",
-        "body": "Faites glisser une image dans la zone ou cliquez pour en sélectionner une depuis votre appareil. Les fichiers peuvent peser jusqu'à 10 Mo, et les formats JPG, PNG, WebP, GIF et SVG sont acceptés."
+        "body": "Faites glisser une image dans la zone ou cliquez pour en sélectionner une depuis votre appareil. Les fichiers peuvent peser jusqu'à 50 Mo, et les formats JPG, PNG, WebP, GIF et SVG sont acceptés."
       },
       {
         "title": "Récupérez le lien",
@@ -522,7 +522,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Quels formats d'image puis-je utiliser ?",
-        "a": "JPG, PNG, WebP, GIF et SVG, jusqu'à 10 Mo par fichier. Le lien obtenu se termine par l'extension réelle, permettant une intégration identique au fichier original."
+        "a": "JPG, PNG, WebP, GIF et SVG, jusqu'à 50 Mo par fichier. Le lien obtenu se termine par l'extension réelle, permettant une intégration identique au fichier original."
       },
       {
         "q": "Puis-je transformer une capture d'écran ou une photo en URL ?",
@@ -546,7 +546,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Y a-t-il une limite de taille de fichier ?",
-        "a": "10 Mo par image, ce qui couvre presque toutes les captures d'écran, photos ou graphiques. Si un fichier est plus gros, compressez-le ou redimensionnez-le d'abord avant de le convertir en URL."
+        "a": "50 Mo par image, ce qui couvre presque toutes les captures d'écran, photos ou graphiques. Si un fichier est plus gros, compressez-le ou redimensionnez-le d'abord avant de le convertir en URL."
       },
       {
         "q": "Est-ce une bonne alternative gratuite à Imgur ?",
@@ -588,7 +588,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Taille max",
-        "value": "10 Mo"
+        "value": "50 Mo"
       },
       {
         "label": "Sortie",
@@ -610,7 +610,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Oui",
-          "10 Mo",
+          "50 Mo",
           "Oui",
           "Oui",
           "Semaines (gratuit), illimité (connecté)"
@@ -704,18 +704,18 @@ export const content: LandingContentMap = {
   },
   "de": {
     "metaTitle": "Bild zu URL - Kostenlos, ohne Anmeldung, sofortiger Direktlink | ImageToURL",
-    "metaDescription": "Verwandeln Sie jedes Bild kostenlos in eine URL. Laden Sie JPG, PNG, WebP, GIF oder SVG hoch und erhalten Sie einen Direktlink für Discord, Reddit, Foren und E-Mails. Kein Konto, keine Komprimierung, bis 10 MB.",
+    "metaDescription": "Verwandeln Sie jedes Bild kostenlos in eine URL. Laden Sie JPG, PNG, WebP, GIF oder SVG hoch und erhalten Sie einen Direktlink für Discord, Reddit, Foren und E-Mails. Kein Konto, keine Komprimierung, bis 50 MB.",
     "schemaName": "Bild zu URL",
     "schemaDescription": "Ein kostenloses Tool, das jedes Bild in einen direkten Link in voller Qualität umwandelt. Kein Konto, kein Wasserzeichen, schnelles globales CDN.",
     "badge": "BILD ZU URL",
     "h1Pre": "Bild zu URL:",
     "h1Highlight": "kostenlos, keine Anmeldung erforderlich",
-    "intro": "Sie müssen ein Bild in eine URL umwandeln, ohne vorher ein Konto zu erstellen? Ziehen Sie Ihr Bild einfach in das Feld oben und Sie erhalten in etwa zwei Sekunden einen Direktlink. Es funktioniert mit JPG-, PNG-, WebP-, GIF- und SVG-Dateien bis zu 10 MB. Es gibt kein Wasserzeichen und die Qualität bleibt unverändert. Kopieren Sie den Link und fügen Sie ihn überall ein, wo Sie ihn benötigen.",
+    "intro": "Sie müssen ein Bild in eine URL umwandeln, ohne vorher ein Konto zu erstellen? Ziehen Sie Ihr Bild einfach in das Feld oben und Sie erhalten in etwa zwei Sekunden einen Direktlink. Es funktioniert mit JPG-, PNG-, WebP-, GIF- und SVG-Dateien bis zu 50 MB. Es gibt kein Wasserzeichen und die Qualität bleibt unverändert. Kopieren Sie den Link und fügen Sie ihn überall ein, wo Sie ihn benötigen.",
     "howTitle": "So funktioniert das Bild-zu-URL-Tool",
     "steps": [
       {
         "title": "Datei hochladen",
-        "body": "Ziehen Sie ein Bild in das Feld oder klicken Sie darauf, um eine Datei von Ihrem Gerät auszuwählen. Dateien können bis zu 10 MB groß sein; JPG, PNG, WebP, GIF und SVG werden unterstützt."
+        "body": "Ziehen Sie ein Bild in das Feld oder klicken Sie darauf, um eine Datei von Ihrem Gerät auszuwählen. Dateien können bis zu 50 MB groß sein; JPG, PNG, WebP, GIF und SVG werden unterstützt."
       },
       {
         "title": "Link abrufen",
@@ -753,7 +753,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Welche Bildformate kann ich verwenden?",
-        "a": "JPG, PNG, WebP, GIF und SVG bis zu 10 MB pro Datei. Der Link endet mit der echten Dateiendung, sodass er sich wie die Originaldatei verhält und eingebettet werden kann."
+        "a": "JPG, PNG, WebP, GIF und SVG bis zu 50 MB pro Datei. Der Link endet mit der echten Dateiendung, sodass er sich wie die Originaldatei verhält und eingebettet werden kann."
       },
       {
         "q": "Kann ich einen Screenshot oder ein Foto in eine URL umwandeln?",
@@ -777,7 +777,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Gibt es eine Dateigrößenbeschränkung?",
-        "a": "10 MB pro Bild, was für fast jeden Screenshot, jedes Foto oder jede Grafik ausreicht. Wenn eine Datei größer ist, komprimieren oder verkleinern Sie sie bitte zuerst."
+        "a": "50 MB pro Bild, was für fast jeden Screenshot, jedes Foto oder jede Grafik ausreicht. Wenn eine Datei größer ist, komprimieren oder verkleinern Sie sie bitte zuerst."
       },
       {
         "q": "Ist dies eine gute kostenlose Imgur-Alternative?",
@@ -819,7 +819,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max. Größe",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Ausgabe",
@@ -841,7 +841,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Ja",
-          "10 MB",
+          "50 MB",
           "Ja",
           "Ja",
           "Wochenlang kostenlos, für immer mit Konto"
@@ -935,18 +935,18 @@ export const content: LandingContentMap = {
   },
   "ja": {
     "metaTitle": "画像URL変換 - 無料・登録不要・即時直リンク発行 | ImageToURL",
-    "metaDescription": "画像を無料でURLに変換。JPG、PNG、WebP、GIF、SVGをアップロードして、Discord、Reddit、掲示板、メールで使える直リンクを取得。アカウント不要、圧縮なし、最大10MBまで対応。",
+    "metaDescription": "画像を無料でURLに変換。JPG、PNG、WebP、GIF、SVGをアップロードして、Discord、Reddit、掲示板、メールで使える直リンクを取得。アカウント不要、圧縮なし、最大50MBまで対応。",
     "schemaName": "画像URL変換",
     "schemaDescription": "画像を画質劣化なしの直リンクに変換する無料ツール。アカウント登録不要、透かしなし、高速グローバルCDN利用。",
     "badge": "画像URL変換",
     "h1Pre": "画像URL変換：",
     "h1Highlight": "無料・登録不要",
-    "intro": "アカウント作成なしで画像をURLに変換したいですか？上のボックスに画像をドラッグ＆ドロップするだけで、約2秒で直リンクが発行されます。JPG、PNG、WebP、GIF、SVG形式（最大10MB）に対応しており、透かしや画質の劣化もありません。リンクをコピーして、必要な場所に貼り付けてください。",
+    "intro": "アカウント作成なしで画像をURLに変換したいですか？上のボックスに画像をドラッグ＆ドロップするだけで、約2秒で直リンクが発行されます。JPG、PNG、WebP、GIF、SVG形式（最大50MB）に対応しており、透かしや画質の劣化もありません。リンクをコピーして、必要な場所に貼り付けてください。",
     "howTitle": "画像URL変換ツールの使い方",
     "steps": [
       {
         "title": "ファイルをアップロード",
-        "body": "画像をボックスにドラッグ＆ドロップするか、クリックしてデバイスから選択してください。最大10MBまでのJPG、PNG、WebP、GIF、SVGファイルに対応しています。"
+        "body": "画像をボックスにドラッグ＆ドロップするか、クリックしてデバイスから選択してください。最大50MBまでのJPG、PNG、WebP、GIF、SVGファイルに対応しています。"
       },
       {
         "title": "リンクを取得",
@@ -985,7 +985,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "どの画像形式が使えますか？",
-        "a": "JPG、PNG、WebP、GIF、SVGに対応しており、1ファイル最大10MBまでです。発行されるリンクは元の拡張子で終わるため、元のファイルと同じようにホットリンクや埋め込みが可能です。"
+        "a": "JPG、PNG、WebP、GIF、SVGに対応しており、1ファイル最大50MBまでです。発行されるリンクは元の拡張子で終わるため、元のファイルと同じようにホットリンクや埋め込みが可能です。"
       },
       {
         "q": "スクリーンショットや写真をURLにできますか？",
@@ -1009,7 +1009,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "ファイルサイズの制限はありますか？",
-        "a": "1画像あたり10MBまでです。これはほとんどのスクリーンショット、写真、グラフィックをカバーします。これを超える場合は、圧縮やリサイズを行ってから変換してください。"
+        "a": "1画像あたり50MBまでです。これはほとんどのスクリーンショット、写真、グラフィックをカバーします。これを超える場合は、圧縮やリサイズを行ってから変換してください。"
       },
       {
         "q": "Imgurの無料代替として適していますか？",
@@ -1033,7 +1033,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "はい",
-          "10 MB",
+          "50 MB",
           "はい",
           "はい",
           "無料は数週間、ログイン時は永久"
@@ -1137,7 +1137,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "最大サイズ",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "出力",
@@ -1167,18 +1167,18 @@ export const content: LandingContentMap = {
   },
   "zh-Hans": {
     "metaTitle": "图片转 URL - 免费、无需注册、即时直链 | ImageToURL",
-    "metaDescription": "免费将任何图片转换为 URL。上传 JPG、PNG、WebP、GIF 或 SVG，即可获得适用于 Discord、Reddit、论坛和电子邮件的直链。无需账户，无压缩，支持 10MB。",
+    "metaDescription": "免费将任何图片转换为 URL。上传 JPG、PNG、WebP、GIF 或 SVG，即可获得适用于 Discord、Reddit、论坛和电子邮件的直链。无需账户，无压缩，支持 50MB。",
     "schemaName": "图片转 URL",
     "schemaDescription": "一款免费的图片转 URL 工具，可将任何图片转换为直接、全质量的链接。无需账户，无水印，快速全球 CDN。",
     "badge": "图片转 URL",
     "h1Pre": "图片转 URL：",
     "h1Highlight": "免费，无需注册",
-    "intro": "需要将图片转换为 URL 而无需先注册账户吗？将您的图片拖放到上方的框中，大约两秒钟即可获得直链。它适用于最大 10MB 的 JPG、PNG、WebP、GIF 和 SVG 文件，没有水印，传输过程中也不会进行任何压缩或缩减。复制链接并将其粘贴到您需要的地方即可。",
+    "intro": "需要将图片转换为 URL 而无需先注册账户吗？将您的图片拖放到上方的框中，大约两秒钟即可获得直链。它适用于最大 50MB 的 JPG、PNG、WebP、GIF 和 SVG 文件，没有水印，传输过程中也不会进行任何压缩或缩减。复制链接并将其粘贴到您需要的地方即可。",
     "howTitle": "图片转 URL 工具的使用方法",
     "steps": [
       {
         "title": "拖放您的文件",
-        "body": "将图片拖到框中或点击以从您的设备中选择。每个文件最大可达 10MB，支持 JPG、PNG、WebP、GIF 和 SVG。"
+        "body": "将图片拖到框中或点击以从您的设备中选择。每个文件最大可达 50MB，支持 JPG、PNG、WebP、GIF 和 SVG。"
       },
       {
         "title": "获取链接",
@@ -1216,7 +1216,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "我可以使用哪些图片格式？",
-        "a": "JPG、PNG、WebP、GIF 和 SVG，每个文件最大 10MB。您获得的链接以真实扩展名结尾，因此它的外链和嵌入方式与原始文件相同。"
+        "a": "JPG、PNG、WebP、GIF 和 SVG，每个文件最大 50MB。您获得的链接以真实扩展名结尾，因此它的外链和嵌入方式与原始文件相同。"
       },
       {
         "q": "我可以将截图或照片转换为 URL 吗？",
@@ -1240,7 +1240,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "有文件大小限制吗？",
-        "a": "每张图片 10MB，这涵盖了几乎所有的截图、照片或图形。如果文件较大，请先压缩或调整大小，然后再转换为 URL。"
+        "a": "每张图片 50MB，这涵盖了几乎所有的截图、照片或图形。如果文件较大，请先压缩或调整大小，然后再转换为 URL。"
       },
       {
         "q": "这是一个好的免费 Imgur 替代品吗？",
@@ -1264,7 +1264,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "是",
-          "10 MB",
+          "50 MB",
           "是",
           "是",
           "免费几周，登录后永久"
@@ -1368,7 +1368,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "最大大小",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "输出",

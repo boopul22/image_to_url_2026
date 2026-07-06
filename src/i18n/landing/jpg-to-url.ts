@@ -6,7 +6,7 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "JPG to URL - Convert JPG to a Link Free | ImageToURL",
-    "metaDescription": "JPG to URL in seconds. Upload a JPG or JPEG and get a permanent direct link that embeds in Discord, Reddit, and forums. Free, no signup, up to 10MB.",
+    "metaDescription": "JPG to URL in seconds. Upload a JPG or JPEG and get a permanent direct link that embeds in Discord, Reddit, and forums. Free, no signup, up to 50MB.",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-to-url", "label": "Image to URL converter" },
@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop your JPG in",
-        "body": "Drag a JPG or JPEG onto the box above or click to pick one. Files up to 10MB are fine, including full-size photos straight off a phone or camera."
+        "body": "Drag a JPG or JPEG onto the box above or click to pick one. Files up to 50MB are fine, including full-size photos straight off a phone or camera."
       },
       {
         "title": "We host it on a fast CDN",
@@ -78,7 +78,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What's the largest JPG I can upload?",
-        "a": "Up to 10MB per JPG or JPEG, which covers most phone and camera photos without resizing first."
+        "a": "Up to 50MB per JPG or JPEG, which covers most phone and camera photos without resizing first."
       },
       {
         "q": "Does the JPG to URL tool compress my image?",
@@ -121,7 +121,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, JPEG (also PNG, WebP, GIF, SVG)" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct .jpg CDN link" }
     ],
     "comparisonTitle": "JPG hosts compared",
@@ -135,7 +135,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
@@ -179,7 +179,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Sube tu JPG",
-        "body": "Arrastra y suelta o haz clic para seleccionar tu archivo JPG o JPEG. Compatible con fotos de alta resolución de hasta 10MB."
+        "body": "Arrastra y suelta o haz clic para seleccionar tu archivo JPG o JPEG. Compatible con fotos de alta resolución de hasta 50MB."
       },
       {
         "title": "Obtén tu URL",
@@ -213,7 +213,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Cuál es el tamaño máximo de archivo JPG que puedo subir?",
-        "a": "Los usuarios gratuitos pueden subir imágenes JPG de hasta 2MB. Con una cuenta gratuita, el límite aumenta a 10MB, más que suficiente para la mayoría de las fotos."
+        "a": "Puedes subir imágenes JPG de hasta 50 MB, de forma anónima o con sesión iniciada — más que suficiente para la mayoría de las fotos. Iniciar sesión no cambia el límite de tamaño: conserva tus enlaces para siempre y te da más subidas diarias."
       },
       {
         "q": "¿ImageToURL comprime mis imágenes JPG?",
@@ -248,7 +248,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Téléchargez votre JPG",
-        "body": "Glissez-déposez ou cliquez pour sélectionner votre fichier JPG ou JPEG. Prend en charge les photos haute résolution jusqu'à 10 Mo."
+        "body": "Glissez-déposez ou cliquez pour sélectionner votre fichier JPG ou JPEG. Prend en charge les photos haute résolution jusqu'à 50 Mo."
       },
       {
         "title": "Obtenez votre URL",
@@ -282,7 +282,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Quelle est la taille maximale de fichier JPG que je peux télécharger ?",
-        "a": "Les utilisateurs gratuits peuvent télécharger des images JPG jusqu'à 2 Mo. Avec un compte gratuit, la limite passe à 10 Mo, ce qui est largement suffisant pour la plupart des photos."
+        "a": "Vous pouvez téléverser des images JPG jusqu'à 50 Mo, connecté ou non — largement suffisant pour la plupart des photos. Se connecter ne change pas la limite de taille : vos liens sont conservés pour toujours et vous obtenez plus de téléversements quotidiens."
       },
       {
         "q": "ImageToURL compresse-t-il mes images JPG ?",
@@ -317,7 +317,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Laden Sie Ihr JPG hoch",
-        "body": "Ziehen Sie Ihre JPG- oder JPEG-Datei per Drag & Drop hinein oder klicken Sie, um sie auszuwählen. Unterstützt hochauflösende Fotos bis zu 10 MB."
+        "body": "Ziehen Sie Ihre JPG- oder JPEG-Datei per Drag & Drop hinein oder klicken Sie, um sie auszuwählen. Unterstützt hochauflösende Fotos bis zu 50 MB."
       },
       {
         "title": "Erhalten Sie Ihre URL",
@@ -351,7 +351,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Wie groß darf die JPG-Datei maximal sein?",
-        "a": "Kostenlose Nutzer können JPG-Bilder bis zu 2 MB hochladen. Mit einem kostenlosen Konto erhöht sich das Limit auf 10 MB – mehr als genug für die meisten Fotos."
+        "a": "Sie können JPG-Bilder bis zu 50 MB hochladen – ob anonym oder angemeldet – mehr als genug für die meisten Fotos. Die Anmeldung ändert das Größenlimit nicht: Links bleiben dauerhaft erhalten und Sie erhalten mehr tägliche Uploads."
       },
       {
         "q": "Komprimiert ImageToURL meine JPG-Bilder?",
@@ -386,7 +386,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "JPGをアップロード",
-        "body": "ドラッグ＆ドロップ、またはクリックしてJPGやJPEGファイルを選択してください。最大10MBまでの高解像度写真に対応しています。"
+        "body": "ドラッグ＆ドロップ、またはクリックしてJPGやJPEGファイルを選択してください。最大50MBまでの高解像度写真に対応しています。"
       },
       {
         "title": "URLを取得",
@@ -420,7 +420,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "アップロードできるJPGの最大ファイルサイズは？",
-        "a": "無料ユーザーは最大2MBまでのJPG画像をアップロードできます。無料アカウントを作成すると、制限が10MBまで拡大され、ほとんどの写真に対応可能です。"
+        "a": "JPG画像は匿名でもログイン状態でも最大50 MBまでアップロードでき、ほとんどの写真に対応可能です。ログインしてもサイズ上限は変わりませんが、リンクを永久に保持でき、1日あたりのアップロード数が増えます。"
       },
       {
         "q": "ImageToURLはJPG画像を圧縮しますか？",
@@ -455,7 +455,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "上传您的 JPG",
-        "body": "拖放或点击选择您的 JPG 或 JPEG 文件。支持最高 10MB 的高分辨率照片。"
+        "body": "拖放或点击选择您的 JPG 或 JPEG 文件。支持最高 50MB 的高分辨率照片。"
       },
       {
         "title": "获取您的 URL",
@@ -489,7 +489,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "我能上传的最大 JPG 文件大小是多少？",
-        "a": "免费用户可以上传最大 2MB 的 JPG 图片。注册免费账户后，限制可提升至 10MB，足以满足大多数照片需求。"
+        "a": "无论匿名还是登录，您都可以上传最大 50 MB 的 JPG 图片，足以满足大多数照片需求。登录不会改变大小限制，但可以永久保留链接，并获得更多每日上传次数。"
       },
       {
         "q": "ImageToURL 会压缩我的 JPG 图片吗？",

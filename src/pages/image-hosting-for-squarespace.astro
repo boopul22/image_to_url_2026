@@ -28,7 +28,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Does this break Squarespace's responsive image system?", a: "Yes — external images don't get automatic srcset variants. Pre-generate sizes with the image resizer and use a &lt;picture&gt; element with media queries if responsive is critical." },
     { q: "og:image?", a: "Squarespace auto-generates og:image from your featured image. For custom control, use a Code Injection in Page Settings with a meta tag pointing to your ImageToURL URL." },
     { q: "SEO impact?", a: "Neutral. Search engines follow external image URLs the same as internal ones. Alt text is what matters for image SEO." },
-    { q: "Max file size?", a: "Squarespace Code Blocks have no size limit on external images. ImageToURL currently accepts 10 MB per upload." },
+    { q: "Max file size?", a: "Squarespace Code Blocks have no size limit on external images. ImageToURL currently accepts 50 MB per upload." },
     { q: "Commerce product photos?", a: "Those are uploaded natively to Squarespace Commerce — external URLs don't integrate. Use ImageToURL as your master archive." }
   ]}
   relatedSlugs={[

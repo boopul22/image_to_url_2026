@@ -106,7 +106,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required (recommended for keep-forever)" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct https link" }
     ],
     "useCasesTitle": "What goes in a signature",

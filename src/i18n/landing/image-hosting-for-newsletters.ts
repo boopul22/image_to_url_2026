@@ -87,7 +87,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What size and format should newsletter images be?",
-        "a": "JPG works well for photos and PNG for logos or anything with text or transparency, up to 10 MB. Keep the width around 600px for the main content area so it looks sharp without slowing the load. The file is served at full quality with no recompression."
+        "a": "JPG works well for photos and PNG for logos or anything with text or transparency, up to 50 MB. Keep the width around 600px for the main content area so it looks sharp without slowing the load. The file is served at full quality with no recompression."
       },
       {
         "q": "Will the same image show in every email client?",
@@ -102,7 +102,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required (recommended for keep-forever)" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct https link" }
     ],
     "useCasesTitle": "What newsletter creators host here",

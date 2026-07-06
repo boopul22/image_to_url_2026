@@ -13,13 +13,13 @@ export const content: LandingContentMap = {
       { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" },
       { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
     ],
-    "metaDescription": "Free image hosting with no signup. Upload JPG, PNG, WebP, GIF or SVG up to 10 MB and get a direct CDN link you can paste into Discord, forums, and HTML.",
+    "metaDescription": "Free image hosting with no signup. Upload JPG, PNG, WebP, GIF or SVG up to 50 MB and get a direct CDN link you can paste into Discord, forums, and HTML.",
     "schemaName": "ImageToURL",
-    "schemaDescription": "A free, no-signup image hosting service that returns a direct CDN link for JPG, PNG, WebP, GIF and SVG files up to 10 MB.",
+    "schemaDescription": "A free, no-signup image hosting service that returns a direct CDN link for JPG, PNG, WebP, GIF and SVG files up to 50 MB.",
     "badge": "FREE HOSTING",
     "h1Pre": "Free Image Hosting",
     "h1Highlight": "for everyone.",
-    "intro": "Free image hosting with nothing to pay and nothing to sign up for. Drop a JPG, PNG, WebP, GIF or SVG up to 10 MB in the box above and you get a direct link in a couple of seconds, served from a global CDN so it loads fast wherever people open it. Nothing gets compressed or watermarked, so the file you share is the file you uploaded. Anonymous links stay live for at least a couple of weeks; sign in free if you want one that sticks around forever.",
+    "intro": "Free image hosting with nothing to pay and nothing to sign up for. Drop a JPG, PNG, WebP, GIF or SVG up to 50 MB in the box above and you get a direct link in a couple of seconds, served from a global CDN so it loads fast wherever people open it. Nothing gets compressed or watermarked, so the file you share is the file you uploaded. Anonymous links stay live for at least a couple of weeks; sign in free if you want one that sticks around forever.",
     "howTitle": "How It Works",
     "steps": [
       {
@@ -70,7 +70,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What file types and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link you get ends in the real extension, so it hotlinks and embeds just like the original."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link you get ends in the real extension, so it hotlinks and embeds just like the original."
       },
       {
         "q": "Does it compress or watermark my image?",
@@ -105,7 +105,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct CDN link" }
     ],
     "comparisonTitle": "Free image hosts compared",
@@ -119,7 +119,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },

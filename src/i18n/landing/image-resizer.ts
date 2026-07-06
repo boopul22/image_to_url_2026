@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "Image Resizer",
     "h1Highlight": "exact pixels, exact ratio.",
-    "intro": "Need a photo at a specific pixel size? Drop it in the box above, type a width or a height, and the picture scales to fit while the other side adjusts on its own so nothing looks stretched. It runs in your browser on JPG, PNG, WebP and GIF files up to 10 MB. Download the result, and if you want a link to share, send it through the main uploader to get an https URL.",
+    "intro": "Need a photo at a specific pixel size? Drop it in the box above, type a width or a height, and the picture scales to fit while the other side adjusts on its own so nothing looks stretched. It runs in your browser on JPG, PNG, WebP and GIF files up to 50 MB. Download the result, and if you want a link to share, send it through the main uploader to get an https URL.",
     "specsTitle": "Image resizer at a glance",
     "specs": [
       {
@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop your file in",
-        "body": "Drag a photo onto the box or click to pick one. JPG, PNG, WebP and GIF all work, up to 10 MB each. The original stays untouched on your device."
+        "body": "Drag a photo onto the box or click to pick one. JPG, PNG, WebP and GIF all work, up to 50 MB each. The original stays untouched on your device."
       },
       {
         "title": "Set a width or height",
@@ -171,7 +171,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats can I resize?",
-        "a": "JPG, PNG, WebP and GIF, up to 10 MB per file. The output keeps the same format, so a PNG stays a PNG and a JPG stays a JPG."
+        "a": "JPG, PNG, WebP and GIF, up to 50 MB per file. The output keeps the same format, so a PNG stays a PNG and a JPG stays a JPG."
       },
       {
         "q": "How do I resize a photo for Instagram?",
@@ -195,7 +195,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "10 MB per image, which covers almost any photo, screenshot or graphic. If a file is bigger, compress it first and then resize."
+        "a": "50 MB per image, which covers almost any photo, screenshot or graphic. If a file is bigger, compress it first and then resize."
       },
       {
         "q": "What happens to EXIF data?",

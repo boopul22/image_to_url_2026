@@ -11,13 +11,13 @@ export const content: LandingContentMap = {
       { "pageKey": "imgbb-alternative", "label": "ImgBB alternative" },
       { "pageKey": "cloudinary-alternative", "label": "Cloudinary alternative" }
     ],
-    "metaDescription": "Want an Imgur alternative that skips the account? Drop a JPG, PNG, WebP, GIF or SVG and get a direct https link in seconds. No sign-up, no watermark, full quality, 10MB.",
+    "metaDescription": "Want an Imgur alternative that skips the account? Drop a JPG, PNG, WebP, GIF or SVG and get a direct https link in seconds. No sign-up, no watermark, full quality, 50MB.",
     "schemaName": "Imgur Alternative",
     "schemaDescription": "A free Imgur alternative that turns any image into a direct, full-quality link. No account, no watermark, no gallery page, fast global CDN.",
     "badge": "IMGUR ALTERNATIVE",
     "h1Pre": "A simpler Imgur",
     "h1Highlight": "alternative, no account",
-    "intro": "Since Imgur dropped anonymous uploads in 2023, getting a quick image link there means making an account first and tying the picture to it. If all you want is a direct link to paste into Discord or a forum, that's a lot of overhead. ImageToURL skips the sign-up: drop a JPG, PNG, WebP, GIF or SVG up to 10MB and you get a direct https link in about two seconds, at full quality, with no watermark and no gallery page wrapped around it.",
+    "intro": "Since Imgur dropped anonymous uploads in 2023, getting a quick image link there means making an account first and tying the picture to it. If all you want is a direct link to paste into Discord or a forum, that's a lot of overhead. ImageToURL skips the sign-up: drop a JPG, PNG, WebP, GIF or SVG up to 50MB and you get a direct https link in about two seconds, at full quality, with no watermark and no gallery page wrapped around it.",
     "specsTitle": "ImageToURL at a glance",
     "specs": [
       {
@@ -34,7 +34,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -45,7 +45,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop your image in",
-        "body": "Drag a file onto the box above or click to pick one from your device. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. No account screen first."
+        "body": "Drag a file onto the box above or click to pick one from your device. JPG, PNG, WebP, GIF and SVG all work, up to 50MB each. No account screen first."
       },
       {
         "title": "Copy the direct link",
@@ -90,7 +90,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Yes",
-          "10 MB",
+          "50 MB",
           "Yes",
           "Yes",
           "Weeks free, forever when signed in"
@@ -185,7 +185,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link you get ends in the real extension, so it hotlinks and embeds the same way the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The link you get ends in the real extension, so it hotlinks and embeds the same way the original file would."
       },
       {
         "q": "Will the link embed in Discord?",

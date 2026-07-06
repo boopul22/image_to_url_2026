@@ -29,7 +29,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Will Webflow resize my externally-hosted image?", a: "No — Webflow's srcset/responsive magic only applies to assets you upload to its CDN. For external URLs, you're responsible for pre-sizing via the image resizer tool." },
     { q: "Do external images break if Webflow hosting changes?", a: "No — they're decoupled. Webflow serves your HTML; the &lt;img&gt; src points at our CDN. Unrelated systems." },
     { q: "SEO considerations?", a: "Fine. Google's crawler follows image URLs regardless of host. Just make sure alt text, lazy loading, and responsive sizes are set in Webflow." },
-    { q: "Max size?", a: "Webflow asset cap on external URLs: there isn't one — it's just a remote fetch. ImageToURL currently accepts 10 MB per upload." }
+    { q: "Max size?", a: "Webflow asset cap on external URLs: there isn't one — it's just a remote fetch. ImageToURL currently accepts 50 MB per upload." }
   ]}
   relatedSlugs={[
     { href: "/image-hosting-for-wix/", title: "Wix", body: "Same pattern on Wix." },

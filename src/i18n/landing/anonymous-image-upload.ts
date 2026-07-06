@@ -90,7 +90,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and size can I upload anonymously?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The anonymous link is identical in quality to a signed-in one; the only difference is how long it lasts."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The anonymous link is identical in quality to a signed-in one; the only difference is how long it lasts."
       },
       {
         "q": "Is anonymous upload free?",
@@ -105,7 +105,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Email", "value": "Never asked" },
-      { "label": "Max size", "value": "10 MB per file" },
+      { "label": "Max size", "value": "50 MB per file" },
       { "label": "Visibility", "value": "Public to anyone with the link" }
     ],
     "comparisonTitle": "Which hosts let you skip the account",
@@ -119,7 +119,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] },

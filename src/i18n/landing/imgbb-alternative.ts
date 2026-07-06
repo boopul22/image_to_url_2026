@@ -17,7 +17,7 @@ export const content: LandingContentMap = {
     "badge": "IMGBB ALTERNATIVE",
     "h1Pre": "A Better ImgBB",
     "h1Highlight": "Alternative.",
-    "intro": "ImgBB is a fine free image host, but every upload lands on its own image page wrapped in ads, and the link you copy often points at that page rather than the file. If all you want is a clean link to drop into Discord or a forum, that gets in the way. ImageToURL skips the account and the gallery page: drop a JPG, PNG, WebP, GIF or SVG up to 10MB and you get a direct https link in about two seconds, at full quality, with no watermark and no ad page around it.",
+    "intro": "ImgBB is a fine free image host, but every upload lands on its own image page wrapped in ads, and the link you copy often points at that page rather than the file. If all you want is a clean link to drop into Discord or a forum, that gets in the way. ImageToURL skips the account and the gallery page: drop a JPG, PNG, WebP, GIF or SVG up to 50MB and you get a direct https link in about two seconds, at full quality, with no watermark and no ad page around it.",
     "specsTitle": "ImageToURL at a glance",
     "specs": [
       {
@@ -34,7 +34,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -45,7 +45,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop your image in",
-        "body": "Drag a file onto the box above or click to pick one from your device. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. No account screen, no email to confirm first."
+        "body": "Drag a file onto the box above or click to pick one from your device. JPG, PNG, WebP, GIF and SVG all work, up to 50MB each. No account screen, no email to confirm first."
       },
       {
         "title": "Copy the direct link",
@@ -90,7 +90,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Yes",
-          "10 MB",
+          "50 MB",
           "Yes",
           "Yes",
           "Weeks free, forever when signed in"
@@ -181,7 +181,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. ImgBB allows larger files (up to 32MB), so for very big images that limit is worth knowing."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. ImgBB allows larger files (up to 32MB), so for very big images that limit is worth knowing."
       },
       {
         "q": "Will the link embed in Discord and forums?",

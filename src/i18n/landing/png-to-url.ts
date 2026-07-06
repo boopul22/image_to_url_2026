@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload Your PNG",
-        "body": "Drag & drop or click to select your PNG file. Supports transparent and high-resolution PNGs up to 10MB."
+        "body": "Drag & drop or click to select your PNG file. Supports transparent and high-resolution PNGs up to 50MB."
       },
       {
         "title": "Get Your URL",
@@ -94,7 +94,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What's the maximum PNG file size?",
-        "a": "10MB per file. That covers almost any screenshot, logo, or graphic. If a PNG is bigger, you can convert it to JPG or compress it first, then upload that."
+        "a": "50MB per file. That covers almost any screenshot, logo, or graphic. If a PNG is bigger, you can convert it to JPG or compress it first, then upload that."
       },
       {
         "q": "Should I use PNG or JPG for this?",
@@ -121,7 +121,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "PNG (plus JPG, WebP, GIF, SVG)" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct .png link" }
     ],
     "comparisonTitle": "PNG hosts compared",
@@ -135,7 +135,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Not always (large PNGs become JPG)", "Limited", "Tied to your account"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
@@ -179,7 +179,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Sube tu PNG",
-        "body": "Arrastra y suelta o haz clic para seleccionar tu archivo PNG. Compatible con PNG transparentes y de alta resolución de hasta 10MB."
+        "body": "Arrastra y suelta o haz clic para seleccionar tu archivo PNG. Compatible con PNG transparentes y de alta resolución de hasta 50MB."
       },
       {
         "title": "Obtén tu URL",
@@ -213,7 +213,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Cuál es el tamaño máximo de archivo PNG?",
-        "a": "Los usuarios gratuitos pueden subir PNG de hasta 2MB. Con una cuenta gratuita, el límite aumenta a 10MB."
+        "a": "Puedes subir archivos PNG de hasta 50 MB, de forma anónima o con sesión iniciada. Iniciar sesión no cambia el límite de tamaño: te permite conservar los enlaces para siempre y te da más subidas diarias."
       },
       {
         "q": "¿Puedo obtener un enlace directo a mi PNG?",
@@ -252,7 +252,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Téléchargez votre PNG",
-        "body": "Glissez-déposez ou cliquez pour sélectionner votre fichier PNG. Prend en charge les PNG transparents et haute résolution jusqu'à 10 Mo."
+        "body": "Glissez-déposez ou cliquez pour sélectionner votre fichier PNG. Prend en charge les PNG transparents et haute résolution jusqu'à 50 Mo."
       },
       {
         "title": "Obtenez votre URL",
@@ -286,7 +286,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Quelle est la taille maximale d'un fichier PNG ?",
-        "a": "Les utilisateurs gratuits peuvent télécharger des PNG jusqu'à 2 Mo. Avec un compte gratuit, la limite passe à 10 Mo."
+        "a": "Vous pouvez téléverser des fichiers PNG jusqu'à 50 Mo, connecté ou non. Se connecter ne change pas la limite de taille : cela vous permet de conserver les liens pour toujours et d'obtenir plus de téléversements quotidiens."
       },
       {
         "q": "Puis-je obtenir un lien direct vers mon PNG ?",
@@ -325,7 +325,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Laden Sie Ihr PNG hoch",
-        "body": "Ziehen Sie Ihre PNG-Datei per Drag & Drop oder klicken Sie, um sie auszuwählen. Unterstützt transparente und hochauflösende PNGs bis zu 10 MB."
+        "body": "Ziehen Sie Ihre PNG-Datei per Drag & Drop oder klicken Sie, um sie auszuwählen. Unterstützt transparente und hochauflösende PNGs bis zu 50 MB."
       },
       {
         "title": "Erhalten Sie Ihre URL",
@@ -359,7 +359,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Was ist die maximale PNG-Dateigröße?",
-        "a": "Kostenlose Nutzer können PNGs bis zu 2 MB hochladen. Mit einem kostenlosen Konto erhöht sich das Limit auf 10 MB."
+        "a": "Sie können PNG-Dateien bis zu 50 MB hochladen – ob anonym oder angemeldet. Die Anmeldung ändert das Größenlimit nicht: Sie können damit Links dauerhaft behalten und erhalten mehr tägliche Uploads."
       },
       {
         "q": "Kann ich einen direkten Link zu meinem PNG erhalten?",
@@ -398,7 +398,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "PNGをアップロード",
-        "body": "PNGファイルをドラッグ＆ドロップするか、クリックして選択してください。最大10MBまでの透明PNGや高解像度PNGに対応しています。"
+        "body": "PNGファイルをドラッグ＆ドロップするか、クリックして選択してください。最大50MBまでの透明PNGや高解像度PNGに対応しています。"
       },
       {
         "title": "URLを取得",
@@ -432,7 +432,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "PNGファイルの最大サイズは？",
-        "a": "無料ユーザーは最大2MBまでのPNGをアップロードできます。無料アカウントを作成すると、制限が10MBまで拡大されます。"
+        "a": "PNGファイルは匿名でもログイン状態でも最大50 MBまでアップロードできます。ログインしてもサイズ上限は変わりませんが、リンクを永久に保持でき、1日あたりのアップロード数が増えます。"
       },
       {
         "q": "PNGへの直接リンクを取得できますか？",
@@ -471,7 +471,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "上传您的 PNG",
-        "body": "拖放或点击选择您的 PNG 文件。支持最大 10MB 的透明及高分辨率 PNG 图片。"
+        "body": "拖放或点击选择您的 PNG 文件。支持最大 50MB 的透明及高分辨率 PNG 图片。"
       },
       {
         "title": "获取您的 URL",
@@ -505,7 +505,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "PNG 文件大小限制是多少？",
-        "a": "免费用户可上传最大 2MB 的 PNG。注册免费账户后，限制可提升至 10MB。"
+        "a": "无论匿名还是登录，您都可以上传最大 50 MB 的 PNG 文件。登录不会改变大小限制，但可以永久保留链接，并获得更多每日上传次数。"
       },
       {
         "q": "我可以获取 PNG 的直接链接吗？",

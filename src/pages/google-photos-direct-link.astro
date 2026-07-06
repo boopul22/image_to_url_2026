@@ -13,7 +13,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
   { "@type": "Question", "name": "Is there a way to extract all photos from a shared album at once?", "acceptedAnswer": { "@type": "Answer", "text": "Use Google Takeout (takeout.google.com) to export the whole library or an album as a ZIP. Then bulk-upload the extracted photos here. Takeout preserves originals without recompression." } },
   { "@type": "Question", "name": "Why do googleusercontent.com URLs break?", "acceptedAnswer": { "@type": "Answer", "text": "Those URLs carry short-lived signed tokens. They work while the share session is active but can rotate or expire silently. Embedding them is a common cause of broken images on old forum posts." } },
   { "@type": "Question", "name": "Does the re-hosted image preserve EXIF?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, uploads keep original EXIF by default. If you'd rather strip it for privacy, run it through the image compressor first — canvas re-encoding drops metadata." } },
-  { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "10 MB per upload. Google Photos originals usually fit." } },
+  { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "50 MB per upload. Google Photos originals usually fit." } },
   { "@type": "Question", "name": "What about Google Drive image links?", "acceptedAnswer": { "@type": "Answer", "text": "Same problem — Drive links resolve to preview HTML. The drive.google.com/uc?id= trick sometimes works as a direct link but is unreliable and often rate-limited. Re-hosting is the stable answer." } }
 ] };
 ---

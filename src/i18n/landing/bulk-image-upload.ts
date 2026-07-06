@@ -82,7 +82,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and size limits apply to a batch?",
-        "a": "Each file can be JPG, PNG, WebP, GIF or SVG, up to 10 MB. Mixed formats in one batch are fine."
+        "a": "Each file can be JPG, PNG, WebP, GIF or SVG, up to 50 MB. Mixed formats in one batch are fine."
       },
       {
         "q": "Can I drag a whole folder in?",
@@ -101,7 +101,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Optional (higher daily limit)" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Per file", "value": "10 MB" },
+      { "label": "Per file", "value": "50 MB" },
       { "label": "Output", "value": "One direct link per image" }
     ],
     "comparisonTitle": "Free hosts for batch uploads",
@@ -115,7 +115,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] },

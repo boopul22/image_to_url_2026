@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop in your image",
-        "body": "Drag a file onto the box or click to browse. The converter takes JPG, PNG, WebP, GIF and SVG, up to 10MB each."
+        "body": "Drag a file onto the box or click to browse. The converter takes JPG, PNG, WebP, GIF and SVG, up to 50MB each."
       },
       {
         "title": "Get a direct link",
@@ -74,7 +74,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is the image to URL converter free?",
-        "a": "Yes. It's free to use, with no watermark added to your image and no hidden limits beyond the 10MB per-file size."
+        "a": "Yes. It's free to use, with no watermark added to your image and no hidden limits beyond the 50MB per-file size."
       },
       {
         "q": "Do I need an account?",
@@ -98,7 +98,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats can I convert to a URL?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. The link you get ends in the real file extension, so it hotlinks and embeds exactly the way the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. The link you get ends in the real file extension, so it hotlinks and embeds exactly the way the original file would."
       },
       {
         "q": "Do I need to install any software?",
@@ -125,7 +125,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats in", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct CDN link" }
     ],
     "comparisonTitle": "Free image to URL converters compared",
@@ -139,7 +139,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
@@ -183,7 +183,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Suelta tu imagen",
-        "body": "Arrastra un archivo al cuadro o haz clic para buscarlo. El convertidor acepta JPG, PNG, WebP y GIF, hasta 10MB cada uno."
+        "body": "Arrastra un archivo al cuadro o haz clic para buscarlo. El convertidor acepta JPG, PNG, WebP y GIF, hasta 50MB cada uno."
       },
       {
         "title": "Obtén un enlace directo",
@@ -217,7 +217,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Es gratuito el convertidor de imagen a URL?",
-        "a": "Sí. Es de uso gratuito, sin marcas de agua añadidas a tu imagen y sin límites ocultos más allá de los 10MB por archivo."
+        "a": "Sí. Es de uso gratuito, sin marcas de agua añadidas a tu imagen y sin límites ocultos más allá de los 50MB por archivo."
       },
       {
         "q": "Necesito una cuenta?",
@@ -260,7 +260,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Déposez votre image",
-        "body": "Faites glisser un fichier dans la zone ou cliquez pour parcourir. Le convertisseur accepte les formats JPG, PNG, WebP et GIF, jusqu'à 10 Mo chacun."
+        "body": "Faites glisser un fichier dans la zone ou cliquez pour parcourir. Le convertisseur accepte les formats JPG, PNG, WebP et GIF, jusqu'à 50 Mo chacun."
       },
       {
         "title": "Obtenez un lien direct",
@@ -294,7 +294,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Le convertisseur d'image en URL est-il gratuit ?",
-        "a": "Oui. Il est gratuit, sans filigrane ajouté à votre image et sans limite cachée au-delà des 10 Mo par fichier."
+        "a": "Oui. Il est gratuit, sans filigrane ajouté à votre image et sans limite cachée au-delà des 50 Mo par fichier."
       },
       {
         "q": "Ai-je besoin d'un compte ?",
@@ -337,7 +337,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Bild hochladen",
-        "body": "Ziehen Sie eine Datei in das Feld oder klicken Sie zum Durchsuchen. Der Konverter akzeptiert JPG, PNG, WebP und GIF bis zu 10 MB pro Datei."
+        "body": "Ziehen Sie eine Datei in das Feld oder klicken Sie zum Durchsuchen. Der Konverter akzeptiert JPG, PNG, WebP und GIF bis zu 50 MB pro Datei."
       },
       {
         "title": "Direktlink erhalten",
@@ -371,7 +371,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Ist der Bild-in-URL-Konverter kostenlos?",
-        "a": "Ja. Die Nutzung ist kostenlos, es wird kein Wasserzeichen hinzugefügt und es gibt keine versteckten Limits außer der Dateigröße von 10 MB."
+        "a": "Ja. Die Nutzung ist kostenlos, es wird kein Wasserzeichen hinzugefügt und es gibt keine versteckten Limits außer der Dateigröße von 50 MB."
       },
       {
         "q": "Benötige ich ein Konto?",
@@ -414,7 +414,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "画像をアップロード",
-        "body": "ファイルをボックスにドラッグ＆ドロップするか、クリックして選択してください。JPG、PNG、WebP、GIFに対応しており、各ファイル最大10MBまで可能です。"
+        "body": "ファイルをボックスにドラッグ＆ドロップするか、クリックして選択してください。JPG、PNG、WebP、GIFに対応しており、各ファイル最大50MBまで可能です。"
       },
       {
         "title": "直リンクを取得",
@@ -448,7 +448,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "画像URL変換ツールは無料ですか？",
-        "a": "はい。無料で利用でき、画像に透かしが入ることもありません。1ファイルあたり10MBという制限以外、隠れた制限はありません。"
+        "a": "はい。無料で利用でき、画像に透かしが入ることもありません。1ファイルあたり50MBという制限以外、隠れた制限はありません。"
       },
       {
         "q": "アカウントは必要ですか？",
@@ -491,7 +491,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "上传您的图片",
-        "body": "将文件拖入框中或点击浏览。转换器支持 JPG、PNG、WebP 和 GIF 格式，单个文件最大 10MB。"
+        "body": "将文件拖入框中或点击浏览。转换器支持 JPG、PNG、WebP 和 GIF 格式，单个文件最大 50MB。"
       },
       {
         "title": "获取直链",
@@ -525,7 +525,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "图片转链接转换器是免费的吗？",
-        "a": "是的。它是免费使用的，不会在您的图片上添加任何水印，除了单个文件 10MB 的限制外，没有其他隐藏限制。"
+        "a": "是的。它是免费使用的，不会在您的图片上添加任何水印，除了单个文件 50MB 的限制外，没有其他隐藏限制。"
       },
       {
         "q": "我需要账户吗？",

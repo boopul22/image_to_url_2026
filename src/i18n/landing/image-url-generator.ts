@@ -19,12 +19,12 @@ export const content: LandingContentMap = {
     "badge": "URL GENERATOR",
     "h1Pre": "Free Image URL Generator and ",
     "h1Highlight": "Image Link Generator",
-    "intro": "This free image url generator turns any photo into a direct, hotlinkable link you can paste anywhere. Drop in a JPG, PNG, WebP or GIF up to 10MB and the image link generator hands back a clean URL in seconds. No account, no watermark, no software to install. The link points straight at your file, so it embeds in HTML, Markdown, Discord, Reddit and forum posts without breaking.",
+    "intro": "This free image url generator turns any photo into a direct, hotlinkable link you can paste anywhere. Drop in a JPG, PNG, WebP or GIF up to 50MB and the image link generator hands back a clean URL in seconds. No account, no watermark, no software to install. The link points straight at your file, so it embeds in HTML, Markdown, Discord, Reddit and forum posts without breaking.",
     "howTitle": "How the Image URL Generator Works",
     "steps": [
       {
         "title": "Drop in your file",
-        "body": "Drag an image onto the box or click to browse. JPG, PNG, WebP and GIF are supported, up to 10MB each. Nothing is compressed, so the file you upload is the file people see."
+        "body": "Drag an image onto the box or click to browse. JPG, PNG, WebP and GIF are supported, up to 50MB each. Nothing is compressed, so the file you upload is the file people see."
       },
       {
         "title": "Get a direct link",
@@ -94,7 +94,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Which image formats and file sizes work?",
-        "a": "JPG, PNG, WebP and GIF are supported, up to 10MB per file. Nothing is compressed or re-encoded, so the generated link serves your image at full quality."
+        "a": "JPG, PNG, WebP and GIF are supported, up to 50MB per file. Nothing is compressed or re-encoded, so the generated link serves your image at full quality."
       },
       {
         "q": "What does a generated image URL look like?",
@@ -125,7 +125,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct CDN link (.jpg/.png)" }
     ],
     "comparisonTitle": "Image URL generators compared",
@@ -139,7 +139,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },

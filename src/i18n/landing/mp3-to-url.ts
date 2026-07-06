@@ -10,26 +10,26 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "MP3 to URL - Turn an MP3 Into a Link Free, No Sign-Up | ImageToURL",
-    "metaDescription": "Turn an MP3 into a URL for free. Upload an audio file and get a direct link that plays in Discord, an HTML player or a browser. Free MP3 hosting, no account, up to 10MB.",
+    "metaDescription": "Turn an MP3 into a URL for free. Upload an audio file and get a direct link that plays in Discord, an HTML player or a browser. Free MP3 hosting, no account, up to 50MB.",
     "schemaName": "MP3 to URL",
     "schemaDescription": "A free MP3 to URL tool that uploads an audio file and returns a direct, full-quality link. Free MP3 hosting, no account, no re-encoding.",
     "badge": "MP3 TO URL",
     "h1Pre": "MP3 to URL:",
     "h1Highlight": "free, no sign-up needed",
-    "intro": "Want to turn an MP3 into a URL without signing up for anything? Upload the file in the box above and you get a direct link in about two seconds. That link is the audio's own web address, the kind that plays in Discord, in an HTML audio player, or straight in a browser. It's free MP3 hosting, files go up to 10MB, and nothing gets re-encoded on the way through. Copy the link and paste it wherever you need the sound.",
+    "intro": "Want to turn an MP3 into a URL without signing up for anything? Upload the file in the box above and you get a direct link in about two seconds. That link is the audio's own web address, the kind that plays in Discord, in an HTML audio player, or straight in a browser. It's free MP3 hosting, files go up to 50MB, and nothing gets re-encoded on the way through. Copy the link and paste it wherever you need the sound.",
     "specsTitle": "MP3 to URL at a glance",
     "specs": [
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Format", "value": "MP3 (audio/mpeg)" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct CDN link" }
     ],
     "howTitle": "How to get a URL for your MP3",
     "steps": [
       {
         "title": "Upload your MP3",
-        "body": "Drag the audio file onto the box or click to pick one from your device. One file at a time, up to 10MB. The same uploader takes images too, so you can use it for both."
+        "body": "Drag the audio file onto the box or click to pick one from your device. One file at a time, up to 50MB. The same uploader takes images too, so you can use it for both."
       },
       {
         "title": "Copy the link",
@@ -70,7 +70,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["mp3tourl.com", "Yes", "2 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["Google Drive", "No", "15 GB", "No (viewer page)", "No", "Tied to your account"] },
       { "cells": ["Dropbox", "No", "2 GB", "Only with ?dl=1 trick", "No", "Tied to your account"] }
@@ -145,7 +145,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What's the file size limit?",
-        "a": "10MB per file, which covers most songs, voice memos, loops and podcast clips. If a file is bigger, trim it or re-export it at a lower bitrate first."
+        "a": "50MB per file, which covers most songs, voice memos, loops and podcast clips. If a file is bigger, trim it or re-export it at a lower bitrate first."
       },
       {
         "q": "Can I host WAV or M4A audio too?",

@@ -78,7 +78,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it hotlinks the same way the original file would."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, so it hotlinks the same way the original file would."
       },
       {
         "q": "Do the CDN links work in an <img> tag or Markdown?",
@@ -105,7 +105,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Network", "value": "Global edge servers" },
-      { "label": "Max size", "value": "10 MB per file" },
+      { "label": "Max size", "value": "50 MB per file" },
       { "label": "Output", "value": "Direct HTTPS CDN link" }
     ],
     "comparisonTitle": "Free image hosts compared",
@@ -119,7 +119,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },

@@ -86,7 +86,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it hotlinks and embeds like the original."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, so it hotlinks and embeds like the original."
       },
       {
         "q": "Should I still keep my own copy?",
@@ -101,7 +101,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Only to keep links forever" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Link lifetime", "value": "Weeks anonymous, forever signed in" }
     ],
     "comparisonTitle": "How long links last, host by host",
@@ -115,7 +115,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["Postimages", "Yes", "24 MB", "Yes", "No (resized to 1280px)", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },

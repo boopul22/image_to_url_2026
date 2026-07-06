@@ -13,7 +13,7 @@ export const content: LandingContentMap = {
       { "pageKey": "image-to-link", "label": "Image to link" },
       { "pageKey": "image-url-generator", "label": "Image URL generator" }
     ],
-    "metaDescription": "Turn a screenshot into a shareable link for free. Paste a copied capture or pick the saved PNG and get a direct URL for Slack, Jira, GitHub, Discord and email. No sign-up, no compression, 10MB.",
+    "metaDescription": "Turn a screenshot into a shareable link for free. Paste a copied capture or pick the saved PNG and get a direct URL for Slack, Jira, GitHub, Discord and email. No sign-up, no compression, 50MB.",
     "schemaName": "Screenshot to URL",
     "schemaDescription": "A free tool that turns a screenshot into a direct, full-quality link you can paste into a chat, ticket or issue. No account, no watermark, fast global CDN.",
     "badge": "SCREENSHOT TO URL",
@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -51,7 +51,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Paste or pick the file",
-        "body": "Paste the copied screenshot straight into the box above, or drag the saved PNG onto it. Files up to 10MB work, which covers any full-screen capture from a 4K display."
+        "body": "Paste the copied screenshot straight into the box above, or drag the saved PNG onto it. Files up to 50MB work, which covers any full-screen capture from a 4K display."
       },
       {
         "title": "Copy the link and share",
@@ -175,7 +175,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What screenshot formats work?",
-        "a": "PNG, JPG, WebP, GIF and SVG, up to 10MB each. Screen captures are almost always PNG, which is exactly what you want for sharp text, and they upload the same as any other image."
+        "a": "PNG, JPG, WebP, GIF and SVG, up to 50MB each. Screen captures are almost always PNG, which is exactly what you want for sharp text, and they upload the same as any other image."
       },
       {
         "q": "Will it compress my screenshot or blur the text?",
@@ -191,7 +191,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "10MB per image, which covers virtually any screen capture, even a full 4K or multi-monitor shot. If a file somehow runs larger, save it as PNG or crop it down and try again."
+        "a": "50MB per image, which covers virtually any screen capture, even a full 4K or multi-monitor shot. If a file somehow runs larger, save it as PNG or crop it down and try again."
       },
       {
         "q": "Do I need an account?",

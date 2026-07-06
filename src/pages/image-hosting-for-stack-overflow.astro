@@ -26,7 +26,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Are my screenshots really private until I paste the URL?", a: "The URL is unlisted — not indexed by our site and not browsable through any gallery. But anyone with the URL can fetch it. Treat the URL as 'share with care' rather than 'secret'." },
     { q: "Does SO strip EXIF?", a: "SO's own image upload does. ImageToURL keeps EXIF by default on uploads. For privacy, run through the image compressor first — canvas re-encoding strips metadata." },
     { q: "Can I embed GIFs to show repro behavior?", a: "Yes — ![](url.gif) renders an animated GIF in SO answers. Great for showing a UI bug." },
-    { q: "Max file size?", a: "SO Markdown has no hard cap. ImageToURL currently accepts 10 MB per upload. Most screenshots are 50–300 KB, so they fit comfortably." },
+    { q: "Max file size?", a: "SO Markdown has no hard cap. ImageToURL currently accepts 50 MB per upload. Most screenshots are 50–300 KB, so they fit comfortably." },
     { q: "What about meta.stackoverflow, stackexchange network sites?", a: "All Stack Exchange sites use the same Markdown. Same external URL works in Server Fault, Super User, Mathematics SE, etc." },
     { q: "Can I delete my image later?", a: "Yes — log in, open the upload in your dashboard, click Delete. The URL will return 404, breaking the embed. Use this cautiously on old, well-read answers." },
     { q: "Does this affect answer reputation or vote scoring?", a: "No. Image host has no bearing on voting or reputation. Answer quality does — an image that loads is worth more votes than a broken one." }

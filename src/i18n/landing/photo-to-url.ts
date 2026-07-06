@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Pick a Photo",
-        "body": "Tap the upload area on your phone to grab a shot from your camera roll, or drag a file in from your computer. JPG, PNG, WebP, GIF, and SVG all work, up to 10MB. If your iPhone saves photos as HEIC, export or save one as JPG first and upload that."
+        "body": "Tap the upload area on your phone to grab a shot from your camera roll, or drag a file in from your computer. JPG, PNG, WebP, GIF, and SVG all work, up to 50MB. If your iPhone saves photos as HEIC, export or save one as JPG first and upload that."
       },
       {
         "title": "Get the Link",
@@ -87,7 +87,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What photo formats and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF, and SVG are supported, up to 10MB each. iPhones often save shots as HEIC, which most websites can't display - save or export the photo as JPG first, then upload that."
+        "a": "JPG, PNG, WebP, GIF, and SVG are supported, up to 50MB each. iPhones often save shots as HEIC, which most websites can't display - save or export the photo as JPG first, then upload that."
       },
       {
         "q": "Does the link embed as the actual photo?",
@@ -122,7 +122,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct CDN link" }
     ],
     "comparisonTitle": "Where to host a photo link",
@@ -136,7 +136,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "Yes", "10 MB", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "Yes", "50 MB", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "App or account", "20 MB", "Re-encodes large photos", "Tied to your account"] },
       { "cells": ["ImgBB", "Yes", "Yes", "32 MB", "Yes", "Optional expiry"] },
       { "cells": ["Catbox", "Yes", "Yes", "200 MB", "Yes", "Permanent"] },
@@ -153,7 +153,7 @@ export const content: LandingContentMap = {
       },
       {
         "heading": "Will my photo lose quality?",
-        "body": "No. We serve the exact file you upload, with no compression, resizing, or watermark, so the photo looks the way it did on your device. That is the main reason to use a link instead of dropping the image straight into a chat app - WhatsApp, Messenger, and similar tools re-encode photos to small versions, softening detail and washing out color. The one thing to watch is format: iPhones often save shots as HEIC, which most sites can't display, so export a JPG copy before uploading. JPG, PNG, WebP, GIF, and SVG up to 10MB all go through untouched."
+        "body": "No. We serve the exact file you upload, with no compression, resizing, or watermark, so the photo looks the way it did on your device. That is the main reason to use a link instead of dropping the image straight into a chat app - WhatsApp, Messenger, and similar tools re-encode photos to small versions, softening detail and washing out color. The one thing to watch is format: iPhones often save shots as HEIC, which most sites can't display, so export a JPG copy before uploading. JPG, PNG, WebP, GIF, and SVG up to 50MB all go through untouched."
       }
     ],
     "howToSchema": true,

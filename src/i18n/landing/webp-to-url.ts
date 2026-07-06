@@ -55,7 +55,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "WebP (lossy, lossless, animated)" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct .webp CDN link" }
     ],
     "comparisonTitle": "WebP hosts compared",
@@ -69,7 +69,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
@@ -121,7 +121,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What's the maximum WebP file size?",
-        "a": "Up to 10MB per WebP file, free and with no account. WebP files are small to begin with, so that limit covers almost any image you'd want to host."
+        "a": "Up to 50MB per WebP file, free and with no account. WebP files are small to begin with, so that limit covers almost any image you'd want to host."
       },
       {
         "q": "Will the link work in modern browsers and apps?",
@@ -225,7 +225,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Cuál es el tamaño máximo de archivo WebP?",
-        "a": "Las subidas gratuitas admiten archivos WebP de hasta 2MB. Crea una cuenta gratuita para subir imágenes WebP de hasta 10MB."
+        "a": "Las subidas gratuitas admiten archivos WebP de hasta 2MB. Crea una cuenta gratuita para subir imágenes WebP de hasta 50MB."
       }
     ],
     "ctaTitle": "Convierte tu WebP a una URL compartible",
@@ -298,7 +298,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Quelle est la taille maximale d'un fichier WebP ?",
-        "a": "Les téléchargements gratuits prennent en charge les fichiers WebP jusqu'à 2 Mo. Créez un compte gratuit pour télécharger des images WebP jusqu'à 10 Mo."
+        "a": "Les téléchargements gratuits prennent en charge les fichiers WebP jusqu'à 2 Mo. Créez un compte gratuit pour télécharger des images WebP jusqu'à 50 Mo."
       }
     ],
     "ctaTitle": "Convertissez votre WebP en URL partageable",
@@ -371,7 +371,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Was ist die maximale WebP-Dateigröße?",
-        "a": "Kostenlose Uploads unterstützen WebP-Dateien bis zu 2 MB. Erstellen Sie ein kostenloses Konto, um WebP-Bilder bis zu 10 MB hochzuladen."
+        "a": "Kostenlose Uploads unterstützen WebP-Dateien bis zu 2 MB. Erstellen Sie ein kostenloses Konto, um WebP-Bilder bis zu 50 MB hochzuladen."
       }
     ],
     "ctaTitle": "Wandeln Sie Ihr WebP in eine teilbare URL um",
@@ -444,7 +444,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "WebPの最大ファイルサイズは？",
-        "a": "無料アップロードでは最大2MBまでのWebPファイルに対応しています。無料アカウントを作成すると、最大10MBまでのWebP画像をアップロード可能です。"
+        "a": "無料アップロードでは最大2MBまでのWebPファイルに対応しています。無料アカウントを作成すると、最大50MBまでのWebP画像をアップロード可能です。"
       }
     ],
     "ctaTitle": "WebPを共有可能なURLに変換",
@@ -517,7 +517,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "WebP 文件的最大限制是多少？",
-        "a": "免费上传支持最大 2MB 的 WebP 文件。注册免费账户可上传最大 10MB 的 WebP 图片。"
+        "a": "免费上传支持最大 2MB 的 WebP 文件。注册免费账户可上传最大 50MB 的 WebP 图片。"
       }
     ],
     "ctaTitle": "将您的 WebP 转换为可分享的 URL",

@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "GOOGLE SHEETS",
     "h1Pre": "Image URLs for Google",
     "h1Highlight": "Sheets.",
-    "intro": "Google Sheets can show a picture inside a cell with the IMAGE(\"url\") formula, but that formula needs a direct link to the actual image file - not a Drive share page and not a web page that happens to contain the photo. Upload your image here, copy the link it returns, and drop it straight into =IMAGE(). It handles JPG, PNG, WebP, GIF and SVG up to 10 MB, with no recompression and no watermark, so product photos, icons and charts stay crisp in the grid.",
+    "intro": "Google Sheets can show a picture inside a cell with the IMAGE(\"url\") formula, but that formula needs a direct link to the actual image file - not a Drive share page and not a web page that happens to contain the photo. Upload your image here, copy the link it returns, and drop it straight into =IMAGE(). It handles JPG, PNG, WebP, GIF and SVG up to 50 MB, with no recompression and no watermark, so product photos, icons and charts stay crisp in the grid.",
     "howTitle": "How It Works with Google Sheets",
     "steps": [
       {
@@ -86,7 +86,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes are supported?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB each. Transparent PNGs keep their transparency, which is handy for logos and icons sitting in coloured cells."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB each. Transparent PNGs keep their transparency, which is handy for logos and icons sitting in coloured cells."
       },
       {
         "q": "Do the image links expire?",
@@ -105,7 +105,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct URL for =IMAGE()" }
     ],
     "useCasesTitle": "Where =IMAGE() links earn their keep",

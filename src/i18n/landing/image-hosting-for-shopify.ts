@@ -59,7 +59,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct CDN link" }
     ],
     "comparisonTitle": "Shopify media library vs an external image link",
@@ -129,7 +129,7 @@ export const content: LandingContentMap = {
       },
       {
         "heading": "What you get back, and what stays untouched",
-        "body": "Upload a JPG, PNG, WebP, GIF or SVG up to 10 MB and you get a direct https link that ends in the real file extension. Nothing is recompressed, resized or watermarked, so a crisp size chart stays crisp. That matters because Shopify's storefront CDN already handles resizing for product images through its own image tags. For the loose pieces, description graphics, blog visuals, email art, you usually want the file shown exactly as you made it, which is what a direct link does."
+        "body": "Upload a JPG, PNG, WebP, GIF or SVG up to 50 MB and you get a direct https link that ends in the real file extension. Nothing is recompressed, resized or watermarked, so a crisp size chart stays crisp. That matters because Shopify's storefront CDN already handles resizing for product images through its own image tags. For the loose pieces, description graphics, blog visuals, email art, you usually want the file shown exactly as you made it, which is what a direct link does."
       },
       {
         "heading": "How long do the links stay live?",
@@ -164,7 +164,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes work?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, so it embeds the same way the original file would in an HTML img tag or Liquid."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, so it embeds the same way the original file would in an HTML img tag or Liquid."
       },
       {
         "q": "Do I need a Shopify app for this?",

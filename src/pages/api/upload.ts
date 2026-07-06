@@ -18,7 +18,14 @@ import {
 } from '../../lib/upload-limits';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml', 'audio/mpeg', 'audio/mp3'];
-const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_SIZE = 50 * 1024 * 1024; // 50MB
+const MAX_SIZE_LABEL = '50MB';
+
+// Attribution embedding (embedAttribution) copies the whole file buffer, so on a
+// big upload it doubles peak memory. Workers cap at 128 MB, so above this size we
+// skip the metadata pass and store the raw bytes — attribution is best-effort and
+// must never be the reason a large upload OOMs.
+const ATTRIBUTION_MAX_SIZE = 20 * 1024 * 1024; // 20MB
 
 // MIME types we treat as audio. These go to a dedicated "mp3/" prefix in the
 // same R2 bucket instead of the image folders.
@@ -86,7 +93,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
 
     if (file.size > MAX_SIZE) {
-      return new Response(JSON.stringify({ error: 'File too large. Maximum size is 10MB.' }), {
+      return new Response(JSON.stringify({ error: `File too large. Maximum size is ${MAX_SIZE_LABEL}.` }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -162,7 +169,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const folder = AUDIO_TYPES.includes(file.type) ? 'mp3' : user ? 'uploads' : 'anonymous';
     const key = `${folder}/${id}.${ext}`;
     // Embed imagetourl.cloud attribution metadata (no-op + safe on failure).
-    const body = embedAttribution(new Uint8Array(await file.arrayBuffer()), file.type);
+    // Skip it for very large files — the metadata pass copies the whole buffer,
+    // and doubling a 50 MB upload risks the Worker's 128 MB memory ceiling.
+    const raw = new Uint8Array(await file.arrayBuffer());
+    const body = raw.length <= ATTRIBUTION_MAX_SIZE ? embedAttribution(raw, file.type) : raw;
 
     await uploadToR2({
       accountId,

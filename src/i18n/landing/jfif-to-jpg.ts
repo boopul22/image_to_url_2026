@@ -60,7 +60,7 @@ export const content: LandingContentMap = {
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input", "value": "JFIF (.jfif)" },
       { "label": "Output", "value": "JPG (.jpg)" },
-      { "label": "Max size", "value": "10 MB" }
+      { "label": "Max size", "value": "50 MB" }
     ],
     "comparisonTitle": "JFIF, JPG and the formats around them",
     "comparisonIntro": "JFIF is not really a separate format - it is a JPEG that ended up with a confusing extension. Here is how it sits next to the names you see every day, so you can tell what is actually different and what is just a label.",

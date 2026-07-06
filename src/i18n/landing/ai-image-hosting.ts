@@ -86,7 +86,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit for AI renders?",
-        "a": "10 MB per file, which covers most 1024px to 2048px outputs. If a big upscale is larger, compress it lightly first and then upload."
+        "a": "50 MB per file, which covers most 1024px to 2048px outputs. If a big upscale is larger, compress it lightly first and then upload."
       },
       {
         "q": "Do you claim any rights over images I upload?",
@@ -101,7 +101,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "PNG, JPG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB per render" },
+      { "label": "Max size", "value": "50 MB per render" },
       { "label": "Output", "value": "Direct CDN link" }
     ],
     "comparisonTitle": "Where AI artists host their renders",
@@ -115,7 +115,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Limited", "Yes", "Tied to your account"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },

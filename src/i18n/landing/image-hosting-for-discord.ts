@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload Your Image",
-        "body": "Drag a screenshot, meme, art piece or GIF onto the box, or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each."
+        "body": "Drag a screenshot, meme, art piece or GIF onto the box, or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 50MB each."
       },
       {
         "title": "Copy the direct link",
@@ -95,7 +95,7 @@ export const content: LandingContentMap = {
           "Weeks free, forever signed in",
           "Yes",
           "Yes",
-          "10 MB"
+          "50 MB"
         ]
       },
       {
@@ -185,7 +185,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "10MB per image, which covers almost any screenshot, meme, or piece of art you'd post in a server. If a file is bigger, shrink or compress it first, then upload."
+        "a": "50MB per image, which covers almost any screenshot, meme, or piece of art you'd post in a server. If a file is bigger, shrink or compress it first, then upload."
       },
       {
         "q": "Can I host animated GIFs for Discord?",

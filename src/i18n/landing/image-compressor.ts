@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB per file"
+        "value": "50 MB per file"
       },
       {
         "label": "Output",
@@ -191,7 +191,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Can I compress large images over 10 MB?",
-        "a": "The uploader for shareable links accepts up to 10 MB per file. The in-browser compressor itself is bounded mainly by your device memory, so very large images still work, you just may not get a hosted link for the source if it is over the limit."
+        "a": "The uploader for shareable links accepts up to 50 MB per file. The in-browser compressor itself is bounded mainly by your device memory, so very large images still work, you just may not get a hosted link for the source if it is over the limit."
       },
       {
         "q": "Does it strip metadata?",

@@ -29,7 +29,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "What about lazy loading in Markdown?", a: "Native Markdown doesn't support loading='lazy'. If your renderer extends to HTML (MDX, GFM with raw HTML enabled), use &lt;img loading='lazy' src='url'&gt;." },
     { q: "Width and height attributes?", a: "Pure Markdown: no. GFM (GitHub), MDX, and many docs generators: inline &lt;img width=... height=...&gt; is supported." },
     { q: "Can I use SVG?", a: "Yes — SVGs render inline via ![](url.svg) in most renderers. GitHub renders SVGs safely; some strip interactive JS inside SVGs for security." },
-    { q: "Max file size?", a: "ImageToURL currently accepts 10 MB per upload. Markdown renderers have no cap — they just &lt;img src&gt; and let the browser fetch." }
+    { q: "Max file size?", a: "ImageToURL currently accepts 50 MB per upload. Markdown renderers have no cap — they just &lt;img src&gt; and let the browser fetch." }
   ]}
   relatedSlugs={[
     { href: "/en/image-hosting-for-github-readme/", title: "GitHub README", body: "README-specific advice." },

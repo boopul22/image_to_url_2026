@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "GOOGLE FORMS",
     "h1Pre": "Image URLs for Google",
     "h1Highlight": "Forms.",
-    "intro": "Google Forms lets you add an image to a question, to individual answer options, or to the form header - but the URL option wants a real image link, not a file sitting on your desktop. Upload your picture here, copy the direct link it hands back, and paste that into the Forms image dialog. It works with JPG, PNG, WebP, GIF and SVG up to 10 MB, there's no watermark, and nothing gets recompressed on the way through.",
+    "intro": "Google Forms lets you add an image to a question, to individual answer options, or to the form header - but the URL option wants a real image link, not a file sitting on your desktop. Upload your picture here, copy the direct link it hands back, and paste that into the Forms image dialog. It works with JPG, PNG, WebP, GIF and SVG up to 50 MB, there's no watermark, and nothing gets recompressed on the way through.",
     "howTitle": "How to Add Images",
     "steps": [
       {
@@ -74,7 +74,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes does it accept?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. That covers screenshots, logos, product photos and diagrams. The link you get back ends in the real extension, which is exactly what the Forms 'By URL' tab needs."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. That covers screenshots, logos, product photos and diagrams. The link you get back ends in the real extension, which is exactly what the Forms 'By URL' tab needs."
       },
       {
         "q": "Is the image recompressed or watermarked?",
@@ -101,7 +101,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "JPG, PNG, WebP, GIF, SVG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Works in", "value": "Questions, answer options, headers" }
     ],
     "useCasesTitle": "Where a hosted link helps in Forms",

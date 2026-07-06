@@ -18,7 +18,7 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "HEIC to PNG Converter,",
     "h1Highlight": "100% in Your Browser",
-    "intro": "Drop your iPhone HEIC photos here and get PNG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere. There's no signup, no watermark, and no daily cap. When a PNG is ready you can save it straight to your device, or click 'Get URL' to host the result and get a shareable https link (files up to 10 MB).",
+    "intro": "Drop your iPhone HEIC photos here and get PNG files in seconds. The whole conversion runs on your own device, so your photos never get uploaded anywhere. There's no signup, no watermark, and no daily cap. When a PNG is ready you can save it straight to your device, or click 'Get URL' to host the result and get a shareable https link (files up to 50 MB).",
     "specsTitle": "At a glance",
     "specs": [
       {

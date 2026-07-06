@@ -44,7 +44,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Format Support",
-        "body": "We support all major image formats including JPG, PNG, WebP, GIF, and SVG up to 10MB."
+        "body": "We support all major image formats including JPG, PNG, WebP, GIF, and SVG up to 50MB."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
@@ -63,7 +63,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats are supported?",
-        "a": "We support JPG, PNG, WebP, GIF, and SVG formats up to 10MB per file."
+        "a": "We support JPG, PNG, WebP, GIF, and SVG formats up to 50MB per file."
       }
     ],
     "ctaTitle": "Still have questions?",
@@ -110,7 +110,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Formatos compatibles",
-        "body": "Admitimos todos los formatos de imagen principales, incluidos JPG, PNG, WebP, GIF y SVG de hasta 10MB."
+        "body": "Admitimos todos los formatos de imagen principales, incluidos JPG, PNG, WebP, GIF y SVG de hasta 50MB."
       }
     ],
     "faqTitle": "Preguntas frecuentes",
@@ -129,7 +129,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Qué formatos son compatibles?",
-        "a": "Admitimos formatos JPG, PNG, WebP, GIF y SVG de hasta 10MB por archivo."
+        "a": "Admitimos formatos JPG, PNG, WebP, GIF y SVG de hasta 50MB por archivo."
       }
     ],
     "ctaTitle": "¿Aún tienes preguntas?",
@@ -176,7 +176,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Formats supportés",
-        "body": "Nous prenons en charge tous les formats d'image courants, dont JPG, PNG, WebP, GIF et SVG jusqu'à 10 Mo."
+        "body": "Nous prenons en charge tous les formats d'image courants, dont JPG, PNG, WebP, GIF et SVG jusqu'à 50 Mo."
       }
     ],
     "faqTitle": "Questions fréquentes",
@@ -195,7 +195,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Quels formats sont supportés ?",
-        "a": "Nous supportons les formats JPG, PNG, WebP, GIF et SVG jusqu'à 10 Mo par fichier."
+        "a": "Nous supportons les formats JPG, PNG, WebP, GIF et SVG jusqu'à 50 Mo par fichier."
       }
     ],
     "ctaTitle": "Vous avez encore des questions ?",
@@ -242,7 +242,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Format-Unterstützung",
-        "body": "Wir unterstützen alle gängigen Bildformate, einschließlich JPG, PNG, WebP, GIF und SVG bis zu 10 MB."
+        "body": "Wir unterstützen alle gängigen Bildformate, einschließlich JPG, PNG, WebP, GIF und SVG bis zu 50 MB."
       }
     ],
     "faqTitle": "Häufig gestellte Fragen",
@@ -261,7 +261,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Welche Formate werden unterstützt?",
-        "a": "Wir unterstützen JPG, PNG, WebP, GIF und SVG-Formate bis zu 10 MB pro Datei."
+        "a": "Wir unterstützen JPG, PNG, WebP, GIF und SVG-Formate bis zu 50 MB pro Datei."
       }
     ],
     "ctaTitle": "Noch Fragen?",
@@ -308,7 +308,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "フォーマット対応",
-        "body": "JPG、PNG、WebP、GIF、SVGなど、最大10MBまでの主要な画像フォーマットをすべてサポートしています。"
+        "body": "JPG、PNG、WebP、GIF、SVGなど、最大50MBまでの主要な画像フォーマットをすべてサポートしています。"
       }
     ],
     "faqTitle": "よくある質問",
@@ -327,7 +327,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "対応しているフォーマットは何ですか？",
-        "a": "1ファイルあたり最大10MBまでのJPG、PNG、WebP、GIF、SVGフォーマットに対応しています。"
+        "a": "1ファイルあたり最大50MBまでのJPG、PNG、WebP、GIF、SVGフォーマットに対応しています。"
       }
     ],
     "ctaTitle": "まだ質問がありますか？",
@@ -374,7 +374,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "格式支持",
-        "body": "我们支持所有主流图像格式，包括 JPG、 PNG、 WebP、 GIF 和 SVG，最大支持 10MB。"
+        "body": "我们支持所有主流图像格式，包括 JPG、 PNG、 WebP、 GIF 和 SVG，最大支持 50MB。"
       }
     ],
     "faqTitle": "常见问题解答",
@@ -393,7 +393,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "支持哪些格式？",
-        "a": "我们支持 JPG、 PNG、 WebP、 GIF 和 SVG 格式，每个文件最大 10MB。"
+        "a": "我们支持 JPG、 PNG、 WebP、 GIF 和 SVG 格式，每个文件最大 50MB。"
       }
     ],
     "ctaTitle": "还有其他问题吗？",

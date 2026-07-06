@@ -19,7 +19,7 @@ export const content: LandingContentMap = {
     "badge": "CHATGPT USERS",
     "h1Pre": "Image URL for ChatGPT:",
     "h1Highlight": "a public link AI can read",
-    "intro": "ChatGPT and other AI models can only look at an image if it lives at a public https address their servers can reach. A file on your desktop or a private share link won't do it. Drop your picture in the box above, copy the direct link, and paste it into your prompt or an image_url field. It works on JPG, PNG, WebP, GIF and SVG up to 10 MB, with no account and no sign-up.",
+    "intro": "ChatGPT and other AI models can only look at an image if it lives at a public https address their servers can reach. A file on your desktop or a private share link won't do it. Drop your picture in the box above, copy the direct link, and paste it into your prompt or an image_url field. It works on JPG, PNG, WebP, GIF and SVG up to 50 MB, with no account and no sign-up.",
     "specsTitle": "Image URL for ChatGPT at a glance",
     "specs": [
       {
@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your image",
-        "body": "Drag your picture onto the box or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10 MB each. Nothing is compressed or resized."
+        "body": "Drag your picture onto the box or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 50 MB each. Nothing is compressed or resized."
       },
       {
         "title": "Copy the direct link",
@@ -191,7 +191,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats and sizes can I use?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, which is what tells a model it's a direct image rather than a page."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, which is what tells a model it's a direct image rather than a page."
       },
       {
         "q": "Is my image compressed before the model sees it?",

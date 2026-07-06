@@ -18,13 +18,13 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "PNG to WebP Converter,",
     "h1Highlight": "Half the Size",
-    "intro": "PNG files keep every pixel and the transparency you need, but they get heavy fast. Drop your PNGs in the box above to re-encode them as WebP, which keeps the same alpha transparency while cutting the file size, often by 60 to 85% on photographic or detailed images. It runs in your browser, with no upload, no signup, and no watermark, on files up to 10 MB. Download the result or click 'Get URL' for a shareable https link.",
+    "intro": "PNG files keep every pixel and the transparency you need, but they get heavy fast. Drop your PNGs in the box above to re-encode them as WebP, which keeps the same alpha transparency while cutting the file size, often by 60 to 85% on photographic or detailed images. It runs in your browser, with no upload, no signup, and no watermark, on files up to 50 MB. Download the result or click 'Get URL' for a shareable https link.",
     "specsTitle": "PNG to WebP at a glance",
     "specs": [
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input", "value": "PNG (alpha kept)" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "WebP (with optional hosted link)" }
     ],
     "howTitle": "How to convert PNG to WebP",
@@ -187,7 +187,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "Up to 10 MB per file. That covers almost any graphic or screenshot. For something larger, resize it first and then convert."
+        "a": "Up to 50 MB per file. That covers almost any graphic or screenshot. For something larger, resize it first and then convert."
       },
       {
         "q": "Is the converter free and account-free?",

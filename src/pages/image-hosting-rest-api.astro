@@ -12,7 +12,7 @@ Public bearer-token REST access is not live yet.
 # Current limits
 Guest uploads:     100 files per rolling 24 hours
 Signed-in uploads: 150 credits per day (about 1 credit per MB)
-Max file size:     10 MB
+Max file size:     50 MB
 
 # Current storage behavior
 Guest links auto-expire at monthly cleanup.
@@ -30,7 +30,7 @@ Signed-in uploads can use "Never delete" before upload.`;
   codeSnippet={code}
   whys={[
     { title: "Honest current status", body: "Website uploads are live. Public REST automation is roadmap and should not be wired into production systems yet." },
-    { title: "Clear limits", body: "The live uploader enforces 5 guest uploads/day, 25 signed-in uploads/day, and 10 MB per file." },
+    { title: "Clear limits", body: "The live uploader enforces 100 guest uploads/day, 150 signed-in credits/day (about 1 credit per MB), and 50 MB per file." },
     { title: "Predictable storage", body: "Guest links auto-expire at monthly cleanup; signed-in users can choose keep-forever links before uploading." },
     { title: "Simple path forward", body: "Use the dashboard and web uploader today. Contact us if you need higher limits or programmatic access." }
   ]}

@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your image",
-        "body": "Drag a file onto the box above or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 10MB each. Nothing is resized or recompressed."
+        "body": "Drag a file onto the box above or click to pick one. JPG, PNG, WebP, GIF and SVG all work, up to 50MB each. Nothing is resized or recompressed."
       },
       {
         "title": "Copy the link",
@@ -92,7 +92,7 @@ export const content: LandingContentMap = {
         "cells": [
           "ImageToURL",
           "Yes",
-          "10 MB",
+          "50 MB",
           "Yes",
           "Yes",
           "Weeks free, forever when signed in"
@@ -213,7 +213,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What formats and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10MB per file. If an image is larger, compress or resize it first, then upload it and copy the link."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50MB per file. If an image is larger, compress or resize it first, then upload it and copy the link."
       },
       {
         "q": "Can I host the same image across several WordPress sites?",

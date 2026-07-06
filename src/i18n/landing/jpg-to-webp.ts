@@ -18,13 +18,13 @@ export const content: LandingContentMap = {
     "badge": "Browser-only Tool",
     "h1Pre": "JPG to WebP Converter,",
     "h1Highlight": "Lighter Pages, Same Look",
-    "intro": "Need a lighter version of a photo for the web? Drop your JPGs in the box above and they re-encode to WebP in your browser, usually 25 to 35% smaller at the same visual quality. There is no upload, no signup, and no watermark, and files up to 10 MB work. Once a file is converted you can download it or click 'Get URL' to get a shareable https link.",
+    "intro": "Need a lighter version of a photo for the web? Drop your JPGs in the box above and they re-encode to WebP in your browser, usually 25 to 35% smaller at the same visual quality. There is no upload, no signup, and no watermark, and files up to 50 MB work. Once a file is converted you can download it or click 'Get URL' to get a shareable https link.",
     "specsTitle": "JPG to WebP at a glance",
     "specs": [
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input", "value": "JPG / JPEG" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "WebP (with optional hosted link)" }
     ],
     "howTitle": "How to convert JPG to WebP",
@@ -183,7 +183,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Is there a file size limit?",
-        "a": "Up to 10 MB per file, which covers nearly any photo. If a JPG is larger than that, compress or resize it first and then convert."
+        "a": "Up to 50 MB per file, which covers nearly any photo. If a JPG is larger than that, compress or resize it first and then convert."
       },
       {
         "q": "Does WebP show up in email?",

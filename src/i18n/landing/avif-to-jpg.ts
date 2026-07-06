@@ -104,7 +104,7 @@ export const content: LandingContentMap = {
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input", "value": "AVIF (.avif)" },
       { "label": "Output", "value": "JPG" },
-      { "label": "Max size", "value": "10 MB" }
+      { "label": "Max size", "value": "50 MB" }
     ],
     "useCasesTitle": "When AVIF to JPG helps",
     "useCasesIntro": "Converting comes up most often when a file simply refuses to cooperate:",

@@ -114,7 +114,7 @@ export const content: LandingContentMap = {
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Input format", "value": "PNG" },
       { "label": "Output format", "value": "JPG" },
-      { "label": "Max size to host", "value": "10 MB" }
+      { "label": "Max size to host", "value": "50 MB" }
     ],
     "comparisonTitle": "PNG, JPG and WebP compared",
     "comparisonIntro": "PNG and JPG solve different problems, and WebP tries to cover both. Here is how the common web formats line up so you can pick the right one before you convert.",

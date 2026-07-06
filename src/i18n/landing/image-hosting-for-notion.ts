@@ -36,7 +36,7 @@ export const content: LandingContentMap = {
       },
       {
         "label": "Max size",
-        "value": "10 MB"
+        "value": "50 MB"
       },
       {
         "label": "Output",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Upload your image",
-        "body": "Drag and drop your file onto the box above or click to browse. JPG, PNG, WebP, GIF and SVG all work, up to 10 MB each, and nothing gets compressed or resized on the way through."
+        "body": "Drag and drop your file onto the box above or click to browse. JPG, PNG, WebP, GIF and SVG all work, up to 50 MB each, and nothing gets compressed or resized on the way through."
       },
       {
         "title": "Copy the direct link",
@@ -187,7 +187,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What image formats can I use?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 10 MB per file. The link ends in the real extension, which is what Notion's Embed link field expects."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, which is what Notion's Embed link field expects."
       },
       {
         "q": "Will externally hosted images work in Notion's API?",

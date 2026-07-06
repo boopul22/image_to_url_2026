@@ -6,7 +6,7 @@ import type { LandingContentMap } from './types';
 export const content: LandingContentMap = {
   "en": {
     "metaTitle": "GIF to URL - Get a Direct Link That Stays Animated | ImageToURL",
-    "metaDescription": "Turn a GIF to URL or a GIF to link in seconds. The direct link plays the animation inline in Discord, Reddit, and forums. Free, no signup, GIFs up to 10MB.",
+    "metaDescription": "Turn a GIF to URL or a GIF to link in seconds. The direct link plays the animation inline in Discord, Reddit, and forums. Free, no signup, GIFs up to 50MB.",
     "relatedTitle": "Related image tools",
     "related": [
       { "pageKey": "image-to-url", "label": "Turn any image into a link" },
@@ -24,7 +24,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Drop in your GIF",
-        "body": "Drag the animated GIF onto the box or click to browse. Anything up to 10MB works, and you stay anonymous - no account needed."
+        "body": "Drag the animated GIF onto the box or click to browse. Anything up to 50MB works, and you stay anonymous - no account needed."
       },
       {
         "title": "Grab the direct link",
@@ -47,7 +47,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Free with room to breathe",
-        "body": "Upload GIFs up to 10MB at no cost. No watermark stamped on top, no signup wall, no compression eating your colors."
+        "body": "Upload GIFs up to 50MB at no cost. No watermark stamped on top, no signup wall, no compression eating your colors."
       }
     ],
     "useCasesTitle": "What you can do with a GIF to URL link",
@@ -71,7 +71,7 @@ export const content: LandingContentMap = {
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
       { "label": "Formats", "value": "Animated and static GIF" },
-      { "label": "Max size", "value": "10 MB" },
+      { "label": "Max size", "value": "50 MB" },
       { "label": "Output", "value": "Direct .gif CDN link" }
     ],
     "comparisonTitle": "GIF hosts compared",
@@ -85,7 +85,7 @@ export const content: LandingContentMap = {
       "Link lifetime"
     ],
     "comparisonRows": [
-      { "cells": ["ImageToURL", "Yes", "10 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
+      { "cells": ["ImageToURL", "Yes", "50 MB", "Yes", "Yes", "Weeks free, forever when signed in"] },
       { "cells": ["Imgur", "No (since 2023)", "20 MB", "Converts to MP4/GIFV", "Limited", "Tied to your account"] },
       { "cells": ["ImgBB", "Yes", "32 MB", "Yes", "Yes", "Optional expiry"] },
       { "cells": ["Catbox", "Yes", "200 MB", "Yes", "Yes", "Permanent"] },
@@ -98,7 +98,7 @@ export const content: LandingContentMap = {
       },
       {
         "heading": "Does the animation still play from the link?",
-        "body": "Yes. The file goes onto our CDN byte for byte, with no re-encoding, so every frame stays intact and the loop runs the moment the link loads. Some hosts quietly turn larger GIFs into MP4 or a custom video wrapper to save space, which can strip the loop or break a plain img tag. We don't touch the file. The real catch with GIF is its own weight: the format is old and inefficient, so a few seconds of footage can run several megabytes. Keep it under 10MB and the link hotlinks cleanly everywhere you drop it."
+        "body": "Yes. The file goes onto our CDN byte for byte, with no re-encoding, so every frame stays intact and the loop runs the moment the link loads. Some hosts quietly turn larger GIFs into MP4 or a custom video wrapper to save space, which can strip the loop or break a plain img tag. We don't touch the file. The real catch with GIF is its own weight: the format is old and inefficient, so a few seconds of footage can run several megabytes. Keep it under 50MB and the link hotlinks cleanly everywhere you drop it."
       },
       {
         "heading": "GIF vs WebP and MP4 for animation",
@@ -125,7 +125,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "What's the largest GIF I can upload?",
-        "a": "Up to 10MB per GIF. That covers most reaction clips and short loops. GIF is a heavy format, so longer or full-screen clips can blow past the limit fast."
+        "a": "Up to 50MB per GIF. That covers most reaction clips and short loops. GIF is a heavy format, so longer or full-screen clips can blow past the limit fast."
       },
       {
         "q": "Why is my GIF file so large?",
@@ -179,7 +179,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Sube tu GIF",
-        "body": "Arrastra y suelta o haz clic para seleccionar tu GIF animado. Admitimos todos los recuentos de fotogramas y animaciones de hasta 10MB."
+        "body": "Arrastra y suelta o haz clic para seleccionar tu GIF animado. Admitimos todos los recuentos de fotogramas y animaciones de hasta 50MB."
       },
       {
         "title": "Obtén tu URL",
@@ -202,7 +202,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Sin sorpresas de tamaño",
-        "body": "Sube GIFs de hasta 10MB. Nosotros gestionamos el ancho de banda para que tus animaciones carguen rápido en todas partes."
+        "body": "Sube GIFs de hasta 50MB. Nosotros gestionamos el ancho de banda para que tus animaciones carguen rápido en todas partes."
       },
       {
         "title": "Compatible con hotlinking",
@@ -229,7 +229,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "¿Puedo subir archivos GIF grandes?",
-        "a": "Las subidas anónimas gratuitas admiten GIFs de hasta 2MB. Crea una cuenta gratuita para subir GIFs de hasta 10MB."
+        "a": "Las subidas anónimas gratuitas admiten GIFs de hasta 2MB. Crea una cuenta gratuita para subir GIFs de hasta 50MB."
       }
     ],
     "ctaTitle": "Aloja tu GIF animado en segundos",
@@ -256,7 +256,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Téléchargez votre GIF",
-        "body": "Glissez-déposez ou cliquez pour sélectionner votre GIF animé. Nous prenons en charge tous les nombres d'images et les animations jusqu'à 10 Mo."
+        "body": "Glissez-déposez ou cliquez pour sélectionner votre GIF animé. Nous prenons en charge tous les nombres d'images et les animations jusqu'à 50 Mo."
       },
       {
         "title": "Obtenez votre URL",
@@ -279,7 +279,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Pas de surprise sur la taille",
-        "body": "Téléchargez des GIF jusqu'à 10 Mo. Nous gérons la bande passante pour que vos animations se chargent rapidement partout."
+        "body": "Téléchargez des GIF jusqu'à 50 Mo. Nous gérons la bande passante pour que vos animations se chargent rapidement partout."
       },
       {
         "title": "Compatible avec le hotlinking",
@@ -306,7 +306,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Puis-je télécharger de gros fichiers GIF ?",
-        "a": "Les téléchargements anonymes gratuits supportent les GIF jusqu'à 2 Mo. Créez un compte gratuit pour télécharger des GIF jusqu'à 10 Mo."
+        "a": "Les téléchargements anonymes gratuits supportent les GIF jusqu'à 2 Mo. Créez un compte gratuit pour télécharger des GIF jusqu'à 50 Mo."
       }
     ],
     "ctaTitle": "Hébergez votre GIF animé en quelques secondes",
@@ -333,7 +333,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "Laden Sie Ihr GIF hoch",
-        "body": "Ziehen Sie Ihr animiertes GIF per Drag & Drop oder klicken Sie, um es auszuwählen. Wir unterstützen alle Frame-Anzahlen und Animationen bis zu 10 MB."
+        "body": "Ziehen Sie Ihr animiertes GIF per Drag & Drop oder klicken Sie, um es auszuwählen. Wir unterstützen alle Frame-Anzahlen und Animationen bis zu 50 MB."
       },
       {
         "title": "Erhalten Sie Ihre URL",
@@ -356,7 +356,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "Keine Überraschungen bei der Dateigröße",
-        "body": "Laden Sie GIFs bis zu 10 MB hoch. Wir kümmern uns um die Bandbreite, damit Ihre Animationen überall schnell laden."
+        "body": "Laden Sie GIFs bis zu 50 MB hoch. Wir kümmern uns um die Bandbreite, damit Ihre Animationen überall schnell laden."
       },
       {
         "title": "Hotlink-freundlich",
@@ -383,7 +383,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Kann ich große GIF-Dateien hochladen?",
-        "a": "Kostenlose anonyme Uploads unterstützen GIFs bis zu 2 MB. Erstellen Sie ein kostenloses Konto, um GIFs bis zu 10 MB hochzuladen."
+        "a": "Kostenlose anonyme Uploads unterstützen GIFs bis zu 2 MB. Erstellen Sie ein kostenloses Konto, um GIFs bis zu 50 MB hochzuladen."
       }
     ],
     "ctaTitle": "Hosten Sie Ihr animiertes GIF in Sekunden",
@@ -410,7 +410,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "GIFをアップロード",
-        "body": "ドラッグ＆ドロップ、またはクリックしてアニメーションGIFを選択してください。最大10MBまでのあらゆるフレーム数とアニメーションに対応しています。"
+        "body": "ドラッグ＆ドロップ、またはクリックしてアニメーションGIFを選択してください。最大50MBまでのあらゆるフレーム数とアニメーションに対応しています。"
       },
       {
         "title": "URLを取得",
@@ -433,7 +433,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "ファイルサイズ制限も安心",
-        "body": "最大10MBまでのGIFをアップロード可能。帯域幅は当社が管理するため、どこでも高速に読み込まれます。"
+        "body": "最大50MBまでのGIFをアップロード可能。帯域幅は当社が管理するため、どこでも高速に読み込まれます。"
       },
       {
         "title": "ホットリンク対応",
@@ -460,7 +460,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "大きなGIFファイルをアップロードできますか？",
-        "a": "匿名での無料アップロードは最大2MBまで対応しています。無料アカウントを作成すると、最大10MBまでのGIFをアップロード可能です。"
+        "a": "匿名での無料アップロードは最大2MBまで対応しています。無料アカウントを作成すると、最大50MBまでのGIFをアップロード可能です。"
       }
     ],
     "ctaTitle": "数秒でアニメーションGIFをホスト",
@@ -487,7 +487,7 @@ export const content: LandingContentMap = {
     "steps": [
       {
         "title": "上传您的 GIF",
-        "body": "拖放或点击选择您的动态 GIF。我们支持所有帧数，最大支持 10MB 的动画文件。"
+        "body": "拖放或点击选择您的动态 GIF。我们支持所有帧数，最大支持 50MB 的动画文件。"
       },
       {
         "title": "获取您的 URL",
@@ -510,7 +510,7 @@ export const content: LandingContentMap = {
       },
       {
         "title": "无文件大小烦恼",
-        "body": "支持上传最大 10MB 的 GIF。我们处理带宽问题，确保您的动画在任何地方都能快速加载。"
+        "body": "支持上传最大 50MB 的 GIF。我们处理带宽问题，确保您的动画在任何地方都能快速加载。"
       },
       {
         "title": "支持外链",
@@ -537,7 +537,7 @@ export const content: LandingContentMap = {
       },
       {
         "q": "我可以上传大型 GIF 文件吗？",
-        "a": "免费匿名上传支持最大 2MB 的 GIF。注册免费账户即可上传最大 10MB 的 GIF。"
+        "a": "免费匿名上传支持最大 2MB 的 GIF。注册免费账户即可上传最大 50MB 的 GIF。"
       }
     ],
     "ctaTitle": "几秒钟内托管您的动态 GIF",
