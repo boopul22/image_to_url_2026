@@ -25,6 +25,9 @@ export const REMINDER_CAMPAIGN_KEY = 'inactive-user-reminder-v1';
 export const REMINDER_FROM = 'updates@imagetourl.cloud';
 export const REMINDER_FROM_NAME = 'ImageToURL Updates';
 export const REMINDER_SUBJECT = 'Need a quick image link?';
+export const WELCOME_FROM = 'welcome@imagetourl.cloud';
+export const WELCOME_FROM_NAME = 'ImageToURL';
+export const WELCOME_SUBJECT = 'Welcome to ImageToURL';
 const REMINDER_COOLDOWN_DAYS = 21;
 
 export async function ensureEmailPreferences(db: D1Database, userId: string): Promise<void> {
@@ -144,6 +147,33 @@ export async function sendReminderBatch(opts: {
   };
 }
 
+export async function sendWelcomeEmail(opts: {
+  db: D1Database;
+  email?: EmailBinding;
+  userId: string;
+  to: string;
+  name: string;
+  baseUrl: string;
+  from?: string;
+}): Promise<void> {
+  if (!opts.email) {
+    throw new Error('EMAIL binding is not configured');
+  }
+
+  const message = buildWelcomeEmail({
+    to: opts.to,
+    name: opts.name,
+    baseUrl: opts.baseUrl,
+    from: opts.from || WELCOME_FROM,
+  });
+
+  await opts.email.send(message);
+  await opts.db
+    .prepare("UPDATE users SET welcome_email_sent_at = datetime('now'), updated_at = datetime('now') WHERE id = ?")
+    .bind(opts.userId)
+    .run();
+}
+
 async function eligibleReminderRecipients(db: D1Database, limit: number): Promise<ReminderRecipient[]> {
   const result = await db
     .prepare(
@@ -252,6 +282,70 @@ function buildReminderEmail(opts: {
       'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       'X-Campaign-ID': REMINDER_CAMPAIGN_KEY,
     },
+  };
+}
+
+function buildWelcomeEmail(opts: {
+  to: string;
+  name: string;
+  baseUrl: string;
+  from: string;
+}): {
+  to: string;
+  from: { email: string; name: string };
+  replyTo: string;
+  subject: string;
+  html: string;
+  text: string;
+} {
+  const firstName = firstNameFor(opts.name);
+  const siteUrl = normalizeBaseUrl(opts.baseUrl);
+  const logoUrl = `${siteUrl}/icon-192.png`;
+  const uploadUrl = `${siteUrl}/en/`;
+  const dashboardUrl = `${siteUrl}/dashboard`;
+
+  const text = [
+    `Hi ${firstName},`,
+    '',
+    'Welcome to ImageToURL.',
+    '',
+    'You can upload an image, copy a shareable link, and manage signed-in uploads from your profile.',
+    '',
+    `Upload an image: ${uploadUrl}`,
+    `Open your profile: ${dashboardUrl}`,
+    '',
+    'From your profile you can review your images, copy links again, and delete uploads you no longer need.',
+  ].join('\n');
+
+  const html = `<!doctype html>
+<html>
+  <body style="margin:0;background:#f6f7f9;color:#18181b;font-family:Arial,Helvetica,sans-serif;">
+    <div style="max-width:620px;margin:0 auto;padding:34px 20px;">
+      <div style="border:1px solid #e5e7eb;background:#ffffff;padding:30px;">
+        <img src="${logoUrl}" width="42" height="42" alt="ImageToURL" style="display:block;border:0;margin:0 0 22px;" />
+        <h1 style="margin:0 0 14px;font-size:28px;line-height:1.15;color:#111827;">Welcome to ImageToURL</h1>
+        <p style="margin:0 0 18px;font-size:16px;line-height:1.6;color:#3f3f46;">Hi ${escapeHtml(firstName)}, your account is ready. You can upload images, copy shareable links, and keep track of signed-in uploads from your profile.</p>
+        <div style="border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;padding:18px 0;margin:24px 0;">
+          <p style="margin:0 0 10px;font-size:14px;line-height:1.5;color:#52525b;"><strong style="color:#111827;">Your profile keeps things organized.</strong></p>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#52525b;">Open it anytime to review uploaded images, copy links again, and delete uploads you no longer need.</p>
+        </div>
+        <p style="margin:0 0 22px;">
+          <a href="${dashboardUrl}" style="display:inline-block;background:#e11d48;color:#ffffff;text-decoration:none;padding:12px 18px;font-weight:700;">Open profile</a>
+          <a href="${uploadUrl}" style="display:inline-block;color:#be123c;text-decoration:none;padding:12px 0 12px 14px;font-weight:700;">Upload image</a>
+        </p>
+        <p style="margin:0;color:#71717a;font-size:12px;line-height:1.5;">This is a one-time account email from ImageToURL.</p>
+      </div>
+    </div>
+  </body>
+</html>`;
+
+  return {
+    to: opts.to,
+    from: { email: opts.from, name: WELCOME_FROM_NAME },
+    replyTo: opts.from,
+    subject: WELCOME_SUBJECT,
+    html,
+    text,
   };
 }
 

@@ -27,6 +27,7 @@ declare namespace App {
         IMAGES: ImagesBinding;
         EMAIL: SendEmail;
         EMAIL_FROM: string;
+        WELCOME_EMAIL_FROM: string;
         SITE_URL: string;
         MARKETING_REMINDERS_DAILY_LIMIT: string;
         GOOGLE_CLIENT_ID: string;

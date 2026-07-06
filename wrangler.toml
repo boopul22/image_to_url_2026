@@ -20,10 +20,11 @@ binding = "IMAGES"
 
 [[send_email]]
 name = "EMAIL"
-allowed_sender_addresses = ["updates@imagetourl.cloud"]
+allowed_sender_addresses = ["updates@imagetourl.cloud", "welcome@imagetourl.cloud"]
 
 [vars]
 EMAIL_FROM = "updates@imagetourl.cloud"
+WELCOME_EMAIL_FROM = "welcome@imagetourl.cloud"
 SITE_URL = "https://imagetourl.cloud"
 MARKETING_REMINDERS_DAILY_LIMIT = "25"
 

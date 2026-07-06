@@ -6,7 +6,7 @@ import { createSession } from '../../../lib/session';
 import { generateId } from '../../../lib/crypto';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
-import { ensureEmailPreferences } from '../../../lib/email-reminders';
+import { ensureEmailPreferences, sendWelcomeEmail, WELCOME_FROM } from '../../../lib/email-reminders';
 
 export const GET: APIRoute = async ({ request, url, cookies, redirect, locals }) => {
   const code = url.searchParams.get('code');
@@ -54,6 +54,12 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
 
     // Fetch user info
     const googleUser = await fetchGoogleUser(tokens.access_token);
+
+    const existingUser = await db
+      .prepare('SELECT id FROM users WHERE google_id = ?')
+      .bind(googleUser.sub)
+      .first<{ id: string }>();
+    const isNewUser = !existingUser;
 
     // Check if this is the first user (gets admin role)
     const countResult = await db
@@ -109,6 +115,21 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
         )
         .bind(user.id)
         .run();
+    }
+
+    if (isNewUser) {
+      const welcomeTask = sendWelcomeEmail({
+        db,
+        email: (env as any).EMAIL,
+        userId: user.id,
+        to: googleUser.email,
+        name: googleUser.name,
+        baseUrl: env.SITE_URL || 'https://imagetourl.cloud',
+        from: env.WELCOME_EMAIL_FROM || WELCOME_FROM,
+      }).catch((err) => {
+        console.error('Welcome email failed:', err);
+      });
+      locals.runtime?.ctx?.waitUntil?.(welcomeTask);
     }
 
     // Create session
