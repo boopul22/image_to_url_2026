@@ -129,7 +129,12 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
       }).catch((err) => {
         console.error('Welcome email failed:', err);
       });
-      locals.runtime?.ctx?.waitUntil?.(welcomeTask);
+      const cfCtx = (locals as unknown as { cfContext?: { waitUntil?: (p: Promise<unknown>) => void } }).cfContext;
+      if (cfCtx?.waitUntil) {
+        cfCtx.waitUntil(welcomeTask);
+      } else {
+        welcomeTask.catch(() => {});
+      }
     }
 
     // Create session

@@ -20,30 +20,8 @@ declare const HTMLRewriter: { new (): MinimalHTMLRewriter };
 
 declare namespace App {
   interface Locals {
-    runtime: {
-      env: {
-        DB: D1Database;
-        R2: R2Bucket;
-        IMAGES: ImagesBinding;
-        EMAIL: SendEmail;
-        EMAIL_FROM: string;
-        WELCOME_EMAIL_FROM: string;
-        SITE_URL: string;
-        MARKETING_REMINDERS_DAILY_LIMIT: string;
-        GOOGLE_CLIENT_ID: string;
-        GOOGLE_CLIENT_SECRET: string;
-        AUTH_SECRET: string;
-        CRON_SECRET: string;
-        CLOUDFLARE_ACCOUNT_ID: string;
-        R2_ACCESS_KEY_ID: string;
-        R2_SECRET_ACCESS_KEY: string;
-        R2_BUCKET_NAME: string;
-        R2_ENDPOINT: string;
-        R2_PUBLIC_URL: string;
-      };
-      ctx: {
-        waitUntil: (promise: Promise<unknown>) => void;
-      };
+    cfContext?: {
+      waitUntil: (promise: Promise<unknown>) => void;
     };
     user?: {
       id: string;
