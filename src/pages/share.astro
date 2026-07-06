@@ -30,7 +30,7 @@ const single = urls.length === 1 ? urls[0] : undefined;
 
 <Layout
   title="Image URL Copied — ImageToURL"
-  description="Your image URL is ready. Copy it as a direct link, Markdown, HTML, or BBCode, scan the QR code, or upload another image — free, permanent hosting with no account required."
+  description="Your image URL is ready. Copy it as a direct link, Markdown, HTML, or BBCode, scan the QR code, or upload another image. Guest links expire; signed-in links can be kept forever."
   noindex={true}
   noHreflang
   eagerAds
@@ -93,8 +93,8 @@ const single = urls.length === 1 ? urls[0] : undefined;
               </span>
               <h3 class="text-base font-bold text-on-surface mt-3">How long it lasts</h3>
               <p class="text-sm text-on-surface-variant mt-1 leading-relaxed">
-                Guest uploads stay live for about two weeks. <a href="/" class="text-primary hover:underline">Sign in</a>
-                before uploading to keep your links permanent and manage every image from your
+                Guest uploads stay live until the monthly cleanup, with at least about two weeks before removal. <a href="/" class="text-primary hover:underline">Sign in</a>
+                before uploading to keep your links forever and manage every image from your
                 dashboard.
               </p>
             </div>
@@ -104,12 +104,11 @@ const single = urls.length === 1 ? urls[0] : undefined;
           <div class="mt-4 divide-y divide-outline-variant/40 border-y border-outline-variant/40">
             <details class="group py-4">
               <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-on-surface">
-                <h3 class="m-0 font-semibold">Is the link free and permanent?</h3>
+                <h3 class="m-0 font-semibold">Is the link free, and how long does it last?</h3>
                 <Icon name="expand_more" class="text-xl text-on-surface-variant transition-transform group-open:rotate-180" />
               </summary>
               <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
-                Hosting is free with no account required. Guest links auto-expire in roughly two
-                weeks; sign in before uploading and your links stay permanent.
+                Hosting is free with no account required. Guest links auto-expire at the monthly cleanup, with at least about two weeks before removal; sign in before uploading and your links can stay forever.
               </p>
             </details>
             <details class="group py-4">

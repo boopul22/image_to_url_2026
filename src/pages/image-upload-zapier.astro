@@ -2,42 +2,39 @@
 export const prerender = true;
 import DevApiPage from '../components/DevApiPage.astro';
 
-const code = `# Zapier "Webhooks by Zapier" custom action
-# Action: POST
-# URL: https://imagetourl.cloud/api/upload
-# Payload Type: form
-# Data:
-#   file:  {{Attachment URL from previous step}}
-# Headers:
-#   Authorization: Bearer YOUR_IMAGETOURL_KEY
-
-# Zapier will POST multipart form with the downloaded file
-# Response → extract {{data.url}} for use in later steps`;
+const code = `# Current status
+# Public Zapier webhook uploads are not live yet.
+#
+# The active /api/upload route is used by the ImageToURL website uploader
+# and requires a same-site browser request from imagetourl.cloud.
+#
+# Use the web uploader today, or contact us if you need automation access.`;
 ---
 <DevApiPage
-  title="Image Upload via Zapier — No-code CDN URLs"
+  title="Image Upload via Zapier — Current Status"
   slug="image-upload-zapier"
-  metaDescription="Upload images to a CDN from Zapier with Webhooks by Zapier — no code, any trigger. Forward a file attachment, POST multipart, reuse the URL downstream."
+  metaDescription="Current Zapier upload status for ImageToURL. Public webhook/API uploads are not live yet; use the website uploader today."
   h1Pre="Zapier image upload"
-  h1Highlight="Webhooks, one step."
-  intro="Zapier doesn't have a native ImageToURL integration yet, but 'Webhooks by Zapier' handles it in one action. Any Zap trigger (form submission, new email attachment, Airtable record) can feed an image into ImageToURL."
+  h1Highlight="not public yet."
+  intro="Zapier automation is not live yet because public API-key uploads are not open. Use the website uploader today, or contact us if your workflow needs automation access."
   lang="bash"
   langLabel="Zapier Webhook"
   codeSnippet={code}
   whys={[
-    { title: "Works with any trigger", body: "Typeform, Google Forms, Gmail, Dropbox, Airtable, Notion — whatever Zapier can read, you can forward to ImageToURL." },
-    { title: "No coding required", body: "Configure once in Zapier's UI; every matching trigger auto-uploads. Great for form submissions, user avatar uploads, customer photo intake." },
-    { title: "Extract URL for downstream steps", body: "The response contains {{data.url}} — use that in a later Zap step to write back to Airtable, Google Sheets, or Slack." },
-    { title: "Rate-limit friendly", body: "Pro plan's 60 uploads/min matches Zapier's typical trigger cadence — no throttling for normal workloads." }
+    { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
+    { title: "Zapier is roadmap", body: "No-code uploads need public API-key access before they are reliable." },
+    { title: "Current limits are clear", body: "Guests get 5 uploads and signed-in users get 25 uploads per rolling 24 hours, with a 10 MB file cap." },
+    { title: "Contact for automation", body: "If you need Zapier for forms, Airtable, or support intake, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
-    { q: "What trigger should I use?", a: "Anything that provides a file URL or attachment: Typeform file upload, Gmail attachment, Airtable attachment field, Dropbox new file. Zapier downloads the file and re-uploads via the webhook." },
-    { q: "Do I need a paid Zapier plan?", a: "Webhooks by Zapier is a 'Multi-Step' feature — requires the Starter plan ($19.99/mo) or higher. Free-plan users can't use custom webhooks." },
-    { q: "How do I pass the file?", a: "Use Zapier's 'Attachment URL' or 'File URL' field from the trigger as the value of the 'file' form field in the webhook action." },
-    { q: "Is the API key safe in Zapier?", a: "Zapier stores headers encrypted at rest. Still, use a Pro or Business API key with scoped permissions — rotate via your dashboard if Zapier account is compromised." },
-    { q: "Can I handle upload failures?", a: "Use Zapier's 'Filter' step on {{status_code}} to branch — send a Slack alert on non-200 responses, or retry with Zapier Code." },
-    { q: "What about multi-file uploads?", a: "Zapier's webhook sends one POST per step. For multi-file zaps, use the 'Looping' path: one trigger → loop → one upload each." },
-    { q: "Cost at scale?", a: "Zapier Starter: 750 tasks/mo for ~$20. If each upload is one task, that's 750 uploads/mo. ImageToURL Pro at $12 gives unlimited. Make / n8n are cheaper at higher scale." },
+    { q: "Can I use Zapier today?", a: "No. Public webhook/API uploads are not live yet; use the website uploader." },
+    { q: "What trigger should I use later?", a: "Anything that provides a file URL or attachment: Typeform file upload, Gmail attachment, Airtable attachment field, or Dropbox new file." },
+    { q: "Do I need a paid Zapier plan?", a: "Likely yes once automation opens, because Webhooks by Zapier is usually a multi-step paid feature. ImageToURL does not provide a live webhook endpoint today." },
+    { q: "How do I pass the file?", a: "That will be documented when public API-key uploads launch. The current /api/upload route is only for same-site website uploads." },
+    { q: "Is the API key safe in Zapier?", a: "No public upload API key is available today. Once available, store it in Zapier's encrypted connection/header fields and rotate shared credentials." },
+    { q: "Can I handle upload failures?", a: "Zapier can branch on status codes, but ImageToURL webhook uploads are not live today." },
+    { q: "What about multi-file uploads?", a: "Not available today through public Zapier automation." },
+    { q: "Cost at scale?", a: "Zapier pricing depends on task volume. ImageToURL does not have a self-serve paid automation tier today; contact us if you need higher limits or API access." },
     { q: "Alternatives to Zapier?", a: "Make (Integromat) has a more flexible HTTP module. n8n is self-hostable and cheaper for high volume." }
   ]}
   relatedSlugs={[

@@ -20,7 +20,7 @@ type ImgEntry = {
 // that the converters live in the SLUGS landing registry, so listing the
 // redirecting URLs here put 3XX + non-canonical entries in the sitemap.
 const IMAGES: ImgEntry[] = [
-  { page: '/en/', image: SITE + '/og-default.png', caption: 'ImageToURL upload interface', title: 'Free image hosting with permanent URLs' },
+  { page: '/en/', image: SITE + '/og-default.png', caption: 'ImageToURL upload interface', title: 'Free image hosting with direct CDN URLs' },
   { page: '/en/heic-to-jpg/', image: SITE + '/og-default.png', caption: 'HEIC to JPG converter', title: 'Convert iPhone HEIC to JPG in your browser' },
   { page: '/en/heic-to-png/', image: SITE + '/og-default.png', caption: 'HEIC to PNG converter', title: 'HEIC to PNG lossless converter' },
   { page: '/en/heic-to-pdf/', image: SITE + '/og-default.png', caption: 'HEIC to PDF converter', title: 'Merge HEIC photos into PDF' },

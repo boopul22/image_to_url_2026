@@ -6,18 +6,18 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
   platform="Reddit"
   slug="image-hosting-for-reddit"
   metaTitle="Image Hosting for Reddit — Free, Direct Links That Embed"
-  metaDescription="Free image hosting for Reddit with CDN-delivered direct URLs that embed inline in posts and comments. No ads, no signup, and no Imgur-style purge."
+  metaDescription="Free image hosting for Reddit with CDN-delivered direct URLs that embed inline in posts and comments."
   h1Pre="Image hosting for Reddit"
   h1Highlight="embeds that survive the crawler."
-  intro="Reddit's native image upload works, but cross-posting, Markdown comments, and text-post embeds still need a real direct URL. Here's a host built for that — fast CDN, permanent links, no Imgur inactivity purge."
+  intro="Reddit's native image upload works, but cross-posting, Markdown comments, and text-post embeds still need a real direct URL. Use the website uploader for quick links, or sign in and choose Never delete for long-lived embeds."
   why={[
     { title: "Markdown embeds need direct URLs", body: "Reddit text posts and comments accept inline images only if the URL resolves to raw bytes. Imgur album links, Google Photos links, Dropbox links all fail silently." },
-    { title: "Imgur's 2023 purge", body: "Anonymous Imgur uploads older than 6 months with no views now get deleted. For old Reddit threads that's catastrophic. ImageToURL doesn't purge." },
+    { title: "Imgur's 2023 purge", body: "Anonymous Imgur uploads older than 6 months with no views now get deleted. For old Reddit threads, use an account-backed Never delete upload when permanence matters." },
     { title: "i.redd.it isn't available via URL", body: "You can't pre-upload to Reddit's CDN from outside. Reddit's native hosting only kicks in when you post from inside Reddit. Any other context needs an external host." },
     { title: "Cross-subreddit workflows", body: "Moderators, wiki editors, and sidebar image authors all need stable URLs they can reference from multiple places without re-uploading." }
   ]}
   steps={[
-    { title: "Upload your image", body: "Drop the file here — get a direct URL on Cloudflare's CDN instantly. No signup required." },
+    { title: "Upload your image", body: "Drop the file here for a guest URL, or sign in first and choose Never delete for a long-lived direct URL." },
     { title: "Paste into Reddit", body: "In a text post or comment, type ![](paste-url-here). Reddit renders it inline. For image posts, switch to Link post and paste the URL." },
     { title: "Share anywhere", body: "The same URL works in wikis, modmail, Discord cross-posts, and external blog posts linking back to the Reddit thread." }
   ]}
@@ -26,10 +26,10 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Does ImageToURL work in Old Reddit?", a: "Yes. Old Reddit's Markdown supports inline images via ![](url) syntax. ImageToURL gives you a stable URL that works identically in both Old and New Reddit." },
     { q: "Will Reddit rehost my image?", a: "If you submit a Link post with an image URL, Reddit sometimes mirrors it to i.redd.it. Sometimes not — depends on subreddit rules and the mobile app. Either way, your original URL keeps working as a fallback." },
     { q: "Any NSFW restriction?", a: "ImageToURL doesn't allow adult content. For NSFW subreddits, Reddit's native upload or Imgur is the right path." },
-    { q: "What's the max file size?", a: "10 MB on the free plan, 50 MB on Business. Reddit's own image limit is 20 MB, so the free tier covers 99% of cases." },
+    { q: "What's the max file size?", a: "10 MB per upload. Reddit's own image limit is 20 MB, so compress anything larger before uploading to ImageToURL." },
     { q: "Does the URL survive a subreddit ban?", a: "Yes — the URL lives on our CDN, not Reddit's. If a sub bans you or removes a post, the image is still accessible via its direct link." },
     { q: "Can I use this in Reddit automod rules?", a: "Yes. Any URL in an automod YAML works the same whether it points to imgur.com, i.redd.it, or imagetourl.cloud." },
-    { q: "Does it track who views my image?", a: "No analytics on free. Pro plan optionally logs per-URL view counts (aggregate only — no IPs)." }
+    { q: "Does it track who views my image?", a: "Hosted-image analytics are not live today." }
   ]}
   relatedSlugs={[
     { href: "/en/image-hosting-for-forums/", title: "Forum Image Hosting", body: "Same pattern for phpBB, Discourse, XenForo." },

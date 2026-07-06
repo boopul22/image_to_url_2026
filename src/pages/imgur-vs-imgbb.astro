@@ -7,7 +7,7 @@ import Footer from '../components/Footer.astro';
 
 const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Imgur vs ImgBB", "url": "https://imagetourl.cloud/imgur-vs-imgbb", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Imgur vs ImgBB side-by-side. Permanence, CDN, API, community features.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-  { "@type": "Question", "name": "Which is more reliable long-term?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB. Since Imgur's 2023 policy change, anonymous uploads older than 6 months with no views can be purged. ImgBB has no such rule as of 2026. Neither is ideal for 10-year-old embeds — for that, a focused host with an explicit permanence SLA is safer." } },
+  { "@type": "Question", "name": "Which is more reliable long-term?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB. Since Imgur's 2023 policy change, anonymous uploads older than 6 months with no views can be purged. ImgBB has no such rule as of 2026. Neither is ideal for critical 10-year embeds without a retention setting you control." } },
   { "@type": "Question", "name": "Which is faster?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur. Fastly's edge network delivers faster TTFB than ImgBB's origin, especially in Europe and Asia." } },
   { "@type": "Question", "name": "Which has the better API?", "acceptedAnswer": { "@type": "Answer", "text": "Both are solid. Imgur's is more mature with richer endpoints (albums, galleries, comments). ImgBB is simpler — just upload and list. Pick by what you need." } },
   { "@type": "Question", "name": "NSFW policy?", "acceptedAnswer": { "@type": "Answer", "text": "Imgur allows NSFW with a flag. ImgBB officially disallows adult content, though enforcement is uneven." } },
@@ -62,7 +62,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
     <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6"><div class="reveal"><div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border border-outline-variant/40 hard-shadow text-center">
         <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">Tired of picking between compromises?</h2>
-        <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">ImageToURL is a focused, ad-free, permanence-first host.</p>
+        <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">ImageToURL is a focused CDN image host with signed-in keep-forever uploads.</p>
         <a href="/" class="inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Try ImageToURL</a>
       </div></div></div>
     </section>

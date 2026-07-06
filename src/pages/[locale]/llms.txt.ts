@@ -11,12 +11,12 @@ const SITE = 'https://imagetourl.cloud';
 
 // Localized one-line intro. Hand-authored so no translation service call.
 const INTRO: Record<Locale, string> = {
-  en: 'ImageToURL is a free image hosting service that converts uploaded images into permanent, shareable CDN-backed URLs.',
-  es: 'ImageToURL es un servicio gratuito de alojamiento de imágenes que convierte las imágenes cargadas en URLs permanentes y compartibles respaldadas por CDN.',
-  fr: 'ImageToURL est un service gratuit d\'hébergement d\'images qui convertit les images téléchargées en URLs permanentes et partageables via CDN.',
-  de: 'ImageToURL ist ein kostenloser Bilder-Hosting-Dienst, der hochgeladene Bilder in permanente, teilbare CDN-URLs umwandelt.',
-  ja: 'ImageToURLは、アップロードされた画像を永続的で共有可能なCDNベースのURLに変換する無料の画像ホスティングサービスです。',
-  'zh-Hans': 'ImageToURL 是一项免费的图片托管服务，可将上传的图片转换为永久、可共享的 CDN URL。',
+  en: 'ImageToURL is a free image hosting service that converts uploaded images into shareable CDN-backed URLs. Guest uploads expire; signed-in users can choose Never delete.',
+  es: 'ImageToURL es un servicio gratuito de alojamiento de imágenes que convierte imágenes en URLs CDN compartibles. Las subidas de visitantes caducan; los usuarios con sesión pueden elegir Nunca eliminar.',
+  fr: 'ImageToURL est un service gratuit d\'hébergement d\'images qui convertit les images en URLs CDN partageables. Les téléversements visiteurs expirent; les utilisateurs connectés peuvent choisir Ne jamais supprimer.',
+  de: 'ImageToURL ist ein kostenloser Bilder-Hosting-Dienst, der hochgeladene Bilder in teilbare CDN-URLs umwandelt. Gast-Uploads laufen ab; angemeldete Nutzer können Nie löschen wählen.',
+  ja: 'ImageToURLは、アップロードされた画像を共有可能なCDNベースのURLに変換する無料の画像ホスティングサービスです。ゲストアップロードは期限切れになり、ログインユーザーは「削除しない」を選択できます。',
+  'zh-Hans': 'ImageToURL 是一项免费的图片托管服务，可将上传的图片转换为可共享的 CDN URL。访客上传会过期，已登录用户可以选择“永不删除”。',
 };
 
 const KEY_PAGES = [

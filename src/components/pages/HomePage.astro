@@ -16,10 +16,6 @@ import { AD_CLIENT, AD_SLOTS } from '../../lib/ads';
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const currentUser = Astro.locals.user ?? null;
 
-function lp(path: string): string {
-  return `/${locale}${path}`;
-}
-
 
 
 const canonicalHomeUrl = `https://imagetourl.cloud/${locale}/`;
@@ -107,16 +103,16 @@ const pageSchema = [
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "browserRequirements": "Requires JavaScript and HTML5",
-    "description": "Upload any image and instantly receive a permanent, CDN-delivered shareable URL. Supports JPG, PNG, WebP, GIF, and SVG up to 10 MB. No account required.",
+    "description": "Upload any image and instantly receive a CDN-delivered shareable URL. Guest uploads auto-expire at monthly cleanup; signed-in users can choose keep-forever links. Supports JPG, PNG, WebP, GIF, and SVG up to 10 MB.",
     "featureList": [
       "Drag and drop image upload",
-      "Instant permanent URL generation",
+      "Instant CDN URL generation",
       "Global CDN delivery",
       "SSL-encrypted links",
-      "No signup required for free tier",
-      "REST API access",
+      "No signup required for guest uploads",
+      "Signed-in keep-forever links",
       "Markdown and HTML export",
-      "Custom link expiration"
+      "Dashboard upload history"
     ],
     "screenshot": "https://imagetourl.cloud/og-default.png",
     "offers": [
@@ -127,41 +123,7 @@ const pageSchema = [
         "priceCurrency": "USD",
         "priceValidUntil": "2026-12-31",
         "availability": "https://schema.org/InStock",
-        "description": "10 uploads per month, standard processing speed, public link library.",
-        "url": "https://imagetourl.cloud/pricing"
-      },
-      {
-        "@type": "Offer",
-        "name": "Pro",
-        "priceCurrency": "USD",
-        "price": "12",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "12",
-          "priceCurrency": "USD",
-          "billingDuration": "P1M",
-          "unitCode": "MON"
-        },
-        "description": "Unlimited uploads, high-priority processing, custom link expiration, API access.",
-        "url": "https://imagetourl.cloud/pricing"
-      },
-      {
-        "@type": "Offer",
-        "name": "Business",
-        "priceCurrency": "USD",
-        "price": "49",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "49",
-          "priceCurrency": "USD",
-          "billingDuration": "P1M",
-          "unitCode": "MON"
-        },
-        "description": "Everything in Pro plus team workspaces, ultra-high resolution, and dedicated support.",
+        "description": "5 guest uploads per rolling 24 hours, 10 MB per file, auto-expiring CDN links.",
         "url": "https://imagetourl.cloud/pricing"
       }
     ],
@@ -176,7 +138,7 @@ const pageSchema = [
     "@id": `${canonicalHomeUrl}#webpage`,
     "url": canonicalHomeUrl,
     "name": "ImageToURL — Turn Images into Shareable Links",
-    "description": "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery.",
+    "description": "The fastest way to host your images for free. Guest uploads are temporary; signed-in users can choose keep-forever links on a fast CDN.",
     "inLanguage": locale,
     "isPartOf": { "@id": "https://imagetourl.cloud/#website" },
     "about": { "@id": "https://imagetourl.cloud/#software" },

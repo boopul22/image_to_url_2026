@@ -6,7 +6,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
   platform="X (Twitter)"
   slug="image-hosting-for-twitter"
   metaTitle="Image Hosting for X / Twitter — Direct URLs for Link Cards"
-  metaDescription="Host images for X / Twitter link cards, bio-link pages, and og:image previews. Free, no signup, with permanent CDN URLs that survive deleting any post."
+  metaDescription="Host images for X / Twitter link cards, bio-link pages, and og:image previews on fast CDN URLs."
   h1Pre="Image hosting for X / Twitter"
   h1Highlight="link cards that render correctly."
   intro="X's native image upload is for posts. For link-in-bio pages, og:image on external links, Twitter cards, or bot-posted media referenced via URL, you need a separate host."
@@ -14,7 +14,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { title: "og:image for link previews", body: "When someone posts a URL to X, the preview card pulls og:image from your site's HTML. That image needs to be on a CDN, publicly reachable, and ≥1200×630 for a large card." },
     { title: "Profile banner / avatar backups", body: "X strips EXIF and recompresses every upload, so your originals get degraded. Keep pristine copies on ImageToURL for re-uploads or side-by-side comparisons." },
     { title: "Bot-posted image via URL", body: "Many bots use the v2 API's media_url field. Your image has to live somewhere public first — ImageToURL is a one-call upload away." },
-    { title: "Bio-link pages", body: "Linktree/Beacons-style pages you link from your X bio fetch images from external hosts. Use a stable URL here and your bio page stays clean for years." }
+    { title: "Bio-link pages", body: "Linktree/Beacons-style pages you link from your X bio fetch images from external hosts. Use a signed-in Never delete URL for assets that should stay live." }
   ]}
   steps={[
     { title: "Upload the source file", body: "Drop your image — we return a CDN URL suitable for og:image and Twitter card use." },
@@ -25,10 +25,10 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "What image size does X recommend for link cards?", a: "1200×628 for summary_large_image cards. X will crop or pad anything else. Use the image resizer tool first to hit exact dimensions." },
     { q: "Do I need HTTPS?", a: "Yes. X's card crawler only fetches https URLs. ImageToURL URLs are https by default." },
     { q: "Does it support animated PNG or GIF?", a: "GIF yes — animations play in X's card preview. APNG works as a static first-frame PNG (X converts to MP4 for real animation uploads)." },
-    { q: "Will the URL survive if I delete my post?", a: "Yes. The image is on our CDN, not X's. Deleting a post doesn't touch the underlying host." },
+    { q: "Will the URL survive if I delete my post?", a: "Deleting a post does not touch the hosted image. For long-lived assets, sign in and choose Never delete before uploading." },
     { q: "Can I embed an image in my X bio?", a: "Not directly — X's bio is plain text. The usual pattern is link-in-bio (Linktree, Carrd, a personal page) and host the images used there via ImageToURL." },
     { q: "What about threads?", a: "Each thread post uploads images natively. ImageToURL is for images you reference externally from X, not for the image attached to a post." },
-    { q: "Size limit on X?", a: "X accepts up to 5 MB for static images, 15 MB for GIFs. ImageToURL's 10 MB free tier covers both." },
+    { q: "Size limit on X?", a: "X accepts up to 5 MB for static images, 15 MB for GIFs. ImageToURL currently accepts 10 MB per upload." },
     { q: "Does this stop X from recompressing?", a: "No — X always recompresses uploads. Use ImageToURL for the source-of-truth copy and any URL-referenced context." }
   ]}
   relatedSlugs={[

@@ -2,55 +2,39 @@
 export const prerender = true;
 import DevApiPage from '../components/DevApiPage.astro';
 
-const code = `import fs from 'node:fs';
-
-export async function uploadImage(filePath, apiKey) {
-  const fd = new FormData();
-  fd.append('file', new Blob([fs.readFileSync(filePath)]), filePath.split('/').pop());
-
-  const headers = {};
-  if (apiKey) headers.Authorization = \`Bearer \${apiKey}\`;
-
-  const r = await fetch('https://imagetourl.cloud/api/upload', {
-    method: 'POST',
-    headers,
-    body: fd,
-  });
-
-  const body = await r.json();
-  if (!r.ok || body.error) throw new Error(body.error || \`HTTP \${r.status}\`);
-  return body.data.url;
-}
-
-// Example
-const url = await uploadImage('./screenshot.png', process.env.IMAGETOURL_KEY);
-console.log(url); // https://imagetourl.cloud/uploads/abc123.png`;
+const code = `# Current status
+# Public Node/API-key uploads are not live yet.
+#
+# The active /api/upload route is used by the ImageToURL website uploader
+# and requires a same-site browser request from imagetourl.cloud.
+#
+# Use the web uploader today, or contact us if you need automation access.`;
 ---
 <DevApiPage
-  title="Image Hosting API — Node.js (fetch) Example"
+  title="Image Hosting API — Node.js Status"
   slug="image-hosting-api-nodejs"
-  metaDescription="Upload images from Node.js using the built-in fetch and FormData — no axios, no SDK. A copy-paste function that POSTs multipart and returns a direct CDN URL."
+  metaDescription="Current Node/API upload status for ImageToURL. Public API-key uploads are not live yet; use the website uploader today."
   h1Pre="Image hosting API"
-  h1Highlight="Node.js with built-in fetch."
-  intro="Node 18+ has fetch and FormData built in. This snippet reads a file, posts multipart, and returns the hosted URL — no third-party dependencies."
-  lang="javascript"
+  h1Highlight="not public yet."
+  intro="The public Node upload flow is not live yet. The current upload endpoint powers the website uploader and rejects non-same-site automation requests."
+  lang="text"
   langLabel="Node.js"
   codeSnippet={code}
   whys={[
-    { title: "Zero dependencies", body: "Works with Node 18+'s global fetch and FormData. No axios, no form-data, no node-fetch. Fewer deps means fewer security patches to babysit." },
-    { title: "Serverless-friendly", body: "The same snippet runs in AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and Deno Deploy without modification." },
-    { title: "TypeScript-ready", body: "Drop into a .ts file unchanged. The URL return type is string; error paths throw." },
-    { title: "Streaming uploads", body: "For large files, swap readFileSync for fs.createReadStream in a ReadableStream wrapper — memory-efficient for 50 MB+ uploads." }
+    { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
+    { title: "Node automation is roadmap", body: "Server actions, route handlers, workers, and CI uploads need public API-key access before they are reliable." },
+    { title: "Current limits are clear", body: "Guests get 5 uploads and signed-in users get 25 uploads per rolling 24 hours, with a 10 MB file cap." },
+    { title: "Contact for automation", body: "If you need Node upload workflows, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
-    { q: "Do I need node-fetch?", a: "No — Node 18+ has global fetch. For older Node, npm install node-fetch@2 and require it. The API surface is identical." },
-    { q: "What about Next.js server components?", a: "Same code works in a Route Handler or server action. Cloudflare Pages, Vercel, and self-hosted Next.js all provide fetch globally." },
-    { q: "Deno / Bun?", a: "Identical. Deno has fetch and FormData built in; Bun matches Node.js's fetch API." },
-    { q: "Can I upload a Buffer directly?", a: "Yes: new Blob([buffer], { type: 'image/png' }) — then append to FormData. Useful when you already have image bytes in memory." },
-    { q: "How do I upload a canvas in browser-side Node (Electron)?", a: "canvas.toBlob(blob => uploadImage(blob)) — rename the function to accept a Blob instead of a path; the rest is identical." },
-    { q: "Retry on 429?", a: "Wrap the fetch in a small backoff loop. ImageToURL responds with Retry-After headers on rate limit — respect that value." },
-    { q: "TypeScript types?", a: "The response shape is { data: { url: string, id: string, size: number, mime: string, created_at: string } } | { error: string }. Declare as a union and narrow." },
-    { q: "Express middleware for server-side uploads?", a: "Accept multipart with multer, then re-POST the buffer to ImageToURL using the above function. Store the returned URL in your DB instead of local disk." }
+    { q: "Can I upload from Node today?", a: "No. Public Node/API-key uploads are not live yet; use the website uploader." },
+    { q: "Do I need node-fetch?", a: "No public Node upload snippet is supported today. Node 18+ fetch will be the natural path once API-key uploads are available." },
+    { q: "What about Next.js server components?", a: "Not today. Public API-key uploads are not live yet, so Next.js route handlers and server actions should not call /api/upload directly." },
+    { q: "Deno / Bun?", a: "Same status: no public upload API today." },
+    { q: "Can I upload a Buffer directly?", a: "Not through a public ImageToURL API today. Upload the saved file through the website uploader." },
+    { q: "Retry on 429?", a: "The live website uploader respects the current 5 guest and 25 signed-in uploads per rolling 24 hours." },
+    { q: "TypeScript types?", a: "Public TypeScript response types will be documented when API-key uploads launch." },
+    { q: "Express middleware for server-side uploads?", a: "Not available today. Use the website uploader or contact us if you need automation access reviewed." }
   ]}
   relatedSlugs={[
     { href: "/image-hosting-api-python/", title: "Python", body: "Python snippet." },

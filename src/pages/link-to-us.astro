@@ -19,13 +19,13 @@ const SITE = 'https://imagetourl.cloud';
 // standard, legitimate way a site earns inbound links from real domains.
 const textLink = `<a href="${SITE}/" target="_blank" rel="noopener">Free Image Hosting by ImageToURL</a>`;
 
-const badgeSmall = `<a href="${SITE}/" target="_blank" rel="noopener" title="Free image hosting — upload an image, get a permanent URL" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#e11d48;color:#fff;font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:13px;font-weight:700;line-height:1;text-decoration:none;border-radius:4px;">&#128247; ImageToURL &middot; Free Image Hosting</a>`;
+const badgeSmall = `<a href="${SITE}/" target="_blank" rel="noopener" title="Free image hosting — upload an image and get a CDN URL" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#e11d48;color:#fff;font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:13px;font-weight:700;line-height:1;text-decoration:none;border-radius:4px;">&#128247; ImageToURL &middot; Free Image Hosting</a>`;
 
-const badgeOutline = `<a href="${SITE}/" target="_blank" rel="noopener" title="Upload an image and get a free, permanent direct URL" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:2px solid #e11d48;color:#e11d48;font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:13px;font-weight:700;line-height:1;text-decoration:none;border-radius:4px;">Image to URL &rarr; imagetourl.cloud</a>`;
+const badgeOutline = `<a href="${SITE}/" target="_blank" rel="noopener" title="Upload an image and get a free direct CDN URL" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:2px solid #e11d48;color:#e11d48;font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:13px;font-weight:700;line-height:1;text-decoration:none;border-radius:4px;">Image to URL &rarr; imagetourl.cloud</a>`;
 
 const markdownLink = `[Free Image Hosting by ImageToURL](${SITE}/)`;
 
-const poweredBy = `<p style="font-family:system-ui,sans-serif;font-size:12px;color:#64748b;">Images hosted with <a href="${SITE}/" target="_blank" rel="noopener" style="color:#e11d48;font-weight:600;">ImageToURL</a> — free, permanent, CDN-delivered.</p>`;
+const poweredBy = `<p style="font-family:system-ui,sans-serif;font-size:12px;color:#64748b;">Images hosted with <a href="${SITE}/" target="_blank" rel="noopener" style="color:#e11d48;font-weight:600;">ImageToURL</a> — free CDN image links.</p>`;
 
 const snippets = [
   { id: 'text', label: 'Simple text link', desc: 'The cleanest option for in-article links and resource pages.', code: textLink },

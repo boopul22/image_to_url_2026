@@ -5,26 +5,26 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
-const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Postimages Alternative — ImageToURL", "url": "https://imagetourl.cloud/postimages-alternative", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "A modern, no-ads alternative to Postimages with permanent URLs, CDN delivery, and optional account.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
+const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Postimages Alternative — ImageToURL", "url": "https://imagetourl.cloud/postimages-alternative", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "A modern Postimages alternative with CDN delivery, guest uploads, and signed-in keep-forever links.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
   { "@type": "Question", "name": "What's wrong with Postimages?", "acceptedAnswer": { "@type": "Answer", "text": "Postimages works, but the ads are heavy, the mobile UI is dated, and there's no API. For one-off forum-post hosting it's fine. For regular work — blog posts, portfolios, dev assets — it grinds." } },
-  { "@type": "Question", "name": "Are URLs actually permanent on Postimages?", "acceptedAnswer": { "@type": "Answer", "text": "They claim permanent, and in practice most uploads stay. But 'inactive' rules exist in the fine print, and there's no UI to extend or renew. ImageToURL URLs have no inactivity rule." } },
-  { "@type": "Question", "name": "Does ImageToURL show ads?", "acceptedAnswer": { "@type": "Answer", "text": "No. The free plan is ad-free. Revenue comes from Pro and Business plans — your uploads aren't the product." } },
+  { "@type": "Question", "name": "Are URLs actually permanent on Postimages?", "acceptedAnswer": { "@type": "Answer", "text": "They claim permanent, and in practice most uploads stay. ImageToURL guest uploads are temporary; signed-in users can choose Never delete before upload when they need a keep-forever link." } },
+  { "@type": "Question", "name": "Does ImageToURL show ads?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL is free within the current limits and supported by ads on the site. Your uploads are not sold as a product." } },
   { "@type": "Question", "name": "Which is faster for viewers?", "acceptedAnswer": { "@type": "Answer", "text": "Side-by-side tests on the same image show ImageToURL ~60–120 ms faster TTFB from US/EU, because Cloudflare's PoPs sit closer to most users than Postimages' origin. Asia and LATAM see bigger gaps." } },
-  { "@type": "Question", "name": "Can I migrate existing Postimages URLs?", "acceptedAnswer": { "@type": "Answer", "text": "Not automatically — there's no import API. Download your images from Postimages and re-upload here. The Pro plan's bulk uploader handles hundreds at once." } },
+  { "@type": "Question", "name": "Can I migrate existing Postimages URLs?", "acceptedAnswer": { "@type": "Answer", "text": "Not automatically — there is no import API. Download your images from Postimages and re-upload them here. Use the web bulk uploader within the current limits." } },
   { "@type": "Question", "name": "Embed codes?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — direct URL, HTML, Markdown, BBCode. Same set Postimages offers, generated locally after upload." } },
   { "@type": "Question", "name": "NSFW policy?", "acceptedAnswer": { "@type": "Answer", "text": "Not allowed. Postimages is more permissive; if that's a hard requirement, this isn't the right tool. See content guidelines." } },
   { "@type": "Question", "name": "Do I need an account?", "acceptedAnswer": { "@type": "Answer", "text": "No. Anonymous uploads are supported. Create an account only if you want to manage or delete uploads later." } }
 ] };
 ---
-<Layout title="Postimages Alternative — Ad-free, Permanent URLs" description="A modern, ad-free Postimages alternative with a faster global CDN, permanent direct image URLs, and a free tier with no signup required to start." schema={[schema, faqSchema]} noHreflang>
+<Layout title="Postimages Alternative — Fast CDN Image Links" description="A modern Postimages alternative with a fast global CDN, guest image uploads, and signed-in keep-forever links when you need them." schema={[schema, faqSchema]} noHreflang>
   <Nav />
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
       <header class="mb-5 sm:mb-8 reveal">
         <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">Comparison</span>
-        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">Postimages Alternative <span class="italic text-primary">no ads, faster CDN.</span></h1>
-        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">If Postimages' ads, dated UI, or slow LATAM delivery annoy you, ImageToURL is the drop-in upgrade — free tier, global CDN, permanent URLs.</p>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">Postimages Alternative <span class="italic text-primary">faster CDN links.</span></h1>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">If Postimages' dated UI or slow LATAM delivery annoy you, ImageToURL is a focused upload flow with guest links, signed-in keep-forever links, and a global CDN.</p>
       </header>
     </div>
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
@@ -34,13 +34,13 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <table class="w-full text-sm">
             <thead class="bg-surface-variant border-b border-outline-variant/40"><tr><th class="text-left p-3 font-black font-headline uppercase text-xs">Feature</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImageToURL</th><th class="text-left p-3 font-black font-headline uppercase text-xs">Postimages</th></tr></thead>
             <tbody class="font-body">
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads</td><td class="p-3">None</td><td class="p-3">Heavy display + popup</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads</td><td class="p-3">Ad-supported site</td><td class="p-3">Heavy display + popup</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">CDN</td><td class="p-3">Cloudflare (300+ PoPs)</td><td class="p-3">Single-origin delivery</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API</td><td class="p-3">Yes (Pro)</td><td class="p-3">No</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">10 MB free / 50 MB Business</td><td class="p-3">24 MB</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API</td><td class="p-3">Not public today</td><td class="p-3">No</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">10 MB</td><td class="p-3">24 MB</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Mobile UI</td><td class="p-3">Modern, PWA</td><td class="p-3">Dated</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Anonymous upload</td><td class="p-3">Yes</td><td class="p-3">Yes</td></tr>
-              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Blogs, dev, portfolios, API workflows</td><td class="p-3">Forum quick-shares</td></tr>
+              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Blogs, dev, portfolios, web uploads</td><td class="p-3">Forum quick-shares</td></tr>
             </tbody>
           </table>
         </div>

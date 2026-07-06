@@ -7,24 +7,24 @@ import Footer from '../components/Footer.astro';
 
 const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "ImageToURL vs ImgBB", "url": "https://imagetourl.cloud/imagetourl-vs-imgbb", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Side-by-side: ImageToURL and ImgBB for image hosting and direct URLs.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-  { "@type": "Question", "name": "What's the main difference?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB is ad-supported and optimized for forum culture (BBCode embeds, thumbnail variants). ImageToURL is ad-free, CDN-first, and API-forward. Both give you permanent direct URLs." } },
+  { "@type": "Question", "name": "What's the main difference?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB is optimized for forum culture with BBCode embeds and thumbnail variants. ImageToURL is CDN-first with a focused uploader, guest links, and signed-in keep-forever links." } },
   { "@type": "Question", "name": "Which is faster?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL for most regions — Cloudflare's edge network beats ImgBB's single-origin delivery outside North America. US users see roughly equal TTFB." } },
-  { "@type": "Question", "name": "Max file size?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB: 32 MB. ImageToURL: 10 MB free / 50 MB on Business. For large photos, Business is the pick." } },
-  { "@type": "Question", "name": "API comparison?", "acceptedAnswer": { "@type": "Answer", "text": "Both expose REST upload APIs. ImgBB's is free with an API key. ImageToURL's is Pro-only but has no per-day request cap on Business." } },
-  { "@type": "Question", "name": "Does ImgBB show ads?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, on the gallery page. Direct image URLs themselves are ad-free on both services." } },
-  { "@type": "Question", "name": "Custom expiration?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB offers 'auto-delete after X' on uploads. ImageToURL Pro offers the same plus programmatic deletion via API." } },
+  { "@type": "Question", "name": "Max file size?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB: 32 MB. ImageToURL currently accepts 10 MB per upload." } },
+  { "@type": "Question", "name": "API comparison?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB exposes a public upload API with an API key. ImageToURL public API-key uploads are not live yet; use the website uploader today." } },
+  { "@type": "Question", "name": "Does ImgBB show ads?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, on the gallery page. Direct image URLs themselves load as raw images on both services." } },
+  { "@type": "Question", "name": "Custom expiration?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB offers 'auto-delete after X' on uploads. ImageToURL guest uploads are temporary, while signed-in users can choose Never delete before uploading." } },
   { "@type": "Question", "name": "Thumbnail variants?", "acceptedAnswer": { "@type": "Answer", "text": "ImgBB returns a medium + thumbnail URL alongside the direct. ImageToURL returns the direct; pre-generate thumbnails with the image resizer tool before upload if you need them." } },
-  { "@type": "Question", "name": "Which to pick?", "acceptedAnswer": { "@type": "Answer", "text": "Forum posting and casual shares: either works. Production embeds on a growing site: ImageToURL for speed and ad-free experience. If you've been on ImgBB for years and it's fine, there's no urgent reason to move." } }
+  { "@type": "Question", "name": "Which to pick?", "acceptedAnswer": { "@type": "Answer", "text": "Forum posting and casual shares: either works. Production embeds on a growing site: ImageToURL for speed, direct CDN links, and signed-in keep-forever uploads. If you've been on ImgBB for years and it's fine, there's no urgent reason to move." } }
 ] };
 ---
-<Layout title="ImageToURL vs ImgBB — Hosting Comparison" description="ImageToURL vs ImgBB, side by side on CDN speed, max file size, API access, ads, and thumbnails, so you can choose the right free image host." schema={[schema, faqSchema]} noHreflang>
+<Layout title="ImageToURL vs ImgBB — Hosting Comparison" description="ImageToURL vs ImgBB, side by side on CDN speed, max file size, API status, ads, and thumbnails, so you can choose the right free image host." schema={[schema, faqSchema]} noHreflang>
   <Nav />
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
       <header class="mb-5 sm:mb-8 reveal">
         <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">Comparison</span>
         <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">ImageToURL vs ImgBB <span class="italic text-primary">quiet upgrades.</span></h1>
-        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Both host images. ImageToURL pushes further on global CDN speed, no-ads experience, and workspace tooling.</p>
+        <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Both host images. ImageToURL pushes further on global CDN speed, a focused upload flow, and signed-in keep-forever links.</p>
       </header>
     </div>
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
@@ -33,14 +33,14 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <table class="w-full text-sm">
             <thead class="bg-surface-variant border-b border-outline-variant/40"><tr><th class="text-left p-3 font-black font-headline uppercase text-xs">Feature</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImageToURL</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImgBB</th></tr></thead>
             <tbody class="font-body">
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads on gallery</td><td class="p-3">None</td><td class="p-3">Display</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads on gallery</td><td class="p-3">Ad-supported site</td><td class="p-3">Display</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">CDN</td><td class="p-3">Cloudflare</td><td class="p-3">Single-origin</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">10 / 50 MB</td><td class="p-3">32 MB</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API tier</td><td class="p-3">Pro plan</td><td class="p-3">Free with key</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Auto-delete</td><td class="p-3">Pro</td><td class="p-3">Free</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">10 MB</td><td class="p-3">32 MB</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API tier</td><td class="p-3">Not public today</td><td class="p-3">Free with key</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Retention choice</td><td class="p-3">Guest expiry or signed-in Never delete</td><td class="p-3">Auto-delete options</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Thumbnails</td><td class="p-3">Pre-generate</td><td class="p-3">Auto, returned in JSON</td></tr>
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Team workspaces</td><td class="p-3">Yes, Business</td><td class="p-3">No</td></tr>
-              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Production embeds, teams, API</td><td class="p-3">Forum culture, BBCode embeds</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Team workspaces</td><td class="p-3">No self-serve team plan today</td><td class="p-3">No</td></tr>
+              <tr><td class="p-3 font-semibold">Best for</td><td class="p-3">Production embeds, blogs, support assets</td><td class="p-3">Forum culture, BBCode embeds</td></tr>
             </tbody>
           </table>
         </div>

@@ -2,45 +2,39 @@
 export const prerender = true;
 import DevApiPage from '../components/DevApiPage.astro';
 
-const code = `// n8n "HTTP Request" node configuration
-// Method: POST
-// URL: https://imagetourl.cloud/api/upload
-// Authentication: Generic Credential → Header Auth
-//   Name: Authorization
-//   Value: Bearer YOUR_IMAGETOURL_KEY
-// Body Content Type: Form-Data Multipart
-// Body Parameters:
-//   Name:          Type:       Value:
-//   file           n8n Binary  data  (from previous node's binary property)
-// Options → Response → Response Format: JSON
-
-// After this node runs, the URL is at:  {{$json.data.url}}`;
+const code = `// Current status
+// Public n8n HTTP uploads are not live yet.
+//
+// The active /api/upload route is used by the ImageToURL website uploader
+// and requires a same-site browser request from imagetourl.cloud.
+//
+// Use the web uploader today, or contact us if you need automation access.`;
 ---
 <DevApiPage
-  title="Image Upload via n8n — Self-hosted Automation"
+  title="Image Upload via n8n — Current Status"
   slug="image-upload-n8n"
-  metaDescription="Upload images from n8n via the HTTP Request node — pass binary from any node, POST multipart, get a CDN URL back. Self-hosted, open-source, no per-op fees."
+  metaDescription="Current n8n upload status for ImageToURL. Public HTTP/API uploads are not live yet; use the website uploader today."
   h1Pre="n8n image upload"
-  h1Highlight="self-hosted, no op fees."
-  intro="n8n is the self-hostable alternative to Zapier/Make. Its HTTP Request node handles multipart uploads with binary data from any previous node — webhooks, email triggers, database rows, file watches."
+  h1Highlight="not public yet."
+  intro="n8n automation is not live yet because public API-key uploads are not open. Use the website uploader today, or contact us if your workflow needs automation access."
   lang="javascript"
   langLabel="n8n HTTP"
   codeSnippet={code}
   whys={[
-    { title: "No per-op costs", body: "Self-host n8n for $5–20/month on a VPS and run millions of workflow executions. Zapier/Make charge per task — n8n is free once hosted." },
-    { title: "Binary data handling", body: "n8n tracks file bytes as first-class 'binary' properties across nodes. The HTTP Request node binds them directly to multipart form fields." },
-    { title: "Code nodes for complex logic", body: "When the built-in nodes don't cover your case, drop in a Function node with the raw fetch snippet — same code as the Node.js example." },
-    { title: "Community-built integrations", body: "n8n's marketplace has hundreds of community nodes. If ImageToURL gets an official n8n node later, it'll land there." }
+    { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
+    { title: "n8n automation is roadmap", body: "HTTP Request uploads need public API-key access before they are reliable." },
+    { title: "Current limits are clear", body: "Guests get 5 uploads and signed-in users get 25 uploads per rolling 24 hours, with a 10 MB file cap." },
+    { title: "Contact for automation", body: "If you need n8n for self-hosted workflows, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
-    { q: "How do I pass a binary file to the HTTP Request node?", a: "The previous node must have a binary property (e.g. 'data' from a Read Binary File node or webhook with binary upload). In the HTTP node's multipart form, set the field type to 'n8n Binary' and reference that property name." },
+    { q: "Can I use n8n today?", a: "No. Public HTTP/API uploads are not live yet; use the website uploader." },
     { q: "Do I need n8n Pro?", a: "No — self-hosted Community Edition is free and covers this use case fully. Pro adds SSO, audit logs, and hosted service." },
-    { q: "Where do I store the API key?", a: "Create a Credential in n8n (Generic → Header Auth). Attach it to the HTTP Request node. Credentials are encrypted at rest." },
-    { q: "How do I handle errors?", a: "Enable 'Continue On Fail' on the HTTP node and add an IF node checking for a non-success response. Route errors to Slack, email, or a retry queue." },
-    { q: "Rate-limit retries?", a: "Add a Wait node + IF loop with exponential backoff. Or use the community 'Retry' node package." },
-    { q: "Webhook trigger → upload flow?", a: "Webhook Trigger (receives file) → HTTP Request (uploads to ImageToURL) → Respond to Webhook (returns the hosted URL). Classic n8n pattern." },
+    { q: "Where do I store the API key?", a: "Do not store an ImageToURL API key yet; public API-key uploads are not live. Once available, use encrypted n8n credentials." },
+    { q: "How do I handle errors?", a: "n8n can branch on non-success responses, but ImageToURL public upload automation is not live today." },
+    { q: "Rate-limit retries?", a: "Website upload limits are 5 guest uploads and 25 signed-in uploads per rolling 24 hours. Public automation limits will be documented when API access opens." },
+    { q: "Webhook trigger -> upload flow?", a: "Not available today through a public ImageToURL endpoint." },
     { q: "Docker / Railway / Render deploy?", a: "All three have one-click n8n templates. Railway and Render free tiers run small n8n instances comfortably." },
-    { q: "Can I trigger n8n from GitHub Actions?", a: "Yes — expose an n8n webhook from Actions via curl. Useful for upload-as-part-of-CI-pipeline workflows." }
+    { q: "Can I trigger n8n from GitHub Actions?", a: "n8n can receive GitHub Actions webhooks, but ImageToURL public upload automation is not live today." }
   ]}
   relatedSlugs={[
     { href: "/image-upload-make/", title: "Make.com", body: "Hosted alternative." },

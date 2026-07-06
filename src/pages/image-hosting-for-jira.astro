@@ -6,12 +6,12 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
   platform="Jira"
   slug="image-hosting-for-jira"
   metaTitle="Image Hosting for Jira — Bug Repros & Ticket Screenshots"
-  metaDescription="Host bug-repro screenshots on a fast CDN and get direct URLs that render in Jira tickets, markdown, and Confluence. Free, no signup, permanent links."
+  metaDescription="Host bug-repro screenshots on a fast CDN and get direct URLs that render in Jira tickets, markdown, and Confluence."
   h1Pre="Image hosting for Jira"
   h1Highlight="repros that survive attachment sprawl."
-  intro="Jira's native attachments are fine, but they duplicate across every ticket, eat tenant storage, and break when tickets get archived. External CDN URLs keep your repros accessible forever."
+  intro="Jira's native attachments are fine, but they duplicate across every ticket, eat tenant storage, and break when tickets get archived. External CDN URLs keep reusable repro assets easy to share."
   why={[
-    { title: "Survive ticket archival", body: "When your org archives old Jira projects, attached images are often deleted. External URLs on ImageToURL remain." },
+    { title: "Survive ticket archival", body: "When your org archives old Jira projects, attached images are often deleted. Sign in and choose Never delete for ImageToURL links that should stay available." },
     { title: "One image, many tickets", body: "A UI mockup or architecture diagram referenced from 10+ related tickets and the umbrella epic. Upload once, reference everywhere." },
     { title: "Confluence + Jira consistency", body: "Same image in a Confluence page AND the tracking Jira ticket. External URL = one source of truth, no re-upload." },
     { title: "Share with non-Jira users", body: "Stakeholders, customers, auditors who don't have Jira access can't fetch attachments. Public CDN URLs work for anyone with a browser." }
@@ -28,7 +28,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Is this compliant with our SOC 2 / ISO evidence?", a: "If your security team requires all attachments in tenant-controlled storage, native Jira attachments are the safer path. For non-sensitive screenshots, external hosting is usually acceptable." },
     { q: "Does this work with Jira Cloud and Server?", a: "Both. Cloud and Data Center both accept external image URLs in markdown. Behavior is identical." },
     { q: "What about Jira Product Discovery?", a: "Product Discovery's idea descriptions use the same editor — external URLs render inline." },
-    { q: "API upload from a bug-report tool?", a: "Yes — POST to /api/upload with a Pro/Business API key. Integrate into Sentry, Bugsnag, or custom QA tooling to auto-host repro screenshots." },
+    { q: "API upload from a bug-report tool?", a: "Not today. Public API-key uploads are not live yet; use the website uploader or contact us if you need automation access for Sentry, Bugsnag, or custom QA tooling." },
     { q: "Permissions?", a: "ImageToURL URLs are publicly reachable (URL-based access). Don't use for confidential repros — use Jira native attachments for those." }
   ]}
   relatedSlugs={[

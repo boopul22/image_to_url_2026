@@ -2,50 +2,37 @@
 export const prerender = true;
 import DevApiPage from '../components/DevApiPage.astro';
 
-const code = `# Anonymous upload (rate-limited, no auth required)
-curl -X POST https://imagetourl.cloud/api/upload \\
-  -F "file=@screenshot.png"
-
-# Authenticated upload (Pro / Business)
-curl -X POST https://imagetourl.cloud/api/upload \\
-  -H "Authorization: Bearer $IMAGETOURL_KEY" \\
-  -F "file=@screenshot.png"
-
-# Extract the URL from the JSON response with jq
-curl -sS -X POST https://imagetourl.cloud/api/upload \\
-  -H "Authorization: Bearer $IMAGETOURL_KEY" \\
-  -F "file=@screenshot.png" \\
-  | jq -r '.data.url'
-
-# Delete an upload
-curl -X DELETE https://imagetourl.cloud/api/uploads/abc123 \\
-  -H "Authorization: Bearer $IMAGETOURL_KEY"`;
+const code = `# Current status
+# Public cURL/API-key uploads are not live yet.
+#
+# The active /api/upload route is used by the ImageToURL website uploader
+# and requires a same-site browser request from imagetourl.cloud.
+#
+# Use the web uploader today, or contact us if you need automation access.`;
 ---
 <DevApiPage
-  title="Image Hosting API — cURL Examples"
+  title="Image Hosting API — cURL Status"
   slug="image-hosting-api-curl"
-  metaDescription="Upload images from the terminal with cURL — anonymous, authenticated, and delete examples that POST multipart and return a direct CDN URL for scripts and CI."
+  metaDescription="Current cURL/API upload status for ImageToURL. Public API-key uploads are not live yet; use the website uploader today."
   h1Pre="Image hosting API"
-  h1Highlight="cURL, one-liner style."
-  intro="Upload from your shell, bash scripts, GitHub Actions, or anywhere cURL runs. Pipe with jq to extract the URL in one line."
+  h1Highlight="not public yet."
+  intro="The public cURL upload flow is not live yet. The current upload endpoint powers the website uploader and rejects non-same-site automation requests."
   lang="bash"
   langLabel="cURL"
   codeSnippet={code}
   whys={[
-    { title: "Terminal-native", body: "No language runtime needed. Runs on macOS, Linux, WSL, and CI environments out of the box." },
-    { title: "GitHub Actions friendly", body: "Upload screenshots from your test runs, CI-generated reports, or build artifacts as one step in any workflow." },
-    { title: "Bash pipelines", body: "Chain with find, xargs, jq, and other Unix tools — bulk upload every PNG in a directory in one line." },
-    { title: "Debugging aid", body: "When your language client behaves oddly, curl -v reproduces the raw HTTP exchange. Fastest way to verify API behavior." }
+    { title: "Website path is live", body: "Use the main uploader today for guest links, signed-in keep-forever links, copy formats, and dashboard history." },
+    { title: "Automation is roadmap", body: "cURL, CI, and shell uploads need public API-key access before they are reliable." },
+    { title: "Current limits are clear", body: "Guests get 5 uploads and signed-in users get 25 uploads per rolling 24 hours, with a 10 MB file cap." },
+    { title: "Contact for access", body: "If automation is important for your workflow, contact us and we can review the request." }
   ]}
   faqs={[
-    { q: "Why -F instead of --data-binary?", a: "-F tells curl to use multipart/form-data, which is what the API expects. --data-binary sends the raw bytes without form encoding — wrong format." },
-    { q: "Can I pipe an image from stdin?", a: "Yes: cat img.png | curl -X POST -F 'file=@-;filename=img.png;type=image/png' .... Useful for one-shot pipelines." },
-    { q: "GitHub Actions example?", a: "steps: - run: | URL=$(curl -sS -X POST https://imagetourl.cloud/api/upload -H \"Authorization: Bearer $KEY\" -F \"file=@./screenshot.png\" | jq -r '.data.url') && echo \"$URL\"" },
-    { q: "Bulk upload a directory?", a: "find . -name '*.png' -exec curl -X POST https://imagetourl.cloud/api/upload -H \"Authorization: Bearer $KEY\" -F 'file=@{}' \\;. Add jq to collect URLs." },
-    { q: "Progress bar for large uploads?", a: "Remove -sS to see the default progress meter. -v for full request/response logging." },
-    { q: "Setting a timeout?", a: "--max-time 30 caps total duration; --connect-timeout 10 caps the TCP handshake." },
-    { q: "Why does auth header get logged?", a: "-v logs everything including the Authorization header. Use -v 2> err.log and scrub before sharing logs." },
-    { q: "Can I pass the key in a file?", a: "-H \"Authorization: Bearer $(cat ~/.imagetourl)\" — keeps the key out of shell history and process lists." }
+    { q: "Can I upload with cURL today?", a: "No. Public API-key uploads are not live yet; use the website uploader." },
+    { q: "Can I use this in GitHub Actions?", a: "Not reliably until public API-key access is enabled." },
+    { q: "What are the live limits?", a: "Guests get 5 uploads per rolling 24 hours. Signed-in users get 25 uploads per rolling 24 hours. Max file size is 10 MB." },
+    { q: "Can I bulk upload today?", a: "Use the website bulk uploader, not a public REST script." },
+    { q: "How do I get higher limits?", a: "Contact us with your workflow and expected volume." },
+    { q: "Will cURL docs return later?", a: "Yes, once public bearer-token upload access is live." }
   ]}
   relatedSlugs={[
     { href: "/image-hosting-api-python/", title: "Python", body: "Python snippet." },

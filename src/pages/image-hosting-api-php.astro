@@ -2,59 +2,39 @@
 export const prerender = true;
 import DevApiPage from '../components/DevApiPage.astro';
 
-const code = `<?php
-function uploadImage(string $path, ?string $apiKey = null): string {
-    $ch = curl_init('https://imagetourl.cloud/api/upload');
-    $postData = ['file' => new CURLFile($path)];
-
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-
-    if ($apiKey) {
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $apiKey]);
-    }
-
-    $response = curl_exec($ch);
-    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    if ($code >= 400) throw new RuntimeException("HTTP $code");
-    $body = json_decode($response, true);
-    if (!empty($body['error'])) throw new RuntimeException($body['error']);
-    return $body['data']['url'];
-}
-
-// Example
-$url = uploadImage('/var/www/uploads/screenshot.png', getenv('IMAGETOURL_KEY'));
-echo $url;`;
+const code = `# Current status
+# Public PHP/API-key uploads are not live yet.
+#
+# The active /api/upload route is used by the ImageToURL website uploader
+# and requires a same-site browser request from imagetourl.cloud.
+#
+# Use the web uploader today, or contact us if you need automation access.`;
 ---
 <DevApiPage
-  title="Image Hosting API — PHP Example"
+  title="Image Hosting API — PHP Status"
   slug="image-hosting-api-php"
-  metaDescription="Upload images from PHP with the built-in curl extension — a drop-in multipart function for Laravel, WordPress, Symfony, or plain PHP that returns a CDN URL."
+  metaDescription="Current PHP/API upload status for ImageToURL. Public API-key uploads are not live yet; use the website uploader today."
   h1Pre="Image hosting API"
-  h1Highlight="PHP with built-in curl."
-  intro="A copy-paste function for uploading images from PHP. Uses the built-in curl extension — works in WordPress, Laravel, Symfony, CakePHP, or raw PHP."
-  lang="php"
+  h1Highlight="not public yet."
+  intro="The public PHP upload flow is not live yet. The current upload endpoint powers the website uploader and rejects non-same-site automation requests."
+  lang="text"
   langLabel="PHP"
   codeSnippet={code}
   whys={[
-    { title: "No Composer package required", body: "The built-in curl extension is enabled on every PHP host since PHP 4. You don't need Guzzle, though you can swap in Guzzle for PSR-18 compliance." },
-    { title: "WordPress plugin-ready", body: "Drop the function into a plugin file; hook to media_upload or save_post to auto-push WP Media Library uploads to ImageToURL." },
-    { title: "Laravel compatible", body: "Use Laravel's HTTP client (Http::attach) or this raw curl version inside a service class. Save the returned URL to a model's URL column." },
-    { title: "Backwards-compatible", body: "Works on PHP 5.6+ with CURLFile. Modern (8.x) users can switch to the built-in http\\Client for PSR-18." }
+    { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
+    { title: "PHP automation is roadmap", body: "Server-side PHP uploads need public API-key access before they are reliable." },
+    { title: "Current limits are clear", body: "Guests get 5 uploads and signed-in users get 25 uploads per rolling 24 hours, with a 10 MB file cap." },
+    { title: "Contact for automation", body: "If you need WordPress, Laravel, or backend upload workflows, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
-    { q: "Should I use Guzzle instead?", a: "If your project already uses Guzzle, yes — $client->post($url, ['multipart' => [['name' => 'file', 'contents' => fopen($path, 'r')]]]). The curl version avoids adding a dependency if you don't already have one." },
-    { q: "WordPress integration?", a: "Add an action on 'add_attachment' that calls uploadImage() with the local WP file path, then stores the ImageToURL URL as post_meta. Serve the CDN URL instead of the local one." },
-    { q: "Laravel Filesystem custom driver?", a: "Yes — implement a custom FilesystemAdapter where put() calls uploadImage() and returns the URL. Makes Storage::disk('cdn')->put() transparent." },
-    { q: "Max upload size in PHP?", a: "Watch php.ini upload_max_filesize and post_max_size. ImageToURL accepts up to 10 MB free / 50 MB Business — make sure PHP's limits are higher than that." },
-    { q: "Error handling?", a: "Wrap in try/catch; the function throws on HTTP errors or API-level errors. Log body['error'] to your monitoring before rethrowing." },
-    { q: "HTTPS / SSL verification?", a: "curl verifies SSL by default. If your server has an outdated CA bundle, CURLOPT_CAINFO to a fresh cacert.pem. Don't disable verification in production." },
-    { q: "Rate-limit handling?", a: "Check HTTP 429 response. The Retry-After header tells you how many seconds to wait. Implement exponential backoff for bulk operations." },
-    { q: "Is the API key safe in PHP code?", a: "Never hard-code it. Use getenv() or Laravel's config() to read from .env — exclude .env from git." }
+    { q: "Can I upload from PHP today?", a: "No. Public PHP/API-key uploads are not live yet; use the website uploader." },
+    { q: "Should I use Guzzle or curl?", a: "Neither is supported for production uploads until public API-key access opens. The current /api/upload route is guarded for same-site browser requests." },
+    { q: "WordPress integration?", a: "Not available as a public integration today. Use the web uploader for assets, or contact us if you need automation access reviewed." },
+    { q: "Laravel Filesystem custom driver?", a: "Not today. A driver would need public API-key uploads, which are not live yet." },
+    { q: "Max upload size?", a: "ImageToURL currently accepts up to 10 MB per website upload." },
+    { q: "What are the live limits?", a: "Guests get 5 uploads per rolling 24 hours. Signed-in users get 25 uploads per rolling 24 hours." },
+    { q: "When will PHP automation work?", a: "It depends on API rollout. Until then, treat this page as a status note, not production API documentation." },
+    { q: "Do I need an API key?", a: "No public upload API key is available today. Signed-in website uploads use your normal browser session." }
   ]}
   relatedSlugs={[
     { href: "/image-hosting-api-python/", title: "Python", body: "Python snippet." },

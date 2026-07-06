@@ -6,7 +6,7 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
   platform="Substack"
   slug="image-hosting-for-substack"
   metaTitle="Image Hosting for Substack — External CDN for Emails & Web"
-  metaDescription="Host images for Substack newsletters and posts on a fast external CDN. Faster load, better deliverability, permanent URLs, and no Substack CDN quirks."
+  metaDescription="Host images for Substack newsletters and posts on a fast external CDN. Faster load, better deliverability, and fewer Substack CDN quirks."
   h1Pre="Image hosting for Substack"
   h1Highlight="faster emails, cleaner embeds."
   intro="Substack auto-hosts images you paste into the editor, but for embedded HTML, newsletter images referenced from multiple posts, or logos in your header, an external CDN URL is cleaner and faster."
@@ -25,9 +25,9 @@ import PlatformHostingPage from '../components/PlatformHostingPage.astro';
     { q: "Doesn't Substack host images automatically?", a: "Yes — when you paste or drag into the editor, Substack uploads to its own CDN. That's fine for one-off images; for reused assets, logos, or speed-critical international delivery, an external host wins." },
     { q: "Will external images load in subscribers' inbox?", a: "Yes. Gmail, Apple Mail, Outlook all render external &lt;img&gt; tags from any https URL. Some clients cache images; deliverability isn't affected." },
     { q: "Do images show in the emailed version of the post?", a: "Yes — Substack's email renderer inlines the src URL into the HTML mailer. Subscribers fetch from our CDN at open time (or from Gmail's proxy, which also talks to our CDN)." },
-    { q: "Can I track image opens via ImageToURL?", a: "Not on free. Pro plan logs per-URL view counts (aggregate). Substack's own analytics covers open-rate already." },
+    { q: "Can I track image opens via ImageToURL?", a: "Hosted-image analytics are not live today. Substack's own analytics covers open-rate already." },
     { q: "What about og:image for shared post links?", a: "Substack auto-generates og:image from post content. If you want to override, use the post's custom header image upload — ImageToURL can host the source." },
-    { q: "Max size?", a: "10 MB free, 50 MB Business. Substack's own cap is 10 MB, so the free tier matches." },
+    { q: "Max size?", a: "10 MB per upload. Substack's own cap is 10 MB, so the free tier matches." },
     { q: "Does it work for paid-only posts?", a: "Yes. Paywall gates the Substack post HTML, not external assets. If someone guesses the image URL they can see it — same as with any hosted image." },
     { q: "Can I host my podcast cover art here?", a: "Yes. The URL works as the cover-art reference in RSS feeds for Spotify, Apple Podcasts, and Overcast." }
   ]}

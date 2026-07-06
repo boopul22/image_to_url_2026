@@ -2,47 +2,40 @@
 export const prerender = true;
 import DevApiPage from '../components/DevApiPage.astro';
 
-const code = `# One-line upload: POST multipart/form-data to /api/upload
-curl -X POST https://imagetourl.cloud/api/upload \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "file=@/path/to/image.png"
-
-# Response (JSON)
-# {
-#   "data": {
-#     "url": "https://imagetourl.cloud/uploads/abc123.png",
-#     "id": "abc123",
-#     "size": 245678,
-#     "mime": "image/png",
-#     "created_at": "2026-04-18T12:34:56Z"
-#   }
-# }`;
+const code = `# Current status
+# Public API-key uploads are not live yet.
+#
+# The active /api/upload route is used by the ImageToURL website uploader
+# and accepts same-site browser requests from imagetourl.cloud.
+#
+# Use the web uploader today. Treat API-key upload examples as roadmap
+# until public bearer-token access is enabled.`;
 ---
 <DevApiPage
-  title="Image Upload API — Simple REST Endpoint"
+  title="Image Upload Endpoint — Current Status"
   slug="image-upload-api"
-  metaDescription="A free REST image upload API: POST multipart form-data to one endpoint, get a direct CDN URL back. No SDK — works from curl, Python, Node, or any stack."
-  h1Pre="Image Upload API"
-  h1Highlight="one endpoint, one POST, one URL back."
-  intro="A boring, focused image upload API. POST multipart form-data to /api/upload, receive a JSON response with a permanent CDN URL. No SDK required — curl, Python requests, Node fetch, or whatever your stack uses."
+  metaDescription="Current ImageToURL upload endpoint status: website uploads are live; public API-key uploads are not live yet."
+  h1Pre="Image Upload Endpoint"
+  h1Highlight="website uploads are live; public API is roadmap."
+  intro="ImageToURL currently supports uploads through the website uploader. The underlying /api/upload route is guarded for same-site browser requests, so public bearer-token uploads should not be treated as live production API access yet."
   lang="bash"
   langLabel="cURL"
   codeSnippet={code}
   whys={[
-    { title: "Predictable response shape", body: "Always { data: { url, id, size, mime, created_at } } on success; { error } on failure. No deep nested structures to parse." },
-    { title: "No SDK lock-in", body: "Plain multipart upload works from every language. No npm install, no pip install required — though language-specific examples are on this page." },
-    { title: "Permanent URLs", body: "Upload once, URL lasts forever (Pro/Business guarantees written into the SLA). No 30-day expiry, no inactivity purge." },
-    { title: "Cloudflare-backed CDN", body: "Uploads are served from 300+ edge PoPs. Your users hit the edge closest to them — no single-region latency." }
+    { title: "Website uploader is live", body: "Use the main uploader today for guest links, signed-in keep-forever links, copy formats, and dashboard history." },
+    { title: "Same response shape internally", body: "The website endpoint returns JSON with success, data.url, filename, size, mimetype, and created_at when uploads succeed." },
+    { title: "Clear storage behavior", body: "Guest links auto-expire at the monthly cleanup. Signed-in users can choose \"Never delete\" before upload for links that stay live." },
+    { title: "Cloudflare-backed CDN", body: "Uploaded files are served from a fast Cloudflare-backed path on imagetourl.cloud." }
   ]}
   faqs={[
-    { q: "Do I need an API key?", a: "Anonymous uploads work without a key (rate-limited). Programmatic use in production should use a Pro or Business API key — higher rate limits, programmatic delete, and usage dashboards." },
-    { q: "What's the max file size?", a: "10 MB on free/anonymous, 10 MB on Pro, 50 MB on Business. Contact us for larger." },
-    { q: "Is there a rate limit?", a: "Anonymous: 10 uploads/min per IP. Pro: 60/min. Business: 600/min. Contact for higher." },
-    { q: "How do I delete an upload?", a: "DELETE /api/uploads/:id with your API key. Only works for uploads made with the same key." },
-    { q: "Supported formats?", a: "PNG, JPG, WebP, GIF, SVG. AVIF supported on upload; served as-is. HEIC not accepted — convert client-side first via /heic-to-jpg." },
-    { q: "Does the API return responsive variants?", a: "Not in the free response. Pro plan includes optional ?w=300 query-string resizing via Cloudflare Images on the CDN URL." },
-    { q: "CORS?", a: "Access-Control-Allow-Origin: * for GET on upload URLs. POST to /api/upload requires Origin header; we allow all origins for the upload endpoint too." },
-    { q: "Webhooks on upload?", a: "Business plan supports webhooks — configure a URL in your dashboard and we POST the upload metadata on each successful upload." }
+    { q: "Do I need an API key?", a: "No public upload API key is available today. Signed-in website uploads use your normal session cookie." },
+    { q: "What's the max file size?", a: "10 MB per upload." },
+    { q: "Is there a rate limit?", a: "Guests get 5 uploads per rolling 24 hours. Signed-in users get 25 uploads per rolling 24 hours." },
+    { q: "How do I delete an upload?", a: "Signed-in users can delete their own uploads from the dashboard." },
+    { q: "Supported formats?", a: "PNG, JPG, WebP, GIF, SVG, and MP3. Use the browser conversion tools first for HEIC, PDF, or format changes." },
+    { q: "Does the endpoint return responsive variants?", a: "No. Use the image tools before upload or the /img route helpers used by the site." },
+    { q: "CORS?", a: "POST uploads are restricted to same-site browser requests from imagetourl.cloud." },
+    { q: "Webhooks on upload?", a: "No public webhook feature is live today." }
   ]}
   relatedSlugs={[
     { href: "/image-hosting-api-python/", title: "Python", body: "Python requests snippet." },
