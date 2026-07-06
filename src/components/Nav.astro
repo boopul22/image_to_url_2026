@@ -50,8 +50,9 @@ function localePath(path: string, loc: Locale = locale): string {
   return `/${loc}${path}`;
 }
 
+// Top-level links kept lean: the logo is the Home link, so Home is dropped here.
+// Features + Blog stay; the former SEO "Solutions" mega-menu lives in the footer.
 const navLinks = [
-  { name: t(locale, 'nav.home'), href: localePath('/'), id: "home", icon: "home" },
   { name: t(locale, 'nav.features'), href: localePath('/features'), id: "features", icon: "auto_awesome" },
   { name: t(locale, 'nav.blog'), href: localePath('/blog'), id: "blog", icon: "article" },
 ];
@@ -81,87 +82,6 @@ const toolsDropdown = getNavGroups(locale);
           {link.name}
         </a>
       ))}
-
-      <!-- Tools Dropdown -->
-      <div class="relative" id="tools-switcher-desktop">
-        <button
-          id="tools-btn-desktop"
-          class="flex items-center gap-1 text-[13px] font-headline font-medium uppercase tracking-wide transition-colors duration-200 text-neutral-500 hover:text-on-background"
-          aria-expanded="false"
-        >
-          {t(locale, 'nav.tools')}
-          <Icon name="expand_more" class="text-sm" />
-        </button>
-        <div id="tools-dropdown-desktop" class="hidden fixed top-16 right-[calc((100vw-min(100vw,72rem))/2+1.5rem)] rounded-xl bg-surface border border-outline-variant/40 hard-shadow overflow-hidden z-50 w-[780px] max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-y-auto">
-          <!-- Row 1: Utilities + Features + Use Cases -->
-          <div class="grid grid-cols-3 gap-0 divide-x divide-outline-variant/40 border-b border-outline-variant/40">
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Utilities</span>
-              {toolsDropdown.utilities.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mt-4 mb-3">{t(locale, 'nav.featuresLabel')}</span>
-              {toolsDropdown.features.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Use Cases</span>
-              {toolsDropdown.useCases.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Compare</span>
-              {toolsDropdown.compare.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-          <!-- Row 2: API + Answers + Guides -->
-          <div class="grid grid-cols-3 gap-0 divide-x divide-outline-variant/40">
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">API &amp; Integrations</span>
-              {toolsDropdown.api.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Answers</span>
-              {toolsDropdown.answers.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Guides</span>
-              {toolsDropdown.guides.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Tools Dropdown (our products) -->
       <div class="relative" id="our-tools-switcher-desktop">
@@ -193,22 +113,31 @@ const toolsDropdown = getNavGroups(locale);
                 </a>
               ))}
             </div>
-            {toolsDropdown.tools.length > 0 && (
-              <div class="p-4">
-                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Partner Tools</span>
-                {toolsDropdown.tools.map((item) => (
-                  <a
-                    href={item.href}
-                    {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
-                    class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
-                  >
-                    <Icon name={item.icon} class="text-primary text-base" />
-                    {item.name}
-                    {item.external && <Icon name="open_in_new" class="text-[10px] text-outline ml-auto" />}
-                  </a>
-                ))}
-              </div>
-            )}
+            <div class="p-4">
+              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Utilities</span>
+              {toolsDropdown.utilities.map((item) => (
+                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
+                  <Icon name={item.icon} class="text-primary text-base" />
+                  {item.name}
+                </a>
+              ))}
+              {toolsDropdown.tools.length > 0 && (
+                <Fragment>
+                  <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mt-4 mb-3">Partner Tools</span>
+                  {toolsDropdown.tools.map((item) => (
+                    <a
+                      href={item.href}
+                      {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                      class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
+                    >
+                      <Icon name={item.icon} class="text-primary text-base" />
+                      {item.name}
+                      {item.external && <Icon name="open_in_new" class="text-[10px] text-outline ml-auto" />}
+                    </a>
+                  ))}
+                </Fragment>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -357,45 +286,6 @@ const toolsDropdown = getNavGroups(locale);
 
       <div class="h-px bg-outline-variant my-2"></div>
 
-      <!-- Tools Dropdown (mobile) -->
-      <div class="relative" id="tools-switcher-mobile">
-        <button
-          id="tools-btn-mobile"
-          class="flex items-center gap-3 w-full py-3.5 px-4 hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors font-label uppercase tracking-wider text-xs font-bold text-outline"
-          aria-label="Tools"
-          aria-expanded="false"
-        >
-          <Icon name="build" class="text-base" />
-          {t(locale, 'nav.tools')}
-          <Icon name="expand_more" class="text-sm ml-auto" id="tools-chevron-mobile" />
-        </button>
-        <div id="tools-dropdown-mobile" class="hidden mx-4 mb-1 rounded-xl bg-surface-container border border-outline-variant/40 overflow-hidden max-h-[70vh] overflow-y-auto">
-          {([
-            ['Utilities', toolsDropdown.utilities],
-            ['nav.featuresLabel', toolsDropdown.features],
-            ['Use Cases', toolsDropdown.useCases],
-            ['Compare', toolsDropdown.compare],
-            ['API & Integrations', toolsDropdown.api],
-            ['Answers', toolsDropdown.answers],
-            ['Guides', toolsDropdown.guides],
-          ] as const).map(([label, items]) => (
-            <>
-              <div class="px-3 pt-3 pb-1">
-                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">
-                  {label.startsWith('nav.') ? t(locale, label) : label}
-                </span>
-              </div>
-              {items.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </>
-          ))}
-        </div>
-      </div>
-
       <!-- Tools Dropdown (mobile, real products) -->
       <div class="relative" id="our-tools-switcher-mobile">
         <button
@@ -412,6 +302,7 @@ const toolsDropdown = getNavGroups(locale);
           {([
             ['nav.convert', toolsDropdown.convert],
             ['Format Converters', toolsDropdown.formatConvert],
+            ['Utilities', toolsDropdown.utilities],
             ['Partner Tools', toolsDropdown.tools],
           ] as const).filter(([, items]) => items.length > 0).map(([label, items]) => (
             <>
@@ -561,27 +452,12 @@ const toolsDropdown = getNavGroups(locale);
     const isOpen = !langDropdownDesktop!.classList.contains('hidden');
     langDropdownDesktop!.classList.toggle('hidden');
     langBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
-    // Close tools dropdown when opening lang
-    toolsDropdownDesktop?.classList.add('hidden');
-    toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
-  });
-
-  // Desktop tools dropdown
-  const toolsBtnDesktop = document.getElementById('tools-btn-desktop');
-  const toolsDropdownDesktop = document.getElementById('tools-dropdown-desktop');
-
-  toolsBtnDesktop?.addEventListener('click', () => {
-    const isOpen = !toolsDropdownDesktop!.classList.contains('hidden');
-    toolsDropdownDesktop!.classList.toggle('hidden');
-    toolsBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
-    // Close other dropdowns when opening solutions
-    langDropdownDesktop?.classList.add('hidden');
-    langBtnDesktop?.setAttribute('aria-expanded', 'false');
+    // Close the tools dropdown when opening lang
     ourToolsDropdownDesktop?.classList.add('hidden');
     ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
 
-  // Desktop our-tools dropdown (real products)
+  // Desktop tools dropdown (real products)
   const ourToolsBtnDesktop = document.getElementById('our-tools-btn-desktop');
   const ourToolsDropdownDesktop = document.getElementById('our-tools-dropdown-desktop');
 
@@ -589,8 +465,6 @@ const toolsDropdown = getNavGroups(locale);
     const isOpen = !ourToolsDropdownDesktop!.classList.contains('hidden');
     ourToolsDropdownDesktop!.classList.toggle('hidden');
     ourToolsBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
-    toolsDropdownDesktop?.classList.add('hidden');
-    toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
     langDropdownDesktop?.classList.add('hidden');
     langBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
@@ -605,22 +479,17 @@ const toolsDropdown = getNavGroups(locale);
     profileBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
     langDropdownDesktop?.classList.add('hidden');
     langBtnDesktop?.setAttribute('aria-expanded', 'false');
-    toolsDropdownDesktop?.classList.add('hidden');
-    toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
+    ourToolsDropdownDesktop?.classList.add('hidden');
+    ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
 
   // Close all desktop dropdowns on outside click
   document.addEventListener('click', (e) => {
     const langSwitcher = document.getElementById('lang-switcher-desktop');
-    const toolsSwitcher = document.getElementById('tools-switcher-desktop');
     const profileSwitcher = document.getElementById('profile-switcher-desktop');
     if (langSwitcher && !langSwitcher.contains(e.target as Node)) {
       langDropdownDesktop?.classList.add('hidden');
       langBtnDesktop?.setAttribute('aria-expanded', 'false');
-    }
-    if (toolsSwitcher && !toolsSwitcher.contains(e.target as Node)) {
-      toolsDropdownDesktop?.classList.add('hidden');
-      toolsBtnDesktop?.setAttribute('aria-expanded', 'false');
     }
     const ourToolsSwitcher = document.getElementById('our-tools-switcher-desktop');
     if (ourToolsSwitcher && !ourToolsSwitcher.contains(e.target as Node)) {
@@ -644,20 +513,6 @@ const toolsDropdown = getNavGroups(locale);
   });
 
   // Mobile tools dropdown (inline expand)
-  const toolsBtnMobile = document.getElementById('tools-btn-mobile');
-  const toolsDropdownMobile = document.getElementById('tools-dropdown-mobile');
-  const toolsChevronMobile = document.getElementById('tools-chevron-mobile');
-
-  toolsBtnMobile?.addEventListener('click', () => {
-    const isOpen = !toolsDropdownMobile!.classList.contains('hidden');
-    toolsDropdownMobile!.classList.toggle('hidden');
-    toolsBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
-    if (toolsChevronMobile) {
-      toolsChevronMobile.style.transform = isOpen ? '' : 'rotate(180deg)';
-    }
-  });
-
-  // Mobile our-tools dropdown
   const ourToolsBtnMobile = document.getElementById('our-tools-btn-mobile');
   const ourToolsDropdownMobile = document.getElementById('our-tools-dropdown-mobile');
   const ourToolsChevronMobile = document.getElementById('our-tools-chevron-mobile');
