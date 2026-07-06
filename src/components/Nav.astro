@@ -144,21 +144,22 @@ const toolsDropdown = getNavGroups(locale);
     </div>
 
     <!-- Desktop Right Actions -->
-    <div class="hidden lg:flex items-center gap-4 lg:justify-self-end">
-      <!-- Language Switcher (desktop) — hidden on English-only pages -->
-      {isLocalizable && (
+    <div class="hidden lg:flex items-center gap-2.5 lg:justify-self-end">
+      <!-- Compact language switcher — a globe icon (signed-OUT only). Signed-in
+           users get the language grid inside the profile menu below, so this is
+           the anonymous visitor's switcher and keeps the top bar tidy. -->
+      {isLocalizable && !user && (
       <div class="relative" id="lang-switcher-desktop">
         <button
           id="lang-btn-desktop"
-          class="flex items-center gap-1 text-[13px] font-headline font-medium uppercase tracking-wide text-neutral-500 hover:text-on-background transition-colors"
+          class="flex items-center justify-center w-9 h-9 text-neutral-500 hover:text-on-background hover:bg-neutral-100 transition-colors"
           aria-label="Change language"
           aria-expanded="false"
+          title={localeLabels[locale]}
         >
-          <Icon name="translate" class="text-sm" />
-          {localeLabels[locale]}
-          <Icon name="expand_more" class="text-sm" />
+          <Icon name="translate" class="text-lg" />
         </button>
-        <div id="lang-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-surface border border-outline-variant/40 hard-shadow z-50 w-[360px] max-h-[min(70vh,480px)] overflow-y-auto grid grid-cols-2">
+        <div id="lang-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-surface border border-outline-variant/40 hard-shadow z-50 w-[360px] max-w-[calc(100vw-2rem)] max-h-[min(70vh,480px)] overflow-y-auto grid grid-cols-2">
           {locales.map((loc) => (
             <a
               href={langSwitchHref(loc)}
@@ -174,7 +175,7 @@ const toolsDropdown = getNavGroups(locale);
       </div>
       )}
 
-      <div id="auth-slot-desktop" data-signed-in={user ? 'true' : 'false'} class="flex items-center gap-3">
+      <div id="auth-slot-desktop" data-signed-in={user ? 'true' : 'false'} class="flex items-center gap-2.5">
       {user ? (
         <Fragment>
         <!-- Credits chip — filled by the deferred /api/me hydration (same fetch
@@ -192,22 +193,26 @@ const toolsDropdown = getNavGroups(locale);
         <div class="relative" id="profile-switcher-desktop">
           <button
             id="profile-btn-desktop"
-            class="flex items-center gap-2 text-[13px] font-headline font-medium uppercase tracking-wide text-on-background hover:text-rose-600 transition-colors"
+            class="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
             aria-label="Profile menu"
             aria-expanded="false"
           >
             <img
               src={user.avatarUrl}
               alt={user.name}
-              class="w-6 h-6 border border-neutral-300 object-cover"
-              width="24"
-              height="24"
+              class="w-7 h-7 rounded-full border border-neutral-300 object-cover"
+              width="28"
+              height="28"
               referrerpolicy="no-referrer"
             />
-            <span>{user.name}</span>
-            <Icon name="expand_more" class="text-sm" />
+            <Icon name="expand_more" class="text-sm text-neutral-500" />
           </button>
-          <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[220px]">
+          <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 w-[248px]">
+            <!-- Identity header — name moved off the top bar into here. -->
+            <div class="flex items-center gap-2.5 px-4 py-3 border-b border-neutral-200">
+              <img src={user.avatarUrl} alt={user.name} class="w-8 h-8 rounded-full border border-neutral-300 object-cover" width="32" height="32" referrerpolicy="no-referrer" />
+              <span class="text-[13px] font-semibold text-on-background truncate">{user.name}</span>
+            </div>
             <!-- Credits detail — number, progress bar, refill time. Filled with
                  the chip; stays hidden if the balance fetch fails. -->
             <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
@@ -224,8 +229,30 @@ const toolsDropdown = getNavGroups(locale);
               <Icon name="dashboard" class="text-base text-neutral-500" />
               Dashboard
             </a>
+            {isLocalizable && (
+              <div class="border-t border-neutral-200">
+                <button id="profile-lang-btn" class="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors" aria-expanded="false" aria-controls="profile-lang-grid">
+                  <Icon name="translate" class="text-base text-neutral-500" />
+                  Language
+                  <span class="ml-auto flex items-center gap-1 text-neutral-500 text-[12px]">{localeLabels[locale]}<Icon name="expand_more" class="text-sm transition-transform" id="profile-lang-chevron" /></span>
+                </button>
+                <div id="profile-lang-grid" class="hidden max-h-56 overflow-y-auto grid grid-cols-2 border-t border-neutral-100 bg-neutral-50/60">
+                  {locales.map((loc) => (
+                    <a
+                      href={langSwitchHref(loc)}
+                      class:list={[
+                        "block px-3 py-2 text-[13px] font-medium hover:bg-white transition-colors truncate",
+                        loc === locale ? "text-on-background font-bold bg-primary" : "text-on-surface",
+                      ]}
+                    >
+                      {localeLabels[loc]}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
             {user.role === 'admin' && (
-              <a href="/admin" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-rose-600 hover:bg-neutral-50 transition-colors">
+              <a href="/admin" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-rose-600 hover:bg-neutral-50 transition-colors border-t border-neutral-200">
                 <Icon name="admin_panel_settings" class="text-base" />
                 {t(locale, 'nav.admin')}
               </a>
@@ -415,8 +442,8 @@ const toolsDropdown = getNavGroups(locale);
 </nav>
 
 <script>
-  import { ic_menu, ic_close, ic_expand_more, ic_dashboard, ic_admin_panel_settings, ic_logout, ic_toll } from '../data/icon-svgs';
-  const icon = (inner: string, cls = '') => `<svg class="ms-icon ${cls}" viewBox="0 -960 960 960">${inner}</svg>`;
+  import { ic_menu, ic_close, ic_expand_more, ic_dashboard, ic_admin_panel_settings, ic_logout, ic_toll, ic_translate } from '../data/icon-svgs';
+  const icon = (inner: string, cls = '', id = '') => `<svg class="ms-icon ${cls}"${id ? ` id="${id}"` : ''} viewBox="0 -960 960 960">${inner}</svg>`;
   // Mobile menu toggle
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -482,6 +509,24 @@ const toolsDropdown = getNavGroups(locale);
     ourToolsDropdownDesktop?.classList.add('hidden');
     ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
+
+  // The "Language" row inside the profile menu expands an inline locale grid.
+  // Idempotent + re-callable so it works for both the SSR-signed-in DOM and the
+  // JS-hydrated profile menu (data-wired guards against double-binding).
+  function wireProfileLang() {
+    const btn = document.getElementById('profile-lang-btn');
+    const grid = document.getElementById('profile-lang-grid');
+    const chev = document.getElementById('profile-lang-chevron');
+    if (!btn || !grid || (btn as HTMLElement).dataset.wired) return;
+    (btn as HTMLElement).dataset.wired = '1';
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // don't let the outside-click handler close the menu
+      const nowHidden = grid.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!nowHidden));
+      if (chev) chev.style.transform = nowHidden ? '' : 'rotate(180deg)';
+    });
+  }
+  wireProfileLang();
 
   // Close all desktop dropdowns on outside click
   document.addEventListener('click', (e) => {
@@ -613,18 +658,37 @@ const toolsDropdown = getNavGroups(locale);
     const avatar = escapeHtml(user.avatarUrl);
     const isAdmin = user.role === 'admin';
 
+    // Language grid for the profile menu: clone the anon locale panel that the
+    // signed-out SSR already rendered (correct per-locale hrefs, current locale
+    // flagged). currentLangLabel is read off the flagged option.
+    const anonLangGrid = document.getElementById('lang-dropdown-desktop');
+    const langGridHtml = anonLangGrid ? anonLangGrid.innerHTML : '';
+    const currentLangLabel = anonLangGrid?.querySelector('a.font-bold')?.textContent?.trim() || '';
+    const langSection = langGridHtml
+      ? `<div class="border-t border-neutral-200">
+          <button id="profile-lang-btn" class="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors" aria-expanded="false" aria-controls="profile-lang-grid">
+            ${icon(ic_translate, 'text-base text-neutral-500')}Language
+            <span class="ml-auto flex items-center gap-1 text-neutral-500 text-[12px]">${escapeHtml(currentLangLabel)}${icon(ic_expand_more, 'text-sm transition-transform', 'profile-lang-chevron')}</span>
+          </button>
+          <div id="profile-lang-grid" class="hidden max-h-56 overflow-y-auto grid grid-cols-2 border-t border-neutral-100 bg-neutral-50/60">${langGridHtml}</div>
+        </div>`
+      : '';
+
     desktop.innerHTML = `
       <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Daily upload credits — refills every 24h">
         ${icon(ic_toll, 'text-sm text-primary')}
         <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
       </a>
       <div class="relative" id="profile-switcher-desktop">
-        <button id="profile-btn-desktop" class="flex items-center gap-2 text-[13px] font-headline font-medium uppercase tracking-wide text-on-background hover:text-rose-600 transition-colors" aria-label="Profile menu" aria-expanded="false">
-          <img src="${avatar}" alt="${name}" class="w-6 h-6 border border-neutral-300 object-cover" width="24" height="24" referrerpolicy="no-referrer" />
-          <span>${name}</span>
-          ${icon(ic_expand_more, 'text-sm')}
+        <button id="profile-btn-desktop" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity" aria-label="Profile menu" aria-expanded="false">
+          <img src="${avatar}" alt="${name}" class="w-7 h-7 rounded-full border border-neutral-300 object-cover" width="28" height="28" referrerpolicy="no-referrer" />
+          ${icon(ic_expand_more, 'text-sm text-neutral-500')}
         </button>
-        <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[220px]">
+        <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 w-[248px]">
+          <div class="flex items-center gap-2.5 px-4 py-3 border-b border-neutral-200">
+            <img src="${avatar}" alt="${name}" class="w-8 h-8 rounded-full border border-neutral-300 object-cover" width="32" height="32" referrerpolicy="no-referrer" />
+            <span class="text-[13px] font-semibold text-on-background truncate">${name}</span>
+          </div>
           <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
             <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
               <span class="text-neutral-500">Upload credits</span>
@@ -638,7 +702,8 @@ const toolsDropdown = getNavGroups(locale);
           <a href="/dashboard" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors">
             ${icon(ic_dashboard, 'text-base text-neutral-500')}Dashboard
           </a>
-          ${isAdmin ? `<a href="/admin" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-rose-600 hover:bg-neutral-50 transition-colors">${icon(ic_admin_panel_settings, 'text-base')}Admin</a>` : ''}
+          ${langSection}
+          ${isAdmin ? `<a href="/admin" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-rose-600 hover:bg-neutral-50 transition-colors border-t border-neutral-200">${icon(ic_admin_panel_settings, 'text-base')}Admin</a>` : ''}
           <div class="border-t border-neutral-200"></div>
           <a href="/api/auth/logout" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-neutral-500 hover:text-on-background hover:bg-neutral-50 transition-colors">
             ${icon(ic_logout, 'text-base')}Sign out
@@ -646,6 +711,9 @@ const toolsDropdown = getNavGroups(locale);
         </div>
       </div>
     `;
+
+    // Language now lives in the profile menu — retire the standalone globe.
+    document.getElementById('lang-switcher-desktop')?.remove();
 
     if (mobile) {
       mobile.innerHTML = `
@@ -673,6 +741,8 @@ const toolsDropdown = getNavGroups(locale);
 
     // Fill the freshly injected credits elements from the same /api/me payload.
     fillCredits(upload);
+    // Wire the profile menu's inline Language expander (freshly injected DOM).
+    wireProfileLang();
 
     // Re-wire the desktop profile dropdown toggle for the freshly injected DOM
     const newProfileBtn = document.getElementById('profile-btn-desktop');
