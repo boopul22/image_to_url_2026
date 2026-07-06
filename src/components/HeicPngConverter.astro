@@ -144,8 +144,21 @@ import Icon from './Icon.astro';
         row.appendChild(inp); row.appendChild(copy);
       } catch (err: any) {
         host.disabled = false; host.textContent = 'Retry';
-        const note = document.createElement('span'); note.className = 'text-[11px] text-error'; note.textContent = err.message || 'Failed';
+        // Quota 429s: compress the long message + surface the sign-in recovery.
+        const msg = String(err.message || 'Failed');
+        const isLimit = /limit|credit/i.test(msg);
+        const note = document.createElement('span');
+        note.className = 'flex-1 min-w-0 truncate text-[11px] text-error';
+        note.title = msg;
+        note.textContent = isLimit ? 'Daily upload limit reached.' : msg;
         row.appendChild(note);
+        if (isLimit) {
+          const signin = document.createElement('a');
+          signin.href = '/api/auth/login';
+          signin.className = 'text-[11px] font-semibold text-primary hover:underline underline-offset-2 flex-shrink-0';
+          signin.textContent = 'Sign in for more';
+          row.appendChild(signin);
+        }
       }
     });
     row.appendChild(thumb); row.appendChild(meta); row.appendChild(dl); row.appendChild(host);

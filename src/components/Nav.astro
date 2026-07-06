@@ -245,8 +245,21 @@ const toolsDropdown = getNavGroups(locale);
       </div>
       )}
 
-      <div id="auth-slot-desktop" data-signed-in={user ? 'true' : 'false'}>
+      <div id="auth-slot-desktop" data-signed-in={user ? 'true' : 'false'} class="flex items-center gap-3">
       {user ? (
+        <Fragment>
+        <!-- Credits chip — filled by the deferred /api/me hydration (same fetch
+             that already runs for auth state), so the server render costs no
+             extra D1 query. Hidden until the balance is known. -->
+        <a
+          href="/dashboard"
+          id="nav-credits-chip"
+          class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors"
+          title="Daily upload credits — refills every 24h"
+        >
+          <Icon name="toll" class="text-sm text-primary" fill />
+          <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
+        </a>
         <div class="relative" id="profile-switcher-desktop">
           <button
             id="profile-btn-desktop"
@@ -265,7 +278,19 @@ const toolsDropdown = getNavGroups(locale);
             <span>{user.name}</span>
             <Icon name="expand_more" class="text-sm" />
           </button>
-          <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[180px]">
+          <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[220px]">
+            <!-- Credits detail — number, progress bar, refill time. Filled with
+                 the chip; stays hidden if the balance fetch fails. -->
+            <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
+              <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
+                <span class="text-neutral-500">Upload credits</span>
+                <span><span id="nav-credits-panel-num" class="font-bold">—</span><span class="text-neutral-500" id="nav-credits-panel-cap"></span></span>
+              </div>
+              <div class="mt-2 h-1 bg-neutral-100 overflow-hidden">
+                <div id="nav-credits-panel-bar" class="h-full bg-rose-600 transition-[width] duration-300" style="width:0%"></div>
+              </div>
+              <p id="nav-credits-panel-refill" class="text-[11px] text-neutral-500 mt-1.5"></p>
+            </div>
             <a href="/dashboard" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors">
               <Icon name="dashboard" class="text-base text-neutral-500" />
               Dashboard
@@ -283,6 +308,7 @@ const toolsDropdown = getNavGroups(locale);
             </a>
           </div>
         </div>
+        </Fragment>
       ) : (
         <a
           href="/api/auth/login"
@@ -456,6 +482,17 @@ const toolsDropdown = getNavGroups(locale);
             />
             <span class="font-label text-xs font-bold text-on-background">{user.name}</span>
           </a>
+          <!-- Credits row — filled by the deferred /api/me hydration; hidden until known. -->
+          <a href="/dashboard" id="nav-credits-mobile" class="hidden mx-4 mb-2 px-3 py-2.5 border border-outline-variant/40 bg-surface-container-low hover:bg-surface-container transition-colors">
+            <span class="flex items-center justify-between text-xs font-medium text-on-surface">
+              <span class="flex items-center gap-1.5 text-on-surface-variant"><Icon name="toll" class="text-sm text-primary" fill /> Upload credits</span>
+              <span><span id="nav-credits-mobile-num" class="font-bold">—</span><span class="text-on-surface-variant" id="nav-credits-mobile-cap"></span></span>
+            </span>
+            <span class="block mt-2 h-1 bg-surface-container-highest overflow-hidden">
+              <span id="nav-credits-mobile-bar" class="block h-full bg-rose-600 transition-[width] duration-300" style="width:0%"></span>
+            </span>
+            <span id="nav-credits-mobile-refill" class="block text-[11px] text-on-surface-variant mt-1.5"></span>
+          </a>
           {user.role === 'admin' && (
             <a href="/admin" class="font-label uppercase tracking-wider text-xs font-bold py-3.5 px-4 text-error hover:bg-error-container active:bg-error-container transition-colors flex items-center gap-3">
               <Icon name="admin_panel_settings" class="text-base" />
@@ -487,7 +524,7 @@ const toolsDropdown = getNavGroups(locale);
 </nav>
 
 <script>
-  import { ic_menu, ic_close, ic_expand_more, ic_dashboard, ic_admin_panel_settings, ic_logout } from '../data/icon-svgs';
+  import { ic_menu, ic_close, ic_expand_more, ic_dashboard, ic_admin_panel_settings, ic_logout, ic_toll } from '../data/icon-svgs';
   const icon = (inner: string, cls = '') => `<svg class="ms-icon ${cls}" viewBox="0 -960 960 960">${inner}</svg>`;
   // Mobile menu toggle
   const menuBtn = document.getElementById('mobile-menu-btn');
@@ -640,10 +677,51 @@ const toolsDropdown = getNavGroups(locale);
   //
   // Deferred off the critical path: the /api/me fetch is not render-blocking, so
   // we wait for idle to avoid competing with LCP resources.
+  // Fill the nav credits chip + dropdown panel + mobile row from the /api/me
+  // `upload` payload. Signed-in users spend size-priced credits; everything
+  // stays hidden when the balance is unknown (fetch failed / guest scope).
+  const fillCredits = (upload: any) => {
+    if (!upload || upload.unit !== 'credits' || typeof upload.remaining !== 'number' || typeof upload.limit !== 'number') return;
+    const low = upload.remaining <= upload.limit * 0.2;
+    const pct = Math.max(0, Math.min(100, (upload.remaining / upload.limit) * 100));
+    const refill = upload.resetIn ? `Refills in ~${upload.resetIn}` : '≈1 credit per MB';
+
+    const chip = document.getElementById('nav-credits-chip');
+    const num = document.getElementById('nav-credits-num');
+    const cap = document.getElementById('nav-credits-cap');
+    if (chip && num && cap) {
+      num.textContent = String(upload.remaining);
+      cap.textContent = `/${upload.limit}`;
+      num.classList.toggle('text-warning', low);
+      chip.classList.remove('hidden');
+      chip.classList.add('flex');
+    }
+
+    const setPanel = (prefix: string) => {
+      const panel = document.getElementById(prefix);
+      const pnum = document.getElementById(`${prefix}-num`);
+      const pcap = document.getElementById(`${prefix}-cap`);
+      const bar = document.getElementById(`${prefix}-bar`);
+      const prefill = document.getElementById(`${prefix}-refill`);
+      if (!panel || !pnum || !pcap || !bar || !prefill) return;
+      pnum.textContent = String(upload.remaining);
+      pcap.textContent = `/${upload.limit}`;
+      pnum.classList.toggle('text-warning', low);
+      bar.style.width = `${pct}%`;
+      bar.classList.toggle('bg-warning', low);
+      bar.classList.toggle('bg-rose-600', !low);
+      prefill.textContent = refill;
+      panel.classList.remove('hidden');
+      panel.classList.add('block');
+    };
+    setPanel('nav-credits-panel');
+    setPanel('nav-credits-mobile');
+  };
+
   const hydrateAuth = async () => {
     const desktop = document.getElementById('auth-slot-desktop');
     const mobile = document.getElementById('auth-slot-mobile');
-    if (!desktop || desktop.dataset.signedIn === 'true') return;
+    if (!desktop) return;
 
     // Skip /api/me entirely when the has_session hint cookie is missing.
     // The real session cookie is HttpOnly; this non-sensitive hint lets us
@@ -654,30 +732,54 @@ const toolsDropdown = getNavGroups(locale);
       s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 
     let user: { name: string; avatarUrl: string; role: 'user' | 'admin' } | null = null;
+    let upload: any = null;
     try {
       const res = await fetch('/api/me', {
         credentials: 'same-origin',
         priority: 'low',
       } as RequestInit);
       if (!res.ok) return;
-      user = (await res.json()).user;
+      const me = await res.json();
+      user = me.user;
+      upload = me.upload;
     } catch {
       return;
     }
     if (!user) return;
+
+    // Server already rendered the signed-in UI (SSR page) — the hidden credits
+    // elements are in the DOM; just fill them and stop.
+    if (desktop.dataset.signedIn === 'true') {
+      fillCredits(upload);
+      return;
+    }
 
     const name = escapeHtml(user.name);
     const avatar = escapeHtml(user.avatarUrl);
     const isAdmin = user.role === 'admin';
 
     desktop.innerHTML = `
+      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Daily upload credits — refills every 24h">
+        ${icon(ic_toll, 'text-sm text-primary')}
+        <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
+      </a>
       <div class="relative" id="profile-switcher-desktop">
         <button id="profile-btn-desktop" class="flex items-center gap-2 text-[13px] font-headline font-medium uppercase tracking-wide text-on-background hover:text-rose-600 transition-colors" aria-label="Profile menu" aria-expanded="false">
           <img src="${avatar}" alt="${name}" class="w-6 h-6 border border-neutral-300 object-cover" width="24" height="24" referrerpolicy="no-referrer" />
           <span>${name}</span>
           ${icon(ic_expand_more, 'text-sm')}
         </button>
-        <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[180px]">
+        <div id="profile-dropdown-desktop" class="hidden absolute right-0 top-full mt-2 rounded-xl bg-white border border-neutral-200 shadow-lg overflow-hidden z-50 min-w-[220px]">
+          <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
+            <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
+              <span class="text-neutral-500">Upload credits</span>
+              <span><span id="nav-credits-panel-num" class="font-bold">—</span><span class="text-neutral-500" id="nav-credits-panel-cap"></span></span>
+            </div>
+            <div class="mt-2 h-1 bg-neutral-100 overflow-hidden">
+              <div id="nav-credits-panel-bar" class="h-full bg-rose-600 transition-[width] duration-300" style="width:0%"></div>
+            </div>
+            <p id="nav-credits-panel-refill" class="text-[11px] text-neutral-500 mt-1.5"></p>
+          </div>
           <a href="/dashboard" class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-on-background hover:bg-neutral-50 transition-colors">
             ${icon(ic_dashboard, 'text-base text-neutral-500')}Dashboard
           </a>
@@ -697,12 +799,25 @@ const toolsDropdown = getNavGroups(locale);
           <img src="${avatar}" alt="${name}" class="w-7 h-7 rounded-full border border-outline-variant/40 object-cover" width="28" height="28" referrerpolicy="no-referrer" />
           <span class="font-label text-xs font-bold text-on-background">${name}</span>
         </a>
+        <a href="/dashboard" id="nav-credits-mobile" class="hidden mx-4 mb-2 px-3 py-2.5 border border-outline-variant/40 bg-surface-container-low hover:bg-surface-container transition-colors">
+          <span class="flex items-center justify-between text-xs font-medium text-on-surface">
+            <span class="flex items-center gap-1.5 text-on-surface-variant">${icon(ic_toll, 'text-sm text-primary')} Upload credits</span>
+            <span><span id="nav-credits-mobile-num" class="font-bold">—</span><span class="text-on-surface-variant" id="nav-credits-mobile-cap"></span></span>
+          </span>
+          <span class="block mt-2 h-1 bg-surface-container-highest overflow-hidden">
+            <span id="nav-credits-mobile-bar" class="block h-full bg-rose-600 transition-[width] duration-300" style="width:0%"></span>
+          </span>
+          <span id="nav-credits-mobile-refill" class="block text-[11px] text-on-surface-variant mt-1.5"></span>
+        </a>
         ${isAdmin ? `<a href="/admin" class="font-label uppercase tracking-wider text-xs font-bold py-3.5 px-4 text-error hover:bg-error-container active:bg-error-container transition-colors flex items-center gap-3">${icon(ic_admin_panel_settings, 'text-base')}Admin</a>` : ''}
         <a href="/api/auth/logout" class="font-label uppercase tracking-wider text-xs font-bold py-3.5 px-4 text-outline hover:text-on-background hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors flex items-center gap-3">
           ${icon(ic_logout, 'text-base')}Sign out
         </a>
       `;
     }
+
+    // Fill the freshly injected credits elements from the same /api/me payload.
+    fillCredits(upload);
 
     // Re-wire the desktop profile dropdown toggle for the freshly injected DOM
     const newProfileBtn = document.getElementById('profile-btn-desktop');

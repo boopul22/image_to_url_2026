@@ -39,7 +39,10 @@ const user = Astro.locals.user!;
       </div>
     </section>
 
-    <!-- Overview Stats -->
+    <!-- Overview Stats. Icon color semantics: near-black (secondary) for neutral
+         counts, amber (warning) for urgency, rose (primary) reserved for the
+         actionable spend metric (Credits). Every tile reserves the subtitle line
+         so the big numbers baseline-align across the row. -->
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
@@ -47,27 +50,34 @@ const user = Astro.locals.user!;
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Images</span>
         </div>
         <p id="stat-total" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+        <p class="text-[11px] text-on-surface-variant mt-0.5 min-h-4">&nbsp;</p>
       </div>
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <Icon name="database" class="text-primary text-lg" />
+          <Icon name="database" class="text-secondary text-lg" />
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Storage</span>
         </div>
         <p id="stat-storage" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+        <p class="text-[11px] text-on-surface-variant mt-0.5 min-h-4">&nbsp;</p>
       </div>
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <Icon name="schedule" class="text-tertiary text-lg" />
+          <Icon name="schedule" class="text-warning text-lg" />
           <span class="font-label text-[10px] font-bold uppercase tracking-wider">Expiring Soon</span>
         </div>
         <p id="stat-expiring" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+        <p id="stat-expiring-sub" class="text-[11px] text-on-surface-variant mt-0.5 min-h-4">&nbsp;</p>
       </div>
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
-          <Icon name="badge" class="text-secondary text-lg" />
-          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Account</span>
+          <Icon name="toll" class="text-primary text-lg" />
+          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Credits</span>
         </div>
-        <p class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface capitalize">{user.role}</p>
+        <p id="stat-credits" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
+        <div class="mt-2 h-1 bg-surface-container-highest overflow-hidden">
+          <div id="stat-credits-bar" class="h-full bg-rose-600 transition-[width] duration-300" style="width:0%"></div>
+        </div>
+        <p id="stat-credits-sub" class="text-[11px] text-on-surface-variant mt-1 min-h-4"></p>
       </div>
     </section>
 
@@ -170,16 +180,49 @@ const user = Astro.locals.user!;
     return `in ${Math.round(h / 24)}d`;
   }
 
+  // Expiry line on a card: within 7 days it becomes an amber badge (urgency —
+  // the --color-warning token); further out it stays a quiet gray line. Rose is
+  // reserved for brand/actions, so it no longer paints every expiry as alarming.
+  function renderExpiryChip(iso: string): string {
+    const ms = new Date(iso.replace(' ', 'T') + 'Z').getTime() - Date.now();
+    const label = `Expires ${formatExpiry(iso)}`;
+    return ms <= 7 * 86400000
+      ? `<p class="inline-flex w-fit items-center bg-warning-container text-warning text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5">${label}</p>`
+      : `<p class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">${label}</p>`;
+  }
+
   // ---- Stats ----
   const statTotal = document.getElementById('stat-total')!;
   const statStorage = document.getElementById('stat-storage')!;
   const statExpiring = document.getElementById('stat-expiring')!;
+  const statCredits = document.getElementById('stat-credits')!;
+  const statCreditsSub = document.getElementById('stat-credits-sub')!;
 
-  function renderStats(stats: { totalImages: number; totalBytes: number; expiringSoon: number } | undefined) {
+  function renderStats(stats: { totalImages: number; totalBytes: number; expiringSoon: number; credits?: number; creditsCap?: number; refreshIn?: string } | undefined) {
     if (!stats) return;
     statTotal.textContent = String(stats.totalImages);
     statStorage.textContent = formatBytes(stats.totalBytes);
     statExpiring.textContent = String(stats.expiringSoon);
+    // Urgency states use the amber --color-warning token: expiring count > 0,
+    // and a credit balance at ≤20% of the daily cap. Swap (not stack) the color
+    // utilities so two color classes never fight over the same element.
+    const expiringUrgent = stats.expiringSoon > 0;
+    statExpiring.classList.toggle('text-warning', expiringUrgent);
+    statExpiring.classList.toggle('text-on-surface', !expiringUrgent);
+    if (typeof stats.credits === 'number') {
+      const cap = stats.creditsCap ?? 150;
+      statCredits.textContent = `${stats.credits} / ${cap}`;
+      statCreditsSub.textContent = stats.refreshIn ? `Refills in ~${stats.refreshIn}` : '~1 credit per MB';
+      const low = stats.credits <= cap * 0.2;
+      statCredits.classList.toggle('text-warning', low);
+      statCredits.classList.toggle('text-on-surface', !low);
+      const bar = document.getElementById('stat-credits-bar');
+      if (bar) {
+        bar.style.width = `${Math.max(0, Math.min(100, (stats.credits / cap) * 100))}%`;
+        bar.classList.toggle('bg-warning', low);
+        bar.classList.toggle('bg-rose-600', !low);
+      }
+    }
   }
 
   // ---- Images state ----
@@ -234,7 +277,7 @@ const user = Astro.locals.user!;
         <div class="p-3 space-y-2">
           <p class="text-xs font-bold truncate" title="${esc(img.filename)}">${esc(img.filename)}</p>
           <p class="text-xs text-outline">${(img.size_bytes / 1024).toFixed(1)} KB · ${new Date(img.created_at).toLocaleDateString()}</p>
-          ${img.expires_at ? `<p class="text-[10px] font-bold uppercase tracking-wider text-rose-600">Expires ${formatExpiry(img.expires_at)}</p>` : ''}
+          ${img.expires_at ? renderExpiryChip(img.expires_at) : ''}
           <div class="flex gap-2">
             <button onclick="copyUrl('${esc(img.url)}')" class="flex-1 text-center py-2.5 border border-outline-variant/40 text-xs font-bold uppercase hover:bg-primary hover:text-on-primary active:bg-primary active:text-on-primary transition-colors">Copy URL</button>
             <button onclick="deleteImage('${esc(img.id)}')" class="py-2.5 px-3 border border-error text-error text-xs font-bold uppercase hover:bg-error hover:text-on-error active:bg-error active:text-on-error transition-colors">

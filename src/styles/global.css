@@ -115,6 +115,11 @@
   --color-on-error: #ffffff;
   --color-on-error-container: #9f1239;
 
+  /* amber-700 — urgency/attention (low credits, images expiring soon). Distinct
+     from the rose accent/error family; passes 4.5:1 on the light surfaces. */
+  --color-warning: #b45309;
+  --color-warning-container: #fef3c7;
+
   --color-on-background: #171717;
   --color-on-surface: #171717;
   --color-on-surface-variant: #404040;
@@ -692,6 +697,21 @@ h1, h2, h3, h4, h5, h6 {
 :focus-visible {
   outline: 2px solid #171717;
   outline-offset: 2px;
+}
+
+/* Tiny visual controls (like the 16px "?" help toggle) keep a ≥44px touch
+   target via an invisible centered overlay — visual size stays unchanged. */
+.tap-target {
+  position: relative;
+}
+.tap-target::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 
 /* Soft default radius for bare form controls (those without a rounded-* class).

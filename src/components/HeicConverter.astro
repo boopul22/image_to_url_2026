@@ -247,10 +247,22 @@ import Icon from './Icon.astro';
       } catch (err: any) {
         host.disabled = false;
         host.textContent = 'Retry';
+        // Quota 429s carry a long friendly message — compress it to one line
+        // and surface the actual recovery action (sign in) instead.
+        const msg = String(err.message || 'Failed');
+        const isLimit = /limit|credit/i.test(msg);
         const note = document.createElement('span');
-        note.className = 'text-[11px] text-error';
-        note.textContent = err.message || 'Failed';
+        note.className = 'flex-1 min-w-0 truncate text-[11px] text-error';
+        note.title = msg;
+        note.textContent = isLimit ? 'Daily upload limit reached.' : msg;
         row.appendChild(note);
+        if (isLimit) {
+          const signin = document.createElement('a');
+          signin.href = '/api/auth/login';
+          signin.className = 'text-[11px] font-semibold text-primary hover:underline underline-offset-2 flex-shrink-0';
+          signin.textContent = 'Sign in for more';
+          row.appendChild(signin);
+        }
       }
     });
 

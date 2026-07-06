@@ -260,6 +260,20 @@ const pageSchema = [
                 {t(locale, 'home.upload.getLink')}
               </button>
             </div>
+            <!-- Guest-only heads-up: anonymous uploads auto-expire. Revealed by JS
+                 only when /api/me reports no signed-in user. The sign-in action is
+                 a bordered pill (not an inline link) so the recovery path reads as
+                 actionable without shouting. -->
+            <div id="guest-expiry-note" class="hidden mt-4 pt-3 border-t border-outline-variant/40 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs text-on-surface-variant">
+              <Icon name="schedule" class="text-rose-500 text-base flex-shrink-0" fill />
+              <span class="flex-1 min-w-[12rem]">
+                <span class="font-semibold text-on-surface">{t(locale, 'home.upload.guestExpiryLead')}</span> {t(locale, 'home.upload.guestExpiryBody')}
+              </span>
+              <a href="/api/auth/login" class="su-control inline-flex items-center gap-1.5 border border-outline-variant bg-surface-container-low text-primary font-semibold px-3 py-1.5 hover:bg-rose-50 hover:border-rose-300 transition-colors flex-shrink-0 group">
+                {t(locale, 'home.upload.guestExpiryLink')}
+                <Icon name="arrow_forward" class="text-sm group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </div>
 
           </div>
 
@@ -275,11 +289,12 @@ const pageSchema = [
                 LOGIN
               </a>
             </div>
-            <!-- Sign in CTA for limit errors -->
-            <a href="/api/auth/login" id="error-signin" class="hidden items-center gap-2 mt-3 pt-3 border-t border-outline-variant/40 text-on-background hover:opacity-80 transition-opacity group">
-              <Icon name="login" class="text-base text-primary" />
-              <span class="text-xs sm:text-sm font-bold">Sign in to get more uploads</span>
-              <Icon name="arrow_forward" class="text-sm text-primary group-hover:translate-x-0.5 transition-transform" />
+            <!-- Sign in CTA for limit errors — solid button (same vocabulary as
+                 Browse/Get Link) since it's the primary recovery action. -->
+            <a href="/api/auth/login" id="error-signin" class="hidden w-fit items-center gap-2 mt-4 su-btn bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 transition-colors active:scale-95 group" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">
+              <Icon name="login" class="text-base" />
+              <span>Sign in to get more uploads</span>
+              <Icon name="arrow_forward" class="text-sm group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
         </div>
@@ -294,13 +309,19 @@ const pageSchema = [
           <span class="text-on-surface-variant/40">·</span>
           <a href="/api/auth/login" class="font-semibold text-primary hover:underline underline-offset-2">Sign in</a>
           <span>for permanent links</span>
+          <!-- Quota chip: hidden until the visitor shows intent (hover/focus/touch
+               on the drop panel) so cold pageviews never pay the /api/me query. -->
+          <span id="quota-chip" class="hidden items-center gap-x-1.5">
+            <span class="text-on-surface-variant/40">·</span>
+            <span id="quota-chip-text" class="font-medium"></span>
+          </span>
           <button
             type="button"
             id="expires-in-help"
             aria-label="What does auto-delete do?"
             aria-expanded="false"
             aria-controls="expires-in-help-panel"
-            class="su-control inline-flex items-center justify-center w-[16px] h-[16px] rounded-full border border-outline-variant text-[10px] font-bold text-on-surface-variant hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors flex-shrink-0"
+            class="su-control tap-target inline-flex items-center justify-center w-[16px] h-[16px] rounded-full border border-outline-variant text-[10px] font-bold text-on-surface-variant hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors flex-shrink-0"
           >?</button>
         </p>
 
@@ -841,11 +862,70 @@ const pageSchema = [
     uploadingFile: panel.dataset.uploadingFile || 'Uploading {name}',
   };
 
+  const guestExpiryNote = document.getElementById('guest-expiry-note');
+
   function showState(state: 'idle' | 'success' | 'error') {
     stateIdle.classList.toggle('hidden', state !== 'idle');
     stateSuccess.classList.toggle('hidden', state !== 'success');
     stateError.classList.toggle('hidden', state !== 'error');
+    if (state === 'success') {
+      refreshQuotaChip(); // server just deducted — refetch, then reveal
+      revealGuestExpiryNote();
+    } else {
+      guestExpiryNote?.classList.add('hidden');
+    }
   }
+
+  // Show the "your image auto-deletes" heads-up only to guests. Uses the cached
+  // /api/me payload, so it costs no extra request; a null user means anonymous.
+  async function revealGuestExpiryNote() {
+    if (!guestExpiryNote) return;
+    const isGuest = !(await fetchMe()).user;
+    guestExpiryNote.classList.toggle('hidden', !isGuest);
+  }
+
+  // ---- Proactive quota chip (footnote line) ----
+  // State honesty without taxing cold pageviews: the /api/me fetch fires on the
+  // visitor's first intent signal (hover/focus/touch on the drop panel), not on
+  // load. Guests see "N of 100 uploads left today", users "N of 150 credits
+  // left"; ≤20% remaining turns amber via the --color-warning token. English on
+  // purpose — the whole footnote line it sits in is English across locales.
+  const quotaChip = document.getElementById('quota-chip');
+  const quotaChipText = document.getElementById('quota-chip-text');
+
+  function renderQuotaChip(me: any) {
+    if (!quotaChip || !quotaChipText) return;
+    const u = me?.upload;
+    if (!u || typeof u.remaining !== 'number' || typeof u.limit !== 'number') return;
+    if (u.unit === 'credits') {
+      quotaChipText.textContent = `${u.remaining} of ${u.limit} credits left`;
+      quotaChipText.title = '≈1 credit per MB';
+    } else {
+      quotaChipText.textContent = `${u.remaining} of ${u.limit} uploads left today`;
+    }
+    const low = u.remaining <= u.limit * 0.2;
+    quotaChipText.classList.toggle('text-warning', low);
+    quotaChipText.classList.toggle('text-on-surface', !low);
+    quotaChip.classList.remove('hidden');
+    quotaChip.classList.add('inline-flex');
+  }
+
+  let quotaLoaded = false;
+  async function loadQuotaChip() {
+    if (quotaLoaded) return;
+    quotaLoaded = true;
+    renderQuotaChip(await fetchMe());
+  }
+
+  async function refreshQuotaChip() {
+    quotaLoaded = true;
+    mePromise = null; // balance changed server-side — bust the cache
+    renderQuotaChip(await fetchMe());
+  }
+
+  (['pointerenter', 'focusin', 'touchstart'] as const).forEach((ev) =>
+    panel.addEventListener(ev, loadQuotaChip, { once: true, passive: true }),
+  );
 
   // Destination the Get Link button navigates to; set by both the single and
   // bulk upload paths (bulk carries multiple u= params + skipped count).
@@ -912,26 +992,30 @@ const pageSchema = [
       return;
     }
     if (files.length === 1) { uploadFile(files[0]); return; }
-    // Bulk path — open to everyone. Each file counts against the caller's daily
-    // quota (guest 5 / signed-in 25); uploadBatch pre-slices to what remains.
+    // Bulk path — open to everyone. Guests spend a daily upload count (5), users
+    // spend size-priced credits; uploadBatch pre-slices to what the allowance covers.
     uploadBatch(Array.from(files));
   }
 
-  const MAX_BATCH = 25; // never exceeds the highest daily quota (signed-in)
+  const MAX_BATCH = 25; // hard cap on files per batch, whatever the allowance
+  // Credits an upload costs — must match creditCost() in src/lib/upload-limits.ts.
+  const creditCost = (bytes: number) => Math.max(1, Math.round(bytes / (1024 * 1024)));
 
   async function uploadBatch(files: File[]) {
-    // Pre-slice to what the caller's daily quota allows so we don't fire doomed
+    // Pre-slice to what the caller's allowance covers so we don't fire doomed
     // requests. The server still enforces per file (429), so a stale/unknown
     // remaining just means a few extra fast rejections handled below.
-    const me = await fetchMe();
-    const remaining = typeof me?.upload?.remaining === 'number' ? me.upload.remaining : Infinity;
+    const usage = (await fetchMe())?.upload;
+    const unit = usage?.unit;
+    const remaining = typeof usage?.remaining === 'number' ? usage.remaining : Infinity;
 
     if (remaining <= 0) {
       // Nothing left today — mirror the single-file 429 UX (limit copy + sign-in).
       showState('error');
-      errorText.textContent = me?.upload?.resetIn
-        ? `You've reached your daily upload limit. It resets in about ${me.upload.resetIn}.`
-        : "You've reached your daily upload limit.";
+      const resetIn = usage?.resetIn;
+      errorText.textContent = unit === 'credits'
+        ? (resetIn ? `You're out of upload credits for today. They refill in about ${resetIn}.` : "You're out of upload credits for today.")
+        : (resetIn ? `You've reached your daily upload limit. It resets in about ${resetIn}.` : "You've reached your daily upload limit.");
       errorSignin.classList.remove('hidden');
       errorSignin.classList.add('flex');
       showLoginError();
@@ -939,7 +1023,23 @@ const pageSchema = [
       return;
     }
 
-    const toUpload = files.slice(0, Math.min(files.length, MAX_BATCH, remaining));
+    // Credits: greedily pack files while their cumulative cost fits the balance
+    // (a too-big file is skipped but smaller later ones can still go). Uploads
+    // (guests): slice by count. Both respect MAX_BATCH.
+    let toUpload: File[];
+    if (unit === 'credits' && Number.isFinite(remaining)) {
+      toUpload = [];
+      let spent = 0;
+      for (const f of files) {
+        if (toUpload.length >= MAX_BATCH) break;
+        const c = creditCost(f.size);
+        if (spent + c > remaining) continue;
+        spent += c;
+        toUpload.push(f);
+      }
+    } else {
+      toUpload = files.slice(0, Math.min(files.length, MAX_BATCH, remaining));
+    }
 
     showState('idle');
     progressBar.classList.remove('hidden');
@@ -1107,7 +1207,8 @@ const pageSchema = [
       clearInterval(progressInterval);
       showState('error');
       errorText.textContent = err.message || i18n.failed;
-      const isLimit = (err.message || '').toLowerCase().includes('limit');
+      const msg = (err.message || '').toLowerCase();
+      const isLimit = msg.includes('limit') || msg.includes('credit');
       errorSignin.classList.toggle('hidden', !isLimit);
       errorSignin.classList.toggle('flex', isLimit);
       if (isLimit) showLoginError();

@@ -9,10 +9,12 @@ import { embedAttribution } from '../../lib/images/metadata';
 import { isSameSiteRequest } from '../../lib/same-origin';
 import {
   ANON_DAILY_LIMIT,
-  USER_DAILY_LIMIT,
+  USER_DAILY_CREDITS,
   CONTACT_EMAIL,
   getClientIP,
   formatResetIn,
+  creditCost,
+  getUserCredits,
 } from '../../lib/upload-limits';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml', 'audio/mpeg', 'audio/mp3'];
@@ -61,61 +63,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const user = locals.user;
     const db = getDB(locals);
 
-    // Daily rate limit — a friendly 429 that explains *why* we cap uploads (we
-    // pay for storage + bandwidth) and how to get more (sign in, or email us).
-    // Counts a rolling 24h window so the allowance trickles back, not all at once.
-    if (user) {
-      const row = await db
-        .prepare(
-          `SELECT COUNT(*) as count, MIN(created_at) as oldest
-             FROM images
-            WHERE user_id = ? AND branded_of IS NULL
-              AND created_at >= datetime('now', '-1 day')`,
-        )
-        .bind(user.id)
-        .first<{ count: number; oldest: string | null }>();
-
-      if (row && row.count >= USER_DAILY_LIMIT) {
-        const resetIn = formatResetIn(row.oldest);
-        return new Response(
-          JSON.stringify({
-            error:
-              `You've reached your daily limit of ${USER_DAILY_LIMIT} uploads. ` +
-              `Hosting images costs us real money in storage and bandwidth, so we cap uploads each day to keep imagetourl.cloud free for everyone. ` +
-              `Your limit resets in about ${resetIn}. ` +
-              `Need a higher limit? Just email us at ${CONTACT_EMAIL} and we'll happily raise it for you.`,
-            limit: { scope: 'user', limit: USER_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
-          }),
-          { status: 429, headers: { 'Content-Type': 'application/json' } },
-        );
-      }
-    } else {
-      const ip = getClientIP(request);
-      const row = await db
-        .prepare(
-          `SELECT COUNT(*) as count, MIN(created_at) as oldest
-             FROM anonymous_uploads
-            WHERE ip_address = ? AND created_at >= datetime('now', '-1 day')`,
-        )
-        .bind(ip)
-        .first<{ count: number; oldest: string | null }>();
-
-      if (row && row.count >= ANON_DAILY_LIMIT) {
-        const resetIn = formatResetIn(row.oldest);
-        return new Response(
-          JSON.stringify({
-            error:
-              `You've reached your daily limit of ${ANON_DAILY_LIMIT} uploads for guests. ` +
-              `Hosting images costs us real money in storage and bandwidth, so we cap free uploads each day to keep imagetourl.cloud free for everyone. ` +
-              `Sign in (it's free) to get ${USER_DAILY_LIMIT} uploads per day — or your limit resets in about ${resetIn}. ` +
-              `Need even more? Just email us at ${CONTACT_EMAIL}.`,
-            limit: { scope: 'anon', limit: ANON_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
-          }),
-          { status: 429, headers: { 'Content-Type': 'application/json' } },
-        );
-      }
-    }
-
     const formData = await request.formData();
     const file = formData.get('file');
     const expiresAt = resolveExpiresAt(formData.get('expires_in'), !user);
@@ -143,6 +90,54 @@ export const POST: APIRoute = async ({ request, locals }) => {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
+    }
+
+    // Upload allowance — a friendly 429 that explains *why* we cap uploads (we
+    // pay for storage + bandwidth) and how to get more. Signed-in users spend a
+    // renewable credit balance priced by size (~1 credit per MB); guests get a
+    // count-based free allowance keyed by IP over a rolling 24h window. The cost
+    // is computed here so we can also deduct it after a successful upload.
+    const cost = creditCost(file.size);
+    if (user) {
+      const { credits, refreshedAt } = await getUserCredits(db, user.id);
+      if (credits < cost) {
+        const resetIn = formatResetIn(refreshedAt);
+        return new Response(
+          JSON.stringify({
+            error:
+              `This upload needs about ${cost} credit${cost === 1 ? '' : 's'}, but you have ${credits} of your ${USER_DAILY_CREDITS} daily credits left. ` +
+              `Credits cost roughly 1 per MB and keep imagetourl.cloud free for everyone — they refill in about ${resetIn}. ` +
+              `Need a higher limit? Just email us at ${CONTACT_EMAIL} and we'll happily raise it for you.`,
+            limit: { scope: 'user', unit: 'credits', limit: USER_DAILY_CREDITS, remaining: credits, cost, resetIn, contactEmail: CONTACT_EMAIL },
+          }),
+          { status: 429, headers: { 'Content-Type': 'application/json' } },
+        );
+      }
+    } else {
+      const ip = getClientIP(request);
+      const row = await db
+        .prepare(
+          `SELECT COUNT(*) as count, MIN(created_at) as oldest
+             FROM anonymous_uploads
+            WHERE ip_address = ? AND created_at >= datetime('now', '-1 day')`,
+        )
+        .bind(ip)
+        .first<{ count: number; oldest: string | null }>();
+
+      if (row && row.count >= ANON_DAILY_LIMIT) {
+        const resetIn = formatResetIn(row.oldest);
+        return new Response(
+          JSON.stringify({
+            error:
+              `You've reached your daily limit of ${ANON_DAILY_LIMIT} uploads for guests. ` +
+              `Hosting images costs us real money in storage and bandwidth, so we cap free uploads each day to keep imagetourl.cloud free for everyone. ` +
+              `Sign in (it's free) to get ${USER_DAILY_CREDITS} credits per day — or your limit resets in about ${resetIn}. ` +
+              `Need even more? Just email us at ${CONTACT_EMAIL}.`,
+            limit: { scope: 'anon', unit: 'uploads', limit: ANON_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
+          }),
+          { status: 429, headers: { 'Content-Type': 'application/json' } },
+        );
+      }
     }
 
     const env = getEnv(locals);
@@ -206,12 +201,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
           .run();
       }
 
-      // Latest-value-wins ad-blocker rollup for logged-in accounts.
-      // (Anonymous uploads are already captured per-row via images.adblock.)
+      // Deduct the upload's credits and roll up the ad-blocker signal in one
+      // write. MAX(0, …) guards the rare concurrent-bulk race (the balance was
+      // already checked >= cost above; getUserCredits applied any lazy refill).
+      // Anonymous uploads are captured per-row via images.adblock instead.
       if (user) {
         await db
-          .prepare('UPDATE users SET uses_adblock = ? WHERE id = ?')
-          .bind(adblock, user.id)
+          .prepare('UPDATE users SET uses_adblock = ?, credits = MAX(0, credits - ?) WHERE id = ?')
+          .bind(adblock, cost, user.id)
           .run();
       }
     } catch (dbErr: any) {
