@@ -18,6 +18,15 @@ bucket_name = "imagetourl-storage"
 [images]
 binding = "IMAGES"
 
+[[send_email]]
+name = "EMAIL"
+allowed_sender_addresses = ["updates@imagetourl.cloud"]
+
+[vars]
+EMAIL_FROM = "updates@imagetourl.cloud"
+SITE_URL = "https://imagetourl.cloud"
+MARKETING_REMINDERS_DAILY_LIMIT = "25"
+
 # Run the Astro worker (middleware + SSR) BEFORE static asset matching for any
 # path under a locale. Without this, Cloudflare serves dist/client/404.html
 # directly for paths like /fa/<unknown-slug>/ — bypassing the middleware, so

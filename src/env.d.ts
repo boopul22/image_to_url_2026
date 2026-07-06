@@ -25,9 +25,14 @@ declare namespace App {
         DB: D1Database;
         R2: R2Bucket;
         IMAGES: ImagesBinding;
+        EMAIL: SendEmail;
+        EMAIL_FROM: string;
+        SITE_URL: string;
+        MARKETING_REMINDERS_DAILY_LIMIT: string;
         GOOGLE_CLIENT_ID: string;
         GOOGLE_CLIENT_SECRET: string;
         AUTH_SECRET: string;
+        CRON_SECRET: string;
         CLOUDFLARE_ACCOUNT_ID: string;
         R2_ACCESS_KEY_ID: string;
         R2_SECRET_ACCESS_KEY: string;

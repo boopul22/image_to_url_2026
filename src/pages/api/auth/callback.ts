@@ -6,6 +6,7 @@ import { createSession } from '../../../lib/session';
 import { generateId } from '../../../lib/crypto';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
+import { ensureEmailPreferences } from '../../../lib/email-reminders';
 
 export const GET: APIRoute = async ({ request, url, cookies, redirect, locals }) => {
   const code = url.searchParams.get('code');
@@ -89,6 +90,8 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     if (!user) {
       return new Response('Failed to create user', { status: 500 });
     }
+
+    await ensureEmailPreferences(db, user.id);
 
     // Create session
     const sessionToken = await createSession(db, user.id);
