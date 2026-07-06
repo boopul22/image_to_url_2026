@@ -22,6 +22,8 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
   const storedState = cookies.get('google_oauth_state')?.value || parseCookie('google_oauth_state');
   const codeVerifier =
     cookies.get('google_oauth_code_verifier')?.value || parseCookie('google_oauth_code_verifier');
+  const emailOptIn =
+    (cookies.get('google_oauth_email_opt_in')?.value || parseCookie('google_oauth_email_opt_in')) === '1';
 
   if (!code || !state || !storedState || !codeVerifier || state !== storedState) {
     const missing = [
@@ -92,6 +94,22 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     }
 
     await ensureEmailPreferences(db, user.id);
+    if (emailOptIn) {
+      await db
+        .prepare(
+          `UPDATE email_preferences
+           SET marketing_opt_in = 1,
+               reminder_opt_in = 1,
+               marketing_consented_at = datetime('now'),
+               marketing_declined_at = NULL,
+               reminder_prompt_snoozed_until = NULL,
+               unsubscribed_at = NULL,
+               updated_at = datetime('now')
+           WHERE user_id = ?`,
+        )
+        .bind(user.id)
+        .run();
+    }
 
     // Create session
     const sessionToken = await createSession(db, user.id);
@@ -115,6 +133,7 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
         ['Set-Cookie', `has_session=1; ${hintFlags}`],
         ['Set-Cookie', `google_oauth_state=; ${clearFlags}`],
         ['Set-Cookie', `google_oauth_code_verifier=; ${clearFlags}`],
+        ['Set-Cookie', `google_oauth_email_opt_in=; ${clearFlags}`],
         ['Cache-Control', 'no-store'],
       ],
     });
