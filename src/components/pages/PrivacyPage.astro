@@ -99,6 +99,25 @@ const locale: Locale = Astro.locals.locale ?? defaultLocale;
         </div>
       </section>
 
+      <!-- Section: Email Communications — clarifies the consent captured by the
+           "I accept the Privacy Policy to upload" checkbox in the uploader. -->
+      <section>
+        <h2 class="text-2xl font-headline font-bold text-on-background mb-4">Email Communications</h2>
+        <div class="space-y-3">
+          <p>
+            When you are signed in and accept this Privacy Policy to upload an image, you consent to
+            receiving occasional emails from us &mdash; product updates and upload reminders sent to the
+            email address associated with your Google account. This is the only marketing email we send.
+          </p>
+          <p>
+            We never sell or share your email address. You can unsubscribe at any time using the link in
+            the footer of every email, or by contacting us &mdash; this stops all marketing emails
+            immediately and does not affect your ability to keep using the service. We may still send
+            essential account or security messages where necessary.
+          </p>
+        </div>
+      </section>
+
       <!-- Section 5: Your Rights -->
       <section>
         <h2 class="text-2xl font-headline font-bold text-on-background mb-4">{t(locale, 'privacy.s5.title')}</h2>
