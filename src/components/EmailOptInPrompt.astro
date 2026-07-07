@@ -1,21 +1,23 @@
 ---
-// Inline post-upload email opt-in consent.
+// Email opt-in consent GATE — shown before upload for legacy signed-in users.
 //
-// Backend is already built (see src/pages/api/email/preferences.ts + the
-// email_preferences D1 table). This is the missing UI: after a signed-in user
-// completes an upload, the uploader calls `window.showEmailOptIn(container)`
-// with its result/success panel. If the account `needsPrompt` (never opted in,
-// never declined, not unsubscribed, not snoozed — i.e. legacy users who signed
-// up before the opt-in existed), we mount an inline consent checkbox INSIDE
-// that panel, like a privacy-policy accept row. Guests get a 401 → nothing.
+// Backend is already built (src/pages/api/email/preferences.ts + the
+// email_preferences D1 table). Accounts created before the opt-in existed have
+// marketing_opt_in=0 and `needsPrompt=true`. For those users we mount a
+// "required to upload" consent checkbox below the uploader and LOCK uploads
+// until they tick it (ticking = opt_in). Guests (401) and already-opted-in /
+// declined / snoozed users are never locked — the gate fails open, so an opt-in
+// hiccup can never block uploads.
 //
 // A single reusable node lives here (hidden) and is relocated into whichever
-// uploader panel asks for it — only one uploader is ever active per page.
+// uploader asks for it via `window.emailOptInGate.init(wrapper)`; only one
+// uploader is ever active per page. Each uploader guards its handleFiles() with
+// `await emailOptInGate.ready` then `emailOptInGate.isLocked()`.
 ---
 
 <div
   id="email-optin-inline"
-  class="hidden mt-4 pt-3 border-t border-outline-variant/40 text-xs leading-relaxed"
+  class="hidden mt-3 border border-outline-variant/60 bg-surface-container-low px-3.5 py-3 text-xs leading-relaxed"
 >
   <div id="email-optin-consent" class="flex items-start gap-2.5 text-on-surface-variant">
     <input
@@ -25,35 +27,40 @@
     />
     <span class="flex-1 min-w-0">
       <label for="email-optin-checkbox" class="cursor-pointer">
-        Email me occasional product updates and upload reminders. I can unsubscribe anytime.
+        Email me occasional product updates and upload reminders &mdash;
+        <span class="font-semibold text-on-surface">required to upload</span>. I can unsubscribe anytime.
       </label>
-      <button
-        id="email-optin-later"
-        type="button"
-        class="ms-1.5 font-semibold text-on-surface/45 hover:text-on-surface whitespace-nowrap transition-colors"
-      >Not now</button>
     </span>
   </div>
 
   <p id="email-optin-confirm" class="hidden items-center gap-1.5 font-semibold text-rose-600">
-    <span aria-hidden="true">&#10003;</span> Subscribed — you can unsubscribe anytime.
+    <span aria-hidden="true">&#10003;</span> Thanks &mdash; you can upload now.
   </p>
 </div>
+
+<style>
+  /* Brief rose outline pulse when a locked upload is attempted. Kept subtle to
+     respect the minimal-motion design system. */
+  @keyframes optinFlash {
+    0%, 100% { border-color: rgb(225 29 72 / 0.25); box-shadow: none; }
+    25%, 60% { border-color: rgb(225 29 72 / 0.9); box-shadow: inset 0 0 0 1px rgb(225 29 72 / 0.5); }
+  }
+  #email-optin-inline.optin-flash { animation: optinFlash 1.2s ease; }
+</style>
 
 <script>
   const el = document.getElementById('email-optin-inline');
   const consent = document.getElementById('email-optin-consent');
   const confirm = document.getElementById('email-optin-confirm');
   const checkbox = document.getElementById('email-optin-checkbox') as HTMLInputElement | null;
-  const laterBtn = document.getElementById('email-optin-later');
 
-  // Guards: resolve eligibility once per page, and act at most once.
-  let resolved = false;
-  let done = false;
+  let resolved = false; // eligibility fetched once per page
+  let locked = false;   // uploads blocked until consent given
+  let done = false;     // opted in this page session
+  let markReady: () => void;
+  const ready = new Promise<void>((r) => { markReady = r; });
 
-  async function post(action: 'opt_in' | 'snooze') {
-    // Fire-and-forget — the UI has already updated; a failed write just means
-    // we may prompt again on a later visit.
+  async function post(action: 'opt_in') {
     try {
       await fetch('/api/email/preferences', {
         method: 'POST',
@@ -62,48 +69,55 @@
         body: JSON.stringify({ action }),
       });
     } catch {
-      /* best-effort */
+      /* best-effort — server state already reflects the tick on next load */
     }
   }
 
-  // Ticking the box IS the consent (privacy-accept style) — opt in immediately
-  // and swap to a small inline confirmation.
+  // Ticking the box IS the consent — opt in, unlock uploads, confirm inline.
   checkbox?.addEventListener('change', () => {
     if (done || !checkbox.checked) return;
     done = true;
+    locked = false;
     consent?.classList.add('hidden');
     confirm?.classList.remove('hidden');
     confirm?.classList.add('flex');
     post('opt_in');
   });
 
-  // "Not now" — didn't decide; ask again in 30 days.
-  laterBtn?.addEventListener('click', () => {
-    if (done) return;
-    done = true;
-    el?.classList.add('hidden');
-    post('snooze');
-  });
-
-  // Called by each uploader after a successful upload, passing the result panel
-  // to mount into. Self-contained: only surfaces when the account needs it.
-  (window as any).showEmailOptIn = async function showEmailOptIn(container: HTMLElement | null) {
-    if (!el || !container || done || resolved) return;
-    let needsPrompt = false;
-    try {
-      const res = await fetch('/api/email/preferences', { credentials: 'same-origin' });
-      if (!res.ok) {
-        resolved = true; // guest / not signed in — never ask
-        return;
+  (window as any).emailOptInGate = {
+    // Called once by the active uploader on load. Fetches eligibility and, when
+    // the account needs prompting, mounts the checkbox into `mountEl` and locks.
+    async init(mountEl: HTMLElement | null) {
+      if (resolved) { markReady(); return; }
+      resolved = true;
+      try {
+        if (mountEl) {
+          const res = await fetch('/api/email/preferences', { credentials: 'same-origin' });
+          if (res.ok) {
+            const data = await res.json();
+            if (data?.preferences?.needsPrompt) {
+              locked = true;
+              mountEl.appendChild(el!);
+              el!.classList.remove('hidden');
+            }
+          }
+          // !res.ok → guest / not signed in → never lock.
+        }
+      } catch {
+        /* fail open — never block uploads on an opt-in error */
       }
-      const data = await res.json();
-      needsPrompt = Boolean(data?.preferences?.needsPrompt);
-    } catch {
-      return; // transient error — allow a later upload to retry
-    }
-    resolved = true;
-    if (!needsPrompt || done) return;
-    container.appendChild(el);
-    el.classList.remove('hidden');
+      markReady();
+    },
+    // Resolves once init()'s fetch settles, so a fast drop can't race the lock.
+    ready,
+    isLocked() { return locked; },
+    // Draw attention to the checkbox when a locked upload is attempted.
+    flash() {
+      if (!el) return;
+      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      el.classList.remove('optin-flash');
+      void el.offsetWidth; // restart the animation
+      el.classList.add('optin-flash');
+    },
   };
 </script>

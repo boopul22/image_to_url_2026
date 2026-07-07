@@ -393,7 +393,19 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     if (fileInput.files && fileInput.files.length > 0) handleFiles(fileInput.files);
   });
 
+  // Mount + resolve the email opt-in gate (locks uploads for legacy signed-in
+  // users until they consent; no-op for guests / already-opted-in users).
+  (window as any).emailOptInGate?.init(panel.closest('.soft-uploader'));
+
   async function handleFiles(files: FileList) {
+    // Email opt-in gate: legacy signed-in users must consent before uploading.
+    // Fails open (never locks guests or on error).
+    await (window as any).emailOptInGate?.ready;
+    if ((window as any).emailOptInGate?.isLocked?.()) {
+      (window as any).emailOptInGate.flash();
+      fileInput.value = '';
+      return;
+    }
     // Ad-block gate covers both single and batch paths in one place.
     if (!(await (window as any).__adblockGate?.check())) {
       fileInput.value = '';
@@ -514,7 +526,6 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     }
     progressFill.style.width = '100%';
     showState('success');
-    (window as any).showEmailOptIn?.(stateSuccess);
   }
 
   copyBtn.addEventListener('click', () => {
@@ -592,7 +603,6 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
         showState('success');
         resultUrl.value = data.data.url;
         shareHref = '/share?u=' + encodeURIComponent(data.data.url);
-        (window as any).showEmailOptIn?.(stateSuccess);
       }, 300);
 
     } catch (err: any) {

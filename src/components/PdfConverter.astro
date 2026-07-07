@@ -147,6 +147,8 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
     input.addEventListener('change', () => {
       if (input.files && input.files.length) handleFiles(input.files);
     });
+    // Email opt-in gate — locks uploads for legacy signed-in users until consent.
+    (window as any).emailOptInGate?.init(panel.closest('.soft-uploader'));
     resetBtn.addEventListener('click', () => {
       resultsList.innerHTML = ''; input.value = '';
       showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%';
@@ -247,7 +249,6 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
             await new Promise((r) => setTimeout(r, remaining));
           }
           const hosted = data.data.url as string;
-          (window as any).showEmailOptIn?.(stateResults);
           host.remove();
           const inp = document.createElement('input');
           inp.type = 'text'; inp.readOnly = true; inp.value = hosted;
@@ -305,6 +306,13 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
     async function handleFiles(fileList: FileList) {
       const files = Array.from(fileList);
       if (!files.length) return;
+      // Email opt-in gate — legacy signed-in users must consent first (fails open).
+      await (window as any).emailOptInGate?.ready;
+      if ((window as any).emailOptInGate?.isLocked?.()) {
+        (window as any).emailOptInGate.flash();
+        input.value = '';
+        return;
+      }
       progress.classList.remove('hidden');
       progressFill.style.width = '0%';
       progressText.textContent = 'Preparing…';

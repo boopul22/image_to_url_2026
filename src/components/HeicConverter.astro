@@ -157,6 +157,10 @@ import Icon from './Icon.astro';
     if (input.files && input.files.length) handleFiles(input.files);
   });
 
+  // Mount + resolve the email opt-in gate (locks uploads for legacy signed-in
+  // users until they consent; no-op for guests / already-opted-in users).
+  (window as any).emailOptInGate?.init(panel.closest('.soft-uploader'));
+
   resetBtn.addEventListener('click', () => {
     resultsList.innerHTML = '';
     input.value = '';
@@ -226,7 +230,6 @@ import Icon from './Icon.astro';
           await new Promise((r) => setTimeout(r, remaining));
         }
         const hosted = data.data.url as string;
-        (window as any).showEmailOptIn?.(stateResults);
         host.remove();
         const urlInput = document.createElement('input');
         urlInput.type = 'text';
@@ -277,6 +280,15 @@ import Icon from './Icon.astro';
   async function handleFiles(fileList: FileList) {
     const files = Array.from(fileList);
     if (!files.length) return;
+
+    // Email opt-in gate: legacy signed-in users must consent before uploading.
+    // Fails open (never locks guests or on error).
+    await (window as any).emailOptInGate?.ready;
+    if ((window as any).emailOptInGate?.isLocked?.()) {
+      (window as any).emailOptInGate.flash();
+      input.value = '';
+      return;
+    }
 
     progress.classList.remove('hidden');
     progressFill.style.width = '0%';

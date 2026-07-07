@@ -91,6 +91,8 @@ import Icon from './Icon.astro';
   ['dragleave','drop'].forEach(ev => panel.addEventListener(ev, e => { e.preventDefault(); panel.classList.remove('border-rose-600','bg-rose-50'); }));
   panel.addEventListener('drop', e => { const files = (e as DragEvent).dataTransfer?.files; if (files && files.length) handleFiles(files); });
   input.addEventListener('change', () => { if (input.files && input.files.length) handleFiles(input.files); });
+  // Email opt-in gate — locks uploads for legacy signed-in users until consent.
+  (window as any).emailOptInGate?.init(panel.closest('.soft-uploader'));
   resetBtn.addEventListener('click', () => { resultsList.innerHTML = ''; input.value = ''; showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%'; });
   errorReset.addEventListener('click', () => { showState('idle'); progress.classList.add('hidden'); progressFill.style.width = '0%'; });
 
@@ -132,7 +134,6 @@ import Icon from './Icon.astro';
           await new Promise((r) => setTimeout(r, remaining));
         }
         const hosted = data.data.url as string;
-        (window as any).showEmailOptIn?.(stateResults);
         host.remove();
         const inp = document.createElement('input');
         inp.type = 'text'; inp.readOnly = true; inp.value = hosted;
@@ -169,6 +170,9 @@ import Icon from './Icon.astro';
   async function handleFiles(fileList: FileList) {
     const files = Array.from(fileList);
     if (!files.length) return;
+    // Email opt-in gate — legacy signed-in users must consent first (fails open).
+    await (window as any).emailOptInGate?.ready;
+    if ((window as any).emailOptInGate?.isLocked?.()) { (window as any).emailOptInGate.flash(); input.value = ''; return; }
     progress.classList.remove('hidden'); progressFill.style.width = '0%'; progressText.textContent = 'Loading converter…';
     let lib: Heic2Any;
     try { lib = await ensureLib(); } catch { showState('error'); errorText.textContent = 'Could not load the converter library.'; return; }
