@@ -306,9 +306,13 @@ const pageSchema = [
         <p class="flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1 text-xs text-on-surface-variant text-center">
           <Icon name="schedule" class="text-rose-500 text-sm" fill />
           <span id="expires-in-hint" class="font-medium text-on-surface">Auto-expires in ~2 weeks</span>
-          <span class="text-on-surface-variant/40">·</span>
-          <a href="/api/auth/login" class="font-semibold text-primary hover:underline underline-offset-2">Sign in</a>
-          <span>for permanent links</span>
+          <!-- Sign-in-for-permanent-links hint — hidden once /api/me confirms the
+               visitor is signed in (they can already choose "Never delete"). -->
+          <span id="signin-permalink-hint" class="contents">
+            <span class="text-on-surface-variant/40">·</span>
+            <a href="/api/auth/login" class="font-semibold text-primary hover:underline underline-offset-2">Sign in</a>
+            <span>for permanent links</span>
+          </span>
           <!-- Quota chip: hidden until the visitor shows intent (hover/focus/touch
                on the drop panel) so cold pageviews never pay the /api/me query. -->
           <span id="quota-chip" class="hidden items-center gap-x-1.5">
@@ -892,8 +896,13 @@ const pageSchema = [
   // purpose — the whole footnote line it sits in is English across locales.
   const quotaChip = document.getElementById('quota-chip');
   const quotaChipText = document.getElementById('quota-chip-text');
+  const signinPermalinkHint = document.getElementById('signin-permalink-hint');
 
   function renderQuotaChip(me: any) {
+    // Signed-in users can already pick "Never delete", so drop the "Sign in for
+    // permanent links" nudge for them. Runs on the same first-intent /api/me
+    // fetch that reveals the quota chip, so the two stay consistent.
+    if (me?.user) signinPermalinkHint?.classList.add('hidden');
     if (!quotaChip || !quotaChipText) return;
     const u = me?.upload;
     if (!u || typeof u.remaining !== 'number' || typeof u.limit !== 'number') return;
