@@ -1103,7 +1103,7 @@ const pageSchema = [
     }
     progressFill.style.width = '100%';
     showState('success');
-    (window as any).showEmailOptIn?.();
+    (window as any).showEmailOptIn?.(stateSuccess);
   }
 
   copyBtn.addEventListener('click', () => {
@@ -1202,7 +1202,7 @@ const pageSchema = [
         showState('success');
         resultUrl.value = data.data.url;
         shareHref = '/share?u=' + encodeURIComponent(data.data.url);
-        (window as any).showEmailOptIn?.();
+        (window as any).showEmailOptIn?.(stateSuccess);
       }, 300);
 
     } catch (err: any) {

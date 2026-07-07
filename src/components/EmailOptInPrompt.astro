@@ -1,78 +1,59 @@
 ---
-// Post-upload email opt-in prompt.
+// Inline post-upload email opt-in consent.
 //
 // Backend is already built (see src/pages/api/email/preferences.ts + the
 // email_preferences D1 table). This is the missing UI: after a signed-in user
-// completes an upload, we call GET /api/email/preferences; if `needsPrompt` is
-// true (never opted in, never declined, not unsubscribed, not snoozed) we show
-// a small checkbox toast so legacy users who signed up before the opt-in
-// existed get a chance to consent. Guests get a 401 → nothing shows.
+// completes an upload, the uploader calls `window.showEmailOptIn(container)`
+// with its result/success panel. If the account `needsPrompt` (never opted in,
+// never declined, not unsubscribed, not snoozed — i.e. legacy users who signed
+// up before the opt-in existed), we mount an inline consent checkbox INSIDE
+// that panel, like a privacy-policy accept row. Guests get a 401 → nothing.
 //
-// Included once in Layout.astro. Each uploader triggers it with a single line
-// in its success handler: `window.showEmailOptIn?.()`.
+// A single reusable node lives here (hidden) and is relocated into whichever
+// uploader panel asks for it — only one uploader is ever active per page.
 ---
 
 <div
-  id="email-optin-toast"
-  role="dialog"
-  aria-modal="false"
-  aria-labelledby="email-optin-title"
-  class="hidden fixed bottom-4 end-4 z-[70] w-[calc(100%-2rem)] max-w-[360px] bg-white border border-outline-variant/60 brutal-shadow p-4"
+  id="email-optin-inline"
+  class="hidden mt-4 pt-3 border-t border-outline-variant/40 text-xs leading-relaxed"
 >
-  <button
-    id="email-optin-dismiss"
-    type="button"
-    aria-label="Not now"
-    class="absolute top-2 end-2 inline-flex items-center justify-center w-6 h-6 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors leading-none text-lg"
-  >&times;</button>
-
-  <h2 id="email-optin-title" class="font-headline text-sm font-semibold text-on-surface mb-2 pe-6">
-    Stay in the loop
-  </h2>
-
-  <label class="flex items-start gap-2.5 cursor-pointer text-xs text-on-surface-variant leading-relaxed">
+  <div id="email-optin-consent" class="flex items-start gap-2.5 text-on-surface-variant">
     <input
       id="email-optin-checkbox"
       type="checkbox"
-      checked
       class="mt-0.5 h-4 w-4 shrink-0 accent-rose-600 cursor-pointer"
     />
-    <span>Email me occasional product updates and upload reminders. I can unsubscribe anytime.</span>
-  </label>
-
-  <div class="mt-3.5 flex items-center gap-2">
-    <button
-      id="email-optin-save"
-      type="button"
-      class="su-btn bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold px-4 py-2 transition-colors active:scale-95 disabled:opacity-60 disabled:pointer-events-none"
-    >Save</button>
-    <button
-      id="email-optin-later"
-      type="button"
-      class="text-xs font-semibold text-on-surface-variant hover:text-on-surface px-2 py-2 transition-colors"
-    >Not now</button>
+    <span class="flex-1 min-w-0">
+      <label for="email-optin-checkbox" class="cursor-pointer">
+        Email me occasional product updates and upload reminders. I can unsubscribe anytime.
+      </label>
+      <button
+        id="email-optin-later"
+        type="button"
+        class="ms-1.5 font-semibold text-on-surface/45 hover:text-on-surface whitespace-nowrap transition-colors"
+      >Not now</button>
+    </span>
   </div>
+
+  <p id="email-optin-confirm" class="hidden items-center gap-1.5 font-semibold text-rose-600">
+    <span aria-hidden="true">&#10003;</span> Subscribed — you can unsubscribe anytime.
+  </p>
 </div>
 
 <script>
-  const toast = document.getElementById('email-optin-toast');
+  const el = document.getElementById('email-optin-inline');
+  const consent = document.getElementById('email-optin-consent');
+  const confirm = document.getElementById('email-optin-confirm');
   const checkbox = document.getElementById('email-optin-checkbox') as HTMLInputElement | null;
-  const saveBtn = document.getElementById('email-optin-save') as HTMLButtonElement | null;
   const laterBtn = document.getElementById('email-optin-later');
-  const dismissBtn = document.getElementById('email-optin-dismiss');
 
-  // Guards: only ever resolve prompt-eligibility once, and never re-show after
-  // the user has acted (or after we've learned they don't need it) this session.
+  // Guards: resolve eligibility once per page, and act at most once.
   let resolved = false;
   let done = false;
 
-  function hide() {
-    toast?.classList.add('hidden');
-  }
-
-  async function post(action: 'opt_in' | 'decline' | 'snooze') {
-    // Fire-and-forget from the UI's point of view — we've already hidden the
-    // toast; a failed write just means we may prompt again next visit.
+  async function post(action: 'opt_in' | 'snooze') {
+    // Fire-and-forget — the UI has already updated; a failed write just means
+    // we may prompt again on a later visit.
     try {
       await fetch('/api/email/preferences', {
         method: 'POST',
@@ -85,30 +66,29 @@
     }
   }
 
-  saveBtn?.addEventListener('click', () => {
-    if (done) return;
+  // Ticking the box IS the consent (privacy-accept style) — opt in immediately
+  // and swap to a small inline confirmation.
+  checkbox?.addEventListener('change', () => {
+    if (done || !checkbox.checked) return;
     done = true;
-    hide();
-    // Checked → consent. Unchecked-then-saved → an explicit "no", so decline
-    // (stops future prompts) rather than snooze.
-    post(checkbox?.checked ? 'opt_in' : 'decline');
+    consent?.classList.add('hidden');
+    confirm?.classList.remove('hidden');
+    confirm?.classList.add('flex');
+    post('opt_in');
   });
 
-  function later() {
+  // "Not now" — didn't decide; ask again in 30 days.
+  laterBtn?.addEventListener('click', () => {
     if (done) return;
     done = true;
-    hide();
-    // Didn't decide — ask again in 30 days.
+    el?.classList.add('hidden');
     post('snooze');
-  }
-  laterBtn?.addEventListener('click', later);
-  dismissBtn?.addEventListener('click', later);
+  });
 
-  // Called by each uploader after a successful upload. Self-contained: fetches
-  // preference state, and only surfaces the toast when the account genuinely
-  // needs prompting. Guests get a 401 and see nothing.
-  (window as any).showEmailOptIn = async function showEmailOptIn() {
-    if (!toast || done || resolved) return;
+  // Called by each uploader after a successful upload, passing the result panel
+  // to mount into. Self-contained: only surfaces when the account needs it.
+  (window as any).showEmailOptIn = async function showEmailOptIn(container: HTMLElement | null) {
+    if (!el || !container || done || resolved) return;
     let needsPrompt = false;
     try {
       const res = await fetch('/api/email/preferences', { credentials: 'same-origin' });
@@ -123,6 +103,7 @@
     }
     resolved = true;
     if (!needsPrompt || done) return;
-    toast.classList.remove('hidden');
+    container.appendChild(el);
+    el.classList.remove('hidden');
   };
 </script>
