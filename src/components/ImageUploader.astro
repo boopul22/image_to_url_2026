@@ -514,6 +514,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     }
     progressFill.style.width = '100%';
     showState('success');
+    (window as any).showEmailOptIn?.();
   }
 
   copyBtn.addEventListener('click', () => {
@@ -591,6 +592,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
         showState('success');
         resultUrl.value = data.data.url;
         shareHref = '/share?u=' + encodeURIComponent(data.data.url);
+        (window as any).showEmailOptIn?.();
       }, 300);
 
     } catch (err: any) {

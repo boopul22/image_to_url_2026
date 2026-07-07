@@ -247,6 +247,7 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
             await new Promise((r) => setTimeout(r, remaining));
           }
           const hosted = data.data.url as string;
+          (window as any).showEmailOptIn?.();
           host.remove();
           const inp = document.createElement('input');
           inp.type = 'text'; inp.readOnly = true; inp.value = hosted;

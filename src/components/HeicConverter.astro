@@ -226,6 +226,7 @@ import Icon from './Icon.astro';
           await new Promise((r) => setTimeout(r, remaining));
         }
         const hosted = data.data.url as string;
+        (window as any).showEmailOptIn?.();
         host.remove();
         const urlInput = document.createElement('input');
         urlInput.type = 'text';

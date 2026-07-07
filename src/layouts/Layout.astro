@@ -4,6 +4,7 @@ import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
 import AdBlockGate from '../components/AdBlockGate.astro';
+import EmailOptInPrompt from '../components/EmailOptInPrompt.astro';
 import { AD_CLIENT } from '../lib/ads';
 // Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
 // bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
@@ -351,6 +352,7 @@ function hreflangUrl(loc: Locale): string {
       <slot />
     </main>
     <AdBlockGate />
+    <EmailOptInPrompt />
     <script>
       const revealed = new WeakSet();
       function reveal(el: Element) {
