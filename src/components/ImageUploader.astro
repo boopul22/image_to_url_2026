@@ -57,11 +57,11 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
                     <select
                       id="expires-in"
                       aria-label="Auto-delete after"
-                      aria-describedby="expires-in-hint"
+                      aria-describedby="plan-title plan-cost"
                       class="su-control appearance-none w-full bg-transparent text-xs font-semibold text-on-surface pr-5 outline-none cursor-pointer"
                     >
-                      <option value="auto">Auto-expire</option>
-                      <option value="never">Never delete</option>
+                      <option value="auto">Auto-delete · free</option>
+                      <option value="never">Keep forever · 1 save</option>
                     </select>
                     <Icon name="expand_more" class="absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-base pointer-events-none" />
                   </div>
@@ -135,41 +135,71 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
           </div>
         </div>
 
-        <!-- Expiry notice: one quiet footnote line. Default behavior + permanent-link
-             hint inline; the full explanation lives behind the "?" toggle. -->
+        <!-- Upload plan strip: makes the cost of the expiry choice legible *before*
+             upload — what happens to the file, what it costs, and how much of today's
+             allowance is left (the limit made tangible via a meter). Driven by
+             renderPlan() from the cached /api/me payload; server-renders in the
+             guest / Auto-delete default so cold, JS-less pageviews still read right. -->
         <div class="mt-3 w-full max-w-md mx-auto">
-          <p class="flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1 text-xs text-on-surface-variant text-center">
-            <Icon name="schedule" class="text-rose-500 text-sm" fill />
-            <span id="expires-in-hint" class="font-medium text-on-surface">Auto-expires in ~2 weeks</span>
-            <!-- Hidden once /api/me confirms the visitor is signed in. -->
-            <span id="signin-permalink-hint" class="contents">
-              <span class="text-on-surface-variant/40">·</span>
-              <a href="/api/auth/login" class="font-semibold text-primary hover:underline underline-offset-2">Sign in</a>
-              <span>for permanent links</span>
-            </span>
-            <!-- Quota chip: hidden until the visitor shows intent (hover/focus/touch
-                 on the drop panel) so cold pageviews never pay the /api/me query. -->
-            <span id="quota-chip" class="hidden items-center gap-x-1.5">
-              <span class="text-on-surface-variant/40">·</span>
-              <span id="quota-chip-text" class="font-medium"></span>
-            </span>
-            <button
-              type="button"
-              id="expires-in-help"
-              aria-label="What does auto-delete do?"
-              aria-expanded="false"
-              aria-controls="expires-in-help-panel"
-              class="su-control tap-target inline-flex items-center justify-center w-[16px] h-[16px] rounded-full border border-outline-variant text-[10px] font-bold text-on-surface-variant hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors flex-shrink-0"
-            >?</button>
-          </p>
+          <div id="upload-plan" class="su-control bg-surface-container-low border border-outline-variant/40 su-inner-shadow px-3.5 py-3 text-left">
+            <div class="flex items-start gap-2.5">
+              <span class="flex-shrink-0 leading-none mt-px">
+                <Icon id="plan-icon-auto" name="schedule" class="text-rose-600 text-lg" fill />
+                <Icon id="plan-icon-forever" name="all_inclusive" class="hidden text-rose-600 text-lg" fill />
+              </span>
+              <div class="flex-1 min-w-0">
+                <p id="plan-title" class="text-sm font-semibold text-on-surface leading-snug">Auto-deletes in ~2 weeks</p>
+                <p id="plan-cost" class="text-xs text-on-surface-variant leading-snug mt-0.5">Free — no account needed</p>
+              </div>
+              <button
+                type="button"
+                id="expires-in-help"
+                aria-label="Compare Auto-delete and Keep forever"
+                aria-expanded="false"
+                aria-controls="expires-in-help-panel"
+                class="su-control tap-target flex-shrink-0 inline-flex items-center justify-center w-[18px] h-[18px] rounded-full border border-outline-variant text-[10px] font-bold text-on-surface-variant hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-colors"
+              >?</button>
+            </div>
 
-          <div
-            id="expires-in-help-panel"
-            class="su-control hidden mt-2 bg-surface-container-low border border-outline-variant/40 px-4 py-3 text-xs text-on-surface-variant leading-relaxed text-left"
-            role="region"
-            aria-labelledby="expires-in-help"
-          >
-            Auto-expire images are cleared at the start of each month, so you always get at least about two weeks. Choose "Never delete" (sign-in required) for a permanent link that never breaks.
+            <!-- Allowance row: today's remaining allowance + a meter, or the sign-in
+                 path to unlock more. Hidden until renderPlan decides it's relevant. -->
+            <div id="plan-allowance" class="hidden mt-2.5 pt-2.5 border-t border-outline-variant/40">
+              <div class="flex items-center justify-between gap-2">
+                <span id="plan-allowance-label" class="text-xs font-medium text-on-surface"></span>
+                <a
+                  id="plan-action"
+                  href="/api/auth/login"
+                  class="hidden flex-shrink-0 items-center gap-1 text-xs font-semibold text-primary hover:underline underline-offset-2 group"
+                >
+                  <span id="plan-action-text">Sign in</span>
+                  <Icon name="arrow_forward" class="text-sm group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </div>
+              <div id="plan-meter" class="hidden mt-1.5 h-1 rounded-full bg-surface-container-highest overflow-hidden">
+                <div id="plan-meter-fill" class="h-full bg-rose-600 transition-[width] duration-300" style="width:0%"></div>
+              </div>
+            </div>
+
+            <!-- Comparison: the whole two-mode model at a glance. -->
+            <div
+              id="expires-in-help-panel"
+              class="hidden mt-2.5 pt-2.5 border-t border-outline-variant/40 grid grid-cols-2 gap-x-4 gap-y-1 text-xs"
+              role="region"
+              aria-labelledby="expires-in-help"
+            >
+              <p class="flex items-center gap-1.5 font-semibold text-on-surface"><Icon name="schedule" class="text-rose-500 text-sm" fill /> Auto-delete</p>
+              <p class="flex items-center gap-1.5 font-semibold text-on-surface"><Icon name="all_inclusive" class="text-rose-500 text-sm" fill /> Keep forever</p>
+              <ul class="space-y-0.5 text-on-surface-variant">
+                <li>Free &amp; unlimited</li>
+                <li>Clears ~monthly (min ~2 weeks)</li>
+                <li>No account needed</li>
+              </ul>
+              <ul class="space-y-0.5 text-on-surface-variant">
+                <li>Never expires</li>
+                <li>50 a day when signed in</li>
+                <li>Sign in (free) to unlock</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -225,22 +255,89 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     return !!(await fetchMe()).user;
   }
 
+  // ---- Upload plan strip ----------------------------------------------------
+  // Makes the expiry choice's cost legible before upload: what happens to the
+  // file, what it costs, and how much of today's allowance is left. One render
+  // function driven by the selected mode + cached /api/me payload; the markup
+  // server-renders in the guest / Auto-delete default so a cold, JS-less
+  // pageview already reads correctly. English on purpose (matches the strip).
   const expiresInSel = document.getElementById('expires-in') as HTMLSelectElement | null;
-  const expiresInHint = document.getElementById('expires-in-hint');
-  const EXPIRY_HINTS: Record<string, string> = {
-    auto: 'Auto-expires in ~2 weeks',
-    never: 'Permanent — never deleted',
-  };
+  const planIconAuto = document.getElementById('plan-icon-auto');
+  const planIconForever = document.getElementById('plan-icon-forever');
+  const planTitle = document.getElementById('plan-title');
+  const planCost = document.getElementById('plan-cost');
+  const planAllowance = document.getElementById('plan-allowance');
+  const planAllowanceLabel = document.getElementById('plan-allowance-label');
+  const planAction = document.getElementById('plan-action');
+  const planActionText = document.getElementById('plan-action-text');
+  const planMeter = document.getElementById('plan-meter');
+  const planMeterFill = document.getElementById('plan-meter-fill');
+  let meCache: any;
 
-  function refreshExpiresHint(value: string) {
-    if (expiresInHint) {
-      expiresInHint.textContent = EXPIRY_HINTS[value] || EXPIRY_HINTS.auto;
+  function setAllowance(label: string, remaining: number, limit: number) {
+    planAllowance?.classList.remove('hidden');
+    const metered = limit > 0 && remaining >= 0;
+    const low = metered && remaining <= limit * 0.2;
+    if (planAllowanceLabel) {
+      planAllowanceLabel.textContent = label;
+      planAllowanceLabel.classList.toggle('text-warning', low);
+      planAllowanceLabel.classList.toggle('text-on-surface', !low);
+    }
+    if (planMeter && planMeterFill && metered) {
+      planMeter.classList.remove('hidden');
+      planMeterFill.style.width = `${Math.max(0, Math.min(100, (remaining / limit) * 100))}%`;
+      planMeterFill.classList.toggle('bg-warning', low);
+      planMeterFill.classList.toggle('bg-rose-600', !low);
+    }
+  }
+
+  function setAction(text: string) {
+    planAllowance?.classList.remove('hidden');
+    planAction?.classList.remove('hidden');
+    planAction?.classList.add('inline-flex');
+    if (planActionText) planActionText.textContent = text;
+  }
+
+  function renderPlan(me: any) {
+    const forever = expiresInSel?.value === 'never';
+    const signedIn = !!me?.user;
+    const u = me?.upload;
+    planIconAuto?.classList.toggle('hidden', forever);
+    planIconForever?.classList.toggle('hidden', !forever);
+    // Reset the allowance region every render.
+    planAllowance?.classList.add('hidden');
+    planMeter?.classList.add('hidden');
+    planAction?.classList.add('hidden');
+    if (planAllowanceLabel) planAllowanceLabel.textContent = '';
+
+    if (!forever) {
+      if (planTitle) planTitle.textContent = 'Auto-deletes in ~2 weeks';
+      if (signedIn) {
+        if (planCost) planCost.textContent = "Free & unlimited — doesn't touch your daily limit";
+      } else {
+        if (planCost) planCost.textContent = 'Free — no account needed';
+        if (u && u.unit === 'uploads' && typeof u.remaining === 'number') {
+          setAllowance(`${u.remaining} of ${u.limit} free uploads left today`, u.remaining, u.limit);
+        }
+        setAction('Sign in to keep links forever');
+      }
+    } else {
+      if (planTitle) planTitle.textContent = 'Kept forever — never expires';
+      if (signedIn) {
+        if (planCost) planCost.textContent = 'Uses 1 of your daily keep-forever saves';
+        if (u && u.unit === 'credits' && typeof u.remaining === 'number') {
+          setAllowance(`${u.remaining} of ${u.limit} keep-forever saves left today`, u.remaining, u.limit);
+        }
+      } else {
+        if (planCost) planCost.textContent = 'Requires a free account';
+        setAllowance("Guests can't keep links forever", -1, -1);
+        setAction('Sign in to unlock');
+      }
     }
   }
 
   if (expiresInSel) {
-    expiresInSel.addEventListener('change', () => refreshExpiresHint(expiresInSel.value));
-    refreshExpiresHint(expiresInSel.value);
+    expiresInSel.addEventListener('change', () => renderPlan(meCache));
   }
 
   const expiresHelpBtn = document.getElementById('expires-in-help');
@@ -281,7 +378,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     stateSuccess.classList.toggle('hidden', state !== 'success');
     stateError.classList.toggle('hidden', state !== 'error');
     if (state === 'success') {
-      refreshQuotaChip(); // server just deducted — refetch, then reveal
+      refreshPlan(); // server may have deducted a save — refetch, then re-render
       revealGuestExpiryNote();
     } else {
       guestExpiryNote?.classList.add('hidden');
@@ -296,49 +393,27 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     guestExpiryNote.classList.toggle('hidden', !isGuest);
   }
 
-  // ---- Proactive quota chip (footnote line) ----
+  // ---- Hydrate the upload plan strip ----
   // State honesty without taxing cold pageviews: the /api/me fetch fires on the
   // visitor's first intent signal (hover/focus/touch on the drop panel), not on
-  // load. Guests see "N of 100 uploads left today", users "N of 150 credits
-  // left"; ≤20% remaining turns amber via the --color-warning token.
-  const quotaChip = document.getElementById('quota-chip');
-  const quotaChipText = document.getElementById('quota-chip-text');
-  const signinPermalinkHint = document.getElementById('signin-permalink-hint');
-
-  function renderQuotaChip(me: any) {
-    // Signed-in users can already pick "Never delete" — drop the sign-in nudge.
-    if (me?.user) signinPermalinkHint?.classList.add('hidden');
-    if (!quotaChip || !quotaChipText) return;
-    const u = me?.upload;
-    if (!u || typeof u.remaining !== 'number' || typeof u.limit !== 'number') return;
-    if (u.unit === 'credits') {
-      quotaChipText.textContent = `${u.remaining} of ${u.limit} credits left`;
-      quotaChipText.title = '≈1 credit per MB';
-    } else {
-      quotaChipText.textContent = `${u.remaining} of ${u.limit} uploads left today`;
-    }
-    const low = u.remaining <= u.limit * 0.2;
-    quotaChipText.classList.toggle('text-warning', low);
-    quotaChipText.classList.toggle('text-on-surface', !low);
-    quotaChip.classList.remove('hidden');
-    quotaChip.classList.add('inline-flex');
+  // load, then renderPlan() fills in live numbers (remaining allowance + meter).
+  let planLoaded = false;
+  async function loadPlan() {
+    if (planLoaded) return;
+    planLoaded = true;
+    meCache = await fetchMe();
+    renderPlan(meCache);
   }
 
-  let quotaLoaded = false;
-  async function loadQuotaChip() {
-    if (quotaLoaded) return;
-    quotaLoaded = true;
-    renderQuotaChip(await fetchMe());
-  }
-
-  async function refreshQuotaChip() {
-    quotaLoaded = true;
+  async function refreshPlan() {
+    planLoaded = true;
     mePromise = null; // balance changed server-side — bust the cache
-    renderQuotaChip(await fetchMe());
+    meCache = await fetchMe();
+    renderPlan(meCache);
   }
 
   (['pointerenter', 'focusin', 'touchstart'] as const).forEach((ev) =>
-    panel.addEventListener(ev, loadQuotaChip, { once: true, passive: true }),
+    panel.addEventListener(ev, loadPlan, { once: true, passive: true }),
   );
 
   // Destination the Get Link button navigates to; set by both the single and
@@ -421,14 +496,13 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
       uploadFile(files[0]);
       return;
     }
-    // Bulk path — open to everyone. Guests spend a daily upload count (5), users
-    // spend size-priced credits; uploadBatch pre-slices to what the allowance covers.
+    // Bulk path — open to everyone. Guests spend a daily upload count (5); signed-in
+    // users spend one credit per permanent upload (temporary uploads are free).
+    // uploadBatch pre-slices to what the allowance covers.
     uploadBatch(Array.from(files));
   }
 
   const MAX_BATCH = 25; // hard cap on files per batch, whatever the allowance
-  // Credits an upload costs — must match creditCost() in src/lib/upload-limits.ts.
-  const creditCost = (bytes: number) => Math.max(1, Math.round(bytes / (1024 * 1024)));
 
   async function uploadBatch(files: File[]) {
     // Pre-slice to what the caller's allowance covers so we don't fire doomed
@@ -438,12 +512,22 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     const unit = usage?.unit;
     const remaining = typeof usage?.remaining === 'number' ? usage.remaining : Infinity;
 
-    if (remaining <= 0) {
-      // Nothing left today — mirror the single-file 429 UX (limit copy + sign-in).
+    // Only PERMANENT ("keep forever") uploads spend a signed-in user's allowance
+    // — temporary/auto-delete uploads are free and unlimited. Guests are always
+    // metered (their uploads are always temporary). So the allowance only bites
+    // when: guest, or signed-in user who picked "never" expiry.
+    const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
+    const isPermanent = expiresInEl?.value === 'never';
+    const spendsAllowance = unit === 'uploads' || (unit === 'credits' && isPermanent);
+
+    if (spendsAllowance && remaining <= 0) {
+      // Nothing left — mirror the single-file 429 UX (limit copy + sign-in).
       showState('error');
       const resetIn = usage?.resetIn;
       errorText.textContent = unit === 'credits'
-        ? (resetIn ? `You're out of upload credits for today. They refill in about ${resetIn}.` : "You're out of upload credits for today.")
+        ? (resetIn
+            ? `You've used all your keep-forever saves for today. Switch to "Auto-delete" to keep uploading for free, or they refill in about ${resetIn}.`
+            : 'You\'ve used all your keep-forever saves for today. Switch to "Auto-delete" to keep uploading for free.')
         : (resetIn ? `You've reached your daily upload limit. It resets in about ${resetIn}.` : "You've reached your daily upload limit.");
       errorSignin.classList.remove('hidden');
       errorSignin.classList.add('flex');
@@ -452,23 +536,12 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
       return;
     }
 
-    // Credits: greedily pack files while their cumulative cost fits the balance
-    // (a too-big file is skipped but smaller later ones can still go). Uploads
-    // (guests): slice by count. Both respect MAX_BATCH.
-    let toUpload: File[];
-    if (unit === 'credits' && Number.isFinite(remaining)) {
-      toUpload = [];
-      let spent = 0;
-      for (const f of files) {
-        if (toUpload.length >= MAX_BATCH) break;
-        const c = creditCost(f.size);
-        if (spent + c > remaining) continue;
-        spent += c;
-        toUpload.push(f);
-      }
-    } else {
-      toUpload = files.slice(0, Math.min(files.length, MAX_BATCH, remaining));
-    }
+    // Flat 1 credit per file (or 1 guest upload each). When the allowance
+    // applies, slice by count; otherwise (free temporary uploads) only MAX_BATCH
+    // caps the batch.
+    const toUpload = spendsAllowance && Number.isFinite(remaining)
+      ? files.slice(0, Math.min(files.length, MAX_BATCH, remaining))
+      : files.slice(0, MAX_BATCH);
 
     showState('idle');
     progressBar.classList.remove('hidden');
@@ -478,7 +551,6 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     uploadSubtext.textContent = 'Bulk upload in progress…';
     uploadBtn.textContent = 'Uploading...';
 
-    const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
     const ab = '0'; // gated in handleFiles
     const results: { name: string; url: string }[] = [];
     const failures: { name: string; error: string }[] = [];
@@ -551,7 +623,7 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
       const loggedIn = await fetchLoggedIn();
       if (!loggedIn) {
         showState('error');
-        errorText.textContent = 'Sign in to upload images that never expire.';
+        errorText.textContent = 'Keep forever needs a free account. Sign in to keep this link forever — or switch to Auto-delete.';
         errorSignin.classList.remove('hidden');
         errorSignin.classList.add('flex');
         showLoginError();

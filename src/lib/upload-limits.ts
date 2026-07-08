@@ -2,19 +2,28 @@
 // (`api/upload.ts`) and the quota reporter (`api/me.ts`) so the allowance a
 // client sees can never diverge from what the server enforces.
 //
-// Hosting images costs real money in storage + bandwidth. Two models:
-//   • Guests: a generous count-based free allowance keyed by IP (rolling 24h).
-//     Kept high because *every* anonymous upload auto-expires (see
-//     lib/images/delete.ts) — the images clear themselves, so the storage
-//     footprint is self-limiting and we don't need a tight per-guest cap.
-//   • Signed-in users: a renewable *credit* balance (150/day, ~1 credit per MB)
-//     that refills to full once every 24h. Priced by size so small images cost
-//     ~nothing and heavy uploads cost fairly. Email CONTACT_EMAIL for more.
+// What actually costs us money is *permanent* storage — an image kept forever
+// keeps paying rent. Temporary uploads auto-expire (see lib/images/delete.ts),
+// so they clean themselves up and are cheap. The limits reflect that:
+//   • Guests: 5 temporary uploads per rolling 24h, keyed by IP. Every guest
+//     upload auto-expires, so this is purely a light anti-abuse cap.
+//   • Signed-in users: 50 *permanent* uploads per day (a flat 1 "credit" each,
+//     size-independent), refilled to full once every 24h. Temporary /
+//     auto-expiring uploads cost nothing and are unlimited — only choosing
+//     "keep forever" spends the daily allowance. Email CONTACT_EMAIL for more.
+//
+// NOTE: the users table columns are still named `credits` / `credits_refreshed_at`
+// for historical reasons; a "credit" now simply means one permanent upload.
 
-export const ANON_DAILY_LIMIT = 100;
-export const USER_DAILY_CREDITS = 150;
+export const ANON_DAILY_LIMIT = 5;
+export const USER_DAILY_CREDITS = 50;
 export const CREDIT_REFRESH_MS = 24 * 60 * 60 * 1000;
 export const CONTACT_EMAIL = 'blog.boopul@gmail.com';
+
+// A permanent ("keep forever") upload costs exactly one credit, regardless of
+// size. Temporary/auto-expiring uploads cost nothing (handled by the caller,
+// which only spends this for permanent uploads). Mirrored client-side.
+export const PERMANENT_UPLOAD_COST = 1;
 
 export function getClientIP(request: Request): string {
   return (
@@ -24,10 +33,12 @@ export function getClientIP(request: Request): string {
   );
 }
 
-// Credits an upload costs: ~1 per MB, rounded to nearest, minimum 1. Mirrored
-// client-side in the uploaders' pre-slice, so keep the formula identical there.
-export function creditCost(sizeBytes: number): number {
-  return Math.max(1, Math.round(sizeBytes / (1024 * 1024)));
+// Credits an upload costs. Permanent ("keep forever") uploads cost one credit;
+// temporary/auto-expiring uploads are free. `isPermanent` is true only for a
+// signed-in user who chose "never" expiry (expires_at resolves to null).
+// Mirrored client-side in the uploaders' pre-slice, so keep this in sync there.
+export function creditCost(isPermanent: boolean): number {
+  return isPermanent ? PERMANENT_UPLOAD_COST : 0;
 }
 
 // Human-friendly "resets in ~X" string, derived from a UTC timestamp that marks
@@ -81,9 +92,11 @@ export async function getUserCredits(
 
 export interface UploadUsage {
   scope: 'user' | 'anon';
-  // How to read `limit`/`used`/`remaining`: guests are counted in uploads,
-  // signed-in users in credits. Lets the client pre-slice a bulk selection
-  // correctly (by count vs by cumulative credit cost).
+  // How to read `limit`/`used`/`remaining`: guests are counted in temporary
+  // uploads, signed-in users in permanent-upload credits (1 each). Lets the
+  // client pre-slice a bulk selection — but only permanent uploads spend the
+  // signed-in allowance; temporary ones are free (the client checks the expiry
+  // select before applying `remaining`).
   unit: 'uploads' | 'credits';
   limit: number;
   used: number;

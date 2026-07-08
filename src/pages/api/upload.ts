@@ -99,26 +99,34 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    // Upload allowance — a friendly 429 that explains *why* we cap uploads (we
-    // pay for storage + bandwidth) and how to get more. Signed-in users spend a
-    // renewable credit balance priced by size (~1 credit per MB); guests get a
-    // count-based free allowance keyed by IP over a rolling 24h window. The cost
-    // is computed here so we can also deduct it after a successful upload.
-    const cost = creditCost(file.size);
+    // Upload allowance — a friendly 429 that explains *why* we cap uploads and
+    // how to keep going. What costs us money is *permanent* storage, so that's
+    // what we meter:
+    //   • Signed-in users spend one credit per PERMANENT ("keep forever") upload
+    //     (50/day, refilled every 24h). Temporary/auto-expiring uploads are free
+    //     and unlimited — so we only check/charge credits when expires_at is null.
+    //   • Guests get a small count-based allowance of temporary uploads keyed by
+    //     IP over a rolling 24h window (every guest upload auto-expires).
+    // `cost` is computed here so we can also deduct it after a successful upload.
+    const isPermanent = !!user && expiresAt === null;
+    const cost = creditCost(isPermanent);
     if (user) {
-      const { credits, refreshedAt } = await getUserCredits(db, user.id);
-      if (credits < cost) {
-        const resetIn = formatResetIn(refreshedAt);
-        return new Response(
-          JSON.stringify({
-            error:
-              `This upload needs about ${cost} credit${cost === 1 ? '' : 's'}, but you have ${credits} of your ${USER_DAILY_CREDITS} daily credits left. ` +
-              `Credits cost roughly 1 per MB and keep imagetourl.cloud free for everyone — they refill in about ${resetIn}. ` +
-              `Need a higher limit? Just email us at ${CONTACT_EMAIL} and we'll happily raise it for you.`,
-            limit: { scope: 'user', unit: 'credits', limit: USER_DAILY_CREDITS, remaining: credits, cost, resetIn, contactEmail: CONTACT_EMAIL },
-          }),
-          { status: 429, headers: { 'Content-Type': 'application/json' } },
-        );
+      // Temporary uploads never touch the allowance — let them straight through.
+      if (isPermanent) {
+        const { credits, refreshedAt } = await getUserCredits(db, user.id);
+        if (credits < cost) {
+          const resetIn = formatResetIn(refreshedAt);
+          return new Response(
+            JSON.stringify({
+              error:
+                `You've used all ${USER_DAILY_CREDITS} of your permanent ("keep forever") uploads for today. ` +
+                `Set this upload's expiry to "Auto-delete" instead and it won't count against your limit — temporary uploads are always free and unlimited. ` +
+                `Your permanent allowance refills in about ${resetIn}. Need a higher limit? Just email us at ${CONTACT_EMAIL} and we'll happily raise it for you.`,
+              limit: { scope: 'user', unit: 'credits', limit: USER_DAILY_CREDITS, remaining: credits, cost, resetIn, contactEmail: CONTACT_EMAIL },
+            }),
+            { status: 429, headers: { 'Content-Type': 'application/json' } },
+          );
+        }
       }
     } else {
       const ip = getClientIP(request);
@@ -136,9 +144,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
         return new Response(
           JSON.stringify({
             error:
-              `You've reached your daily limit of ${ANON_DAILY_LIMIT} uploads for guests. ` +
-              `Hosting images costs us real money in storage and bandwidth, so we cap free uploads each day to keep imagetourl.cloud free for everyone. ` +
-              `Sign in (it's free) to get ${USER_DAILY_CREDITS} credits per day — or your limit resets in about ${resetIn}. ` +
+              `You've reached your guest limit of ${ANON_DAILY_LIMIT} temporary uploads. ` +
+              `Guest uploads are temporary and auto-delete on their own. ` +
+              `Sign in (it's free) to get ${USER_DAILY_CREDITS} permanent uploads a day plus unlimited temporary ones — or your limit resets in about ${resetIn}. ` +
               `Need even more? Just email us at ${CONTACT_EMAIL}.`,
             limit: { scope: 'anon', unit: 'uploads', limit: ANON_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
           }),
@@ -212,9 +220,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
       }
 
       // Deduct the upload's credits and roll up the ad-blocker signal in one
-      // write. MAX(0, …) guards the rare concurrent-bulk race (the balance was
-      // already checked >= cost above; getUserCredits applied any lazy refill).
-      // Anonymous uploads are captured per-row via images.adblock instead.
+      // write. `cost` is 0 for temporary uploads (they're free), so only a
+      // permanent "keep forever" upload actually decrements the balance. MAX(0, …)
+      // guards the rare concurrent-bulk race (the balance was already checked
+      // >= cost above; getUserCredits applied any lazy refill). Anonymous uploads
+      // are captured per-row via images.adblock instead.
       if (user) {
         await db
           .prepare('UPDATE users SET uses_adblock = ?, credits = MAX(0, credits - ?) WHERE id = ?')

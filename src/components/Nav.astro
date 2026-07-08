@@ -185,7 +185,7 @@ const toolsDropdown = getNavGroups(locale);
           href="/dashboard"
           id="nav-credits-chip"
           class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors"
-          title="Daily upload credits — refills every 24h"
+          title="Keep-forever saves left today — refills every 24h (temporary uploads are free & unlimited)"
         >
           <Icon name="toll" class="text-sm text-primary" fill />
           <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
@@ -217,7 +217,7 @@ const toolsDropdown = getNavGroups(locale);
                  the chip; stays hidden if the balance fetch fails. -->
             <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
               <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
-                <span class="text-neutral-500">Upload credits</span>
+                <span class="text-neutral-500">Keep-forever saves</span>
                 <span><span id="nav-credits-panel-num" class="font-bold">—</span><span class="text-neutral-500" id="nav-credits-panel-cap"></span></span>
               </div>
               <div class="mt-2 h-1 bg-neutral-100 overflow-hidden">
@@ -403,7 +403,7 @@ const toolsDropdown = getNavGroups(locale);
           <!-- Credits row — filled by the deferred /api/me hydration; hidden until known. -->
           <a href="/dashboard" id="nav-credits-mobile" class="hidden mx-4 mb-2 px-3 py-2.5 border border-outline-variant/40 bg-surface-container-low hover:bg-surface-container transition-colors">
             <span class="flex items-center justify-between text-xs font-medium text-on-surface">
-              <span class="flex items-center gap-1.5 text-on-surface-variant"><Icon name="toll" class="text-sm text-primary" fill /> Upload credits</span>
+              <span class="flex items-center gap-1.5 text-on-surface-variant"><Icon name="toll" class="text-sm text-primary" fill /> Keep-forever saves</span>
               <span><span id="nav-credits-mobile-num" class="font-bold">—</span><span class="text-on-surface-variant" id="nav-credits-mobile-cap"></span></span>
             </span>
             <span class="block mt-2 h-1 bg-surface-container-highest overflow-hidden">
@@ -578,13 +578,14 @@ const toolsDropdown = getNavGroups(locale);
   // Deferred off the critical path: the /api/me fetch is not render-blocking, so
   // we wait for idle to avoid competing with LCP resources.
   // Fill the nav credits chip + dropdown panel + mobile row from the /api/me
-  // `upload` payload. Signed-in users spend size-priced credits; everything
-  // stays hidden when the balance is unknown (fetch failed / guest scope).
+  // `upload` payload. Signed-in users get a daily allowance of permanent uploads
+  // (temporary uploads are free & unlimited); everything stays hidden when the
+  // balance is unknown (fetch failed / guest scope).
   const fillCredits = (upload: any) => {
     if (!upload || upload.unit !== 'credits' || typeof upload.remaining !== 'number' || typeof upload.limit !== 'number') return;
     const low = upload.remaining <= upload.limit * 0.2;
     const pct = Math.max(0, Math.min(100, (upload.remaining / upload.limit) * 100));
-    const refill = upload.resetIn ? `Refills in ~${upload.resetIn}` : '≈1 credit per MB';
+    const refill = upload.resetIn ? `Refills in ~${upload.resetIn}` : 'Refills every 24h';
 
     const chip = document.getElementById('nav-credits-chip');
     const num = document.getElementById('nav-credits-num');
@@ -675,7 +676,7 @@ const toolsDropdown = getNavGroups(locale);
       : '';
 
     desktop.innerHTML = `
-      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Daily upload credits — refills every 24h">
+      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Keep-forever saves left today — refills every 24h (temporary uploads are free & unlimited)">
         ${icon(ic_toll, 'text-sm text-primary')}
         <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
       </a>
@@ -691,7 +692,7 @@ const toolsDropdown = getNavGroups(locale);
           </div>
           <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
             <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
-              <span class="text-neutral-500">Upload credits</span>
+              <span class="text-neutral-500">Keep-forever saves</span>
               <span><span id="nav-credits-panel-num" class="font-bold">—</span><span class="text-neutral-500" id="nav-credits-panel-cap"></span></span>
             </div>
             <div class="mt-2 h-1 bg-neutral-100 overflow-hidden">
@@ -724,7 +725,7 @@ const toolsDropdown = getNavGroups(locale);
         </a>
         <a href="/dashboard" id="nav-credits-mobile" class="hidden mx-4 mb-2 px-3 py-2.5 border border-outline-variant/40 bg-surface-container-low hover:bg-surface-container transition-colors">
           <span class="flex items-center justify-between text-xs font-medium text-on-surface">
-            <span class="flex items-center gap-1.5 text-on-surface-variant">${icon(ic_toll, 'text-sm text-primary')} Upload credits</span>
+            <span class="flex items-center gap-1.5 text-on-surface-variant">${icon(ic_toll, 'text-sm text-primary')} Keep-forever saves</span>
             <span><span id="nav-credits-mobile-num" class="font-bold">—</span><span class="text-on-surface-variant" id="nav-credits-mobile-cap"></span></span>
           </span>
           <span class="block mt-2 h-1 bg-surface-container-highest overflow-hidden">
