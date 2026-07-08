@@ -291,10 +291,13 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     }
   }
 
-  function setAction(text: string) {
+  // mode 'signin' navigates to login (href); mode 'keepforever' converts the
+  // upload to a permanent link in one tap (handled by the click listener below).
+  function setAction(text: string, mode: 'signin' | 'keepforever' = 'signin') {
     planAllowance?.classList.remove('hidden');
     planAction?.classList.remove('hidden');
     planAction?.classList.add('inline-flex');
+    if (planAction) (planAction as HTMLElement).dataset.mode = mode;
     if (planActionText) planActionText.textContent = text;
   }
 
@@ -311,10 +314,13 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
     if (planAllowanceLabel) planAllowanceLabel.textContent = '';
 
     if (!forever) {
-      if (planTitle) planTitle.textContent = 'Auto-deletes in ~2 weeks';
       if (signedIn) {
-        if (planCost) planCost.textContent = "Free & unlimited — doesn't touch your daily limit";
+        // Lead with the consequence: this link disappears. One tap makes it stay.
+        if (planTitle) planTitle.textContent = 'Temporary — this link is deleted in ~2 weeks';
+        if (planCost) planCost.textContent = "Free & unlimited, but it won't stay live.";
+        setAction('Keep it forever', 'keepforever');
       } else {
+        if (planTitle) planTitle.textContent = 'Temporary — deleted in ~2 weeks';
         if (planCost) planCost.textContent = 'Free — no account needed';
         if (u && u.unit === 'uploads' && typeof u.remaining === 'number') {
           setAllowance(`${u.remaining} of ${u.limit} free uploads left today`, u.remaining, u.limit);
@@ -339,6 +345,16 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
   if (expiresInSel) {
     expiresInSel.addEventListener('change', () => renderPlan(meCache));
   }
+
+  // In the signed-in Auto-delete state the action flips the upload to a permanent
+  // "Keep forever" link in one tap instead of navigating to sign-in.
+  planAction?.addEventListener('click', (e) => {
+    if ((planAction as HTMLElement).dataset.mode === 'keepforever' && expiresInSel) {
+      e.preventDefault();
+      expiresInSel.value = 'never';
+      renderPlan(meCache);
+    }
+  });
 
   const expiresHelpBtn = document.getElementById('expires-in-help');
   const expiresHelpPanel = document.getElementById('expires-in-help-panel');
