@@ -3,6 +3,7 @@ import Icon from '../Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
+import AdSlot from '../ads/AdSlot.astro';
 import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
@@ -177,6 +178,8 @@ and requires a same-site browser request from imagetourl.cloud.</code>
           </div>
         </div>
       </div>
+
+      <AdSlot placement="contentMidA" />
     </section>
   </main>
 

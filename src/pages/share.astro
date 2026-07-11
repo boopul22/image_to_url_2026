@@ -11,7 +11,8 @@ export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import ToolAdSurround from '../components/ToolAdSurround.astro';
+import ToolAdFrame from '../components/ads/ToolAdFrame.astro';
+import AdSlot from '../components/ads/AdSlot.astro';
 import SharePanel from '../components/SharePanel.astro';
 import SharePanelMulti from '../components/SharePanelMulti.astro';
 import { getValidUrls } from '../lib/share-url';
@@ -43,14 +44,14 @@ const single = urls.length === 1 ? urls[0] : undefined;
         <!-- Valid link(s): the share panel renders populated + visible server-side,
              flanked by the tool ad rails. One URL → the rich single panel; several
              (a bulk upload) → the multi-image list. -->
-        <ToolAdSurround>
+        <ToolAdFrame>
           {single
             ? <SharePanel url={single} copyDelayMs={1500} />
             : <SharePanelMulti urls={urls} skipped={skipped} copyDelayMs={1500} />}
           <div class="max-w-xl mx-auto mt-6 text-center">
             <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
           </div>
-        </ToolAdSurround>
+        </ToolAdFrame>
 
         <!-- Publisher content (kept at the BOTTOM, below the share panel). This is
              real, useful guidance about the link the visitor just created — it turns
@@ -148,6 +149,8 @@ const single = urls.length === 1 ? urls[0] : undefined;
               <Icon name="star" class="text-lg text-rose-600" /> Favicon generator
             </a>
           </div>
+
+          <AdSlot placement="bottomMultiplex" class="mt-12" />
         </section>
       </Fragment>
     ) : (

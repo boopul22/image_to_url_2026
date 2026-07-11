@@ -10,21 +10,10 @@ import Icon from './Icon.astro';
  * The soft radii/shadows come from the scoped `.soft-uploader` layer in global.css;
  * the rest of the site stays brutalist.
  */
-import AdRail from './ads/AdRail.astro';
-import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
 ---
 
-<!-- Tool-area ads: left + right 160x600 skyscrapers flank the uploader on lg+,
-     with a 90px horizontal banner above. The wrapper breaks out of its parent's
-     max-w-5xl constraint at lg+ via left-1/2/-translate-x-1/2 so all three
-     columns + gaps fit (~1040px) inside an lg:max-w-6xl frame. -->
-<div class="w-full mb-8 sm:mb-10 xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6">
-  <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-    <!-- Left rail — two stacked responsive ad units (vertical + square) -->
-    <AdRail side="left" />
-
-    <!-- Center column: uploader widget + trust signals. -->
-    <div class="w-full xl:flex-1 xl:max-w-2xl xl:min-w-0">
+<!-- Bare uploader widget — no ad markup of its own. Pages that want the rails +
+     mobile multiplex frame wrap this in <ToolAdFrame> (src/components/ads/). -->
       <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
         <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" multiple class="hidden" />
 
@@ -212,27 +201,6 @@ import { AD_CLIENT, AD_SLOTS } from '../lib/ads';
         </div>
 
       </div><!-- /soft-uploader -->
-    </div><!-- /center column -->
-
-    <!-- Right rail — two stacked responsive square ad units -->
-    <AdRail side="right" />
-  </div><!-- /flex wrapper -->
-
-  <!-- Mobile/tablet in-content Multiplex — fills the slot gap where desktop has
-       rails. Kept LAST in DOM (after both rails) so its lazy fill can't steal an
-       earlier eager rail's push. Below the fold → lazy-loaded by the observer. -->
-  <div class="xl:hidden w-full max-w-2xl mx-auto mt-6">
-    <div class="ad-reserve">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="autorelaxed"
-        data-ad-client={AD_CLIENT}
-        data-ad-slot={AD_SLOTS.inContent}
-        data-ad-lazy></ins>
-    </div>
-  </div>
-</div><!-- /ad-wrapped outer -->
 
 <script>
   import { ic_cloud_upload, ic_hourglass_top } from '../data/icon-svgs';

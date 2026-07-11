@@ -3,6 +3,7 @@ import Icon from '../Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
+import AdSlot from '../ads/AdSlot.astro';
 import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
@@ -53,6 +54,8 @@ function lp(path: string): string {
         </div>
       </div>
     </section>
+
+    <AdSlot placement="contentMidA" class="mb-10 sm:mb-24" />
 
     <section class="mb-10 sm:mb-24">
       <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
@@ -131,6 +134,8 @@ function lp(path: string): string {
         </div>
       </div>
     </section>
+
+    <AdSlot placement="bottomMultiplex" class="mt-10 sm:mt-16" />
   </main>
 
   <section class="bg-surface-container py-16 sm:py-24 border-t border-outline-variant/40 mt-12 sm:mt-20">

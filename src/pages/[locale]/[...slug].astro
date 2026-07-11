@@ -14,7 +14,8 @@ import ImageResizer from '../../components/ImageResizer.astro';
 import Base64Encoder from '../../components/Base64Encoder.astro';
 import Base64Decoder from '../../components/Base64Decoder.astro';
 import FaviconGenerator from '../../components/FaviconGenerator.astro';
-import ToolAdSurround from '../../components/ToolAdSurround.astro';
+import ToolAdFrame from '../../components/ads/ToolAdFrame.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
 import { locales, defaultLocale, type Locale } from '../../i18n/config';
 import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, isPageKey, type PageKey } from '../../i18n/landing/registry';
 import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
@@ -183,16 +184,16 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
 
   <main>
     <div class="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
-      {widget.kind === 'uploader' && <ImageUploader />}
-      {widget.kind === 'heic-to-jpg' && <ToolAdSurround><HeicConverter /></ToolAdSurround>}
-      {widget.kind === 'heic-to-png' && <ToolAdSurround><HeicPngConverter /></ToolAdSurround>}
-      {widget.kind === 'pdf' && <ToolAdSurround><PdfConverter from={widget.from} idPrefix={`pdf-${widget.from}-${locale}`} /></ToolAdSurround>}
-      {widget.kind === 'canvas' && <ToolAdSurround><CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} outExtOverride={widget.outExt} /></ToolAdSurround>}
-      {widget.kind === 'compressor' && <ToolAdSurround><ImageCompressor /></ToolAdSurround>}
-      {widget.kind === 'resizer' && <ToolAdSurround><ImageResizer /></ToolAdSurround>}
-      {widget.kind === 'base64-encoder' && <ToolAdSurround><Base64Encoder /></ToolAdSurround>}
-      {widget.kind === 'base64-decoder' && <ToolAdSurround><Base64Decoder /></ToolAdSurround>}
-      {widget.kind === 'favicon' && <ToolAdSurround><FaviconGenerator /></ToolAdSurround>}
+      {widget.kind === 'uploader' && <ToolAdFrame><ImageUploader /></ToolAdFrame>}
+      {widget.kind === 'heic-to-jpg' && <ToolAdFrame><HeicConverter /></ToolAdFrame>}
+      {widget.kind === 'heic-to-png' && <ToolAdFrame><HeicPngConverter /></ToolAdFrame>}
+      {widget.kind === 'pdf' && <ToolAdFrame><PdfConverter from={widget.from} idPrefix={`pdf-${widget.from}-${locale}`} /></ToolAdFrame>}
+      {widget.kind === 'canvas' && <ToolAdFrame><CanvasConverter from={widget.from} to={widget.to} idPrefix={`${widget.idPrefix}-${locale}`} outExtOverride={widget.outExt} /></ToolAdFrame>}
+      {widget.kind === 'compressor' && <ToolAdFrame><ImageCompressor /></ToolAdFrame>}
+      {widget.kind === 'resizer' && <ToolAdFrame><ImageResizer /></ToolAdFrame>}
+      {widget.kind === 'base64-encoder' && <ToolAdFrame><Base64Encoder /></ToolAdFrame>}
+      {widget.kind === 'base64-decoder' && <ToolAdFrame><Base64Decoder /></ToolAdFrame>}
+      {widget.kind === 'favicon' && <ToolAdFrame><FaviconGenerator /></ToolAdFrame>}
 
       <header class="mb-5 sm:mb-8 reveal">
         <span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest mb-3 sm:mb-4 border border-outline-variant/40">{c.badge}</span>
@@ -236,6 +237,8 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
         </div>
       </div>
     </section>
+
+    <AdSlot placement="contentMidA" class="max-w-5xl mx-auto px-3 sm:px-6 mt-8 sm:mt-12" />
 
     <section class="py-8 sm:py-12">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
@@ -302,6 +305,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
               <p class="font-body text-on-surface-variant leading-relaxed">{sec.body}</p>
             </div>
           ))}
+          {c.sections.length >= 2 && <AdSlot placement="articleMidA" />}
         </div>
       </section>
     )}
@@ -369,6 +373,8 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
         </div>
       </section>
     )}
+
+    <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto px-3 sm:px-6 mb-8 sm:mb-12" />
 
     <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">

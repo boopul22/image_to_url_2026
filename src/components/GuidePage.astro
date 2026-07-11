@@ -10,6 +10,8 @@ import Icon from './Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import AdSlot from './ads/AdSlot.astro';
+import { ARTICLE_ROTATION } from '../lib/ads';
 
 export interface Section { heading: string; paragraphs: string[] }
 export interface FaqItem { q: string; a: string }
@@ -74,11 +76,17 @@ const faqSchema = {
       )}
 
       <div class="prose-guide">
-        {sections.map(s => (
-          <section class="mb-8 sm:mb-10 reveal">
-            <h2 id={s.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')} class="text-lg sm:text-xl font-black font-headline tracking-tight mb-3">{s.heading}</h2>
-            {s.paragraphs.map(p => (<p class="font-body text-on-surface-variant mb-3 leading-relaxed">{p}</p>))}
-          </section>
+        {sections.map((s, i) => (
+          <>
+            <section class="mb-8 sm:mb-10 reveal">
+              <h2 id={s.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')} class="text-lg sm:text-xl font-black font-headline tracking-tight mb-3">{s.heading}</h2>
+              {s.paragraphs.map(p => (<p class="font-body text-on-surface-variant mb-3 leading-relaxed">{p}</p>))}
+            </section>
+            {/* Mid-article ad after every 3rd section (thin guides get none). */}
+            {sections.length >= 3 && i >= 1 && (i - 1) % 3 === 0 && (i - 1) / 3 < ARTICLE_ROTATION.length && (
+              <AdSlot placement={ARTICLE_ROTATION[(i - 1) / 3]} class="mb-8 sm:mb-10" />
+            )}
+          </>
         ))}
       </div>
 
@@ -93,6 +101,8 @@ const faqSchema = {
           ))}
         </div>
       </section>
+
+      <AdSlot placement="bottomMultiplex" class="mt-10 sm:mt-12" />
     </article>
 
     {relatedSlugs && relatedSlugs.length > 0 && (

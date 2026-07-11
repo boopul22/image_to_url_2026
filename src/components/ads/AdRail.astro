@@ -17,23 +17,23 @@
  * (a Best-Practices console-error fail). The inline guard below only push()es at
  * xl+; below xl it instead strips the `adsbygoogle` class off the hidden <ins> so
  * the slot leaves AdSense's candidate pool entirely — otherwise the next *visible*
- * push (the banner) would grab this 0-width slot in DOM order and still throw.
+ * push would grab this 0-width slot in DOM order and still throw.
  *
  * Slots (data-ad-format="auto" + full-width-responsive, so each adapts to the
  * 280px rail): each of the four rail boxes is its own distinct square ad unit
  * (per AdSense best practice — reusing one unit ID across boxes makes AdSense
  * unfill the duplicates).
  */
-import { AD_CLIENT as PUB, AD_SLOTS } from '../../lib/ads';
+import { AD_CLIENT as PUB, AD_PLACEMENTS } from '../../lib/ads';
 interface Props {
   side?: 'left' | 'right';
 }
-const { side = 'left' } = Astro.props;
+const { side = 'left' } = Astro.props as Props;
 
 // One distinct square ad unit per rail box (ids centralised in lib/ads.ts).
 const SLOTS = {
-  left: { top: AD_SLOTS.railLeftTop, bottom: AD_SLOTS.railLeftBottom },
-  right: { top: AD_SLOTS.railRightTop, bottom: AD_SLOTS.railRightBottom },
+  left: { top: AD_PLACEMENTS.railLeftTop.slot, bottom: AD_PLACEMENTS.railLeftBottom.slot },
+  right: { top: AD_PLACEMENTS.railRightTop.slot, bottom: AD_PLACEMENTS.railRightBottom.slot },
 } as const;
 const slot = SLOTS[side];
 ---

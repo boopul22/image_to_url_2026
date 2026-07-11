@@ -692,6 +692,27 @@ h1, h2, h3, h4, h5, h6 {
 .ad-reserve:has(> ins.adsbygoogle[data-ad-status="unfilled"]) {
   display: none;
 }
+/* AdSlot.astro renders an outer wrapper (carries visibility utilities + margins,
+   since .ad-reserve's unlayered display:flex would beat a `hidden` utility).
+   Collapse the wrapper too when its slot is unfilled so no margin remnant is
+   left behind. */
+[data-ad-outer]:has(.ad-reserve > ins.adsbygoogle[data-ad-status="unfilled"]) {
+  display: none;
+}
+/* Format-specific reserves (base .ad-reserve above = display responsive).
+   In-article fluid units fill ~250–450px; multiplex grids grow downward and sit
+   below the fold, so reserve more on desktop where they render multi-column. */
+.ad-reserve--in-article {
+  min-height: 280px;
+}
+.ad-reserve--multiplex {
+  min-height: 320px;
+}
+@media (min-width: 1024px) {
+  .ad-reserve--multiplex {
+    min-height: 420px;
+  }
+}
 
 /* Focus visible styles for accessibility */
 :focus-visible {

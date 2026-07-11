@@ -7,6 +7,7 @@ import Icon from './Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import AdSlot from './ads/AdSlot.astro';
 
 export interface FaqItem { q: string; a: string; }
 export interface Props {
@@ -82,6 +83,8 @@ const faqSchema = {
       </div>
     </section>
 
+    <AdSlot placement="articleMidA" class="max-w-3xl mx-auto px-3 sm:px-6 mt-8 sm:mt-12" />
+
     <section class="py-8 sm:py-12">
       <div class="max-w-3xl mx-auto px-3 sm:px-6">
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">FAQ</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
@@ -95,6 +98,8 @@ const faqSchema = {
         </div>
       </div>
     </section>
+
+    <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto px-3 sm:px-6 mb-8 sm:mb-12" />
 
     {relatedSlugs && relatedSlugs.length > 0 && (
       <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">

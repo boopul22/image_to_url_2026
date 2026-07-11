@@ -10,7 +10,7 @@ import { localizedUrl } from '../../i18n/landing/registry';
 import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
 import AdRail from '../ads/AdRail.astro';
-import { AD_CLIENT, AD_SLOTS } from '../../lib/ads';
+import AdSlot from '../ads/AdSlot.astro';
 
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -387,17 +387,7 @@ const pageSchema = [
   <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
        Multiplex (autorelaxed) grid; below the fold → lazy-loaded by the observer in
        Layout.astro (data-ad-lazy). -->
-  <div class="xl:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6">
-    <div class="ad-reserve">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-format="autorelaxed"
-        data-ad-client={AD_CLIENT}
-        data-ad-slot={AD_SLOTS.inContent}
-        data-ad-lazy></ins>
-    </div>
-  </div>
+  <AdSlot placement="toolBelowMultiplex" class="xl:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6" stripAboveXl />
 
   <!-- How It Works -->
   <section class="cv-auto max-w-5xl mx-auto px-4 sm:px-6 pt-2 pb-8 sm:pt-3 sm:pb-12">
@@ -507,7 +497,7 @@ const pageSchema = [
     </div>
   </section>
 
-
+  <AdSlot placement="contentMidA" class="max-w-3xl mx-auto px-4 sm:px-6" />
 
   <!-- How-to — targets informational "how to make an image url" long-tail cluster.
        Safe for the homepage: informational intent, the tool itself lives here, and no
@@ -656,6 +646,8 @@ const pageSchema = [
     </div>
   </section>
 
+  <AdSlot placement="contentMidB" class="max-w-3xl mx-auto px-4 sm:px-6 mt-8 sm:mt-12" />
+
   <!-- FAQ Accordion -->
   <section class="cv-auto max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <div class="text-center mb-5 sm:mb-8 reveal">
@@ -753,6 +745,8 @@ const pageSchema = [
       ))}
     </div>
   </div>
+
+  <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto px-4 sm:px-6 my-8 sm:my-12" />
 
   <!-- Final CTA -->
   <section class="cv-auto py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">

@@ -1,0 +1,91 @@
+---
+/**
+ * The one unified manual ad unit. Renders any placement from AD_PLACEMENTS by
+ * key as an outer wrapper (which takes the `class` prop — visibility utilities
+ * like `xl:hidden` MUST live here) around a dedicated `.ad-reserve` div (CLS
+ * reserve; its unlayered display:flex in global.css would beat a `hidden`
+ * utility, which is why visibility never goes on the reserve itself). When
+ * AdSense reports the slot unfilled, both the reserve and this outer wrapper
+ * collapse (see the [data-ad-outer] :has() rule in global.css) so no margin
+ * remnant is left behind.
+ *
+ * Loading: `data-ad-lazy` (default) hands the push to the shared
+ * IntersectionObserver in Layout.astro — pushed ~300px before viewport, with a
+ * 0-width retry guard (which multiplex units need) and `data-ad-pushed` dedupe.
+ * Slots hidden at the current breakpoint are simply never pushed. Only the
+ * rails (AdRail.astro) use eager inline pushes — don't add eager pushes here;
+ * a bare push({}) fills <ins> in DOM order and would steal another slot.
+ */
+import { AD_CLIENT, AD_PLACEMENTS, type PlacementKey } from '../../lib/ads';
+
+interface Props {
+  placement: PlacementKey;
+  /** Wrapper utilities: visibility (`xl:hidden`), margins, max-widths. */
+  class?: string;
+  /** Set false only for above-the-fold slots on eager pages (e.g. share). */
+  lazy?: boolean;
+  /**
+   * REQUIRED alongside an `xl:hidden` class. Emits an inline guard that strips
+   * the `adsbygoogle` class at xl+ so the hidden 0-width slot leaves AdSense's
+   * candidate pool. Without it, the next lazy push({}) on the page — which
+   * fills statusless <ins> in DOM order, not the observed one — gets consumed
+   * by this hidden slot and throws `Invalid responsive width … : 0`, shifting
+   * every later slot's fill by one. (Same guard AdRail uses, inverted.)
+   */
+  stripAboveXl?: boolean;
+}
+
+const { placement, class: cls = '', lazy = true, stripAboveXl = false } = Astro.props;
+const p = AD_PLACEMENTS[placement];
+const insAttrs = {
+  'data-ad-client': AD_CLIENT,
+  'data-ad-slot': p.slot,
+  ...(lazy ? { 'data-ad-lazy': '' } : {}),
+};
+---
+
+<div data-ad-outer class:list={cls} aria-label="Advertisement">
+  <div class:list={['ad-reserve', `ad-reserve--${p.format}`]}>
+    {p.format === 'display' && (
+      <ins
+        class="adsbygoogle"
+        style="display:block;width:100%"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+        {...insAttrs}></ins>
+    )}
+    {p.format === 'in-article' && (
+      <ins
+        class="adsbygoogle"
+        style="display:block;text-align:center;width:100%"
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+        {...insAttrs}></ins>
+    )}
+    {p.format === 'multiplex' && (
+      <ins
+        class="adsbygoogle"
+        style="display:block;width:100%"
+        data-ad-format="autorelaxed"
+        {...insAttrs}></ins>
+    )}
+    {stripAboveXl && (
+      <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(window.matchMedia('(min-width:1280px)').matches&&i){i.classList.remove('adsbygoogle');}})();</script>
+    )}
+  </div>
+</div>
+
+<script>
+  // Non-lazy slots (eager pages like /share) still need a push once the AdSense
+  // library loads. The Layout observer only handles [data-ad-lazy], so push
+  // eager AdSlot units here, in DOM order, guarded against double-push.
+  document
+    .querySelectorAll<HTMLElement>(
+      '.ad-reserve > ins.adsbygoogle:not([data-ad-lazy]):not([data-ad-pushed])'
+    )
+    .forEach((ins) => {
+      if (ins.offsetWidth === 0) return; // hidden at this breakpoint
+      ins.setAttribute('data-ad-pushed', '');
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    });
+</script>

@@ -3,6 +3,7 @@ import Icon from '../Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
+import AdSlot from '../ads/AdSlot.astro';
 import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
@@ -224,6 +225,8 @@ const pageSchema = [
         </div>
       </div>
     </section>
+
+    <AdSlot placement="contentMidA" class="mt-16 sm:mt-24" />
 
     <!-- CTA Visual Section -->
     <section class="mt-16 sm:mt-40 bg-surface-container border border-outline-variant/40 overflow-hidden flex flex-col lg:flex-row items-center p-4 sm:p-5 lg:p-12 relative">

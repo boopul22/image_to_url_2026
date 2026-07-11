@@ -424,8 +424,8 @@ function hreflangUrl(loc: Locale): string {
       })();
     </script>
 
-    <!-- GA4 — interaction-gated to avoid blocking LCP. AdSense moved to <head>
-         as a normal async script so Auto Ads can render on first paint. -->
+    <!-- GA4 — interaction-gated to avoid blocking LCP, same trigger set as the
+         AdSense loader in <head>. -->
     <script is:inline>
       (function(){
         var gaLoaded = false;

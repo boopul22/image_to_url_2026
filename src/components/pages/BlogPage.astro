@@ -9,6 +9,7 @@ import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPublishedPostsLocalized, getCategories } from '../../lib/cms';
 import { imgUrl } from '../../lib/img';
+import AdSlot from '../ads/AdSlot.astro';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -84,6 +85,7 @@ try {
         {posts.map((post, i) => {
           const isWide = i === posts.length - 1 && posts.length % 3 === 0;
           return (
+            <>
             <article class:list={["group", { "lg:col-span-2": isWide }]}>
               <a href={lp(`/blog/${post.slug}`)} class="block h-full">
                 <div class:list={[
@@ -158,11 +160,17 @@ try {
                 </div>
               </a>
             </article>
+            {/* In-grid ad cell after the 5th card. Deliberately plain (hairline
+                border only, no fake post chrome — an ad styled as content is an
+                AdSense policy violation). Collapses with the cell when unfilled. */}
+            {i === 4 && <AdSlot placement="blogGrid" class="border border-outline-variant/40 bg-surface" />}
+          </>
           );
         })}
       </div>
     </section>
 
+    <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto px-4 sm:px-6 mb-12 sm:mb-20" />
 
   </main>
 
