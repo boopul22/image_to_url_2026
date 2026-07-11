@@ -1,0 +1,67 @@
+---
+/**
+ * Lazy variant of AdRail for READING templates (blog posts, guides, Q&A) —
+ * same sticky two-unit-per-side geometry, different loading model.
+ *
+ * Why not AdRail: AdRail's eager inline push({}) pattern is only safe when the
+ * rails are the FIRST statusless <ins> in the DOM (true on tool pages — the
+ * center column carries no ad slots). On reading pages the center article
+ * CONTAINS lazy in-article <ins> slots that sit before the right rail in DOM
+ * order, so queued eager rail pushes would misfill them (a bare push({})
+ * fills statusless slots in DOM order). Here every rail <ins> is data-ad-lazy
+ * instead: the Layout.astro observer pushes each slot as it nears the
+ * viewport, and since ALL slots on these pages are lazy, push count equals
+ * visible-slot count — every visible slot gets its request even though bare
+ * pushes assign in DOM order.
+ *
+ * Below the breakpoint the rail <aside> is display:none, so each <ins> is
+ * 0-width. The inline guard strips the `adsbygoogle` class (inverse of
+ * AdRail's guard) so hidden slots leave AdSense's candidate pool — otherwise
+ * a visible slot's lazy push would be consumed by the hidden 0-width rail and
+ * throw `Invalid responsive width … : 0`.
+ *
+ * breakpoint: 'xl' (1280px — fits a max-w-2xl center: 280+24+672+24+280) or
+ * '2xl' (1536px — needed for a max-w-3xl center: 280+24+768+24+280 = 1376).
+ */
+import { AD_CLIENT as PUB, AD_PLACEMENTS } from '../../lib/ads';
+interface Props {
+  side?: 'left' | 'right';
+  breakpoint?: 'xl' | '2xl';
+}
+const { side = 'left', breakpoint = 'xl' } = Astro.props as Props;
+
+const SLOTS = {
+  left: { top: AD_PLACEMENTS.railLeftTop.slot, bottom: AD_PLACEMENTS.railLeftBottom.slot },
+  right: { top: AD_PLACEMENTS.railRightTop.slot, bottom: AD_PLACEMENTS.railRightBottom.slot },
+} as const;
+const slot = SLOTS[side];
+
+const showCls =
+  breakpoint === '2xl'
+    ? 'hidden 2xl:flex 2xl:flex-col 2xl:gap-4 2xl:flex-shrink-0 2xl:w-[280px] 2xl:sticky 2xl:top-20 2xl:self-start'
+    : 'hidden xl:flex xl:flex-col xl:gap-4 xl:flex-shrink-0 xl:w-[280px] xl:sticky xl:top-20 xl:self-start';
+const minWidth = breakpoint === '2xl' ? '1536px' : '1280px';
+---
+<aside class={showCls} aria-label="Sponsored" data-rail={side}>
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot={slot.top}
+    data-ad-lazy
+    data-strip-below={minWidth}></ins>
+  <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(i&&!window.matchMedia('(min-width:'+i.getAttribute('data-strip-below')+')').matches){i.classList.remove('adsbygoogle');}})();</script>
+
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+    data-ad-client={PUB}
+    data-ad-slot={slot.bottom}
+    data-ad-lazy
+    data-strip-below={minWidth}></ins>
+  <script is:inline>(function(){var i=document.currentScript.previousElementSibling;if(i&&!window.matchMedia('(min-width:'+i.getAttribute('data-strip-below')+')').matches){i.classList.remove('adsbygoogle');}})();</script>
+</aside>

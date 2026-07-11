@@ -1,0 +1,41 @@
+---
+/**
+ * Flanks a READING column (blog article, guide, Q&A) with lazy sticky rails
+ * (ArticleRails) at the given breakpoint. Unlike ToolAdFrame there is no
+ * mobile multiplex here — reading templates already carry in-article + bottom
+ * units — and the rails are lazy-pushed (see ArticleRails for why eager
+ * pushes are unsafe when the center content contains ad slots).
+ *
+ * Geometry: 280 + 24 + center + 24 + 280.
+ *  - breakpoint "xl"  (max-w-7xl = 1280): center up to max-w-2xl (672px)
+ *  - breakpoint "2xl" (max-w-[1400px]):   center up to max-w-3xl (768px)
+ * Below the breakpoint the frame is a plain pass-through wrapper.
+ */
+import ArticleRails from './ArticleRails.astro';
+interface Props {
+  breakpoint?: 'xl' | '2xl';
+}
+const { breakpoint = 'xl' } = Astro.props as Props;
+
+const outerCls =
+  breakpoint === '2xl'
+    ? 'w-full 2xl:relative 2xl:left-1/2 2xl:-translate-x-1/2 2xl:w-screen 2xl:max-w-[1400px] 2xl:px-6'
+    : 'w-full xl:relative xl:left-1/2 xl:-translate-x-1/2 xl:w-screen xl:max-w-7xl xl:px-6';
+const rowCls =
+  breakpoint === '2xl'
+    ? 'w-full 2xl:flex 2xl:items-start 2xl:justify-center 2xl:gap-6'
+    : 'w-full xl:flex xl:items-start xl:justify-center xl:gap-6';
+const centerCls =
+  breakpoint === '2xl'
+    ? 'w-full 2xl:flex-1 2xl:max-w-3xl 2xl:min-w-0'
+    : 'w-full xl:flex-1 xl:max-w-2xl xl:min-w-0';
+---
+<div class={outerCls}>
+  <div class={rowCls}>
+    <ArticleRails side="left" breakpoint={breakpoint} />
+    <div class={centerCls}>
+      <slot />
+    </div>
+    <ArticleRails side="right" breakpoint={breakpoint} />
+  </div>
+</div>

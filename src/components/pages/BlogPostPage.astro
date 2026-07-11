@@ -10,6 +10,7 @@ import { getDB } from '../../lib/db';
 import { getPostBySlugLocalized, getRelatedPosts } from '../../lib/cms';
 import { imgUrl, imgUrlAbs, rewriteOwnedCdnImagesInHtml } from '../../lib/img';
 import AdSlot from '../ads/AdSlot.astro';
+import RailFrame from '../ads/RailFrame.astro';
 import { ARTICLE_ROTATION, inArticleAdHtml } from '../../lib/ads';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -116,19 +117,20 @@ if (post.htmlContent) {
 }
 
 // Mid-article ads (htmlContent mode): inject an in-article unit before every
-// 3rd <h2> (starting at the 2nd, max 3 per post), rotating distinct slot ids.
-// Thin-content guard: skip short posts entirely so the ad:content ratio stays
-// policy-safe. Runs AFTER the heading-ID pass + CDN image rewrite (the injected
-// markup contains no <img> and no headings, so it can't disturb either).
+// 2nd <h2> (h2 #2, #4, #6, #8 — cap = rotation length), rotating distinct slot
+// ids. Thin-content guard: skip short posts entirely so the ad:content ratio
+// stays policy-safe. Runs AFTER the heading-ID pass + CDN image rewrite (the
+// injected markup contains no img tags and no headings, so it can't disturb
+// either).
 function injectInArticleAds(html: string): string {
   const textLen = html.replace(/<[^>]*>/g, '').length;
   const h2Count = (html.match(/<h2\b/gi) || []).length;
-  if (textLen < 1500 || h2Count < 3) return html;
+  if (textLen < 1200 || h2Count < 3) return html;
   let h2Index = 0;
   let injected = 0;
   return html.replace(/<h2\b/gi, (m) => {
     h2Index++;
-    if (h2Index >= 2 && (h2Index - 2) % 3 === 0 && injected < ARTICLE_ROTATION.length) {
+    if (h2Index >= 2 && h2Index % 2 === 0 && injected < ARTICLE_ROTATION.length) {
       return inArticleAdHtml(ARTICLE_ROTATION[injected++]) + m;
     }
     return m;
@@ -251,6 +253,7 @@ const faqSchema = post.faqItems?.length ? {
   ></div>
 
   <main class="pt-5 sm:pt-8 pb-16 sm:pb-24 px-5 sm:px-6">
+    <RailFrame breakpoint="xl">
     <article class="blog-article max-w-2xl mx-auto">
       <!-- Article Header -->
       <header class="mb-8 sm:mb-10">
@@ -358,6 +361,8 @@ const faqSchema = post.faqItems?.length ? {
         </details>
       )}
 
+      <AdSlot placement="leaderTop" class="my-8" />
+
       <!-- Article Body -->
       {post.htmlContent ? (
         <div class="landing-prose blog-html-content" set:html={displayHtml ?? post.htmlContent} />
@@ -397,13 +402,12 @@ const faqSchema = post.faqItems?.length ? {
                 </aside>
               )}
 
-              {/* Mid-article ad after every 3rd section (indexes 1, 4, 7), same
-                  cadence + thin-content guard as the htmlContent mode above. */}
+              {/* Mid-article ad after every 2nd section (indexes 1, 3, 5, 7),
+                  same cadence + thin-content guard as htmlContent mode above. */}
               {post.content.sections.length >= 3 &&
-                i >= 1 &&
-                (i - 1) % 3 === 0 &&
-                (i - 1) / 3 < ARTICLE_ROTATION.length && (
-                  <AdSlot placement={ARTICLE_ROTATION[(i - 1) / 3]} class="my-8" />
+                i % 2 === 1 &&
+                (i - 1) / 2 < ARTICLE_ROTATION.length && (
+                  <AdSlot placement={ARTICLE_ROTATION[(i - 1) / 2]} class="my-8" />
                 )}
             </>
           ))}
@@ -460,6 +464,7 @@ const faqSchema = post.faqItems?.length ? {
         </div>
       </section>
     </article>
+    </RailFrame>
 
     <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto mt-14 sm:mt-16" />
 

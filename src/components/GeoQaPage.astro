@@ -14,6 +14,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import AdSlot from './ads/AdSlot.astro';
+import RailFrame from './ads/RailFrame.astro';
 
 export interface FaqItem { q: string; a: string; }
 export interface Props {
@@ -53,6 +54,7 @@ const faqSchema = {
 <Layout title={metaTitle} description={metaDescription} schema={[qaSchema, faqSchema]} noHreflang>
   <Nav />
   <main>
+    <RailFrame breakpoint="2xl">
     <div class="max-w-3xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10">
       <article>
         <header class="mb-5 sm:mb-8 reveal">
@@ -60,6 +62,8 @@ const faqSchema = {
           <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-tight tracking-tighter mb-4 sm:mb-6">{question}</h1>
           <p class="speakable text-base sm:text-lg font-headline font-semibold text-on-background leading-relaxed bg-white border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">{shortAnswer}</p>
         </header>
+
+        <AdSlot placement="leaderTop" class="mb-8 sm:mb-12" />
 
         <section class="mb-8 sm:mb-12">
           {longAnswerParagraphs.map(p => (
@@ -83,6 +87,7 @@ const faqSchema = {
         </section>
       </article>
     </div>
+    </RailFrame>
 
     {relatedSlugs && relatedSlugs.length > 0 && (
       <>

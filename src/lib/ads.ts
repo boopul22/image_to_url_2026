@@ -1,6 +1,10 @@
 /**
- * Single source of truth for the site's ad setup (manual AdSense units only —
- * Auto Ads is OFF for this site; every impression comes from a placement below).
+ * Single source of truth for the site's ad setup. In-page ads are 100% manual
+ * (the placements below). Auto Ads is ON for OVERLAY FORMATS ONLY (anchor +
+ * vignette — ~70% of mobile display revenue industry-wide) with every in-page
+ * auto format disabled; do NOT re-enable in-page auto formats, they'd collide
+ * with this manual layout. Offerwall (rewarded ads) is enabled at the account
+ * level with ML frequency optimization.
  *
  * One `AdSlot` component (src/components/ads/AdSlot.astro) renders any placement
  * by key; `AdRail` renders the desktop side rails; `ToolAdFrame` wraps a tool
@@ -50,13 +54,16 @@ export const AD_PLACEMENTS = {
   railRightBottom: { slot: '5602530637', format: 'display' },
   // Mobile/tablet gap-filler below tool widgets (where desktop shows rails)
   toolBelowMultiplex: { slot: '5416461285', format: 'multiplex' },
+  // After-intro leaderboard (first in-page unit on content templates)
+  leaderTop: { slot: '2466487018', format: 'display' },
   // Between-section display units, shared across templates
   contentMidA: { slot: '8617339698', format: 'display' },
   contentMidB: { slot: '9738849672', format: 'display' },
-  // Mid-article fluid units (rotate A→B→C when a page injects several)
+  // Mid-article fluid units (rotate A→B→C→D when a page injects several)
   articleMidA: { slot: '9547277983', format: 'in-article' },
   articleMidB: { slot: '4462472264', format: 'in-article' },
   articleMidC: { slot: '8234196312', format: 'in-article' },
+  articleMidD: { slot: '7527242008', format: 'in-article' },
   // End-of-content multiplex, shared across templates
   bottomMultiplex: { slot: '2790297942', format: 'multiplex' },
   // Blog index in-grid cell
@@ -70,6 +77,7 @@ export const ARTICLE_ROTATION: readonly PlacementKey[] = [
   'articleMidA',
   'articleMidB',
   'articleMidC',
+  'articleMidD',
 ];
 
 /**
@@ -82,8 +90,12 @@ export const ARTICLE_ROTATION: readonly PlacementKey[] = [
 export function inArticleAdHtml(key: PlacementKey): string {
   const p = AD_PLACEMENTS[key];
   return (
+    // width:100% is load-bearing: .ad-reserve is display:flex, so a plain
+    // block <ins> shrinks to 0 width as a flex item — the lazy observer then
+    // never pushes it AND it sits as a statusless DOM-order sink that eats
+    // later slots' bare pushes. Must stay in sync with AdSlot.astro.
     `<div class="ad-reserve ad-reserve--in-article my-8" aria-label="Advertisement">` +
-    `<ins class="adsbygoogle" style="display:block;text-align:center" ` +
+    `<ins class="adsbygoogle" style="display:block;text-align:center;width:100%" ` +
     `data-ad-layout="in-article" data-ad-format="fluid" ` +
     `data-ad-client="${AD_CLIENT}" data-ad-slot="${p.slot}" data-ad-lazy></ins>` +
     `</div>`
