@@ -6,11 +6,45 @@ export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getDB } from '../lib/db';
 
 // No CDN caching — always fresh, private user data
 Astro.response.headers.set('Cache-Control', 'private, no-store');
 
 const user = Astro.locals.user!;
+
+// Email opt-in banner: shown to users who were never asked (legacy accounts) —
+// mirrors the needsPrompt logic in /api/email/preferences. Best-effort; the
+// dashboard must render even if the preferences lookup fails.
+let showEmailPrompt = false;
+try {
+  const pref = await getDB(Astro.locals)
+    .prepare(
+      `SELECT marketing_opt_in, marketing_consented_at, marketing_declined_at,
+              reminder_prompt_snoozed_until, unsubscribed_at
+       FROM email_preferences WHERE user_id = ?`,
+    )
+    .bind(user.id)
+    .first<{
+      marketing_opt_in: number;
+      marketing_consented_at: string | null;
+      marketing_declined_at: string | null;
+      reminder_prompt_snoozed_until: string | null;
+      unsubscribed_at: string | null;
+    }>();
+  const snoozedUntil = pref?.reminder_prompt_snoozed_until
+    ? Date.parse(pref.reminder_prompt_snoozed_until.replace(' ', 'T') + 'Z')
+    : 0;
+  showEmailPrompt =
+    !pref ||
+    (!pref.marketing_opt_in &&
+      !pref.marketing_consented_at &&
+      !pref.marketing_declined_at &&
+      !pref.unsubscribed_at &&
+      (!snoozedUntil || snoozedUntil < Date.now()));
+} catch {
+  /* banner is optional */
+}
 ---
 
 <Layout title="Dashboard - ImageToURL" noindex={true}>
@@ -38,6 +72,31 @@ const user = Astro.locals.user!;
         </span>
       </div>
     </section>
+
+    {showEmailPrompt && (
+      <section
+        id="email-alerts-banner"
+        class="bg-surface border border-outline-variant/40 hard-shadow p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5"
+      >
+        <Icon name="notifications_active" class="text-primary text-2xl shrink-0 hidden sm:block" />
+        <div class="flex-1 min-w-0">
+          <p class="font-headline italic font-black text-on-surface text-sm sm:text-base">Don't lose your image links</p>
+          <p class="text-on-surface-variant text-xs sm:text-[13px] leading-relaxed">
+            Get an email before your uploads expire, plus occasional product updates. Unsubscribe anytime.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            id="email-alerts-on"
+            class="min-h-10 px-5 bg-primary text-on-primary font-label text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all"
+          >Turn on</button>
+          <button
+            id="email-alerts-later"
+            class="min-h-10 px-4 border border-outline-variant/40 text-on-surface-variant font-label text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all"
+          >Not now</button>
+        </div>
+      </section>
+    )}
 
     <!-- Overview Stats. Icon color semantics: near-black (secondary) for neutral
          counts, amber (warning) for urgency, rose (primary) reserved for the
@@ -154,6 +213,35 @@ const user = Astro.locals.user!;
 
   <Footer />
 </Layout>
+
+<script>
+  // Email opt-in banner actions. "Turn on" = full opt-in; "Not now" = 30-day
+  // snooze (both via the existing preferences API). Best-effort: the banner
+  // hides immediately either way and server state catches up.
+  {
+    const banner = document.getElementById('email-alerts-banner');
+    const post = (action: string) => {
+      fetch('/api/email/preferences', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action }),
+      }).catch(() => {});
+    };
+    document.getElementById('email-alerts-on')?.addEventListener('click', () => {
+      post('opt_in');
+      if (banner) {
+        banner.innerHTML =
+          '<p class="flex items-center gap-2 font-bold text-primary text-sm">' +
+          '<span aria-hidden="true">&#10003;</span> Email alerts are on &mdash; we\'ll warn you before links expire.</p>';
+      }
+    });
+    document.getElementById('email-alerts-later')?.addEventListener('click', () => {
+      post('snooze');
+      banner?.remove();
+    });
+  }
+</script>
 
 <script>
   import { ic_image, ic_delete } from '../data/icon-svgs';

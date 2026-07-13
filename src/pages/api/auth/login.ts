@@ -55,11 +55,11 @@ function signInPage(): Response {
         <h1 style="margin:0 0 10px;font-size:28px;line-height:1.15;">Sign in with Google</h1>
         <p style="margin:0 0 22px;color:#52525b;line-height:1.55;font-size:15px;">Use your Google account for dashboard access, higher upload limits, and permanent image options.</p>
         <label style="display:flex;gap:10px;align-items:flex-start;margin:0 0 22px;color:#3f3f46;font-size:14px;line-height:1.45;">
-          <input type="checkbox" name="email_updates" value="1" style="margin-top:2px;width:16px;height:16px;accent-color:#e11d48;" />
-          <span>Email me occasional product updates and upload reminders. I can unsubscribe anytime.</span>
+          <input type="checkbox" name="email_updates" value="1" checked style="margin-top:2px;width:16px;height:16px;accent-color:#e11d48;" />
+          <span>Email me before my image links expire, plus occasional product updates. I can unsubscribe anytime.</span>
         </label>
         <button type="submit" style="width:100%;min-height:46px;border:0;background:#e11d48;color:#fff;font-weight:800;font-size:14px;cursor:pointer;">Continue with Google</button>
-        <p style="margin:18px 0 0;color:#71717a;font-size:12px;line-height:1.45;">If the box is unchecked, we will not enable reminder or marketing emails for this login.</p>
+        <p style="margin:18px 0 0;color:#71717a;font-size:12px;line-height:1.45;">Uncheck the box if you prefer no reminder or marketing emails for this login.</p>
       </form>
     </main>
   </body>
