@@ -45,10 +45,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		   FROM subscriptions
 		  WHERE user_id = ?
 		    AND provider = 'paddle'
+		    AND paddle_environment = ?
 		    AND status IN ('trialing', 'active', 'past_due', 'paused')
 		  LIMIT 1`,
 	)
-		.bind(locals.proUser!.id)
+		.bind(locals.proUser!.id, paddleEnvironment(env))
 		.first<{ provider_subscription_id: string | null }>();
 	if (activeSubscription) {
 		return json({ error: 'This workspace already has a Paddle subscription' }, 409);
@@ -58,9 +59,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		`SELECT COUNT(*) AS attempts
 		   FROM billing_checkout_requests
 		  WHERE user_id = ?
+		    AND paddle_environment = ?
 		    AND created_at >= datetime('now', '-1 hour')`,
 	)
-		.bind(locals.proUser!.id)
+		.bind(locals.proUser!.id, paddleEnvironment(env))
 		.first<{ attempts: number }>();
 	if (Number(recentAttempts?.attempts ?? 0) >= 5) {
 		return json({ error: 'Too many checkout attempts. Please try again later.' }, 429);
@@ -71,11 +73,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		   FROM subscriptions
 		  WHERE user_id = ?
 		    AND provider = 'paddle'
+		    AND paddle_environment = ?
 		    AND provider_customer_id IS NOT NULL
 		  ORDER BY updated_at DESC
 		  LIMIT 1`,
 	)
-		.bind(locals.proUser!.id)
+		.bind(locals.proUser!.id, paddleEnvironment(env))
 		.first<{ provider_customer_id: string }>();
 
 	try {
@@ -102,8 +105,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 		await env.PRO_DB.prepare(
 			`INSERT INTO billing_checkout_requests
-			   (transaction_id, user_id, plan, billing_interval, price_id, storage_pack_quantity, provider_customer_id)
-			 VALUES (?, ?, 'pro', ?, ?, ?, ?)`,
+			   (transaction_id, user_id, plan, billing_interval, price_id, storage_pack_quantity, provider_customer_id, paddle_environment)
+			 VALUES (?, ?, 'pro', ?, ?, ?, ?, ?)`,
 		)
 			.bind(
 				transaction.id,
@@ -112,6 +115,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				priceId,
 				storagePacks,
 				previousCustomer?.provider_customer_id ?? null,
+				paddleEnvironment(env),
 			)
 			.run();
 

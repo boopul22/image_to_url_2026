@@ -1,0 +1,53 @@
+---
+export const prerender = false;
+
+import ProMarketingShell from '../layouts/ProMarketingShell.astro';
+import { getProEnv } from '../lib/env';
+
+const env = getProEnv();
+const logoutEndpoint = new URL('/api/auth/logout', env.AUTH_API_ORIGIN);
+logoutEndpoint.searchParams.set('response', 'json');
+const fallbackEndpoint = new URL('/api/auth/logout', env.AUTH_API_ORIGIN);
+fallbackEndpoint.searchParams.set('return_to', env.SITE_URL);
+---
+
+<ProMarketingShell title="Signing out of ImageToURL Pro" noindex>
+  <main class="pro-auth-main">
+    <section
+      class="pro-auth-card pro-auth-signout"
+      data-logout-endpoint={logoutEndpoint.toString()}
+      data-fallback-endpoint={fallbackEndpoint.toString()}
+    >
+      <div class="pro-auth-mark" aria-hidden="true"><span></span></div>
+      <p class="marketing-kicker">ImageToURL Pro</p>
+      <h1>Signing you out securely.</h1>
+      <p class="pro-auth-intro" id="signout-status">Closing your shared ImageToURL session…</p>
+      <noscript>
+        <a class="pro-auth-button" href={fallbackEndpoint.toString()}>Continue to sign out</a>
+      </noscript>
+    </section>
+  </main>
+</ProMarketingShell>
+
+<script>
+  const card = document.querySelector<HTMLElement>('.pro-auth-signout');
+  const status = document.querySelector<HTMLElement>('#signout-status');
+
+  const signOut = async () => {
+    if (!card) return;
+    try {
+      const response = await fetch(card.dataset.logoutEndpoint || '', {
+        method: 'GET',
+        credentials: 'include',
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw new Error('Sign out failed');
+      window.location.replace('/');
+    } catch {
+      if (status) status.textContent = 'Finishing sign out…';
+      window.location.assign(card.dataset.fallbackEndpoint || '/');
+    }
+  };
+
+  void signOut();
+</script>

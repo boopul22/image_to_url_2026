@@ -133,11 +133,12 @@ export async function workspaceStorageLimitBytes(env: ProEnv, userId: string): P
 		   FROM subscriptions
 		  WHERE user_id = ?
 		    AND provider = 'paddle'
+		    AND paddle_environment = ?
 		    AND status IN ('trialing', 'active', 'past_due')
 		  ORDER BY updated_at DESC
 		  LIMIT 1`,
 	)
-		.bind(userId)
+		.bind(userId, paddleEnvironment(env))
 		.first<{ storage_pack_quantity: number }>();
 	return baseBytes + storagePackQuantity(subscription?.storage_pack_quantity) * packBytes;
 }

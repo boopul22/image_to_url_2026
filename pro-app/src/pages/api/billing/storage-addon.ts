@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import {
 	billingIntervalForBasePrice,
 	MAX_STORAGE_PACKS,
+	paddleEnvironment,
 	paddlePriceId,
 	paddleRequest,
 	PaddleApiError,
@@ -108,11 +109,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		   FROM subscriptions
 		  WHERE user_id = ?
 		    AND provider = 'paddle'
+		    AND paddle_environment = ?
 		    AND status IN ('trialing', 'active')
 		  ORDER BY updated_at DESC
 		  LIMIT 1`,
 	)
-		.bind(locals.proUser!.id)
+		.bind(locals.proUser!.id, paddleEnvironment(env))
 		.first<{
 			provider_subscription_id: string | null;
 			status: 'trialing' | 'active';
@@ -171,20 +173,21 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			`SELECT id
 			   FROM subscription_addon_changes
 			  WHERE user_id = ?
+			    AND paddle_environment = ?
 			    AND requested_quantity = ?
 			    AND status IN ('pending', 'completed')
 			    AND created_at >= datetime('now', '-1 minute')
 			  LIMIT 1`,
 		)
-			.bind(locals.proUser!.id, requestedQuantity)
+			.bind(locals.proUser!.id, paddleEnvironment(env), requestedQuantity)
 			.first();
 		if (recentChange) return json({ error: 'That storage change was already submitted' }, 409);
 
 		const changeId = crypto.randomUUID();
 		await env.PRO_DB.prepare(
 			`INSERT INTO subscription_addon_changes
-			   (id, user_id, provider_subscription_id, previous_quantity, requested_quantity, price_id)
-			 VALUES (?, ?, ?, ?, ?, ?)`,
+			   (id, user_id, provider_subscription_id, previous_quantity, requested_quantity, price_id, paddle_environment)
+			 VALUES (?, ?, ?, ?, ?, ?, ?)`,
 		)
 			.bind(
 				changeId,
@@ -193,6 +196,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				previousQuantity,
 				requestedQuantity,
 				requestedQuantity > 0 ? change.addonPrice : null,
+				paddleEnvironment(env),
 			)
 			.run();
 
@@ -218,8 +222,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				env.PRO_DB.prepare(
 					`UPDATE subscriptions
 					    SET storage_pack_quantity = ?, updated_at = datetime('now')
-					  WHERE provider_subscription_id = ?`,
-				).bind(requestedQuantity, current.provider_subscription_id),
+					  WHERE provider_subscription_id = ?
+					    AND paddle_environment = ?`,
+				).bind(requestedQuantity, current.provider_subscription_id, paddleEnvironment(env)),
 			]);
 		} catch (error) {
 			await env.PRO_DB.prepare(

@@ -7,6 +7,7 @@ import { generateId } from '../../../lib/crypto';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
 import { ensureEmailPreferences, sendWelcomeEmail, WELCOME_FROM } from '../../../lib/email-reminders';
+import { safeReturnTo } from '../../../lib/return-to';
 
 export const GET: APIRoute = async ({ request, url, cookies, redirect, locals }) => {
   const code = url.searchParams.get('code');
@@ -24,6 +25,15 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     cookies.get('google_oauth_code_verifier')?.value || parseCookie('google_oauth_code_verifier');
   const emailOptIn =
     (cookies.get('google_oauth_email_opt_in')?.value || parseCookie('google_oauth_email_opt_in')) === '1';
+  const encodedReturnTo =
+    cookies.get('google_oauth_return_to')?.value || parseCookie('google_oauth_return_to') || '';
+  let decodedReturnTo = encodedReturnTo;
+  try {
+    decodedReturnTo = decodeURIComponent(encodedReturnTo);
+  } catch {
+    decodedReturnTo = '';
+  }
+  const returnTo = safeReturnTo(decodedReturnTo);
 
   if (!code || !state || !storedState || !codeVerifier || state !== storedState) {
     const missing = [
@@ -154,12 +164,13 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     return new Response(null, {
       status: 302,
       headers: [
-        ['Location', `/?_=${Date.now()}`],
+        ['Location', returnTo === '/' ? `/?_=${Date.now()}` : returnTo],
         ['Set-Cookie', `session=${sessionToken}; ${sessionFlags}`],
         ['Set-Cookie', `has_session=1; ${hintFlags}`],
         ['Set-Cookie', `google_oauth_state=; ${clearFlags}`],
         ['Set-Cookie', `google_oauth_code_verifier=; ${clearFlags}`],
         ['Set-Cookie', `google_oauth_email_opt_in=; ${clearFlags}`],
+        ['Set-Cookie', `google_oauth_return_to=; ${clearFlags}`],
         ['Cache-Control', 'no-store'],
       ],
     });

@@ -10,19 +10,52 @@ interface AuthRow {
 }
 
 export async function authenticateSession(env: ProEnv, token: string): Promise<ProUser | null> {
-	const account = await env.AUTH_DB.prepare(
-		`SELECT u.id, u.name, u.email, u.avatar_url, u.role
-		   FROM sessions s
-		   JOIN users u ON u.id = s.user_id
-		  WHERE s.id = ?
-		    AND s.expires_at > datetime('now')
-		    AND COALESCE(u.is_banned, 0) = 0
-		  LIMIT 1`,
-	)
-		.bind(token)
-		.first<AuthRow>();
+	let response: Response;
+	try {
+		response = await env.AUTH_API.fetch(
+			new Request(new URL('/api/auth/session', env.AUTH_API_ORIGIN), {
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+					Cookie: `session=${encodeURIComponent(token)}`,
+				},
+				redirect: 'manual',
+			}),
+		);
+	} catch {
+		return null;
+	}
 
-	if (!account) return null;
+	if (!response.ok) return null;
+
+	const result = (await response.json()) as {
+		user?: {
+			id?: unknown;
+			name?: unknown;
+			email?: unknown;
+			avatarUrl?: unknown;
+			role?: unknown;
+		} | null;
+	};
+	const user = result.user;
+	if (
+		!user ||
+		typeof user.id !== 'string' ||
+		typeof user.name !== 'string' ||
+		typeof user.email !== 'string' ||
+		typeof user.avatarUrl !== 'string' ||
+		(user.role !== 'user' && user.role !== 'admin')
+	) {
+		return null;
+	}
+
+	const account: AuthRow = {
+		id: user.id,
+		name: user.name,
+		email: user.email,
+		avatar_url: user.avatarUrl || null,
+		role: user.role,
+	};
 
 	const profile = await env.PRO_DB.prepare(
 		`SELECT email, display_name, avatar_url, plan

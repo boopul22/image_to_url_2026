@@ -42,6 +42,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		const asset = await storeAsset({
 			env,
 			user: locals.proUser!,
+			origin: new URL(request.url).origin,
 			body: file.stream(),
 			name: file.name,
 			type: file.type,

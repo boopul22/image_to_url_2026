@@ -7,27 +7,33 @@ export const prerender = false;
 export const GET: APIRoute = async () => {
   try {
     const env = getProEnv();
-    const [result] = await Promise.all([
+    const [result, authResponse] = await Promise.all([
       env.PRO_DB.prepare('SELECT 1 AS healthy').first<{ healthy: number }>(),
-      env.AUTH_DB.prepare('SELECT 1 AS healthy').first(),
+      env.AUTH_API.fetch(
+        new Request(new URL('/api/auth/session', env.AUTH_API_ORIGIN), {
+          method: 'GET',
+          redirect: 'manual',
+        })
+      ),
       env.PRO_STORAGE.list({ limit: 1 }),
     ]);
 
     return Response.json({
-      ok: result?.healthy === 1,
+      ok: result?.healthy === 1 && authResponse.status === 401,
       service: 'imagetourl-pro-app',
       database: 'imagetourl-pro-db',
-      auth: 'imagetourl-db',
+      auth: 'https://imagetourl.cloud/api/auth/session',
       storage: 'imagetourl-pro-storage',
       billing: isPaddleCheckoutConfigured(env) ? 'configured' : 'disabled'
     });
-  } catch {
+  } catch (error) {
+    console.error('Pro health dependency check failed', error);
     return Response.json(
       {
         ok: false,
         service: 'imagetourl-pro-app',
         database: 'imagetourl-pro-db',
-        auth: 'imagetourl-db',
+        auth: 'https://imagetourl.cloud/api/auth/session',
         storage: 'imagetourl-pro-storage'
       },
       { status: 503 }

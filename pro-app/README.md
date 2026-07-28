@@ -11,21 +11,24 @@ The standalone Pro product for `pro.imagetourl.cloud`. It is deliberately isolat
 | Cloudflare Worker | `imagetourl-pro-app` |
 | D1 database | `imagetourl-pro-db` |
 | D1 binding | `PRO_DB` |
-| Shared identity database | `imagetourl-db` |
-| Identity binding | `AUTH_DB` |
+| Shared identity service | `https://imagetourl.cloud/api/auth/*` |
+| Identity service binding | `AUTH_API` → `imagetourl2026` |
 | R2 bucket | `imagetourl-pro-storage` |
 | R2 binding | `PRO_STORAGE` |
 | Session KV namespace | `imagetourl-pro-app-session` |
 | Production hostname | `pro.imagetourl.cloud` |
 
-The shared identity binding is used only to validate the existing ImageToURL
-session. Pro files, folders, preferences, subscriptions, and usage remain in the
-separate Pro resources.
+The Pro Worker validates the existing ImageToURL session through the main-domain
+authentication API over a Cloudflare service binding. It does not bind to or
+query the main identity database.
+Pro files, folders, preferences, subscriptions, and usage remain in the separate
+Pro resources.
 
 ## Production behavior
 
 - One ImageToURL Google account works across the main and Pro subdomains.
-- Anonymous dashboard requests return to the trusted main-site login.
+- Anonymous dashboard requests stay on the Pro sign-in UI, which starts Google
+  OAuth through the trusted main-domain authentication API.
 - Authenticated uploads are stored in the dedicated Pro R2 bucket.
 - JPG, PNG, GIF, WebP, and AVIF files are signature checked before storage.
 - Uploads are limited to 50 MB, 20 uploads per minute, and 50 GB per workspace.

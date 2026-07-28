@@ -3,11 +3,10 @@ import { env } from 'cloudflare:workers';
 
 export interface ProEnv {
 	PRO_DB: D1Database;
-	AUTH_DB: D1Database;
 	PRO_STORAGE: R2Bucket;
+	AUTH_API: Fetcher;
 	SITE_URL: string;
-	AUTH_LOGIN_URL: string;
-	AUTH_LOGOUT_URL: string;
+	AUTH_API_ORIGIN: string;
 	MAX_UPLOAD_BYTES: string;
 	STORAGE_LIMIT_BYTES: string;
 	STORAGE_ADDON_BYTES?: string;

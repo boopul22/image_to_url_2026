@@ -1,4 +1,4 @@
-import type { SubscriptionStatus } from './billing';
+import { paddleEnvironment, type SubscriptionStatus } from './billing';
 import type { ProEnv } from './env';
 import { json } from './http';
 
@@ -16,6 +16,7 @@ export async function getProAccessStatus(env: ProEnv, userId: string): Promise<P
 		   FROM subscriptions
 		  WHERE user_id = ?
 		    AND provider = 'paddle'
+		    AND paddle_environment = ?
 		  ORDER BY
 		    CASE status
 		      WHEN 'active' THEN 1
@@ -28,7 +29,7 @@ export async function getProAccessStatus(env: ProEnv, userId: string): Promise<P
 		    updated_at DESC
 		  LIMIT 1`,
 	)
-		.bind(userId)
+		.bind(userId, paddleEnvironment(env))
 		.first<{ status: SubscriptionStatus }>();
 
 	return subscription?.status ?? 'preview';

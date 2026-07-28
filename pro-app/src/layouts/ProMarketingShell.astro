@@ -43,7 +43,7 @@ const user = Astro.locals.proUser;
   </head>
   <body class="marketing-body">
     <header class="marketing-header">
-      <a class="marketing-brand" href="/" aria-label="Open ImageToURL Pro workspace">
+      <a class="marketing-brand" href={user ? '/workspace' : '/'} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">image to url</span>
         <span class="pro-chip">PRO</span>
@@ -55,9 +55,19 @@ const user = Astro.locals.proUser;
       </nav>
       <div class="marketing-actions">
         <a class="marketing-back" href="https://imagetourl.cloud">Free tools</a>
-        <a class="marketing-login" href={user ? '/' : 'https://imagetourl.cloud/api/auth/login?return_to=https%3A%2F%2Fpro.imagetourl.cloud%2F'}>
-          {user ? 'Open workspace' : 'Sign in'}
-        </a>
+        {user ? (
+          <>
+            <a class="marketing-signout" href="/sign-out">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M10 5H5v14h5M14 8l4 4-4 4M8 12h10" />
+              </svg>
+              <span>Sign out</span>
+            </a>
+            <a class="marketing-login" href="/workspace">Open workspace</a>
+          </>
+        ) : (
+          <a class="marketing-login" href="/sign-in?return_to=%2Fworkspace">Sign in</a>
+        )}
       </div>
     </header>
 
@@ -65,7 +75,7 @@ const user = Astro.locals.proUser;
 
     <footer class="marketing-footer">
       <div class="marketing-footer-brand">
-        <a class="marketing-brand" href="/" aria-label="Open ImageToURL Pro workspace">
+        <a class="marketing-brand" href={user ? '/workspace' : '/'} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">image to url</span>
           <span class="pro-chip">PRO</span>
@@ -75,7 +85,7 @@ const user = Astro.locals.proUser;
       <nav aria-label="Product links">
         <strong>Product</strong>
         <a href="/pricing">Pricing</a>
-        <a href="/">Workspace</a>
+        <a href={user ? '/workspace' : '/sign-in?return_to=%2Fworkspace'}>Workspace</a>
         <a href="https://imagetourl.cloud">Free ImageToURL</a>
       </nav>
       <nav aria-label="Legal links">

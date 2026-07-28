@@ -8,6 +8,67 @@ import { isSameOriginMutation, json, requireUser, safeFilename } from '../../lib
 import { storeAsset } from '../../lib/store-asset';
 
 const REMOTE_IMPORT_LIMIT = 10 * 1024 * 1024;
+const MAX_REDIRECTS = 5;
+
+function isPrivateIpv4(hostname: string): boolean {
+	const parts = hostname.split('.');
+	if (parts.length !== 4 || !parts.every((part) => /^\d{1,3}$/.test(part))) return false;
+	const octets = parts.map(Number);
+	if (octets.some((part) => part > 255)) return true;
+	const [first, second] = octets;
+	return first === 0 ||
+		first === 10 ||
+		first === 127 ||
+		(first === 100 && second >= 64 && second <= 127) ||
+		(first === 169 && second === 254) ||
+		(first === 172 && second >= 16 && second <= 31) ||
+		(first === 192 && second === 0) ||
+		(first === 192 && second === 168) ||
+		(first === 198 && (second === 18 || second === 19)) ||
+		first >= 224;
+}
+
+function isPrivateIpv6(hostname: string): boolean {
+	const normalized = hostname.replace(/^\[|\]$/g, '').toLowerCase();
+	if (!normalized.includes(':')) return false;
+	if (normalized === '::' || normalized === '::1') return true;
+	if (normalized.startsWith('fc') || normalized.startsWith('fd')) return true;
+	if (/^fe[89ab]/.test(normalized)) return true;
+	const mappedIpv4 = normalized.match(/(?:^|:)ffff:(\d+\.\d+\.\d+\.\d+)$/)?.[1];
+	return mappedIpv4 ? isPrivateIpv4(mappedIpv4) : false;
+}
+
+function isPublicHttpUrl(source: URL): boolean {
+	if (!['https:', 'http:'].includes(source.protocol) || source.username || source.password) return false;
+	const hostname = source.hostname.replace(/\.$/, '').toLowerCase();
+	if (
+		!hostname ||
+		hostname === 'localhost' ||
+		hostname.endsWith('.localhost') ||
+		hostname.endsWith('.local') ||
+		hostname.endsWith('.internal') ||
+		hostname.endsWith('.home.arpa')
+	) return false;
+	return !isPrivateIpv4(hostname) && !isPrivateIpv6(hostname);
+}
+
+async function fetchPublicImage(source: URL): Promise<Response> {
+	let current = source;
+	for (let redirects = 0; redirects <= MAX_REDIRECTS; redirects += 1) {
+		if (!isPublicHttpUrl(current)) throw new Error('PRIVATE_NETWORK');
+		const response = await fetch(current, {
+			headers: { Accept: 'image/avif,image/webp,image/png,image/jpeg,image/gif' },
+			redirect: 'manual',
+		});
+		if (![301, 302, 303, 307, 308].includes(response.status)) return response;
+		if (redirects === MAX_REDIRECTS) throw new Error('TOO_MANY_REDIRECTS');
+		const location = response.headers.get('Location');
+		await response.body?.cancel();
+		if (!location) throw new Error('INVALID_REDIRECT');
+		current = new URL(location, current);
+	}
+	throw new Error('TOO_MANY_REDIRECTS');
+}
 
 async function readWithLimit(response: Response): Promise<Uint8Array> {
 	if (!response.body) throw new Error('EMPTY_FILE');
@@ -58,15 +119,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return json({ error: 'Enter a valid image URL' }, 400);
 	}
 
-	if (!['https:', 'http:'].includes(source.protocol) || source.username || source.password) {
+	if (!isPublicHttpUrl(source)) {
 		return json({ error: 'Only public HTTP or HTTPS image URLs are supported' }, 400);
 	}
 
 	try {
-		const remote = await fetch(source, {
-			headers: { Accept: 'image/avif,image/webp,image/png,image/jpeg,image/gif' },
-			redirect: 'follow',
-		});
+		const remote = await fetchPublicImage(source);
 		if (!remote.ok) return json({ error: `The source returned HTTP ${remote.status}` }, 400);
 
 		const type = (remote.headers.get('Content-Type') ?? '').split(';')[0].trim().toLowerCase();
@@ -92,6 +150,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		const asset = await storeAsset({
 			env,
 			user: locals.proUser!,
+			origin: new URL(request.url).origin,
 			body: bytes,
 			name,
 			type,
@@ -110,6 +169,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		if (reason === 'RATE_LIMIT') return json({ error: 'Import limit reached. Try again in one minute.' }, 429);
 		if (reason === 'FILE_TOO_LARGE') return json({ error: 'Remote images must be 10 MB or smaller' }, 413);
 		if (reason === 'STORAGE_LIMIT') return json({ error: 'Your Pro storage allowance is full' }, 413);
+		if (reason === 'PRIVATE_NETWORK') {
+			return json({ error: 'Only public HTTP or HTTPS image URLs are supported' }, 400);
+		}
 		return json({ error: 'That image could not be imported safely' }, 400);
 	}
 };

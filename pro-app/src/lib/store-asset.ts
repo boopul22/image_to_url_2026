@@ -9,6 +9,7 @@ import type { ProUser } from './types';
 interface StoreAssetInput {
 	env: ProEnv;
 	user: ProUser;
+	origin: string;
 	body: ReadableStream | ArrayBuffer | ArrayBufferView;
 	name: string;
 	type: string;
@@ -111,14 +112,13 @@ export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 		throw error;
 	}
 
-	const origin = import.meta.env.DEV ? 'http://127.0.0.1:4322' : env.SITE_URL;
 	return {
 		id,
 		name,
 		mimeType: input.type,
 		sizeBytes: input.size,
 		visibility,
-		url: assetUrl(origin, id, name),
+		url: assetUrl(input.origin, id, name),
 		createdAt,
 	};
 }

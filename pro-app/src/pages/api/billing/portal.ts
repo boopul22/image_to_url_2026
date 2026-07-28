@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import {
+	paddleEnvironment,
 	paddleRequest,
 	PaddleApiError,
 	type PaddlePortalSession,
@@ -20,6 +21,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		   FROM subscriptions
 		  WHERE user_id = ?
 		    AND provider = 'paddle'
+		    AND paddle_environment = ?
 		    AND provider_customer_id IS NOT NULL
 		  ORDER BY
 		    CASE status
@@ -32,7 +34,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		    updated_at DESC
 		  LIMIT 1`,
 	)
-		.bind(locals.proUser!.id)
+		.bind(locals.proUser!.id, paddleEnvironment(env))
 		.first<{
 			provider_customer_id: string;
 			provider_subscription_id: string | null;

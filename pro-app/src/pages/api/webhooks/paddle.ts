@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import {
 	normalizeSubscriptionStatus,
+	paddleEnvironment,
 	paddlePriceId,
 	storageAddonPriceId,
 	storagePackQuantity,
@@ -20,8 +21,12 @@ const SUBSCRIPTION_EVENTS = new Set([
 
 export const POST: APIRoute = async ({ request }) => {
 	const env = getProEnv();
+	const environment = paddleEnvironment(env);
 	if (!env.PADDLE_WEBHOOK_SECRET) {
 		return json({ error: 'Paddle webhook is not configured' }, 503);
+	}
+	if (!environment) {
+		return json({ error: 'Paddle environment is not configured' }, 503);
 	}
 
 	const signature = request.headers.get('Paddle-Signature');
@@ -43,30 +48,36 @@ export const POST: APIRoute = async ({ request }) => {
 	}
 
 	const existingEvent = await env.PRO_DB.prepare(
-		'SELECT event_id FROM paddle_webhook_events WHERE event_id = ? LIMIT 1',
+		`SELECT event_id
+		   FROM paddle_webhook_events
+		  WHERE event_id = ?
+		    AND paddle_environment = ?
+		  LIMIT 1`,
 	)
-		.bind(event.event_id)
+		.bind(event.event_id, environment)
 		.first();
 	if (existingEvent) return json({ received: true, duplicate: true });
 
 	if (!SUBSCRIPTION_EVENTS.has(event.event_type)) {
-		await recordIgnoredEvent(env.PRO_DB, event);
+		await recordIgnoredEvent(env.PRO_DB, event, environment);
 		return json({ received: true, ignored: true });
 	}
 
 	const status = normalizeSubscriptionStatus(event.data.status);
 	if (!status || !event.data.customer_id) {
-		await recordIgnoredEvent(env.PRO_DB, event);
+		await recordIgnoredEvent(env.PRO_DB, event, environment);
 		return json({ received: true, ignored: true });
 	}
 
 	const currentSubscription = await env.PRO_DB.prepare(
 		`SELECT user_id, last_event_at
 		   FROM subscriptions
-		  WHERE provider = 'paddle' AND provider_subscription_id = ?
+		  WHERE provider = 'paddle'
+		    AND provider_subscription_id = ?
+		    AND paddle_environment = ?
 		  LIMIT 1`,
 	)
-		.bind(event.data.id)
+		.bind(event.data.id, environment)
 		.first<{ user_id: string; last_event_at: string | null }>();
 
 	let checkout:
@@ -82,9 +93,10 @@ export const POST: APIRoute = async ({ request }) => {
 			`SELECT user_id, plan, price_id, storage_pack_quantity
 			   FROM billing_checkout_requests
 			  WHERE transaction_id = ?
+			    AND paddle_environment = ?
 			  LIMIT 1`,
 		)
-			.bind(event.data.transaction_id)
+			.bind(event.data.transaction_id, environment)
 			.first<{
 				user_id: string;
 				plan: 'pro' | 'business';
@@ -120,7 +132,7 @@ export const POST: APIRoute = async ({ request }) => {
 				checkout.price_id !== priceId ||
 				storagePackQuantity(checkout.storage_pack_quantity) !== addonQuantity))
 	) {
-		await recordIgnoredEvent(env.PRO_DB, event);
+		await recordIgnoredEvent(env.PRO_DB, event, environment);
 		return json({ received: true, ignored: true });
 	}
 
@@ -128,7 +140,7 @@ export const POST: APIRoute = async ({ request }) => {
 		currentSubscription?.last_event_at &&
 		event.occurred_at < currentSubscription.last_event_at
 	) {
-		await recordIgnoredEvent(env.PRO_DB, event);
+		await recordIgnoredEvent(env.PRO_DB, event, environment);
 		return json({ received: true, ignored: true, reason: 'older_event' });
 	}
 
@@ -144,10 +156,11 @@ export const POST: APIRoute = async ({ request }) => {
 			   event_type,
 			   occurred_at,
 			   provider_entity_id,
+			   paddle_environment,
 			   processing_result,
 			   processed_at
-			 ) VALUES (?, ?, ?, ?, 'processed', datetime('now'))`,
-		).bind(event.event_id, event.event_type, event.occurred_at, event.data.id),
+			 ) VALUES (?, ?, ?, ?, ?, 'processed', datetime('now'))`,
+		).bind(event.event_id, event.event_type, event.occurred_at, event.data.id, environment),
 		env.PRO_DB.prepare(
 			`INSERT INTO subscriptions (
 			   id,
@@ -163,8 +176,9 @@ export const POST: APIRoute = async ({ request }) => {
 			   cancel_at_period_end,
 			   scheduled_change,
 			   last_event_at,
-			   storage_pack_quantity
-			 ) VALUES (?, ?, 'paddle', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			   storage_pack_quantity,
+			   paddle_environment
+			 ) VALUES (?, ?, 'paddle', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 			 ON CONFLICT(provider_subscription_id) DO UPDATE SET
 			   provider_customer_id = excluded.provider_customer_id,
 			   provider_transaction_id = COALESCE(
@@ -179,6 +193,7 @@ export const POST: APIRoute = async ({ request }) => {
 			   scheduled_change = excluded.scheduled_change,
 			   last_event_at = excluded.last_event_at,
 			   storage_pack_quantity = excluded.storage_pack_quantity,
+			   paddle_environment = excluded.paddle_environment,
 			   updated_at = datetime('now')`,
 		).bind(
 			`paddle:${event.data.id}`,
@@ -194,6 +209,7 @@ export const POST: APIRoute = async ({ request }) => {
 			scheduledChange,
 			event.occurred_at,
 			addonQuantity,
+			environment,
 		),
 		...(event.data.transaction_id
 			? [
@@ -202,8 +218,9 @@ export const POST: APIRoute = async ({ request }) => {
 						    SET status = 'completed',
 						        provider_customer_id = ?,
 						        updated_at = datetime('now')
-						  WHERE transaction_id = ?`,
-					).bind(event.data.customer_id, event.data.transaction_id),
+						  WHERE transaction_id = ?
+						    AND paddle_environment = ?`,
+					).bind(event.data.customer_id, event.data.transaction_id, environment),
 				]
 			: []),
 		env.PRO_DB.prepare(
@@ -213,19 +230,24 @@ export const POST: APIRoute = async ({ request }) => {
 			        SELECT 1 FROM subscriptions
 			         WHERE user_id = ?
 			           AND provider = 'paddle'
+			           AND paddle_environment = ?
 			           AND status IN ('trialing', 'active', 'past_due')
 			      ) THEN 'pro'
 			      ELSE 'trial'
 			    END,
 			    updated_at = datetime('now')
 			  WHERE id = ?`,
-		).bind(userId, userId),
+		).bind(userId, environment, userId),
 	]);
 
 	return json({ received: true });
 };
 
-async function recordIgnoredEvent(db: D1Database, event: PaddleWebhookEvent): Promise<void> {
+async function recordIgnoredEvent(
+	db: D1Database,
+	event: PaddleWebhookEvent,
+	environment: 'sandbox' | 'production',
+): Promise<void> {
 	await db
 		.prepare(
 			`INSERT INTO paddle_webhook_events (
@@ -233,10 +255,11 @@ async function recordIgnoredEvent(db: D1Database, event: PaddleWebhookEvent): Pr
 			   event_type,
 			   occurred_at,
 			   provider_entity_id,
+			   paddle_environment,
 			   processing_result,
 			   processed_at
-			 ) VALUES (?, ?, ?, ?, 'ignored', datetime('now'))`,
+			 ) VALUES (?, ?, ?, ?, ?, 'ignored', datetime('now'))`,
 		)
-		.bind(event.event_id, event.event_type, event.occurred_at, event.data.id)
+		.bind(event.event_id, event.event_type, event.occurred_at, event.data.id, environment)
 		.run();
 }
