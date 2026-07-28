@@ -3,6 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { isAllowedImageType, matchesFileSignature } from '../../lib/assets';
 import { getProEnv } from '../../lib/env';
+import { requireProAccess } from '../../lib/entitlements';
 import { isSameOriginMutation, json, requireUser, safeFilename } from '../../lib/http';
 import { storeAsset } from '../../lib/store-asset';
 
@@ -38,6 +39,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const authError = requireUser(locals.proUser);
 	if (authError) return authError;
 	if (!isSameOriginMutation(request)) return json({ error: 'Invalid request origin' }, 403);
+
+	const env = getProEnv();
+	const entitlementError = await requireProAccess(env, locals.proUser!.id);
+	if (entitlementError) return entitlementError;
 
 	const payload = await request.json().catch(() => null) as {
 		url?: unknown;
@@ -85,7 +90,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			: 'unlisted';
 
 		const asset = await storeAsset({
-			env: getProEnv(),
+			env,
 			user: locals.proUser!,
 			body: bytes,
 			name,
@@ -98,6 +103,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	} catch (error) {
 		console.error('Remote import failed', error);
 		const reason = error instanceof Error ? error.message : '';
+		if (reason === 'PRO_REQUIRED') {
+			return (await requireProAccess(env, locals.proUser!.id)) ??
+				json({ error: 'An active Pro plan is required to import images', code: 'PRO_REQUIRED' }, 402);
+		}
 		if (reason === 'RATE_LIMIT') return json({ error: 'Import limit reached. Try again in one minute.' }, 429);
 		if (reason === 'FILE_TOO_LARGE') return json({ error: 'Remote images must be 10 MB or smaller' }, 413);
 		if (reason === 'STORAGE_LIMIT') return json({ error: 'Your Pro storage allowance is full' }, 413);

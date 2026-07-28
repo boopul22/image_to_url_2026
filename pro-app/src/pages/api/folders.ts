@@ -2,6 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getProEnv } from '../../lib/env';
+import { requireProAccess } from '../../lib/entitlements';
 import { isSameOriginMutation, json, requireUser, slugify } from '../../lib/http';
 
 export const GET: APIRoute = async ({ locals }) => {
@@ -25,6 +26,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	if (authError) return authError;
 	if (!isSameOriginMutation(request)) return json({ error: 'Invalid request origin' }, 403);
 
+	const env = getProEnv();
+	const entitlementError = await requireProAccess(env, locals.proUser!.id);
+	if (entitlementError) return entitlementError;
+
 	const payload = await request.json().catch(() => null) as { name?: unknown } | null;
 	const name = typeof payload?.name === 'string' ? payload.name.trim().slice(0, 48) : '';
 	if (!name) return json({ error: 'Enter a folder name' }, 400);
@@ -32,7 +37,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const id = crypto.randomUUID();
 	const slug = slugify(name);
 	try {
-		await getProEnv().PRO_DB.prepare(
+		await env.PRO_DB.prepare(
 			'INSERT INTO folders (id, user_id, name, slug) VALUES (?, ?, ?, ?)',
 		)
 			.bind(id, locals.proUser!.id, name, slug)

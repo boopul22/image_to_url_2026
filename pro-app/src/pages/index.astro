@@ -8,6 +8,7 @@ import {
   storagePackQuantity,
   workspaceStorageLimitBytes,
 } from '../lib/billing';
+import { hasProAccess } from '../lib/entitlements';
 import { getProEnv } from '../lib/env';
 
 const user = Astro.locals.proUser!;
@@ -119,6 +120,17 @@ const addonPackOptions = Array.from({ length: 11 }, (_, quantity) => {
   };
 });
 const billingStatus = subscription?.status ?? 'preview';
+const proAccessEnabled = hasProAccess(subscription?.status);
+const accessNeedsBillingRepair = subscription?.status === 'past_due' || subscription?.status === 'paused';
+const accessHeadline = accessNeedsBillingRepair
+  ? subscription?.status === 'past_due'
+    ? 'Restore uploads by fixing your payment'
+    : 'Resume Pro to keep uploading'
+  : 'Unlock your permanent image workspace';
+const accessCopy = accessNeedsBillingRepair
+  ? 'Your existing library stays available. New uploads and URL imports are paused until billing is active again.'
+  : 'You can explore the workspace now. An active Pro subscription is required before ImageToURL stores a file or creates a permanent URL.';
+const accessActionLabel = accessNeedsBillingRepair ? 'Manage billing' : 'Choose Pro';
 const billingStatusLabel = {
   preview: 'Pro preview',
   incomplete: 'Setup incomplete',
@@ -138,7 +150,11 @@ logoutUrl.searchParams.set('return_to', origin);
 ---
 
 <ProShell>
-  <div class="app-shell">
+  <div
+    class:list={['app-shell', { 'is-preview-workspace': !proAccessEnabled }]}
+    data-pro-access={String(proAccessEnabled)}
+    data-access-status={billingStatus}
+  >
     <aside class="sidebar" aria-label="Primary navigation">
       <a class="brand" href="/" aria-label="ImageToURL Pro home">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -203,7 +219,7 @@ logoutUrl.searchParams.set('return_to', origin);
 	          : <span class="avatar" aria-hidden="true">{avatarInitial}</span>}
 	        <span class="profile-copy">
 	          <strong>{user.name}</strong>
-	          <span>{user.plan === 'trial' ? 'Pro preview' : `${user.plan} workspace`}</span>
+	          <span>{proAccessEnabled ? 'Pro workspace' : 'Pro preview'}</span>
 	        </span>
 	      </div>
     </aside>
@@ -233,7 +249,12 @@ logoutUrl.searchParams.set('return_to', origin);
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7.5a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M12 11v5M9.5 13.5h5"/></svg>
             New folder
           </button>
-          <button class="button button-primary" id="upload-button" type="button">
+          <button
+            class="button button-primary"
+            id="upload-button"
+            type="button"
+            aria-describedby={!proAccessEnabled ? 'upload-access-copy' : undefined}
+          >
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 16V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v5h14v-5"/></svg>
             Upload images
           </button>
@@ -259,14 +280,38 @@ logoutUrl.searchParams.set('return_to', origin);
             </div>
 
             <div class="upload-studio">
+              {!proAccessEnabled && (
+                <section class="upload-access" aria-labelledby="upload-access-heading">
+                  <span class="upload-access-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <rect x="5" y="10" width="14" height="10" rx="3"></rect>
+                      <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10"></path>
+                    </svg>
+                  </span>
+                  <span class="upload-access-copy">
+                    <small>{billingStatusLabel}</small>
+                    <strong id="upload-access-heading">{accessHeadline}</strong>
+                    <span id="upload-access-copy">{accessCopy}</span>
+                  </span>
+                  <button class="upload-access-action" id="upload-access-action" type="button">
+                    {accessActionLabel}
+                  </button>
+                </section>
+              )}
+
               <div class="source-tabs" role="tablist" aria-label="Choose upload source">
                 <button type="button" role="tab" aria-selected="true" aria-controls="file-source" id="file-tab">Files</button>
                 <button type="button" role="tab" aria-selected="false" aria-controls="url-source" id="url-tab">From URL</button>
               </div>
 
               <div id="file-source" role="tabpanel" aria-labelledby="file-tab">
-                <label class="dropzone" id="dropzone" tabindex="0">
-	                  <input class="sr-only" id="file-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/avif" multiple />
+                <label
+                  class:list={['dropzone', { 'is-locked': !proAccessEnabled }]}
+                  id="dropzone"
+                  tabindex="0"
+                  aria-disabled={!proAccessEnabled}
+                >
+	                  <input class="sr-only" id="file-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/avif" multiple disabled={!proAccessEnabled} />
                   <span>
                     <span class="drop-icon">
                       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 16V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v5h14v-5"/></svg>
@@ -276,7 +321,7 @@ logoutUrl.searchParams.set('return_to', origin);
                       <span class="drop-copy-mobile">Tap to choose images</span>
                     </strong>
 	                    <small>JPG, PNG, GIF, WebP, AVIF · up to 50 MB</small>
-                    <span class="browse-link">Choose files</span>
+                    <span class="browse-link">{proAccessEnabled ? 'Choose files' : 'Unlock uploads'}</span>
                     <span class="file-feedback" id="file-feedback" aria-live="polite"></span>
                   </span>
                 </label>
@@ -288,8 +333,8 @@ logoutUrl.searchParams.set('return_to', origin);
 	                <p>Paste a public direct image URL up to 10 MB. Pro will preserve the original in your library.</p>
                 <form class="url-form" id="url-form">
                   <label class="sr-only" for="source-url">Image URL</label>
-                  <input id="source-url" type="url" placeholder="https://example.com/image.jpg" required />
-	                  <button type="submit">Import</button>
+                  <input id="source-url" type="url" placeholder="https://example.com/image.jpg" required disabled={!proAccessEnabled} />
+	                  <button type="submit" disabled={!proAccessEnabled}>{proAccessEnabled ? 'Import' : 'Unlock Pro'}</button>
 	                </form>
 	                <div class="url-preview" id="url-preview" hidden>
 	                  <img id="url-preview-image" alt="" />
@@ -302,11 +347,11 @@ logoutUrl.searchParams.set('return_to', origin);
 	                  <span class="preference-check" aria-hidden="true">✓</span>
 	                  Original preserved
 	                </button>
-	                <button class="preference" type="button" aria-pressed={privateDefault} data-preference="private">
+	                <button class="preference" type="button" aria-pressed={privateDefault} data-preference="private" disabled={!proAccessEnabled}>
 	                  <span class="preference-check" aria-hidden="true">✓</span>
 	                  Private link
 	                </button>
-	                <select class="folder-select" id="upload-folder" aria-label="Upload folder">
+	                <select class="folder-select" id="upload-folder" aria-label="Upload folder" disabled={!proAccessEnabled}>
 	                  <option value="">No folder</option>
 	                  {folders.map((folder) => <option value={folder.id}>{folder.name}</option>)}
 	                </select>
@@ -353,7 +398,9 @@ logoutUrl.searchParams.set('return_to', origin);
               <span class="tool-icon">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8.5"/><path d="M3.8 9h16.4M3.8 15h16.4M12 3.5c2 2.3 3 5.1 3 8.5s-1 6.2-3 8.5c-2-2.3-3-5.1-3-8.5s1-6.2 3-8.5Z"/></svg>
               </span>
-	              <span class="status-dot">Active</span>
+	              <span class:list={['status-dot', { 'status-neutral': !proAccessEnabled }]}>
+                  {proAccessEnabled ? 'Active' : 'Preview'}
+                </span>
 	              <h3>Secure delivery</h3>
 	              <p>Every asset gets a stable HTTPS URL on the Pro edge.</p>
 	              <code id="custom-domain-display">pro.imagetourl.cloud/files</code>
@@ -363,7 +410,9 @@ logoutUrl.searchParams.set('return_to', origin);
               <span class="tool-icon">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m13 2-8 12h6l-1 8 9-13h-6Z"/></svg>
               </span>
-	              <span class="status-dot">Active</span>
+	              <span class:list={['status-dot', { 'status-neutral': !proAccessEnabled }]}>
+                  {proAccessEnabled ? 'Active' : 'Preview'}
+                </span>
 	              <h3>Original delivery</h3>
 	              <p>Files stream directly from dedicated Pro object storage.</p>
 	              <span class="tool-metric">Immutable cache-ready URLs</span>
@@ -383,7 +432,9 @@ logoutUrl.searchParams.set('return_to', origin);
               <span class="tool-icon">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="7" width="16" height="13" rx="3"/><path d="M8 7V5a4 4 0 0 1 8 0v2M12 12v3"/></svg>
               </span>
-	              <span class="status-dot">Available</span>
+	              <span class:list={['status-dot', { 'status-neutral': !proAccessEnabled }]}>
+                  {proAccessEnabled ? 'Available' : 'Preview'}
+                </span>
 	              <h3>Protected links</h3>
 	              <p>Private assets only open inside the owner’s signed-in workspace.</p>
 	              <span class="tool-metric">Choose “Private link” before upload</span>
@@ -439,9 +490,15 @@ logoutUrl.searchParams.set('return_to', origin);
 	            )) : (
 	              <div class="empty-library">
 	                <span class="empty-library-mark" aria-hidden="true">↗</span>
-	                <h3>Your Pro library is ready.</h3>
-	                <p>Upload your first image to create a permanent, copy-ready URL.</p>
-	                <button class="button button-primary" id="empty-upload-button" type="button">Choose an image</button>
+	                <h3>{proAccessEnabled ? 'Your Pro library is ready.' : 'This is your Pro library preview.'}</h3>
+	                <p>
+                    {proAccessEnabled
+                      ? 'Upload your first image to create a permanent, copy-ready URL.'
+                      : 'Subscribe to store your first image and create a permanent, copy-ready URL.'}
+                  </p>
+	                <button class="button button-primary" id="empty-upload-button" type="button">
+                    {proAccessEnabled ? 'Choose an image' : 'Unlock uploads'}
+                  </button>
 	              </div>
 	            )}
 	          </div>
@@ -604,6 +661,30 @@ logoutUrl.searchParams.set('return_to', origin);
       </form>
     </dialog>
 
+    <dialog class="pro-dialog upload-result-dialog" id="upload-result-dialog" aria-labelledby="upload-result-title">
+      <section class="upload-result-shell">
+        <header class="upload-result-head">
+          <span class="upload-result-mark" id="upload-result-mark" aria-hidden="true">✓</span>
+          <span>
+            <small class="dialog-kicker" id="upload-result-kicker">Upload complete</small>
+            <h2 id="upload-result-title">Your URL is ready.</h2>
+            <p id="upload-result-summary">Copy it now or open the image to verify it.</p>
+          </span>
+          <button class="dialog-close" type="button" data-close-dialog aria-label="Close upload results">×</button>
+        </header>
+        <div class="upload-result-list" id="upload-result-list"></div>
+        <div class="upload-result-batch-actions">
+          <button class="button button-secondary" id="copy-all-results" type="button" hidden>
+            Copy all URLs
+          </button>
+        </div>
+        <footer class="dialog-actions upload-result-actions">
+          <button class="button button-secondary" type="button" data-close-dialog>View library</button>
+          <button class="button button-primary" id="upload-more-button" type="button">Upload more</button>
+        </footer>
+      </section>
+    </dialog>
+
     <nav class="mobile-nav" aria-label="Mobile navigation">
       <a href="#workspace-top" aria-current="page" aria-label="Workspace">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9v11h13V9M9.5 20v-6h5v6"/></svg>
@@ -679,7 +760,38 @@ logoutUrl.searchParams.set('return_to', origin);
 	    const privatePreference = document.querySelector<HTMLButtonElement>('[data-preference="private"]');
 	    const uploadFolder = document.querySelector('#upload-folder') as (Element & { value: string }) | null;
       const mobileNavLinks = document.querySelectorAll<HTMLAnchorElement>('.mobile-nav a');
+      const appShell = document.querySelector<HTMLElement>('.app-shell');
+      const proAccessEnabled = appShell?.dataset.proAccess === 'true';
+      const uploadAccessAction = document.querySelector<HTMLButtonElement>('#upload-access-action');
+      const uploadResultDialog = document.querySelector<HTMLDialogElement>('#upload-result-dialog');
+      const uploadResultMark = document.querySelector<HTMLElement>('#upload-result-mark');
+      const uploadResultKicker = document.querySelector<HTMLElement>('#upload-result-kicker');
+      const uploadResultTitle = document.querySelector<HTMLElement>('#upload-result-title');
+      const uploadResultSummary = document.querySelector<HTMLElement>('#upload-result-summary');
+      const uploadResultList = document.querySelector<HTMLElement>('#upload-result-list');
+      const copyAllResults = document.querySelector<HTMLButtonElement>('#copy-all-results');
+      const uploadMoreButton = document.querySelector<HTMLButtonElement>('#upload-more-button');
 	    let toastTimer: number | undefined;
+
+      interface UploadAsset {
+        id: string;
+        name: string;
+        mimeType: string;
+        sizeBytes: number;
+        visibility: 'private' | 'unlisted' | 'public';
+        url: string;
+        createdAt: string;
+      }
+
+      interface UploadFailure {
+        name: string;
+        error: string;
+      }
+
+      interface UploadResultState {
+        successes: UploadAsset[];
+        failures: UploadFailure[];
+      }
 
 	    const showToast = (message: string) => {
 	      if (!toast || !toastMessage) return;
@@ -688,6 +800,24 @@ logoutUrl.searchParams.set('return_to', origin);
 	      toast.classList.add('is-visible');
 	      toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 3200);
 	    };
+
+      const copyText = async (value: string): Promise<boolean> => {
+        try {
+          await navigator.clipboard.writeText(value);
+          return true;
+        } catch {
+          const fallback = document.createElement('textarea');
+          fallback.value = value;
+          fallback.setAttribute('readonly', '');
+          fallback.style.position = 'fixed';
+          fallback.style.opacity = '0';
+          document.body.appendChild(fallback);
+          fallback.select();
+          const copied = document.execCommand('copy');
+          fallback.remove();
+          return copied;
+        }
+      };
 
 	    {
 	      const now = new Date();
@@ -724,11 +854,32 @@ logoutUrl.searchParams.set('return_to', origin);
 
 	    const uploadFiles = async (files: FileList | null) => {
 	      if (!files?.length || !feedback) return;
+        if (!proAccessEnabled) {
+          requestUploadAccess();
+          return;
+        }
 	      const queue = Array.from(files).slice(0, 20);
+        const successes: UploadAsset[] = [];
+        const failures: UploadFailure[] = [];
 	      feedback.classList.add('is-visible');
+        dropzone?.classList.add('is-uploading');
 
 	      for (let index = 0; index < queue.length; index += 1) {
 	        const file = queue[index];
+          const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif'];
+          if (!acceptedTypes.includes(file.type)) {
+            failures.push({ name: file.name, error: 'Use JPG, PNG, GIF, WebP, or AVIF.' });
+            continue;
+          }
+          if (file.size === 0) {
+            failures.push({ name: file.name, error: 'This file is empty.' });
+            continue;
+          }
+          if (file.size > 50 * 1024 * 1024) {
+            failures.push({ name: file.name, error: 'This file is larger than 50 MB.' });
+            continue;
+          }
+
 	        feedback.textContent = `Uploading ${index + 1} of ${queue.length} · ${file.name}`;
 	        const form = new FormData();
 	        form.set('file', file);
@@ -736,19 +887,40 @@ logoutUrl.searchParams.set('return_to', origin);
 	        if (uploadFolder?.value) form.set('folderId', uploadFolder.value);
 
 	        const response = await fetch('/api/upload', { method: 'POST', body: form });
-	        const result = await response.json().catch(() => ({ error: 'Upload failed' })) as { error?: string };
+	        const result = await response.json().catch(() => ({ error: 'Upload failed' })) as {
+            asset?: UploadAsset;
+            error?: string;
+            code?: string;
+          };
 	        if (!response.ok) {
-	          feedback.textContent = result.error || 'Upload failed';
-	          showToast(result.error || 'Upload failed');
-	          return;
+            if (result.code === 'PRO_REQUIRED') {
+              dropzone?.classList.remove('is-uploading');
+              feedback.textContent = result.error || 'An active Pro plan is required.';
+              requestUploadAccess(result.error);
+              return;
+            }
+            failures.push({ name: file.name, error: result.error || 'Upload failed.' });
+            continue;
 	        }
+          if (result.asset) successes.push(result.asset);
 	      }
 
-	      window.sessionStorage.setItem(
-	        'imagetourl-pro-flash',
-	        queue.length === 1 ? 'Image uploaded to your Pro library' : `${queue.length} images uploaded`
-	      );
-	      window.location.reload();
+        dropzone?.classList.remove('is-uploading');
+        feedback.textContent =
+          failures.length === 0
+            ? `${successes.length} ${successes.length === 1 ? 'image' : 'images'} uploaded`
+            : `${successes.length} uploaded · ${failures.length} need attention`;
+
+        if (successes.length > 0) {
+          window.sessionStorage.setItem(
+            'imagetourl-pro-upload-results',
+            JSON.stringify({ successes, failures } satisfies UploadResultState)
+          );
+          window.location.reload();
+          return;
+        }
+
+        renderUploadResults({ successes, failures });
 	    };
 
 	    const setSource = (source: 'file' | 'url') => {
@@ -768,29 +940,200 @@ logoutUrl.searchParams.set('return_to', origin);
 	      if (dialog?.open) dialog.close();
 	    };
 
+      const requestUploadAccess = (message?: string) => {
+        if (message) showToast(message);
+        openDialog(workspaceDialog);
+        window.setTimeout(() => billingActionButton?.focus(), 80);
+      };
+
+      const resultSize = (bytes: number) => {
+        if (bytes < 1024) return `${bytes} B`;
+        if (bytes < 1024 ** 2) return `${(bytes / 1024).toFixed(1)} KB`;
+        return `${(bytes / 1024 ** 2).toFixed(1)} MB`;
+      };
+
+      const renderUploadResults = ({ successes, failures }: UploadResultState) => {
+        if (
+          !uploadResultDialog ||
+          !uploadResultList ||
+          !uploadResultMark ||
+          !uploadResultKicker ||
+          !uploadResultTitle ||
+          !uploadResultSummary
+        ) return;
+
+        uploadResultList.replaceChildren();
+        const hasSuccess = successes.length > 0;
+        uploadResultMark.textContent = hasSuccess ? '✓' : '!';
+        uploadResultMark.classList.toggle('is-warning', failures.length > 0);
+        uploadResultKicker.textContent =
+          failures.length > 0 ? (hasSuccess ? 'Upload partially complete' : 'Upload needs attention') : 'Upload complete';
+        uploadResultTitle.textContent = hasSuccess
+          ? successes.length === 1
+            ? 'Your URL is ready.'
+            : `${successes.length} URLs are ready.`
+          : 'No images were uploaded.';
+        uploadResultSummary.textContent =
+          failures.length > 0
+            ? `${failures.length} ${failures.length === 1 ? 'file needs' : 'files need'} attention. Successful uploads are safe in your library.`
+            : 'Copy a URL now or open the image to verify it.';
+
+        successes.forEach((asset) => {
+          const item = document.createElement('article');
+          item.className = 'upload-result-item';
+
+          const preview = document.createElement('img');
+          preview.className = 'upload-result-preview';
+          preview.src = asset.url;
+          preview.alt = '';
+
+          const body = document.createElement('div');
+          body.className = 'upload-result-body';
+
+          const heading = document.createElement('div');
+          heading.className = 'upload-result-name';
+          const name = document.createElement('strong');
+          name.textContent = asset.name;
+          const meta = document.createElement('span');
+          meta.textContent = `${resultSize(asset.sizeBytes)} · ${asset.visibility}`;
+          heading.appendChild(name);
+          heading.appendChild(meta);
+
+          const urlRow = document.createElement('div');
+          urlRow.className = 'upload-result-url';
+          const url = document.createElement('input');
+          url.type = 'text';
+          url.readOnly = true;
+          url.value = asset.url;
+          url.setAttribute('aria-label', `Direct URL for ${asset.name}`);
+          const copy = document.createElement('button');
+          copy.type = 'button';
+          copy.textContent = 'Copy URL';
+          copy.addEventListener('click', async () => {
+            const copied = await copyText(asset.url);
+            if (!copied) {
+              url.focus();
+              url.select();
+              copy.textContent = 'Press Ctrl+C';
+              showToast('Clipboard access is blocked. The URL is selected for you.');
+              return;
+            }
+            copy.textContent = '✓ Copied';
+            showToast('Direct URL copied to clipboard');
+            window.setTimeout(() => {
+              copy.textContent = 'Copy URL';
+            }, 1800);
+          });
+          urlRow.appendChild(url);
+          urlRow.appendChild(copy);
+
+          const open = document.createElement('a');
+          open.className = 'upload-result-open';
+          open.href = asset.url;
+          open.target = '_blank';
+          open.rel = 'noopener';
+          open.textContent = 'Open image ↗';
+
+          body.appendChild(heading);
+          body.appendChild(urlRow);
+          body.appendChild(open);
+          item.appendChild(preview);
+          item.appendChild(body);
+          uploadResultList.appendChild(item);
+        });
+
+        failures.forEach((failure) => {
+          const item = document.createElement('article');
+          item.className = 'upload-result-item is-failed';
+          const mark = document.createElement('span');
+          mark.className = 'upload-result-error-mark';
+          mark.textContent = '!';
+          const body = document.createElement('div');
+          body.className = 'upload-result-body';
+          const name = document.createElement('strong');
+          name.textContent = failure.name;
+          const error = document.createElement('p');
+          error.textContent = failure.error;
+          body.appendChild(name);
+          body.appendChild(error);
+          item.appendChild(mark);
+          item.appendChild(body);
+          uploadResultList.appendChild(item);
+        });
+
+        if (copyAllResults) {
+          copyAllResults.hidden = successes.length < 2;
+          copyAllResults.onclick = async () => {
+            const copied = await copyText(successes.map((asset) => asset.url).join('\n'));
+            showToast(
+              copied
+                ? `${successes.length} URLs copied to clipboard`
+                : 'Clipboard access is blocked. Copy each selected URL instead.'
+            );
+          };
+        }
+        openDialog(uploadResultDialog);
+      };
+
+      {
+        const storedResults = window.sessionStorage.getItem('imagetourl-pro-upload-results');
+        if (storedResults) {
+          window.sessionStorage.removeItem('imagetourl-pro-upload-results');
+          try {
+            const parsed = JSON.parse(storedResults) as Partial<UploadResultState>;
+            const state: UploadResultState = {
+              successes: Array.isArray(parsed.successes) ? parsed.successes : [],
+              failures: Array.isArray(parsed.failures) ? parsed.failures : []
+            };
+            window.setTimeout(() => renderUploadResults(state), 160);
+          } catch {
+            showToast('Upload complete. Your newest image is in the library.');
+          }
+        }
+      }
+
 	    input?.addEventListener('change', () => uploadFiles(input.files));
-	    uploadButton?.addEventListener('click', () => input?.click());
-	    emptyUploadButton?.addEventListener('click', () => input?.click());
+	    uploadButton?.addEventListener('click', () => {
+        if (!proAccessEnabled) requestUploadAccess();
+        else input?.click();
+      });
+	    emptyUploadButton?.addEventListener('click', () => {
+        if (!proAccessEnabled) requestUploadAccess();
+        else input?.click();
+      });
+      uploadAccessAction?.addEventListener('click', () => requestUploadAccess());
+      uploadMoreButton?.addEventListener('click', () => {
+        closeDialog(uploadResultDialog);
+        document.querySelector('#upload-heading')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.setTimeout(() => input?.click(), 300);
+      });
 	    fileTab?.addEventListener('click', () => setSource('file'));
-	    urlTab?.addEventListener('click', () => {
+      urlTab?.addEventListener('click', () => {
 	      setSource('url');
 	      window.setTimeout(() => urlInput?.focus(), 50);
 	    });
 	    dropzone?.addEventListener('keydown', (event) => {
 	      if (event.key === 'Enter' || event.key === ' ') {
 	        event.preventDefault();
-	        input?.click();
+          if (!proAccessEnabled) requestUploadAccess();
+	        else input?.click();
 	      }
 	    });
+      dropzone?.addEventListener('click', (event) => {
+        if (proAccessEnabled) return;
+        event.preventDefault();
+        requestUploadAccess();
+      });
 	    dropzone?.addEventListener('dragover', (event) => {
 	      event.preventDefault();
-	      dropzone.classList.add('is-dragging');
+        if (proAccessEnabled) dropzone.classList.add('is-dragging');
 	    });
 	    dropzone?.addEventListener('dragleave', () => dropzone.classList.remove('is-dragging'));
 	    dropzone?.addEventListener('drop', (event) => {
 	      event.preventDefault();
 	      dropzone.classList.remove('is-dragging');
-	      uploadFiles(event.dataTransfer?.files ?? null);
+        if (!proAccessEnabled) requestUploadAccess();
+	      else uploadFiles(event.dataTransfer?.files ?? null);
 	    });
 
 	    privatePreference?.addEventListener('click', () => {
@@ -801,6 +1144,10 @@ logoutUrl.searchParams.set('return_to', origin);
 
 	    urlForm?.addEventListener('submit', async (event) => {
 	      event.preventDefault();
+        if (!proAccessEnabled) {
+          requestUploadAccess();
+          return;
+        }
 	      if (!urlInput?.value || !urlPreview || !urlPreviewImage) return;
 	      urlPreviewImage.src = urlInput.value;
 	      urlPreview.hidden = false;
@@ -813,13 +1160,29 @@ logoutUrl.searchParams.set('return_to', origin);
 	          folderId: uploadFolder?.value || null
 	        })
 	      });
-	      const result = await response.json().catch(() => ({ error: 'Import failed' })) as { error?: string };
+	      const result = await response.json().catch(() => ({ error: 'Import failed' })) as {
+          asset?: UploadAsset;
+          error?: string;
+          code?: string;
+        };
 	      if (!response.ok) {
 	        urlPreview.hidden = true;
+          if (result.code === 'PRO_REQUIRED') {
+            requestUploadAccess(result.error);
+            return;
+          }
 	        showToast(result.error || 'Import failed');
 	        return;
 	      }
-	      window.sessionStorage.setItem('imagetourl-pro-flash', 'Image imported to your Pro library');
+        if (!result.asset) {
+          urlPreview.hidden = true;
+          showToast('The image was imported, but its URL could not be displayed.');
+          return;
+        }
+	      window.sessionStorage.setItem(
+          'imagetourl-pro-upload-results',
+          JSON.stringify({ successes: [result.asset], failures: [] } satisfies UploadResultState)
+        );
 	      window.location.reload();
 	    });
 
@@ -842,7 +1205,11 @@ logoutUrl.searchParams.set('return_to', origin);
 	      button.addEventListener('click', async () => {
 	        const url = button.dataset.copyUrl;
 	        if (!url) return;
-	        await navigator.clipboard.writeText(url);
+	        const copied = await copyText(url);
+          if (!copied) {
+            showToast('Clipboard access is blocked. Open the image and copy its URL.');
+            return;
+          }
 	        button.classList.add('is-copied');
 	        button.textContent = '✓ Copied';
 	        showToast('Direct URL copied to clipboard');
@@ -920,6 +1287,10 @@ logoutUrl.searchParams.set('return_to', origin);
 
 	    commandSearch?.addEventListener('click', focusAssetSearch);
 	    newFolderButton?.addEventListener('click', () => {
+        if (!proAccessEnabled) {
+          requestUploadAccess();
+          return;
+        }
 	      openDialog(folderDialog);
 	      window.setTimeout(() => folderName?.focus(), 50);
 	    });
@@ -939,7 +1310,7 @@ logoutUrl.searchParams.set('return_to', origin);
 	    document.querySelectorAll<HTMLButtonElement>('[data-close-dialog]').forEach((button) => {
 	      button.addEventListener('click', () => closeDialog(button.closest<HTMLDialogElement>('dialog')));
 	    });
-	    [folderDialog, workspaceDialog].forEach((dialog) => {
+	    [folderDialog, workspaceDialog, uploadResultDialog].forEach((dialog) => {
 	      dialog?.addEventListener('click', (event) => {
 	        if (event.target === dialog) closeDialog(dialog);
 	      });
@@ -956,6 +1327,11 @@ logoutUrl.searchParams.set('return_to', origin);
 	      });
 	      const result = await response.json().catch(() => ({ error: 'Folder creation failed' })) as { error?: string };
 	      if (!response.ok) {
+          if (response.status === 402) {
+            closeDialog(folderDialog);
+            requestUploadAccess(result.error);
+            return;
+          }
 	        showToast(result.error || 'Folder creation failed');
 	        return;
 	      }

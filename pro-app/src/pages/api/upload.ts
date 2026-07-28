@@ -3,6 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { isAllowedImageType, matchesFileSignature } from '../../lib/assets';
 import { getProEnv, getNumberEnv } from '../../lib/env';
+import { requireProAccess } from '../../lib/entitlements';
 import { isSameOriginMutation, json, requireUser } from '../../lib/http';
 import { storeAsset } from '../../lib/store-asset';
 
@@ -12,6 +13,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	if (!isSameOriginMutation(request)) return json({ error: 'Invalid request origin' }, 403);
 
 	const env = getProEnv();
+	const entitlementError = await requireProAccess(env, locals.proUser!.id);
+	if (entitlementError) return entitlementError;
+
 	const form = await request.formData().catch(() => null);
 	const file = form?.get('file');
 	if (!(file instanceof File)) return json({ error: 'Choose an image to upload' }, 400);
@@ -49,6 +53,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	} catch (error) {
 		console.error('Pro upload failed', error);
 		const reason = error instanceof Error ? error.message : '';
+		if (reason === 'PRO_REQUIRED') {
+			return (await requireProAccess(env, locals.proUser!.id)) ??
+				json({ error: 'An active Pro plan is required to upload images', code: 'PRO_REQUIRED' }, 402);
+		}
 		if (reason === 'RATE_LIMIT') return json({ error: 'Upload limit reached. Try again in one minute.' }, 429);
 		if (reason === 'STORAGE_LIMIT') return json({ error: 'Your Pro storage allowance is full' }, 413);
 		if (reason === 'INVALID_FOLDER') return json({ error: 'That folder is no longer available' }, 400);

@@ -1,5 +1,6 @@
 import { assetUrl, currentPeriodStart, extensionForType } from './assets';
 import { workspaceStorageLimitBytes } from './billing';
+import { assertProAccess } from './entitlements';
 import type { ProEnv } from './env';
 import { getNumberEnv } from './env';
 import { safeFilename } from './http';
@@ -28,6 +29,8 @@ export interface StoredAsset {
 
 export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 	const { env, user } = input;
+	await assertProAccess(env, user.id);
+
 	const extension = extensionForType(input.type);
 	if (!extension) throw new Error('UNSUPPORTED_TYPE');
 
