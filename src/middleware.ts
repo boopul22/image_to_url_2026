@@ -10,6 +10,9 @@ const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/
 const NON_LOCALIZED_EXACT = new Set([
   '/sitemap.xml', '/image-sitemap.xml', '/robots.txt', '/favicon.ico', '/site.webmanifest',
   '/llms.txt', '/llms-full.txt',
+  // Commercial and legal pages are shared across locales so pricing, billing,
+  // refund, and operator disclosures stay identical for customers and Paddle.
+  '/pricing', '/privacy', '/terms', '/refund-policy', '/acceptable-use-policy', '/contact',
   // Post-copy share screen (English-only, noindex) — keep at /share, don't 301 to /en/share.
   '/share',
   // Astro's 404 page — during static build, prerender visits /404 to build
@@ -51,6 +54,18 @@ function isNonLocalized(path: string): boolean {
 export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
   const url0 = new URL(request.url);
   const path = url0.pathname;
+
+  // Canonicalize legacy locale-prefixed commercial/legal URLs to the single
+  // English policy set. Keeping one source prevents checkout terms drifting
+  // across translated pages while those translations are being refreshed.
+  {
+    const match = path.match(
+      /^\/([a-z]{2,3}(?:-[A-Za-z]+)?)\/(pricing|privacy|terms|refund-policy|acceptable-use-policy|contact)\/?$/,
+    );
+    if (match && (locales as readonly string[]).includes(match[1])) {
+      return redirect(`/${match[2]}${url0.search}`, 301);
+    }
+  }
 
   // Canonical host: 301 www → apex. www.imagetourl.cloud otherwise serves a
   // full duplicate of the site (bad for SEO, and its Origin breaks the

@@ -1,5 +1,156 @@
 ---
 export const prerender = false;
-import PrivacyPage from '../components/pages/PrivacyPage.astro';
+import LegalDocument from '../components/LegalDocument.astro';
 ---
-<PrivacyPage />
+
+<LegalDocument
+  title="Privacy Policy"
+  eyebrow="Your data, explained plainly"
+  description="Learn what ImageToURL collects, why we collect it, how images and account data are handled, and how to exercise your privacy rights."
+  intro="This policy explains how ImageToURL handles account information, uploaded images, usage data, and subscription information across imagetourl.cloud and pro.imagetourl.cloud."
+>
+  <section>
+    <h2>1. Who operates ImageToURL</h2>
+    <p>
+      ImageToURL is operated by <strong>Bipul Kumar</strong> in India (“ImageToURL”, “we”, “us”, or
+      “our”). This policy applies to the free ImageToURL service, the ImageToURL Pro workspace, and
+      related pages and support communications.
+    </p>
+    <p>
+      Privacy questions and data requests can be sent to
+      <a href="mailto:blog.boopul@gmail.com">blog.boopul@gmail.com</a>.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Information we collect</h2>
+    <h3>Information you provide</h3>
+    <ul>
+      <li>Images, filenames, folders, visibility settings, and URLs you upload or import.</li>
+      <li>Your name, email address, profile image, and account identifier when you sign in with Google.</li>
+      <li>Messages and information you send when requesting support, a refund, or reporting abuse.</li>
+    </ul>
+    <h3>Subscription information</h3>
+    <p>
+      Paddle processes ImageToURL Pro purchases as our Merchant of Record. We receive identifiers and
+      status information needed to activate and support a subscription, such as customer, transaction,
+      subscription, price, renewal, and cancellation status. We do not receive or store your complete
+      payment-card number.
+    </p>
+    <h3>Information collected automatically</h3>
+    <ul>
+      <li>IP address, browser and device information, request timestamps, and security logs.</li>
+      <li>Upload, storage, image-delivery, feature-usage, and error information.</li>
+      <li>Cookie or similar identifiers needed for sessions, preferences, analytics, and—on the free site—advertising.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. How we use information</h2>
+    <ul>
+      <li>Provide, secure, maintain, and improve the service.</li>
+      <li>Authenticate accounts and preserve workspace preferences.</li>
+      <li>Store and deliver images according to the visibility option you choose.</li>
+      <li>Measure plan usage, prevent abuse, investigate security events, and enforce our policies.</li>
+      <li>Activate subscriptions, provide billing support, and maintain required transaction records.</li>
+      <li>Send essential service, security, billing, and policy notices.</li>
+      <li>Send optional product emails only where permitted; every marketing message includes an unsubscribe option.</li>
+    </ul>
+    <p>We do not sell your personal information.</p>
+  </section>
+
+  <section>
+    <h2>4. Image visibility and sharing</h2>
+    <p>
+      Free-service images and Pro images marked public or unlisted can be opened by anyone who has the
+      URL. Unlisted URLs are not an access-control system. Do not upload confidential, regulated, or
+      highly sensitive information to a public or unlisted link.
+    </p>
+    <p>
+      Pro images marked private require access through the authenticated owner workspace. We may still
+      access content when reasonably necessary to provide support, investigate abuse, protect the
+      service, or comply with law.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Service providers and disclosures</h2>
+    <p>We use service providers only where needed to operate the service, including:</p>
+    <ul>
+      <li><strong>Cloudflare</strong> for application hosting, databases, security, storage, and image delivery.</li>
+      <li><strong>Google</strong> for account sign-in and, on parts of the free site, analytics and advertising services.</li>
+      <li><strong>Paddle</strong> for checkout, subscription billing, tax handling, fraud prevention, receipts, and buyer support.</li>
+    </ul>
+    <p>
+      We may disclose information where required by law, to protect rights and safety, to investigate
+      misuse, or as part of a business reorganization. We do not authorize service providers to use
+      personal data for their own unrelated marketing.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Cookies and similar technologies</h2>
+    <p>
+      Essential cookies keep you signed in, preserve security state, and remember necessary preferences.
+      The free site may also use analytics and advertising cookies. You can control non-essential cookies
+      through available consent controls and your browser settings, although blocking essential cookies
+      may prevent sign-in or workspace features from working.
+    </p>
+  </section>
+
+  <section>
+    <h2>7. Retention and deletion</h2>
+    <ul>
+      <li>Guest uploads follow the retention period disclosed in the uploader and may be removed during scheduled cleanup.</li>
+      <li>Signed-in free uploads are retained according to the option selected at upload and our storage policies.</li>
+      <li>Pro assets are retained while your workspace is active, until you delete them, or until removal is required for security, abuse, legal, or service-operational reasons.</li>
+      <li>Account, security, support, and billing records are retained only as long as reasonably needed for the purposes described above and applicable legal obligations.</li>
+    </ul>
+    <p>
+      Deleting an image stops normal access to its URL. Residual copies may remain briefly in caches or
+      backups before being overwritten.
+    </p>
+  </section>
+
+  <section>
+    <h2>8. Security and international processing</h2>
+    <p>
+      We use HTTPS, access controls, scoped service credentials, and Cloudflare security infrastructure.
+      No online service can promise absolute security, so keep an independent backup of important files
+      and protect access to your Google account.
+    </p>
+    <p>
+      Our providers operate globally. Information may be processed in countries other than your own,
+      subject to the safeguards and legal mechanisms used by those providers.
+    </p>
+  </section>
+
+  <section>
+    <h2>9. Your privacy choices and rights</h2>
+    <p>
+      Depending on where you live, you may have rights to access, correct, delete, restrict, or obtain a
+      copy of personal information, or to object to certain processing. You may also withdraw optional
+      marketing consent at any time.
+    </p>
+    <p>
+      Send a request from the email associated with your account to
+      <a href="mailto:blog.boopul@gmail.com">blog.boopul@gmail.com</a>. We may need to verify your identity
+      before completing a request. Paddle independently handles buyer transaction data for which it is
+      responsible as Merchant of Record.
+    </p>
+  </section>
+
+  <section>
+    <h2>10. Children and policy changes</h2>
+    <p>
+      ImageToURL is not directed to children under 13, and we do not knowingly collect personal
+      information from children under 13. Where local law requires a higher age for independent consent,
+      users must meet that age or use the service with appropriate guardian authorization.
+    </p>
+    <p>
+      We may update this policy as the service changes. Material changes will be posted here and, where
+      appropriate, communicated through the service or by email. The effective date at the top identifies
+      the current version.
+    </p>
+  </section>
+</LegalDocument>

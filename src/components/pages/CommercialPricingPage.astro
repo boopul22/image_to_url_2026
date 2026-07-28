@@ -1,0 +1,623 @@
+---
+import Icon from '../Icon.astro';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+
+const proBase = 'https://pro.imagetourl.cloud/pricing';
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'ImageToURL Pricing',
+    url: 'https://imagetourl.cloud/pricing',
+    description: 'Compare free ImageToURL hosting with the ImageToURL Pro founding plan.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'ImageToURL Pro',
+    description: 'Permanent image hosting with 50GB storage, private links, folders, and usage analytics.',
+    brand: { '@type': 'Brand', name: 'ImageToURL' },
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'ImageToURL Pro Monthly',
+        price: '4.99',
+        priceCurrency: 'USD',
+        url: `${proBase}?billing=month`,
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        name: 'ImageToURL Pro Annual',
+        price: '39.00',
+        priceCurrency: 'USD',
+        url: `${proBase}?billing=year`,
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Simple Image Hosting Pricing — Free & Pro | ImageToURL"
+  description="Start free or get ImageToURL Pro for $4.99 monthly or $39 annually with 50GB storage, permanent URLs, private links, and no ads."
+  schema={schema}
+  noHreflang
+  breadcrumbs={[
+    { name: 'Home', url: 'https://imagetourl.cloud/' },
+    { name: 'Pricing', url: 'https://imagetourl.cloud/pricing' },
+  ]}
+>
+  <Nav activePage="pricing" />
+
+  <main class="price-page">
+    <section class="price-hero">
+      <div class="price-hero-copy">
+        <p class="price-kicker"><span></span> One free tool. One serious workspace.</p>
+        <h1>Simple pricing for images that need to stay.</h1>
+        <p>
+          Use ImageToURL free for quick links. Move to Pro when your images become part of your work:
+          organized, private when needed, and stored permanently.
+        </p>
+      </div>
+
+      <div class="billing-switch" role="group" aria-label="Billing frequency">
+        <button type="button" data-cycle="month" aria-pressed="false">Monthly</button>
+        <button type="button" data-cycle="year" aria-pressed="true">
+          Annual <span>Save $20.88</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="price-grid" aria-label="ImageToURL plans">
+      <article class="price-card free-card">
+        <header>
+          <p>Free hosting</p>
+          <h2>Quick links</h2>
+          <p>For one-off sharing and lightweight personal use.</p>
+        </header>
+        <div class="price-line">
+          <strong>$0</strong>
+          <span>forever</span>
+        </div>
+        <a class="price-button secondary" href="/en/">Upload an image</a>
+        <ul>
+          <li><Icon name="check" />5 guest uploads per rolling 24 hours</li>
+          <li><Icon name="check" />50 permanent uploads/day when signed in</li>
+          <li><Icon name="check" />50MB maximum file size</li>
+          <li><Icon name="check" />Temporary or keep-forever links</li>
+          <li><Icon name="check" />Advertising supports the free service</li>
+        </ul>
+        <p class="card-foot">No card. No subscription. Start immediately.</p>
+      </article>
+
+      <article class="price-card pro-card">
+        <div class="founding-label">Founding plan</div>
+        <header>
+          <p>ImageToURL Pro</p>
+          <h2>Your image workspace</h2>
+          <p>For creators and developers who rely on their image URLs.</p>
+        </header>
+        <div class="price-line">
+          <strong id="pro-price">$39</strong>
+          <span id="pro-period">per year</span>
+        </div>
+        <p class="price-equivalent" id="price-equivalent">$3.25/month, billed annually</p>
+        <a
+          class="price-button primary"
+          id="pro-checkout-link"
+          href={`${proBase}?billing=year`}
+        >
+          Get Pro for $39/year <span>↗</span>
+        </a>
+        <ul>
+          <li><Icon name="check" fill />50GB active storage</li>
+          <li><Icon name="check" fill />Up to 1 million image views/month</li>
+          <li><Icon name="check" fill />Permanent HTTPS URLs</li>
+          <li><Icon name="check" fill />Public and private assets</li>
+          <li><Icon name="check" fill />Folders, URL import, and usage analytics</li>
+          <li><Icon name="check" fill />Original-quality storage with no ads</li>
+          <li><Icon name="check" fill />API access when the production API launches</li>
+        </ul>
+        <p class="card-foot">Founding price stays locked while your subscription remains active.</p>
+      </article>
+    </section>
+
+    <section class="price-proof" aria-label="Purchase information">
+      <div>
+        <span>01</span>
+        <h3>No surprise overages</h3>
+        <p>We pause new uploads at the storage limit. We do not quietly add usage charges.</p>
+      </div>
+      <div>
+        <span>02</span>
+        <h3>Cancel online</h3>
+        <p>Manage payment details, invoices, and cancellation through the secure Paddle portal.</p>
+      </div>
+      <div>
+        <span>03</span>
+        <h3>14-day first-purchase refund</h3>
+        <p>If Pro is not right for you, request a first-purchase refund within 14 days.</p>
+      </div>
+    </section>
+
+    <section class="price-faq">
+      <header>
+        <p class="price-kicker"><span></span> The practical details</p>
+        <h2>Know exactly what you’re buying.</h2>
+      </header>
+      <div class="faq-list">
+        <details open>
+          <summary>What happens when I reach 50GB?</summary>
+          <p>Existing files stay available and new uploads pause. We show your usage clearly so you can remove files before reaching the limit.</p>
+        </details>
+        <details>
+          <summary>Who processes my payment?</summary>
+          <p>Paddle is our Merchant of Record. Paddle securely handles payment processing, sales tax or VAT, receipts, and invoices. ImageToURL does not store your full card details.</p>
+        </details>
+        <details>
+          <summary>Can I cancel at any time?</summary>
+          <p>Yes. Cancellation stops the next renewal and Pro remains active through the paid billing period. See our <a href="/refund-policy">Refund Policy</a> for refund details.</p>
+        </details>
+        <details>
+          <summary>Are private images encrypted?</summary>
+          <p>Images are sent over HTTPS and stored on Cloudflare infrastructure. Private assets require your signed-in workspace, but you should not use ImageToURL as the only backup for irreplaceable files.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="price-legal">
+      <p>
+        Prices are in USD. Applicable taxes are calculated at checkout. By subscribing, you agree to the
+        <a href="/terms">Terms of Service</a>, <a href="/privacy">Privacy Policy</a>, and
+        <a href="/refund-policy">Refund Policy</a>.
+      </p>
+      <p>ImageToURL is operated by Bipul Kumar. Billing is securely provided by Paddle as Merchant of Record.</p>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const switches = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-cycle]'));
+  const price = document.querySelector<HTMLElement>('#pro-price');
+  const period = document.querySelector<HTMLElement>('#pro-period');
+  const equivalent = document.querySelector<HTMLElement>('#price-equivalent');
+  const checkout = document.querySelector<HTMLAnchorElement>('#pro-checkout-link');
+
+  const plans = {
+    month: {
+      price: '$4.99',
+      period: 'per month',
+      equivalent: 'Billed monthly. Cancel before the next renewal.',
+      cta: 'Get Pro for $4.99/month',
+      href: 'https://pro.imagetourl.cloud/pricing?billing=month',
+    },
+    year: {
+      price: '$39',
+      period: 'per year',
+      equivalent: '$3.25/month, billed annually',
+      cta: 'Get Pro for $39/year',
+      href: 'https://pro.imagetourl.cloud/pricing?billing=year',
+    },
+  } as const;
+
+  const selectPlan = (cycle: keyof typeof plans) => {
+    const plan = plans[cycle];
+    if (price) price.textContent = plan.price;
+    if (period) period.textContent = plan.period;
+    if (equivalent) equivalent.textContent = plan.equivalent;
+    if (checkout) {
+      checkout.firstChild!.textContent = `${plan.cta} `;
+      checkout.href = plan.href;
+    }
+    switches.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.cycle === cycle)));
+  };
+
+  switches.forEach((button) => {
+    button.addEventListener('click', () => selectPlan(button.dataset.cycle === 'month' ? 'month' : 'year'));
+  });
+</script>
+
+<style>
+  .price-page {
+    --price-ink: #171717;
+    --price-muted: #666;
+    --price-rose: #e11d48;
+    --price-soft: #fff1f2;
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 86px 0 112px;
+  }
+
+  .price-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 48px;
+    align-items: end;
+    padding-bottom: 50px;
+  }
+
+  .price-hero-copy {
+    max-width: 790px;
+  }
+
+  .price-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    color: #be123c;
+    font-family: var(--font-headline);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .price-kicker span {
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .price-hero h1 {
+    max-width: 800px;
+    margin: 0;
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: clamp(48px, 7.4vw, 88px);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+  }
+
+  .price-hero-copy > p:last-child {
+    max-width: 670px;
+    margin: 28px 0 0;
+    color: var(--price-muted);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+  }
+
+  .billing-switch {
+    display: flex;
+    padding: 4px;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+  }
+
+  .billing-switch button {
+    min-height: 44px;
+    padding: 0 15px;
+    color: #737373;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .billing-switch button[aria-pressed='true'] {
+    color: #fff;
+    background: var(--price-ink);
+  }
+
+  .billing-switch span {
+    display: block;
+    font-size: 9px;
+    font-weight: 600;
+    opacity: 0.72;
+  }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    border: 1px solid #dedede;
+  }
+
+  .price-card {
+    position: relative;
+    padding: clamp(28px, 5vw, 54px);
+    background: #fff;
+  }
+
+  .free-card {
+    border-right: 1px solid #dedede;
+  }
+
+  .pro-card {
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 241, 242, 0.84)),
+      #fff;
+  }
+
+  .founding-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 9px 13px;
+    color: #fff;
+    background: var(--price-rose);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .price-card header > p:first-child {
+    margin: 0 0 10px;
+    color: var(--price-rose);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .price-card h2 {
+    margin: 0;
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  .price-card header > p:last-child {
+    max-width: 410px;
+    min-height: 48px;
+    margin: 14px 0 0;
+    color: var(--price-muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .price-line {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 38px;
+  }
+
+  .price-line strong {
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: clamp(48px, 7vw, 68px);
+    font-weight: 650;
+    letter-spacing: -0.06em;
+    line-height: 1;
+  }
+
+  .price-line span,
+  .price-equivalent {
+    color: #737373;
+    font-size: 12px;
+  }
+
+  .price-equivalent {
+    min-height: 18px;
+    margin: 6px 0 0;
+  }
+
+  .price-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 52px;
+    margin: 28px 0;
+    font-family: var(--font-headline);
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .price-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .price-button.secondary {
+    color: var(--price-ink);
+    background: #f5f5f5;
+    border: 1px solid #dedede;
+  }
+
+  .price-button.primary {
+    color: #fff;
+    background: var(--price-ink);
+    border: 1px solid var(--price-ink);
+  }
+
+  .price-button.primary:hover {
+    background: var(--price-rose);
+    border-color: var(--price-rose);
+  }
+
+  .price-card ul {
+    display: grid;
+    gap: 13px;
+    margin: 0;
+    padding: 28px 0 0;
+    border-top: 1px solid #e5e5e5;
+    list-style: none;
+  }
+
+  .price-card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #404040;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .price-card li :global(.ms-icon) {
+    flex: 0 0 auto;
+    margin-top: 2px;
+    color: var(--price-rose);
+    font-size: 16px;
+  }
+
+  .card-foot {
+    margin: 24px 0 0;
+    color: #737373;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .price-proof {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 24px;
+    border: 1px solid #dedede;
+  }
+
+  .price-proof > div {
+    padding: 28px;
+  }
+
+  .price-proof > div + div {
+    border-left: 1px solid #dedede;
+  }
+
+  .price-proof span {
+    color: var(--price-rose);
+    font-family: var(--font-headline);
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .price-proof h3 {
+    margin: 12px 0 8px;
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: 18px;
+    font-weight: 650;
+  }
+
+  .price-proof p {
+    margin: 0;
+    color: var(--price-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .price-faq {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(44px, 9vw, 120px);
+    padding: 112px 0 80px;
+  }
+
+  .price-faq h2 {
+    margin: 0;
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: clamp(34px, 5vw, 54px);
+    font-weight: 650;
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+
+  .faq-list {
+    border-top: 1px solid #d4d4d4;
+  }
+
+  .faq-list details {
+    border-bottom: 1px solid #d4d4d4;
+  }
+
+  .faq-list summary {
+    padding: 20px 36px 20px 0;
+    color: var(--price-ink);
+    cursor: pointer;
+    font-family: var(--font-headline);
+    font-size: 16px;
+    font-weight: 650;
+  }
+
+  .faq-list p {
+    max-width: 620px;
+    margin: 0;
+    padding: 0 36px 20px 0;
+    color: var(--price-muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .faq-list a,
+  .price-legal a {
+    color: #be123c;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .price-legal {
+    padding: 24px;
+    background: #f5f5f5;
+    border-left: 3px solid var(--price-rose);
+  }
+
+  .price-legal p {
+    margin: 0;
+    color: #525252;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .price-legal p + p {
+    margin-top: 4px;
+  }
+
+  @media (max-width: 800px) {
+    .price-page {
+      width: min(100% - 24px, 680px);
+      padding: 52px 0 80px;
+    }
+
+    .price-hero {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding-bottom: 34px;
+    }
+
+    .billing-switch {
+      width: 100%;
+    }
+
+    .billing-switch button {
+      flex: 1;
+    }
+
+    .price-grid,
+    .price-proof,
+    .price-faq {
+      grid-template-columns: 1fr;
+    }
+
+    .free-card {
+      border-right: 0;
+      border-bottom: 1px solid #dedede;
+    }
+
+    .price-card header > p:last-child {
+      min-height: 0;
+    }
+
+    .price-proof > div + div {
+      border-top: 1px solid #dedede;
+      border-left: 0;
+    }
+
+    .price-faq {
+      gap: 36px;
+      padding: 80px 0 56px;
+    }
+  }
+</style>

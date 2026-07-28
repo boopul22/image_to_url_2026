@@ -1,0 +1,286 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  intro: string;
+  updated?: string;
+}
+
+const {
+  title,
+  description,
+  eyebrow,
+  intro,
+  updated = 'July 28, 2026',
+} = Astro.props;
+---
+
+<Layout
+  title={`${title} | ImageToURL`}
+  description={description}
+  noHreflang
+  breadcrumbs={[
+    { name: 'Home', url: 'https://imagetourl.cloud/' },
+    { name: title, url: new URL(Astro.url.pathname, 'https://imagetourl.cloud').href },
+  ]}
+>
+  <Nav />
+
+  <main class="legal-shell">
+    <header class="legal-hero">
+      <p class="legal-eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="legal-intro">{intro}</p>
+      <p class="legal-updated">Effective and last updated: {updated}</p>
+    </header>
+
+    <div class="legal-layout">
+      <aside class="legal-index" aria-label="Legal pages">
+        <p>Legal centre</p>
+        <nav>
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/refund-policy">Refund Policy</a>
+          <a href="/acceptable-use-policy">Acceptable Use</a>
+          <a href="/contact">Contact</a>
+        </nav>
+        <div class="legal-operator">
+          <span>Service operator</span>
+          <strong>Bipul Kumar</strong>
+          <span>ImageToURL · India</span>
+        </div>
+      </aside>
+
+      <article class="legal-document">
+        <slot />
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-shell {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 72px 0 112px;
+  }
+
+  .legal-hero {
+    max-width: 760px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid rgba(23, 23, 23, 0.12);
+  }
+
+  .legal-eyebrow {
+    margin: 0 0 16px;
+    color: #be123c;
+    font-family: var(--font-headline);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .legal-hero h1 {
+    max-width: 680px;
+    margin: 0;
+    color: #171717;
+    font-family: var(--font-headline);
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 650;
+    letter-spacing: -0.055em;
+    line-height: 0.96;
+  }
+
+  .legal-intro {
+    max-width: 680px;
+    margin: 24px 0 0;
+    color: #525252;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.65;
+  }
+
+  .legal-updated {
+    margin: 24px 0 0;
+    color: #737373;
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 720px);
+    gap: clamp(44px, 8vw, 104px);
+    align-items: start;
+    padding-top: 48px;
+  }
+
+  .legal-index {
+    position: sticky;
+    top: 88px;
+  }
+
+  .legal-index > p,
+  .legal-operator span:first-child {
+    margin: 0 0 12px;
+    color: #a3a3a3;
+    font-family: var(--font-headline);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .legal-index nav {
+    display: grid;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .legal-index nav a {
+    padding: 11px 0;
+    color: #525252;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 13px;
+    font-weight: 600;
+    transition: color 150ms ease, padding-left 150ms ease;
+  }
+
+  .legal-index nav a:hover {
+    padding-left: 5px;
+    color: #be123c;
+  }
+
+  .legal-operator {
+    display: grid;
+    gap: 3px;
+    margin-top: 32px;
+    padding: 16px;
+    background: #f5f5f5;
+    border-left: 2px solid #e11d48;
+    color: #525252;
+    font-size: 12px;
+  }
+
+  .legal-operator span:first-child {
+    margin-bottom: 5px;
+  }
+
+  .legal-operator strong {
+    color: #171717;
+    font-size: 13px;
+  }
+
+  .legal-document :global(section) {
+    padding: 0 0 36px;
+    margin: 0 0 36px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .legal-document :global(section:last-child) {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .legal-document :global(h2) {
+    margin: 0 0 14px;
+    color: #171717;
+    font-family: var(--font-headline);
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.18;
+  }
+
+  .legal-document :global(h3) {
+    margin: 24px 0 8px;
+    color: #262626;
+    font-family: var(--font-headline);
+    font-size: 17px;
+    font-weight: 650;
+  }
+
+  .legal-document :global(p),
+  .legal-document :global(li) {
+    color: #525252;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .legal-document :global(p) {
+    margin: 0 0 14px;
+  }
+
+  .legal-document :global(ul),
+  .legal-document :global(ol) {
+    display: grid;
+    gap: 8px;
+    margin: 14px 0;
+    padding-left: 22px;
+  }
+
+  .legal-document :global(strong) {
+    color: #262626;
+    font-weight: 700;
+  }
+
+  .legal-document :global(a) {
+    color: #be123c;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-document :global(.legal-note) {
+    padding: 18px 20px;
+    background: #fff1f2;
+    border-left: 3px solid #e11d48;
+    color: #3f3f46;
+  }
+
+  @media (max-width: 760px) {
+    .legal-shell {
+      width: min(100% - 24px, 720px);
+      padding: 48px 0 80px;
+    }
+
+    .legal-hero {
+      padding-bottom: 32px;
+    }
+
+    .legal-layout {
+      grid-template-columns: 1fr;
+      gap: 38px;
+      padding-top: 32px;
+    }
+
+    .legal-index {
+      position: static;
+    }
+
+    .legal-index nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-left: 1px solid #e5e5e5;
+    }
+
+    .legal-index nav a {
+      padding: 11px;
+      border-right: 1px solid #e5e5e5;
+    }
+
+    .legal-index nav a:hover {
+      padding-left: 11px;
+    }
+
+    .legal-operator {
+      display: none;
+    }
+  }
+</style>

@@ -14,11 +14,8 @@ const SITE = 'https://imagetourl.cloud';
 const STATIC_PAGES: { path: string; lastmod: string }[] = [
   { path: '/',         lastmod: '2026-04-01' },
   { path: '/features', lastmod: '2026-04-01' },
-  { path: '/pricing',  lastmod: '2026-04-01' },
   { path: '/docs',     lastmod: '2026-04-01' },
   { path: '/blog',     lastmod: '2026-04-01' },
-  { path: '/privacy',  lastmod: '2026-04-01' },
-  { path: '/terms',    lastmod: '2026-04-01' },
   // Note: image-to-url-for-html and image-to-url-vercel are emitted via the
   // landing slug registry below — listing them here too caused duplicate <loc>s.
 ];
@@ -44,7 +41,12 @@ function localeUrl(loc: Locale, basePath: string): string {
 // Root-level English-only pages (no hreflang alternates)
 const ROOT_PAGES: { path: string; lastmod: string }[] = [
   { path: '/about',              lastmod: '2026-04-04' },
-  { path: '/contact',            lastmod: '2026-04-04' },
+  { path: '/pricing',            lastmod: '2026-07-28' },
+  { path: '/privacy',            lastmod: '2026-07-28' },
+  { path: '/terms',              lastmod: '2026-07-28' },
+  { path: '/refund-policy',      lastmod: '2026-07-28' },
+  { path: '/acceptable-use-policy', lastmod: '2026-07-28' },
+  { path: '/contact',            lastmod: '2026-07-28' },
   { path: '/free-image-hosting', lastmod: '2026-04-04' },
   { path: '/image-url-generator',lastmod: '2026-04-04' },
   { path: '/bulk-image-upload',  lastmod: '2026-04-04' },

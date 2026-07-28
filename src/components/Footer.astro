@@ -126,11 +126,14 @@ const learnGroups: Group[] = [
       <div>
         <span class={colHead}>{t(locale, 'footer.resources')}</span>
         <nav class="flex flex-wrap gap-x-5 gap-y-1">
-          <a href={localePath('/privacy')} class={linkClass}>{t(locale, 'footer.privacy')}</a>
-          <a href={localePath('/terms')} class={linkClass}>{t(locale, 'footer.terms')}</a>
+          <a href="/pricing" class={linkClass}>Pricing</a>
+          <a href="/privacy" class={linkClass}>{t(locale, 'footer.privacy')}</a>
+          <a href="/terms" class={linkClass}>{t(locale, 'footer.terms')}</a>
+          <a href="/refund-policy" class={linkClass}>Refund Policy</a>
+          <a href="/acceptable-use-policy" class={linkClass}>Acceptable Use</a>
           <a href={localePath('/docs')} class={linkClass}>{t(locale, 'footer.docs')}</a>
           <a href={localizedUrl('about', locale)} class={linkClass}>{t(locale, 'footer.about')}</a>
-          <a href={localizedUrl('contact', locale)} class={linkClass}>{t(locale, 'footer.contact')}</a>
+          <a href="/contact" class={linkClass}>{t(locale, 'footer.contact')}</a>
           <a href={localePath('/blog')} class={linkClass}>{t(locale, 'footer.blog')}</a>
           <a href={localizedUrl('content-guidelines', locale)} class={linkClass}>Content Guidelines</a>
           <a href="/link-to-us/" class={linkClass}>Link to Us</a>
@@ -143,6 +146,10 @@ const learnGroups: Group[] = [
           <a href={localePath('/')} class={linkClass + ' inline-flex items-center gap-1.5'}>
             <Icon name="cloud_upload" class="text-rose-600 text-sm" />
             ImageToURL
+          </a>
+          <a href="https://pro.imagetourl.cloud/pricing" class={linkClass + ' inline-flex items-center gap-1.5'}>
+            <Icon name="workspace_premium" class="text-rose-600 text-sm" />
+            ImageToURL Pro
           </a>
           <a href={localizedUrl('heic-to-jpg', locale)} class={linkClass + ' inline-flex items-center gap-1.5'}>
             <Icon name="photo_camera_back" class="text-rose-600 text-sm" />
