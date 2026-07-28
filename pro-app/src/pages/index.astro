@@ -819,6 +819,34 @@ logoutUrl.searchParams.set('return_to', origin);
         }
       };
 
+      const waitForBillingActivation = async () => {
+        showToast('Payment received. Activating your Pro workspace…');
+
+        for (let attempt = 0; attempt < 25; attempt += 1) {
+          try {
+            const response = await fetch('/api/billing/status', {
+              headers: { Accept: 'application/json' }
+            });
+            const result = await response.json().catch(() => null) as {
+              hasAccess?: boolean;
+            } | null;
+            if (response.ok && result?.hasAccess) {
+              window.sessionStorage.setItem(
+                'imagetourl-pro-flash',
+                'Pro is active. Your workspace is fully unlocked.'
+              );
+              window.location.replace('/');
+              return;
+            }
+          } catch {
+            // A brief network interruption should not abandon activation polling.
+          }
+          await new Promise((resolve) => window.setTimeout(resolve, 1200));
+        }
+
+        showToast('Payment is complete. Activation is taking longer than usual—refresh shortly.');
+      };
+
 	    {
 	      const now = new Date();
 	      const hour = now.getHours();
@@ -842,11 +870,7 @@ logoutUrl.searchParams.set('return_to', origin);
 	      }
         const billingResult = new URLSearchParams(window.location.search).get('billing');
         if (billingResult === 'success') {
-          window.history.replaceState({}, '', window.location.pathname);
-          window.setTimeout(
-            () => showToast('Payment received. Paddle is activating your Pro workspace.'),
-            120
-          );
+          window.setTimeout(() => waitForBillingActivation(), 120);
         }
 	    }
 

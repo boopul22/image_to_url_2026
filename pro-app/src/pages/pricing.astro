@@ -342,6 +342,7 @@ loginUrl.searchParams.set('return_to', returnTo);
               'imagetourl-pro-flash',
               'Payment received. Paddle is activating your Pro workspace.',
             );
+            window.location.assign('/?billing=success');
           }
         },
       });
