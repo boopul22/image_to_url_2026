@@ -1,0 +1,327 @@
+---
+export const prerender = false;
+
+import ProMarketingShell from '../layouts/ProMarketingShell.astro';
+import {
+  isPaddleCheckoutConfigured,
+  paddleEnvironment,
+} from '../lib/billing';
+import { getProEnv } from '../lib/env';
+
+const env = getProEnv();
+const user = Astro.locals.proUser;
+const initialInterval = Astro.url.searchParams.get('billing') === 'month' ? 'month' : 'year';
+const checkoutConfigured = isPaddleCheckoutConfigured(env);
+const paddleToken = env.PADDLE_CLIENT_TOKEN ?? '';
+const paddleEnv = paddleEnvironment(env);
+
+let hasSubscription = false;
+if (user) {
+  const subscription = await env.PRO_DB.prepare(
+    `SELECT id
+       FROM subscriptions
+      WHERE user_id = ?
+        AND provider = 'paddle'
+        AND status IN ('trialing', 'active', 'past_due', 'paused')
+      LIMIT 1`,
+  )
+    .bind(user.id)
+    .first();
+  hasSubscription = Boolean(subscription);
+}
+
+const returnTo = `https://pro.imagetourl.cloud/pricing?billing=${initialInterval}`;
+const loginUrl = new URL(env.AUTH_LOGIN_URL);
+loginUrl.searchParams.set('return_to', returnTo);
+---
+
+<ProMarketingShell
+  title="ImageToURL Pro Pricing — $4.99 monthly or $39 annually"
+  description="Get 50GB storage, permanent image URLs, private assets, folders, URL imports, and usage analytics with ImageToURL Pro."
+>
+  <main class="marketing-main">
+    <section class="pricing-hero">
+      <div class="pricing-hero-copy">
+        <p class="marketing-kicker">Founding pricing · no hidden overages</p>
+        <h1>A permanent home for the images your work <em>depends on.</em></h1>
+        <p>
+          One professional workspace, one straightforward plan. Keep original-quality images organized
+          and deliver them through stable HTTPS URLs without building your own storage stack.
+        </p>
+      </div>
+
+      <div class="pro-billing-toggle" role="group" aria-label="Billing frequency">
+        <button type="button" data-interval="month" aria-pressed={initialInterval === 'month'}>Monthly</button>
+        <button type="button" data-interval="year" aria-pressed={initialInterval === 'year'}>
+          Annual <small>Save $20.88</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="pro-plan-wrap" aria-label="ImageToURL Pro founding plan">
+      <article class="pro-plan-card">
+        <span class="pro-plan-badge">Founding plan</span>
+        <h2>Everything in Pro. Priced for early users.</h2>
+        <p>
+          Your founding price remains locked while the subscription stays active. Upgrade later only if
+          your workspace needs more capacity.
+        </p>
+        <div class="pro-price-row">
+          <strong id="display-price">{initialInterval === 'year' ? '$39' : '$4.99'}</strong>
+          <span id="display-period">{initialInterval === 'year' ? 'per year' : 'per month'}</span>
+        </div>
+        <p class="pro-price-note" id="display-note">
+          {initialInterval === 'year' ? '$3.25/month, billed annually' : 'Billed monthly. Cancel before renewal.'}
+        </p>
+
+        {hasSubscription ? (
+          <a class="pro-checkout-button" href="/">
+            <span>Open your Pro workspace</span><span aria-hidden="true">↗</span>
+          </a>
+        ) : user ? (
+          <button
+            class="pro-checkout-button"
+            id="checkout-button"
+            type="button"
+            data-interval={initialInterval}
+            disabled={!checkoutConfigured}
+          >
+            <span id="checkout-label">
+              {checkoutConfigured
+                ? initialInterval === 'year'
+                  ? 'Get Pro for $39/year'
+                  : 'Get Pro for $4.99/month'
+                : 'Checkout setup in progress'}
+            </span>
+            <span aria-hidden="true">↗</span>
+          </button>
+        ) : (
+          <a class="pro-checkout-button" id="signin-checkout" href={loginUrl.toString()}>
+            <span id="signin-label">
+              {initialInterval === 'year' ? 'Sign in to get Pro for $39/year' : 'Sign in to get Pro for $4.99/month'}
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        )}
+        <p class="pro-checkout-error" id="checkout-error" role="alert"></p>
+      </article>
+
+      <aside class="pro-feature-panel">
+        <p>Included with your subscription</p>
+        <ul class="pro-feature-list">
+          <li>50GB active image storage</li>
+          <li>Up to 1 million image views each month</li>
+          <li>50MB maximum file size</li>
+          <li>Permanent HTTPS delivery URLs</li>
+          <li>Original-quality image storage</li>
+          <li>Public, unlisted, and private assets</li>
+          <li>Folders and import from URL</li>
+          <li>Workspace usage analytics</li>
+          <li>No advertising in your Pro workspace</li>
+          <li>Production API access when released</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="pricing-facts" aria-label="Subscription benefits">
+      <article>
+        <span>01 / LIMITS</span>
+        <h3>No surprise usage bill</h3>
+        <p>New uploads pause at the storage limit. You stay in control of what is stored and what you pay.</p>
+      </article>
+      <article>
+        <span>02 / CONTROL</span>
+        <h3>Cancel online</h3>
+        <p>Use the secure Paddle portal for cancellation, payment details, invoices, and receipts.</p>
+      </article>
+      <article>
+        <span>03 / CONFIDENCE</span>
+        <h3>14-day first-purchase refund</h3>
+        <p>Try the real workspace. If it is not a fit, request your first payment back within 14 days.</p>
+      </article>
+    </section>
+
+    <section class="pricing-faq">
+      <header>
+        <p class="marketing-kicker">Before you subscribe</p>
+        <h2>Clear answers, before checkout.</h2>
+      </header>
+      <div class="pricing-faq-list">
+        <details open>
+          <summary>What exactly am I purchasing?</summary>
+          <p>
+            A recurring ImageToURL Pro subscription for one personal workspace with the features and
+            limits shown above. The API is marked for future release and is not production-ready today.
+          </p>
+        </details>
+        <details>
+          <summary>Does the subscription renew automatically?</summary>
+          <p>
+            Yes. Monthly subscriptions renew monthly and annual subscriptions renew annually until you
+            cancel before the renewal date. Paddle shows the total, tax, and renewal details at checkout.
+          </p>
+        </details>
+        <details>
+          <summary>What happens if I cancel?</summary>
+          <p>
+            Cancellation stops future renewal. Paid access normally continues until the end of the
+            current billing period. Download important files before paid access ends.
+          </p>
+        </details>
+        <details>
+          <summary>Who handles payment and tax?</summary>
+          <p>
+            Paddle is the Merchant of Record and securely handles checkout, applicable tax or VAT,
+            receipts, invoices, and buyer payment support. ImageToURL does not store your full card number.
+          </p>
+        </details>
+        <details>
+          <summary>Can I get a refund?</summary>
+          <p>
+            Your first subscription payment is covered by our 14-day refund policy, subject to the fair-use
+            conditions in the <a href="/refund-policy">Refund Policy</a> and any stronger rights under law.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section class="pricing-disclosure">
+      <p>
+        Prices are USD. Applicable taxes are calculated at checkout. By subscribing, you agree to the
+        <a href="/terms">Terms of Service</a>, <a href="/privacy">Privacy Policy</a>,
+        <a href="/refund-policy">Refund Policy</a>, and <a href="/acceptable-use-policy">Acceptable Use Policy</a>.
+      </p>
+      <p>ImageToURL is operated by Bipul Kumar. Paddle acts as Merchant of Record for Pro purchases.</p>
+    </section>
+  </main>
+
+  {paddleToken && <script is:inline src="https://cdn.paddle.com/paddle/v2/paddle.js" data-paddle-js></script>}
+
+  <script
+    is:inline
+    define:vars={{
+      initialInterval,
+      paddleToken,
+      paddleEnv,
+      checkoutConfigured,
+      loginUrl: loginUrl.toString(),
+      isAuthenticated: Boolean(user),
+    }}
+  >
+    const intervalButtons = Array.from(document.querySelectorAll('[data-interval]'));
+    const displayPrice = document.querySelector('#display-price');
+    const displayPeriod = document.querySelector('#display-period');
+    const displayNote = document.querySelector('#display-note');
+    const checkoutButton = document.querySelector('#checkout-button');
+    const checkoutLabel = document.querySelector('#checkout-label');
+    const signinCheckout = document.querySelector('#signin-checkout');
+    const signinLabel = document.querySelector('#signin-label');
+    const errorBox = document.querySelector('#checkout-error');
+    let selectedInterval = initialInterval;
+    let paddleInitialized = false;
+
+    const planCopy = {
+      month: {
+        price: '$4.99',
+        period: 'per month',
+        note: 'Billed monthly. Cancel before renewal.',
+        checkout: 'Get Pro for $4.99/month',
+        signin: 'Sign in to get Pro for $4.99/month',
+      },
+      year: {
+        price: '$39',
+        period: 'per year',
+        note: '$3.25/month, billed annually',
+        checkout: 'Get Pro for $39/year',
+        signin: 'Sign in to get Pro for $39/year',
+      },
+    };
+
+    const setInterval = (interval) => {
+      selectedInterval = interval === 'month' ? 'month' : 'year';
+      const copy = planCopy[selectedInterval];
+      if (displayPrice) displayPrice.textContent = copy.price;
+      if (displayPeriod) displayPeriod.textContent = copy.period;
+      if (displayNote) displayNote.textContent = copy.note;
+      if (checkoutButton) checkoutButton.dataset.interval = selectedInterval;
+      if (checkoutLabel) checkoutLabel.textContent = copy.checkout;
+      if (signinLabel) signinLabel.textContent = copy.signin;
+      if (signinCheckout) {
+        const target = new URL(loginUrl);
+        target.searchParams.set(
+          'return_to',
+          `https://pro.imagetourl.cloud/pricing?billing=${selectedInterval}`,
+        );
+        signinCheckout.href = target.toString();
+      }
+      intervalButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.interval === selectedInterval));
+      });
+      const pageUrl = new URL(window.location.href);
+      pageUrl.searchParams.set('billing', selectedInterval);
+      window.history.replaceState({}, '', pageUrl);
+    };
+
+    intervalButtons.forEach((button) => {
+      button.addEventListener('click', () => setInterval(button.dataset.interval));
+    });
+
+    const initializePaddle = () => {
+      if (paddleInitialized || !paddleToken || !window.Paddle) return Boolean(window.Paddle);
+      if (paddleEnv === 'sandbox') window.Paddle.Environment.set('sandbox');
+      window.Paddle.Initialize({
+        token: paddleToken,
+        eventCallback(event) {
+          if (event && event.name === 'checkout.completed') {
+            window.sessionStorage.setItem(
+              'imagetourl-pro-flash',
+              'Payment received. Paddle is activating your Pro workspace.',
+            );
+          }
+        },
+      });
+      paddleInitialized = true;
+      return true;
+    };
+
+    initializePaddle();
+
+    checkoutButton?.addEventListener('click', async () => {
+      if (!checkoutConfigured || !isAuthenticated) return;
+      checkoutButton.disabled = true;
+      const previousLabel = checkoutLabel?.textContent;
+      if (checkoutLabel) checkoutLabel.textContent = 'Opening secure checkout…';
+      if (errorBox) errorBox.textContent = '';
+
+      try {
+        const response = await fetch('/api/billing/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ interval: selectedInterval }),
+        });
+        const result = await response.json().catch(() => ({ error: 'Checkout failed' }));
+        if (!response.ok || !result.transactionId) {
+          throw new Error(result.error || 'Checkout could not be started.');
+        }
+        if (!initializePaddle()) throw new Error('Secure checkout could not be loaded.');
+        window.Paddle.Checkout.open({
+          transactionId: result.transactionId,
+          settings: {
+            displayMode: 'overlay',
+            variant: 'one-page',
+            theme: 'light',
+            locale: 'en',
+            successUrl: `${window.location.origin}/?billing=success`,
+          },
+        });
+      } catch (error) {
+        if (errorBox) {
+          errorBox.textContent = error instanceof Error ? error.message : 'Checkout could not be started.';
+        }
+      } finally {
+        checkoutButton.disabled = false;
+        if (checkoutLabel) checkoutLabel.textContent = previousLabel || planCopy[selectedInterval].checkout;
+      }
+    });
+  </script>
+</ProMarketingShell>

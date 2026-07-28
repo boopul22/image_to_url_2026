@@ -1,0 +1,742 @@
+.marketing-body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 2%, rgba(240, 215, 255, 0.55), transparent 27rem),
+    linear-gradient(180deg, #ffffef 0%, #fffef7 52%, #f8f8e6 100%);
+}
+
+.marketing-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 68px;
+  padding: 0 clamp(18px, 4vw, 64px);
+  background: rgba(255, 254, 247, 0.9);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+}
+
+.marketing-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+}
+
+.marketing-header .brand-mark,
+.marketing-footer .brand-mark {
+  width: 28px;
+  height: 28px;
+}
+
+.marketing-header .pro-chip,
+.marketing-footer .pro-chip {
+  margin-left: 2px;
+}
+
+.marketing-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.marketing-nav a,
+.marketing-back {
+  color: #58635e;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  transition: color 150ms ease;
+}
+
+.marketing-nav a:hover,
+.marketing-back:hover {
+  color: var(--green);
+}
+
+.marketing-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
+.marketing-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 17px;
+  color: var(--cream);
+  background: var(--green);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.marketing-login:hover {
+  background: var(--green-soft);
+  transform: translateY(-1px);
+}
+
+.marketing-main {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 86px 0 112px;
+}
+
+.marketing-kicker {
+  margin: 0 0 16px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.pricing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 52px;
+  align-items: end;
+  padding-bottom: 46px;
+}
+
+.pricing-hero-copy {
+  max-width: 820px;
+}
+
+.pricing-hero h1,
+.pro-legal-hero h1 {
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(50px, 8vw, 94px);
+  font-weight: 620;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+}
+
+.pricing-hero h1 em {
+  color: #8c50a8;
+  font-weight: 560;
+}
+
+.pricing-hero-copy > p:last-child {
+  max-width: 670px;
+  margin: 28px 0 0;
+  color: #5f6863;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.58;
+}
+
+.pro-billing-toggle {
+  display: flex;
+  padding: 4px;
+  background: rgba(3, 79, 70, 0.07);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+
+.pro-billing-toggle button {
+  min-height: 46px;
+  padding: 0 16px;
+  color: #68706b;
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pro-billing-toggle button[aria-pressed='true'] {
+  color: var(--cream);
+  background: var(--green);
+}
+
+.pro-billing-toggle small {
+  display: block;
+  font-size: 9px;
+  font-weight: 650;
+  opacity: 0.68;
+}
+
+.pro-plan-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  box-shadow: var(--panel-shadow);
+}
+
+.pro-plan-card {
+  position: relative;
+  padding: clamp(32px, 5.6vw, 68px);
+}
+
+.pro-plan-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  margin-bottom: 24px;
+  color: var(--green);
+  background: var(--lavender);
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pro-plan-card h2 {
+  max-width: 560px;
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(32px, 5vw, 58px);
+  font-weight: 620;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.pro-plan-card > p {
+  max-width: 560px;
+  margin: 18px 0 0;
+  color: #606863;
+  font-size: 15px;
+  line-height: 1.66;
+}
+
+.pro-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.pro-price-row strong {
+  color: var(--green);
+  font-size: clamp(54px, 8vw, 82px);
+  font-weight: 640;
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.pro-price-row span,
+.pro-price-note {
+  color: #6c746f;
+  font-size: 12px;
+}
+
+.pro-price-note {
+  min-height: 18px;
+  margin: 9px 0 0 !important;
+}
+
+.pro-checkout-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 490px);
+  min-height: 56px;
+  padding: 0 20px;
+  margin-top: 28px;
+  color: var(--cream);
+  background: var(--green);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 740;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.pro-checkout-button:hover {
+  background: var(--green-soft);
+  transform: translateY(-2px);
+}
+
+.pro-checkout-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  transform: none;
+}
+
+.pro-checkout-error {
+  min-height: 20px;
+  margin: 12px 0 0 !important;
+  color: var(--danger) !important;
+  font-size: 12px !important;
+}
+
+.pro-feature-panel {
+  padding: clamp(32px, 5vw, 58px);
+  color: var(--cream);
+  background: var(--green);
+}
+
+.pro-feature-panel > p {
+  margin: 0 0 26px;
+  color: rgba(255, 255, 235, 0.56);
+  font-size: 10px;
+  font-weight: 780;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.pro-feature-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pro-feature-list li {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  gap: 11px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 235, 0.12);
+  color: rgba(255, 255, 235, 0.9);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.pro-feature-list li::before {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  content: '✓';
+  color: var(--green);
+  background: var(--lavender);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.pricing-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.pricing-facts article {
+  padding: 26px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+}
+
+.pricing-facts span {
+  color: #8c50a8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.pricing-facts h3 {
+  margin: 13px 0 8px;
+  color: var(--green);
+  font-size: 18px;
+  font-weight: 690;
+  letter-spacing: -0.02em;
+}
+
+.pricing-facts p {
+  margin: 0;
+  color: #68706b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.pricing-faq {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(48px, 9vw, 124px);
+  padding: 110px 0 70px;
+}
+
+.pricing-faq h2 {
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 620;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.pricing-faq-list {
+  border-top: 1px solid var(--line);
+}
+
+.pricing-faq-list details {
+  border-bottom: 1px solid var(--line);
+}
+
+.pricing-faq-list summary {
+  padding: 20px 32px 20px 0;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 690;
+}
+
+.pricing-faq-list p {
+  margin: 0;
+  padding: 0 32px 20px 0;
+  color: #68706b;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.pricing-faq-list a,
+.pro-legal-document a {
+  color: #7a4493;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pricing-disclosure {
+  padding: 22px 24px;
+  background: rgba(240, 215, 255, 0.42);
+  border-left: 3px solid #8c50a8;
+  border-radius: 0 12px 12px 0;
+}
+
+.pricing-disclosure p {
+  margin: 0;
+  color: #59615d;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.pricing-disclosure p + p {
+  margin-top: 5px;
+}
+
+.pricing-disclosure a {
+  color: var(--green);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.marketing-footer {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 52px;
+  padding: 56px clamp(20px, 5vw, 72px) 28px;
+  color: rgba(255, 255, 235, 0.66);
+  background: var(--green);
+  border-top: 1px solid rgba(255, 255, 235, 0.16);
+}
+
+.marketing-footer .brand-name {
+  color: var(--cream);
+}
+
+.marketing-footer-brand p {
+  max-width: 280px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 235, 0.58);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.marketing-footer nav {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+}
+
+.marketing-footer nav strong {
+  margin-bottom: 5px;
+  color: var(--cream);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.marketing-footer nav a {
+  width: fit-content;
+  color: rgba(255, 255, 235, 0.62);
+  font-size: 12px;
+  transition: color 150ms ease;
+}
+
+.marketing-footer nav a:hover {
+  color: var(--lavender);
+}
+
+.marketing-footer-base {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 26px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 235, 0.13);
+  font-size: 10px;
+}
+
+.pro-legal-shell {
+  width: min(1080px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 82px 0 112px;
+}
+
+.pro-legal-hero {
+  max-width: 800px;
+  padding-bottom: 46px;
+  border-bottom: 1px solid var(--line);
+}
+
+.pro-legal-hero h1 {
+  font-size: clamp(48px, 7vw, 80px);
+}
+
+.pro-legal-hero > p:last-of-type {
+  max-width: 700px;
+  margin: 25px 0 0;
+  color: #68706b;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.pro-legal-hero > span {
+  display: block;
+  margin-top: 23px;
+  color: #8a918d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.pro-legal-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 720px);
+  gap: clamp(48px, 9vw, 110px);
+  align-items: start;
+  padding-top: 48px;
+}
+
+.pro-legal-layout > aside {
+  position: sticky;
+  top: 92px;
+}
+
+.pro-legal-layout > aside > p,
+.pro-legal-layout > aside > div span:first-child {
+  margin: 0 0 12px;
+  color: #8a918d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.pro-legal-layout aside nav {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.pro-legal-layout aside nav a {
+  padding: 11px 0;
+  color: #5e6762;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.pro-legal-layout aside nav a:hover {
+  color: #7a4493;
+}
+
+.pro-legal-layout > aside > div {
+  display: grid;
+  gap: 3px;
+  margin-top: 30px;
+  padding: 16px;
+  background: rgba(240, 215, 255, 0.42);
+  border-left: 2px solid #8c50a8;
+  border-radius: 0 10px 10px 0;
+  color: #68706b;
+  font-size: 11px;
+}
+
+.pro-legal-layout > aside > div span:first-child {
+  margin-bottom: 4px;
+}
+
+.pro-legal-layout > aside > div strong {
+  color: var(--green);
+}
+
+.pro-legal-document section {
+  padding-bottom: 34px;
+  margin-bottom: 34px;
+  border-bottom: 1px solid var(--line);
+}
+
+.pro-legal-document section:last-child {
+  border-bottom: 0;
+}
+
+.pro-legal-document h2 {
+  margin: 0 0 14px;
+  color: var(--green);
+  font-size: clamp(23px, 3vw, 30px);
+  font-weight: 660;
+  letter-spacing: -0.035em;
+}
+
+.pro-legal-document h3 {
+  margin: 22px 0 8px;
+  color: #244e48;
+  font-size: 17px;
+}
+
+.pro-legal-document p,
+.pro-legal-document li {
+  color: #626b66;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.pro-legal-document p {
+  margin: 0 0 13px;
+}
+
+.pro-legal-document ul,
+.pro-legal-document ol {
+  display: grid;
+  gap: 8px;
+  padding-left: 22px;
+}
+
+.pro-legal-document strong {
+  color: #244e48;
+}
+
+@media (max-width: 800px) {
+  .marketing-header {
+    grid-template-columns: 1fr auto;
+    min-height: 62px;
+    padding: 0 16px;
+  }
+
+  .marketing-nav,
+  .marketing-back {
+    display: none;
+  }
+
+  .marketing-main,
+  .pro-legal-shell {
+    width: min(100% - 24px, 680px);
+    padding: 52px 0 80px;
+  }
+
+  .pricing-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-bottom: 34px;
+  }
+
+  .pro-billing-toggle {
+    width: 100%;
+  }
+
+  .pro-billing-toggle button {
+    flex: 1;
+  }
+
+  .pro-plan-wrap,
+  .pricing-facts,
+  .pricing-faq,
+  .pro-legal-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-facts article {
+    padding: 22px;
+  }
+
+  .pricing-faq {
+    gap: 36px;
+    padding: 78px 0 54px;
+  }
+
+  .marketing-footer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 38px 24px;
+    padding: 44px 24px 26px;
+  }
+
+  .marketing-footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .marketing-footer-base {
+    flex-direction: column;
+  }
+
+  .pro-legal-layout {
+    gap: 36px;
+    padding-top: 34px;
+  }
+
+  .pro-legal-layout > aside {
+    position: static;
+  }
+
+  .pro-legal-layout aside nav {
+    grid-template-columns: repeat(2, 1fr);
+    border-left: 1px solid var(--line);
+  }
+
+  .pro-legal-layout aside nav a {
+    padding: 10px;
+    border-right: 1px solid var(--line);
+  }
+
+  .pro-legal-layout > aside > div {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .marketing-header .brand-name {
+    font-size: 14px;
+  }
+
+  .marketing-login {
+    min-height: 36px;
+    padding: 0 13px;
+  }
+
+  .pro-plan-card,
+  .pro-feature-panel {
+    padding: 28px 22px;
+  }
+
+  .marketing-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .marketing-footer-brand,
+  .marketing-footer-base {
+    grid-column: auto;
+  }
+}

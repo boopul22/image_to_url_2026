@@ -1,0 +1,51 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"account_id": "ab54ca2d01df4886aa0c3f240ace806d",
+	"compatibility_date": "2026-07-27",
+	"compatibility_flags": [
+		"global_fetch_strictly_public"
+	],
+	"name": "imagetourl-pro-app",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"routes": [
+		{
+			"pattern": "pro.imagetourl.cloud",
+			"custom_domain": true
+		}
+	],
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"vars": {
+		"SITE_URL": "https://pro.imagetourl.cloud",
+		"AUTH_LOGIN_URL": "https://imagetourl.cloud/api/auth/login",
+		"AUTH_LOGOUT_URL": "https://imagetourl.cloud/api/auth/logout",
+		"MAX_UPLOAD_BYTES": "52428800",
+		"STORAGE_LIMIT_BYTES": "53687091200",
+		"PADDLE_ENVIRONMENT": "sandbox",
+		"PADDLE_PRO_MONTHLY_PRICE_ID": "pri_01kymq9gw78c1ahdekbwbjhvms",
+		"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_01kymqdabt3mxtwrsk82wvt1f3"
+	},
+	"d1_databases": [
+		{
+			"binding": "PRO_DB",
+			"database_name": "imagetourl-pro-db",
+			"database_id": "2bfd1580-c88a-4110-9ba3-a957a30813da"
+		},
+		{
+			"binding": "AUTH_DB",
+			"database_name": "imagetourl-db",
+			"database_id": "4cc70585-dd14-4083-9b03-6dda95846d64"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "PRO_STORAGE",
+			"bucket_name": "imagetourl-pro-storage"
+		}
+	]
+}

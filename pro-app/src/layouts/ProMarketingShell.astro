@@ -1,0 +1,100 @@
+---
+import '@fontsource-variable/figtree';
+import '@fontsource-variable/figtree/wght-italic.css';
+import '../styles/pro.css';
+import '../styles/marketing.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'ImageToURL Pro — Permanent image hosting',
+  description = 'A focused image workspace with permanent URLs, original-quality storage, private assets, and simple pricing.',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, 'https://pro.imagetourl.cloud').href;
+const user = Astro.locals.proUser;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#034f46" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ImageToURL Pro" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="marketing-body">
+    <header class="marketing-header">
+      <a class="marketing-brand" href="/pricing" aria-label="ImageToURL Pro pricing">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">image to url</span>
+        <span class="pro-chip">PRO</span>
+      </a>
+      <nav class="marketing-nav" aria-label="Marketing navigation">
+        <a href="/pricing">Pricing</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="marketing-actions">
+        <a class="marketing-back" href="https://imagetourl.cloud">Free tools</a>
+        <a class="marketing-login" href={user ? '/' : 'https://imagetourl.cloud/api/auth/login?return_to=https%3A%2F%2Fpro.imagetourl.cloud%2F'}>
+          {user ? 'Open workspace' : 'Sign in'}
+        </a>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="marketing-footer">
+      <div class="marketing-footer-brand">
+        <a class="marketing-brand" href="/pricing">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">image to url</span>
+          <span class="pro-chip">PRO</span>
+        </a>
+        <p>Permanent image URLs and a calmer place to manage them.</p>
+      </div>
+      <nav aria-label="Product links">
+        <strong>Product</strong>
+        <a href="/pricing">Pricing</a>
+        <a href="/">Workspace</a>
+        <a href="https://imagetourl.cloud">Free ImageToURL</a>
+      </nav>
+      <nav aria-label="Legal links">
+        <strong>Legal</strong>
+        <a href="/terms">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/refund-policy">Refund Policy</a>
+        <a href="/acceptable-use-policy">Acceptable Use</a>
+      </nav>
+      <nav aria-label="Support links">
+        <strong>Support</strong>
+        <a href="/contact">Contact</a>
+        <a href="https://paddle.net" target="_blank" rel="noopener">Paddle buyer support</a>
+        <a href="mailto:blog.boopul@gmail.com">Email support</a>
+      </nav>
+      <div class="marketing-footer-base">
+        <span>© {new Date().getFullYear()} ImageToURL · Operated by Bipul Kumar</span>
+        <span>Payments and taxes handled securely by Paddle.</span>
+      </div>
+    </footer>
+  </body>
+</html>
