@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro';
 import {
 	normalizeSubscriptionStatus,
+	paddlePriceId,
+	storageAddonPriceId,
+	storagePackQuantity,
 	verifyPaddleWebhook,
 	type PaddleWebhookEvent,
 } from '../../../lib/billing';
@@ -71,11 +74,12 @@ export const POST: APIRoute = async ({ request }) => {
 				user_id: string;
 				plan: 'pro' | 'business';
 				price_id: string;
+				storage_pack_quantity: number;
 		  }
 		| null = null;
 	if (event.data.transaction_id) {
 		checkout = await env.PRO_DB.prepare(
-			`SELECT user_id, plan, price_id
+			`SELECT user_id, plan, price_id, storage_pack_quantity
 			   FROM billing_checkout_requests
 			  WHERE transaction_id = ?
 			  LIMIT 1`,
@@ -85,14 +89,36 @@ export const POST: APIRoute = async ({ request }) => {
 				user_id: string;
 				plan: 'pro' | 'business';
 				price_id: string;
+				storage_pack_quantity: number;
 			}>();
 	}
 
 	const userId = currentSubscription?.user_id ?? checkout?.user_id;
-	const priceId = event.data.items?.[0]?.price?.id ?? null;
+	const basePriceIds = new Set(
+		[paddlePriceId(env, 'month'), paddlePriceId(env, 'year')].filter(
+			(value): value is string => Boolean(value),
+		),
+	);
+	const addonPriceIds = new Set(
+		[storageAddonPriceId(env, 'month'), storageAddonPriceId(env, 'year')].filter(
+			(value): value is string => Boolean(value),
+		),
+	);
+	const priceId =
+		event.data.items?.find((item) => item.price?.id && basePriceIds.has(item.price.id))?.price?.id ??
+		null;
+	const addonQuantity = storagePackQuantity(
+		event.data.items
+			?.filter((item) => item.price?.id && addonPriceIds.has(item.price.id))
+			.reduce((total, item) => total + Number(item.quantity ?? 0), 0) ?? 0,
+	);
 	if (
 		!userId ||
-		(!currentSubscription && (!checkout || !priceId || checkout.price_id !== priceId))
+		(!currentSubscription &&
+			(!checkout ||
+				!priceId ||
+				checkout.price_id !== priceId ||
+				storagePackQuantity(checkout.storage_pack_quantity) !== addonQuantity))
 	) {
 		await recordIgnoredEvent(env.PRO_DB, event);
 		return json({ received: true, ignored: true });
@@ -136,8 +162,9 @@ export const POST: APIRoute = async ({ request }) => {
 			   current_period_end,
 			   cancel_at_period_end,
 			   scheduled_change,
-			   last_event_at
-			 ) VALUES (?, ?, 'paddle', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			   last_event_at,
+			   storage_pack_quantity
+			 ) VALUES (?, ?, 'paddle', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 			 ON CONFLICT(provider_subscription_id) DO UPDATE SET
 			   provider_customer_id = excluded.provider_customer_id,
 			   provider_transaction_id = COALESCE(
@@ -151,6 +178,7 @@ export const POST: APIRoute = async ({ request }) => {
 			   cancel_at_period_end = excluded.cancel_at_period_end,
 			   scheduled_change = excluded.scheduled_change,
 			   last_event_at = excluded.last_event_at,
+			   storage_pack_quantity = excluded.storage_pack_quantity,
 			   updated_at = datetime('now')`,
 		).bind(
 			`paddle:${event.data.id}`,
@@ -165,6 +193,7 @@ export const POST: APIRoute = async ({ request }) => {
 			cancelAtPeriodEnd,
 			scheduledChange,
 			event.occurred_at,
+			addonQuantity,
 		),
 		...(event.data.transaction_id
 			? [

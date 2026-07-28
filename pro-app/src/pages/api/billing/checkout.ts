@@ -5,6 +5,8 @@ import {
 	paddlePriceId,
 	paddleRequest,
 	PaddleApiError,
+	storageAddonPriceId,
+	storagePackQuantity,
 	type BillingInterval,
 	type PaddleTransaction,
 } from '../../../lib/billing';
@@ -23,11 +25,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return json({ error: 'Paddle checkout is not configured yet' }, 503);
 	}
 
-	const input = (await request.json().catch(() => ({}))) as { interval?: string };
+	const input = (await request.json().catch(() => ({}))) as {
+		interval?: string;
+		storagePacks?: unknown;
+	};
 	const interval: BillingInterval = input.interval === 'year' ? 'year' : 'month';
 	const priceId = paddlePriceId(env, interval);
+	const storagePacks = storagePackQuantity(input.storagePacks);
+	const addonPriceId = storagePacks > 0 ? storageAddonPriceId(env, interval) : null;
 	if (!priceId || !env.PADDLE_CLIENT_TOKEN) {
 		return json({ error: 'The selected Paddle price is not configured' }, 503);
+	}
+	if (storagePacks > 0 && !addonPriceId) {
+		return json({ error: 'The storage add-on is not configured yet' }, 503);
 	}
 
 	const activeSubscription = await env.PRO_DB.prepare(
@@ -72,13 +82,17 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		const transaction = await paddleRequest<PaddleTransaction>(env, '/transactions', {
 			method: 'POST',
 			body: JSON.stringify({
-				items: [{ price_id: priceId, quantity: 1 }],
+				items: [
+					{ price_id: priceId, quantity: 1 },
+					...(addonPriceId ? [{ price_id: addonPriceId, quantity: storagePacks }] : []),
+				],
 				...(previousCustomer?.provider_customer_id
 					? { customer_id: previousCustomer.provider_customer_id }
 					: {}),
 				custom_data: {
 					imagetourl_user_id: locals.proUser!.id,
 					imagetourl_plan: 'pro',
+					imagetourl_storage_packs: storagePacks,
 				},
 				checkout: {
 					url: `${env.SITE_URL}/pricing`,
@@ -88,14 +102,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 		await env.PRO_DB.prepare(
 			`INSERT INTO billing_checkout_requests
-			   (transaction_id, user_id, plan, billing_interval, price_id, provider_customer_id)
-			 VALUES (?, ?, 'pro', ?, ?, ?)`,
+			   (transaction_id, user_id, plan, billing_interval, price_id, storage_pack_quantity, provider_customer_id)
+			 VALUES (?, ?, 'pro', ?, ?, ?, ?)`,
 		)
 			.bind(
 				transaction.id,
 				locals.proUser!.id,
 				interval,
 				priceId,
+				storagePacks,
 				previousCustomer?.provider_customer_id ?? null,
 			)
 			.run();

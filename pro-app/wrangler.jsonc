@@ -26,9 +26,12 @@
 		"AUTH_LOGOUT_URL": "https://imagetourl.cloud/api/auth/logout",
 		"MAX_UPLOAD_BYTES": "52428800",
 		"STORAGE_LIMIT_BYTES": "53687091200",
+		"STORAGE_ADDON_BYTES": "53687091200",
 		"PADDLE_ENVIRONMENT": "sandbox",
 		"PADDLE_PRO_MONTHLY_PRICE_ID": "pri_01kymq9gw78c1ahdekbwbjhvms",
-		"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_01kymqdabt3mxtwrsk82wvt1f3"
+		"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_01kymqdabt3mxtwrsk82wvt1f3",
+		"PADDLE_STORAGE_ADDON_MONTHLY_PRICE_ID": "pri_01kymrh353fsbt46zst2r5g2ba",
+		"PADDLE_STORAGE_ADDON_ANNUAL_PRICE_ID": "pri_01kymrhvy0mkg1cxcajx0e9e82"
 	},
 	"d1_databases": [
 		{

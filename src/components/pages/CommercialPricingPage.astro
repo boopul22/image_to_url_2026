@@ -38,6 +38,32 @@ const schema = [
       },
     ],
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'ImageToURL Pro 50GB Storage Pack',
+    description: 'A recurring 50GB storage capacity add-on for an active ImageToURL Pro workspace.',
+    brand: { '@type': 'Brand', name: 'ImageToURL' },
+    isAccessoryOrSparePartFor: { '@type': 'Product', name: 'ImageToURL Pro' },
+    offers: [
+      {
+        '@type': 'Offer',
+        name: '50GB Storage Pack Monthly',
+        price: '2.99',
+        priceCurrency: 'USD',
+        url: `${proBase}?billing=month&storage=1`,
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        name: '50GB Storage Pack Annual',
+        price: '24.00',
+        priceCurrency: 'USD',
+        url: `${proBase}?billing=year&storage=1`,
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+  },
 ];
 ---
 
@@ -126,6 +152,25 @@ const schema = [
       </article>
     </section>
 
+    <section class="price-addon" aria-labelledby="price-addon-title">
+      <div class="addon-capacity"><strong>+50</strong><span>GB</span></div>
+      <div>
+        <p class="price-kicker"><span></span> Optional storage add-on</p>
+        <h2 id="price-addon-title">More room when your library grows.</h2>
+        <p>
+          Add repeatable 50GB storage packs without moving to another plan. Packs follow your Pro billing
+          interval and Paddle automatically prorates changes made during a billing cycle.
+        </p>
+      </div>
+      <div class="addon-purchase">
+        <strong id="addon-price">$24</strong>
+        <span id="addon-period">per year / 50GB</span>
+        <a id="addon-link" href={`${proBase}?billing=year&storage=1`}>
+          Add Pro + 50GB <span>↗</span>
+        </a>
+      </div>
+    </section>
+
     <section class="price-proof" aria-label="Purchase information">
       <div>
         <span>01</span>
@@ -152,7 +197,10 @@ const schema = [
       <div class="faq-list">
         <details open>
           <summary>What happens when I reach 50GB?</summary>
-          <p>Existing files stay available and new uploads pause. We show your usage clearly so you can remove files before reaching the limit.</p>
+          <p>
+            Existing files stay available and new uploads pause. You can remove files or add one or more
+            50GB storage packs from your Pro billing settings.
+          </p>
         </details>
         <details>
           <summary>Who processes my payment?</summary>
@@ -182,12 +230,15 @@ const schema = [
   <Footer />
 </Layout>
 
-<script>
-  const switches = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-cycle]'));
-  const price = document.querySelector<HTMLElement>('#pro-price');
-  const period = document.querySelector<HTMLElement>('#pro-period');
-  const equivalent = document.querySelector<HTMLElement>('#price-equivalent');
-  const checkout = document.querySelector<HTMLAnchorElement>('#pro-checkout-link');
+<script is:inline>
+  const switches = Array.from(document.querySelectorAll('[data-cycle]'));
+  const price = document.querySelector('#pro-price');
+  const period = document.querySelector('#pro-period');
+  const equivalent = document.querySelector('#price-equivalent');
+  const checkout = document.querySelector('#pro-checkout-link');
+  const addonPrice = document.querySelector('#addon-price');
+  const addonPeriod = document.querySelector('#addon-period');
+  const addonLink = document.querySelector('#addon-link');
 
   const plans = {
     month: {
@@ -204,17 +255,20 @@ const schema = [
       cta: 'Get Pro for $39/year',
       href: 'https://pro.imagetourl.cloud/pricing?billing=year',
     },
-  } as const;
+  };
 
-  const selectPlan = (cycle: keyof typeof plans) => {
+  const selectPlan = (cycle) => {
     const plan = plans[cycle];
     if (price) price.textContent = plan.price;
     if (period) period.textContent = plan.period;
     if (equivalent) equivalent.textContent = plan.equivalent;
     if (checkout) {
-      checkout.firstChild!.textContent = `${plan.cta} `;
+      checkout.firstChild.textContent = `${plan.cta} `;
       checkout.href = plan.href;
     }
+    if (addonPrice) addonPrice.textContent = cycle === 'year' ? '$24' : '$2.99';
+    if (addonPeriod) addonPeriod.textContent = cycle === 'year' ? 'per year / 50GB' : 'per month / 50GB';
+    if (addonLink) addonLink.href = `${plan.href}&storage=1`;
     switches.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.cycle === cycle)));
   };
 
@@ -471,6 +525,90 @@ const schema = [
     line-height: 1.55;
   }
 
+  .price-addon {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) minmax(190px, 0.34fr);
+    gap: 28px;
+    align-items: center;
+    padding: 28px;
+    margin-top: 24px;
+    background: var(--price-soft);
+    border: 1px solid #fecdd3;
+  }
+
+  .addon-capacity {
+    display: grid;
+    width: 88px;
+    height: 88px;
+    place-content: center;
+    color: #fff;
+    background: var(--price-ink);
+    text-align: center;
+  }
+
+  .addon-capacity strong {
+    font-family: var(--font-headline);
+    font-size: 31px;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+  }
+
+  .addon-capacity span {
+    margin-top: 4px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+  }
+
+  .price-addon h2 {
+    margin: 8px 0;
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: 24px;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+  }
+
+  .price-addon > div:nth-child(2) > p:last-child {
+    max-width: 600px;
+    margin: 0;
+    color: var(--price-muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .addon-purchase {
+    display: grid;
+    gap: 3px;
+    padding-left: 24px;
+    border-left: 1px solid #fecdd3;
+  }
+
+  .addon-purchase > strong {
+    color: var(--price-ink);
+    font-family: var(--font-headline);
+    font-size: 30px;
+    letter-spacing: -0.04em;
+  }
+
+  .addon-purchase > span {
+    color: var(--price-muted);
+    font-size: 10px;
+  }
+
+  .addon-purchase a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 38px;
+    padding: 0 11px;
+    margin-top: 9px;
+    color: #fff;
+    background: var(--price-rose);
+    font-size: 11px;
+    font-weight: 750;
+  }
+
   .price-proof {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -599,6 +737,22 @@ const schema = [
     .price-proof,
     .price-faq {
       grid-template-columns: 1fr;
+    }
+
+    .price-addon {
+      grid-template-columns: 78px minmax(0, 1fr);
+    }
+
+    .addon-capacity {
+      width: 72px;
+      height: 72px;
+    }
+
+    .addon-purchase {
+      grid-column: 1 / -1;
+      padding: 16px 0 0;
+      border-top: 1px solid #fecdd3;
+      border-left: 0;
     }
 
     .free-card {

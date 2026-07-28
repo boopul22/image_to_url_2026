@@ -1,8 +1,14 @@
 ---
 import ProShell from '../layouts/ProShell.astro';
 import { assetUrl, formatBytes, relativeAge } from '../lib/assets';
-import { isPaddleCheckoutConfigured } from '../lib/billing';
-import { getNumberEnv, getProEnv } from '../lib/env';
+import {
+  billingIntervalForBasePrice,
+  isPaddleCheckoutConfigured,
+  isStorageAddonConfigured,
+  storagePackQuantity,
+  workspaceStorageLimitBytes,
+} from '../lib/billing';
+import { getProEnv } from '../lib/env';
 
 const user = Astro.locals.proUser!;
 const env = getProEnv();
@@ -43,7 +49,7 @@ const [assetResult, folderResult, storageResult, usage, preferences, subscriptio
   ).bind(user.id).first<{ private_default: number }>(),
   env.PRO_DB.prepare(
     `SELECT provider_customer_id, provider_subscription_id, status, price_id,
-            current_period_end, cancel_at_period_end
+            current_period_end, cancel_at_period_end, storage_pack_quantity
        FROM subscriptions
       WHERE user_id = ? AND provider = 'paddle'
       ORDER BY
@@ -63,6 +69,7 @@ const [assetResult, folderResult, storageResult, usage, preferences, subscriptio
     price_id: string | null;
     current_period_end: string | null;
     cancel_at_period_end: number;
+    storage_pack_quantity: number;
   }>()
 ]);
 
@@ -77,7 +84,7 @@ const assets = (assetResult.results ?? []).map((asset) => ({
 }));
 const folders = folderResult.results ?? [];
 const storageBytes = Number(storageResult?.bytes ?? 0);
-const storageLimit = getNumberEnv(env.STORAGE_LIMIT_BYTES, 50 * 1024 ** 3);
+const storageLimit = await workspaceStorageLimitBytes(env, user.id);
 const storagePercent = Math.min(100, Math.round((storageBytes / storageLimit) * 100));
 const bandwidthBytes = Number(usage?.bandwidth_bytes ?? 0);
 const uploadsCount = Number(usage?.uploads_count ?? 0);
@@ -85,11 +92,32 @@ const privateDefault = preferences?.private_default === 1;
 const firstName = user.name.trim().split(/\s+/)[0] || 'there';
 const avatarInitial = firstName.slice(0, 1).toUpperCase();
 const checkoutConfigured = isPaddleCheckoutConfigured(env);
+const storageAddonConfigured = isStorageAddonConfigured(env);
 const portalConfigured = Boolean(
   env.PADDLE_API_KEY &&
   (env.PADDLE_ENVIRONMENT === 'sandbox' || env.PADDLE_ENVIRONMENT === 'production')
 );
 const hasPaddleCustomer = Boolean(subscription?.provider_customer_id);
+const storagePacks = storagePackQuantity(subscription?.storage_pack_quantity);
+const subscriptionInterval = billingIntervalForBasePrice(env, subscription?.price_id);
+const canChangeStorage = Boolean(
+  storageAddonConfigured &&
+  subscription?.provider_subscription_id &&
+  (subscription.status === 'active' || subscription.status === 'trialing') &&
+  subscriptionInterval
+);
+const addonRateLabel =
+  subscriptionInterval === 'year' ? '$24/year per 50GB pack' : '$2.99/month per 50GB pack';
+const addonPackOptions = Array.from({ length: 11 }, (_, quantity) => {
+  const price = subscriptionInterval === 'year' ? quantity * 24 : quantity * 2.99;
+  return {
+    quantity,
+    label:
+      quantity === 0
+        ? 'No extra storage'
+        : `+${quantity * 50}GB · $${Number.isInteger(price) ? price : price.toFixed(2)}/${subscriptionInterval === 'year' ? 'year' : 'month'}`,
+  };
+});
 const billingStatus = subscription?.status ?? 'preview';
 const billingStatusLabel = {
   preview: 'Pro preview',
@@ -502,6 +530,54 @@ logoutUrl.searchParams.set('return_to', origin);
                 </select>
               </label>
             )}
+            {hasPaddleCustomer && (
+              <section class="storage-addon-setting" aria-labelledby="storage-addon-title">
+                <div class="storage-addon-heading">
+                  <span>
+                    <small class="dialog-kicker">Flexible capacity</small>
+                    <strong id="storage-addon-title">50GB storage packs</strong>
+                  </span>
+                  <span>{storagePacks > 0 ? `${storagePacks * 50}GB extra` : 'Base 50GB'}</span>
+                </div>
+                <p>
+                  Add up to 500GB without changing plans. Your current total allowance is
+                  <strong> {formatBytes(storageLimit)}</strong>.
+                </p>
+                <label class="billing-interval" for="storage-pack-quantity">
+                  <span>Storage allowance</span>
+                  <select
+                    id="storage-pack-quantity"
+                    disabled={!canChangeStorage}
+                    data-current-quantity={storagePacks}
+                  >
+                    {addonPackOptions.map((option) => (
+                      <option value={option.quantity} selected={option.quantity === storagePacks}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <small class="storage-addon-rate">{addonRateLabel}. Paddle prorates mid-cycle changes.</small>
+                <button
+                  class="button button-storage-addon"
+                  id="storage-addon-preview"
+                  type="button"
+                  disabled={!canChangeStorage}
+                >
+                  Review storage change
+                </button>
+                <div class="storage-addon-confirm" id="storage-addon-confirm" hidden>
+                  <p id="storage-addon-preview-copy"></p>
+                  <div>
+                    <button class="button button-secondary" id="storage-addon-back" type="button">Go back</button>
+                    <button class="button button-primary" id="storage-addon-apply" type="button">
+                      Confirm and update
+                    </button>
+                  </div>
+                </div>
+                <p class="storage-addon-feedback" id="storage-addon-feedback" role="status"></p>
+              </section>
+            )}
             <button
               class="button button-billing"
               id="billing-action-button"
@@ -590,6 +666,15 @@ logoutUrl.searchParams.set('return_to', origin);
       const billingInterval = document.querySelector('#billing-interval') as
         | (Element & { value: string })
         | null;
+      const storagePackSelect = document.querySelector('#storage-pack-quantity') as
+        | (Element & { value: string })
+        | null;
+      const storageAddonPreview = document.querySelector<HTMLButtonElement>('#storage-addon-preview');
+      const storageAddonConfirm = document.querySelector<HTMLElement>('#storage-addon-confirm');
+      const storageAddonPreviewCopy = document.querySelector<HTMLElement>('#storage-addon-preview-copy');
+      const storageAddonBack = document.querySelector<HTMLButtonElement>('#storage-addon-back');
+      const storageAddonApply = document.querySelector<HTMLButtonElement>('#storage-addon-apply');
+      const storageAddonFeedback = document.querySelector<HTMLElement>('#storage-addon-feedback');
 	    const settingPrivateDefault = document.querySelector<HTMLInputElement>('#setting-private-default');
 	    const privatePreference = document.querySelector<HTMLButtonElement>('[data-preference="private"]');
 	    const uploadFolder = document.querySelector('#upload-folder') as (Element & { value: string }) | null;
@@ -1002,6 +1087,75 @@ logoutUrl.searchParams.set('return_to', origin);
       if (billingActionButton) {
         billingActionButton.addEventListener('click', openBilling);
       }
+
+      const requestStorageChange = async (action: 'preview' | 'apply') => {
+        if (!storagePackSelect) return;
+        const quantity = Number(storagePackSelect.value);
+        const target = action === 'preview' ? storageAddonPreview : storageAddonApply;
+        if (!target) return;
+        const originalLabel = target.textContent;
+        target.disabled = true;
+        target.textContent = action === 'preview' ? 'Calculating with Paddle…' : 'Updating storage…';
+        if (storageAddonFeedback) storageAddonFeedback.textContent = '';
+
+        try {
+          const response = await fetch('/api/billing/storage-addon', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quantity, action })
+          });
+          const result = await response.json().catch(() => ({ error: 'Storage update failed' })) as {
+            ok?: boolean;
+            error?: string;
+            totalStorageBytes?: number;
+            immediateCharge?: string | null;
+            renewalTotal?: string | null;
+          };
+          if (!response.ok || !result.ok) throw new Error(result.error || 'Storage update failed');
+
+          if (action === 'apply') {
+            window.sessionStorage.setItem(
+              'imagetourl-pro-flash',
+              'Storage updated. Your new allowance is ready.'
+            );
+            window.location.reload();
+            return;
+          }
+
+          const totalGb = Math.round(Number(result.totalStorageBytes ?? 0) / 1024 ** 3);
+          const chargeCopy = result.immediateCharge
+            ? `Paddle will charge ${result.immediateCharge} now, including proration and tax.`
+            : 'No immediate charge is due. Paddle will apply any billing credit automatically.';
+          const renewalCopy = result.renewalTotal
+            ? ` Your next renewal total will be ${result.renewalTotal}.`
+            : '';
+          if (storageAddonPreviewCopy) {
+            storageAddonPreviewCopy.textContent =
+              `${chargeCopy}${renewalCopy} Your workspace allowance will become ${totalGb}GB.`;
+          }
+          if (storageAddonConfirm) storageAddonConfirm.hidden = false;
+          storageAddonApply?.focus();
+        } catch (error) {
+          if (storageAddonFeedback) {
+            storageAddonFeedback.textContent =
+              error instanceof Error ? error.message : 'Storage could not be updated';
+          }
+        } finally {
+          target.disabled = false;
+          target.textContent = originalLabel;
+        }
+      };
+
+      storageAddonPreview?.addEventListener('click', () => requestStorageChange('preview'));
+      storageAddonApply?.addEventListener('click', () => requestStorageChange('apply'));
+      storageAddonBack?.addEventListener('click', () => {
+        if (storageAddonConfirm) storageAddonConfirm.hidden = true;
+        storageAddonPreview?.focus();
+      });
+      storagePackSelect?.addEventListener('change', () => {
+        if (storageAddonConfirm) storageAddonConfirm.hidden = true;
+        if (storageAddonFeedback) storageAddonFeedback.textContent = '';
+      });
 
 	    window.addEventListener('keydown', (event) => {
 	      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {

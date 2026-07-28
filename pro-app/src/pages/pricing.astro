@@ -4,6 +4,7 @@ export const prerender = false;
 import ProMarketingShell from '../layouts/ProMarketingShell.astro';
 import {
   isPaddleCheckoutConfigured,
+  isStorageAddonConfigured,
   paddleEnvironment,
 } from '../lib/billing';
 import { getProEnv } from '../lib/env';
@@ -11,7 +12,9 @@ import { getProEnv } from '../lib/env';
 const env = getProEnv();
 const user = Astro.locals.proUser;
 const initialInterval = Astro.url.searchParams.get('billing') === 'month' ? 'month' : 'year';
+const initialStoragePacks = Astro.url.searchParams.get('storage') === '1' ? 1 : 0;
 const checkoutConfigured = isPaddleCheckoutConfigured(env);
+const storageAddonConfigured = isStorageAddonConfigured(env);
 const paddleToken = env.PADDLE_CLIENT_TOKEN ?? '';
 const paddleEnv = paddleEnvironment(env);
 
@@ -30,7 +33,7 @@ if (user) {
   hasSubscription = Boolean(subscription);
 }
 
-const returnTo = `https://pro.imagetourl.cloud/pricing?billing=${initialInterval}`;
+const returnTo = `https://pro.imagetourl.cloud/pricing?billing=${initialInterval}${initialStoragePacks ? '&storage=1' : ''}`;
 const loginUrl = new URL(env.AUTH_LOGIN_URL);
 loginUrl.searchParams.set('return_to', returnTo);
 ---
@@ -123,6 +126,46 @@ loginUrl.searchParams.set('return_to', returnTo);
       </aside>
     </section>
 
+    <section class="storage-pack-offer" aria-labelledby="storage-pack-title">
+      <div class="storage-pack-visual" aria-hidden="true">
+        <span>50</span>
+        <small>GB</small>
+      </div>
+      <div class="storage-pack-copy">
+        <p class="marketing-kicker">Capacity add-on</p>
+        <h2 id="storage-pack-title">Add storage without changing plans.</h2>
+        <p>
+          Each recurring storage pack adds 50GB to your workspace. Start with one at checkout or add up
+          to ten packs later from billing settings.
+        </p>
+        <ul>
+          <li>Same billing interval as your Pro plan</li>
+          <li>Prorated automatically for mid-cycle changes</li>
+          <li>Remove packs whenever your storage needs shrink</li>
+        </ul>
+      </div>
+      <label class:list={['storage-pack-choice', { 'is-disabled': hasSubscription || !storageAddonConfigured }]}>
+        <input
+          id="storage-addon-choice"
+          type="checkbox"
+          checked={initialStoragePacks === 1}
+          disabled={hasSubscription || !storageAddonConfigured}
+        />
+        <span>
+          <strong id="storage-addon-price">
+            {initialInterval === 'year' ? '+$24/year' : '+$2.99/month'}
+          </strong>
+          <small>
+            {hasSubscription
+              ? 'Manage packs in your workspace'
+              : storageAddonConfigured
+                ? 'Include one 50GB pack'
+                : 'Add-on setup in progress'}
+          </small>
+        </span>
+      </label>
+    </section>
+
     <section class="pricing-facts" aria-label="Subscription benefits">
       <article>
         <span>01 / LIMITS</span>
@@ -159,6 +202,13 @@ loginUrl.searchParams.set('return_to', returnTo);
           <p>
             Yes. Monthly subscriptions renew monthly and annual subscriptions renew annually until you
             cancel before the renewal date. Paddle shows the total, tax, and renewal details at checkout.
+          </p>
+        </details>
+        <details>
+          <summary>Can I add more storage later?</summary>
+          <p>
+            Yes. Add or remove repeatable 50GB packs from your workspace billing settings. Paddle shows
+            the prorated amount before you confirm any mid-cycle change.
           </p>
         </details>
         <details>
@@ -204,6 +254,8 @@ loginUrl.searchParams.set('return_to', returnTo);
       paddleToken,
       paddleEnv,
       checkoutConfigured,
+      addonConfigured: storageAddonConfigured,
+      initialStoragePacks,
       loginUrl: loginUrl.toString(),
       isAuthenticated: Boolean(user),
     }}
@@ -217,7 +269,10 @@ loginUrl.searchParams.set('return_to', returnTo);
     const signinCheckout = document.querySelector('#signin-checkout');
     const signinLabel = document.querySelector('#signin-label');
     const errorBox = document.querySelector('#checkout-error');
+    const storageAddonChoice = document.querySelector('#storage-addon-choice');
+    const storageAddonPrice = document.querySelector('#storage-addon-price');
     let selectedInterval = initialInterval;
+    let selectedStoragePacks = initialStoragePacks;
     let paddleInitialized = false;
 
     const planCopy = {
@@ -246,11 +301,15 @@ loginUrl.searchParams.set('return_to', returnTo);
       if (checkoutButton) checkoutButton.dataset.interval = selectedInterval;
       if (checkoutLabel) checkoutLabel.textContent = copy.checkout;
       if (signinLabel) signinLabel.textContent = copy.signin;
+      if (storageAddonPrice) {
+        storageAddonPrice.textContent = selectedInterval === 'year' ? '+$24/year' : '+$2.99/month';
+      }
       if (signinCheckout) {
         const target = new URL(loginUrl);
+        const storageQuery = selectedStoragePacks > 0 ? '&storage=1' : '';
         target.searchParams.set(
           'return_to',
-          `https://pro.imagetourl.cloud/pricing?billing=${selectedInterval}`,
+          `https://pro.imagetourl.cloud/pricing?billing=${selectedInterval}${storageQuery}`,
         );
         signinCheckout.href = target.toString();
       }
@@ -259,11 +318,17 @@ loginUrl.searchParams.set('return_to', returnTo);
       });
       const pageUrl = new URL(window.location.href);
       pageUrl.searchParams.set('billing', selectedInterval);
+      if (selectedStoragePacks > 0) pageUrl.searchParams.set('storage', '1');
+      else pageUrl.searchParams.delete('storage');
       window.history.replaceState({}, '', pageUrl);
     };
 
     intervalButtons.forEach((button) => {
       button.addEventListener('click', () => setInterval(button.dataset.interval));
+    });
+    storageAddonChoice?.addEventListener('change', () => {
+      selectedStoragePacks = storageAddonChoice.checked && addonConfigured ? 1 : 0;
+      setInterval(selectedInterval);
     });
 
     const initializePaddle = () => {
@@ -297,7 +362,10 @@ loginUrl.searchParams.set('return_to', returnTo);
         const response = await fetch('/api/billing/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ interval: selectedInterval }),
+          body: JSON.stringify({
+            interval: selectedInterval,
+            storagePacks: selectedStoragePacks,
+          }),
         });
         const result = await response.json().catch(() => ({ error: 'Checkout failed' }));
         if (!response.ok || !result.transactionId) {

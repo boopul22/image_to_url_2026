@@ -323,6 +323,115 @@
   font-weight: 900;
 }
 
+.storage-pack-offer {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) minmax(220px, 0.42fr);
+  gap: 28px;
+  align-items: center;
+  padding: 28px;
+  margin-top: 14px;
+  background: linear-gradient(120deg, rgba(240, 215, 255, 0.65), rgba(255, 255, 255, 0.75));
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+}
+
+.storage-pack-visual {
+  display: grid;
+  width: 96px;
+  height: 96px;
+  place-content: center;
+  color: var(--cream);
+  background: var(--green);
+  border-radius: 22px;
+  text-align: center;
+}
+
+.storage-pack-visual span {
+  font-size: 38px;
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+.storage-pack-visual small {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.storage-pack-copy h2 {
+  margin: 5px 0 7px;
+  color: var(--green);
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.storage-pack-copy > p:not(.marketing-kicker) {
+  max-width: 650px;
+  margin: 0;
+  color: #646d67;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.storage-pack-copy ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  padding: 0;
+  margin: 12px 0 0;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 650;
+  list-style: none;
+}
+
+.storage-pack-copy li::before {
+  margin-right: 5px;
+  content: '✓';
+  color: #8c50a8;
+}
+
+.storage-pack-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 76px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(3, 79, 70, 0.14);
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.storage-pack-choice input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--green);
+}
+
+.storage-pack-choice span {
+  display: grid;
+  gap: 3px;
+}
+
+.storage-pack-choice strong {
+  color: var(--green);
+  font-size: 18px;
+}
+
+.storage-pack-choice small {
+  color: #6b736e;
+  font-size: 10px;
+}
+
+.storage-pack-choice.is-disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
 .pricing-facts {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -669,6 +778,19 @@
     grid-template-columns: 1fr;
   }
 
+  .storage-pack-offer {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .storage-pack-visual {
+    width: 78px;
+    height: 78px;
+  }
+
+  .storage-pack-choice {
+    grid-column: 1 / -1;
+  }
+
   .pricing-facts article {
     padding: 22px;
   }
@@ -729,6 +851,25 @@
   .pro-plan-card,
   .pro-feature-panel {
     padding: 28px 22px;
+  }
+
+  .storage-pack-offer {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 22px;
+  }
+
+  .storage-pack-visual {
+    width: 72px;
+    height: 72px;
+  }
+
+  .storage-pack-copy ul {
+    display: grid;
+  }
+
+  .storage-pack-choice {
+    grid-column: auto;
   }
 
   .marketing-footer {

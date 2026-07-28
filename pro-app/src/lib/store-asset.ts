@@ -1,4 +1,5 @@
 import { assetUrl, currentPeriodStart, extensionForType } from './assets';
+import { workspaceStorageLimitBytes } from './billing';
 import type { ProEnv } from './env';
 import { getNumberEnv } from './env';
 import { safeFilename } from './http';
@@ -43,7 +44,7 @@ export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 		.first<{ count: number }>();
 	if ((recentUploads?.count ?? 0) >= 20) throw new Error('RATE_LIMIT');
 
-	const storageLimit = getNumberEnv(env.STORAGE_LIMIT_BYTES, 50 * 1024 ** 3);
+	const storageLimit = await workspaceStorageLimitBytes(env, user.id);
 	const usage = await env.PRO_DB.prepare(
 		`SELECT COALESCE(SUM(size_bytes), 0) AS bytes
 		   FROM assets

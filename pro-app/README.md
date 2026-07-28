@@ -107,13 +107,16 @@ The sandbox catalog currently uses:
 - Product: `ImageToURL Pro` (`pro_01kymjd52929gdxfr3hxcp5gbf`)
 - Monthly recurring price: USD 4.99 (`pri_01kymq9gw78c1ahdekbwbjhvms`)
 - Annual recurring price: USD 39 (`pri_01kymqdabt3mxtwrsk82wvt1f3`)
+- Storage add-on product: `ImageToURL Pro Storage Pack` (`pro_01kymre5zw701bcysab14ttb7r`)
+- Recurring 50GB pack monthly price: USD 2.99 (`pri_01kymrh353fsbt46zst2r5g2ba`)
+- Recurring 50GB pack annual price: USD 24 (`pri_01kymrhvy0mkg1cxcajx0e9e82`)
 - Client-side token
 - API key with `transaction.write` and `customer_portal_session.write`
 - Notification destination:
   `https://pro.imagetourl.cloud/api/webhooks/paddle`
 - Events: `subscription.created`, `subscription.updated`, and
   `subscription.canceled`
-- Default payment link: `https://pro.imagetourl.cloud/?billing=checkout`
+- Default payment link: `https://pro.imagetourl.cloud/pricing`
 
 For live checkout, Paddle must approve `pro.imagetourl.cloud`.
 
@@ -123,7 +126,9 @@ with Wrangler:
 ```jsonc
 "PADDLE_ENVIRONMENT": "sandbox",
 "PADDLE_PRO_MONTHLY_PRICE_ID": "pri_...",
-"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_..."
+"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_...",
+"PADDLE_STORAGE_ADDON_MONTHLY_PRICE_ID": "pri_...",
+"PADDLE_STORAGE_ADDON_ANNUAL_PRICE_ID": "pri_..."
 ```
 
 Store every credential with Wrangler rather than the Cloudflare dashboard:
