@@ -36,12 +36,8 @@ interface Props {
   breadcrumbs?: { name: string; url: string }[];
   /** ISO-8601 date string surfaced as visible text and `WebPage.dateModified` */
   lastModified?: string;
-  /** Load the AdSense library IMMEDIATELY instead of interaction-gating it.
-   *  Only for noindex, non-cached dead-end screens (e.g. /share) where the
-   *  performance score is irrelevant and the high-intent visitor bounces fast —
-   *  so waiting for a scroll/click just burns the impression. Never set this on
-   *  an indexed content page; it defeats the LCP-protecting gate. */
-  eagerAds?: boolean;
+  /** Whether this page may render or load advertising code. */
+  adsEnabled?: boolean;
 }
 
 const {
@@ -57,7 +53,7 @@ const {
   hreflangAlternates,
   breadcrumbs,
   lastModified,
-  eagerAds = false,
+  adsEnabled = true,
 } = Astro.props;
 
 // Clamp the meta description to <=158 chars at a word boundary so it never
@@ -263,6 +259,8 @@ function hreflangUrl(loc: Locale): string {
       crossorigin
     />
 
+    {adsEnabled && (
+      <Fragment>
     <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP.
          fonts.gstatic.com is included because AdSense pulls its own Roboto woff2s from there;
          resolving DNS early warms that fetch without an eager TLS handshake on the LCP path. -->
@@ -291,7 +289,7 @@ function hreflangUrl(loc: Locale): string {
          unchanged; scroll is an interaction trigger, so the library is already loading
          by the time any below-fold slot is pushed. Component inline push({}) calls
          queue harmlessly on the window.adsbygoogle array until the library loads. -->
-    <script is:inline define:vars={{ adClient: AD_CLIENT, eagerAds }}>
+    <script is:inline define:vars={{ adClient: AD_CLIENT }}>
       (function () {
         var loaded = false;
         function loadAds() {
@@ -303,10 +301,6 @@ function hreflangUrl(loc: Locale): string {
           s.crossOrigin = 'anonymous';
           document.head.appendChild(s);
         }
-        // Eager pages (noindex, non-cached dead-ends like /share): load the library
-        // right now so the rail slots fill on first paint instead of waiting for an
-        // interaction. Safe because these pages are never audited for LCP/score.
-        if (eagerAds) { loadAds(); return; }
         // Primary: load on the first real user interaction.
         ['scroll', 'pointerdown', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (evt) {
           window.addEventListener(evt, loadAds, { once: true, passive: true });
@@ -340,6 +334,8 @@ function hreflangUrl(loc: Locale): string {
     <style is:global>
       ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
     </style>
+      </Fragment>
+    )}
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={schemaJson} />
@@ -351,7 +347,7 @@ function hreflangUrl(loc: Locale): string {
     <main>
       <slot />
     </main>
-    <AdBlockGate />
+    {adsEnabled && <AdBlockGate />}
     <EmailOptInPrompt />
     <script>
       const revealed = new WeakSet();
@@ -384,6 +380,8 @@ function hreflangUrl(loc: Locale): string {
       }
     </script>
 
+    {adsEnabled && (
+      <Fragment>
     <!-- Lazy-load below-the-fold ad slots. Slots marked data-ad-lazy are NOT pushed
          at parse time; we request them ~300px before they scroll into view. This is
          Google's recommended pre-trigger (200–400px) so the ad is filled by the time
@@ -423,6 +421,8 @@ function hreflangUrl(loc: Locale): string {
         slots.forEach(function (s) { io.observe(s); });
       })();
     </script>
+      </Fragment>
+    )}
 
     <!-- GA4 — interaction-gated to avoid blocking LCP, same trigger set as the
          AdSense loader in <head>. -->

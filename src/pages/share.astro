@@ -11,8 +11,6 @@ export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import ToolAdFrame from '../components/ads/ToolAdFrame.astro';
-import AdSlot from '../components/ads/AdSlot.astro';
 import SharePanel from '../components/SharePanel.astro';
 import SharePanelMulti from '../components/SharePanelMulti.astro';
 import { getValidUrls } from '../lib/share-url';
@@ -34,7 +32,7 @@ const single = urls.length === 1 ? urls[0] : undefined;
   description="Your image URL is ready. Copy it as a direct link, Markdown, HTML, or BBCode, scan the QR code, or upload another image. Guest links expire; signed-in links can be kept forever."
   noindex={true}
   noHreflang
-  eagerAds
+  adsEnabled={false}
 >
   <Nav />
 
@@ -42,22 +40,18 @@ const single = urls.length === 1 ? urls[0] : undefined;
     {urls.length > 0 ? (
       <Fragment>
         <!-- Valid link(s): the share panel renders populated + visible server-side,
-             flanked by the tool ad rails. One URL → the rich single panel; several
-             (a bulk upload) → the multi-image list. -->
-        <ToolAdFrame>
+             with one URL using the rich single panel and several (a bulk upload)
+             using the multi-image list. This route intentionally contains no ads. -->
+        <div class="w-full max-w-2xl mx-auto mb-8 sm:mb-10">
           {single
-            ? <SharePanel url={single} copyDelayMs={1500} />
-            : <SharePanelMulti urls={urls} skipped={skipped} copyDelayMs={1500} />}
+            ? <SharePanel url={single} />
+            : <SharePanelMulti urls={urls} skipped={skipped} />}
           <div class="max-w-xl mx-auto mt-6 text-center">
             <a href="/" class="font-label text-xs font-bold uppercase tracking-wider text-primary hover:underline">← Upload another image</a>
           </div>
-        </ToolAdFrame>
+        </div>
 
-        <!-- Publisher content (kept at the BOTTOM, below the share panel). This is
-             real, useful guidance about the link the visitor just created — it turns
-             /share from a bare "dead-end / Thank-You" screen into a content page, so
-             the ad units above are valuable-inventory compliant (Google forbids ads
-             on no-content screens). -->
+        <!-- Useful guidance about the link the visitor just created. -->
         <section class="max-w-3xl mx-auto mt-14 sm:mt-16">
           <h2 class="text-2xl sm:text-3xl font-headline font-bold text-on-surface tracking-tight">Make the most of your image link</h2>
           <p class="text-on-surface-variant mt-3 leading-relaxed">
@@ -149,8 +143,6 @@ const single = urls.length === 1 ? urls[0] : undefined;
               <Icon name="star" class="text-lg text-rose-600" /> Favicon generator
             </a>
           </div>
-
-          <AdSlot placement="bottomMultiplex" class="mt-12" />
         </section>
       </Fragment>
     ) : (

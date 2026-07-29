@@ -17,19 +17,15 @@ export interface Props {
   urls: string[];
   /** How many selected files were NOT hosted (over daily quota / cap / failures). */
   skipped?: number;
-  /** Hold the copy buttons for this many ms with a visible countdown so the
-   *  eagerly-loaded ad has time to render before the visitor grabs the links. */
-  copyDelayMs?: number;
 }
 
-const { urls: rawUrls, skipped = 0, copyDelayMs } = Astro.props;
+const { urls: rawUrls, skipped = 0 } = Astro.props;
 // Defensive re-validation (never trust the caller): this is the last hop before
 // the URLs hit the DOM.
 const urls = getValidUrls(rawUrls);
 ---
 
-<section id="share-multi" class="max-w-xl mx-auto"
-         data-copy-delay={copyDelayMs && copyDelayMs > 0 ? String(copyDelayMs) : undefined}>
+<section id="share-multi" class="max-w-xl mx-auto">
   <div class="mb-5">
     <div class="flex items-center gap-2">
       <Icon name="check_circle" class="text-secondary text-xl sm:text-2xl" fill />
@@ -258,30 +254,7 @@ const urls = getValidUrls(rawUrls);
       });
     });
 
-    // Copy-gate: hold the COPY buttons for a moment so the eager ad renders first
-    // (same concept as SharePanel). The watermark toggle stays live. Opt-in via
-    // data-copy-delay (/share only).
-    function runCopyGate(ms: number) {
-      const btns = [copyAllBtn, ...document.querySelectorAll<HTMLButtonElement>('.mc-copy')].filter(Boolean) as HTMLButtonElement[];
-      if (!btns.length) return;
-      const primary = copyAllBtn;
-      const primaryLabel = primary?.textContent ?? '';
-      btns.forEach((b) => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); });
-      let remaining = Math.max(1, Math.ceil(ms / 1000));
-      const paint = () => { if (primary) primary.textContent = `Preparing your links… ${remaining}s`; };
-      paint();
-      const iv = window.setInterval(() => {
-        remaining -= 1;
-        if (remaining > 0) { paint(); return; }
-        window.clearInterval(iv);
-        btns.forEach((b) => { b.disabled = false; b.classList.remove('opacity-60', 'cursor-not-allowed'); });
-        if (primary) primary.textContent = primaryLabel;
-      }, 1000);
-    }
-
     rows.forEach((_, i) => syncRow(i));
     syncAll();
-    const delay = Number(root.dataset.copyDelay) || 0;
-    if (delay > 0) runCopyGate(delay);
   }
 </script>
