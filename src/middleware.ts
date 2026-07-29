@@ -55,6 +55,32 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   const url0 = new URL(request.url);
   const path = url0.pathname;
 
+  // Permanently remove the reported policy-violating upload and every share URL
+  // that points to it. Matching by pathname also covers an encoded `u` parameter
+  // and either of the site's allowed image hosts.
+  const removedImagePaths = new Set(['/bfidfscn.jpg']);
+  const isRemovedShareUrl = (path === '/share' || path === '/share/') &&
+    url0.searchParams.getAll('u').some((raw) => {
+      try {
+        return removedImagePaths.has(new URL(raw).pathname);
+      } catch {
+        return false;
+      }
+    });
+  if (removedImagePaths.has(path) || isRemovedShareUrl) {
+    return new Response(
+      '<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Gone</title></head><body><h1>410 Gone</h1><p>This URL has been permanently removed.</p></body></html>',
+      {
+        status: 410,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'X-Robots-Tag': 'noindex',
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+        },
+      },
+    );
+  }
+
   // Canonicalize legacy locale-prefixed commercial/legal URLs to the single
   // English policy set. Keeping one source prevents checkout terms drifting
   // across translated pages while those translations are being refreshed.
