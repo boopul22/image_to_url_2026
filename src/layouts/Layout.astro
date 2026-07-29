@@ -36,8 +36,6 @@ interface Props {
   breadcrumbs?: { name: string; url: string }[];
   /** ISO-8601 date string surfaced as visible text and `WebPage.dateModified` */
   lastModified?: string;
-  /** Whether this page may render or load advertising code. */
-  adsEnabled?: boolean;
 }
 
 const {
@@ -53,8 +51,8 @@ const {
   hreflangAlternates,
   breadcrumbs,
   lastModified,
-  adsEnabled = true,
 } = Astro.props;
+const adsEnabled = Astro.url.pathname !== '/share' && Astro.url.pathname !== '/share/';
 
 // Clamp the meta description to <=158 chars at a word boundary so it never
 // trips "description too long" or gets truncated mid-word in SERPs. OG/Twitter

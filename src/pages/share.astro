@@ -32,7 +32,6 @@ const single = urls.length === 1 ? urls[0] : undefined;
   description="Your image URL is ready. Copy it as a direct link, Markdown, HTML, or BBCode, scan the QR code, or upload another image. Guest links expire; signed-in links can be kept forever."
   noindex={true}
   noHreflang
-  adsEnabled={false}
 >
   <Nav />
 
@@ -41,7 +40,7 @@ const single = urls.length === 1 ? urls[0] : undefined;
       <Fragment>
         <!-- Valid link(s): the share panel renders populated + visible server-side,
              with one URL using the rich single panel and several (a bulk upload)
-             using the multi-image list. This route intentionally contains no ads. -->
+             using the multi-image list. -->
         <div class="w-full max-w-2xl mx-auto mb-8 sm:mb-10">
           {single
             ? <SharePanel url={single} />
