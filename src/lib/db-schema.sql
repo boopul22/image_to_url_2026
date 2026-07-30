@@ -110,9 +110,9 @@ CREATE TABLE IF NOT EXISTS anonymous_uploads (
 );
 CREATE INDEX IF NOT EXISTS idx_anon_uploads_ip ON anonymous_uploads(ip_address);
 
--- Copy-event tracking for the /share page: did the visitor copy the WATERMARKED
+-- Historical copy-event tracking: did the visitor copy the WATERMARKED
 -- ("branded") or the clean variant, and in which format. The only signal of the
--- variant choice — the branded PNG is auto-generated on share load (images.branded_of),
+-- variant choice — branded PNG variants are linked through images.branded_of,
 -- so a branded row alone doesn't mean anyone picked it. See migrations/009_copy_events.sql.
 CREATE TABLE IF NOT EXISTS copy_events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

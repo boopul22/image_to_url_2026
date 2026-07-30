@@ -142,7 +142,11 @@ import Icon from './Icon.astro';
         const copy = document.createElement('button');
         copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
         copy.textContent = 'Copy';
-        copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ } window.location.href = '/share?u=' + encodeURIComponent(hosted); });
+        copy.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
+          copy.textContent = 'Copied!';
+          window.setTimeout(() => { copy.textContent = 'Copy'; }, 1500);
+        });
         row.appendChild(inp); row.appendChild(copy);
       } catch (err: any) {
         host.disabled = false; host.textContent = 'Retry';

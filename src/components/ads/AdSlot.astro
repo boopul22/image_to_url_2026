@@ -76,7 +76,7 @@ const insAttrs = {
 </div>
 
 <script>
-  // Non-lazy slots (eager pages like /share) still need a push once the AdSense
+  // Non-lazy slots still need a push once the AdSense
   // library loads. The Layout observer only handles [data-ad-lazy], so push
   // eager AdSlot units here, in DOM order, guarded against double-push.
   document

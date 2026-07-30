@@ -258,10 +258,9 @@ const fromLabel = { png: 'PNG', jpg: 'JPG', heic: 'HEIC', any: 'image' }[from];
           copy.className = 'su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs py-2 px-3 flex-shrink-0';
           copy.textContent = 'Copy';
           copy.addEventListener('click', async () => {
-            // Copy, then send the user to the /share screen for the rich share
-            // widget (more formats + QR + watermark) + ad rails.
             try { await navigator.clipboard.writeText(hosted); } catch { /* ignore */ }
-            window.location.href = '/share?u=' + encodeURIComponent(hosted);
+            copy.textContent = 'Copied!';
+            window.setTimeout(() => { copy.textContent = 'Copy'; }, 1500);
           });
           row.appendChild(inp); row.appendChild(copy);
         } catch (err: any) {

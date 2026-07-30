@@ -1,5 +1,5 @@
 // Website-only request guard for our internal POST endpoints (api/upload,
-// api/brand-image). These are NOT a public API: we only accept requests that a
+// internal mutation routes). These are NOT a public API: we only accept requests that a
 // browser makes from our own site, where the Origin (or, as a fallback,
 // Referer) header is present and matches a known host.
 //

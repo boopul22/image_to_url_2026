@@ -13,8 +13,6 @@ const NON_LOCALIZED_EXACT = new Set([
   // Commercial and legal pages are shared across locales so pricing, billing,
   // refund, and operator disclosures stay identical for customers and Paddle.
   '/pricing', '/privacy', '/terms', '/refund-policy', '/acceptable-use-policy', '/contact',
-  // Post-copy share screen (English-only, noindex) — keep at /share, don't 301 to /en/share.
-  '/share',
   // Astro's 404 page — during static build, prerender visits /404 to build
   // dist/client/404.html. If the catch-all redirects it to /en/404, the built
   // file becomes a redirect body that Cloudflare Pages then serves for EVERY
@@ -55,19 +53,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   const url0 = new URL(request.url);
   const path = url0.pathname;
 
-  // Permanently remove the reported policy-violating upload and every share URL
-  // that points to it. Matching by pathname also covers an encoded `u` parameter
-  // and either of the site's allowed image hosts.
+  // The standalone share page has been retired; upload results now stay on the
+  // originating tool page. Return 410 so crawlers drop every old query-string
+  // variant instead of retrying it or following it into locale routing.
   const removedImagePaths = new Set(['/bfidfscn.jpg']);
-  const isRemovedShareUrl = (path === '/share' || path === '/share/') &&
-    url0.searchParams.getAll('u').some((raw) => {
-      try {
-        return removedImagePaths.has(new URL(raw).pathname);
-      } catch {
-        return false;
-      }
-    });
-  if (removedImagePaths.has(path) || isRemovedShareUrl) {
+  const isRetiredSharePage = path === '/share' || path === '/share/';
+  if (removedImagePaths.has(path) || isRetiredSharePage) {
     return new Response(
       '<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Gone</title></head><body><h1>410 Gone</h1><p>This URL has been permanently removed.</p></body></html>',
       {

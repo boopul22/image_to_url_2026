@@ -75,10 +75,17 @@ import Icon from './Icon.astro';
                   Upload another
                 </button>
               </div>
-              <div class="flex flex-col sm:flex-row gap-3">
+              <div id="single-result" class="flex flex-col sm:flex-row gap-3">
                 <input type="text" id="result-url" readonly class="su-control flex-1 min-w-0 bg-surface-container-low border border-outline-variant px-4 py-3 text-sm font-mono text-on-surface focus:outline-none focus:border-rose-500" />
                 <button id="copy-btn" class="su-btn bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm py-3 px-6 transition-colors active:scale-95 flex-shrink-0" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">
-                  Get Link
+                  Copy link
+                </button>
+              </div>
+              <div id="bulk-result" class="hidden space-y-3">
+                <p id="bulk-result-summary" class="text-sm font-medium text-on-surface"></p>
+                <textarea id="result-urls" readonly rows="5" class="su-control w-full bg-surface-container-low border border-outline-variant px-4 py-3 text-xs font-mono text-on-surface focus:outline-none focus:border-rose-500 resize-none"></textarea>
+                <button id="copy-all-btn" class="su-btn w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm py-3 px-6 transition-colors active:scale-95" style="box-shadow: 0 4px 14px rgb(225 29 72 / 0.30);">
+                  Copy all links
                 </button>
               </div>
               <!-- Guest-only heads-up: anonymous uploads auto-expire. Revealed by JS
@@ -96,10 +103,6 @@ import Icon from './Icon.astro';
                 </a>
               </div>
             </div>
-
-            <!-- Bulk uploads (>1 file) no longer render an in-page list here —
-                 they navigate to the multi-image /share screen (rich list + ad
-                 rails). Single uploads use #state-success below. -->
 
             <!-- State: error -->
             <div id="state-error" class="p-4 sm:p-6 hidden">
@@ -348,7 +351,12 @@ import Icon from './Icon.astro';
   const stateSuccess = document.getElementById('state-success')!;
   const stateError = document.getElementById('state-error')!;
   const resultUrl = document.getElementById('result-url') as HTMLInputElement;
-  const copyBtn = document.getElementById('copy-btn')!;
+  const resultUrls = document.getElementById('result-urls') as HTMLTextAreaElement;
+  const singleResult = document.getElementById('single-result')!;
+  const bulkResult = document.getElementById('bulk-result')!;
+  const bulkResultSummary = document.getElementById('bulk-result-summary')!;
+  const copyBtn = document.getElementById('copy-btn') as HTMLButtonElement;
+  const copyAllBtn = document.getElementById('copy-all-btn') as HTMLButtonElement;
   const uploadAnother = document.getElementById('upload-another')!;
   const errorRetry = document.getElementById('error-retry')!;
   const errorLogin = document.getElementById('error-login')!;
@@ -400,13 +408,37 @@ import Icon from './Icon.astro';
     panel.addEventListener(ev, loadPlan, { once: true, passive: true }),
   );
 
-  // Destination the Get Link button navigates to; set by both the single and
-  // bulk upload paths (bulk carries multiple u= params + skipped count).
-  let shareHref = '';
+  function renderUploadedUrls(urls: string[], skipped = 0) {
+    const showBulk = urls.length > 1 || skipped > 0;
+    resultUrl.value = urls[0] || '';
+    resultUrls.value = urls.join('\n');
+    singleResult.classList.toggle('hidden', showBulk);
+    singleResult.classList.toggle('flex', !showBulk);
+    bulkResult.classList.toggle('hidden', !showBulk);
+    bulkResultSummary.textContent = skipped > 0
+      ? `${urls.length} uploaded · ${skipped} skipped`
+      : `${urls.length} links ready`;
+  }
+
+  async function copyText(value: string, button: HTMLButtonElement, idleLabel: string) {
+    try {
+      await navigator.clipboard.writeText(value);
+      button.textContent = 'Copied!';
+    } catch {
+      button.textContent = 'Select and copy';
+      if (button === copyBtn) resultUrl.select();
+      else resultUrls.select();
+    }
+    window.setTimeout(() => { button.textContent = idleLabel; }, 1500);
+  }
 
   function resetIdle() {
     showState('idle');
-    shareHref = '';
+    resultUrl.value = '';
+    resultUrls.value = '';
+    singleResult.classList.remove('hidden');
+    singleResult.classList.add('flex');
+    bulkResult.classList.add('hidden');
     progressBar.classList.add('hidden');
     progressFill.style.width = '0%';
     uploadIcon.innerHTML = ic_cloud_upload;
@@ -570,32 +602,16 @@ import Icon from './Icon.astro';
     }
 
     // Everything selected minus what actually got hosted (over-quota, over
-    // MAX_BATCH, or per-file failures) is reported as "skipped" on /share.
+    // MAX_BATCH, or per-file failures) is reported in the on-page result.
     const skipped = files.length - results.length;
 
-    // Land on the success panel; /share opens only when Get Link is clicked.
-    if (results.length === 1 && skipped === 0) {
-      shareHref = '/share?u=' + encodeURIComponent(results[0].url);
-      resultUrl.value = results[0].url;
-    } else {
-      const params = new URLSearchParams();
-      for (const r of results) params.append('u', r.url);
-      if (skipped > 0) params.set('skipped', String(skipped));
-      shareHref = '/share?' + params.toString();
-      resultUrl.value = skipped > 0
-        ? `${results.length} images uploaded · ${skipped} skipped`
-        : `${results.length} images uploaded`;
-    }
+    renderUploadedUrls(results.map((result) => result.url), skipped);
     progressFill.style.width = '100%';
     showState('success');
   }
 
-  copyBtn.addEventListener('click', () => {
-    // "Get Link" — send the user to the /share screen, which owns the rich share
-    // widget (URL, copy, formats, QR, watermark) + ad rails.
-    window.location.href = shareHref || '/share?u=' + encodeURIComponent(resultUrl.value);
-  });
-
+  copyBtn.addEventListener('click', () => copyText(resultUrl.value, copyBtn, 'Copy link'));
+  copyAllBtn.addEventListener('click', () => copyText(resultUrls.value, copyAllBtn, 'Copy all links'));
 
 
   uploadAnother.addEventListener('click', resetIdle);
@@ -662,9 +678,8 @@ import Icon from './Icon.astro';
       clearInterval(progressInterval);
       progressFill.style.width = '100%';
       setTimeout(() => {
+        renderUploadedUrls([data.data.url]);
         showState('success');
-        resultUrl.value = data.data.url;
-        shareHref = '/share?u=' + encodeURIComponent(data.data.url);
       }, 300);
 
     } catch (err: any) {

@@ -7,9 +7,9 @@
 /* Cross-document View Transitions: makes full-page (MPA) navigations crossfade
    instead of white-flashing — and since it stays a REAL navigation, Google's
    vignette/overlay ad still fires (an SPA router would break it). The browser
-   holds the old page on screen during the fetch, so it also masks the SSR
-   render delay on /share. Kept fast (140ms) to fit the brutalist feel; fully
-   disabled for users who prefer reduced motion. Chromium today; other browsers
+   holds the old page on screen during the fetch. Kept fast (140ms) to fit the
+   brutalist feel; fully disabled for users who prefer reduced motion. Chromium
+   today; other browsers
    degrade gracefully to a normal navigation. */
 @view-transition {
   navigation: auto;
