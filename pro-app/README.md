@@ -39,18 +39,25 @@ Pro resources.
 - Asset delivery supports immutable caching, ETags, and bandwidth accounting.
 - The dashboard, folders, preferences, usage, and asset library are D1-backed.
 
-Paddle Billing is integrated but remains safely disabled until its Cloudflare
-configuration is supplied. New signed-in users receive a Pro preview profile
-until a verified Paddle webhook provisions a paid subscription.
+Paddle Billing is configured for the live environment. New signed-in users
+receive a Pro preview profile until a verified Paddle webhook provisions a paid
+subscription.
 
 The billing flow is intentionally server-led:
 
 1. The authenticated Worker creates a Paddle transaction for an allowed price.
 2. The transaction is recorded against the Pro user in D1.
 3. Paddle.js opens that exact transaction in a one-page overlay checkout.
-4. A signature-verified Paddle webhook matches the resulting subscription to
-   the recorded transaction before granting the Pro entitlement.
-5. Existing customers manage invoices, payment methods, and cancellation in a
+4. The Paddle SDK verifies the raw webhook body before any parsing or database
+   access. Typed, idempotent handlers mirror customers, subscriptions, and
+   completed transactions into D1.
+5. A subscription in `active` or `trialing` status grants Pro access. A future
+   scheduled cancellation does not revoke access; `paused`, `past_due`, and
+   `canceled` do not grant write access under the current product policy.
+6. The webhook event ledger and resource timestamps make duplicate and
+   out-of-order deliveries convergent. An unmapped paid subscription returns a
+   non-2xx response so Paddle retries rather than losing fulfillment.
+7. Existing customers manage invoices, payment methods, and cancellation in a
    temporary Paddle customer portal session.
 
 Browser-supplied user IDs or price IDs are never trusted for provisioning.
@@ -104,33 +111,32 @@ CLOUDFLARE_ACCOUNT_ID=ab54ca2d01df4886aa0c3f240ace806d npx wrangler <command>
 
 ## Paddle Billing configuration
 
-Start in Paddle sandbox and complete a test subscription before switching to
-live. Paddle sandbox and live credentials, customers, products, and prices are
-separate.
+Paddle sandbox and live credentials, customers, products, and prices are
+separate. Production is currently mapped to this live catalog:
 
-The sandbox catalog currently uses:
-
-- Product: `ImageToURL Pro` (`pro_01kymjd52929gdxfr3hxcp5gbf`)
-- Monthly recurring price: USD 4.99 (`pri_01kymq9gw78c1ahdekbwbjhvms`)
-- Annual recurring price: USD 39 (`pri_01kymqdabt3mxtwrsk82wvt1f3`)
-- Storage add-on product: `ImageToURL Pro Storage Pack` (`pro_01kymre5zw701bcysab14ttb7r`)
-- Recurring 50GB pack monthly price: USD 2.99 (`pri_01kymrh353fsbt46zst2r5g2ba`)
-- Recurring 50GB pack annual price: USD 24 (`pri_01kymrhvy0mkg1cxcajx0e9e82`)
+- Product: `ImageToURL Pro` (`pro_01kymyp8r0q8dyz28w437p4xgg`)
+- Monthly recurring price: USD 4.99 (`pri_01kymyp901jkpahectcbvhv2xk`)
+- Annual recurring price: USD 39 (`pri_01kymyp99v8fq5wva28t78cd2h`)
+- Storage add-on product: `ImageToURL Pro Storage Pack` (`pro_01kymyp9mc51rbq4qrp0zdvy70`)
+- Recurring 50GB pack monthly price: USD 2.99 (`pri_01kymyp9w6j7g5esz8jvtrvjcq`)
+- Recurring 50GB pack annual price: USD 24 (`pri_01kymypa4pwy961gejhbxjr14q`)
 - Client-side token
 - API key with `transaction.write` and `customer_portal_session.write`
 - Notification destination:
   `https://imagetourl.cloud/pro/api/webhooks/paddle`
-- Events: `subscription.created`, `subscription.updated`, and
-  `subscription.canceled`
+- Events: `customer.created`, `customer.updated`, `subscription.created`,
+  `subscription.updated`, `subscription.canceled`, and `transaction.completed`
 - Default payment link: `https://imagetourl.cloud/pro/pricing`
 
-For live checkout, Paddle must approve `imagetourl.cloud`.
+The live notification destination is permanent infrastructure and must not be
+deleted: `ntfset_01kymypaz3e69y83at3jqdg0j4`. Paddle has approved
+`imagetourl.cloud` for checkout.
 
 Add the non-sensitive values to `vars` in `wrangler.jsonc`, then publish them
 with Wrangler:
 
 ```jsonc
-"PADDLE_ENVIRONMENT": "sandbox",
+"PADDLE_ENVIRONMENT": "production",
 "PADDLE_PRO_MONTHLY_PRICE_ID": "pri_...",
 "PADDLE_PRO_ANNUAL_PRICE_ID": "pri_...",
 "PADDLE_STORAGE_ADDON_MONTHLY_PRICE_ID": "pri_...",
@@ -142,9 +148,13 @@ Store every credential with Wrangler rather than the Cloudflare dashboard:
 ```sh
 npx wrangler secret put PADDLE_CLIENT_TOKEN --name imagetourl-pro-app
 npx wrangler secret put PADDLE_API_KEY --name imagetourl-pro-app
-npx wrangler secret put PADDLE_WEBHOOK_SECRET --name imagetourl-pro-app
+npx wrangler secret put PADDLE_NOTIFICATION_WEBHOOK_SECRET --name imagetourl-pro-app
 npx wrangler secret list --name imagetourl-pro-app
 ```
+
+`PADDLE_NOTIFICATION_WEBHOOK_SECRET` is the notification destination signing
+secret, not the Paddle API key. The handler also accepts the legacy
+`PADDLE_WEBHOOK_SECRET` binding during migration.
 
 The client-side token is safe to publish according to Paddle, but it is still
 managed as a Cloudflare secret here to keep all credentials in one operational
