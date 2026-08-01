@@ -132,6 +132,7 @@ export async function workspaceStorageLimitBytes(env: ProEnv, userId: string): P
 	)
 		.bind(userId, paddleEnvironment(env))
 		.first<{ storage_pack_quantity: number }>();
+	if (!subscription) return 0;
 	return baseBytes + storagePackQuantity(subscription?.storage_pack_quantity) * packBytes;
 }
 
