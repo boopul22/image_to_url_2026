@@ -2,6 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { authenticateSession, createDevelopmentUser } from './lib/auth';
 import { getProEnv } from './lib/env';
 import { json } from './lib/http';
+import { proPath, stripProBase } from './lib/paths';
 
 const PUBLIC_PATHS = new Set([
 	'/',
@@ -41,8 +42,9 @@ function securityHeaders(response: Response, isDocument: boolean): Response {
 
 export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
 	const url = new URL(request.url);
-	const isAsset = url.pathname.startsWith('/_astro/');
-	const isPublicFile = url.pathname.startsWith('/files/');
+	const appPath = stripProBase(url.pathname);
+	const isAsset = appPath?.startsWith('/_astro/') ?? false;
+	const isPublicFile = appPath?.startsWith('/files/') ?? false;
 	const env = getProEnv();
 
 	try {
@@ -60,13 +62,13 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
 		!locals.proUser &&
 		!isAsset &&
 		!isPublicFile &&
-		!PUBLIC_PATHS.has(url.pathname)
+		(!appPath || !PUBLIC_PATHS.has(appPath))
 	) {
-		if (url.pathname.startsWith('/api/')) {
+		if (appPath?.startsWith('/api/')) {
 			return json({ error: 'Authentication required' }, 401);
 		}
 		const returnTo = `${url.origin}${url.pathname}${url.search}`;
-		const login = new URL('/sign-in', url.origin);
+		const login = new URL(proPath('/sign-in'), url.origin);
 		login.searchParams.set('return_to', returnTo);
 		return redirect(login.toString(), 302);
 	}

@@ -2,11 +2,12 @@
 export const prerender = false;
 
 import ProMarketingShell from '../layouts/ProMarketingShell.astro';
+import { proPath } from '../lib/paths';
 
 const user = Astro.locals.proUser;
 const workspaceHref = user
-  ? '/workspace'
-  : '/sign-in?return_to=%2Fworkspace';
+  ? proPath('/workspace')
+  : `${proPath('/sign-in')}?return_to=${encodeURIComponent(proPath('/workspace'))}`;
 ---
 
 <ProMarketingShell
@@ -23,7 +24,7 @@ const workspaceHref = user
           storage, permanent HTTPS delivery URLs, folders, imports, and clear usage controls.
         </p>
         <div class="pro-home-actions">
-          <a class="pro-home-primary" href="/pricing">View Pro pricing <span aria-hidden="true">↗</span></a>
+          <a class="pro-home-primary" href={proPath('/pricing')}>View Pro pricing <span aria-hidden="true">↗</span></a>
           <a class="pro-home-secondary" href={workspaceHref}>{user ? 'Open workspace' : 'Sign in to Pro'}</a>
         </div>
         <p class="pro-home-proof">From $4.99/month · 50GB included · Cancel before renewal</p>
@@ -82,7 +83,7 @@ const workspaceHref = user
         <h2>50GB of professional image hosting for $4.99 per month.</h2>
         <p>Or pay $39 annually. Add 50GB storage packs only when your workspace needs them.</p>
       </div>
-      <a class="pro-home-primary" href="/pricing">See pricing and features <span aria-hidden="true">↗</span></a>
+      <a class="pro-home-primary" href={proPath('/pricing')}>See pricing and features <span aria-hidden="true">↗</span></a>
     </section>
   </main>
 </ProMarketingShell>

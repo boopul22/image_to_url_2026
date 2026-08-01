@@ -35,7 +35,10 @@ export function matchesFileSignature(type: string, bytes: Uint8Array): boolean {
 }
 
 export function assetUrl(origin: string, id: string, name: string): string {
-	return `${origin}/files/${encodeURIComponent(id)}/${encodeURIComponent(name)}`;
+	const url = new URL(origin);
+	const basePath = url.pathname.replace(/\/$/, '');
+	url.pathname = `${basePath}/files/${encodeURIComponent(id)}/${encodeURIComponent(name)}`;
+	return url.toString();
 }
 
 export function currentPeriodStart(): string {

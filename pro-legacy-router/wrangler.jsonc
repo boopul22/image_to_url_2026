@@ -1,0 +1,25 @@
+{
+	"$schema": "../node_modules/wrangler/config-schema.json",
+	"name": "imagetourl-pro-legacy-router",
+	"account_id": "ab54ca2d01df4886aa0c3f240ace806d",
+	"compatibility_date": "2026-07-27",
+	"main": "./src/index.ts",
+	"routes": [
+		{
+			"pattern": "pro.imagetourl.cloud/*",
+			"zone_name": "imagetourl.cloud"
+		}
+	],
+	"services": [
+		{
+			"binding": "PRO_APP",
+			"service": "imagetourl-pro-app"
+		}
+	],
+	"vars": {
+		"MIGRATION_ACTIVE": "true"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

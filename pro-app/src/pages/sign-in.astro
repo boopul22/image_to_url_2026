@@ -3,19 +3,25 @@ export const prerender = false;
 
 import ProMarketingShell from '../layouts/ProMarketingShell.astro';
 import { getProEnv } from '../lib/env';
+import { proPath } from '../lib/paths';
 
 if (Astro.locals.proUser) {
-  return Astro.redirect('/workspace', 302);
+  return Astro.redirect(proPath('/workspace'), 302);
 }
 
 const env = getProEnv();
 const requestedReturnTo = Astro.url.searchParams.get('return_to');
 const siteOrigin = new URL(env.SITE_URL).origin;
-let returnTo = new URL('/workspace', siteOrigin).toString();
+let returnTo = new URL(proPath('/workspace'), siteOrigin).toString();
 if (requestedReturnTo) {
   try {
     const candidate = new URL(requestedReturnTo, siteOrigin);
-    if (candidate.origin === siteOrigin && !candidate.username && !candidate.password) {
+    if (
+      candidate.origin === siteOrigin &&
+      (candidate.pathname === proPath() || candidate.pathname.startsWith(`${proPath()}/`)) &&
+      !candidate.username &&
+      !candidate.password
+    ) {
       returnTo = candidate.toString();
     }
   } catch {
@@ -74,8 +80,8 @@ fallbackEndpoint.searchParams.delete('response');
         <span>30-day session</span>
       </div>
       <p class="pro-auth-legal">
-        By continuing, you agree to the <a href="/terms">Terms</a> and acknowledge the
-        <a href="/privacy">Privacy Policy</a>.
+        By continuing, you agree to the <a href={proPath('/terms')}>Terms</a> and acknowledge the
+        <a href={proPath('/privacy')}>Privacy Policy</a>.
       </p>
     </section>
   </main>

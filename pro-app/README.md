@@ -1,6 +1,6 @@
 # ImageToURL Pro
 
-The standalone Pro product for `pro.imagetourl.cloud`. It is deliberately isolated from the free ImageToURL site so the product, infrastructure, and billing model can evolve independently.
+The standalone Pro product mounted at `imagetourl.cloud/pro`. Its app folder, Worker, D1 database, R2 bucket, and billing model remain isolated from the free ImageToURL site.
 
 ## Resource naming
 
@@ -16,7 +16,8 @@ The standalone Pro product for `pro.imagetourl.cloud`. It is deliberately isolat
 | R2 bucket | `imagetourl-pro-storage` |
 | R2 binding | `PRO_STORAGE` |
 | Session KV namespace | `imagetourl-pro-app-session` |
-| Production hostname | `pro.imagetourl.cloud` |
+| Production URL | `https://imagetourl.cloud/pro` |
+| Legacy compatibility host | `pro.imagetourl.cloud` via `imagetourl-pro-legacy-router` |
 
 The Pro Worker validates the existing ImageToURL session through the main-domain
 authentication API over a Cloudflare service binding. It does not bind to or
@@ -26,7 +27,7 @@ Pro resources.
 
 ## Production behavior
 
-- One ImageToURL Google account works across the main and Pro subdomains.
+- One ImageToURL Google account works across the free site and the `/pro` workspace.
 - Anonymous dashboard requests stay on the Pro sign-in UI, which starts Google
   OAuth through the trusted main-domain authentication API.
 - Authenticated uploads are stored in the dedicated Pro R2 bucket.
@@ -62,7 +63,7 @@ npx wrangler d1 migrations apply PRO_DB --local
 npm run dev
 ```
 
-The D1 health check is available at `/api/health`.
+The D1 health check is available at `/pro/api/health`.
 
 ## Cloudflare commands
 
@@ -74,7 +75,9 @@ npm run deploy
 ```
 
 `npm run deploy` builds the standalone Astro Worker and publishes it to the
-`pro.imagetourl.cloud` custom domain configured in `wrangler.jsonc`.
+`imagetourl.cloud/pro*` routes configured in `wrangler.jsonc`. The old subdomain
+remains behind a compatibility Worker so historical file and webhook URLs do
+not fail during migration.
 
 ## Cloudflare-only infrastructure policy
 
@@ -116,12 +119,12 @@ The sandbox catalog currently uses:
 - Client-side token
 - API key with `transaction.write` and `customer_portal_session.write`
 - Notification destination:
-  `https://pro.imagetourl.cloud/api/webhooks/paddle`
+  `https://imagetourl.cloud/pro/api/webhooks/paddle`
 - Events: `subscription.created`, `subscription.updated`, and
   `subscription.canceled`
-- Default payment link: `https://pro.imagetourl.cloud/pricing`
+- Default payment link: `https://imagetourl.cloud/pro/pricing`
 
-For live checkout, Paddle must approve `pro.imagetourl.cloud`.
+For live checkout, Paddle must approve `imagetourl.cloud`.
 
 Add the non-sensitive values to `vars` in `wrangler.jsonc`, then publish them
 with Wrangler:

@@ -1,5 +1,6 @@
 ---
 import ProMarketingShell from '../layouts/ProMarketingShell.astro';
+import { proPath } from '../lib/paths';
 
 interface Props {
   title: string;
@@ -24,11 +25,11 @@ const { title, description, eyebrow, intro } = Astro.props;
       <aside>
         <p>Legal centre</p>
         <nav>
-          <a href="/terms">Terms of Service</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/refund-policy">Refund Policy</a>
-          <a href="/acceptable-use-policy">Acceptable Use</a>
-          <a href="/contact">Contact</a>
+          <a href={proPath('/terms')}>Terms of Service</a>
+          <a href={proPath('/privacy')}>Privacy Policy</a>
+          <a href={proPath('/refund-policy')}>Refund Policy</a>
+          <a href={proPath('/acceptable-use-policy')}>Acceptable Use</a>
+          <a href={proPath('/contact')}>Contact</a>
         </nav>
         <div>
           <span>Service operator</span>

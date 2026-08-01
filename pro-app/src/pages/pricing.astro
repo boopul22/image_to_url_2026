@@ -8,6 +8,7 @@ import {
   paddleEnvironment,
 } from '../lib/billing';
 import { getProEnv } from '../lib/env';
+import { proAbsoluteUrl, proPath } from '../lib/paths';
 
 const env = getProEnv();
 const user = Astro.locals.proUser;
@@ -37,9 +38,12 @@ if (user) {
   hasSubscription = Boolean(subscription);
 }
 
-const returnTo = `https://pro.imagetourl.cloud/pricing?billing=${initialInterval}${initialStoragePacks ? '&storage=1' : ''}`;
-const loginUrl = new URL('/sign-in', Astro.url.origin);
+const returnTo = `${proAbsoluteUrl('/pricing')}?billing=${initialInterval}${initialStoragePacks ? '&storage=1' : ''}`;
+const loginUrl = new URL(proPath('/sign-in'), new URL(env.SITE_URL).origin);
 loginUrl.searchParams.set('return_to', returnTo);
+const pricingUrl = proAbsoluteUrl('/pricing');
+const workspaceUrl = proPath('/workspace');
+const checkoutApiUrl = proPath('/api/billing/checkout');
 ---
 
 <ProMarketingShell
@@ -120,7 +124,7 @@ loginUrl.searchParams.set('return_to', returnTo);
         </label>
 
         {hasSubscription ? (
-          <a class="pro-checkout-button" href="/workspace">
+          <a class="pro-checkout-button" href={proPath('/workspace')}>
             <span>Open your Pro workspace</span><span aria-hidden="true">↗</span>
           </a>
         ) : user ? (
@@ -257,7 +261,7 @@ loginUrl.searchParams.set('return_to', returnTo);
           <summary>Can I get a refund?</summary>
           <p>
             Your first subscription payment is covered by our 14-day refund policy, subject to the fair-use
-            conditions in the <a href="/refund-policy">Refund Policy</a> and any stronger rights under law.
+            conditions in the <a href={proPath('/refund-policy')}>Refund Policy</a> and any stronger rights under law.
           </p>
         </details>
       </div>
@@ -266,8 +270,8 @@ loginUrl.searchParams.set('return_to', returnTo);
     <section class="pricing-disclosure">
       <p>
         Prices are USD. Applicable taxes are calculated at checkout. By subscribing, you agree to the
-        <a href="/terms">Terms of Service</a>, <a href="/privacy">Privacy Policy</a>,
-        <a href="/refund-policy">Refund Policy</a>, and <a href="/acceptable-use-policy">Acceptable Use Policy</a>.
+        <a href={proPath('/terms')}>Terms of Service</a>, <a href={proPath('/privacy')}>Privacy Policy</a>,
+        <a href={proPath('/refund-policy')}>Refund Policy</a>, and <a href={proPath('/acceptable-use-policy')}>Acceptable Use Policy</a>.
       </p>
       <p>ImageToURL is operated by Bipul Kumar. Paddle acts as Merchant of Record for Pro purchases.</p>
     </section>
@@ -286,6 +290,9 @@ loginUrl.searchParams.set('return_to', returnTo);
       initialStoragePacks,
       loginUrl: loginUrl.toString(),
       isAuthenticated: Boolean(user),
+      pricingUrl,
+      workspaceUrl,
+      checkoutApiUrl,
     }}
   >
     const intervalButtons = Array.from(document.querySelectorAll('.pro-billing-choice [data-interval]'));
@@ -344,7 +351,7 @@ loginUrl.searchParams.set('return_to', returnTo);
         const storageQuery = selectedStoragePacks > 0 ? '&storage=1' : '';
         target.searchParams.set(
           'return_to',
-          `https://pro.imagetourl.cloud/pricing?billing=${selectedInterval}${storageQuery}`,
+          `${pricingUrl}?billing=${selectedInterval}${storageQuery}`,
         );
         signinCheckout.href = target.toString();
       }
@@ -377,7 +384,7 @@ loginUrl.searchParams.set('return_to', returnTo);
               'imagetourl-pro-flash',
               'Payment received. Paddle is activating your Pro workspace.',
             );
-            window.location.assign('/?billing=success');
+            window.location.assign(`${workspaceUrl}?billing=success`);
           }
         },
       });
@@ -395,7 +402,7 @@ loginUrl.searchParams.set('return_to', returnTo);
       if (errorBox) errorBox.textContent = '';
 
       try {
-        const response = await fetch('/api/billing/checkout', {
+        const response = await fetch(checkoutApiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -415,7 +422,7 @@ loginUrl.searchParams.set('return_to', returnTo);
             variant: 'one-page',
             theme: 'light',
             locale: 'en',
-            successUrl: `${window.location.origin}/?billing=success`,
+            successUrl: new URL(`${workspaceUrl}?billing=success`, window.location.origin).toString(),
           },
         });
       } catch (error) {

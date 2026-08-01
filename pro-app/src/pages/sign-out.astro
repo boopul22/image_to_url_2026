@@ -3,12 +3,14 @@ export const prerender = false;
 
 import ProMarketingShell from '../layouts/ProMarketingShell.astro';
 import { getProEnv } from '../lib/env';
+import { proPath } from '../lib/paths';
 
 const env = getProEnv();
 const logoutEndpoint = new URL('/api/auth/logout', env.AUTH_API_ORIGIN);
 logoutEndpoint.searchParams.set('response', 'json');
 const fallbackEndpoint = new URL('/api/auth/logout', env.AUTH_API_ORIGIN);
 fallbackEndpoint.searchParams.set('return_to', env.SITE_URL);
+const signedOutUrl = proPath();
 ---
 
 <ProMarketingShell title="Signing out of ImageToURL Pro" noindex>
@@ -29,7 +31,7 @@ fallbackEndpoint.searchParams.set('return_to', env.SITE_URL);
   </main>
 </ProMarketingShell>
 
-<script>
+<script is:inline define:vars={{ signedOutUrl }}>
   const card = document.querySelector<HTMLElement>('.pro-auth-signout');
   const status = document.querySelector<HTMLElement>('#signout-status');
 
@@ -42,10 +44,10 @@ fallbackEndpoint.searchParams.set('return_to', env.SITE_URL);
         headers: { Accept: 'application/json' },
       });
       if (!response.ok) throw new Error('Sign out failed');
-      window.location.replace('/');
+      window.location.replace(signedOutUrl);
     } catch {
       if (status) status.textContent = 'Finishing sign out…';
-      window.location.assign(card.dataset.fallbackEndpoint || '/');
+      window.location.assign(card.dataset.fallbackEndpoint || signedOutUrl);
     }
   };
 

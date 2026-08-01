@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 import ProLegalDocument from '../components/ProLegalDocument.astro';
+import { proPath } from '../lib/paths';
 ---
 
 <ProLegalDocument
@@ -13,9 +14,9 @@ import ProLegalDocument from '../components/ProLegalDocument.astro';
     <h2>1. Operator and acceptance</h2>
     <p>
       ImageToURL Pro is operated by <strong>Bipul Kumar</strong> in India. By creating a workspace or
-      subscribing, you agree to these Terms, the <a href="/privacy">Privacy Policy</a>,
-      <a href="/refund-policy">Refund Policy</a>, and
-      <a href="/acceptable-use-policy">Acceptable Use Policy</a>.
+      subscribing, you agree to these Terms, the <a href={proPath('/privacy')}>Privacy Policy</a>,
+      <a href={proPath('/refund-policy')}>Refund Policy</a>, and
+      <a href={proPath('/acceptable-use-policy')}>Acceptable Use Policy</a>.
     </p>
   </section>
   <section>
@@ -83,7 +84,7 @@ import ProLegalDocument from '../components/ProLegalDocument.astro';
     <p>
       Cancel through the Paddle portal available in workspace settings. Cancellation stops future renewal
       and normally leaves access active through the paid period. Refunds follow our
-      <a href="/refund-policy">Refund Policy</a> and non-waivable consumer law.
+      <a href={proPath('/refund-policy')}>Refund Policy</a> and non-waivable consumer law.
     </p>
   </section>
   <section>
@@ -97,7 +98,7 @@ import ProLegalDocument from '../components/ProLegalDocument.astro';
   <section>
     <h2>9. Acceptable use and enforcement</h2>
     <p>
-      You must follow the <a href="/acceptable-use-policy">Acceptable Use Policy</a>. We may remove
+      You must follow the <a href={proPath('/acceptable-use-policy')}>Acceptable Use Policy</a>. We may remove
       content or restrict, suspend, or terminate access to address abuse, infringement, security threats,
       non-payment, legal requirements, or a material breach. Urgent harm may require immediate action.
     </p>

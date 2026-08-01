@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 import ProLegalDocument from '../components/ProLegalDocument.astro';
+import { proPath } from '../lib/paths';
 ---
 
 <ProLegalDocument
@@ -31,7 +32,7 @@ import ProLegalDocument from '../components/ProLegalDocument.astro';
       <a href="https://paddle.net" target="_blank" rel="noopener">paddle.net</a> for transaction support,
       cancellation help, invoices, and refund requests, or email us with your receipt number.
     </p>
-    <p>See the <a href="/refund-policy">Refund Policy</a> for eligibility.</p>
+    <p>See the <a href={proPath('/refund-policy')}>Refund Policy</a> for eligibility.</p>
   </section>
   <section>
     <h2>Privacy and abuse</h2>

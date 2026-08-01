@@ -1,6 +1,7 @@
 import { paddleEnvironment, type SubscriptionStatus } from './billing';
 import type { ProEnv } from './env';
 import { json } from './http';
+import { proPath } from './paths';
 
 export type ProAccessStatus = SubscriptionStatus | 'preview';
 
@@ -53,7 +54,7 @@ export async function requireProAccess(env: ProEnv, userId: string): Promise<Res
 			code: 'PRO_REQUIRED',
 			subscriptionStatus: status,
 			billingAction,
-			upgradeUrl: '/pricing',
+			upgradeUrl: proPath('/pricing'),
 		},
 		402,
 	);

@@ -7,7 +7,7 @@ import type { APIRoute } from 'astro';
  *
  * Authentication is still performed by the main site's middleware against the
  * existing users and sessions tables. This endpoint only exposes the resolved
- * account to server-side consumers such as pro.imagetourl.cloud.
+ * account to server-side consumers such as the ImageToURL Pro Worker.
  */
 export const GET: APIRoute = async ({ locals }) => {
   const user = locals.user;

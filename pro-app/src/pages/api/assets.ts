@@ -28,7 +28,9 @@ export const GET: APIRoute = async ({ url, locals }) => {
 			  ORDER BY created_at DESC LIMIT ?`,
 		).bind(locals.proUser!.id, limit);
 	const result = await query.all<Record<string, unknown>>();
-	const origin = import.meta.env.DEV ? url.origin : getProEnv().SITE_URL;
+	const origin = import.meta.env.DEV
+		? new URL(import.meta.env.BASE_URL, url.origin).toString()
+		: getProEnv().SITE_URL;
 	return json({
 		assets: result.results.map((asset) => ({
 			...asset,

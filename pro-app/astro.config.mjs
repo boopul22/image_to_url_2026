@@ -5,7 +5,8 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://pro.imagetourl.cloud',
+  site: 'https://imagetourl.cloud',
+  base: '/pro',
   output: 'server',
   devToolbar: {
     enabled: false

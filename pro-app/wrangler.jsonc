@@ -11,6 +11,14 @@
 		{
 			"pattern": "pro.imagetourl.cloud",
 			"custom_domain": true
+		},
+		{
+			"pattern": "imagetourl.cloud/pro",
+			"zone_name": "imagetourl.cloud"
+		},
+		{
+			"pattern": "imagetourl.cloud/pro/*",
+			"zone_name": "imagetourl.cloud"
 		}
 	],
 	"assets": {
@@ -27,7 +35,7 @@
 		}
 	],
 	"vars": {
-		"SITE_URL": "https://pro.imagetourl.cloud",
+		"SITE_URL": "https://imagetourl.cloud/pro",
 		"AUTH_API_ORIGIN": "https://imagetourl.cloud",
 		"MAX_UPLOAD_BYTES": "52428800",
 		"STORAGE_LIMIT_BYTES": "53687091200",

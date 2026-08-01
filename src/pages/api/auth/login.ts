@@ -12,6 +12,7 @@ import { getEnv } from '../../../lib/env';
 import { safeReturnTo } from '../../../lib/return-to';
 
 const PRO_AUTH_ORIGINS = new Set([
+	'https://imagetourl.cloud',
   'https://pro.imagetourl.cloud',
   'http://localhost:4322',
   'http://127.0.0.1:4322',
@@ -38,7 +39,7 @@ export const GET: APIRoute = async ({ request, url: requestUrl, locals }) => {
   const wantsJson = requestUrl.searchParams.get('response') === 'json';
 
   if (wantsJson) {
-    const requestOrigin = request.headers.get('Origin') ?? '';
+    const requestOrigin = request.headers.get('Origin') ?? requestUrl.origin;
     if (!PRO_AUTH_ORIGINS.has(requestOrigin)) {
       return new Response(JSON.stringify({ error: 'Origin not allowed' }), {
         status: 403,

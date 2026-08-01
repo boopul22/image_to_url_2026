@@ -3,6 +3,7 @@ import '@fontsource-variable/figtree';
 import '@fontsource-variable/figtree/wght-italic.css';
 import '../styles/pro.css';
 import '../styles/marketing.css';
+import { proAbsoluteUrl, proPath } from '../lib/paths';
 
 interface Props {
   title?: string;
@@ -16,7 +17,11 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, 'https://pro.imagetourl.cloud').href;
+const canonical = proAbsoluteUrl(
+  Astro.url.pathname.startsWith('/pro')
+    ? Astro.url.pathname.slice('/pro'.length) || '/'
+    : Astro.url.pathname,
+);
 const user = Astro.locals.proUser;
 ---
 
@@ -29,7 +34,7 @@ const user = Astro.locals.proUser;
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#034f46" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={proPath('/favicon.svg')} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -43,30 +48,30 @@ const user = Astro.locals.proUser;
   </head>
   <body class="marketing-body">
     <header class="marketing-header">
-      <a class="marketing-brand" href={user ? '/workspace' : '/'} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
+      <a class="marketing-brand" href={user ? proPath('/workspace') : proPath()} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">image to url</span>
         <span class="pro-chip">PRO</span>
       </a>
       <nav class="marketing-nav" aria-label="Marketing navigation">
-        <a href="/pricing">Pricing</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/contact">Contact</a>
+        <a href={proPath('/pricing')}>Pricing</a>
+        <a href={proPath('/privacy')}>Privacy</a>
+        <a href={proPath('/contact')}>Contact</a>
       </nav>
       <div class="marketing-actions">
         <a class="marketing-back" href="https://imagetourl.cloud">Free tools</a>
         {user ? (
           <>
-            <a class="marketing-signout" href="/sign-out">
+            <a class="marketing-signout" href={proPath('/sign-out')}>
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M10 5H5v14h5M14 8l4 4-4 4M8 12h10" />
               </svg>
               <span>Sign out</span>
             </a>
-            <a class="marketing-login" href="/workspace">Open workspace</a>
+            <a class="marketing-login" href={proPath('/workspace')}>Open workspace</a>
           </>
         ) : (
-          <a class="marketing-login" href="/sign-in?return_to=%2Fworkspace">Sign in</a>
+          <a class="marketing-login" href={`${proPath('/sign-in')}?return_to=${encodeURIComponent(proPath('/workspace'))}`}>Sign in</a>
         )}
       </div>
     </header>
@@ -75,7 +80,7 @@ const user = Astro.locals.proUser;
 
     <footer class="marketing-footer">
       <div class="marketing-footer-brand">
-        <a class="marketing-brand" href={user ? '/workspace' : '/'} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
+        <a class="marketing-brand" href={user ? proPath('/workspace') : proPath()} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">image to url</span>
           <span class="pro-chip">PRO</span>
@@ -84,20 +89,20 @@ const user = Astro.locals.proUser;
       </div>
       <nav aria-label="Product links">
         <strong>Product</strong>
-        <a href="/pricing">Pricing</a>
-        <a href={user ? '/workspace' : '/sign-in?return_to=%2Fworkspace'}>Workspace</a>
+        <a href={proPath('/pricing')}>Pricing</a>
+        <a href={user ? proPath('/workspace') : `${proPath('/sign-in')}?return_to=${encodeURIComponent(proPath('/workspace'))}`}>Workspace</a>
         <a href="https://imagetourl.cloud">Free ImageToURL</a>
       </nav>
       <nav aria-label="Legal links">
         <strong>Legal</strong>
-        <a href="/terms">Terms of Service</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/refund-policy">Refund Policy</a>
-        <a href="/acceptable-use-policy">Acceptable Use</a>
+        <a href={proPath('/terms')}>Terms of Service</a>
+        <a href={proPath('/privacy')}>Privacy Policy</a>
+        <a href={proPath('/refund-policy')}>Refund Policy</a>
+        <a href={proPath('/acceptable-use-policy')}>Acceptable Use</a>
       </nav>
       <nav aria-label="Support links">
         <strong>Support</strong>
-        <a href="/contact">Contact</a>
+        <a href={proPath('/contact')}>Contact</a>
         <a href="https://paddle.net" target="_blank" rel="noopener">Paddle buyer support</a>
         <a href="mailto:blog.boopul@gmail.com">Email support</a>
       </nav>

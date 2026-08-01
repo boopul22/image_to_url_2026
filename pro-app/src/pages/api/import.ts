@@ -150,7 +150,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		const asset = await storeAsset({
 			env,
 			user: locals.proUser!,
-			origin: new URL(request.url).origin,
+			origin: import.meta.env.DEV
+				? new URL(import.meta.env.BASE_URL, new URL(request.url).origin).toString()
+				: env.SITE_URL,
 			body: bytes,
 			name,
 			type,
