@@ -19,14 +19,15 @@ const origin = import.meta.env.DEV
   ? new URL(import.meta.env.BASE_URL, Astro.url.origin).toString()
   : env.SITE_URL;
 const periodStart = `${new Date().getUTCFullYear()}-${String(new Date().getUTCMonth() + 1).padStart(2, '0')}-01`;
+const initialLibraryLimit = 24;
 
 const [assetResult, folderResult, storageResult, usage, preferences, subscription] = await Promise.all([
   env.PRO_DB.prepare(
     `SELECT id, folder_id, original_name, mime_type, size_bytes, visibility, created_at
-       FROM assets
+      FROM assets
       WHERE user_id = ? AND status = 'ready'
-      ORDER BY created_at DESC LIMIT 40`
-  ).bind(user.id).all<{
+	      ORDER BY created_at DESC, id DESC LIMIT ?`
+	).bind(user.id, initialLibraryLimit).all<{
     id: string;
     folder_id: string | null;
     original_name: string;
@@ -44,9 +45,11 @@ const [assetResult, folderResult, storageResult, usage, preferences, subscriptio
       ORDER BY f.name COLLATE NOCASE`
   ).bind(user.id).all<{ id: string; name: string; asset_count: number }>(),
   env.PRO_DB.prepare(
-    `SELECT COALESCE(SUM(size_bytes), 0) AS bytes
+	    `SELECT COALESCE(SUM(size_bytes), 0) AS bytes,
+	            COUNT(*) AS count,
+	            COALESCE(SUM(CASE WHEN folder_id IS NULL THEN 1 ELSE 0 END), 0) AS unfiled_count
        FROM assets WHERE user_id = ? AND status = 'ready'`
-  ).bind(user.id).first<{ bytes: number }>(),
+	).bind(user.id).first<{ bytes: number; count: number; unfiled_count: number }>(),
   env.PRO_DB.prepare(
     `SELECT bandwidth_bytes, uploads_count, api_requests
        FROM usage_monthly WHERE user_id = ? AND period_start = ?`
@@ -94,10 +97,19 @@ const assets = (assetResult.results ?? []).map((asset) => ({
   size: formatBytes(asset.size_bytes),
   age: relativeAge(asset.created_at),
   visibility: asset.visibility,
-  url: assetUrl(origin, asset.id, asset.original_name)
+	  mimeType: asset.mime_type,
+	  sizeBytes: asset.size_bytes,
+	  createdAt: asset.created_at,
+	  url: assetUrl(origin, asset.id, asset.original_name)
 }));
 const folders = folderResult.results ?? [];
 const storageBytes = Number(storageResult?.bytes ?? 0);
+const assetTotal = Number(storageResult?.count ?? 0);
+const unfiledAssetTotal = Number(storageResult?.unfiled_count ?? 0);
+const finalInitialAsset = assets.at(-1);
+const initialLibraryCursor = assetTotal > assets.length && finalInitialAsset
+	? btoa(JSON.stringify({ createdAt: finalInitialAsset.createdAt, id: finalInitialAsset.id }))
+	: '';
 const storageLimit = await workspaceStorageLimitBytes(env, user.id);
 const bandwidthBytes = Number(usage?.bandwidth_bytes ?? 0);
 const uploadsCount = Number(usage?.uploads_count ?? 0);
@@ -502,14 +514,16 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	              <span class="tool-metric">Immutable cache-ready URLs</span>
             </article>
 
-            <article class="tool-card tool-card-locked" id="api-access" aria-disabled="true">
+	            <article class="tool-card" id="smart-library">
               <span class="tool-icon">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg>
+	                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7.5a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="m9 14 2 2 4-4"/></svg>
               </span>
-	              <span class="status-dot status-neutral">Coming soon</span>
-	              <h3>API access</h3>
-	              <p>Personal API keys are not available yet. We’ll unlock this area after the public API is ready.</p>
-	              <span class="tool-metric">Locked until public release</span>
+	              <span class:list={['status-dot', { 'status-neutral': !proAccessEnabled }]}>
+                  {proAccessEnabled ? 'Active' : 'Preview'}
+                </span>
+	              <h3>Smart library</h3>
+	              <p>Rename folders, move existing assets, and search your complete library.</p>
+	              <span class="tool-metric">New in Pro</span>
             </article>
 
             <article class="tool-card" id="workspace-settings">
@@ -529,8 +543,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
         <section class="recent reveal reveal-four" id="recent" aria-labelledby="recent-heading">
           <header class="recent-head">
             <div class="recent-title-wrap">
-              <h2 id="recent-heading">Recent uploads</h2>
-              <p>Your latest assets, ready to copy and share.</p>
+	              <h2 id="recent-heading">Library</h2>
+	              <p><span id="library-result-count">{assetTotal}</span> assets · search, organize, copy, and manage.</p>
             </div>
             <div class="recent-actions" aria-label="Change asset view">
               <label class="asset-search">
@@ -550,35 +564,60 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
           <div class="folder-browser" id="folders" aria-label="Filter library by folder">
             <span class="folder-browser-label">Folders</span>
             <button class="folder-filter is-active" type="button" data-folder-filter="" aria-pressed="true">
-              All images <span>{assets.length}</span>
+	              All images <span>{assetTotal}</span>
             </button>
+	            <button class="folder-filter" type="button" data-folder-filter="unfiled" aria-pressed="false">
+	              Unfiled <span>{unfiledAssetTotal}</span>
+	            </button>
             {folders.map((folder) => (
-              <button
-                class="folder-filter"
-                type="button"
-                data-folder-filter={folder.id}
-                aria-pressed="false"
-              >
-                {folder.name} <span>{Number(folder.asset_count ?? 0)}</span>
-              </button>
+	              <span class="folder-chip">
+	                <button
+	                  class="folder-filter"
+	                  type="button"
+	                  data-folder-filter={folder.id}
+	                  aria-pressed="false"
+	                >
+	                  {folder.name} <span>{Number(folder.asset_count ?? 0)}</span>
+	                </button>
+	                {proAccessEnabled && (
+	                  <button
+	                    class="folder-manage"
+	                    type="button"
+	                    data-folder-manage={folder.id}
+	                    data-folder-name={folder.name}
+	                    aria-label={`Manage ${folder.name}`}
+	                  >•••</button>
+	                )}
+	              </span>
             ))}
           </div>
 
-	          <div class="asset-grid" id="asset-grid">
+	          <div
+	            class="asset-grid"
+	            id="asset-grid"
+	            data-next-cursor={initialLibraryCursor}
+	            data-library-limit={initialLibraryLimit}
+	          >
 	            {assets.length > 0 ? assets.map((asset) => (
 	              <article
                   class="asset-card"
                   data-asset-name={asset.name.toLowerCase()}
                   data-asset-id={asset.id}
                   data-folder-id={asset.folderId ?? ''}
+	                data-asset-original-name={asset.name}
                 >
 	                <div class="asset-preview">
-	                  <img src={asset.url} alt="" loading="lazy" />
+	                  <img src={asset.url} alt={`Preview of ${asset.name}`} loading="lazy" />
 	                  <div class="asset-card-actions">
 	                    <button class="copy-link" type="button" data-copy-url={asset.url} aria-label={`Copy URL for ${asset.name}`}>
 	                      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
 	                      Copy URL
 	                    </button>
+	                    {proAccessEnabled && (
+	                      <button class="manage-asset" type="button" data-manage-id={asset.id} aria-label={`Organize ${asset.name}`}>
+	                        Organize
+	                      </button>
+	                    )}
 	                    <button class="delete-asset" type="button" data-delete-id={asset.id} aria-label={`Delete ${asset.name}`}>Delete</button>
 	                  </div>
 	                </div>
@@ -608,9 +647,37 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	              </div>
 	            )}
 	          </div>
+	          <template id="asset-card-template">
+	            <article class="asset-card" data-asset-name="" data-asset-id="" data-folder-id="" data-asset-original-name="">
+	              <div class="asset-preview">
+	                <img src="" alt="" loading="lazy" />
+	                <div class="asset-card-actions">
+	                  <button class="copy-link" type="button" data-copy-url="">
+	                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+	                    Copy URL
+	                  </button>
+	                  {proAccessEnabled && <button class="manage-asset" type="button" data-manage-id="">Organize</button>}
+	                  <button class="delete-asset" type="button" data-delete-id="">Delete</button>
+	                </div>
+	              </div>
+	              <div class="asset-body">
+	                <div class="asset-meta">
+	                  <span class="asset-name"></span>
+	                  <span class="asset-format"></span>
+	                </div>
+	                <div class="asset-footer"><span data-asset-size></span><span data-asset-age></span></div>
+	              </div>
+	            </article>
+	          </template>
             <p class="asset-filter-empty" id="asset-filter-empty" hidden>
-              No images match this folder and search.
+	              No images match this folder and search. Try a different name or folder.
             </p>
+	          <div class="library-pagination">
+	            <button class="button button-secondary" id="load-more-assets" type="button" hidden={!initialLibraryCursor}>
+	              Load more assets
+	            </button>
+	            <span id="library-status" role="status" aria-live="polite"></span>
+	          </div>
         </section>
       </div>
     </main>
@@ -625,19 +692,45 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
         <header class="dialog-head">
           <div>
             <span class="dialog-kicker">Organize your library</span>
-            <h2 id="folder-dialog-title">Create a new folder</h2>
+	            <h2 id="folder-dialog-title">Create a new folder</h2>
           </div>
           <button class="dialog-close" type="button" data-close-dialog aria-label="Close dialog">×</button>
         </header>
         <label class="field-label" for="folder-name">Folder name</label>
         <input class="dialog-input" id="folder-name" name="folderName" type="text" placeholder="e.g. Product launch" maxlength="48" required />
-        <p class="field-help">Folders make bulk sharing and asset permissions easier to manage.</p>
+	        <p class="field-help" id="folder-dialog-help">Folders keep projects tidy. Deleting a folder safely moves its images to Unfiled.</p>
         <footer class="dialog-actions">
+	          <button class="button button-danger" id="delete-folder-button" type="button" hidden>Delete folder</button>
           <button class="button button-secondary" type="button" data-close-dialog>Cancel</button>
-          <button class="button button-primary" type="submit">Create folder</button>
+	          <button class="button button-primary" id="folder-submit-button" type="submit">Create folder</button>
         </footer>
       </form>
     </dialog>
+
+	  <dialog class="pro-dialog" id="asset-dialog" aria-labelledby="asset-dialog-title">
+	    <form class="dialog-form" id="asset-form">
+	      <header class="dialog-head">
+	        <div>
+	          <span class="dialog-kicker">Organize asset</span>
+	          <h2 id="asset-dialog-title">Update library details</h2>
+	        </div>
+	        <button class="dialog-close" type="button" data-close-dialog aria-label="Close asset dialog">×</button>
+	      </header>
+	      <input id="asset-manage-id" type="hidden" />
+	      <label class="field-label" for="asset-manage-name">File name</label>
+	      <input class="dialog-input" id="asset-manage-name" type="text" maxlength="120" required />
+	      <label class="field-label" for="asset-manage-folder">Folder</label>
+	      <select class="dialog-input" id="asset-manage-folder">
+	        <option value="">Unfiled</option>
+	        {folders.map((folder) => <option value={folder.id}>{folder.name}</option>)}
+	      </select>
+	      <p class="field-help">Moving or renaming an asset never deletes the stored image. Existing direct URLs keep working.</p>
+	      <footer class="dialog-actions">
+	        <button class="button button-secondary" type="button" data-close-dialog>Cancel</button>
+	        <button class="button button-primary" id="asset-submit-button" type="submit">Save changes</button>
+	      </footer>
+	    </form>
+	  </dialog>
 
     <dialog class="pro-dialog workspace-dialog" id="workspace-dialog" aria-labelledby="workspace-dialog-title">
       <form class="dialog-form" id="workspace-form">
@@ -833,15 +926,29 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	    const urlPreview = document.querySelector<HTMLElement>('#url-preview');
 	    const urlPreviewImage = document.querySelector<HTMLImageElement>('#url-preview-image');
 	    const searchInput = document.querySelector<HTMLInputElement>('#asset-search');
-	    const assetCards = document.querySelectorAll<HTMLElement>('.asset-card');
 	    const folderFilters = document.querySelectorAll<HTMLButtonElement>('[data-folder-filter]');
 	    const assetFilterEmpty = document.querySelector<HTMLElement>('#asset-filter-empty');
+	    const assetCardTemplate = document.querySelector<HTMLTemplateElement>('#asset-card-template');
+	    const loadMoreAssets = document.querySelector<HTMLButtonElement>('#load-more-assets');
+	    const libraryStatus = document.querySelector<HTMLElement>('#library-status');
+	    const libraryResultCount = document.querySelector<HTMLElement>('#library-result-count');
 	    const toast = document.querySelector<HTMLElement>('#toast');
 	    const toastMessage = document.querySelector<HTMLElement>('#toast-message');
 	    const commandSearch = document.querySelector<HTMLButtonElement>('.command-search');
 	    const folderDialog = document.querySelector<HTMLDialogElement>('#folder-dialog');
 	    const folderForm = document.querySelector<HTMLFormElement>('#folder-form');
 	    const folderName = document.querySelector<HTMLInputElement>('#folder-name');
+	    const folderDialogTitle = document.querySelector<HTMLElement>('#folder-dialog-title');
+	    const folderSubmitButton = document.querySelector<HTMLButtonElement>('#folder-submit-button');
+	    const deleteFolderButton = document.querySelector<HTMLButtonElement>('#delete-folder-button');
+	    const assetDialog = document.querySelector<HTMLDialogElement>('#asset-dialog');
+	    const assetForm = document.querySelector<HTMLFormElement>('#asset-form');
+	    const assetManageId = document.querySelector<HTMLInputElement>('#asset-manage-id');
+	    const assetManageName = document.querySelector<HTMLInputElement>('#asset-manage-name');
+	    const assetManageFolder = document.querySelector('#asset-manage-folder') as
+	      | (Element & { value: string })
+	      | null;
+	    const assetSubmitButton = document.querySelector<HTMLButtonElement>('#asset-submit-button');
 	    const workspaceDialog = document.querySelector<HTMLDialogElement>('#workspace-dialog');
 	    const workspaceForm = document.querySelector<HTMLFormElement>('#workspace-form');
 	    const newFolderButton = document.querySelector<HTMLButtonElement>('#new-folder-button');
@@ -878,6 +985,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
       const copyAllResults = document.querySelector<HTMLButtonElement>('#copy-all-results');
       const uploadMoreButton = document.querySelector<HTMLButtonElement>('#upload-more-button');
 	    let toastTimer: number | undefined;
+	    let editingFolderId: string | null = null;
 
       interface UploadAsset {
         id: string;
@@ -888,6 +996,18 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
         url: string;
         createdAt: string;
       }
+
+	    interface LibraryAsset extends UploadAsset {
+	      folderId: string | null;
+	      folderName: string | null;
+	    }
+
+	    interface LibraryResponse {
+	      assets?: LibraryAsset[];
+	      total?: number;
+	      nextCursor?: string | null;
+	      error?: string;
+	    }
 
       interface UploadFailure {
         name: string;
@@ -1359,21 +1479,130 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	    listButton?.addEventListener('click', () => setView(true));
 
 	    let activeFolder = '';
-	    const applyLibraryFilters = () => {
-	      const query = searchInput?.value.trim().toLowerCase() ?? '';
-	      let visibleCount = 0;
-	      assetCards.forEach((card) => {
-	        const matchesSearch = !query || Boolean(card.dataset.assetName?.includes(query));
-	        const matchesFolder = !activeFolder || card.dataset.folderId === activeFolder;
-	        card.hidden = !(matchesSearch && matchesFolder);
-	        if (!card.hidden) visibleCount += 1;
+	    let libraryCursor = grid?.dataset.nextCursor || null;
+	    let libraryAbort: AbortController | undefined;
+	    let librarySearchTimer: number | undefined;
+
+	    const librarySize = (bytes: number) => {
+	      if (bytes < 1024) return `${bytes} B`;
+	      if (bytes < 1024 ** 2) return `${(bytes / 1024).toFixed(1)} KB`;
+	      if (bytes < 1024 ** 3) return `${(bytes / 1024 ** 2).toFixed(1)} MB`;
+	      return `${(bytes / 1024 ** 3).toFixed(1)} GB`;
+	    };
+
+	    const libraryAge = (createdAt: string) => {
+	      const elapsed = Math.max(0, Date.now() - new Date(createdAt).getTime());
+	      const minutes = Math.floor(elapsed / 60_000);
+	      if (minutes < 1) return 'Just now';
+	      if (minutes < 60) return `${minutes}m ago`;
+	      const hours = Math.floor(minutes / 60);
+	      if (hours < 24) return `${hours}h ago`;
+	      const days = Math.floor(hours / 24);
+	      if (days < 30) return `${days}d ago`;
+	      return new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' })
+	        .format(new Date(createdAt));
+	    };
+
+	    const createAssetCard = (asset: LibraryAsset): HTMLElement | null => {
+	      const card = assetCardTemplate?.content.firstElementChild?.cloneNode(true) as HTMLElement | undefined;
+	      if (!card) return null;
+	      card.dataset.assetId = asset.id;
+	      card.dataset.assetName = asset.name.toLowerCase();
+	      card.dataset.assetOriginalName = asset.name;
+	      card.dataset.folderId = asset.folderId ?? '';
+
+	      const image = card.querySelector<HTMLImageElement>('.asset-preview img');
+	      if (image) {
+	        image.src = asset.url;
+	        image.alt = `Preview of ${asset.name}`;
+	      }
+	      const name = card.querySelector<HTMLElement>('.asset-name');
+	      if (name) name.textContent = asset.name;
+	      const format = card.querySelector<HTMLElement>('.asset-format');
+	      if (format) {
+	        format.textContent = asset.visibility === 'private'
+	          ? 'PRIVATE'
+	          : asset.mimeType.split('/')[1]?.toUpperCase() || 'IMAGE';
+	      }
+	      const size = card.querySelector<HTMLElement>('[data-asset-size]');
+	      if (size) size.textContent = librarySize(asset.sizeBytes);
+	      const age = card.querySelector<HTMLElement>('[data-asset-age]');
+	      if (age) age.textContent = libraryAge(asset.createdAt);
+
+	      const copy = card.querySelector<HTMLButtonElement>('.copy-link');
+	      if (copy) {
+	        copy.dataset.copyUrl = asset.url;
+	        copy.setAttribute('aria-label', `Copy URL for ${asset.name}`);
+	      }
+	      const manage = card.querySelector<HTMLButtonElement>('.manage-asset');
+	      if (manage) {
+	        manage.dataset.manageId = asset.id;
+	        manage.setAttribute('aria-label', `Organize ${asset.name}`);
+	      }
+	      const remove = card.querySelector<HTMLButtonElement>('.delete-asset');
+	      if (remove) {
+	        remove.dataset.deleteId = asset.id;
+	        remove.setAttribute('aria-label', `Delete ${asset.name}`);
+	      }
+	      return card;
+	    };
+
+	    const loadLibrary = async (append = false) => {
+	      if (!grid) return;
+	      libraryAbort?.abort();
+	      libraryAbort = new AbortController();
+	      const params = new URLSearchParams({
+	        limit: grid.dataset.libraryLimit || '24'
 	      });
-	      if (assetFilterEmpty) {
-	        assetFilterEmpty.hidden = visibleCount > 0 || assetCards.length === 0;
+	      const query = searchInput?.value.trim() ?? '';
+	      if (query) params.set('search', query);
+	      if (activeFolder) params.set('folder', activeFolder);
+	      if (append && libraryCursor) params.set('cursor', libraryCursor);
+
+	      if (libraryStatus) libraryStatus.textContent = append ? 'Loading more assets…' : 'Updating library…';
+	      if (loadMoreAssets) loadMoreAssets.disabled = true;
+
+	      try {
+	        const response = await fetch(`/pro/api/assets?${params.toString()}`, {
+	          headers: { Accept: 'application/json' },
+	          cache: 'no-store',
+	          signal: libraryAbort.signal
+	        });
+	        const result = await response.json().catch(() => ({ error: 'Library could not be loaded' })) as LibraryResponse;
+	        if (!response.ok) throw new Error(result.error || 'Library could not be loaded');
+
+	        const items = Array.isArray(result.assets) ? result.assets : [];
+	        if (!append) grid.replaceChildren();
+	        items.forEach((asset) => {
+	          const card = createAssetCard(asset);
+	          if (card) grid.appendChild(card);
+	        });
+	        libraryCursor = result.nextCursor || null;
+	        grid.dataset.nextCursor = libraryCursor || '';
+	        if (loadMoreAssets) loadMoreAssets.hidden = !libraryCursor;
+	        if (libraryResultCount) libraryResultCount.textContent = String(Number(result.total ?? items.length));
+	        if (assetFilterEmpty) assetFilterEmpty.hidden = grid.querySelectorAll('.asset-card').length > 0;
+	        if (libraryStatus) {
+	          libraryStatus.textContent = libraryCursor
+	            ? `${grid.querySelectorAll('.asset-card').length} shown`
+	            : items.length > 0 || append
+	              ? 'All matching assets are shown'
+	              : '';
+	        }
+	      } catch (error) {
+	        if (error instanceof DOMException && error.name === 'AbortError') return;
+	        if (libraryStatus) libraryStatus.textContent = 'Library could not be refreshed.';
+	        showToast(error instanceof Error ? error.message : 'Library could not be loaded');
+	      } finally {
+	        if (loadMoreAssets) loadMoreAssets.disabled = false;
 	      }
 	    };
 
-	    searchInput?.addEventListener('input', applyLibraryFilters);
+	    searchInput?.addEventListener('input', () => {
+	      window.clearTimeout(librarySearchTimer);
+	      librarySearchTimer = window.setTimeout(() => void loadLibrary(false), 280);
+	    });
+	    loadMoreAssets?.addEventListener('click', () => void loadLibrary(true));
 	    folderFilters.forEach((filter) => {
 	      filter.addEventListener('click', () => {
 	        activeFolder = filter.dataset.folderFilter ?? '';
@@ -1382,44 +1611,58 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	          item.classList.toggle('is-active', selected);
 	          item.setAttribute('aria-pressed', String(selected));
 	        });
-	        applyLibraryFilters();
+	        void loadLibrary(false);
 	      });
 	    });
 
-	    document.querySelectorAll<HTMLButtonElement>('.copy-link').forEach((button) => {
-	      button.addEventListener('click', async () => {
-	        const url = button.dataset.copyUrl;
+	    grid?.addEventListener('click', async (event) => {
+	      const target = event.target as HTMLElement;
+	      const copy = target.closest<HTMLButtonElement>('.copy-link');
+	      if (copy) {
+	        const url = copy.dataset.copyUrl;
 	        if (!url) return;
 	        const copied = await copyText(url);
-          if (!copied) {
-            showToast('Clipboard access is blocked. Open the image and copy its URL.');
-            return;
-          }
-	        button.classList.add('is-copied');
-	        button.textContent = '✓ Copied';
-	        showToast('Direct URL copied to clipboard');
-	        window.setTimeout(() => {
-	          button.classList.remove('is-copied');
-	          button.textContent = 'Copy URL';
-	        }, 1800);
-	      });
-	    });
-
-	    document.querySelectorAll<HTMLButtonElement>('.delete-asset').forEach((button) => {
-	      button.addEventListener('click', async () => {
-	        const id = button.dataset.deleteId;
-	        if (!id || !window.confirm('Delete this asset permanently? Its URL will stop working.')) return;
-	        button.disabled = true;
-	        const response = await fetch(`/pro/api/assets/${encodeURIComponent(id)}`, { method: 'DELETE' });
-	        const result = await response.json().catch(() => ({ error: 'Delete failed' })) as { error?: string };
-	        if (!response.ok) {
-	          button.disabled = false;
-	          showToast(result.error || 'Delete failed');
+	        if (!copied) {
+	          showToast('Clipboard access is blocked. Open the image and copy its URL.');
 	          return;
 	        }
-	        window.sessionStorage.setItem('imagetourl-pro-flash', 'Asset deleted permanently');
-	        window.location.reload();
-	      });
+	        copy.classList.add('is-copied');
+	        copy.textContent = '✓ Copied';
+	        showToast('Direct URL copied to clipboard');
+	        window.setTimeout(() => {
+	          copy.classList.remove('is-copied');
+	          copy.textContent = 'Copy URL';
+	        }, 1800);
+	        return;
+	      }
+
+	      const manage = target.closest<HTMLButtonElement>('.manage-asset');
+	      if (manage) {
+	        const card = manage.closest<HTMLElement>('.asset-card');
+	        if (!card || !assetManageId || !assetManageName || !assetManageFolder) return;
+	        assetManageId.value = card.dataset.assetId ?? '';
+	        assetManageName.value = card.dataset.assetOriginalName ?? '';
+	        assetManageFolder.value = card.dataset.folderId ?? '';
+	        openDialog(assetDialog);
+	        window.setTimeout(() => assetManageName.focus(), 60);
+	        return;
+	      }
+
+	      const remove = target.closest<HTMLButtonElement>('.delete-asset');
+	      if (!remove) return;
+	      const id = remove.dataset.deleteId;
+	      const name = remove.closest<HTMLElement>('.asset-card')?.dataset.assetOriginalName || 'this asset';
+	      if (!id || !window.confirm(`Delete “${name}” permanently? Its URL will stop working.`)) return;
+	      remove.disabled = true;
+	      const response = await fetch(`/pro/api/assets/${encodeURIComponent(id)}`, { method: 'DELETE' });
+	      const result = await response.json().catch(() => ({ error: 'Delete failed' })) as { error?: string };
+	      if (!response.ok) {
+	        remove.disabled = false;
+	        showToast(result.error || 'Delete failed');
+	        return;
+	      }
+	      window.sessionStorage.setItem('imagetourl-pro-flash', 'Asset deleted permanently');
+	      window.location.reload();
 	    });
 
 	    const focusAssetSearch = () => {
@@ -1470,14 +1713,32 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
         mobileSections.forEach((section) => mobileNavObserver.observe(section));
       }
 
+	    const setFolderDialogMode = (id: string | null, name = '') => {
+	      editingFolderId = id;
+	      if (folderName) folderName.value = name;
+	      if (folderDialogTitle) folderDialogTitle.textContent = id ? 'Manage folder' : 'Create a new folder';
+	      if (folderSubmitButton) folderSubmitButton.textContent = id ? 'Save folder' : 'Create folder';
+	      if (deleteFolderButton) deleteFolderButton.hidden = !id;
+	    };
+
 	    commandSearch?.addEventListener('click', focusAssetSearch);
 	    newFolderButton?.addEventListener('click', () => {
         if (!proAccessEnabled) {
           requestUploadAccess();
           return;
         }
+	      setFolderDialogMode(null);
 	      openDialog(folderDialog);
 	      window.setTimeout(() => folderName?.focus(), 50);
+	    });
+	    document.querySelectorAll<HTMLButtonElement>('[data-folder-manage]').forEach((button) => {
+	      button.addEventListener('click', () => {
+	        const id = button.dataset.folderManage;
+	        if (!id) return;
+	        setFolderDialogMode(id, button.dataset.folderName ?? '');
+	        openDialog(folderDialog);
+	        window.setTimeout(() => folderName?.focus(), 50);
+	      });
 	    });
 	    manageWorkspaceButton?.addEventListener('click', () => openDialog(workspaceDialog));
 	    profileButton?.addEventListener('click', () => openDialog(workspaceDialog));
@@ -1495,7 +1756,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	    document.querySelectorAll<HTMLButtonElement>('[data-close-dialog]').forEach((button) => {
 	      button.addEventListener('click', () => closeDialog(button.closest<HTMLDialogElement>('dialog')));
 	    });
-	    [folderDialog, workspaceDialog, uploadResultDialog].forEach((dialog) => {
+	    [folderDialog, assetDialog, workspaceDialog, uploadResultDialog].forEach((dialog) => {
 	      dialog?.addEventListener('click', (event) => {
 	        if (event.target === dialog) closeDialog(dialog);
 	      });
@@ -1505,22 +1766,74 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	      event.preventDefault();
 	      const name = folderName?.value.trim();
 	      if (!name) return;
-	      const response = await fetch('/pro/api/folders', {
-	        method: 'POST',
+	      const target = editingFolderId
+	        ? `/pro/api/folders/${encodeURIComponent(editingFolderId)}`
+	        : '/pro/api/folders';
+	      if (folderSubmitButton) folderSubmitButton.disabled = true;
+	      const response = await fetch(target, {
+	        method: editingFolderId ? 'PATCH' : 'POST',
 	        headers: { 'Content-Type': 'application/json' },
 	        body: JSON.stringify({ name })
 	      });
-	      const result = await response.json().catch(() => ({ error: 'Folder creation failed' })) as { error?: string };
+	      const result = await response.json().catch(() => ({ error: 'Folder update failed' })) as { error?: string };
+	      if (folderSubmitButton) folderSubmitButton.disabled = false;
 	      if (!response.ok) {
           if (response.status === 402) {
             closeDialog(folderDialog);
             requestUploadAccess(result.error);
             return;
           }
-	        showToast(result.error || 'Folder creation failed');
+	        showToast(result.error || 'Folder update failed');
 	        return;
 	      }
-	      window.sessionStorage.setItem('imagetourl-pro-flash', `“${name}” folder created`);
+	      window.sessionStorage.setItem(
+	        'imagetourl-pro-flash',
+	        editingFolderId ? `Folder renamed to “${name}”` : `“${name}” folder created`
+	      );
+	      window.location.reload();
+	    });
+
+	    deleteFolderButton?.addEventListener('click', async () => {
+	      if (!editingFolderId) return;
+	      const name = folderName?.value.trim() || 'this folder';
+	      if (!window.confirm(`Delete “${name}”? Its images will move to Unfiled and remain available.`)) return;
+	      deleteFolderButton.disabled = true;
+	      const response = await fetch(`/pro/api/folders/${encodeURIComponent(editingFolderId)}`, {
+	        method: 'DELETE'
+	      });
+	      const result = await response.json().catch(() => ({ error: 'Folder deletion failed' })) as { error?: string };
+	      if (!response.ok) {
+	        deleteFolderButton.disabled = false;
+	        showToast(result.error || 'Folder deletion failed');
+	        return;
+	      }
+	      window.sessionStorage.setItem('imagetourl-pro-flash', `“${name}” deleted. Its images are now Unfiled.`);
+	      window.location.reload();
+	    });
+
+	    assetForm?.addEventListener('submit', async (event) => {
+	      event.preventDefault();
+	      const id = assetManageId?.value;
+	      const name = assetManageName?.value.trim();
+	      if (!id || !name || !assetManageFolder) return;
+	      if (assetSubmitButton) assetSubmitButton.disabled = true;
+	      const response = await fetch(`/pro/api/assets/${encodeURIComponent(id)}`, {
+	        method: 'PATCH',
+	        headers: { 'Content-Type': 'application/json' },
+	        body: JSON.stringify({ name, folderId: assetManageFolder.value || null })
+	      });
+	      const result = await response.json().catch(() => ({ error: 'Asset update failed' })) as { error?: string };
+	      if (assetSubmitButton) assetSubmitButton.disabled = false;
+	      if (!response.ok) {
+	        if (response.status === 402) {
+	          closeDialog(assetDialog);
+	          requestUploadAccess(result.error);
+	          return;
+	        }
+	        showToast(result.error || 'Asset update failed');
+	        return;
+	      }
+	      window.sessionStorage.setItem('imagetourl-pro-flash', `“${name}” updated in your library`);
 	      window.location.reload();
 	    });
 

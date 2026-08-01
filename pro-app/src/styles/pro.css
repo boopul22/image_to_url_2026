@@ -1426,6 +1426,38 @@ h1 {
   background: rgba(255, 255, 235, 0.14);
 }
 
+.folder-chip {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+}
+
+.folder-chip .folder-filter {
+  border-radius: 9px 0 0 9px;
+}
+
+.folder-manage {
+  width: 32px;
+  flex: 0 0 auto;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 0;
+  border-radius: 0 9px 9px 0;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.04em;
+}
+
+.folder-manage:hover,
+.folder-manage:focus-visible,
+.folder-chip:has(.folder-filter.is-active) .folder-manage {
+  color: var(--cream);
+  background: var(--green);
+  border-color: var(--green);
+}
+
 .asset-filter-empty {
   padding: 26px 0 4px;
   color: var(--muted);
@@ -1580,18 +1612,41 @@ h1 {
   backdrop-filter: blur(8px);
 }
 
+.manage-asset {
+  min-height: 30px;
+  padding: 0 10px;
+  color: var(--green);
+  background: rgba(255, 254, 247, 0.92);
+  border: 1px solid rgba(3, 79, 70, 0.16);
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 650;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 160ms ease, transform 160ms ease, background 160ms ease;
+  backdrop-filter: blur(8px);
+}
+
 .copy-link svg {
   width: 12px;
   height: 12px;
 }
 
 .asset-card:hover .copy-link,
+.asset-card:hover .manage-asset,
 .asset-card:hover .delete-asset,
 .copy-link:focus-visible,
+.manage-asset:focus-visible,
 .delete-asset:focus-visible,
 .copy-link.is-copied {
   opacity: 1;
   transform: translateY(0);
+}
+
+.manage-asset:hover {
+  color: var(--cream);
+  background: var(--green);
 }
 
 .delete-asset:hover {
@@ -1690,6 +1745,24 @@ h1 {
 
 .asset-card[hidden] {
   display: none;
+}
+
+.library-pagination {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.library-pagination:has(button[hidden]) {
+  min-height: 18px;
+}
+
+#library-status {
+  color: var(--muted);
+  font-size: 10px;
 }
 
 .empty-library {
@@ -2015,6 +2088,10 @@ h1 {
   outline: 0;
 }
 
+.dialog-input + .field-label {
+  margin-top: 16px;
+}
+
 .dialog-input:focus,
 .domain-field:focus-within {
   border-color: var(--green);
@@ -2034,6 +2111,19 @@ h1 {
   padding-top: 22px;
   margin-top: 24px;
   border-top: 1px solid var(--line);
+}
+
+.button-danger {
+  margin-right: auto;
+  color: #7f3028;
+  background: #fff6f2;
+  border-color: rgba(164, 62, 50, 0.22);
+}
+
+.button-danger:hover {
+  color: var(--cream);
+  background: var(--danger);
+  border-color: var(--danger);
 }
 
 .signout-link {
@@ -2955,8 +3045,11 @@ h1 {
   }
 
   .copy-link,
+  .manage-asset,
   .delete-asset {
     min-height: 42px;
+	  opacity: 1;
+	  transform: none;
   }
 
   .icon-button {

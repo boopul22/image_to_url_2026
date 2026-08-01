@@ -5,6 +5,8 @@ import { getProEnv } from '../../lib/env';
 import { requireProAccess } from '../../lib/entitlements';
 import { isSameOriginMutation, json, requireUser, slugify } from '../../lib/http';
 
+const MAX_FOLDERS_PER_USER = 100;
+
 export const GET: APIRoute = async ({ locals }) => {
 	const authError = requireUser(locals.proUser);
 	if (authError) return authError;
@@ -33,6 +35,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const payload = await request.json().catch(() => null) as { name?: unknown } | null;
 	const name = typeof payload?.name === 'string' ? payload.name.trim().slice(0, 48) : '';
 	if (!name) return json({ error: 'Enter a folder name' }, 400);
+
+	const folderCount = await env.PRO_DB.prepare(
+		'SELECT COUNT(*) AS count FROM folders WHERE user_id = ?',
+	)
+		.bind(locals.proUser!.id)
+		.first<{ count: number }>();
+	if (Number(folderCount?.count ?? 0) >= MAX_FOLDERS_PER_USER) {
+		return json({ error: `You can create up to ${MAX_FOLDERS_PER_USER} folders` }, 409);
+	}
 
 	const id = crypto.randomUUID();
 	const slug = slugify(name);
