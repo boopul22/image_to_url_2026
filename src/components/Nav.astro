@@ -146,6 +146,17 @@ const toolsDropdown = getNavGroups(locale);
 
     <!-- Desktop Right Actions -->
     <div class="hidden lg:flex items-center gap-2.5 lg:justify-self-end">
+      <a
+        href={user ? '/pro/workspace' : '/pricing'}
+        data-nav-pro-track="nav-pro"
+        class="group flex items-center gap-1.5 min-h-8 px-2.5 bg-neutral-900 text-white font-headline text-[11px] font-semibold uppercase tracking-wide hover:bg-rose-600 transition-colors"
+        aria-label={user ? 'Open ImageToURL Pro workspace' : 'Explore ImageToURL Pro'}
+      >
+        <Icon name="workspace_premium" class="text-[15px] text-rose-300 group-hover:text-white" fill />
+        Pro
+        <span class="text-[8px] text-rose-300 group-hover:text-white tracking-[0.13em]">New</span>
+      </a>
+
       <!-- Compact language switcher — a globe icon (signed-OUT only). Signed-in
            users get the language grid inside the profile menu below, so this is
            the anonymous visitor's switcher and keeps the top bar tidy. -->
@@ -312,6 +323,16 @@ const toolsDropdown = getNavGroups(locale);
         </a>
       ))}
 
+      <a
+        href={user ? '/pro/workspace' : '/pricing'}
+        data-nav-pro-track="nav-pro-mobile"
+        class="flex items-center gap-3 mx-1 mt-1 py-3.5 px-4 rounded-lg bg-neutral-900 text-white font-label uppercase tracking-wider text-xs font-bold active:scale-[0.98] transition-transform"
+      >
+        <Icon name="workspace_premium" class="text-lg text-rose-300" fill />
+        ImageToURL Pro
+        <span class="ml-auto px-1.5 py-0.5 bg-rose-600 text-[8px] tracking-[0.13em]">New</span>
+      </a>
+
       <div class="h-px bg-outline-variant my-2"></div>
 
       <!-- Tools Dropdown (mobile, real products) -->
@@ -445,6 +466,17 @@ const toolsDropdown = getNavGroups(locale);
 <script>
   import { ic_menu, ic_close, ic_expand_more, ic_dashboard, ic_admin_panel_settings, ic_logout, ic_toll, ic_translate } from '../data/icon-svgs';
   const icon = (inner: string, cls = '', id = '') => `<svg class="ms-icon ${cls}"${id ? ` id="${id}"` : ''} viewBox="0 -960 960 960">${inner}</svg>`;
+
+  // Track the global Pro entry separately from page-level conversion links.
+  document.querySelectorAll<HTMLAnchorElement>('[data-nav-pro-track]').forEach((link) => {
+    link.addEventListener('click', () => {
+      navigator.sendBeacon('/api/track/click', JSON.stringify({
+        linkId: link.dataset.navProTrack,
+        page: window.location.pathname,
+      }));
+    });
+  });
+
   // Mobile menu toggle
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');

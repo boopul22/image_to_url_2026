@@ -1,0 +1,567 @@
+---
+import Icon from './Icon.astro';
+import type { Locale } from '../i18n/config';
+
+type Variant = 'banner' | 'section';
+
+type ProCopy = {
+  launched: string;
+  bannerDetail: string;
+  bannerCta: string;
+  openWorkspace: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  benefits: [string, string, string, string];
+  priceLabel: string;
+  pricePeriod: string;
+  priceEquivalent: string;
+  annualCta: string;
+  monthlyCta: string;
+  compareCta: string;
+  trust: string;
+};
+
+const copyByLocale: Record<Locale, ProCopy> = {
+  en: {
+    launched: 'ImageToURL Pro is live',
+    bannerDetail: '50GB storage, private assets, permanent URLs, and no ads.',
+    bannerCta: 'Explore Pro',
+    openWorkspace: 'Open workspace',
+    eyebrow: 'A new home for important images',
+    title: 'Free for quick shares. Pro for images your work depends on.',
+    description: 'Keep using the fast free uploader. Move into Pro when you need a focused workspace with privacy, organization, and room to grow.',
+    benefits: ['50GB active storage', 'Permanent HTTPS URLs', 'Public and private assets', 'Folders and usage analytics'],
+    priceLabel: 'Founding plan',
+    pricePeriod: 'per year',
+    priceEquivalent: '$3.25/month · save $20.88',
+    annualCta: 'Choose annual Pro',
+    monthlyCta: 'Or pay $4.99 monthly',
+    compareCta: 'Compare Free and Pro',
+    trust: 'Secure checkout by Paddle · Cancel online · 14-day first-purchase refund',
+  },
+  es: {
+    launched: 'ImageToURL Pro ya está disponible',
+    bannerDetail: '50 GB, archivos privados, URL permanentes y sin anuncios.',
+    bannerCta: 'Descubrir Pro',
+    openWorkspace: 'Abrir espacio',
+    eyebrow: 'Un nuevo hogar para imágenes importantes',
+    title: 'Gratis para compartir rápido. Pro para las imágenes de las que depende tu trabajo.',
+    description: 'Sigue usando el cargador gratuito. Pasa a Pro cuando necesites privacidad, organización y espacio para crecer.',
+    benefits: ['50 GB de almacenamiento activo', 'URL HTTPS permanentes', 'Archivos públicos y privados', 'Carpetas y analíticas de uso'],
+    priceLabel: 'Plan fundador',
+    pricePeriod: 'al año',
+    priceEquivalent: '3,25 US$/mes · ahorra 20,88 US$',
+    annualCta: 'Elegir Pro anual',
+    monthlyCta: 'O paga 4,99 US$ al mes',
+    compareCta: 'Comparar Gratis y Pro',
+    trust: 'Pago seguro con Paddle · Cancela online · Reembolso de 14 días en la primera compra',
+  },
+  fr: {
+    launched: 'ImageToURL Pro est disponible',
+    bannerDetail: '50 Go, fichiers privés, URL permanentes et sans publicité.',
+    bannerCta: 'Découvrir Pro',
+    openWorkspace: 'Ouvrir l’espace',
+    eyebrow: 'Un nouvel espace pour vos images importantes',
+    title: 'Gratuit pour partager vite. Pro pour les images essentielles à votre travail.',
+    description: 'Continuez avec l’outil gratuit. Passez à Pro pour la confidentialité, l’organisation et davantage d’espace.',
+    benefits: ['50 Go de stockage actif', 'URL HTTPS permanentes', 'Fichiers publics et privés', 'Dossiers et statistiques d’utilisation'],
+    priceLabel: 'Offre fondateur',
+    pricePeriod: 'par an',
+    priceEquivalent: '3,25 $US/mois · économisez 20,88 $US',
+    annualCta: 'Choisir Pro annuel',
+    monthlyCta: 'Ou 4,99 $US par mois',
+    compareCta: 'Comparer Gratuit et Pro',
+    trust: 'Paiement sécurisé par Paddle · Annulation en ligne · Remboursement sous 14 jours pour le premier achat',
+  },
+  de: {
+    launched: 'ImageToURL Pro ist live',
+    bannerDetail: '50 GB, private Dateien, permanente URLs und keine Werbung.',
+    bannerCta: 'Pro entdecken',
+    openWorkspace: 'Workspace öffnen',
+    eyebrow: 'Ein neuer Ort für wichtige Bilder',
+    title: 'Kostenlos für schnelles Teilen. Pro für Bilder, auf die deine Arbeit angewiesen ist.',
+    description: 'Nutze den schnellen kostenlosen Uploader weiter. Wechsle zu Pro, wenn du Privatsphäre, Ordnung und mehr Platz brauchst.',
+    benefits: ['50 GB aktiver Speicher', 'Permanente HTTPS-URLs', 'Öffentliche und private Dateien', 'Ordner und Nutzungsanalysen'],
+    priceLabel: 'Gründerpreis',
+    pricePeriod: 'pro Jahr',
+    priceEquivalent: '3,25 $/Monat · 20,88 $ sparen',
+    annualCta: 'Jährliches Pro wählen',
+    monthlyCta: 'Oder 4,99 $ monatlich',
+    compareCta: 'Kostenlos und Pro vergleichen',
+    trust: 'Sichere Zahlung über Paddle · Online kündbar · 14 Tage Erstattung beim Erstkauf',
+  },
+  ja: {
+    launched: 'ImageToURL Pro を公開しました',
+    bannerDetail: '50GB、非公開ファイル、永久URL、広告なし。',
+    bannerCta: 'Proを見る',
+    openWorkspace: 'ワークスペースを開く',
+    eyebrow: '大切な画像のための新しい場所',
+    title: '手軽な共有は無料で。仕事に欠かせない画像はProで。',
+    description: '高速な無料アップローダーはそのまま。プライバシー、整理、容量が必要になったらProへ移行できます。',
+    benefits: ['50GBのアクティブストレージ', '永久HTTPS URL', '公開・非公開ファイル', 'フォルダーと利用状況分析'],
+    priceLabel: '創設記念プラン',
+    pricePeriod: '年額',
+    priceEquivalent: '月額換算$3.25 · $20.88お得',
+    annualCta: '年間Proを選ぶ',
+    monthlyCta: 'または月額$4.99',
+    compareCta: '無料版とProを比較',
+    trust: 'Paddleによる安全な決済 · オンライン解約 · 初回購入は14日間返金対応',
+  },
+  'zh-Hans': {
+    launched: 'ImageToURL Pro 已上线',
+    bannerDetail: '50GB、私密文件、永久链接、无广告。',
+    bannerCta: '了解 Pro',
+    openWorkspace: '打开工作区',
+    eyebrow: '重要图片的新空间',
+    title: '快速分享用免费版。工作依赖的图片用 Pro。',
+    description: '继续使用快速的免费上传工具；需要隐私、整理和更多空间时，再升级到 Pro。',
+    benefits: ['50GB 活跃存储空间', '永久 HTTPS 链接', '公开和私密文件', '文件夹与使用分析'],
+    priceLabel: '创始方案',
+    pricePeriod: '每年',
+    priceEquivalent: '折合每月 $3.25 · 节省 $20.88',
+    annualCta: '选择年度 Pro',
+    monthlyCta: '或每月 $4.99',
+    compareCta: '比较免费版与 Pro',
+    trust: 'Paddle 安全结账 · 可在线取消 · 首次购买享 14 天退款',
+  },
+};
+
+const { variant = 'section', locale = 'en' } = Astro.props as { variant?: Variant; locale?: Locale };
+const copy = copyByLocale[locale] ?? copyByLocale.en;
+const user = Astro.locals.user;
+const destination = user ? '/pro/workspace' : '/pricing';
+const destinationLabel = user ? copy.openWorkspace : copy.bannerCta;
+---
+
+{variant === 'banner' ? (
+  <aside class="pro-announcement" aria-label={copy.launched}>
+    <div class="pro-announcement-inner">
+      <div class="pro-announcement-copy">
+        <span class="pro-new">New</span>
+        <Icon name="workspace_premium" class="pro-announcement-icon" fill />
+        <strong>{copy.launched}</strong>
+        <span class="pro-announcement-detail">{copy.bannerDetail}</span>
+      </div>
+      <a href={destination} data-track-click="home-pro-announcement">
+        {destinationLabel}
+        <Icon name="arrow_forward" class="pro-arrow" />
+      </a>
+    </div>
+  </aside>
+) : (
+  <section class="pro-launch cv-auto" id="pro" aria-labelledby="pro-launch-title">
+    <div class="pro-launch-inner">
+      <div class="pro-launch-copy">
+        <p class="pro-eyebrow"><span></span>{copy.eyebrow}</p>
+        <h2 id="pro-launch-title">{copy.title}</h2>
+        <p class="pro-description">{copy.description}</p>
+
+        <ul class="pro-benefits" aria-label="ImageToURL Pro features">
+          {copy.benefits.map((benefit, index) => (
+            <li>
+              <Icon name={['hard_drive', 'link', 'lock', 'folder'][index]} fill={index === 2} />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a class="pro-compare" href="/pricing" data-track-click="home-pro-compare">
+          {copy.compareCta}
+          <Icon name="arrow_forward" />
+        </a>
+      </div>
+
+      <aside class="pro-offer" aria-label="ImageToURL Pro annual offer">
+        <div class="pro-offer-topline">
+          <span>{copy.priceLabel}</span>
+          <span class="pro-offer-status"><i></i> Live</span>
+        </div>
+        <div class="pro-price"><strong>$39</strong><span>{copy.pricePeriod}</span></div>
+        <p class="pro-equivalent">{copy.priceEquivalent}</p>
+        <a class="pro-primary" href="/pro/pricing?billing=year" data-track-click="home-pro-annual">
+          {copy.annualCta}
+          <Icon name="arrow_forward" />
+        </a>
+        <a class="pro-monthly" href="/pro/pricing?billing=month" data-track-click="home-pro-monthly">{copy.monthlyCta}</a>
+        <p class="pro-trust"><Icon name="verified_user" fill />{copy.trust}</p>
+      </aside>
+    </div>
+  </section>
+)}
+
+<style>
+  .pro-announcement {
+    color: #262626;
+    background: #fff1f2;
+    border-bottom: 1px solid #fecdd3;
+  }
+
+  .pro-announcement-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    width: min(1152px, calc(100% - 32px));
+    min-height: 44px;
+    margin: 0 auto;
+  }
+
+  .pro-announcement-copy,
+  .pro-announcement-inner > a {
+    display: flex;
+    align-items: center;
+  }
+
+  .pro-announcement-copy {
+    min-width: 0;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .pro-new {
+    padding: 3px 6px;
+    color: #fff;
+    background: #e11d48;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .pro-announcement-icon {
+    color: #e11d48;
+    font-size: 17px;
+  }
+
+  .pro-announcement-copy strong {
+    font-family: var(--font-headline);
+    font-weight: 700;
+  }
+
+  .pro-announcement-detail {
+    color: #737373;
+  }
+
+  .pro-announcement-inner > a {
+    flex: 0 0 auto;
+    gap: 5px;
+    color: #be123c;
+    font-family: var(--font-headline);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .pro-announcement-inner > a:hover .pro-arrow {
+    transform: translateX(3px);
+  }
+
+  .pro-arrow {
+    font-size: 14px;
+    transition: transform 160ms ease;
+  }
+
+  .pro-launch {
+    width: min(1056px, calc(100% - 32px));
+    margin: 26px auto 48px;
+  }
+
+  .pro-launch-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.4fr);
+    gap: clamp(30px, 5vw, 64px);
+    align-items: stretch;
+    padding: clamp(30px, 5vw, 58px);
+    overflow: hidden;
+    color: #f5f5f5;
+    background: #171717;
+    border: 1px solid #262626;
+    box-shadow: 0 22px 50px rgb(23 23 23 / 0.15);
+  }
+
+  .pro-launch-inner::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: #e11d48;
+    content: '';
+  }
+
+  .pro-launch-copy {
+    align-self: center;
+  }
+
+  .pro-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    color: #fda4af;
+    font-family: var(--font-headline);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .pro-eyebrow span {
+    width: 22px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .pro-launch h2 {
+    max-width: 660px;
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-headline);
+    font-size: clamp(30px, 5vw, 54px);
+    font-weight: 650;
+    letter-spacing: -0.052em;
+    line-height: 0.98;
+  }
+
+  .pro-description {
+    max-width: 620px;
+    margin: 20px 0 0;
+    color: #bdbdbd;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .pro-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+    margin: 28px 0 0;
+    padding: 24px 0 0;
+    border-top: 1px solid #333;
+    list-style: none;
+  }
+
+  .pro-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #e5e5e5;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .pro-benefits :global(.ms-icon) {
+    flex: 0 0 auto;
+    color: #fb7185;
+    font-size: 17px;
+  }
+
+  .pro-compare {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 28px;
+    color: #fda4af;
+    font-family: var(--font-headline);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .pro-compare:hover {
+    color: #fff;
+  }
+
+  .pro-compare :global(.ms-icon) {
+    font-size: 14px;
+  }
+
+  .pro-offer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 26px;
+    color: #171717;
+    background: #fff;
+    border-top: 3px solid #e11d48;
+    box-shadow: 0 12px 28px rgb(0 0 0 / 0.2);
+  }
+
+  .pro-offer-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #737373;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pro-offer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #15803d;
+  }
+
+  .pro-offer-status i {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+  }
+
+  .pro-price {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin-top: 26px;
+  }
+
+  .pro-price strong {
+    font-family: var(--font-headline);
+    font-size: clamp(52px, 7vw, 68px);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 0.9;
+  }
+
+  .pro-price span,
+  .pro-equivalent {
+    color: #737373;
+    font-size: 11px;
+  }
+
+  .pro-equivalent {
+    margin: 8px 0 0;
+  }
+
+  .pro-primary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 50px;
+    padding: 0 17px;
+    margin-top: 24px;
+    color: #fff;
+    background: #e11d48;
+    font-family: var(--font-headline);
+    font-size: 12px;
+    font-weight: 750;
+  }
+
+  .pro-primary:hover {
+    background: #be123c;
+  }
+
+  .pro-primary :global(.ms-icon) {
+    font-size: 16px;
+    transition: transform 160ms ease;
+  }
+
+  .pro-primary:hover :global(.ms-icon) {
+    transform: translateX(3px);
+  }
+
+  .pro-monthly {
+    margin-top: 13px;
+    color: #525252;
+    font-size: 11px;
+    font-weight: 650;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: #d4d4d4;
+    text-underline-offset: 3px;
+  }
+
+  .pro-monthly:hover {
+    color: #be123c;
+  }
+
+  .pro-trust {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 21px 0 0;
+    padding-top: 17px;
+    color: #737373;
+    border-top: 1px solid #e5e5e5;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .pro-trust :global(.ms-icon) {
+    flex: 0 0 auto;
+    color: #15803d;
+    font-size: 14px;
+  }
+
+  @media (max-width: 767px) {
+    .pro-announcement-inner {
+      width: min(100% - 24px, 720px);
+      min-height: 46px;
+      gap: 10px;
+    }
+
+    .pro-announcement-copy {
+      gap: 6px;
+    }
+
+    .pro-announcement-icon,
+    .pro-announcement-detail {
+      display: none;
+    }
+
+    .pro-announcement-copy strong {
+      overflow: hidden;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pro-announcement-inner > a {
+      font-size: 9px;
+    }
+
+    .pro-launch {
+      width: calc(100% - 24px);
+      margin: 18px auto 36px;
+    }
+
+    .pro-launch-inner {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px 22px 22px;
+    }
+
+    .pro-launch h2 {
+      font-size: clamp(29px, 10vw, 42px);
+    }
+
+    .pro-description {
+      font-size: 13px;
+    }
+
+    .pro-benefits {
+      grid-template-columns: 1fr;
+      gap: 11px;
+    }
+
+    .pro-offer {
+      padding: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pro-arrow,
+    .pro-primary :global(.ms-icon) {
+      transition: none;
+    }
+  }
+</style>

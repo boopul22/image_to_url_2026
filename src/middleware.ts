@@ -5,6 +5,11 @@ import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale, locales, type Locale } from './i18n/config';
 import { resolveSlug, ownerLocaleForSlug, isPageKey, localizedUrl } from './i18n/landing/registry';
 
+// Increment this when a release changes public HTML. Workers Cache API entries
+// survive deployments, so a versioned key prevents old pages from masking a
+// newly deployed homepage or landing-page update.
+const HTML_EDGE_CACHE_VERSION = '2026-08-01-pro-launch';
+
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
 const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
 const NON_LOCALIZED_EXACT = new Set([
@@ -254,7 +259,9 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   }
   
   if (isCacheableHtmlPage && cacheObj) {
-    cacheKey = new Request(request.url, { method: 'GET' });
+    const cacheUrl = new URL(request.url);
+    cacheUrl.searchParams.set('__html_cache_version', HTML_EDGE_CACHE_VERSION);
+    cacheKey = new Request(cacheUrl.toString(), { method: 'GET' });
     try {
       const cachedResponse = await cacheObj.match(cacheKey);
       if (cachedResponse) {

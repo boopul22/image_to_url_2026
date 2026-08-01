@@ -11,6 +11,7 @@ import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
 import AdRail from '../ads/AdRail.astro';
 import AdSlot from '../ads/AdSlot.astro';
+import ProLaunch from '../ProLaunch.astro';
 
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -125,6 +126,24 @@ const pageSchema = [
         "availability": "https://schema.org/InStock",
         "description": "5 guest uploads per rolling 24 hours, 50 MB per file, auto-expiring CDN links.",
         "url": "https://imagetourl.cloud/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "ImageToURL Pro Monthly",
+        "price": "4.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "50GB active storage, permanent HTTPS URLs, private assets, folders, usage analytics, and no ads.",
+        "url": "https://imagetourl.cloud/pro/pricing?billing=month"
+      },
+      {
+        "@type": "Offer",
+        "name": "ImageToURL Pro Annual",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "Annual ImageToURL Pro access with 50GB active storage, permanent HTTPS URLs, private assets, folders, usage analytics, and no ads.",
+        "url": "https://imagetourl.cloud/pro/pricing?billing=year"
       }
     ],
     "publisher": {
@@ -164,6 +183,8 @@ const pageSchema = [
 
 <Layout schema={pageSchema} title={t(locale, 'home.meta.title')} description={t(locale, 'home.meta.description')}>
   <Nav activePage="home" />
+
+  <ProLaunch variant="banner" locale={locale} />
 
   <!-- Hero Section — Immediate, action-focused -->
   <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
@@ -395,6 +416,8 @@ const pageSchema = [
        Multiplex (autorelaxed) grid; below the fold → lazy-loaded by the observer in
        Layout.astro (data-ad-lazy). -->
   <AdSlot placement="toolBelowMultiplex" class="xl:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6" stripAboveXl />
+
+  <ProLaunch variant="section" locale={locale} />
 
   <!-- How It Works -->
   <section class="cv-auto max-w-5xl mx-auto px-4 sm:px-6 pt-2 pb-8 sm:pt-3 sm:pb-12">
@@ -760,9 +783,15 @@ const pageSchema = [
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
       <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-3 sm:mb-4 reveal">{t(locale, 'home.cta.title')}</h2>
       <p class="font-body text-on-surface-variant text-sm mb-3 sm:mb-4 reveal">{t(locale, 'home.cta.subtitle')}</p>
-      <button class="reveal inline-block bg-primary text-on-primary px-8 py-3 rounded-xl font-headline font-black text-sm uppercase tracking-wider hover:-translate-y-1 transition-transform cursor-pointer" id="cta-upload-btn">
-        {t(locale, 'home.cta.button')}
-      </button>
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button class="inline-block bg-primary text-on-primary px-8 py-3 rounded-xl font-headline font-black text-sm uppercase tracking-wider hover:-translate-y-1 transition-transform cursor-pointer" id="cta-upload-btn">
+          {t(locale, 'home.cta.button')}
+        </button>
+        <a href="/pricing" data-track-click="home-final-pro" class="inline-flex items-center gap-2 border border-outline-variant bg-background text-on-background px-8 py-3 rounded-xl font-headline font-black text-sm uppercase tracking-wider hover:border-rose-300 hover:text-rose-700 hover:-translate-y-1 transition-all">
+          ImageToURL Pro
+          <Icon name="arrow_forward" class="text-base" />
+        </a>
+      </div>
     </div>
   </section>
 
