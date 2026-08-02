@@ -91,8 +91,8 @@ const schema = [
       </div>
 
       <div class="billing-switch" role="group" aria-label="Billing frequency">
-        <button type="button" data-cycle="month" aria-pressed="false">Monthly</button>
-        <button type="button" data-cycle="year" aria-pressed="true">
+        <button type="button" data-cycle="month" data-pro-event="pro_plan_selected" data-pro-location="main-pricing-toggle" data-pro-plan="month" aria-pressed="false">Monthly</button>
+        <button type="button" data-cycle="year" data-pro-event="pro_plan_selected" data-pro-location="main-pricing-toggle" data-pro-plan="year" aria-pressed="true">
           Annual <span>Save $20.88</span>
         </button>
       </div>
@@ -136,6 +136,9 @@ const schema = [
           class="price-button primary"
           id="pro-checkout-link"
           href={`${proBase}?billing=year`}
+          data-pro-event="pro_cta_clicked"
+          data-pro-location="main-pricing-primary"
+          data-pro-plan="year"
         >
           Get Pro for $39/year <span>↗</span>
         </a>
@@ -265,6 +268,7 @@ const schema = [
     if (checkout) {
       checkout.firstChild.textContent = `${plan.cta} `;
       checkout.href = plan.href;
+      checkout.dataset.proPlan = cycle;
     }
     if (addonPrice) addonPrice.textContent = cycle === 'year' ? '$24' : '$2.99';
     if (addonPeriod) addonPeriod.textContent = cycle === 'year' ? 'per year / 50GB' : 'per month / 50GB';

@@ -76,14 +76,14 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
         </header>
 
         <div class="pro-billing-choice" role="group" aria-label="Choose your billing frequency">
-          <button type="button" data-interval="month" aria-pressed={initialInterval === 'month'}>
+          <button type="button" data-interval="month" data-pro-event="pro_plan_selected" data-pro-location="pro-pricing-toggle" data-pro-plan="month" aria-pressed={initialInterval === 'month'}>
             <span>
               <strong>Monthly</strong>
               <small>Pay month to month</small>
             </span>
             <b>$4.99 <small>/ month</small></b>
           </button>
-          <button type="button" data-interval="year" aria-pressed={initialInterval === 'year'}>
+          <button type="button" data-interval="year" data-pro-event="pro_plan_selected" data-pro-location="pro-pricing-toggle" data-pro-plan="year" aria-pressed={initialInterval === 'year'}>
             <span>
               <strong>Annual</strong>
               <small>Best value · save 35%</small>
@@ -133,6 +133,9 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
             id="checkout-button"
             type="button"
             data-interval={initialInterval}
+            data-pro-event="pro_plan_selected"
+            data-pro-location="pro-pricing-checkout"
+            data-pro-plan={initialInterval}
             disabled={!checkoutConfigured}
           >
             <span id="checkout-label">
@@ -143,7 +146,7 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
             <span aria-hidden="true">↗</span>
           </button>
         ) : (
-          <a class="pro-checkout-button" id="signin-checkout" href={loginUrl.toString()}>
+          <a class="pro-checkout-button" id="signin-checkout" href={loginUrl.toString()} data-pro-event="pro_plan_selected" data-pro-location="pro-pricing-signin" data-pro-plan={initialInterval}>
             <span id="signin-label">
               Sign in to continue — {initialCheckoutPrice}
             </span>
@@ -340,13 +343,17 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
       if (displayPrice) displayPrice.textContent = copy.price;
       if (displayPeriod) displayPeriod.textContent = copy.period;
       if (displayNote) displayNote.textContent = copy.note;
-      if (checkoutButton) checkoutButton.dataset.interval = selectedInterval;
+      if (checkoutButton) {
+        checkoutButton.dataset.interval = selectedInterval;
+        checkoutButton.dataset.proPlan = selectedInterval;
+      }
       if (checkoutLabel) checkoutLabel.textContent = actionCopy.checkout;
       if (signinLabel) signinLabel.textContent = actionCopy.signin;
       if (storageAddonPrice) {
         storageAddonPrice.textContent = selectedInterval === 'year' ? '+$24/year' : '+$2.99/month';
       }
       if (signinCheckout) {
+        signinCheckout.dataset.proPlan = selectedInterval;
         const target = new URL(loginUrl);
         const storageQuery = selectedStoragePacks > 0 ? '&storage=1' : '';
         target.searchParams.set(
@@ -408,6 +415,7 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
           body: JSON.stringify({
             interval: selectedInterval,
             storagePacks: selectedStoragePacks,
+            interestSessionId: window.sessionStorage.getItem('imagetourl_pro_interest_session'),
           }),
         });
         const result = await response.json().catch(() => ({ error: 'Checkout failed' }));

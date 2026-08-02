@@ -135,7 +135,7 @@ const destinationLabel = user ? copy.openWorkspace : copy.bannerCta;
 ---
 
 {variant === 'banner' ? (
-  <aside class="pro-announcement" aria-label={copy.launched}>
+  <aside class="pro-announcement" aria-label={copy.launched} data-pro-impression="home-pro-announcement">
     <div class="pro-announcement-inner">
       <div class="pro-announcement-copy">
         <span class="pro-new">New</span>
@@ -143,14 +143,14 @@ const destinationLabel = user ? copy.openWorkspace : copy.bannerCta;
         <strong>{copy.launched}</strong>
         <span class="pro-announcement-detail">{copy.bannerDetail}</span>
       </div>
-      <a href={destination} data-track-click="home-pro-announcement">
+      <a href={destination} data-track-click="home-pro-announcement" data-pro-event="pro_cta_clicked" data-pro-location="home-announcement">
         {destinationLabel}
         <Icon name="arrow_forward" class="pro-arrow" />
       </a>
     </div>
   </aside>
 ) : (
-  <section class="pro-launch cv-auto" id="pro" aria-labelledby="pro-launch-title">
+  <section class="pro-launch cv-auto" id="pro" aria-labelledby="pro-launch-title" data-pro-impression="home-pro-section">
     <div class="pro-launch-inner">
       <div class="pro-launch-copy">
         <p class="pro-eyebrow"><span></span>{copy.eyebrow}</p>
@@ -166,7 +166,7 @@ const destinationLabel = user ? copy.openWorkspace : copy.bannerCta;
           ))}
         </ul>
 
-        <a class="pro-compare" href="/pricing" data-track-click="home-pro-compare">
+        <a class="pro-compare" href="/pricing" data-track-click="home-pro-compare" data-pro-event="pro_cta_clicked" data-pro-location="home-pro-compare">
           {copy.compareCta}
           <Icon name="arrow_forward" />
         </a>
@@ -179,11 +179,11 @@ const destinationLabel = user ? copy.openWorkspace : copy.bannerCta;
         </div>
         <div class="pro-price"><strong>$39</strong><span>{copy.pricePeriod}</span></div>
         <p class="pro-equivalent">{copy.priceEquivalent}</p>
-        <a class="pro-primary" href="/pro/pricing?billing=year" data-track-click="home-pro-annual">
+        <a class="pro-primary" href="/pro/pricing?billing=year" data-track-click="home-pro-annual" data-pro-event="pro_cta_clicked" data-pro-location="home-pro-annual" data-pro-plan="year">
           {copy.annualCta}
           <Icon name="arrow_forward" />
         </a>
-        <a class="pro-monthly" href="/pro/pricing?billing=month" data-track-click="home-pro-monthly">{copy.monthlyCta}</a>
+        <a class="pro-monthly" href="/pro/pricing?billing=month" data-track-click="home-pro-monthly" data-pro-event="pro_cta_clicked" data-pro-location="home-pro-monthly" data-pro-plan="month">{copy.monthlyCta}</a>
         <p class="pro-trust"><Icon name="verified_user" fill />{copy.trust}</p>
       </aside>
     </div>

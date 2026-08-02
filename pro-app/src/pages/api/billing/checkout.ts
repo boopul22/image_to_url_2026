@@ -28,8 +28,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const input = (await request.json().catch(() => ({}))) as {
 		interval?: string;
 		storagePacks?: unknown;
+		interestSessionId?: unknown;
 	};
 	const interval: BillingInterval = input.interval === 'year' ? 'year' : 'month';
+	const interestSessionId =
+		typeof input.interestSessionId === 'string' &&
+		/^[a-zA-Z0-9:-]{8,64}$/.test(input.interestSessionId)
+			? input.interestSessionId
+			: `user:${locals.proUser!.id}`;
 	const priceId = paddlePriceId(env, interval);
 	const storagePacks = storagePackQuantity(input.storagePacks);
 	const addonPriceId = storagePacks > 0 ? storageAddonPriceId(env, interval) : null;
@@ -103,6 +109,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			}),
 		});
 
+		const environment = paddleEnvironment(env);
 		await env.PRO_DB.prepare(
 			`INSERT INTO billing_checkout_requests
 			   (transaction_id, user_id, plan, billing_interval, price_id, storage_pack_quantity, provider_customer_id, paddle_environment)
@@ -115,9 +122,31 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				priceId,
 				storagePacks,
 				previousCustomer?.provider_customer_id ?? null,
-				paddleEnvironment(env),
+				environment,
 			)
 			.run();
+
+		// Product analytics must never prevent a valid checkout from opening. The
+		// billing request above is the durable fulfillment link; this signal is best effort.
+		try {
+			await env.PRO_DB.batch([
+				env.PRO_DB.prepare(
+					`INSERT OR IGNORE INTO pro_interest_events
+					   (event_id, event_name, session_id, user_id, page_path, location, plan_interval)
+					 VALUES (?, 'pro_checkout_started', ?, ?, '/pro/pricing', 'paddle-transaction-created', ?)`,
+				).bind(
+					`checkout:${environment}:${transaction.id}`,
+					interestSessionId,
+					locals.proUser!.id,
+					interval,
+				),
+				env.PRO_DB.prepare(
+					`DELETE FROM pro_interest_events WHERE created_at < datetime('now', '-180 days')`,
+				),
+			]);
+		} catch (analyticsError) {
+			console.warn('Pro checkout interest event could not be stored', analyticsError);
+		}
 
 		return json(
 			{

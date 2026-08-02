@@ -5,6 +5,7 @@ import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
 import AdBlockGate from '../components/AdBlockGate.astro';
 import EmailOptInPrompt from '../components/EmailOptInPrompt.astro';
+import ProInterestTracker from '../components/ProInterestTracker.astro';
 import { AD_CLIENT } from '../lib/ads';
 // Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
 // bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
@@ -68,6 +69,7 @@ const metaDescription = description.length <= 158
     })();
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const proTrackingPageEvent = Astro.url.pathname.replace(/\/+$/, '') === '/pricing' ? 'pro_pricing_viewed' : '';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const basePath = stripLocalePrefix(Astro.url.pathname);
 
@@ -423,6 +425,8 @@ function hreflangUrl(loc: Locale): string {
     </script>
       </Fragment>
     )}
+
+	<ProInterestTracker pageEvent={proTrackingPageEvent} pageLocation="main-pricing" />
 
     <!-- GA4 — interaction-gated to avoid blocking LCP, same trigger set as the
          AdSense loader in <head>. -->

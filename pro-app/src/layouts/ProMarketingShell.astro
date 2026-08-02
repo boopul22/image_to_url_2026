@@ -4,6 +4,7 @@ import '@fontsource-variable/figtree/wght-italic.css';
 import '../styles/pro.css';
 import '../styles/marketing.css';
 import { proAbsoluteUrl, proPath } from '../lib/paths';
+import ProInterestTracker from '../components/ProInterestTracker.astro';
 
 interface Props {
   title?: string;
@@ -23,6 +24,7 @@ const canonical = proAbsoluteUrl(
     : Astro.url.pathname,
 );
 const user = Astro.locals.proUser;
+const proTrackingPageEvent = Astro.url.pathname.replace(/\/+$/, '').endsWith('/pricing') ? 'pro_pricing_viewed' : '';
 ---
 
 <!doctype html>
@@ -77,6 +79,8 @@ const user = Astro.locals.proUser;
     </header>
 
     <slot />
+
+    <ProInterestTracker pageEvent={proTrackingPageEvent} pageLocation="pro-pricing" />
 
     <footer class="marketing-footer">
       <div class="marketing-footer-brand">

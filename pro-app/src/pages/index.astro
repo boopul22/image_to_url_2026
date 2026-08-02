@@ -15,7 +15,7 @@ const workspaceHref = user
   description="Store original-quality images, organize them privately, and share stable HTTPS URLs from a professional ImageToURL workspace."
 >
   <main class="marketing-main pro-home">
-    <section class="pro-home-hero">
+    <section class="pro-home-hero" data-pro-impression="pro-home-hero">
       <div class="pro-home-copy">
         <p class="marketing-kicker">Professional image hosting, without the infrastructure</p>
         <h1>Images that stay organized. URLs that keep working.</h1>
@@ -24,8 +24,8 @@ const workspaceHref = user
           storage, permanent HTTPS delivery URLs, folders, imports, and clear usage controls.
         </p>
         <div class="pro-home-actions">
-          <a class="pro-home-primary" href={proPath('/pricing')}>View Pro pricing <span aria-hidden="true">↗</span></a>
-          <a class="pro-home-secondary" href={workspaceHref}>{user ? 'Open workspace' : 'Sign in to Pro'}</a>
+          <a class="pro-home-primary" href={proPath('/pricing')} data-pro-event="pro_cta_clicked" data-pro-location="pro-home-hero-pricing">View Pro pricing <span aria-hidden="true">↗</span></a>
+          <a class="pro-home-secondary" href={workspaceHref} data-pro-event={user ? 'pro_feature_explored' : 'pro_signin_started'} data-pro-location="pro-home-hero-workspace">{user ? 'Open workspace' : 'Sign in to Pro'}</a>
         </div>
         <p class="pro-home-proof">From $4.99/month · 50GB included · Cancel before renewal</p>
       </div>
@@ -77,13 +77,13 @@ const workspaceHref = user
       </div>
     </section>
 
-    <section class="pro-home-cta">
+    <section class="pro-home-cta" data-pro-impression="pro-home-final">
       <div>
         <p class="marketing-kicker">Simple founding plan</p>
         <h2>50GB of professional image hosting for $4.99 per month.</h2>
         <p>Or pay $39 annually. Add 50GB storage packs only when your workspace needs them.</p>
       </div>
-      <a class="pro-home-primary" href={proPath('/pricing')}>See pricing and features <span aria-hidden="true">↗</span></a>
+      <a class="pro-home-primary" href={proPath('/pricing')} data-pro-event="pro_cta_clicked" data-pro-location="pro-home-final-pricing">See pricing and features <span aria-hidden="true">↗</span></a>
     </section>
   </main>
 </ProMarketingShell>

@@ -8,7 +8,7 @@ import { resolveSlug, ownerLocaleForSlug, isPageKey, localizedUrl } from './i18n
 // Increment this when a release changes public HTML. Workers Cache API entries
 // survive deployments, so a versioned key prevents old pages from masking a
 // newly deployed homepage or landing-page update.
-const HTML_EDGE_CACHE_VERSION = '2026-08-01-pro-launch';
+const HTML_EDGE_CACHE_VERSION = '2026-08-02-pro-interest';
 
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
 const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];

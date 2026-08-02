@@ -245,11 +245,11 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9v11h13V9M9.5 20v-6h5v6"/></svg>
           Workspace
         </a>
-        <a class="nav-item" href="#recent">
+        <a class="nav-item" href="#recent" data-pro-event="pro_feature_explored" data-pro-location="workspace-library-nav">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 16 3.4-3.6 2.4 2.4 2.3-2.5L19 16"/><circle cx="8.5" cy="8.5" r="1.2"/></svg>
           Library
         </a>
-        <a class="nav-item" href="#folders">
+        <a class="nav-item" href="#folders" data-pro-event="pro_feature_explored" data-pro-location="workspace-folders-nav">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7.5a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
 	          Folders
 	          <span class="nav-count" id="folder-count">{folders.length}</span>
@@ -267,6 +267,12 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5.5h10.5L20 11l-9 9-7-7Z"/><circle cx="9" cy="10" r="1.2"/></svg>
           Pricing
         </a>
+        {user.role === 'admin' && (
+          <a class="nav-item" href={proPath('/admin/interest')}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/></svg>
+            Interest tracker
+          </a>
+        )}
       </nav>
 
       <div class="nav-spacer"></div>
@@ -368,7 +374,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 
             <div class="upload-studio">
               {!proAccessEnabled && (
-                <section class="upload-access" aria-labelledby="upload-access-heading">
+                <section class="upload-access" aria-labelledby="upload-access-heading" data-pro-impression="workspace-paywall" data-pro-impression-event="pro_paywall_viewed">
                   <span class="upload-access-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                       <rect x="5" y="10" width="14" height="10" rx="3"></rect>
@@ -381,7 +387,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
                     <span id="upload-access-copy">{accessCopy}</span>
                   </span>
                   <span class="upload-access-actions">
-                    <button class="upload-access-action" id="upload-access-action" type="button">
+                    <button class="upload-access-action" id="upload-access-action" type="button" data-pro-event="pro_paywall_clicked" data-pro-location="workspace-upload-paywall">
                       {accessActionLabel}
                     </button>
                     <a class="upload-access-free" href="https://imagetourl.cloud/">
@@ -834,6 +840,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
               id="billing-action-button"
               type="button"
               data-mode={billingActionMode}
+              data-pro-event={billingActionMode === 'checkout' ? 'pro_paywall_clicked' : undefined}
+              data-pro-location={billingActionMode === 'checkout' ? 'workspace-billing-settings' : undefined}
               disabled={!billingActionAvailable}
             >
               {billingActionLabel}
@@ -1892,7 +1900,10 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
           const response = await fetch('/pro/api/billing/checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ interval: billingInterval?.value || 'month' })
+            body: JSON.stringify({
+              interval: billingInterval?.value || 'month',
+              interestSessionId: window.sessionStorage.getItem('imagetourl_pro_interest_session')
+            })
           });
           const result = await response.json().catch(() => ({ error: 'Checkout failed' })) as {
             transactionId?: string;

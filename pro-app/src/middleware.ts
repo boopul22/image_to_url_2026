@@ -9,6 +9,7 @@ const PUBLIC_PATHS = new Set([
 	'/sign-in',
 	'/sign-out',
 	'/api/health',
+	'/api/analytics/event',
 	'/api/webhooks/paddle',
 	'/pricing',
 	'/privacy',

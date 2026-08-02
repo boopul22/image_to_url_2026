@@ -1,0 +1,154 @@
+---
+interface Props {
+  pageEvent?: string;
+  pageLocation?: string;
+}
+
+const { pageEvent = '', pageLocation = '' } = Astro.props;
+---
+
+<script is:inline define:vars={{ pageEvent, pageLocation }}>
+  (function () {
+    if (window.__imageToUrlProInterestTracker) return;
+    window.__imageToUrlProInterestTracker = true;
+
+    var endpoint = '/pro/api/analytics/event';
+    var sessionKey = 'imagetourl_pro_interest_session';
+    var attributionKey = 'imagetourl_pro_interest_attribution';
+    var memorySessionId = '';
+
+    function randomId() {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+      }
+      return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    }
+
+    function sessionId() {
+      try {
+        var current = window.sessionStorage.getItem(sessionKey);
+        if (current) return current;
+        current = randomId();
+        window.sessionStorage.setItem(sessionKey, current);
+        return current;
+      } catch (_) {
+        if (!memorySessionId) memorySessionId = randomId();
+        return memorySessionId;
+      }
+    }
+
+    function referrerHost() {
+      if (!document.referrer) return '';
+      try { return new URL(document.referrer).hostname.slice(0, 120); }
+      catch (_) { return ''; }
+    }
+
+    function attribution() {
+      try {
+        var saved = window.sessionStorage.getItem(attributionKey);
+        if (saved) return JSON.parse(saved);
+        var params = new URLSearchParams(window.location.search);
+        var value = {
+          referrerHost: referrerHost(),
+          utmSource: (params.get('utm_source') || '').slice(0, 80),
+          utmMedium: (params.get('utm_medium') || '').slice(0, 80),
+          utmCampaign: (params.get('utm_campaign') || '').slice(0, 80)
+        };
+        window.sessionStorage.setItem(attributionKey, JSON.stringify(value));
+        return value;
+      } catch (_) {
+        return { referrerHost: referrerHost(), utmSource: '', utmMedium: '', utmCampaign: '' };
+      }
+    }
+
+    function markOnce(key) {
+      try {
+        var storageKey = 'imagetourl_pro_seen:' + key;
+        if (window.sessionStorage.getItem(storageKey)) return false;
+        window.sessionStorage.setItem(storageKey, '1');
+        return true;
+      } catch (_) {
+        return true;
+      }
+    }
+
+    function trackProInterest(eventName, properties) {
+      if (!eventName) return;
+      var props = properties || {};
+      var source = attribution();
+      var payload = {
+        eventId: randomId(),
+        eventName: eventName,
+        sessionId: sessionId(),
+        pagePath: window.location.pathname,
+        location: String(props.location || '').slice(0, 64),
+        planInterval: props.plan === 'year' ? 'year' : props.plan === 'month' ? 'month' : null,
+        referrerHost: source.referrerHost,
+        utmSource: source.utmSource,
+        utmMedium: source.utmMedium,
+        utmCampaign: source.utmCampaign
+      };
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: eventName,
+        pro_location: payload.location,
+        pro_plan_interval: payload.planInterval
+      });
+
+      var body = JSON.stringify(payload);
+      var sent = false;
+      try {
+        sent = navigator.sendBeacon(endpoint, new Blob([body], { type: 'application/json' }));
+      } catch (_) {}
+      if (!sent) {
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body,
+          keepalive: true,
+          credentials: 'same-origin'
+        }).catch(function () {});
+      }
+    }
+
+    window.trackProInterest = trackProInterest;
+
+    document.addEventListener('click', function (event) {
+      var target = event.target instanceof Element ? event.target.closest('[data-pro-event]') : null;
+      if (!target) return;
+      trackProInterest(target.getAttribute('data-pro-event'), {
+        location: target.getAttribute('data-pro-location') || '',
+        plan: target.getAttribute('data-pro-plan') || ''
+      });
+    }, true);
+
+    var impressionNodes = document.querySelectorAll('[data-pro-impression]');
+    if (impressionNodes.length) {
+      var reveal = function (node) {
+        var location = node.getAttribute('data-pro-impression') || 'unknown';
+        var eventName = node.getAttribute('data-pro-impression-event') || 'pro_promotion_viewed';
+        if (markOnce(eventName + ':' + location)) {
+          trackProInterest(eventName, { location: location });
+        }
+      };
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+              reveal(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: [0.25] });
+        impressionNodes.forEach(function (node) { observer.observe(node); });
+      } else {
+        impressionNodes.forEach(reveal);
+      }
+    }
+
+    if (pageEvent && markOnce(pageEvent + ':' + (pageLocation || window.location.pathname))) {
+      trackProInterest(pageEvent, { location: pageLocation || 'page' });
+    }
+  })();
+</script>

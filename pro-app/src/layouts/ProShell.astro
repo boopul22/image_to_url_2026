@@ -3,6 +3,7 @@ import '@fontsource-variable/figtree';
 import '@fontsource-variable/figtree/wght-italic.css';
 import '../styles/pro.css';
 import { proPath } from '../lib/paths';
+import ProInterestTracker from '../components/ProInterestTracker.astro';
 
 interface Props {
   title?: string;
@@ -29,5 +30,6 @@ const {
   </head>
   <body>
     <slot />
+    <ProInterestTracker />
   </body>
 </html>

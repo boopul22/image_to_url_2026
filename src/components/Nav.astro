@@ -149,6 +149,8 @@ const toolsDropdown = getNavGroups(locale);
       <a
         href={user ? '/pro/workspace' : '/pricing'}
         data-nav-pro-track="nav-pro"
+        data-pro-event="pro_cta_clicked"
+        data-pro-location="nav-desktop"
         class="group flex items-center gap-1.5 min-h-8 px-2.5 bg-neutral-900 text-white font-headline text-[11px] font-semibold uppercase tracking-wide hover:bg-rose-600 transition-colors"
         aria-label={user ? 'Open ImageToURL Pro workspace' : 'Explore ImageToURL Pro'}
       >
@@ -326,6 +328,8 @@ const toolsDropdown = getNavGroups(locale);
       <a
         href={user ? '/pro/workspace' : '/pricing'}
         data-nav-pro-track="nav-pro-mobile"
+        data-pro-event="pro_cta_clicked"
+        data-pro-location="nav-mobile"
         class="flex items-center gap-3 mx-1 mt-1 py-3.5 px-4 rounded-lg bg-neutral-900 text-white font-label uppercase tracking-wider text-xs font-bold active:scale-[0.98] transition-transform"
       >
         <Icon name="workspace_premium" class="text-lg text-rose-300" fill />

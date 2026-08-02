@@ -1,0 +1,301 @@
+---
+export const prerender = false;
+
+import ProShell from '../../layouts/ProShell.astro';
+import { paddleEnvironment } from '../../lib/billing';
+import { getProEnv } from '../../lib/env';
+import { proPath } from '../../lib/paths';
+
+const user = Astro.locals.proUser!;
+if (user.role !== 'admin') return Astro.redirect(proPath('/workspace'), 302);
+
+const env = getProEnv();
+const billingEnvironment = paddleEnvironment(env);
+
+type EventCount = { event_name: string; events: number; people: number };
+type Breakdown = { label: string; people: number; events: number };
+type RecentEvent = {
+  event_name: string;
+  location: string | null;
+  page_path: string;
+  plan_interval: string | null;
+  source: string | null;
+  created_at: string;
+};
+type CountRow = { count: number };
+
+const eventCounts = (days: number) => env.PRO_DB.prepare(
+  `SELECT event_name, COUNT(*) AS events, COUNT(DISTINCT session_id) AS people
+     FROM pro_interest_events
+    WHERE created_at >= datetime('now', ?)
+    GROUP BY event_name`,
+).bind(`-${days} days`).all<EventCount>();
+
+const [counts7Result, counts30Result, locationsResult, plansResult, sourcesResult, recentResult,
+  activeSubscriptions, completedTransactions, dataStart] = await Promise.all([
+  eventCounts(7),
+  eventCounts(30),
+  env.PRO_DB.prepare(
+    `SELECT COALESCE(NULLIF(location, ''), 'Unlabelled') AS label,
+            COUNT(DISTINCT session_id) AS people, COUNT(*) AS events
+       FROM pro_interest_events
+      WHERE created_at >= datetime('now', '-30 days')
+        AND event_name IN ('pro_cta_clicked', 'pro_plan_selected', 'pro_paywall_clicked')
+      GROUP BY label ORDER BY people DESC, events DESC LIMIT 10`,
+  ).all<Breakdown>(),
+  env.PRO_DB.prepare(
+    `SELECT COALESCE(plan_interval, 'Not selected') AS label,
+            COUNT(DISTINCT session_id) AS people, COUNT(*) AS events
+       FROM pro_interest_events
+      WHERE created_at >= datetime('now', '-30 days')
+        AND event_name IN ('pro_plan_selected', 'pro_checkout_started')
+      GROUP BY label ORDER BY people DESC`,
+  ).all<Breakdown>(),
+  env.PRO_DB.prepare(
+    `SELECT COALESCE(NULLIF(utm_source, ''), NULLIF(referrer_host, ''), 'Direct / unknown') AS label,
+            COUNT(DISTINCT session_id) AS people, COUNT(*) AS events
+       FROM pro_interest_events
+      WHERE created_at >= datetime('now', '-30 days')
+        AND event_name IN ('pro_promotion_viewed', 'pro_cta_clicked', 'pro_pricing_viewed')
+      GROUP BY label ORDER BY people DESC, events DESC LIMIT 10`,
+  ).all<Breakdown>(),
+  env.PRO_DB.prepare(
+    `SELECT event_name, location, page_path, plan_interval,
+            COALESCE(NULLIF(utm_source, ''), NULLIF(referrer_host, '')) AS source,
+            created_at
+       FROM pro_interest_events
+      ORDER BY created_at DESC LIMIT 20`,
+  ).all<RecentEvent>(),
+  env.PRO_DB.prepare(
+    `SELECT COUNT(DISTINCT user_id) AS count
+       FROM subscriptions
+      WHERE provider = 'paddle' AND paddle_environment = ?
+        AND status IN ('active', 'trialing')`,
+  ).bind(billingEnvironment).first<CountRow>(),
+  env.PRO_DB.prepare(
+    `SELECT COUNT(DISTINCT user_id) AS count
+       FROM paddle_transactions
+      WHERE paddle_environment = ? AND status = 'completed'
+        AND completed_at >= datetime('now', '-30 days')`,
+  ).bind(billingEnvironment).first<CountRow>(),
+  env.PRO_DB.prepare(`SELECT MIN(created_at) AS started_at FROM pro_interest_events`).first<{ started_at: string | null }>(),
+]);
+
+const counts7 = new Map((counts7Result.results ?? []).map((row) => [row.event_name, row]));
+const counts30 = new Map((counts30Result.results ?? []).map((row) => [row.event_name, row]));
+const people = (event: string, period: 7 | 30 = 30) => Number((period === 7 ? counts7 : counts30).get(event)?.people ?? 0);
+const events = (event: string, period: 7 | 30 = 30) => Number((period === 7 ? counts7 : counts30).get(event)?.events ?? 0);
+const completed30 = Number(completedTransactions?.count ?? 0);
+const activePaid = Number(activeSubscriptions?.count ?? 0);
+
+const funnel = [
+  { label: 'Saw Pro promotion', value: people('pro_promotion_viewed'), note: 'Homepage announcement or Pro section' },
+  { label: 'Clicked a Pro CTA', value: people('pro_cta_clicked'), note: `${events('pro_cta_clicked')} total CTA clicks` },
+  { label: 'Viewed pricing', value: people('pro_pricing_viewed'), note: 'Main or Pro pricing page' },
+  { label: 'Selected a plan', value: people('pro_plan_selected'), note: 'Monthly or annual intent' },
+  { label: 'Started checkout', value: people('pro_checkout_started'), note: 'Paddle transaction created' },
+  { label: 'Completed purchase', value: completed30, note: `${billingEnvironment} Paddle records` },
+].map((stage, index, all) => ({
+  ...stage,
+  conversion: index === 0
+    ? 'start'
+    : all[index - 1].value > 0
+      ? Math.min(999, (stage.value / all[index - 1].value) * 100)
+      : null,
+}));
+
+const maxFunnel = Math.max(1, ...funnel.map((stage) => stage.value));
+const eventLabels: Record<string, string> = {
+  pro_promotion_viewed: 'Promotion viewed',
+  pro_cta_clicked: 'Pro CTA clicked',
+  pro_pricing_viewed: 'Pricing viewed',
+  pro_plan_selected: 'Plan selected',
+  pro_signin_started: 'Sign-in started',
+  pro_paywall_viewed: 'Paywall viewed',
+  pro_paywall_clicked: 'Paywall clicked',
+  pro_feature_explored: 'Feature explored',
+  pro_checkout_started: 'Checkout started',
+};
+
+const formatDate = (value: string | null | undefined) => value
+  ? new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata' }).format(new Date(`${value.replace(' ', 'T')}Z`))
+  : 'No interest events yet';
+---
+
+<ProShell title="Pro interest tracker — ImageToURL">
+  <main class="interest-page">
+    <header class="interest-header">
+      <div>
+        <a class="back-link" href={proPath('/workspace')}>← Back to workspace</a>
+        <p class="eyebrow">Private admin analytics</p>
+        <h1>Are people interested in Pro?</h1>
+        <p>Follow the real path from promotion to paid access. Counts are unique browser sessions unless marked as Paddle records.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot"></span>
+        <strong>Tracking is active</strong>
+        <small>First event: {formatDate(dataStart?.started_at)}</small>
+        <small>Paddle: {billingEnvironment}</small>
+      </div>
+    </header>
+
+    <section class="metric-grid" aria-label="Pro interest summary">
+      <article><span>Interested visitors</span><strong>{people('pro_cta_clicked')}</strong><small>{people('pro_cta_clicked', 7)} in the last 7 days</small></article>
+      <article><span>Pricing visitors</span><strong>{people('pro_pricing_viewed')}</strong><small>{people('pro_pricing_viewed', 7)} in the last 7 days</small></article>
+      <article><span>Checkout starts</span><strong>{people('pro_checkout_started')}</strong><small>{people('pro_paywall_clicked')} paywall clicks</small></article>
+      <article class="metric-highlight"><span>Completed purchases</span><strong>{completed30}</strong><small>{activePaid} active paid account{activePaid === 1 ? '' : 's'}</small></article>
+    </section>
+
+    <section class="panel funnel-panel" aria-labelledby="funnel-title">
+      <div class="panel-heading">
+        <div><p class="eyebrow">Last 30 days</p><h2 id="funnel-title">Conversion funnel</h2></div>
+        <p>Use the largest drop to decide what to improve next.</p>
+      </div>
+      <div class="funnel-list">
+        {funnel.map((stage, index) => (
+          <article class="funnel-row">
+            <span class="stage-index">{String(index + 1).padStart(2, '0')}</span>
+            <div class="stage-copy"><strong>{stage.label}</strong><small>{stage.note}</small></div>
+            <div class="stage-rail" aria-hidden="true"><span style={`width:${Math.max(stage.value ? 4 : 0, (stage.value / maxFunnel) * 100)}%`}></span></div>
+            <strong class="stage-value">{stage.value}</strong>
+            <span class="stage-rate">{typeof stage.conversion === 'number' ? `${stage.conversion.toFixed(1)}%` : stage.conversion === 'start' ? 'Start' : '—'}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <div class="breakdown-grid">
+      <section class="panel" aria-labelledby="locations-title">
+        <div class="panel-heading compact"><div><p class="eyebrow">What works</p><h2 id="locations-title">Top CTA locations</h2></div></div>
+        <div class="rank-list">
+          {(locationsResult.results ?? []).length ? (locationsResult.results ?? []).map((row) => (
+            <div><span><strong>{row.label}</strong><small>{row.events} interactions</small></span><b>{row.people}</b></div>
+          )) : <p class="empty-state">CTA activity will appear here after launch.</p>}
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="plans-title">
+        <div class="panel-heading compact"><div><p class="eyebrow">Purchase intent</p><h2 id="plans-title">Plan preference</h2></div></div>
+        <div class="rank-list">
+          {(plansResult.results ?? []).length ? (plansResult.results ?? []).map((row) => (
+            <div><span><strong>{row.label === 'year' ? 'Annual' : row.label === 'month' ? 'Monthly' : row.label}</strong><small>{row.events} selections or starts</small></span><b>{row.people}</b></div>
+          )) : <p class="empty-state">Monthly versus annual interest will appear here.</p>}
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="sources-title">
+        <div class="panel-heading compact"><div><p class="eyebrow">Attribution</p><h2 id="sources-title">Traffic sources</h2></div></div>
+        <div class="rank-list">
+          {(sourcesResult.results ?? []).length ? (sourcesResult.results ?? []).map((row) => (
+            <div><span><strong>{row.label}</strong><small>{row.events} tracked events</small></span><b>{row.people}</b></div>
+          )) : <p class="empty-state">Referring domains and UTM sources will appear here.</p>}
+        </div>
+      </section>
+    </div>
+
+    <section class="panel recent-panel" aria-labelledby="recent-title">
+      <div class="panel-heading">
+        <div><p class="eyebrow">Live signal</p><h2 id="recent-title">Recent interest events</h2></div>
+        <p>No email, IP address, card data, or full referrer URL is stored.</p>
+      </div>
+      <div class="event-table" role="table" aria-label="Recent Pro interest events">
+        <div class="event-row event-head" role="row"><span>Event</span><span>Location</span><span>Plan / source</span><span>Time</span></div>
+        {(recentResult.results ?? []).length ? (recentResult.results ?? []).map((row) => (
+          <div class="event-row" role="row">
+            <span><strong>{eventLabels[row.event_name] ?? row.event_name}</strong><small>{row.page_path}</small></span>
+            <span>{row.location ?? '—'}</span>
+            <span>{[row.plan_interval, row.source].filter(Boolean).join(' · ') || '—'}</span>
+            <span>{formatDate(row.created_at)}</span>
+          </div>
+        )) : <p class="empty-state table-empty">No interest events have been recorded yet.</p>}
+      </div>
+    </section>
+
+    <aside class="privacy-note">
+      <strong>How to read this dashboard</strong>
+      <p>“People” means unique, session-scoped browser IDs. A completed purchase is counted from verified Paddle fulfillment data. Events automatically expire after 180 days.</p>
+    </aside>
+  </main>
+</ProShell>
+
+<style>
+  :global(body) { margin: 0; background: #f3f4ef; color: #18302b; font-family: 'Figtree Variable', system-ui, sans-serif; }
+  .interest-page { width: min(1220px, calc(100% - 40px)); margin: 0 auto; padding: 44px 0 72px; }
+  .interest-header { display: flex; justify-content: space-between; gap: 36px; align-items: flex-end; margin-bottom: 28px; }
+  .back-link { color: #47645e; text-decoration: none; font-size: .86rem; font-weight: 700; }
+  .eyebrow { margin: 18px 0 8px; color: #0a7668; font-size: .71rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+  h1, h2, p { margin-top: 0; }
+  h1 { max-width: 720px; margin-bottom: 10px; font-size: clamp(2rem, 5vw, 4.2rem); line-height: .98; letter-spacing: -.055em; }
+  .interest-header > div > p:last-child { max-width: 700px; margin-bottom: 0; color: #62736f; font-size: 1.02rem; }
+  .status-card { min-width: 230px; padding: 18px 20px; border: 1px solid #d6ddd8; border-radius: 18px; background: #fff; box-shadow: 0 12px 38px rgba(28, 55, 48, .06); }
+  .status-card strong, .status-card small { display: block; }
+  .status-card small { margin: 6px 0 0 17px; color: #73817e; font-size: .76rem; }
+  .status-dot { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: #18a17e; box-shadow: 0 0 0 5px #e3f5ef; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .metric-grid article { min-height: 126px; padding: 20px; border: 1px solid #dbe0dc; border-radius: 18px; background: rgba(255, 255, 255, .8); }
+  .metric-grid span, .metric-grid small { display: block; color: #6b7c78; }
+  .metric-grid span { font-size: .78rem; font-weight: 750; text-transform: uppercase; letter-spacing: .07em; }
+  .metric-grid strong { display: block; margin: 10px 0 4px; color: #123a32; font-size: 2.25rem; letter-spacing: -.045em; }
+  .metric-grid small { font-size: .78rem; }
+  .metric-grid .metric-highlight { border-color: #0d6e60; background: #064f46; }
+  .metric-grid .metric-highlight span, .metric-grid .metric-highlight small { color: #b7d8d1; }
+  .metric-grid .metric-highlight strong { color: #fff; }
+  .panel { padding: 24px; border: 1px solid #dbe0dc; border-radius: 22px; background: #fff; box-shadow: 0 16px 50px rgba(29, 56, 49, .045); }
+  .funnel-panel { margin-bottom: 16px; }
+  .panel-heading { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 22px; }
+  .panel-heading .eyebrow { margin-top: 0; }
+  .panel-heading h2 { margin-bottom: 0; font-size: 1.45rem; letter-spacing: -.025em; }
+  .panel-heading > p { max-width: 340px; margin-bottom: 0; color: #72807d; font-size: .84rem; text-align: right; }
+  .funnel-list { display: grid; gap: 4px; }
+  .funnel-row { display: grid; grid-template-columns: 42px minmax(170px, 1.15fr) minmax(180px, 2fr) 54px 62px; gap: 15px; align-items: center; padding: 12px 8px; border-top: 1px solid #edf0ed; }
+  .funnel-row:first-child { border-top: 0; }
+  .stage-index { color: #93a19d; font-size: .72rem; font-weight: 800; }
+  .stage-copy strong, .stage-copy small { display: block; }
+  .stage-copy strong { font-size: .9rem; }
+  .stage-copy small { margin-top: 3px; color: #7a8884; font-size: .73rem; }
+  .stage-rail { height: 9px; overflow: hidden; border-radius: 999px; background: #edf1ed; }
+  .stage-rail span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #0c7869, #41ad91); }
+  .stage-value { font-size: 1.02rem; text-align: right; }
+  .stage-rate { padding: 5px 7px; border-radius: 8px; background: #edf5f2; color: #26685b; font-size: .72rem; font-weight: 800; text-align: center; }
+  .breakdown-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+  .panel-heading.compact { margin-bottom: 12px; }
+  .rank-list > div { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 13px 0; border-top: 1px solid #edf0ed; }
+  .rank-list > div:first-child { border-top: 0; }
+  .rank-list span, .rank-list strong, .rank-list small { display: block; min-width: 0; }
+  .rank-list strong { overflow: hidden; max-width: 230px; font-size: .88rem; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-list small { margin-top: 2px; color: #81908c; font-size: .72rem; }
+  .rank-list b { min-width: 32px; color: #0c6d60; font-size: 1.05rem; text-align: right; }
+  .empty-state { margin: 16px 0 0; color: #7c8a86; font-size: .84rem; }
+  .recent-panel { overflow: hidden; }
+  .event-table { overflow-x: auto; }
+  .event-row { display: grid; grid-template-columns: minmax(190px, 1.35fr) minmax(150px, 1fr) minmax(140px, 1fr) minmax(160px, .9fr); gap: 18px; min-width: 760px; padding: 13px 6px; border-top: 1px solid #edf0ed; align-items: center; color: #536864; font-size: .8rem; }
+  .event-row strong, .event-row small { display: block; }
+  .event-row strong { color: #203c36; font-size: .82rem; }
+  .event-row small { margin-top: 2px; color: #899590; }
+  .event-head { border-top: 0; color: #82908d; font-size: .69rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+  .table-empty { padding: 18px 4px 0; }
+  .privacy-note { display: flex; gap: 18px; margin-top: 16px; padding: 18px 22px; border: 1px solid #cfe0da; border-radius: 16px; background: #eaf4f0; color: #45645d; }
+  .privacy-note strong { flex: 0 0 auto; color: #174f44; font-size: .83rem; }
+  .privacy-note p { margin: 0; font-size: .8rem; }
+  @media (max-width: 900px) {
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .breakdown-grid { grid-template-columns: 1fr; }
+    .funnel-row { grid-template-columns: 34px minmax(145px, 1fr) 54px 58px; }
+    .stage-rail { display: none; }
+  }
+  @media (max-width: 640px) {
+    .interest-page { width: min(100% - 24px, 1220px); padding-top: 24px; }
+    .interest-header { display: block; }
+    .status-card { margin-top: 20px; }
+    .metric-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .metric-grid article { min-height: 108px; padding: 16px; }
+    .metric-grid strong { font-size: 1.8rem; }
+    .panel { padding: 18px 14px; border-radius: 18px; }
+    .panel-heading { display: block; }
+    .panel-heading > p { margin-top: 8px; text-align: left; }
+    .funnel-row { grid-template-columns: 28px 1fr 44px 54px; gap: 8px; padding-left: 0; padding-right: 0; }
+    .stage-copy small { max-width: 180px; }
+    .privacy-note { display: block; }
+    .privacy-note p { margin-top: 6px; }
+  }
+</style>
