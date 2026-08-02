@@ -426,12 +426,15 @@ function hreflangUrl(loc: Locale): string {
       </Fragment>
     )}
 
-	<ProInterestTracker pageEvent={proTrackingPageEvent} pageLocation="main-pricing" />
-
-    <!-- GA4 — interaction-gated to avoid blocking LCP, same trigger set as the
-         AdSense loader in <head>. -->
+    <!-- GA4 — queue page and funnel events immediately, then load the network
+         script on interaction or idle so it does not compete with LCP. -->
     <script is:inline>
       (function(){
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', 'G-CFY17JKKYK', { send_page_view: true });
+
         var gaLoaded = false;
         function loadGA() {
           if (gaLoaded) return;
@@ -441,15 +444,18 @@ function hreflangUrl(loc: Locale): string {
           s.async = true;
           s.fetchPriority = 'low';
           document.head.appendChild(s);
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-CFY17JKKYK');
         }
-        ['scroll','click','keydown','touchstart'].forEach(function(evt){
+        ['pointerdown','scroll','keydown','touchstart'].forEach(function(evt){
           document.addEventListener(evt, loadGA, {once:true, passive:true});
         });
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadGA, { timeout: 3000 });
+        } else {
+          window.setTimeout(loadGA, 2200);
+        }
       })();
     </script>
+
+	<ProInterestTracker pageEvent={proTrackingPageEvent} pageLocation="main-pricing" />
   </body>
 </html>

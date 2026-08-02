@@ -30,7 +30,7 @@ function securityHeaders(response: Response, isDocument: boolean): Response {
 	if (isDocument) {
 		headers.set(
 			'Content-Security-Policy',
-			"default-src 'self'; img-src 'self' data: blob: https:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://cdn.paddle.com; connect-src 'self' https://imagetourl.cloud https://*.paddle.com; frame-src https://*.paddle.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https://imagetourl.cloud https://*.paddle.com",
+			"default-src 'self'; img-src 'self' data: blob: https:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://cdn.paddle.com https://www.googletagmanager.com; connect-src 'self' https://imagetourl.cloud https://*.paddle.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://*.paddle.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https://imagetourl.cloud https://*.paddle.com",
 		);
 		headers.set('Cache-Control', 'private, no-store');
 	}

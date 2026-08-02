@@ -3,6 +3,7 @@ import '@fontsource-variable/figtree';
 import '@fontsource-variable/figtree/wght-italic.css';
 import '../styles/pro.css';
 import { proPath } from '../lib/paths';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import ProInterestTracker from '../components/ProInterestTracker.astro';
 
 interface Props {
@@ -29,6 +30,7 @@ const {
     <title>{title}</title>
   </head>
   <body>
+    <GoogleAnalytics userId={Astro.locals.proUser?.id} />
     <slot />
     <ProInterestTracker />
   </body>

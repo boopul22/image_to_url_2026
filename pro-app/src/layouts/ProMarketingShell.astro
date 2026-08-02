@@ -4,6 +4,7 @@ import '@fontsource-variable/figtree/wght-italic.css';
 import '../styles/pro.css';
 import '../styles/marketing.css';
 import { proAbsoluteUrl, proPath } from '../lib/paths';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import ProInterestTracker from '../components/ProInterestTracker.astro';
 
 interface Props {
@@ -49,6 +50,7 @@ const proTrackingPageEvent = Astro.url.pathname.replace(/\/+$/, '').endsWith('/p
     <title>{title}</title>
   </head>
   <body class="marketing-body">
+    <GoogleAnalytics userId={user?.id} />
     <header class="marketing-header">
       <a class="marketing-brand" href={user ? proPath('/workspace') : proPath()} aria-label={user ? 'Open ImageToURL Pro workspace' : 'ImageToURL Pro home'}>
         <span class="brand-mark" aria-hidden="true"></span>

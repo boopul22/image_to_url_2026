@@ -387,6 +387,7 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
         token: paddleToken,
         eventCallback(event) {
           if (event && event.name === 'checkout.completed') {
+            window.trackProPaddlePurchase?.(event);
             window.sessionStorage.setItem(
               'imagetourl-pro-flash',
               'Payment received. Paddle is activating your Pro workspace.',
@@ -422,6 +423,7 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
         if (!response.ok || !result.transactionId) {
           throw new Error(result.error || 'Checkout could not be started.');
         }
+        window.trackProCheckoutStarted?.(result.transactionId, selectedInterval, selectedStoragePacks);
         if (!initializePaddle()) throw new Error('Secure checkout could not be loaded.');
         window.Paddle.Checkout.open({
           transactionId: result.transactionId,

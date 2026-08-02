@@ -1897,11 +1897,12 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
             return;
           }
 
+          const selectedCheckoutInterval = billingInterval?.value === 'year' ? 'year' : 'month';
           const response = await fetch('/pro/api/billing/checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              interval: billingInterval?.value || 'month',
+              interval: selectedCheckoutInterval,
               interestSessionId: window.sessionStorage.getItem('imagetourl_pro_interest_session')
             })
           });
@@ -1921,7 +1922,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
               Environment: { set(environment: 'sandbox'): void };
               Initialize(options: {
                 token: string;
-                eventCallback(event: { name?: string }): void;
+                eventCallback(event: { name?: string; data?: unknown }): void;
               }): void;
               Checkout: {
                 open(options: {
@@ -1943,6 +1944,9 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
             token: result.clientToken,
             eventCallback: (event) => {
               if (event.name === 'checkout.completed') {
+                (window as unknown as {
+                  trackProPaddlePurchase?: (checkoutEvent: { name?: string; data?: unknown }) => void;
+                }).trackProPaddlePurchase?.(event);
                 window.sessionStorage.setItem(
                   'imagetourl-pro-flash',
                   'Payment received. Paddle is activating your Pro workspace.'
@@ -1950,6 +1954,9 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
               }
             }
           });
+          (window as unknown as {
+            trackProCheckoutStarted?: (transactionId: string, plan: 'month' | 'year', storagePacks: number) => void;
+          }).trackProCheckoutStarted?.(result.transactionId, selectedCheckoutInterval, 0);
           closeDialog(workspaceDialog);
           paddle.Checkout.open({
             transactionId: result.transactionId,
@@ -1958,7 +1965,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
               variant: 'one-page',
               theme: 'light',
               locale: 'en',
-              successUrl: `${window.location.origin}/?billing=success`
+              successUrl: `${window.location.origin}/pro/workspace?billing=success`
             }
           });
         } catch (error) {

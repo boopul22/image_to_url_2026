@@ -24,6 +24,7 @@ import ProLegalDocument from '../components/ProLegalDocument.astro';
       <li>Images, filenames, folders, visibility choices, and source URLs you upload or import.</li>
       <li>Storage, uploads, delivery, feature usage, request, device, IP, security, and error information.</li>
       <li>Pro promotion, pricing, plan-selection, sign-in, paywall, checkout-start, and feature-interaction events, with a random session identifier, page, CTA location, plan choice, referring hostname, and campaign tags.</li>
+      <li>Google Analytics page, campaign, device, and Pro funnel events, including checkout and purchase totals without card details or your email address.</li>
       <li>Customer, subscription, transaction, price, renewal, and cancellation status received from Paddle.</li>
       <li>Information you provide in support, refund, privacy, or abuse communications.</li>
     </ul>
@@ -54,13 +55,19 @@ import ProLegalDocument from '../components/ProLegalDocument.astro';
     <h2>5. Service providers</h2>
     <p>
       We use <strong>Cloudflare</strong> for application hosting, databases, object storage, network
-      delivery, and security; <strong>Google</strong> for account authentication; and
+      delivery, and security; <strong>Google</strong> for account authentication and Google Analytics; and
       <strong>Paddle</strong> as Merchant of Record for checkout, billing, tax handling, fraud prevention,
       receipts, invoices, and buyer support.
     </p>
     <p>
       Information may be processed in countries other than your own through these global providers,
       subject to their safeguards and applicable data-transfer mechanisms.
+    </p>
+    <p>
+      Google Analytics may use cookies or similar identifiers. You can control these through your browser
+      settings. We send an internal account identifier for signed-in Pro users, never an email address, so
+      journeys between pricing and the workspace can be measured without adding contact data to analytics
+      events.
     </p>
   </section>
   <section>

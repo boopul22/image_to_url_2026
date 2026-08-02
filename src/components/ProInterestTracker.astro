@@ -72,29 +72,151 @@ const { pageEvent = '', pageLocation = '' } = Astro.props;
       }
     }
 
+    function googleEvent(eventName, parameters) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag('event', eventName, parameters || {});
+    }
+
+    function planDetails(plan) {
+      var interval = plan === 'month' ? 'month' : 'year';
+      return {
+        interval: interval,
+        price: interval === 'year' ? 39 : 4.99,
+        item: {
+          item_id: 'imagetourl_pro_' + interval,
+          item_name: 'ImageToURL Pro',
+          item_brand: 'ImageToURL',
+          item_category: 'Subscription',
+          item_variant: interval,
+          price: interval === 'year' ? 39 : 4.99,
+          quantity: 1
+        }
+      };
+    }
+
+    function trackRecommendedGoogleEvent(eventName, payload) {
+      var common = {
+        pro_location: payload.location || 'unknown',
+        pro_plan_interval: payload.planInterval || 'not_selected'
+      };
+      if (eventName === 'pro_promotion_viewed') {
+        googleEvent('view_promotion', {
+          ...common,
+          promotion_id: 'imagetourl_pro',
+          promotion_name: 'ImageToURL Pro',
+          creative_slot: payload.location || 'unknown'
+        });
+      } else if (eventName === 'pro_cta_clicked' || eventName === 'pro_paywall_clicked') {
+        googleEvent('select_promotion', {
+          ...common,
+          promotion_id: 'imagetourl_pro',
+          promotion_name: 'ImageToURL Pro',
+          creative_slot: payload.location || 'unknown'
+        });
+      } else if (eventName === 'pro_pricing_viewed' || eventName === 'pro_plan_selected') {
+        var details = planDetails(payload.planInterval);
+        googleEvent(eventName === 'pro_pricing_viewed' ? 'view_item' : 'select_item', {
+          ...common,
+          currency: 'USD',
+          value: details.price,
+          items: [details.item]
+        });
+      }
+    }
+
+    function trackCheckoutStarted(transactionId, plan, storagePacks) {
+      if (!transactionId || !markOnce('ga:begin_checkout:' + transactionId)) return;
+      var details = planDetails(plan);
+      var packs = Math.max(0, Math.min(10, Number(storagePacks) || 0));
+      var addonPrice = details.interval === 'year' ? 24 : 2.99;
+      var items = [details.item];
+      if (packs > 0) {
+        items.push({
+          item_id: 'imagetourl_storage_50gb_' + details.interval,
+          item_name: 'ImageToURL Pro 50GB storage pack',
+          item_brand: 'ImageToURL',
+          item_category: 'Storage add-on',
+          item_variant: details.interval,
+          price: addonPrice,
+          quantity: packs
+        });
+      }
+      googleEvent('begin_checkout', {
+        currency: 'USD',
+        value: details.price + (addonPrice * packs),
+        checkout_transaction_id: transactionId,
+        pro_plan_interval: details.interval,
+        items: items
+      });
+    }
+
+    function trackPaddlePurchase(event) {
+      var data = event && event.data ? event.data : {};
+      var transactionId = typeof data.transaction_id === 'string' ? data.transaction_id : '';
+      if (!transactionId || !markOnce('ga:purchase:' + transactionId)) return;
+      var currency = typeof data.currency_code === 'string' ? data.currency_code : 'USD';
+      var total = Number(data.totals && data.totals.total);
+      var paddleItems = Array.isArray(data.items) ? data.items : [];
+      var items = paddleItems.map(function (item, index) {
+        var product = item && item.product ? item.product : {};
+        var itemTotal = Number(item && item.totals && item.totals.total);
+        var quantity = Math.max(1, Number(item && item.quantity) || 1);
+        var itemName = String(product.name || 'ImageToURL Pro');
+        return {
+          item_id: String((item && item.price_id) || product.id || ('imagetourl_item_' + index)),
+          item_name: itemName,
+          item_brand: 'ImageToURL',
+          item_category: /storage/i.test(itemName) ? 'Storage add-on' : 'Subscription',
+          item_variant: item && item.billing_cycle ? String(item.billing_cycle.interval || '') : '',
+          price: Number.isFinite(itemTotal) ? itemTotal / quantity : 0,
+          quantity: quantity
+        };
+      });
+      googleEvent('purchase', {
+        transaction_id: transactionId,
+        affiliation: 'Paddle',
+        currency: currency,
+        value: Number.isFinite(total) ? total : 0,
+        items: items.length ? items : [{
+          item_id: 'imagetourl_pro',
+          item_name: 'ImageToURL Pro',
+          item_brand: 'ImageToURL',
+          item_category: 'Subscription',
+          price: Number.isFinite(total) ? total : 0,
+          quantity: 1
+        }]
+      });
+    }
+
     function trackProInterest(eventName, properties) {
       if (!eventName) return;
       var props = properties || {};
       var source = attribution();
+      var requestedPlan = props.plan === 'year' ? 'year' : props.plan === 'month' ? 'month' : null;
+      if (!requestedPlan && eventName === 'pro_pricing_viewed') {
+        requestedPlan = new URLSearchParams(window.location.search).get('billing') === 'month' ? 'month' : 'year';
+      }
       var payload = {
         eventId: randomId(),
         eventName: eventName,
         sessionId: sessionId(),
         pagePath: window.location.pathname,
         location: String(props.location || '').slice(0, 64),
-        planInterval: props.plan === 'year' ? 'year' : props.plan === 'month' ? 'month' : null,
+        planInterval: requestedPlan,
         referrerHost: source.referrerHost,
         utmSource: source.utmSource,
         utmMedium: source.utmMedium,
         utmCampaign: source.utmCampaign
       };
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: eventName,
+      googleEvent(eventName, {
         pro_location: payload.location,
-        pro_plan_interval: payload.planInterval
+        pro_plan_interval: payload.planInterval || 'not_selected',
+        pro_utm_source: payload.utmSource || 'not_set',
+        event_category: 'pro_funnel'
       });
+      trackRecommendedGoogleEvent(eventName, payload);
 
       var body = JSON.stringify(payload);
       var sent = false;
@@ -113,6 +235,9 @@ const { pageEvent = '', pageLocation = '' } = Astro.props;
     }
 
     window.trackProInterest = trackProInterest;
+    window.trackProGoogleEvent = googleEvent;
+    window.trackProCheckoutStarted = trackCheckoutStarted;
+    window.trackProPaddlePurchase = trackPaddlePurchase;
 
     document.addEventListener('click', function (event) {
       var target = event.target instanceof Element ? event.target.closest('[data-pro-event]') : null;

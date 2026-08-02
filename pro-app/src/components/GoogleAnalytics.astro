@@ -1,0 +1,46 @@
+---
+interface Props {
+  userId?: string;
+}
+
+const { userId = '' } = Astro.props;
+const measurementId = 'G-CFY17JKKYK';
+---
+
+<script is:inline define:vars={{ measurementId, userId }}>
+  (function () {
+    if (window.__imageToUrlGa4Configured) return;
+    window.__imageToUrlGa4Configured = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, {
+      send_page_view: true,
+      ...(userId ? { user_id: userId } : {})
+    });
+    window.gtag('set', 'user_properties', {
+      account_type: userId ? 'signed_in' : 'anonymous'
+    });
+
+    var loaded = false;
+    function loadGoogleTag() {
+      if (loaded) return;
+      loaded = true;
+      var script = document.createElement('script');
+      script.async = true;
+      script.fetchPriority = 'low';
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+      document.head.appendChild(script);
+    }
+
+    ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (eventName) {
+      document.addEventListener(eventName, loadGoogleTag, { once: true, passive: true });
+    });
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadGoogleTag, { timeout: 3000 });
+    } else {
+      window.setTimeout(loadGoogleTag, 2200);
+    }
+  })();
+</script>
