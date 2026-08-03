@@ -8,6 +8,25 @@ Disallow: /uploads/
 Disallow: /api/
 Disallow: /cdn-cgi/
 
+# Pro application surfaces that are private, authenticated, or non-content.
+Disallow: /pro/admin/
+Disallow: /pro/api/
+Disallow: /pro/files/
+Disallow: /pro/sign-in
+Disallow: /pro/sign-out
+Disallow: /pro/workspace
+
+# Tracking parameters never change indexable page content. Blocking their
+# crawl variants preserves quota while canonical clean URLs remain crawlable.
+Disallow: /*?*utm_
+Disallow: /*?*gclid=
+Disallow: /*?*dclid=
+Disallow: /*?*fbclid=
+Disallow: /*?*msclkid=
+Disallow: /*?*srsltid=
+Disallow: /*?*_ga=
+Disallow: /*?*_gl=
+
 # AI search / RAG crawlers — allow public content, block private surfaces.
 User-agent: GPTBot
 Allow: /

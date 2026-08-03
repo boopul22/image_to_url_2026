@@ -8,7 +8,30 @@ import { resolveSlug, ownerLocaleForSlug, isPageKey, localizedUrl } from './i18n
 // Increment this when a release changes public HTML. Workers Cache API entries
 // survive deployments, so a versioned key prevents old pages from masking a
 // newly deployed homepage or landing-page update.
-const HTML_EDGE_CACHE_VERSION = '2026-08-02-pro-ga4';
+const HTML_EDGE_CACHE_VERSION = '2026-08-03-crawl-budget';
+
+// These endpoints either return non-HTML assets or produce user/token-specific
+// responses. Keeping them out of the HTML cache prevents accidental caching and
+// limits the cache surface to pages that search crawlers can actually index.
+const HTML_EDGE_CACHE_BYPASS_PREFIXES = [
+  '/api/',
+  '/admin',
+  '/dashboard',
+  '/uploads/',
+  '/img/',
+  '/og/',
+  '/email/',
+  '/__cdn/',
+];
+
+function isPublicHtmlPath(path: string): boolean {
+  if (HTML_EDGE_CACHE_BYPASS_PREFIXES.some(prefix => path === prefix || path.startsWith(prefix))) {
+    return false;
+  }
+
+  // Sitemap, robots, manifests, and static assets have their own cache policy.
+  return !/\.[a-zA-Z0-9]{2,5}$/.test(path) || path.endsWith('.html');
+}
 
 // Paths that never get a locale prefix. Anything else at the root is 301'd to /en/*.
 const NON_LOCALIZED_PREFIXES = ['/admin', '/dashboard', '/api/', '/uploads/', '/p/', '/__cdn/', '/guides/'];
@@ -244,10 +267,8 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   // and D1 queries entirely. Cache is populated on miss and expires with the
   // same max-age as the Cache-Control header set below.
   const sessionCookie = cookies.get('session')?.value;
-  const isCacheableHtmlPage = request.method === 'GET' && 
-    !path.startsWith('/api/') && 
-    !path.startsWith('/admin') && 
-    !path.startsWith('/dashboard') &&
+  const isCacheableHtmlPage = request.method === 'GET' &&
+    isPublicHtmlPath(path) &&
     !sessionCookie; // only for anonymous
   
   let cacheKey: Request | null = null;
@@ -260,6 +281,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   
   if (isCacheableHtmlPage && cacheObj) {
     const cacheUrl = new URL(request.url);
+    // Public HTML is canonicalized by pathname and none of these pages renders
+    // different server HTML from query parameters. Share one edge entry across
+    // utm_*, gclid, fbclid, msclkid, and arbitrary crawler-generated variants.
+    // The browser still keeps the original query string, so attribution scripts
+    // can read it without multiplying SSR work or crawler-facing cache entries.
+    cacheUrl.search = '';
     cacheUrl.searchParams.set('__html_cache_version', HTML_EDGE_CACHE_VERSION);
     cacheKey = new Request(cacheUrl.toString(), { method: 'GET' });
     try {
