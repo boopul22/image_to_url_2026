@@ -8,6 +8,7 @@ import GuidePage from '../../components/GuidePage.astro';
   metaDescription="Reddit strips EXIF metadata and recompresses uploads. Here's why, what it means for OC (original content) verification, and how to work around it."
   title="Why Reddit Strips EXIF (and Recompresses Your Uploads)"
   datePublished="2026-04-08"
+  dateModified="2026-08-03"
   readTime="6 min read"
   intro="Post an original photograph to Reddit and the downloaded version will have no EXIF, degraded quality, and — if it's wider than 4096 pixels — different dimensions. This is deliberate. Here's why Reddit processes uploads aggressively, what it means for 'original content' verification, and how to work around it."
   keyPoints={[
@@ -56,8 +57,8 @@ import GuidePage from '../../components/GuidePage.astro';
     { q: "Is there a way to tell Reddit not to strip?", a: "No user-facing option. The strip is a server-side pipeline applied to every upload." },
   ]}
   relatedSlugs={[
+    { href: "/en/image-to-url/", title: "Image to URL", body: "Host the original and get a direct link." },
     { href: "/image-hosting-for-reddit/", title: "Reddit hosting", body: "External URL workflow." },
     { href: "/guides/what-exif-leaks/", title: "EXIF leaks", body: "What's actually at stake." },
-    { href: "/en/imgur-alternative/", title: "Imgur alternative", body: "Permanent URLs on Reddit." },
   ]}
 />

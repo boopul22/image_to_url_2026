@@ -7,8 +7,8 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL - Free, No Sign-Up, Instant Direct Link | ImageToURL",
-    "metaDescription": "Turn any image into a URL for free. Drop a JPG, PNG, WebP, GIF or SVG and get a direct link that works in Discord, Reddit, forums and email. No account, no compression, 50MB.",
+    "metaTitle": "Image to URL - Free Direct Image Link, No Sign-Up",
+    "metaDescription": "Turn any image into a URL free. Upload JPG, PNG, WebP, GIF or SVG up to 50MB and get a direct CDN link for Discord, Reddit, HTML and email. No sign-up.",
     "schemaName": "Image to URL",
     "schemaDescription": "A free image to URL tool that turns any picture into a direct, full-quality link. No account, no watermark, fast global CDN.",
     "badge": "IMAGE TO URL",
@@ -209,6 +209,10 @@ export const content: LandingContentMap = {
     "relatedTitle": "More image to URL tools",
     "related": [
       {
+        "href": "/en/blog/create-a-link-for-an-image/",
+        "label": "How to Create a Link for an Image"
+      },
+      {
         "pageKey": "image-to-url-converter",
         "label": "Image to URL Converter"
       },
@@ -229,8 +233,16 @@ export const content: LandingContentMap = {
         "label": "Direct Image Link"
       },
       {
+        "pageKey": "gif-to-url",
+        "label": "GIF to URL Converter"
+      },
+      {
         "pageKey": "png-to-url",
         "label": "PNG to URL"
+      },
+      {
+        "pageKey": "jpg-to-url",
+        "label": "JPG to URL"
       }
     ],
     "howToSchema": true,
@@ -238,7 +250,7 @@ export const content: LandingContentMap = {
     "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. No sign-up, no compression, no watermark.",
     "ctaButton": "Upload Image Now",
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-15"
+    "dateModified": "2026-08-03"
   },
   "es": {
     "metaTitle": "Imagen a URL - Gratis, sin registro, enlace directo instantáneo | ImageToURL",

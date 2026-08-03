@@ -768,11 +768,16 @@ const pageSchema = [
         { k: 'photo-to-url', a: 'Photo to URL' },
         { k: 'png-to-url', a: 'PNG to URL' },
         { k: 'jpg-to-url', a: 'JPG to URL' },
+        { k: 'gif-to-url', a: 'GIF to URL converter' },
+        { k: 'png-to-pdf', a: 'PNG to PDF converter' },
         { k: 'screenshot-to-url', a: 'Screenshot to URL' },
         { k: 'free-image-hosting', a: 'Free image hosting' },
       ].map(l => (
         <a href={localizedUrl(l.k as any, locale)} class="hover:text-primary hover:underline underline-offset-4">{l.a}</a>
       ))}
+      {locale === 'en' && (
+        <a href="/en/blog/create-a-link-for-an-image/" class="hover:text-primary hover:underline underline-offset-4">How to create a link for an image</a>
+      )}
     </div>
   </div>
 

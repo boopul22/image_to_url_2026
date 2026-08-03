@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>30-Day Keyword Growth Audit | imagetourl.cloud</title>
+  <style>
+    :root {
+      --paper: #f4f1e8;
+      --paper-2: #ebe5d7;
+      --ink: #17211d;
+      --muted: #667069;
+      --line: #b9b5a8;
+      --acid: #d9ff43;
+      --orange: #ff6a32;
+      --blue: #2762ff;
+      --green: #0d7a52;
+      --red: #b72f26;
+      --white: #fffefa;
+      --shadow: 8px 8px 0 rgba(23,33,29,.11);
+      --display: Georgia, "Times New Roman", serif;
+      --body: "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+      --mono: "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23,33,29,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,33,29,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      font-family: var(--body);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 80px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      margin-bottom: 14px; font: 700 11px/1.2 var(--mono); text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .live { display: inline-flex; align-items: center; gap: 8px; }
+    .live i { width: 9px; height: 9px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 4px rgba(13,122,82,.13); }
+    .hero {
+      position: relative; overflow: hidden; border: 2px solid var(--ink); background: var(--white);
+      padding: clamp(28px, 6vw, 72px); box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "US / EN"; position: absolute; right: -38px; top: 42px; transform: rotate(45deg);
+      width: 190px; padding: 9px 0; text-align: center; background: var(--acid);
+      border: 2px solid var(--ink); font: 800 11px/1 var(--mono); letter-spacing: .12em;
+    }
+    .eyebrow { font: 800 12px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+    h1 { margin: 14px 0 18px; max-width: 920px; font: 700 clamp(42px, 8vw, 88px)/.92 var(--display); letter-spacing: -.055em; }
+    h1 span { box-shadow: inset 0 -.34em 0 var(--acid); }
+    .lede { max-width: 800px; margin: 0; font-size: clamp(17px, 2vw, 23px); color: #38433d; }
+    .meta-strip {
+      display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px; padding-top: 18px;
+      border-top: 1px solid var(--line); font: 650 12px/1.35 var(--mono);
+    }
+    nav {
+      position: sticky; top: 10px; z-index: 10; margin: 18px 0 44px; padding: 10px;
+      border: 2px solid var(--ink); background: rgba(255,254,250,.94); box-shadow: 4px 4px 0 rgba(23,33,29,.16);
+      backdrop-filter: blur(8px); overflow-x: auto; white-space: nowrap;
+    }
+    nav a { display: inline-block; padding: 7px 11px; text-decoration: none; font: 750 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    nav a:hover { background: var(--acid); }
+    section { scroll-margin-top: 90px; margin-top: 54px; }
+    .section-head { display: grid; grid-template-columns: 58px 1fr; gap: 16px; align-items: end; margin-bottom: 18px; }
+    .section-num { font: 800 12px/1 var(--mono); color: var(--orange); padding-bottom: 7px; border-bottom: 3px solid var(--orange); }
+    h2 { margin: 0; font: 700 clamp(28px, 4.4vw, 48px)/1 var(--display); letter-spacing: -.035em; }
+    .subhead { margin: 8px 0 0 74px; max-width: 780px; color: var(--muted); }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .kpi {
+      min-height: 178px; padding: 18px; border: 2px solid var(--ink); background: var(--white);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .kpi.accent { background: var(--acid); }
+    .kpi .label { font: 800 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .kpi .value { font: 700 clamp(34px, 5vw, 54px)/.95 var(--display); letter-spacing: -.04em; }
+    .kpi .compare { font-size: 13px; color: #47514c; }
+    .delta { display: inline-block; margin-top: 6px; font: 800 12px/1 var(--mono); }
+    .positive { color: var(--green); }
+    .negative { color: var(--red); }
+    .neutral { color: var(--blue); }
+    .verdict {
+      display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .6fr); gap: 0;
+      margin-top: 14px; border: 2px solid var(--ink); background: var(--ink); color: var(--paper);
+    }
+    .verdict-main { padding: clamp(24px, 5vw, 50px); }
+    .verdict-main strong { display: block; margin-bottom: 12px; color: var(--acid); font: 700 clamp(27px, 4vw, 44px)/1.03 var(--display); }
+    .verdict-main p { max-width: 750px; margin: 0; font-size: 18px; color: #d8ddd9; }
+    .verdict-side { padding: 26px; background: var(--orange); color: var(--ink); display: grid; align-content: center; }
+    .verdict-side .big { font: 800 64px/.9 var(--display); letter-spacing: -.05em; }
+    .verdict-side p { margin: 12px 0 0; font-weight: 700; }
+    .panel { border: 2px solid var(--ink); background: var(--white); box-shadow: var(--shadow); }
+    .panel-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 18px; border-bottom: 2px solid var(--ink); }
+    .panel-head h3 { margin: 0; font: 700 20px/1.1 var(--display); }
+    .tabs { display: inline-flex; border: 1px solid var(--ink); }
+    .tabs button { border: 0; padding: 7px 10px; background: transparent; cursor: pointer; font: 800 10px/1 var(--mono); text-transform: uppercase; }
+    .tabs button + button { border-left: 1px solid var(--ink); }
+    .tabs button.active { background: var(--acid); }
+    .chart-area { padding: 24px 20px 12px; overflow-x: auto; }
+    #trendChart { display: block; width: 100%; min-width: 640px; height: auto; }
+    .chart-note { padding: 0 20px 20px; color: var(--muted); font-size: 12px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .distribution { padding: 20px; }
+    .dist-row { margin-bottom: 20px; }
+    .dist-row:last-child { margin-bottom: 0; }
+    .dist-label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font: 750 11px/1.2 var(--mono); }
+    .stack { display: flex; height: 27px; overflow: hidden; border: 1px solid var(--ink); background: var(--paper-2); }
+    .stack i { display: block; min-width: 1px; border-right: 1px solid rgba(23,33,29,.38); }
+    .s1 { background: var(--acid); } .s2 { background: var(--orange); } .s3 { background: #e6adff; }
+    .s4 { background: #8bb1ff; } .s5 { background: #c8c4b7; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; padding-top: 16px; font: 650 10px/1.2 var(--mono); color: var(--muted); }
+    .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--ink); background: var(--swatch); }
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .insight { padding: 22px; border: 2px solid var(--ink); background: var(--white); }
+    .insight:nth-child(2) { background: #dfe8ff; }
+    .insight:nth-child(3) { background: #ffe2d5; }
+    .insight .mark { font: 800 11px/1 var(--mono); color: var(--blue); }
+    .insight h3 { margin: 28px 0 10px; font: 700 25px/1.05 var(--display); }
+    .insight p { margin: 0; color: #4b5550; font-size: 14px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 12px 13px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { position: sticky; top: 0; background: var(--paper-2); font: 800 10px/1.25 var(--mono); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: rgba(217,255,67,.18); }
+    .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .kw { font-weight: 750; }
+    .url { max-width: 330px; color: var(--muted); font: 600 11px/1.35 var(--mono); overflow-wrap: anywhere; }
+    .badge { display: inline-block; padding: 4px 7px; border: 1px solid currentColor; font: 800 10px/1 var(--mono); white-space: nowrap; }
+    .badge.win { color: var(--green); background: #e2f5e9; }
+    .badge.watch { color: #8a4b00; background: #fff0c2; }
+    .badge.risk { color: var(--red); background: #ffe2dc; }
+    .caption { padding: 14px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .opportunity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .opportunity { border: 2px solid var(--ink); background: var(--white); padding: 22px; }
+    .opportunity h3 { margin: 0 0 16px; font: 700 26px/1 var(--display); }
+    .opportunity ul { margin: 0; padding: 0; list-style: none; }
+    .opportunity li { padding: 12px 0; border-top: 1px solid var(--line); }
+    .opportunity li:first-child { border-top: 0; padding-top: 0; }
+    .opportunity b { display: block; }
+    .opportunity small { color: var(--muted); }
+    .priority-list { display: grid; gap: 10px; counter-reset: task; }
+    .task {
+      counter-increment: task; display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 16px;
+      align-items: start; padding: 18px; border: 2px solid var(--ink); background: var(--white);
+    }
+    .task::before { content: "0" counter(task); font: 800 13px/1 var(--mono); color: var(--orange); padding-top: 4px; }
+    .task h3 { margin: 0 0 5px; font: 700 20px/1.1 var(--display); }
+    .task p { margin: 0; color: var(--muted); font-size: 13px; }
+    .task .impact { min-width: 92px; text-align: center; }
+    .method { padding: 24px; border: 2px solid var(--ink); background: var(--paper-2); }
+    .method p { margin: 0 0 10px; }
+    .method p:last-child { margin-bottom: 0; }
+    .method code { font-family: var(--mono); font-size: 11px; background: var(--white); border: 1px solid var(--line); padding: 2px 5px; }
+    footer { display: flex; justify-content: space-between; gap: 18px; margin-top: 48px; padding-top: 18px; border-top: 2px solid var(--ink); font: 650 11px/1.45 var(--mono); color: var(--muted); }
+    .reveal { animation: rise .55s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; } }
+    @media (max-width: 900px) {
+      .kpis { grid-template-columns: repeat(2, 1fr); }
+      .insight-grid { grid-template-columns: 1fr; }
+      .verdict { grid-template-columns: 1fr; }
+      .verdict-side { grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+      .two-col, .opportunity-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 20px, 1180px); padding-top: 10px; }
+      .hero { padding: 28px 20px; }
+      .hero::after { display: none; }
+      h1 { font-size: 45px; }
+      .kpis { grid-template-columns: 1fr; }
+      .kpi { min-height: 145px; }
+      .section-head { grid-template-columns: 38px 1fr; }
+      .subhead { margin-left: 54px; }
+      .task { grid-template-columns: 36px 1fr; }
+      .task .impact { grid-column: 2; justify-self: start; }
+      footer { flex-direction: column; }
+    }
+    @media print {
+      body { background: white; }
+      .shell { width: 100%; padding: 0; }
+      nav, .tabs { display: none; }
+      .hero, .panel { box-shadow: none; }
+      section { break-inside: avoid; }
+      .reveal { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <span class="live"><i></i> DataForSEO MCP dataset loaded</span>
+      <span>Report 03 Aug 2026</span>
+    </div>
+
+    <header class="hero reveal">
+      <div class="eyebrow">30-day keyword growth audit / completed monthly period</div>
+      <h1>Visibility grew.<br><span>Rank depth did not.</span></h1>
+      <p class="lede">imagetourl.cloud nearly doubled estimated organic traffic in July, but 92.5% of its US keyword footprint still ranks below position 50. The next growth phase is ranking consolidation, not publishing volume.</p>
+      <div class="meta-strip">
+        <span>Target: imagetourl.cloud</span>
+        <span>Market: Google / United States / English</span>
+        <span>Growth window: Jul 2026 vs Jun 2026</span>
+        <span>Live inventory: 466 keywords</span>
+      </div>
+    </header>
+
+    <nav aria-label="Report sections">
+      <a href="#summary">Summary</a><a href="#trend">Growth</a><a href="#distribution">Rank depth</a><a href="#movers">Movers</a><a href="#opportunities">Opportunities</a><a href="#pages">Pages</a><a href="#plan">Action plan</a><a href="#method">Method</a>
+    </nav>
+
+    <section id="summary">
+      <div class="section-head"><div class="section-num">01</div><h2>Executive signal</h2></div>
+      <p class="subhead">July versus June uses DataForSEO Labs' completed monthly historical snapshots. All traffic figures are ETV estimates, not analytics sessions.</p>
+      <div class="kpis">
+        <article class="kpi accent"><div class="label">Estimated traffic / ETV</div><div class="value">788.7</div><div class="compare">June 425.1 <span class="delta positive">+85.5%</span></div></article>
+        <article class="kpi"><div class="label">Ranked keywords</div><div class="value">388</div><div class="compare">June 276 <span class="delta positive">+40.6%</span></div></article>
+        <article class="kpi"><div class="label">Estimated traffic value</div><div class="value">$1,493</div><div class="compare">June $514 <span class="delta positive">+190.5%</span></div></article>
+        <article class="kpi"><div class="label">Top-30 keywords</div><div class="value">11</div><div class="compare">June 0 <span class="delta neutral">First meaningful entry</span></div></article>
+      </div>
+      <div class="verdict">
+        <div class="verdict-main"><strong>Healthy expansion, shallow rankings.</strong><p>ETV grew more than twice as fast as the number of ranked keywords, lifting estimated traffic per keyword by about 32%. That is real efficiency improvement. The constraint is depth: only 29 of 388 July keywords reached the top 50.</p></div>
+        <div class="verdict-side"><div class="big">92.5%</div><p>of July's ranked keywords remained below position 50.</p></div>
+      </div>
+    </section>
+
+    <section id="trend">
+      <div class="section-head"><div class="section-num">02</div><h2>Five-month growth curve</h2></div>
+      <p class="subhead">The growth is not a single-month anomaly. Keyword count expanded from 9 in March to 388 in July, while ETV rose from 7.6 to 788.7.</p>
+      <div class="panel">
+        <div class="panel-head"><h3 id="chartTitle">Estimated organic traffic (ETV)</h3><div class="tabs" role="group" aria-label="Chart metric"><button class="active" data-metric="etv">ETV</button><button data-metric="keywords">Keywords</button></div></div>
+        <div class="chart-area"><svg id="trendChart" viewBox="0 0 1000 350" role="img" aria-labelledby="chartTitle"></svg></div>
+        <div class="chart-note">March through July 2026. Monthly snapshots retrieved through the DataForSEO historical rank overview endpoint.</div>
+      </div>
+    </section>
+
+    <section id="distribution">
+      <div class="section-head"><div class="section-num">03</div><h2>Rank depth is the bottleneck</h2></div>
+      <p class="subhead">The latest weekly inventory is broader than July's completed monthly snapshot, but nearly all growth still sits in pages 6-10 of Google.</p>
+      <div class="two-col">
+        <div class="panel distribution">
+          <div class="dist-row"><div class="dist-label"><span>July monthly snapshot</span><span>388 keywords</span></div><div class="stack" aria-label="July ranking distribution"><i class="s1" style="width:.52%" title="Top 10: 2"></i><i class="s2" style="width:2.32%" title="11-30: 9"></i><i class="s3" style="width:4.64%" title="31-50: 18"></i><i class="s4" style="width:25.26%" title="51-70: 98"></i><i class="s5" style="width:67.26%" title="71-100: 261"></i></div></div>
+          <div class="dist-row"><div class="dist-label"><span>Latest weekly inventory</span><span>466 keywords</span></div><div class="stack" aria-label="Latest ranking distribution"><i class="s1" style="width:.43%" title="Top 10: 2"></i><i class="s2" style="width:3.22%" title="11-30: 15"></i><i class="s3" style="width:5.15%" title="31-50: 24"></i><i class="s4" style="width:28.76%" title="51-70: 134"></i><i class="s5" style="width:62.45%" title="71-100: 291"></i></div></div>
+          <div class="legend"><span style="--swatch:var(--acid)">Top 10</span><span style="--swatch:var(--orange)">11-30</span><span style="--swatch:#e6adff">31-50</span><span style="--swatch:#8bb1ff">51-70</span><span style="--swatch:#c8c4b7">71-100</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Latest inventory movement</h3></div>
+          <div class="table-wrap"><table><tbody>
+            <tr><td>Newly detected ranking elements</td><td class="num"><b>377</b></td></tr>
+            <tr><td>Improved since previous item check</td><td class="num positive"><b>62</b></td></tr>
+            <tr><td>Declined since previous item check</td><td class="num negative"><b>25</b></td></tr>
+            <tr><td>Top 20 organic positions</td><td class="num"><b>8</b></td></tr>
+            <tr><td>Top 30 organic positions</td><td class="num"><b>17</b></td></tr>
+          </tbody></table></div>
+          <div class="caption">DataForSEO refreshes ranked-keyword data weekly, but individual SERP observations can have different check dates. These movement counts are directional audit signals, not a strict calendar-day cohort.</div>
+        </div>
+      </div>
+      <div class="insight-grid" style="margin-top:14px">
+        <article class="insight"><div class="mark">CONCENTRATION</div><h3>Three pages drive 78% of ETV.</h3><p>The homepage, PNG-to-PDF, and free-image-hosting article account for about 599.7 of 768.0 ETV in the latest weekly inventory.</p></article>
+        <article class="insight"><div class="mark">MAPPING RISK</div><h3>The head term lands on JPG.</h3><p>“image to url” currently maps to <code>/en/jpg-to-url/</code> at organic rank 70, not the homepage. This suggests intent overlap and internal competition.</p></article>
+        <article class="insight"><div class="mark">QUALITY GAP</div><h3>New reach is mostly deep reach.</h3><p>High-volume terms such as “pngs to pdf” and “image url” entered at ranks 87-97. Visibility is growing before meaningful click capture.</p></article>
+      </div>
+    </section>
+
+    <section id="movers">
+      <div class="section-head"><div class="section-num">04</div><h2>Keyword movers</h2></div>
+      <p class="subhead">Rank-change deltas use DataForSEO's absolute SERP position. The current rank shown below is the organic group rank, which excludes intervening SERP features.</p>
+      <div class="panel">
+        <div class="panel-head"><h3>Strongest upward moves</h3><span class="badge win">Latest item comparison</span></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Keyword</th><th class="num">Volume</th><th class="num">Current organic rank</th><th class="num">Absolute move</th><th class="num">KD</th><th>Landing page</th></tr></thead>
+          <tbody>
+            <tr><td class="kw">gif to url converter</td><td class="num">70</td><td class="num">14</td><td class="num positive">+58</td><td class="num">0</td><td class="url">/en/gif-to-url/</td></tr>
+            <tr><td class="kw">convert jpg image to url link</td><td class="num">170</td><td class="num">49</td><td class="num positive">+41</td><td class="num">32</td><td class="url">/en/</td></tr>
+            <tr><td class="kw">png url converter</td><td class="num">90</td><td class="num">35</td><td class="num positive">+25</td><td class="num">13</td><td class="url">/en/png-to-url/</td></tr>
+            <tr><td class="kw">how to convert image to url</td><td class="num">90</td><td class="num">63</td><td class="num positive">+25</td><td class="num">31</td><td class="url">/en/</td></tr>
+            <tr><td class="kw">hyperlink animated gif</td><td class="num">170</td><td class="num">49</td><td class="num positive">+24</td><td class="num">0</td><td class="url">/en/gif-to-url/</td></tr>
+            <tr><td class="kw">png to url converter</td><td class="num">90</td><td class="num">28</td><td class="num positive">+19</td><td class="num">3</td><td class="url">/en/png-to-url/</td></tr>
+            <tr><td class="kw">photo url generator</td><td class="num">2,400</td><td class="num">60</td><td class="num positive">+18</td><td class="num">47</td><td class="url">/en/</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="panel" style="margin-top:14px">
+        <div class="panel-head"><h3>Declines to monitor</h3><span class="badge risk">Do not overreact</span></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Keyword</th><th class="num">Volume</th><th class="num">Current organic rank</th><th class="num">Absolute move</th><th class="num">KD</th><th>Landing page</th></tr></thead>
+          <tbody>
+            <tr><td class="kw">email embedding</td><td class="num">110</td><td class="num">91</td><td class="num negative">-55</td><td class="num">4</td><td class="url">/how-to-embed-image-in-email/</td></tr>
+            <tr><td class="kw">sites like imgur</td><td class="num">390</td><td class="num">67</td><td class="num negative">-23</td><td class="num">21</td><td class="url">/en/imgur-alternative/</td></tr>
+            <tr><td class="kw">screenshot link</td><td class="num">210</td><td class="num">80</td><td class="num negative">-15</td><td class="num">50</td><td class="url">/en/screenshot-to-url/</td></tr>
+            <tr><td class="kw">logo url generator</td><td class="num">140</td><td class="num">73</td><td class="num negative">-15</td><td class="num">51</td><td class="url">/en/</td></tr>
+            <tr><td class="kw">create link for image</td><td class="num">260</td><td class="num">74</td><td class="num negative">-13</td><td class="num">43</td><td class="url">/en/</td></tr>
+          </tbody>
+        </table></div>
+        <div class="caption">Most declines occur below position 50 and contribute little current ETV. Fix page/intent alignment first; avoid broad reactive rewrites based on one refresh.</div>
+      </div>
+    </section>
+
+    <section id="opportunities">
+      <div class="section-head"><div class="section-num">05</div><h2>Opportunity map</h2></div>
+      <p class="subhead">Separate near-page-one wins from large, distant terms. They need different playbooks.</p>
+      <div class="opportunity-grid">
+        <article class="opportunity"><span class="badge win">Quick wins / ranks 11-20</span><h3>Push what already has proof</h3><ul>
+          <li><b>gif to url converter - rank 14</b><small>70 volume · KD 0 · /en/gif-to-url/ · up 58 absolute positions</small></li>
+          <li><b>how to make url for image - rank 15</b><small>90 volume · KD 15 · /en/blog/create-a-link-for-an-image</small></li>
+          <li><b>making an image a link - rank 17</b><small>70 volume · KD 6 · same create-a-link article</small></li>
+          <li><b>make an image a link - rank 19</b><small>70 volume · KD 8 · same create-a-link article</small></li>
+        </ul></article>
+        <article class="opportunity"><span class="badge watch">Large upside / distant</span><h3>Build authority, not just copy</h3><ul>
+          <li><b>pngs to pdf - rank 97</b><small>90,500 volume · KD 26 · /en/png-to-pdf/</small></li>
+          <li><b>converter png to pdf - rank 94</b><small>18,100 volume · KD 24 · /en/png-to-pdf/</small></li>
+          <li><b>image to url - rank 70</b><small>12,100 volume · KD 44 · currently mapped to /en/jpg-to-url/</small></li>
+          <li><b>photo url generator - rank 60</b><small>2,400 volume · KD 47 · /en/ · up 18 positions</small></li>
+        </ul></article>
+      </div>
+      <div class="panel" style="margin-top:14px">
+        <div class="panel-head"><h3>Page-one foothold to protect</h3><span class="badge win">2 keywords</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Keyword</th><th class="num">Volume</th><th class="num">Rank</th><th class="num">KD</th><th>Landing page</th></tr></thead><tbody>
+          <tr><td class="kw">does reddit remove exif data</td><td class="num">50</td><td class="num">8</td><td class="num">0</td><td class="url">/guides/why-reddit-strips-exif/</td></tr>
+          <tr><td class="kw">does reddit strip exif data</td><td class="num">40</td><td class="num">8</td><td class="num">0</td><td class="url">/guides/why-reddit-strips-exif/</td></tr>
+        </tbody></table></div>
+      </div>
+    </section>
+
+    <section id="pages">
+      <div class="section-head"><div class="section-num">06</div><h2>Landing-page concentration</h2></div>
+      <p class="subhead">Aggregated from all 466 keywords in the latest DataForSEO ranked-keyword inventory.</p>
+      <div class="panel"><div class="table-wrap"><table>
+        <thead><tr><th>Landing page</th><th class="num">Keywords</th><th class="num">Keyword volume</th><th class="num">ETV</th><th class="num">Share of ETV</th><th class="num">Top 20</th></tr></thead>
+        <tbody>
+          <tr><td class="url">/en/</td><td class="num">137</td><td class="num">127,640</td><td class="num">268.3</td><td class="num">34.9%</td><td class="num">1</td></tr>
+          <tr><td class="url">/en/png-to-pdf/</td><td class="num">8</td><td class="num">111,200</td><td class="num">233.5</td><td class="num">30.4%</td><td class="num">0</td></tr>
+          <tr><td class="url">/en/blog/free-image-hosting-image-to-url</td><td class="num">32</td><td class="num">46,640</td><td class="num">97.9</td><td class="num">12.8%</td><td class="num">0</td></tr>
+          <tr><td class="url">/en/jpg-to-url/</td><td class="num">10</td><td class="num">16,680</td><td class="num">35.0</td><td class="num">4.6%</td><td class="num">0</td></tr>
+          <tr><td class="url">/en/image-url-generator/</td><td class="num">8</td><td class="num">15,080</td><td class="num">31.7</td><td class="num">4.1%</td><td class="num">0</td></tr>
+          <tr><td class="url">/en/gif-to-url/</td><td class="num">14</td><td class="num">5,600</td><td class="num">12.0</td><td class="num">1.6%</td><td class="num">1</td></tr>
+          <tr><td class="url">/how-to-embed-image-in-email/</td><td class="num">41</td><td class="num">5,060</td><td class="num">10.6</td><td class="num">1.4%</td><td class="num">0</td></tr>
+          <tr><td class="url">/en/anonymous-image-upload/</td><td class="num">27</td><td class="num">4,470</td><td class="num">9.4</td><td class="num">1.2%</td><td class="num">0</td></tr>
+        </tbody>
+      </table></div><div class="caption">The PNG-to-PDF page produces 30.4% of modeled ETV from only eight ranking keywords because two very high-volume terms dominate the estimate. Treat ETV as directional, especially for deep rankings.</div></div>
+    </section>
+
+    <section id="plan">
+      <div class="section-head"><div class="section-num">07</div><h2>Prioritized 30-day plan</h2></div>
+      <p class="subhead">The fastest path is to consolidate query-to-page relevance, then lift proven rank-11-20 clusters before investing in distant head terms.</p>
+      <div class="priority-list">
+        <article class="task"><div><h3>Resolve “image to URL” cannibalization</h3><p>Choose one canonical target for the head cluster. Point homepage copy, internal anchors, breadcrumbs, and related tool pages toward that target. Keep JPG-specific intent on /en/jpg-to-url/.</p></div><span class="badge win impact">High impact</span></article>
+        <article class="task"><div><h3>Push the GIF page from 14 into the top 10</h3><p>Add exact-intent copy for “GIF to URL converter,” strengthen contextual internal links from the homepage and related converter pages, and verify title/H1/snippet alignment.</p></div><span class="badge win impact">Fast win</span></article>
+        <article class="task"><div><h3>Consolidate the create-a-link cluster</h3><p>The article already holds ranks 15, 17, and 19. Expand the answer block, add a short step-by-step example, and link it from high-authority tool pages using varied but relevant anchors.</p></div><span class="badge win impact">Fast win</span></article>
+        <article class="task"><div><h3>Upgrade PNG-to-PDF authority</h3><p>Do not split synonyms into thin pages. Build one definitive tool page covering plural uploads, merge order, privacy, file limits, and output quality; earn links to this URL.</p></div><span class="badge watch impact">Big upside</span></article>
+        <article class="task"><div><h3>Protect the Reddit EXIF guide</h3><p>Keep the page fresh, answer the two ranking phrasings directly, and add internal links to relevant privacy/metadata tools. It is the site's only current page-one proof.</p></div><span class="badge win impact">Defend</span></article>
+        <article class="task"><div><h3>Measure with Search Console alongside ETV</h3><p>Use GSC clicks and impressions to validate whether modeled ETV gains convert into real visits. Keep DataForSEO for market visibility, difficulty, rank depth, and competitive opportunity.</p></div><span class="badge watch impact">Measurement</span></article>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="section-head"><div class="section-num">08</div><h2>Method &amp; caveats</h2></div>
+      <div class="method">
+        <p><b>Source:</b> DataForSEO MCP calling the DataForSEO Labs Google endpoints <code>historical_rank_overview/live</code> and <code>ranked_keywords/live</code>.</p>
+        <p><b>Locale:</b> Google, United States (<code>2840</code>), English (<code>en</code>), target <code>imagetourl.cloud</code>.</p>
+        <p><b>Growth comparison:</b> July 2026 completed monthly snapshot versus June 2026. This is the closest stable DataForSEO equivalent to a completed 30-day comparison.</p>
+        <p><b>ETV:</b> Estimated monthly organic traffic derived from ranking position and keyword demand. It is modeled traffic, not observed sessions or clicks.</p>
+        <p><b>Keyword movers:</b> The live ranked-keyword dataset updates weekly, but each SERP item includes its own latest and previous check timestamps. Movers are directional and may span different observation intervals.</p>
+        <p><b>Interpretation:</b> Deep-rank, high-volume terms can contribute outsized modeled ETV. Validate priority decisions against Google Search Console before forecasting revenue or server capacity.</p>
+      </div>
+    </section>
+
+    <footer><span>imagetourl.cloud · 30-day keyword growth audit</span><span>Generated 03 Aug 2026 · DataForSEO MCP · self-contained HTML</span></footer>
+  </main>
+
+  <script>
+    const history = [
+      { month: 'Mar', etv: 7.581, keywords: 9 },
+      { month: 'Apr', etv: 164.220, keywords: 92 },
+      { month: 'May', etv: 225.267, keywords: 136 },
+      { month: 'Jun', etv: 425.061, keywords: 276 },
+      { month: 'Jul', etv: 788.688, keywords: 388 }
+    ];
+    const svg = document.getElementById('trendChart');
+    const title = document.getElementById('chartTitle');
+    const buttons = [...document.querySelectorAll('[data-metric]')];
+    const NS = 'http://www.w3.org/2000/svg';
+    const add = (name, attrs = {}, text = '') => {
+      const el = document.createElementNS(NS, name);
+      Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k,v));
+      if (text) el.textContent = text;
+      svg.appendChild(el);
+      return el;
+    };
+    function draw(metric) {
+      svg.innerHTML = '';
+      const W = 1000, H = 350, L = 72, R = 28, T = 28, B = 58;
+      const values = history.map(d => d[metric]);
+      const max = Math.max(...values) * 1.12;
+      const x = i => L + i * ((W - L - R) / (history.length - 1));
+      const y = v => T + (H - T - B) * (1 - v / max);
+      for (let i = 0; i <= 4; i++) {
+        const yy = T + i * ((H - T - B) / 4);
+        add('line', {x1:L, y1:yy, x2:W-R, y2:yy, stroke:'#c6c1b4', 'stroke-width':1, 'stroke-dasharray':'4 6'});
+        add('text', {x:L-12, y:yy+4, 'text-anchor':'end', fill:'#667069', 'font-family':'Menlo,monospace', 'font-size':11}, Math.round(max * (1 - i/4)).toLocaleString());
+      }
+      const points = history.map((d,i) => `${x(i)},${y(d[metric])}`).join(' ');
+      add('polyline', {points, fill:'none', stroke:'#17211d', 'stroke-width':5, 'stroke-linejoin':'round', 'stroke-linecap':'round'});
+      history.forEach((d,i) => {
+        add('line', {x1:x(i), y1:y(d[metric]), x2:x(i), y2:H-B, stroke:'#17211d', 'stroke-width':1, opacity:.18});
+        add('circle', {cx:x(i), cy:y(d[metric]), r:9, fill:i===history.length-1?'#ff6a32':'#d9ff43', stroke:'#17211d', 'stroke-width':3});
+        add('text', {x:x(i), y:y(d[metric])-18, 'text-anchor':'middle', fill:'#17211d', 'font-family':'Menlo,monospace', 'font-weight':800, 'font-size':12}, metric==='etv'?d.etv.toFixed(1):d.keywords);
+        add('text', {x:x(i), y:H-B+31, 'text-anchor':'middle', fill:'#17211d', 'font-family':'Menlo,monospace', 'font-weight':700, 'font-size':12}, d.month);
+      });
+      title.textContent = metric === 'etv' ? 'Estimated organic traffic (ETV)' : 'Ranked keyword footprint';
+    }
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.toggle('active', b === btn));
+      draw(btn.dataset.metric);
+    }));
+    draw('etv');
+  </script>
+</body>
+</html>

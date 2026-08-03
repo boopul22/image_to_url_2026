@@ -132,7 +132,7 @@ const ROOT_PAGES: { path: string; lastmod: string }[] = [
   { path: '/guides/image-lcp-optimization',        lastmod: '2026-04-15' },
   { path: '/guides/what-exif-leaks',               lastmod: '2026-04-12' },
   { path: '/guides/embed-images-in-notion',        lastmod: '2026-04-10' },
-  { path: '/guides/why-reddit-strips-exif',        lastmod: '2026-04-08' },
+  { path: '/guides/why-reddit-strips-exif',        lastmod: '2026-08-03' },
   { path: '/guides/responsive-images-cheatsheet',  lastmod: '2026-04-05' },
   { path: '/guides/image-optimization-core-web-vitals', lastmod: '2026-04-02' },
 ];
@@ -208,7 +208,10 @@ export async function GET({ locals }: APIContext): Promise<Response> {
   // Per-page lastmod overrides for recently refreshed pages (keeps the sitemap
   // signal aligned with the page's JSON-LD dateModified).
   const lastmodOverrides: Partial<Record<string, string>> = {
-    'image-to-url': '2026-06-15',
+    'image-to-url': '2026-08-03',
+    'gif-to-url': '2026-08-03',
+    'jpg-to-url': '2026-08-03',
+    'png-to-pdf': '2026-08-03',
   };
   for (const pageKey of PAGE_KEYS) {
     const pageLastmod = lastmodOverrides[pageKey] ?? landingLastmod;

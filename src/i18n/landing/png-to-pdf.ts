@@ -8,6 +8,8 @@ export const content: LandingContentMap = {
     "metaTitle": "PNG to PDF Converter | Free, Merge Into One PDF",
     "relatedTitle": "Related image tools",
     "related": [
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "png-to-url", "label": "PNG to URL" },
       { "pageKey": "jpg-to-pdf", "label": "JPG to PDF" },
       { "pageKey": "heic-to-pdf", "label": "HEIC to PDF" }
     ],
@@ -189,7 +191,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-03"
   },
   "es": {
     "metaTitle": "Convertidor de PNG a PDF | Gratis, combinar en un solo PDF",

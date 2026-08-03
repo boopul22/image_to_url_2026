@@ -5,11 +5,12 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "GIF to URL - Get a Direct Link That Stays Animated | ImageToURL",
-    "metaDescription": "Turn a GIF to URL or a GIF to link in seconds. The direct link plays the animation inline in Discord, Reddit, and forums. Free, no signup, GIFs up to 50MB.",
+    "metaTitle": "GIF to URL Converter - Animated Direct Link, Free",
+    "metaDescription": "Use this free GIF to URL converter to upload an animated GIF and get a direct .gif link that plays in Discord, Reddit and forums. No signup, up to 50MB.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Turn any image into a link" },
+      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "href": "/en/blog/create-a-link-for-an-image/", "label": "How to Create a Link for an Image" },
       { "pageKey": "png-to-url", "label": "PNG to URL" },
       { "pageKey": "jpg-to-url", "label": "JPG to URL" },
       { "pageKey": "webp-to-url", "label": "WebP to URL" }
@@ -17,9 +18,9 @@ export const content: LandingContentMap = {
     "schemaName": "GIF to URL Converter",
     "schemaDescription": "Convert a GIF to a URL or direct link that stays animated. Free hosting with no signup, no watermark, and inline playback in Discord, Reddit, and forums.",
     "badge": "GIF HOSTING",
-    "h1Pre": "GIF to URL -",
+    "h1Pre": "GIF to URL Converter -",
     "h1Highlight": "a direct link that stays animated",
-    "intro": "Our GIF to URL tool hands you a direct link that still plays the animation, not a frozen first frame. Drop the GIF to link straight into Discord, Reddit, or a forum and it loops inline like it should. No signup, no watermark, and nothing gets compressed.",
+    "intro": "This GIF to URL converter hands you a direct link that still plays the animation, not a frozen first frame. Drop the GIF link straight into Discord, Reddit, or a forum and it loops inline like it should. No signup, no watermark, and nothing gets compressed.",
     "howTitle": "How the GIF to URL tool works",
     "steps": [
       {
@@ -157,7 +158,7 @@ export const content: LandingContentMap = {
     "ctaButton": "Upload GIF Now",
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-03"
   },
   "es": {
     "metaTitle": "GIF a URL — Aloja GIFs animados y obtén enlaces directos | ImageToURL",

@@ -165,9 +165,11 @@ const relatedSource = c.related?.length
       pageKey: r.pageKey,
       label: contentFor(r.pageKey)?.[locale]?.schemaName ?? r.title,
     }));
-const relatedLinks = relatedSource
-  .filter(r => isPageKey(r.pageKey))
-  .map(r => ({ href: localizedUrl(r.pageKey as PageKey, locale), label: r.label }));
+const relatedLinks = relatedSource.flatMap(r => {
+  if ('href' in r) return [{ href: r.href, label: r.label }];
+  if (!isPageKey(r.pageKey)) return [];
+  return [{ href: localizedUrl(r.pageKey as PageKey, locale), label: r.label }];
+});
 
 const homeHref = `/${locale}/`;
 const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };

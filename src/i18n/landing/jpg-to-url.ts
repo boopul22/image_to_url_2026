@@ -9,7 +9,7 @@ export const content: LandingContentMap = {
     "metaDescription": "JPG to URL in seconds. Upload a JPG or JPEG and get a permanent direct link that embeds in Discord, Reddit, and forums. Free, no signup, up to 50MB.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Image to URL converter" },
+      { "pageKey": "image-to-url", "label": "Image to URL" },
       { "pageKey": "png-to-url", "label": "PNG to URL" },
       { "pageKey": "photo-to-url", "label": "Photo to URL" },
       { "pageKey": "jpg-to-png", "label": "Convert JPG to PNG" }
@@ -157,7 +157,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-03"
   },
   "es": {
     "metaTitle": "Convertir imagen JPG a enlace URL — Online y gratis | ImageToURL",

@@ -47,9 +47,13 @@ export interface LandingContent {
   // Extra long-form prose sections (each an <h2> + paragraph) for topical depth.
   sections?: { heading: string; body: string }[];
   // Internal links to related pages. `pageKey` resolves to a localized URL;
+  // `href` supports editorial pages outside the landing-page registry.
   // `label` is the (translatable) anchor text.
   relatedTitle?: string;
-  related?: { pageKey: string; label: string }[];
+  related?: (
+    | { pageKey: string; label: string }
+    | { href: string; label: string }
+  )[];
   // Opt-in: emit HowTo JSON-LD built from `steps` for richer search results.
   howToSchema?: boolean;
 }

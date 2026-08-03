@@ -22,6 +22,7 @@ export interface Props {
   metaDescription: string;
   title: string;
   datePublished: string;      // ISO date
+  dateModified?: string;      // ISO date; defaults to datePublished
   readTime: string;           // e.g. "8 min read"
   intro: string;              // opening paragraph
   keyPoints?: string[];       // optional TL;DR bullets
@@ -29,7 +30,7 @@ export interface Props {
   faqs: FaqItem[];
   relatedSlugs?: { href: string; title: string; body: string }[];
 }
-const { slug, metaTitle, metaDescription, title, datePublished, readTime, intro, keyPoints, sections, faqs, relatedSlugs } = Astro.props;
+const { slug, metaTitle, metaDescription, title, datePublished, dateModified = datePublished, readTime, intro, keyPoints, sections, faqs, relatedSlugs } = Astro.props;
 
 const pageUrl = `https://imagetourl.cloud/guides/${slug}`;
 
@@ -38,7 +39,7 @@ const articleSchema = {
   "headline": title,
   "description": metaDescription,
   "datePublished": datePublished,
-  "dateModified": datePublished,
+  "dateModified": dateModified,
   "author": { "@type": "Organization", "name": "ImageToURL", "@id": "https://imagetourl.cloud/#organization" },
   "publisher": { "@id": "https://imagetourl.cloud/#organization" },
   "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
@@ -59,6 +60,9 @@ const faqSchema = {
           <span class="uppercase tracking-wider font-bold">Guide</span>
           <span>·</span>
           <time datetime={datePublished}>{new Date(datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          {dateModified !== datePublished && (
+            <><span>·</span><span>Updated <time datetime={dateModified}>{new Date(dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time></span></>
+          )}
           <span>·</span>
           <span>{readTime}</span>
         </div>
