@@ -9,6 +9,7 @@ import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const productImage = 'https://imagetourl.cloud/og-default.png';
 
 function lp(path: string): string {
   return `/${locale}${path}`;
@@ -37,6 +38,7 @@ const pageSchema = [
     "name": `ImageToURL ${t(locale, 'pricing.free.name')}`,
     "description": t(locale, 'pricing.free.description'),
     "url": "https://imagetourl.cloud/pricing",
+    "image": productImage,
     "brand": { "@id": "https://imagetourl.cloud/#organization" },
     "offers": {
       "@type": "Offer",
@@ -54,6 +56,7 @@ const pageSchema = [
     "name": `ImageToURL ${t(locale, 'pricing.pro.name')}`,
     "description": t(locale, 'pricing.pro.description'),
     "url": "https://imagetourl.cloud/pricing",
+    "image": productImage,
     "brand": { "@id": "https://imagetourl.cloud/#organization" },
     "offers": {
       "@type": "Offer",

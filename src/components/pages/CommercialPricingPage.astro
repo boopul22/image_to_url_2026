@@ -5,19 +5,24 @@ import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 
 const proBase = 'https://imagetourl.cloud/pro/pricing';
+const pricingUrl = 'https://imagetourl.cloud/pricing';
+const productImage = 'https://imagetourl.cloud/og-default.png';
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'ImageToURL Pricing',
-    url: 'https://imagetourl.cloud/pricing',
+    url: pricingUrl,
     description: 'Compare free ImageToURL hosting with the ImageToURL Pro founding plan.',
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${pricingUrl}#pro`,
     name: 'ImageToURL Pro',
     description: 'Permanent image hosting with 50GB storage, private links, folders, and usage analytics.',
+    url: pricingUrl,
+    image: productImage,
     brand: { '@type': 'Brand', name: 'ImageToURL' },
     offers: [
       {
@@ -41,10 +46,13 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${pricingUrl}#storage-pack`,
     name: 'ImageToURL Pro 50GB Storage Pack',
     description: 'A recurring 50GB storage capacity add-on for an active ImageToURL Pro workspace.',
+    url: pricingUrl,
+    image: productImage,
     brand: { '@type': 'Brand', name: 'ImageToURL' },
-    isAccessoryOrSparePartFor: { '@type': 'Product', name: 'ImageToURL Pro' },
+    isAccessoryOrSparePartFor: { '@id': `${pricingUrl}#pro` },
     offers: [
       {
         '@type': 'Offer',
