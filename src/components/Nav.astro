@@ -3,7 +3,6 @@ import Icon from './Icon.astro';
 import { t, stripLocalePrefix } from '../i18n/utils';
 import { locales, localeLabels, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
-import { getNavGroups } from '../lib/nav-links';
 import { resolveSlug, localizedUrl } from '../i18n/landing/registry';
 
 const { activePage = "home", blogLocaleSlugs = null } = Astro.props as { activePage?: string; blogLocaleSlugs?: Record<string, string> | null };
@@ -58,7 +57,6 @@ const navLinks = [
   { name: t(locale, 'nav.blog'), href: localePath('/blog'), id: "blog", icon: "article" },
 ];
 
-const toolsDropdown = getNavGroups(locale);
 ---
 
 <nav class="site-nav sticky top-0 z-40 bg-background/95 backdrop-blur-sm transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
@@ -84,64 +82,6 @@ const toolsDropdown = getNavGroups(locale);
         </a>
       ))}
 
-      <!-- Tools Dropdown (our products) -->
-      <div class="relative" id="our-tools-switcher-desktop">
-        <button
-          id="our-tools-btn-desktop"
-          class="flex items-center gap-1 text-[13px] font-headline font-medium transition-colors duration-200 text-neutral-500 hover:text-on-background py-1"
-          aria-expanded="false"
-        >
-          Tools
-          <Icon name="expand_more" class="text-sm" />
-        </button>
-        <div id="our-tools-dropdown-desktop" class="nav-editorial-panel hidden fixed top-[3.75rem] right-[calc((100vw-min(100vw,64rem))/2+1.5rem)] bg-surface border-2 border-outline hard-shadow overflow-hidden z-50 w-[780px] max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-y-auto">
-          <div class="grid grid-cols-3 gap-0 divide-x divide-outline-variant/40">
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
-              {toolsDropdown.convert.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Format Converters</span>
-              {toolsDropdown.formatConvert.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div class="p-4">
-              <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">Utilities</span>
-              {toolsDropdown.utilities.map((item) => (
-                <a href={item.href} class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded">
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                </a>
-              ))}
-              {toolsDropdown.tools.length > 0 && (
-                <Fragment>
-                  <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mt-4 mb-3">Partner Tools</span>
-                  {toolsDropdown.tools.map((item) => (
-                    <a
-                      href={item.href}
-                      {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
-                      class="flex items-center gap-2 px-2 py-1.5 text-sm font-medium hover:bg-surface-container-highest transition-colors rounded"
-                    >
-                      <Icon name={item.icon} class="text-primary text-base" />
-                      {item.name}
-                      {item.external && <Icon name="open_in_new" class="text-[10px] text-outline ml-auto" />}
-                    </a>
-                  ))}
-                </Fragment>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Desktop Right Actions -->
@@ -339,49 +279,6 @@ const toolsDropdown = getNavGroups(locale);
 
       <div class="h-px bg-outline-variant my-2"></div>
 
-      <!-- Tools Dropdown (mobile, real products) -->
-      <div class="relative" id="our-tools-switcher-mobile">
-        <button
-          id="our-tools-btn-mobile"
-          class="flex items-center gap-3 w-full py-3.5 px-4 hover:bg-surface-container-highest active:bg-surface-container-highest transition-colors font-label uppercase tracking-wider text-xs font-bold text-outline"
-          aria-label="Tools"
-          aria-expanded="false"
-        >
-          <Icon name="build" class="text-base" />
-          Tools
-          <Icon name="expand_more" class="text-sm ml-auto" id="our-tools-chevron-mobile" />
-        </button>
-        <div id="our-tools-dropdown-mobile" class="hidden mx-4 mb-1 rounded-xl bg-surface-container border border-outline-variant/40 overflow-hidden max-h-[70vh] overflow-y-auto">
-          {([
-            ['nav.convert', toolsDropdown.convert],
-            ['Format Converters', toolsDropdown.formatConvert],
-            ['Utilities', toolsDropdown.utilities],
-            ['Partner Tools', toolsDropdown.tools],
-          ] as const).filter(([, items]) => items.length > 0).map(([label, items]) => (
-            <>
-              <div class="px-3 pt-3 pb-1">
-                <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline">
-                  {label.startsWith('nav.') ? t(locale, label) : label}
-                </span>
-              </div>
-              {items.map((item) => (
-                <a
-                  href={item.href}
-                  {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
-                  class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-surface-container-highest transition-colors"
-                >
-                  <Icon name={item.icon} class="text-primary text-base" />
-                  {item.name}
-                  {item.external && <Icon name="open_in_new" class="text-[10px] text-outline ml-auto" />}
-                </a>
-              ))}
-            </>
-          ))}
-        </div>
-      </div>
-
-      <div class="h-px bg-outline-variant my-2"></div>
-
       <!-- Language Switcher (inside mobile menu) — hidden on English-only pages -->
       {isLocalizable && (
       <div class="relative" id="lang-switcher-mobile">
@@ -516,21 +413,6 @@ const toolsDropdown = getNavGroups(locale);
     const isOpen = !langDropdownDesktop!.classList.contains('hidden');
     langDropdownDesktop!.classList.toggle('hidden');
     langBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
-    // Close the tools dropdown when opening lang
-    ourToolsDropdownDesktop?.classList.add('hidden');
-    ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
-  });
-
-  // Desktop tools dropdown (real products)
-  const ourToolsBtnDesktop = document.getElementById('our-tools-btn-desktop');
-  const ourToolsDropdownDesktop = document.getElementById('our-tools-dropdown-desktop');
-
-  ourToolsBtnDesktop?.addEventListener('click', () => {
-    const isOpen = !ourToolsDropdownDesktop!.classList.contains('hidden');
-    ourToolsDropdownDesktop!.classList.toggle('hidden');
-    ourToolsBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
-    langDropdownDesktop?.classList.add('hidden');
-    langBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
 
   // Desktop profile dropdown
@@ -543,8 +425,6 @@ const toolsDropdown = getNavGroups(locale);
     profileBtnDesktop!.setAttribute('aria-expanded', String(!isOpen));
     langDropdownDesktop?.classList.add('hidden');
     langBtnDesktop?.setAttribute('aria-expanded', 'false');
-    ourToolsDropdownDesktop?.classList.add('hidden');
-    ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
   });
 
   // The "Language" row inside the profile menu expands an inline locale grid.
@@ -573,11 +453,6 @@ const toolsDropdown = getNavGroups(locale);
       langDropdownDesktop?.classList.add('hidden');
       langBtnDesktop?.setAttribute('aria-expanded', 'false');
     }
-    const ourToolsSwitcher = document.getElementById('our-tools-switcher-desktop');
-    if (ourToolsSwitcher && !ourToolsSwitcher.contains(e.target as Node)) {
-      ourToolsDropdownDesktop?.classList.add('hidden');
-      ourToolsBtnDesktop?.setAttribute('aria-expanded', 'false');
-    }
     if (profileSwitcher && !profileSwitcher.contains(e.target as Node)) {
       profileDropdownDesktop?.classList.add('hidden');
       profileBtnDesktop?.setAttribute('aria-expanded', 'false');
@@ -592,20 +467,6 @@ const toolsDropdown = getNavGroups(locale);
     const isOpen = !langDropdownMobile!.classList.contains('hidden');
     langDropdownMobile!.classList.toggle('hidden');
     langBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
-  });
-
-  // Mobile tools dropdown (inline expand)
-  const ourToolsBtnMobile = document.getElementById('our-tools-btn-mobile');
-  const ourToolsDropdownMobile = document.getElementById('our-tools-dropdown-mobile');
-  const ourToolsChevronMobile = document.getElementById('our-tools-chevron-mobile');
-
-  ourToolsBtnMobile?.addEventListener('click', () => {
-    const isOpen = !ourToolsDropdownMobile!.classList.contains('hidden');
-    ourToolsDropdownMobile!.classList.toggle('hidden');
-    ourToolsBtnMobile!.setAttribute('aria-expanded', String(!isOpen));
-    if (ourToolsChevronMobile) {
-      ourToolsChevronMobile.style.transform = isOpen ? '' : 'rotate(180deg)';
-    }
   });
 
   // Auth nav hydration — fixes signed-out flash on prerendered/CDN-cached pages.
@@ -814,7 +675,6 @@ const toolsDropdown = getNavGroups(locale);
   .site-nav :is(
     [id$='-dropdown-desktop'],
     #profile-dropdown-desktop,
-    #our-tools-dropdown-mobile,
     #lang-dropdown-mobile
   ) {
     border-radius: 0 !important;

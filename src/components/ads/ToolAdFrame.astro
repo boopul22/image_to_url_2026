@@ -1,0 +1,110 @@
+---
+import ResponsiveAdSlot from './ResponsiveAdSlot.astro';
+import { TOOL_AD_SLOTS, isMonetizedPath } from '../../lib/ads';
+
+interface Props {
+  width?: 'standard' | 'wide';
+}
+
+const { width = 'standard' } = Astro.props;
+const enabled = import.meta.env.PROD && isMonetizedPath(Astro.url.pathname);
+---
+
+{enabled ? (
+  <div class:list={['tool-ad-frame', `tool-ad-frame--${width}`]} data-tool-ad-frame>
+    <div class="tool-ad-frame__left">
+      <ResponsiveAdSlot slot={TOOL_AD_SLOTS.leftRail} placement="rail" audience="wide" />
+    </div>
+    <div class="tool-ad-frame__banner">
+      <ResponsiveAdSlot slot={TOOL_AD_SLOTS.top} placement="banner" />
+    </div>
+    <div class="tool-ad-frame__content">
+      <slot />
+    </div>
+    <div class="tool-ad-frame__right">
+      <ResponsiveAdSlot slot={TOOL_AD_SLOTS.rightRail} placement="rail" audience="wide" />
+    </div>
+  </div>
+) : (
+  <slot />
+)}
+
+<style>
+  .tool-ad-frame {
+    --tool-ad-content-width: 64rem;
+    width: 100%;
+    min-width: 0;
+    padding-block: 1.5rem;
+  }
+
+  .tool-ad-frame--wide {
+    --tool-ad-content-width: 72rem;
+  }
+
+  .tool-ad-frame__banner,
+  .tool-ad-frame__content {
+    width: min(100%, var(--tool-ad-content-width));
+    min-width: 0;
+    margin-inline: auto;
+  }
+
+  .tool-ad-frame__banner {
+    padding-inline: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tool-ad-frame__left,
+  .tool-ad-frame__right {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    .tool-ad-frame__banner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .tool-ad-frame {
+      display: grid;
+      grid-template-columns: 10.5rem minmax(0, var(--tool-ad-content-width)) 10.5rem;
+      grid-template-rows: auto auto;
+      justify-content: center;
+      align-items: start;
+      column-gap: 1rem;
+      padding-inline: 1rem;
+    }
+
+    .tool-ad-frame__left,
+    .tool-ad-frame__right {
+      display: block;
+      grid-row: 1 / span 2;
+      position: sticky;
+      top: calc(3.25rem + 1rem);
+      align-self: start;
+      z-index: 10;
+    }
+
+    .tool-ad-frame__left {
+      grid-column: 1;
+    }
+
+    .tool-ad-frame__right {
+      grid-column: 3;
+    }
+
+    .tool-ad-frame__banner,
+    .tool-ad-frame__content {
+      grid-column: 2;
+      width: 100%;
+    }
+
+    .tool-ad-frame__banner {
+      grid-row: 1;
+    }
+
+    .tool-ad-frame__content {
+      grid-row: 2;
+    }
+  }
+</style>

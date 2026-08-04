@@ -1,0 +1,152 @@
+---
+import { ADSENSE_CLIENT } from '../../lib/ads';
+
+interface Props {
+  slot: string;
+  placement: 'banner' | 'rail';
+  audience?: 'all' | 'wide';
+}
+
+const { slot, placement, audience = 'all' } = Astro.props;
+---
+
+<aside
+  class:list={['responsive-ad', `responsive-ad--${placement}`]}
+  data-responsive-ad
+  data-ad-audience={audience}
+  data-ad-placement={placement}
+  data-ad-client={ADSENSE_CLIENT}
+  data-ad-slot={slot}
+  aria-label="Advertisement"
+>
+  <span class="responsive-ad__label" aria-hidden="true">Advertisement</span>
+  <div class="responsive-ad__mount" data-ad-mount></div>
+</aside>
+
+<script>
+  type AdsWindow = Window & { adsbygoogle?: Record<string, unknown>[] };
+
+  const wideScreen = window.matchMedia('(min-width: 90rem)');
+
+  function observeFillState(shell: HTMLElement, ad: HTMLElement) {
+    const syncState = () => {
+      const status = ad.dataset.adStatus;
+      if (status === 'filled') shell.dataset.adState = 'filled';
+      if (status?.startsWith('unfill')) shell.hidden = true;
+    };
+    new MutationObserver(syncState).observe(ad, {
+      attributes: true,
+      attributeFilter: ['data-ad-status'],
+    });
+    syncState();
+  }
+
+  function mountAd(shell: HTMLElement) {
+    if (shell.dataset.adMounted === 'true') return;
+    if (shell.dataset.adAudience === 'wide' && !wideScreen.matches) return;
+    if (shell.getBoundingClientRect().width < 1) return;
+
+    const mount = shell.querySelector<HTMLElement>('[data-ad-mount]');
+    const client = shell.dataset.adClient;
+    const slot = shell.dataset.adSlot;
+    if (!mount || !client || !slot) return;
+
+    const ad = document.createElement('ins');
+    ad.className = 'adsbygoogle';
+    ad.style.display = 'block';
+    ad.style.width = '100%';
+    ad.dataset.adClient = client;
+    ad.dataset.adSlot = slot;
+    ad.dataset.adFormat = 'auto';
+    ad.dataset.fullWidthResponsive = 'true';
+    mount.replaceChildren(ad);
+    shell.dataset.adMounted = 'true';
+    observeFillState(shell, ad);
+
+    try {
+      const adsWindow = window as AdsWindow;
+      (adsWindow.adsbygoogle = adsWindow.adsbygoogle || []).push({});
+    } catch {
+      shell.hidden = true;
+    }
+  }
+
+  function mountEligibleAds() {
+    document.querySelectorAll<HTMLElement>('[data-responsive-ad]').forEach((shell) => {
+      requestAnimationFrame(() => mountAd(shell));
+    });
+  }
+
+  mountEligibleAds();
+  wideScreen.addEventListener('change', mountEligibleAds);
+</script>
+
+<style>
+  .responsive-ad {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+  }
+
+  .responsive-ad--banner {
+    min-height: 100px;
+  }
+
+  .responsive-ad--rail {
+    display: none;
+    min-height: 600px;
+  }
+
+  .responsive-ad__label {
+    position: absolute;
+    inset: -0.85rem 0 auto;
+    visibility: hidden;
+    text-align: center;
+    font-size: 0.55rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-on-surface-variant);
+  }
+
+  .responsive-ad[data-ad-state='filled'] .responsive-ad__label {
+    visibility: visible;
+  }
+
+  .responsive-ad[data-ad-state='filled'] {
+    box-shadow: 0 0 0 1px rgb(225 29 72 / 22%);
+  }
+
+  .responsive-ad__mount,
+  .responsive-ad__mount :global(.adsbygoogle) {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .responsive-ad--banner .responsive-ad__mount,
+  .responsive-ad--banner .responsive-ad__mount :global(.adsbygoogle) {
+    min-height: 100px;
+  }
+
+  @media (min-width: 48rem) {
+    .responsive-ad--banner,
+    .responsive-ad--banner .responsive-ad__mount,
+    .responsive-ad--banner .responsive-ad__mount :global(.adsbygoogle) {
+      min-height: 90px;
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .responsive-ad--rail {
+      display: block;
+      width: 10.5rem;
+    }
+
+    .responsive-ad--rail .responsive-ad__mount,
+    .responsive-ad--rail .responsive-ad__mount :global(.adsbygoogle) {
+      min-height: 600px;
+    }
+  }
+</style>
