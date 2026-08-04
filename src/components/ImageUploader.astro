@@ -499,6 +499,11 @@ import Icon from './Icon.astro';
       fileInput.value = '';
       return;
     }
+    // Ad-block gate covers both single and bulk upload paths.
+    if (!(await (window as any).__adblockGate?.check())) {
+      fileInput.value = '';
+      return;
+    }
     if (files.length === 1) {
       uploadFile(files[0]);
       return;

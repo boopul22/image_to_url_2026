@@ -1054,6 +1054,11 @@ const pageSchema = [
       fileInput.value = '';
       return;
     }
+    // Ad-block gate covers both single and bulk upload paths.
+    if (!(await (window as any).__adblockGate?.check())) {
+      fileInput.value = '';
+      return;
+    }
     if (files.length === 1) { uploadFile(files[0]); return; }
     // Bulk path — open to everyone. Guests spend a daily upload count (5); signed-in
     // users spend one credit per permanent upload (temporary uploads are free).
