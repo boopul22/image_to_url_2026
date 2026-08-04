@@ -15,11 +15,11 @@ const enabled = import.meta.env.PROD && isMonetizedPath(Astro.url.pathname);
     <div class="tool-ad-frame__left">
       <ResponsiveAdSlot slot={TOOL_AD_SLOTS.leftRail} placement="rail" audience="wide" />
     </div>
-    <div class="tool-ad-frame__banner">
-      <ResponsiveAdSlot slot={TOOL_AD_SLOTS.top} placement="banner" />
-    </div>
     <div class="tool-ad-frame__content">
       <slot />
+    </div>
+    <div class="tool-ad-frame__banner">
+      <ResponsiveAdSlot slot={TOOL_AD_SLOTS.top} placement="banner" />
     </div>
     <div class="tool-ad-frame__right">
       <ResponsiveAdSlot slot={TOOL_AD_SLOTS.rightRail} placement="rail" audience="wide" />
@@ -34,7 +34,7 @@ const enabled = import.meta.env.PROD && isMonetizedPath(Astro.url.pathname);
     --tool-ad-content-width: 64rem;
     width: 100%;
     min-width: 0;
-    padding-block: 1.5rem;
+    padding-block: 0.5rem 1rem;
   }
 
   .tool-ad-frame--wide {
@@ -50,7 +50,7 @@ const enabled = import.meta.env.PROD && isMonetizedPath(Astro.url.pathname);
 
   .tool-ad-frame__banner {
     padding-inline: 1rem;
-    margin-bottom: 1.25rem;
+    margin-top: 0.75rem;
   }
 
   .tool-ad-frame__left,
@@ -100,11 +100,11 @@ const enabled = import.meta.env.PROD && isMonetizedPath(Astro.url.pathname);
     }
 
     .tool-ad-frame__banner {
-      grid-row: 1;
+      grid-row: 2;
     }
 
     .tool-ad-frame__content {
-      grid-row: 2;
+      grid-row: 1;
     }
   }
 </style>
