@@ -61,20 +61,20 @@ const navLinks = [
 const toolsDropdown = getNavGroups(locale);
 ---
 
-<nav class="sticky top-0 z-40 bg-[#fcfcfc]/95 backdrop-blur-sm border-b border-neutral-200 transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
-  <div class="flex justify-between items-center w-full px-4 sm:px-6 h-14 max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_auto_1fr]">
-    <a href={localePath('/')} class="text-[15px] font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-1.5 flex-shrink-0 lg:justify-self-start">
+<nav class="site-nav sticky top-0 z-40 bg-background/95 backdrop-blur-sm transition-all duration-300" style="padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);">
+  <div class="site-nav-inner relative flex justify-between items-center w-full px-4 sm:px-6 h-[3.25rem] max-w-5xl mx-auto border-b border-outline-variant">
+    <a href={localePath('/')} class="text-[15px] font-semibold font-headline tracking-tighter uppercase text-on-background flex items-center gap-1.5 flex-shrink-0">
       <Icon name="cloud_done" class="text-rose-600 text-lg" fill />
       ImageToURL
     </a>
 
     <!-- Desktop Nav -->
-    <div class="hidden lg:flex items-center gap-5 xl:gap-6 lg:justify-self-center">
+    <div class="site-nav-links hidden md:flex items-center gap-5 absolute left-1/2 -translate-x-1/2">
       {navLinks.map((link) => (
         <a
           href={link.href}
           class:list={[
-            "text-[13px] font-headline font-medium uppercase tracking-wide transition-colors duration-200",
+            "text-[13px] font-headline font-medium transition-colors duration-200 py-1 whitespace-nowrap",
             activePage === link.id
               ? "text-on-background"
               : "text-neutral-500 hover:text-on-background",
@@ -88,13 +88,13 @@ const toolsDropdown = getNavGroups(locale);
       <div class="relative" id="our-tools-switcher-desktop">
         <button
           id="our-tools-btn-desktop"
-          class="flex items-center gap-1 text-[13px] font-headline font-medium uppercase tracking-wide transition-colors duration-200 text-neutral-500 hover:text-on-background"
+          class="flex items-center gap-1 text-[13px] font-headline font-medium transition-colors duration-200 text-neutral-500 hover:text-on-background py-1"
           aria-expanded="false"
         >
           Tools
           <Icon name="expand_more" class="text-sm" />
         </button>
-        <div id="our-tools-dropdown-desktop" class="hidden fixed top-16 right-[calc((100vw-min(100vw,72rem))/2+1.5rem)] rounded-xl bg-surface border border-outline-variant/40 hard-shadow overflow-hidden z-50 w-[780px] max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-y-auto">
+        <div id="our-tools-dropdown-desktop" class="nav-editorial-panel hidden fixed top-[3.75rem] right-[calc((100vw-min(100vw,64rem))/2+1.5rem)] bg-surface border-2 border-outline hard-shadow overflow-hidden z-50 w-[780px] max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-y-auto">
           <div class="grid grid-cols-3 gap-0 divide-x divide-outline-variant/40">
             <div class="p-4">
               <span class="font-label uppercase tracking-widest text-[10px] font-bold text-outline block mb-3">{t(locale, 'nav.convert')}</span>
@@ -145,7 +145,7 @@ const toolsDropdown = getNavGroups(locale);
     </div>
 
     <!-- Desktop Right Actions -->
-    <div class="hidden lg:flex items-center gap-2.5 lg:justify-self-end">
+    <div class="hidden md:flex items-center gap-2.5 ml-auto">
       <a
         href={user ? '/pro/workspace' : '/pricing'}
         data-nav-pro-track="nav-pro"
@@ -299,7 +299,7 @@ const toolsDropdown = getNavGroups(locale);
     <!-- Mobile Menu Button (only element on right side on mobile) -->
     <button
       id="mobile-menu-btn"
-      class="lg:hidden w-9 h-9 flex items-center justify-center text-on-background hover:bg-neutral-100 transition-colors"
+      class="md:hidden w-9 h-9 flex items-center justify-center text-on-background hover:bg-neutral-100 transition-colors"
       aria-label={t(locale, 'nav.toggleMenu')}
       aria-expanded="false"
     >
@@ -308,7 +308,7 @@ const toolsDropdown = getNavGroups(locale);
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu-transition lg:hidden border-t border-neutral-200 bg-background">
+  <div id="mobile-menu" class="mobile-menu-transition md:hidden border-t border-outline-variant bg-background">
     <div class="flex flex-col px-4 py-3 gap-1" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
       {navLinks.map((link) => (
         <a
@@ -806,3 +806,46 @@ const toolsDropdown = getNavGroups(locale);
     ?? ((cb: () => void) => setTimeout(cb, 1500) as unknown as number);
   idle(() => { void hydrateAuth(); }, { timeout: 2000 });
 </script>
+
+<style>
+  .site-nav :global(.hard-shadow) {
+    box-shadow: 4px 4px 0 var(--color-outline) !important;
+  }
+  .site-nav :is(
+    [id$='-dropdown-desktop'],
+    #profile-dropdown-desktop,
+    #our-tools-dropdown-mobile,
+    #lang-dropdown-mobile
+  ) {
+    border-radius: 0 !important;
+  }
+  .site-nav [id$='-dropdown-desktop'],
+  .site-nav #profile-dropdown-desktop {
+    border: 2px solid var(--color-outline) !important;
+    box-shadow: 4px 4px 0 var(--color-outline) !important;
+  }
+  #mobile-menu > div {
+    width: min(100%, 64rem);
+    margin-inline: auto;
+  }
+  #mobile-menu :is(a, button, [id$='-dropdown-mobile']) {
+    border-radius: 0 !important;
+  }
+  #mobile-menu > div > a:not([data-nav-pro-track]),
+  #mobile-menu > div > div[id$='-mobile'] > button {
+    border-bottom: 1px solid var(--color-outline-variant);
+  }
+
+  @media (max-width: 900px) and (min-width: 768px) {
+    .site-nav-links {
+      gap: 0.8rem;
+    }
+    .site-nav-links a,
+    .site-nav-links button {
+      font-size: 12px;
+    }
+    .site-nav [data-nav-pro-track='nav-pro'] span {
+      display: none;
+    }
+  }
+</style>

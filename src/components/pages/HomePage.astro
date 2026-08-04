@@ -184,11 +184,11 @@ const pageSchema = [
 
   <div class="home-editorial">
   <!-- First viewport: a focused upload workspace with no competing content. -->
-  <section class="max-w-5xl mx-auto px-4 sm:px-6">
-    <div class="min-h-[calc(100svh-3.5rem)] flex flex-col justify-center py-8 sm:py-10">
+  <section class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="min-h-[calc(100svh-3.25rem)] flex flex-col justify-center py-7 sm:py-9">
       <div class="w-full">
       <!-- Center column: upload tool only -->
-      <div class="flex flex-col text-center w-full max-w-4xl mx-auto">
+      <div class="flex flex-col text-center w-full max-w-5xl mx-auto">
     <div class="soft-uploader w-full mx-auto">
       <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" multiple class="hidden" />
 
@@ -208,7 +208,7 @@ const pageSchema = [
           data-uploading-file={t(locale, 'home.upload.uploadingFile')}
         >
           <!-- State: idle / uploading -->
-          <div id="state-idle" class="relative min-h-[260px] sm:min-h-[300px] lg:min-h-[360px]">
+          <div id="state-idle" class="relative min-h-[290px] sm:min-h-[340px] lg:min-h-[400px]">
             <div id="drop-zone" class="group absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 cursor-pointer" role="button" tabindex="0">
               <Icon name="cloud_upload" class="text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon" />
               <div class="text-center">

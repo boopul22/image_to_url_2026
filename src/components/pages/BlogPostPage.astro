@@ -229,7 +229,7 @@ const faqSchema = post.faqItems?.length ? {
   ></div>
 
   <main class="pt-5 sm:pt-8 pb-16 sm:pb-24 px-5 sm:px-6">
-    <article class="blog-article max-w-2xl mx-auto">
+    <article class="blog-article max-w-3xl mx-auto">
       <!-- Article Header -->
       <header class="mb-8 sm:mb-10">
         <a
@@ -239,7 +239,7 @@ const faqSchema = post.faqItems?.length ? {
           <Icon name="arrow_back" class="text-base" />
           {(() => { const r = t(locale, 'blogPost.back'); return r && r !== 'blogPost.back' ? r : 'All articles'; })()}
         </a>
-        <span class="inline-block py-1 px-3.5 bg-tertiary-fixed text-on-tertiary-fixed border border-outline-variant/40 rounded-full text-xs font-bold uppercase tracking-widest mb-5">
+        <span class="inline-block py-1 px-3.5 bg-tertiary-fixed text-on-tertiary-fixed border-2 border-outline text-xs font-bold uppercase tracking-widest mb-5">
           {post.categoryName || t(locale, 'blogPost.uncategorized')}
         </span>
         <h1
@@ -295,7 +295,7 @@ const faqSchema = post.faqItems?.length ? {
             alt={post.title}
             width="1200"
             height="675"
-            class="w-full aspect-[16/9] object-cover border border-outline-variant/40 bg-surface-container"
+            class="w-full aspect-[16/9] object-cover border-2 border-outline bg-surface-container"
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -307,7 +307,7 @@ const faqSchema = post.faqItems?.length ? {
       {showToc && (
         <details
           open
-          class="blog-toc group mb-10 sm:mb-12 bg-surface-container border border-outline-variant/40 rounded-xl"
+          class="blog-toc group mb-10 sm:mb-12 bg-surface-container-lowest border-2 border-outline"
         >
           <summary class="cursor-pointer list-none px-4 sm:px-5 py-3.5 flex items-center justify-between gap-3 group-open:border-b group-open:border-outline-variant/40">
             <span class="text-xs uppercase tracking-widest font-black text-on-surface flex items-center gap-2">
@@ -354,7 +354,7 @@ const faqSchema = post.faqItems?.length ? {
 
               {/* Show blockquote after first section if available */}
               {i === 0 && post.content.blockquote && (
-                <figure class="my-10 p-6 sm:p-8 bg-surface-container border border-outline-variant/40 rounded-xl relative overflow-hidden">
+                <figure class="my-10 p-6 sm:p-8 bg-surface-container border-2 border-outline relative overflow-hidden">
                   <Icon name="format_quote" class="absolute right-3 top-1 text-7xl text-primary/10" />
                   <blockquote class="font-headline font-bold text-xl sm:text-2xl leading-snug text-on-surface relative z-10 m-0">
                     {post.content.blockquote}
@@ -364,7 +364,7 @@ const faqSchema = post.faqItems?.length ? {
 
               {/* Show callout after second section if available */}
               {i === 1 && post.content.callout && (
-                <aside class="my-10 p-5 sm:p-7 bg-tertiary-fixed border border-outline-variant/40 rounded-xl flex gap-4 items-start">
+                <aside class="my-10 p-5 sm:p-7 bg-tertiary-fixed border-2 border-outline flex gap-4 items-start">
                   <div class="bg-on-surface text-tertiary-fixed p-2.5 rounded-lg flex-shrink-0">
                     <Icon name="lightbulb" />
                   </div>
@@ -391,7 +391,7 @@ const faqSchema = post.faqItems?.length ? {
           </h2>
           <div class="space-y-3">
             {post.faqItems.map((faq) => (
-              <details class="group border border-outline-variant/40 rounded-xl overflow-hidden bg-surface-container">
+              <details class="group border-2 border-outline overflow-hidden bg-surface-container-lowest">
                 <summary class="cursor-pointer px-5 py-4 hover:bg-surface-container-highest transition-colors flex items-center justify-between gap-4 font-headline font-bold text-on-surface list-none">
                   <h3 class="m-0 font-headline font-bold">{faq.question}</h3>
                   <Icon name="expand_more" class="text-lg text-outline group-open:rotate-180 transition-transform flex-none" />
@@ -432,14 +432,14 @@ const faqSchema = post.faqItems?.length ? {
     </article>
     <!-- Related Posts (breaks out wider than the reading column) -->
     {relatedPosts.length > 0 && (
-      <section class="max-w-5xl mx-auto mt-16 sm:mt-24">
+      <section class="max-w-3xl mx-auto mt-16 sm:mt-24">
         <h2 class="text-2xl sm:text-3xl font-headline font-black mb-8 sm:mb-10 text-on-surface tracking-tight">
           {t(locale, 'blogPost.related')}
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {relatedPosts.map((related) => (
             <a
-              class="group flex flex-col border border-outline-variant/40 bg-surface-container rounded-xl overflow-hidden hover:border-primary/50 transition-colors"
+              class="blog-related-card group flex flex-col border-2 border-outline bg-surface-container-lowest overflow-hidden transition-all"
               href={lp(`/blog/${related.slug}`)}
             >
               <div class={`aspect-[16/10] border-b border-outline-variant/40 overflow-hidden ${related.coverImage ? '' : (related.iconBg || 'bg-primary-fixed')} flex items-center justify-center`}>
@@ -471,6 +471,15 @@ const faqSchema = post.faqItems?.length ? {
 </Layout>
 
 <style>
+  .blog-toc,
+  .blog-related-card {
+    border-radius: 0 !important;
+    box-shadow: 4px 4px 0 var(--color-outline);
+  }
+  .blog-related-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-outline);
+  }
   .blog-html-content :is(h2, h3)[id],
   article :is(h2, h3)[id] {
     scroll-margin-top: 6rem;
