@@ -9,7 +9,7 @@ const schema = { "@context": "https://schema.org", "@type": "WebApplication", "n
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
   { "@type": "Question", "name": "What's wrong with Postimages?", "acceptedAnswer": { "@type": "Answer", "text": "Postimages works, but the ads are heavy, the mobile UI is dated, and there's no API. For one-off forum-post hosting it's fine. For regular work — blog posts, portfolios, dev assets — it grinds." } },
   { "@type": "Question", "name": "Are URLs actually permanent on Postimages?", "acceptedAnswer": { "@type": "Answer", "text": "They claim permanent, and in practice most uploads stay. ImageToURL guest uploads are temporary; signed-in users can choose Never delete before upload when they need a keep-forever link." } },
-  { "@type": "Question", "name": "Does ImageToURL show ads?", "acceptedAnswer": { "@type": "Answer", "text": "ImageToURL is free within the current limits and supported by ads on the site. Your uploads are not sold as a product." } },
+  { "@type": "Question", "name": "Does ImageToURL show ads?", "acceptedAnswer": { "@type": "Answer", "text": "No. ImageToURL is ad-free within the current free-service limits, and your uploads are not sold as a product." } },
   { "@type": "Question", "name": "Which is faster for viewers?", "acceptedAnswer": { "@type": "Answer", "text": "Side-by-side tests on the same image show ImageToURL ~60–120 ms faster TTFB from US/EU, because Cloudflare's PoPs sit closer to most users than Postimages' origin. Asia and LATAM see bigger gaps." } },
   { "@type": "Question", "name": "Can I migrate existing Postimages URLs?", "acceptedAnswer": { "@type": "Answer", "text": "Not automatically — there is no import API. Download your images from Postimages and re-upload them here. Use the web bulk uploader within the current limits." } },
   { "@type": "Question", "name": "Embed codes?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — direct URL, HTML, Markdown, BBCode. Same set Postimages offers, generated locally after upload." } },
@@ -34,7 +34,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
           <table class="w-full text-sm">
             <thead class="bg-surface-variant border-b border-outline-variant/40"><tr><th class="text-left p-3 font-black font-headline uppercase text-xs">Feature</th><th class="text-left p-3 font-black font-headline uppercase text-xs">ImageToURL</th><th class="text-left p-3 font-black font-headline uppercase text-xs">Postimages</th></tr></thead>
             <tbody class="font-body">
-              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads</td><td class="p-3">Ad-supported site</td><td class="p-3">Heavy display + popup</td></tr>
+              <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Ads</td><td class="p-3">None</td><td class="p-3">Heavy display + popup</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">CDN</td><td class="p-3">Cloudflare (300+ PoPs)</td><td class="p-3">Single-origin delivery</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">API</td><td class="p-3">Not public today</td><td class="p-3">No</td></tr>
               <tr class="border-b border-outline-variant/40"><td class="p-3 font-semibold">Max file size</td><td class="p-3">50 MB</td><td class="p-3">24 MB</td></tr>

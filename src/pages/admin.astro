@@ -114,16 +114,6 @@ const firstName = user.name.split(' ')[0];
         </div>
         <div>
           <div class="flex items-baseline justify-between text-xs mb-1.5">
-            <span class="font-medium" style="color:var(--a-fg)">Ad-blocker <span class="a-subtle font-normal" id="comp-ab-num">—</span></span>
-            <span class="a-muted">No blocker <span class="font-medium" style="color:var(--a-fg)" id="comp-noab-num">—</span></span>
-          </div>
-          <div class="a-track">
-            <div class="a-seg a-seg-3" id="comp-ab-bar" style="width:0%"></div>
-            <div class="a-seg a-seg-2" id="comp-noab-bar" style="width:0%"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex items-baseline justify-between text-xs mb-1.5">
             <span class="font-medium" style="color:var(--a-fg)">With watermark <span class="a-subtle font-normal" id="comp-wm-num">—</span></span>
             <span class="a-muted">No watermark <span class="font-medium" style="color:var(--a-fg)" id="comp-nowm-num">—</span></span>
           </div>
@@ -202,19 +192,12 @@ const firstName = user.name.split(' ')[0];
     </div>
 
     <!-- ENGAGEMENT -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div class="a-card a-card-pad">
         <p class="a-stat-label">Anon visitors · unique IPs</p>
         <div class="grid grid-cols-2 gap-4 mt-3">
           <div><p class="text-xl font-semibold a-num" style="color:var(--a-fg)" id="anon-ips-7d">—</p><p class="text-xs a-subtle mt-0.5">7 days</p></div>
           <div><p class="text-xl font-semibold a-num" style="color:var(--a-fg)" id="anon-ips-30d">—</p><p class="text-xs a-subtle mt-0.5">30 days</p></div>
-        </div>
-      </div>
-      <div class="a-card a-card-pad">
-        <p class="a-stat-label">Ad-blocker users · last 30 days</p>
-        <div class="flex items-baseline gap-2 mt-3">
-          <p class="text-xl font-semibold a-num" style="color:var(--a-fg)" id="eng-adblock-30d">—</p>
-          <p class="text-xs a-subtle" id="eng-adblock-30d-sub">&nbsp;</p>
         </div>
       </div>
       <div class="a-card a-card-pad">
@@ -320,9 +303,6 @@ const firstName = user.name.split(' ')[0];
     document.getElementById('comp-api-num')!.textContent = fmt(d.sources.api30d ?? 0);
     setW('comp-web-bar', d.sources.web30d ?? 0); setW('comp-api-bar', d.sources.api30d ?? 0);
 
-    document.getElementById('comp-ab-num')!.textContent = fmt(d.sources.adblock30d ?? 0);
-    document.getElementById('comp-noab-num')!.textContent = fmt(d.sources.noAdblock30d ?? 0);
-    setW('comp-ab-bar', d.sources.adblock30d ?? 0); setW('comp-noab-bar', d.sources.noAdblock30d ?? 0);
 
     // Watermark choice has its own denominator (total link copies, not uploads).
     const wm = d.watermark ?? {};
@@ -464,8 +444,6 @@ const firstName = user.name.split(' ')[0];
   }
 
   function renderEngagementBlock(d: Data) {
-    document.getElementById('eng-adblock-30d')!.textContent = (d.sources.adblock30d ?? 0).toLocaleString();
-    document.getElementById('eng-adblock-30d-sub')!.textContent = `${(d.sources.adblockPct30d ?? 0).toFixed(1)}% of uploads`;
     const ctaList: any[] = d.engagement.ctaBreakdown ?? [];
     const ctaEl = document.getElementById('eng-cta-list')!;
     ctaEl.innerHTML = !ctaList.length

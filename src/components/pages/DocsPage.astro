@@ -3,7 +3,6 @@ import Icon from '../Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
-import AdSlot from '../ads/AdSlot.astro';
 import { t } from '../../i18n/utils';
 import { defaultLocale } from '../../i18n/config';
 import type { Locale } from '../../i18n/config';
@@ -147,11 +146,6 @@ and requires a same-site browser request from imagetourl.cloud.</code>
                       <td class="p-3 text-sm italic">string</td>
                       <td class="p-3 text-sm">{t(locale, 'docs.upload.ttlDesc')}</td>
                     </tr>
-                    <tr>
-                      <td class="p-3 font-bold text-sm">adblock</td>
-                      <td class="p-3 text-sm italic">string</td>
-                      <td class="p-3 text-sm">{t(locale, 'docs.upload.folderDesc')}</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -179,7 +173,6 @@ and requires a same-site browser request from imagetourl.cloud.</code>
         </div>
       </div>
 
-      <AdSlot placement="contentMidA" />
     </section>
   </main>
 

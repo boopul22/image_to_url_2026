@@ -9,7 +9,6 @@ import type { Locale } from '../../i18n/config';
 import { getDB } from '../../lib/db';
 import { getPublishedPostsLocalized, getCategories } from '../../lib/cms';
 import { imgUrl } from '../../lib/img';
-import AdSlot from '../ads/AdSlot.astro';
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 
@@ -78,8 +77,6 @@ try {
         </div>
       </div>
     </section>
-
-    <AdSlot placement="leaderTop" class="max-w-5xl mx-auto px-4 sm:px-6 mt-10" />
 
     <!-- Blog Grid -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
@@ -162,17 +159,11 @@ try {
                 </div>
               </a>
             </article>
-            {/* In-grid ad cell after the 5th card. Deliberately plain (hairline
-                border only, no fake post chrome — an ad styled as content is an
-                AdSense policy violation). Collapses with the cell when unfilled. */}
-            {i === 4 && <AdSlot placement="blogGrid" class="border border-outline-variant/40 bg-surface" />}
           </>
           );
         })}
       </div>
     </section>
-
-    <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto px-4 sm:px-6 mb-12 sm:mb-20" />
 
   </main>
 

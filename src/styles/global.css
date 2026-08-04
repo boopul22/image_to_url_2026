@@ -5,9 +5,8 @@
 @import "@fontsource-variable/space-grotesk";
 
 /* Cross-document View Transitions: makes full-page (MPA) navigations crossfade
-   instead of white-flashing — and since it stays a REAL navigation, Google's
-   vignette/overlay ad still fires (an SPA router would break it). The browser
-   holds the old page on screen during the fetch. Kept fast (140ms) to fit the
+   instead of white-flashing. The browser holds the old page on screen during
+   the fetch. Kept fast (140ms) to fit the
    brutalist feel; fully disabled for users who prefer reduced motion. Chromium
    today; other browsers
    degrade gracefully to a normal navigation. */
@@ -43,7 +42,7 @@
 /* Metric-matched fallbacks. Under load throttling the preloaded variable fonts
    don't arrive before first paint, so the page renders in the fallback then swaps
    — and because the headline uses a fixed line-height, a width mismatch re-wraps it
-   and shifts the whole page below (this was the dominant CLS, ~0.75, not the ads).
+   and shifts the whole page below (this was the dominant CLS, ~0.75).
    These overrides make Helvetica/Arial occupy the SAME box as the web font, so the
    swap is invisible (no re-wrap, no shift). */
 @font-face {
@@ -655,63 +654,6 @@ h1, h2, h3, h4, h5, h6 {
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 800px;
-}
-
-/* Reserve height for responsive AdSense slots so the iframe filling in later
-   doesn't shift the layout (this is what killed CLS — slots rendered at 0px then
-   expanded). Always lives on a DEDICATED inner div wrapping the <ins>, never on a
-   wrapper that toggles visibility (lg:hidden/hidden): unlayered rules here beat
-   Tailwind utilities, so display:flex would override `hidden` and leak mobile ads
-   onto desktop. The ad is centered; a fill shorter than the reserve shows centered
-   whitespace (no shift), a taller fill grows the box slightly. The reserve holds
-   its height WHILE the request is in flight (data-ad-status unset) so a fill never
-   shifts layout; once Google returns `unfilled` (no ad to serve) the reserve
-   collapses entirely (see the :has rule below) so no blank white patch is left —
-   a deliberate late shift accepted in trade for clean empty space. min-heights are
-   tuned to the common fill per breakpoint. */
-.ad-reserve {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  /* Sized to the observed mobile responsive fill (~300–400px) so the ad doesn't
-     grow much when it loads. On mobile these slots sit BELOW the uploader, so any
-     residual growth pushes off-screen content (≈0 visible shift). */
-  min-height: 300px;
-}
-@media (min-width: 1024px) {
-  /* Desktop banner lives in the ~672px center column (skyscrapers handle the
-     sides); it fills shorter, so reserve less to avoid dead whitespace. */
-  .ad-reserve { min-height: 280px; }
-}
-/* No ad to show → no reserved space. When AdSense marks a slot `unfilled`
-   (Google chose not to render, or there are no ads), collapse its reserve so the
-   page shows zero blank height instead of a 280–300px white patch. The reserve is
-   only ever collapsed AFTER the request resolves, so an actually-filled slot keeps
-   its space and never shifts. */
-.ad-reserve:has(> ins.adsbygoogle[data-ad-status="unfilled"]) {
-  display: none;
-}
-/* AdSlot.astro renders an outer wrapper (carries visibility utilities + margins,
-   since .ad-reserve's unlayered display:flex would beat a `hidden` utility).
-   Collapse the wrapper too when its slot is unfilled so no margin remnant is
-   left behind. */
-[data-ad-outer]:has(.ad-reserve > ins.adsbygoogle[data-ad-status="unfilled"]) {
-  display: none;
-}
-/* Format-specific reserves (base .ad-reserve above = display responsive).
-   In-article fluid units fill ~250–450px; multiplex grids grow downward and sit
-   below the fold, so reserve more on desktop where they render multi-column. */
-.ad-reserve--in-article {
-  min-height: 280px;
-}
-.ad-reserve--multiplex {
-  min-height: 320px;
-}
-@media (min-width: 1024px) {
-  .ad-reserve--multiplex {
-    min-height: 420px;
-  }
 }
 
 /* Focus visible styles for accessibility */

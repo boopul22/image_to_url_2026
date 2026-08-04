@@ -39,7 +39,6 @@
   "docs.sidebar.requestApiKey": "Demander une clé API",
   "docs.upload.description": "Téléversez depuis le site web pour recevoir une URL mise en cache par CDN. Les téléversements visiteurs expirent; les utilisateurs connectés peuvent choisir un lien permanent avant le téléversement.",
   "docs.upload.fileDesc": "Le fichier image (PNG, JPG, WebP) jusqu'à 50 Mo.",
-  "docs.upload.folderDesc": "Nom du dossier de destination.",
   "docs.upload.name": "Nom",
   "docs.upload.paramDescription": "Description",
   "docs.upload.parameters": "Paramètres",

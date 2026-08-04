@@ -73,9 +73,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const formData = await request.formData();
     const file = formData.get('file');
     const expiresAt = resolveExpiresAt(formData.get('expires_in'), !user);
-    // Ad-blocker signal from the client — analytics only, never affects the upload.
-    const adblock = formData.get('adblock') === '1' ? 1 : 0;
-
     if (!file || !(file instanceof File)) {
       return new Response(JSON.stringify({ error: 'No file provided' }), {
         status: 400,
@@ -204,10 +201,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
       await db
         .prepare(
-          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, adblock, expires_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, expires_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         )
-        .bind(id, user?.id ?? null, key, imageUrl, file.name, body.length, file.type, uploadedVia, adblock, expiresAt)
+        .bind(id, user?.id ?? null, key, imageUrl, file.name, body.length, file.type, uploadedVia, expiresAt)
         .run();
 
       // Track anonymous upload count
@@ -219,16 +216,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
           .run();
       }
 
-      // Deduct the upload's credits and roll up the ad-blocker signal in one
-      // write. `cost` is 0 for temporary uploads (they're free), so only a
+      // Deduct the upload's credits. `cost` is 0 for temporary uploads, so only a
       // permanent "keep forever" upload actually decrements the balance. MAX(0, …)
       // guards the rare concurrent-bulk race (the balance was already checked
-      // >= cost above; getUserCredits applied any lazy refill). Anonymous uploads
-      // are captured per-row via images.adblock instead.
+      // >= cost above; getUserCredits applied any lazy refill).
       if (user) {
         await db
-          .prepare('UPDATE users SET uses_adblock = ?, credits = MAX(0, credits - ?) WHERE id = ?')
-          .bind(adblock, cost, user.id)
+          .prepare('UPDATE users SET credits = MAX(0, credits - ?) WHERE id = ?')
+          .bind(cost, user.id)
           .run();
       }
     } catch (dbErr: any) {

@@ -39,7 +39,6 @@
   "docs.sidebar.requestApiKey": "API-Schlüssel anfordern",
   "docs.upload.description": "Lade über die Website hoch und erhalte eine CDN-gecachte URL. Gast-Uploads laufen ab; angemeldete Nutzer können vor dem Upload einen permanenten Link wählen.",
   "docs.upload.fileDesc": "Die Bilddatei (PNG, JPG, WebP) bis zu 50 MB.",
-  "docs.upload.folderDesc": "Name des Zielordners.",
   "docs.upload.name": "Name",
   "docs.upload.paramDescription": "Beschreibung",
   "docs.upload.parameters": "Parameter",

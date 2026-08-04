@@ -12,8 +12,7 @@ import Icon from './Icon.astro';
  */
 ---
 
-<!-- Bare uploader widget — no ad markup of its own. Pages that want the rails +
-     mobile multiplex frame wrap this in <ToolAdFrame> (src/components/ads/). -->
+<!-- Bare uploader widget shared by localized tool pages. -->
       <div class="soft-uploader w-full max-w-xl sm:max-w-2xl mx-auto">
         <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,audio/mpeg,.mp3" multiple class="hidden" />
 
@@ -207,9 +206,6 @@ import Icon from './Icon.astro';
 
 <script>
   import { ic_cloud_upload, ic_hourglass_top } from '../data/icon-svgs';
-  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
-  // Shared with HomePage.astro so both uploaders report the same signal.
-
   // Cached /api/me payload — shared by the never-expire login gate and the
   // bulk-upload quota pre-slice. One fetch per page; the server 429 is the real
   // backstop, so a slightly stale `remaining` only costs an extra "skipped" label.
@@ -503,11 +499,6 @@ import Icon from './Icon.astro';
       fileInput.value = '';
       return;
     }
-    // Ad-block gate covers both single and batch paths in one place.
-    if (!(await (window as any).__adblockGate?.check())) {
-      fileInput.value = '';
-      return;
-    }
     if (files.length === 1) {
       uploadFile(files[0]);
       return;
@@ -567,7 +558,6 @@ import Icon from './Icon.astro';
     uploadSubtext.textContent = 'Bulk upload in progress…';
     uploadBtn.textContent = 'Uploading...';
 
-    const ab = '0'; // gated in handleFiles
     const results: { name: string; url: string }[] = [];
     const failures: { name: string; error: string }[] = [];
 
@@ -578,7 +568,6 @@ import Icon from './Icon.astro';
       try {
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('adblock', ab);
         if (expiresInEl) formData.append('expires_in', expiresInEl.value);
         const response = await fetch('/api/upload', { method: 'POST', body: formData });
         const data = await response.json();
@@ -640,8 +629,6 @@ import Icon from './Icon.astro';
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1]?.toUpperCase() || 'FILE'}`;
     uploadBtn.textContent = 'Uploading...';
 
-    const ab = '0'; // gated in handleFiles
-
     // Minimum perceived upload time — instant completion was driving
     // users to bounce before they registered that anything happened.
     const MIN_UPLOAD_MS = 5000;
@@ -658,7 +645,6 @@ import Icon from './Icon.astro';
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('adblock', ab);
       const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
       if (expiresInEl) formData.append('expires_in', expiresInEl.value);
 

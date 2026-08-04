@@ -9,8 +9,6 @@ import type { Locale } from '../../i18n/config';
 import { localizedUrl } from '../../i18n/landing/registry';
 import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
-import AdRail from '../ads/AdRail.astro';
-import AdSlot from '../ads/AdSlot.astro';
 import ProLaunch from '../ProLaunch.astro';
 
 
@@ -133,7 +131,7 @@ const pageSchema = [
         "price": "4.99",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "description": "50GB active storage, permanent HTTPS URLs, private assets, folders, usage analytics, and no ads.",
+        "description": "50GB active storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
         "url": "https://imagetourl.cloud/pro/pricing?billing=month"
       },
       {
@@ -142,7 +140,7 @@ const pageSchema = [
         "price": "39.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "description": "Annual ImageToURL Pro access with 50GB active storage, permanent HTTPS URLs, private assets, folders, usage analytics, and no ads.",
+        "description": "Annual ImageToURL Pro access with 50GB active storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
         "url": "https://imagetourl.cloud/pro/pricing?billing=year"
       }
     ],
@@ -189,9 +187,6 @@ const pageSchema = [
   <!-- Hero Section — Immediate, action-focused -->
   <section class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
     <div class="w-full xl:flex xl:items-start xl:justify-center xl:gap-6">
-      <!-- Left rail — two stacked responsive ad units (vertical + square) -->
-      <AdRail side="left" />
-
       <!-- Center column: badge, headline, upload tool -->
       <div class="flex flex-col text-center xl:flex-1 xl:max-w-2xl xl:min-w-0">
         <div class="max-w-4xl mx-auto w-full">
@@ -399,8 +394,6 @@ const pageSchema = [
         </div>
       </div><!-- /center column -->
 
-      <!-- Right rail — two stacked responsive ad units (vertical + square) -->
-      <AdRail side="right" />
     </div><!-- /flex wrapper -->
 
     <!-- Trust Signals — pushed to bottom of viewport -->
@@ -411,11 +404,6 @@ const pageSchema = [
       <span class="flex items-center gap-1.5"><Icon name="flash_on" class="text-primary text-base" fill /> <span class="hidden sm:inline">{t(locale, 'home.trust.instant')}</span></span>
     </div>
   </section>
-
-  <!-- Mobile/tablet in-content ad — fills the slot gap where desktop has skyscrapers.
-       Multiplex (autorelaxed) grid; below the fold → lazy-loaded by the observer in
-       Layout.astro (data-ad-lazy). -->
-  <AdSlot placement="toolBelowMultiplex" class="xl:hidden max-w-2xl mx-auto px-4 sm:px-6 mb-6" stripAboveXl />
 
   <ProLaunch variant="section" locale={locale} />
 
@@ -526,8 +514,6 @@ const pageSchema = [
       </div>
     </div>
   </section>
-
-  <AdSlot placement="contentMidA" class="max-w-3xl mx-auto px-4 sm:px-6" />
 
   <!-- How-to — targets informational "how to make an image url" long-tail cluster.
        Safe for the homepage: informational intent, the tool itself lives here, and no
@@ -676,8 +662,6 @@ const pageSchema = [
     </div>
   </section>
 
-  <AdSlot placement="contentMidB" class="max-w-3xl mx-auto px-4 sm:px-6 mt-8 sm:mt-12" />
-
   <!-- FAQ Accordion -->
   <section class="cv-auto max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <div class="text-center mb-5 sm:mb-8 reveal">
@@ -781,8 +765,6 @@ const pageSchema = [
     </div>
   </div>
 
-  <AdSlot placement="bottomMultiplex" class="max-w-5xl mx-auto px-4 sm:px-6 my-8 sm:my-12" />
-
   <!-- Final CTA -->
   <section class="cv-auto py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
@@ -848,9 +830,6 @@ const pageSchema = [
 
 <script>
   import { ic_cloud_upload, ic_hourglass_top } from '../../data/icon-svgs';
-  // Ad-blocker detection — analytics only, NEVER blocks or degrades uploads.
-  // Shared with the tool-page uploader so both report the same signal.
-
   // Cached /api/me payload — the auto-delete "Never" gate reads .user; the bulk
   // upload reads .upload.remaining to pre-slice a selection. One fetch per page;
   // the server 429 is the real backstop, so a stale `remaining` only costs an
@@ -1157,11 +1136,6 @@ const pageSchema = [
       fileInput.value = '';
       return;
     }
-    // Ad-block gate covers both single and bulk paths in one place.
-    if (!(await (window as any).__adblockGate?.check())) {
-      fileInput.value = '';
-      return;
-    }
     if (files.length === 1) { uploadFile(files[0]); return; }
     // Bulk path — open to everyone. Guests spend a daily upload count (5); signed-in
     // users spend one credit per permanent upload (temporary uploads are free).
@@ -1218,7 +1192,6 @@ const pageSchema = [
     uploadSubtext.textContent = 'Bulk upload in progress…';
     uploadBtn.textContent = i18n.uploading;
 
-    const ab = '0'; // gated in handleFiles
     const results: { name: string; url: string }[] = [];
     const failures: { name: string; error: string }[] = [];
 
@@ -1229,7 +1202,6 @@ const pageSchema = [
       try {
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('adblock', ab);
         if (expiresInEl) formData.append('expires_in', expiresInEl.value);
         const response = await fetch('/api/upload', { method: 'POST', body: formData });
         const data = await response.json();
@@ -1277,8 +1249,6 @@ const pageSchema = [
   }
 
   async function uploadFile(file: File) {
-    // Ad-block gate already ran in handleFiles (covers single + bulk paths).
-
     // "Never" requires a signed-in account; server clamps anon to 24h otherwise.
     if (expiresInSel?.value === 'never') {
       const loggedIn = await fetchLoggedIn();
@@ -1302,9 +1272,6 @@ const pageSchema = [
     uploadSubtext.textContent = `${(file.size / 1024).toFixed(0)} KB · ${file.type.split('/')[1].toUpperCase()}`;
     uploadBtn.textContent = i18n.uploading;
 
-    // Gate already passed above — blocker is either off or never was on.
-    const ab = '0';
-
     const MIN_UPLOAD_MS = 5000;
     const startedAt = Date.now();
 
@@ -1317,7 +1284,6 @@ const pageSchema = [
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('adblock', ab);
       const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
       if (expiresInEl) formData.append('expires_in', expiresInEl.value);
 
@@ -1368,7 +1334,7 @@ const pageSchema = [
     }
   }
 
-  // Legacy click tracking (non-sponsor links)
+  // Legacy click tracking for product links.
   document.querySelectorAll<HTMLAnchorElement>('[data-track-click]').forEach((el) => {
     el.addEventListener('click', () => {
       navigator.sendBeacon('/api/track/click', JSON.stringify({
@@ -1511,28 +1477,6 @@ const pageSchema = [
 </script>
 
 <style>
-  @keyframes sponsor-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
-  }
-  @keyframes sponsor-nudge {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(2px); }
-  }
-  .sponsor-card {
-    animation: sponsor-float 4s ease-in-out infinite;
-  }
-  .sponsor-card:nth-of-type(1) { animation-delay: 0s; }
-  .sponsor-card:nth-of-type(2) { animation-delay: 2s; }
-  .sponsor-arrow {
-    display: inline-block;
-    animation: sponsor-nudge 2.2s ease-in-out infinite;
-  }
-  .sponsor-card:hover { animation-play-state: paused; }
-  @media (prefers-reduced-motion: reduce) {
-    .sponsor-card, .sponsor-arrow { animation: none; }
-  }
-
   /* Reviews marquee — continuous right-to-left scroll, pause on hover */
   @keyframes reviews-marquee {
     from { transform: translateX(0); }

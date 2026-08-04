@@ -39,7 +39,6 @@
   "docs.sidebar.requestApiKey": "APIキーをリクエスト",
   "docs.upload.description": "WebサイトからアップロードしてCDNキャッシュ済みURLを受け取ります。ゲストアップロードは期限切れになり、ログインユーザーはアップロード前に永久リンクを選択できます。",
   "docs.upload.fileDesc": "画像ファイル（PNG、JPG、WebP）最大50MB。",
-  "docs.upload.folderDesc": "保存先フォルダ名。",
   "docs.upload.name": "名前",
   "docs.upload.paramDescription": "説明",
   "docs.upload.parameters": "パラメーター",

@@ -3,10 +3,8 @@ import '../styles/global.css';
 import { locales, localeOgTags, defaultLocale, isRtl } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
-import AdBlockGate from '../components/AdBlockGate.astro';
 import EmailOptInPrompt from '../components/EmailOptInPrompt.astro';
 import ProInterestTracker from '../components/ProInterestTracker.astro';
-import { AD_CLIENT } from '../lib/ads';
 // Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
 // bundles them into /_astro/* with content hashes — Vite resolves these ?url imports
 // to those same fingerprinted URLs, so the preload is always in sync with the CSS.
@@ -37,8 +35,6 @@ interface Props {
   breadcrumbs?: { name: string; url: string }[];
   /** ISO-8601 date string surfaced as visible text and `WebPage.dateModified` */
   lastModified?: string;
-  /** Whether this page may render or load advertising code. */
-  adsEnabled?: boolean;
 }
 
 const {
@@ -54,7 +50,6 @@ const {
   hreflangAlternates,
   breadcrumbs,
   lastModified,
-  adsEnabled = true,
 } = Astro.props;
 
 // Clamp the meta description to <=158 chars at a word boundary so it never
@@ -243,7 +238,7 @@ function hreflangUrl(loc: Locale): string {
 
     <!-- Self-hosted fonts: preload the three woff2s the inlined CSS will reference
          right after the HTML parses. Without these, busy pages (home: uploader JS +
-         AdSense + dense DOM) discover the fonts later than light pages, so the
+         uploader JS + dense DOM) discover the fonts later than light pages, so the
          FOUT window flashed the Space Grotesk fallback (Arial Black 900) on home
          while /about/ had already swapped. -->
     <link
@@ -261,84 +256,6 @@ function hreflangUrl(loc: Locale): string {
       crossorigin
     />
 
-    {adsEnabled && (
-      <Fragment>
-    <!-- Ad domains: dns-prefetch only — ads are lazy so avoid preconnect contention with LCP.
-         fonts.gstatic.com is included because AdSense pulls its own Roboto woff2s from there;
-         resolving DNS early warms that fetch without an eager TLS handshake on the LCP path. -->
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
-    <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
-    <!-- AdSense loader (global) — INTERACTION-GATED off the FCP/LCP path. The
-         adsbygoogle.js library (and its ~2.5s of main-thread script eval on mobile)
-         is injected on the FIRST real user interaction: scroll, pointerdown, click,
-         keydown, touchstart, or mousemove. Lighthouse / headless audits never do any
-         of these, so the library — and every ad — stays entirely OUT of the measured
-         load window. That is what lets the Performance score reach the 90s. Real
-         visitors trip one of these listeners within the first moment (a scroll, a
-         tap, the first mouse twitch), so the impression is preserved, just deferred.
-
-         A requestIdleCallback fallback fires AFTER `load` for the rare visitor who
-         never interacts, so passive readers still get an ad. It is deferred well past
-         the audit window (10s timeout) so it doesn't count against the score.
-
-         Note: this replaced the old (1) immediate viewport-IO trigger — which fired
-         the instant the above-the-fold banner was near view, i.e. on every page load,
-         defeating the gating — and (2) the 2.5s blanket timer, which fired inside
-         Lighthouse's trace. The per-slot below-the-fold lazy observer further down is
-         unchanged; scroll is an interaction trigger, so the library is already loading
-         by the time any below-fold slot is pushed. Component inline push({}) calls
-         queue harmlessly on the window.adsbygoogle array until the library loads. -->
-    <script is:inline define:vars={{ adClient: AD_CLIENT }}>
-      (function () {
-        var loaded = false;
-        function loadAds() {
-          if (loaded) return;
-          loaded = true;
-          var s = document.createElement('script');
-          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + adClient;
-          s.async = true;
-          s.crossOrigin = 'anonymous';
-          document.head.appendChild(s);
-        }
-        // Primary: load on the first real user interaction.
-        ['scroll', 'pointerdown', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (evt) {
-          window.addEventListener(evt, loadAds, { once: true, passive: true });
-        });
-        // Revenue safety net: genuinely passive (no-interaction) HUMAN visitors still
-        // get an ad — but only well after LCP, and NEVER for automated agents.
-        // Lighthouse / PageSpeed Insights / headless crawlers set navigator.webdriver,
-        // and they never interact, so the old requestIdleCallback fallback fired the
-        // instant the (ad-free) page went idle — i.e. right inside the audit window —
-        // loading AdSense and tanking both Best Practices (console error + 3p cookies)
-        // and Performance. Bots don't view ads anyway, so skipping them costs zero real
-        // impressions while keeping the measured page identical to the engagement-gated
-        // experience. Real passive readers get the ad on a post-load delay.
-        function idleFallback() {
-          if (navigator.webdriver) return; // automated audit / crawler → never load ads
-          setTimeout(function () {
-            if ('requestIdleCallback' in window) { requestIdleCallback(loadAds, { timeout: 4000 }); }
-            else { loadAds(); }
-          }, 3000); // real passive reader, comfortably past the LCP window
-        }
-        if (document.readyState === 'complete') idleFallback();
-        else window.addEventListener('load', idleFallback, { once: true });
-      })();
-    </script>
-
-    <!-- Collapse ad slots Google returns as "unfilled" so empty placeholders
-         don't reserve blank space (e.g. the 90px banner that otherwise sits
-         empty above the H1). Hiding *unfilled* slots is AdSense-compliant;
-         filled slots are never touched. The slot still reserves space while the
-         request is in flight (data-ad-status unset), so there's no CLS on fill. -->
-    <style is:global>
-      ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
-    </style>
-      </Fragment>
-    )}
-
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={schemaJson} />
 
@@ -349,7 +266,6 @@ function hreflangUrl(loc: Locale): string {
     <main>
       <slot />
     </main>
-    {adsEnabled && <AdBlockGate />}
     <EmailOptInPrompt />
     <script>
       const revealed = new WeakSet();
@@ -381,50 +297,6 @@ function hreflangUrl(loc: Locale): string {
         }, { passive: true });
       }
     </script>
-
-    {adsEnabled && (
-      <Fragment>
-    <!-- Lazy-load below-the-fold ad slots. Slots marked data-ad-lazy are NOT pushed
-         at parse time; we request them ~300px before they scroll into view. This is
-         Google's recommended pre-trigger (200–400px) so the ad is filled by the time
-         it's viewable — viewability/revenue is preserved while one fewer concurrent
-         AdSense fill competes in the FCP/LCP window. Above-the-fold slots keep their
-         own inline push and are untouched. display:none slots (e.g. lg:hidden on the
-         wrong breakpoint) never intersect, so they're correctly never requested. -->
-    <script is:inline>
-      (function () {
-        var pushed = new WeakSet();
-        function fill(ins, tries) {
-          if (pushed.has(ins) || ins.hasAttribute('data-ad-pushed')) return;
-          // Matched Content / autorelaxed slots throw "Invalid responsive width from
-          // Matched Content slot …: 0" if pushed while their container has no layout
-          // box (e.g. revealed-in-place panels, or a frame where layout hasn't settled).
-          // Defer until the slot actually has width; give up after ~1s so a slot that
-          // stays collapsed just stays unfilled instead of erroring in the console.
-          if (ins.offsetWidth === 0) {
-            if ((tries || 0) < 60) requestAnimationFrame(function () { fill(ins, (tries || 0) + 1); });
-            return;
-          }
-          pushed.add(ins);
-          ins.setAttribute('data-ad-pushed', '');
-          try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-        }
-        var slots = document.querySelectorAll('ins.adsbygoogle[data-ad-lazy]:not([data-ad-pushed])');
-        if (!slots.length) return;
-        if (!('IntersectionObserver' in window)) {
-          slots.forEach(fill);
-          return;
-        }
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { fill(e.target); io.unobserve(e.target); }
-          });
-        }, { rootMargin: '300px 0px', threshold: 0 });
-        slots.forEach(function (s) { io.observe(s); });
-      })();
-    </script>
-      </Fragment>
-    )}
 
     <!-- GA4 — queue page and funnel events immediately, then load the network
          script on interaction or idle so it does not compete with LCP. -->

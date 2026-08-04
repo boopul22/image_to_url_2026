@@ -280,7 +280,6 @@
   "docs.upload.paramDescription": "Description",
   "docs.upload.fileDesc": "The image file (PNG, JPG, WebP) up to 50MB.",
   "docs.upload.ttlDesc": "Optional expiry choice: use \"never\" only when signed in; guests always auto-expire.",
-  "docs.upload.folderDesc": "Optional analytics flag from the website uploader: 1 when ad-block detection is positive.",
   "docs.upload.response": "Response Example",
   "privacy.meta.title": "Privacy Policy — ImageToURL",
   "privacy.meta.description": "ImageToURL’s privacy policy. Learn how we collect, use, and protect your data when you use our image hosting service.",
@@ -412,10 +411,5 @@
   "terms.s14.title": "14. Contact",
   "terms.s14.label": "Questions about our terms?",
   "terms.s14.contactIntro": "Contact us at:",
-  "terms.s14.email": "blog.boopul@gmail.com",
-  "adblock.title": "Please disable your ad blocker",
-  "adblock.body": "Ads pay for the free storage and bandwidth this site uses. Please disable your ad blocker for this site and try again.",
-  "adblock.retry": "Try again",
-  "adblock.cancel": "Cancel",
-  "adblock.stillBlocked": "Still detecting an ad blocker. Disable it for this site, then try again."
+  "terms.s14.email": "blog.boopul@gmail.com"
 }

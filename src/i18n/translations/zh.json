@@ -39,7 +39,6 @@
   "docs.sidebar.requestApiKey": "申请API密钥",
   "docs.upload.description": "通过网站上传即可获得CDN缓存URL。访客上传会过期；已登录用户可在上传前选择永久链接。",
   "docs.upload.fileDesc": "图片文件（PNG、JPG、WebP），最大50MB。",
-  "docs.upload.folderDesc": "目标文件夹名称。",
   "docs.upload.name": "名称",
   "docs.upload.paramDescription": "描述",
   "docs.upload.parameters": "参数",

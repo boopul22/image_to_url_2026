@@ -413,12 +413,12 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   response.headers.set(
     'Content-Security-Policy-Report-Only',
     "default-src 'self'; " +
-      "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud https://cdn.imagetourl.cloud https://*.cloudflare.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google https://www.google.com https://*.google.com https://www.googletagmanager.com https://*.google-analytics.com; " +
+      "img-src 'self' data: blob: https://*.googleusercontent.com https://imagetourl.cloud https://cdn.imagetourl.cloud https://*.cloudflare.com https://www.google.com https://*.google.com https://www.googletagmanager.com https://*.google-analytics.com; " +
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' data: https://fonts.gstatic.com; " +
-      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://*.g.doubleclick.net https://www.googletagmanager.com; " +
-      "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.g.doubleclick.net https://*.adtrafficquality.google https://www.google.com https://*.google-analytics.com https://www.googletagmanager.com; " +
-      "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.g.doubleclick.net https://*.adtrafficquality.google https://www.google.com; " +
+      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com; " +
+      "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google.com https://*.google-analytics.com https://www.googletagmanager.com; " +
+      "frame-src https://www.google.com; " +
       "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'",
   );
 

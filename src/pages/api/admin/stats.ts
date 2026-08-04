@@ -52,8 +52,6 @@ export const GET: APIRoute = async ({ locals }) => {
            COALESCE(SUM(CASE WHEN created_at >= date('now')                  THEN size_bytes ELSE 0 END), 0) AS size_today,
            COALESCE(SUM(CASE WHEN created_at >= datetime('now', '-7 days')   THEN size_bytes ELSE 0 END), 0) AS size_7d,
            COALESCE(SUM(CASE WHEN created_at >= datetime('now', '-30 days')  THEN size_bytes ELSE 0 END), 0) AS size_30d,
-           COALESCE(SUM(adblock), 0) AS adblock_total,
-           SUM(CASE WHEN created_at >= datetime('now', '-30 days') AND adblock = 1            THEN 1 ELSE 0 END) AS adblock_30d,
            SUM(CASE WHEN created_at >= datetime('now', '-30 days') AND uploaded_via = 'web'   THEN 1 ELSE 0 END) AS web_30d,
            SUM(CASE WHEN created_at >= datetime('now', '-30 days') AND uploaded_via = 'api'   THEN 1 ELSE 0 END) AS api_30d,
            SUM(CASE WHEN created_at >= datetime('now', '-30 days') AND user_id IS NOT NULL    THEN 1 ELSE 0 END) AS auth_30d,
@@ -67,7 +65,6 @@ export const GET: APIRoute = async ({ locals }) => {
         last7d: number; prev7d: number;
         last30d: number; prev30d: number;
         size_today: number; size_7d: number; size_30d: number;
-        adblock_total: number; adblock_30d: number;
         web_30d: number; api_30d: number;
         auth_30d: number; anon_30d: number;
       }>(),
@@ -193,14 +190,13 @@ export const GET: APIRoute = async ({ locals }) => {
            COUNT(*) as uploads,
            COUNT(DISTINCT user_id) as unique_users,
            SUM(CASE WHEN user_id IS NULL THEN 1 ELSE 0 END) as anon,
-           COALESCE(SUM(adblock), 0) as adblock,
            COALESCE(SUM(size_bytes), 0) as size
          FROM images
          WHERE deleted_at IS NULL AND created_at >= datetime('now', '-30 days')
          GROUP BY day
          ORDER BY day DESC`,
       )
-      .all<{ day: string; uploads: number; unique_users: number; anon: number; adblock: number; size: number }>(),
+      .all<{ day: string; uploads: number; unique_users: number; anon: number; size: number }>(),
 
     // Upload patterns: what hour of day people upload (UTC, last 7 days).
     db
@@ -255,7 +251,7 @@ export const GET: APIRoute = async ({ locals }) => {
       )
       .all<{ id: string; name: string; email: string; avatar_url: string | null; created_at: string; lifetime_uploads: number; last_upload: string | null }>(),
 
-    // CTA / link click breakdown (last 30 days). Future-proofed — currently only extractpics-cta exists.
+    // Product CTA / link click breakdown (last 30 days).
     db
       .prepare(
         `SELECT link_id, COUNT(*) as count
@@ -300,9 +296,6 @@ export const GET: APIRoute = async ({ locals }) => {
     return ((curr - prev) / prev) * 100;
   };
 
-  const adblockPctAllTime = img.total > 0 ? (img.adblock_total / img.total) * 100 : 0;
-  const adblockPct30d = img.last30d > 0 ? (img.adblock_30d / img.last30d) * 100 : 0;
-
   return new Response(
     JSON.stringify({
       // ---- Legacy fields (kept so anything else that reads them still works) ----
@@ -314,8 +307,6 @@ export const GET: APIRoute = async ({ locals }) => {
       totalPosts: posts?.count ?? 0,
       totalMedia: cmsMedia?.count ?? 0,
       totalPages: pages?.count ?? 0,
-      ctaClicks: ctaBreakdown.results?.find((r) => r.link_id === 'extractpics-cta')?.count ?? 0,
-      adblockUploads: img.adblock_total,
       uploadsByUser: uploadsByUser.results ?? [],
 
       // ---- New structured payload ----
@@ -351,10 +342,6 @@ export const GET: APIRoute = async ({ locals }) => {
         api30d: img.api_30d,
         authenticated30d: img.auth_30d,
         anonymous30d: img.anon_30d,
-        adblock30d: img.adblock_30d,
-        noAdblock30d: img.last30d - img.adblock_30d,
-        adblockPct30d,
-        adblockPctAllTime,
       },
       anonymous: {
         uniqueIPs7d: anon.ips_7d,

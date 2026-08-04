@@ -39,7 +39,6 @@
   "docs.sidebar.requestApiKey": "Solicitar Clave API",
   "docs.upload.description": "Sube desde el sitio web para recibir una URL con caché en CDN. Las subidas de visitantes caducan; los usuarios con sesión pueden elegir un enlace permanente antes de subir.",
   "docs.upload.fileDesc": "El archivo de imagen (PNG, JPG, WebP) hasta 50 MB.",
-  "docs.upload.folderDesc": "Nombre de la carpeta de destino.",
   "docs.upload.name": "Nombre",
   "docs.upload.paramDescription": "Descripción",
   "docs.upload.parameters": "Parámetros",
