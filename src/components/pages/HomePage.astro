@@ -314,6 +314,25 @@ const pageSchema = [
                 </a>
               </span>
             </div>
+
+            <div class="mt-5 pt-5 border-t-2 border-outline">
+              <p class="editorial-kicker mb-3">Image finish</p>
+              <select id="watermark-mode" class="sr-only" tabindex="-1" aria-hidden="true">
+                <option value="clean">No watermark</option>
+                <option value="watermark">Watermark</option>
+              </select>
+              <div id="watermark-toggle" class="settings-toggle grid grid-cols-2 border-2 border-outline bg-surface-container-lowest" role="group" aria-label="Choose image watermark" aria-describedby="watermark-note">
+                <button type="button" class="settings-option watermark-option is-active flex items-center justify-center gap-1.5 px-2 py-3 text-xs font-semibold uppercase tracking-wide transition-colors" data-watermark="clean" aria-pressed="true">
+                  <Icon name="image" class="text-sm flex-shrink-0" />
+                  <span>No watermark</span>
+                </button>
+                <button type="button" class="settings-option watermark-option flex items-center justify-center gap-1.5 px-2 py-3 text-xs font-semibold uppercase tracking-wide transition-colors" data-watermark="watermark" aria-pressed="false">
+                  <Icon name="brush" class="text-sm flex-shrink-0" />
+                  <span>Watermark</span>
+                </button>
+              </div>
+              <p id="watermark-note" class="mt-2 text-xs leading-relaxed text-on-surface-variant">Upload the original image unchanged.</p>
+            </div>
           </div>
 
           <div>
@@ -793,6 +812,7 @@ const pageSchema = [
 
 <script>
   import { ic_cloud_upload, ic_hourglass_top } from '../../data/icon-svgs';
+  import { addBrandWatermark, canWatermarkFile } from '../../lib/watermark-file';
   // Cached /api/me payload — the auto-delete "Never" gate reads .user; the bulk
   // upload reads .upload.remaining to pre-slice a selection. One fetch per page;
   // the server 429 is the real backstop, so a stale `remaining` only costs an
@@ -878,6 +898,44 @@ const pageSchema = [
       loadPlan();
     });
   });
+
+  // ---- Image finish toggle --------------------------------------------------
+  // No watermark remains the default. When selected, watermarking happens in
+  // the browser before the normal upload so expiry, quotas, and result handling
+  // keep using the existing path.
+  const watermarkMode = document.getElementById('watermark-mode') as HTMLSelectElement | null;
+  const watermarkButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.watermark-option'));
+  const watermarkNote = document.getElementById('watermark-note');
+
+  function syncWatermarkToggle() {
+    const selected = watermarkMode?.value ?? 'clean';
+    watermarkButtons.forEach((button) => {
+      const active = button.dataset.watermark === selected;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    if (watermarkNote) {
+      watermarkNote.textContent = selected === 'watermark'
+        ? 'Adds an imagetourl.cloud strip. JPG, PNG and WebP only.'
+        : 'Upload the original image unchanged.';
+    }
+  }
+
+  watermarkButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!watermarkMode || !button.dataset.watermark) return;
+      watermarkMode.value = button.dataset.watermark;
+      syncWatermarkToggle();
+    });
+  });
+
+  async function prepareUploadFile(file: File): Promise<File> {
+    if (watermarkMode?.value !== 'watermark') return file;
+    if (!canWatermarkFile(file)) {
+      throw new Error('Watermark works with JPG, PNG and WebP images only.');
+    }
+    return addBrandWatermark(file);
+  }
 
   const panel = document.getElementById('upload-panel')!;
   const dropZone = document.getElementById('drop-zone')!;
@@ -1126,8 +1184,9 @@ const pageSchema = [
       uploadText.textContent = `Uploading ${i + 1} / ${toUpload.length}`;
       uploadSubtext.textContent = file.name;
       try {
+        const uploadFile = await prepareUploadFile(file);
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', uploadFile);
         if (expiresInEl) formData.append('expires_in', expiresInEl.value);
         const response = await fetch('/api/upload', { method: 'POST', body: formData });
         const data = await response.json();
@@ -1208,8 +1267,9 @@ const pageSchema = [
     }, 100);
 
     try {
+      const preparedFile = await prepareUploadFile(file);
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', preparedFile);
       const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
       if (expiresInEl) formData.append('expires_in', expiresInEl.value);
 
@@ -1464,24 +1524,29 @@ const pageSchema = [
     box-shadow: 1px 1px 0 var(--color-outline) !important;
   }
 
-  .expiry-toggle {
+  .expiry-toggle,
+  .settings-toggle {
     border-radius: 0 !important;
   }
-  .expiry-option {
+  .expiry-option,
+  .settings-option {
     border-radius: 0 !important;
     color: var(--color-on-surface-variant);
     background: var(--color-surface-container-lowest);
     box-shadow: none !important;
   }
-  .expiry-option.is-active {
+  .expiry-option.is-active,
+  .settings-option.is-active {
     color: var(--color-on-primary);
     background: var(--color-primary);
     box-shadow: none !important;
   }
-  .expiry-option + .expiry-option {
+  .expiry-option + .expiry-option,
+  .settings-option + .settings-option {
     border-left: 2px solid var(--color-outline);
   }
-  .expiry-option:focus-visible {
+  .expiry-option:focus-visible,
+  .settings-option:focus-visible {
     outline: 3px solid var(--color-primary);
     outline-offset: -4px;
   }

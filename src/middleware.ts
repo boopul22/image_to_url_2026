@@ -8,7 +8,7 @@ import { resolveSlug, ownerLocaleForSlug, isPageKey, localizedUrl } from './i18n
 // Increment this when a release changes public HTML. Workers Cache API entries
 // survive deployments, so a versioned key prevents old pages from masking a
 // newly deployed homepage or landing-page update.
-const HTML_EDGE_CACHE_VERSION = '2026-08-04-tool-first-ad-spacing';
+const HTML_EDGE_CACHE_VERSION = '2026-08-04-uploader-watermark-setting';
 
 // These endpoints either return non-HTML assets or produce user/token-specific
 // responses. Keeping them out of the HTML cache prevents accidental caching and
