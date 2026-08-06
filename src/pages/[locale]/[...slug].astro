@@ -15,6 +15,9 @@ import Base64Encoder from '../../components/Base64Encoder.astro';
 import Base64Decoder from '../../components/Base64Decoder.astro';
 import FaviconGenerator from '../../components/FaviconGenerator.astro';
 import ToolAdFrame from '../../components/ads/ToolAdFrame.astro';
+import AtfSocialProof from '../../components/AtfSocialProof.astro';
+import StickyUploadCta from '../../components/StickyUploadCta.astro';
+import { splitFaqAnswer } from '../../lib/faq-answer';
 import { locales, defaultLocale, type Locale } from '../../i18n/config';
 import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, isPageKey, type PageKey } from '../../i18n/landing/registry';
 import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
@@ -83,7 +86,7 @@ export function getStaticPaths() {
   const paths: { params: { locale: Locale; slug: string } }[] = [];
   for (const pageKey of PAGE_KEYS) {
     for (const locale of locales) {
-      const slug = SLUGS[pageKey][locale] ?? SLUGS[pageKey][defaultLocale];
+      const slug = SLUGS[pageKey][locale];
       if (!slug) continue;
       paths.push({ params: { locale, slug } });
     }
@@ -105,7 +108,7 @@ const map = contentFor(pageKey);
 if (!map) return Astro.redirect('/' + locale + '/');
 const c: LandingContent = map[locale] ?? map[defaultLocale];
 
-const pageUrl = `https://imagetourl.cloud/${locale}/${slug}`;
+const pageUrl = `https://imagetourl.cloud/${locale}/${slug}/`;
 const alternates = hreflangPairs(pageKey);
 
 const schema = {
@@ -172,21 +175,26 @@ const relatedLinks = relatedSource.flatMap(r => {
 
 const homeHref = `/${locale}/`;
 const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
+const showStickyCta = widget.kind !== 'none';
+const primarySections = (c.sections ?? []).slice(0, 2);
+const deepSections = (c.sections ?? []).slice(2);
 ---
 
 <Layout
+  locale={locale}
   title={c.metaTitle}
   description={c.metaDescription}
   ogTitleEn={`${map[defaultLocale].h1Pre} ${map[defaultLocale].h1Highlight}`}
   schema={schemas}
   hreflangAlternates={alternates}
+  noindex={pageKey === 'mp3-to-url'}
 >
-  <Nav />
+  <Nav locale={locale} />
 
   <main>
     {widget.kind !== 'none' && (
       <ToolAdFrame>
-        <div class="px-3 sm:px-6">
+        <div class="px-3 sm:px-6" data-tool-anchor>
           {widget.kind === 'uploader' && <ImageUploader />}
           {widget.kind === 'heic-to-jpg' && <HeicConverter />}
           {widget.kind === 'heic-to-png' && <HeicPngConverter />}
@@ -208,6 +216,12 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
         <h1 class="text-xl sm:text-2xl lg:text-3xl font-black font-headline leading-none tracking-tighter mb-4 sm:mb-6">
           {c.h1Pre} <span class="italic text-primary">{c.h1Highlight}</span>
         </h1>
+        <AtfSocialProof
+          class="mb-4 items-start sm:items-center"
+          href={`${homeHref}#reviews`}
+          ratingValue="5.0"
+          reviewCount={0}
+        />
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">
           {c.intro}
         </p>
@@ -247,7 +261,36 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       </div>
     </section>
 
+    {/* FAQ early — answer-first for snippet / compact BoFu intent */}
     <section class="py-8 sm:py-12">
+      <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
+          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.faqTitle}</h2>
+          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
+        </div>
+        {c.faqIntro && <p class="text-sm sm:text-base text-on-surface-variant mb-5 sm:mb-8 reveal">{c.faqIntro}</p>}
+        <div class="space-y-4 reveal">
+          {c.faqs.map((f, i) => {
+            const { lead, rest } = splitFaqAnswer(f.a);
+            return (
+              <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border border-outline-variant/40 rounded-xl hard-shadow group`}>
+                <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">
+                  <h3 class="m-0 font-black font-headline text-sm sm:text-base">{f.q}</h3>
+                  <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
+                </summary>
+                <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+                  <p class="font-body text-on-surface-variant">
+                    <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+                  </p>
+                </div>
+              </details>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
           <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.whyTitle}</h2>
@@ -268,7 +311,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
     </section>
 
     {c.comparisonColumns && c.comparisonColumns.length > 0 && c.comparisonRows && c.comparisonRows.length > 0 && (
-      <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+      <section class="py-8 sm:py-12">
         <div class="max-w-5xl mx-auto px-3 sm:px-6">
           <div class="flex items-baseline gap-4 mb-3 sm:mb-4 reveal">
             <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.comparisonTitle ?? 'How it compares'}</h2>
@@ -303,21 +346,37 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       </section>
     )}
 
-    {c.sections && c.sections.length > 0 && (
-      <section class="py-8 sm:py-12">
+    {primarySections.length > 0 && (
+      <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
         <div class="max-w-3xl mx-auto px-3 sm:px-6 space-y-6 sm:space-y-8">
-          {c.sections.map(sec => (
+          {primarySections.map(sec => (
             <div class="reveal">
               <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-3">{sec.heading}</h2>
               <p class="font-body text-on-surface-variant leading-relaxed">{sec.body}</p>
             </div>
           ))}
+          {deepSections.length > 0 && (
+            <details class="reveal border border-outline-variant/40 bg-surface p-4 sm:p-5">
+              <summary class="cursor-pointer font-headline font-black text-sm sm:text-base list-none flex items-center justify-between gap-3">
+                <span>More detail</span>
+                <Icon name="expand_more" class="text-primary" />
+              </summary>
+              <div class="mt-5 space-y-6">
+                {deepSections.map(sec => (
+                  <div>
+                    <h2 class="text-lg sm:text-xl font-black font-headline tracking-tight mb-2">{sec.heading}</h2>
+                    <p class="font-body text-on-surface-variant leading-relaxed">{sec.body}</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
         </div>
       </section>
     )}
 
     {c.useCasesTitle && c.useCases && c.useCases.length > 0 && (
-      <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
+      <section class="py-8 sm:py-12">
         <div class="max-w-5xl mx-auto px-3 sm:px-6">
           <div class="flex items-baseline gap-4 mb-3 sm:mb-4 reveal">
             <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.useCasesTitle}</h2>
@@ -338,31 +397,8 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       </section>
     )}
 
-    <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
-      <div class="max-w-5xl mx-auto px-3 sm:px-6">
-        <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
-          <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.faqTitle}</h2>
-          <div class="h-1 flex-grow bg-on-background opacity-10"></div>
-        </div>
-        {c.faqIntro && <p class="text-sm sm:text-base text-on-surface-variant mb-5 sm:mb-8 reveal">{c.faqIntro}</p>}
-        <div class="space-y-4 reveal">
-          {c.faqs.map((f, i) => (
-            <details class={`${['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-fixed', 'bg-surface-variant'][i % 4]} border border-outline-variant/40 rounded-xl hard-shadow group`}>
-              <summary class="p-4 sm:p-5 cursor-pointer font-black font-headline text-sm sm:text-base list-none flex items-center justify-between gap-3">
-                <h3 class="m-0 font-black font-headline text-sm sm:text-base">{f.q}</h3>
-                <Icon name="expand_more" class="text-primary transition-transform group-open:rotate-180" />
-              </summary>
-              <div class="px-4 sm:px-5 pb-4 sm:pb-5">
-                <p class="font-body text-on-surface-variant">{f.a}</p>
-              </div>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-
     {relatedLinks.length > 0 && (
-      <section class="py-8 sm:py-12">
+      <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
         <div class="max-w-5xl mx-auto px-3 sm:px-6">
           <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal">
             <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">{c.relatedTitle ?? 'More image to URL tools'}</h2>
@@ -370,7 +406,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
           </div>
           <div class="flex flex-wrap gap-2 sm:gap-3 reveal">
             {relatedLinks.map(l => (
-              <a href={l.href} class="inline-flex items-center gap-1.5 bg-surface-container-low border border-outline-variant/40 rounded-xl px-3 py-2 font-label text-xs sm:text-sm font-bold text-on-background hover:text-primary hover:-translate-y-0.5 transition-all hard-shadow">
+              <a href={l.href} class="inline-flex items-center gap-1.5 bg-surface border border-outline-variant/40 rounded-xl px-3 py-2 font-label text-xs sm:text-sm font-bold text-on-background hover:text-primary hover:-translate-y-0.5 transition-all hard-shadow">
                 <Icon name="arrow_forward" class="text-base text-primary" />
                 {l.label}
               </a>
@@ -380,13 +416,17 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
       </section>
     )}
 
-    <section class="py-8 sm:py-12 bg-surface-container-low border-t border-outline-variant/40">
+    <section class="py-8 sm:py-12">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="reveal">
           <div class="bg-on-surface text-surface rounded-xl p-5 sm:p-8 border border-outline-variant/40 hard-shadow text-center">
             <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-4">{c.ctaTitle}</h2>
             <p class="font-body text-surface/70 mb-4 sm:mb-6 max-w-lg mx-auto">{c.ctaBody}</p>
-            <a href={homeHref} class="inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">
+            <a
+              href={homeHref}
+              class="landing-cta-btn inline-block bg-primary text-on-primary px-6 py-3 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all"
+              data-scroll-tool={showStickyCta ? '' : undefined}
+            >
               {c.ctaButton}
             </a>
           </div>
@@ -395,5 +435,19 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
     </section>
   </main>
 
-  <Footer />
+  {showStickyCta && <StickyUploadCta label={c.ctaButton} />}
+  <Footer locale={locale} />
 </Layout>
+
+{showStickyCta && (
+  <script>
+    document.querySelectorAll<HTMLAnchorElement>('[data-scroll-tool]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const tool = document.querySelector('[data-tool-anchor]');
+        if (!tool) return;
+        e.preventDefault();
+        tool.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+)}

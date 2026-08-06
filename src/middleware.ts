@@ -5,6 +5,22 @@ import { getLocaleFromPath } from './i18n/utils';
 import { defaultLocale, locales, type Locale } from './i18n/config';
 import { resolveSlug, ownerLocaleForSlug, isPageKey, localizedUrl } from './i18n/landing/registry';
 
+const REDIRECT_SECURITY_HEADERS = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Content-Security-Policy': "default-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+};
+
+function secureRedirect(location: string, status: 301 | 302 = 301): Response {
+  return new Response(null, {
+    status,
+    headers: { Location: location, ...REDIRECT_SECURITY_HEADERS },
+  });
+}
+
 // Increment this when a release changes public HTML. Workers Cache API entries
 // survive deployments, so a versioned key prevents old pages from masking a
 // newly deployed homepage or landing-page update.
@@ -40,7 +56,7 @@ const NON_LOCALIZED_EXACT = new Set([
   '/llms.txt', '/llms-full.txt',
   // Commercial and legal pages are shared across locales so pricing, billing,
   // refund, and operator disclosures stay identical for customers and Paddle.
-  '/pricing', '/privacy', '/terms', '/refund-policy', '/acceptable-use-policy', '/contact',
+  '/pricing', '/privacy', '/terms', '/refund-policy', '/acceptable-use-policy',
   // Astro's 404 page — during static build, prerender visits /404 to build
   // dist/client/404.html. If the catch-all redirects it to /en/404, the built
   // file becomes a redirect body that Cloudflare Pages then serves for EVERY
@@ -77,7 +93,7 @@ function isNonLocalized(path: string): boolean {
   return NON_LOCALIZED_PREFIXES.some(p => path === p.replace(/\/$/, '') || path.startsWith(p));
 }
 
-export const onRequest = defineMiddleware(async ({ request, cookies, locals, redirect }, next) => {
+export const onRequest = defineMiddleware(async ({ request, cookies, locals }, next) => {
   const url0 = new URL(request.url);
   const path = url0.pathname;
 
@@ -105,10 +121,10 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   // across translated pages while those translations are being refreshed.
   {
     const match = path.match(
-      /^\/([a-z]{2,3}(?:-[A-Za-z]+)?)\/(pricing|privacy|terms|refund-policy|acceptable-use-policy|contact)\/?$/,
+      /^\/([a-z]{2,3}(?:-[A-Za-z]+)?)\/(pricing|privacy|terms|refund-policy|acceptable-use-policy)\/?$/,
     );
     if (match && (locales as readonly string[]).includes(match[1])) {
-      return redirect(`/${match[2]}${url0.search}`, 301);
+      return secureRedirect(`/${match[2]}${url0.search}`);
     }
   }
 
@@ -121,7 +137,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
     (request.method === 'GET' || request.method === 'HEAD')
   ) {
     url0.hostname = 'imagetourl.cloud';
-    return redirect(url0.toString(), 301);
+    return secureRedirect(url0.toString());
   }
 
   // Homepage: serve /en/ content at / via an internal rewrite instead of a 301.
@@ -134,20 +150,20 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   // Legacy: /zh/* -> /zh-Hans/* (locale was renamed to BCP-47 Simplified Chinese)
   if (path === '/zh' || path.startsWith('/zh/')) {
     const tail = path === '/zh' ? '/' : path.slice(3);
-    return redirect(`/zh-Hans${tail}`, 301);
+    return secureRedirect(`/zh-Hans${tail}`);
   }
 
   // Unsupported locale Google guessed: /uk/* -> /en/*
   if (path === '/uk' || path.startsWith('/uk/')) {
     const tail = path === '/uk' ? '/' : path.slice(3);
-    return redirect(`/en${tail}${url0.search}`, 301);
+    return secureRedirect(`/en${tail}${url0.search}`);
   }
 
   // Legacy locale-prefixed auth links (/en/auth/login etc.) — auth lives under /api/auth/*
   {
     const m = path.match(/^\/([a-z]{2,3}(?:-[A-Za-z]+)?)\/(auth\/.+)$/);
     if (m && (locales as readonly string[]).includes(m[1])) {
-      return redirect(`/api/${m[2]}${url0.search}`, 301);
+      return secureRedirect(`/api/${m[2]}${url0.search}`);
     }
   }
 
@@ -170,7 +186,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       if (!resolveSlug(loc, decoded)) {
         const owner = ownerLocaleForSlug(decoded);
         if (owner && owner !== loc) {
-          return redirect(`/${owner}/${rawSlug}/${url0.search}`, 301);
+          return secureRedirect(`/${owner}/${rawSlug}/${url0.search}`);
         }
       }
     }
@@ -192,7 +208,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
       let key = seg[3];
       try { key = decodeURIComponent(seg[3]); } catch { /* keep raw */ }
       if (isPageKey(key)) {
-        return redirect(localizedUrl(key, seg[1] as Locale) + url0.search, 301);
+        return secureRedirect(localizedUrl(key, seg[1] as Locale) + url0.search);
       }
     }
   }
@@ -203,7 +219,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
   const hasLocalePrefix = locales.includes(firstSeg as (typeof locales)[number]);
   if (!rewriteTo && !hasLocalePrefix && !isNonLocalized(path)) {
     const cleaned = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
-    return redirect(`/en${cleaned}${url0.search}`, 301);
+    return secureRedirect(`/en${cleaned}${url0.search}`);
   }
 
   // Locale detection — force English for admin/dashboard/api routes
@@ -247,7 +263,7 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals, red
         status: 401, headers: { 'Content-Type': 'application/json' },
       });
     }
-    return redirect('/api/auth/login', 302);
+    return secureRedirect('/api/auth/login', 302);
   }
 
   // Protect /admin routes (pages + API)

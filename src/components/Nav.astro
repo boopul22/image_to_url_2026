@@ -5,9 +5,14 @@ import { locales, localeLabels, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { resolveSlug, localizedUrl } from '../i18n/landing/registry';
 
-const { activePage = "home", blogLocaleSlugs = null } = Astro.props as { activePage?: string; blogLocaleSlugs?: Record<string, string> | null };
+const { activePage = "home", blogLocaleSlugs = null, locale: localeProp } = Astro.props as {
+  activePage?: string;
+  blogLocaleSlugs?: Record<string, string> | null;
+  /** Required by prerendered localized pages because middleware does not run at build time. */
+  locale?: Locale;
+};
 const user = Astro.locals.user;
-const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const locale: Locale = localeProp ?? Astro.locals.locale ?? defaultLocale;
 const basePath = stripLocalePrefix(Astro.url.pathname);
 
 // Always show the language switcher — even on English-only root pages, users
@@ -18,7 +23,16 @@ const isLocalizable = true;
 // If the current URL is a translated landing page, resolve its pageKey so we
 // can generate per-locale translated slugs for the language switcher.
 // e.g. on /hi/convert-png-to-url the user clicks "French" → /fr/convertir-png-en-url
-const currentSlug = basePath.replace(/^\/+|\/+$/g, '');
+// Astro.url.pathname is percent-encoded for non-ASCII slugs while the registry
+// stores decoded text. Decode before reverse lookup so Japanese/Chinese pages
+// switch to each locale's real slug instead of reusing the current slug under
+// every locale prefix (which creates redirecting internal links).
+let currentSlug = basePath.replace(/^\/+|\/+$/g, '');
+try {
+  currentSlug = decodeURIComponent(currentSlug);
+} catch {
+  // Keep the original path if a malformed escape sequence somehow reaches us.
+}
 const currentPageKey = currentSlug ? resolveSlug(locale, currentSlug) : null;
 
 // Detect English-only root pages (/png-to-jpg, /image-compressor, /guides/*, etc.)

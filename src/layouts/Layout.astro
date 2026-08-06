@@ -14,6 +14,8 @@ import dmSansLatinUrl from '@fontsource-variable/dm-sans/files/dm-sans-latin-wgh
 import spaceGroteskLatinUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
 
 interface Props {
+  /** Explicit locale for prerendered routes, where middleware locals are not available. */
+  locale?: Locale;
   title?: string;
   description?: string;
   /** Explicit OG/Twitter image. When omitted, a branded card is generated per
@@ -40,6 +42,7 @@ interface Props {
 }
 
 const {
+  locale: localeProp,
   title = "ImageToURL \u2014 Free Image Hosting | Turn Images into Shareable Links",
   description = "The fastest way to host your images for free. No account required, permanent hosting, and lightning-fast CDN delivery. Upload JPG, PNG, WebP, GIF, SVG and get an instant shareable URL.",
   ogImage,
@@ -54,18 +57,41 @@ const {
   lastModified,
 } = Astro.props;
 
-// Clamp the meta description to <=158 chars at a word boundary so it never
+// Metadata must be plain text. A few content entries intentionally mention
+// HTML tags such as <img>; leaving angle brackets inside an attribute can make
+// crawlers parse the remainder of <head> as malformed markup.
+const plainDescription = description
+  .replace(/HTML\s*<\s*img\s*>/gi, 'HTML image')
+  .replace(/<\s*img\s*>/gi, 'image')
+  .replace(/<[^>]+>/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+// Clamp the meta description to <=155 chars at a word boundary so it never
 // trips "description too long" or gets truncated mid-word in SERPs. OG/Twitter
 // descriptions can run longer, so they keep the full text.
-const metaDescription = description.length <= 158
-  ? description
+const metaDescription = plainDescription.length <= 155
+  ? plainDescription
   : (() => {
-      const cut = description.slice(0, 158);
+      const cut = plainDescription.slice(0, 155);
       const atWord = cut.replace(/\s+\S*$/, '').trim();
       return atWord.length > 0 ? atWord : cut.trim();
     })();
 
-const locale: Locale = Astro.locals.locale ?? defaultLocale;
+// Keep the HTML title within the common 60-character audit threshold. First
+// remove a trailing brand suffix when that is sufficient; otherwise cut at a
+// word boundary. OG cards retain the full editorial title.
+const titleWithoutBrand = title.replace(/(?:\s*[—–|]|\s+-)\s*ImageToURL\s*$/i, '').trim();
+const titleCandidate = title.length <= 60 ? title : (titleWithoutBrand.length <= 60 ? titleWithoutBrand : title);
+const metaTitle = titleCandidate.length <= 60
+  ? titleCandidate
+  : (() => {
+      const cut = titleCandidate.slice(0, 60);
+      const atWord = cut.replace(/\s+\S*$/, '').trim();
+      return atWord.length > 0 ? atWord : cut.trim();
+    })();
+
+const locale: Locale = localeProp ?? Astro.locals.locale ?? defaultLocale;
 const proTrackingPageEvent = Astro.url.pathname.replace(/\/+$/, '') === '/pricing' ? 'pro_pricing_viewed' : '';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const basePath = stripLocalePrefix(Astro.url.pathname);
@@ -100,11 +126,12 @@ const sitewideSchemas = [
     "founder": {
       "@type": "Person",
       "@id": "https://imagetourl.cloud/#founder",
-      "name": "Bipul",
+      "name": "Bipul Kumar",
       "url": "https://bipul.online/",
       "sameAs": [
         "https://github.com/boopul22",
-        "https://www.instagram.com/bipul.skill"
+        "https://www.instagram.com/bipul.skill",
+        "https://bipul.online/"
       ]
     }
   },
@@ -151,7 +178,7 @@ if (ogImage) {
   ogImageUrl = new URL(ogImage, Astro.site).href;
 } else {
   const ogTitle = cleanTitle || 'ImageToURL';
-  const ogSub = (ogSubtitle ?? description ?? '').slice(0, 120);
+  const ogSub = (ogSubtitle ?? plainDescription ?? '').replace(/<[^>]+>/g, '').slice(0, 120);
   const ogParams = new URLSearchParams({ t: ogTitle, l: locale });
   if (ogSub) ogParams.set('s', ogSub);
   ogParams.set('en', (ogTitleEn ?? ogTitle).slice(0, 90));
@@ -224,7 +251,7 @@ function hreflangUrl(loc: Locale): string {
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={plainDescription} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
@@ -234,10 +261,10 @@ function hreflangUrl(loc: Locale): string {
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={plainDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <title>{title}</title>
+    <title>{metaTitle}</title>
 
     <!-- Self-hosted fonts: preload the three woff2s the inlined CSS will reference
          right after the HTML parses. Without these, busy pages (home: uploader JS +

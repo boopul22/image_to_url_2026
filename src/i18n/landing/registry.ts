@@ -17,6 +17,9 @@ export function getSlug(pageKey: PageKey, locale: Locale): string {
 }
 
 export function localizedUrl(pageKey: PageKey, locale: Locale): string {
+  // Pages without an authored translation use their English canonical URL.
+  // Do not create thin duplicate locale URLs from the English fallback.
+  if (!SLUGS[pageKey][locale]) locale = defaultLocale;
   // Trailing slash matches the canonical URL Astro emits for landing pages.
   return `/${locale}/${getSlug(pageKey, locale)}/`;
 }
@@ -26,8 +29,8 @@ export function isPageKey(v: string): v is PageKey {
 }
 
 // Reverse index — built once at module load. Maps "<locale>/<slug>" -> pageKey.
-// Includes English for every page (always present) and each locale's translated
-// slug when defined.
+// Includes only explicitly authored locale slugs. Missing translations resolve
+// to their English owner through middleware instead of becoming duplicate pages.
 let REVERSE: Map<string, PageKey> | null = null;
 function getReverse(): Map<string, PageKey> {
   if (!REVERSE) {
@@ -35,7 +38,7 @@ function getReverse(): Map<string, PageKey> {
     for (const pageKey of PAGE_KEYS) {
       const slugs = SLUGS[pageKey];
       for (const locale of locales) {
-        const slug = slugs[locale] ?? slugs[defaultLocale];
+        const slug = slugs[locale];
         if (slug) REVERSE.set(`${locale}/${slug}`, pageKey);
       }
     }
@@ -74,7 +77,7 @@ export function ownerLocaleForSlug(slug: string): Locale | null {
 // page. Locales without a translated slug fall back to their English slug
 // under their locale prefix (still linguistically navigable).
 export function hreflangPairs(pageKey: PageKey): { locale: Locale; url: string }[] {
-  return locales.map(locale => ({
+  return locales.filter(locale => Boolean(SLUGS[pageKey][locale])).map(locale => ({
     locale,
     url: localizedUrl(pageKey, locale),
   }));

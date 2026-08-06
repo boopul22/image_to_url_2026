@@ -1,0 +1,79 @@
+---
+/**
+ * Mobile sticky conversion bar. Hidden until the primary tool leaves the
+ * viewport, then fixed to the bottom safe-area with a high-contrast CTA.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  label?: string;
+  targetSelector?: string;
+  class?: string;
+}
+
+const {
+  label = 'Upload an image',
+  targetSelector = '[data-tool-anchor]',
+  class: className = '',
+} = Astro.props as Props;
+---
+
+<div
+  id="sticky-upload-cta"
+  class={`sticky-upload-cta fixed inset-x-0 bottom-0 z-50 translate-y-full opacity-0 pointer-events-none md:hidden ${className}`}
+  data-target={targetSelector}
+  hidden
+>
+  <div class="border-t border-outline-variant/40 bg-surface/95 backdrop-blur-sm px-3 pt-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))]">
+    <button
+      type="button"
+      id="sticky-upload-btn"
+      class="w-full inline-flex items-center justify-center gap-2 bg-rose-600 text-white px-4 py-3 font-label text-sm font-bold uppercase tracking-wider border border-rose-600 active:scale-[0.98] transition-transform"
+    >
+      <Icon name="cloud_upload" class="text-lg" />
+      {label}
+    </button>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('sticky-upload-cta');
+  const btn = document.getElementById('sticky-upload-btn');
+  if (bar && btn) {
+    const sel = bar.getAttribute('data-target') || '[data-tool-anchor]';
+    const target = document.querySelector(sel) || document.querySelector('.soft-uploader') || document.querySelector('main');
+
+    const show = () => {
+      bar.hidden = false;
+      bar.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+    };
+    const hide = () => {
+      bar.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+    };
+
+    if (target && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+          if (entry.isIntersecting) hide();
+          else show();
+        },
+        { rootMargin: '-64px 0px 0px 0px', threshold: 0.05 },
+      );
+      io.observe(target);
+    }
+
+    btn.addEventListener('click', () => {
+      const el = document.querySelector(sel) || document.querySelector('.soft-uploader');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const file = document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (file) file.click();
+    });
+  }
+</script>
+
+<style>
+  .sticky-upload-cta {
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+</style>

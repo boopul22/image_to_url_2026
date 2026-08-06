@@ -7,7 +7,7 @@ import type { APIContext } from 'astro';
 import { getDB } from '../lib/db';
 import { locales, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
-import { PAGE_KEYS, getSlug } from '../i18n/landing/registry';
+import { PAGE_KEYS, getSlug, hreflangPairs } from '../i18n/landing/registry';
 
 const SITE = 'https://imagetourl.cloud';
 
@@ -214,15 +214,17 @@ export async function GET({ locals }: APIContext): Promise<Response> {
     'png-to-pdf': '2026-08-03',
   };
   for (const pageKey of PAGE_KEYS) {
+    if (pageKey === 'mp3-to-url') continue; // topical outlier — noindex + keep out of sitemap
     const pageLastmod = lastmodOverrides[pageKey] ?? landingLastmod;
     // Landing pages canonicalize to a trailing-slash URL; emit the canonical
     // form so Google doesn't follow a 307 on every entry.
-    const alternates = locales
-      .map(loc => `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}/${loc}/${getSlug(pageKey, loc)}/`)}" />`)
+    const pageLocales = hreflangPairs(pageKey);
+    const alternates = pageLocales
+      .map(({ locale: loc, url }) => `    <xhtml:link rel="alternate" hreflang="${loc}" href="${escapeXml(`${SITE}${url}`)}" />`)
       .join('\n');
     const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${SITE}/${defaultLocale}/${getSlug(pageKey, defaultLocale)}/`)}" />`;
-    for (const loc of locales) {
-      const locUrl = `${SITE}/${loc}/${getSlug(pageKey, loc)}/`;
+    for (const { locale: loc, url } of pageLocales) {
+      const locUrl = `${SITE}${url}`;
       urlEntries.push(`  <url>
     <loc>${escapeXml(locUrl)}</loc>
     <lastmod>${pageLastmod}</lastmod>

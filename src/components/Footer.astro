@@ -6,7 +6,8 @@ import type { Locale } from '../i18n/config';
 import { getNavGroups } from '../lib/nav-links';
 import { localizedUrl } from '../i18n/landing/registry';
 
-const locale: Locale = Astro.locals.locale ?? defaultLocale;
+const { locale: localeProp } = Astro.props as { locale?: Locale };
+const locale: Locale = localeProp ?? Astro.locals.locale ?? defaultLocale;
 const nav = getNavGroups(locale);
 
 function localePath(path: string): string {
@@ -133,7 +134,7 @@ const learnGroups: Group[] = [
           <a href="/acceptable-use-policy" class={linkClass}>Acceptable Use</a>
           <a href={localePath('/docs')} class={linkClass}>{t(locale, 'footer.docs')}</a>
           <a href={localizedUrl('about', locale)} class={linkClass}>{t(locale, 'footer.about')}</a>
-          <a href="/contact" class={linkClass}>{t(locale, 'footer.contact')}</a>
+          <a href={localizedUrl('contact', locale)} class={linkClass}>{t(locale, 'footer.contact')}</a>
           <a href={localePath('/blog')} class={linkClass}>{t(locale, 'footer.blog')}</a>
           <a href={localizedUrl('content-guidelines', locale)} class={linkClass}>Content Guidelines</a>
           <a href="/link-to-us/" class={linkClass}>Link to Us</a>

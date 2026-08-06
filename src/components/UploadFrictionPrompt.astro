@@ -1,0 +1,82 @@
+---
+/**
+ * Post-upload "gap question": what almost stopped the user.
+ * Shown once after a successful upload; answers POST to /api/friction.
+ */
+---
+
+<div
+  id="friction-prompt"
+  class="hidden mt-4 border border-outline-variant/40 bg-surface-container-low p-4"
+  role="region"
+  aria-label="Quick feedback"
+>
+  <p class="font-headline font-bold text-sm text-on-background mb-2">
+    Quick question — what almost stopped you from uploading?
+  </p>
+  <div class="flex flex-wrap gap-2" id="friction-chips">
+    {[
+      'Not sure links last',
+      'Worried about privacy',
+      'File size limits',
+      'Wanted an account first',
+      'Nothing — it was easy',
+    ].map((label) => (
+      <button
+        type="button"
+        class="friction-chip px-3 py-1.5 text-xs font-label font-bold border border-outline-variant/40 bg-surface text-on-surface-variant hover:border-rose-600 hover:text-rose-700 transition-colors cursor-pointer"
+        data-answer={label}
+      >
+        {label}
+      </button>
+    ))}
+  </div>
+  <p id="friction-thanks" class="hidden mt-2 text-xs font-label font-bold text-rose-700">Thanks — that helps us remove friction.</p>
+</div>
+
+<script>
+  const KEY = 'itu_friction_v1';
+  const root = document.getElementById('friction-prompt');
+  const thanks = document.getElementById('friction-thanks');
+  const chips = document.getElementById('friction-chips');
+
+  function alreadyAnswered(): boolean {
+    try {
+      return localStorage.getItem(KEY) === '1';
+    } catch {
+      return false;
+    }
+  }
+
+  function markAnswered() {
+    try {
+      localStorage.setItem(KEY, '1');
+    } catch {}
+  }
+
+  function showFriction() {
+    if (!root || alreadyAnswered()) return;
+    root.classList.remove('hidden');
+  }
+
+  // Home + ImageUploader dispatch this after a successful upload.
+  window.addEventListener('itu:upload-success', () => showFriction());
+
+  chips?.querySelectorAll<HTMLButtonElement>('.friction-chip').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const answer = btn.dataset.answer || btn.textContent || '';
+      markAnswered();
+      chips.classList.add('hidden');
+      thanks?.classList.remove('hidden');
+      try {
+        await fetch('/api/friction', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ answer, path: location.pathname }),
+          keepalive: true,
+        });
+      } catch {}
+      setTimeout(() => root?.classList.add('hidden'), 2500);
+    });
+  });
+</script>

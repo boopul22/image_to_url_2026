@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import UploadFrictionPrompt from './UploadFrictionPrompt.astro';
 /**
  * Reusable image uploader widget.
  * Embeds the drag-and-drop upload panel with progress, success, and error states.
@@ -112,6 +113,7 @@ import Icon from './Icon.astro';
                   <Icon name="arrow_forward" class="text-sm group-hover:translate-x-0.5 transition-transform" />
                 </a>
               </div>
+              <UploadFrictionPrompt />
             </div>
 
             <!-- State: error -->
@@ -402,6 +404,7 @@ import Icon from './Icon.astro';
     if (state === 'success') {
       refreshPlan(); // server may have deducted a save — refetch, then re-render
       revealGuestExpiryNote();
+      window.dispatchEvent(new CustomEvent('itu:upload-success'));
     } else {
       guestExpiryNote?.classList.add('hidden');
     }

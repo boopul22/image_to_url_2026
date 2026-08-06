@@ -29,7 +29,7 @@ const removedSlugsJson = JSON.stringify(removedRedirects.slugs || {});
 // Parse SLUGS from slugs.ts — extract each pageKey's locale→slug map.
 const src = readFileSync(SLUGS_FILE, 'utf8');
 const owner = new Map(); // decoded-slug → owning locale
-const validCombos = new Set(); // "<locale>/<slug>" for all valid (locale, slug) pairs including English fallback
+const validCombos = new Set(); // "<locale>/<slug>" for explicitly authored locale pages
 const toolsMap = {}; // pageKey → { locale: slug } non-English overrides (legacy /tools/ 301 targets)
 const outer = /'([a-z0-9-]+)':\s*\{\s*([^}]+)\}/g;
 let m;
@@ -45,11 +45,11 @@ while ((m = outer.exec(src)) !== null) {
     const s = entries[loc];
     if (s && !owner.has(s)) owner.set(s, loc);
   }
-  // Second pass: record every (locale, slug) combo that would be valid
-  // — either the locale has its own slug, or it falls back to English.
+  // Second pass: record explicitly authored (locale, slug) combinations only.
+  // Missing translations redirect to the locale that owns the English slug.
   const enSlug = entries['en'];
   for (const loc of LOCALES) {
-    const s = entries[loc] ?? enSlug;
+    const s = entries[loc];
     if (s) validCombos.add(`${loc}/${s}`);
   }
   // Legacy /{locale}/tools/{pageKey} URLs used English pageKeys in every
@@ -119,6 +119,20 @@ async function __shortUrlHandler__(pathname, request, env, context) {
 const __SLUG_OWNER__ = new Map(Object.entries(${ownerJson}));
 const __VALID__ = new Set(${validJson});
 const __LOCALES__ = new Set(${localesJson});
+const __REDIRECT_SECURITY__ = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Content-Security-Policy': "default-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+};
+function __redirect301__(location, cacheControl) {
+  return new Response(null, {
+    status: 301,
+    headers: { Location: location, 'Cache-Control': cacheControl, ...__REDIRECT_SECURITY__ },
+  });
+}
 // [PATCH] Removed-locale 301 → English equivalent. Locales dropped in the
 // 28→6 cleanup. Single-slug landing pages map 1:1 to their English page;
 // bare locale roots and unmapped nested paths fall back to /en/<rest>.
@@ -222,7 +236,7 @@ const PATCH_AT_START = `async function handle(request, env, context) {
     const u = new URL(request.url);
     if (u.hostname === 'www.imagetourl.cloud') {
       u.hostname = 'imagetourl.cloud';
-      return new Response(null, { status: 301, headers: { Location: u.toString(), 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } });
+      return __redirect301__(u.toString(), 'public, max-age=3600, s-maxage=86400');
     }
   }
   // [PATCH] Legacy /{locale}/tools/* 301/410 BEFORE removed-locale + routing.
@@ -231,7 +245,7 @@ const PATCH_AT_START = `async function handle(request, env, context) {
     const t = __toolsRedirect__(u.pathname, u.search);
     if (t) {
       if (t.gone) return __gone410__();
-      return new Response(null, { status: 301, headers: { Location: t.target, 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } });
+      return __redirect301__(t.target, 'public, max-age=3600, s-maxage=86400');
     }
   }
   // [PATCH] Short-URL /{id}.{ext} BEFORE any routing.
@@ -249,7 +263,7 @@ const PATCH_AT_START = `async function handle(request, env, context) {
     const u = new URL(request.url);
     const target = __removedLocaleRedirect__(u.pathname, u.search);
     if (target) {
-      return new Response(null, { status: 301, headers: { Location: target, 'Cache-Control': 'public, max-age=60, s-maxage=60' } });
+      return __redirect301__(target, 'public, max-age=60, s-maxage=60');
     }
   }
   // [PATCH] Cross-locale slug redirect BEFORE any routing.
@@ -257,7 +271,7 @@ const PATCH_AT_START = `async function handle(request, env, context) {
     const u = new URL(request.url);
     const target = __crossLocaleRedirect__(u.pathname, u.search);
     if (target) {
-      return new Response(null, { status: 301, headers: { Location: target, 'Cache-Control': 'public, max-age=60, s-maxage=60' } });
+      return __redirect301__(target, 'public, max-age=60, s-maxage=60');
     }
   }`;
 
@@ -282,6 +296,61 @@ let content = readFileSync(entryPath, 'utf8');
 // written straight into their HTML.
 const CLIENT_DIR = fileURLToPath(new URL('../dist/client/', import.meta.url));
 const iconChunk = readdirSync(join(CLIENT_DIR, '_astro')).find((f) => /^icon-svgs\..+\.js$/.test(f));
+
+function decodeHtmlText(value) {
+  return value
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#(?:39|x27);/gi, "'")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(Number.parseInt(n, 16)));
+}
+
+function escapeHtmlText(value) {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function clampText(value, limit) {
+  if (value.length <= limit) return value;
+  const cut = value.slice(0, limit);
+  const atWord = cut.replace(/\s+\S*$/, '').trim();
+  return atWord || cut.trim();
+}
+
+function repairPrerenderedSeo(html, path) {
+  const headMatch = html.match(/<head>([\s\S]*?)<\/head>/i);
+  if (!headMatch) return html;
+  let head = headMatch[0]
+    .replace(/HTML\s*<\s*img\s*>/gi, 'HTML image')
+    .replace(/<\s*img\s*>/gi, 'image');
+
+  head = head.replace(/(<title>)([\s\S]*?)(<\/title>)/i, (_, open, raw, close) => {
+    let title = decodeHtmlText(raw).trim();
+    if (title.length > 60) {
+      const unbranded = title.replace(/(?:\s*[—–|]|\s+-)\s*ImageToURL\s*$/i, '').trim();
+      title = unbranded.length <= 60 ? unbranded : clampText(title, 60);
+    }
+    return open + escapeHtmlText(title) + close;
+  });
+
+  head = head.replace(/(<meta\s+name="description"\s+content=")([^"]*)(")/i, (_, open, raw, close) => {
+    const description = clampText(decodeHtmlText(raw).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(), 155);
+    return open + escapeHtmlText(description) + close;
+  });
+
+  const apiLabels = {
+    'image-hosting-api-curl/index.html': 'cURL',
+    'image-hosting-api-nodejs/index.html': 'Node.js',
+    'image-hosting-api-php/index.html': 'PHP',
+    'image-hosting-api-python/index.html': 'Python',
+  };
+  const label = apiLabels[path];
+  let out = html.replace(headMatch[0], head);
+  if (label) {
+    out = out.replace(/(<h1\b[^>]*>)Image hosting API\s+(<span\b)/i, `$1${label} image hosting API $2`);
+  }
+  return out;
+}
+
 if (iconChunk) {
   const iconUrl = `/_astro/${iconChunk}`;
   content = content.replaceAll('__ICON_SVGS_CHUNK_URL__', iconUrl);
@@ -317,8 +386,12 @@ if (iconChunk) {
         const raw = readFileSync(p);
         const isGz = raw[0] === 0x1f && raw[1] === 0x8b;
         const html = (isGz ? gunzipSync(raw) : raw).toString('utf8');
-        if (html.includes('rel="modulepreload"') || !html.includes('_astro/')) continue;
-        const out = html.replace('<head>', '<head>' + preload);
+        const relativePath = p.slice(CLIENT_DIR.length).replaceAll('\\', '/');
+        let out = repairPrerenderedSeo(html, relativePath);
+        if (!out.includes('rel="modulepreload"') && out.includes('_astro/')) {
+          out = out.replace('<head>', '<head>' + preload);
+        }
+        if (out === html) continue;
         writeFileSync(p, isGz ? gzipSync(out, { level: 9 }) : out);
         pages++;
       }

@@ -11,6 +11,10 @@ import { getDB } from '../../lib/db';
 import { getApprovedReviews, getReviewStats } from '../../lib/reviews';
 import ProLaunch from '../ProLaunch.astro';
 import ToolAdFrame from '../ads/ToolAdFrame.astro';
+import AtfSocialProof from '../AtfSocialProof.astro';
+import StickyUploadCta from '../StickyUploadCta.astro';
+import UploadFrictionPrompt from '../UploadFrictionPrompt.astro';
+import { splitFaqAnswer } from '../../lib/faq-answer';
 
 
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
@@ -186,7 +190,7 @@ const pageSchema = [
   <div class="home-editorial">
   <!-- Focused upload workspace: top ad, tight spacing, then the full-size tool. -->
   <ToolAdFrame width="wide">
-  <section class="max-w-6xl mx-auto px-3 sm:px-4">
+  <section class="max-w-6xl mx-auto px-3 sm:px-4" data-tool-anchor>
     <div class="pt-3 pb-8 sm:pb-10">
       <div class="w-full">
       <!-- Center column: upload tool only -->
@@ -261,6 +265,7 @@ const pageSchema = [
               </a>
             </div>
 
+            <UploadFrictionPrompt />
           </div>
 
           <!-- State: error -->
@@ -363,6 +368,14 @@ const pageSchema = [
         <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-semibold text-on-background leading-[0.95] tracking-[-0.055em]">
           {t(locale, 'home.hero.headline1')} <span class="text-primary">{t(locale, 'home.hero.headline2')}</span>
         </h1>
+        <AtfSocialProof
+          class="mt-5"
+          ratingValue={ratingValue}
+          reviewCount={reviewCount}
+          quote={hasReviews ? reviews[0]?.quote : null}
+          quoteName={hasReviews ? reviews[0]?.name : null}
+          href="#reviews"
+        />
       </div>
       <div class="w-full flex flex-col items-center">
         <p class="font-body text-base sm:text-lg text-on-surface-variant leading-relaxed max-w-2xl mt-5 text-pretty">
@@ -550,15 +563,16 @@ const pageSchema = [
       <div class="text-center mb-5 sm:mb-7 reveal">
         {hasReviews ? (
           <Fragment>
-            <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-2">Loved by <span class="text-primary">{reviewCount}+ creators</span> worldwide</h2>
+            <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-2">
+              <span class="text-primary">{ratingValue}/5</span> from people who upload here
+            </h2>
             <div class="flex items-center justify-center gap-2 text-sm">
               <span class="flex items-center" aria-hidden="true">
                 {[0,1,2,3,4].map(() => (
                   <Icon name="star" class="text-base text-amber-500" fill />
                 ))}
               </span>
-              <span class="font-bold text-on-background">{ratingValue}</span>
-              <span class="text-on-surface-variant">out of 5 · {reviewCount} reviews</span>
+              <span class="text-on-surface-variant">{reviewCount} verified reviews</span>
             </div>
           </Fragment>
         ) : (
@@ -654,7 +668,14 @@ const pageSchema = [
           <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
         </button>
         <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-          <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.faq.a1')}</p>
+          {(() => {
+            const { lead, rest } = splitFaqAnswer(t(locale, 'home.faq.a1'));
+            return (
+              <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+              </p>
+            );
+          })()}
         </div>
       </div>
       <div class="faq-item bg-surface-container rounded-xl">
@@ -663,7 +684,14 @@ const pageSchema = [
           <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
         </button>
         <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-          <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.faq.a2')}</p>
+          {(() => {
+            const { lead, rest } = splitFaqAnswer(t(locale, 'home.faq.a2'));
+            return (
+              <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+              </p>
+            );
+          })()}
         </div>
       </div>
       <div class="faq-item bg-surface-container rounded-xl">
@@ -672,7 +700,14 @@ const pageSchema = [
           <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
         </button>
         <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-          <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.faq.a3')}</p>
+          {(() => {
+            const { lead, rest } = splitFaqAnswer(t(locale, 'home.faq.a3'));
+            return (
+              <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+              </p>
+            );
+          })()}
         </div>
       </div>
       <div class="faq-item bg-surface-container rounded-xl">
@@ -681,7 +716,14 @@ const pageSchema = [
           <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
         </button>
         <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-          <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.faq.a4')}</p>
+          {(() => {
+            const { lead, rest } = splitFaqAnswer(t(locale, 'home.faq.a4'));
+            return (
+              <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+              </p>
+            );
+          })()}
         </div>
       </div>
       <div class="faq-item bg-surface-container rounded-xl">
@@ -690,7 +732,14 @@ const pageSchema = [
           <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
         </button>
         <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-          <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.faq.a5')}</p>
+          {(() => {
+            const { lead, rest } = splitFaqAnswer(t(locale, 'home.faq.a5'));
+            return (
+              <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+              </p>
+            );
+          })()}
         </div>
       </div>
       {locale === 'en' && (
@@ -700,7 +749,14 @@ const pageSchema = [
             <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
           </button>
           <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-            <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, 'home.faq.a6')}</p>
+            {(() => {
+              const { lead, rest } = splitFaqAnswer(t(locale, 'home.faq.a6'));
+              return (
+                <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                  <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+                </p>
+              );
+            })()}
           </div>
         </div>
       )}
@@ -711,7 +767,14 @@ const pageSchema = [
             <Icon name="expand_more" class="text-on-surface-variant flex-shrink-0 faq-icon transition-transform duration-200" />
           </button>
           <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5">
-            <p class="font-body text-on-surface-variant text-sm leading-relaxed">{t(locale, `home.faq.a${n}`)}</p>
+            {(() => {
+              const { lead, rest } = splitFaqAnswer(t(locale, `home.faq.a${n}`));
+              return (
+                <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                  <strong class="text-on-background font-bold">{lead}</strong>{rest ? ` ${rest}` : ''}
+                </p>
+              );
+            })()}
           </div>
         </div>
       ))}
@@ -746,6 +809,29 @@ const pageSchema = [
     </div>
   </div>
 
+  <!-- UGC / brand moat prompt -->
+  <section class="editorial-section cv-auto py-8 sm:py-12">
+    <div class="editorial-shell editorial-shell--narrow text-center">
+      <h2 class="font-headline text-lg sm:text-xl font-black text-on-background mb-2 reveal">Share how you use ImageToURL</h2>
+      <p class="font-body text-on-surface-variant text-sm mb-4 reveal text-pretty">
+        Real posts on Reddit (and captioned screen recordings) help other people trust the tool — and help AI search cite real usage.
+      </p>
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="https://www.reddit.com/submit?url=https%3A%2F%2Fimagetourl.cloud%2Fen%2F&title=Free%20image%20to%20URL%20host%20I%20use"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 font-label text-xs font-bold uppercase tracking-wider"
+        >
+          Post on Reddit
+        </a>
+        <a href="#reviews" class="inline-flex items-center gap-2 border border-outline-variant px-5 py-2.5 font-label text-xs font-bold uppercase tracking-wider text-on-background hover:border-primary transition-colors">
+          Leave a review here
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="editorial-section editorial-final cv-auto py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
     <div class="editorial-shell editorial-shell--narrow text-center">
@@ -764,6 +850,7 @@ const pageSchema = [
   </section>
   </div>
 
+  <StickyUploadCta label={t(locale, 'home.cta.button')} />
   <Footer />
 
   {/* Review modal — kept at the top level (outside the cv-auto/overflow-hidden
@@ -798,6 +885,10 @@ const pageSchema = [
           <div>
             <label for="review-body" class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Your review</label>
             <textarea id="review-body" rows="4" maxlength="600" placeholder="What do you use ImageToURL for, and how's it working out?" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant/40 rounded-lg font-body text-sm focus:outline-none focus:border-primary resize-none"></textarea>
+          </div>
+          <div>
+            <label for="review-friction" class="block font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">What almost stopped you? <span class="font-normal lowercase">(optional)</span></label>
+            <input id="review-friction" type="text" maxlength="120" placeholder="e.g. Wasn't sure how long links last" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant/40 rounded-lg font-body text-sm focus:outline-none focus:border-primary" />
           </div>
           <p id="review-msg" class="hidden text-sm font-medium"></p>
           <div class="flex items-center justify-end gap-2 pt-1">
@@ -984,6 +1075,7 @@ const pageSchema = [
     if (state === 'success') {
       refreshPlan(); // server may have deducted a save — refetch, then re-render
       revealGuestExpiryNote();
+      window.dispatchEvent(new CustomEvent('itu:upload-success'));
     } else {
       guestExpiryNote?.classList.add('hidden');
     }
@@ -1371,6 +1463,7 @@ const pageSchema = [
     const backdrop = document.getElementById('review-backdrop');
     const bodyInput = document.getElementById('review-body') as HTMLTextAreaElement;
     const roleInput = document.getElementById('review-role') as HTMLInputElement;
+    const frictionInput = document.getElementById('review-friction') as HTMLInputElement | null;
     const msg = document.getElementById('review-msg')!;
     const submitBtn = document.getElementById('review-submit') as HTMLButtonElement;
     const starBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.review-star'));
@@ -1440,10 +1533,21 @@ const pageSchema = [
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
       try {
+        const friction = frictionInput?.value.trim() || '';
+        let body = bodyInput.value.trim();
+        if (friction) body = `${body}\n\n[Almost stopped me: ${friction}]`;
+        if (friction) {
+          fetch('/api/friction', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ answer: friction, path: location.pathname + '#review' }),
+            keepalive: true,
+          }).catch(() => {});
+        }
         const res = await fetch('/api/reviews', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ rating, role: roleInput.value.trim(), body: bodyInput.value.trim() }),
+          body: JSON.stringify({ rating, role: roleInput.value.trim(), body }),
         });
         const data = await res.json();
         if (res.ok) {

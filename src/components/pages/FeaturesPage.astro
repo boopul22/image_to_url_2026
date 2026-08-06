@@ -41,7 +41,7 @@ function lp(path: string): string {
           <div class="relative z-10">
             <h3 class="text-lg sm:text-xl font-black font-headline mb-4">{t(locale, 'features.speed.cdn.title')}</h3>
             <p class="text-lg font-headline font-medium mb-8 max-w-md">{t(locale, 'features.speed.cdn.description')}</p>
-            <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
+            <a href={lp('/free-image-cdn/')} class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
               {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
             </a>
           </div>
@@ -63,13 +63,13 @@ function lp(path: string): string {
         <div class="relative group">
           <div class="bg-tertiary-fixed border border-outline-variant/40 p-2 rounded-xl hard-shadow h-full">
             <div class="overflow-hidden rounded-lg border border-outline-variant/40 h-64 relative">
-              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="HTTPS Security" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSdRwuOrmCj4ycUILmrlyMqINJmIzdLRXee66AW4UlJ_KzbNGVelXR1A-OxUB53ZxyAwFYHex5aHKj6-IwjRa9Tj1xZf-Z4xIFliAuIqH1QXRhzWTUyPCNAqMbBN7E8zxlAxL4CRk5h4pK9TReXntJQaa-qrowLCwfRZ5AtkWtGikuQuZUBZO8VYAZa87yW7a_YSBJHMamaJ1C0Eoamp9C6Al8nR1oUEUs8g5Cgq9seLdIBOpDlf-NA0_MbSLE05x29s6HBZVxSJE" width="500" height="256" loading="lazy" decoding="async" />
+              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="HTTPS Security" src="/feature-https-security.webp" width="512" height="512" loading="lazy" decoding="async" />
               <div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
             </div>
             <div class="p-6">
               <h3 class="text-2xl font-black font-headline mb-2">{t(locale, 'features.security.https.title')}</h3>
               <p class="font-body text-on-surface-variant mb-4">{t(locale, 'features.security.https.description')}</p>
-              <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
+              <a href={lp('/direct-image-link/')} class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
                 {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
               </a>
             </div>
@@ -78,13 +78,13 @@ function lp(path: string): string {
         <div class="relative group">
           <div class="bg-surface-variant border border-outline-variant/40 p-2 rounded-xl hard-shadow h-full">
             <div class="overflow-hidden rounded-lg border border-outline-variant/40 h-64 relative">
-              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="No Signup Required" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZjDa9o2JxdS7bGm1oXpigcU9nx0vwEcY-Wkyi5TG6ai-sn9BsyeG2XOGfA6Zz0Xu7vYFSN_Yg-u9M8TAWFt2vRc4Ie19zsVEVn8_qi96bYHyiE2GtIQ5qfVZzO-aUQpl7UQot0I6jvct23gjaVSU9H1KvT7Z7XpsWH0JhAMlpt_-rin-b7I1yX7ANp1Z3_Ahdt4xvsgocXNdWcxv4Vcr9bRbLA3iWxWxctOwWmDbbwJVKVYtFalYHgqWm2LXVzol_teioziOU79A" width="500" height="256" loading="lazy" decoding="async" />
+              <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="No Signup Required" src="/feature-no-signup.webp" width="512" height="512" loading="lazy" decoding="async" />
               <div class="absolute inset-0 bg-secondary/10 mix-blend-multiply"></div>
             </div>
             <div class="p-6">
               <h3 class="text-2xl font-black font-headline mb-2">{t(locale, 'features.security.noSignup.title')}</h3>
               <p class="font-body text-on-surface-variant mb-4">{t(locale, 'features.security.noSignup.description')}</p>
-              <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
+              <a href={lp('/anonymous-image-upload/')} class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
                 {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
               </a>
             </div>
@@ -115,7 +115,7 @@ function lp(path: string): string {
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">{t(locale, 'features.devtools.markdown.title')}</h3>
           <p class="font-body text-on-surface-variant mb-8 flex-grow">{t(locale, 'features.devtools.markdown.description')}</p>
-          <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
+          <a href={lp('/image-embed-code-generator/')} class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
             {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
           </a>
         </div>
@@ -125,7 +125,7 @@ function lp(path: string): string {
           </div>
           <h3 class="text-xl sm:text-2xl font-black font-headline mb-3">{t(locale, 'features.devtools.endpoints.title')}</h3>
           <p class="font-body text-on-surface-variant mb-8 flex-grow">{t(locale, 'features.devtools.endpoints.description')}</p>
-          <a href="#" class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
+          <a href={lp('/bulk-image-upload/')} class="inline-flex items-center gap-2 bg-secondary text-on-secondary w-fit px-4 py-2 rounded-full font-bold font-label text-xs uppercase tracking-wider border border-outline-variant/40 hard-shadow-hover transition-all">
             {t(locale, 'features.exploreAll')} <Icon name="arrow_forward" class="text-sm" />
           </a>
         </div>

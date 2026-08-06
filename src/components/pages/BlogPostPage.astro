@@ -166,8 +166,9 @@ const canonicalPostUrl = `https://imagetourl.cloud/${locale}/blog/${slug}`;
 // Link the author to the sitewide founder Person node (defined in Layout's
 // Organization schema with url + sameAs) when the byline matches, so Google and
 // AI engines resolve full author authority instead of a bare name string.
-const FOUNDER_NAME = 'Bipul';
-const isFounderAuthor = post.authorName?.trim().toLowerCase() === FOUNDER_NAME.toLowerCase();
+const FOUNDER_NAME = 'Bipul Kumar';
+const authorNorm = post.authorName?.trim().toLowerCase() ?? '';
+const isFounderAuthor = authorNorm === 'bipul' || authorNorm === FOUNDER_NAME.toLowerCase();
 
 // Google ignores headline past ~110 chars; cap so it stays eligible.
 const headline = post.title.length > 110 ? post.title.slice(0, 109).trimEnd() + '…' : post.title;
@@ -261,7 +262,7 @@ const faqSchema = post.faqItems?.length ? {
               decoding="async"
             />
             <div class="leading-tight">
-              <p class="font-bold text-sm text-on-surface">{post.authorName}</p>
+              <p class="font-bold text-sm text-on-surface">{isFounderAuthor ? 'Bipul Kumar' : post.authorName}</p>
               <p class="text-xs text-outline">{post.authorRole}</p>
             </div>
           </div>
@@ -283,6 +284,16 @@ const faqSchema = post.faqItems?.length ? {
             )}
           </div>
         </div>
+        {isFounderAuthor && (
+          <aside class="mt-6 p-4 sm:p-5 border border-outline-variant/40 bg-surface-container-low">
+            <p class="font-headline font-black text-sm text-on-background mb-1">About the author</p>
+            <p class="font-body text-sm text-on-surface-variant leading-relaxed text-pretty">
+              Bipul Kumar builds ImageToURL and other practical web tools. He writes from shipping experience — what worked in production, not generic SEO filler.
+              {' '}
+              <a href="https://bipul.online/" class="text-primary font-semibold underline-offset-2 hover:underline" rel="author">More about Bipul →</a>
+            </p>
+          </aside>
+        )}
       </header>
 
       <!-- Cover image -->

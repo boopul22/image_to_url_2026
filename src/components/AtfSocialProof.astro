@@ -1,0 +1,51 @@
+---
+/**
+ * Above-the-fold social proof: stars + optional short quote under H1.
+ * Pass live AggregateRating stats on SSR pages; landings can use the same
+ * customer-centric line with a conservative static fallback.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  ratingValue?: string | number;
+  reviewCount?: number;
+  quote?: string | null;
+  quoteName?: string | null;
+  href?: string;
+  class?: string;
+}
+
+const {
+  ratingValue = '5.0',
+  reviewCount = 0,
+  quote = null,
+  quoteName = null,
+  href = '#reviews',
+  class: className = '',
+} = Astro.props as Props;
+
+const hasCount = reviewCount > 0;
+const label = hasCount
+  ? `${ratingValue} / 5 from ${reviewCount} people who used ImageToURL`
+  : 'Rated by people who upload and share image links';
+---
+
+<div class={`atf-social-proof flex flex-col items-center gap-2 ${className}`}>
+  <a
+    href={href}
+    class="inline-flex flex-wrap items-center justify-center gap-2 text-sm text-on-surface-variant hover:text-on-background transition-colors no-underline"
+  >
+    <span class="flex items-center" aria-hidden="true">
+      {[0, 1, 2, 3, 4].map(() => (
+        <Icon name="star" class="text-base text-amber-500" fill />
+      ))}
+    </span>
+    <span class="font-label font-bold text-on-background">{label}</span>
+  </a>
+  {quote && (
+    <blockquote class="m-0 max-w-xl text-center font-body text-sm text-on-surface-variant leading-relaxed text-pretty">
+      “{quote}”
+      {quoteName && <cite class="not-italic font-label text-xs font-bold text-on-background"> — {quoteName}</cite>}
+    </blockquote>
+  )}
+</div>
