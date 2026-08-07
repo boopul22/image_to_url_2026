@@ -3,6 +3,21 @@
 // object typed as Record<Locale, LandingContent>.
 
 import type { Locale } from '../config';
+import { locales } from '../config';
+
+/** One on-page SEO figure (HTML→WebP asset under /page-images/). */
+export interface PageFigureImage {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+}
+
+export interface LandingImages {
+  hero: PageFigureImage;
+  body: PageFigureImage;
+}
 
 export interface LandingContent {
   metaTitle: string;
@@ -56,6 +71,8 @@ export interface LandingContent {
   )[];
   // Opt-in: emit HowTo JSON-LD built from `steps` for richer search results.
   howToSchema?: boolean;
+  // Optional in-content SEO figures (usually resolved from page-images meta).
+  images?: LandingImages;
 }
 
 export type LandingContentMap = Record<Locale, LandingContent>;
@@ -66,7 +83,6 @@ export type LandingContentMap = Record<Locale, LandingContent>;
  * The runtime dynamic route also falls back to defaultLocale, but using this
  * helper keeps the map type-safe without 27-per-module copy-paste.
  */
-import { locales } from '../config';
 export function fillLocales(
   en: LandingContent,
   overrides: Partial<Record<Locale, LandingContent>> = {},

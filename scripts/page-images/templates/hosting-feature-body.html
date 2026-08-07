@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { width: 1200px; height: 675px; font-family: "Space Grotesk", system-ui, sans-serif; }
+    #card {
+      width: 1200px; height: 675px; padding: 48px 56px;
+      background: #fff; border: 1px solid #e5e5e5;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .col { border: 1px solid #e5e5e5; background: #fafafa; padding: 28px; }
+    .tag { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #e11d48; margin-bottom: 14px; }
+    h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    p { color: #555; font-size: 16px; line-height: 1.45; }
+    ul { margin-top: 20px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    li { background: #fff; border: 1px solid #e5e5e5; padding: 12px 14px; font-size: 15px; font-weight: 600; }
+    .accent { border-color: #e11d48; }
+  </style>
+</head>
+<body>
+  <div id="card">
+    <div class="col">
+      <div class="tag">{{leftTag}}</div>
+      <h2>{{leftTitle}}</h2>
+      <p>{{leftBody}}</p>
+      <ul>
+        <li>{{leftItem1}}</li>
+        <li>{{leftItem2}}</li>
+      </ul>
+    </div>
+    <div class="col accent">
+      <div class="tag">{{rightTag}}</div>
+      <h2>{{rightTitle}}</h2>
+      <p>{{rightBody}}</p>
+      <ul>
+        <li>{{rightItem1}}</li>
+        <li>{{rightItem2}}</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

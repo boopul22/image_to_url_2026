@@ -1,0 +1,38 @@
+---
+/**
+ * Drop-in pair of SEO figures for EN-only pages that don't use LandingContent.
+ * Resolves /page-images/<id>/{hero,body}.webp via page-images-meta.json.
+ */
+import PageFigure from './PageFigure.astro';
+import { resolvePageImages } from '../lib/page-images';
+
+interface Props {
+  id: string;
+  /** When true, stack body under hero in one block (default). */
+  stack?: boolean;
+}
+
+const { id, stack = true } = Astro.props;
+const images = resolvePageImages(id);
+---
+
+{images && stack && (
+  <div class="page-seo-images reveal mb-6 sm:mb-8 space-y-6">
+    <PageFigure
+      src={images.hero.src}
+      alt={images.hero.alt}
+      caption={images.hero.caption}
+      width={images.hero.width}
+      height={images.hero.height}
+      loading="lazy"
+    />
+    <PageFigure
+      src={images.body.src}
+      alt={images.body.alt}
+      caption={images.body.caption}
+      width={images.body.width}
+      height={images.body.height}
+      loading="lazy"
+    />
+  </div>
+)}

@@ -1,0 +1,3459 @@
+{
+  "version": 1,
+  "width": 1200,
+  "height": 675,
+  "pages": [
+    {
+      "id": "gif-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "Gif To Url",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Gif To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .gif URL that embeds inline.",
+          "fileLabel": "clip.gif",
+          "primaryKeyword": "Gif To Url"
+        },
+        "alt": "Gif To Url illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Gif To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct GIF link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.gif",
+          "previewLabel": "clip.gif",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Gif To Url example showing a direct image URL used in context",
+        "caption": "A practical Gif To Url example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "heic-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Heic To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Heic To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .heic URL that embeds inline.",
+          "fileLabel": "iphone.heic",
+          "primaryKeyword": "Heic To Jpg"
+        },
+        "alt": "Heic To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Heic To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct HEIC link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.heic",
+          "previewLabel": "iphone.heic",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Heic To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Heic To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "png-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "Png To Url",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Png To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Png To Url"
+        },
+        "alt": "Png To Url illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Png To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Png To Url example showing a direct image URL used in context",
+        "caption": "A practical Png To Url example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jpg-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "JPG to link",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jpg To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "JPG to link"
+        },
+        "alt": "JPG to link illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpg To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "JPG to link example showing a direct image URL used in context",
+        "caption": "A practical JPG to link example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "webp-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "Webp To Url",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Webp To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .webp URL that embeds inline.",
+          "fileLabel": "shot.webp",
+          "primaryKeyword": "Webp To Url"
+        },
+        "alt": "Webp To Url illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Webp To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct WEBP link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.webp",
+          "previewLabel": "shot.webp",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Webp To Url example showing a direct image URL used in context",
+        "caption": "A practical Webp To Url example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "photo-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "photo to URL",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Photo To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "photo to URL"
+        },
+        "alt": "photo to URL illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Photo To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "photo to URL example showing a direct image URL used in context",
+        "caption": "A practical photo to URL example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "screenshot-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "Screenshot To Url",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Screenshot To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Screenshot To Url"
+        },
+        "alt": "Screenshot To Url illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Screenshot To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Screenshot To Url example showing a direct image URL used in context",
+        "caption": "A practical Screenshot To Url example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-url-generator",
+      "family": "tool-flow",
+      "primaryKeyword": "Image Url Generator",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image Url Generator in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image Url Generator"
+        },
+        "alt": "Image Url Generator illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Url Generator: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image Url Generator example showing a direct image URL used in context",
+        "caption": "A practical Image Url Generator example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "Image To Url",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image To Url"
+        },
+        "alt": "Image To Url illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image To Url example showing a direct image URL used in context",
+        "caption": "A practical Image To Url example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-url-converter",
+      "family": "tool-flow",
+      "primaryKeyword": "Image To Url Converter",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image To Url Converter in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image To Url Converter"
+        },
+        "alt": "Image To Url Converter illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Url Converter: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image To Url Converter example showing a direct image URL used in context",
+        "caption": "A practical Image To Url Converter example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-link",
+      "family": "tool-flow",
+      "primaryKeyword": "make image into a link",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image To Link in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "make image into a link"
+        },
+        "alt": "make image into a link illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Link: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "make image into a link example showing a direct image URL used in context",
+        "caption": "A practical make image into a link example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-embed-code-generator",
+      "family": "tool-flow",
+      "primaryKeyword": "Image Embed Code Generator",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image Embed Code Generator in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image Embed Code Generator"
+        },
+        "alt": "Image Embed Code Generator illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Embed Code Generator: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image Embed Code Generator example showing a direct image URL used in context",
+        "caption": "A practical Image Embed Code Generator example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-url-for-chatgpt",
+      "family": "platform-use",
+      "primaryKeyword": "Image Url For Chatgpt",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Image Url For Chatgpt",
+          "title": "Host once, paste into Image Url For Chatgpt",
+          "windowTitle": "Image Url For Chatgpt",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Image Url For Chatgpt.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Url For Chatgpt illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Url For Chatgpt: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Image Url For Chatgpt",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Image Url For Chatgpt where an image URL is expected."
+        },
+        "alt": "Image Url For Chatgpt example showing a direct image URL used in context",
+        "caption": "A practical Image Url For Chatgpt example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-url-for-whatsapp",
+      "family": "platform-use",
+      "primaryKeyword": "Image To Url For Whatsapp",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Image To Url For Whatsapp",
+          "title": "Host once, paste into Image To Url For Whatsapp",
+          "windowTitle": "Image To Url For Whatsapp",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Image To Url For Whatsapp.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image To Url For Whatsapp illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Url For Whatsapp: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Image To Url For Whatsapp",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Image To Url For Whatsapp where an image URL is expected."
+        },
+        "alt": "Image To Url For Whatsapp example showing a direct image URL used in context",
+        "caption": "A practical Image To Url For Whatsapp example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-url-for-html",
+      "family": "platform-use",
+      "primaryKeyword": "Image To Url For Html",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Image To Url For Html",
+          "title": "Host once, paste into Image To Url For Html",
+          "windowTitle": "Image To Url For Html",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Image To Url For Html.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image To Url For Html illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Url For Html: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Image To Url For Html",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Image To Url For Html where an image URL is expected."
+        },
+        "alt": "Image To Url For Html example showing a direct image URL used in context",
+        "caption": "A practical Image To Url For Html example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-url-vercel",
+      "family": "tool-flow",
+      "primaryKeyword": "Image To Url Vercel",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image To Url Vercel in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image To Url Vercel"
+        },
+        "alt": "Image To Url Vercel illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Url Vercel: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image To Url Vercel example showing a direct image URL used in context",
+        "caption": "A practical Image To Url Vercel example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-wordpress",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Wordpress",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Wordpress",
+          "title": "Host once, paste into Wordpress",
+          "windowTitle": "Wordpress",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Wordpress.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Wordpress illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Wordpress: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Wordpress",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Wordpress where an image URL is expected."
+        },
+        "alt": "Image Hosting For Wordpress example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Wordpress example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-discord",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Discord",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Discord",
+          "title": "Host once, paste into Discord",
+          "windowTitle": "Discord",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Discord.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Discord illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Discord: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Discord",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Discord where an image URL is expected."
+        },
+        "alt": "Image Hosting For Discord example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Discord example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-ebay",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Ebay",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Ebay",
+          "title": "Host once, paste into Ebay",
+          "windowTitle": "Ebay",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Ebay.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Ebay illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Ebay: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Ebay",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Ebay where an image URL is expected."
+        },
+        "alt": "Image Hosting For Ebay example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Ebay example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-email-signatures",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Email Signatures",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Email Signatures",
+          "title": "Host once, paste into Email Signatures",
+          "windowTitle": "Email Signatures",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Email Signatures.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Email Signatures illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Email Signatures: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Email Signatures",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Email Signatures where an image URL is expected."
+        },
+        "alt": "Image Hosting For Email Signatures example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Email Signatures example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-forums",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Forums",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Forums",
+          "title": "Host once, paste into Forums",
+          "windowTitle": "Forums",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Forums.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Forums illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Forums: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Forums",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Forums where an image URL is expected."
+        },
+        "alt": "Image Hosting For Forums example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Forums example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-github-readme",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Github Readme",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Github Readme",
+          "title": "Host once, paste into Github Readme",
+          "windowTitle": "Github Readme",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Github Readme.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Github Readme illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Github Readme: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Github Readme",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Github Readme where an image URL is expected."
+        },
+        "alt": "Image Hosting For Github Readme example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Github Readme example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-google-forms",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Google Forms",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Google Forms",
+          "title": "Host once, paste into Google Forms",
+          "windowTitle": "Google Forms",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Google Forms.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Google Forms illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Google Forms: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Google Forms",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Google Forms where an image URL is expected."
+        },
+        "alt": "Image Hosting For Google Forms example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Google Forms example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-google-sheets",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Google Sheets",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Google Sheets",
+          "title": "Host once, paste into Google Sheets",
+          "windowTitle": "Google Sheets",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Google Sheets.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Google Sheets illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Google Sheets: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Google Sheets",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Google Sheets where an image URL is expected."
+        },
+        "alt": "Image Hosting For Google Sheets example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Google Sheets example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-newsletters",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Newsletters",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Newsletters",
+          "title": "Host once, paste into Newsletters",
+          "windowTitle": "Newsletters",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Newsletters.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Newsletters illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Newsletters: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Newsletters",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Newsletters where an image URL is expected."
+        },
+        "alt": "Image Hosting For Newsletters example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Newsletters example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-notion",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Notion",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Notion",
+          "title": "Host once, paste into Notion",
+          "windowTitle": "Notion",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Notion.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Notion illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Notion: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Notion",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Notion where an image URL is expected."
+        },
+        "alt": "Image Hosting For Notion example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Notion example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-shopify",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Shopify",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Shopify",
+          "title": "Host once, paste into Shopify",
+          "windowTitle": "Shopify",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Shopify.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Shopify illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Shopify: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Shopify",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Shopify where an image URL is expected."
+        },
+        "alt": "Image Hosting For Shopify example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Shopify example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "free-image-hosting",
+      "family": "hosting-feature",
+      "primaryKeyword": "free image hosting",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Free Image Hosting",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "free image hosting"
+        },
+        "alt": "free image hosting illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Free Image Hosting: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "free image hosting example showing a direct image URL used in context",
+        "caption": "A practical free image hosting example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "free-image-cdn",
+      "family": "hosting-feature",
+      "primaryKeyword": "Free Image Cdn",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Free Image Cdn",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "Free Image Cdn"
+        },
+        "alt": "Free Image Cdn illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Free Image Cdn: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "Free Image Cdn example showing a direct image URL used in context",
+        "caption": "A practical Free Image Cdn example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "ai-image-hosting",
+      "family": "hosting-feature",
+      "primaryKeyword": "Ai Image Hosting",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Ai Image Hosting",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "Ai Image Hosting"
+        },
+        "alt": "Ai Image Hosting illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Ai Image Hosting: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "Ai Image Hosting example showing a direct image URL used in context",
+        "caption": "A practical Ai Image Hosting example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "anonymous-image-upload",
+      "family": "hosting-feature",
+      "primaryKeyword": "Anonymous Image Upload",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Anonymous Image Upload",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "Anonymous Image Upload"
+        },
+        "alt": "Anonymous Image Upload illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Anonymous Image Upload: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "Anonymous Image Upload example showing a direct image URL used in context",
+        "caption": "A practical Anonymous Image Upload example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "bulk-image-upload",
+      "family": "hosting-feature",
+      "primaryKeyword": "Bulk Image Upload",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Bulk Image Upload",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "Bulk Image Upload"
+        },
+        "alt": "Bulk Image Upload illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Bulk Image Upload: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "Bulk Image Upload example showing a direct image URL used in context",
+        "caption": "A practical Bulk Image Upload example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "direct-image-link",
+      "family": "hosting-feature",
+      "primaryKeyword": "Direct Image Link",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Direct Image Link",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "Direct Image Link"
+        },
+        "alt": "Direct Image Link illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Direct Image Link: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "Direct Image Link example showing a direct image URL used in context",
+        "caption": "A practical Direct Image Link example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "permanent-image-hosting",
+      "family": "hosting-feature",
+      "primaryKeyword": "Permanent Image Hosting",
+      "hero": {
+        "template": "hosting-feature-hero.html",
+        "params": {
+          "eyebrow": "Hosting",
+          "title": "Permanent Image Hosting",
+          "badge": "No signup to start",
+          "dropTitle": "Drop an image, get a URL",
+          "dropSub": "JPG, PNG, WebP, GIF, SVG up to 50MB",
+          "primaryKeyword": "Permanent Image Hosting"
+        },
+        "alt": "Permanent Image Hosting illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Permanent Image Hosting: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "hosting-feature-body.html",
+        "params": {
+          "leftTag": "Guest",
+          "leftTitle": "Temporary link",
+          "leftBody": "Anonymous uploads stay live for at least a couple of weeks.",
+          "leftItem1": "No account required",
+          "leftItem2": "Cleared on monthly cleanup",
+          "rightTag": "Signed in",
+          "rightTitle": "Keep forever",
+          "rightBody": "Free account can mark files permanent.",
+          "rightItem1": "No credit card",
+          "rightItem2": "Best for signatures and sites"
+        },
+        "alt": "Permanent Image Hosting example showing a direct image URL used in context",
+        "caption": "A practical Permanent Image Hosting example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "imgbb-alternative",
+      "family": "comparison",
+      "primaryKeyword": "Imgbb Alternative",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Imgbb Alternative",
+          "colA": "ImageToURL",
+          "colB": "Other host",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Imgbb Alternative illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Imgbb Alternative: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Other host",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Other host may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Imgbb Alternative example showing a direct image URL used in context",
+        "caption": "A practical Imgbb Alternative example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "imgur-alternative",
+      "family": "comparison",
+      "primaryKeyword": "Imgur alternative",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Imgur Alternative",
+          "colA": "ImageToURL",
+          "colB": "Imgur",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "No (since 2023)",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Imgur alternative illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Imgur Alternative: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Imgur",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Imgur may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Imgur alternative example showing a direct image URL used in context",
+        "caption": "A practical Imgur alternative example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "cloudinary-alternative",
+      "family": "comparison",
+      "primaryKeyword": "Cloudinary Alternative",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Cloudinary Alternative",
+          "colA": "ImageToURL",
+          "colB": "Cloudinary",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Cloudinary Alternative illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Cloudinary Alternative: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Cloudinary",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Cloudinary may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Cloudinary Alternative example showing a direct image URL used in context",
+        "caption": "A practical Cloudinary Alternative example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "png-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Png To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Png To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Png To Jpg"
+        },
+        "alt": "Png To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Png To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Png To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Png To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jpg-to-png",
+      "family": "tool-flow",
+      "primaryKeyword": "Jpg To Png",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jpg To Png in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Jpg To Png"
+        },
+        "alt": "Jpg To Png illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpg To Png: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Jpg To Png example showing a direct image URL used in context",
+        "caption": "A practical Jpg To Png example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "convert-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Convert To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Convert To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Convert To Jpg"
+        },
+        "alt": "Convert To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Convert To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Convert To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Convert To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jpeg-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Jpeg To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jpeg To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Jpeg To Jpg"
+        },
+        "alt": "Jpeg To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpeg To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Jpeg To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Jpeg To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jfif-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Jfif To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jfif To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Jfif To Jpg"
+        },
+        "alt": "Jfif To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jfif To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Jfif To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Jfif To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jpg-to-jpeg",
+      "family": "tool-flow",
+      "primaryKeyword": "Jpg To Jpeg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jpg To Jpeg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Jpg To Jpeg"
+        },
+        "alt": "Jpg To Jpeg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpg To Jpeg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Jpg To Jpeg example showing a direct image URL used in context",
+        "caption": "A practical Jpg To Jpeg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "avif-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Avif To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Avif To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Avif To Jpg"
+        },
+        "alt": "Avif To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Avif To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Avif To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Avif To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "tiff-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Tiff To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Tiff To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "photo.jpg",
+          "primaryKeyword": "Tiff To Jpg"
+        },
+        "alt": "Tiff To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Tiff To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "photo.jpg",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Tiff To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Tiff To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "webp-to-jpg",
+      "family": "tool-flow",
+      "primaryKeyword": "Webp To Jpg",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Webp To Jpg in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .webp URL that embeds inline.",
+          "fileLabel": "shot.webp",
+          "primaryKeyword": "Webp To Jpg"
+        },
+        "alt": "Webp To Jpg illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Webp To Jpg: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct WEBP link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.webp",
+          "previewLabel": "shot.webp",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Webp To Jpg example showing a direct image URL used in context",
+        "caption": "A practical Webp To Jpg example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "webp-to-png",
+      "family": "tool-flow",
+      "primaryKeyword": "Webp To Png",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Webp To Png in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .webp URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Webp To Png"
+        },
+        "alt": "Webp To Png illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Webp To Png: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct WEBP link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.webp",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Webp To Png example showing a direct image URL used in context",
+        "caption": "A practical Webp To Png example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "png-to-webp",
+      "family": "tool-flow",
+      "primaryKeyword": "Png To Webp",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Png To Webp in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Png To Webp"
+        },
+        "alt": "Png To Webp illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Png To Webp: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Png To Webp example showing a direct image URL used in context",
+        "caption": "A practical Png To Webp example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jpg-to-webp",
+      "family": "tool-flow",
+      "primaryKeyword": "Jpg To Webp",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jpg To Webp in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "shot.webp",
+          "primaryKeyword": "Jpg To Webp"
+        },
+        "alt": "Jpg To Webp illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpg To Webp: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "shot.webp",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Jpg To Webp example showing a direct image URL used in context",
+        "caption": "A practical Jpg To Webp example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "png-to-pdf",
+      "family": "tool-flow",
+      "primaryKeyword": "Png To Pdf",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Png To Pdf in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Png To Pdf"
+        },
+        "alt": "Png To Pdf illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Png To Pdf: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Png To Pdf example showing a direct image URL used in context",
+        "caption": "A practical Png To Pdf example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "jpg-to-pdf",
+      "family": "tool-flow",
+      "primaryKeyword": "Jpg To Pdf",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Jpg To Pdf in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .jpg URL that embeds inline.",
+          "fileLabel": "scan.pdf",
+          "primaryKeyword": "Jpg To Pdf"
+        },
+        "alt": "Jpg To Pdf illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpg To Pdf: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct JPG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.jpg",
+          "previewLabel": "scan.pdf",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Jpg To Pdf example showing a direct image URL used in context",
+        "caption": "A practical Jpg To Pdf example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "heic-to-png",
+      "family": "tool-flow",
+      "primaryKeyword": "Heic To Png",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Heic To Png in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .heic URL that embeds inline.",
+          "fileLabel": "logo.png",
+          "primaryKeyword": "Heic To Png"
+        },
+        "alt": "Heic To Png illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Heic To Png: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct HEIC link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.heic",
+          "previewLabel": "logo.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Heic To Png example showing a direct image URL used in context",
+        "caption": "A practical Heic To Png example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "heic-to-pdf",
+      "family": "tool-flow",
+      "primaryKeyword": "Heic To Pdf",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Heic To Pdf in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .heic URL that embeds inline.",
+          "fileLabel": "iphone.heic",
+          "primaryKeyword": "Heic To Pdf"
+        },
+        "alt": "Heic To Pdf illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Heic To Pdf: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct HEIC link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.heic",
+          "previewLabel": "iphone.heic",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Heic To Pdf example showing a direct image URL used in context",
+        "caption": "A practical Heic To Pdf example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-compressor",
+      "family": "tool-flow",
+      "primaryKeyword": "Image Compressor",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image Compressor in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image Compressor"
+        },
+        "alt": "Image Compressor illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Compressor: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image Compressor example showing a direct image URL used in context",
+        "caption": "A practical Image Compressor example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-resizer",
+      "family": "tool-flow",
+      "primaryKeyword": "Image Resizer",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image Resizer in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image Resizer"
+        },
+        "alt": "Image Resizer illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Resizer: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image Resizer example showing a direct image URL used in context",
+        "caption": "A practical Image Resizer example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-to-base64",
+      "family": "tool-flow",
+      "primaryKeyword": "Image To Base64",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Image To Base64 in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Image To Base64"
+        },
+        "alt": "Image To Base64 illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image To Base64: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Image To Base64 example showing a direct image URL used in context",
+        "caption": "A practical Image To Base64 example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "base64-to-image",
+      "family": "tool-flow",
+      "primaryKeyword": "Base64 To Image",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Base64 To Image in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Base64 To Image"
+        },
+        "alt": "Base64 To Image illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Base64 To Image: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Base64 To Image example showing a direct image URL used in context",
+        "caption": "A practical Base64 To Image example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "favicon-generator",
+      "family": "tool-flow",
+      "primaryKeyword": "Favicon Generator",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Favicon Generator in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .png URL that embeds inline.",
+          "fileLabel": "image.png",
+          "primaryKeyword": "Favicon Generator"
+        },
+        "alt": "Favicon Generator illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Favicon Generator: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct PNG link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.png",
+          "previewLabel": "image.png",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Favicon Generator example showing a direct image URL used in context",
+        "caption": "A practical Favicon Generator example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "about",
+      "family": "guide-explain",
+      "primaryKeyword": "About",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "About",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "About illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "About: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep About concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "About example showing a direct image URL used in context",
+        "caption": "A practical About example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "contact",
+      "family": "guide-explain",
+      "primaryKeyword": "Contact",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Contact",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Contact illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Contact: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Contact concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Contact example showing a direct image URL used in context",
+        "caption": "A practical Contact example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "content-guidelines",
+      "family": "guide-explain",
+      "primaryKeyword": "Content Guidelines",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Content Guidelines",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Content Guidelines illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Content Guidelines: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Content Guidelines concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Content Guidelines example showing a direct image URL used in context",
+        "caption": "A practical Content Guidelines example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "mp3-to-url",
+      "family": "tool-flow",
+      "primaryKeyword": "Mp3 To Url",
+      "hero": {
+        "template": "tool-flow-hero.html",
+        "params": {
+          "eyebrow": "Tool flow",
+          "title": "Mp3 To Url in three steps",
+          "step1Title": "Upload",
+          "step1Body": "Drop your file in the browser. No account wall.",
+          "step2Title": "Host on CDN",
+          "step2Body": "We store the original on a global CDN.",
+          "step3Title": "Copy the link",
+          "step3Body": "Get a direct .mp3 URL that embeds inline.",
+          "fileLabel": "clip.mp3",
+          "primaryKeyword": "Mp3 To Url"
+        },
+        "alt": "Mp3 To Url illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Mp3 To Url: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "tool-flow-body.html",
+        "params": {
+          "title": "Direct MP3 link",
+          "subtitle": "The URL ends in the real file extension so chats and forums show the picture.",
+          "urlExample": "https://imagetourl.cloud/abc123.mp3",
+          "previewLabel": "clip.mp3",
+          "chatLine": "Paste the link in Discord or a forum…",
+          "embedLabel": "Inline preview"
+        },
+        "alt": "Mp3 To Url example showing a direct image URL used in context",
+        "caption": "A practical Mp3 To Url example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-reddit",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Reddit",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Reddit",
+          "title": "Host once, paste into Reddit",
+          "windowTitle": "Reddit",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Reddit.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Reddit illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Reddit: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Reddit",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Reddit where an image URL is expected."
+        },
+        "alt": "Image Hosting For Reddit example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Reddit example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-twitter",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Twitter",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Twitter",
+          "title": "Host once, paste into Twitter",
+          "windowTitle": "Twitter",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Twitter.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Twitter illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Twitter: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Twitter",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Twitter where an image URL is expected."
+        },
+        "alt": "Image Hosting For Twitter example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Twitter example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-instagram",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Instagram",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Instagram",
+          "title": "Host once, paste into Instagram",
+          "windowTitle": "Instagram",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Instagram.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Instagram illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Instagram: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Instagram",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Instagram where an image URL is expected."
+        },
+        "alt": "Image Hosting For Instagram example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Instagram example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-pinterest",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Pinterest",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Pinterest",
+          "title": "Host once, paste into Pinterest",
+          "windowTitle": "Pinterest",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Pinterest.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Pinterest illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Pinterest: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Pinterest",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Pinterest where an image URL is expected."
+        },
+        "alt": "Image Hosting For Pinterest example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Pinterest example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-linkedin",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Linkedin",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Linkedin",
+          "title": "Host once, paste into Linkedin",
+          "windowTitle": "Linkedin",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Linkedin.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Linkedin illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Linkedin: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Linkedin",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Linkedin where an image URL is expected."
+        },
+        "alt": "Image Hosting For Linkedin example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Linkedin example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-substack",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Substack",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Substack",
+          "title": "Host once, paste into Substack",
+          "windowTitle": "Substack",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Substack.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Substack illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Substack: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Substack",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Substack where an image URL is expected."
+        },
+        "alt": "Image Hosting For Substack example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Substack example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-medium",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Medium",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Medium",
+          "title": "Host once, paste into Medium",
+          "windowTitle": "Medium",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Medium.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Medium illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Medium: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Medium",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Medium where an image URL is expected."
+        },
+        "alt": "Image Hosting For Medium example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Medium example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-ghost",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Ghost",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Ghost",
+          "title": "Host once, paste into Ghost",
+          "windowTitle": "Ghost",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Ghost.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Ghost illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Ghost: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Ghost",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Ghost where an image URL is expected."
+        },
+        "alt": "Image Hosting For Ghost example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Ghost example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-webflow",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Webflow",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Webflow",
+          "title": "Host once, paste into Webflow",
+          "windowTitle": "Webflow",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Webflow.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Webflow illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Webflow: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Webflow",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Webflow where an image URL is expected."
+        },
+        "alt": "Image Hosting For Webflow example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Webflow example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-squarespace",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Squarespace",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Squarespace",
+          "title": "Host once, paste into Squarespace",
+          "windowTitle": "Squarespace",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Squarespace.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Squarespace illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Squarespace: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Squarespace",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Squarespace where an image URL is expected."
+        },
+        "alt": "Image Hosting For Squarespace example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Squarespace example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-wix",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Wix",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Wix",
+          "title": "Host once, paste into Wix",
+          "windowTitle": "Wix",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Wix.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Wix illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Wix: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Wix",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Wix where an image URL is expected."
+        },
+        "alt": "Image Hosting For Wix example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Wix example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-framer",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Framer",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Framer",
+          "title": "Host once, paste into Framer",
+          "windowTitle": "Framer",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Framer.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Framer illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Framer: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Framer",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Framer where an image URL is expected."
+        },
+        "alt": "Image Hosting For Framer example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Framer example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-stack-overflow",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Stack Overflow",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Stack Overflow",
+          "title": "Host once, paste into Stack Overflow",
+          "windowTitle": "Stack Overflow",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Stack Overflow.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Stack Overflow illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Stack Overflow: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Stack Overflow",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Stack Overflow where an image URL is expected."
+        },
+        "alt": "Image Hosting For Stack Overflow example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Stack Overflow example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-markdown",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Markdown",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Markdown",
+          "title": "Host once, paste into Markdown",
+          "windowTitle": "Markdown",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Markdown.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Markdown illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Markdown: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Markdown",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Markdown where an image URL is expected."
+        },
+        "alt": "Image Hosting For Markdown example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Markdown example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-nextjs",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Nextjs",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Nextjs",
+          "title": "Host once, paste into Nextjs",
+          "windowTitle": "Nextjs",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Nextjs.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Nextjs illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Nextjs: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Nextjs",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Nextjs where an image URL is expected."
+        },
+        "alt": "Image Hosting For Nextjs example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Nextjs example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-for-jira",
+      "family": "platform-use",
+      "primaryKeyword": "Image Hosting For Jira",
+      "hero": {
+        "template": "platform-use-hero.html",
+        "params": {
+          "eyebrow": "For Jira",
+          "title": "Host once, paste into Jira",
+          "windowTitle": "Jira",
+          "sideText": "Upload on ImageToURL, then paste the direct URL into Jira.",
+          "mainLabel": "Image embed",
+          "urlExample": "https://imagetourl.cloud/abc123.png"
+        },
+        "alt": "Image Hosting For Jira illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting For Jira: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "platform-use-body.html",
+        "params": {
+          "title": "Three steps for Jira",
+          "s1": "Upload",
+          "s1b": "Drop the image on imagetourl.cloud.",
+          "s2": "Copy URL",
+          "s2b": "Grab the direct https link.",
+          "s3": "Paste",
+          "s3b": "Use it in Jira where an image URL is expected."
+        },
+        "alt": "Image Hosting For Jira example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting For Jira example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "postimages-alternative",
+      "family": "comparison",
+      "primaryKeyword": "Postimages Alternative",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Postimages Alternative",
+          "colA": "ImageToURL",
+          "colB": "Other host",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Postimages Alternative illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Postimages Alternative: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Other host",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Other host may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Postimages Alternative example showing a direct image URL used in context",
+        "caption": "A practical Postimages Alternative example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "google-photos-direct-link",
+      "family": "comparison",
+      "primaryKeyword": "Google Photos Direct Link",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Google Photos Direct Link",
+          "colA": "ImageToURL",
+          "colB": "Other host",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Google Photos Direct Link illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Google Photos Direct Link: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Other host",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Other host may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Google Photos Direct Link example showing a direct image URL used in context",
+        "caption": "A practical Google Photos Direct Link example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "dropbox-direct-image-link",
+      "family": "comparison",
+      "primaryKeyword": "Dropbox Direct Image Link",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Dropbox Direct Image Link",
+          "colA": "ImageToURL",
+          "colB": "Other host",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Dropbox Direct Image Link illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Dropbox Direct Image Link: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Other host",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Other host may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Dropbox Direct Image Link example showing a direct image URL used in context",
+        "caption": "A practical Dropbox Direct Image Link example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "imagetourl-vs-imgur",
+      "family": "comparison",
+      "primaryKeyword": "Imagetourl Vs Imgur",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Imagetourl Vs Imgur",
+          "colA": "ImageToURL",
+          "colB": "Imgur",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "No (since 2023)",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Imagetourl Vs Imgur illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Imagetourl Vs Imgur: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Imgur",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Imgur may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Imagetourl Vs Imgur example showing a direct image URL used in context",
+        "caption": "A practical Imagetourl Vs Imgur example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "imagetourl-vs-imgbb",
+      "family": "comparison",
+      "primaryKeyword": "Imagetourl Vs Imgbb",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Imagetourl Vs Imgbb",
+          "colA": "ImageToURL",
+          "colB": "Other host",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Imagetourl Vs Imgbb illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Imagetourl Vs Imgbb: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Other host",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Other host may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Imagetourl Vs Imgbb example showing a direct image URL used in context",
+        "caption": "A practical Imagetourl Vs Imgbb example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "imagetourl-vs-cloudinary",
+      "family": "comparison",
+      "primaryKeyword": "Imagetourl Vs Cloudinary",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Imagetourl Vs Cloudinary",
+          "colA": "ImageToURL",
+          "colB": "Cloudinary",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "Varies",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Imagetourl Vs Cloudinary illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Imagetourl Vs Cloudinary: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Cloudinary",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Cloudinary may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Imagetourl Vs Cloudinary example showing a direct image URL used in context",
+        "caption": "A practical Imagetourl Vs Cloudinary example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "imgur-vs-imgbb",
+      "family": "comparison",
+      "primaryKeyword": "Imgur Vs Imgbb",
+      "hero": {
+        "template": "comparison-hero.html",
+        "params": {
+          "eyebrow": "Compare",
+          "title": "Imgur Vs Imgbb",
+          "colA": "ImageToURL",
+          "colB": "Imgur",
+          "r1l": "No signup",
+          "r1a": "Yes",
+          "r1b": "No (since 2023)",
+          "r2l": "Direct hotlink",
+          "r2a": "Yes",
+          "r2b": "Often gallery page",
+          "r3l": "Full quality",
+          "r3a": "Yes",
+          "r3b": "Sometimes resized",
+          "r4l": "Max size",
+          "r4a": "50 MB",
+          "r4b": "Varies"
+        },
+        "alt": "Imgur Vs Imgbb illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Imgur Vs Imgbb: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "comparison-body.html",
+        "params": {
+          "leftTag": "Imgur",
+          "leftTitle": "Account or gallery friction",
+          "leftBody": "Imgur may require signup or wrap the file in a viewer page.",
+          "rightTag": "ImageToURL",
+          "rightTitle": "Direct file URL",
+          "rightBody": "Upload once and paste a link that ends in the image itself."
+        },
+        "alt": "Imgur Vs Imgbb example showing a direct image URL used in context",
+        "caption": "A practical Imgur Vs Imgbb example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-upload-api",
+      "family": "api-dev",
+      "primaryKeyword": "Image Upload Api",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Upload Api",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Upload Api illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Upload Api: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Upload Api example showing a direct image URL used in context",
+        "caption": "A practical Image Upload Api example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-rest-api",
+      "family": "api-dev",
+      "primaryKeyword": "Image Hosting Rest Api",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Hosting Rest Api",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Hosting Rest Api illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting Rest Api: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Hosting Rest Api example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting Rest Api example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-api-python",
+      "family": "api-dev",
+      "primaryKeyword": "Image Hosting Api Python",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Hosting Api Python",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Hosting Api Python illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting Api Python: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Hosting Api Python example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting Api Python example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-api-nodejs",
+      "family": "api-dev",
+      "primaryKeyword": "Image Hosting Api Nodejs",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Hosting Api Nodejs",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Hosting Api Nodejs illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting Api Nodejs: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Hosting Api Nodejs example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting Api Nodejs example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-api-php",
+      "family": "api-dev",
+      "primaryKeyword": "Image Hosting Api Php",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Hosting Api Php",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Hosting Api Php illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting Api Php: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Hosting Api Php example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting Api Php example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-hosting-api-curl",
+      "family": "api-dev",
+      "primaryKeyword": "Image Hosting Api Curl",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Hosting Api Curl",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Hosting Api Curl illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Hosting Api Curl: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Hosting Api Curl example showing a direct image URL used in context",
+        "caption": "A practical Image Hosting Api Curl example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-upload-zapier",
+      "family": "api-dev",
+      "primaryKeyword": "Image Upload Zapier",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Upload Zapier",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Upload Zapier illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Upload Zapier: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Upload Zapier example showing a direct image URL used in context",
+        "caption": "A practical Image Upload Zapier example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-upload-make",
+      "family": "api-dev",
+      "primaryKeyword": "Image Upload Make",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Upload Make",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Upload Make illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Upload Make: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Upload Make example showing a direct image URL used in context",
+        "caption": "A practical Image Upload Make example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "image-upload-n8n",
+      "family": "api-dev",
+      "primaryKeyword": "Image Upload N8n",
+      "hero": {
+        "template": "api-dev-hero.html",
+        "params": {
+          "eyebrow": "API",
+          "title": "Image Upload N8n",
+          "code": "$ curl -F file=@image.png https://imagetourl.cloud/api/upload\n→ { \"url\": \"https://imagetourl.cloud/abc123.png\" }"
+        },
+        "alt": "Image Upload N8n illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Upload N8n: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "api-dev-body.html",
+        "params": {
+          "title": "Example response",
+          "code": "{\n  \"ok\": true,\n  \"url\": \"https://imagetourl.cloud/abc123.png\",\n  \"id\": \"abc123\"\n}"
+        },
+        "alt": "Image Upload N8n example showing a direct image URL used in context",
+        "caption": "A practical Image Upload N8n example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "what-is-image-hotlinking",
+      "family": "guide-explain",
+      "primaryKeyword": "What Is Image Hotlinking",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "What Is Image Hotlinking",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "What Is Image Hotlinking illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "What Is Image Hotlinking: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep What Is Image Hotlinking concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "What Is Image Hotlinking example showing a direct image URL used in context",
+        "caption": "A practical What Is Image Hotlinking example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "how-long-does-imagetourl-store-images",
+      "family": "guide-explain",
+      "primaryKeyword": "How Long Does Imagetourl Store Images",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "How Long Does Imagetourl Store Images",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "How Long Does Imagetourl Store Images illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "How Long Does Imagetourl Store Images: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep How Long Does Imagetourl Store Images concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "How Long Does Imagetourl Store Images example showing a direct image URL used in context",
+        "caption": "A practical How Long Does Imagetourl Store Images example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/jpg-vs-png-vs-webp-vs-avif",
+      "family": "guide-explain",
+      "primaryKeyword": "Jpg Vs Png Vs Webp Vs Avif",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Jpg Vs Png Vs Webp Vs Avif",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Jpg Vs Png Vs Webp Vs Avif illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Jpg Vs Png Vs Webp Vs Avif: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Jpg Vs Png Vs Webp Vs Avif concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Jpg Vs Png Vs Webp Vs Avif example showing a direct image URL used in context",
+        "caption": "A practical Jpg Vs Png Vs Webp Vs Avif example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/image-lcp-optimization",
+      "family": "guide-explain",
+      "primaryKeyword": "Image Lcp Optimization",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Image Lcp Optimization",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Image Lcp Optimization illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Lcp Optimization: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Image Lcp Optimization concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Image Lcp Optimization example showing a direct image URL used in context",
+        "caption": "A practical Image Lcp Optimization example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/image-optimization-core-web-vitals",
+      "family": "guide-explain",
+      "primaryKeyword": "Image Optimization Core Web Vitals",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Image Optimization Core Web Vitals",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Image Optimization Core Web Vitals illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Image Optimization Core Web Vitals: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Image Optimization Core Web Vitals concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Image Optimization Core Web Vitals example showing a direct image URL used in context",
+        "caption": "A practical Image Optimization Core Web Vitals example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/responsive-images-cheatsheet",
+      "family": "guide-explain",
+      "primaryKeyword": "Responsive Images Cheatsheet",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Responsive Images Cheatsheet",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Responsive Images Cheatsheet illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Responsive Images Cheatsheet: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Responsive Images Cheatsheet concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Responsive Images Cheatsheet example showing a direct image URL used in context",
+        "caption": "A practical Responsive Images Cheatsheet example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/what-exif-leaks",
+      "family": "guide-explain",
+      "primaryKeyword": "What Exif Leaks",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "What Exif Leaks",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "What Exif Leaks illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "What Exif Leaks: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep What Exif Leaks concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "What Exif Leaks example showing a direct image URL used in context",
+        "caption": "A practical What Exif Leaks example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/embed-images-in-notion",
+      "family": "guide-explain",
+      "primaryKeyword": "Embed Images In Notion",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Embed Images In Notion",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Embed Images In Notion illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Embed Images In Notion: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Embed Images In Notion concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Embed Images In Notion example showing a direct image URL used in context",
+        "caption": "A practical Embed Images In Notion example you can copy for sharing and embeds."
+      }
+    },
+    {
+      "id": "guides/why-reddit-strips-exif",
+      "family": "guide-explain",
+      "primaryKeyword": "Why Reddit Strips Exif",
+      "hero": {
+        "template": "guide-explain-hero.html",
+        "params": {
+          "eyebrow": "Guide",
+          "title": "Why Reddit Strips Exif",
+          "n1": "Concept",
+          "n1b": "What the topic means in practice.",
+          "n2": "Trade-offs",
+          "n2b": "When to choose one approach over another.",
+          "n3": "Action",
+          "n3b": "How ImageToURL fits the workflow.",
+          "footer": "imagetourl.cloud guides"
+        },
+        "alt": "Why Reddit Strips Exif illustrated as a clear on-page diagram for imagetourl.cloud",
+        "caption": "Why Reddit Strips Exif: visual overview of how the flow works on ImageToURL."
+      },
+      "body": {
+        "template": "guide-explain-body.html",
+        "params": {
+          "title": "Checklist",
+          "i1": "Keep Why Reddit Strips Exif concrete and testable.",
+          "i2": "Prefer direct image URLs over gallery pages.",
+          "i3": "Watch file size and format for the destination.",
+          "i4": "Sign in when the link needs to last."
+        },
+        "alt": "Why Reddit Strips Exif example showing a direct image URL used in context",
+        "caption": "A practical Why Reddit Strips Exif example you can copy for sharing and embeds."
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1200px;
+      height: 675px;
+      font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+      background: #f7f7f7;
+      color: #1a1a1a;
+    }
+    #card {
+      width: 1200px;
+      height: 675px;
+      padding: 48px 56px;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+    .panel {
+      border: 1px solid #e5e5e5;
+      background: #fafafa;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .url {
+      font-family: ui-monospace, monospace;
+      font-size: 15px;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      padding: 14px;
+      color: #e11d48;
+      word-break: break-all;
+    }
+    .preview {
+      margin-top: 18px;
+      flex: 1;
+      border: 1px dashed #d0d0d0;
+      background: linear-gradient(135deg, #ffe4e9, #fff 45%, #f3f3f3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #1a1a1a;
+    }
+    .chat {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .bubble {
+      background: #f3f3f3;
+      border: 1px solid #e5e5e5;
+      padding: 12px;
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 12px;
+    }
+    .embed {
+      height: 180px;
+      border: 1px solid #e5e5e5;
+      background: linear-gradient(135deg, #fecdd3, #fff);
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .sub { color: #555; font-size: 15px; line-height: 1.45; }
+  </style>
+</head>
+<body>
+  <div id="card">
+    <div class="panel">
+      <div class="label">Direct link</div>
+      <h1>{{title}}</h1>
+      <p class="sub">{{subtitle}}</p>
+      <div class="url">{{urlExample}}</div>
+      <div class="preview">{{previewLabel}}</div>
+    </div>
+    <div class="panel">
+      <div class="label">Where it embeds</div>
+      <div class="chat">
+        <div class="bubble">{{chatLine}}</div>
+        <div class="embed">{{embedLabel}}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

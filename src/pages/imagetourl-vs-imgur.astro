@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import PageSeoImages from '../components/PageSeoImages.astro';
 
 const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "ImageToURL vs Imgur", "url": "https://imagetourl.cloud/imagetourl-vs-imgur", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Side-by-side comparison: ImageToURL and Imgur for image hosting.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
@@ -27,6 +28,8 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Imgur now purges some inactive anonymous uploads. ImageToURL guest uploads are also temporary, but signed-in users can choose Never delete for links that need to stay live.</p>
       </header>
     </div>
+      <div class="max-w-3xl mx-auto px-3 sm:px-6"><PageSeoImages id="imagetourl-vs-imgur" /></div>
+
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="overflow-x-auto border border-outline-variant/40 rounded-xl hard-shadow bg-white">

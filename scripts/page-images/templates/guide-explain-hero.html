@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { width: 1200px; height: 675px; font-family: "Space Grotesk", system-ui, sans-serif; }
+    #card {
+      width: 1200px; height: 675px; padding: 48px 56px;
+      background: #fafafa; border: 1px solid #e5e5e5;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e11d48; }
+    h1 { font-size: 38px; font-weight: 800; margin: 12px 0 20px; max-width: 900px; }
+    .diagram {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; flex: 1;
+    }
+    .node {
+      background: #fff; border: 1px solid #e5e5e5; padding: 20px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .node strong { font-size: 18px; display: block; margin-bottom: 8px; }
+    .node span { color: #555; font-size: 14px; line-height: 1.4; }
+    .foot { color: #666; font-size: 14px; border-top: 1px solid #e5e5e5; padding-top: 14px; }
+  </style>
+</head>
+<body>
+  <div id="card">
+    <div>
+      <div class="eyebrow">{{eyebrow}}</div>
+      <h1>{{title}}</h1>
+      <div class="diagram">
+        <div class="node"><strong>{{n1}}</strong><span>{{n1b}}</span></div>
+        <div class="node"><strong>{{n2}}</strong><span>{{n2b}}</span></div>
+        <div class="node"><strong>{{n3}}</strong><span>{{n3b}}</span></div>
+      </div>
+    </div>
+    <div class="foot">{{footer}}</div>
+  </div>
+</body>
+</html>

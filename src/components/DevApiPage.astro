@@ -7,6 +7,9 @@ import Icon from './Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import PageFigure from './PageFigure.astro';
+import type { LandingImages } from '../i18n/landing/types';
+import { resolvePageImages } from '../lib/page-images';
 
 export interface FaqItem { q: string; a: string; }
 export interface Props {
@@ -22,8 +25,10 @@ export interface Props {
   whys: { title: string; body: string }[];
   faqs: FaqItem[];
   relatedSlugs?: { href: string; title: string; body: string }[];
+  images?: LandingImages;
 }
-const { title, slug, metaDescription, h1Pre, h1Highlight, intro, lang, langLabel, codeSnippet, whys, faqs, relatedSlugs } = Astro.props;
+const { title, slug, metaDescription, h1Pre, h1Highlight, intro, lang, langLabel, codeSnippet, whys, faqs, relatedSlugs, images: imagesProp } = Astro.props;
+const pageImages = imagesProp ?? resolvePageImages(slug);
 
 const schema = {
   "@context": "https://schema.org", "@type": "WebApplication",
@@ -56,6 +61,18 @@ const faqSchema = {
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">{intro}</p>
       </header>
 
+      {pageImages && (
+        <PageFigure
+          src={pageImages.hero.src}
+          alt={pageImages.hero.alt}
+          caption={pageImages.hero.caption}
+          width={pageImages.hero.width}
+          height={pageImages.hero.height}
+          loading="lazy"
+          class="reveal mb-6 sm:mb-8"
+        />
+      )}
+
       <div class="border border-outline-variant/40 rounded-xl hard-shadow overflow-hidden bg-on-surface reveal">
         <div class="bg-surface-variant border-b border-outline-variant/40 px-4 py-2 flex items-center justify-between">
           <span class="text-xs font-bold uppercase tracking-wider text-on-background">{langLabel}</span>
@@ -70,6 +87,17 @@ const faqSchema = {
 
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
+        {pageImages && (
+          <PageFigure
+            src={pageImages.body.src}
+            alt={pageImages.body.alt}
+            caption={pageImages.body.caption}
+            width={pageImages.body.width}
+            height={pageImages.body.height}
+            loading="lazy"
+            class="reveal mb-6 sm:mb-8 max-w-3xl"
+          />
+        )}
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">Current status</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {whys.map((w, i) => (

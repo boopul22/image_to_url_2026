@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import PageSeoImages from '../components/PageSeoImages.astro';
 
 const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Dropbox Direct Image Link — ImageToURL", "url": "https://imagetourl.cloud/dropbox-direct-image-link", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Dropbox share links don't embed as images. Here's how to get a real direct image URL by re-hosting.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
@@ -28,6 +29,8 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">Dropbox share URLs open a preview page, not a raw image. The ?dl=1 trick is rate-limited and brittle. Re-host once for a stable direct URL.</p>
       </header>
     </div>
+      <div class="max-w-3xl mx-auto px-3 sm:px-6"><PageSeoImages id="dropbox-direct-image-link" /></div>
+
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">The problem with each Dropbox URL</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>

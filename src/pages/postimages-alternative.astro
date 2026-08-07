@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import PageSeoImages from '../components/PageSeoImages.astro';
 
 const schema = { "@context": "https://schema.org", "@type": "WebApplication", "name": "Postimages Alternative — ImageToURL", "url": "https://imagetourl.cloud/postimages-alternative", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "A modern Postimages alternative with CDN delivery, guest uploads, and signed-in keep-forever links.", "provider": { "@id": "https://imagetourl.cloud/#organization" } };
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
@@ -27,6 +28,8 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainE
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">If Postimages' dated UI or slow LATAM delivery annoy you, ImageToURL is a focused upload flow with guest links, signed-in keep-forever links, and a global CDN.</p>
       </header>
     </div>
+      <div class="max-w-3xl mx-auto px-3 sm:px-6"><PageSeoImages id="postimages-alternative" /></div>
+
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
       <div class="max-w-5xl mx-auto px-3 sm:px-6">
         <div class="flex items-baseline gap-4 mb-5 sm:mb-8 reveal"><h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight">At a glance</h2><div class="h-1 flex-grow bg-on-background opacity-10"></div></div>

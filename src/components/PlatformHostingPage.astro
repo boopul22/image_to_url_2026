@@ -8,6 +8,9 @@ import Icon from './Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import PageFigure from './PageFigure.astro';
+import type { LandingImages } from '../i18n/landing/types';
+import { resolvePageImages } from '../lib/page-images';
 
 export interface FaqItem { q: string; a: string; }
 export interface StepItem { title: string; body: string; }
@@ -24,8 +27,10 @@ export interface Props {
   steps: StepItem[];          // 3 steps
   faqs: FaqItem[];            // 8 Q&As
   relatedSlugs?: { href: string; title: string; body: string }[];
+  images?: LandingImages;
 }
-const { platform, slug, metaTitle, metaDescription, h1Pre, h1Highlight, intro, why, steps, faqs, relatedSlugs } = Astro.props;
+const { platform, slug, metaTitle, metaDescription, h1Pre, h1Highlight, intro, why, steps, faqs, relatedSlugs, images: imagesProp } = Astro.props;
+const pageImages = imagesProp ?? resolvePageImages(slug);
 
 const schema = {
   "@context": "https://schema.org", "@type": "WebApplication",
@@ -59,6 +64,18 @@ const bgRotation = ['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-f
         <p class="text-sm sm:text-base font-headline font-medium max-w-2xl text-on-surface-variant leading-relaxed">{intro}</p>
         <a href="/" class="inline-block mt-5 sm:mt-6 bg-primary text-on-primary px-5 py-2.5 border border-outline-variant/40 font-label text-sm font-bold uppercase tracking-wider hard-shadow hard-shadow-hover active:scale-95 transition-all">Upload an image →</a>
       </header>
+
+      {pageImages && (
+        <PageFigure
+          src={pageImages.hero.src}
+          alt={pageImages.hero.alt}
+          caption={pageImages.hero.caption}
+          width={pageImages.hero.width}
+          height={pageImages.hero.height}
+          loading="lazy"
+          class="reveal mb-6 sm:mb-8"
+        />
+      )}
     </div>
 
     <section class="py-8 sm:py-12 mt-8 bg-surface-container-low border-y border-outline-variant/40">
@@ -72,6 +89,17 @@ const bgRotation = ['bg-secondary-container', 'bg-tertiary-fixed', 'bg-primary-f
             </div>
           ))}
         </div>
+        {pageImages && (
+          <PageFigure
+            src={pageImages.body.src}
+            alt={pageImages.body.alt}
+            caption={pageImages.body.caption}
+            width={pageImages.body.width}
+            height={pageImages.body.height}
+            loading="lazy"
+            class="reveal mt-6 sm:mt-8 max-w-3xl"
+          />
+        )}
       </div>
     </section>
 

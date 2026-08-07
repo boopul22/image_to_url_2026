@@ -13,6 +13,9 @@ import Icon from './Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import PageFigure from './PageFigure.astro';
+import type { LandingImages } from '../i18n/landing/types';
+import { resolvePageImages } from '../lib/page-images';
 
 export interface FaqItem { q: string; a: string; }
 export interface Props {
@@ -24,8 +27,10 @@ export interface Props {
   longAnswerParagraphs: string[];  // 3–5 paragraphs of detail
   faqs: FaqItem[];
   relatedSlugs?: { href: string; title: string; body: string }[];
+  images?: LandingImages;
 }
-const { slug, metaTitle, metaDescription, question, shortAnswer, longAnswerParagraphs, faqs, relatedSlugs } = Astro.props;
+const { slug, metaTitle, metaDescription, question, shortAnswer, longAnswerParagraphs, faqs, relatedSlugs, images: imagesProp } = Astro.props;
+const pageImages = imagesProp ?? resolvePageImages(slug);
 
 const pageUrl = `https://imagetourl.cloud/${slug}`;
 
@@ -60,9 +65,34 @@ const faqSchema = {
           <p class="speakable text-base sm:text-lg font-headline font-semibold text-on-background leading-relaxed bg-white border border-outline-variant/40 p-4 sm:p-5 rounded-xl hard-shadow">{shortAnswer}</p>
         </header>
 
+        {pageImages && (
+          <PageFigure
+            src={pageImages.hero.src}
+            alt={pageImages.hero.alt}
+            caption={pageImages.hero.caption}
+            width={pageImages.hero.width}
+            height={pageImages.hero.height}
+            loading="lazy"
+            class="reveal mb-6 sm:mb-8"
+          />
+        )}
+
         <section class="mb-8 sm:mb-12">
-          {longAnswerParagraphs.map(p => (
-            <p class="font-body text-on-surface-variant mb-4 leading-relaxed">{p}</p>
+          {longAnswerParagraphs.map((p, i) => (
+            <>
+              <p class="font-body text-on-surface-variant mb-4 leading-relaxed">{p}</p>
+              {i === 0 && pageImages && (
+                <PageFigure
+                  src={pageImages.body.src}
+                  alt={pageImages.body.alt}
+                  caption={pageImages.body.caption}
+                  width={pageImages.body.width}
+                  height={pageImages.body.height}
+                  loading="lazy"
+                  class="mb-4"
+                />
+              )}
+            </>
           ))}
         </section>
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { width: 1200px; height: 675px; font-family: "Space Grotesk", system-ui, sans-serif; }
+    #card {
+      width: 1200px; height: 675px; padding: 48px 56px;
+      background: #fafafa; border: 1px solid #e5e5e5;
+    }
+    .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e11d48; }
+    h1 { font-size: 36px; font-weight: 800; margin: 10px 0 28px; }
+    .win {
+      background: #fff; border: 1px solid #e5e5e5; padding: 24px; height: 420px;
+      display: flex; flex-direction: column;
+    }
+    .bar { height: 36px; border-bottom: 1px solid #e5e5e5; display: flex; align-items: center; gap: 8px; margin: -24px -24px 20px; padding: 0 16px; background: #f3f3f3; }
+    .dot { width: 10px; height: 10px; background: #d4d4d4; border-radius: 999px; }
+    .content { flex: 1; display: grid; grid-template-columns: 1fr 1.2fr; gap: 16px; }
+    .side { border: 1px solid #e5e5e5; background: #fafafa; padding: 14px; font-size: 14px; color: #555; }
+    .main { border: 1px solid #e5e5e5; background: linear-gradient(160deg, #fecdd3, #fff 50%); display: flex; align-items: flex-end; padding: 14px; font-weight: 800; }
+    .url { margin-top: 14px; font-family: ui-monospace, monospace; font-size: 14px; color: #e11d48; border: 1px solid #e5e5e5; background: #fff; padding: 10px; }
+  </style>
+</head>
+<body>
+  <div id="card">
+    <div class="eyebrow">{{eyebrow}}</div>
+    <h1>{{title}}</h1>
+    <div class="win">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:8px;font-size:13px;color:#666">{{windowTitle}}</span></div>
+      <div class="content">
+        <div class="side">{{sideText}}</div>
+        <div class="main">{{mainLabel}}</div>
+      </div>
+      <div class="url">{{urlExample}}</div>
+    </div>
+  </div>
+</body>
+</html>

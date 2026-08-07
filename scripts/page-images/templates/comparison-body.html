@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { width: 1200px; height: 675px; font-family: "Space Grotesk", system-ui, sans-serif; }
+    #card {
+      width: 1200px; height: 675px; padding: 48px 56px;
+      background: #fff; border: 1px solid #e5e5e5;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;
+    }
+    .box { border: 1px solid #e5e5e5; padding: 28px; background: #fafafa; }
+    .box.hi { border-color: #e11d48; background: #fff5f7; }
+    .tag { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #666; margin-bottom: 12px; }
+    .hi .tag { color: #e11d48; }
+    h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+    p { color: #555; font-size: 16px; line-height: 1.45; }
+  </style>
+</head>
+<body>
+  <div id="card">
+    <div class="box">
+      <div class="tag">{{leftTag}}</div>
+      <h2>{{leftTitle}}</h2>
+      <p>{{leftBody}}</p>
+    </div>
+    <div class="box hi">
+      <div class="tag">{{rightTag}}</div>
+      <h2>{{rightTitle}}</h2>
+      <p>{{rightBody}}</p>
+    </div>
+  </div>
+</body>
+</html>

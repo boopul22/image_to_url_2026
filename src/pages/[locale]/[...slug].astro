@@ -17,7 +17,9 @@ import FaviconGenerator from '../../components/FaviconGenerator.astro';
 import ToolAdFrame from '../../components/ads/ToolAdFrame.astro';
 import AtfSocialProof from '../../components/AtfSocialProof.astro';
 import StickyUploadCta from '../../components/StickyUploadCta.astro';
+import PageFigure from '../../components/PageFigure.astro';
 import { splitFaqAnswer } from '../../lib/faq-answer';
+import { resolvePageImages } from '../../lib/page-images';
 import { locales, defaultLocale, type Locale } from '../../i18n/config';
 import { PAGE_KEYS, SLUGS, getSlug, localizedUrl, hreflangPairs, isPageKey, type PageKey } from '../../i18n/landing/registry';
 import type { LandingContentMap, LandingContent } from '../../i18n/landing/types';
@@ -178,6 +180,7 @@ const widget: WidgetSpec = WIDGETS[pageKey] ?? { kind: 'uploader' };
 const showStickyCta = widget.kind !== 'none';
 const primarySections = (c.sections ?? []).slice(0, 2);
 const deepSections = (c.sections ?? []).slice(2);
+const pageImages = c.images ?? resolvePageImages(pageKey);
 ---
 
 <Layout
@@ -226,6 +229,18 @@ const deepSections = (c.sections ?? []).slice(2);
           {c.intro}
         </p>
       </header>
+
+      {pageImages && (
+        <PageFigure
+          src={pageImages.hero.src}
+          alt={pageImages.hero.alt}
+          caption={pageImages.hero.caption}
+          width={pageImages.hero.width}
+          height={pageImages.hero.height}
+          loading="lazy"
+          class="reveal mb-6 sm:mb-8"
+        />
+      )}
 
       {c.specs && c.specs.length > 0 && (
         <section class="mb-6 sm:mb-10 reveal" aria-label={c.specsTitle ?? 'At a glance'}>
@@ -349,10 +364,21 @@ const deepSections = (c.sections ?? []).slice(2);
     {primarySections.length > 0 && (
       <section class="py-8 sm:py-12 bg-surface-container-low border-y border-outline-variant/40">
         <div class="max-w-3xl mx-auto px-3 sm:px-6 space-y-6 sm:space-y-8">
-          {primarySections.map(sec => (
+          {primarySections.map((sec, si) => (
             <div class="reveal">
               <h2 class="text-xl sm:text-2xl font-black font-headline tracking-tight mb-3">{sec.heading}</h2>
               <p class="font-body text-on-surface-variant leading-relaxed">{sec.body}</p>
+              {si === 0 && pageImages && (
+                <PageFigure
+                  src={pageImages.body.src}
+                  alt={pageImages.body.alt}
+                  caption={pageImages.body.caption}
+                  width={pageImages.body.width}
+                  height={pageImages.body.height}
+                  loading="lazy"
+                  class="mt-5 sm:mt-6"
+                />
+              )}
             </div>
           ))}
           {deepSections.length > 0 && (
@@ -371,6 +397,22 @@ const deepSections = (c.sections ?? []).slice(2);
               </div>
             </details>
           )}
+        </div>
+      </section>
+    )}
+
+    {primarySections.length === 0 && pageImages && (
+      <section class="py-8 sm:py-12">
+        <div class="max-w-3xl mx-auto px-3 sm:px-6">
+          <PageFigure
+            src={pageImages.body.src}
+            alt={pageImages.body.alt}
+            caption={pageImages.body.caption}
+            width={pageImages.body.width}
+            height={pageImages.body.height}
+            loading="lazy"
+            class="reveal"
+          />
         </div>
       </section>
     )}

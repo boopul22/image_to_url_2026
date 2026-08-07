@@ -17,7 +17,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "kw:auth": "node scripts/keyword-ideas/get-refresh-token.mjs",
-    "kw:ideas": "node scripts/keyword-ideas/keyword-ideas.mjs"
+    "kw:ideas": "node scripts/keyword-ideas/keyword-ideas.mjs",
+    "images:manifest": "node scripts/page-images/build-manifest.mjs",
+    "images:render": "node scripts/page-images/build-manifest.mjs && node scripts/render-page-images.mjs",
+    "images:render:wave0": "node scripts/page-images/build-manifest.mjs && node scripts/render-page-images.mjs --only=wave0",
+    "images:render:one": "node scripts/render-page-images.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.6",
@@ -42,6 +46,8 @@
     "@astrojs/check": "^0.9.9",
     "@cloudflare/workers-types": "^4.20260331.1",
     "@material-symbols/svg-400": "^0.44.11",
+    "playwright": "^1.62.1",
+    "sharp": "^0.35.3",
     "typescript": "^5.9.3",
     "wrangler": "^4.84.1"
   }
