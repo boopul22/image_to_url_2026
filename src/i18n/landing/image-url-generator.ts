@@ -5,22 +5,22 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Free Image URL Generator - Get a Direct Image Link",
-    "metaDescription": "Free image URL generator and image link generator. Upload a JPG, PNG, WebP or GIF and get a direct, permanent link in seconds. No signup, no watermark.",
+    "metaTitle": "Image URL Generator & Image Link Maker Free | ImageToURL",
+    "metaDescription": "Free image URL generator and image link maker. Upload JPG, PNG, WebP or GIF and get a direct link in seconds. No signup, no watermark.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "image-to-url-converter", "label": "Image to URL converter" },
+      { "pageKey": "image-to-link", "label": "Make image into a link" },
       { "pageKey": "image-embed-code-generator", "label": "Embed code generator" },
-      { "pageKey": "image-to-link", "label": "Image to link" },
       { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
     ],
     "schemaName": "Free Image URL Generator",
-    "schemaDescription": "Upload an image and get a direct, permanent URL in seconds. Free image url generator and image link generator with no signup or watermark.",
-    "badge": "URL GENERATOR",
-    "h1Pre": "Free Image URL Generator and ",
-    "h1Highlight": "Image Link Generator",
-    "intro": "This free image url generator turns any photo into a direct, hotlinkable link you can paste anywhere. Drop in a JPG, PNG, WebP or GIF up to 50MB and the image link generator hands back a clean URL in seconds. No account, no watermark, no software to install. The link points straight at your file, so it embeds in HTML, Markdown, Discord, Reddit and forum posts without breaking.",
-    "howTitle": "How the Image URL Generator Works",
+    "schemaDescription": "Upload an image and get a direct URL in seconds. Free image URL generator and image link maker with no signup or watermark.",
+    "badge": "URL GENERATOR / LINK MAKER",
+    "h1Pre": "Image URL generator,",
+    "h1Highlight": "image link maker, free",
+    "intro": "This page is the generator and link-maker angle: upload a JPG, PNG, WebP or GIF up to 50MB and copy a direct URL. No account, no watermark. Use it when you want a \"generated\" address for HTML, Markdown, Discord, or an API. For \"converter\" wording, use the converter page; for \"make into a link\", use image-to-link.",
+    "howTitle": "How the image URL generator works",
     "steps": [
       {
         "title": "Drop in your file",
@@ -161,7 +161,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Generador de URL de imagen gratuito — Convierte imágenes a URL al instante | ImageToURL",

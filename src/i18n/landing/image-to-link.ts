@@ -5,22 +5,23 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to Link - Free Direct Image Link Generator | ImageToURL",
-    "metaDescription": "Turn any image to link free with no signup. Get a direct, hotlinkable link that renders as the image in Discord, Reddit, and forums. Permanent and anonymous.",
+    "metaTitle": "Make Image into a Link - Free Image to Link Tool | ImageToURL",
+    "metaDescription": "Make an image into a link free, no signup. Turn a picture into a direct, hotlinkable URL that shows as the image in Discord, Reddit, and forums.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Image to URL converter" },
-      { "pageKey": "image-embed-code-generator", "label": "Image embed code generator" },
+      { "pageKey": "jpg-to-url", "label": "JPG to link" },
+      { "pageKey": "photo-to-url", "label": "Photo to URL" },
+      { "pageKey": "image-to-url-converter", "label": "Image to URL converter" },
       { "pageKey": "direct-image-link", "label": "Direct image link" },
-      { "pageKey": "image-url-generator", "label": "Image URL generator" }
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" }
     ],
     "schemaName": "Image to Link Generator",
-    "schemaDescription": "Convert any image to a direct, shareable link that loads as the image itself in Discord, Reddit, forums, and chat. Free, no signup, no compression.",
-    "badge": "IMAGE TO LINK",
-    "h1Pre": "Image to Link -",
-    "h1Highlight": "a direct link that shows your image",
-    "intro": "This image to link tool gives you a direct, hotlinkable URL that loads as the picture itself, not a webpage or a gallery page. Paste it into Discord, Reddit, a forum post, or a chat and people see the image inline. No signup, no watermark, nothing to click through.",
-    "howTitle": "How the image to link tool works",
+    "schemaDescription": "Make any image into a link: upload and get a direct URL that loads as the picture in Discord, Reddit, forums, and chat. Free, no signup, no compression.",
+    "badge": "MAKE IMAGE INTO A LINK",
+    "h1Pre": "Make an image into a link,",
+    "h1Highlight": "or turn a picture into a URL",
+    "intro": "If you searched for how to make an image into a link or turn a picture into a link, this is that tool. Upload a JPG, PNG, WebP, or GIF and copy a direct URL that loads as the picture itself, not a gallery page. Paste it in Discord, Reddit, a forum, or chat. No signup, no watermark.",
+    "howTitle": "How to turn an image into a link",
     "steps": [
       {
         "title": "Upload your image",
@@ -68,7 +69,15 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to link FAQ",
     "faqs": [
-      { "q": "How do I turn an image into a link?", "a": "Upload it in the box above to get a direct URL, then use that URL as the link. To make the link display the image (Discord, Reddit, forums) paste the raw URL; to make clickable text, wrap it as [text](your-url) in Markdown or in an HTML anchor. The same steps make an image into a link whether it is a photo, a screenshot, or any other picture. No signup is needed and it takes a couple of seconds." },
+      { "q": "How do I turn an image into a link?", "a": "Upload it in the box above. You get a direct URL in a couple of seconds. Paste the raw URL in Discord, Reddit, or a forum to show the picture; wrap it as [text](your-url) in Markdown if you want clickable text instead." },
+      {
+        "q": "How do I make an image into a link?",
+        "a": "Same steps: drop the file in the uploader, copy the link we return, paste it where you need it. \"Make image into a link\" and \"turn image into a link\" are the same job."
+      },
+      {
+        "q": "How do I create a URL for an image?",
+        "a": "Upload the image here. We host the file and hand back a public https address that points at it. That address is your image URL."
+      },
       {
         "q": "What is an image link generator?",
         "a": "It is a tool that takes your uploaded picture and gives back a direct URL pointing at the file. That link is what you share, and supported sites render it as the image instead of a download or a gallery page."
@@ -150,7 +159,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Imagen a enlace — Generador gratuito de enlaces directos de imágenes | ImageToURL",

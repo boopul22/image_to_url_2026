@@ -5,21 +5,22 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Image to URL Converter - Free Direct Link, No Signup | ImageToURL",
-    "metaDescription": "Free image to URL converter. Upload a JPG, PNG, WebP, GIF or SVG and get a direct link that embeds cleanly in Discord, Reddit and forums - no signup, no compression, no watermark.",
+    "metaTitle": "Image to URL Converter Free - Direct Link, No Signup | ImageToURL",
+    "metaDescription": "Free image to URL converter. Upload JPG, PNG, WebP, GIF or SVG and get a direct link for Discord, Reddit and forums. No signup, no compression.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Image to URL" },
-      { "pageKey": "image-to-link", "label": "Image to link tool" },
+      { "pageKey": "png-to-url", "label": "PNG to URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG to link" },
+      { "pageKey": "image-to-link", "label": "Make image into a link" },
       { "pageKey": "image-url-generator", "label": "Image URL generator" },
       { "pageKey": "free-image-hosting", "label": "Free image hosting" }
     ],
     "schemaName": "Image to URL Converter",
-    "schemaDescription": "A free image to URL converter that turns any image into a direct, full-quality link. No account, no watermark, fast global CDN.",
-    "badge": "IMAGE TO URL",
-    "h1Pre": "Image to URL Converter -",
-    "h1Highlight": "Free, No Signup",
-    "intro": "This image to URL converter turns any picture into a direct, shareable link in a couple of seconds. Drop in a JPG, PNG, WebP, GIF or SVG and you get a clean image to URL link you can paste anywhere - no account, no watermark, and nothing re-compressed or downscaled out of your file.",
+    "schemaDescription": "Free image to URL converter that turns any image into a direct, full-quality link. No account, no watermark, fast global CDN.",
+    "badge": "IMAGE TO URL CONVERTER",
+    "h1Pre": "Image to URL converter,",
+    "h1Highlight": "free, no signup",
+    "intro": "This image to URL converter is for people who searched that exact phrase. Drop in a JPG, PNG, WebP, GIF or SVG and get a direct link in a couple of seconds. No account, no watermark, no re-compression. If you wanted \"make into a link\" wording instead, use the image-to-link page; this one owns the converter job.",
     "howTitle": "How the image to URL converter works",
     "steps": [
       {
@@ -68,6 +69,10 @@ export const content: LandingContentMap = {
     ],
     "faqTitle": "Image to URL converter FAQ",
     "faqs": [
+      {
+        "q": "Is there a free image to URL converter?",
+        "a": "Yes. This page is free with no signup. Upload, copy the link, done. Guest links last at least a couple of weeks; sign in if you want one that never expires."
+      },
       {
         "q": "How do I convert an image to a URL?",
         "a": "Upload your image in the box above. The converter puts it on our CDN and gives you a direct link within a few seconds, ready to copy and paste."
@@ -161,7 +166,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Convertidor de imagen a URL — Gratis, sin registro | ImageToURL",

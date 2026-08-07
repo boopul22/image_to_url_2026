@@ -9,10 +9,11 @@ export const content: LandingContentMap = {
     "metaDescription": "Convert PNG image to URL link online and free. Upload any PNG and get a permanent direct .png URL with transparency preserved. No signup required.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Convert any image to a URL" },
-      { "pageKey": "jpg-to-url", "label": "JPG to URL" },
+      { "pageKey": "jpg-to-url", "label": "JPG to link" },
       { "pageKey": "gif-to-url", "label": "GIF to URL" },
-      { "pageKey": "png-to-jpg", "label": "Convert PNG to JPG" }
+      { "pageKey": "webp-to-url", "label": "WebP to URL" },
+      { "pageKey": "image-to-link", "label": "Make image into a link" },
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" }
     ],
     "schemaName": "PNG to URL Converter",
     "schemaDescription": "Convert any PNG image to a URL link, free and online with lossless quality and transparency preserved.",
@@ -157,7 +158,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Convertir imagen PNG a enlace URL — Gratis en línea | ImageToURL",

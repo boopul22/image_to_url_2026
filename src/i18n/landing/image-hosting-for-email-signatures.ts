@@ -54,48 +54,52 @@ export const content: LandingContentMap = {
         "body": "Your image links never expire, ensuring your signature remains professional forever."
       }
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "faqTitle": "Email signature and embed FAQ",
     "faqs": [
-      { "q": "How do I embed my signature image in an email?", "a": "Host the logo or banner here for a permanent direct URL, then point your signature’s image tag at that link. Email clients strip attachments from signatures, so a hosted URL is the reliable way to make the image render every time." },
+      { "q": "How do I embed an image in an email?", "a": "Host the image here to get a direct https URL, then set that URL as the image source in your email HTML or signature editor. Clients load the picture from the web; they won't reliably use a file from your computer." },
+      {
+        "q": "How do I embed a picture in an HTML email?",
+        "a": "Use an absolute https image URL in an <img src=\"...\"> tag. Upload the file above, copy the link, and paste it into the src. Relative paths and local files break for recipients."
+      },
+      {
+        "q": "How do I embed my signature image in an email?",
+        "a": "Host the logo or banner here for a direct URL, then point your signature's image tag at that link. Email clients strip attachments from signatures, so a hosted URL is the reliable way."
+      },
       {
         "q": "Why do email signature images sometimes appear as broken?",
-        "a": "Email signature images break when the hosting service expires the URL or blocks hotlinking. ImageToURL provides permanent, direct URLs with no restrictions."
+        "a": "They break when the host expires the URL or blocks hotlinking. Use a direct link and, for a signature that lasts years, sign in and choose keep forever."
       },
       {
         "q": "What image size should I use for email signatures?",
-        "a": "For logos, use 200-300 pixels wide. For headshots, 100-150 pixels works best. Keep file sizes under 100KB for fast loading."
+        "a": "For logos, about 200-300 pixels wide. For headshots, 100-150 pixels. Keep files under about 100KB so the message loads quickly."
       },
       {
         "q": "Does this work with Gmail signatures?",
-        "a": "Yes. Simply go to Gmail Settings, click the image icon, select 'Web Address (URL)', and paste your ImageToURL link."
+        "a": "Yes. In Gmail Settings, use the image icon, pick Web Address (URL), and paste your ImageToURL link."
       },
       {
         "q": "Will my signature images show as attachments?",
-        "a": "No. The image loads from the web when the recipient opens the email, keeping your messages clean and professional."
+        "a": "No. The image loads from the web when the recipient opens the email."
       },
       {
         "q": "Can I use the same image URL for my entire team?",
-        "a": "Absolutely. Upload your company logo once and share the same URL with your entire team for consistent branding."
+        "a": "Yes. Upload the company logo once and share the same URL so branding stays consistent."
       },
       {
         "q": "Does it work with Outlook and Apple Mail signatures?",
-        "a": "Yes. In Outlook you can insert an image by web address, and Apple Mail will render a linked image you paste or drag into the signature box. The same direct link works in both because it points straight at the image file."
+        "a": "Yes. Outlook can insert an image by web address, and Apple Mail renders a linked image in the signature box. The same direct link works in both."
       },
       {
         "q": "Should I sign in so the signature image lasts?",
-        "a": "It's the safer choice. Anonymous links last at least a couple of weeks, but a signature sits on thousands of emails over years. Create a free account and choose 'keep forever' so the logo can't quietly turn into a broken-image box down the line."
+        "a": "Yes for production signatures. Anonymous links last at least a couple of weeks. Create a free account and choose keep forever so the logo does not turn into a broken-image box later."
       },
       {
         "q": "What format should a signature logo be?",
-        "a": "PNG is best for logos and anything with text or a transparent background; JPG is fine for a photo headshot. Keep the file small, under about 100KB, so it loads instantly. Full quality is preserved either way - there's no recompression or watermark."
-      },
-      {
-        "q": "Will the image show as a download or attachment?",
-        "a": "No. The signature references the image by URL, so it loads from the web when the recipient opens the message. Nothing is attached, which keeps your emails light and clear of spam-filter triggers."
+        "a": "PNG for logos and text or transparency; JPG for a photo headshot. Keep it small, under about 100KB. We don't recompress or watermark."
       },
       {
         "q": "Is the hosted logo private?",
-        "a": "Anonymous uploads are public to anyone with the link. A company logo is meant to be seen, so that's no problem here, but don't use this for anything you wouldn't want shared, and keep your own copy of the original file."
+        "a": "Anonymous uploads are public to anyone with the link. Fine for a company logo; don't use this for private files, and keep your own copy of the original."
       }
     ],
     "ctaTitle": "Professional email signatures start here",
@@ -157,7 +161,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes para firmas de email — URLs permanentes | ImageToURL",

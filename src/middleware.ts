@@ -24,7 +24,7 @@ function secureRedirect(location: string, status: 301 | 302 = 301): Response {
 // Increment this when a release changes public HTML. Workers Cache API entries
 // survive deployments, so a versioned key prevents old pages from masking a
 // newly deployed homepage or landing-page update.
-const HTML_EDGE_CACHE_VERSION = '2026-08-04-top-ad-natural-uploader-flow';
+const HTML_EDGE_CACHE_VERSION = '2026-08-07-seo-p0-p1-synonyms';
 
 // These endpoints either return non-HTML assets or produce user/token-specific
 // responses. Keeping them out of the HTML cache prevents accidental caching and
@@ -76,9 +76,8 @@ const NON_LOCALIZED_EXACT = new Set([
   '/image-upload-api', '/image-hosting-api-python', '/image-hosting-api-nodejs', '/image-hosting-api-php',
   '/image-hosting-api-curl', '/image-upload-zapier', '/image-upload-make', '/image-upload-n8n',
   '/image-hosting-rest-api',
-  // Cluster F GEO Q&A pages
-  '/how-to-get-direct-url-for-image', '/how-to-share-image-as-link', '/how-to-embed-image-in-email',
-  '/what-is-image-hotlinking', '/how-to-host-image-for-free', '/how-long-does-imagetourl-store-images',
+  // Cluster F GEO Q&A pages (kept live; cannibal how-tos redirect in middleware)
+  '/what-is-image-hotlinking', '/how-long-does-imagetourl-store-images',
   // Link-to-us backlink/badge page (English-only, not in landing registry)
   '/link-to-us',
 ]);
@@ -138,6 +137,21 @@ export const onRequest = defineMiddleware(async ({ request, cookies, locals }, n
   ) {
     url0.hostname = 'imagetourl.cloud';
     return secureRedirect(url0.toString());
+  }
+
+  // Thin how-to / GEO pages that cannibalize landings → tool pages.
+  {
+    const bare = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+    const HOWTO_TO_LANDING: Record<string, string> = {
+      '/how-to-host-image-for-free': '/en/free-image-hosting/',
+      '/how-to-embed-image-in-email': '/en/image-hosting-for-email-signatures/',
+      '/how-to-share-image-as-link': '/en/image-to-link/',
+      '/how-to-get-direct-url-for-image': '/en/direct-image-link/',
+    };
+    const howtoTarget = HOWTO_TO_LANDING[bare];
+    if (howtoTarget && (request.method === 'GET' || request.method === 'HEAD')) {
+      return secureRedirect(`${howtoTarget}${url0.search}`);
+    }
   }
 
   // Homepage: serve /en/ content at / via an internal rewrite instead of a 301.

@@ -5,22 +5,23 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "JPG to URL - Convert JPG to a Link Free | ImageToURL",
-    "metaDescription": "JPG to URL in seconds. Upload a JPG or JPEG and get a permanent direct link that embeds in Discord, Reddit, and forums. Free, no signup, up to 50MB.",
+    "metaTitle": "JPG to Link - Convert JPG to URL Free | ImageToURL",
+    "metaDescription": "JPG to link in seconds. Upload a JPG or JPEG and get a direct URL that embeds in Discord, Reddit, and forums. Free, no signup, up to 50MB.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Image to URL" },
+      { "pageKey": "image-to-link", "label": "Make image into a link" },
       { "pageKey": "png-to-url", "label": "PNG to URL" },
+      { "pageKey": "gif-to-url", "label": "GIF to URL" },
       { "pageKey": "photo-to-url", "label": "Photo to URL" },
-      { "pageKey": "jpg-to-png", "label": "Convert JPG to PNG" }
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" }
     ],
-    "schemaName": "JPG to URL Converter",
-    "schemaDescription": "Convert JPG to URL online and free. Get a permanent direct .jpg link that embeds anywhere, with no signup, no watermark, and no compression.",
-    "badge": "JPG TO URL",
-    "h1Pre": "JPG to URL,",
-    "h1Highlight": "free and anonymous.",
-    "intro": "JPG to URL takes one drag and drop: upload a JPG or JPEG and get a permanent direct link back in seconds. No account, no email, no watermark. The link points straight at your image, so it embeds in Discord, Reddit, and forums and renders as the picture instead of plain text.",
-    "howTitle": "How JPG to URL works",
+    "schemaName": "JPG to Link Converter",
+    "schemaDescription": "Convert JPG to a link or URL online for free. Get a direct .jpg link that embeds anywhere, with no signup, no watermark, and no compression.",
+    "badge": "JPG TO LINK",
+    "h1Pre": "JPG to link,",
+    "h1Highlight": "or JPG to URL, free.",
+    "intro": "Need a JPG to link? Drop a JPG or JPEG in the box above and copy a direct URL in a couple of seconds. No account, no email, no watermark. The link points at the file itself, so Discord, Reddit, and forums show the photo instead of plain text.",
+    "howTitle": "How JPG to link works",
     "steps": [
       {
         "title": "Drop your JPG in",
@@ -109,14 +110,22 @@ export const content: LandingContentMap = {
         "a": "No. JPG and JPEG are the same format with two spellings of the extension, a leftover from old three-letter filename limits. Either one uploads the same way and gets the same kind of direct link."
       },
       {
+        "q": "How do I convert a JPEG to a URL or link?",
+        "a": "Same upload as JPG. Drop the .jpeg file in the box above, copy the direct link, and paste it where you need it. JPEG to URL and JPEG to link are the same job with different wording."
+      },
+      {
+        "q": "Is there a free JPG to URL converter?",
+        "a": "Yes. This page is a free JPG to URL converter with no signup. Upload, copy the link, done. Guest links stay live for at least a couple of weeks; sign in free if you want one that never expires."
+      },
+      {
         "q": "Should I use JPG or PNG for my link?",
         "a": "Use JPG for photographs. It is lossy and makes a smaller file that loads fast. Use PNG when you need a transparent background or crisp text and lines, like a logo or a UI screenshot. Both get a direct link here, so pick the format that fits the image."
       }
     ],
-    "ctaTitle": "Convert your JPG to URL now",
-    "ctaBody": "Upload a JPG or JPEG and get a permanent, hotlinkable link in seconds. Free, anonymous, no watermark, and no compression.",
+    "ctaTitle": "Convert your JPG to a link now",
+    "ctaBody": "Upload a JPG or JPEG and get a direct, hotlinkable link in seconds. Free, anonymous, no watermark, and no compression.",
     "ctaButton": "Upload JPG Now",
-    "specsTitle": "JPG to URL at a glance",
+    "specsTitle": "JPG to link at a glance",
     "specs": [
       { "label": "Price", "value": "Free" },
       { "label": "Sign-up", "value": "Not required" },
@@ -157,7 +166,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-08-03"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Convertir imagen JPG a enlace URL — Online y gratis | ImageToURL",

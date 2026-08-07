@@ -5,72 +5,81 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Free Image Hosting - Upload Images & Get Instant URLs",
+    "metaTitle": "Free Image Hosting - Upload Image & Get a Link, No Signup",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "free-image-cdn", "label": "Free image CDN" },
-      { "pageKey": "ai-image-hosting", "label": "AI image hosting" },
+      { "pageKey": "permanent-image-hosting", "label": "Permanent image hosting" },
       { "pageKey": "anonymous-image-upload", "label": "Anonymous image upload" },
-      { "pageKey": "bulk-image-upload", "label": "Bulk image upload" }
+      { "pageKey": "imgur-alternative", "label": "Imgur alternative" },
+      { "pageKey": "image-to-link", "label": "Make image into a link" },
+      { "pageKey": "free-image-cdn", "label": "Free image CDN" }
     ],
-    "metaDescription": "Free image hosting with no signup. Upload JPG, PNG, WebP, GIF or SVG up to 50 MB and get a direct CDN link you can paste into Discord, forums, and HTML.",
-    "schemaName": "ImageToURL",
-    "schemaDescription": "A free, no-signup image hosting service that returns a direct CDN link for JPG, PNG, WebP, GIF and SVG files up to 50 MB.",
-    "badge": "FREE HOSTING",
-    "h1Pre": "Free Image Hosting",
-    "h1Highlight": "for everyone.",
-    "intro": "Free image hosting with nothing to pay and nothing to sign up for. Drop a JPG, PNG, WebP, GIF or SVG up to 50 MB in the box above and you get a direct link in a couple of seconds, served from a global CDN so it loads fast wherever people open it. Nothing gets compressed or watermarked, so the file you share is the file you uploaded. Anonymous links stay live for at least a couple of weeks; sign in free if you want one that sticks around forever.",
-    "howTitle": "How It Works",
+    "metaDescription": "Free image hosting with no signup. Upload JPG, PNG, WebP, GIF or SVG up to 50 MB and get a direct CDN link for Discord, forums, and HTML.",
+    "schemaName": "Free Image Hosting",
+    "schemaDescription": "Free, no-signup image hosting that returns a direct CDN link for JPG, PNG, WebP, GIF and SVG up to 50 MB.",
+    "badge": "FREE IMAGE HOSTING",
+    "h1Pre": "Free image hosting,",
+    "h1Highlight": "upload and get a link",
+    "intro": "Free image hosting without a credit card or an account wall. Drop a JPG, PNG, WebP, GIF or SVG up to 50 MB in the box above and copy a direct link in a couple of seconds. Nothing gets compressed or watermarked. Guest links stay live for at least a couple of weeks; sign in free if you want one that never expires.",
+    "howTitle": "How free image hosting works here",
     "steps": [
       {
-        "title": "Upload",
-        "body": "Drag and drop your images directly into the uploader or click to select files from your device."
+        "title": "Upload the image",
+        "body": "Drag a file into the box or click to pick one from your device. No account screen first."
       },
       {
-        "title": "Process",
-        "body": "Our system instantly optimizes and hosts your image on our global CDN network."
+        "title": "Get the CDN link",
+        "body": "We store the file on a global CDN and hand back a direct URL that ends in the real extension. Nothing is \"optimized\" away - you get the file you uploaded."
       },
       {
-        "title": "Share",
-        "body": "Copy your permanent, shareable URL and use it anywhere on the web immediately."
+        "title": "Paste the link",
+        "body": "Copy it into Discord, a forum, HTML, Markdown, or email. Sites that embed images show the picture inline."
       }
     ],
-    "whyTitle": "Why Choose Free Hosting",
+    "whyTitle": "Why use this free host",
     "whyItems": [
       {
-        "title": "Unlimited Free Uploads",
-        "body": "Upload as many images as you want, completely free. No hidden fees, no storage caps - just straightforward image hosting."
+        "title": "No signup to start",
+        "body": "Upload and copy a link without making an account. Sign in only if you want permanent retention."
       },
       {
-        "title": "Global CDN Network",
-        "body": "Your images are delivered from edge servers worldwide, ensuring fast load times no matter where your audience is located."
+        "title": "Direct links that embed",
+        "body": "The URL points at the file, not a gallery page, so Discord, Reddit, and forums show the picture."
       },
       {
-        "title": "No Signup Required",
-        "body": "Start uploading instantly. No account creation, no email verification - just drag, drop, and share."
+        "title": "Honest about lifetime",
+        "body": "Anonymous uploads clear on a monthly cleanup (at least a couple of weeks). Free accounts can keep files forever."
       },
       {
-        "title": "Honest about how long links last",
-        "body": "An anonymous upload stays live for at least a couple of weeks, until the monthly storage cleanup. Want a link that never goes away? Make a free account and mark the file 'keep forever' when you upload it."
+        "title": "Full quality",
+        "body": "No re-compression, no watermark, no quiet resize to 1280px."
       }
     ],
     "faqTitle": "Free image hosting FAQ",
     "faqs": [
       {
         "q": "Is this image hosting really free?",
-        "a": "Yes. There's no charge to upload, no subscription and no credit card. You don't even need an account to get a working link."
+        "a": "Yes. No charge to upload, no subscription, no credit card. You don't need an account for a working link."
+      },
+      {
+        "q": "How do I upload an image and get a link?",
+        "a": "Drop the file in the box above. When the upload finishes, copy the URL. That is the whole flow - upload image, get link."
+      },
+      {
+        "q": "What are the best free image hosting sites?",
+        "a": "It depends what you need. For a quick anonymous direct link with no gallery page, this site is built for that. Imgur needs an account now. ImgBB and Postimages also work; check file limits and whether they resize your image."
       },
       {
         "q": "Do I have to sign up?",
-        "a": "No. You can upload and copy a link without making an account. Signing in is optional, and the only thing it adds is the ability to mark a file 'keep forever' so its link doesn't get cleaned up."
+        "a": "No. Upload and copy a link without an account. Signing in only adds \"keep forever\" so the link is not cleaned up."
       },
       {
         "q": "How long do the links last?",
-        "a": "Anonymous uploads stay live until the next monthly storage cleanup, so you get at least a couple of weeks and often longer. For a link that never expires, sign in free and choose 'keep forever' when you upload. Either way, keep your own copy of the file."
+        "a": "Anonymous uploads stay live until the next monthly storage cleanup, so you get at least a couple of weeks and often longer. For a link that never expires, sign in free and choose 'keep forever' when you upload. Keep your own copy of the file either way."
       },
       {
         "q": "What file types and sizes can I upload?",
-        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link you get ends in the real extension, so it hotlinks and embeds just like the original."
+        "a": "JPG, PNG, WebP, GIF and SVG, up to 50 MB per file. The link ends in the real extension, so it hotlinks like the original."
       },
       {
         "q": "Does it compress or watermark my image?",
@@ -78,28 +87,28 @@ export const content: LandingContentMap = {
       },
       {
         "q": "Can I use these links on my website?",
-        "a": "Yes. The URL is a direct image link, so it works in an HTML <img> tag, Markdown, a CSS background-image, Notion, a README or any site builder that accepts an image address."
+        "a": "Yes. The URL is a direct image link, so it works in an HTML <img> tag, Markdown, CSS background-image, Notion, a README or any site builder that takes an image address."
       },
       {
         "q": "Will the link show up inline on Discord and Reddit?",
-        "a": "Yes. Because the link points straight at the image file rather than a gallery page, Discord, Reddit, Slack and most forums render it as a picture instead of a download button."
+        "a": "Yes. Because the link points at the image file rather than a gallery page, Discord, Reddit, Slack and most forums render it as a picture."
       },
       {
         "q": "Is the upload private?",
-        "a": "The link is unguessable, but anyone who has it can open the image, since anonymous uploads are public. Don't post anything sensitive, and keep a local backup of the original."
+        "a": "The link is hard to guess, but anyone who has it can open the image. Don't post anything sensitive, and keep a local backup."
       },
       {
         "q": "Is this a good free Imgur alternative?",
-        "a": "For a lot of people, yes. Imgur dropped anonymous uploads in 2023, so if you just want to drop an image and grab a link without an account, this fills that gap."
+        "a": "For a quick no-account link, yes. Imgur dropped anonymous uploads in 2023. If you just want to drop a file and grab a URL, this fills that gap."
       },
       {
         "q": "How many images can I host?",
-        "a": "There's no overall library cap. Anonymous uploading has a daily limit to keep things fair; signing in free raises that limit if you're hosting a batch at once."
+        "a": "There's no overall library cap. Anonymous uploading has a daily limit to keep things fair; signing in free raises that limit for batches."
       }
     ],
-    "ctaTitle": "Start hosting your images for free",
-    "ctaBody": "Upload your first image in seconds. No signup, no credit card, no catch.",
-    "ctaButton": "Upload Now",
+    "ctaTitle": "Host an image for free",
+    "ctaBody": "Upload in the box above. No signup required for a temporary link; free account if you need it forever.",
+    "ctaButton": "Upload now",
     "specsTitle": "Free image hosting at a glance",
     "specs": [
       { "label": "Price", "value": "Free" },
@@ -139,7 +148,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Alojamiento de imágenes gratis - Sube imágenes y obtén URLs al instante | ImageToURL",

@@ -5,22 +5,22 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Photo to URL - Turn a Photo into a Link Free | ImageToURL",
-    "metaDescription": "Photo to URL in seconds: upload from your phone or computer and get a direct, shareable link. Free, no signup, no watermark. Works as a photo to link tool.",
+    "metaTitle": "Photo to URL - Pic, Picture & Photos to Link Free | ImageToURL",
+    "metaDescription": "Turn a photo, pic, or picture into a URL free. Upload from your phone or computer and get a direct shareable link. No signup, no watermark.",
     "relatedTitle": "Related image tools",
     "related": [
-      { "pageKey": "image-to-url", "label": "Image to URL" },
-      { "pageKey": "jpg-to-url", "label": "JPG to URL" },
+      { "pageKey": "image-to-link", "label": "Make image into a link" },
+      { "pageKey": "jpg-to-url", "label": "JPG to link" },
       { "pageKey": "screenshot-to-url", "label": "Screenshot to URL" },
       { "pageKey": "png-to-url", "label": "PNG to URL" }
     ],
     "schemaName": "Photo to URL Converter",
-    "schemaDescription": "A free web tool that turns any uploaded photo into a direct, shareable URL, with no signup, no watermark, and uploads straight from a phone or computer.",
-    "badge": "PHOTO SHARING",
+    "schemaDescription": "Turn a photo, pic, or picture into a direct shareable URL. Free, no signup, no watermark. Works from phone or computer.",
+    "badge": "PHOTO / PIC TO URL",
     "h1Pre": "Photo to URL,",
-    "h1Highlight": "photo to link in seconds",
-    "intro": "Photo to URL is the quickest way to share a picture without sending the file itself. Upload from your phone or computer, and you get a direct link you can paste into a chat, a forum, or a post. No signup, no watermark, and the link works as a photo to link anywhere you drop it.",
-    "howTitle": "How Photo to URL Works",
+    "h1Highlight": "or pic and picture to link",
+    "intro": "Photo to URL, pic to URL, picture to URL - same job. Upload from your phone or computer and copy a direct link you can paste into chat, a forum, or a post. No signup, no watermark. The link shows the photo itself, not a page wrapped around it.",
+    "howTitle": "How photo to URL works",
     "steps": [
       {
         "title": "Pick a Photo",
@@ -66,9 +66,17 @@ export const content: LandingContentMap = {
         "body": "Marketplace listings, spreadsheets, and forms often ask for an image link. Your direct photo URL fills that field and loads the photo for anyone who opens it."
       }
     ],
-    "faqTitle": "Photo to URL Questions, Answered",
+    "faqTitle": "Photo, pic, and picture URL FAQ",
     "faqs": [
       { "q": "What is a picture URL?", "a": "A picture URL is the direct web link to a photo file. Open it in a browser and you see just the photo; drop it into a webpage, chat or document and the photo appears inline. Upload above to turn any picture into one." },
+      {
+        "q": "How do I turn a pic into a URL?",
+        "a": "Upload the pic in the box above. You get a direct link in a few seconds. Copy it and paste it wherever you need to share the picture. No account required."
+      },
+      {
+        "q": "How do I convert photos to URL?",
+        "a": "Same upload. One photo or several - each file gets its own direct URL. \"Photos to URL\" and \"photo to URL\" are the same tool."
+      },
       {
         "q": "How do I turn a photo into a link?",
         "a": "Upload the photo using the box above. A direct link is generated in a few seconds. Copy it and paste it wherever you need to share the picture. No account is required."
@@ -158,7 +166,7 @@ export const content: LandingContentMap = {
     ],
     "howToSchema": true,
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "Foto a URL — Convierte cualquier foto en un enlace compartible | ImageToURL",

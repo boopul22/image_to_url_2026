@@ -5,19 +5,22 @@ import type { LandingContentMap } from './types';
 
 export const content: LandingContentMap = {
   "en": {
-    "metaTitle": "Imgur Alternative - Free, No Account, Direct Links | ImageToURL",
+    "metaTitle": "Free Imgur Alternative - No Account, Direct Links | ImageToURL",
     "relatedTitle": "Related image tools",
     "related": [
+      { "pageKey": "free-image-hosting", "label": "Free image hosting" },
       { "pageKey": "imgbb-alternative", "label": "ImgBB alternative" },
-      { "pageKey": "cloudinary-alternative", "label": "Cloudinary alternative" }
+      { "pageKey": "cloudinary-alternative", "label": "Cloudinary alternative" },
+      { "href": "/imagetourl-vs-imgur/", "label": "ImageToURL vs Imgur" },
+      { "href": "/imgur-vs-imgbb/", "label": "Imgur vs ImgBB" }
     ],
-    "metaDescription": "Want an Imgur alternative that skips the account? Drop a JPG, PNG, WebP, GIF or SVG and get a direct https link in seconds. No sign-up, no watermark, full quality, 50MB.",
+    "metaDescription": "Free Imgur alternative with no account. Upload JPG, PNG, WebP, GIF or SVG up to 50MB and get a direct https link in seconds. No watermark, full quality.",
     "schemaName": "Imgur Alternative",
-    "schemaDescription": "A free Imgur alternative that turns any image into a direct, full-quality link. No account, no watermark, no gallery page, fast global CDN.",
-    "badge": "IMGUR ALTERNATIVE",
-    "h1Pre": "A simpler Imgur",
-    "h1Highlight": "alternative, no account",
-    "intro": "Since Imgur dropped anonymous uploads in 2023, getting a quick image link there means making an account first and tying the picture to it. If all you want is a direct link to paste into Discord or a forum, that's a lot of overhead. ImageToURL skips the sign-up: drop a JPG, PNG, WebP, GIF or SVG up to 50MB and you get a direct https link in about two seconds, at full quality, with no watermark and no gallery page wrapped around it.",
+    "schemaDescription": "Free Imgur alternative that turns any image into a direct, full-quality link. No account, no watermark, no gallery page, fast global CDN.",
+    "badge": "FREE IMGUR ALTERNATIVE",
+    "h1Pre": "Free Imgur alternative,",
+    "h1Highlight": "no account needed",
+    "intro": "Looking for an Imgur alternative after they ended anonymous uploads in 2023? If you just need a direct link for Discord or a forum, an account wall is extra friction. Drop a JPG, PNG, WebP, GIF or SVG up to 50MB here and copy a direct https link in about two seconds. Full quality, no watermark, no gallery page wrapped around it.",
     "specsTitle": "ImageToURL at a glance",
     "specs": [
       {
@@ -160,6 +163,14 @@ export const content: LandingContentMap = {
     "faqTitle": "Imgur alternative FAQ",
     "faqs": [
       {
+        "q": "Is there a free Imgur alternative with no signup?",
+        "a": "Yes. This page is one: upload without an account and get a direct link. Guest links last at least a couple of weeks; sign in free if you need permanent retention."
+      },
+      {
+        "q": "Imgur vs ImgBB vs ImageToURL - which should I use?",
+        "a": "Use Imgur if you want galleries and community. Use ImgBB if you like optional expiry and their UI. Use ImageToURL when you want a plain direct file URL with no account for a quick Discord or forum paste."
+      },
+      {
         "q": "Is Imgur free?",
         "a": "Yes, Imgur is free to use. The main change is that you now need an account to upload, so it is no longer a one-step anonymous link tool the way it was before 2023."
       },
@@ -213,7 +224,7 @@ export const content: LandingContentMap = {
     "ctaBody": "Upload a JPG, PNG, WebP, GIF or SVG and get a direct link in seconds. No sign-up, no compression, no watermark, no gallery page.",
     "ctaButton": "Upload Now",
     "datePublished": "2026-06-15",
-    "dateModified": "2026-06-24"
+    "dateModified": "2026-08-07"
   },
   "es": {
     "metaTitle": "La mejor alternativa a Imgur (2026) — Gratis, sin cuenta | ImageToURL",

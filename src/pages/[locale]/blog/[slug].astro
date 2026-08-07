@@ -4,6 +4,16 @@ import BlogPostPage from '../../../components/pages/BlogPostPage.astro';
 import { getDB } from '../../../lib/db';
 import { defaultLocale } from '../../../i18n/config';
 import type { Locale } from '../../../i18n/config';
+import { localizedUrl, type PageKey } from '../../../i18n/landing/registry';
+
+// Blog posts that cannibalize tool landings: 301 to the money page.
+const BLOG_CANNIBAL_REDIRECTS: Record<string, PageKey> = {
+  'free-image-hosting-image-to-url': 'free-image-hosting',
+  'top-10-free-image-hosting-options': 'free-image-hosting',
+  'how-to-convert-any-image-to-a-shareable-url-in-seconds-step-by-step-o6rf1r': 'image-to-url',
+  'add-a-url-to-an-image': 'image-to-link',
+  'create-a-link-for-an-image': 'image-to-link',
+};
 
 // Non-English visitor arriving at the English slug? 301 to the canonical
 // translated slug for their locale so URLs always match content language
@@ -12,6 +22,11 @@ import type { Locale } from '../../../i18n/config';
 const locale: Locale = Astro.locals.locale ?? defaultLocale;
 const { slug } = Astro.params;
 if (slug) {
+  const cannibalTarget = BLOG_CANNIBAL_REDIRECTS[slug];
+  if (cannibalTarget) {
+    return Astro.redirect(localizedUrl(cannibalTarget, locale), 301);
+  }
+
   try {
     const db = getDB(Astro.locals);
 
