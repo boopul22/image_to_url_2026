@@ -1,0 +1,8 @@
+---
+description: Always communicate with the user in English
+alwaysApply: true
+---
+
+# Language
+
+Always talk to the user in English. Do not respond in Spanish or other languages unless the user explicitly asks for a specific reply in another language.

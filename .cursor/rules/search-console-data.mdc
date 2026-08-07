@@ -1,0 +1,11 @@
+---
+description: Where Google Search Console exports live and how to refresh them
+alwaysApply: true
+---
+
+# Search Console data
+
+- Project folder: `SEO_Searchconsole_data/`
+- Standard files: `Chart.csv`, `Queries.csv`, `Pages.csv`, `Countries.csv`, `Devices.csv`, `Filters.csv`, `Search appearance.csv`
+- When the user provides a new GSC export: delete the matching old CSV in that folder first, then copy the new file in using the standard name (e.g. Chart export → `Chart.csv`)
+- Keep HTML/MD reports in the same folder unless asked to replace them
