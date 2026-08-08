@@ -5,6 +5,7 @@ import type { Locale } from '../i18n/config';
 import { stripLocalePrefix } from '../i18n/utils';
 import { ADSENSE_CLIENT } from '../lib/ads';
 import AdBlockGate from '../components/AdBlockGate.astro';
+import BackToTop from '../components/BackToTop.astro';
 import EmailOptInPrompt from '../components/EmailOptInPrompt.astro';
 import ProInterestTracker from '../components/ProInterestTracker.astro';
 // Preload the latin subsets of the variable body/headline fonts. @fontsource-variable
@@ -310,6 +311,7 @@ function hreflangUrl(loc: Locale): string {
     </main>
     <AdBlockGate />
     <EmailOptInPrompt />
+    <BackToTop />
     <script>
       const revealed = new WeakSet();
       function reveal(el: Element) {

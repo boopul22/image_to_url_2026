@@ -1,0 +1,96 @@
+---
+/**
+ * Fixed jump-to-top control. Hidden until the user scrolls past ~1 viewport,
+ * then fades in at the bottom-end corner. Lifts above the mobile sticky upload
+ * bar when that bar is visible so the two never overlap.
+ */
+import Icon from './Icon.astro';
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  class="back-to-top fixed z-40 end-4 flex h-11 w-11 items-center justify-center border border-outline-variant/40 bg-surface text-rose-600 opacity-0 pointer-events-none translate-y-2 transition-[opacity,transform,bottom,background-color,color,border-color] duration-200 hover:bg-rose-600 hover:text-white hover:border-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+  style="bottom: max(1.25rem, env(safe-area-inset-bottom));"
+  aria-label="Back to top"
+  hidden
+>
+  <Icon name="keyboard_double_arrow_up" class="text-xl" />
+</button>
+
+<script>
+  const btn = document.getElementById('back-to-top') as HTMLButtonElement | null;
+  if (btn) {
+    const sticky = document.getElementById('sticky-upload-cta');
+    const threshold = () => Math.min(480, Math.round(window.innerHeight * 0.75));
+    let visible = false;
+    let ticking = false;
+
+    const syncBottom = () => {
+      const stickyOpen =
+        !!sticky &&
+        !sticky.hidden &&
+        !sticky.classList.contains('translate-y-full') &&
+        !sticky.classList.contains('pointer-events-none');
+      btn.style.bottom = stickyOpen
+        ? 'max(5.5rem, calc(env(safe-area-inset-bottom) + 4.75rem))'
+        : 'max(1.25rem, env(safe-area-inset-bottom))';
+    };
+
+    const show = () => {
+      if (visible) return;
+      visible = true;
+      btn.hidden = false;
+      // Force layout so the opacity transition runs after un-hiding.
+      void btn.offsetWidth;
+      btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+    };
+
+    const hide = () => {
+      if (!visible) return;
+      visible = false;
+      btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (window.scrollY > threshold()) show();
+        else hide();
+        syncBottom();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+
+    if (sticky && 'MutationObserver' in window) {
+      new MutationObserver(syncBottom).observe(sticky, {
+        attributes: true,
+        attributeFilter: ['class', 'hidden'],
+      });
+    }
+
+    btn.addEventListener('click', () => {
+      const reduce =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+
+    btn.addEventListener('transitionend', (e) => {
+      if (e.propertyName === 'opacity' && !visible) btn.hidden = true;
+    });
+  }
+</script>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+      transition: none !important;
+    }
+  }
+</style>
