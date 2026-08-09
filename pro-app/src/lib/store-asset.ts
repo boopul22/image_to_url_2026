@@ -1,5 +1,4 @@
 import { assetUrl, currentPeriodStart, extensionForType } from './assets';
-import { workspaceStorageLimitBytes } from './billing';
 import { assertProAccess } from './entitlements';
 import type { ProEnv } from './env';
 import { getNumberEnv } from './env';
@@ -35,7 +34,7 @@ export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 	const extension = extensionForType(input.type);
 	if (!extension) throw new Error('UNSUPPORTED_TYPE');
 
-	const maxUploadBytes = getNumberEnv(env.MAX_UPLOAD_BYTES, 50 * 1024 * 1024);
+	const maxUploadBytes = getNumberEnv(env.MAX_UPLOAD_BYTES, 64 * 1024 * 1024);
 	if (input.size <= 0) throw new Error('EMPTY_FILE');
 	if (input.size > maxUploadBytes) throw new Error('FILE_TOO_LARGE');
 
@@ -47,17 +46,6 @@ export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 		.bind(user.id)
 		.first<{ count: number }>();
 	if ((recentUploads?.count ?? 0) >= 20) throw new Error('RATE_LIMIT');
-
-	const storageLimit = await workspaceStorageLimitBytes(env, user.id);
-	const usage = await env.PRO_DB.prepare(
-		`SELECT COALESCE(SUM(size_bytes), 0) AS bytes
-		   FROM assets
-		  WHERE user_id = ? AND status = 'ready'`,
-	)
-		.bind(user.id)
-		.first<{ bytes: number }>();
-
-	if ((usage?.bytes ?? 0) + input.size > storageLimit) throw new Error('STORAGE_LIMIT');
 
 	const folderId = input.folderId || null;
 	if (folderId) {
@@ -81,7 +69,7 @@ export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 			cacheControl:
 				visibility === 'private'
 					? 'private, no-store'
-					: 'public, max-age=31536000, immutable',
+					: 'public, max-age=60, must-revalidate',
 		},
 		customMetadata: {
 			assetId: id,
@@ -91,22 +79,32 @@ export async function storeAsset(input: StoreAssetInput): Promise<StoredAsset> {
 	});
 
 	try {
-		await env.PRO_DB.batch([
+		const results = await env.PRO_DB.batch([
 			env.PRO_DB.prepare(
 				`INSERT INTO assets
 				   (id, user_id, folder_id, original_name, object_key, mime_type, size_bytes, status, visibility)
-				 VALUES (?, ?, ?, ?, ?, ?, ?, 'ready', ?)`,
-			).bind(id, user.id, folderId, name, objectKey, input.type, input.size, visibility),
+				 SELECT ?, ?, ?, ?, ?, ?, ?, 'ready', ?
+				  WHERE (
+				    SELECT COUNT(*) FROM assets
+				     WHERE user_id = ? AND created_at >= datetime('now', '-1 minute')
+				  ) < 20`,
+			).bind(
+				id, user.id, folderId, name, objectKey, input.type, input.size, visibility,
+				user.id,
+			),
 			env.PRO_DB.prepare(
 				`INSERT INTO usage_monthly
 				   (user_id, period_start, storage_bytes, uploads_count)
-				 VALUES (?, ?, ?, 1)
+				 SELECT ?, ?, ?, 1
+				   FROM assets
+				  WHERE id = ? AND user_id = ? AND object_key = ?
 				 ON CONFLICT(user_id, period_start) DO UPDATE SET
 				   storage_bytes = storage_bytes + excluded.storage_bytes,
 				   uploads_count = uploads_count + 1,
 				   updated_at = datetime('now')`,
-			).bind(user.id, currentPeriodStart(), input.size),
+			).bind(user.id, currentPeriodStart(), input.size, id, user.id, objectKey),
 		]);
+		if (Number(results[0]?.meta.changes ?? 0) < 1) throw new Error('RATE_LIMIT');
 	} catch (error) {
 		await env.PRO_STORAGE.delete(objectKey);
 		throw error;

@@ -178,7 +178,7 @@ const formatDate = (value: string | null | undefined) => value
         <div class="panel-heading compact"><div><p class="eyebrow">Purchase intent</p><h2 id="plans-title">Plan preference</h2></div></div>
         <div class="rank-list">
           {(plansResult.results ?? []).length ? (plansResult.results ?? []).map((row) => (
-            <div><span><strong>{row.label === 'year' ? 'Annual' : row.label === 'month' ? 'Monthly' : row.label}</strong><small>{row.events} selections or starts</small></span><b>{row.people}</b></div>
+            <div><span><strong>{row.label === 'three_year' ? '3-Year' : row.label === 'year' ? 'Annual' : row.label === 'month' ? 'Monthly' : row.label}</strong><small>{row.events} selections or starts</small></span><b>{row.people}</b></div>
           )) : <p class="empty-state">Monthly versus annual interest will appear here.</p>}
         </div>
       </section>

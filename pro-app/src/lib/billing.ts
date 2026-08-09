@@ -1,8 +1,7 @@
 import type { ProEnv } from './env';
 
-export type BillingInterval = 'month' | 'year';
+export type BillingInterval = 'month' | 'year' | 'three_year';
 export type PaddleEnvironment = 'sandbox' | 'production';
-export const MAX_STORAGE_PACKS = 10;
 export type SubscriptionStatus =
 	| 'incomplete'
 	| 'trialing'
@@ -85,16 +84,11 @@ export function paddleEnvironment(env: ProEnv): PaddleEnvironment | null {
 }
 
 export function paddlePriceId(env: ProEnv, interval: BillingInterval): string | null {
-	const priceId =
-		interval === 'year' ? env.PADDLE_PRO_ANNUAL_PRICE_ID : env.PADDLE_PRO_MONTHLY_PRICE_ID;
-	return priceId?.startsWith('pri_') ? priceId : null;
-}
-
-export function storageAddonPriceId(env: ProEnv, interval: BillingInterval): string | null {
-	const priceId =
-		interval === 'year'
-			? env.PADDLE_STORAGE_ADDON_ANNUAL_PRICE_ID
-			: env.PADDLE_STORAGE_ADDON_MONTHLY_PRICE_ID;
+	const priceId = interval === 'three_year'
+		? env.PADDLE_PRO_THREE_YEAR_PRICE_ID
+		: interval === 'year'
+			? env.PADDLE_PRO_ANNUAL_PRICE_ID
+			: env.PADDLE_PRO_MONTHLY_PRICE_ID;
 	return priceId?.startsWith('pri_') ? priceId : null;
 }
 
@@ -104,36 +98,8 @@ export function billingIntervalForBasePrice(
 ): BillingInterval | null {
 	if (priceId && priceId === paddlePriceId(env, 'month')) return 'month';
 	if (priceId && priceId === paddlePriceId(env, 'year')) return 'year';
+	if (priceId && priceId === paddlePriceId(env, 'three_year')) return 'three_year';
 	return null;
-}
-
-export function isStorageAddonConfigured(env: ProEnv): boolean {
-	return Boolean(storageAddonPriceId(env, 'month') && storageAddonPriceId(env, 'year'));
-}
-
-export function storagePackQuantity(value: unknown): number {
-	const parsed = Number(value);
-	if (!Number.isInteger(parsed)) return 0;
-	return Math.max(0, Math.min(MAX_STORAGE_PACKS, parsed));
-}
-
-export async function workspaceStorageLimitBytes(env: ProEnv, userId: string): Promise<number> {
-	const baseBytes = getPositiveNumber(env.STORAGE_LIMIT_BYTES, 50 * 1024 ** 3);
-	const packBytes = getPositiveNumber(env.STORAGE_ADDON_BYTES, 50 * 1024 ** 3);
-	const subscription = await env.PRO_DB.prepare(
-		`SELECT storage_pack_quantity
-		   FROM subscriptions
-		  WHERE user_id = ?
-		    AND provider = 'paddle'
-		    AND paddle_environment = ?
-		    AND status IN ('trialing', 'active', 'past_due')
-		  ORDER BY updated_at DESC
-		  LIMIT 1`,
-	)
-		.bind(userId, paddleEnvironment(env))
-		.first<{ storage_pack_quantity: number }>();
-	if (!subscription) return 0;
-	return baseBytes + storagePackQuantity(subscription?.storage_pack_quantity) * packBytes;
 }
 
 export function isPaddleCheckoutConfigured(env: ProEnv): boolean {
@@ -147,13 +113,9 @@ export function isPaddleCheckoutConfigured(env: ProEnv): boolean {
 			tokenMatchesEnvironment &&
 			env.PADDLE_API_KEY &&
 			paddlePriceId(env, 'month') &&
-			paddlePriceId(env, 'year'),
+			paddlePriceId(env, 'year') &&
+			paddlePriceId(env, 'three_year'),
 	);
-}
-
-function getPositiveNumber(value: string | undefined, fallback: number): number {
-	const parsed = Number(value);
-	return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
 function paddleApiOrigin(env: ProEnv): string {

@@ -56,7 +56,7 @@ export const GET: APIRoute = async ({ request, params, locals }) => {
 		'Cache-Control',
 		asset.visibility === 'private'
 			? 'private, no-store'
-			: 'public, max-age=31536000, immutable',
+			: 'public, max-age=60, must-revalidate',
 	);
 	headers.set(
 		'Content-Disposition',

@@ -2,12 +2,8 @@
 import ProShell from '../layouts/ProShell.astro';
 import { assetUrl, formatBytes, relativeAge } from '../lib/assets';
 import {
-  billingIntervalForBasePrice,
   isPaddleCheckoutConfigured,
-  isStorageAddonConfigured,
   paddleEnvironment,
-  storagePackQuantity,
-  workspaceStorageLimitBytes,
 } from '../lib/billing';
 import { hasProAccess } from '../lib/entitlements';
 import { getProEnv } from '../lib/env';
@@ -63,7 +59,7 @@ const [assetResult, folderResult, storageResult, usage, preferences, subscriptio
   ).bind(user.id).first<{ private_default: number }>(),
   env.PRO_DB.prepare(
     `SELECT provider_customer_id, provider_subscription_id, status, price_id,
-            current_period_end, cancel_at_period_end, storage_pack_quantity
+            current_period_end, cancel_at_period_end
        FROM subscriptions
       WHERE user_id = ?
         AND provider = 'paddle'
@@ -85,7 +81,6 @@ const [assetResult, folderResult, storageResult, usage, preferences, subscriptio
     price_id: string | null;
     current_period_end: string | null;
     cancel_at_period_end: number;
-    storage_pack_quantity: number;
   }>()
 ]);
 
@@ -110,14 +105,12 @@ const finalInitialAsset = assets.at(-1);
 const initialLibraryCursor = assetTotal > assets.length && finalInitialAsset
 	? btoa(JSON.stringify({ createdAt: finalInitialAsset.createdAt, id: finalInitialAsset.id }))
 	: '';
-const storageLimit = await workspaceStorageLimitBytes(env, user.id);
 const bandwidthBytes = Number(usage?.bandwidth_bytes ?? 0);
 const uploadsCount = Number(usage?.uploads_count ?? 0);
 const privateDefault = preferences?.private_default === 1;
 const firstName = user.name.trim().split(/\s+/)[0] || 'there';
 const avatarInitial = firstName.slice(0, 1).toUpperCase();
 const checkoutConfigured = isPaddleCheckoutConfigured(env);
-const storageAddonConfigured = isStorageAddonConfigured(env);
 const portalConfigured = Boolean(
   env.PADDLE_API_KEY &&
   (env.PADDLE_ENVIRONMENT === 'sandbox' || env.PADDLE_ENVIRONMENT === 'production')
@@ -147,40 +140,13 @@ const sidebarBillingLabel =
       : checkoutConfigured
         ? 'Choose Pro plan'
         : 'Paddle setup pending';
-const storagePacks = storagePackQuantity(subscription?.storage_pack_quantity);
-const subscriptionInterval = billingIntervalForBasePrice(env, subscription?.price_id);
-const canChangeStorage = Boolean(
-  storageAddonConfigured &&
-  subscription?.provider_subscription_id &&
-  (subscription.status === 'active' || subscription.status === 'trialing') &&
-  subscriptionInterval
-);
-const addonRateLabel =
-  subscriptionInterval === 'year' ? '$24/year per 50GB pack' : '$2.99/month per 50GB pack';
-const addonPackOptions = Array.from({ length: 11 }, (_, quantity) => {
-  const price = subscriptionInterval === 'year' ? quantity * 24 : quantity * 2.99;
-  return {
-    quantity,
-    label:
-      quantity === 0
-        ? 'No extra storage'
-        : `+${quantity * 50}GB · $${Number.isInteger(price) ? price : price.toFixed(2)}/${subscriptionInterval === 'year' ? 'year' : 'month'}`,
-  };
-});
 const accessNeedsBillingRepair = subscription?.status === 'past_due' || subscription?.status === 'paused';
-const storagePercent =
-  proAccessEnabled && storageLimit > 0
-    ? Math.min(100, Math.round((storageBytes / storageLimit) * 100))
-    : 0;
 const storageUsageLabel = proAccessEnabled
-  ? `${storagePercent}% used`
+  ? 'Unlimited storage'
   : accessNeedsBillingRepair
     ? 'Uploads paused'
     : 'Plan inactive';
-const storageAllowanceLabel = proAccessEnabled ? formatBytes(storageLimit) : 'No active plan';
-const storageMeterLabel = proAccessEnabled
-  ? `${storagePercent} percent of storage used`
-  : 'Storage is unavailable without an active Pro plan';
+const storageAllowanceLabel = proAccessEnabled ? 'Unlimited' : 'No active plan';
 const profilePlanLabel = proAccessEnabled
   ? 'Pro workspace'
   : accessNeedsBillingRepair
@@ -217,12 +183,12 @@ const billingDetailsCopy =
       ? `Access remains active through ${billingRenewalLabel}.`
       : `Your current billing period ends ${billingRenewalLabel}.`
     : subscription?.status === 'canceled'
-      ? 'Your subscription has ended. Choose monthly or annual billing to restart Pro.'
+      ? 'Your subscription has ended. Choose monthly, annual, or three-year billing to restart Pro.'
       : accessNeedsBillingRepair
         ? 'Open Paddle to restore billing. Your existing library remains available while uploads are paused.'
         : hasPaddleCustomer
           ? 'Manage payment details, invoices, and cancellation securely in Paddle.'
-          : 'Subscribe for $4.99 monthly or $39 annually. Checkout is securely handled by Paddle.';
+          : 'Subscribe for $12.99 monthly, $95.88 annually, or $143.64 every three years. Checkout is securely handled by Paddle.';
 const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 ---
 
@@ -291,7 +257,6 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	          <span>{billingStatusLabel}</span>
 	          <span>{storageUsageLabel}</span>
 	        </div>
-	        <div class="meter" aria-label={storageMeterLabel}><span style={`width:${storagePercent}%`}></span></div>
 	        <div class="plan-copy">
 	          <span>{formatBytes(storageBytes)} used</span>
 	          <span>{storageAllowanceLabel}</span>
@@ -418,7 +383,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
                       <span class="drop-copy-desktop">Drag your images here</span>
                       <span class="drop-copy-mobile">Tap to choose images</span>
                     </strong>
-	                    <small>JPG, PNG, GIF, WebP, AVIF · up to 50 MB</small>
+	                    <small>JPG, PNG, GIF, WebP, AVIF · up to 64 MB</small>
                     <span class="browse-link">{proAccessEnabled ? 'Choose files' : 'Unlock uploads'}</span>
                     <span class="file-feedback" id="file-feedback" aria-live="polite"></span>
                   </span>
@@ -465,9 +430,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
           </header>
 
 	          <div class="stat">
-	            <div class="stat-label"><span>Storage</span><span>{formatBytes(storageBytes)} / {storageAllowanceLabel}</span></div>
+	            <div class="stat-label"><span>Storage</span><span>{storageAllowanceLabel}</span></div>
 	            <div class="summary-value">{formatBytes(storageBytes)}</div>
-	            <div class="thin-meter" aria-hidden="true"><span style={`width:${storagePercent}%`}></span></div>
 	          </div>
 	          <div class="stat">
 	            <div class="stat-label"><span>Bandwidth</span><span>Measured this month</span></div>
@@ -517,7 +481,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
                 </span>
 	              <h3>Original delivery</h3>
 	              <p>Files stream directly from dedicated Pro object storage.</p>
-	              <span class="tool-metric">Immutable cache-ready URLs</span>
+	              <span class="tool-metric">Stable URLs with same-link replacement</span>
             </article>
 
 	            <article class="tool-card" id="smart-library">
@@ -620,6 +584,9 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	                      Copy URL
 	                    </button>
 	                    {proAccessEnabled && (
+	                      <button class="replace-asset" type="button" data-replace-id={asset.id} aria-label={`Replace image for ${asset.name}`}>Replace</button>
+	                    )}
+	                    {proAccessEnabled && (
 	                      <button class="manage-asset" type="button" data-manage-id={asset.id} aria-label={`Organize ${asset.name}`}>
 	                        Organize
 	                      </button>
@@ -662,7 +629,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
 	                    Copy URL
 	                  </button>
-	                  {proAccessEnabled && <button class="manage-asset" type="button" data-manage-id="">Organize</button>}
+	                {proAccessEnabled && <button class="replace-asset" type="button" data-replace-id="">Replace</button>}
+	                {proAccessEnabled && <button class="manage-asset" type="button" data-manage-id="">Organize</button>}
 	                  <button class="delete-asset" type="button" data-delete-id="">Delete</button>
 	                </div>
 	              </div>
@@ -675,6 +643,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	              </div>
 	            </article>
 	          </template>
+	          <input id="replace-file-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/avif" hidden />
             <p class="asset-filter-empty" id="asset-filter-empty" hidden>
 	              No images match this folder and search. Try a different name or folder.
             </p>
@@ -782,58 +751,11 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
               <label class="billing-interval">
                 <span>Billing frequency</span>
                 <select id="billing-interval" disabled={!checkoutConfigured}>
-                  <option value="month">Monthly · $4.99</option>
-                  <option value="year">Annual · $39 (save $20.88)</option>
+                  <option value="month">Monthly · $12.99</option>
+                  <option value="year">Annual · $95.88 (save 38%)</option>
+                  <option value="three_year">3-Year · $143.64 (save 69%)</option>
                 </select>
               </label>
-            )}
-            {proAccessEnabled && hasPaddleCustomer && (
-              <section class="storage-addon-setting" aria-labelledby="storage-addon-title">
-                <div class="storage-addon-heading">
-                  <span>
-                    <small class="dialog-kicker">Flexible capacity</small>
-                    <strong id="storage-addon-title">50GB storage packs</strong>
-                  </span>
-                  <span>{storagePacks > 0 ? `${storagePacks * 50}GB extra` : 'Base 50GB'}</span>
-                </div>
-                <p>
-                  Add up to 500GB without changing plans. Your current total allowance is
-                  <strong> {formatBytes(storageLimit)}</strong>.
-                </p>
-                <label class="billing-interval" for="storage-pack-quantity">
-                  <span>Storage allowance</span>
-                  <select
-                    id="storage-pack-quantity"
-                    disabled={!canChangeStorage}
-                    data-current-quantity={storagePacks}
-                  >
-                    {addonPackOptions.map((option) => (
-                      <option value={option.quantity} selected={option.quantity === storagePacks}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <small class="storage-addon-rate">{addonRateLabel}. Paddle prorates mid-cycle changes.</small>
-                <button
-                  class="button button-storage-addon"
-                  id="storage-addon-preview"
-                  type="button"
-                  disabled={!canChangeStorage}
-                >
-                  Review storage change
-                </button>
-                <div class="storage-addon-confirm" id="storage-addon-confirm" hidden>
-                  <p id="storage-addon-preview-copy"></p>
-                  <div>
-                    <button class="button button-secondary" id="storage-addon-back" type="button">Go back</button>
-                    <button class="button button-primary" id="storage-addon-apply" type="button">
-                      Confirm and update
-                    </button>
-                  </div>
-                </div>
-                <p class="storage-addon-feedback" id="storage-addon-feedback" role="status"></p>
-              </section>
             )}
             <button
               class="button button-billing"
@@ -937,6 +859,7 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	    const folderFilters = document.querySelectorAll<HTMLButtonElement>('[data-folder-filter]');
 	    const assetFilterEmpty = document.querySelector<HTMLElement>('#asset-filter-empty');
 	    const assetCardTemplate = document.querySelector<HTMLTemplateElement>('#asset-card-template');
+	    const replaceFileInput = document.querySelector<HTMLInputElement>('#replace-file-input');
 	    const loadMoreAssets = document.querySelector<HTMLButtonElement>('#load-more-assets');
 	    const libraryStatus = document.querySelector<HTMLElement>('#library-status');
 	    const libraryResultCount = document.querySelector<HTMLElement>('#library-result-count');
@@ -967,15 +890,6 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
       const billingInterval = document.querySelector('#billing-interval') as
         | (Element & { value: string })
         | null;
-      const storagePackSelect = document.querySelector('#storage-pack-quantity') as
-        | (Element & { value: string })
-        | null;
-      const storageAddonPreview = document.querySelector<HTMLButtonElement>('#storage-addon-preview');
-      const storageAddonConfirm = document.querySelector<HTMLElement>('#storage-addon-confirm');
-      const storageAddonPreviewCopy = document.querySelector<HTMLElement>('#storage-addon-preview-copy');
-      const storageAddonBack = document.querySelector<HTMLButtonElement>('#storage-addon-back');
-      const storageAddonApply = document.querySelector<HTMLButtonElement>('#storage-addon-apply');
-      const storageAddonFeedback = document.querySelector<HTMLElement>('#storage-addon-feedback');
 	    const settingPrivateDefault = document.querySelector<HTMLInputElement>('#setting-private-default');
 	    const privatePreference = document.querySelector<HTMLButtonElement>('[data-preference="private"]');
 	    const uploadFolder = document.querySelector('#upload-folder') as (Element & { value: string }) | null;
@@ -994,6 +908,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
       const uploadMoreButton = document.querySelector<HTMLButtonElement>('#upload-more-button');
 	    let toastTimer: number | undefined;
 	    let editingFolderId: string | null = null;
+	    let replacementAssetId: string | null = null;
+	    let replacementAssetName = '';
 
       interface UploadAsset {
         id: string;
@@ -1167,8 +1083,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
             failures.push({ name: file.name, error: 'This file is empty.' });
             continue;
           }
-          if (file.size > 50 * 1024 * 1024) {
-            failures.push({ name: file.name, error: 'This file is larger than 50 MB.' });
+          if (file.size > 64 * 1024 * 1024) {
+            failures.push({ name: file.name, error: 'This file is larger than 64 MB.' });
             continue;
           }
 
@@ -1547,6 +1463,11 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	        manage.dataset.manageId = asset.id;
 	        manage.setAttribute('aria-label', `Organize ${asset.name}`);
 	      }
+	      const replace = card.querySelector<HTMLButtonElement>('.replace-asset');
+	      if (replace) {
+	        replace.dataset.replaceId = asset.id;
+	        replace.setAttribute('aria-label', `Replace image for ${asset.name}`);
+	      }
 	      const remove = card.querySelector<HTMLButtonElement>('.delete-asset');
 	      if (remove) {
 	        remove.dataset.deleteId = asset.id;
@@ -1644,6 +1565,15 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	        return;
 	      }
 
+	      const replace = target.closest<HTMLButtonElement>('.replace-asset');
+	      if (replace) {
+	        const card = replace.closest<HTMLElement>('.asset-card');
+	        replacementAssetId = replace.dataset.replaceId ?? null;
+	        replacementAssetName = card?.dataset.assetOriginalName || 'this image';
+	        replaceFileInput?.click();
+	        return;
+	      }
+
 	      const manage = target.closest<HTMLButtonElement>('.manage-asset');
 	      if (manage) {
 	        const card = manage.closest<HTMLElement>('.asset-card');
@@ -1670,6 +1600,38 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
 	        return;
 	      }
 	      window.sessionStorage.setItem('imagetourl-pro-flash', 'Asset deleted permanently');
+	      window.location.reload();
+	    });
+
+	    replaceFileInput?.addEventListener('change', async () => {
+	      const file = replaceFileInput.files?.[0];
+	      const assetId = replacementAssetId;
+	      replaceFileInput.value = '';
+	      if (!file || !assetId) return;
+	      const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif'];
+	      if (!acceptedTypes.includes(file.type)) {
+	        showToast('Use JPG, PNG, GIF, WebP, or AVIF.');
+	        return;
+	      }
+	      if (file.size === 0 || file.size > 64 * 1024 * 1024) {
+	        showToast(file.size === 0 ? 'This file is empty.' : 'Replacement images must be 64 MB or smaller.');
+	        return;
+	      }
+	      if (!window.confirm(`Replace “${replacementAssetName}” with “${file.name}”? The direct URL stays the same, but the old image cannot be recovered.`)) return;
+
+	      const form = new FormData();
+	      form.set('file', file);
+	      showToast('Replacing image while keeping its URL…');
+	      const response = await fetch(`/pro/api/assets/${encodeURIComponent(assetId)}`, {
+	        method: 'PUT',
+	        body: form,
+	      });
+	      const result = await response.json().catch(() => ({ error: 'Replacement failed' })) as { error?: string };
+	      if (!response.ok) {
+	        showToast(result.error || 'Replacement failed');
+	        return;
+	      }
+	      window.sessionStorage.setItem('imagetourl-pro-flash', 'Image replaced. Its direct URL is unchanged.');
 	      window.location.reload();
 	    });
 
@@ -1897,7 +1859,11 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
             return;
           }
 
-          const selectedCheckoutInterval = billingInterval?.value === 'year' ? 'year' : 'month';
+          const selectedCheckoutInterval = billingInterval?.value === 'three_year'
+            ? 'three_year'
+            : billingInterval?.value === 'year'
+              ? 'year'
+              : 'month';
           const response = await fetch('/pro/api/billing/checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1955,8 +1921,8 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
             }
           });
           (window as unknown as {
-            trackProCheckoutStarted?: (transactionId: string, plan: 'month' | 'year', storagePacks: number) => void;
-          }).trackProCheckoutStarted?.(result.transactionId, selectedCheckoutInterval, 0);
+            trackProCheckoutStarted?: (transactionId: string, plan: 'month' | 'year' | 'three_year') => void;
+          }).trackProCheckoutStarted?.(result.transactionId, selectedCheckoutInterval);
           closeDialog(workspaceDialog);
           paddle.Checkout.open({
             transactionId: result.transactionId,
@@ -1979,75 +1945,6 @@ const logoutUrl = new URL(proPath('/sign-out'), new URL(origin).origin);
       if (billingActionButton) {
         billingActionButton.addEventListener('click', openBilling);
       }
-
-      const requestStorageChange = async (action: 'preview' | 'apply') => {
-        if (!storagePackSelect) return;
-        const quantity = Number(storagePackSelect.value);
-        const target = action === 'preview' ? storageAddonPreview : storageAddonApply;
-        if (!target) return;
-        const originalLabel = target.textContent;
-        target.disabled = true;
-        target.textContent = action === 'preview' ? 'Calculating with Paddle…' : 'Updating storage…';
-        if (storageAddonFeedback) storageAddonFeedback.textContent = '';
-
-        try {
-          const response = await fetch('/pro/api/billing/storage-addon', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quantity, action })
-          });
-          const result = await response.json().catch(() => ({ error: 'Storage update failed' })) as {
-            ok?: boolean;
-            error?: string;
-            totalStorageBytes?: number;
-            immediateCharge?: string | null;
-            renewalTotal?: string | null;
-          };
-          if (!response.ok || !result.ok) throw new Error(result.error || 'Storage update failed');
-
-          if (action === 'apply') {
-            window.sessionStorage.setItem(
-              'imagetourl-pro-flash',
-              'Storage updated. Your new allowance is ready.'
-            );
-            window.location.reload();
-            return;
-          }
-
-          const totalGb = Math.round(Number(result.totalStorageBytes ?? 0) / 1024 ** 3);
-          const chargeCopy = result.immediateCharge
-            ? `Paddle will charge ${result.immediateCharge} now, including proration and tax.`
-            : 'No immediate charge is due. Paddle will apply any billing credit automatically.';
-          const renewalCopy = result.renewalTotal
-            ? ` Your next renewal total will be ${result.renewalTotal}.`
-            : '';
-          if (storageAddonPreviewCopy) {
-            storageAddonPreviewCopy.textContent =
-              `${chargeCopy}${renewalCopy} Your workspace allowance will become ${totalGb}GB.`;
-          }
-          if (storageAddonConfirm) storageAddonConfirm.hidden = false;
-          storageAddonApply?.focus();
-        } catch (error) {
-          if (storageAddonFeedback) {
-            storageAddonFeedback.textContent =
-              error instanceof Error ? error.message : 'Storage could not be updated';
-          }
-        } finally {
-          target.disabled = false;
-          target.textContent = originalLabel;
-        }
-      };
-
-      storageAddonPreview?.addEventListener('click', () => requestStorageChange('preview'));
-      storageAddonApply?.addEventListener('click', () => requestStorageChange('apply'));
-      storageAddonBack?.addEventListener('click', () => {
-        if (storageAddonConfirm) storageAddonConfirm.hidden = true;
-        storageAddonPreview?.focus();
-      });
-      storagePackSelect?.addEventListener('change', () => {
-        if (storageAddonConfirm) storageAddonConfirm.hidden = true;
-        if (storageAddonFeedback) storageAddonFeedback.textContent = '';
-      });
 
 	    window.addEventListener('keydown', (event) => {
 	      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {

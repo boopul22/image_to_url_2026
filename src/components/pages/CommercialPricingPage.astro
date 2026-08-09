@@ -20,7 +20,7 @@ const schema = [
     '@type': 'Product',
     '@id': `${pricingUrl}#pro`,
     name: 'ImageToURL Pro',
-    description: 'Permanent image hosting with 50GB storage, private links, folders, and usage analytics.',
+    description: 'Permanent image hosting with unlimited storage, private links, folders, and usage analytics.',
     url: pricingUrl,
     image: productImage,
     brand: { '@type': 'Brand', name: 'ImageToURL' },
@@ -28,7 +28,7 @@ const schema = [
       {
         '@type': 'Offer',
         name: 'ImageToURL Pro Monthly',
-        price: '4.99',
+        price: '12.99',
         priceCurrency: 'USD',
         url: `${proBase}?billing=month`,
         availability: 'https://schema.org/InStock',
@@ -36,38 +36,17 @@ const schema = [
       {
         '@type': 'Offer',
         name: 'ImageToURL Pro Annual',
-        price: '39.00',
+        price: '95.88',
         priceCurrency: 'USD',
         url: `${proBase}?billing=year`,
         availability: 'https://schema.org/InStock',
       },
-    ],
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    '@id': `${pricingUrl}#storage-pack`,
-    name: 'ImageToURL Pro 50GB Storage Pack',
-    description: 'A recurring 50GB storage capacity add-on for an active ImageToURL Pro workspace.',
-    url: pricingUrl,
-    image: productImage,
-    brand: { '@type': 'Brand', name: 'ImageToURL' },
-    isAccessoryOrSparePartFor: { '@id': `${pricingUrl}#pro` },
-    offers: [
       {
         '@type': 'Offer',
-        name: '50GB Storage Pack Monthly',
-        price: '2.99',
+        name: 'ImageToURL Pro Three-Year',
+        price: '143.64',
         priceCurrency: 'USD',
-        url: `${proBase}?billing=month&storage=1`,
-        availability: 'https://schema.org/InStock',
-      },
-      {
-        '@type': 'Offer',
-        name: '50GB Storage Pack Annual',
-        price: '24.00',
-        priceCurrency: 'USD',
-        url: `${proBase}?billing=year&storage=1`,
+        url: `${proBase}?billing=three_year`,
         availability: 'https://schema.org/InStock',
       },
     ],
@@ -77,7 +56,7 @@ const schema = [
 
 <Layout
   title="Simple Image Hosting Pricing — Free & Pro | ImageToURL"
-  description="Start free or get ImageToURL Pro for $4.99 monthly or $39 annually with 50GB storage, permanent URLs, private links, and folders."
+  description="Start free or get ImageToURL Pro from $3.99/month equivalent with unlimited storage, permanent URLs, same-link replacement, private links, and folders."
   schema={schema}
   noHreflang
   breadcrumbs={[
@@ -100,8 +79,11 @@ const schema = [
 
       <div class="billing-switch" role="group" aria-label="Billing frequency">
         <button type="button" data-cycle="month" data-pro-event="pro_plan_selected" data-pro-location="main-pricing-toggle" data-pro-plan="month" aria-pressed="false">Monthly</button>
-        <button type="button" data-cycle="year" data-pro-event="pro_plan_selected" data-pro-location="main-pricing-toggle" data-pro-plan="year" aria-pressed="true">
-          Annual <span>Save $20.88</span>
+        <button type="button" data-cycle="year" data-pro-event="pro_plan_selected" data-pro-location="main-pricing-toggle" data-pro-plan="year" aria-pressed="false">
+          Annual <span>Save 38%</span>
+        </button>
+        <button type="button" data-cycle="three_year" data-pro-event="pro_plan_selected" data-pro-location="main-pricing-toggle" data-pro-plan="three_year" aria-pressed="true">
+          3-Year <span>Save 69%</span>
         </button>
       </div>
     </section>
@@ -121,8 +103,9 @@ const schema = [
         <a class="price-button secondary" href="/en/">Upload an image</a>
         <ul>
           <li><Icon name="check" />5 guest uploads per rolling 24 hours</li>
-          <li><Icon name="check" />50 permanent uploads/day when signed in</li>
-          <li><Icon name="check" />50MB maximum file size</li>
+          <li><Icon name="check" />25 temporary uploads/day when signed in</li>
+          <li><Icon name="check" />5 permanent uploads/day; up to 25 stored or 100MB</li>
+          <li><Icon name="check" />10MB maximum file size</li>
           <li><Icon name="check" />Temporary or keep-forever links</li>
           <li><Icon name="check" />Ad-free upload and sharing experience</li>
         </ul>
@@ -130,64 +113,46 @@ const schema = [
       </article>
 
       <article class="price-card pro-card">
-        <div class="founding-label">Founding plan</div>
+        <div class="founding-label">Best value</div>
         <header>
           <p>ImageToURL Pro</p>
           <h2>Your image workspace</h2>
           <p>For creators and developers who rely on their image URLs.</p>
         </header>
         <div class="price-line">
-          <strong id="pro-price">$39</strong>
-          <span id="pro-period">per year</span>
+          <strong id="pro-price">$143.64</strong>
+          <span id="pro-period">per 3 years</span>
         </div>
-        <p class="price-equivalent" id="price-equivalent">$3.25/month, billed annually</p>
+        <p class="price-equivalent" id="price-equivalent">$3.99/month equivalent, billed every 3 years</p>
         <a
           class="price-button primary"
           id="pro-checkout-link"
-          href={`${proBase}?billing=year`}
+          href={`${proBase}?billing=three_year`}
           data-pro-event="pro_cta_clicked"
           data-pro-location="main-pricing-primary"
-          data-pro-plan="year"
+          data-pro-plan="three_year"
         >
-          Get Pro for $39/year <span>↗</span>
+          Get Pro for $143.64/3 years <span>↗</span>
         </a>
         <ul>
-          <li><Icon name="check" fill />50GB active storage</li>
+          <li><Icon name="check" fill />Unlimited active image storage</li>
           <li><Icon name="check" fill />Up to 1 million image views/month</li>
           <li><Icon name="check" fill />Permanent HTTPS URLs</li>
+          <li><Icon name="check" fill />Replace an image without changing its URL</li>
+          <li><Icon name="check" fill />64MB maximum file size</li>
           <li><Icon name="check" fill />Public and private assets</li>
           <li><Icon name="check" fill />Folders, URL import, and usage analytics</li>
           <li><Icon name="check" fill />Original-quality storage</li>
-          <li><Icon name="check" fill />API access when the production API launches</li>
         </ul>
         <p class="card-foot">Founding price stays locked while your subscription remains active.</p>
       </article>
     </section>
 
-    <section class="price-addon" aria-labelledby="price-addon-title">
-      <div class="addon-capacity"><strong>+50</strong><span>GB</span></div>
-      <div>
-        <p class="price-kicker"><span></span> Optional storage add-on</p>
-        <h2 id="price-addon-title">More room when your library grows.</h2>
-        <p>
-          Add repeatable 50GB storage packs without moving to another plan. Packs follow your Pro billing
-          interval and Paddle automatically prorates changes made during a billing cycle.
-        </p>
-      </div>
-      <div class="addon-purchase">
-        <strong id="addon-price">$24</strong>
-        <span id="addon-period">per year / 50GB</span>
-        <a id="addon-link" href={`${proBase}?billing=year&storage=1`}>
-          Add Pro + 50GB <span>↗</span>
-        </a>
-      </div>
-    </section>
-
     <section class="price-proof" aria-label="Purchase information">
       <div>
         <span>01</span>
-        <h3>No surprise overages</h3>
-        <p>We pause new uploads at the storage limit. We do not quietly add usage charges.</p>
+        <h3>Unlimited storage included</h3>
+        <p>There is no fixed storage cap, capacity meter, or storage-overage charge.</p>
       </div>
       <div>
         <span>02</span>
@@ -208,10 +173,10 @@ const schema = [
       </header>
       <div class="faq-list">
         <details open>
-          <summary>What happens when I reach 50GB?</summary>
+          <summary>Is Pro storage really unlimited?</summary>
           <p>
-            Existing files stay available and new uploads pause. You can remove files or add one or more
-            50GB storage packs from your Pro billing settings.
+            Yes. Active Pro workspaces have no fixed storage-capacity limit or storage-overage charge.
+            The 64MB per-file limit, upload-rate protection, monthly delivery allowance, and Acceptable Use Policy still apply.
           </p>
         </details>
         <details>
@@ -248,24 +213,28 @@ const schema = [
   const period = document.querySelector('#pro-period');
   const equivalent = document.querySelector('#price-equivalent');
   const checkout = document.querySelector('#pro-checkout-link');
-  const addonPrice = document.querySelector('#addon-price');
-  const addonPeriod = document.querySelector('#addon-period');
-  const addonLink = document.querySelector('#addon-link');
 
   const plans = {
     month: {
-      price: '$4.99',
+      price: '$12.99',
       period: 'per month',
       equivalent: 'Billed monthly. Cancel before the next renewal.',
-      cta: 'Get Pro for $4.99/month',
+      cta: 'Get Pro for $12.99/month',
       href: 'https://imagetourl.cloud/pro/pricing?billing=month',
     },
     year: {
-      price: '$39',
+      price: '$95.88',
       period: 'per year',
-      equivalent: '$3.25/month, billed annually',
-      cta: 'Get Pro for $39/year',
+      equivalent: '$7.99/month equivalent, billed annually',
+      cta: 'Get Pro for $95.88/year',
       href: 'https://imagetourl.cloud/pro/pricing?billing=year',
+    },
+    three_year: {
+      price: '$143.64',
+      period: 'per 3 years',
+      equivalent: '$3.99/month equivalent, billed every 3 years',
+      cta: 'Get Pro for $143.64/3 years',
+      href: 'https://imagetourl.cloud/pro/pricing?billing=three_year',
     },
   };
 
@@ -279,14 +248,11 @@ const schema = [
       checkout.href = plan.href;
       checkout.dataset.proPlan = cycle;
     }
-    if (addonPrice) addonPrice.textContent = cycle === 'year' ? '$24' : '$2.99';
-    if (addonPeriod) addonPeriod.textContent = cycle === 'year' ? 'per year / 50GB' : 'per month / 50GB';
-    if (addonLink) addonLink.href = `${plan.href}&storage=1`;
     switches.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.cycle === cycle)));
   };
 
   switches.forEach((button) => {
-    button.addEventListener('click', () => selectPlan(button.dataset.cycle === 'month' ? 'month' : 'year'));
+    button.addEventListener('click', () => selectPlan(button.dataset.cycle === 'month' || button.dataset.cycle === 'three_year' ? button.dataset.cycle : 'year'));
   });
 </script>
 
@@ -538,90 +504,6 @@ const schema = [
     line-height: 1.55;
   }
 
-  .price-addon {
-    display: grid;
-    grid-template-columns: 96px minmax(0, 1fr) minmax(190px, 0.34fr);
-    gap: 28px;
-    align-items: center;
-    padding: 28px;
-    margin-top: 24px;
-    background: var(--price-soft);
-    border: 1px solid #fecdd3;
-  }
-
-  .addon-capacity {
-    display: grid;
-    width: 88px;
-    height: 88px;
-    place-content: center;
-    color: #fff;
-    background: var(--price-ink);
-    text-align: center;
-  }
-
-  .addon-capacity strong {
-    font-family: var(--font-headline);
-    font-size: 31px;
-    letter-spacing: -0.05em;
-    line-height: 0.9;
-  }
-
-  .addon-capacity span {
-    margin-top: 4px;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.13em;
-  }
-
-  .price-addon h2 {
-    margin: 8px 0;
-    color: var(--price-ink);
-    font-family: var(--font-headline);
-    font-size: 24px;
-    font-weight: 650;
-    letter-spacing: -0.035em;
-  }
-
-  .price-addon > div:nth-child(2) > p:last-child {
-    max-width: 600px;
-    margin: 0;
-    color: var(--price-muted);
-    font-size: 12px;
-    line-height: 1.6;
-  }
-
-  .addon-purchase {
-    display: grid;
-    gap: 3px;
-    padding-left: 24px;
-    border-left: 1px solid #fecdd3;
-  }
-
-  .addon-purchase > strong {
-    color: var(--price-ink);
-    font-family: var(--font-headline);
-    font-size: 30px;
-    letter-spacing: -0.04em;
-  }
-
-  .addon-purchase > span {
-    color: var(--price-muted);
-    font-size: 10px;
-  }
-
-  .addon-purchase a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 38px;
-    padding: 0 11px;
-    margin-top: 9px;
-    color: #fff;
-    background: var(--price-rose);
-    font-size: 11px;
-    font-weight: 750;
-  }
-
   .price-proof {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -750,22 +632,6 @@ const schema = [
     .price-proof,
     .price-faq {
       grid-template-columns: 1fr;
-    }
-
-    .price-addon {
-      grid-template-columns: 78px minmax(0, 1fr);
-    }
-
-    .addon-capacity {
-      width: 72px;
-      height: 72px;
-    }
-
-    .addon-purchase {
-      grid-column: 1 / -1;
-      padding: 16px 0 0;
-      border-top: 1px solid #fecdd3;
-      border-left: 0;
     }
 
     .free-card {

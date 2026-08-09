@@ -37,14 +37,11 @@
 	"vars": {
 		"SITE_URL": "https://imagetourl.cloud/pro",
 		"AUTH_API_ORIGIN": "https://imagetourl.cloud",
-		"MAX_UPLOAD_BYTES": "52428800",
-		"STORAGE_LIMIT_BYTES": "53687091200",
-		"STORAGE_ADDON_BYTES": "53687091200",
+		"MAX_UPLOAD_BYTES": "67108864",
 		"PADDLE_ENVIRONMENT": "production",
-		"PADDLE_PRO_MONTHLY_PRICE_ID": "pri_01kymyp901jkpahectcbvhv2xk",
-		"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_01kymyp99v8fq5wva28t78cd2h",
-		"PADDLE_STORAGE_ADDON_MONTHLY_PRICE_ID": "pri_01kymyp9w6j7g5esz8jvtrvjcq",
-		"PADDLE_STORAGE_ADDON_ANNUAL_PRICE_ID": "pri_01kymypa4pwy961gejhbxjr14q"
+		"PADDLE_PRO_MONTHLY_PRICE_ID": "pri_01kzkmw3cp16eg0sy86kznsftq",
+		"PADDLE_PRO_ANNUAL_PRICE_ID": "pri_01kzkmwjs2t1ythh5w1sgcmkjk",
+		"PADDLE_PRO_THREE_YEAR_PRICE_ID": "pri_01kzkmxcc0e53dpb0rm8sefhk7"
 	},
 	"d1_databases": [
 		{

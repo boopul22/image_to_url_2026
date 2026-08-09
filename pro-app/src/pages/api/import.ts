@@ -170,7 +170,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		}
 		if (reason === 'RATE_LIMIT') return json({ error: 'Import limit reached. Try again in one minute.' }, 429);
 		if (reason === 'FILE_TOO_LARGE') return json({ error: 'Remote images must be 10 MB or smaller' }, 413);
-		if (reason === 'STORAGE_LIMIT') return json({ error: 'Your Pro storage allowance is full' }, 413);
 		if (reason === 'PRIVATE_NETWORK') {
 			return json({ error: 'Only public HTTP or HTTPS image URLs are supported' }, 400);
 		}

@@ -32,7 +32,8 @@ Pro resources.
   OAuth through the trusted main-domain authentication API.
 - Authenticated uploads are stored in the dedicated Pro R2 bucket.
 - JPG, PNG, GIF, WebP, and AVIF files are signature checked before storage.
-- Uploads are limited to 50 MB, 20 uploads per minute, and 50 GB per workspace.
+- Pro storage has no fixed capacity cap. Uploads remain limited to 64 MB per file and 20 uploads per minute, and acceptable-use protections still apply.
+- Existing assets can be replaced without changing their public URL.
 - Remote URL imports are restricted to public HTTP(S) images up to 10 MB.
 - Mutating APIs require a same-origin browser request.
 - Private assets return `404` unless the owner has a valid shared session.
@@ -115,11 +116,9 @@ Paddle sandbox and live credentials, customers, products, and prices are
 separate. Production is currently mapped to this live catalog:
 
 - Product: `ImageToURL Pro` (`pro_01kymyp8r0q8dyz28w437p4xgg`)
-- Monthly recurring price: USD 4.99 (`pri_01kymyp901jkpahectcbvhv2xk`)
-- Annual recurring price: USD 39 (`pri_01kymyp99v8fq5wva28t78cd2h`)
-- Storage add-on product: `ImageToURL Pro Storage Pack` (`pro_01kymyp9mc51rbq4qrp0zdvy70`)
-- Recurring 50GB pack monthly price: USD 2.99 (`pri_01kymyp9w6j7g5esz8jvtrvjcq`)
-- Recurring 50GB pack annual price: USD 24 (`pri_01kymypa4pwy961gejhbxjr14q`)
+- Monthly recurring price: USD 12.99 (`pri_01kzkmw3cp16eg0sy86kznsftq`)
+- Annual recurring price: USD 95.88 (`pri_01kzkmwjs2t1ythh5w1sgcmkjk`)
+- Three-year recurring price: USD 143.64 (`pri_01kzkmxcc0e53dpb0rm8sefhk7`)
 - Client-side token
 - API key with `transaction.write` and `customer_portal_session.write`
 - Notification destination:
@@ -139,8 +138,7 @@ with Wrangler:
 "PADDLE_ENVIRONMENT": "production",
 "PADDLE_PRO_MONTHLY_PRICE_ID": "pri_...",
 "PADDLE_PRO_ANNUAL_PRICE_ID": "pri_...",
-"PADDLE_STORAGE_ADDON_MONTHLY_PRICE_ID": "pri_...",
-"PADDLE_STORAGE_ADDON_ANNUAL_PRICE_ID": "pri_..."
+"PADDLE_PRO_THREE_YEAR_PRICE_ID": "pri_..."
 ```
 
 Store every credential with Wrangler rather than the Cloudflare dashboard:

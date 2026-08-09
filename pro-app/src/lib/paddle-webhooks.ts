@@ -11,8 +11,6 @@ import {
 import {
 	normalizeSubscriptionStatus,
 	paddlePriceId,
-	storageAddonPriceId,
-	storagePackQuantity,
 	type PaddleEnvironment,
 } from './billing';
 import type { ProEnv } from './env';
@@ -34,7 +32,6 @@ interface CheckoutLink {
 	user_id: string;
 	plan: 'pro' | 'business';
 	price_id: string;
-	storage_pack_quantity: number;
 }
 
 export async function processPaddleWebhookEvent(
@@ -154,7 +151,7 @@ async function upsertSubscription(
 	const transactionId = 'transactionId' in subscription ? subscription.transactionId : null;
 	const checkout = transactionId
 		? await env.PRO_DB.prepare(
-				`SELECT user_id, plan, price_id, storage_pack_quantity
+				`SELECT user_id, plan, price_id
 				   FROM billing_checkout_requests
 				  WHERE transaction_id = ? AND paddle_environment = ?
 				  LIMIT 1`,
@@ -183,25 +180,15 @@ async function upsertSubscription(
 	}
 
 	const basePriceIds = new Set(
-		[paddlePriceId(env, 'month'), paddlePriceId(env, 'year')].filter(
-			(value): value is string => Boolean(value),
-		),
-	);
-	const addonPriceIds = new Set(
-		[storageAddonPriceId(env, 'month'), storageAddonPriceId(env, 'year')].filter(
+		[paddlePriceId(env, 'month'), paddlePriceId(env, 'year'), paddlePriceId(env, 'three_year')].filter(
 			(value): value is string => Boolean(value),
 		),
 	);
 	const baseItem =
 		subscription.items.find((item) => item.price?.id && basePriceIds.has(item.price.id)) ??
-		subscription.items.find((item) => item.price?.id && !addonPriceIds.has(item.price.id));
+		subscription.items.find((item) => item.price?.id);
 	const priceId = baseItem?.price?.id ?? checkout?.price_id ?? null;
 	const productId = baseItem?.price?.productId ?? null;
-	const addonQuantity = storagePackQuantity(
-		subscription.items
-			.filter((item) => item.price?.id && addonPriceIds.has(item.price.id))
-			.reduce((total, item) => total + item.quantity, 0),
-	);
 	const scheduledChange = subscription.scheduledChange;
 
 	await env.PRO_DB.batch([
@@ -255,7 +242,7 @@ async function upsertSubscription(
 			scheduledChange?.action ?? null,
 			scheduledChange?.effectiveAt ?? null,
 			event.occurredAt,
-			addonQuantity,
+			0,
 			environment,
 		),
 		...(transactionId
@@ -307,7 +294,7 @@ async function upsertCompletedTransaction(
 	}
 
 	const checkout = await env.PRO_DB.prepare(
-		`SELECT user_id, plan, price_id, storage_pack_quantity
+		`SELECT user_id, plan, price_id
 		   FROM billing_checkout_requests
 		  WHERE transaction_id = ? AND paddle_environment = ?
 		  LIMIT 1`,
@@ -329,7 +316,14 @@ async function upsertCompletedTransaction(
 		checkout?.user_id ??
 		customerLink?.user_id ??
 		(await validCustomUserId(env.PRO_DB, customUserId(transaction.customData)));
-	const baseItem = transaction.items.find((item) => item.price?.billingCycle);
+	const basePriceIds = new Set(
+		[paddlePriceId(env, 'month'), paddlePriceId(env, 'year'), paddlePriceId(env, 'three_year')].filter(
+			(value): value is string => Boolean(value),
+		),
+	);
+	const baseItem =
+		transaction.items.find((item) => item.price?.id && basePriceIds.has(item.price.id)) ??
+		transaction.items.find((item) => item.price?.billingCycle);
 	const priceId = baseItem?.price?.id ?? checkout?.price_id ?? null;
 	const productId = baseItem?.price?.productId ?? null;
 

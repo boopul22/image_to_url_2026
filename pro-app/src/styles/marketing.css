@@ -680,7 +680,7 @@
 
 .pro-billing-choice {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin-top: 28px;
 }
@@ -892,164 +892,6 @@
   border-radius: 50%;
   font-size: 10px;
   font-weight: 900;
-}
-
-.storage-pack-offer {
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 28px;
-  align-items: center;
-  padding: 28px;
-  margin-top: 14px;
-  background: linear-gradient(120deg, rgba(240, 215, 255, 0.65), rgba(255, 255, 255, 0.75));
-  border: 1px solid var(--panel-border);
-  border-radius: 18px;
-}
-
-.storage-pack-visual {
-  display: grid;
-  width: 96px;
-  height: 96px;
-  place-content: center;
-  color: var(--cream);
-  background: var(--green);
-  border-radius: 22px;
-  text-align: center;
-}
-
-.storage-pack-visual span {
-  font-size: 38px;
-  font-weight: 650;
-  letter-spacing: -0.06em;
-  line-height: 0.9;
-}
-
-.storage-pack-visual small {
-  margin-top: 5px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
-.storage-pack-copy h2 {
-  margin: 5px 0 7px;
-  color: var(--green);
-  font-size: 24px;
-  font-weight: 650;
-  letter-spacing: -0.035em;
-}
-
-.storage-pack-copy > p:not(.marketing-kicker) {
-  max-width: 650px;
-  margin: 0;
-  color: #646d67;
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.storage-pack-copy ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px 16px;
-  padding: 0;
-  margin: 12px 0 0;
-  color: var(--green);
-  font-size: 10px;
-  font-weight: 650;
-  list-style: none;
-}
-
-.storage-pack-copy li::before {
-  margin-right: 5px;
-  content: '✓';
-  color: #8c50a8;
-}
-
-.storage-pack-choice {
-  display: grid;
-  grid-template-columns: 20px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 12px;
-  min-height: 70px;
-  padding: 13px 15px;
-  background: rgba(3, 79, 70, 0.025);
-  border: 1px solid rgba(3, 79, 70, 0.14);
-  border-radius: 13px;
-  cursor: pointer;
-  transition: background 180ms ease, border-color 180ms ease;
-}
-
-.plan-storage-choice {
-  margin-top: 20px;
-}
-
-.storage-pack-choice:hover {
-  background: rgba(3, 79, 70, 0.045);
-  border-color: rgba(3, 79, 70, 0.24);
-}
-
-.storage-pack-choice input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.storage-pack-check {
-  display: grid;
-  width: 20px;
-  height: 20px;
-  place-items: center;
-  border: 1px solid rgba(3, 79, 70, 0.28);
-  border-radius: 6px;
-}
-
-.storage-pack-choice input:checked + .storage-pack-check {
-  color: var(--cream);
-  background: var(--green);
-  border-color: var(--green);
-}
-
-.storage-pack-choice input:checked + .storage-pack-check::after {
-  content: '✓';
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.storage-pack-choice:focus-within {
-  outline: 3px solid rgba(140, 80, 168, 0.24);
-  outline-offset: 2px;
-}
-
-.storage-pack-choice-copy {
-  display: grid;
-  gap: 3px;
-}
-
-.storage-pack-choice-copy strong {
-  color: var(--green);
-  font-size: 12px;
-  font-weight: 720;
-}
-
-.storage-pack-choice-copy small {
-  color: #6b736e;
-  font-size: 9px;
-  line-height: 1.4;
-}
-
-.storage-pack-choice > b {
-  color: var(--green);
-  font-size: 11px;
-  font-weight: 730;
-  white-space: nowrap;
-}
-
-.storage-pack-choice.is-disabled {
-  cursor: default;
-  opacity: 0.72;
 }
 
 .pricing-facts {
@@ -1429,15 +1271,6 @@
     grid-template-columns: 1fr;
   }
 
-  .storage-pack-offer {
-    grid-template-columns: 84px minmax(0, 1fr);
-  }
-
-  .storage-pack-visual {
-    width: 78px;
-    height: 78px;
-  }
-
   .pricing-facts article {
     padding: 22px;
   }
@@ -1562,6 +1395,7 @@
   }
 
   .pro-billing-choice {
+    grid-template-columns: 1fr;
     gap: 8px;
   }
 
@@ -1578,21 +1412,6 @@
   .pro-billing-choice button > span small {
     max-width: none;
     text-align: left;
-  }
-
-  .storage-pack-offer {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 22px;
-  }
-
-  .storage-pack-visual {
-    width: 72px;
-    height: 72px;
-  }
-
-  .storage-pack-copy ul {
-    display: grid;
   }
 
   .marketing-footer {

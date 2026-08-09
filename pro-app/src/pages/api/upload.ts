@@ -24,8 +24,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return json({ error: 'Supported formats: JPG, PNG, GIF, WebP, and AVIF' }, 415);
 	}
 
-	const maxBytes = getNumberEnv(env.MAX_UPLOAD_BYTES, 50 * 1024 * 1024);
-	if (file.size > maxBytes) return json({ error: 'Images must be 50 MB or smaller' }, 413);
+	const maxBytes = getNumberEnv(env.MAX_UPLOAD_BYTES, 64 * 1024 * 1024);
+	if (file.size > maxBytes) return json({ error: 'Images must be 64 MB or smaller' }, 413);
 	if (file.size === 0) return json({ error: 'The selected file is empty' }, 400);
 
 	const signature = new Uint8Array(await file.slice(0, 32).arrayBuffer());
@@ -61,7 +61,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				json({ error: 'An active Pro plan is required to upload images', code: 'PRO_REQUIRED' }, 402);
 		}
 		if (reason === 'RATE_LIMIT') return json({ error: 'Upload limit reached. Try again in one minute.' }, 429);
-		if (reason === 'STORAGE_LIMIT') return json({ error: 'Your Pro storage allowance is full' }, 413);
 		if (reason === 'INVALID_FOLDER') return json({ error: 'That folder is no longer available' }, 400);
 		return json({ error: 'Upload failed. Please try again.' }, 500);
 	}

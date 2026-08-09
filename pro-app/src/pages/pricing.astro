@@ -4,7 +4,6 @@ export const prerender = false;
 import ProMarketingShell from '../layouts/ProMarketingShell.astro';
 import {
   isPaddleCheckoutConfigured,
-  isStorageAddonConfigured,
   paddleEnvironment,
 } from '../lib/billing';
 import { getProEnv } from '../lib/env';
@@ -12,15 +11,18 @@ import { proAbsoluteUrl, proPath } from '../lib/paths';
 
 const env = getProEnv();
 const user = Astro.locals.proUser;
-const initialInterval = Astro.url.searchParams.get('billing') === 'month' ? 'month' : 'year';
-const initialStoragePacks = Astro.url.searchParams.get('storage') === '1' ? 1 : 0;
+const requestedInterval = Astro.url.searchParams.get('billing');
+const initialInterval = requestedInterval === 'month' || requestedInterval === 'year'
+  ? requestedInterval
+  : 'three_year';
 const checkoutConfigured = isPaddleCheckoutConfigured(env);
-const storageAddonConfigured = isStorageAddonConfigured(env);
 const paddleToken = env.PADDLE_CLIENT_TOKEN ?? '';
 const paddleEnv = paddleEnvironment(env);
-const initialCheckoutPrice = initialInterval === 'year'
-  ? `$${39 + (24 * initialStoragePacks)}/year`
-  : `$${(4.99 + (2.99 * initialStoragePacks)).toFixed(2)}/month`;
+const initialCheckoutPrice = initialInterval === 'three_year'
+  ? '$143.64/3 years'
+  : initialInterval === 'year'
+    ? '$95.88/year'
+    : '$12.99/month';
 
 let hasSubscription = false;
 if (user) {
@@ -38,7 +40,7 @@ if (user) {
   hasSubscription = Boolean(subscription);
 }
 
-const returnTo = `${proAbsoluteUrl('/pricing')}?billing=${initialInterval}${initialStoragePacks ? '&storage=1' : ''}`;
+const returnTo = `${proAbsoluteUrl('/pricing')}?billing=${initialInterval}`;
 const loginUrl = new URL(proPath('/sign-in'), new URL(env.SITE_URL).origin);
 loginUrl.searchParams.set('return_to', returnTo);
 const pricingUrl = proAbsoluteUrl('/pricing');
@@ -47,8 +49,8 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
 ---
 
 <ProMarketingShell
-  title="ImageToURL Pro Pricing — $4.99 monthly or $39 annually"
-  description="Get 50GB storage, permanent image URLs, private assets, folders, URL imports, and usage analytics with ImageToURL Pro."
+  title="ImageToURL Pro Pricing — Monthly, Annual & 3-Year Plans"
+  description="Get unlimited image storage, permanent image URLs, private assets, folders, URL imports, and usage analytics with ImageToURL Pro."
 >
   <main class="marketing-main pricing-main">
     <section class="pricing-hero">
@@ -61,9 +63,9 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
         </p>
       </div>
       <ul class="pricing-proof-strip" aria-label="Plan highlights">
-        <li><strong>50GB</strong><span>included storage</span></li>
+        <li><strong>Unlimited</strong><span>image storage</span></li>
         <li><strong>1M</strong><span>image views monthly</span></li>
-        <li><strong>50MB</strong><span>maximum file size</span></li>
+        <li><strong>64MB</strong><span>maximum file size</span></li>
       </ul>
     </section>
 
@@ -81,47 +83,35 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
               <strong>Monthly</strong>
               <small>Pay month to month</small>
             </span>
-            <b>$4.99 <small>/ month</small></b>
+            <b>$12.99 <small>/ month</small></b>
           </button>
           <button type="button" data-interval="year" data-pro-event="pro_plan_selected" data-pro-location="pro-pricing-toggle" data-pro-plan="year" aria-pressed={initialInterval === 'year'}>
             <span>
               <strong>Annual</strong>
-              <small>Best value · save 35%</small>
+              <small>Save 38% vs monthly</small>
             </span>
-            <b>$39 <small>/ year</small></b>
+            <b>$95.88 <small>/ year</small></b>
+          </button>
+          <button type="button" data-interval="three_year" data-pro-event="pro_plan_selected" data-pro-location="pro-pricing-toggle" data-pro-plan="three_year" aria-pressed={initialInterval === 'three_year'}>
+            <span>
+              <strong>3-Year</strong>
+              <small>Best value · save 69%</small>
+            </span>
+            <b>$143.64 <small>/ 3 years</small></b>
           </button>
         </div>
 
         <div class="pro-price-row">
-          <strong id="display-price">{initialInterval === 'year' ? '$39' : '$4.99'}</strong>
-          <span id="display-period">{initialInterval === 'year' ? 'per year' : 'per month'}</span>
+          <strong id="display-price">{initialInterval === 'three_year' ? '$143.64' : initialInterval === 'year' ? '$95.88' : '$12.99'}</strong>
+          <span id="display-period">{initialInterval === 'three_year' ? 'per 3 years' : initialInterval === 'year' ? 'per year' : 'per month'}</span>
         </div>
         <p class="pro-price-note" id="display-note">
-          {initialInterval === 'year' ? '$3.25/month, billed annually' : 'Billed monthly. Cancel before renewal.'}
+          {initialInterval === 'three_year'
+            ? '$3.99/month equivalent, billed $143.64 every 3 years'
+            : initialInterval === 'year'
+              ? '$7.99/month equivalent, billed annually'
+              : 'Billed monthly. Cancel before renewal.'}
         </p>
-
-        <label class:list={['storage-pack-choice', 'plan-storage-choice', { 'is-disabled': hasSubscription || !storageAddonConfigured }]}>
-          <input
-            id="storage-addon-choice"
-            type="checkbox"
-            checked={initialStoragePacks === 1}
-            disabled={hasSubscription || !storageAddonConfigured}
-          />
-          <span class="storage-pack-check" aria-hidden="true"></span>
-          <span class="storage-pack-choice-copy">
-            <strong>Add 50GB storage</strong>
-            <small>
-              {hasSubscription
-                ? 'Manage storage packs in your workspace'
-                : storageAddonConfigured
-                  ? 'Optional · include it with this subscription'
-                  : 'Add-on setup in progress'}
-            </small>
-          </span>
-          <b id="storage-addon-price">
-            {initialInterval === 'year' ? '+$24/year' : '+$2.99/month'}
-          </b>
-        </label>
 
         {hasSubscription ? (
           <a class="pro-checkout-button" href={proPath('/workspace')}>
@@ -167,9 +157,10 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
       <aside class="pro-feature-panel">
         <p>Included with your subscription</p>
         <ul class="pro-feature-list">
-          <li>50GB active image storage</li>
+          <li>Unlimited active image storage</li>
           <li>Up to 1 million image views each month</li>
-          <li>50MB maximum file size</li>
+          <li>64MB maximum file size</li>
+          <li>Replace an image without changing its URL</li>
           <li>Permanent HTTPS delivery URLs</li>
           <li>Original-quality image storage</li>
           <li>Public, unlisted, and private assets</li>
@@ -181,31 +172,11 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
       </aside>
     </section>
 
-    <section class="storage-pack-offer" aria-labelledby="storage-pack-title">
-      <div class="storage-pack-visual" aria-hidden="true">
-        <span>50</span>
-        <small>GB</small>
-      </div>
-      <div class="storage-pack-copy">
-        <p class="marketing-kicker">Capacity add-on</p>
-        <h2 id="storage-pack-title">Add storage without changing plans.</h2>
-        <p>
-          Each recurring storage pack adds 50GB to your workspace. Start with one at checkout or add up
-          to ten packs later from billing settings.
-        </p>
-        <ul>
-          <li>Same billing interval as your Pro plan</li>
-          <li>Prorated automatically for mid-cycle changes</li>
-          <li>Remove packs whenever your storage needs shrink</li>
-        </ul>
-      </div>
-    </section>
-
     <section class="pricing-facts" aria-label="Subscription benefits">
       <article>
-        <span>01 / LIMITS</span>
-        <h3>No surprise usage bill</h3>
-        <p>New uploads pause at the storage limit. You stay in control of what is stored and what you pay.</p>
+        <span>01 / STORAGE</span>
+        <h3>No storage cap</h3>
+        <p>Store unlimited images without a capacity meter or storage-overage charge.</p>
       </article>
       <article>
         <span>02 / CONTROL</span>
@@ -228,22 +199,22 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
         <details open>
           <summary>What exactly am I purchasing?</summary>
           <p>
-            A recurring ImageToURL Pro subscription for one personal workspace with the features and
-            limits shown above. The API is marked for future release and is not production-ready today.
+            A recurring ImageToURL Pro subscription for one personal workspace with unlimited image
+            storage and the features shown above. The API is marked for future release and is not production-ready today.
+          </p>
+        </details>
+        <details>
+          <summary>Is Pro storage really unlimited?</summary>
+          <p>
+            Yes. Active Pro workspaces have no fixed storage-capacity limit or storage-overage charge.
+            The 64MB per-file limit, upload-rate protection, monthly delivery allowance, and Acceptable Use Policy still apply.
           </p>
         </details>
         <details>
           <summary>Does the subscription renew automatically?</summary>
           <p>
-            Yes. Monthly subscriptions renew monthly and annual subscriptions renew annually until you
-            cancel before the renewal date. Paddle shows the total, tax, and renewal details at checkout.
-          </p>
-        </details>
-        <details>
-          <summary>Can I add more storage later?</summary>
-          <p>
-            Yes. Add or remove repeatable 50GB packs from your workspace billing settings. Paddle shows
-            the prorated amount before you confirm any mid-cycle change.
+            Yes. Monthly plans renew monthly, annual plans renew annually, and three-year plans renew every
+            three years until you cancel before the renewal date. Paddle shows the total, tax, and renewal details at checkout.
           </p>
         </details>
         <details>
@@ -289,8 +260,6 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
       paddleToken,
       paddleEnv,
       checkoutConfigured,
-      addonConfigured: storageAddonConfigured,
-      initialStoragePacks,
       loginUrl: loginUrl.toString(),
       isAuthenticated: Boolean(user),
       pricingUrl,
@@ -307,29 +276,33 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
     const signinCheckout = document.querySelector('#signin-checkout');
     const signinLabel = document.querySelector('#signin-label');
     const errorBox = document.querySelector('#checkout-error');
-    const storageAddonChoice = document.querySelector('#storage-addon-choice');
-    const storageAddonPrice = document.querySelector('#storage-addon-price');
     let selectedInterval = initialInterval;
-    let selectedStoragePacks = initialStoragePacks;
     let paddleInitialized = false;
 
     const planCopy = {
       month: {
-        price: '$4.99',
+        price: '$12.99',
         period: 'per month',
         note: 'Billed monthly. Cancel before renewal.',
       },
       year: {
-        price: '$39',
+        price: '$95.88',
         period: 'per year',
-        note: '$3.25/month, billed annually',
+        note: '$7.99/month equivalent, billed annually',
+      },
+      three_year: {
+        price: '$143.64',
+        period: 'per 3 years',
+        note: '$3.99/month equivalent, billed every 3 years',
       },
     };
 
     const getActionCopy = () => {
-      const total = selectedInterval === 'year'
-        ? `$${39 + (24 * selectedStoragePacks)}/year`
-        : `$${(4.99 + (2.99 * selectedStoragePacks)).toFixed(2)}/month`;
+      const total = selectedInterval === 'three_year'
+        ? '$143.64/3 years'
+        : selectedInterval === 'year'
+          ? '$95.88/year'
+          : '$12.99/month';
       return {
         checkout: `Continue with Pro — ${total}`,
         signin: `Sign in to continue — ${total}`,
@@ -337,7 +310,7 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
     };
 
     const setInterval = (interval) => {
-      selectedInterval = interval === 'month' ? 'month' : 'year';
+      selectedInterval = interval === 'month' || interval === 'three_year' ? interval : 'year';
       const copy = planCopy[selectedInterval];
       const actionCopy = getActionCopy();
       if (displayPrice) displayPrice.textContent = copy.price;
@@ -349,16 +322,12 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
       }
       if (checkoutLabel) checkoutLabel.textContent = actionCopy.checkout;
       if (signinLabel) signinLabel.textContent = actionCopy.signin;
-      if (storageAddonPrice) {
-        storageAddonPrice.textContent = selectedInterval === 'year' ? '+$24/year' : '+$2.99/month';
-      }
       if (signinCheckout) {
         signinCheckout.dataset.proPlan = selectedInterval;
         const target = new URL(loginUrl);
-        const storageQuery = selectedStoragePacks > 0 ? '&storage=1' : '';
         target.searchParams.set(
           'return_to',
-          `${pricingUrl}?billing=${selectedInterval}${storageQuery}`,
+          `${pricingUrl}?billing=${selectedInterval}`,
         );
         signinCheckout.href = target.toString();
       }
@@ -367,19 +336,12 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
       });
       const pageUrl = new URL(window.location.href);
       pageUrl.searchParams.set('billing', selectedInterval);
-      if (selectedStoragePacks > 0) pageUrl.searchParams.set('storage', '1');
-      else pageUrl.searchParams.delete('storage');
       window.history.replaceState({}, '', pageUrl);
     };
 
     intervalButtons.forEach((button) => {
       button.addEventListener('click', () => setInterval(button.dataset.interval));
     });
-    storageAddonChoice?.addEventListener('change', () => {
-      selectedStoragePacks = storageAddonChoice.checked && addonConfigured ? 1 : 0;
-      setInterval(selectedInterval);
-    });
-
     const initializePaddle = () => {
       if (paddleInitialized || !paddleToken || !window.Paddle) return Boolean(window.Paddle);
       if (paddleEnv === 'sandbox') window.Paddle.Environment.set('sandbox');
@@ -415,7 +377,6 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             interval: selectedInterval,
-            storagePacks: selectedStoragePacks,
             interestSessionId: window.sessionStorage.getItem('imagetourl_pro_interest_session'),
           }),
         });
@@ -423,7 +384,7 @@ const checkoutApiUrl = proPath('/api/billing/checkout');
         if (!response.ok || !result.transactionId) {
           throw new Error(result.error || 'Checkout could not be started.');
         }
-        window.trackProCheckoutStarted?.(result.transactionId, selectedInterval, selectedStoragePacks);
+        window.trackProCheckoutStarted?.(result.transactionId, selectedInterval);
         if (!initializePaddle()) throw new Error('Secure checkout could not be loaded.');
         window.Paddle.Checkout.open({
           transactionId: result.transactionId,

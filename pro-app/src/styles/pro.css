@@ -294,22 +294,6 @@ input:focus-visible,
   font-weight: 500;
 }
 
-.meter {
-  height: 5px;
-  margin: 12px 0 9px;
-  overflow: hidden;
-  background: rgba(255, 255, 235, 0.15);
-  border-radius: 99px;
-}
-
-.meter > span {
-  display: block;
-  width: 36%;
-  height: 100%;
-  background: var(--lavender);
-  border-radius: inherit;
-}
-
 .plan-copy {
   justify-content: space-between;
   color: rgba(255, 255, 235, 0.58);
@@ -1612,7 +1596,8 @@ h1 {
   backdrop-filter: blur(8px);
 }
 
-.manage-asset {
+.manage-asset,
+.replace-asset {
   min-height: 30px;
   padding: 0 10px;
   color: var(--green);
@@ -1635,16 +1620,19 @@ h1 {
 
 .asset-card:hover .copy-link,
 .asset-card:hover .manage-asset,
+.asset-card:hover .replace-asset,
 .asset-card:hover .delete-asset,
 .copy-link:focus-visible,
 .manage-asset:focus-visible,
+.replace-asset:focus-visible,
 .delete-asset:focus-visible,
 .copy-link.is-copied {
   opacity: 1;
   transform: translateY(0);
 }
 
-.manage-asset:hover {
+.manage-asset:hover,
+.replace-asset:hover {
   color: var(--cream);
   background: var(--green);
 }
@@ -2298,108 +2286,6 @@ h1 {
   font: inherit;
 }
 
-.storage-addon-setting {
-  padding: 14px;
-  margin: 4px 0 14px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(3, 79, 70, 0.12);
-  border-radius: 11px;
-}
-
-.storage-addon-heading {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.storage-addon-heading strong {
-  display: block;
-  color: var(--ink);
-  font-size: 14px;
-}
-
-.storage-addon-heading > span:last-child {
-  padding: 5px 8px;
-  color: var(--green);
-  background: var(--mint);
-  border-radius: 99px;
-  font-size: 9px;
-  font-weight: 700;
-}
-
-.storage-addon-setting > p {
-  margin: 8px 0 2px;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.5;
-}
-
-.storage-addon-setting .billing-interval {
-  padding-bottom: 8px;
-}
-
-.storage-addon-setting .billing-interval select {
-  width: min(238px, 65%);
-}
-
-.storage-addon-rate {
-  display: block;
-  margin: 0 0 10px;
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.button-storage-addon {
-  width: 100%;
-  color: var(--green);
-  background: var(--mint);
-  border: 1px solid rgba(3, 79, 70, 0.12);
-}
-
-.button-storage-addon:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.storage-addon-confirm {
-  padding: 11px;
-  margin-top: 10px;
-  background: var(--cream);
-  border: 1px solid rgba(3, 79, 70, 0.14);
-  border-radius: 9px;
-}
-
-.storage-addon-confirm[hidden] {
-  display: none;
-}
-
-.storage-addon-confirm p {
-  margin: 0 0 10px;
-  color: var(--ink);
-  font-size: 10px;
-  line-height: 1.5;
-}
-
-.storage-addon-confirm > div {
-  display: flex;
-  justify-content: flex-end;
-  gap: 7px;
-}
-
-.storage-addon-confirm .button {
-  min-height: 34px;
-  padding: 0 11px;
-  font-size: 10px;
-}
-
-.storage-addon-feedback {
-  min-height: 14px;
-  margin: 7px 0 0 !important;
-  color: var(--danger) !important;
-  font-size: 9px !important;
-}
-
 .button-billing {
   width: 100%;
   color: var(--cream);
@@ -2753,7 +2639,9 @@ h1 {
     transform: none;
   }
 
-  .delete-asset {
+  .delete-asset,
+  .manage-asset,
+  .replace-asset {
     opacity: 1;
     transform: none;
   }
@@ -3046,6 +2934,7 @@ h1 {
 
   .copy-link,
   .manage-asset,
+  .replace-asset,
   .delete-asset {
     min-height: 42px;
 	  opacity: 1;

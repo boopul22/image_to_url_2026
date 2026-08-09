@@ -44,7 +44,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	}
 
 	const planValue = shortString(payload?.planInterval, 12);
-	const planInterval = planValue === 'month' || planValue === 'year' ? planValue : null;
+	const planInterval =
+		planValue === 'month' || planValue === 'year' || planValue === 'three_year'
+			? planValue
+			: null;
 	const env = getProEnv();
 	const recent = await env.PRO_DB.prepare(
 		`SELECT COUNT(*) AS count

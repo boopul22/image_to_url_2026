@@ -7,18 +7,23 @@
 // so they clean themselves up and are cheap. The limits reflect that:
 //   • Guests: 5 temporary uploads per rolling 24h, keyed by IP. Every guest
 //     upload auto-expires, so this is purely a light anti-abuse cap.
-//   • Signed-in users: 50 *permanent* uploads per day (a flat 1 "credit" each,
-//     size-independent), refilled to full once every 24h. Temporary /
-//     auto-expiring uploads cost nothing and are unlimited — only choosing
-//     "keep forever" spends the daily allowance. Email CONTACT_EMAIL for more.
+//   • Signed-in free users: 5 permanent uploads and 25 temporary uploads per
+//     rolling 24h. Permanent storage is also capped at 25 active images or
+//     100 MB, whichever comes first. Existing links remain available above the
+//     cap; only new permanent uploads pause until space is freed or Pro is used.
 //
 // NOTE: the users table columns are still named `credits` / `credits_refreshed_at`
 // for historical reasons; a "credit" now simply means one permanent upload.
 
 export const ANON_DAILY_LIMIT = 5;
-export const USER_DAILY_CREDITS = 50;
+export const USER_DAILY_CREDITS = 5;
+export const USER_TEMPORARY_DAILY_LIMIT = 25;
+export const USER_PERMANENT_IMAGE_LIMIT = 25;
+export const USER_PERMANENT_STORAGE_BYTES = 100 * 1024 * 1024;
+export const FREE_MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 export const CREDIT_REFRESH_MS = 24 * 60 * 60 * 1000;
 export const CONTACT_EMAIL = 'blog.boopul@gmail.com';
+export const PRO_PRICING_URL = '/pro/pricing';
 
 // A permanent ("keep forever") upload costs exactly one credit, regardless of
 // size. Temporary/auto-expiring uploads cost nothing (handled by the caller,
@@ -65,43 +70,139 @@ export async function getUserCredits(
   db: D1Database,
   userId: string,
 ): Promise<{ credits: number; refreshedAt: string | null }> {
+  // Refill and legacy-balance clamping happen in one serialized statement.
+  // This prevents a quota read racing with a simultaneous reservation from
+  // restoring a credit that was already spent.
   const row = await db
-    .prepare(`SELECT credits, credits_refreshed_at FROM users WHERE id = ?`)
+    .prepare(
+      `UPDATE users
+          SET credits = CASE
+                WHEN credits_refreshed_at IS NULL
+                  OR credits_refreshed_at <= datetime('now', '-1 day')
+                  THEN ?
+                ELSE MIN(?, MAX(0, COALESCE(credits, ?)))
+              END,
+              credits_refreshed_at = CASE
+                WHEN credits_refreshed_at IS NULL
+                  OR credits_refreshed_at <= datetime('now', '-1 day')
+                  THEN datetime('now')
+                ELSE credits_refreshed_at
+              END
+        WHERE id = ?
+        RETURNING credits, credits_refreshed_at`,
+    )
+    .bind(USER_DAILY_CREDITS, USER_DAILY_CREDITS, USER_DAILY_CREDITS, userId)
+    .first<{ credits: number; credits_refreshed_at: string | null }>();
+
+  return {
+    credits: Math.min(USER_DAILY_CREDITS, Math.max(0, row?.credits ?? USER_DAILY_CREDITS)),
+    refreshedAt: row?.credits_refreshed_at ?? null,
+  };
+}
+
+export async function reservePermanentUploadCredit(
+  db: D1Database,
+  userId: string,
+): Promise<{ reserved: boolean; remaining: number; refreshedAt: string | null }> {
+  const current = await getUserCredits(db, userId);
+  const updated = await db
+    .prepare(
+      `UPDATE users
+          SET credits = credits - 1
+        WHERE id = ? AND credits >= 1
+        RETURNING credits`,
+    )
     .bind(userId)
-    .first<{ credits: number | null; credits_refreshed_at: string | null }>();
+    .first<{ credits: number }>();
+  return {
+    reserved: Boolean(updated),
+    remaining: updated?.credits ?? current.credits,
+    refreshedAt: current.refreshedAt,
+  };
+}
 
-  const refreshedAt = row?.credits_refreshed_at ?? null;
-  const refreshedMs = refreshedAt
-    ? new Date(refreshedAt.replace(' ', 'T') + 'Z').getTime()
-    : NaN;
-  const dueRefill = !refreshedAt || Number.isNaN(refreshedMs) || Date.now() - refreshedMs >= CREDIT_REFRESH_MS;
+export async function refundPermanentUploadCredit(db: D1Database, userId: string): Promise<void> {
+  await db
+    .prepare('UPDATE users SET credits = MIN(?, credits + 1) WHERE id = ?')
+    .bind(USER_DAILY_CREDITS, userId)
+    .run();
+}
 
-  if (dueRefill) {
-    const updated = await db
-      .prepare(
-        `UPDATE users SET credits = ?, credits_refreshed_at = datetime('now')
-          WHERE id = ? RETURNING credits_refreshed_at`,
-      )
-      .bind(USER_DAILY_CREDITS, userId)
-      .first<{ credits_refreshed_at: string }>();
-    return { credits: USER_DAILY_CREDITS, refreshedAt: updated?.credits_refreshed_at ?? null };
-  }
+export interface PermanentStorageUsage {
+  images: number;
+  bytes: number;
+  imageLimit: number;
+  byteLimit: number;
+  imageRemaining: number;
+  byteRemaining: number;
+}
 
-  return { credits: row?.credits ?? USER_DAILY_CREDITS, refreshedAt };
+export async function getPermanentStorageUsage(
+  db: D1Database,
+  userId: string,
+): Promise<PermanentStorageUsage> {
+  const row = await db
+    .prepare(
+      `SELECT COUNT(*) AS images, COALESCE(SUM(size_bytes), 0) AS bytes
+         FROM images
+        WHERE user_id = ?
+          AND expires_at IS NULL
+          AND deleted_at IS NULL
+          AND branded_of IS NULL`,
+    )
+    .bind(userId)
+    .first<{ images: number; bytes: number }>();
+  const images = Number(row?.images ?? 0);
+  const bytes = Number(row?.bytes ?? 0);
+  return {
+    images,
+    bytes,
+    imageLimit: USER_PERMANENT_IMAGE_LIMIT,
+    byteLimit: USER_PERMANENT_STORAGE_BYTES,
+    imageRemaining: Math.max(0, USER_PERMANENT_IMAGE_LIMIT - images),
+    byteRemaining: Math.max(0, USER_PERMANENT_STORAGE_BYTES - bytes),
+  };
+}
+
+export async function getTemporaryUploadUsage(
+  db: D1Database,
+  userId: string,
+): Promise<{ limit: number; used: number; remaining: number; resetIn: string }> {
+  const row = await db
+    .prepare(
+      `SELECT COUNT(*) AS count, MIN(created_at) AS oldest
+         FROM images
+        WHERE user_id = ?
+          AND expires_at IS NOT NULL
+          AND deleted_at IS NULL
+          AND branded_of IS NULL
+          AND created_at >= datetime('now', '-1 day')`,
+    )
+    .bind(userId)
+    .first<{ count: number; oldest: string | null }>();
+  const used = Number(row?.count ?? 0);
+  return {
+    limit: USER_TEMPORARY_DAILY_LIMIT,
+    used,
+    remaining: Math.max(0, USER_TEMPORARY_DAILY_LIMIT - used),
+    resetIn: formatResetIn(row?.oldest ?? null),
+  };
 }
 
 export interface UploadUsage {
   scope: 'user' | 'anon';
   // How to read `limit`/`used`/`remaining`: guests are counted in temporary
   // uploads, signed-in users in permanent-upload credits (1 each). Lets the
-  // client pre-slice a bulk selection — but only permanent uploads spend the
-  // signed-in allowance; temporary ones are free (the client checks the expiry
-  // select before applying `remaining`).
+  // client pre-slice a bulk selection. Signed-in users also receive the
+  // mode-specific `temporary` and `permanent` objects below.
   unit: 'uploads' | 'credits';
   limit: number;
   used: number;
   remaining: number;
   resetIn: string;
+  temporary?: { limit: number; used: number; remaining: number; resetIn: string };
+  permanent?: PermanentStorageUsage & { dailyLimit: number; dailyUsed: number; dailyRemaining: number; resetIn: string };
+  maxFileBytes: number;
 }
 
 // Report the caller's current allowance. Signed-in users get their credit
@@ -113,14 +214,28 @@ export async function getUploadUsage(
   request: Request,
 ): Promise<UploadUsage> {
   if (user) {
-    const { credits, refreshedAt } = await getUserCredits(db, user.id);
+    const [{ credits, refreshedAt }, temporary, storage] = await Promise.all([
+      getUserCredits(db, user.id),
+      getTemporaryUploadUsage(db, user.id),
+      getPermanentStorageUsage(db, user.id),
+    ]);
+    const resetIn = formatResetIn(refreshedAt);
     return {
       scope: 'user',
       unit: 'credits',
       limit: USER_DAILY_CREDITS,
       used: Math.max(0, USER_DAILY_CREDITS - credits),
       remaining: credits,
-      resetIn: formatResetIn(refreshedAt),
+      resetIn,
+      temporary,
+      permanent: {
+        ...storage,
+        dailyLimit: USER_DAILY_CREDITS,
+        dailyUsed: Math.max(0, USER_DAILY_CREDITS - credits),
+        dailyRemaining: credits,
+        resetIn,
+      },
+      maxFileBytes: FREE_MAX_UPLOAD_BYTES,
     };
   }
 
@@ -141,5 +256,6 @@ export async function getUploadUsage(
     used,
     remaining: Math.max(0, ANON_DAILY_LIMIT - used),
     resetIn: formatResetIn(row?.oldest ?? null),
+    maxFileBytes: FREE_MAX_UPLOAD_BYTES,
   };
 }

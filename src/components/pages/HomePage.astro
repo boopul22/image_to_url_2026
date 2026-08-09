@@ -107,7 +107,7 @@ const pageSchema = [
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "browserRequirements": "Requires JavaScript and HTML5",
-    "description": "Upload any image and instantly receive a CDN-delivered shareable URL. Guest uploads auto-expire at monthly cleanup; signed-in users can choose keep-forever links. Supports JPG, PNG, WebP, GIF, and SVG up to 50 MB.",
+    "description": "Upload any image and instantly receive a CDN-delivered shareable URL. Guest uploads auto-expire at monthly cleanup; signed-in users can choose keep-forever links. Free uploads support JPG, PNG, WebP, GIF, and SVG up to 10 MB.",
     "featureList": [
       "Drag and drop image upload",
       "Instant CDN URL generation",
@@ -127,26 +127,35 @@ const pageSchema = [
         "priceCurrency": "USD",
         "priceValidUntil": "2026-12-31",
         "availability": "https://schema.org/InStock",
-        "description": "5 guest uploads per rolling 24 hours, 50 MB per file, auto-expiring CDN links.",
+        "description": "5 guest uploads per rolling 24 hours, 10 MB per file, and auto-expiring CDN links. Signed-in free accounts get 25 temporary and 5 permanent uploads per day.",
         "url": "https://imagetourl.cloud/pricing"
       },
       {
         "@type": "Offer",
         "name": "ImageToURL Pro Monthly",
-        "price": "4.99",
+        "price": "12.99",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "description": "50GB active storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
+        "description": "Unlimited active image storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
         "url": "https://imagetourl.cloud/pro/pricing?billing=month"
       },
       {
         "@type": "Offer",
         "name": "ImageToURL Pro Annual",
-        "price": "39.00",
+        "price": "95.88",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "description": "Annual ImageToURL Pro access with 50GB active storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
+        "description": "Annual ImageToURL Pro access with unlimited active image storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
         "url": "https://imagetourl.cloud/pro/pricing?billing=year"
+      },
+      {
+        "@type": "Offer",
+        "name": "ImageToURL Pro Three-Year",
+        "price": "143.64",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "Three years of ImageToURL Pro with unlimited active image storage, permanent HTTPS URLs, private assets, folders, and usage analytics.",
+        "url": "https://imagetourl.cloud/pro/pricing?billing=three_year"
       }
     ],
     "publisher": {
@@ -219,7 +228,7 @@ const pageSchema = [
               <Icon name="cloud_upload" class="text-on-surface-variant/30 group-hover:text-rose-500 group-hover:scale-110 transition-all duration-300 text-5xl sm:text-6xl" id="upload-icon" />
               <div class="text-center">
                 <p class="text-on-surface-variant font-medium text-sm sm:text-base transition-opacity duration-300 group-hover:opacity-70" id="upload-text">{t(locale, 'home.upload.clickOrDrag')}</p>
-                <p class="text-[11px] sm:text-xs text-on-surface-variant/80 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 50MB</p>
+                <p class="text-[11px] sm:text-xs text-on-surface-variant/80 mt-1" id="upload-subtext">JPG, PNG, WebP, GIF, SVG &mdash; Max 10MB</p>
               </div>
               <div id="progress-bar" class="su-progress hidden w-full max-w-xs h-2 bg-surface-variant overflow-hidden">
                 <div id="progress-fill" class="su-progress h-full bg-rose-600 transition-all duration-300" style="width: 0%"></div>
@@ -953,9 +962,16 @@ const pageSchema = [
     if (planActionText) planActionText.textContent = text;
   }
 
+  function setAllowanceText(text: string) {
+    planAllowance?.classList.remove('hidden');
+    planAllowance?.classList.add('flex');
+    if (planAllowanceLabel) planAllowanceLabel.textContent = text;
+  }
+
   function renderPlan(me: any) {
     const forever = expiresInSel?.value === 'never';
     const signedIn = !!me?.user;
+    const usage = me?.upload;
     syncExpiryToggle();
     planAllowance?.classList.add('hidden');
     planAllowance?.classList.remove('flex');
@@ -966,10 +982,18 @@ const pageSchema = [
     if (!forever) {
       if (planTitle) planTitle.textContent = 'Temporary link.';
       if (planCost) planCost.textContent = ' Free, auto-deletes in ~2 weeks.';
+      if (signedIn && usage?.temporary) {
+        setAllowanceText(`${usage.temporary.remaining} of ${usage.temporary.limit} temporary uploads left.`);
+      } else if (!signedIn && typeof usage?.remaining === 'number') {
+        setAllowanceText(`${usage.remaining} of ${usage.limit} guest uploads left.`);
+      }
     } else {
       if (planTitle) planTitle.textContent = 'Permanent link.';
       if (signedIn) {
         if (planCost) planCost.textContent = ' Never expires; uses 1 daily save.';
+        if (usage?.permanent) {
+          setAllowanceText(`${usage.permanent.dailyRemaining} daily saves left; ${usage.permanent.images} of ${usage.permanent.imageLimit} permanent images stored.`);
+        }
       } else {
         if (planCost) planCost.textContent = ' Never expires; sign-in required.';
         setAction('Sign in');
@@ -1061,7 +1085,7 @@ const pageSchema = [
     copy: panel.dataset.copy || 'COPY',
     failed: panel.dataset.failed || 'Upload failed',
     clickOrDrag: panel.dataset.clickOrDrag || 'Click to upload or drag & drop',
-    formats: panel.dataset.formats || 'JPG, PNG, WebP, GIF, SVG — up to 50 MB',
+    formats: panel.dataset.formats || 'JPG, PNG, WebP, GIF, SVG — up to 10 MB',
     selectFile: panel.dataset.selectFile || 'SELECT FILE',
     uploadingFile: panel.dataset.uploadingFile || 'Uploading {name}',
   };
@@ -1154,6 +1178,13 @@ const pageSchema = [
     errorSignin.classList.remove('flex');
     errorLogin.classList.add('hidden');
     errorRetry.classList.remove('hidden');
+    setErrorAction('/api/auth/login', 'Sign in to get more uploads');
+  }
+
+  function setErrorAction(href: string, label: string) {
+    (errorSignin as HTMLAnchorElement).href = href;
+    const labelEl = errorSignin.querySelector('span');
+    if (labelEl) labelEl.textContent = label;
   }
 
   function showLoginError() {
@@ -1213,9 +1244,8 @@ const pageSchema = [
       return;
     }
     if (files.length === 1) { uploadFile(files[0]); return; }
-    // Bulk path — open to everyone. Guests spend a daily upload count (5); signed-in
-    // users spend one credit per permanent upload (temporary uploads are free).
-    // uploadBatch pre-slices to what the allowance covers.
+    // Bulk path — open to everyone. uploadBatch pre-slices to the allowance for
+    // the selected lifetime before the server performs the authoritative check.
     uploadBatch(Array.from(files));
   }
 
@@ -1227,28 +1257,27 @@ const pageSchema = [
     // remaining just means a few extra fast rejections handled below.
     const usage = (await fetchMe())?.upload;
     const unit = usage?.unit;
-    const remaining = typeof usage?.remaining === 'number' ? usage.remaining : Infinity;
-
-    // Only PERMANENT ("keep forever") uploads spend a signed-in user's allowance
-    // — temporary/auto-delete uploads are free and unlimited. Guests are always
-    // metered (their uploads are always temporary). So the allowance only bites
-    // when: guest, or signed-in user who picked "never" expiry.
     const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
     const isPermanent = expiresInEl?.value === 'never';
-    const spendsAllowance = unit === 'uploads' || (unit === 'credits' && isPermanent);
+    const signedIn = unit === 'credits';
+    const modeUsage = signedIn ? (isPermanent ? usage?.permanent : usage?.temporary) : usage;
+    const remaining = isPermanent && signedIn
+      ? Math.min(modeUsage?.dailyRemaining ?? Infinity, modeUsage?.imageRemaining ?? Infinity)
+      : (typeof modeUsage?.remaining === 'number' ? modeUsage.remaining : Infinity);
 
-    if (spendsAllowance && remaining <= 0) {
+    if (remaining <= 0) {
       // Nothing left — mirror the single-file 429 UX (limit copy + sign-in).
       showState('error');
-      const resetIn = usage?.resetIn;
-      errorText.textContent = unit === 'credits'
-        ? (resetIn
-            ? `You've used all your permanent saves for today. Switch to Temporary to keep uploading for free, or they refill in about ${resetIn}.`
-            : 'You\'ve used all your permanent saves for today. Switch to Temporary to keep uploading for free.')
+      const resetIn = modeUsage?.resetIn ?? usage?.resetIn;
+      errorText.textContent = signedIn
+        ? (isPermanent
+            ? `Your free permanent allowance is full for now${resetIn ? ` or refills in about ${resetIn}` : ''}. Existing links keep working; delete an image or continue in Pro.`
+            : `You've used all 25 temporary uploads in this 24-hour window${resetIn ? `; try again in about ${resetIn}` : ''}, or continue in Pro.`)
         : (resetIn ? `You've reached your daily upload limit. It resets in about ${resetIn}.` : "You've reached your daily upload limit.");
+      setErrorAction(signedIn ? '/pro/pricing?source=free-upload&reason=batch-limit' : '/api/auth/login', signedIn ? 'Continue with Pro' : 'Sign in to get more uploads');
       errorSignin.classList.remove('hidden');
       errorSignin.classList.add('flex');
-      showLoginError();
+      if (signedIn) showRetryError(); else showLoginError();
       fileInput.value = '';
       return;
     }
@@ -1256,7 +1285,7 @@ const pageSchema = [
     // Flat 1 credit per file (or 1 guest upload each). When the allowance
     // applies, slice by count; otherwise (free temporary uploads) only MAX_BATCH
     // caps the batch.
-    const toUpload = spendsAllowance && Number.isFinite(remaining)
+    const toUpload = Number.isFinite(remaining)
       ? files.slice(0, Math.min(files.length, MAX_BATCH, remaining))
       : files.slice(0, MAX_BATCH);
 
@@ -1285,7 +1314,21 @@ const pageSchema = [
         if (!response.ok || data.error) {
           // 429 backstop: a race pushed the count over between /api/me and now.
           // Stop — every remaining file would 429 too; they're reported as skipped.
-          if (response.status === 429) { failures.push({ name: file.name, error: data.error || 'Daily limit reached' }); break; }
+          if (response.status === 429) {
+            failures.push({ name: file.name, error: data.error || 'Daily limit reached' });
+            const isUpgrade = Boolean(data.upgradeUrl);
+            setErrorAction(data.upgradeUrl || '/api/auth/login', isUpgrade ? 'Continue with Pro' : 'Sign in to get more uploads');
+            errorSignin.classList.remove('hidden');
+            errorSignin.classList.add('flex');
+            if (isUpgrade) showRetryError(); else showLoginError();
+            break;
+          }
+          if (data.upgradeUrl) {
+            setErrorAction(data.upgradeUrl, 'Continue with Pro');
+            errorSignin.classList.remove('hidden');
+            errorSignin.classList.add('flex');
+            showRetryError();
+          }
           throw new Error(data.error || i18n.failed);
         }
         results.push({ name: file.name, url: data.data.url });
@@ -1370,21 +1413,20 @@ const pageSchema = [
 
       if (!response.ok || data.error) {
         clearInterval(progressInterval);
-        // Daily rate limit: show the friendly reason inline. Only nudge guests
-        // to sign in — logged-in users already have the higher cap, so they get
-        // a "try again later / email us" message instead.
-        if (data.limit) {
-          showState('error');
-          errorText.textContent = data.error;
-          const isAnon = data.limit.scope === 'anon';
-          errorSignin.classList.toggle('hidden', !isAnon);
-          errorSignin.classList.toggle('flex', isAnon);
-          if (isAnon) showLoginError();
-          else showRetryError();
-          fileInput.value = '';
-          return;
+        showState('error');
+        errorText.textContent = data.error || i18n.failed;
+        const hasAction = Boolean(data.limit || data.upgradeUrl);
+        if (hasAction) {
+          const isUpgrade = Boolean(data.upgradeUrl);
+          setErrorAction(data.upgradeUrl || '/api/auth/login', isUpgrade ? 'Continue with Pro' : 'Sign in to get more uploads');
+          errorSignin.classList.remove('hidden');
+          errorSignin.classList.add('flex');
+          if (isUpgrade) showRetryError(); else showLoginError();
+        } else {
+          showRetryError();
         }
-        throw new Error(data.error || i18n.failed);
+        fileInput.value = '';
+        return;
       }
 
       const remaining = MIN_UPLOAD_MS - (Date.now() - startedAt);

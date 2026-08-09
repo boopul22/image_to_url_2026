@@ -79,17 +79,18 @@ const { pageEvent = '', pageLocation = '' } = Astro.props;
     }
 
     function planDetails(plan) {
-      var interval = plan === 'month' ? 'month' : 'year';
+      var interval = plan === 'three_year' ? 'three_year' : plan === 'month' ? 'month' : 'year';
+      var price = interval === 'three_year' ? 143.64 : interval === 'year' ? 95.88 : 12.99;
       return {
         interval: interval,
-        price: interval === 'year' ? 39 : 4.99,
+        price: price,
         item: {
           item_id: 'imagetourl_pro_' + interval,
           item_name: 'ImageToURL Pro',
           item_brand: 'ImageToURL',
           item_category: 'Subscription',
           item_variant: interval,
-          price: interval === 'year' ? 39 : 4.99,
+          price: price,
           quantity: 1
         }
       };
@@ -125,29 +126,15 @@ const { pageEvent = '', pageLocation = '' } = Astro.props;
       }
     }
 
-    function trackCheckoutStarted(transactionId, plan, storagePacks) {
+    function trackCheckoutStarted(transactionId, plan) {
       if (!transactionId || !markOnce('ga:begin_checkout:' + transactionId)) return;
       var details = planDetails(plan);
-      var packs = Math.max(0, Math.min(10, Number(storagePacks) || 0));
-      var addonPrice = details.interval === 'year' ? 24 : 2.99;
-      var items = [details.item];
-      if (packs > 0) {
-        items.push({
-          item_id: 'imagetourl_storage_50gb_' + details.interval,
-          item_name: 'ImageToURL Pro 50GB storage pack',
-          item_brand: 'ImageToURL',
-          item_category: 'Storage add-on',
-          item_variant: details.interval,
-          price: addonPrice,
-          quantity: packs
-        });
-      }
       googleEvent('begin_checkout', {
         currency: 'USD',
-        value: details.price + (addonPrice * packs),
+        value: details.price,
         checkout_transaction_id: transactionId,
         pro_plan_interval: details.interval,
-        items: items
+        items: [details.item]
       });
     }
 
@@ -167,7 +154,7 @@ const { pageEvent = '', pageLocation = '' } = Astro.props;
           item_id: String((item && item.price_id) || product.id || ('imagetourl_item_' + index)),
           item_name: itemName,
           item_brand: 'ImageToURL',
-          item_category: /storage/i.test(itemName) ? 'Storage add-on' : 'Subscription',
+          item_category: 'Subscription',
           item_variant: item && item.billing_cycle ? String(item.billing_cycle.interval || '') : '',
           price: Number.isFinite(itemTotal) ? itemTotal / quantity : 0,
           quantity: quantity
@@ -193,9 +180,10 @@ const { pageEvent = '', pageLocation = '' } = Astro.props;
       if (!eventName) return;
       var props = properties || {};
       var source = attribution();
-      var requestedPlan = props.plan === 'year' ? 'year' : props.plan === 'month' ? 'month' : null;
+      var requestedPlan = props.plan === 'three_year' ? 'three_year' : props.plan === 'year' ? 'year' : props.plan === 'month' ? 'month' : null;
       if (!requestedPlan && eventName === 'pro_pricing_viewed') {
-        requestedPlan = new URLSearchParams(window.location.search).get('billing') === 'month' ? 'month' : 'year';
+        var billing = new URLSearchParams(window.location.search).get('billing');
+        requestedPlan = billing === 'month' || billing === 'three_year' ? billing : 'year';
       }
       var payload = {
         eventId: randomId(),
