@@ -86,6 +86,8 @@ const navLinks = [
       {navLinks.map((link) => (
         <a
           href={link.href}
+          target={link.href.startsWith('http') ? '_blank' : undefined}
+          rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
           class:list={[
             "text-[13px] font-headline font-medium transition-colors duration-200 py-1 whitespace-nowrap",
             activePage === link.id
@@ -268,6 +270,8 @@ const navLinks = [
       {navLinks.map((link) => (
         <a
           href={link.href}
+          target={link.href.startsWith('http') ? '_blank' : undefined}
+          rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
           class:list={[
             "font-label uppercase tracking-wider text-xs font-bold py-3.5 px-4 transition-colors flex items-center gap-3",
             activePage === link.id
