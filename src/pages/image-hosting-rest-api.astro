@@ -11,7 +11,7 @@ Public bearer-token REST access is not live yet.
 
 # Current limits
 Guest uploads:     5 temporary files per rolling 24 hours
-Signed-in uploads: 50 permanent uploads per day plus unlimited temporary uploads
+Signed-in uploads: 500 temporary and 50 permanent uploads per rolling 24 hours
 Max file size:     50 MB
 
 # Current storage behavior
@@ -30,7 +30,7 @@ Signed-in uploads can use "Never delete" before upload.`;
   codeSnippet={code}
   whys={[
     { title: "Honest current status", body: "Website uploads are live. Public REST automation is roadmap and should not be wired into production systems yet." },
-    { title: "Clear limits", body: "The live uploader enforces 5 guest temporary uploads/day, 50 signed-in permanent uploads/day plus unlimited temporary uploads, and 50 MB per file." },
+    { title: "Clear limits", body: "The live uploader enforces 5 guest temporary uploads per rolling 24 hours, plus 500 temporary and 50 permanent uploads for signed-in users per rolling 24 hours, and 50 MB per file." },
     { title: "Predictable storage", body: "Guest links auto-expire at monthly cleanup; signed-in users can choose keep-forever links before uploading." },
     { title: "Simple path forward", body: "Use the dashboard and web uploader today. Contact us if you need higher limits or programmatic access." }
   ]}

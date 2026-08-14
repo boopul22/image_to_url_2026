@@ -127,7 +127,7 @@ const pageSchema = [
         "priceCurrency": "USD",
         "priceValidUntil": "2026-12-31",
         "availability": "https://schema.org/InStock",
-        "description": "5 guest uploads per rolling 24 hours, 10 MB per file, and auto-expiring CDN links. Signed-in free accounts get 25 temporary and 5 permanent uploads per day.",
+        "description": "5 guest uploads per rolling 24 hours, 10 MB per file, and auto-expiring CDN links. Signed-in free accounts get 500 temporary and 50 permanent uploads per rolling 24 hours.",
         "url": "https://imagetourl.cloud/pricing"
       },
       {
@@ -1272,7 +1272,7 @@ const pageSchema = [
       errorText.textContent = signedIn
         ? (isPermanent
             ? `Your free permanent allowance is full for now${resetIn ? ` or refills in about ${resetIn}` : ''}. Existing links keep working; delete an image or continue in Pro.`
-            : `You've used all 25 temporary uploads in this 24-hour window${resetIn ? `; try again in about ${resetIn}` : ''}, or continue in Pro.`)
+            : `You've used all ${modeUsage?.limit ?? 500} temporary uploads in this 24-hour window${resetIn ? `; try again in about ${resetIn}` : ''}, or continue in Pro.`)
         : (resetIn ? `You've reached your daily upload limit. It resets in about ${resetIn}.` : "You've reached your daily upload limit.");
       setErrorAction(signedIn ? '/pro/pricing?source=free-upload&reason=batch-limit' : '/api/auth/login', signedIn ? 'Continue with Pro' : 'Sign in to get more uploads');
       errorSignin.classList.remove('hidden');

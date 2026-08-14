@@ -7,19 +7,19 @@
 // so they clean themselves up and are cheap. The limits reflect that:
 //   • Guests: 5 temporary uploads per rolling 24h, keyed by IP. Every guest
 //     upload auto-expires, so this is purely a light anti-abuse cap.
-//   • Signed-in free users: 5 permanent uploads and 25 temporary uploads per
-//     rolling 24h. Permanent storage is also capped at 25 active images or
-//     100 MB, whichever comes first. Existing links remain available above the
+//   • Signed-in free users: 50 permanent uploads and 500 temporary uploads per
+//     rolling 24h. Permanent storage is also capped at 50 active images or
+//     500 MB, whichever comes first. Existing links remain available above the
 //     cap; only new permanent uploads pause until space is freed or Pro is used.
 //
 // NOTE: the users table columns are still named `credits` / `credits_refreshed_at`
 // for historical reasons; a "credit" now simply means one permanent upload.
 
 export const ANON_DAILY_LIMIT = 5;
-export const USER_DAILY_CREDITS = 5;
-export const USER_TEMPORARY_DAILY_LIMIT = 25;
-export const USER_PERMANENT_IMAGE_LIMIT = 25;
-export const USER_PERMANENT_STORAGE_BYTES = 100 * 1024 * 1024;
+export const USER_DAILY_CREDITS = 50;
+export const USER_TEMPORARY_DAILY_LIMIT = 500;
+export const USER_PERMANENT_IMAGE_LIMIT = 50;
+export const USER_PERMANENT_STORAGE_BYTES = 500 * 1024 * 1024;
 export const FREE_MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 export const CREDIT_REFRESH_MS = 24 * 60 * 60 * 1000;
 export const CONTACT_EMAIL = 'blog.boopul@gmail.com';

@@ -23,7 +23,7 @@ const code = `# Current status
   whys={[
     { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
     { title: "Node automation is roadmap", body: "Server actions, route handlers, workers, and CI uploads need public API-key access before they are reliable." },
-    { title: "Current limits are clear", body: "Guests get 5 temporary uploads per rolling 24 hours and signed-in users get 50 permanent uploads per day plus unlimited temporary uploads, with a 50 MB file cap." },
+    { title: "Current limits are clear", body: "Guests get 5 temporary uploads per rolling 24 hours and signed-in users get 500 temporary and 50 permanent uploads per rolling 24 hours, with a 50 MB file cap." },
     { title: "Contact for automation", body: "If you need Node upload workflows, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
@@ -32,7 +32,7 @@ const code = `# Current status
     { q: "What about Next.js server components?", a: "Not today. Public API-key uploads are not live yet, so Next.js route handlers and server actions should not call /api/upload directly." },
     { q: "Deno / Bun?", a: "Same status: no public upload API today." },
     { q: "Can I upload a Buffer directly?", a: "Not through a public ImageToURL API today. Upload the saved file through the website uploader." },
-    { q: "Retry on 429?", a: "The live website uploader respects the current 5 guest and 25 signed-in uploads per rolling 24 hours." },
+    { q: "Retry on 429?", a: "The live website uploader respects the current 5 guest temporary uploads, plus 500 temporary and 50 permanent uploads for signed-in users, per rolling 24 hours." },
     { q: "TypeScript types?", a: "Public TypeScript response types will be documented when API-key uploads launch." },
     { q: "Express middleware for server-side uploads?", a: "Not available today. Use the website uploader or contact us if you need automation access reviewed." }
   ]}

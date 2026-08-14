@@ -23,7 +23,7 @@ const code = `# Current status
   whys={[
     { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
     { title: "Python automation is roadmap", body: "Scripts, notebooks, Airflow, and backend jobs need public API-key access before they are reliable." },
-    { title: "Current limits are clear", body: "Guests get 5 temporary uploads per rolling 24 hours and signed-in users get 50 permanent uploads per day plus unlimited temporary uploads, with a 50 MB file cap." },
+    { title: "Current limits are clear", body: "Guests get 5 temporary uploads per rolling 24 hours and signed-in users get 500 temporary and 50 permanent uploads per rolling 24 hours, with a 50 MB file cap." },
     { title: "Contact for automation", body: "If you need Python upload workflows, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
@@ -31,7 +31,7 @@ const code = `# Current status
     { q: "Can I upload from a BytesIO buffer instead of a file path?", a: "Not through a public ImageToURL API today. That pattern can work after API-key uploads are available." },
     { q: "Error handling?", a: "The live website uploader shows friendly errors for quota, file type, and size. Public Python error handling docs will come with API access." },
     { q: "How do I upload from a Pillow image?", a: "Use Pillow to resize or compress locally, then upload the final file through the website uploader today." },
-    { q: "Rate limits from Python?", a: "Public Python uploads are not live yet. Website limits are 5 guest uploads and 25 signed-in uploads per rolling 24 hours." },
+    { q: "Rate limits from Python?", a: "Public Python uploads are not live yet. Website limits are 5 guest temporary uploads, plus 500 temporary and 50 permanent uploads for signed-in users, per rolling 24 hours." },
     { q: "Does it work in Jupyter / Colab?", a: "Not as a public upload API today. You can still upload manually through the website and paste the resulting URL into a notebook." },
     { q: "Parallelism — is it safe?", a: "No public bulk automation endpoint is live today. Use the website limits, or contact us if you need automation access." },
     { q: "Django ImageField integration?", a: "Not available today. A Django storage backend would need public API-key uploads first." }

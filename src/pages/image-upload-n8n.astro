@@ -23,7 +23,7 @@ const code = `// Current status
   whys={[
     { title: "Website uploads are live", body: "Use the main uploader today for guest links, signed-in dashboard history, and the Never delete option." },
     { title: "n8n automation is roadmap", body: "HTTP Request uploads need public API-key access before they are reliable." },
-    { title: "Current limits are clear", body: "Guests get 5 temporary uploads per rolling 24 hours and signed-in users get 50 permanent uploads per day plus unlimited temporary uploads, with a 50 MB file cap." },
+    { title: "Current limits are clear", body: "Guests get 5 temporary uploads per rolling 24 hours and signed-in users get 500 temporary and 50 permanent uploads per rolling 24 hours, with a 50 MB file cap." },
     { title: "Contact for automation", body: "If you need n8n for self-hosted workflows, contact us so the use case can be reviewed manually." }
   ]}
   faqs={[
@@ -31,7 +31,7 @@ const code = `// Current status
     { q: "Do I need n8n Pro?", a: "No — self-hosted Community Edition is free and covers this use case fully. Pro adds SSO, audit logs, and hosted service." },
     { q: "Where do I store the API key?", a: "Do not store an ImageToURL API key yet; public API-key uploads are not live. Once available, use encrypted n8n credentials." },
     { q: "How do I handle errors?", a: "n8n can branch on non-success responses, but ImageToURL public upload automation is not live today." },
-    { q: "Rate-limit retries?", a: "Website upload limits are 5 guest uploads and 25 signed-in uploads per rolling 24 hours. Public automation limits will be documented when API access opens." },
+    { q: "Rate-limit retries?", a: "Website upload limits are 5 guest temporary uploads, plus 500 temporary and 50 permanent uploads for signed-in users, per rolling 24 hours. Public automation limits will be documented when API access opens." },
     { q: "Webhook trigger -> upload flow?", a: "Not available today through a public ImageToURL endpoint." },
     { q: "Docker / Railway / Render deploy?", a: "All three have one-click n8n templates. Railway and Render free tiers run small n8n instances comfortably." },
     { q: "Can I trigger n8n from GitHub Actions?", a: "n8n can receive GitHub Actions webhooks, but ImageToURL public upload automation is not live today." }

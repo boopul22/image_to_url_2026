@@ -125,8 +125,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Upload allowance — a friendly 429 that explains *why* we cap uploads and
     // how to keep going. What costs us money is *permanent* storage, so that's
     // what we meter:
-    //   • Signed-in free users get 5 permanent and 25 temporary uploads per 24h.
-    //     Permanent files also share a 25-image / 100MB active-storage allowance.
+    //   • Signed-in free users get 50 permanent and 500 temporary uploads per 24h.
+    //     Permanent files also share a 50-image / 500MB active-storage allowance.
     //   • Guests get a small count-based allowance of temporary uploads keyed by
     //     IP over a rolling 24h window (every guest upload auto-expires).
     // `cost` is computed here so we can also deduct it after a successful upload.

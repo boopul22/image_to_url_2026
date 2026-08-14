@@ -156,7 +156,7 @@ const navLinks = [
           href="/dashboard"
           id="nav-credits-chip"
           class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors"
-          title="Keep-forever saves left today — refills every 24h (temporary uploads are free & unlimited)"
+          title="Keep-forever saves left today — refills every 24h (500 temporary uploads per day)"
         >
           <Icon name="toll" class="text-sm text-primary" fill />
           <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
@@ -496,7 +496,7 @@ const navLinks = [
   // we wait for idle to avoid competing with LCP resources.
   // Fill the nav credits chip + dropdown panel + mobile row from the /api/me
   // `upload` payload. Signed-in users get a daily allowance of permanent uploads
-  // (temporary uploads are free & unlimited); everything stays hidden when the
+  // (temporary uploads are capped at 500 per day); everything stays hidden when the
   // balance is unknown (fetch failed / guest scope).
   const fillCredits = (upload: any) => {
     if (!upload || upload.unit !== 'credits' || typeof upload.remaining !== 'number' || typeof upload.limit !== 'number') return;
@@ -593,7 +593,7 @@ const navLinks = [
       : '';
 
     desktop.innerHTML = `
-      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Keep-forever saves left today — refills every 24h (temporary uploads are free & unlimited)">
+      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Keep-forever saves left today — refills every 24h (500 temporary uploads per day)">
         ${icon(ic_toll, 'text-sm text-primary')}
         <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
       </a>
