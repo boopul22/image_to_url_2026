@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
   role TEXT NOT NULL DEFAULT 'user',
   is_banned INTEGER NOT NULL DEFAULT 0,
   uses_adblock INTEGER NOT NULL DEFAULT 0,
-  credits INTEGER NOT NULL DEFAULT 150,
+  credits INTEGER NOT NULL DEFAULT 50,
   credits_refreshed_at TEXT,
   welcome_email_sent_at TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),

@@ -39,14 +39,8 @@ type R2Env = {
   R2_BUCKET_NAME: string;
 };
 
-async function r2Delete(env: R2Env, key: string): Promise<void> {
-  await deleteFromR2({
-    accountId: env.CLOUDFLARE_ACCOUNT_ID,
-    accessKeyId: env.R2_ACCESS_KEY_ID,
-    secretAccessKey: env.R2_SECRET_ACCESS_KEY,
-    bucket: env.R2_BUCKET_NAME,
-    key,
-  });
+async function r2Delete(_env: R2Env, key: string): Promise<void> {
+  await deleteFromR2({ key });
 }
 
 // Hard-delete: removes from R2 and the DB row. Used by user/admin manual delete.

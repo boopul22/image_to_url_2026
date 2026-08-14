@@ -3,7 +3,6 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { deleteFromR2, uploadToR2 } from '../../lib/r2';
 import { getDB } from '../../lib/db';
-import { getEnv } from '../../lib/env';
 import { resolveExpiresAt } from '../../lib/images/delete';
 import { embedAttribution } from '../../lib/images/metadata';
 import { isSameSiteRequest } from '../../lib/same-origin';
@@ -103,21 +102,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
         upgradeUrl: `${PRO_PRICING_URL}?source=free-upload&reason=file-size`,
       }), {
         status: 413,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Validate storage configuration before reserving a permanent-upload
-    // credit, so an operator error can never consume a user's allowance.
-    const env = getEnv(locals);
-    const accountId = env.CLOUDFLARE_ACCOUNT_ID;
-    const accessKeyId = env.R2_ACCESS_KEY_ID;
-    const secretAccessKey = env.R2_SECRET_ACCESS_KEY;
-    const bucketName = env.R2_BUCKET_NAME;
-
-    if (!accessKeyId || !secretAccessKey) {
-      return new Response(JSON.stringify({ error: 'R2 credentials not configured' }), {
-        status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
     }
@@ -225,10 +209,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     try {
       await uploadToR2({
-        accountId,
-        accessKeyId,
-        secretAccessKey,
-        bucket: bucketName,
         key,
         body,
         contentType: file.type,
@@ -264,7 +244,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
           )
           .run();
         if (Number(result.meta.changes ?? 0) < 1) {
-          await deleteFromR2({ accountId, accessKeyId, secretAccessKey, bucket: bucketName, key });
+          await deleteFromR2({ key });
           await refundPermanentUploadCredit(db, user.id);
           return new Response(JSON.stringify({
             error: 'Your free permanent storage just reached its limit. Existing links keep working; delete an image or continue in Pro.',
@@ -292,7 +272,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
           ).bind(generateId(), ip, id, id),
         ]);
         if (Number(results[0]?.meta.changes ?? 0) < 1) {
-          await deleteFromR2({ accountId, accessKeyId, secretAccessKey, bucket: bucketName, key })
+          await deleteFromR2({ key })
             .catch((error) => console.error('Guest quota cleanup failed', error));
           return new Response(JSON.stringify({
             error: `You've reached your guest limit of ${ANON_DAILY_LIMIT} temporary uploads. Sign in free or try again after the rolling 24-hour window resets.`,
@@ -318,7 +298,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
           )
           .run();
         if (Number(result.meta.changes ?? 0) < 1) {
-          await deleteFromR2({ accountId, accessKeyId, secretAccessKey, bucket: bucketName, key })
+          await deleteFromR2({ key })
             .catch((error) => console.error('Temporary quota cleanup failed', error));
           return new Response(JSON.stringify({
             error: `You've used all ${USER_TEMPORARY_DAILY_LIMIT} temporary uploads for this 24-hour window. Continue in Pro or try again later.`,
@@ -350,14 +330,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
         },
       );
     } catch (storageError) {
-      await deleteFromR2({ accountId, accessKeyId, secretAccessKey, bucket: bucketName, key }).catch(() => {});
+      await deleteFromR2({ key }).catch(() => {});
       if (creditReserved && user) await refundPermanentUploadCredit(db, user.id).catch(() => {});
       throw storageError;
     }
   } catch (err: any) {
     console.error('Upload error:', err);
     return new Response(
-      JSON.stringify({ error: 'Upload failed: ' + (err.message || 'Unknown error') }),
+      JSON.stringify({ error: 'Upload failed. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } },
     );
   }

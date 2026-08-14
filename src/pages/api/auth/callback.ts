@@ -8,6 +8,7 @@ import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
 import { ensureEmailPreferences, sendWelcomeEmail, WELCOME_FROM } from '../../../lib/email-reminders';
 import { safeReturnTo } from '../../../lib/return-to';
+import { USER_DAILY_CREDITS } from '../../../lib/upload-limits';
 
 export const GET: APIRoute = async ({ request, url, cookies, redirect, locals }) => {
   const code = url.searchParams.get('code');
@@ -81,8 +82,8 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
     const userId = generateId();
     await db
       .prepare(
-        `INSERT INTO users (id, google_id, email, name, avatar_url, role)
-         VALUES (?, ?, ?, ?, ?, ?)
+        `INSERT INTO users (id, google_id, email, name, avatar_url, role, credits, credits_refreshed_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
          ON CONFLICT(google_id) DO UPDATE SET
            email = excluded.email,
            name = excluded.name,
@@ -96,6 +97,7 @@ export const GET: APIRoute = async ({ request, url, cookies, redirect, locals })
         googleUser.name,
         googleUser.picture,
         isFirstUser ? 'admin' : 'user',
+        USER_DAILY_CREDITS,
       )
       .run();
 

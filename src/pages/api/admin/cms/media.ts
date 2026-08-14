@@ -99,10 +99,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const body = new Uint8Array(await file.arrayBuffer());
 
   await uploadToR2({
-    accountId: env.CLOUDFLARE_ACCOUNT_ID,
-    accessKeyId: env.R2_ACCESS_KEY_ID,
-    secretAccessKey: env.R2_SECRET_ACCESS_KEY,
-    bucket: env.R2_BUCKET_NAME,
     key,
     body,
     contentType: file.type,
@@ -155,10 +151,6 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
   }
 
   await deleteFromR2({
-    accountId: env.CLOUDFLARE_ACCOUNT_ID,
-    accessKeyId: env.R2_ACCESS_KEY_ID,
-    secretAccessKey: env.R2_SECRET_ACCESS_KEY,
-    bucket: env.R2_BUCKET_NAME,
     key: media.r2_key,
   });
 
