@@ -992,7 +992,7 @@ const pageSchema = [
       if (signedIn) {
         if (planCost) planCost.textContent = ' Never expires; uses 1 daily save.';
         if (usage?.permanent) {
-          setAllowanceText(`${usage.permanent.dailyRemaining} daily saves left; ${usage.permanent.images} of ${usage.permanent.imageLimit} permanent images stored.`);
+          setAllowanceText(`Daily allowance: ${usage.permanent.dailyRemaining} of ${usage.permanent.dailyLimit} left; storage: ${usage.permanent.images} stored, ${usage.permanent.imageRemaining} slots free.`);
         }
       } else {
         if (planCost) planCost.textContent = ' Never expires; sign-in required.';

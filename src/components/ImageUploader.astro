@@ -329,8 +329,8 @@ import UploadFrictionPrompt from './UploadFrictionPrompt.astro';
       if (signedIn) {
         if (planCost) planCost.textContent = 'Uses 1 of your daily keep-forever saves';
         if (u?.permanent && typeof u.permanent.dailyRemaining === 'number') {
-          const stored = `${u.permanent.images} of ${u.permanent.imageLimit} permanent images stored`;
-          setAllowance(`${u.permanent.dailyRemaining} daily saves left · ${stored}`, u.permanent.dailyRemaining, u.permanent.dailyLimit);
+          const storage = `${u.permanent.images} stored, ${u.permanent.imageRemaining} storage slots free`;
+          setAllowance(`Daily allowance: ${u.permanent.dailyRemaining} of ${u.permanent.dailyLimit} left · Storage: ${storage}`, u.permanent.dailyRemaining, u.permanent.dailyLimit);
         }
       } else {
         if (planCost) planCost.textContent = 'Requires a free account';
