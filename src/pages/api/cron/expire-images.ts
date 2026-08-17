@@ -27,7 +27,16 @@ async function handle(request: Request, locals: App.Locals): Promise<Response> {
 
   const db = getDB(locals);
   const result = await expireDueImages(db, env as any);
-  return new Response(JSON.stringify({ ok: true, ...result }), {
+  // Quota events are operational data, not upload history. Keep one extra day
+  // beyond the rolling window for debugging, then prune them to bound growth.
+  const quotaCleanup = await db
+    .prepare("DELETE FROM user_upload_events WHERE created_at < datetime('now', '-2 days')")
+    .run();
+  return new Response(JSON.stringify({
+    ok: true,
+    ...result,
+    quotaEventsPruned: Number(quotaCleanup.meta.changes ?? 0),
+  }), {
     headers: { 'Content-Type': 'application/json' },
   });
 }

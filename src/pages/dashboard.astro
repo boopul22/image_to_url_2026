@@ -130,7 +130,7 @@ try {
       <div class="bg-surface border border-outline-variant/40 p-4 sm:p-5 hard-shadow">
         <div class="flex items-center gap-2 text-on-surface-variant mb-1">
           <Icon name="toll" class="text-primary text-lg" />
-          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Keep-forever</span>
+          <span class="font-label text-[10px] font-bold uppercase tracking-wider">Permanent uploads</span>
         </div>
         <p id="stat-credits" class="text-2xl sm:text-3xl font-headline italic font-black text-on-surface">—</p>
         <div class="mt-2 h-1 bg-surface-container-highest overflow-hidden">
@@ -286,7 +286,7 @@ try {
   const statCredits = document.getElementById('stat-credits')!;
   const statCreditsSub = document.getElementById('stat-credits-sub')!;
 
-  function renderStats(stats: { totalImages: number; totalBytes: number; expiringSoon: number; credits?: number; creditsCap?: number; refreshIn?: string } | undefined) {
+  function renderStats(stats: { totalImages: number; totalBytes: number; expiringSoon: number; permanentRemaining?: number; permanentLimit?: number; refreshIn?: string } | undefined) {
     if (!stats) return;
     statTotal.textContent = String(stats.totalImages);
     statStorage.textContent = formatBytes(stats.totalBytes);
@@ -297,16 +297,18 @@ try {
     const expiringUrgent = stats.expiringSoon > 0;
     statExpiring.classList.toggle('text-warning', expiringUrgent);
     statExpiring.classList.toggle('text-on-surface', !expiringUrgent);
-    if (typeof stats.credits === 'number') {
-      const cap = stats.creditsCap ?? 50;
-      statCredits.textContent = `${stats.credits} / ${cap}`;
-      statCreditsSub.textContent = stats.refreshIn ? `Refills in ~${stats.refreshIn}` : 'Keep-forever saves/day';
-      const low = stats.credits <= cap * 0.2;
+    if (typeof stats.permanentRemaining === 'number') {
+      const cap = stats.permanentLimit ?? 50;
+      statCredits.textContent = `${stats.permanentRemaining} / ${cap}`;
+      statCreditsSub.textContent = stats.permanentRemaining < cap && stats.refreshIn
+        ? `Next slot in ~${stats.refreshIn}`
+        : 'Rolling 24-hour allowance';
+      const low = stats.permanentRemaining <= cap * 0.2;
       statCredits.classList.toggle('text-warning', low);
       statCredits.classList.toggle('text-on-surface', !low);
       const bar = document.getElementById('stat-credits-bar');
       if (bar) {
-        bar.style.width = `${Math.max(0, Math.min(100, (stats.credits / cap) * 100))}%`;
+        bar.style.width = `${Math.max(0, Math.min(100, (stats.permanentRemaining / cap) * 100))}%`;
         bar.classList.toggle('bg-warning', low);
         bar.classList.toggle('bg-rose-600', !low);
       }

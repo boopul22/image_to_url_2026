@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 import { getDB } from '../../../lib/db';
 import { getEnv } from '../../../lib/env';
 import { hardDeleteImage } from '../../../lib/images/delete';
-import { getUserCredits, formatResetIn, USER_DAILY_CREDITS } from '../../../lib/upload-limits';
+import { getUserUploadUsage, USER_PERMANENT_DAILY_LIMIT } from '../../../lib/upload-limits';
 
 const JSON_HEADERS = { 'Content-Type': 'application/json' };
 
@@ -73,8 +73,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
 
   const total = countResult?.count ?? 0;
 
-  // Current credit balance (with lazy daily refill applied) for the dashboard tile.
-  const { credits, refreshedAt } = await getUserCredits(db, locals.user.id);
+  const permanentUsage = await getUserUploadUsage(db, locals.user.id, 'permanent');
 
   return new Response(
     JSON.stringify({
@@ -86,9 +85,9 @@ export const GET: APIRoute = async ({ url, locals }) => {
         totalImages: stats?.total ?? 0,
         totalBytes: stats?.bytes ?? 0,
         expiringSoon: stats?.expiring ?? 0,
-        credits,
-        creditsCap: USER_DAILY_CREDITS,
-        refreshIn: formatResetIn(refreshedAt),
+        permanentRemaining: permanentUsage.remaining,
+        permanentLimit: USER_PERMANENT_DAILY_LIMIT,
+        refreshIn: permanentUsage.resetIn,
       },
     }),
     { headers: JSON_HEADERS },

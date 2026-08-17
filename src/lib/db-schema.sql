@@ -110,6 +110,17 @@ CREATE TABLE IF NOT EXISTS anonymous_uploads (
 );
 CREATE INDEX IF NOT EXISTS idx_anon_uploads_ip ON anonymous_uploads(ip_address);
 
+CREATE TABLE IF NOT EXISTS user_upload_events (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  image_id TEXT NOT NULL UNIQUE,
+  kind TEXT NOT NULL CHECK (kind IN ('permanent', 'temporary')),
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS idx_user_upload_events_quota
+  ON user_upload_events(user_id, kind, created_at);
+
 -- Historical copy-event tracking: did the visitor copy the WATERMARKED
 -- ("branded") or the clean variant, and in which format. The only signal of the
 -- variant choice — branded PNG variants are linked through images.branded_of,

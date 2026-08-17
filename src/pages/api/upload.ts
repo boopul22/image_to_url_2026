@@ -9,18 +9,14 @@ import { isSameSiteRequest } from '../../lib/same-origin';
 import {
   ANON_DAILY_LIMIT,
   FREE_MAX_UPLOAD_BYTES,
-  USER_DAILY_CREDITS,
+  USER_PERMANENT_DAILY_LIMIT,
   USER_TEMPORARY_DAILY_LIMIT,
-  USER_PERMANENT_IMAGE_LIMIT,
-  USER_PERMANENT_STORAGE_BYTES,
   PRO_PRICING_URL,
   CONTACT_EMAIL,
   getClientIP,
   formatResetIn,
-  getPermanentStorageUsage,
+  getUserUploadUsage,
   getTemporaryUploadUsage,
-  reservePermanentUploadCredit,
-  refundPermanentUploadCredit,
 } from '../../lib/upload-limits';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml', 'audio/mpeg', 'audio/mp3'];
@@ -110,47 +106,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // how to keep going. What costs us money is *permanent* storage, so that's
     // what we meter:
     //   • Signed-in free users get 50 permanent and 500 temporary uploads per 24h.
-    //     Permanent files also share a 50-image / 500MB active-storage allowance.
     //   • Guests get a small count-based allowance of temporary uploads keyed by
     //     IP over a rolling 24h window (every guest upload auto-expires).
-    // `cost` is computed here so we can also deduct it after a successful upload.
     const isPermanent = !!user && expiresAt === null;
-    let creditReserved = false;
     if (user) {
       if (isPermanent) {
-        const storage = await getPermanentStorageUsage(db, user.id);
-        if (storage.imageRemaining < 1 || storage.byteRemaining < file.size) {
-          const reason = storage.imageRemaining < 1 ? 'permanent-image-limit' : 'permanent-storage-limit';
+        const permanent = await getUserUploadUsage(db, user.id, 'permanent');
+        if (permanent.remaining < 1) {
           return new Response(
             JSON.stringify({
               error:
-                'Your existing permanent links will keep working, but your free permanent storage is full. ' +
-                'Delete an existing permanent image or continue in Pro with unlimited storage.',
-              code: 'PRO_STORAGE_REQUIRED',
-              upgradeUrl: `${PRO_PRICING_URL}?source=free-upload&reason=${reason}`,
-              limit: { scope: 'user', unit: 'storage', ...storage },
-            }),
-            { status: 429, headers: { 'Content-Type': 'application/json' } },
-          );
-        }
-
-        const reservation = await reservePermanentUploadCredit(db, user.id);
-        if (!reservation.reserved) {
-          const resetIn = formatResetIn(reservation.refreshedAt);
-          return new Response(
-            JSON.stringify({
-              error:
-                `You've used all ${USER_DAILY_CREDITS} of your permanent ("keep forever") uploads for today. ` +
-                `Set this upload to "Auto-delete," delete an existing image, or continue in Pro. ` +
-                `Your permanent allowance refills in about ${resetIn}.`,
+                `You've used all ${USER_PERMANENT_DAILY_LIMIT} of your permanent ("keep forever") uploads for today. ` +
+                `Set this upload to "Auto-delete" or continue in Pro. ` +
+                `One slot becomes available in about ${permanent.resetIn}.`,
               code: 'PRO_DAILY_LIMIT',
               upgradeUrl: `${PRO_PRICING_URL}?source=free-upload&reason=permanent-daily-limit`,
-              limit: { scope: 'user', unit: 'credits', limit: USER_DAILY_CREDITS, remaining: reservation.remaining, cost: 1, resetIn },
+              limit: { scope: 'user', unit: 'uploads', ...permanent },
             }),
             { status: 429, headers: { 'Content-Type': 'application/json' } },
           );
         }
-        creditReserved = true;
       } else {
         const temporary = await getTemporaryUploadUsage(db, user.id);
         if (temporary.remaining < 1) {
@@ -185,7 +160,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
             error:
               `You've reached your guest limit of ${ANON_DAILY_LIMIT} temporary uploads. ` +
               `Guest uploads are temporary and auto-delete on their own. ` +
-              `Sign in free for ${USER_DAILY_CREDITS} permanent uploads and ${USER_TEMPORARY_DAILY_LIMIT} temporary uploads per day — or your guest limit resets in about ${resetIn}.`,
+              `Sign in free for ${USER_PERMANENT_DAILY_LIMIT} permanent uploads and ${USER_TEMPORARY_DAILY_LIMIT} temporary uploads per day — or your guest limit resets in about ${resetIn}.`,
             limit: { scope: 'anon', unit: 'uploads', limit: ANON_DAILY_LIMIT, resetIn, contactEmail: CONTACT_EMAIL },
           }),
           { status: 429, headers: { 'Content-Type': 'application/json' } },
@@ -221,38 +196,37 @@ export const POST: APIRoute = async ({ request, locals }) => {
       const imageUrl = `${siteOrigin}/${id}.${ext}`;
       const uploadedVia = request.headers.get('authorization') ? 'api' : 'web';
 
-      if (user && isPermanent) {
-        // The earlier usage read gives a fast friendly rejection. This guarded
-        // insert is the concurrency backstop, so two simultaneous uploads can
-        // never both claim the final free storage slot.
-        const result = await db.prepare(
-          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, expires_at)
-           SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?
-            WHERE (
-              SELECT COUNT(*) FROM images
-               WHERE user_id = ? AND expires_at IS NULL AND deleted_at IS NULL AND branded_of IS NULL
-            ) < ?
-              AND COALESCE((
-                SELECT SUM(size_bytes) FROM images
-                 WHERE user_id = ? AND expires_at IS NULL AND deleted_at IS NULL AND branded_of IS NULL
-              ), 0) + ? <= ?`,
-        )
-          .bind(
-            id, user.id, key, imageUrl, file.name, body.length, file.type, uploadedVia, expiresAt,
-            user.id, USER_PERMANENT_IMAGE_LIMIT,
-            user.id, body.length, USER_PERMANENT_STORAGE_BYTES,
-          )
-          .run();
-        if (Number(result.meta.changes ?? 0) < 1) {
-          await deleteFromR2({ key });
-          await refundPermanentUploadCredit(db, user.id);
+      if (user) {
+        const kind = isPermanent ? 'permanent' : 'temporary';
+        const limit = isPermanent ? USER_PERMANENT_DAILY_LIMIT : USER_TEMPORARY_DAILY_LIMIT;
+        const eventId = generateId();
+        const results = await db.batch([
+          db.prepare(
+            `INSERT INTO user_upload_events (id, user_id, image_id, kind)
+             SELECT ?, ?, ?, ?
+              WHERE (
+                SELECT COUNT(*) FROM user_upload_events
+                 WHERE user_id = ? AND kind = ?
+                   AND created_at >= datetime('now', '-1 day')
+              ) < ?`,
+          ).bind(eventId, user.id, id, kind, user.id, kind, limit),
+          db.prepare(
+            `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, expires_at)
+             SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?
+              WHERE EXISTS (SELECT 1 FROM user_upload_events WHERE image_id = ?)`,
+          ).bind(id, user.id, key, imageUrl, file.name, body.length, file.type, uploadedVia, expiresAt, id),
+        ]);
+        if (Number(results[0]?.meta.changes ?? 0) < 1 || Number(results[1]?.meta.changes ?? 0) < 1) {
+          await deleteFromR2({ key }).catch((error) => console.error('User quota cleanup failed', error));
           return new Response(JSON.stringify({
-            error: 'Your free permanent storage just reached its limit. Existing links keep working; delete an image or continue in Pro.',
-            code: 'PRO_STORAGE_REQUIRED',
-            upgradeUrl: `${PRO_PRICING_URL}?source=free-upload&reason=permanent-storage-limit`,
+            error: isPermanent
+              ? `You've used all ${USER_PERMANENT_DAILY_LIMIT} permanent uploads in the current rolling 24-hour window.`
+              : `You've used all ${USER_TEMPORARY_DAILY_LIMIT} temporary uploads in the current rolling 24-hour window.`,
+            code: isPermanent ? 'PRO_DAILY_LIMIT' : 'PRO_TEMPORARY_LIMIT',
+            upgradeUrl: `${PRO_PRICING_URL}?source=free-upload&reason=${isPermanent ? 'permanent' : 'temporary'}-daily-limit`,
           }), { status: 429, headers: { 'Content-Type': 'application/json' } });
         }
-      } else if (!user) {
+      } else {
         const ip = getClientIP(request);
         const results = await db.batch([
           db.prepare(
@@ -277,33 +251,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
           return new Response(JSON.stringify({
             error: `You've reached your guest limit of ${ANON_DAILY_LIMIT} temporary uploads. Sign in free or try again after the rolling 24-hour window resets.`,
             code: 'GUEST_DAILY_LIMIT',
-          }), { status: 429, headers: { 'Content-Type': 'application/json' } });
-        }
-      } else {
-        const result = await db.prepare(
-          `INSERT INTO images (id, user_id, r2_key, url, filename, size_bytes, mime_type, uploaded_via, expires_at)
-           SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?
-            WHERE (
-              SELECT COUNT(*) FROM images
-               WHERE user_id = ?
-                 AND expires_at IS NOT NULL
-                 AND deleted_at IS NULL
-                 AND branded_of IS NULL
-                 AND created_at >= datetime('now', '-1 day')
-            ) < ?`,
-        )
-          .bind(
-            id, user.id, key, imageUrl, file.name, body.length, file.type, uploadedVia, expiresAt,
-            user.id, USER_TEMPORARY_DAILY_LIMIT,
-          )
-          .run();
-        if (Number(result.meta.changes ?? 0) < 1) {
-          await deleteFromR2({ key })
-            .catch((error) => console.error('Temporary quota cleanup failed', error));
-          return new Response(JSON.stringify({
-            error: `You've used all ${USER_TEMPORARY_DAILY_LIMIT} temporary uploads for this 24-hour window. Continue in Pro or try again later.`,
-            code: 'PRO_TEMPORARY_LIMIT',
-            upgradeUrl: `${PRO_PRICING_URL}?source=free-upload&reason=temporary-daily-limit`,
           }), { status: 429, headers: { 'Content-Type': 'application/json' } });
         }
       }
@@ -331,7 +278,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
       );
     } catch (storageError) {
       await deleteFromR2({ key }).catch(() => {});
-      if (creditReserved && user) await refundPermanentUploadCredit(db, user.id).catch(() => {});
       throw storageError;
     }
   } catch (err: any) {

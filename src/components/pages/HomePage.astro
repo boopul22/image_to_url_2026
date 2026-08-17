@@ -990,9 +990,9 @@ const pageSchema = [
     } else {
       if (planTitle) planTitle.textContent = 'Permanent link.';
       if (signedIn) {
-        if (planCost) planCost.textContent = ' Never expires; uses 1 daily save.';
+        if (planCost) planCost.textContent = ' Never expires; uses 1 of 50 rolling daily permanent uploads.';
         if (usage?.permanent) {
-          setAllowanceText(`Daily allowance: ${usage.permanent.dailyRemaining} of ${usage.permanent.dailyLimit} left; storage: ${usage.permanent.images} stored, ${usage.permanent.imageRemaining} slots free.`);
+          setAllowanceText(`${usage.permanent.dailyRemaining} of ${usage.permanent.dailyLimit} permanent uploads left today.`);
         }
       } else {
         if (planCost) planCost.textContent = ' Never expires; sign-in required.';
@@ -1256,13 +1256,12 @@ const pageSchema = [
     // requests. The server still enforces per file (429), so a stale/unknown
     // remaining just means a few extra fast rejections handled below.
     const usage = (await fetchMe())?.upload;
-    const unit = usage?.unit;
     const expiresInEl = document.getElementById('expires-in') as HTMLSelectElement | null;
     const isPermanent = expiresInEl?.value === 'never';
-    const signedIn = unit === 'credits';
+    const signedIn = usage?.scope === 'user';
     const modeUsage = signedIn ? (isPermanent ? usage?.permanent : usage?.temporary) : usage;
     const remaining = isPermanent && signedIn
-      ? Math.min(modeUsage?.dailyRemaining ?? Infinity, modeUsage?.imageRemaining ?? Infinity)
+      ? (modeUsage?.dailyRemaining ?? Infinity)
       : (typeof modeUsage?.remaining === 'number' ? modeUsage.remaining : Infinity);
 
     if (remaining <= 0) {
@@ -1271,7 +1270,7 @@ const pageSchema = [
       const resetIn = modeUsage?.resetIn ?? usage?.resetIn;
       errorText.textContent = signedIn
         ? (isPermanent
-            ? `Your free permanent allowance is full for now${resetIn ? ` or refills in about ${resetIn}` : ''}. Existing links keep working; delete an image or continue in Pro.`
+            ? `You've used all 50 permanent uploads in the current rolling 24-hour window${resetIn ? `; the next slot opens in about ${resetIn}` : ''}. Existing links keep working.`
             : `You've used all ${modeUsage?.limit ?? 500} temporary uploads in this 24-hour window${resetIn ? `; try again in about ${resetIn}` : ''}, or continue in Pro.`)
         : (resetIn ? `You've reached your daily upload limit. It resets in about ${resetIn}.` : "You've reached your daily upload limit.");
       setErrorAction(signedIn ? '/pro/pricing?source=free-upload&reason=batch-limit' : '/api/auth/login', signedIn ? 'Continue with Pro' : 'Sign in to get more uploads');

@@ -156,7 +156,7 @@ const navLinks = [
           href="/dashboard"
           id="nav-credits-chip"
           class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors"
-          title="Keep-forever saves left today — refills every 24h (500 temporary uploads per day)"
+          title="Permanent uploads available in the rolling 24-hour window"
         >
           <Icon name="toll" class="text-sm text-primary" fill />
           <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
@@ -188,7 +188,7 @@ const navLinks = [
                  the chip; stays hidden if the balance fetch fails. -->
             <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
               <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
-                <span class="text-neutral-500">Keep-forever saves</span>
+                <span class="text-neutral-500">Permanent uploads</span>
                 <span><span id="nav-credits-panel-num" class="font-bold">—</span><span class="text-neutral-500" id="nav-credits-panel-cap"></span></span>
               </div>
               <div class="mt-2 h-1 bg-neutral-100 overflow-hidden">
@@ -345,7 +345,7 @@ const navLinks = [
           <!-- Credits row — filled by the deferred /api/me hydration; hidden until known. -->
           <a href="/dashboard" id="nav-credits-mobile" class="hidden mx-4 mb-2 px-3 py-2.5 border border-outline-variant/40 bg-surface-container-low hover:bg-surface-container transition-colors">
             <span class="flex items-center justify-between text-xs font-medium text-on-surface">
-              <span class="flex items-center gap-1.5 text-on-surface-variant"><Icon name="toll" class="text-sm text-primary" fill /> Keep-forever saves</span>
+              <span class="flex items-center gap-1.5 text-on-surface-variant"><Icon name="toll" class="text-sm text-primary" fill /> Permanent uploads</span>
               <span><span id="nav-credits-mobile-num" class="font-bold">—</span><span class="text-on-surface-variant" id="nav-credits-mobile-cap"></span></span>
             </span>
             <span class="block mt-2 h-1 bg-surface-container-highest overflow-hidden">
@@ -499,10 +499,12 @@ const navLinks = [
   // (temporary uploads are capped at 500 per day); everything stays hidden when the
   // balance is unknown (fetch failed / guest scope).
   const fillCredits = (upload: any) => {
-    if (!upload || upload.unit !== 'credits' || typeof upload.remaining !== 'number' || typeof upload.limit !== 'number') return;
+    if (!upload || upload.scope !== 'user' || typeof upload.remaining !== 'number' || typeof upload.limit !== 'number') return;
     const low = upload.remaining <= upload.limit * 0.2;
     const pct = Math.max(0, Math.min(100, (upload.remaining / upload.limit) * 100));
-    const refill = upload.resetIn ? `Refills in ~${upload.resetIn}` : 'Refills every 24h';
+    const refill = upload.used > 0 && upload.resetIn
+      ? `Next slot available in ~${upload.resetIn}`
+      : 'Rolling 24-hour allowance';
 
     const chip = document.getElementById('nav-credits-chip');
     const num = document.getElementById('nav-credits-num');
@@ -593,7 +595,7 @@ const navLinks = [
       : '';
 
     desktop.innerHTML = `
-      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Keep-forever saves left today — refills every 24h (500 temporary uploads per day)">
+      <a href="/dashboard" id="nav-credits-chip" class="hidden items-center gap-1.5 border border-outline-variant/60 bg-surface-container-low px-2.5 py-1 text-[12px] font-semibold text-on-surface hover:border-rose-300 hover:bg-rose-50 transition-colors" title="Permanent uploads available in the rolling 24-hour window">
         ${icon(ic_toll, 'text-sm text-primary')}
         <span id="nav-credits-num">—</span><span class="text-on-surface-variant font-normal" id="nav-credits-cap"></span>
       </a>
@@ -609,7 +611,7 @@ const navLinks = [
           </div>
           <div id="nav-credits-panel" class="hidden px-4 py-3 border-b border-neutral-200">
             <div class="flex items-center justify-between text-[12px] font-medium text-on-surface">
-              <span class="text-neutral-500">Keep-forever saves</span>
+              <span class="text-neutral-500">Permanent uploads</span>
               <span><span id="nav-credits-panel-num" class="font-bold">—</span><span class="text-neutral-500" id="nav-credits-panel-cap"></span></span>
             </div>
             <div class="mt-2 h-1 bg-neutral-100 overflow-hidden">
@@ -642,7 +644,7 @@ const navLinks = [
         </a>
         <a href="/dashboard" id="nav-credits-mobile" class="hidden mx-4 mb-2 px-3 py-2.5 border border-outline-variant/40 bg-surface-container-low hover:bg-surface-container transition-colors">
           <span class="flex items-center justify-between text-xs font-medium text-on-surface">
-            <span class="flex items-center gap-1.5 text-on-surface-variant">${icon(ic_toll, 'text-sm text-primary')} Keep-forever saves</span>
+            <span class="flex items-center gap-1.5 text-on-surface-variant">${icon(ic_toll, 'text-sm text-primary')} Permanent uploads</span>
             <span><span id="nav-credits-mobile-num" class="font-bold">—</span><span class="text-on-surface-variant" id="nav-credits-mobile-cap"></span></span>
           </span>
           <span class="block mt-2 h-1 bg-surface-container-highest overflow-hidden">
