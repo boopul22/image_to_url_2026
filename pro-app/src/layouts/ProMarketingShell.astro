@@ -98,6 +98,7 @@ const proTrackingPageEvent = Astro.url.pathname.replace(/\/+$/, '').endsWith('/p
         <a href={proPath('/pricing')}>Pricing</a>
         <a href={user ? proPath('/workspace') : `${proPath('/sign-in')}?return_to=${encodeURIComponent(proPath('/workspace'))}`}>Workspace</a>
         <a href="https://imagetourl.cloud">Free ImageToURL</a>
+        <a href="https://freepromptbase.com/" target="_blank" rel="noopener">ai prompt</a>
       </nav>
       <nav aria-label="Legal links">
         <strong>Legal</strong>
